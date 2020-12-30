@@ -1,14 +1,11 @@
-import * as React from 'react';
-import {View, Text, Button} from 'react-native';
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import * as React from "react";
+import {View, Text, Button} from "react-native";
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import RootStackParamList from "../../stacks/Root";
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
-type ProfileScreenNavigationProp = StackNavigationProp<
-    RootStackParamList,
-    'Profile'
-    >;
+type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Profile'>;
 
 type ProfileProps = {
     route: ProfileScreenRouteProp;
