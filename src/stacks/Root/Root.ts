@@ -7,6 +7,7 @@ type RootStackParamList = {
     DemoRoute: { id: string };
     DemoThirdPart: undefined;
     DemoThunkCC: undefined;
+    SignIn: undefined;
 };
 
 export default RootStackParamList;

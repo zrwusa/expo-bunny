@@ -3,6 +3,7 @@ import {View, Text, Button} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import RootStackParamList from "../../stacks/Root";
+import {AuthContext} from "../../components/Auth/Auth";
 
 type HomeRouteProp = RouteProp<RootStackParamList, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -10,6 +11,8 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 type Props = { route: HomeRouteProp; navigation: HomeNavigationProp; };
 
 function HomeScreen({navigation}: Props) {
+    const {signOut} = React.useContext(AuthContext);
+
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text>Home Screen</Text>
@@ -19,6 +22,7 @@ function HomeScreen({navigation}: Props) {
             <Button title="Go to DemoRoute" onPress={() => navigation.navigate('DemoRoute',{id: '1'})} />
             <Button title="Go to DemoThirdPart" onPress={() => navigation.navigate('DemoThirdPart')} />
             <Button title="Go to DemoThunkCC" onPress={() => navigation.navigate('DemoThunkCC')} />
+            <Button onPress={signOut} title="Sign out"/>
         </View>
     );
 }
