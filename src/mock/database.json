@@ -1,0 +1,350 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product001",
+      "cost": 10,
+      "quantity": 1000,
+      "locationId": 1,
+      "familyId": 1
+    },
+    {
+      "id": 2,
+      "name": "Product002",
+      "cost": 20,
+      "quantity": 2000,
+      "locationId": 1,
+      "familyId": 2
+    },
+    {
+      "id": 3,
+      "name": "Product003",
+      "cost": 30,
+      "quantity": 3000,
+      "locationId": 3,
+      "familyId": 2
+    },
+    {
+      "id": 4,
+      "name": "Product004",
+      "cost": 40,
+      "quantity": 4000,
+      "locationId": 2,
+      "familyId": 3
+    },
+    {
+      "name": "Product005",
+      "cost": 5,
+      "quantity": 5000,
+      "locationId": 2,
+      "familyId": 3,
+      "id": 6
+    },
+    {
+      "name": "Product005",
+      "cost": 5,
+      "quantity": 5000,
+      "locationId": 2,
+      "familyId": 3,
+      "id": 7
+    },
+    {
+      "name": "Product007",
+      "cost": 5,
+      "quantity": 5000,
+      "locationId": 2,
+      "familyId": 3,
+      "id": 8
+    },
+    {
+      "name": "Product009",
+      "cost": 5,
+      "quantity": 5000,
+      "locationId": 2,
+      "familyId": 3,
+      "id": 9
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "name": "Location001"
+    },
+    {
+      "id": 2,
+      "name": "Location002"
+    },
+    {
+      "id": 3,
+      "name": "Location003"
+    }
+  ],
+  "families": [
+    {
+      "id": 1,
+      "name": "FM001"
+    },
+    {
+      "id": 2,
+      "name": "FM002"
+    },
+    {
+      "id": 3,
+      "name": "FM003"
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "cost": 11,
+      "quantity": 10,
+      "productId": 1
+    },
+    {
+      "id": 2,
+      "cost": 12,
+      "quantity": 100,
+      "productId": 2
+    },
+    {
+      "id": 3,
+      "cost": 15,
+      "quantity": 101,
+      "productId": 3
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "first_name": "Sebastian",
+      "last_name": "Eschweiler",
+      "email": "sebastian@codingthesmartway.com"
+    },
+    {
+      "id": 2,
+      "first_name": "Steve",
+      "last_name": "Palmer",
+      "email": "steve@codingthesmartway.com"
+    },
+    {
+      "id": 3,
+      "first_name": "Ann",
+      "last_name": "Smith",
+      "email": "ann@codingthesmartway.com"
+    }
+  ],
+  "demo_thunks": [
+    {
+      "id": 1,
+      "name": "name1"
+    },
+    {
+      "text": "text1",
+      "id": 2
+    },
+    {
+      "text": "text1",
+      "id": 3
+    },
+    {
+      "text": "text1",
+      "id": 4
+    },
+    {
+      "text": "text1",
+      "id": 5
+    },
+    {
+      "text": "text1",
+      "id": 6
+    },
+    {
+      "text": "text1",
+      "id": 7
+    },
+    {
+      "text": "text1",
+      "id": 8
+    },
+    {
+      "text": "text1",
+      "id": 9
+    },
+    {
+      "text": "text1",
+      "id": 10
+    },
+    {
+      "text": "text1",
+      "id": 11
+    },
+    {
+      "text": "text1",
+      "id": 12
+    },
+    {
+      "text": "text1",
+      "id": 13
+    },
+    {
+      "text": "text1",
+      "id": 14
+    },
+    {
+      "text": "text1",
+      "id": 15
+    },
+    {
+      "text": "text1",
+      "id": 16
+    },
+    {
+      "text": "text1",
+      "id": 17
+    },
+    {
+      "text": "text1",
+      "id": 18
+    },
+    {
+      "text": "text1",
+      "id": 19
+    },
+    {
+      "text": "text1",
+      "id": 20
+    },
+    {
+      "text": "text1",
+      "id": 21
+    },
+    {
+      "text": "text1",
+      "id": 22
+    },
+    {
+      "text": "text1",
+      "id": 23
+    },
+    {
+      "text": "text1",
+      "id": 24
+    },
+    {
+      "text": "text1",
+      "id": 25
+    },
+    {
+      "text": "text1",
+      "id": 26
+    },
+    {
+      "text": "text1",
+      "id": 27
+    },
+    {
+      "text": "text1",
+      "id": 28
+    },
+    {
+      "text": "text1",
+      "id": 29
+    },
+    {
+      "text": "text1",
+      "id": 30
+    },
+    {
+      "text": "text1",
+      "id": 31
+    },
+    {
+      "text": "text1",
+      "id": 32
+    },
+    {
+      "text": "text1",
+      "id": 33
+    },
+    {
+      "text": "text1",
+      "id": 34
+    },
+    {
+      "text": "text1",
+      "id": 35
+    },
+    {
+      "text": "text1",
+      "id": 36
+    },
+    {
+      "text": "text1",
+      "id": 37
+    },
+    {
+      "text": "text1",
+      "id": 38
+    },
+    {
+      "text": "text1",
+      "id": 39
+    },
+    {
+      "text": "text1",
+      "id": 40
+    },
+    {
+      "text": "text1",
+      "id": 41
+    },
+    {
+      "text": "text1",
+      "id": 42
+    },
+    {
+      "text": "text1",
+      "id": 43
+    },
+    {
+      "text": "text1",
+      "id": 44
+    },
+    {
+      "text": "text1",
+      "id": 45
+    },
+    {
+      "text": "text1",
+      "id": 46
+    },
+    {
+      "text": "text1",
+      "id": 47
+    },
+    {
+      "text": "text1",
+      "id": 48
+    },
+    {
+      "text": "text1",
+      "id": 49
+    },
+    {
+      "text": "text1",
+      "id": 50
+    },
+    {
+      "text": "text1",
+      "id": 51
+    },
+    {
+      "text": "text1",
+      "id": 52
+    },
+    {
+      "text": "text1",
+      "id": 53
+    }
+  ]
+}

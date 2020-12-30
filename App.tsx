@@ -6,6 +6,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import RootStackParamList from "./src/stacks/Root";
 import Home from "./src/screens/Home";
 import Profile from "./src/screens/Profile";
+import DemoFCReduxHook from "./src/screens/DemoFCReduxHook";
+import DemoHome from "./src/screens/DemoHome";
+import DemoRoute from "./src/screens/DemoRoute";
+import DemoThirdPart from "./src/screens/DemoThirdPart";
+import DemoThunkCC from "./src/screens/DemoThunkCC";
+import {Provider} from "react-redux";
+import store from "./src/stores";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -21,14 +28,18 @@ const linking = {
                     id: (id: string) => `${id}`,
                 },
             },
-            Notifications: "notifications",
-            Settings: "settings",
+            DemoFCReduxHook: "demo-fc-redux-hook",
+            DemoHome: "demo-home",
+            DemoRoute: "demo-route",
+            DemoThirdPart: "demo-third-part",
+            DemoThunkCC: "demo-thunk-cc",
         },
     },
 };
 
 function App() {
     return (
+        <Provider store={store}>
         <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
             <RootStack.Navigator initialRouteName="Home">
                 <RootStack.Screen name="Home" component={Home}/>
@@ -37,8 +48,14 @@ function App() {
                     component={Profile}
                     initialParams={{id: '000'}}
                 />
+                <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHook}/>
+                <RootStack.Screen name="DemoHome" component={DemoHome}/>
+                <RootStack.Screen name="DemoRoute" component={DemoRoute}/>
+                <RootStack.Screen name="DemoThirdPart" component={DemoThirdPart}/>
+                <RootStack.Screen name="DemoThunkCC" component={DemoThunkCC}/>
             </RootStack.Navigator>
         </NavigationContainer>
+        </Provider>
     );
 }
 
