@@ -5,10 +5,10 @@ const api = axios.create({baseURL: isDevServerProxy ? `http://localhost:3006/api
 // Request interceptor for API calls
 api.interceptors.request.use(
     async config => {
-        const {userState} = store.getState();
-        if (userState.user.access_token) {
+        const {authState} = store.getState();
+        if (authState.accessToken) {
             config.headers = {
-                "Authorization": `Bearer ${userState.user.access_token}`,
+                "Authorization": `Bearer ${authState.accessToken}`,
                 // "Accept": "application/json",
                 // "Content-Type": "application/x-www-form-urlencoded"
             }

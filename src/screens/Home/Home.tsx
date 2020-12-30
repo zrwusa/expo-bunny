@@ -3,7 +3,8 @@ import {View, Text, Button} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import RootStackParamList from "../../stacks/Root";
-import {AuthContext} from "../../components/Auth/Auth";
+import {useDispatch} from "react-redux";
+import {signOutAction} from "../../stores/auth/actions";
 
 type HomeRouteProp = RouteProp<RootStackParamList, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -11,7 +12,7 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 type Props = { route: HomeRouteProp; navigation: HomeNavigationProp; };
 
 function HomeScreen({navigation}: Props) {
-    const {signOut} = React.useContext(AuthContext);
+const dispatch = useDispatch()
 
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -22,7 +23,7 @@ function HomeScreen({navigation}: Props) {
             <Button title="Go to DemoRoute" onPress={() => navigation.navigate('DemoRoute',{id: '1'})} />
             <Button title="Go to DemoThirdPart" onPress={() => navigation.navigate('DemoThirdPart')} />
             <Button title="Go to DemoThunkCC" onPress={() => navigation.navigate('DemoThunkCC')} />
-            <Button onPress={signOut} title="Sign out"/>
+            <Button onPress={()=>{dispatch(signOutAction({}))}} title="Sign out"/>
         </View>
     );
 }

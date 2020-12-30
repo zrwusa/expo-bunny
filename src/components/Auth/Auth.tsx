@@ -1,5 +1,7 @@
 import {Button, Text, TextInput, View} from "react-native";
 import * as React from "react";
+import {signInAction} from "../../stores/auth/actions";
+import {useDispatch} from "react-redux";
 
 export const SplashScreen = () => {
     return (
@@ -10,8 +12,7 @@ export const SplashScreen = () => {
 };
 
 export const SignInScreen = () => {
-    const {signIn} = React.useContext(AuthContext);
-
+    const dispatch = useDispatch();
     return (
         <View>
             <TextInput
@@ -21,35 +22,10 @@ export const SignInScreen = () => {
                 placeholder="Password"
                 secureTextEntry
             />
-            <Button onPress={signIn} title="Sign in"/>
-
+            <Button onPress={() => {
+                dispatch(signInAction({email: 'bruno@email.com', password: 'bruno'}))
+            }} title="Sign in"/>
         </View>
     );
 };
 
-export type AuthState = {
-    isLoading: boolean;
-    isSignOut: boolean;
-    userToken: undefined | string | null;
-};
-
-export type AuthAction =
-    | { type: 'RESTORE_TOKEN'; token: undefined | string | null }
-    | { type: 'SIGN_IN'; token: string }
-    | { type: 'SIGN_OUT' };
-
-
-const AUTH_CONTEXT_ERROR =
-    'Authentication context not found. Have your wrapped your components with AuthContext.Consumer?';
-
-export const AuthContext = React.createContext<{
-    signIn: () => void;
-    signOut: () => void;
-}>({
-    signIn: () => {
-        throw new Error(AUTH_CONTEXT_ERROR);
-    },
-    signOut: () => {
-        throw new Error(AUTH_CONTEXT_ERROR);
-    },
-});
