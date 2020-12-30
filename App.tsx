@@ -14,7 +14,7 @@ import DemoThunkCC from "./src/screens/DemoThunkCC";
 import {Provider} from "react-redux";
 import store from "./src/stores";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Action, SignInScreen, State, AuthContext} from "./src/components/Auth/Auth";
+import {AuthAction, SignInScreen, AuthState, AuthContext} from "./src/components/Auth/Auth";
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -43,7 +43,7 @@ const linking = {
 
 
 function App() {
-    const [state, dispatch] = React.useReducer<React.Reducer<State, Action>>(
+    const [state, dispatch] = React.useReducer<React.Reducer<AuthState, AuthAction>>(
         (prevState, action) => {
             switch (action.type) {
                 case 'RESTORE_TOKEN':
@@ -77,16 +77,13 @@ function App() {
     React.useEffect(() => {
         const bootstrapAsync = async () => {
             let userToken;
-
             try {
                 userToken = await AsyncStorage.getItem('userToken');
             } catch (e) {
                 // Restoring token failed
             }
-
             dispatch({type: 'RESTORE_TOKEN', token: userToken});
         };
-
         bootstrapAsync();
     }, []);
 

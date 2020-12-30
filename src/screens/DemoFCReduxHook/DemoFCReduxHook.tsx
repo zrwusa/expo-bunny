@@ -5,7 +5,7 @@ import {IRootState} from "../../stores/models";
 import {Button, Text, View} from "react-native";
 
 
-const DemoFCReduxHook: React.FunctionComponent<IRootState> = () => {
+const DemoFCReduxHook: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const demoHelloState = useSelector((store:IRootState) => store.demoHelloState);
     return (<View>

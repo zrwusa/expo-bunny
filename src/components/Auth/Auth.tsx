@@ -27,13 +27,13 @@ export const SignInScreen = () => {
     );
 };
 
-export type State = {
+export type AuthState = {
     isLoading: boolean;
     isSignOut: boolean;
     userToken: undefined | string | null;
 };
 
-export type Action =
+export type AuthAction =
     | { type: 'RESTORE_TOKEN'; token: undefined | string | null }
     | { type: 'SIGN_IN'; token: string }
     | { type: 'SIGN_OUT' };
