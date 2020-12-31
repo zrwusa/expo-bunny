@@ -1,21 +1,37 @@
-import {AxiosError} from "axios";
+import {GoogleUser} from "expo-google-app-auth/src/Google";
 
 export interface SignInPayload {
     email: string;
-    password:string;
+    password: string;
 }
 
 export interface SignOutPayload {
     username?: string;
 }
 
-export interface RestoreTokenPayload {
-    access_token:string;
-    nickname?:string;
+export type RestoreTokenPayload = {
+    access_token: string;
+    nickname?: string;
 }
 
+export type RestoreTokenGooglePayload =
+    | {
+    type: 'success';
+    accessToken: string | null;
+    idToken: string | null;
+    refreshToken: string | null;
+    user: GoogleUser;
+}
+    | {
+    type: 'cancel';
+};
+
 export interface AuthFailedPayload {
-    error: AxiosError;
+    error: string;
+}
+
+export interface AuthWarnPayload {
+    warn: string;
 }
 
 export interface DemoHelloPayload {

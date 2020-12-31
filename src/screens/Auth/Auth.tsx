@@ -1,6 +1,6 @@
-import {Button, Text, TextInput, View} from "react-native";
+import {Button, Platform, Text, TextInput, View} from "react-native";
 import * as React from "react";
-import {signIn} from "../../stores/auth/actions";
+import {signIn, signInGoogle} from "../../stores/auth/actions";
 import {useDispatch} from "react-redux";
 
 export const SplashScreen = () => {
@@ -10,7 +10,6 @@ export const SplashScreen = () => {
         </View>
     );
 };
-
 export const SignInScreen = () => {
     const dispatch = useDispatch();
     return (
@@ -25,6 +24,13 @@ export const SignInScreen = () => {
             <Button onPress={() => {
                 dispatch(signIn({email: 'bruno@email.com', password: 'bruno'}))
             }} title="Sign in"/>
+            {
+                Platform.OS !== 'web'
+                    ? <Button onPress={() => {
+                        dispatch(signInGoogle())
+                    }} title="Sign in with google"/>
+                    : <></>
+            }
         </View>
     );
 };

@@ -3,7 +3,7 @@ import {View, Text, Button} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
-import {signOut} from "../../stores/auth/actions";
+import {signOutAndRemove} from "../../stores/auth/actions";
 import {RootStackParamList} from "../../types/stacks";
 
 type HomeRouteProp = RouteProp<RootStackParamList, 'Home'>;
@@ -24,7 +24,7 @@ function HomeScreen({navigation}: Props) {
             <Button title="Go to DemoThirdPart" onPress={() => navigation.navigate('DemoThirdPart')}/>
             <Button title="Go to DemoThunkCC" onPress={() => navigation.navigate('DemoThunkCC')}/>
             <Button onPress={() => {
-                dispatch(signOut({}))
+                dispatch(signOutAndRemove())
             }} title="Sign out"/>
         </View>
     );

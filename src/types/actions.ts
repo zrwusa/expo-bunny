@@ -1,6 +1,14 @@
 import {AxiosError} from "axios";
 import {EAuth, EDemoHello, EDemoThunk} from "./constants";
-import {DemoHello2Payload, DemoHelloPayload, DemoThunkSuccessPayload, RestoreTokenPayload, SignOutPayload} from "./payloads";
+import {
+    AuthFailedPayload, AuthWarnPayload,
+    DemoHello2Payload,
+    DemoHelloPayload,
+    DemoThunkSuccessPayload,
+    RestoreTokenGooglePayload,
+    RestoreTokenPayload,
+    SignOutPayload
+} from "./payloads";
 
 export interface SignOut {
     type: EAuth.SIGN_OUT;
@@ -12,9 +20,19 @@ export interface RestoreToken {
     payload: RestoreTokenPayload;
 }
 
+export interface RestoreTokenGoogle {
+    type: EAuth.RESTORE_TOKEN_GOOGLE;
+    payload: RestoreTokenGooglePayload;
+}
+
 export interface AuthFailed {
     type: EAuth.AUTH_FAIL;
-    payload: AxiosError;
+    payload: AuthFailedPayload;
+}
+
+export interface AuthWarn {
+    type: EAuth.AUTH_WARN;
+    payload: AuthWarnPayload;
 }
 
 export interface DemoThunkSuccess {

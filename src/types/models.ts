@@ -3,6 +3,7 @@ export type Auth = {
     isSignOut: boolean;
     accessToken: undefined | string | null;
     error: string;
+    warn:string;
 };
 
 export interface DemoHello {

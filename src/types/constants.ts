@@ -1,8 +1,11 @@
 export enum EAuth {
-    RESTORE_TOKEN = "RESTORE_TOKEN",
     SIGN_IN = "SIGN_IN",
     SIGN_OUT = "SIGN_OUT",
+    RESTORE_TOKEN = "RESTORE_TOKEN",
+    RESTORE_TOKEN_GOOGLE = "RESTORE_TOKEN_GOOGLE",
     AUTH_FAIL = "AUTH_FAIL",
+    AUTH_WARN = "AUTH_WARN",
+
 }
 
 export enum EDemoHello {

@@ -14,10 +14,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SignInScreen} from "./screens/Auth";
 import {restoreToken} from "./stores/auth/actions";
 import {RootState} from "./types/models";
+import * as Linking from "expo-linking";
 
-
+const basePath = Linking.makeUrl('/');
 const linking = {
-    prefixes: ["demo://app"],
+    prefixes: [basePath],
     config: {
         initialRouteName: "Home",
         screens: {

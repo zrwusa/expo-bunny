@@ -1,36 +1,48 @@
 import {AuthActions} from "./actions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Auth} from "../../types/models";
-import {AuthFailedPayload, RestoreTokenPayload} from "../../types/payloads";
+import {EAuth} from "../../types/constants";
 
 export const initialAuthState: Auth = {
     isLoading: true,
     isSignOut: false,
     accessToken: undefined,
-    error:"",
+    error: "",
+    warn: "",
 };
+
 export function authReducer(state: Auth = initialAuthState, {type, payload}: AuthActions): Auth {
     switch (type) {
-        case 'RESTORE_TOKEN':
-            AsyncStorage.setItem('accessToken', (<RestoreTokenPayload>payload).access_token)
+        case EAuth.RESTORE_TOKEN :
             return {
                 ...state,
-                accessToken: (<RestoreTokenPayload>payload).access_token,
+                accessToken: payload.access_token,
                 isLoading: false,
             };
-        case 'AUTH_FAIL':
+        case EAuth.AUTH_FAIL:
             return {
                 ...state,
                 isSignOut: false,
-                error: JSON.stringify((<AuthFailedPayload>payload).error),
+                error: payload.error,
             };
-        case 'SIGN_OUT':
-            AsyncStorage.removeItem('accessToken')
+        case EAuth.AUTH_WARN:
+            return {
+                ...state,
+                isSignOut: false,
+                warn: payload.warn,
+            };
+        case EAuth.SIGN_OUT:
             return {
                 ...state,
                 isSignOut: true,
                 accessToken: undefined,
             };
+        case EAuth.RESTORE_TOKEN_GOOGLE:
+            return {
+                ...state,
+                accessToken: payload.accessToken,
+                isLoading: false,
+            };
+
         default:
             return state;
     }

@@ -20,3 +20,6 @@ __tests__/
 note.md
 test.json
 test.html
+.env
+.expo-shared/
+yarn-error.log
