@@ -1,4 +1,4 @@
-export type AuthState = {
+export type Auth = {
     isLoading: boolean;
     isSignOut: boolean;
     accessToken: undefined | string | null;

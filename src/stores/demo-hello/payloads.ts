@@ -1,8 +1,8 @@
-export interface IDemoHelloStateAction1Payload {
+export interface DemoHelloAction1Payload {
     order: number;
 }
 
-export interface IDemoHelloStateAction2Payload {
+export interface DemoHelloAction2Payload {
     name: string;
 }
 

@@ -1,23 +1,23 @@
-import {EDemoThunkAction} from "./constants";
+import {EDemoThunk} from "./constants";
 import {IDemoThunk} from "./models";
-import {IDemoThunkAction} from "./actions";
+import {DemoThunkActions} from "./actions";
 
 export const initialState: IDemoThunk = {
     text: "text default",
     id: 0,
 };
 
-export function demoThunkReducer(state: IDemoThunk = initialState, {type, payload}: IDemoThunkAction): IDemoThunk {
+export function demoThunkReducer(state: IDemoThunk = initialState, {type, payload}: DemoThunkActions): IDemoThunk {
     switch (type) {
-        case EDemoThunkAction.ACTION_DEMO_THUNK_SUCCESS: {
-            console.log(`${EDemoThunkAction.ACTION_DEMO_THUNK_SUCCESS} Invoked With Payload:${JSON.stringify(payload)}`);
+        case EDemoThunk.DEMO_THUNK_SUCCESS: {
+            console.log(`${EDemoThunk.DEMO_THUNK_SUCCESS} Invoked With Payload:${JSON.stringify(payload)}`);
             return {
                 ...state,
                 ...payload,
             };
         }
-        case EDemoThunkAction.ACTION_DEMO_THUNK_FAIL: {
-            console.log(`${EDemoThunkAction.ACTION_DEMO_THUNK_FAIL} Invoked With Payload:${JSON.stringify(payload)}`);
+        case EDemoThunk.DEMO_THUNK_FAILED: {
+            console.log(`${EDemoThunk.DEMO_THUNK_FAILED} Invoked With Payload:${JSON.stringify(payload)}`);
             return {
                 ...state,
                 ...payload,

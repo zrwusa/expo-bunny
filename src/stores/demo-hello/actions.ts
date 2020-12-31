@@ -1,31 +1,29 @@
-import {EDemoHelloStateAction} from "./constants";
-import {IDemoHelloStateAction1Payload, IDemoHelloStateAction2Payload} from "./payloads";
+import {EDemoHello} from "./constants";
+import {DemoHelloAction1Payload, DemoHelloAction2Payload} from "./payloads";
 
-export interface IDemoHelloStateAction1 {
-    type: EDemoHelloStateAction.ACTION_ONE;
-    payload: IDemoHelloStateAction1Payload;
+export interface DemoHelloAction1 {
+    type: EDemoHello.ACTION_ONE;
+    payload: DemoHelloAction1Payload;
 }
 
-export interface IDemoHelloStateAction2 {
-    type: EDemoHelloStateAction.ACTION_TWO;
-    payload: IDemoHelloStateAction2Payload;
+export interface DemoHelloAction2 {
+    type: EDemoHello.ACTION_TWO;
+    payload: DemoHelloAction2Payload;
 }
 
-export const demoHelloStateAction1: (payload: IDemoHelloStateAction1Payload) => IDemoHelloStateAction1 = (payload) => {
-    console.log("demoHelloStateAction1 Action Creator");
+export const demoHelloAction1: (payload: DemoHelloAction1Payload) => DemoHelloAction1 = (payload) => {
     return {
-        type: EDemoHelloStateAction.ACTION_ONE,
+        type: EDemoHello.ACTION_ONE,
         payload: payload,
     };
 };
 
-export const demoHelloStateAction2: (payload: IDemoHelloStateAction2Payload) => IDemoHelloStateAction2 = (payload) => {
-    console.log("demoHelloStateAction2 Action Creator");
+export const demoHelloAction2: (payload: DemoHelloAction2Payload) => DemoHelloAction2 = (payload) => {
     return {
-        type: EDemoHelloStateAction.ACTION_TWO,
+        type: EDemoHello.ACTION_TWO,
         payload: payload,
     };
 };
 
 
-export type IDemoHelloStateAction = IDemoHelloStateAction1 | IDemoHelloStateAction2 ;
+export type DemoHelloActions = DemoHelloAction1 | DemoHelloAction2 ;

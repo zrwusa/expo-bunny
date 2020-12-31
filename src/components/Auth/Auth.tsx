@@ -1,6 +1,6 @@
 import {Button, Text, TextInput, View} from "react-native";
 import * as React from "react";
-import {signInAction} from "../../stores/auth/actions";
+import {signIn} from "../../stores/auth/actions";
 import {useDispatch} from "react-redux";
 
 export const SplashScreen = () => {
@@ -23,7 +23,7 @@ export const SignInScreen = () => {
                 secureTextEntry
             />
             <Button onPress={() => {
-                dispatch(signInAction({email: 'bruno@email.com', password: 'bruno'}))
+                dispatch(signIn({email: 'bruno@email.com', password: 'bruno'}))
             }} title="Sign in"/>
         </View>
     );

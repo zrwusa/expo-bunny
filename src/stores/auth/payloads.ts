@@ -1,20 +1,20 @@
 import {AxiosError} from "axios";
 
-export interface ISignInPayload {
+export interface SignInPayload {
     email: string;
     password:string;
 }
 
-export interface ISignOutPayload {
+export interface SignOutPayload {
     username?: string;
 }
 
-export interface IRestoreTokenPayload {
+export interface RestoreTokenPayload {
     access_token:string;
     nickname?:string;
 }
 
-export interface IAuthFailPayload {
+export interface AuthFailedPayload {
     error: AxiosError;
 }
 

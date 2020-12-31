@@ -1,8 +1,8 @@
-export interface IReqDemoThunkPayload {
+export interface DemoThunkPayload {
     text: string;
     id: number;
 }
 
-export interface IDemoThunkSuccessPayload {
+export interface DemoThunkSuccessPayload {
     text: string;
 }

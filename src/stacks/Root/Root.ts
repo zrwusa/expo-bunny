@@ -1,3 +1,5 @@
+import {createStackNavigator} from "@react-navigation/stack";
+
 type RootStackParamList = {
     Home: undefined;
     Profile: { id: string };
@@ -10,4 +12,9 @@ type RootStackParamList = {
     SignIn: undefined;
 };
 
-export default RootStackParamList;
+export {RootStackParamList};
+
+const RootStack = createStackNavigator<RootStackParamList>();
+
+export default RootStack;
+

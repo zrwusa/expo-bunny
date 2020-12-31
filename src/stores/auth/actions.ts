@@ -1,55 +1,55 @@
 import {EAuth} from "./constants";
-import {IRestoreTokenPayload, ISignInPayload, ISignOutPayload} from "./payloads";
+import {RestoreTokenPayload, SignInPayload, SignOutPayload} from "./payloads";
 import {AxiosError} from "axios";
 import {IThunkResult} from "../thunk";
 import api from "../../common/api";
 
-interface ISignOutAction {
+interface SignOut {
     type: EAuth.SIGN_OUT;
-    payload: ISignOutPayload;
+    payload: SignOutPayload;
 }
 
-export const signOutAction: (payload: ISignOutPayload) => ISignOutAction = (payload) => {
+export const signOut: (payload: SignOutPayload) => SignOut = (payload) => {
     return {
         type: EAuth.SIGN_OUT,
         payload: payload,
     };
 };
 
-interface IRestoreTokenAction {
+interface RestoreToken {
     type: EAuth.RESTORE_TOKEN;
-    payload: IRestoreTokenPayload;
+    payload: RestoreTokenPayload;
 }
 
-export const restoreTokenAction: (payload: IRestoreTokenPayload) => IRestoreTokenAction = (payload) => {
+export const restoreToken: (payload: RestoreTokenPayload) => RestoreToken = (payload) => {
     return {
         type: EAuth.RESTORE_TOKEN,
         payload: payload,
     };
 };
 
-export interface IAuthFailAction {
+export interface AuthFailed {
     type: EAuth.AUTH_FAIL;
     payload: AxiosError;
 }
 
-export const authFailAction: (payload: AxiosError) => IAuthFailAction = (payload) => {
+export const authFailed: (payload: AxiosError) => AuthFailed = (payload) => {
     return {
         type: EAuth.AUTH_FAIL,
         payload: payload,
     };
 };
 
-export const signInAction = (data: ISignInPayload): IThunkResult<Promise<void>> => (dispatch) => {
+export const signIn = (data: SignInPayload): IThunkResult<Promise<void>> => (dispatch) => {
     return api.post(`/auth/login`, data)
         .then((res) => {
-            dispatch(restoreTokenAction(res.data.user))
+            dispatch(restoreToken(res.data.user))
         })
         .catch((err: AxiosError) => {
-            dispatch(authFailAction(err))
+            dispatch(authFailed(err))
         });
 };
 
 
-export type AuthAction =  ISignOutAction | IRestoreTokenAction | IAuthFailAction ;
+export type AuthActions =  SignOut | RestoreToken | AuthFailed ;
 

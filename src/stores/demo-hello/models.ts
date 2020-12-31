@@ -1,9 +1,9 @@
-export interface IDemoHelloState {
+export interface DemoHello {
     name: string;
     order: number;
 }
 
-export interface IDemoState2 {
+export interface Demo2 {
     company: string;
     companyId: string;
     job: string;

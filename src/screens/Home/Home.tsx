@@ -4,7 +4,7 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import RootStackParamList from "../../stacks/Root";
 import {useDispatch} from "react-redux";
-import {signOutAction} from "../../stores/auth/actions";
+import {signOut} from "../../stores/auth/actions";
 
 type HomeRouteProp = RouteProp<RootStackParamList, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -23,7 +23,7 @@ const dispatch = useDispatch()
             <Button title="Go to DemoRoute" onPress={() => navigation.navigate('DemoRoute',{id: '1'})} />
             <Button title="Go to DemoThirdPart" onPress={() => navigation.navigate('DemoThirdPart')} />
             <Button title="Go to DemoThunkCC" onPress={() => navigation.navigate('DemoThunkCC')} />
-            <Button onPress={()=>{dispatch(signOutAction({}))}} title="Sign out"/>
+            <Button onPress={()=>{dispatch(signOut({}))}} title="Sign out"/>
         </View>
     );
 }
