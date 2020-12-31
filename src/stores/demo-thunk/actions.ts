@@ -1,15 +1,9 @@
-import {EDemoThunk} from "./constants";
-import {DemoThunkSuccessPayload, DemoThunkPayload} from "./payloads";
 import {AxiosError} from "axios";
-import {IThunkResult} from "../thunk";
 import api from "../../common/api";
-
-
-
-export interface DemoThunkSuccess {
-    type: EDemoThunk.DEMO_THUNK_SUCCESS;
-    payload: DemoThunkSuccessPayload;
-}
+import {DemoThunkPayload, DemoThunkSuccessPayload} from "../../types/payloads";
+import {DemoThunkFailed, DemoThunkSuccess} from "../../types/actions";
+import {EDemoThunk} from "../../types/constants";
+import {ThunkResult} from "../../types/thunk";
 
 export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSuccess = (payload) => {
     return {
@@ -18,11 +12,6 @@ export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSu
     };
 };
 
-export interface DemoThunkFailed {
-    type: EDemoThunk.DEMO_THUNK_FAILED;
-    payload: AxiosError;
-}
-
 export const demoThunkFailed: (payload: AxiosError) => DemoThunkFailed = (payload) => {
     return {
         type: EDemoThunk.DEMO_THUNK_FAILED,
@@ -30,7 +19,7 @@ export const demoThunkFailed: (payload: AxiosError) => DemoThunkFailed = (payloa
     };
 };
 
-export const demoThunk = (data: DemoThunkPayload): IThunkResult<Promise<void>> => (dispatch) => {
+export const demoThunk = (data: DemoThunkPayload): ThunkResult<Promise<void>> => (dispatch) => {
     const retPromise = api.post(`/demo_thunks`, data)
         .then((res) => {
             dispatch(demoThunkSuccess(res.data))
@@ -40,6 +29,5 @@ export const demoThunk = (data: DemoThunkPayload): IThunkResult<Promise<void>> =
         });
     return retPromise;
 };
-
 
 export type DemoThunkActions =  DemoThunkSuccess | DemoThunkFailed;

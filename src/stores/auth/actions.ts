@@ -1,13 +1,9 @@
-import {EAuth} from "./constants";
-import {RestoreTokenPayload, SignInPayload, SignOutPayload} from "./payloads";
 import {AxiosError} from "axios";
-import {IThunkResult} from "../thunk";
 import api from "../../common/api";
-
-interface SignOut {
-    type: EAuth.SIGN_OUT;
-    payload: SignOutPayload;
-}
+import {AuthFailed, RestoreToken, SignOut} from "../../types/actions";
+import {RestoreTokenPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
+import {EAuth} from "../../types/constants";
+import {ThunkResult} from "../../types/thunk";
 
 export const signOut: (payload: SignOutPayload) => SignOut = (payload) => {
     return {
@@ -16,22 +12,12 @@ export const signOut: (payload: SignOutPayload) => SignOut = (payload) => {
     };
 };
 
-interface RestoreToken {
-    type: EAuth.RESTORE_TOKEN;
-    payload: RestoreTokenPayload;
-}
-
 export const restoreToken: (payload: RestoreTokenPayload) => RestoreToken = (payload) => {
     return {
         type: EAuth.RESTORE_TOKEN,
         payload: payload,
     };
 };
-
-export interface AuthFailed {
-    type: EAuth.AUTH_FAIL;
-    payload: AxiosError;
-}
 
 export const authFailed: (payload: AxiosError) => AuthFailed = (payload) => {
     return {
@@ -40,7 +26,7 @@ export const authFailed: (payload: AxiosError) => AuthFailed = (payload) => {
     };
 };
 
-export const signIn = (data: SignInPayload): IThunkResult<Promise<void>> => (dispatch) => {
+export const signIn = (data: SignInPayload): ThunkResult<Promise<void>> => (dispatch) => {
     return api.post(`/auth/login`, data)
         .then((res) => {
             dispatch(restoreToken(res.data.user))
@@ -49,7 +35,6 @@ export const signIn = (data: SignInPayload): IThunkResult<Promise<void>> => (dis
             dispatch(authFailed(err))
         });
 };
-
 
 export type AuthActions =  SignOut | RestoreToken | AuthFailed ;
 

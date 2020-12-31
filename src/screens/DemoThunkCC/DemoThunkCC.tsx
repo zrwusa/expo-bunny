@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {DemoThunkPayload} from "../../stores/payloads";
-import {IRootState} from "../../stores/models";
-import {IThunkDispatch} from "../../stores/thunk";
-import {demoThunk} from "../../stores/demo-thunk/actions";
 import {Button, Text, View} from "react-native";
+import {demoThunk} from "../../stores/demo-thunk/actions";
+import {RootState} from "../../types/models";
+import {DemoThunkPayload} from "../../types/payloads";
+import {ThunkDispatchCustom} from "../../types/thunk";
 
-const mapStateToProps = (rootState: IRootState) => ({...rootState.demoThunkState});
+const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 
-const mapDispatchToProps = (dispatch: IThunkDispatch) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatchCustom) => ({
     demoThunk: (data: DemoThunkPayload) => dispatch(demoThunk(data)),
 });
 
@@ -23,20 +23,21 @@ export class DemoThunkCC extends React.Component<Props> {
     handleThunk(): void {
         this.props.demoThunk({
             "text": "text1",
-            "id":0
-        }).then(value => {
+            "id": 0
+        }).then((value) => {
             console.log('hello world, got', value);
         });
     }
 
     render(): React.ReactNode {
-        const {text,id} = this.props;
+        const {text, id} = this.props;
         return <View>
             <Text>Demo Thunk CC Page</Text>
-            <Button onPress={this.handleThunk} title="Thunk dispatch" />
+            <Button onPress={this.handleThunk} title="Thunk dispatch"/>
             <Text>text:{text}</Text>
             <Text>id:{id}</Text>
-            <Text>This demo shows you how to use a thunk dispatcher to dispatch data to Redux reducer,As in http request situation thunk works awesome.And shows you how to map states and dispatchers in Class Component(CC)</Text>
+            <Text>This demo shows you how to use a thunk dispatcher to dispatch data to Redux reducer,As in http request situation thunk works
+                awesome.And shows you how to map states and dispatchers in Class Component(CC)</Text>
         </View>;
     }
 }

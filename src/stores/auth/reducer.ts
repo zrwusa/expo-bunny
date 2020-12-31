@@ -1,7 +1,7 @@
-import {Auth} from "./models";
 import {AuthActions} from "./actions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {AuthFailedPayload, RestoreTokenPayload} from "./payloads";
+import {Auth} from "../../types/models";
+import {AuthFailedPayload, RestoreTokenPayload} from "../../types/payloads";
 
 export const initialAuthState: Auth = {
     isLoading: true,

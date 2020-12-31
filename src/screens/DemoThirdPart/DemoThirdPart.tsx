@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {View} from "react-native";
 import {Button, ListItem, Avatar} from "react-native-elements"
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 type Props = { title?: string }
@@ -53,4 +53,4 @@ class DemoThirdPart extends Component<Props, States> {
     }
 }
 
-export default DemoThirdPart
+export default DemoThirdPart;

@@ -1,6 +1,6 @@
-import {EDemoHello} from "./constants";
-import {DemoHello} from "./models";
 import {DemoHelloActions} from "./actions";
+import {DemoHello} from "../../types/models";
+import {EDemoHello} from "../../types/constants";
 
 export const initialState: DemoHello = {
     name: "name default",
@@ -9,15 +9,15 @@ export const initialState: DemoHello = {
 
 export function demoHelloStateReducer(state: DemoHello = initialState, {type, payload}: DemoHelloActions): DemoHello {
     switch (type) {
-        case EDemoHello.ACTION_ONE: {
-            console.log(`${EDemoHello.ACTION_ONE} Invoked With Payload:${JSON.stringify(payload)}`);
+        case EDemoHello.DEMO_HELLO: {
+            console.log(`${EDemoHello.DEMO_HELLO} Invoked With Payload:${JSON.stringify(payload)}`);
             return {
                 ...state,
                 ...payload,
             };
         }
-        case EDemoHello.ACTION_TWO: {
-            console.log(`${EDemoHello.ACTION_TWO} Invoked With Payload:${JSON.stringify(payload)}`);
+        case EDemoHello.DEMO_HELLO2: {
+            console.log(`${EDemoHello.DEMO_HELLO2} Invoked With Payload:${JSON.stringify(payload)}`);
             return {
                 ...state,
                 ...payload,

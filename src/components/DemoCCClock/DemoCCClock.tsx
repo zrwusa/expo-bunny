@@ -61,4 +61,4 @@ class DemoCCClock extends Component<Props, States> {
     }
 }
 
-export default DemoCCClock
+export default DemoCCClock;

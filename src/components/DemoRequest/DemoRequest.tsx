@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import api from "../../common/api";
-import {IDemoEmployee} from "../../stores/models";
 import {Button, Text, View} from "react-native";
+import {DemoEmployee} from "../../types/models";
 
 type Props = { title: string, }
-type States = { name: string, employees: Array<IDemoEmployee>, }
+type States = { name: string, employees: Array<DemoEmployee>, }
 
 class DemoRequest extends Component<Props, States> {
     constructor(props: Props) {
@@ -35,7 +35,7 @@ class DemoRequest extends Component<Props, States> {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>{this.state.name}</Text>
-            <Button onPress={this.handleGetSomethingClick} title="Click me to get employees" />
+            <Button onPress={this.handleGetSomethingClick} title="Click me to get employees"/>
             <View>
                 {this.state.employees.map((employee) =>
                     <Text key={employee.email.toString()}>
@@ -47,4 +47,4 @@ class DemoRequest extends Component<Props, States> {
     }
 }
 
-export default DemoRequest
+export default DemoRequest;

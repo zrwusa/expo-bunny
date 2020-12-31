@@ -26,11 +26,6 @@ class DemoHome extends Component<Props, States> {
             </View>
             <View>
                 <TextInput placeholder={"I am placeholder"}/>
-                {/*<View className="demo-autoprefixer"/>*/}
-            </View>
-            <View>
-                <Text>If the width of the view less than 500px i will be a svg image</Text>
-                <Text>Demo Autoprefixer</Text>
             </View>
         </View>);
     }

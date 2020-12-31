@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View,Text} from "react-native";
-import RootStackParamList from "../../stacks/Root";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "../../types/stacks";
 
 type ProfileRouteProp = RouteProp<RootStackParamList, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParamList, 'DemoRoute'>;
@@ -21,4 +21,4 @@ class DemoRoute extends Component<Props> {
     }
 }
 
-export default DemoRoute
+export default DemoRoute;

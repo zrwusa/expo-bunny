@@ -1,10 +1,10 @@
 import React from "react";
-import {View,Text} from "react-native";
+import {View, Text} from "react-native";
 
-type Props = {title: string,paragraph?: string,}
+type Props = { title: string, paragraph?: string, }
 
-const DemoFCCard: React.FunctionComponent<Props> = ({title, paragraph, children})=>{
-    return(<View>
+const DemoFCCard: React.FunctionComponent<Props> = ({title, paragraph, children}) => {
+    return (<View>
         <Text>{title}</Text>
         <Text>
             {paragraph}
@@ -13,4 +13,4 @@ const DemoFCCard: React.FunctionComponent<Props> = ({title, paragraph, children}
         {children}
     </View>);
 }
-export default DemoFCCard
+export default DemoFCCard;

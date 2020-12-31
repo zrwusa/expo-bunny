@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "../stores";
 const isDevServerProxy = false;
-const api = axios.create({baseURL: isDevServerProxy ? `http://localhost:3006/api` : `http://localhost:4006`});
+const api = axios.create({baseURL: isDevServerProxy ? `http://192.168.50.19:3006/api` : `http://192.168.50.19:4006`});
 // Request interceptor for API calls
 api.interceptors.request.use(
     async config => {

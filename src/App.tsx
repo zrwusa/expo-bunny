@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Platform, Text} from 'react-native';
+import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import RootStack from "./stacks/Root";
+import {RootStack} from "./stacks/Root";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import DemoFCReduxHook from "./screens/DemoFCReduxHook";
@@ -11,9 +11,9 @@ import DemoThirdPart from "./screens/DemoThirdPart";
 import DemoThunkCC from "./screens/DemoThunkCC";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {SignInScreen} from "./components/Auth/Auth";
-import {IRootState} from "./stores/models";
+import {SignInScreen} from "./screens/Auth";
 import {restoreToken} from "./stores/auth/actions";
+import {RootState} from "./types/models";
 
 
 const linking = {
@@ -40,8 +40,8 @@ const linking = {
 
 function App() {
     const dispatch = useDispatch();
-    const authState = useSelector((store: IRootState) => store.authState);
-    const [isReady, setIsReady] = React.useState(false)
+    const authState = useSelector((store: RootState) => store.authState);
+    const [isReady, setIsReady] = React.useState(false);
     React.useEffect(() => {
         const bootstrapAsync = async () => {
             let accessToken;
@@ -75,7 +75,6 @@ function App() {
             </NavigationContainer>
         )
         : (<Text>Preparing resources</Text>)
-
 }
 
 export default App;
