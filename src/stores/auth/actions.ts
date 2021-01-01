@@ -13,7 +13,7 @@ import {EAuth} from "../../types/constants";
 import {ThunkResult} from "../../types/thunk";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {IOS_CLIENT_ID,ANDROID_CLIENT_ID,IOS_CLIENT_ID_FOR_EXPO,ANDROID_CLIENT_ID_FOR_EXPO} from '@env';
+import {IOS_CLIENT_ID, ANDROID_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO, ANDROID_CLIENT_ID_FOR_EXPO} from '@env';
 
 export const signIn = (data: SignInPayload): ThunkResult<Promise<void>> => (dispatch) => {
     return api.post(`/auth/login`, data)
@@ -36,11 +36,18 @@ export const signInGoogle = (): ThunkResult<Promise<void>> => (dispatch) => {
         .then((logInResult) => {
             switch (logInResult.type) {
                 case "cancel":
-                    dispatch(authWarn({warn: "Login canceled"}));
+                    dispatch(authWarn({warn: "Google login canceled"}));
                     break
                 case "success":
-                    AsyncStorage.setItem('accessToken', logInResult.accessToken);
-                    dispatch(restoreTokenGoogle(logInResult));
+                    logInResult.accessToken ?
+                        AsyncStorage.setItem('accessToken', logInResult.accessToken)
+                            .then(() => {
+                                dispatch(restoreTokenGoogle(logInResult));
+                            })
+                            .catch((err) => {
+                                dispatch(authFailed({error: JSON.stringify(err)}))
+                            })
+                        : dispatch(authFailed({error: 'accessToken gives null'}))
                     break
                 default:
             }

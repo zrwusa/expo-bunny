@@ -5,12 +5,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject",
     "clear:start:ios": "expo start -c --ios",
     "build:ios": "expo build:ios",
-    "clear:build:ios": "expo build:ios --clear-provisioning-profile",
+    "build:clear:ios": "expo build:ios --clear-provisioning-profile",
     "build:android": "expo build:android",
-    "mock": "node src/mock/server.js"
+    "mock": "node src/mock/server.js",
+    "eject": "expo eject"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.13.2",
