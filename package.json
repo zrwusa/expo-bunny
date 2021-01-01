@@ -6,6 +6,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
+    "clear:start:ios": "expo start -c --ios",
+    "build:ios": "expo build:ios",
+    "clear:build:ios": "expo build:ios --clear-provisioning-profile",
+    "build:android": "expo build:android",
     "mock": "node src/mock/server.js"
   },
   "dependencies": {

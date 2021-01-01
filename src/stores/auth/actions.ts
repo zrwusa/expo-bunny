@@ -13,7 +13,7 @@ import {EAuth} from "../../types/constants";
 import {ThunkResult} from "../../types/thunk";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {IOS_CLIENT_ID_FOR_EXPO} from '@env';
+import {IOS_CLIENT_ID,ANDROID_CLIENT_ID,IOS_CLIENT_ID_FOR_EXPO,ANDROID_CLIENT_ID_FOR_EXPO} from '@env';
 
 export const signIn = (data: SignInPayload): ThunkResult<Promise<void>> => (dispatch) => {
     return api.post(`/auth/login`, data)
@@ -29,10 +29,9 @@ export const signIn = (data: SignInPayload): ThunkResult<Promise<void>> => (disp
 export const signInGoogle = (): ThunkResult<Promise<void>> => (dispatch) => {
     return Google.logInAsync({
         iosClientId: `${IOS_CLIENT_ID_FOR_EXPO}`,
-        // androidClientId: `${ANDROID_CLIENT_ID_FOR_EXPO}`,
-        // iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
-        // androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
-
+        androidClientId: `${ANDROID_CLIENT_ID_FOR_EXPO}`,
+        iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
+        androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
     })
         .then((logInResult) => {
             switch (logInResult.type) {
