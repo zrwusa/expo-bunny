@@ -26,14 +26,6 @@ export type RestoreTokenGooglePayload =
     type: 'cancel';
 };
 
-export interface AuthFailedPayload {
-    error: string;
-}
-
-export interface AuthWarnPayload {
-    warn: string;
-}
-
 export interface DemoHelloPayload {
     order: number;
 }
@@ -51,4 +43,12 @@ export interface DemoThunkSuccessPayload {
     text: string;
 }
 
+
+export interface SysErrorPayload {
+    error: string;
+}
+
+export interface SysWarnPayload {
+    warn: string;
+}
 

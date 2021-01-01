@@ -18,13 +18,15 @@ class DemoRequest extends Component<Props, States> {
         };
     }
 
-    getEmployees(): void {
-        api.get(`/employees`)
-            .then(res => {
-                this.setState({
-                    employees: res.data
-                });
-            })
+    async getEmployees(): Promise<void> {
+        let employees;
+        try {
+            const res = await api.get(`/employees`)
+            employees = res.data;
+        } catch (e) {
+            employees = [{email: "dummy email", first_name: "dummy first name"}];
+        }
+        this.setState({employees: employees});
     }
 
     handleGetSomethingClick(): void {

@@ -2,14 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Button, Text, View} from "react-native";
 import {demoThunk} from "../../stores/demo-thunk/actions";
-import {RootState} from "../../types/models";
+import {DemoThunk, RootState} from "../../types/models";
 import {DemoThunkPayload} from "../../types/payloads";
-import {ThunkDispatchCustom} from "../../types/thunk";
+import {ThunkDispatch} from "redux-thunk";
+import {Action} from "redux";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 
-const mapDispatchToProps = (dispatch: ThunkDispatchCustom) => ({
-    demoThunk: (data: DemoThunkPayload) => dispatch(demoThunk(data)),
+const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
+    demoThunk: async (data: DemoThunkPayload) => dispatch(demoThunk(data)),
 });
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> ;
@@ -22,7 +23,7 @@ export class DemoThunkCC extends React.Component<Props> {
 
     handleThunk(): void {
         this.props.demoThunk({
-            "text": "text1",
+            "text": "text-demo",
             "id": 0
         }).then((value) => {
             console.log('hello world, got', value);

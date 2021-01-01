@@ -1,5 +1,5 @@
 import {AxiosError} from "axios";
-import {EAuth, EDemoHello, EDemoThunk} from "./constants";
+import {EAuth, EDemoHello, EDemoThunk, ESys} from "./constants";
 import {
     AuthFailedPayload, AuthWarnPayload,
     DemoHello2Payload,
@@ -7,7 +7,7 @@ import {
     DemoThunkSuccessPayload,
     RestoreTokenGooglePayload,
     RestoreTokenPayload,
-    SignOutPayload
+    SignOutPayload, SysErrorPayload, SysWarnPayload
 } from "./payloads";
 
 export interface SignOut {
@@ -25,14 +25,15 @@ export interface RestoreTokenGoogle {
     payload: RestoreTokenGooglePayload;
 }
 
-export interface AuthFailed {
-    type: EAuth.AUTH_FAIL;
-    payload: AuthFailedPayload;
+
+export interface SysError {
+    type: ESys.ERROR;
+    payload: SysErrorPayload;
 }
 
-export interface AuthWarn {
-    type: EAuth.AUTH_WARN;
-    payload: AuthWarnPayload;
+export interface SysWarn {
+    type: ESys.WARN;
+    payload: SysWarnPayload;
 }
 
 export interface DemoThunkSuccess {

@@ -6,8 +6,6 @@ export const initialAuthState: Auth = {
     isLoading: true,
     isSignOut: false,
     accessToken: undefined,
-    error: "",
-    warn: "",
 };
 
 export function authReducer(state: Auth = initialAuthState, {type, payload}: AuthActions): Auth {
@@ -17,18 +15,6 @@ export function authReducer(state: Auth = initialAuthState, {type, payload}: Aut
                 ...state,
                 accessToken: payload.access_token,
                 isLoading: false,
-            };
-        case EAuth.AUTH_FAIL:
-            return {
-                ...state,
-                isSignOut: false,
-                error: payload.error,
-            };
-        case EAuth.AUTH_WARN:
-            return {
-                ...state,
-                isSignOut: false,
-                warn: payload.warn,
             };
         case EAuth.SIGN_OUT:
             return {
@@ -42,7 +28,6 @@ export function authReducer(state: Auth = initialAuthState, {type, payload}: Aut
                 accessToken: payload.accessToken,
                 isLoading: false,
             };
-
         default:
             return state;
     }

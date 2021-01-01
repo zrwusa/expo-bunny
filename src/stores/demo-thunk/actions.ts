@@ -1,9 +1,11 @@
-import {AxiosError} from "axios";
 import api from "../../common/api";
 import {DemoThunkPayload, DemoThunkSuccessPayload} from "../../types/payloads";
-import {DemoThunkFailed, DemoThunkSuccess} from "../../types/actions";
+import {DemoThunkSuccess, SysError} from "../../types/actions";
 import {EDemoThunk} from "../../types/constants";
-import {ThunkResult} from "../../types/thunk";
+import {Action, ActionCreator, Dispatch} from 'redux';
+import {ThunkAction} from 'redux-thunk';
+import {DemoThunk} from "../../types/models";
+import {sysError} from "../sys/actions";
 
 export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSuccess = (payload) => {
     return {
@@ -12,22 +14,36 @@ export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSu
     };
 };
 
-export const demoThunkFailed: (payload: AxiosError) => DemoThunkFailed = (payload) => {
-    return {
-        type: EDemoThunk.DEMO_THUNK_FAILED,
-        payload: payload,
+export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunk, void, DemoThunkSuccess>> = (reqData: DemoThunkPayload) => {
+    return async (dispatch: Dispatch<DemoThunkSuccess | SysError>): Promise<Action> => {
+        let r;
+        try {
+            const res = await api.post(`/demo_thunks`, reqData);
+            r = dispatch(demoThunkSuccess(res.data));
+        } catch (e) {
+            console.log(e.toString())
+            r = dispatch(sysError({error: e.toString()}));
+        }
+        return r;
     };
 };
 
-export const demoThunk = (data: DemoThunkPayload): ThunkResult<Promise<void>> => (dispatch) => {
-    const retPromise = api.post(`/demo_thunks`, data)
-        .then((res) => {
-            dispatch(demoThunkSuccess(res.data))
-        })
-        .catch((err: AxiosError) => {
-            dispatch(demoThunkFailed(err))
-        });
-    return retPromise;
-};
+export type DemoThunkActions = DemoThunkSuccess;
 
-export type DemoThunkActions =  DemoThunkSuccess | DemoThunkFailed;
+// export const demoThunkFailed: (payload: AxiosError) => DemoThunkFailed = (payload) => {
+//     return {
+//         type: EDemoThunk.DEMO_THUNK_FAILED,
+//         payload: payload,
+//     };
+// };
+
+// export const demoThunk = (data: DemoThunkPayload): ThunkResult<Promise<void>> => (dispatch) => {
+//     const retPromise = api.post(`/demo_thunks`, data)
+//         .then((res) => {
+//             dispatch(demoThunkSuccess(res.data))
+//         })
+//         .catch((err: AxiosError) => {
+//             dispatch(demoThunkFailed(err))
+//         });
+//     return retPromise;
+// };

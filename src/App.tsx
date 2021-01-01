@@ -57,23 +57,25 @@ function App() {
         bootstrapAsync();
     }, []);
     return isReady ? (
-            <NavigationContainer linking={linking} fallback={<Text>Fallback loading...</Text>}>
-                <RootStack.Navigator>
-                    {(authState.accessToken === undefined) ? (
-                        <RootStack.Screen name="SignIn" component={SignInScreen}/>
-                    ) : (
-                        <>
-                            <RootStack.Screen name="Home" component={Home}/>
-                            <RootStack.Screen name="Profile" component={Profile} initialParams={{id: '000'}}/>
-                            <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHook}/>
-                            <RootStack.Screen name="DemoHome" component={DemoHome}/>
-                            <RootStack.Screen name="DemoRoute" component={DemoRoute}/>
-                            <RootStack.Screen name="DemoThirdPart" component={DemoThirdPart}/>
-                            <RootStack.Screen name="DemoThunkCC" component={DemoThunkCC}/>
-                        </>
-                    )}
-                </RootStack.Navigator>
-            </NavigationContainer>
+            <>
+                <NavigationContainer linking={linking} fallback={<Text>Fallback loading...</Text>}>
+                    <RootStack.Navigator>
+                        {(authState.accessToken === undefined) ? (
+                            <RootStack.Screen name="SignIn" component={SignInScreen}/>
+                        ) : (
+                            <>
+                                <RootStack.Screen name="Home" component={Home}/>
+                                <RootStack.Screen name="Profile" component={Profile} initialParams={{id: '000'}}/>
+                                <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHook}/>
+                                <RootStack.Screen name="DemoHome" component={DemoHome}/>
+                                <RootStack.Screen name="DemoRoute" component={DemoRoute}/>
+                                <RootStack.Screen name="DemoThirdPart" component={DemoThirdPart}/>
+                                <RootStack.Screen name="DemoThunkCC" component={DemoThunkCC}/>
+                            </>
+                        )}
+                    </RootStack.Navigator>
+                </NavigationContainer>
+            </>
         )
         : (<Text>Preparing resources</Text>)
 }
