@@ -9,4 +9,5 @@ export type RootStackParamList = {
     DemoThirdPart: undefined;
     DemoThunkCC: undefined;
     DemoMap:undefined;
+    TestMap:undefined;
 };

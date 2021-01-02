@@ -19,14 +19,22 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.zrwusa.expo-react-bunny"
+      "bundleIdentifier": "com.zrwusa.expo-react-bunny",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.zrwusa.exporeactbunny"
+      "package": "com.zrwusa.exporeactbunny",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

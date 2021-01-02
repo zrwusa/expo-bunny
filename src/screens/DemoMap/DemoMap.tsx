@@ -1,6 +1,5 @@
 import React, {Component, createRef} from "react";
 import {View, StyleSheet, Dimensions, Platform, Text, Animated, Image} from "react-native";
-// import MapView, {MapEvent, Marker, PROVIDER_GOOGLE} from "react-native-maps";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
 import {DemoMap, NearbyFilm, RootState} from "../../types/models";
@@ -8,21 +7,12 @@ import {Action} from "redux";
 import {GetNearbyFilmsReqParams} from "../../types/payloads";
 import {getNearbyFilms} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
-import * as MapViewMy from "react-native-maps";
-import MapView from "react-native-maps";
-
+import MapView, {MapEvent, PROVIDER_GOOGLE} from "react-native-maps";
+const { Marker } = MapView as any; // react-native-maps under typescript bug trick
 
 const {width, height} = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
-
-// const MapView = Platform.select({
-//     native: () => require('react-native-maps'),
-//     default: () =>  () => {return (<View><Text>Map is not support in web</Text></View>)}
-// })();
-// <View style={styles.container}>
-//     {MapView.MAP_TYPES?<MapView style={styles.map} />:<Text>xxx</Text>}
-// </View>
 
 type BareProps = { title?: string }
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoMapState});
@@ -116,21 +106,14 @@ class DemoMapScreen extends Component<Props> {
                             opacity: interpolations[index].opacity,
                         };
                         return (
-                            // <View>
-                            //     <Text>Dummy Marker</Text>
-                            //     <Animated.View style={[styles.markerWrap, opacityStyle]}>
-                            //         <Animated.View style={[styles.ring, scaleStyle]}/>
-                            //         <View style={styles.marker}/>
-                            //     </Animated.View>
-                            // </View>
-                            <MapViewMy.Marker key={index} coordinate={marker.coordinate} onPress={() => {
+                            <Marker key={index} coordinate={marker.coordinate} onPress={() => {
                                 this.onMarkerPress(marker)
                             }}>
                                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
                                     <Animated.View style={[styles.ring, scaleStyle]}/>
                                     <View style={styles.marker}/>
                                 </Animated.View>
-                            </MapViewMy.Marker>
+                            </Marker>
                         );
                     })}
                 </MapView>
@@ -173,6 +156,7 @@ class DemoMapScreen extends Component<Props> {
             </View>
         );
     }
+
 
     async getLocation() {
         try {
@@ -219,7 +203,7 @@ class DemoMapScreen extends Component<Props> {
         });
     }
 
-    onMapviewMarkerPress(mapEvent: MapViewMy.MapEvent<{ action: "marker-press"; id: string }>) {
+    onMapviewMarkerPress(mapEvent: MapEvent<{ action: "marker-press"; id: string }>) {
         const mapView = this.mapView.current;
         const markerData = mapEvent.nativeEvent.coordinate;
         mapView && mapView.animateToRegion({

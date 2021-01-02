@@ -33,7 +33,7 @@ export type NearbyFilm = {
     }
     description: string;
 }
-type Region = {
+export type Region = {
     latitude: number,
     longitude: number,
     latitudeDelta: number,

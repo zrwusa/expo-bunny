@@ -24,6 +24,7 @@ function HomeScreen({navigation}: Props) {
             <Button title="Demo Third Part" onPress={() => navigation.navigate('DemoThirdPart')}/>
             <Button title="Demo Thunk CC" onPress={() => navigation.navigate('DemoThunkCC')}/>
             <Button title="Demo Map" onPress={()=>navigation.navigate('DemoMap')}></Button>
+            <Button title="Test Map" onPress={()=>navigation.navigate('TestMap')}></Button>
             <Button onPress={() => {
                 dispatch(signOutAndRemove())
             }} title="Sign out"/>

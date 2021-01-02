@@ -16,6 +16,7 @@ import {restoreToken} from "./stores/auth/actions";
 import {RootState} from "./types/models";
 import * as Linking from "expo-linking";
 import DemoMapScreen from "./screens/DemoMap";
+import TestMapScreen from "./screens/TestMap";
 
 const basePath = Linking.makeUrl('/');
 const linking = {
@@ -35,7 +36,8 @@ const linking = {
             DemoRoute: "demo-route",
             DemoThirdPart: "demo-third-part",
             DemoThunkCC: "demo-thunk-cc",
-            SignIn: "sign-in"
+            SignIn: "sign-in",
+            TestMap:"test-map"
         },
     },
 };
@@ -73,6 +75,8 @@ function App() {
                                 <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen}/>
                                 <RootStack.Screen name="DemoMap" component={DemoMapScreen}/>
                                 <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen}/>
+                                <RootStack.Screen name="TestMap" component={TestMapScreen}/>
+
                             </>
                         )}
                     </RootStack.Navigator>
