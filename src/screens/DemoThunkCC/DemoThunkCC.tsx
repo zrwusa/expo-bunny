@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) =>
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> ;
 
-export class DemoThunkCC extends React.Component<Props> {
+export class DemoThunkCCScreen extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleThunk = this.handleThunk.bind(this);
@@ -44,4 +44,4 @@ export class DemoThunkCC extends React.Component<Props> {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DemoThunkCC);
+export default connect(mapStateToProps, mapDispatchToProps)(DemoThunkCCScreen);

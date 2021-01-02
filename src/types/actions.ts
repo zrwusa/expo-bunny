@@ -1,7 +1,6 @@
 import {AxiosError} from "axios";
-import {EAuth, EDemoHello, EDemoThunk, ESys} from "./constants";
+import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "./constants";
 import {
-    AuthFailedPayload, AuthWarnPayload,
     DemoHello2Payload,
     DemoHelloPayload,
     DemoThunkSuccessPayload,
@@ -9,7 +8,16 @@ import {
     RestoreTokenPayload,
     SignOutPayload, SysErrorPayload, SysWarnPayload
 } from "./payloads";
+import {DemoNearbyFilms} from "./models";
+export interface DemoHello {
+    type: EDemoHello.DEMO_HELLO;
+    payload: DemoHelloPayload;
+}
 
+export interface DemoHello2 {
+    type: EDemoHello.DEMO_HELLO2;
+    payload: DemoHello2Payload;
+}
 export interface SignOut {
     type: EAuth.SIGN_OUT;
     payload: SignOutPayload;
@@ -36,6 +44,7 @@ export interface SysWarn {
     payload: SysWarnPayload;
 }
 
+
 export interface DemoThunkSuccess {
     type: EDemoThunk.DEMO_THUNK_SUCCESS;
     payload: DemoThunkSuccessPayload;
@@ -46,12 +55,7 @@ export interface DemoThunkFailed {
     payload: AxiosError;
 }
 
-export interface DemoHello {
-    type: EDemoHello.DEMO_HELLO;
-    payload: DemoHelloPayload;
-}
-
-export interface DemoHello2 {
-    type: EDemoHello.DEMO_HELLO2;
-    payload: DemoHello2Payload;
+export interface RestoreNearbyFilms {
+    type: EDemoMap.RESTORE_NEARBY_FILMS;
+    payload: DemoNearbyFilms;
 }

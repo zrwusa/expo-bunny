@@ -26,6 +26,15 @@ export type RestoreTokenGooglePayload =
     type: 'cancel';
 };
 
+export interface SysErrorPayload {
+    error: string;
+}
+
+export interface SysWarnPayload {
+    warn: string;
+}
+
+
 export interface DemoHelloPayload {
     order: number;
 }
@@ -43,12 +52,14 @@ export interface DemoThunkSuccessPayload {
     text: string;
 }
 
-
-export interface SysErrorPayload {
-    error: string;
+export interface GetNearbyFilmsReqParams {
+    latitude: number;
+    longitude: number;
+    latitudeDelta:number;
+    longitudeDelta:number;
 }
 
-export interface SysWarnPayload {
-    warn: string;
-}
+
+
+
 

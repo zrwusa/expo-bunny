@@ -4,12 +4,12 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../../types/stacks";
 
-type ProfileRouteProp = RouteProp<RootStackParamList, 'DemoRoute'>;
-type ProfileNavigationProp = StackNavigationProp<RootStackParamList, 'DemoRoute'>;
+type ProfileRouteProp = RouteProp<RootStackParamList, 'DemoRouteScreen'>;
+type ProfileNavigationProp = StackNavigationProp<RootStackParamList, 'DemoRouteScreen'>;
 
 type Props = { route: ProfileRouteProp; navigation: ProfileNavigationProp; };
 
-class DemoRoute extends Component<Props> {
+class DemoRouteScreen extends Component<Props> {
     constructor(props: Props) {
         super(props);
     }
@@ -21,4 +21,4 @@ class DemoRoute extends Component<Props> {
     }
 }
 
-export default DemoRoute;
+export default DemoRouteScreen;

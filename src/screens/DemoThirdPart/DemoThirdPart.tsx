@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 type Props = { title?: string }
 type States = { name: string }
 
-class DemoThirdPart extends Component<Props, States> {
+class DemoThirdPartScreen extends Component<Props, States> {
     constructor(props: Props) {
         super(props);
     }
@@ -52,4 +52,4 @@ class DemoThirdPart extends Component<Props, States> {
     }
 }
 
-export default DemoThirdPart;
+export default DemoThirdPartScreen;

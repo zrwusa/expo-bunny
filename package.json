@@ -5,12 +5,14 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "clear:start:ios": "expo start -c --ios",
+    "clear:start:ios": "expo start --clear --ios",
     "build:ios": "expo build:ios",
     "build:clear:ios": "expo build:ios --clear-provisioning-profile",
     "build:android": "expo build:android",
     "mock": "node src/mock/server.js",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "clear:watchman": "watchman watch-del-all",
+    "clear:rn": "react-native clean-project"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.13.2",
@@ -23,6 +25,7 @@
     "expo": "~40.0.0",
     "expo-google-app-auth": "^8.1.4",
     "expo-linking": "~2.0.0",
+    "expo-location": "^10.0.0",
     "expo-status-bar": "~1.0.3",
     "json-server": "^0.16.3",
     "jsonwebtoken": "^8.5.1",
@@ -32,9 +35,11 @@
     "react-native-dotenv": "^2.4.3",
     "react-native-elements": "^3.1.0",
     "react-native-gesture-handler": "~1.8.0",
+    "react-native-maps": "^0.27.1",
     "react-native-screens": "~2.15.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
+    "react-native-web-maps": "^0.3.0",
     "react-redux": "^7.2.2",
     "redux-thunk": "^2.3.0"
   },

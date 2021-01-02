@@ -2,19 +2,20 @@ import * as React from 'react';
 import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStack} from "./stacks/Root";
-import Home from "./screens/Home";
-import Profile from "./screens/Profile";
-import DemoFCReduxHook from "./screens/DemoFCReduxHook";
-import DemoHome from "./screens/DemoHome";
-import DemoRoute from "./screens/DemoRoute";
-import DemoThirdPart from "./screens/DemoThirdPart";
-import DemoThunkCC from "./screens/DemoThunkCC";
+import HomeScreen from "./screens/Home";
+import ProfileScreen from "./screens/Profile";
+import DemoFCReduxHookScreen from "./screens/DemoFCReduxHook";
+import DemoCollectionScreen from "./screens/DemoHome";
+import DemoRouteScreen from "./screens/DemoRoute";
+import DemoThirdPartScreen from "./screens/DemoThirdPart";
+import DemoThunkCCScreen from "./screens/DemoThunkCC";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {SignInScreen} from "./screens/Auth";
 import {restoreToken} from "./stores/auth/actions";
 import {RootState} from "./types/models";
 import * as Linking from "expo-linking";
+import DemoMapScreen from "./screens/DemoMap";
 
 const basePath = Linking.makeUrl('/');
 const linking = {
@@ -30,7 +31,7 @@ const linking = {
                 },
             },
             DemoFCReduxHook: "demo-fc-redux-hook",
-            DemoHome: "demo-home",
+            DemoCollection: "demo-collection",
             DemoRoute: "demo-route",
             DemoThirdPart: "demo-third-part",
             DemoThunkCC: "demo-thunk-cc",
@@ -64,13 +65,14 @@ function App() {
                             <RootStack.Screen name="SignIn" component={SignInScreen}/>
                         ) : (
                             <>
-                                <RootStack.Screen name="Home" component={Home}/>
-                                <RootStack.Screen name="Profile" component={Profile} initialParams={{id: '000'}}/>
-                                <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHook}/>
-                                <RootStack.Screen name="DemoHome" component={DemoHome}/>
-                                <RootStack.Screen name="DemoRoute" component={DemoRoute}/>
-                                <RootStack.Screen name="DemoThirdPart" component={DemoThirdPart}/>
-                                <RootStack.Screen name="DemoThunkCC" component={DemoThunkCC}/>
+                                <RootStack.Screen name="Home" component={HomeScreen}/>
+                                <RootStack.Screen name="Profile" component={ProfileScreen} initialParams={{id: '000'}}/>
+                                <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen}/>
+                                <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen}/>
+                                <RootStack.Screen name="DemoRoute" component={DemoRouteScreen}/>
+                                <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen}/>
+                                <RootStack.Screen name="DemoMap" component={DemoMapScreen}/>
+                                <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen}/>
                             </>
                         )}
                     </RootStack.Navigator>

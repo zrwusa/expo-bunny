@@ -5,7 +5,7 @@ import {Button, Text, View} from "react-native";
 import {RootState} from "../../types/models";
 
 
-const DemoFCReduxHook: React.FunctionComponent = () => {
+const DemoFCReduxHookScreen: React.FunctionComponent = () => {
     const dispatch = useDispatch();
     const demoHelloState = useSelector((store:RootState) => store.demoHelloState);
     return (<View>
@@ -15,4 +15,4 @@ const DemoFCReduxHook: React.FunctionComponent = () => {
         <Text>This demo shows you to dispatch an action to redux reducer with hook method in Function Component(FC)</Text>
     </View>);
 }
-export default DemoFCReduxHook;
+export default DemoFCReduxHookScreen;

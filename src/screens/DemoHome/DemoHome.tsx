@@ -7,14 +7,14 @@ import {Text, View, TextInput} from "react-native";
 type Props = { title?: string }
 type States = { name: string }
 
-class DemoHome extends Component<Props, States> {
+class DemoCollectionScreen extends Component<Props, States> {
     constructor(props: Props) {
         super(props);
     }
 
     render(): React.ReactNode {
         return (<View>
-            <Text>Demo Home Page</Text>
+            <Text>Demo HomeScreen Page</Text>
             <View>
                 <DemoFCCard title="DemoFCCard is a FunctionComponent" paragraph="I am paragraph"/>
             </View>
@@ -32,4 +32,4 @@ class DemoHome extends Component<Props, States> {
 }
 
 
-export default DemoHome
+export default DemoCollectionScreen

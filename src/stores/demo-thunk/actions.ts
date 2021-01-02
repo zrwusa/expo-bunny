@@ -14,11 +14,11 @@ export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSu
     };
 };
 
-export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunk, void, DemoThunkSuccess>> = (reqData: DemoThunkPayload) => {
+export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunk, void, DemoThunkSuccess>> = (reqParams: DemoThunkPayload) => {
     return async (dispatch: Dispatch<DemoThunkSuccess | SysError>): Promise<Action> => {
         let r;
         try {
-            const res = await api.post(`/demo_thunks`, reqData);
+            const res = await api.post(`/demo_thunks`, reqParams);
             r = dispatch(demoThunkSuccess(res.data));
         } catch (e) {
             console.log(e.toString())

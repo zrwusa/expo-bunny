@@ -15,11 +15,11 @@ import {ThunkAction} from 'redux-thunk';
 import {sysError, sysWarn} from "../sys/actions";
 import {Auth} from "../../types/models";
 
-export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreToken>> = (reqData: SignInPayload) => {
+export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreToken>> = (reqParams: SignInPayload) => {
     return async (dispatch: Dispatch<RestoreToken | SysError>): Promise<Action> => {
         let r;
         try {
-            const res = await api.post(`/auth/login`, reqData)
+            const res = await api.post(`/auth/login`, reqParams)
             await AsyncStorage.setItem('accessToken', res.data.user.access_token)
             r = dispatch(restoreToken(res.data.user))
         } catch (e) {

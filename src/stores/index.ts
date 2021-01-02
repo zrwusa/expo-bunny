@@ -4,10 +4,12 @@ import thunkMiddleware from "redux-thunk";
 import {demoThunkReducer} from "./demo-thunk";
 import {authReducer} from "./auth";
 import {sysStateReducer} from "./sys";
+import {demoMapReducer} from "./demo-map";
 
 const rootReducer = combineReducers({
     demoHelloState: demoHelloStateReducer,
     demoThunkState:demoThunkReducer,
+    demoMapState:demoMapReducer,
     authState:authReducer,
     sysState:sysStateReducer,
 });
