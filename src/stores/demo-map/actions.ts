@@ -1,10 +1,10 @@
 import api from "../../common/api";
 import {GetNearbyFilmsReqParams} from "../../types/payloads";
-import {RestoreNearbyFilms, SysError} from "../../types/actions";
+import {RestoreNearbyFilms, RestoreRegion, SysError} from "../../types/actions";
 import {EDemoMap} from "../../types/constants";
 import {Action, ActionCreator, Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
-import {DemoMap, NearbyFilm} from "../../types/models";
+import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import {sysError} from "../sys/actions";
 
 export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilms = (payload) => {
@@ -27,4 +27,11 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMap,
     };
 };
 
-export type DemoMapActions = RestoreNearbyFilms;
+export const restoreRegion: (payload: Region) => RestoreRegion = (payload) => {
+    return {
+        type: EDemoMap.RESTORE_REGION,
+        payload: payload,
+    };
+};
+
+export type DemoMapActions = RestoreNearbyFilms|RestoreRegion;

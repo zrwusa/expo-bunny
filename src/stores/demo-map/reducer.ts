@@ -1,12 +1,13 @@
 import {DemoMapActions} from "./actions";
 import {DemoMap} from "../../types/models";
 import {EDemoMap} from "../../types/constants";
+import {latLngDeltaGrace} from "../../common/consts";
 
 export const initialState: DemoMap = {
     demoNearbyFilms: [{
         "coordinate": {
-            "latitude": 45.524548,
-            "longitude": -122.6749817
+            "latitude": 5.466971669240216,
+            "longitude": 100.27973582460281,
         },
         "title": "Best Place",
         "description": "This is the best place in Portland",
@@ -15,10 +16,9 @@ export const initialState: DemoMap = {
         }
     }],
     region: {
-        latitude: 45.52220671242907,
-        longitude: -122.6653281029795,
-        latitudeDelta: 0.04864195044303443,
-        longitudeDelta: 0.040142817690068
+        latitude: 5.466971669240216,
+        longitude: 100.27973582460281,
+        ...latLngDeltaGrace
     }
 };
 
@@ -27,8 +27,14 @@ export function demoMapReducer(state: DemoMap = initialState, {type, payload}: D
         case EDemoMap.RESTORE_NEARBY_FILMS: {
             return {
                 ...state,
-                demoNearbyFilms:payload,
+                demoNearbyFilms: payload,
             };
+        }
+        case EDemoMap.RESTORE_REGION: {
+            return {
+                ...state,
+                region: payload,
+            }
         }
         default:
             return state;

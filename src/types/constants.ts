@@ -22,4 +22,5 @@ export enum EDemoThunk {
 
 export enum EDemoMap {
     RESTORE_NEARBY_FILMS = "RESTORE_NEARBY_FILMS",
+    RESTORE_REGION = "RESTORE_REGION",
 }

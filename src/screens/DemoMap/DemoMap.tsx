@@ -2,13 +2,16 @@ import React, {Component, createRef} from "react";
 import {View, StyleSheet, Dimensions, Platform, Text, Animated, Image} from "react-native";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
-import {DemoMap, NearbyFilm, RootState} from "../../types/models";
+import {DemoMap, NearbyFilm, Region, RootState} from "../../types/models";
 import {Action} from "redux";
-import {GetNearbyFilmsReqParams} from "../../types/payloads";
-import {getNearbyFilms} from "../../stores/demo-map/actions";
+import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
+import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
 import MapView, {MapEvent, PROVIDER_GOOGLE} from "react-native-maps";
-const { Marker } = MapView as any; // react-native-maps under typescript bug trick
+import {latLngDeltaGrace} from "../../common/consts";
+import {sysError} from "../../stores/sys/actions";
+
+const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
 const {width, height} = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
@@ -18,7 +21,9 @@ type BareProps = { title?: string }
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoMapState});
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMap, void, Action>) => ({
-    getNearbyFilms: async (data: GetNearbyFilmsReqParams) => dispatch(getNearbyFilms(data)),
+    getNearbyFilms: async (reqParams: GetNearbyFilmsReqParams) => dispatch(getNearbyFilms(reqParams)),
+    restoreRegion:(region:Region)=>dispatch(restoreRegion(region)),
+    sysError:(err:SysErrorPayload)=>dispatch(sysError(err))
 });
 type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps> & BareProps;
 
@@ -38,7 +43,6 @@ class DemoMapScreen extends Component<Props> {
     }
 
     async componentDidMount() {
-        // this.getLocation().then();
         this.animation.addListener(({value}) => {
             let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
             if (index >= this.props.demoNearbyFilms.length) {
@@ -63,6 +67,8 @@ class DemoMapScreen extends Component<Props> {
                 }
             }, 10)
         });
+        // await this.getLocation();
+
         await this.props.getNearbyFilms({latitude: 1, longitude: 1, latitudeDelta: 1, longitudeDelta: 1})
     }
 
@@ -166,26 +172,24 @@ class DemoMapScreen extends Component<Props> {
             }
 
             let location = await Location.getCurrentPositionAsync({});
-            let locationDemo = {
-                "coords": {
-                    "speed": -1,
-                    "longitude": 100.27569485012334,
-                    "latitude": 5.466366920634989,
-                    "accuracy": 72.46962253332663,
-                    "heading": -1,
-                    "altitude": 39.9760627746582,
-                    "altitudeAccuracy": 10
-                }, "timestamp": 1609516775547.3418
-            };
-            this.setState({
-                region: {
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                },
+            // let locationDemo = {
+            //     "coords": {
+            //         "speed": -1,
+            //         "longitude": 100.27569485012334,
+            //         "latitude": 5.466366920634989,
+            //         "accuracy": 72.46962253332663,
+            //         "heading": -1,
+            //         "altitude": 39.9760627746582,
+            //         "altitudeAccuracy": 10
+            //     }, "timestamp": 1609516775547.3418
+            // };
+            this.props.restoreRegion({
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+                ...latLngDeltaGrace
             })
         } catch (e) {
+            this.props.sysError(e);
         }
     }
 
@@ -198,8 +202,7 @@ class DemoMapScreen extends Component<Props> {
         mapView && mapView.animateToRegion({
             latitude: marker.coordinate.latitude,
             longitude: marker.coordinate.longitude,
-            latitudeDelta: 0.0043,
-            longitudeDelta: 0.0034
+            ...latLngDeltaGrace
         });
     }
 
@@ -209,8 +212,7 @@ class DemoMapScreen extends Component<Props> {
         mapView && mapView.animateToRegion({
             latitude: markerData.latitude,
             longitude: markerData.longitude,
-            latitudeDelta: 0.0043,
-            longitudeDelta: 0.0034
+            ...latLngDeltaGrace
         });
     }
 }
