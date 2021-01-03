@@ -15,10 +15,17 @@
     "clear:rn": "react-native clean-project"
   },
   "dependencies": {
+    "@babel/core": "~7.9.0",
+    "@expo/webpack-config": "^0.12.52",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
+    "@types/react": "~16.9.35",
+    "@types/react-dom": "~16.9.8",
+    "@types/react-native": "~0.63.2",
     "@types/react-redux": "^7.1.14",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
@@ -41,15 +48,7 @@
     "react-native-web": "~0.13.12",
     "react-native-web-maps": "^0.3.0",
     "react-redux": "^7.2.2",
-    "redux-thunk": "^2.3.0"
-  },
-  "devDependencies": {
-    "@babel/core": "~7.9.0",
-    "@expo/webpack-config": "^0.12.52",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@types/react": "~16.9.35",
-    "@types/react-dom": "~16.9.8",
-    "@types/react-native": "~0.63.2",
+    "redux-thunk": "^2.3.0",
     "typescript": "~4.0.0"
   },
   "private": true

@@ -1,4 +1,4 @@
-export type RootStackParamList = {
+export type RootStackParam = {
     Home: undefined;
     SignIn: undefined;
     Profile: { id: string };
@@ -10,4 +10,11 @@ export type RootStackParamList = {
     DemoThunkCC: undefined;
     DemoMap: undefined;
     TestMap: undefined;
+    DemoTab: undefined;
 };
+
+export type DemoTabStackParam = {
+    TabHome: undefined;
+    TabSettings: { item: string };
+};
+

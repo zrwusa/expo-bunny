@@ -4,10 +4,10 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {signOutAndRemove} from "../../stores/auth/actions";
-import {RootStackParamList} from "../../types/stacks";
+import {RootStackParam} from "../../types/stacks";
 
-type HomeRouteProp = RouteProp<RootStackParamList, 'Home'>;
-type HomeNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
+type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
 
 type Props = { route: HomeRouteProp; navigation: HomeNavigationProp; };
 
@@ -23,8 +23,9 @@ function HomeScreen({navigation}: Props) {
             <Button title="Demo Route" onPress={() => navigation.navigate('DemoRoute', {id: '1'})}/>
             <Button title="Demo Third Part" onPress={() => navigation.navigate('DemoThirdPart')}/>
             <Button title="Demo Thunk CC" onPress={() => navigation.navigate('DemoThunkCC')}/>
-            <Button title="Demo Map" onPress={()=>navigation.navigate('DemoMap')}></Button>
-            <Button title="Test Map" onPress={()=>navigation.navigate('TestMap')}></Button>
+            <Button title="Demo Map" onPress={() => navigation.navigate('DemoMap')} />
+            <Button title="Test Map" onPress={() => navigation.navigate('TestMap')} />
+            <Button title="Demo Tab" onPress={() => navigation.navigate('DemoTab')} />
             <Button onPress={() => {
                 dispatch(signOutAndRemove())
             }} title="Sign out"/>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStack} from "./stacks/Root";
 import {useDispatch, useSelector} from "react-redux";
@@ -18,6 +18,7 @@ import DemoThunkCCScreen from "./screens/DemoThunkCC";
 import DemoMapScreen from "./screens/DemoMap";
 import TestMapScreen from "./screens/TestMap";
 import {sysError} from "./stores/sys/actions";
+import DemoTabScreen from "./screens/DemoTab";
 
 const basePath = Linking.makeUrl('/');
 const linking = {
@@ -38,7 +39,19 @@ const linking = {
             DemoThirdPart: "demo-third-part",
             DemoThunkCC: "demo-thunk-cc",
             SignIn: "sign-in",
-            TestMap:"test-map"
+            TestMap: "test-map",
+            DemoTab: {
+                path: "demo-tab",
+                screens: {
+                    TabHome: "tab-home",
+                    TabSettings: {
+                        path: "tab-settings/:item",
+                        parse:{
+                            item: (item: string) => `${item}`,
+                        }
+                    }
+                }
+            }
         },
     },
 };
@@ -60,8 +73,9 @@ function App() {
             }
         };
         bootstrapAsync()
-            .catch((err)=>dispatch(sysError(err.toString())));
+            .catch((err) => dispatch(sysError(err.toString())));
     }, []);
+
     return isReady ? (
             <>
                 <NavigationContainer linking={linking} fallback={<Text>Fallback loading...</Text>}>
@@ -79,7 +93,7 @@ function App() {
                                 <RootStack.Screen name="DemoMap" component={DemoMapScreen}/>
                                 <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen}/>
                                 <RootStack.Screen name="TestMap" component={TestMapScreen}/>
-
+                                <RootStack.Screen name="DemoTab" component={DemoTabScreen}/>
                             </>
                         )}
                     </RootStack.Navigator>

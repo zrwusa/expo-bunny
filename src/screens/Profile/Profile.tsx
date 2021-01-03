@@ -2,10 +2,10 @@ import * as React from "react";
 import {View, Text, Button} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "../../types/stacks";
+import {RootStackParam} from "../../types/stacks";
 
-type ProfileRouteProp = RouteProp<RootStackParamList, 'Profile'>;
-type ProfileNavigationProp = StackNavigationProp<RootStackParamList, 'Profile'>;
+type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
+type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
 
 type Props = { route: ProfileRouteProp; navigation: ProfileNavigationProp; };
 
