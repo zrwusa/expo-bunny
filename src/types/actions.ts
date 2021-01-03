@@ -8,7 +8,7 @@ import {
     RestoreTokenPayload,
     SignOutPayload, SysErrorPayload, SysWarnPayload
 } from "./payloads";
-import {DemoNearbyFilms, Region} from "./models";
+import {NearbyFilm, Region} from "./models";
 export interface DemoHello {
     type: EDemoHello.DEMO_HELLO;
     payload: DemoHelloPayload;
@@ -57,7 +57,7 @@ export interface DemoThunkFailed {
 
 export interface RestoreNearbyFilms {
     type: EDemoMap.RESTORE_NEARBY_FILMS;
-    payload: DemoNearbyFilms;
+    payload: NearbyFilm[];
 }
 
 export interface RestoreRegion {

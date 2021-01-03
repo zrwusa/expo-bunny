@@ -8,6 +8,6 @@ export type RootStackParamList = {
     DemoRoute: { id: string };
     DemoThirdPart: undefined;
     DemoThunkCC: undefined;
-    DemoMap:undefined;
-    TestMap:undefined;
+    DemoMap: undefined;
+    TestMap: undefined;
 };

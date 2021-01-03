@@ -2,6 +2,12 @@ import * as React from 'react';
 import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStack} from "./stacks/Root";
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {SignInScreen} from "./screens/Auth";
+import {restoreToken} from "./stores/auth/actions";
+import {RootState} from "./types/models";
+import * as Linking from "expo-linking";
 import HomeScreen from "./screens/Home";
 import ProfileScreen from "./screens/Profile";
 import DemoFCReduxHookScreen from "./screens/DemoFCReduxHook";
@@ -9,14 +15,9 @@ import DemoCollectionScreen from "./screens/DemoHome";
 import DemoRouteScreen from "./screens/DemoRoute";
 import DemoThirdPartScreen from "./screens/DemoThirdPart";
 import DemoThunkCCScreen from "./screens/DemoThunkCC";
-import {useDispatch, useSelector} from "react-redux";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {SignInScreen} from "./screens/Auth";
-import {restoreToken} from "./stores/auth/actions";
-import {RootState} from "./types/models";
-import * as Linking from "expo-linking";
 import DemoMapScreen from "./screens/DemoMap";
 import TestMapScreen from "./screens/TestMap";
+import {sysError} from "./stores/sys/actions";
 
 const basePath = Linking.makeUrl('/');
 const linking = {
@@ -53,11 +54,13 @@ function App() {
                 accessToken = await AsyncStorage.getItem('accessToken');
                 accessToken && dispatch(restoreToken({access_token: accessToken}));
                 setIsReady(true);
-            } catch (e) {
+            } catch (err) {
                 // Restoring token failed
+                dispatch(sysError(err.toString()));
             }
         };
-        bootstrapAsync();
+        bootstrapAsync()
+            .catch((err)=>dispatch(sysError(err.toString())));
     }, []);
     return isReady ? (
             <>
