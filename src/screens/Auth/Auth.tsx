@@ -10,17 +10,13 @@ export const SplashScreen = () => {
         </View>
     );
 };
+
 export const SignInScreen = () => {
     const dispatch = useDispatch();
     return (
         <View>
-            <TextInput
-                placeholder="Username"
-            />
-            <TextInput
-                placeholder="Password"
-                secureTextEntry
-            />
+            <TextInput placeholder="Username"/>
+            <TextInput placeholder="Password" secureTextEntry/>
             <Button onPress={() => {
                 dispatch(signIn({email: 'bruno@email.com', password: 'bruno'}))
             }} title="Sign in"/>

@@ -9,35 +9,30 @@ type States = { name: string, employees: Array<DemoEmployee>, }
 class DemoRequest extends Component<Props, States> {
     constructor(props: Props) {
         super(props);
-        this.getEmployees = this.getEmployees.bind(this);
-        this.handleGetSomethingClick = this.handleGetSomethingClick.bind(this);
-
         this.state = {
             name: "",
             employees: []
         };
+        this.getEmployees = this.getEmployees.bind(this);
     }
 
-    async getEmployees(): Promise<void> {
+    async getEmployees() {
         let employees;
         try {
             const res = await api.get(`/employees`)
             employees = res.data;
         } catch (e) {
-            employees = [{email: "dummy email", first_name: "dummy first name"}];
+            employees = [{email: "dummy email", first_name: "dummy first name,request failed"}];
         }
         this.setState({employees: employees});
     }
 
-    handleGetSomethingClick(): void {
-        this.getEmployees();
-    }
 
     render(): React.ReactNode {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>{this.state.name}</Text>
-            <Button onPress={this.handleGetSomethingClick} title="Click me to get employees"/>
+            <Button onPress={this.getEmployees} title="Click me to get employees"/>
             <View>
                 {this.state.employees.map((employee) =>
                     <Text key={employee.email.toString()}>

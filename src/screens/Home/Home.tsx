@@ -13,7 +13,6 @@ type Props = { route: HomeRouteProp; navigation: HomeNavigationProp; };
 
 function HomeScreen({navigation}: Props) {
     const dispatch = useDispatch()
-
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text>Home Screen</Text>
@@ -23,12 +22,10 @@ function HomeScreen({navigation}: Props) {
             <Button title="Demo Route" onPress={() => navigation.navigate('DemoRoute', {id: '1'})}/>
             <Button title="Demo Third Part" onPress={() => navigation.navigate('DemoThirdPart')}/>
             <Button title="Demo Thunk CC" onPress={() => navigation.navigate('DemoThunkCC')}/>
-            <Button title="Demo Map" onPress={() => navigation.navigate('DemoMap')} />
-            <Button title="Test Map" onPress={() => navigation.navigate('TestMap')} />
-            <Button title="Demo Tab" onPress={() => navigation.navigate('DemoTab')} />
-            <Button onPress={() => {
-                dispatch(signOutAndRemove())
-            }} title="Sign out"/>
+            <Button title="Demo Map" onPress={() => navigation.navigate('DemoMap')}/>
+            <Button title="Test Map" onPress={() => navigation.navigate('TestMap')}/>
+            <Button title="Demo Tab" onPress={() => navigation.navigate('DemoTab')}/>
+            <Button onPress={()=>dispatch(signOutAndRemove())} title="Sign out"/>
         </View>
     );
 }

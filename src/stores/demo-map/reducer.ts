@@ -1,5 +1,5 @@
 import {DemoMapActions} from "./actions";
-import {DemoMap} from "../../types/models";
+import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import {EDemoMap} from "../../types/constants";
 import {latLngDeltaGrace} from "../../common/consts";
 
@@ -27,13 +27,13 @@ export function demoMapReducer(state: DemoMap = initialState, {type, payload}: D
         case EDemoMap.RESTORE_NEARBY_FILMS: {
             return {
                 ...state,
-                demoNearbyFilms: payload,
+                demoNearbyFilms: <NearbyFilm[]>payload,
             };
         }
         case EDemoMap.RESTORE_REGION: {
             return {
                 ...state,
-                region: payload,
+                region: <Region>payload,
             }
         }
         default:

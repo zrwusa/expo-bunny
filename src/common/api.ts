@@ -2,7 +2,7 @@ import axios from "axios";
 import store from "../stores";
 const isDevServerProxy = false;
 const api = axios.create({baseURL: isDevServerProxy ? `http://192.168.50.19:3006/api` : `http://192.168.50.19:4006`});
-// Request interceptor for API calls
+
 api.interceptors.request.use(
     async config => {
         const {authState} = store.getState();
@@ -19,7 +19,6 @@ api.interceptors.request.use(
         Promise.reject(error)
     });
 
-// Response interceptor for API calls
 api.interceptors.response.use(
     (response) => {
         return response
@@ -43,13 +42,11 @@ api.interceptors.response.use(
         if (error.response.status === 403 && !originalRequest._retry) {
             originalRequest._retry = true;
             // const access_token = await refreshAccessToken();
-
             const access_token = "";
             axios.defaults.headers.common["Authorization"] = `Bearer ` + access_token;
             return api(originalRequest);
         }
         else if (error.response.status === 401) {
-            console.warn(`Todo redirect to login page`);
         }
         return Promise.reject(error);
     });

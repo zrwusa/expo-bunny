@@ -31,5 +31,4 @@ class DemoCollectionScreen extends Component<Props, States> {
     }
 }
 
-
 export default DemoCollectionScreen

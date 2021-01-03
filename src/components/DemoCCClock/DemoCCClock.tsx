@@ -13,8 +13,6 @@ class DemoCCClock extends Component<Props, States> {
         };
         this.go = this.go.bind(this);
         this.stop = this.stop.bind(this);
-        this.handleGoClick = this.handleGoClick.bind(this);
-        this.handleStopClick = this.handleStopClick.bind(this);
     }
 
     tick(): void {
@@ -30,19 +28,11 @@ class DemoCCClock extends Component<Props, States> {
         });
     }
 
-    stop(): void {
+    stop() {
         clearInterval(this.state.intervalID);
     }
 
-    handleGoClick(): void {
-        this.go();
-    }
-
-    handleStopClick(): void {
-        this.stop();
-    }
-
-    componentDidMount(): void {
+    componentDidMount() {
         this.tick();
         this.go();
     }
@@ -51,12 +41,12 @@ class DemoCCClock extends Component<Props, States> {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>The current time is {this.state.time.toLocaleTimeString()}</Text>
-            <Button onPress={this.handleStopClick} title="Stop"/>
-            <Button onPress={this.handleGoClick} title="Go"/>
+            <Button onPress={this.stop} title="Stop"/>
+            <Button onPress={this.go} title="Go"/>
         </View>);
     }
 
-    componentWillUnmount(): void {
+    componentWillUnmount() {
         this.stop();
     }
 }

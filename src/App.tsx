@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStack} from "./stacks/Root";
 import {useDispatch, useSelector} from "react-redux";
@@ -46,7 +46,7 @@ const linking = {
                     TabHome: "tab-home",
                     TabSettings: {
                         path: "tab-settings/:item",
-                        parse:{
+                        parse: {
                             item: (item: string) => `${item}`,
                         }
                     }

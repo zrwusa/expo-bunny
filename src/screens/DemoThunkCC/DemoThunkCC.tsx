@@ -43,5 +43,4 @@ export class DemoThunkCCScreen extends React.Component<Props> {
     }
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(DemoThunkCCScreen);

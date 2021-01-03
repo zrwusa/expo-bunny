@@ -1,6 +1,7 @@
 import {AuthActions} from "./actions";
 import {Auth} from "../../types/models";
 import {EAuth} from "../../types/constants";
+import {RestoreTokenGooglePayload, RestoreTokenPayload} from "../../types/payloads";
 
 export const initialAuthState: Auth = {
     isLoading: true,
@@ -13,7 +14,7 @@ export function authReducer(state: Auth = initialAuthState, {type, payload}: Aut
         case EAuth.RESTORE_TOKEN :
             return {
                 ...state,
-                accessToken: payload.access_token,
+                accessToken: (<RestoreTokenPayload>payload).access_token,
                 isLoading: false,
             };
         case EAuth.SIGN_OUT:
@@ -25,7 +26,7 @@ export function authReducer(state: Auth = initialAuthState, {type, payload}: Aut
         case EAuth.RESTORE_TOKEN_GOOGLE:
             return {
                 ...state,
-                accessToken: payload.accessToken,
+                accessToken: (<RestoreTokenGooglePayload>payload).accessToken,
                 isLoading: false,
             };
         default:

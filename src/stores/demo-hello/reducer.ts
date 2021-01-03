@@ -4,7 +4,7 @@ import {EDemoHello} from "../../types/constants";
 
 export const initialState: DemoHello = {
     name: "name default",
-    order: 0,
+    order: 0
 };
 
 export function demoHelloStateReducer(state: DemoHello = initialState, {type, payload}: DemoHelloActions): DemoHello {

@@ -12,39 +12,38 @@ export interface DemoHello2 {
 }
 
 export type DemoThunk = {
-    id: number,
-    text: string,
+    id: number;
+    text: string;
 };
 
 export type DemoEmployee = {
-    first_name: string,
-    last_name: string,
-    email: string
+    first_name: string;
+    last_name: string;
+    email: string;
 };
 
 export type NearbyFilm = {
     title: string,
     coordinate: {
-        latitude: number,
-        longitude: number,
+        latitude: number;
+        longitude: number;
     },
     image: {
-        uri: string
+        uri: string;
     }
     description: string;
 }
 
 export type Region = {
-    latitude: number,
-    longitude: number,
-    latitudeDelta: number,
-    longitudeDelta: number,
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
 }
 export type DemoMap = {
-    demoNearbyFilms: NearbyFilm[],
-    region: Region
+    demoNearbyFilms: NearbyFilm[];
+    region: Region;
 }
-
 
 export type Auth = {
     isLoading: boolean;
@@ -58,12 +57,12 @@ export type Sys = {
 };
 
 export interface RootState {
+    sysState: Sys;
+    authState: Auth;
     demoHelloState: DemoHello;
     demoHello2State: DemoHello2;
     demoThunkState: DemoThunk;
     demoMapState: DemoMap;
-    sysState: Sys;
-    authState: Auth;
 }
 
 

@@ -1,14 +1,12 @@
 import {AxiosError} from "axios";
 import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "./constants";
 import {
-    DemoHello2Payload,
-    DemoHelloPayload,
-    DemoThunkSuccessPayload,
-    RestoreTokenGooglePayload,
-    RestoreTokenPayload,
-    SignOutPayload, SysErrorPayload, SysWarnPayload
+    DemoHello2Payload, DemoHelloPayload, DemoThunkSuccessPayload,
+    RestoreTokenGooglePayload, RestoreTokenPayload, SignOutPayload,
+    SysErrorPayload, SysWarnPayload
 } from "./payloads";
 import {NearbyFilm, Region} from "./models";
+
 export interface DemoHello {
     type: EDemoHello.DEMO_HELLO;
     payload: DemoHelloPayload;
@@ -18,6 +16,7 @@ export interface DemoHello2 {
     type: EDemoHello.DEMO_HELLO2;
     payload: DemoHello2Payload;
 }
+
 export interface SignOut {
     type: EAuth.SIGN_OUT;
     payload: SignOutPayload;

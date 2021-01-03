@@ -16,5 +16,4 @@ export const sysWarn: (payload: SysWarnPayload) => SysWarn = (payload) => {
     };
 };
 
-
 export type SysActions = SysError | SysWarn ;

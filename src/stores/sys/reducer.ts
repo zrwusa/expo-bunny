@@ -10,14 +10,12 @@ export const initialState: Sys = {
 export function sysStateReducer(state: Sys = initialState, {type, payload}: SysActions): Sys {
     switch (type) {
         case ESys.ERROR: {
-            console.log('-------ESys.ERROR',payload)
             return {
                 ...state,
                 ...payload,
             };
         }
         case ESys.WARN: {
-            console.log('-------ESys.WARN',payload)
             return {
                 ...state,
                 ...payload,

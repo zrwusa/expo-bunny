@@ -4,7 +4,7 @@ import {EDemoThunk} from "../../types/constants";
 
 export const initialState: DemoThunk = {
     text: "text default",
-    id: 0,
+    id: 0
 };
 
 export function demoThunkReducer(state: DemoThunk = initialState, {type, payload}: DemoThunkActions): DemoThunk {

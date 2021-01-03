@@ -14,7 +14,14 @@ export type RestoreTokenPayload = {
     nickname?: string;
 }
 
-export type RestoreTokenGooglePayload =
+export type RestoreTokenGooglePayload = {
+    type: 'success';
+    accessToken: string | null;
+    idToken: string | null;
+    refreshToken: string | null;
+    user: GoogleUser;
+}
+export type GoogleLoginResult =
     | {
     type: 'success';
     accessToken: string | null;
@@ -55,8 +62,8 @@ export interface DemoThunkSuccessPayload {
 export interface GetNearbyFilmsReqParams {
     latitude: number;
     longitude: number;
-    latitudeDelta:number;
-    longitudeDelta:number;
+    latitudeDelta: number;
+    longitudeDelta: number;
 }
 
 

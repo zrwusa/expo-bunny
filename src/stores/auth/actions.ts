@@ -1,11 +1,6 @@
 import api from "../../common/api";
 import {RestoreToken, RestoreTokenGoogle, SignOut, SysError, SysWarn} from "../../types/actions";
-import {
-    RestoreTokenGooglePayload,
-    RestoreTokenPayload,
-    SignInPayload,
-    SignOutPayload
-} from "../../types/payloads";
+import {RestoreTokenGooglePayload, RestoreTokenPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
 import {EAuth} from "../../types/constants";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -101,54 +96,3 @@ const restoreTokenGoogle: (payload: RestoreTokenGooglePayload) => RestoreTokenGo
 };
 
 export type AuthActions = SignOut | RestoreToken | RestoreTokenGoogle ;
-
-// export const signIn = (data: SignInPayload): ThunkResult<Promise<void>> => (dispatch) => {
-//     return api.post(`/auth/login`, data)
-//         .then((res) => {
-//             AsyncStorage.setItem('accessToken', res.data.user.access_token)
-//             dispatch(restoreToken(res.data.user))
-//         })
-//         .catch((err: AxiosError) => {
-//             dispatch(sysError({error: JSON.stringify(err)}))
-//         });
-// };
-
-// export const signInGoogle = (): ThunkResult<Promise<void>> => (dispatch) => {
-//     return Google.logInAsync({
-//         iosClientId: `${IOS_CLIENT_ID_FOR_EXPO}`,
-//         androidClientId: `${ANDROID_CLIENT_ID_FOR_EXPO}`,
-//         iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
-//         androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
-//     })
-//         .then((logInResult) => {
-//             switch (logInResult.type) {
-//                 case "cancel":
-//                     dispatch(authWarn({warn: "Google login canceled"}));
-//                     break
-//                 case "success":
-//                     logInResult.accessToken ?
-//                         AsyncStorage.setItem('accessToken', logInResult.accessToken)
-//                             .then(() => {
-//                                 dispatch(restoreTokenGoogle(logInResult));
-//                             })
-//                             .catch((err) => {
-//                                 dispatch(sysError({error: JSON.stringify(err)}))
-//                             })
-//                         : dispatch(sysError({error: 'accessToken gives null'}))
-//                     break
-//                 default:
-//             }
-//         })
-//         .catch((err) => {
-//             dispatch(sysError({error: JSON.stringify(err)}))
-//         });
-// };
-// export const signOutAndRemove = (): ThunkResult<Promise<void>> => (dispatch) => {
-//     return AsyncStorage.removeItem('accessToken')
-//         .then(() => {
-//             dispatch(signOut({}));
-//         })
-//         .catch((err) => {
-//             dispatch(sysError({error: JSON.stringify(err)}))
-//         });
-// };

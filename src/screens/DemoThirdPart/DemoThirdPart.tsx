@@ -25,28 +25,18 @@ class DemoThirdPartScreen extends Component<Props, States> {
             },
         ];
         return (<View>
-            <Button
-                icon={
-                    <Icon
-                        name="air-horn"
-                        size={15}
-                        color="white"
-                    />
-                }
-                title="Button with icon"
-            />
+            <Button icon={<Icon name="air-horn" size={15} color="white"/>}
+                    title="Button with icon"/>
             <View>
-                {
-                    list.map((l, i) => (
-                        <ListItem key={i} bottomDivider>
-                            <Avatar source={{uri: l.avatar_url}}/>
-                            <ListItem.Content>
-                                <ListItem.Title>{l.name}</ListItem.Title>
-                                <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-                            </ListItem.Content>
-                        </ListItem>
-                    ))
-                }
+                {list.map((l, i) => (
+                    <ListItem key={i} bottomDivider>
+                        <Avatar source={{uri: l.avatar_url}}/>
+                        <ListItem.Content>
+                            <ListItem.Title>{l.name}</ListItem.Title>
+                            <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
+                        </ListItem.Content>
+                    </ListItem>
+                ))}
             </View>
         </View>);
     }
