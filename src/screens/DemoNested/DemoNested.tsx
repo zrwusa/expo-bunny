@@ -11,7 +11,7 @@ type NestedHomeProps = { route: NestedHomeRouteProp, navigation: NestedHomeNavig
 function NestedHome({route,navigation}:NestedHomeProps) {
     return (<View>
         <Text>NestedHome</Text>
-        <Button title="Go to nested settings" onPress={() => navigation.navigate('NestedSettings',{item:"dd"})}/>
+        <Button title="Go to nested settings" onPress={() => navigation.navigate('NestedSettings',{item:"001"})}/>
     </View>);
 }
 
@@ -31,9 +31,9 @@ type DemoNestedNavigationProp = StackNavigationProp<RootStackParam, 'DemoNested'
 type Props = { route: DemoNestedRouteProp; navigation: DemoNestedNavigationProp; };
 function DemoNestedScreen({route, navigation}: Props) {
     return (
-        <DemoNestedStack.Navigator>
+        <DemoNestedStack.Navigator initialRouteName="NestedHome">
             <DemoNestedStack.Screen name="NestedHome" component={NestedHome}/>
-            <DemoNestedStack.Screen name="NestedSettings" component={NestedSettings} initialParams={{"item": "item-001"}}/>
+            <DemoNestedStack.Screen name="NestedSettings" component={NestedSettings} initialParams={{"item": "000"}}/>
         </DemoNestedStack.Navigator>
     );
 }
