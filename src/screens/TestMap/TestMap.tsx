@@ -4,7 +4,7 @@ import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
 
 const {Marker} = MapView as any;
 import {Region} from "../../types/models"
-import {latLngDeltaGrace} from "../../common/consts";
+import {latLngDeltaGrace} from "../../common/constants";
 import styles from "./styles";
 
 type Props = { title?: string }

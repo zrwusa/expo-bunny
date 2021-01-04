@@ -7,9 +7,10 @@ import {Action} from "redux";
 import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
 import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
-import MapView, {MapEvent, PROVIDER_GOOGLE} from "react-native-maps";
+import MapView from "react-native-maps";
+
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
-import {latLngDeltaGrace} from "../../common/consts";
+import {latLngDeltaGrace} from "../../common/constants";
 import {sysError} from "../../stores/sys/actions";
 import styles, {CARD_WIDTH} from "./styles";
 
@@ -78,9 +79,13 @@ class DemoMapScreen extends Component<Props> {
                 }
             }, 10)
         });
-        // await this.getCurLocation();
+        await this.getCurLocation();
 
-        await this.props.getNearbyFilms({latitude: 1, longitude: 1, latitudeDelta: 1, longitudeDelta: 1})
+        await this.props.getNearbyFilms({
+            latitude: this.props.region.latitude,
+            longitude: this.props.region.longitude,
+            ...latLngDeltaGrace
+        })
     }
 
     onMarkerPress(marker: NearbyFilm) {

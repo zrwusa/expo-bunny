@@ -18,7 +18,7 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMap,
     return async (dispatch: Dispatch<RestoreNearbyFilms | SysError>): Promise<Action> => {
         let r;
         try {
-            const res = await api.get(`/nearby_films`, {params: reqParams});
+            const res = await api.get(`/nearby_films`, {params: {reqParams}});
             r = dispatch(restoreNearbyFilms(res.data));
         } catch (e) {
             r = dispatch(sysError({error: e.toString()}));

@@ -1,7 +1,7 @@
 import {DemoMapActions} from "./actions";
 import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import {EDemoMap} from "../../types/constants";
-import {latLngDeltaGrace} from "../../common/consts";
+import {latLngDeltaGrace} from "../../common/constants";
 
 export const initialState: DemoMap = {
     demoNearbyFilms: [{
