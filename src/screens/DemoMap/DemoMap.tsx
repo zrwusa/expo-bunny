@@ -79,7 +79,7 @@ class DemoMapScreen extends Component<Props> {
                 }
             }, 10)
         });
-        await this.getCurLocation();
+        // await this.getCurLocation();
 
         await this.props.getNearbyFilms({
             latitude: this.props.region.latitude,

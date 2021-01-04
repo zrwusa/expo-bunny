@@ -25,6 +25,8 @@ function HomeScreen({navigation}: Props) {
             <Button title="Demo Map" onPress={() => navigation.navigate('DemoMap')}/>
             <Button title="Test Map" onPress={() => navigation.navigate('TestMap')}/>
             <Button title="Demo Tab" onPress={() => navigation.navigate('DemoTab')}/>
+            <Button title="Demo Nested" onPress={() => navigation.navigate('DemoNested')}/>
+            <Button title="Demo RN Components" onPress={() => navigation.navigate('DemoRNComponents')}/>
             <Button onPress={()=>dispatch(signOutAndRemove())} title="Sign out"/>
         </View>
     );

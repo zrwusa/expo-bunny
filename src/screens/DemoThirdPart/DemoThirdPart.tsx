@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {View} from "react-native";
-import {Button, ListItem, Avatar} from "react-native-elements"
+import {Button, ListItem, Avatar} from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 type Props = { title?: string }

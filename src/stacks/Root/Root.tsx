@@ -1,6 +1,9 @@
 import {createStackNavigator} from "@react-navigation/stack";
 import {RootStackParam} from "../../types/stacks";
 import {SignInScreen} from "../../screens/Auth";
+import * as React from "react";
+import {useSelector} from "react-redux";
+import {RootState} from "../../types/models";
 import HomeScreen from "../../screens/Home";
 import ProfileScreen from "../../screens/Profile";
 import DemoFCReduxHookScreen from "../../screens/DemoFCReduxHook";
@@ -11,13 +14,12 @@ import DemoMapScreen from "../../screens/DemoMap/DemoMap";
 import DemoThunkCCScreen from "../../screens/DemoThunkCC";
 import TestMapScreen from "../../screens/TestMap";
 import DemoTabScreen from "../../screens/DemoTab";
-import * as React from "react";
-import {useSelector} from "react-redux";
-import {RootState} from "../../types/models";
+import DemoRNComponents from "../../screens/DemoRNComponents";
+import DemoNestedScreen from "../../screens/DemoNested";
 
 export const RootStack = createStackNavigator<RootStackParam>();
 
-function RootStackNavigator() {
+function RootStackNavigatorWithScreensIn() {
     const authState = useSelector((store: RootState) => store.authState);
 
     return (
@@ -36,12 +38,14 @@ function RootStackNavigator() {
                     <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen}/>
                     <RootStack.Screen name="TestMap" component={TestMapScreen}/>
                     <RootStack.Screen name="DemoTab" component={DemoTabScreen}/>
+                    <RootStack.Screen name="DemoNested" component={DemoNestedScreen}/>
+                    <RootStack.Screen name="DemoRNComponents" component={DemoRNComponents}/>
                 </>
             )}
         </RootStack.Navigator>
     )
 }
 
-export default RootStackNavigator
+export default RootStackNavigatorWithScreensIn
 
 

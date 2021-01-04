@@ -11,10 +11,17 @@ export type RootStackParam = {
     DemoMap: undefined;
     TestMap: undefined;
     DemoTab: undefined;
+    DemoNested:undefined;
+    DemoRNComponents: undefined;
 };
 
 export type DemoTabStackParam = {
     TabHome: undefined;
     TabSettings: { item: string };
+};
+
+export type DemoNestedStackParam = {
+    NestedHome: undefined;
+    NestedSettings: { item: string };
 };
 

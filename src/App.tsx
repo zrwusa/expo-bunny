@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {restoreToken} from "./stores/auth/actions";
 import * as Linking from "expo-linking";
 import {sysError} from "./stores/sys/actions";
-import RootStackNavigator from "./stacks/Root/Root";
+import RootStackNavigatorWithScreensIn from "./stacks/Root/Root";
 
 const basePath = Linking.makeUrl('/');
 const linking = {
@@ -39,7 +39,20 @@ const linking = {
                         }
                     }
                 }
-            }
+            },
+            DemoNested: {
+                path: "demo-nested",
+                screens: {
+                    NestedHome: "nested-home",
+                    NestedSettings: {
+                        path: "nested-settings/:item",
+                        parse: {
+                            item: (item: string) => `${item}`,
+                        }
+                    }
+                }
+            },
+            DemoRNComponents:"demo-rn-components"
         },
     },
 };
@@ -64,7 +77,7 @@ function App() {
 
     return isReady ? (
             <NavigationContainer linking={linking} fallback={<Text>Fallback loading...</Text>}>
-                    <RootStackNavigator/>
+                    <RootStackNavigatorWithScreensIn/>
             </NavigationContainer>
         )
         : (<Text>Preparing resources</Text>)

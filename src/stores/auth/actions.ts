@@ -24,6 +24,19 @@ export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, Rest
     };
 };
 
+export const signInDummy: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreToken>> = () => {
+    return async (dispatch: Dispatch<RestoreToken | SysError>): Promise<Action> => {
+        let r;
+        try {
+            await AsyncStorage.setItem('accessToken', 'access_token_dummy')
+            r = dispatch(restoreToken({access_token:'access_token_dummy'}))
+        } catch (e) {
+            r = dispatch(sysError({error: e.toString()}))
+        }
+        return r;
+    };
+};
+
 export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreTokenGoogle>> = () => {
     return async (dispatch: Dispatch<SysWarn | SysError | RestoreTokenGoogle>): Promise<Action> => {
         let r;
