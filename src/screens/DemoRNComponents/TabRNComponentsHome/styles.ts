@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from "react-native";
-import {statusBarHeight} from "../../common/constants";
+import {statusBarHeight} from "../../../common/constants";
 const window = Dimensions.get("window");
 
 

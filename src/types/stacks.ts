@@ -15,13 +15,17 @@ export type RootStackParam = {
     DemoRNComponents: undefined;
 };
 
-export type DemoTabStackParam = {
-    TabHome: undefined;
-    TabSettings: { item: string };
-};
-
 export type DemoNestedStackParam = {
     NestedHome: undefined;
     NestedSettings: { item: string };
 };
 
+export type DemoTabStackParam = {
+    TabHome: undefined;
+    TabSettings: { item: string };
+};
+
+export type DemoTabRNComponentsStackParam = {
+    TabRNComponentsHome: undefined;
+    TabRNComponentsSettings: undefined;
+};

@@ -1,60 +1,18 @@
 import * as React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {useDispatch} from "react-redux";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {restoreToken} from "./stores/auth/actions";
 import * as Linking from "expo-linking";
 import {sysError} from "./stores/sys/actions";
-import RootStackNavigatorWithScreensIn from "./stacks/Root/Root";
+import RootNavigator, {getConfig} from "./navigator/RootNavigator";
 
 const basePath = Linking.makeUrl('/');
+
 const linking = {
     prefixes: [basePath],
-    config: {
-        initialRouteName: "Home",
-        screens: {
-            Home: "home",
-            Profile: {
-                path: "profile/:id",
-                parse: {
-                    id: (id: string) => `${id}`,
-                },
-            },
-            DemoFCReduxHook: "demo-fc-redux-hook",
-            DemoCollection: "demo-collection",
-            DemoRoute: "demo-route",
-            DemoThirdPart: "demo-third-part",
-            DemoThunkCC: "demo-thunk-cc",
-            SignIn: "sign-in",
-            TestMap: "test-map",
-            DemoTab: {
-                path: "demo-tab",
-                screens: {
-                    TabHome: "tab-home",
-                    TabSettings: {
-                        path: "tab-settings/:item",
-                        parse: {
-                            item: (item: string) => `${item}`,
-                        }
-                    }
-                }
-            },
-            DemoNested: {
-                path: "demo-nested",
-                screens: {
-                    NestedHome: "nested-home",
-                    NestedSettings: {
-                        path: "nested-settings/:item",
-                        parse: {
-                            item: (item: string) => `${item}`,
-                        }
-                    }
-                }
-            },
-            DemoRNComponents:"demo-rn-components"
-        },
-    },
+    config: {initialRouteName: "Home", screens: getConfig()}
 };
 
 function App() {
@@ -75,11 +33,12 @@ function App() {
             .catch((err) => dispatch(sysError(err.toString())));
     }, []);
 
-    return isReady ? (
+    return isReady
+        ? (<>
             <NavigationContainer linking={linking} fallback={<Text>Fallback loading...</Text>}>
-                    <RootStackNavigatorWithScreensIn/>
+                <RootNavigator/>
             </NavigationContainer>
-        )
+        </>)
         : (<Text>Preparing resources</Text>)
 }
 

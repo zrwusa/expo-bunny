@@ -28,13 +28,12 @@ import {
     activityIndicatorStyles,
     switchStyles,
     flatListStyles,
-    imageStyles,
-    imageBackgroundStyles,
-    keyboardAvoidingViewStyles,
+    imageStyles,imageBackgroundStyles,keyboardAvoidingViewStyles,
     modalStyles, pressableStyles, safeAreaViewStyles, sectionListStyles, statusBarStyles
-} from "./styles"
+} from "./styles";
 
-function DemoRNComponents() {
+
+export const TabRNComponentsHomeScreen: React.FC = () => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [modalVisible, setModalVisible] = useState(false);
@@ -49,7 +48,7 @@ function DemoRNComponents() {
         id: string;
         title: string;
     }
-    const DATA = [
+    const FLAT_LIST_DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             title: 'First Item',
@@ -83,19 +82,19 @@ function DemoRNComponents() {
         }
     ];
 
-    const imageBackgroundImage = { uri: "https://reactjs.org/logo-og.png" };
+    const imageBackgroundImage = {uri: "https://reactjs.org/logo-og.png"};
     const FlatListItem = ({title}: any) => (
         <View style={flatListStyles.item}>
             <Text style={flatListStyles.title}>{title}</Text>
         </View>
     );
 
-    const SectionListItem = ({ title }:any) => (
+    const SectionListItem = ({title}: any) => (
         <View style={sectionListStyles.item}>
             <Text style={sectionListStyles.title}>{title}</Text>
         </View>
     );
-    const styleTypes:Array<StatusBarStyle> = ['default','dark-content', 'light-content'];
+    const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
 
@@ -105,7 +104,7 @@ function DemoRNComponents() {
 
     const changeStyleStatusBar = () => {
         const styleId = styleTypes.indexOf(styleStatusBar) + 1;
-        if(styleId === styleTypes.length){
+        if (styleId === styleTypes.length) {
             return setStyleStatusBar(styleTypes[0]);
         }
         return setStyleStatusBar(styleTypes[styleId]);
@@ -116,17 +115,17 @@ function DemoRNComponents() {
             <View style={statusBarStyles.container}>
                 <View>
                     <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
-                    <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible': 'Hidden'}</Text>
+                    <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>
                 </View>
-                <StatusBar backgroundColor="blue" barStyle={styleStatusBar} />
+                <StatusBar backgroundColor="blue" barStyle={styleStatusBar}/>
                 <View>
-                    <StatusBar hidden={visibleStatusBar} />
+                    <StatusBar hidden={visibleStatusBar}/>
                 </View>
                 <View style={statusBarStyles.buttonContainer}>
-                    <Button title="Toggle StatusBar" onPress={() => changeVisibilityStatusBar()} />
+                    <Button title="Toggle StatusBar" onPress={() => changeVisibilityStatusBar()}/>
                 </View>
                 <View style={statusBarStyles.buttonContainer}>
-                    <Button title="Change StatusBar Style" onPress={() => changeStyleStatusBar()} />
+                    <Button title="Change StatusBar Style" onPress={() => changeStyleStatusBar()}/>
                 </View>
             </View>
             <View style={[activityIndicatorStyles.container, activityIndicatorStyles.horizontal]}>
@@ -154,7 +153,7 @@ function DemoRNComponents() {
             </View>
             {/*<SafeAreaView style={flatListStyles.container}>*/}
             {/*    <FlatList*/}
-            {/*        data={DATA}*/}
+            {/*        data={FLAT_LIST_DATA}*/}
             {/*        renderItem={({item}: any) => (*/}
             {/*            <FlatListItem title={item.title}/>*/}
             {/*        )}*/}
@@ -211,7 +210,7 @@ function DemoRNComponents() {
                             <Text style={modalStyles.modalText}>Hello World!</Text>
 
                             <TouchableHighlight
-                                style={{ ...modalStyles.openButton, backgroundColor: "#2196F3" }}
+                                style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
                                 }}
@@ -239,7 +238,7 @@ function DemoRNComponents() {
                     onPress={() => {
                         setTimesPressed((current) => current + 1);
                     }}
-                    style={({ pressed }) => [
+                    style={({pressed}) => [
                         {
                             backgroundColor: pressed
                                 ? 'rgb(210, 230, 255)'
@@ -247,7 +246,7 @@ function DemoRNComponents() {
                         },
                         pressableStyles.wrapperCustom
                     ]}>
-                    {({ pressed }) => (
+                    {({pressed}) => (
                         <Text style={pressableStyles.text}>
                             {pressed ? 'Pressed!' : 'Press Me'}
                         </Text>
@@ -276,4 +275,4 @@ function DemoRNComponents() {
         </ScrollView>);
 }
 
-export default DemoRNComponents;
+export default  TabRNComponentsHomeScreen;

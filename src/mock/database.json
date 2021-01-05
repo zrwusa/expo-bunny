@@ -171,6 +171,10 @@
     {
       "text": "text-demo",
       "id": 25
+    },
+    {
+      "text": "text-demo",
+      "id": 26
     }
   ],
   "nearby_films": [
@@ -178,7 +182,7 @@
       "id": 0,
       "coordinate": {
         "latitude": 5.465477663942769,
-        "longitude":  100.28043933880761
+        "longitude": 100.28043933880761
       },
       "title": "Best Place",
       "description": "This is the best place in Portland",

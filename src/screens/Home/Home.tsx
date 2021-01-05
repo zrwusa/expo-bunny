@@ -8,10 +8,9 @@ import {RootStackParam} from "../../types/stacks";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
+export type HomeScreenProps = { route: HomeRouteProp; navigation: HomeNavigationProp; };
 
-type Props = { route: HomeRouteProp; navigation: HomeNavigationProp; };
-
-function HomeScreen({navigation}: Props) {
+function HomeScreen({navigation}: HomeScreenProps) {
     const dispatch = useDispatch()
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
