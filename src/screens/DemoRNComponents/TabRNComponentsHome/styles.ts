@@ -1,12 +1,12 @@
 import {Dimensions, StyleSheet} from "react-native";
 import {statusBarHeight} from "../../../common/constants";
-const window = Dimensions.get("window");
 
+const window = Dimensions.get("window");
 
 export const screenStyles = StyleSheet.create({
     container: {
         justifyContent: "center",
-        height:window.height,
+        height: window.height,
     },
 });
 
@@ -21,6 +21,7 @@ export const activityIndicatorStyles = StyleSheet.create({
         padding: 10
     }
 })
+
 export const switchStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -28,27 +29,9 @@ export const switchStyles = StyleSheet.create({
         justifyContent: "center"
     }
 })
-export const flatListStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        height:100,
-    },
-    item: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 32,
-    },
-})
-
 
 export const imageStyles = StyleSheet.create({
-    container: {
-
-    },
+    container: {},
     tinyLogo: {
         width: 50,
         height: 50,
@@ -192,10 +175,10 @@ export const statusBarStyles = StyleSheet.create({
         backgroundColor: '#ECF0F1',
         padding: 8
     },
-    buttonContainer:{
+    buttonContainer: {
         padding: 10
     },
-    textStyle:{
+    textStyle: {
         textAlign: 'center'
     }
 })

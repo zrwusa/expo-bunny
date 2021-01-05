@@ -24,14 +24,10 @@ import {
     StatusBarStyle
 } from "react-native";
 import {
-    screenStyles,
-    activityIndicatorStyles,
-    switchStyles,
-    flatListStyles,
-    imageStyles,imageBackgroundStyles,keyboardAvoidingViewStyles,
+    screenStyles, activityIndicatorStyles, switchStyles,
+    imageStyles, imageBackgroundStyles, keyboardAvoidingViewStyles,
     modalStyles, pressableStyles, safeAreaViewStyles, sectionListStyles, statusBarStyles
 } from "./styles";
-
 
 export const TabRNComponentsHomeScreen: React.FC = () => {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -44,56 +40,9 @@ export const TabRNComponentsHomeScreen: React.FC = () => {
     } else if (timesPressed > 0) {
         textLog = 'onPress';
     }
-    type IFlatListItem = {
-        id: string;
-        title: string;
-    }
-    const FLAT_LIST_DATA = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            title: 'First Item',
-        },
-        {
-            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-            title: 'Second Item',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Third Item',
-        },
-    ];
-
-    const SECTION_LIST_DATA = [
-        {
-            title: "Main dishes",
-            data: ["Pizza", "Burger", "Risotto"]
-        },
-        {
-            title: "Sides",
-            data: ["French Fries", "Onion Rings", "Fried Shrimps"]
-        },
-        {
-            title: "Drinks",
-            data: ["Water", "Coke", "Beer"]
-        },
-        {
-            title: "Desserts",
-            data: ["Cheese Cake", "Ice Cream"]
-        }
-    ];
 
     const imageBackgroundImage = {uri: "https://reactjs.org/logo-og.png"};
-    const FlatListItem = ({title}: any) => (
-        <View style={flatListStyles.item}>
-            <Text style={flatListStyles.title}>{title}</Text>
-        </View>
-    );
 
-    const SectionListItem = ({title}: any) => (
-        <View style={sectionListStyles.item}>
-            <Text style={sectionListStyles.title}>{title}</Text>
-        </View>
-    );
     const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
@@ -108,7 +57,8 @@ export const TabRNComponentsHomeScreen: React.FC = () => {
             return setStyleStatusBar(styleTypes[0]);
         }
         return setStyleStatusBar(styleTypes[styleId]);
-    };
+    }
+
     return (
         <ScrollView contentContainerStyle={screenStyles.container}>
             <Text>ScrollView Missing momentum scroll events (#1021).</Text>
@@ -151,15 +101,6 @@ export const TabRNComponentsHomeScreen: React.FC = () => {
                     value={isEnabled}
                 />
             </View>
-            {/*<SafeAreaView style={flatListStyles.container}>*/}
-            {/*    <FlatList*/}
-            {/*        data={FLAT_LIST_DATA}*/}
-            {/*        renderItem={({item}: any) => (*/}
-            {/*            <FlatListItem title={item.title}/>*/}
-            {/*        )}*/}
-            {/*        keyExtractor={(item: IFlatListItem) => item.id}*/}
-            {/*    />*/}
-            {/*</SafeAreaView>*/}
             <View style={imageStyles.container}>
                 <Image
                     style={imageStyles.tinyLogo}
@@ -262,17 +203,7 @@ export const TabRNComponentsHomeScreen: React.FC = () => {
             <SafeAreaView style={safeAreaViewStyles.container}>
                 <Text>Safe Area View</Text>
             </SafeAreaView>
-            {/*<SafeAreaView style={sectionListStyles.container}>*/}
-            {/*    <SectionList*/}
-            {/*        sections={SECTION_LIST_DATA}*/}
-            {/*        keyExtractor={(item, index) => item + index}*/}
-            {/*        renderItem={({ item }) => <SectionListItem title={item} />}*/}
-            {/*        renderSectionHeader={({ section: { title } }) => (*/}
-            {/*            <Text style={sectionListStyles.header}>{title}</Text>*/}
-            {/*        )}*/}
-            {/*    />*/}
-            {/*</SafeAreaView>*/}
         </ScrollView>);
 }
 
-export default  TabRNComponentsHomeScreen;
+export default TabRNComponentsHomeScreen;

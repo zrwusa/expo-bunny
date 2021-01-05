@@ -3,17 +3,17 @@ import {statusBarHeight} from "../../../common/constants";
 export const sectionListStyles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: statusBarHeight,
-        marginHorizontal: 16
+        // marginTop: statusBarHeight,
+        marginHorizontal: 2
     },
     item: {
-        backgroundColor: "#f9c2ff",
+        backgroundColor: "#efefef",
         padding: 20,
-        marginVertical: 8
+        marginVertical: 1
     },
     header: {
         fontSize: 32,
-        backgroundColor: "#fff"
+        backgroundColor: "#ddd"
     },
     title: {
         fontSize: 24

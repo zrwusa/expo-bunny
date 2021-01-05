@@ -21,6 +21,8 @@ import NestedHomeScreen from "../../screens/DemoNested/NestedHome";
 import NestedSettingsScreen from "../../screens/DemoNested/NestedSettings";
 import TabRNComponentsHomeScreen from "../../screens/DemoRNComponents/TabRNComponentsHome";
 import TabRNComponentsSectionListScreen from "../../screens/DemoRNComponents/SectionList";
+import FlatListScreen from "../../screens/DemoRNComponents/FlatList";
+import KeyboardAvoidingScreen from "../../screens/DemoRNComponents/KeyboardAvoiding";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -38,19 +40,12 @@ const node: Screen = {
     name: "RootStack",
     signInComponent: SignInScreen,
     screens: [
+        {component: HomeScreen, name: "Home", path: "home"},
         {
-            component: HomeScreen,
-            name: "Home",
-            path: "home"
-        },
-        {
-            component: ProfileScreen,
-            name: "Profile",
-            path: "profile/:id",
+            component: ProfileScreen, name: "Profile", path: "profile/:id",
             parse: {
                 id: (id: string) => `${id}`,
             },
-
         },
         {component: DemoFCReduxHookScreen, name: "DemoFCReduxHook", path: "demo-fc-redux-hook"},
         {component: DemoCollectionScreen, name: "DemoCollection", path: "demo-collection"},
@@ -60,10 +55,7 @@ const node: Screen = {
         {component: DemoMapScreen, name: "DemoMap", path: "demo-map"},
         {component: TestMapScreen, name: "TestMap", path: "test-map"},
         // {component: SignInScreen, name: "SignIn", path: "sign-in"},
-        {
-            name: "DemoTab",
-            stack: DemoTabStack,
-            path: "demo-tab",
+        {name: "DemoTab", stack: DemoTabStack, path: "demo-tab",
             screens: [
                 {
                     component: TabHomeScreen,
@@ -81,10 +73,7 @@ const node: Screen = {
                 }
             ]
         },
-        {
-            name: "DemoNested",
-            path: "demo-nested",
-            stack: DemoNestedStack,
+        {name: "DemoNested", path: "demo-nested", stack: DemoNestedStack,
             screens: [
                 {
                     component: NestedHomeScreen,
@@ -101,19 +90,27 @@ const node: Screen = {
                 }
             ]
         },
-        {
-            name: "DemoRNComponents",
-            path: "demo-tab-rn-components",
-            stack: DemoTabRNComponentsStack,
-            screens: [{
-                component: TabRNComponentsHomeScreen,
-                name: "TabRNComponentsHome",
-                path: "tab-rn-components-home"
-            },
+        {name: "DemoRNComponents", path: "demo-tab-rn-components", stack: DemoTabRNComponentsStack,
+            screens: [
+                {
+                    component: TabRNComponentsHomeScreen,
+                    name: "All",
+                    path: "tab-rn-components-home"
+                },
                 {
                     component: TabRNComponentsSectionListScreen,
-                    name: "TabRNComponentsSectionList",
+                    name: "SectionList",
                     path: "tab-rn-components-settings"
+                },
+                {
+                    component: FlatListScreen,
+                    name: "FlatList",
+                    path: "flat-list"
+                },
+                {
+                    component: KeyboardAvoidingScreen,
+                    name: "NoKeyboard",
+                    path: "keyboard-avoiding"
                 }
             ]
         }
@@ -149,13 +146,12 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node, children})
 
 const RootNavigator: React.FC = () => <RecursiveNavigator node={node}/>;
 
-
-const test = (list: Screen[]): Object => {
+const recursiveConfig = (list: Screen[]): Object => {
     let obj = {};
     list.forEach(item => {
         obj[item.name] = {
             path: item.path,
-            screens: (item.screens && item.screens.length) && test(item.screens),
+            screens: (item.screens && item.screens.length) && recursiveConfig(item.screens),
             parse: item.parse
         }
     })
@@ -163,7 +159,7 @@ const test = (list: Screen[]): Object => {
 };
 
 export const getConfig = (): Object => {
-    return test([node]).RootStack.screens
+    return recursiveConfig([node]).RootStack.screens
 }
 
 export default RootNavigator;
