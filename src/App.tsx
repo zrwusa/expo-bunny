@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {useDispatch} from "react-redux";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,10 +10,7 @@ import RootNavigator, {getConfig} from "./navigator/RootNavigator";
 
 const basePath = Linking.makeUrl('/');
 
-const linking = {
-    prefixes: [basePath],
-    config: {initialRouteName: "Home", screens: getConfig()}
-};
+const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screens: getConfig()}};
 
 function App() {
     const dispatch = useDispatch();
