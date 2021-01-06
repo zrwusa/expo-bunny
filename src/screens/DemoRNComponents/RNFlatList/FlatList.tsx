@@ -2,7 +2,7 @@ import React from "react";
 import {FlatList, SafeAreaView, View, Text} from "react-native";
 import {flatListStyles} from "./styles";
 
-export const FlatListScreen: React.FC = () => {
+export const RNFlatListScreen: React.FC = () => {
     type IFlatListItem = {
         id: string;
         title: string;
@@ -41,4 +41,4 @@ export const FlatListScreen: React.FC = () => {
     );
 }
 
-export default FlatListScreen;
+export default RNFlatListScreen;

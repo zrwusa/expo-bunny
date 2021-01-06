@@ -1,9 +1,10 @@
 import {StyleSheet} from "react-native";
-import {statusBarHeight} from "../../../common/constants";
+import Consts from "../../../common/constants";
+
 export const sectionListStyles = StyleSheet.create({
     container: {
         flex: 1,
-        // marginTop: statusBarHeight,
+        // marginTop: Consts.statusBarHeight,
         marginHorizontal: 2
     },
     item: {

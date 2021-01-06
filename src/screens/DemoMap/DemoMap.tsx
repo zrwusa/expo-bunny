@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import MapView from "react-native-maps";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
-import {latLngDeltaGrace} from "../../common/constants";
+import Consts from "../../common/constants";
 import {sysError} from "../../stores/sys/actions";
 import styles, {CARD_WIDTH} from "./styles";
 
@@ -47,7 +47,7 @@ class DemoMapScreen extends Component<Props> {
             this.props.restoreRegion({
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
-                ...latLngDeltaGrace
+                ...Consts.latLngDeltaGrace
             })
         } catch (e) {
             this.props.sysError(e);
@@ -84,7 +84,7 @@ class DemoMapScreen extends Component<Props> {
         await this.props.getNearbyFilms({
             latitude: this.props.region.latitude,
             longitude: this.props.region.longitude,
-            ...latLngDeltaGrace
+            ...Consts.latLngDeltaGrace
         })
     }
 
@@ -93,7 +93,7 @@ class DemoMapScreen extends Component<Props> {
         mapView && mapView.animateToRegion({
             latitude: marker.coordinate.latitude,
             longitude: marker.coordinate.longitude,
-            ...latLngDeltaGrace
+            ...Consts.latLngDeltaGrace
         });
     }
 
@@ -185,7 +185,7 @@ class DemoMapScreen extends Component<Props> {
     //     mapView && mapView.animateToRegion({
     //         latitude: markerData.latitude,
     //         longitude: markerData.longitude,
-    //         ...latLngDeltaGrace
+    //         ...Consts.latLngDeltaGrace
     //     });
     // }
 }

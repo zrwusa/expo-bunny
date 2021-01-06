@@ -1,8 +1,5 @@
 import React, {ComponentClass, FunctionComponent} from "react";
-import {RootStack} from "../../stacks/Root";
-import {DemoNestedStack} from "../../stacks/DemoNested";
-import {DemoTabStack} from "../../stacks/DemoTab";
-import {DemoTabRNComponentsStack} from "../../stacks/DemoTabRNComponents";
+import {RootStack,DemoNestedStack,DemoTabStack,DemoTabRNComponentsStack} from "../../stacks";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types/models";
 import HomeScreen from "../../screens/Home";
@@ -19,10 +16,12 @@ import TabHomeScreen from "../../screens/DemoTab/TabHome";
 import TabSettingsScreen from "../../screens/DemoTab/TabSettings";
 import NestedHomeScreen from "../../screens/DemoNested/NestedHome";
 import NestedSettingsScreen from "../../screens/DemoNested/NestedSettings";
-import TabRNComponentsHomeScreen from "../../screens/DemoRNComponents/TabRNComponentsHome";
-import TabRNComponentsSectionListScreen from "../../screens/DemoRNComponents/SectionList";
-import FlatListScreen from "../../screens/DemoRNComponents/FlatList";
-import KeyboardAvoidingScreen from "../../screens/DemoRNComponents/KeyboardAvoiding";
+import RNHome from "../../screens/DemoRNComponents/RNHome";
+import RNSectionListScreen from "../../screens/DemoRNComponents/RNSectionList";
+import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
+import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardAvoiding";
+import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea";
+import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -93,25 +92,36 @@ const node: Screen = {
         {name: "DemoRNComponents", path: "demo-tab-rn-components", stack: DemoTabRNComponentsStack,
             screens: [
                 {
-                    component: TabRNComponentsHomeScreen,
-                    name: "All",
-                    path: "tab-rn-components-home"
+                    component: RNHome,
+                    name: "RNHome",
+                    path: "rn-home"
                 },
                 {
-                    component: TabRNComponentsSectionListScreen,
-                    name: "SectionList",
-                    path: "tab-rn-components-settings"
+                    component: RNSectionListScreen,
+                    name: "RNSectionList",
+                    path: "rn-section-list"
                 },
                 {
-                    component: FlatListScreen,
-                    name: "FlatList",
-                    path: "flat-list"
+                    component: RNFlatListScreen,
+                    name: "RNFlatList",
+                    path: "rn-flat-list"
                 },
                 {
-                    component: KeyboardAvoidingScreen,
-                    name: "NoKeyboard",
-                    path: "keyboard-avoiding"
+                    component: RNKeyboardAvoidingScreen,
+                    name: "RNNoKeyboard",
+                    path: "rn-keyboard-avoiding"
+                },
+                {
+                    component: RNSafeAreaScreen,
+                    name: "RNSafeArea",
+                    path: "rn-safe-area"
+                },
+                {
+                    component: RNVirtualizedListScreen,
+                    name: "RNVirtualizedList",
+                    path: "rn-virtualized-list"
                 }
+
             ]
         }
     ]

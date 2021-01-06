@@ -1,5 +1,9 @@
-export const latLngDeltaGrace = {
-    latitudeDelta: 0.0069,
-    longitudeDelta: 0.0045,
+const Consts = {
+    latLngDeltaGrace : {
+        latitudeDelta: 0.0069,
+        longitudeDelta: 0.0045,
+    },
+    statusBarHeight:20
 }
-export const statusBarHeight = 20;
+
+export default Consts

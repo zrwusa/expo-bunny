@@ -6,7 +6,7 @@ export const flatListStyles = StyleSheet.create({
         height: 100,
     },
     item: {
-        backgroundColor: '#bfbfbf',
+        backgroundColor: "#bfbfbf",
         padding: 20,
         marginVertical: 1,
         marginHorizontal: 2,

@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import {keyboardAvoidingViewStyles} from "./styles";
 
-export const KeyboardAvoidingScreen: React.FC = () => {
+export const RNKeyboardAvoidingScreen: React.FC = () => {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -25,4 +25,4 @@ export const KeyboardAvoidingScreen: React.FC = () => {
     );
 }
 
-export default KeyboardAvoidingScreen;
+export default RNKeyboardAvoidingScreen;

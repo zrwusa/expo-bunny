@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from "react-native";
-import {statusBarHeight} from "../../../common/constants";
+import Consts from "../../../common/constants";
 
 const window = Dimensions.get("window");
 
@@ -143,15 +143,11 @@ export const pressableStyles = StyleSheet.create({
         backgroundColor: '#f9f9f9'
     }
 })
-export const safeAreaViewStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-})
+
 export const sectionListStyles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: statusBarHeight,
+        marginTop: Consts.statusBarHeight,
         marginHorizontal: 16
     },
     item: {
@@ -171,7 +167,7 @@ export const statusBarStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingTop: statusBarHeight,
+        paddingTop: Consts.statusBarHeight,
         backgroundColor: '#ECF0F1',
         padding: 8
     },
@@ -182,18 +178,77 @@ export const statusBarStyles = StyleSheet.create({
         textAlign: 'center'
     }
 })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
+export const touchableHighlightStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 10
+    },
+    button: {
+        alignItems: "center",
+        backgroundColor: "#DDDDDD",
+        padding: 10
+    },
+    countContainer: {
+        alignItems: "center",
+        padding: 10
+    },
+    countText: {
+        color: "#FF00FF"
+    }
+})
+export const touchableOpacityStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 10
+    },
+    button: {
+        alignItems: "center",
+        backgroundColor: "#DDDDDD",
+        padding: 10
+    },
+    countContainer: {
+        alignItems: "center",
+        padding: 10
+    }
+})
+export const touchableWithoutFeedbackStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 10
+    },
+    button: {
+        alignItems: "center",
+        backgroundColor: "#DDDDDD",
+        padding: 10
+    },
+    countContainer: {
+        alignItems: "center",
+        padding: 10
+    },
+    countText: {
+        color: "#FF00FF"
+    }
+})
+export const virtualizedListStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: Consts.statusBarHeight,
+    },
+    item: {
+        backgroundColor: '#f9c2ff',
+        height: 150,
+        justifyContent: 'center',
+        marginVertical: 8,
+        marginHorizontal: 16,
+        padding: 20,
+    },
+    title: {
+        fontSize: 32,
+    },
+})
 // export const xxxStyles = StyleSheet.create({
 //
 // })

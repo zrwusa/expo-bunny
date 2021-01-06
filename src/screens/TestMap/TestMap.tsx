@@ -4,7 +4,7 @@ import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
 
 const {Marker} = MapView as any;
 import {Region} from "../../types/models"
-import {latLngDeltaGrace} from "../../common/constants";
+import Consts from "../../common/constants";
 import styles from "./styles";
 
 type Props = { title?: string }
@@ -17,7 +17,7 @@ class TestMapScreen extends Component<Props, States> {
             region: {
                 latitude: 21.392308872706643,
                 longitude: -157.71574550813705,
-                ...latLngDeltaGrace
+                ...Consts.latLngDeltaGrace
             }
         }
     }

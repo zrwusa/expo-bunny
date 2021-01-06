@@ -2,34 +2,37 @@ import React, {useState} from "react";
 import {
     ActivityIndicator,
     Button,
-    FlatList,
-    SafeAreaView,
     Switch,
     View,
     Text,
     ScrollView,
     Image,
     ImageBackground,
-    KeyboardAvoidingView,
-    Platform,
-    TouchableWithoutFeedback,
-    Keyboard,
-    TextInput,
     Modal,
     TouchableHighlight,
     Alert,
     Pressable,
-    SectionList,
     StatusBar,
-    StatusBarStyle
+    StatusBarStyle,
+    TextInput,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
 } from "react-native";
 import {
-    screenStyles, activityIndicatorStyles, switchStyles,
-    imageStyles, imageBackgroundStyles, keyboardAvoidingViewStyles,
-    modalStyles, pressableStyles, safeAreaViewStyles, sectionListStyles, statusBarStyles
+    screenStyles,
+    activityIndicatorStyles,
+    switchStyles,
+    imageStyles,
+    imageBackgroundStyles,
+    modalStyles,
+    pressableStyles,
+    statusBarStyles,
+    touchableHighlightStyles,
+    touchableOpacityStyles,
+    touchableWithoutFeedbackStyles,
 } from "./styles";
 
-export const TabRNComponentsHomeScreen: React.FC = () => {
+const RNHome: React.FC = () => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [modalVisible, setModalVisible] = useState(false);
@@ -59,9 +62,21 @@ export const TabRNComponentsHomeScreen: React.FC = () => {
         return setStyleStatusBar(styleTypes[styleId]);
     }
 
+    const [textInputValue, onChangeText] = React.useState('Useless Placeholder');
+    const [touchableHighlightCount, setTouchableHighlightCount] = useState(0);
+    const onTouchableHighlightPress = () => setTouchableHighlightCount(touchableHighlightCount + 1);
+
+    const [touchableOpacityCount, setTouchableOpacityCount] = useState(0);
+    const onTouchableOpacityPress = () => setTouchableOpacityCount(prevCount => prevCount + 1);
+
+    const [touchableWithoutFeedbackCount, setTouchableWithoutFeedbackCount] = useState(0);
+
+    const onTouchableWithoutFeedbackPress = () => {
+        setTouchableWithoutFeedbackCount(touchableWithoutFeedbackCount + 1);
+    };
     return (
         <ScrollView contentContainerStyle={screenStyles.container}>
-            <Text>ScrollView Missing momentum scroll events (#1021).</Text>
+
             <View style={statusBarStyles.container}>
                 <View>
                     <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
@@ -115,65 +130,14 @@ export const TabRNComponentsHomeScreen: React.FC = () => {
                             'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
                     }}
                 />
-                <Text>Missing multiple sources (#515) and HTTP headers (#1019).</Text>
             </View>
             <View style={imageBackgroundStyles.container}>
                 <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
                     <Text style={imageBackgroundStyles.text}>Inside</Text>
                 </ImageBackground>
             </View>
-            {/*<KeyboardAvoidingView*/}
-            {/*    behavior={Platform.OS === "ios" ? "padding" : "height"}*/}
-            {/*    style={styles.container}*/}
-            {/*>*/}
-            {/*    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>*/}
-            {/*        <View style={keyboardAvoidingViewStyles.inner}>*/}
-            {/*            <Text style={keyboardAvoidingViewStyles.header}>Header</Text>*/}
-            {/*            <TextInput placeholder="Username" style={keyboardAvoidingViewStyles.textInput} />*/}
-            {/*            <View style={keyboardAvoidingViewStyles.btnContainer}>*/}
-            {/*                <Button title="Submit" onPress={() => null} />*/}
-            {/*            </View>*/}
-            {/*        </View>*/}
-            {/*    </TouchableWithoutFeedback>*/}
-            {/*    <Text>Mock. No equivalent web APIs.</Text>*/}
-            {/*</KeyboardAvoidingView>*/}
-            <View style={modalStyles.centeredView}>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                    }}
-                >
-                    <View style={modalStyles.centeredView}>
-                        <View style={modalStyles.modalView}>
-                            <Text style={modalStyles.modalText}>Hello World!</Text>
 
-                            <TouchableHighlight
-                                style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}
-                                onPress={() => {
-                                    setModalVisible(!modalVisible);
-                                }}
-                            >
-                                <Text style={modalStyles.textStyle}>Hide Modal</Text>
-                            </TouchableHighlight>
-                        </View>
-                    </View>
-                </Modal>
 
-                <TouchableHighlight
-                    style={modalStyles.openButton}
-                    onPress={() => {
-                        setModalVisible(true);
-                    }}
-                >
-                    <Text style={modalStyles.textStyle}>Show Modal</Text>
-                </TouchableHighlight>
-            </View>
-            <View>
-                <Text>Picker ???</Text>
-            </View>
             <View style={pressableStyles.container}>
                 <Pressable
                     onPress={() => {
@@ -197,13 +161,87 @@ export const TabRNComponentsHomeScreen: React.FC = () => {
                     <Text testID="pressable_press_console">{textLog}</Text>
                 </View>
             </View>
+
+            {/*<View style={modalStyles.centeredView}>*/}
+            {/*    <Modal*/}
+            {/*        animationType="slide"*/}
+            {/*        transparent={true}*/}
+            {/*        visible={modalVisible}*/}
+            {/*        onRequestClose={() => {*/}
+            {/*            Alert.alert("Modal has been closed.");*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*        <View style={modalStyles.centeredView}>*/}
+            {/*            <View style={modalStyles.modalView}>*/}
+            {/*                <Text style={modalStyles.modalText}>Hello World!</Text>*/}
+
+            {/*                <TouchableHighlight*/}
+            {/*                    style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}*/}
+            {/*                    onPress={() => {*/}
+            {/*                        setModalVisible(!modalVisible);*/}
+            {/*                    }}*/}
+            {/*                >*/}
+            {/*                    <Text style={modalStyles.textStyle}>Hide Modal</Text>*/}
+            {/*                </TouchableHighlight>*/}
+            {/*            </View>*/}
+            {/*        </View>*/}
+            {/*    </Modal>*/}
+
+            {/*    <TouchableHighlight*/}
+            {/*        style={modalStyles.openButton}*/}
+            {/*        onPress={() => {*/}
+            {/*            setModalVisible(true);*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*        <Text style={modalStyles.textStyle}>Show Modal</Text>*/}
+            {/*    </TouchableHighlight>*/}
+            {/*</View>*/}
+
             <View>
-                <Text>RefreshControl Not started (#1027).</Text>
+                <Text>Picker ???</Text>
             </View>
-            <SafeAreaView style={safeAreaViewStyles.container}>
-                <Text>Safe Area View</Text>
-            </SafeAreaView>
+            <View>
+                <TextInput
+                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                    onChangeText={text => onChangeText(text)}
+                    value={textInputValue}
+                />
+            </View>
+            <View style={touchableHighlightStyles.container}>
+                <TouchableHighlight onPress={onTouchableHighlightPress}>
+                    <View style={touchableHighlightStyles.button}>
+                        <Text>Touch Here</Text>
+                    </View>
+                </TouchableHighlight>
+                <View style={touchableHighlightStyles.countContainer}>
+                    <Text style={touchableHighlightStyles.countText}>
+                        {touchableHighlightCount ? touchableHighlightCount : null}
+                    </Text>
+                </View>
+
+            </View>
+            <View style={touchableOpacityStyles.container}>
+                <View style={touchableOpacityStyles.countContainer}>
+                    <Text>Count: {touchableOpacityCount}</Text>
+                </View>
+                <TouchableOpacity
+                    style={touchableOpacityStyles.button}
+                    onPress={onTouchableOpacityPress}
+                >
+                    <Text>Press Here</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={touchableWithoutFeedbackStyles.container}>
+                <View style={touchableWithoutFeedbackStyles.countContainer}>
+                    <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
+                </View>
+                <TouchableWithoutFeedback onPress={onTouchableWithoutFeedbackPress}>
+                    <View style={touchableWithoutFeedbackStyles.button}>
+                        <Text>Touch Here</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+            </View>
         </ScrollView>);
 }
 
-export default TabRNComponentsHomeScreen;
+export default RNHome;
