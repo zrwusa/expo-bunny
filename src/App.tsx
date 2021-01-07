@@ -31,11 +31,13 @@ function App() {
     }, []);
 
     return isReady
-        ? (<>
-            <NavigationContainer linking={linking} fallback={<Text>Fallback loading...</Text>}>
-                <RootNavigator/>
-            </NavigationContainer>
-        </>)
+        ? (
+            <>
+                <NavigationContainer linking={linking} fallback={<Text>Fallback loading...</Text>}>
+                    <RootNavigator/>
+                </NavigationContainer>
+            </>
+        )
         : (<Text>Preparing resources</Text>)
 }
 

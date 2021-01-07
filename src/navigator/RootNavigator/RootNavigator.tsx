@@ -22,6 +22,7 @@ import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
 import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardAvoiding";
 import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea";
 import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
+import DemoShareScreen from "../../screens/DemoShare";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -53,6 +54,7 @@ const node: Screen = {
         {component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc"},
         {component: DemoMapScreen, name: "DemoMap", path: "demo-map"},
         {component: TestMapScreen, name: "TestMap", path: "test-map"},
+        {component: DemoShareScreen, name: "DemoShare", path: "demo-share"},
         // {component: SignInScreen, name: "SignIn", path: "sign-in"},
         {name: "DemoTab", stack: DemoTabStack, path: "demo-tab",
             screens: [
@@ -169,7 +171,8 @@ const recursiveConfig = (list: Screen[]): Object => {
 };
 
 export const getConfig = (): Object => {
-    return recursiveConfig([node]).RootStack.screens
+    let config = recursiveConfig([node]).RootStack.screens
+    return config;
 }
 
 export default RootNavigator;

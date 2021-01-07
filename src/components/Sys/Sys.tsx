@@ -7,16 +7,19 @@ type Props = { title?: string }
 
 const Sys: React.FC<Props> = ({title}) => {
     const sysState = useSelector((store: RootState) => store.sysState);
-    return (<View>
-        <Text>{title}</Text>
-        {
-            sysState.error
-            && <View>
-                <TextInput value={sysState.error}/><Button title="clear" onPress={() => {
-                console.log(111)
-            }}/>
-            </View>
-        }
-    </View>);
+    return (
+        <View>
+            <Text>{title}</Text>
+            {
+                sysState.error
+                && <View>
+                    <TextInput value={sysState.error}/>
+                    <Button title="clear" onPress={() => {
+                        console.log(111)
+                    }}/>
+                </View>
+            }
+        </View>
+    );
 }
 export default Sys;
