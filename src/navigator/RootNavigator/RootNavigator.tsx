@@ -1,5 +1,5 @@
 import React, {ComponentClass, FunctionComponent} from "react";
-import {RootStack,DemoNestedStack,DemoTabStack,DemoTabRNComponentsStack} from "../../stacks";
+import {RootStack, DemoNestedStack, DemoTabStack, DemoTabRNComponentsStack} from "../../stacks";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types/models";
 import HomeScreen from "../../screens/Home";
@@ -23,12 +23,14 @@ import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardA
 import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea";
 import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
 import DemoShareScreen from "../../screens/DemoShare";
+import {Config} from "../../types/common";
+import {View} from "react-native";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
     path?: string;
     name: string;
-    parse?: Object;
+    parse?: Record<string, (value: string) => any>;
     screens?: Screen[];
     initialParams?: Object;
     stack?: typeof RootStack | typeof DemoNestedStack | typeof DemoTabStack | typeof DemoTabRNComponentsStack,
@@ -56,7 +58,8 @@ const node: Screen = {
         {component: TestMapScreen, name: "TestMap", path: "test-map"},
         {component: DemoShareScreen, name: "DemoShare", path: "demo-share"},
         // {component: SignInScreen, name: "SignIn", path: "sign-in"},
-        {name: "DemoTab", stack: DemoTabStack, path: "demo-tab",
+        {
+            name: "DemoTab", stack: DemoTabStack, path: "demo-tab",
             screens: [
                 {
                     component: TabHomeScreen,
@@ -74,7 +77,8 @@ const node: Screen = {
                 }
             ]
         },
-        {name: "DemoNested", path: "demo-nested", stack: DemoNestedStack,
+        {
+            name: "DemoNested", path: "demo-nested", stack: DemoNestedStack,
             screens: [
                 {
                     component: NestedHomeScreen,
@@ -91,7 +95,8 @@ const node: Screen = {
                 }
             ]
         },
-        {name: "DemoRNComponents", path: "demo-tab-rn-components", stack: DemoTabRNComponentsStack,
+        {
+            name: "DemoRNComponents", path: "demo-tab-rn-components", stack: DemoTabRNComponentsStack,
             screens: [
                 {
                     component: RNHome,
@@ -131,48 +136,51 @@ const node: Screen = {
 
 type RecursiveNavigatorProps = { node: Screen }
 const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node, children}) => {
-    const stack = node.stack;
-    const ScreenComponent = stack?.Screen;
+    const {stack} = node;
     const Navigator = stack?.Navigator;
+    let SScreen: React.ElementType =(stack && stack.Screen)?stack.Screen:View;
     const authState = useSelector((store: RootState) => store.authState);
-
     return (
-        <Navigator>
-            {
-                authState.accessToken === undefined
-                    ? (<ScreenComponent name="SignIn" component={SignInScreen}/>)
-                    : (<>
-                        {node.screens && node.screens.map((screen, i) => {
-                            return (screen.screens && screen.screens.length > 0
-                                ? <ScreenComponent name={screen.name} key={screen.name}>
-                                    {props => <RecursiveNavigator {...props} node={screen}/>}
-                                </ScreenComponent>
-                                :
-                                <ScreenComponent name={screen.name} key={screen.name} component={screen.component} initialParams={screen.initialParams}/>)
-                        })}
-                    </>)
-            }
-        </Navigator>
+        Navigator
+            ? <Navigator>
+                {
+                    authState.accessToken === undefined
+                        ? (<SScreen name="SignIn" component={SignInScreen}/>)
+                        : (<>
+                            {node.screens && node.screens.map((screen, i) => {
+                                return (screen.screens && screen.screens.length > 0
+                                    ? <SScreen name={screen.name} key={screen.name}>
+                                        {(props: any) => <RecursiveNavigator {...props} node={screen}/>}
+                                    </SScreen>
+                                    : <SScreen name={screen.name} key={screen.name}
+                                               component={screen.component}
+                                               initialParams={screen.initialParams}/>)
+                            })}
+                        </>)
+                }
+            </Navigator>
+            : null
     );
 }
 
 const RootNavigator: React.FC = () => <RecursiveNavigator node={node}/>;
 
-const recursiveConfig = (list: Screen[]): Object => {
-    let obj = {};
+
+const recursiveConfig = (list: Screen[]): Config => {
+    let obj: Config = {};
     list.forEach(item => {
         obj[item.name] = {
             path: item.path,
-            screens: (item.screens && item.screens.length) && recursiveConfig(item.screens),
+            screens: (item.screens && item.screens.length) ? recursiveConfig(item.screens) : undefined,
             parse: item.parse
         }
     })
+
     return obj;
 };
 
-export const getConfig = (): Object => {
-    let config = recursiveConfig([node]).RootStack.screens
-    return config;
+export const getConfig = (): Config | undefined => {
+    return recursiveConfig([node]).RootStack.screens
 }
 
 export default RootNavigator;
