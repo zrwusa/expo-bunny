@@ -138,7 +138,7 @@ type RecursiveNavigatorProps = { node: Screen }
 const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node, children}) => {
     const {stack} = node;
     const Navigator = stack?.Navigator;
-    let SScreen: React.ElementType =(stack && stack.Screen)?stack.Screen:View;
+    let SScreen: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
     const authState = useSelector((store: RootState) => store.authState);
     return (
         Navigator
