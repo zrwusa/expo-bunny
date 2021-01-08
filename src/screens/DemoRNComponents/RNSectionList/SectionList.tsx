@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    SafeAreaView,
-    View,
-    Text,
-    SectionList,
-} from "react-native";
+import {SafeAreaView, View, Text, SectionList} from "react-native";
 import {sectionListStyles} from "./styles"
 
 function SectionListScreen() {

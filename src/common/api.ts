@@ -1,7 +1,8 @@
 import axios from "axios";
 import store from "../stores";
+
 const isDevServerProxy = false;
-const api = axios.create({baseURL: isDevServerProxy ? `http://192.168.50.19:3006/api` : `http://192.168.50.19:4006`});
+const api = axios.create({baseURL: isDevServerProxy ? `http://192.168.50.19:3006/api` : `http://35.197.159.128:80`});
 
 api.interceptors.request.use(
     async config => {
@@ -45,8 +46,7 @@ api.interceptors.response.use(
             const access_token = "";
             axios.defaults.headers.common["Authorization"] = `Bearer ` + access_token;
             return api(originalRequest);
-        }
-        else if (error.response.status === 401) {
+        } else if (error.response.status === 401) {
         }
         return Promise.reject(error);
     });

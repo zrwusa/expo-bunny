@@ -1,35 +1,13 @@
 import React, {useState} from "react";
 import {
-    ActivityIndicator,
-    Button,
-    Switch,
-    View,
-    Text,
-    ScrollView,
-    Image,
-    ImageBackground,
-    Modal,
-    TouchableHighlight,
-    Alert,
-    Pressable,
-    StatusBar,
-    StatusBarStyle,
-    TextInput,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
+    ActivityIndicator, Button, Switch, View, Text, ScrollView,
+    Image, ImageBackground, Modal, TouchableHighlight, Alert, Pressable,
+    StatusBar, StatusBarStyle, TextInput, TouchableOpacity, TouchableWithoutFeedback,
 } from "react-native";
 import {
-    screenStyles,
-    activityIndicatorStyles,
-    switchStyles,
-    imageStyles,
-    imageBackgroundStyles,
-    modalStyles,
-    pressableStyles,
-    statusBarStyles,
-    touchableHighlightStyles,
-    touchableOpacityStyles,
-    touchableWithoutFeedbackStyles,
+    screenStyles, activityIndicatorStyles, switchStyles, imageStyles, imageBackgroundStyles,
+    modalStyles, pressableStyles, statusBarStyles, touchableHighlightStyles, touchableOpacityStyles,
+    touchableWithoutFeedbackStyles
 } from "./styles";
 
 const RNHome: React.FC = () => {
@@ -45,7 +23,6 @@ const RNHome: React.FC = () => {
     }
 
     const imageBackgroundImage = {uri: "https://reactjs.org/logo-og.png"};
-
     const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
@@ -202,7 +179,7 @@ const RNHome: React.FC = () => {
             </View>
             <View>
                 <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                     onChangeText={text => onChangeText(text)}
                     value={textInputValue}
                 />

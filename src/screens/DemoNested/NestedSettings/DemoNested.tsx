@@ -7,6 +7,7 @@ import {DemoNestedStackParam} from "../../../types/stacks";
 type NestedSettingsRouteProp = RouteProp<DemoNestedStackParam, 'NestedSettings'>;
 type NestedSettingsNavigationProp = StackNavigationProp<DemoNestedStackParam, 'NestedSettings'>;
 type NestedSettingsProps = { route: NestedSettingsRouteProp, navigation: NestedSettingsNavigationProp }
+
 export function NestedSettingsScreen({route, navigation}: NestedSettingsProps) {
     return (<View>
         <Text>NestedSettings</Text>

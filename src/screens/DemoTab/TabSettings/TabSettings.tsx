@@ -7,6 +7,7 @@ import {DemoTabStackParam} from "../../../types/stacks";
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsProps = { route: TabSettingsRouteProp, navigation: TabSettingsNavigationProp }
+
 export function TabSettingsScreen({route, navigation}: TabSettingsProps) {
     return (<View>
         <Text>TabSettings</Text>

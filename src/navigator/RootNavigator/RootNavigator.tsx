@@ -25,6 +25,7 @@ import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualize
 import DemoShareScreen from "../../screens/DemoShare";
 import {Config} from "../../types/common";
 import {View} from "react-native";
+import {PathConfig} from "@react-navigation/core/src/types";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -135,7 +136,7 @@ const node: Screen = {
 }
 
 type RecursiveNavigatorProps = { node: Screen }
-const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node, children}) => {
+const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {stack} = node;
     const Navigator = stack?.Navigator;
     let SScreen: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
@@ -147,7 +148,7 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node, children})
                     authState.accessToken === undefined
                         ? (<SScreen name="SignIn" component={SignInScreen}/>)
                         : (<>
-                            {node.screens && node.screens.map((screen, i) => {
+                            {node.screens && node.screens.map((screen: any, i: number) => {
                                 return (screen.screens && screen.screens.length > 0
                                     ? <SScreen name={screen.name} key={screen.name}>
                                         {(props: any) => <RecursiveNavigator {...props} node={screen}/>}
@@ -164,7 +165,6 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node, children})
 }
 
 const RootNavigator: React.FC = () => <RecursiveNavigator node={node}/>;
-
 
 const recursiveConfig = (list: Screen[]): Config => {
     let obj: Config = {};

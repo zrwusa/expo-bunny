@@ -34,7 +34,7 @@ const RNVirtualizedListScreen: React.FC = () => {
             <VirtualizedList
                 data={VIRTUALIZED_LIST_DATA}
                 initialNumToRender={6}
-                renderItem={({item}) => <VirtualizedListItem title={item.title} id={item.id} />}
+                renderItem={({item}) => <VirtualizedListItem title={item.title} id={item.id}/>}
                 keyExtractor={item => item.id}
                 getItemCount={getVirtualizedListItemCount}
                 getItem={getVirtualizedListItem}

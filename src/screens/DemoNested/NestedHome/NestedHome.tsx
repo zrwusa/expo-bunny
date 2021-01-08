@@ -7,10 +7,11 @@ import {DemoNestedStackParam} from "../../../types/stacks";
 type NestedHomeRouteProp = RouteProp<DemoNestedStackParam, 'NestedHome'>;
 type NestedHomeNavigationProp = StackNavigationProp<DemoNestedStackParam, 'NestedHome'>;
 type NestedHomeProps = { route: NestedHomeRouteProp, navigation: NestedHomeNavigationProp }
-export function NestedHomeScreen({route,navigation}:NestedHomeProps) {
+
+export function NestedHomeScreen({route, navigation}: NestedHomeProps) {
     return (<View>
         <Text>NestedHome</Text>
-        <Button title="Go to nested settings" onPress={() => navigation.navigate('NestedSettings',{item:"001"})}/>
+        <Button title="Go to nested settings" onPress={() => navigation.navigate('NestedSettings', {item: "001"})}/>
     </View>);
 }
 

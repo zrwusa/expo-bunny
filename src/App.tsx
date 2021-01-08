@@ -1,8 +1,8 @@
-import * as React from 'react';
-import {Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import * as React from "react";
+import {Text} from "react-native";
+import {NavigationContainer} from "@react-navigation/native";
 import {useDispatch} from "react-redux";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {restoreToken} from "./stores/auth/actions";
 import * as Linking from "expo-linking";
 import {sysError} from "./stores/sys/actions";

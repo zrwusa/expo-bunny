@@ -27,7 +27,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
             <Button title="Demo Nested" onPress={() => navigation.navigate('DemoNested')}/>
             <Button title="Demo RN Components" onPress={() => navigation.navigate('DemoRNComponents')}/>
             <Button title="Demo Share" onPress={() => navigation.navigate('DemoShare')}/>
-            <Button onPress={()=>dispatch(signOutAndRemove())} title="Sign out"/>
+            <Button onPress={() => dispatch(signOutAndRemove())} title="Sign out"/>
         </View>
     );
 }

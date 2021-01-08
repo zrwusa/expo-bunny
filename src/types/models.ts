@@ -23,14 +23,14 @@ export type DemoEmployee = {
 };
 
 export type NearbyFilm = {
-    title: string,
+    title: string;
     coordinate: {
         latitude: number;
         longitude: number;
-    },
+    };
     image: {
         uri: string;
-    }
+    };
     description: string;
 }
 
@@ -64,7 +64,3 @@ export interface RootState {
     demoThunkState: DemoThunk;
     demoMapState: DemoMap;
 }
-
-
-
-
