@@ -2,7 +2,15 @@ import axios from "axios";
 import store from "../stores";
 
 const isDevServerProxy = false;
-const api = axios.create({baseURL: isDevServerProxy ? `http://192.168.50.19:3006/api` : `http://35.197.159.128:80`});
+const isRemoteBackEnd = false;
+
+const api = axios.create({
+    baseURL: isDevServerProxy
+        ? `http://192.168.50.19:3006/api`
+        : isRemoteBackEnd
+            ? `http://35.197.159.128:80`
+            : `http://192.168.50.19:4006`
+});
 
 api.interceptors.request.use(
     async config => {

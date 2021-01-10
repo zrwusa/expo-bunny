@@ -2,10 +2,9 @@ export type RootStackParam = {
     Home: undefined;
     SignIn: undefined;
     Profile: { id: string };
-    // Feed: { sort: 'latest' | 'top' } | undefined;
     DemoFCReduxHook: undefined;
     DemoCollection: undefined;
-    DemoRoute: { id: string };
+    DemoRoute: { id: string ,isHuman:boolean, sort?: 'latest' | 'top' };
     DemoThirdPart: undefined;
     DemoThunkCC: undefined;
     DemoMap: undefined;
@@ -14,6 +13,7 @@ export type RootStackParam = {
     DemoNested: undefined;
     DemoRNComponents: undefined;
     DemoShare: undefined;
+    DemoBitcoin: undefined | { screen: 'BitcoinAlert'; params: { isPush: boolean } };
 };
 
 export type DemoNestedStackParam = {
@@ -24,6 +24,11 @@ export type DemoNestedStackParam = {
 export type DemoTabStackParam = {
     TabHome: undefined;
     TabSettings: { item: string };
+};
+
+export type DemoBitcoinStackParam = {
+    BitcoinHome: undefined;
+    BitcoinAlert: { isPush: boolean };
 };
 
 export type DemoTabRNComponentsStackParam = {

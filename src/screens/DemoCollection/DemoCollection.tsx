@@ -14,18 +14,17 @@ class DemoCollectionScreen extends Component<Props, States> {
 
     render(): React.ReactNode {
         return (<View>
-            <Text>Demo HomeScreen Page</Text>
             <View>
-                <DemoFCCard title="DemoFCCard is a FunctionComponent" paragraph="I am paragraph"/>
+                <DemoFCCard title="FunctionComponent"/>
             </View>
             <View>
-                <DemoCCClock title="DemoCCClock is a ClassComponent"/>
+                <DemoCCClock title="ClassComponent"/>
             </View>
             <View>
-                <DemoRequest title={"DemoRequest is a http request component"}/>
+                <DemoRequest title={"Request"}/>
             </View>
             <View>
-                <TextInput placeholder={"I am placeholder"}/>
+                <TextInput placeholder={"Placeholder"}/>
             </View>
         </View>);
     }

@@ -9,8 +9,11 @@ const styles = StyleSheet.create({
         paddingTop: Consts.statusBarHeight,
         backgroundColor: '#ecf0f1',
     },
-    button: {
-        marginVertical: 10,
+    wrap:{
+        alignItems:'flex-start',
+    },
+    text: {
+        marginTop:10
     },
 });
 export default styles;

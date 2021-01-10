@@ -1,45 +1,51 @@
 import api from "../../common/api";
-import {RestoreToken, RestoreTokenGoogle, SignOut, SysError, SysWarn} from "../../types/actions";
-import {RestoreTokenGooglePayload, RestoreTokenPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
+import {RestoreAuth, RestoreAuthGoogle, SignOut, SysError, SysWarn} from "../../types/actions";
+import {RestoreAuthGooglePayload, RestoreAuthPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
 import {EAuth} from "../../types/constants";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {IOS_CLIENT_ID, ANDROID_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO, ANDROID_CLIENT_ID_FOR_EXPO} from '@env';
-import {Action, ActionCreator, Dispatch} from 'redux';
-import {ThunkAction} from 'redux-thunk';
+import {Action, ActionCreator, Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
 import {sysError, sysWarn} from "../sys/actions";
 import {Auth} from "../../types/models";
 
-export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreToken>> = (reqParams: SignInPayload) => {
-    return async (dispatch: Dispatch<RestoreToken | SysError>): Promise<Action> => {
-        let r;
+export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreAuth>> = (reqParams: SignInPayload) => {
+    return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {
+        let result;
         try {
             const res = await api.post(`/auth/login`, reqParams)
-            await AsyncStorage.setItem('accessToken', res.data.user.access_token)
-            r = dispatch(restoreToken(res.data.user))
-        } catch (e) {
-            r = dispatch(sysError({error: e.toString()}))
+            await AsyncStorage.setItem('accessToken', res.data.access_token)
+            await AsyncStorage.setItem('user', JSON.stringify(res.data.user))
+            result = dispatch(restoreAuth(res.data))
+        } catch (err) {
+            result = dispatch(sysError({error: err.toString()}))
         }
-        return r;
+        return result;
     };
 };
 
-export const signInDummy: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreToken>> = () => {
-    return async (dispatch: Dispatch<RestoreToken | SysError>): Promise<Action> => {
-        let r;
+export const signInDummy: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreAuth>> = () => {
+    return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {
+        let result;
         try {
             await AsyncStorage.setItem('accessToken', 'access_token_dummy')
-            r = dispatch(restoreToken({access_token:'access_token_dummy'}))
-        } catch (e) {
-            r = dispatch(sysError({error: e.toString()}))
+            const userDummy = {email: 'dummy@dummy.com', nickname: 'dummy nickname'}
+            await AsyncStorage.setItem('user', JSON.stringify(userDummy))
+            result = dispatch(restoreAuth({
+                access_token: 'access_token_dummy',
+                user: userDummy
+            }))
+        } catch (err) {
+            result = dispatch(sysError({error: err.toString()}))
         }
-        return r;
+        return result;
     };
 };
 
-export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreTokenGoogle>> = () => {
-    return async (dispatch: Dispatch<SysWarn | SysError | RestoreTokenGoogle>): Promise<Action> => {
-        let r;
+export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreAuthGoogle>> = () => {
+    return async (dispatch: Dispatch<SysWarn | SysError | RestoreAuthGoogle>): Promise<Action> => {
+        let result;
         try {
             const loginResult = await Google.logInAsync({
                 iosClientId: `${IOS_CLIENT_ID_FOR_EXPO}`,
@@ -49,47 +55,49 @@ export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void
             });
             switch (loginResult.type) {
                 case "cancel":
-                    r = dispatch(sysWarn({warn: "Google login canceled"}));
+                    result = dispatch(sysWarn({warn: "Google login canceled"}));
+                    debugger
                     break
                 case "success":
                     if (loginResult.accessToken) {
                         try {
                             await AsyncStorage.setItem('accessToken', loginResult.accessToken)
-                            r = dispatch(restoreTokenGoogle(loginResult));
-                        } catch (e) {
-                            r = dispatch(sysError({error: e.toString()}))
+                            await AsyncStorage.setItem('user', JSON.stringify(loginResult.user))
+                            result = dispatch(restoreAuthGoogle(loginResult));
+                        } catch (err) {
+                            result = dispatch(sysError({error: err.toString()}))
                         }
                     } else {
-                        r = dispatch(sysError({error: 'accessToken gives null'}))
+                        result = dispatch(sysError({error: 'accessToken gives null'}))
                     }
                     break
                 default:
-                    r = dispatch(sysError({error: 'Google loginResult has returned type neither success nor cancel'}));
+                    result = dispatch(sysError({error: 'Google loginResult has returned type neither success nor cancel'}));
             }
-        } catch (e) {
-            r = dispatch(sysError({error: e.toString()}));
+        } catch (err) {
+            result = dispatch(sysError({error: err.toString()}));
         }
-        return r;
+        return result;
     };
 };
 
 export const signOutAndRemove: ActionCreator<ThunkAction<Promise<Action>, Auth, void, SignOut>> = () => {
     return async (dispatch: Dispatch<SignOut | SysError>): Promise<Action> => {
-        let r;
+        let result;
         try {
             await AsyncStorage.removeItem('accessToken')
-            r = dispatch(signOut({}));
+            result = dispatch(signOut({}));
 
-        } catch (e) {
-            r = dispatch(sysError({error: e.toString()}))
+        } catch (err) {
+            result = dispatch(sysError({error: err.toString()}))
         }
-        return r;
+        return result;
     };
 };
 
-export const restoreToken: (payload: RestoreTokenPayload) => RestoreToken = (payload) => {
+export const restoreAuth: (payload: RestoreAuthPayload) => RestoreAuth = (payload) => {
     return {
-        type: EAuth.RESTORE_TOKEN,
+        type: EAuth.RESTORE_AUTH,
         payload: payload,
     };
 };
@@ -101,11 +109,11 @@ const signOut: (payload: SignOutPayload) => SignOut = (payload) => {
     };
 };
 
-const restoreTokenGoogle: (payload: RestoreTokenGooglePayload) => RestoreTokenGoogle = (payload) => {
+const restoreAuthGoogle: (payload: RestoreAuthGooglePayload) => RestoreAuthGoogle = (payload) => {
     return {
-        type: EAuth.RESTORE_TOKEN_GOOGLE,
+        type: EAuth.RESTORE_AUTH_GOOGLE,
         payload: payload,
     };
 };
 
-export type AuthActions = SignOut | RestoreToken | RestoreTokenGoogle ;
+export type AuthActions = SignOut | RestoreAuth | RestoreAuthGoogle ;

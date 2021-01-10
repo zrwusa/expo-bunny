@@ -9,29 +9,21 @@ export interface SignOutPayload {
     username?: string;
 }
 
-export type RestoreTokenPayload = {
+export type RestoreAuthPayload = {
     access_token: string;
-    nickname?: string;
+    user:{
+        email:string;
+        nickname: string;
+    }
 }
 
-export type RestoreTokenGooglePayload = {
+export type RestoreAuthGooglePayload = {
     type: 'success';
     accessToken: string | null;
     idToken: string | null;
     refreshToken: string | null;
     user: GoogleUser;
 }
-export type GoogleLoginResult =
-    | {
-    type: 'success';
-    accessToken: string | null;
-    idToken: string | null;
-    refreshToken: string | null;
-    user: GoogleUser;
-}
-    | {
-    type: 'cancel';
-};
 
 export interface SysErrorPayload {
     error: string;

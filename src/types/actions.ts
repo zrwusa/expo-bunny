@@ -2,7 +2,7 @@ import {AxiosError} from "axios";
 import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "./constants";
 import {
     DemoHello2Payload, DemoHelloPayload, DemoThunkSuccessPayload,
-    RestoreTokenGooglePayload, RestoreTokenPayload, SignOutPayload,
+    RestoreAuthGooglePayload, RestoreAuthPayload, SignOutPayload,
     SysErrorPayload, SysWarnPayload
 } from "./payloads";
 import {NearbyFilm, Region} from "./models";
@@ -22,14 +22,14 @@ export interface SignOut {
     payload: SignOutPayload;
 }
 
-export interface RestoreToken {
-    type: EAuth.RESTORE_TOKEN;
-    payload: RestoreTokenPayload;
+export interface RestoreAuth {
+    type: EAuth.RESTORE_AUTH;
+    payload: RestoreAuthPayload;
 }
 
-export interface RestoreTokenGoogle {
-    type: EAuth.RESTORE_TOKEN_GOOGLE;
-    payload: RestoreTokenGooglePayload;
+export interface RestoreAuthGoogle {
+    type: EAuth.RESTORE_AUTH_GOOGLE;
+    payload: RestoreAuthGooglePayload;
 }
 
 

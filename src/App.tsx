@@ -3,7 +3,7 @@ import {Text} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {useDispatch} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {restoreToken} from "./stores/auth/actions";
+import {restoreAuth} from "./stores/auth/actions";
 import * as Linking from "expo-linking";
 import {sysError} from "./stores/sys/actions";
 import RootNavigator, {getConfig} from "./navigator/RootNavigator";
@@ -17,10 +17,14 @@ function App() {
     const [isReady, setIsReady] = React.useState(false);
     React.useEffect(() => {
         const bootstrapAsync = async () => {
-            let accessToken;
+            let accessToken,user;
             try {
                 accessToken = await AsyncStorage.getItem('accessToken');
-                accessToken && dispatch(restoreToken({access_token: accessToken}));
+                user = await AsyncStorage.getItem('user');
+                accessToken && dispatch(restoreAuth({
+                    access_token: accessToken,
+                    user: user?JSON.parse(user):{}
+                }));
                 setIsReady(true);
             } catch (err) {
                 dispatch(sysError(err.toString()));

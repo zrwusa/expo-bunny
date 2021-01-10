@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import {View, Text, Button} from "react-native";
+import {View} from "react-native";
+import {TOButton,Text} from "../../common/styled";
 
 type Props = { title: string, }
-type States = { time: Date, intervalID: ReturnType<typeof setInterval>, }
+type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
 
 class DemoCCClock extends Component<Props, States> {
     constructor(props: Props) {
@@ -23,9 +24,7 @@ class DemoCCClock extends Component<Props, States> {
 
     go(): void {
         const intervalID: ReturnType<typeof setInterval> = setInterval(() => this.tick(), 1000);
-        this.setState({
-            intervalID: intervalID
-        });
+        this.setState({intervalID: intervalID});
     }
 
     stop() {
@@ -41,8 +40,8 @@ class DemoCCClock extends Component<Props, States> {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>The current time is {this.state.time.toLocaleTimeString()}</Text>
-            <Button onPress={this.stop} title="Stop"/>
-            <Button onPress={this.go} title="Go"/>
+            <TOButton onPress={this.stop}><Text>Stop</Text></TOButton>
+            <TOButton onPress={this.go}><Text>Go</Text></TOButton>
         </View>);
     }
 

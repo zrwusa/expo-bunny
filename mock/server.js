@@ -33,7 +33,7 @@ function isAuthenticated({email, password}) {
 }
 
 // Get user info
-function getUserInfo({email, password}) {
+function getUser({email, password}) {
     return userdb.users.find(user => user.email === email && user.password === password)
 }
 
@@ -94,12 +94,14 @@ server.post('/auth/login', (req, res) => {
         return
     }
 
-    const userInfo = getUserInfo({email, password})
-    console.log('userInfo', userInfo)
+    const user = getUser({email, password})
+    console.log('userInfo', user)
 
     const access_token = createToken({email, password})
     console.log("Access Token:" + access_token);
-    res.status(200).json({"user": {nickname: userInfo.nickname, access_token}})
+
+    const {nickname} = user;
+    res.status(200).json({"access_token": access_token, "user": {email, nickname}})
 })
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {

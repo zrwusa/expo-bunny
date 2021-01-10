@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {View} from "react-native";
-import {Button, ListItem, Avatar} from "react-native-elements";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {ListItem, Avatar} from "react-native-elements";
+import {ButtonE, IconStyled} from "../../common/styled";
 
 type Props = { title?: string }
 type States = { name: string }
@@ -25,8 +25,8 @@ class DemoThirdPartScreen extends Component<Props, States> {
             },
         ];
         return (<View>
-            <Button icon={<Icon name="air-horn" size={15} color="white"/>}
-                    title="Button with icon"/>
+            <ButtonE icon={<IconStyled name="air-horn" />}
+                     title="Button with icon"/>
             <View>
                 {list.map((l, i) => (
                     <ListItem key={i} bottomDivider>
