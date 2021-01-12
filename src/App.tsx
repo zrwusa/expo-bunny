@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Platform, Text, StatusBar} from "react-native";
 import {NavigationContainer, DefaultTheme as DefaultThemeNav, DarkTheme as DarkThemeNav} from "@react-navigation/native";
-import {DefaultTheme, DarkTheme} from "react-native-paper"
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {restoreAuth} from "./stores/auth/actions";
@@ -11,6 +10,7 @@ import RootNavigator, {getConfig} from "./navigator/RootNavigator";
 import {Provider as PaperProvider} from 'react-native-paper';
 import {RootState} from "./types/models";
 import BunnyConstants from "./common/constants";
+import {DarkTheme, DefaultTheme} from "./components/base-ui";
 
 const basePath = Linking.makeUrl('/');
 
@@ -31,7 +31,6 @@ function App() {
                     access_token: accessToken,
                     user: user ? JSON.parse(user) : {}
                 }));
-
                 const themeName = await AsyncStorage.getItem(BunnyConstants.THEME_PERSISTENCE_KEY);
                 dispatch(restoreTheme({theme: themeName === 'dark' ? DarkTheme : DefaultTheme}))
             } catch (err) {

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {View} from "react-native";
-import {TOButton,Text} from "../styled-bunny-ui";
+import {Button, View, Text} from "react-native";
 
 type Props = { title: string, }
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
@@ -40,8 +39,8 @@ class DemoCCClock extends Component<Props, States> {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>The current time is {this.state.time.toLocaleTimeString()}</Text>
-            <TOButton onPress={this.stop}><Text>Stop</Text></TOButton>
-            <TOButton onPress={this.go}><Text>Go</Text></TOButton>
+            <Button onPress={this.stop} title="Stop"/>
+            <Button onPress={this.go} title="Go"/>
         </View>);
     }
 

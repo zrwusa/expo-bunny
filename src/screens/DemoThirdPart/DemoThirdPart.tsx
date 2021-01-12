@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {View} from "react-native";
 import {ListItem, Avatar} from "react-native-elements";
-import {ButtonE, IconStyled} from "../../components/styled-bunny-ui";
+import {DemoButtonStyledRNE, DemoIconStyled} from "../../components/base-ui";
 
 type Props = { title?: string }
 type States = { name: string }
@@ -25,7 +25,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
             },
         ];
         return (<View>
-            <ButtonE icon={<IconStyled name="air-horn"/>}
+            <DemoButtonStyledRNE icon={<DemoIconStyled name="air-horn"/>}
                      title="Button with icon"/>
             <View>
                 {list.map((l, i) => (
