@@ -1,4 +1,5 @@
 import {GoogleUser} from "expo-google-app-auth/src/Google";
+import {Theme} from "./models";
 
 export interface SignInPayload {
     email: string;
@@ -33,6 +34,9 @@ export interface SysWarnPayload {
     warn: string;
 }
 
+export interface RestoreThemePayload {
+    theme:Theme ;
+}
 
 export interface DemoHelloPayload {
     order: number;

@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {signOutAndRemove} from "../../stores/auth/actions";
 import {RootStackParam} from "../../types/stacks";
 import styles from "./styles";
-import {TOButton, Text} from "../../common/styled";
+import {TOButton, Text} from "../../components/styled-bunny-ui";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -49,6 +49,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     screen: 'BitcoinAlert',
                     params: {isPush: true},
                 })}><Text>Demo Pass Params From Root To Leaf</Text></TOButton>
+            <TOButton onPress={() => navigation.navigate('Settings')}>
+                <Text>Settings</Text></TOButton>
             <TOButton onPress={() => dispatch(signOutAndRemove())}>
                 <Text>Sign out</Text></TOButton>
         </View>

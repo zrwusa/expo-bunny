@@ -27,6 +27,7 @@ import {Config} from "../../types/common";
 import {View} from "react-native";
 import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
+import SettingsScreen from "../../screens/Settings";
 
 const getStackType = () => {
 }
@@ -170,7 +171,8 @@ const node: Screen = {
                     path: "bitcoin-alert/:isPush",
                 }
             ]
-        }
+        },
+        {component: SettingsScreen, name: "Settings", path: "settings"},
     ]
 }
 

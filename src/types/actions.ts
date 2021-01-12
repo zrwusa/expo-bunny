@@ -2,7 +2,7 @@ import {AxiosError} from "axios";
 import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "./constants";
 import {
     DemoHello2Payload, DemoHelloPayload, DemoThunkSuccessPayload,
-    RestoreAuthGooglePayload, RestoreAuthPayload, SignOutPayload,
+    RestoreAuthGooglePayload, RestoreAuthPayload, RestoreThemePayload, SignOutPayload,
     SysErrorPayload, SysWarnPayload
 } from "./payloads";
 import {NearbyFilm, Region} from "./models";
@@ -41,6 +41,11 @@ export interface SysError {
 export interface SysWarn {
     type: ESys.WARN;
     payload: SysWarnPayload;
+}
+
+export interface RestoreTheme {
+    type: ESys.RESTORE_THEME;
+    payload: RestoreThemePayload;
 }
 
 

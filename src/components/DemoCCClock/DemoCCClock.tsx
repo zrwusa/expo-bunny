@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {View} from "react-native";
-import {TOButton,Text} from "../../common/styled";
+import {TOButton,Text} from "../styled-bunny-ui";
 
 type Props = { title: string, }
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }

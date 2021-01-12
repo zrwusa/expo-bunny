@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from "react-native";
-import Consts from "../../../common/constants";
+import BunnyConstants from "../../../common/constants";
 
 const window = Dimensions.get("window");
 
@@ -147,7 +147,7 @@ export const pressableStyles = StyleSheet.create({
 export const sectionListStyles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Consts.statusBarHeight,
+        marginTop: BunnyConstants.statusBarHeight,
         marginHorizontal: 16
     },
     item: {
@@ -167,7 +167,7 @@ export const statusBarStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingTop: Consts.statusBarHeight,
+        paddingTop: BunnyConstants.statusBarHeight,
         backgroundColor: '#ECF0F1',
         padding: 8
     },
@@ -235,7 +235,7 @@ export const touchableWithoutFeedbackStyles = StyleSheet.create({
 export const virtualizedListStyles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Consts.statusBarHeight,
+        marginTop: BunnyConstants.statusBarHeight,
     },
     item: {
         backgroundColor: '#f9c2ff',

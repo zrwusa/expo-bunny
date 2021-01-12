@@ -1,12 +1,12 @@
 import {StyleSheet} from "react-native";
-import Consts from "../../common/constants";
+import BunnyConstants from "../../common/constants";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: Consts.statusBarHeight,
+        paddingTop: BunnyConstants.statusBarHeight,
         backgroundColor: '#ecf0f1',
     },
     wrap:{

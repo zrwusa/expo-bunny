@@ -1,7 +1,7 @@
 import {DemoMapActions} from "./actions";
 import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import {EDemoMap} from "../../types/constants";
-import Consts from "../../common/constants";
+import BunnyConstants from "../../common/constants";
 
 export const initialState: DemoMap = {
     demoNearbyFilms: [{
@@ -18,7 +18,7 @@ export const initialState: DemoMap = {
     region: {
         latitude: 5.466971669240216,
         longitude: 100.27973582460281,
-        ...Consts.latLngDeltaGrace
+        ...BunnyConstants.latLngDeltaGrace
     }
 };
 

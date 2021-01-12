@@ -1,6 +1,11 @@
-import {SysErrorPayload, SysWarnPayload} from "../../types/payloads";
-import {SysError, SysWarn} from "../../types/actions";
+import {RestoreThemePayload, SysErrorPayload, SysWarnPayload} from "../../types/payloads";
+import {RestoreTheme, SysError, SysWarn} from "../../types/actions";
 import {ESys} from "../../types/constants";
+import {Action, ActionCreator, Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {Sys} from "../../types/models";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BunnyConstants from "../../common/constants";
 
 export const sysError: (payload: SysErrorPayload) => SysError = (payload) => {
     return {
@@ -16,4 +21,24 @@ export const sysWarn: (payload: SysWarnPayload) => SysWarn = (payload) => {
     };
 };
 
-export type SysActions = SysError | SysWarn ;
+export const restoreTheme: (payload: RestoreThemePayload) => RestoreTheme = (payload) => {
+    return {
+        type: ESys.RESTORE_THEME,
+        payload: payload,
+    };
+};
+
+export const restoreAndSaveTheme: ActionCreator<ThunkAction<Promise<Action>, Sys, void, RestoreTheme>> = (payload: RestoreThemePayload) => {
+    return async (dispatch: Dispatch<RestoreTheme | SysError>): Promise<Action> => {
+        let result;
+        try {
+            await AsyncStorage.setItem(BunnyConstants.THEME_PERSISTENCE_KEY, payload.theme.dark ? 'dark' : 'light');
+            result = dispatch(restoreTheme(payload))
+        } catch (err) {
+            result = dispatch(sysError({error: err.toString()}))
+        }
+        return result;
+    };
+};
+
+export type SysActions = SysError | SysWarn | RestoreTheme;

@@ -8,7 +8,7 @@ import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
 import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
 import MapView from "react-native-maps";
-import Consts from "../../common/constants";
+import BunnyConstants from "../../common/constants";
 import {sysError} from "../../stores/sys/actions";
 import styles, {CARD_WIDTH} from "./styles";
 
@@ -47,7 +47,7 @@ class DemoMapScreen extends Component<Props> {
             this.props.restoreRegion({
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
-                ...Consts.latLngDeltaGrace
+                ...BunnyConstants.latLngDeltaGrace
             })
         } catch (e) {
             this.props.sysError(e);
@@ -84,7 +84,7 @@ class DemoMapScreen extends Component<Props> {
         await this.props.getNearbyFilms({
             latitude: this.props.region.latitude,
             longitude: this.props.region.longitude,
-            ...Consts.latLngDeltaGrace
+            ...BunnyConstants.latLngDeltaGrace
         })
     }
 
@@ -93,7 +93,7 @@ class DemoMapScreen extends Component<Props> {
         mapView && mapView.animateToRegion({
             latitude: marker.coordinate.latitude,
             longitude: marker.coordinate.longitude,
-            ...Consts.latLngDeltaGrace
+            ...BunnyConstants.latLngDeltaGrace
         });
     }
 
@@ -185,7 +185,7 @@ class DemoMapScreen extends Component<Props> {
     //     mapView && mapView.animateToRegion({
     //         latitude: markerData.latitude,
     //         longitude: markerData.longitude,
-    //         ...Consts.latLngDeltaGrace
+    //         ...BunnyConstants.latLngDeltaGrace
     //     });
     // }
 }

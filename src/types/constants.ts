@@ -8,6 +8,7 @@ export enum EAuth {
 export enum ESys {
     ERROR = "ERROR",
     WARN = "WARN",
+    RESTORE_THEME = "RESTORE_THEME",
 }
 
 export enum EDemoHello {
@@ -24,3 +25,5 @@ export enum EDemoMap {
     RESTORE_NEARBY_FILMS = "RESTORE_NEARBY_FILMS",
     RESTORE_REGION = "RESTORE_REGION",
 }
+
+
