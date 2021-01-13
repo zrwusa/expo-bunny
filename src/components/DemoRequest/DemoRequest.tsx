@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import api from "../../common/api";
-import {Button, Text, View} from "react-native";
+import {View, Text, ButtonTO, TextBtn} from "../base-ui";
 import {DemoEmployee} from "../../types/models";
 
 type Props = { title: string, }
@@ -32,7 +32,7 @@ class DemoRequest extends Component<Props, States> {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>{this.state.name}</Text>
-            <Button onPress={this.getEmployees} title="Click me to get employees"/>
+            <ButtonTO onPress={this.getEmployees}><TextBtn>Click me to get employees</TextBtn></ButtonTO>
             <View>
                 {this.state.employees.map((employee) =>
                     <Text key={employee.email.toString()}>

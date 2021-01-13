@@ -1,9 +1,9 @@
 import * as React from "react";
-import {View, Text, Button} from "react-native";
+import {View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {DemoBitcoinStackParam, RootStackParam} from "../../../types/stacks";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
-import {StackNavigationProp} from "@react-navigation/stack";
+import {Text} from "../../../components/base-ui"
 
 type BitcoinHomeRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinHome'>;
 type BitcoinHomeNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinHome'>;

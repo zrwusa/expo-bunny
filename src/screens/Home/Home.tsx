@@ -6,54 +6,53 @@ import {useDispatch} from "react-redux";
 import {signOutAndRemove} from "../../stores/auth/actions";
 import {RootStackParam} from "../../types/stacks";
 import styles from "./styles";
-import {ButtonTO, Text} from "../../components/base-ui";
+import {ButtonTO, TextBtn} from "../../components/base-ui";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
 export type HomeScreenProps = { route: HomeRouteProp; navigation: HomeNavigationProp; };
-
 
 function HomeScreen({navigation}: HomeScreenProps) {
     const dispatch = useDispatch()
     return (
         <View style={styles.container}>
             <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
-                <Text>Profile</Text></ButtonTO>
+                <TextBtn>Profile</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoFCReduxHook')}>
-                <Text>Demo FC Redux Hook</Text></ButtonTO>
+                <TextBtn>Demo FC Redux Hook</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoCollection')}>
-                <Text>Demo Collection</Text></ButtonTO>
+                <TextBtn>Demo Collection</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
-                <Text>Demo Route</Text></ButtonTO>
+                <TextBtn>Demo Route</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoThirdPart')}>
-                <Text>Demo Third Part</Text></ButtonTO>
+                <TextBtn>Demo Third Part</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoThunkCC')}>
-                <Text>Demo Thunk CC</Text></ButtonTO>
+                <TextBtn>Demo Thunk CC</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoMap')}>
-                <Text>Demo Map</Text></ButtonTO>
+                <TextBtn>Demo Map</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('TestMap')}>
-                <Text>Test Map</Text></ButtonTO>
+                <TextBtn>Test Map</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoTab')}>
-                <Text>Demo Tab</Text></ButtonTO>
+                <TextBtn>Demo Tab</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoNested')}>
-                <Text>Demo Nested Navigation</Text></ButtonTO>
+                <TextBtn>Demo Nested Navigation</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoRNComponents')}>
-                <Text>Demo RN Components</Text></ButtonTO>
+                <TextBtn>Demo RN Components</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoShare')}>
-                <Text>Demo Share</Text></ButtonTO>
+                <TextBtn>Demo Share</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoTheme')}>
-                <Text>DemoTheme</Text></ButtonTO>
+                <TextBtn>DemoTheme</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoBitcoin')}>
-                <Text>Demo Bitcoin</Text></ButtonTO>
+                <TextBtn>Demo Bitcoin</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('DemoBitcoin',
                 {
                     screen: 'BitcoinAlert',
                     params: {isPush: true},
-                })}><Text>Demo Pass Params From Root To Leaf</Text></ButtonTO>
+                })}><TextBtn>Demo Pass Params From Root To Leaf</TextBtn></ButtonTO>
             <ButtonTO onPress={() => navigation.navigate('Settings')}>
-                <Text>Settings</Text></ButtonTO>
+                <TextBtn>Settings</TextBtn></ButtonTO>
             <ButtonTO onPress={() => dispatch(signOutAndRemove())}>
-                <Text>Sign out</Text></ButtonTO>
+                <TextBtn>Sign out</TextBtn></ButtonTO>
         </View>
     );
 }

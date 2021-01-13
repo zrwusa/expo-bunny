@@ -1,6 +1,6 @@
 import React, {ComponentClass, FunctionComponent} from "react";
 import * as Stacks from "../../stacks";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types/models";
 import HomeScreen from "../../screens/Home";
 import {SignInScreen} from "../../screens/Auth";
@@ -29,10 +29,9 @@ import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
 import SettingsScreen from "../../screens/Settings";
 import DemoThemeScreen from "../../screens/DemoTheme";
-
-const getStackType = () => {
-}
-getStackType()
+import {EThemes} from "../../types/enums";
+import {restoreAndSaveTheme} from "../../stores/sys/actions";
+import SettingsItem from "../../screens/Settings/SettingsItem/SettingsItem";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -44,22 +43,49 @@ type Screen = {
     initialParams?: Object;
     stack?: typeof Stacks.RootStack | typeof Stacks.DemoNestedStack | typeof Stacks.DemoTabStack | typeof Stacks.DemoTabRNComponentsStack | typeof Stacks.DemoBitcoinStack,
     signInComponent?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
+    options?: any
 };
+
+const headerRight = () => {
+    const sysState = useSelector((rootState: RootState) => rootState.sysState)
+    const dispatch = useDispatch()
+    const {themeName} = sysState;
+    return <SettingsItem
+        label=""
+        value={themeName === EThemes.DARK}
+        onValueChange={(value) => {
+            dispatch(restoreAndSaveTheme({themeName: value ? EThemes.DARK : EThemes.DEFAULT}));
+        }}
+    />
+}
+
 
 const node: Screen = {
     stack: Stacks.RootStack,
     name: "RootStack",
     signInComponent: SignInScreen,
     screens: [
-        {component: HomeScreen, name: "Home", path: "home"},
+        {
+            component: HomeScreen, name: "Home", path: "home",
+            options: {headerRight: headerRight},
+        },
         {
             component: ProfileScreen, name: "Profile", path: "profile/:id",
             parse: {
                 id: (id: string) => `${id}`,
             },
+            options: {headerRight: headerRight}
         },
-        {component: DemoFCReduxHookScreen, name: "DemoFCReduxHook", path: "demo-fc-redux-hook"},
-        {component: DemoCollectionScreen, name: "DemoCollection", path: "demo-collection"},
+        {
+            component: DemoFCReduxHookScreen,
+            name: "DemoFCReduxHook", path: "demo-fc-redux-hook",
+            options: {headerRight: headerRight}
+        },
+        {
+            component: DemoCollectionScreen,
+            name: "DemoCollection", path: "demo-collection",
+            options: {headerRight: headerRight},
+        },
         {
             component: DemoRouteScreen,
             name: "DemoRoute",
@@ -76,20 +102,38 @@ const node: Screen = {
                     return id
                 }
             },
+            options: {headerRight: headerRight},
         },
-        {component: DemoThirdPartScreen, name: "DemoThirdPart", path: "demo-third-part"},
-        {component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc"},
-        {component: DemoMapScreen, name: "DemoMap", path: "demo-map"},
-        {component: TestMapScreen, name: "TestMap", path: "test-map"},
-        {component: DemoShareScreen, name: "DemoShare", path: "demo-share"},
+        {
+            component: DemoThirdPartScreen, name: "DemoThirdPart", path: "demo-third-part",
+            options: {headerRight: headerRight},
+        },
+        {
+            component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc",
+            options: {headerRight: headerRight},
+        },
+        {
+            component: DemoMapScreen, name: "DemoMap", path: "demo-map",
+            options: {headerRight: headerRight},
+        },
+        {
+            component: TestMapScreen, name: "TestMap", path: "test-map",
+            options: {headerRight: headerRight},
+        },
+        {
+            component: DemoShareScreen, name: "DemoShare", path: "demo-share",
+            options: {headerRight: headerRight},
+        },
         // {component: SignInScreen, name: "SignIn", path: "sign-in"},
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
+            options: {headerRight: headerRight},
             screens: [
                 {
                     component: TabHomeScreen,
                     name: "TabHome",
-                    path: "tab-home"
+                    path: "tab-home",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: TabSettingsScreen,
@@ -98,7 +142,8 @@ const node: Screen = {
                     initialParams: {"item": "item-001"},
                     parse: {
                         item: (item: string) => `${item}`,
-                    }
+                    },
+                    options: {headerRight: headerRight},
                 }
             ]
         },
@@ -108,7 +153,8 @@ const node: Screen = {
                 {
                     component: NestedHomeScreen,
                     name: "NestedHome",
-                    path: "nested-home"
+                    path: "nested-home",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: NestedSettingsScreen,
@@ -116,7 +162,8 @@ const node: Screen = {
                     path: "nested-settings/:item",
                     parse: {
                         item: (item: string) => `${item}`,
-                    }
+                    },
+                    options: {headerRight: headerRight},
                 }
             ]
         },
@@ -126,32 +173,38 @@ const node: Screen = {
                 {
                     component: RNHome,
                     name: "RNHome",
-                    path: "rn-home"
+                    path: "rn-home",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: RNSectionListScreen,
                     name: "RNSectionList",
-                    path: "rn-section-list"
+                    path: "rn-section-list",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: RNFlatListScreen,
                     name: "RNFlatList",
-                    path: "rn-flat-list"
+                    path: "rn-flat-list",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: RNKeyboardAvoidingScreen,
                     name: "RNNoKeyboard",
-                    path: "rn-keyboard-avoiding"
+                    path: "rn-keyboard-avoiding",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: RNSafeAreaScreen,
                     name: "RNSafeArea",
-                    path: "rn-safe-area"
+                    path: "rn-safe-area",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: RNVirtualizedListScreen,
                     name: "RNVirtualizedList",
-                    path: "rn-virtualized-list"
+                    path: "rn-virtualized-list",
+                    options: {headerRight: headerRight},
                 }
 
             ]
@@ -164,17 +217,26 @@ const node: Screen = {
                 {
                     component: BitcoinHomeScreen,
                     name: "BitcoinHome",
-                    path: "bitcoin-home"
+                    path: "bitcoin-home",
+                    options: {headerRight: headerRight},
                 },
                 {
                     component: BitcoinAlertScreen,
                     name: "BitcoinAlert",
                     path: "bitcoin-alert/:isPush",
+                    initialParams: {"isPush": true},
+                    options: {headerRight: headerRight},
                 }
             ]
         },
-        {component: SettingsScreen, name: "Settings", path: "settings"},
-        {component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme"},
+        {
+            component: SettingsScreen, name: "Settings", path: "settings",
+            options: {headerRight: headerRight},
+        },
+        {
+            component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme",
+            options: {headerRight: headerRight},
+        },
     ]
 }
 
@@ -191,14 +253,21 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
                     authState.accessToken === undefined
                         ? (<SScreen name="SignIn" component={SignInScreen}/>)
                         : (<>
-                            {node.screens && node.screens.map((screen) => {
-                                return (screen.screens && screen.screens.length > 0
-                                    ? <SScreen name={screen.name} key={screen.name}>
-                                        {(props: RecursiveNavigatorProps) => <RecursiveNavigator {...props} node={screen}/>}
+                            {node.screens && node.screens.map(({
+                                                                   screens,
+                                                                   name,
+                                                                   component,
+                                                                   ...rest
+                                                               }) => {
+                                return (screens && screens.length > 0
+                                    ? <SScreen name={name} key={name}>
+                                        {(props: RecursiveNavigatorProps) =>
+                                            <RecursiveNavigator {...props}
+                                                                node={{name: name, component: component, ...rest}}/>}
                                     </SScreen>
-                                    : <SScreen name={screen.name} key={screen.name}
-                                               component={screen.component}
-                                               initialParams={screen.initialParams}/>)
+                                    : <SScreen name={name} key={name}
+                                               component={component}
+                                               {...rest}/>)
                             })}
                         </>)
                 }
@@ -216,7 +285,8 @@ const recursiveConfig = (screens: Screen[]): Config => {
             path: screen.path,
             screens: (screen.screens && screen.screens.length) ? recursiveConfig(screen.screens) : undefined,
             parse: screen.parse,
-            stringify: screen.stringify
+            stringify: screen.stringify,
+            options: screen.options,
         }
     })
     return obj;

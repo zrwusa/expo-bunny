@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { Subheading, Switch } from 'react-native-paper';
+import {View} from 'react-native';
+import {Subheading, Switch} from 'react-native-paper';
+import styles from "./styles";
 
 type Props = {
     label: string;
@@ -8,19 +9,11 @@ type Props = {
     onValueChange: ((value: boolean) => void) & Function;
 };
 
-export default function SettingsItem({ label, value, onValueChange }: Props) {
+export default function SettingsItem({label, value, onValueChange}: Props) {
     return (
-        <View
-            style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingHorizontal: 16,
-                paddingVertical: 12,
-            }}
-        >
+        <View style={styles.item}>
             <Subheading>{label}</Subheading>
-            <Switch value={value} onValueChange={onValueChange} />
+            <Switch value={value} onValueChange={onValueChange}/>
         </View>
     );
 }

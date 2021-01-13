@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import DemoFCCard from "../../components/DemoFCCard";
 import DemoCCClock from "../../components/DemoCCClock";
 import DemoRequest from "../../components/DemoRequest";
-import {Text, View, TextInput} from "react-native";
+import {View,TextInput} from "../../components/base-ui";
 
 type Props = { title?: string }
 type States = { name: string }

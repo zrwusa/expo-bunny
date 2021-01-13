@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, View, Text} from "react-native";
+import {View, Text, ButtonTO, TextBtn} from "../base-ui";
 
 type Props = { title: string, }
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
@@ -39,8 +39,8 @@ class DemoCCClock extends Component<Props, States> {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>The current time is {this.state.time.toLocaleTimeString()}</Text>
-            <Button onPress={this.stop} title="Stop"/>
-            <Button onPress={this.go} title="Go"/>
+            <ButtonTO onPress={this.stop}><TextBtn>Stop</TextBtn></ButtonTO>
+            <ButtonTO onPress={this.go}><TextBtn>Go</TextBtn></ButtonTO>
         </View>);
     }
 

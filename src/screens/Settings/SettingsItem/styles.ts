@@ -1,10 +1,13 @@
 import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    item: {
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16,
+        paddingVertical: 12,
     },
+
 });
 export default styles;

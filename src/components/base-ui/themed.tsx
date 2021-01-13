@@ -1,6 +1,16 @@
 import {Button as ButtonElement, ButtonProps as ButtonElementProps} from "react-native-elements";
 import {useTheme} from "react-native-paper";
-import {Text as TextRN, TextProps, TouchableOpacityProps} from "react-native";
+import {
+    Text as TextRN,
+    View as ViewRN,
+    TextInput as TextInputRN,
+    Button as ButtonRN,
+    TextProps,
+    TouchableOpacityProps,
+    ViewProps,
+    TextInputProps,
+    ButtonProps
+} from "react-native";
 import {TouchableOpacity} from "react-native";
 import React from "react";
 import measure from "./measure";
@@ -19,14 +29,34 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, ...rest}) =
     }} {...rest} >{children}</TouchableOpacity>);
 }
 
-export const Text: React.FC<TextProps> = ({children, ...rest}) => {
+export const TextBtn: React.FC<TextProps> = ({children, ...rest}) => {
     const {colors, fonts} = useTheme();
     return (<TextRN style={{
-        color: colors.demoColor0,
+        color: colors.btnTextColor,
         paddingVertical: measure.spacings.s,
         paddingHorizontal: measure.spacings.l,
         fontFamily: fonts.regular.fontFamily
     }} {...rest}>{children}</TextRN>);
+}
+
+export const View: React.FC<ViewProps> = ({children, ...rest}) => {
+    const {colors, fonts} = useTheme();
+    return (<ViewRN {...rest}>{children}</ViewRN>);
+}
+
+export const Text: React.FC<TextProps> = ({children, ...rest}) => {
+    const {colors, fonts} = useTheme();
+    return (<TextRN style={{
+        color: colors.text,
+        paddingVertical: measure.spacings.s,
+        paddingHorizontal: measure.spacings.l,
+        fontFamily: fonts.regular.fontFamily
+    }} {...rest}>{children}</TextRN>);
+}
+
+export const Button: React.FC<ButtonProps> = ({children, ...rest}) => {
+    const {colors} = useTheme();
+    return (<ButtonRN color={colors.btnBgColor}  {...rest} />);
 }
 
 export const ButtonRNE: React.FC<ButtonElementProps> = ({children, ...rest}) => {
@@ -41,4 +71,13 @@ export const ButtonRNE: React.FC<ButtonElementProps> = ({children, ...rest}) => 
                            containerStyle={{
                                width: measure.sizes.s12,
                            }} {...rest}>{children}</ButtonElement>);
+}
+
+export const TextInput: React.FC<TextInputProps> = ({children, ...rest}) => {
+    const {colors} = useTheme();
+    return (<TextInputRN style={{
+        color: colors.text,
+        paddingHorizontal: measure.spacings.l,
+        paddingVertical: measure.spacings.s,
+    }} {...rest} />);
 }
