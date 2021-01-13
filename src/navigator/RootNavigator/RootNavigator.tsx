@@ -24,7 +24,7 @@ import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea";
 import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
 import DemoShareScreen from "../../screens/DemoShare";
 import {Config} from "../../types/common";
-import {View} from "react-native";
+import {Platform, View} from "react-native";
 import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
 import SettingsScreen from "../../screens/Settings";
@@ -46,7 +46,7 @@ type Screen = {
     options?: any
 };
 
-const headerRight = () => {
+const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
     const dispatch = useDispatch()
     const {themeName} = sysState;
@@ -59,6 +59,15 @@ const headerRight = () => {
     />
 }
 
+const customOptions = {
+    headerRight: customHeaderRight,
+    headerStyle: {
+        height: Platform.select({
+            web: 44,
+            android:64,
+        })
+    }
+}
 
 const node: Screen = {
     stack: Stacks.RootStack,
@@ -67,24 +76,24 @@ const node: Screen = {
     screens: [
         {
             component: HomeScreen, name: "Home", path: "home",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: ProfileScreen, name: "Profile", path: "profile/:id",
             parse: {
                 id: (id: string) => `${id}`,
             },
-            options: {headerRight: headerRight}
+            options: customOptions
         },
         {
             component: DemoFCReduxHookScreen,
             name: "DemoFCReduxHook", path: "demo-fc-redux-hook",
-            options: {headerRight: headerRight}
+            options: customOptions
         },
         {
             component: DemoCollectionScreen,
             name: "DemoCollection", path: "demo-collection",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: DemoRouteScreen,
@@ -102,38 +111,38 @@ const node: Screen = {
                     return id
                 }
             },
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: DemoThirdPartScreen, name: "DemoThirdPart", path: "demo-third-part",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: DemoMapScreen, name: "DemoMap", path: "demo-map",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: TestMapScreen, name: "TestMap", path: "test-map",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: DemoShareScreen, name: "DemoShare", path: "demo-share",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         // {component: SignInScreen, name: "SignIn", path: "sign-in"},
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
-            options: {headerRight: headerRight},
+            options: customOptions,
             screens: [
                 {
                     component: TabHomeScreen,
                     name: "TabHome",
                     path: "tab-home",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: TabSettingsScreen,
@@ -143,7 +152,7 @@ const node: Screen = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 }
             ]
         },
@@ -154,7 +163,7 @@ const node: Screen = {
                     component: NestedHomeScreen,
                     name: "NestedHome",
                     path: "nested-home",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: NestedSettingsScreen,
@@ -163,7 +172,7 @@ const node: Screen = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 }
             ]
         },
@@ -171,43 +180,43 @@ const node: Screen = {
             name: "DemoRNComponents",
             path: "demo-tab-rn-components",
             stack: Stacks.DemoTabRNComponentsStack,
-            options: {headerRight: headerRight},
+            options: customOptions,
             screens: [
                 {
                     component: RNHome,
                     name: "RNHome",
                     path: "rn-home",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: RNSectionListScreen,
                     name: "RNSectionList",
                     path: "rn-section-list",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: RNFlatListScreen,
                     name: "RNFlatList",
                     path: "rn-flat-list",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: RNKeyboardAvoidingScreen,
                     name: "RNNoKeyboard",
                     path: "rn-keyboard-avoiding",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: RNSafeAreaScreen,
                     name: "RNSafeArea",
                     path: "rn-safe-area",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: RNVirtualizedListScreen,
                     name: "RNVirtualizedList",
                     path: "rn-virtualized-list",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 }
 
             ]
@@ -216,30 +225,30 @@ const node: Screen = {
             name: "DemoBitcoin",
             stack: Stacks.DemoBitcoinStack,
             path: "demo-bitcoin",
-            options: {headerRight: headerRight},
+            options: customOptions,
             screens: [
                 {
                     component: BitcoinHomeScreen,
                     name: "BitcoinHome",
                     path: "bitcoin-home",
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 },
                 {
                     component: BitcoinAlertScreen,
                     name: "BitcoinAlert",
                     path: "bitcoin-alert/:isPush",
                     initialParams: {"isPush": true},
-                    options: {headerRight: headerRight},
+                    options: customOptions,
                 }
             ]
         },
         {
             component: SettingsScreen, name: "Settings", path: "settings",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
         {
             component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme",
-            options: {headerRight: headerRight},
+            options: customOptions,
         },
     ]
 }

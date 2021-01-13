@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Platform, StatusBar, Text} from "react-native";
+import {Platform,StatusBar, Text} from "react-native";
 import {DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav, NavigationContainer} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
