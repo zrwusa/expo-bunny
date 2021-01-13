@@ -1,6 +1,9 @@
 import * as React from "react";
-import {Platform,StatusBar, Text} from "react-native";
-import {DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav, NavigationContainer} from "@react-navigation/native";
+import {Platform, StatusBar, Text} from "react-native";
+import {
+    DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
+    NavigationContainer, InitialState
+} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {restoreAuth} from "./stores/auth/actions";
@@ -18,6 +21,7 @@ const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screen
 
 function App() {
     const [isReady, setIsReady] = React.useState(false);
+    const [initialState, setInitialState] = React.useState<InitialState | undefined>();
     const {themeName} = useSelector((rootState: RootState) => rootState.sysState)
     const theme = themes[themeName];
     const dispatch = useDispatch();
@@ -25,15 +29,25 @@ function App() {
         const bootstrapAsync = async () => {
             let accessToken, user;
             try {
+                const themeNameSaved = await AsyncStorage.getItem(BunnyConstants.THEME_PERSISTENCE_KEY);
+                const themeName: ThemeNames = (themeNameSaved === EThemes.DARK) ? EThemes.DARK : EThemes.DEFAULT;
+                dispatch(restoreTheme({themeName: themeName}))
+
                 accessToken = await AsyncStorage.getItem('accessToken');
                 user = await AsyncStorage.getItem('user');
                 accessToken && dispatch(restoreAuth({
                     access_token: accessToken,
                     user: user ? JSON.parse(user) : {}
                 }));
-                const themeNameSaved = await AsyncStorage.getItem(BunnyConstants.THEME_PERSISTENCE_KEY);
-                const themeName: ThemeNames = (themeNameSaved===EThemes.DARK)?EThemes.DARK : EThemes.DEFAULT;
-                dispatch(restoreTheme({themeName: themeName}))
+
+                if (Platform.OS !== 'web') {
+                    const savedState = await AsyncStorage.getItem(BunnyConstants.NAVIGATION_PERSISTENCE_KEY);
+                    const state = savedState ? JSON.parse(savedState) : undefined;
+
+                    if (state !== undefined) {
+                        setInitialState(state);
+                    }
+                }
             } catch (err) {
                 dispatch(sysError(err.toString()));
             } finally {
@@ -52,7 +66,14 @@ function App() {
                 )}
                 <NavigationContainer linking={linking}
                                      theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
-                                     fallback={<Text>Fallback loading...</Text>}>
+                                     fallback={<Text>Fallback loading...</Text>}
+                                     initialState={initialState}
+                                     onStateChange={(state) =>
+                                         AsyncStorage.setItem(
+                                             BunnyConstants.NAVIGATION_PERSISTENCE_KEY,
+                                             JSON.stringify(state)
+                                         )
+                                     }>
                     <RootNavigator/>
                 </NavigationContainer>
             </PaperProvider>
