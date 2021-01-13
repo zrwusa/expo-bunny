@@ -21,7 +21,7 @@ const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screen
 
 function App() {
     const [isReady, setIsReady] = React.useState(false);
-    const [initialState, setInitialState] = React.useState<InitialState | undefined>();
+    const [navInitialState, setNavInitialState] = React.useState<InitialState | undefined>();
     const {themeName} = useSelector((rootState: RootState) => rootState.sysState)
     const theme = themes[themeName];
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ function App() {
                     const state = savedState ? JSON.parse(savedState) : undefined;
 
                     if (state !== undefined) {
-                        setInitialState(state);
+                        setNavInitialState(state);
                     }
                 }
             } catch (err) {
@@ -67,7 +67,7 @@ function App() {
                 <NavigationContainer linking={linking}
                                      theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
                                      fallback={<Text>Fallback loading...</Text>}
-                                     initialState={initialState}
+                                     initialState={navInitialState}
                                      onStateChange={(state) =>
                                          AsyncStorage.setItem(
                                              BunnyConstants.NAVIGATION_PERSISTENCE_KEY,
