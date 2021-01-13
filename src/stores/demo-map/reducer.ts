@@ -1,6 +1,6 @@
 import {DemoMapActions} from "./actions";
 import {DemoMap, NearbyFilm, Region} from "../../types/models";
-import {EDemoMap} from "../../types/constants";
+import {EDemoMap} from "../../types/enums";
 import BunnyConstants from "../../common/constants";
 
 export const initialState: DemoMap = {

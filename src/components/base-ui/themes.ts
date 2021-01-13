@@ -1,8 +1,12 @@
 import {DarkTheme as DarkThemePaper, DefaultTheme as DefaultThemePaper} from "react-native-paper";
 import {Platform} from "react-native";
 import palette from "./palette";
+import {EThemes} from "../../types/enums";
 
-export const DarkTheme: ReactNativePaper.Theme = {
+// Theming only cares about these properties e.g. colors,fonts families,animations. Do not restrict the size attribute.
+// Although borderRadius is also a size, it does not affect the entire page and will not cause confusion,
+// so borderRadius is included in the theme attribute. All other size-related attributes are managed by measure
+const DarkTheme: ReactNativePaper.Theme = {
     ...DarkThemePaper,
     colors: {
         ...DarkThemePaper.colors,
@@ -10,6 +14,7 @@ export const DarkTheme: ReactNativePaper.Theme = {
         demoColor1: palette.orange800,
         btnTextColor: palette.white,
         btnBgColor: palette.orange800,
+        transparent: palette.transparent,
     },
     fonts: {
         ...DarkThemePaper.fonts,
@@ -21,22 +26,6 @@ export const DarkTheme: ReactNativePaper.Theme = {
         demoProperty0: 1,
         demoProperty1: 1,
     },
-    breakpoints: {
-        smallPhone: 0,
-        phone: 321,
-        tablet: 768,
-    },
-    spacings: {
-        xxxs: 1,
-        xxs: 2,
-        xs: 4,
-        s: 8,
-        m: 16,
-        l: 24,
-        xl: 48,
-        xxl: 96,
-        xxxl: 192,
-    },
     typography: {
         header: {
             fontFamily: Platform.select({
@@ -56,12 +45,20 @@ export const DarkTheme: ReactNativePaper.Theme = {
             fontSize: 16,
         }
     },
+    borderRadius: {
+        xxs: 2,
+        xs: 4,
+        s: 8,
+        m: 16,
+        l: 32,
+        xl: 64,
+        xxl: 128,
+    },
     demoThemeProperty0: '',
     demoThemeProperty1: '',
-
 };
 
-export const DefaultTheme: ReactNativePaper.Theme = {
+const DefaultTheme: ReactNativePaper.Theme = {
     ...DefaultThemePaper,
     colors: {
         ...DefaultThemePaper.colors,
@@ -69,6 +66,7 @@ export const DefaultTheme: ReactNativePaper.Theme = {
         demoColor1: palette.teal400,
         btnTextColor: palette.white,
         btnBgColor: palette.teal400,
+        transparent: palette.transparent,
     },
     fonts: {
         ...DefaultThemePaper.fonts,
@@ -80,24 +78,6 @@ export const DefaultTheme: ReactNativePaper.Theme = {
         demoProperty0: 1,
         demoProperty1: 1,
     },
-    demoThemeProperty0: '',
-    demoThemeProperty1: '',
-    breakpoints: {
-        smallPhone: 0,
-        phone: 321,
-        tablet: 768,
-    },
-    spacings: {
-        xxxs: 1,
-        xxs: 2,
-        xs: 4,
-        s: 8,
-        m: 16,
-        l: 24,
-        xl: 48,
-        xxl: 96,
-        xxxl: 192,
-    },
     typography: {
         header: {
             fontFamily: Platform.select({
@@ -117,6 +97,20 @@ export const DefaultTheme: ReactNativePaper.Theme = {
             fontSize: 16,
         }
     },
+    borderRadius: {
+        xxs: 2,
+        xs: 4,
+        s: 8,
+        m: 16,
+        l: 32,
+        xl: 64,
+        xxl: 128,
+    },
+    demoThemeProperty0: '',
+    demoThemeProperty1: '',
 };
 
-
+export const themes = {
+    [EThemes.DARK]: DarkTheme,
+    [EThemes.DEFAULT]: DefaultTheme,
+}

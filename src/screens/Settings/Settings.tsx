@@ -5,22 +5,21 @@ import {restoreAndSaveTheme} from "../../stores/sys/actions";
 import {RootState} from "../../types/models";
 import {View} from "react-native";
 import styles from "./styles";
-import {DarkTheme, DefaultTheme} from "../../components/base-ui";
+import {EThemes} from "../../types/enums";
 
 export default function SettingsScreen() {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
     const dispatch = useDispatch()
-    const {theme} = sysState;
+    const {themeName} = sysState;
     return (
         <View style={styles.container}>
             <SettingsItem
                 label="Dark theme"
-                value={theme.dark}
+                value={themeName===EThemes.DARK}
                 onValueChange={(value) => {
-                    dispatch(restoreAndSaveTheme({theme: theme.dark ? DefaultTheme : DarkTheme}));
+                    dispatch(restoreAndSaveTheme({themeName: value ? EThemes.DARK : EThemes.DEFAULT}));
                 }}
             />
         </View>
-
     );
 }

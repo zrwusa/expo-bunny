@@ -1,7 +1,7 @@
 import api from "../../common/api";
 import {RestoreAuth, RestoreAuthGoogle, SignOut, SysError, SysWarn} from "../../types/actions";
 import {RestoreAuthGooglePayload, RestoreAuthPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
-import {EAuth} from "../../types/constants";
+import {EAuth} from "../../types/enums";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {IOS_CLIENT_ID, ANDROID_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO, ANDROID_CLIENT_ID_FOR_EXPO} from '@env';

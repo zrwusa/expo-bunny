@@ -1,4 +1,5 @@
 import {GoogleUser} from "expo-google-app-auth";
+import {themes} from "../components/base-ui";
 
 export interface DemoHello {
     name: string,
@@ -48,16 +49,16 @@ export type DemoMap = {
 }
 
 export type User = {
-    email:string,
-    password:string,
-    nickname:string
+    email: string,
+    password: string,
+    nickname: string
 }
 
 export type Auth = {
     isLoading: boolean,
     isSignOut: boolean,
     accessToken: undefined | string | null,
-    user?:User|GoogleUser
+    user?: User | GoogleUser
 }
 
 
@@ -72,11 +73,12 @@ export type ThemeNav = {
         notification: string;
     };
 };
+export type ThemeNames = keyof (typeof themes)
 
 export type Sys = {
     error: string,
     warn: string,
-    theme:ReactNativePaper.Theme,
+    themeName: ThemeNames,
 }
 
 export interface RootState {

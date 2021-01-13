@@ -1,6 +1,6 @@
 import {DemoHelloActions} from "./actions";
 import {DemoHello} from "../../types/models";
-import {EDemoHello} from "../../types/constants";
+import {EDemoHello} from "../../types/enums";
 
 export const initialState: DemoHello = {
     name: "name default",

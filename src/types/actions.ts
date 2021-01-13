@@ -1,5 +1,5 @@
 import {AxiosError} from "axios";
-import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "./constants";
+import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "./enums";
 import {
     DemoHello2Payload, DemoHelloPayload, DemoThunkSuccessPayload,
     RestoreAuthGooglePayload, RestoreAuthPayload, RestoreThemePayload, SignOutPayload,

@@ -1,6 +1,6 @@
 import {RestoreThemePayload, SysErrorPayload, SysWarnPayload} from "../../types/payloads";
 import {RestoreTheme, SysError, SysWarn} from "../../types/actions";
-import {ESys} from "../../types/constants";
+import {ESys} from "../../types/enums";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {Sys} from "../../types/models";
@@ -32,7 +32,7 @@ export const restoreAndSaveTheme: ActionCreator<ThunkAction<Promise<Action>, Sys
     return async (dispatch: Dispatch<RestoreTheme | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorage.setItem(BunnyConstants.THEME_PERSISTENCE_KEY, payload.theme.dark ? 'dark' : 'light');
+            await AsyncStorage.setItem(BunnyConstants.THEME_PERSISTENCE_KEY, payload.themeName);
             result = dispatch(restoreTheme(payload))
         } catch (err) {
             result = dispatch(sysError({error: err.toString()}))

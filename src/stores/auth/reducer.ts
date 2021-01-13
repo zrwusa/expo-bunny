@@ -1,6 +1,6 @@
 import {AuthActions} from "./actions";
 import {Auth} from "../../types/models";
-import {EAuth} from "../../types/constants";
+import {EAuth} from "../../types/enums";
 import {RestoreAuthGooglePayload, RestoreAuthPayload} from "../../types/payloads";
 
 export const initialAuthState: Auth = {

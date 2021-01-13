@@ -28,6 +28,7 @@ import {View} from "react-native";
 import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
 import SettingsScreen from "../../screens/Settings";
+import DemoThemeScreen from "../../screens/DemoTheme";
 
 const getStackType = () => {
 }
@@ -173,6 +174,7 @@ const node: Screen = {
             ]
         },
         {component: SettingsScreen, name: "Settings", path: "settings"},
+        {component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme"},
     ]
 }
 

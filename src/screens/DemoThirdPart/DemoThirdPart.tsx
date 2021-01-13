@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {View} from "react-native";
-import {ListItem, Avatar} from "react-native-elements";
-import {DemoButtonStyledRNE, DemoIconStyled} from "../../components/base-ui";
+import {ListItem, Avatar, Button} from "react-native-elements";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {DemoButtonStyledRNE, DemoIconCssStyled} from "../../components/base-ui";
 
 type Props = { title?: string }
 type States = { name: string }
@@ -25,8 +26,8 @@ class DemoThirdPartScreen extends Component<Props, States> {
             },
         ];
         return (<View>
-            <DemoButtonStyledRNE icon={<DemoIconStyled name="air-horn"/>}
-                     title="Button with icon"/>
+            <Button icon={<Icon name="air-horn" style={{color: '#FFFFFF'}}/>}
+                    title="Button with icon"/>
             <View>
                 {list.map((l, i) => (
                     <ListItem key={i} bottomDivider>
@@ -37,6 +38,11 @@ class DemoThirdPartScreen extends Component<Props, States> {
                         </ListItem.Content>
                     </ListItem>
                 ))}
+            </View>
+            <View>
+                <DemoButtonStyledRNE icon={<DemoIconCssStyled name="air-horn"/>}
+                                     title="Button with icon"/>
+                <DemoIconCssStyled name="air-horn"/>
             </View>
         </View>);
     }

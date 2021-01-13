@@ -1,6 +1,6 @@
 import {DemoThunkActions} from "./actions";
 import {DemoThunk} from "../../types/models";
-import {EDemoThunk} from "../../types/constants";
+import {EDemoThunk} from "../../types/enums";
 
 export const initialState: DemoThunk = {
     text: "text default",

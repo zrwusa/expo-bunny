@@ -26,4 +26,9 @@ export enum EDemoMap {
     RESTORE_REGION = "RESTORE_REGION",
 }
 
+export enum EThemes  {
+    DARK='DARK',
+    DEFAULT='DEFAULT'
+}
+
 

@@ -1,12 +1,11 @@
 import {SysActions} from "./actions";
 import {Sys} from "../../types/models";
-import {ESys} from "../../types/constants";
-import {DefaultTheme} from "react-native-paper";
+import {ESys, EThemes} from "../../types/enums";
 
 export const initialState: Sys = {
     error: "",
     warn: "",
-    theme:DefaultTheme
+    themeName: EThemes.DEFAULT
 };
 
 export function sysStateReducer(state: Sys = initialState, {type, payload}: SysActions): Sys {
