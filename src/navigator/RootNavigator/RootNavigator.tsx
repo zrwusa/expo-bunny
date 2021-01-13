@@ -168,7 +168,10 @@ const node: Screen = {
             ]
         },
         {
-            name: "DemoRNComponents", path: "demo-tab-rn-components", stack: Stacks.DemoTabRNComponentsStack,
+            name: "DemoRNComponents",
+            path: "demo-tab-rn-components",
+            stack: Stacks.DemoTabRNComponentsStack,
+            options: {headerRight: headerRight},
             screens: [
                 {
                     component: RNHome,
@@ -213,6 +216,7 @@ const node: Screen = {
             name: "DemoBitcoin",
             stack: Stacks.DemoBitcoinStack,
             path: "demo-bitcoin",
+            options: {headerRight: headerRight},
             screens: [
                 {
                     component: BitcoinHomeScreen,
@@ -245,31 +249,24 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {stack} = node;
     const Navigator = stack?.Navigator;
     let SScreen: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
-    const authState = useSelector((store: RootState) => store.authState);
+    const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
+
     return (
         Navigator
             ? <Navigator>
-                {
-                    authState.accessToken === undefined
-                        ? (<SScreen name="SignIn" component={SignInScreen}/>)
-                        : (<>
-                            {node.screens && node.screens.map(({
-                                                                   screens,
-                                                                   name,
-                                                                   component,
-                                                                   ...rest
-                                                               }) => {
-                                return (screens && screens.length > 0
-                                    ? <SScreen name={name} key={name}>
-                                        {(props: RecursiveNavigatorProps) =>
-                                            <RecursiveNavigator {...props}
-                                                                node={{name: name, component: component, ...rest}}/>}
-                                    </SScreen>
-                                    : <SScreen name={name} key={name}
-                                               component={component}
-                                               {...rest}/>)
-                            })}
-                        </>)
+                {authState && (authState.accessToken === undefined)
+                    ? (<SScreen name="SignIn" component={SignInScreen}/>)
+                    : (<>
+                        {node.screens && node.screens.map((screen) => {
+                            return (screen.screens && screen.screens.length > 0
+                                ? <SScreen {...screen} key={screen.name}>
+                                    {(navProps: any) => {
+                                        return <RecursiveNavigator {...navProps} node={screen}/>
+                                    }}
+                                </SScreen>
+                                : <SScreen {...screen} key={screen.name}/>)
+                        })}
+                    </>)
                 }
             </Navigator>
             : null

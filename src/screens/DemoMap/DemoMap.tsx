@@ -1,5 +1,6 @@
 import React, {Component, createRef} from "react";
-import {View, Text, Animated, Image} from "react-native";
+import {Animated} from "react-native";
+import {View, Text, Image} from "../../components/base-ui";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
 import {DemoMap, NearbyFilm, Region, RootState} from "../../types/models";

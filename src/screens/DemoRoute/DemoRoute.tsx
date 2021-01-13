@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text} from "react-native";
+import {View, Text} from "../../components/base-ui";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types/stacks";
@@ -32,12 +32,12 @@ class DemoRouteScreen extends Component<Props> {
         return (<View style={styles.container}>
             {/*<BoxShadow setting={shadowOpt}>*/}
             <View style={styles.wrap}>
-                <Text style={styles.text}>param id = {id}</Text>
-                <Text style={styles.text}>typeof id:{typeof id}</Text>
-                <Text style={styles.text}>param isHuman = {isHuman.toString()}</Text>
-                <Text style={styles.text}>typeof id:{typeof isHuman}</Text>
-                <Text style={styles.text}>param sort = {sort}</Text>
-                <Text style={styles.text}>typeof id:{typeof sort}</Text>
+                <Text>param id = {id}</Text>
+                <Text>typeof id:{typeof id}</Text>
+                <Text>param isHuman = {isHuman.toString()}</Text>
+                <Text>typeof id:{typeof isHuman}</Text>
+                <Text>param sort = {sort}</Text>
+                <Text>typeof id:{typeof sort}</Text>
             </View>
 
             {/*</BoxShadow>*/}

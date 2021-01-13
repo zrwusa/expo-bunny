@@ -50,7 +50,8 @@ function App() {
                 {Platform.OS === 'ios' && (
                     <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
                 )}
-                <NavigationContainer linking={linking} theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
+                <NavigationContainer linking={linking}
+                                     theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
                                      fallback={<Text>Fallback loading...</Text>}>
                     <RootNavigator/>
                 </NavigationContainer>

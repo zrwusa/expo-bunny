@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Button, Text, View} from "react-native";
+import {ButtonRNE, Text, View} from "../../components/base-ui";
 import {demoThunk} from "../../stores/demo-thunk/actions";
 import {DemoThunk, RootState} from "../../types/models";
 import {DemoThunkPayload} from "../../types/payloads";
@@ -33,12 +33,9 @@ export class DemoThunkCCScreen extends React.Component<Props> {
     render(): React.ReactNode {
         const {text, id} = this.props;
         return <View>
-            <Text>Demo Thunk CC Page</Text>
-            <Button onPress={this.handleThunk} title="Thunk dispatch"/>
+            <ButtonRNE onPress={this.handleThunk} title="Thunk dispatch"/>
             <Text>text:{text}</Text>
             <Text>id:{id}</Text>
-            <Text>This demo shows you how to use a thunk dispatcher to dispatch data to Redux reducer,As in http request situation thunk works
-                awesome.And shows you how to map states and dispatchers in Class Component(CC)</Text>
         </View>;
     }
 }

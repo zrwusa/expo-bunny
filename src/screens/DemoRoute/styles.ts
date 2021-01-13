@@ -7,12 +7,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: BunnyConstants.statusBarHeight,
-        backgroundColor: '#ecf0f1',
     },
     wrap:{
         alignItems:'flex-start',
     },
     text: {
+        color:'#FF0000',
         marginTop:10
     },
 });

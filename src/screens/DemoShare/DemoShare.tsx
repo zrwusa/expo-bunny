@@ -1,6 +1,7 @@
 import styles from "./styles";
 import * as React from "react";
-import {View, Share, Text, Button, TouchableOpacity, Image} from "react-native";
+import {Share} from "react-native";
+import {View, Text, Button, TouchableOpacity, Image} from "../../components/base-ui";
 import {useDispatch} from "react-redux";
 import {sysError} from "../../stores/sys/actions";
 import * as ImagePicker from "expo-image-picker";

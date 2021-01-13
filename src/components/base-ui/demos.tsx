@@ -8,25 +8,30 @@ import React from "react";
 import {themes} from "./themes";
 import {EThemes} from "../../types/enums";
 import measure from "./measure";
+import {getStyleObj} from "./utils";
 
 // Support theme switch
-export const DemoTOButtonThemedRN: React.FC<TouchableOpacityProps> = ({children, ...rest}) => {
+export const DemoTOButtonThemedRN: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {colors, borderRadius} = useTheme();
+    const styleObj = getStyleObj(style)
     return (<TouchableOpacity style={{
         backgroundColor: colors.demoColor1,
         marginTop: measure.spacings.s,
         borderRadius: borderRadius.xs,
+        ...styleObj,
     }} {...rest} >{children}</TouchableOpacity>);
 }
 
 // Support theme switch
-export const DemoTextThemedRN: React.FC<TextProps> = ({children, ...rest}) => {
+export const DemoTextThemedRN: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
+    const styleObj = getStyleObj(style)
     return (<TextRN style={{
         color: colors.demoColor0,
         paddingVertical: measure.spacings.s,
         paddingHorizontal: measure.spacings.l,
-        fontFamily: fonts.regular.fontFamily
+        fontFamily: fonts.regular.fontFamily,
+        ...styleObj,
     }} {...rest}>{children}</TextRN>);
 }
 

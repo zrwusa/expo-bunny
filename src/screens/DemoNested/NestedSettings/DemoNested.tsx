@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, Text, Button} from "react-native";
+import {View, Text, Button} from "../../../components/base-ui";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedStackParam} from "../../../types/stacks";
