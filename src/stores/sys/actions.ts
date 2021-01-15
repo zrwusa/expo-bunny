@@ -32,7 +32,7 @@ export const restoreAndSaveTheme: ActionCreator<ThunkAction<Promise<Action>, Sys
     return async (dispatch: Dispatch<RestoreTheme | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorage.setItem(BunnyConstants.THEME_PERSISTENCE_KEY, payload.themeName);
+            await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, payload.themeName);
             result = dispatch(restoreTheme(payload))
         } catch (err) {
             result = dispatch(sysError({error: err.toString()}))

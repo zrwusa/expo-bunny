@@ -61,18 +61,11 @@ export type Auth = {
     user?: User | GoogleUser
 }
 
+export type AuthResponse = {
+    access_token: undefined | string | null,
+    user?: User | GoogleUser
+}
 
-export type ThemeNav = {
-    dark: boolean;
-    colors: {
-        primary: string;
-        background: string;
-        card: string;
-        text: string;
-        border: string;
-        notification: string;
-    };
-};
 export type ThemeNames = keyof (typeof themes)
 
 export type Sys = {

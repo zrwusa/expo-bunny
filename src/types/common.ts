@@ -7,5 +7,6 @@ export interface Config {
         screens?: Config,
         initialRouteName?: string,
         options?:any,
+        tabBarOptions?:any
     };
 }

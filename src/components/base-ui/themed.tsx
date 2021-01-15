@@ -1,5 +1,5 @@
 import {Button as ButtonElement, ButtonProps as ButtonElementProps} from "react-native-elements";
-import {useTheme} from "react-native-paper";
+import {useTheme} from "./theme/theming";
 import {
     Text as TextRN,
     View as ViewRN,
@@ -16,13 +16,10 @@ import {
 } from "react-native";
 import React from "react";
 import measure from "./measure";
-import {themes} from "./themes";
-import {EThemes} from "../../types/enums";
 import {getStyleObj} from "./utils";
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
-const theme = themes[EThemes.DEFAULT];
 export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style,...rest}) => {
     const {colors, borderRadius} = useTheme();
     const styleObj = getStyleObj(style);
@@ -89,7 +86,7 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
 
 
 export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
-    const {colors} = useTheme();
+    const {colors,borderRadius} = useTheme();
     const buttonStyleObj = getStyleObj(buttonStyle);
     const titleStyleObj = getStyleObj(titleStyle);
     const containerStyleObj = getStyleObj(containerStyle);
@@ -97,7 +94,7 @@ export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, 
     return (<ButtonElement
         buttonStyle={{
             backgroundColor: colors.btnBgColor,
-            borderRadius: theme.borderRadius.s,
+            borderRadius: borderRadius.s,
             ...buttonStyleObj,
         }}
         titleStyle={{

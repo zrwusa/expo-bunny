@@ -2,7 +2,9 @@ import React, {Component} from "react";
 import DemoFCCard from "../../components/DemoFCCard";
 import DemoCCClock from "../../components/DemoCCClock";
 import DemoRequest from "../../components/DemoRequest";
-import {View,TextInput} from "../../components/base-ui";
+import {View, TextInput} from "../../components/base-ui";
+import styles from "./styles";
+import containerStyle from "../../containers/box";
 
 type Props = { title?: string }
 type States = { name: string }
@@ -13,17 +15,17 @@ class DemoCollectionScreen extends Component<Props, States> {
     }
 
     render(): React.ReactNode {
-        return (<View>
-            <View>
+        return (<View style={styles.container}>
+            <View style={containerStyle.box}>
                 <DemoFCCard title="FunctionComponent"/>
             </View>
-            <View>
+            <View style={containerStyle.box}>
                 <DemoCCClock title="ClassComponent"/>
             </View>
-            <View>
+            <View style={containerStyle.box}>
                 <DemoRequest title={"Request"}/>
             </View>
-            <View>
+            <View style={containerStyle.box}>
                 <TextInput placeholder={"Placeholder"}/>
             </View>
         </View>);

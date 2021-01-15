@@ -4,6 +4,18 @@ import store from "../stores";
 const isDevServerProxy = false;
 const isRemoteBackEnd = true;
 
+// interface Seal {
+//     name: string;
+//     url: string;
+// }
+// interface API {
+//     "/user": { name: string; age: number; phone: string };
+//     "/seals": { seal: Seal[] };
+// }
+// const apiXXX = <URL extends keyof API>(url: URL): Promise<API[URL]> => {
+//     return fetch(url).then((res) => res.json());
+// };
+
 const api = axios.create({
     baseURL: isDevServerProxy
         ? `http://192.168.50.19:3006/api`

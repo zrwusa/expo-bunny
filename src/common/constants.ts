@@ -4,8 +4,8 @@ const BunnyConstants = {
         longitudeDelta: 0.0045,
     },
     statusBarHeight: 20,
-    THEME_PERSISTENCE_KEY : 'THEME_TYPE',
-    NAVIGATION_PERSISTENCE_KEY : 'NAVIGATION_STATE',
+    THEME_NAME_PERSISTENCE_KEY: 'THEME_TYPE',
+    NAV_STATE_PERSISTENCE_KEY: 'NAVIGATION_STATE',
 }
 
 export default BunnyConstants

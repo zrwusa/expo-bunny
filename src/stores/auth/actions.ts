@@ -8,16 +8,18 @@ import {IOS_CLIENT_ID, ANDROID_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO, ANDROID_CLIENT
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {sysError, sysWarn} from "../sys/actions";
-import {Auth} from "../../types/models";
+import {Auth, AuthResponse} from "../../types/models";
+import {AxiosResponse} from "axios";
 
 export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreAuth>> = (reqParams: SignInPayload) => {
     return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {
         let result;
         try {
-            const res = await api.post(`/auth/login`, reqParams)
+            const res = await api.post<SignInPayload,AxiosResponse<AuthResponse>>(`/auth/login`, reqParams)
             await AsyncStorage.setItem('accessToken', res.data.access_token)
             await AsyncStorage.setItem('user', JSON.stringify(res.data.user))
             result = dispatch(restoreAuth(res.data))
+            debugger
         } catch (err) {
             result = dispatch(sysError({error: err.toString()}))
         }

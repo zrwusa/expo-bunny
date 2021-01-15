@@ -1,14 +1,13 @@
 import styled from "styled-components/native";
 import {Button as ButtonElement, ButtonProps as ButtonElementProps} from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {useTheme} from "react-native-paper";
+import {useTheme} from "./theme/theming";
 import {Text as TextRN, TextProps, TouchableOpacityProps} from "react-native";
 import {TouchableOpacity} from "react-native";
 import React from "react";
-import {themes} from "./themes";
-import {EThemes} from "../../types/enums";
 import measure from "./measure";
 import {getStyleObj} from "./utils";
+import DefaultTheme from "./theme/styles/DefaultTheme"
 
 // Support theme switch
 export const DemoTOButtonThemedRN: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
@@ -37,25 +36,24 @@ export const DemoTextThemedRN: React.FC<TextProps> = ({children, style, ...rest}
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
-const theme = themes[EThemes.DEFAULT];
 export const DemoButtonStyledRN = styled.Button({
-    backgroundColor: theme.colors.transparent,
+    backgroundColor: DefaultTheme.colors.transparent,
     margin: measure.spacings.s
 })
 
 export const DemoTextCssStyledRN = styled.Text`
-  color: ${theme.colors.demoColor1};
+  color: ${DefaultTheme.colors.demoColor1};
   text-align: center;
   font-size: ${measure.fontSizes.m}px;
 `
 
 export const DemoButtonStyledRNE = styled(ButtonElement).attrs({
     buttonStyle: {
-        backgroundColor: theme.colors.demoColor1,
-        borderRadius: theme.borderRadius.xl
+        backgroundColor: DefaultTheme.colors.demoColor1,
+        borderRadius: DefaultTheme.borderRadius.xl
     },
     titleStyle: {
-        color: theme.colors.demoColor0
+        color: DefaultTheme.colors.demoColor0
     },
     containerStyle: {
         width: measure.sizes.s12,
@@ -64,7 +62,7 @@ export const DemoButtonStyledRNE = styled(ButtonElement).attrs({
 
 export const DemoIconCssStyled = styled(Icon)`
   font-size: ${measure.fontSizes.m}px;
-  color:${theme.colors.demoColor0};
+  color:${DefaultTheme.colors.demoColor0};
   padding: ${measure.spacings.s}px;
 `
 

@@ -11,9 +11,12 @@ import * as Linking from "expo-linking";
 import {restoreTheme, sysError} from "./stores/sys/actions";
 import RootNavigator, {getConfig} from "./navigator/RootNavigator";
 import {Provider as PaperProvider} from 'react-native-paper';
+import {ThemeProvider} from './components/base-ui/theme/theming';
+import DefaultTheme from "./components/base-ui/theme/styles/DefaultTheme";
+import DarkTheme from "./components/base-ui/theme/styles/DarkTheme";
+
 import {RootState, ThemeNames} from "./types/models";
 import BunnyConstants from "./common/constants";
-import {themes} from "./components/base-ui";
 import {EThemes} from "./types/enums";
 
 const basePath = Linking.makeUrl('/');
@@ -23,13 +26,13 @@ function App() {
     const [isReady, setIsReady] = React.useState(false);
     const [navInitialState, setNavInitialState] = React.useState<InitialState | undefined>();
     const {themeName} = useSelector((rootState: RootState) => rootState.sysState)
-    const theme = themes[themeName];
+    const theme = themeName === 'DARK' ? DarkTheme : DefaultTheme;
     const dispatch = useDispatch();
     React.useEffect(() => {
         const bootstrapAsync = async () => {
             let accessToken, user;
             try {
-                const themeNameSaved = await AsyncStorage.getItem(BunnyConstants.THEME_PERSISTENCE_KEY);
+                const themeNameSaved = await AsyncStorage.getItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY);
                 const themeName: ThemeNames = (themeNameSaved === EThemes.DARK) ? EThemes.DARK : EThemes.DEFAULT;
                 dispatch(restoreTheme({themeName: themeName}))
 
@@ -41,7 +44,7 @@ function App() {
                 }));
 
                 if (Platform.OS !== 'web') {
-                    const savedState = await AsyncStorage.getItem(BunnyConstants.NAVIGATION_PERSISTENCE_KEY);
+                    const savedState = await AsyncStorage.getItem(BunnyConstants.NAV_STATE_PERSISTENCE_KEY);
                     const state = savedState ? JSON.parse(savedState) : undefined;
 
                     if (state !== undefined) {
@@ -60,23 +63,25 @@ function App() {
 
     return isReady
         ? (
-            <PaperProvider theme={theme}>
-                {Platform.OS === 'ios' && (
-                    <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
-                )}
-                <NavigationContainer linking={linking}
-                                     theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
-                                     fallback={<Text>Fallback loading...</Text>}
-                                     initialState={navInitialState}
-                                     onStateChange={(state) =>
-                                         AsyncStorage.setItem(
-                                             BunnyConstants.NAVIGATION_PERSISTENCE_KEY,
-                                             JSON.stringify(state)
-                                         )
-                                     }>
-                    <RootNavigator/>
-                </NavigationContainer>
-            </PaperProvider>
+            <ThemeProvider theme={theme}>
+                <PaperProvider theme={theme}>
+                    {Platform.OS === 'ios' && (
+                        <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
+                    )}
+                    <NavigationContainer linking={linking}
+                                         theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
+                                         fallback={<Text>Fallback loading...</Text>}
+                                         initialState={navInitialState}
+                                         onStateChange={(state) =>
+                                             AsyncStorage.setItem(
+                                                 BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
+                                                 JSON.stringify(state)
+                                             )
+                                         }>
+                        <RootNavigator/>
+                    </NavigationContainer>
+                </PaperProvider>
+            </ThemeProvider>
         )
         : (<Text>Preparing resources</Text>)
 }

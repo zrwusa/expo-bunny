@@ -43,7 +43,8 @@ type Screen = {
     initialParams?: Object;
     stack?: typeof Stacks.RootStack | typeof Stacks.DemoNestedStack | typeof Stacks.DemoTabStack | typeof Stacks.DemoTabRNComponentsStack | typeof Stacks.DemoBitcoinStack,
     signInComponent?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
-    options?: any
+    options?: any,
+    tabBarOptions?: any
 };
 
 const customHeaderRight = () => {
@@ -64,9 +65,15 @@ const customOptions = {
     headerStyle: {
         height: Platform.select({
             web: 44,
-            android:64,
+            android: 64,
         })
     }
+}
+
+const tabBarOptions = {
+    labelStyle: {fontSize: 12},
+    tabStyle: {justifyContent: 'center'},
+    style: {backgroundColor: 'powderblue'},
 }
 
 const node: Screen = {
@@ -137,12 +144,12 @@ const node: Screen = {
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
             options: customOptions,
+            tabBarOptions: tabBarOptions,
             screens: [
                 {
                     component: TabHomeScreen,
                     name: "TabHome",
                     path: "tab-home",
-                    options: customOptions,
                 },
                 {
                     component: TabSettingsScreen,
@@ -152,7 +159,6 @@ const node: Screen = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
-                    options: customOptions,
                 }
             ]
         },
@@ -255,25 +261,25 @@ const node: Screen = {
 
 type RecursiveNavigatorProps = { node: Screen }
 const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
-    const {stack} = node;
+    const {stack, ...rest} = node;
     const Navigator = stack?.Navigator;
-    let SScreen: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
+    let ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
     const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
 
     return (
         Navigator
-            ? <Navigator>
+            ? <Navigator {...rest}>
                 {authState && (authState.accessToken === undefined)
-                    ? (<SScreen name="SignIn" component={SignInScreen}/>)
+                    ? (<ScreenComponent name="SignIn" component={SignInScreen}/>)
                     : (<>
                         {node.screens && node.screens.map((screen) => {
                             return (screen.screens && screen.screens.length > 0
-                                ? <SScreen {...screen} key={screen.name}>
+                                ? <ScreenComponent {...screen} key={screen.name}>
                                     {(navProps: any) => {
                                         return <RecursiveNavigator {...navProps} node={screen}/>
                                     }}
-                                </SScreen>
-                                : <SScreen {...screen} key={screen.name}/>)
+                                </ScreenComponent>
+                                : <ScreenComponent {...screen} key={screen.name}/>)
                         })}
                     </>)
                 }
@@ -293,6 +299,7 @@ const recursiveConfig = (screens: Screen[]): Config => {
             parse: screen.parse,
             stringify: screen.stringify,
             options: screen.options,
+            tabBarOptions: screen.tabBarOptions
         }
     })
     return obj;
