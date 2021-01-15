@@ -2,6 +2,9 @@ import color from 'color';
 import {palette} from './palette';
 import configureFonts from './fonts';
 import {Theme} from "../../types/styles";
+import {ForkDeep} from "../../types/helpers";
+
+
 
 export const DefaultTheme: Theme = {
     dark: false,
