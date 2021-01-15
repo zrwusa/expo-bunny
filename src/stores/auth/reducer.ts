@@ -1,7 +1,7 @@
+import {EAuth} from "../../types/enums";
 import {AuthActions} from "./actions";
 import {Auth} from "../../types/models";
-import {EAuth} from "../../types/enums";
-import {RestoreAuthGooglePayload, RestoreAuthPayload} from "../../types/payloads";
+import {RestoreAuthPayload, RestoreAuthGooglePayload} from "../../types/payloads";
 
 export const initialAuthState: Auth = {
     isLoading: true,
@@ -15,7 +15,7 @@ export function authReducer(state: Auth = initialAuthState, {type, payload}: Aut
             return {
                 ...state,
                 accessToken: (<RestoreAuthPayload>payload).access_token,
-                user:(<RestoreAuthPayload>payload).user,
+                user: (<RestoreAuthPayload>payload).user,
                 isLoading: false,
             };
         case EAuth.SIGN_OUT:

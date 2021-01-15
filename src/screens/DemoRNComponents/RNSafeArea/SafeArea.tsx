@@ -1,6 +1,7 @@
 import React from "react";
-import {SafeAreaView, Text} from "react-native";
+import {SafeAreaView} from "react-native";
 import {safeAreaViewStyles} from "./styles";
+import {Text} from "../../../components/base-ui";
 
 export const RNFlatListScreen: React.FC = () => {
     return (

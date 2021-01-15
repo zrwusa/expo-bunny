@@ -1,8 +1,11 @@
 import React from "react";
-import {SafeAreaView, View, Text, SectionList} from "react-native";
+import {SafeAreaView, View, SectionList} from "react-native";
+import {Text} from "../../../components/base-ui"
 import {sectionListStyles} from "./styles"
+import {useTheme} from "../../../styles/theme"
 
 function SectionListScreen() {
+    const {colors} = useTheme()
 
     const SECTION_LIST_DATA = [
         {
@@ -28,8 +31,12 @@ function SectionListScreen() {
     ];
 
     const SectionListItem = ({title}: any) => (
-        <View style={sectionListStyles.item}>
-            <Text style={sectionListStyles.title}>{title}</Text>
+        <View style={{
+            backgroundColor: colors.background,
+            padding: 20,
+            marginVertical: 1
+        }}>
+            <Text style={{fontSize: 24}}>{title}</Text>
         </View>
     );
 
@@ -40,7 +47,10 @@ function SectionListScreen() {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({item}) => <SectionListItem title={item}/>}
                 renderSectionHeader={({section: {title}}) => (
-                    <Text style={sectionListStyles.header}>{title}</Text>
+                    <Text style={{
+                        fontSize: 32,
+                        backgroundColor: colors.backdrop
+                    }}>{title}</Text>
                 )}
             />
         </SafeAreaView>

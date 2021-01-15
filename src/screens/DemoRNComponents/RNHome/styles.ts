@@ -6,15 +6,10 @@ const window = Dimensions.get("window");
 export const screenStyles = StyleSheet.create({
     container: {
         justifyContent: "center",
-        height: window.height,
     },
 });
 
 export const activityIndicatorStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center"
-    },
     horizontal: {
         flexDirection: "row",
         justifyContent: "space-around",
@@ -23,15 +18,9 @@ export const activityIndicatorStyles = StyleSheet.create({
 })
 
 export const switchStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-    }
 })
 
 export const imageStyles = StyleSheet.create({
-    container: {},
     tinyLogo: {
         width: 50,
         height: 50,
@@ -43,10 +32,6 @@ export const imageStyles = StyleSheet.create({
 })
 
 export const imageBackgroundStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column"
-    },
     image: {
         flex: 1,
         resizeMode: "cover",
@@ -62,29 +47,26 @@ export const imageBackgroundStyles = StyleSheet.create({
 })
 
 
-export const keyboardAvoidingViewStyles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    inner: {
-        padding: 24,
-        flex: 1,
-        justifyContent: "space-around"
-    },
-    header: {
-        fontSize: 36,
-        marginBottom: 48
-    },
-    textInput: {
-        height: 40,
-        borderColor: "#000000",
-        borderBottomWidth: 1,
-        marginBottom: 36
-    },
-    btnContainer: {
-        backgroundColor: "white",
-    }
-})
+// export const keyboardAvoidingViewStyles = StyleSheet.create({
+//     inner: {
+//         padding: 24,
+//         flex: 1,
+//         justifyContent: "space-around"
+//     },
+//     header: {
+//         fontSize: 36,
+//         marginBottom: 48
+//     },
+//     textInput: {
+//         height: 40,
+//         borderColor: "#000000",
+//         borderBottomWidth: 1,
+//         marginBottom: 36
+//     },
+//     btnContainer: {
+//         backgroundColor: "white",
+//     }
+// })
 export const modalStyles = StyleSheet.create({
     centeredView: {
         flex: 1,

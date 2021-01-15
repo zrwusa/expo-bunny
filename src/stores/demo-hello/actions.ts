@@ -1,6 +1,6 @@
+import {EDemoHello} from "../../types/enums";
 import {DemoHello2Payload, DemoHelloPayload} from "../../types/payloads";
 import {DemoHello, DemoHello2} from "../../types/actions";
-import {EDemoHello} from "../../types/enums";
 
 export const demoHello: (payload: DemoHelloPayload) => DemoHello = (payload) => {
     return {

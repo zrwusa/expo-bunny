@@ -1,5 +1,5 @@
 import {GoogleUser} from "expo-google-app-auth/src/Google";
-import {Themes} from "../components/base-ui";
+import {UserRes} from "./models";
 
 export interface SignInPayload {
     email: string;
@@ -11,11 +11,8 @@ export interface SignOutPayload {
 }
 
 export type RestoreAuthPayload = {
-    access_token: string;
-    user: {
-        email: string;
-        nickname: string;
-    }
+    access_token: string | undefined;
+    user?: UserRes | null | undefined;
 }
 
 export type RestoreAuthGooglePayload = {
@@ -35,7 +32,7 @@ export interface SysWarnPayload {
 }
 
 export interface RestoreThemePayload {
-    themeName: Themes;
+    themeName: string;
 }
 
 export interface DemoHelloPayload {

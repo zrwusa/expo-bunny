@@ -1,9 +1,12 @@
 import * as React from "react";
 import {View, Text} from "../../../components/base-ui";
+import containerStyle from "../../../containers/box";
 
 export function TabHomeScreen() {
     return (<View>
-        <Text>TabHome</Text>
+        <View style={containerStyle.box}>
+            <Text>TabHome</Text>
+        </View>
     </View>);
 }
 

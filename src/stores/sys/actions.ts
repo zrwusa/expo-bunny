@@ -1,10 +1,10 @@
-import {RestoreThemePayload, SysErrorPayload, SysWarnPayload} from "../../types/payloads";
-import {RestoreTheme, SysError, SysWarn} from "../../types/actions";
-import {ESys} from "../../types/enums";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {Sys} from "../../types/models";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {RestoreThemePayload, SysErrorPayload, SysWarnPayload} from "../../types/payloads";
+import {RestoreTheme, SysError, SysWarn} from "../../types/actions";
+import {ESys} from "../../types/enums";
 import BunnyConstants from "../../common/constants";
 
 export const sysError: (payload: SysErrorPayload) => SysError = (payload) => {

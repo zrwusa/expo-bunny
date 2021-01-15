@@ -6,13 +6,12 @@ import {DemoThunk, RootState} from "../../types/models";
 import {DemoThunkPayload} from "../../types/payloads";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
+import containerStyle from "../../containers/box";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
-
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
     demoThunk: async (data: DemoThunkPayload) => dispatch(demoThunk(data)),
 });
-
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> ;
 
 export class DemoThunkCCScreen extends React.Component<Props> {
@@ -33,9 +32,11 @@ export class DemoThunkCCScreen extends React.Component<Props> {
     render(): React.ReactNode {
         const {text, id} = this.props;
         return <View>
-            <ButtonRNE onPress={this.handleThunk} title="Thunk dispatch"/>
-            <Text>text:{text}</Text>
-            <Text>id:{id}</Text>
+            <View style={containerStyle.box}>
+                <Text>text:{text}</Text>
+                <Text>id:{id}</Text>
+                <ButtonRNE onPress={this.handleThunk} title="Thunk dispatch"/>
+            </View>
         </View>;
     }
 }

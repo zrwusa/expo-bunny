@@ -1,7 +1,7 @@
 import styles from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
-import {View, Text, Button, TouchableOpacity, Image} from "../../components/base-ui";
+import {View, Text, Button, TouchableOpacity, Image, ButtonTO} from "../../components/base-ui";
 import {useDispatch} from "react-redux";
 import {sysError} from "../../stores/sys/actions";
 import * as ImagePicker from "expo-image-picker";
@@ -77,15 +77,15 @@ export function DemoShareScreen() {
                             </TouchableOpacity>
                         </View>
                     )
-                    : <View>
+                    : <View style={styles.container}>
                         <Image source={{uri: 'https://i.imgur.com/TkIrScD.png'}} style={styles.logo}/>
                         <Text style={styles.instructions}>
-                            To share a photo from your phone with a friend, just press the button below!
+                            Press the button below!
                         </Text>
 
-                        <TouchableOpacity onPress={openImagePickerAsync} style={styles.button}>
+                        <ButtonTO onPress={openImagePickerAsync} style={styles.button}>
                             <Text style={styles.buttonText}>Pick a photo</Text>
-                        </TouchableOpacity>
+                        </ButtonTO>
                     </View>
             }
 

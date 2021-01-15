@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
-import measure from "../../components/base-ui/measure";
-import palette from "../../components/base-ui/palette";
+import {palette} from "../../styles/theme";
+import {measure} from "../../styles/helpers";
 
 const styles = StyleSheet.create({
     container: {

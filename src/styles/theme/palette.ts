@@ -1,6 +1,6 @@
 import {Palette} from "../../types/styles";
 
-const palette: Palette = {
+export const palette: Palette = {
     red50: '#ffebee',
     red100: '#ffcdd2',
     red200: '#ef9a9a',
@@ -274,9 +274,9 @@ const palette: Palette = {
     grey800: '#424242',
     grey900: '#212121',
 
+    black900: '#121212',
+
     black: '#000000',
     white: '#ffffff',
     transparent: 'transparent',
 }
-
-export default palette

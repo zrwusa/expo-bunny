@@ -1,6 +1,8 @@
 import React from "react";
-import {View, Text, SafeAreaView, VirtualizedList} from "react-native";
+import {View, SafeAreaView, VirtualizedList} from "react-native";
+import {Text} from "../../../components/base-ui"
 import {virtualizedListStyles} from "./styles";
+import {useTheme} from "../../../styles/theme";
 
 type Item = {
     id: string;
@@ -21,8 +23,17 @@ const getVirtualizedListItemCount = (data: []) => {
 }
 
 const VirtualizedListItem = ({title}: Item) => {
+    const {colors} = useTheme()
+
     return (
-        <View style={virtualizedListStyles.item}>
+        <View style={{
+            backgroundColor: colors.background,
+            height: 150,
+            justifyContent: 'center',
+            marginVertical: 2,
+            marginHorizontal: 2,
+            padding: 20,
+        }}>
             <Text style={virtualizedListStyles.title}>{title}</Text>
         </View>
     );

@@ -1,6 +1,9 @@
 import {createStackNavigator} from "@react-navigation/stack";
-import {RootStackParam, DemoNestedStackParam, DemoTabStackParam, DemoTabRNComponentsStackParam, DemoBitcoinStackParam} from "../types/stacks";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {
+    RootStackParam, DemoNestedStackParam, DemoTabStackParam,
+    DemoTabRNComponentsStackParam, DemoBitcoinStackParam
+} from "../types/stacks";
 
 export const RootStack = createStackNavigator<RootStackParam>();
 

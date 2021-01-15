@@ -1,14 +1,16 @@
 import React, {useState} from "react";
 import {
-    ActivityIndicator, Button, Switch, View, Text, ScrollView,
-    Image, ImageBackground, Modal, TouchableHighlight, Alert, Pressable,
-    StatusBar, StatusBarStyle, TextInput, TouchableOpacity, TouchableWithoutFeedback,
+    ActivityIndicator, Switch, View, ScrollView,
+    Image, ImageBackground, Modal, TouchableHighlight, Alert,
+    StatusBar, StatusBarStyle, TouchableWithoutFeedback,
 } from "react-native";
+import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/base-ui";
 import {
     screenStyles, activityIndicatorStyles, switchStyles, imageStyles, imageBackgroundStyles,
     modalStyles, pressableStyles, statusBarStyles, touchableHighlightStyles, touchableOpacityStyles,
     touchableWithoutFeedbackStyles
 } from "./styles";
+import containerStyle from "../../../containers/box";
 
 const RNHome: React.FC = () => {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -53,38 +55,21 @@ const RNHome: React.FC = () => {
     };
     return (
         <ScrollView contentContainerStyle={screenStyles.container}>
-
-            <View style={statusBarStyles.container}>
-                <View>
-                    <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
-                    <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>
-                </View>
-                <StatusBar backgroundColor="blue" barStyle={styleStatusBar}/>
-                <View>
-                    <StatusBar hidden={visibleStatusBar}/>
-                </View>
-                <View style={statusBarStyles.buttonContainer}>
-                    <Button title="Toggle StatusBar" onPress={() => changeVisibilityStatusBar()}/>
-                </View>
-                <View style={statusBarStyles.buttonContainer}>
-                    <Button title="Change StatusBar Style" onPress={() => changeStyleStatusBar()}/>
-                </View>
-            </View>
-            <View style={[activityIndicatorStyles.container, activityIndicatorStyles.horizontal]}>
+            <View style={containerStyle.box}>
                 <ActivityIndicator/>
                 <ActivityIndicator size="large"/>
                 <ActivityIndicator size="small" color="#0000ff"/>
                 <ActivityIndicator size="large" color="#00ff00"/>
             </View>
-            <View>
+            <View style={containerStyle.box}>
                 <Button
                     onPress={() => null}
-                    title="Learn More"
+                    title="Accessibility Label"
                     color="#841584"
-                    accessibilityLabel="Learn more about this purple button"
+                    accessibilityLabel="Accessibility Label"
                 />
             </View>
-            <View style={switchStyles.container}>
+            <View style={containerStyle.box}>
                 <Switch
                     trackColor={{false: "#767577", true: "#81b0ff"}}
                     thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -93,7 +78,7 @@ const RNHome: React.FC = () => {
                     value={isEnabled}
                 />
             </View>
-            <View style={imageStyles.container}>
+            <View style={containerStyle.box}>
                 <Image
                     style={imageStyles.tinyLogo}
                     source={{
@@ -108,14 +93,14 @@ const RNHome: React.FC = () => {
                     }}
                 />
             </View>
-            <View style={imageBackgroundStyles.container}>
+            <View style={containerStyle.box}>
                 <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
                     <Text style={imageBackgroundStyles.text}>Inside</Text>
                 </ImageBackground>
             </View>
 
 
-            <View style={pressableStyles.container}>
+            <View style={containerStyle.box}>
                 <Pressable
                     onPress={() => {
                         setTimesPressed((current) => current + 1);
@@ -139,52 +124,52 @@ const RNHome: React.FC = () => {
                 </View>
             </View>
 
-            {/*<View style={modalStyles.centeredView}>*/}
-            {/*    <Modal*/}
-            {/*        animationType="slide"*/}
-            {/*        transparent={true}*/}
-            {/*        visible={modalVisible}*/}
-            {/*        onRequestClose={() => {*/}
-            {/*            Alert.alert("Modal has been closed.");*/}
-            {/*        }}*/}
-            {/*    >*/}
-            {/*        <View style={modalStyles.centeredView}>*/}
-            {/*            <View style={modalStyles.modalView}>*/}
-            {/*                <Text style={modalStyles.modalText}>Hello World!</Text>*/}
+            <View style={modalStyles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                    }}
+                >
+                    <View style={modalStyles.centeredView}>
+                        <View style={modalStyles.modalView}>
+                            <Text style={modalStyles.modalText}>Hello World!</Text>
 
-            {/*                <TouchableHighlight*/}
-            {/*                    style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}*/}
-            {/*                    onPress={() => {*/}
-            {/*                        setModalVisible(!modalVisible);*/}
-            {/*                    }}*/}
-            {/*                >*/}
-            {/*                    <Text style={modalStyles.textStyle}>Hide Modal</Text>*/}
-            {/*                </TouchableHighlight>*/}
-            {/*            </View>*/}
-            {/*        </View>*/}
-            {/*    </Modal>*/}
+                            <TouchableHighlight
+                                style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}
+                                onPress={() => {
+                                    setModalVisible(!modalVisible);
+                                }}
+                            >
+                                <Text style={modalStyles.textStyle}>Hide Modal</Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                </Modal>
 
-            {/*    <TouchableHighlight*/}
-            {/*        style={modalStyles.openButton}*/}
-            {/*        onPress={() => {*/}
-            {/*            setModalVisible(true);*/}
-            {/*        }}*/}
-            {/*    >*/}
-            {/*        <Text style={modalStyles.textStyle}>Show Modal</Text>*/}
-            {/*    </TouchableHighlight>*/}
-            {/*</View>*/}
+                <TouchableHighlight
+                    style={modalStyles.openButton}
+                    onPress={() => {
+                        setModalVisible(true);
+                    }}
+                >
+                    <Text style={modalStyles.textStyle}>Show Modal</Text>
+                </TouchableHighlight>
+            </View>
 
-            <View>
+            <View style={containerStyle.box}>
                 <Text>Picker ???</Text>
             </View>
-            <View>
+            <View style={containerStyle.box}>
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                     onChangeText={text => onChangeText(text)}
                     value={textInputValue}
                 />
             </View>
-            <View style={touchableHighlightStyles.container}>
+            <View style={containerStyle.box}>
                 <TouchableHighlight onPress={onTouchableHighlightPress}>
                     <View style={touchableHighlightStyles.button}>
                         <Text>Touch Here</Text>
@@ -197,7 +182,7 @@ const RNHome: React.FC = () => {
                 </View>
 
             </View>
-            <View style={touchableOpacityStyles.container}>
+            <View style={containerStyle.box}>
                 <View style={touchableOpacityStyles.countContainer}>
                     <Text>Count: {touchableOpacityCount}</Text>
                 </View>
@@ -208,7 +193,7 @@ const RNHome: React.FC = () => {
                     <Text>Press Here</Text>
                 </TouchableOpacity>
             </View>
-            <View style={touchableWithoutFeedbackStyles.container}>
+            <View style={containerStyle.box}>
                 <View style={touchableWithoutFeedbackStyles.countContainer}>
                     <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
                 </View>
@@ -217,6 +202,22 @@ const RNHome: React.FC = () => {
                         <Text>Touch Here</Text>
                     </View>
                 </TouchableWithoutFeedback>
+            </View>
+            <View style={containerStyle.box}>
+                <View>
+                    <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
+                    <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>
+                </View>
+                <StatusBar backgroundColor="blue" barStyle={styleStatusBar}/>
+                <View>
+                    <StatusBar hidden={visibleStatusBar}/>
+                </View>
+                <View style={statusBarStyles.buttonContainer}>
+                    <Button title="Toggle StatusBar" onPress={() => changeVisibilityStatusBar()}/>
+                </View>
+                <View style={statusBarStyles.buttonContainer}>
+                    <Button title="Change StatusBar Style" onPress={() => changeStyleStatusBar()}/>
+                </View>
             </View>
         </ScrollView>);
 }

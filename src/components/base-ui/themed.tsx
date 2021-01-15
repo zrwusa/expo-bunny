@@ -1,5 +1,5 @@
 import {Button as ButtonElement, ButtonProps as ButtonElementProps} from "react-native-elements";
-import {useTheme} from "./theme/theming";
+import {useTheme} from "../../styles/theme";
 import {
     Text as TextRN,
     View as ViewRN,
@@ -7,20 +7,20 @@ import {
     Button as ButtonRN,
     Image as ImageRN,
     TouchableOpacity as TouchableOpacityRN,
+    Pressable as PressableRN,
     Share as ShareRN,
     TextProps,
     TouchableOpacityProps,
     ViewProps,
     TextInputProps,
-    ButtonProps, ImageProps, StyleSheet
+    ButtonProps, ImageProps, StyleSheet, PressableProps
 } from "react-native";
 import React from "react";
-import measure from "./measure";
-import {getStyleObj} from "./utils";
+import {getStyleObj, measure} from "../../styles/helpers";
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
-export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style,...rest}) => {
+export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {colors, borderRadius} = useTheme();
     const styleObj = getStyleObj(style);
     return (<TouchableOpacityRN style={{
@@ -31,7 +31,7 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style,...re
     }} {...rest} >{children}</TouchableOpacityRN>);
 }
 
-export const TextBtn: React.FC<TextProps> = ({children,style, ...rest}) => {
+export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
     const styleObj = getStyleObj(style);
     return (<TextRN style={{
@@ -52,6 +52,7 @@ export const View: React.FC<ViewProps> = ({children, ...rest}) => {
 export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
     const styleObj = getStyleObj(style);
+
     return (<TextRN style={{
         color: colors.text,
         fontFamily: fonts.regular.fontFamily,
@@ -74,6 +75,16 @@ export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, sty
         }} {...rest} >{children}</TouchableOpacityRN>);
 }
 
+export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) => {
+    const {colors} = useTheme();
+    const styleObj = getStyleObj(style);
+    return (<PressableRN
+        style={{
+            backgroundColor: colors.background,
+            ...styleObj
+        }} {...rest} >{children}</PressableRN>);
+}
+
 export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
     const {colors} = useTheme();
     const styleObj = getStyleObj(style);
@@ -86,7 +97,7 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
 
 
 export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
-    const {colors,borderRadius} = useTheme();
+    const {colors, borderRadius} = useTheme();
     const buttonStyleObj = getStyleObj(buttonStyle);
     const titleStyleObj = getStyleObj(titleStyle);
     const containerStyleObj = getStyleObj(containerStyle);

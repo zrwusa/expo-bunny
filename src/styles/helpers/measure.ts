@@ -1,4 +1,4 @@
-const measure = {
+export const measure = {
     breakpoints: {
         smallPhone: 0,
         phone: 321,
@@ -46,5 +46,3 @@ const measure = {
         xxl: 128,
     },
 }
-
-export default measure

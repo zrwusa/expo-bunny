@@ -1,23 +1,21 @@
 import * as React from "react";
 import {Platform, StatusBar, Text} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useDispatch, useSelector} from "react-redux";
+import * as Linking from "expo-linking";
+import {Provider as PaperProvider} from 'react-native-paper';
 import {
     DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
     NavigationContainer, InitialState
 } from "@react-navigation/native";
-import {useDispatch, useSelector} from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {restoreAuth} from "./stores/auth/actions";
-import * as Linking from "expo-linking";
-import {restoreTheme, sysError} from "./stores/sys/actions";
 import RootNavigator, {getConfig} from "./navigator/RootNavigator";
-import {Provider as PaperProvider} from 'react-native-paper';
-import {ThemeProvider} from './components/base-ui/theme/theming';
-import DefaultTheme from "./components/base-ui/theme/styles/DefaultTheme";
-import DarkTheme from "./components/base-ui/theme/styles/DarkTheme";
-
-import {RootState, ThemeNames} from "./types/models";
-import BunnyConstants from "./common/constants";
 import {EThemes} from "./types/enums";
+import BunnyConstants from "./common/constants";
+import {RootState} from "./types/models";
+import {restoreAuth} from "./stores/auth/actions";
+import {restoreTheme, sysError} from "./stores/sys/actions";
+import {ThemeProvider} from './styles/theme';
+import {DarkTheme, DefaultTheme} from "./styles/theme";
 
 const basePath = Linking.makeUrl('/');
 const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screens: getConfig()}};
@@ -33,7 +31,7 @@ function App() {
             let accessToken, user;
             try {
                 const themeNameSaved = await AsyncStorage.getItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY);
-                const themeName: ThemeNames = (themeNameSaved === EThemes.DARK) ? EThemes.DARK : EThemes.DEFAULT;
+                const themeName = (themeNameSaved === EThemes.DARK) ? EThemes.DARK : EThemes.DEFAULT;
                 dispatch(restoreTheme({themeName: themeName}))
 
                 accessToken = await AsyncStorage.getItem('accessToken');

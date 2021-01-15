@@ -1,13 +1,11 @@
 import styled from "styled-components/native";
 import {Button as ButtonElement, ButtonProps as ButtonElementProps} from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {useTheme} from "./theme/theming";
 import {Text as TextRN, TextProps, TouchableOpacityProps} from "react-native";
 import {TouchableOpacity} from "react-native";
 import React from "react";
-import measure from "./measure";
-import {getStyleObj} from "./utils";
-import DefaultTheme from "./theme/styles/DefaultTheme"
+import {getStyleObj, measure} from "../../styles/helpers";
+import {DefaultTheme, useTheme} from "../../styles/theme"
 
 // Support theme switch
 export const DemoTOButtonThemedRN: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {

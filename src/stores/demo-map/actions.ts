@@ -1,10 +1,10 @@
+import {Action, ActionCreator, Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {EDemoMap} from "../../types/enums";
+import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import api from "../../common/api";
 import {GetNearbyFilmsReqParams} from "../../types/payloads";
 import {RestoreNearbyFilms, RestoreRegion, SysError} from "../../types/actions";
-import {EDemoMap} from "../../types/enums";
-import {Action, ActionCreator, Dispatch} from 'redux';
-import {ThunkAction} from 'redux-thunk';
-import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import {sysError} from "../sys/actions";
 
 export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilms = (payload) => {

@@ -1,5 +1,4 @@
 import {GoogleUser} from "expo-google-app-auth";
-import {themes} from "../components/base-ui";
 
 export interface DemoHello {
     name: string,
@@ -43,35 +42,39 @@ export type Region = {
     latitudeDelta: number,
     longitudeDelta: number,
 }
+
 export type DemoMap = {
     demoNearbyFilms: NearbyFilm[],
     region: Region,
 }
 
-export type User = {
+export type UserReq = {
     email: string,
     password: string,
     nickname: string
+}
+
+export type UserRes = {
+    email: string,
+    nickname: string
+}
+
+export type AuthRes = {
+    access_token: string | undefined,
+    user?: UserRes | null,
 }
 
 export type Auth = {
     isLoading: boolean,
     isSignOut: boolean,
     accessToken: undefined | string | null,
-    user?: User | GoogleUser
+    user?: (UserRes | null) | GoogleUser
 }
-
-export type AuthResponse = {
-    access_token: undefined | string | null,
-    user?: User | GoogleUser
-}
-
-export type ThemeNames = keyof (typeof themes)
 
 export type Sys = {
     error: string,
     warn: string,
-    themeName: ThemeNames,
+    themeName: string,
 }
 
 export interface RootState {

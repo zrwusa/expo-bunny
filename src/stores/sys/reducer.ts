@@ -1,8 +1,8 @@
-import {SysActions} from "./actions";
-import {Sys} from "../../types/models";
 import {ESys, EThemes} from "../../types/enums";
+import {Sys} from "../../types/models";
+import {SysActions} from "./actions";
 
-export const initialState: Sys = {
+const initialState: Sys = {
     error: "",
     warn: "",
     themeName: EThemes.DEFAULT

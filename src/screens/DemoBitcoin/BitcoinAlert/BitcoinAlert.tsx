@@ -4,6 +4,7 @@ import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {DemoBitcoinStackParam} from "../../../types/stacks";
 import {Text} from "../../../components/base-ui";
+import containerStyle from "../../../containers/box";
 
 type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
@@ -11,8 +12,10 @@ type BitcoinAlertProps = { route: BitcoinAlertRouteProp, navigation: BitcoinAler
 
 export function BitcoinAlertScreen({route, navigation}: BitcoinAlertProps) {
     return (<View>
-        <Text>Bitcoin Alert Screen</Text>
-        <Text>{route.params.isPush?"true":"false"}</Text>
+        <View style={containerStyle.box}>
+            <Text>Bitcoin Alert Screen</Text>
+            <Text>{route.params.isPush?"true":"false"}</Text>
+        </View>
     </View>);
 }
 

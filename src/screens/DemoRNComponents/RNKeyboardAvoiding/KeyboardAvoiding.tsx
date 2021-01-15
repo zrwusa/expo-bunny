@@ -1,8 +1,9 @@
 import React from "react";
 import {
-    Button, View, Text, KeyboardAvoidingView,
-    Platform, TouchableWithoutFeedback, Keyboard, TextInput
+    View, KeyboardAvoidingView,
+    Platform, TouchableWithoutFeedback, Keyboard,
 } from "react-native";
+import {Text, Button, TextInput} from "../../../components/base-ui";
 import {keyboardAvoidingViewStyles} from "./styles";
 
 export const RNKeyboardAvoidingScreen: React.FC = () => {
