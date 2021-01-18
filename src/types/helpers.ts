@@ -1,11 +1,31 @@
-export type TreeLeafDeep<T, U> = T extends Function
-    ? U
-    : T extends object
-        ? { [P in keyof T]: TreeLeafDeep<T[P], U> }
-        : U;
 
-export type ForkDeep<T, U> = T extends Function
-    ? U
-    : T extends object
-        ? { [P in keyof T]: ForkDeep<T[P], U> }
-        : { [M in keyof U]: T extends boolean ? boolean : T };
+export type DeepLeavesWrap<T, U> = T extends { [key: string]: any } ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
+    : T extends { [key: string]: any } | undefined ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
+        : T extends boolean ? { [M in keyof U]: boolean }
+            : T extends string ? { [M in keyof U]: string }
+                // Todo : T extends (infer F) ? { [M in keyof U]: F}
+                : { [M in keyof U]: T }
+
+export type Traversable = {
+    [key: string]: string
+}
+
+export type TraversableNested = {
+    [key: string]: TraversableNested
+}
+
+export type TypeName<T> = T extends string
+    ? "string"
+    : T extends number
+        ? "number"
+        : T extends boolean
+            ? "boolean"
+            : T extends undefined
+                ? "undefined"
+                : T extends Function
+                    ? "function"
+                    : "object";
+
+
+
+

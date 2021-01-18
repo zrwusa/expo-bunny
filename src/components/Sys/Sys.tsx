@@ -15,7 +15,7 @@ const Sys: React.FC<Props> = ({title}) => {
                 && <View>
                     <TextInput value={sysState.error}/>
                     <Button title="clear" onPress={() => {
-                        console.log(111)
+                        console.log('clear success')
                     }}/>
                 </View>
             }

@@ -13,6 +13,7 @@ web-build/
 .DS_Store
 
 .idea/
+.vscode/
 yarn.lock
 note.txt
 backup/

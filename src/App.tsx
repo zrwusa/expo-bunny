@@ -8,34 +8,42 @@ import {
     DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
     NavigationContainer, InitialState
 } from "@react-navigation/native";
-import RootNavigator, {getConfig} from "./navigator/RootNavigator";
+import RootNavigator, {getScreensConfig} from "./navigator/RootNavigator";
 import {EThemes} from "./types/enums";
 import BunnyConstants from "./common/constants";
 import {RootState} from "./types/models";
 import {restoreAuth} from "./stores/auth/actions";
 import {restoreTheme, sysError} from "./stores/sys/actions";
-import {ThemeProvider} from './styles/theme';
+import {ThemeProvider} from "./styles/theme";
 import {DarkTheme, DefaultTheme} from "./styles/theme";
+import {getThemes} from "./styles/theme/theme";
+import {Theme} from "./types/styles";
+
+const themes = getThemes();
+const defaultTheme = themes.default as unknown as Theme;
+const darkTheme = themes.dark as unknown as Theme;
 
 const basePath = Linking.makeUrl('/');
-const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screens: getConfig()}};
+
+const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screens: getScreensConfig()}};
 
 function App() {
     const [isReady, setIsReady] = React.useState(false);
     const [navInitialState, setNavInitialState] = React.useState<InitialState | undefined>();
-    const {themeName} = useSelector((rootState: RootState) => rootState.sysState)
-    const theme = themeName === 'DARK' ? DarkTheme : DefaultTheme;
+    const {themeName} = useSelector((rootState: RootState) => rootState.sysState);
+    const theme = themeName === EThemes.dark ? darkTheme : defaultTheme;
+    const themePaper = theme as ReactNativePaper.Theme;
     const dispatch = useDispatch();
     React.useEffect(() => {
         const bootstrapAsync = async () => {
             let accessToken, user;
             try {
                 const themeNameSaved = await AsyncStorage.getItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY);
-                const themeName = (themeNameSaved === EThemes.DARK) ? EThemes.DARK : EThemes.DEFAULT;
-                dispatch(restoreTheme({themeName: themeName}))
+                const themeName = (themeNameSaved === EThemes.dark) ? EThemes.dark : EThemes.default;
+                dispatch(restoreTheme({themeName: themeName}));
 
-                accessToken = await AsyncStorage.getItem('accessToken');
-                user = await AsyncStorage.getItem('user');
+                accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
+                user = await AsyncStorage.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
                 accessToken && dispatch(restoreAuth({
                     access_token: accessToken,
                     user: user ? JSON.parse(user) : {}
@@ -62,7 +70,7 @@ function App() {
     return isReady
         ? (
             <ThemeProvider theme={theme}>
-                <PaperProvider theme={theme}>
+                <PaperProvider theme={themePaper}>
                     {Platform.OS === 'ios' && (
                         <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
                     )}

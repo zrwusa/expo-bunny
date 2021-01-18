@@ -21,7 +21,6 @@ export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunk, vo
             const res = await api.post(`/demo_thunks`, reqParams);
             result = dispatch(demoThunkSuccess(res.data));
         } catch (e) {
-            console.log(e.toString())
             result = dispatch(sysError({error: e.toString()}));
         }
         return result;

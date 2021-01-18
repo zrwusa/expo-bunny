@@ -53,9 +53,9 @@ const customHeaderRight = () => {
     const {themeName} = sysState;
     return <SettingsItem
         label=""
-        value={themeName === EThemes.DARK}
+        value={themeName === EThemes.dark}
         onValueChange={(value) => {
-            dispatch(restoreAndSaveTheme({themeName: value ? EThemes.DARK : EThemes.DEFAULT}));
+            dispatch(restoreAndSaveTheme({themeName: value ? EThemes.dark : EThemes.default}));
         }}
     />
 }
@@ -305,7 +305,7 @@ const recursiveConfig = (screens: Screen[]): Config => {
     return obj;
 };
 
-export const getConfig = (): Config | undefined => {
+export const getScreensConfig = (): Config | undefined => {
     return recursiveConfig([node]).RootStack.screens
 }
 

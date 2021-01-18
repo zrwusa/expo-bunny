@@ -1,3 +1,5 @@
+import {Traversable} from "./helpers";
+
 export enum EAuth {
     SIGN_IN = "SIGN_IN",
     SIGN_OUT = "SIGN_OUT",
@@ -26,9 +28,9 @@ export enum EDemoMap {
     RESTORE_REGION = "RESTORE_REGION",
 }
 
-export enum EThemes  {
-    DARK='DARK',
-    DEFAULT='DEFAULT'
+export const EThemes: Traversable = {
+    default: 'default',
+    dark: 'dark',
 }
 
 

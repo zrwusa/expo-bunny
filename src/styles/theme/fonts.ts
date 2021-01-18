@@ -1,7 +1,9 @@
 import {Platform, PlatformOSType} from 'react-native';
-import {Fonts} from "../../types/styles";
+import {FontConfig, Fonts, FontsWrapped} from "../../types/styles";
+import {EThemes} from "../../types/enums";
+import {TraversableNested} from "../../types/helpers";
 
-const fontConfig = {
+const fontConfig: FontConfig = {
     web: {
         regular: {
             fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
@@ -17,6 +19,14 @@ const fontConfig = {
         },
         thin: {
             fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+            fontWeight: '100' as '100',
+        },
+        demoFont0: {
+            fontFamily: 'DemoFont0',
+            fontWeight: '100' as '100',
+        },
+        demoFont1: {
+            fontFamily: 'DemoFont1',
             fontWeight: '100' as '100',
         },
     },
@@ -37,6 +47,14 @@ const fontConfig = {
             fontFamily: 'System',
             fontWeight: '100' as '100',
         },
+        demoFont0: {
+            fontFamily: 'DemoFont0',
+            fontWeight: '100' as '100',
+        },
+        demoFont1: {
+            fontFamily: 'DemoFont1',
+            fontWeight: '100' as '100',
+        },
     },
     default: {
         regular: {
@@ -55,12 +73,45 @@ const fontConfig = {
             fontFamily: 'sans-serif-thin',
             fontWeight: 'normal' as 'normal',
         },
+        demoFont0: {
+            fontFamily: 'DemoFont0',
+            fontWeight: '100' as '100',
+        },
+        demoFont1: {
+            fontFamily: 'DemoFont1',
+            fontWeight: '100' as '100',
+        },
     },
 };
 
-export default function configureFonts(
+const getFontConfigLeavesWrappedWithThemeNames = () => {
+    let configWithThemeName: TraversableNested = {};
+    // Todo as unknown as is not a safe method
+    let fontConfigAlias = fontConfig as unknown as TraversableNested;
+    Object.keys(fontConfig).forEach(platformName => {
+        configWithThemeName[platformName] = {}
+        Object.keys(fontConfigAlias[platformName]).forEach(fontName => {
+            configWithThemeName[platformName][fontName] = {}
+            Object.keys(fontConfigAlias[platformName][fontName]).forEach(fontProperty => {
+                configWithThemeName[platformName][fontName][fontProperty] = {}
+                Object.keys(EThemes).forEach(themeName => {
+                    configWithThemeName[platformName][fontName][fontProperty][EThemes[themeName]] = fontConfigAlias[platformName][fontName][fontProperty];
+                })
+            })
+
+        })
+    })
+    return configWithThemeName;
+}
+
+export function configureFonts(
     config?: { [platform in PlatformOSType | 'default']?: Fonts }
 ): Fonts {
-    const fonts = Platform.select({...fontConfig, ...config}) as Fonts;
-    return fonts;
+    return Platform.select({...fontConfig, ...config}) as Fonts;
+}
+
+export function configureFontsWarehouse(
+    config?: { [platform in PlatformOSType | 'default']?: FontsWrapped }
+): FontsWrapped {
+    return Platform.select({...getFontConfigLeavesWrappedWithThemeNames(), ...config}) as FontsWrapped;
 }

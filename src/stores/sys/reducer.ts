@@ -1,6 +1,7 @@
-import {ESys, EThemes} from "../../types/enums";
+import {ESys} from "../../types/enums";
 import {Sys} from "../../types/models";
 import {SysActions} from "./actions";
+import {EThemes} from "../../types/enums";
 
 const initialState: Sys = {
     error: "",

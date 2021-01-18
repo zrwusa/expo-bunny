@@ -15,9 +15,9 @@ export default function SettingsScreen() {
         <View style={styles.container}>
             <SettingsItem
                 label="Dark theme"
-                value={themeName===EThemes.DARK}
+                value={themeName===EThemes.dark}
                 onValueChange={(value) => {
-                    dispatch(restoreAndSaveTheme({themeName: value ? EThemes.DARK : EThemes.DEFAULT}));
+                    dispatch(restoreAndSaveTheme({themeName: value ? EThemes.dark : EThemes.default}));
                 }}
             />
         </View>
