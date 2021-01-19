@@ -9,7 +9,7 @@ const containerStyle = StyleSheet.create({
         borderWidth:measure.spacings.xxs,
         margin:measure.spacings.l,
         borderRadius:measure.borderRadius.s,
-        width:measure.sizes.s11
+        width:measure.sizes.s11,
     }
 });
 export default containerStyle;

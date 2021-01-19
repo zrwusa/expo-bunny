@@ -22,6 +22,9 @@
       "bundleIdentifier": "com.zrwusa.expo-react-bunny",
       "config": {
         "googleMapsApiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
+      },
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
       }
     },
     "android": {
@@ -35,6 +38,13 @@
           "apiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
         }
       }
+    },
+    "locales": {
+      "en": "./localization/en.json",
+      "zh": "./localization/zh-Hans-CN.json",
+      "zh-Hans": "./localization/zh-Hans-CN.json",
+      "zh-Hans-CN": "./localization/zh-Hans-CN.json",
+      "he": "./localization/he.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"

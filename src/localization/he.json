@@ -1,0 +1,11 @@
+{
+  "login": {
+    "welcome": "ברוך הבא לאפליקציה המתורגמת!",
+    "login_button": "התחבר"
+  },
+  "user_profile": {
+    "title": "הפרופיל שלך"
+  },
+  "CFBundleDisplayName": "שם תצוגת CF Bundle",
+  "NSContactsUsageDescription": "תיאור השימוש באנשי הקשר של NS"
+}

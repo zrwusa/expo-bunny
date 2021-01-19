@@ -1,0 +1,11 @@
+{
+  "login": {
+    "welcome": "欢迎来到这里!",
+    "login_button": "登陆"
+  },
+  "user_profile": {
+    "title": "个人资料"
+  },
+  "CFBundleDisplayName": "CF Bundle显示名称",
+  "NSContactsUsageDescription": "NS联系人用法说明"
+}

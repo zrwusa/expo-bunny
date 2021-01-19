@@ -5,6 +5,7 @@ import DemoRequest from "../../components/DemoRequest";
 import {View, TextInput} from "../../components/base-ui";
 import styles from "./styles";
 import containerStyle from "../../containers/box";
+import {DemoSvg} from "../../components/DemoSvg";
 
 type Props = { title?: string }
 type States = { name: string }
@@ -27,6 +28,9 @@ class DemoCollectionScreen extends Component<Props, States> {
             </View>
             <View style={containerStyle.box}>
                 <TextInput placeholder={"Placeholder"}/>
+            </View>
+            <View style={containerStyle.box}>
+                <DemoSvg />
             </View>
         </View>);
     }

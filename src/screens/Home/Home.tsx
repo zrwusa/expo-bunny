@@ -8,6 +8,7 @@ import {RootStackParam} from "../../types/stacks";
 import styles from "./styles";
 import {ButtonTO, TextBtn, Text} from "../../components/base-ui";
 import containerStyle from "../../containers/box";
+import i18n from "../../localization/i18n";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -18,6 +19,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
     return (
         <ScrollView>
             <View style={styles.screen}>
+                <Text>
+                    {i18n.t('login.welcome', {})}
+                </Text>
                 <View style={containerStyle.box}>
                     <Text>Nav & Route</Text>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>

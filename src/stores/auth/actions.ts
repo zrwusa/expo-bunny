@@ -10,6 +10,7 @@ import {ThunkAction} from "redux-thunk";
 import {sysError, sysWarn} from "../sys/actions";
 import {Auth, AuthRes} from "../../types/models";
 import {AxiosResponse} from "axios";
+import BunnyConstants from "../../common/constants";
 
 export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreAuth>> = (reqParams: SignInPayload) => {
     return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {
@@ -17,10 +18,10 @@ export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, Rest
         try {
             const {data} = await api.post<SignInPayload, AxiosResponse<AuthRes>>(`/auth/login`, reqParams)
             data.access_token
-                ? await AsyncStorage.setItem('accessToken', data.access_token)
+                ? await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
                 : dispatch(sysError({error: 'No access_token responded'}))
             data.user
-                ? await AsyncStorage.setItem('user', JSON.stringify(data.user))
+                ? await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
                 : dispatch(sysError({error: 'No user info responded'}))
             result = dispatch(restoreAuth(data))
         } catch (err) {
@@ -64,10 +65,11 @@ export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void
                     debugger
                     break
                 case "success":
-                    if (loginResult.accessToken) {
+                    const {accessToken, user} = loginResult;
+                    if (accessToken) {
                         try {
-                            await AsyncStorage.setItem('accessToken', loginResult.accessToken)
-                            await AsyncStorage.setItem('user', JSON.stringify(loginResult.user))
+                            await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, accessToken)
+                            await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
                             result = dispatch(restoreAuthGoogle(loginResult));
                         } catch (err) {
                             result = dispatch(sysError({error: err.toString()}))

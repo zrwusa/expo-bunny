@@ -14,6 +14,12 @@ module.exports = function (api) {
                 "safe": false,
                 "allowUndefined": false
             }
+            ],
+            [
+                "babel-plugin-inline-import",
+                {
+                    "extensions": [".svg"]
+                }
             ]
         ]
     };

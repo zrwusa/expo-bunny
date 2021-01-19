@@ -1,0 +1,11 @@
+{
+  "login": {
+    "welcome": "Welcome to here!",
+    "login_button": "Login"
+  },
+  "user_profile": {
+    "title": "Your Profile"
+  },
+  "CFBundleDisplayName": "CFBundleDisplayName",
+  "NSContactsUsageDescription": "NSContactsUsageDescription"
+}

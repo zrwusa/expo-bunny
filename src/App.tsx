@@ -15,13 +15,14 @@ import {RootState} from "./types/models";
 import {restoreAuth} from "./stores/auth/actions";
 import {restoreTheme, sysError} from "./stores/sys/actions";
 import {ThemeProvider} from "./styles/theme";
-import {DarkTheme, DefaultTheme} from "./styles/theme";
 import {getThemes} from "./styles/theme/theme";
 import {Theme} from "./types/styles";
+import {Preparing} from "./components/Preparing";
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
 const darkTheme = themes.dark as unknown as Theme;
+
 
 const basePath = Linking.makeUrl('/');
 
@@ -34,6 +35,7 @@ function App() {
     const theme = themeName === EThemes.dark ? darkTheme : defaultTheme;
     const themePaper = theme as ReactNativePaper.Theme;
     const dispatch = useDispatch();
+    let mockPreparingTimer = BunnyConstants.fooTimeout;
     React.useEffect(() => {
         const bootstrapAsync = async () => {
             let accessToken, user;
@@ -60,11 +62,16 @@ function App() {
             } catch (err) {
                 dispatch(sysError(err.toString()));
             } finally {
-                setIsReady(true);
+                mockPreparingTimer = setTimeout(() => {
+                    setIsReady(true);
+                }, 1000)
+                // setIsReady(true);
             }
         };
         bootstrapAsync()
             .catch((err) => dispatch(sysError(err.toString())));
+        return () => clearTimeout(mockPreparingTimer);
+
     }, []);
 
     return isReady
@@ -89,7 +96,7 @@ function App() {
                 </PaperProvider>
             </ThemeProvider>
         )
-        : (<Text>Preparing resources</Text>)
+        : (<Preparing/>)
 }
 
 export default App;
