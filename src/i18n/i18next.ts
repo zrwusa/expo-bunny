@@ -40,8 +40,4 @@ init()
         console.log('Initialed i18n')
     })
 
-type TNavigationI18nContext = {
-    locale:string
-}
-export const NavigationI18nContext = React.createContext<TNavigationI18nContext>({locale:Localization.locale});
-
+export default i18n

@@ -10,7 +10,7 @@ import {restartApp} from '../../restart';
 import BunnyConstants from "../../common/constants";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {View, Text} from "../../components/base-ui";
+import {View} from "../../components/base-ui";
 
 export default function SettingsScreen() {
     const [lang, setLang] = useState(false);
@@ -39,20 +39,17 @@ export default function SettingsScreen() {
             <SettingsItem
                 label={t('settings.right_to_left')}
                 value={I18nManager.isRTL}
-
                 onValueChange={async () => {
                     I18nManager.forceRTL(!I18nManager.isRTL);
                     let timerMockAnimationComplete = BunnyConstants.fooTimeout;
                     timerMockAnimationComplete = setTimeout(() => {
                         try {
                             const res = restartApp();
-                            console.log('---restartApp res', res)
                         } catch (err) {
                             //in case of using try catch expression,this err will be caught by fastRefresh tool
-                            console.error('---restartApp res', err)
                         }
                         clearTimeout(timerMockAnimationComplete);
-                    }, 6000);
+                    }, 300);
                 }}
                 // onValueChange={() => {
                 //     I18nManager.forceRTL(!I18nManager.isRTL);

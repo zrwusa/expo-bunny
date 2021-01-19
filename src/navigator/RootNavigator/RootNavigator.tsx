@@ -33,6 +33,7 @@ import {EThemes} from "../../types/enums";
 import {restoreAndSaveTheme} from "../../stores/sys/actions";
 import SettingsItem from "../../screens/Settings/SettingsItem/SettingsItem";
 import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
+import {useTranslation} from "react-i18next";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -266,6 +267,7 @@ const node: Screen = {
 
 type RecursiveNavigatorProps = { node: Screen }
 const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
+    const {t} = useTranslation();
     const {stack, ...rest} = node;
     const Navigator = stack?.Navigator;
     let ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
@@ -279,12 +281,20 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
                     : (<>
                         {node.screens && node.screens.map((screen) => {
                             return (screen.screens && screen.screens.length > 0
-                                ? <ScreenComponent {...screen} key={screen.name}>
+                                ? <ScreenComponent {...screen}
+                                                   options={{
+                                                       ...screen.options,
+                                                       title: t(`screen_titles.${screen.name}`)
+                                                   }} key={screen.name}>
                                     {(navProps: any) => {
                                         return <RecursiveNavigator {...navProps} node={screen}/>
                                     }}
                                 </ScreenComponent>
-                                : <ScreenComponent {...screen} key={screen.name}/>)
+                                : <ScreenComponent {...screen}
+                                                   options={{
+                                                       ...screen.options,
+                                                       title: t(`screen_titles.${screen.name}`)
+                                                   }} key={screen.name}/>)
                         })}
                     </>)
                 }
