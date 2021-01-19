@@ -14,6 +14,7 @@ export type RootStackParam = {
     DemoRNComponents: undefined;
     DemoShare: undefined;
     DemoTheme: undefined;
+    DemoSuspense: undefined;
     DemoBitcoin: undefined | { screen: 'BitcoinAlert'; params: { isPush: boolean } };
     Settings: undefined;
 };

@@ -6,6 +6,11 @@
   "user_profile": {
     "title": "Your Profile"
   },
-  "CFBundleDisplayName": "CFBundleDisplayName",
+  "settings": {
+    "dark_theme": "Dark theme",
+    "language": "Language",
+    "right_to_left": "Right to left"
+  },
+  "CFBundleDisplayName": "CF Bundle DisplayName A",
   "NSContactsUsageDescription": "NSContactsUsageDescription"
 }

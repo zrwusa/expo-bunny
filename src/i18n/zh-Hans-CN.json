@@ -6,6 +6,11 @@
   "user_profile": {
     "title": "个人资料"
   },
+  "settings": {
+    "dark_theme": "深色皮肤",
+    "language": "语言",
+    "right_to_left": "左手习惯"
+  },
   "CFBundleDisplayName": "CF Bundle显示名称",
   "NSContactsUsageDescription": "NS联系人用法说明"
 }

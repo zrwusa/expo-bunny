@@ -32,6 +32,7 @@ import DemoThemeScreen from "../../screens/DemoTheme";
 import {EThemes} from "../../types/enums";
 import {restoreAndSaveTheme} from "../../stores/sys/actions";
 import SettingsItem from "../../screens/Settings/SettingsItem/SettingsItem";
+import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -250,6 +251,10 @@ const node: Screen = {
         },
         {
             component: SettingsScreen, name: "Settings", path: "settings",
+            options: customOptions,
+        },
+        {
+            component: DemoSuspenseScreen, name: "DemoSuspense", path: "demo-suspense",
             options: customOptions,
         },
         {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ScrollView, View} from "react-native";
+import {ScrollView, Switch, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
@@ -8,20 +8,20 @@ import {RootStackParam} from "../../types/stacks";
 import styles from "./styles";
 import {ButtonTO, TextBtn, Text} from "../../components/base-ui";
 import containerStyle from "../../containers/box";
-import i18n from "../../localization/i18n";
+import {useTranslation} from "react-i18next";
+import {useState} from "react";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
 export type HomeScreenProps = { route: HomeRouteProp; navigation: HomeNavigationProp; };
 
 function HomeScreen({navigation}: HomeScreenProps) {
+
     const dispatch = useDispatch()
+
     return (
         <ScrollView>
             <View style={styles.screen}>
-                <Text>
-                    {i18n.t('login.welcome', {})}
-                </Text>
                 <View style={containerStyle.box}>
                     <Text>Nav & Route</Text>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
@@ -65,6 +65,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>RN All In One</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoTheme')}>
                         <TextBtn>DemoTheme</TextBtn></ButtonTO>
+                    <ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>
+                        <TextBtn>DemoSuspense</TextBtn></ButtonTO>
                 </View>
 
                 <View style={containerStyle.box}>

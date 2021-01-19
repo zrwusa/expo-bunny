@@ -1,9 +1,9 @@
-import * as React from "react";
+import React, {Suspense} from "react";
 import {Platform, StatusBar, Text} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch, useSelector} from "react-redux";
 import * as Linking from "expo-linking";
-import {Provider as PaperProvider} from 'react-native-paper';
+import {Provider as PaperProvider} from "react-native-paper";
 import {
     DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
     NavigationContainer, InitialState
@@ -18,11 +18,11 @@ import {ThemeProvider} from "./styles/theme";
 import {getThemes} from "./styles/theme/theme";
 import {Theme} from "./types/styles";
 import {Preparing} from "./components/Preparing";
+import {DemoLazyLoading} from "./components/DemoLazyLoading";
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
 const darkTheme = themes.dark as unknown as Theme;
-
 
 const basePath = Linking.makeUrl('/');
 
@@ -76,25 +76,27 @@ function App() {
 
     return isReady
         ? (
-            <ThemeProvider theme={theme}>
-                <PaperProvider theme={themePaper}>
-                    {Platform.OS === 'ios' && (
-                        <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
-                    )}
-                    <NavigationContainer linking={linking}
-                                         theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
-                                         fallback={<Text>Fallback loading...</Text>}
-                                         initialState={navInitialState}
-                                         onStateChange={(state) =>
-                                             AsyncStorage.setItem(
-                                                 BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
-                                                 JSON.stringify(state)
-                                             )
-                                         }>
-                        <RootNavigator/>
-                    </NavigationContainer>
-                </PaperProvider>
-            </ThemeProvider>
+            <Suspense fallback={<DemoLazyLoading />}>
+                <ThemeProvider theme={theme}>
+                    <PaperProvider theme={themePaper}>
+                        {Platform.OS === 'ios' && (
+                            <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
+                        )}
+                        <NavigationContainer linking={linking}
+                                             theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
+                                             fallback={<Text>Fallback loading...</Text>}
+                                             initialState={navInitialState}
+                                             onStateChange={(state) =>
+                                                 AsyncStorage.setItem(
+                                                     BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
+                                                     JSON.stringify(state)
+                                                 )
+                                             }>
+                            <RootNavigator/>
+                        </NavigationContainer>
+                    </PaperProvider>
+                </ThemeProvider>
+            </Suspense>
         )
         : (<Preparing/>)
 }
