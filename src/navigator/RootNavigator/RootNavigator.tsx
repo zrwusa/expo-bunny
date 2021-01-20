@@ -320,7 +320,7 @@ const recursiveConfig = (screens: Screen[]): Config => {
             parse: screen.parse,
             stringify: screen.stringify,
             options: screen.options,
-            tabBarOptions: screen.tabBarOptions
+            tabBarOptions: screen.tabBarOptions || undefined
         }
     })
     return obj;

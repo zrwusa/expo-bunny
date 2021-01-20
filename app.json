@@ -17,6 +17,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.zrwusa.expo-react-bunny",
@@ -25,7 +26,8 @@
       },
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true
-      }
+      },
+      "userInterfaceStyle": "dark"
     },
     "android": {
       "adaptiveIcon": {
@@ -37,7 +39,8 @@
         "googleMaps": {
           "apiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
         }
-      }
+      },
+      "userInterfaceStyle": "light"
     },
     "locales": {
       "en": "./localization/en.json",

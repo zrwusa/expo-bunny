@@ -11,6 +11,9 @@
     "language": "Language",
     "right_to_left": "Right to left"
   },
+  "sys": {
+    "navigationFallback": "Navigation fallback..."
+  },
   "screens": {
     "Home": {
       "title": "Home",
