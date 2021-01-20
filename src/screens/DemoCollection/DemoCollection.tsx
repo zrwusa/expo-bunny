@@ -7,6 +7,7 @@ import styles from "./styles";
 import containerStyle from "../../containers/box";
 import {DemoSvg} from "../../components/DemoSvg";
 import {WithTranslation, withTranslation} from "react-i18next";
+import {stFactory} from "../../i18n/short-t";
 
 type Props = { title?: string } & WithTranslation
 type States = { name: string }
@@ -19,21 +20,22 @@ class DemoCollectionScreen extends Component<Props, States> {
     render(): React.ReactNode {
         const {t} = this.props;
         const i18nPrefix = 'screens.DemoCollection';
+        const st = stFactory(t, i18nPrefix);
         return (<View style={styles.container}>
             <View style={containerStyle.box}>
-                <DemoFCCard title={t(`${i18nPrefix}.labels.functionComponent`)}/>
+                <DemoFCCard title={st(`functionComponent`)}/>
             </View>
             <View style={containerStyle.box}>
-                <DemoCCClock title={t(`${i18nPrefix}.labels.classComponent`)}
-                             tipLabel={t(`${i18nPrefix}.labels.tipLabel`)}
-                             goButtonTitle={t(`${i18nPrefix}.buttons.go`)}
-                             stopButtonTitle={t(`${i18nPrefix}.buttons.stop`)}/>
+                <DemoCCClock title={st(`classComponent`)}
+                             tipLabel={st(`tipLabel`)}
+                             goButtonTitle={st(`go`)}
+                             stopButtonTitle={st(`stop`)}/>
             </View>
             <View style={containerStyle.box}>
-                <DemoRequest title={t(`${i18nPrefix}.labels.request`)} buttonTitle={t(`${i18nPrefix}.buttons.request`)}/>
+                <DemoRequest title={st(`lbRequest`)} buttonTitle={st(`btnRequest`)}/>
             </View>
             <View style={containerStyle.box}>
-                <TextInput placeholder={t(`${i18nPrefix}.labels.placeholder`)}/>
+                <TextInput placeholder={st(`placeholder`)}/>
             </View>
             <View style={containerStyle.box}>
                 <DemoSvg/>

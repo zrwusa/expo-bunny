@@ -9,79 +9,80 @@ import styles from "./styles";
 import {ButtonTO, TextBtn, Text} from "../../components/base-ui";
 import containerStyle from "../../containers/box";
 import {useTranslation} from "react-i18next";
-import en from "../../i18n/en.json"
+import {stFactory} from "../../i18n/short-t";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
 export type HomeScreenProps = { route: HomeRouteProp; navigation: HomeNavigationProp; };
 
 function HomeScreen({navigation}: HomeScreenProps) {
-    const {t} = useTranslation()
-    const i18nPrefix = 'screens.Home'
-    const dispatch = useDispatch()
+    const {t} = useTranslation();
+    const i18nPrefix = 'screens.Home';
+    const st = stFactory(t, i18nPrefix);
+    const dispatch = useDispatch();
 
     return (
         <ScrollView>
             <View style={styles.screen}>
                 <View style={containerStyle.box}>
-                    <Text>{t(`${i18nPrefix}.labels.navAndRoute`)}</Text>
+                    <Text>{st(`navAndRoute`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.profile`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`profile`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
-                        <TextBtn>Route</TextBtn></ButtonTO>
+                        <TextBtn>{st(`route`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoTab')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.tab`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`tab`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoNested')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.nestedNavigation`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`nestedNavigation`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoBitcoin',
                         {
                             screen: 'BitcoinAlert',
                             params: {isPush: true},
-                        })}><TextBtn>{t(`${i18nPrefix}.buttons.passParamsFromRootToLeaf`)}</TextBtn></ButtonTO>
+                        })}><TextBtn>{st(`passParamsFromRootToLeaf`)}</TextBtn></ButtonTO>
                 </View>
 
                 <View style={containerStyle.box}>
-                    <Text>{t(`${i18nPrefix}.labels.redux`)}</Text>
+                    <Text>{st(`redux`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoFCReduxHook')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.FCReduxHook`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`FCReduxHook`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoThunkCC')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.thunkCC`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`thunkCC`)}</TextBtn></ButtonTO>
                 </View>
 
                 <View style={containerStyle.box}>
-                    <Text>{t(`${i18nPrefix}.labels.nativeCapabilities`)}</Text>
+                    <Text>{st(`nativeCapabilities`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoMap')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.map`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`map`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoShare')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.share`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`share`)}</TextBtn></ButtonTO>
                 </View>
 
                 <View style={containerStyle.box}>
-                    <Text>{t(`${i18nPrefix}.labels.componentsAndThemes`)}</Text>
+                    <Text>{st(`componentsAndThemes`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoThirdPart')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.thirdPart`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`thirdPart`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoCollection')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.componentCollection`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`componentCollection`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRNComponents')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.RNAllInOne`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`RNAllInOne`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoTheme')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.demoTheme`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`demoTheme`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.demoSuspense`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>
                 </View>
 
                 <View style={containerStyle.box}>
-                    <Text>{t(`${i18nPrefix}.labels.others`)}</Text>
+                    <Text>{st(`others`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoBitcoin')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.bitcoin`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`bitcoin`)}</TextBtn></ButtonTO>
                 </View>
 
                 <View style={containerStyle.box}>
-                    <Text>{t(`${i18nPrefix}.labels.system`)}</Text>
+                    <Text>{st(`system`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('Settings')}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.settings`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`settings`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => dispatch(signOutAndRemove())}>
-                        <TextBtn>{t(`${i18nPrefix}.buttons.signOut`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`signOut`)}</TextBtn></ButtonTO>
                 </View>
 
             </View>

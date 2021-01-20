@@ -5,16 +5,18 @@ import {RootState} from "../../types/models";
 import {ButtonRNE, Text, View} from "../../components/base-ui";
 import containerStyle from "../../containers/box";
 import {useTranslation} from "react-i18next";
+import {stFactory} from "../../i18n/short-t";
 
 const DemoFCReduxHookScreen: React.FC = () => {
     const {t} = useTranslation();
     const i18nPrefix = 'screens.DemoFCReduxHook';
+    const st = stFactory(t, i18nPrefix);
     const dispatch = useDispatch();
     const demoHelloState = useSelector((store: RootState) => store.demoHelloState);
     return (
         <View style={containerStyle.box}>
-            <Text>{t(`${i18nPrefix}.labels.order`)}{demoHelloState.order}</Text>
-            <ButtonRNE title={t(`${i18nPrefix}.buttons.dispatchSomething`)}
+            <Text>{st(`order`)}{demoHelloState.order}</Text>
+            <ButtonRNE title={st(`dispatchSomething`)}
                        onPress={() => dispatch(demoHello({order: demoHelloState.order + 1}))}/>
             {/*<Text>This demo shows you to dispatch an action to redux reducer with hook method in Function Component(FC)</Text>*/}
         </View>

@@ -11,10 +11,13 @@ import BunnyConstants from "../../common/constants";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {View} from "../../components/base-ui";
+import {stFactory} from "../../i18n/short-t";
 
 export default function SettingsScreen() {
     const [lang, setLang] = useState(false);
     const {t, i18n} = useTranslation();
+    const i18nPrefix = 'screens.Settings';
+    const st = stFactory(t, i18nPrefix);
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
     const dispatch = useDispatch()
     const {themeName} = sysState;
@@ -22,13 +25,13 @@ export default function SettingsScreen() {
     return (
         <View style={styles.container}>
             <SettingsItem
-                label={t('settings.dark_theme')}
+                label={st(`darkTheme`)}
                 value={themeName === EThemes.dark}
                 onValueChange={(value) => {
                     dispatch(restoreAndSaveTheme({themeName: value ? EThemes.dark : EThemes.default}));
                 }}
             />
-            <SettingsItem label={t('settings.language')}
+            <SettingsItem label={st(`language`)}
                           value={lang}
                           onValueChange={(value) => {
                               let lang = value ? "zh" : "en";
@@ -37,7 +40,7 @@ export default function SettingsScreen() {
                               })
                           }}/>
             <SettingsItem
-                label={t('settings.right_to_left')}
+                label={st(`rightToLeft`)}
                 value={I18nManager.isRTL}
                 onValueChange={async () => {
                     I18nManager.forceRTL(!I18nManager.isRTL);

@@ -1,11 +1,179 @@
 {
-  "login": {
-    "welcome": "ברוך הבא לאפליקציה המתורגמת!",
-    "login_button": "התחבר"
+  "sys": {
+    "navigationFallback": "גיבוי ניווט ..."
   },
-  "user_profile": {
-    "title": "הפרופיל שלך"
+  "screens": {
+    "Home": {
+      "title": "בית",
+      "navAndRoute": "Nav & ניתוב",
+      "redux": "הקטנת",
+      "nativeCapabilities": "יכולות ילידי",
+      "componentsAndThemes": "רכיבים וערכות",
+      "others": "אחרים",
+      "system": "מערכת",
+      "profile": "פרופיל",
+      "route": "נתיב",
+      "tab": "טאב",
+      "nestedNavigation": "ניווט מקונן",
+      "passParamsFromRootToLeaf": "העברת Params ממרוט אל ליף",
+      "FCReduxHook": "הפחתת FC של FC",
+      "thunkCC": "סיסי עותק",
+      "map": "מפה",
+      "share": "שיתוף",
+      "thirdPart": "חלק שלישי",
+      "componentCollection": "אוסף רכיבים",
+      "RNAllInOne": "RN כל אחד",
+      "demoTheme": "ערכת נושא",
+      "demoSuspense": "הדגמה Suspense",
+      "bitcoin": "ביטקוין",
+      "settings": "הגדרות",
+      "signOut": "התנתקות"
+    },
+    "Profile": {
+      "title": "פרופיל",
+      "profileScreenId": "זיהוי מסך פרופיל:",
+      "goToHomeScreen": "מעבר למסך הבית"
+    },
+    "DemoFCReduxHook": {
+      "title": "הסגת XFCxהוק",
+      "dispatchSomething": "שיגור משהו",
+      "order": "סדר: "
+    },
+    "DemoCollection": {
+      "title": "דמוגרפיה",
+      "go": "מעבר",
+      "stop": "עצירה",
+      "btnRequest": "לחצו עליי כדי לקבל עובדים.",
+      "functionComponent": "רכיב פונקציה",
+      "classComponent": "רכיב מחלקה",
+      "lbRequest": "הגשת בקשה",
+      "placeholder": "בעל מקום",
+      "tipLabel": "השעה הנוכחית: "
+    },
+    "DemoRoute": {
+      "title": "דמונתב",
+      "paramId": "זיהוי param: ",
+      "typeofId": "סוג של זיהוי: ",
+      "paramIsHuman": "Param isהאנושי: ",
+      "typeofIsHuman": "סוג של isהאנושי: ",
+      "paramSort": "מיון param: ",
+      "typeofSort": "סוג סוג: "
+    },
+    "DemoThirdPart": {
+      "title": "הסגת חלק חלק",
+      "buttonWithIcon": "לחצן עם איקון"
+    },
+    "DemoThunkCC": {
+      "title": "דמוקרט \" ק",
+      "thunkDispatch": "שיגור התן",
+      "text": "תמליל: ",
+      "id": "זיהוי: "
+    },
+    "DemoMap": {
+      "title": "מפ \" מ"
+    },
+    "TestMap": {
+      "title": "מפת TestMap"
+    },
+    "DemoShare": {
+      "title": "דמותן",
+      "shareMessage": "שיתוף הודעה",
+      "pressButtonTip": "לחצו על הלחצן למטה!",
+      "message": "\"ארנב-רייט-באני\" שיתף אותך במשהו.",
+      "permissionNotGranted": "דרושה הרשאה לגישה רול המצלמה!",
+      "notAvailable": "השיתוף אינו זמין בפלטפורמה שלך."
+    },
+    "SignIn": {
+      "title": "מצת",
+      "signIn": "כניסה ב -",
+      "signInDummy": "התחברות (דמה)",
+      "signInGoogle": "התחברות ב-Google",
+      "username": "שם משתמש",
+      "password": "סיסמה"
+    },
+    "DemoTab": {
+      "title": "דמוטאב"
+    },
+    "TabHome": {
+      "title": "טבור"
+    },
+    "TabSettings": {
+      "title": "טאבהגדרות"
+    },
+    "DemoNested": {
+      "title": "דמונט"
+    },
+    "NestedHome": {
+      "title": "NestedHome",
+      "goToNestedSettings": "מעבר אל ' הגדרות נסגרות '"
+    },
+    "NestedSettings": {
+      "title": "NestedSettings",
+      "goToNestedHome": "מעבר לבית Nested"
+    },
+    "DemoRNComponents": {
+      "title": "NDrnComponents"
+    },
+    "RNHome": {
+      "title": "RNHome",
+      "btnAccessibility": "נגישות",
+      "pressMe": "לחצו עלי",
+      "pressed": "מראש!",
+      "hideModal": "הסתרת מודלי",
+      "showModal": "הצגת מודלי",
+      "touchHere": "געו כאן",
+      "pressHere": "לחצו כאן",
+      "toggleStatusBar": "מיתוג סרגל מצב מיתוג",
+      "changeStatusBarStyle": "שינוי סגנון ' סרגל מצב '",
+      "lbAccessibility": "תווית נגישות (VoiceOver תקרא מחרוזת זו)",
+      "xOnPress": "X onPress",
+      "onPress": "OnPress",
+      "modalClosed": "הדאל כבר סגור.",
+      "helloWorld": "שלום עולם!",
+      "uselessPlaceholder": "מחזיק מקום חסר תועלת",
+      "count": "ספירה: "
+    },
+    "RNSectionList": {
+      "title": "RNSectionList"
+    },
+    "RNFlatList": {
+      "title": "RNFlatList"
+    },
+    "RNNoKeyboard": {
+      "title": "RNNoKeyboard"
+    },
+    "RNSafeArea": {
+      "title": "RNSafeArea"
+    },
+    "RNVirtualizedList": {
+      "title": "RNVirtualizedList"
+    },
+    "DemoBitcoin": {
+      "title": "ביטביטקוין"
+    },
+    "BitcoinHome": {
+      "title": "BitcoinHome"
+    },
+    "BitcoinAlert": {
+      "title": "Bitcoinהתרעה",
+      "paramIsPush": "לחיצה על Param: "
+    },
+    "Settings": {
+      "title": "הגדרות",
+      "dark_theme": "נושא אפל",
+      "language": "שפה",
+      "right_to_left": "מימין לשמאל"
+    },
+    "DemoSuspense": {
+      "title": "דמוניזציה",
+      "lazyComponentTitle": "אני מאחרת, אבל רק פעם אחת!"
+    },
+    "DemoTheme": {
+      "title": "הדמומה",
+      "btnCustom": "TOבטון החל מ-RN",
+      "btnFromPaper": "לחצן ' מאת '"
+    }
   },
-  "CFBundleDisplayName": "שם תצוגת CF Bundle",
-  "NSContactsUsageDescription": "תיאור השימוש באנשי הקשר של NS"
+  "CFBundleDisplayName": "אגד CF DisplayName A",
+  "NSContactsUsageDescription": "NSContactsUsageDescription"
 }

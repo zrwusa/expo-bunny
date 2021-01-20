@@ -5,6 +5,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedStackParam} from "../../../types/stacks";
 import containerStyle from "../../../containers/box";
 import {useTranslation} from "react-i18next";
+import {stFactory} from "../../../i18n/short-t";
 
 type NestedHomeRouteProp = RouteProp<DemoNestedStackParam, 'NestedHome'>;
 type NestedHomeNavigationProp = StackNavigationProp<DemoNestedStackParam, 'NestedHome'>;
@@ -13,10 +14,11 @@ type NestedHomeProps = { route: NestedHomeRouteProp, navigation: NestedHomeNavig
 export function NestedHomeScreen({route, navigation}: NestedHomeProps) {
     const {t} = useTranslation();
     const i18nPrefix = 'screens.NestedHome';
+    const st = stFactory(t, i18nPrefix);
     return (
         <View>
             <View style={containerStyle.box}>
-                <Button title={t(`${i18nPrefix}.buttons.goToNestedSettings`)} onPress={() => navigation.navigate('NestedSettings', {item: "001"})}/>
+                <Button title={st(`goToNestedSettings`)} onPress={() => navigation.navigate('NestedSettings', {item: "001"})}/>
             </View>
 
         </View>);

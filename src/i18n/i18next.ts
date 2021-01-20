@@ -1,7 +1,7 @@
-import * as React from "react";
 import en from "./en.json";
+import zh from "./zh.json";
 import zhHansCN from "./zh-Hans-CN.json";
-import he from "./he.json"
+import he from "./he.json";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import * as Localization from "expo-localization";
@@ -15,7 +15,7 @@ const init = async () => {
                     translation: en
                 },
                 "zh": {
-                    translation: zhHansCN
+                    translation: zh
                 },
                 "zh-Hans": {
                     translation: zhHansCN

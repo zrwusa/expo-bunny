@@ -1,236 +1,180 @@
 {
-  "login": {
-    "welcome": "Welcome to here!",
-    "login_button": "Login"
-  },
-  "user_profile": {
-    "title": "Your Profile"
-  },
-  "settings": {
-    "dark_theme": "Dark theme",
-    "language": "Language",
-    "right_to_left": "Right to left"
-  },
   "sys": {
     "navigationFallback": "Navigation fallback..."
   },
   "screens": {
     "Home": {
       "title": "Home",
-      "labels": {
-        "navAndRoute": "Nav & Route",
-        "redux": "Redux",
-        "nativeCapabilities": "Native Capabilities",
-        "componentsAndThemes": "Components & Themes",
-        "others": "Others",
-        "system": "System"
-      },
-      "buttons": {
-        "profile": "Profile",
-        "route": "Route",
-        "tab": "Tab",
-        "nestedNavigation": "Nested Navigation",
-        "passParamsFromRootToLeaf": "Pass Params From Root To Leaf",
-        "FCReduxHook": "FC Redux Hook",
-        "thunkCC": "Thunk CC",
-        "map": "Map",
-        "share": "Share",
-        "thirdPart": "Third Part",
-        "componentCollection": "Component Collection",
-        "RNAllInOne": "RN All In One",
-        "demoTheme": "Demo Theme",
-        "demoSuspense": "Demo Suspense",
-        "bitcoin": "Bitcoin",
-        "settings": "Settings",
-        "signOut": "Sign Out"
-      }
+      "navAndRoute": "Nav & Route",
+      "redux": "Redux",
+      "nativeCapabilities": "Native Capabilities",
+      "componentsAndThemes": "Components & Themes",
+      "others": "Others",
+      "system": "System",
+      "profile": "Profile",
+      "route": "Route",
+      "tab": "Tab",
+      "nestedNavigation": "Nested Navigation",
+      "passParamsFromRootToLeaf": "Pass Params From Root To Leaf",
+      "FCReduxHook": "FC Redux Hook",
+      "thunkCC": "Thunk CC",
+      "map": "Map",
+      "share": "Share",
+      "thirdPart": "Third Part",
+      "componentCollection": "Component Collection",
+      "RNAllInOne": "RN All In One",
+      "demoTheme": "Demo Theme",
+      "demoSuspense": "Demo Suspense",
+      "bitcoin": "Bitcoin",
+      "settings": "Settings",
+      "signOut": "Sign Out"
     },
     "Profile": {
       "title": "Profile",
-      "labels": {
-        "profileScreenId": "Profile Screen id:"
-      },
-      "buttons": {
-        "goToHomeScreen": "Go to HomeScreen"
-      }
+      "profileScreenId": "Profile Screen id:",
+      "goToHomeScreen": "Go to HomeScreen"
     },
     "DemoFCReduxHook": {
       "title": "DemoFCReduxHook",
-      "buttons": {
-        "dispatchSomething": "Dispatch something"
-      },
-      "labels": {
-        "order": "Order : "
-      }
+      "dispatchSomething": "Dispatch something",
+      "order": "Order: "
     },
     "DemoCollection": {
       "title": "DemoCollection",
-      "buttons": {
-        "go": "Go",
-        "stop": "Stop",
-        "request": "Click me to get employees"
-      },
-      "labels": {
-        "functionComponent": "Function Component",
-        "classComponent": "Class Component",
-        "request": "Make a request",
-        "placeholder": "Placeholder",
-        "tipLabel": "The current time : "
-      }
+      "go": "Go",
+      "stop": "Stop",
+      "btnRequest": "Click me to get employees",
+      "functionComponent": "Function Component",
+      "classComponent": "Class Component",
+      "lbRequest": "Make a request",
+      "placeholder": "Placeholder",
+      "tipLabel": "The current time: "
     },
     "DemoRoute": {
       "title": "DemoRoute",
-      "labels": {
-        "paramId": "param id : ",
-        "typeofId": "typeof id : ",
-        "paramIsHuman": "param isHuman : ",
-        "typeofIsHuman": "typeof isHuman : ",
-        "paramSort": "param sort : ",
-        "typeofSort": "typeof sort : "
-      },
-      "buttons": {}
+      "paramId": "param id: ",
+      "typeofId": "typeof id: ",
+      "paramIsHuman": "param isHuman: ",
+      "typeofIsHuman": "typeof isHuman: ",
+      "paramSort": "param sort: ",
+      "typeofSort": "typeof sort: "
     },
     "DemoThirdPart": {
       "title": "DemoThirdPart",
-      "buttons": {
-        "buttonWithIcon": "Button with icon"
-      }
+      "buttonWithIcon": "Button with icon"
     },
     "DemoThunkCC": {
       "title": "DemoThunkCC",
-      "buttons": {
-        "thunkDispatch": "Thunk Dispatch"
-      },
-      "labels": {
-        "text": "Text : ",
-        "id": "Id : "
-      }
+      "thunkDispatch": "Thunk Dispatch",
+      "text": "Text: ",
+      "id": "id: "
     },
     "DemoMap": {
-      "title": "DemoMap",
-      "buttons": {}
+      "title": "DemoMap"
     },
     "TestMap": {
-      "title": "TestMap",
-      "buttons": {}
+      "title": "TestMap"
     },
     "DemoShare": {
       "title": "DemoShare",
-      "buttons": {
-        "shareMessage": "Share Message"
-      },
-      "labels": {
-        "pressButtonTip": "Press the button below!"
-      },
-      "data": {
-        "message": "React-bunny shared something to you",
-        "permissionNotGranted": "Permission to access camera roll is required!",
-        "notAvailable": "Uh oh, sharing isn't available on your platform"
-      }
+      "shareMessage": "Share Message",
+      "pressButtonTip": "Press the button below!",
+      "message": "React-bunny shared something to you",
+      "permissionNotGranted": "Permission to access camera roll is required!",
+      "notAvailable": "Uh oh, sharing isn't available on your platform",
+      "pickAPhoto": "Pick a photo"
     },
     "SignIn": {
       "title": "SignIn",
-      "buttons": {
-        "signIn": "Sign In",
-        "signInDummy": "Sign In(Dummy)",
-        "signInGoogle": "Sign In Google"
-      },
-      "labels": {
-        "username": "username",
-        "password": "password"
-      }
+      "signIn": "Sign In",
+      "signInDummy": "Sign In(Dummy)",
+      "signInGoogle": "Sign In Google",
+      "username": "username",
+      "password": "password"
     },
     "DemoTab": {
-      "title": "DemoTab",
-      "buttons": {}
+      "title": "DemoTab"
     },
     "TabHome": {
-      "title": "TabHome",
-      "buttons": {}
+      "title": "TabHome"
     },
     "TabSettings": {
-      "title": "TabSettings",
-      "buttons": {},
-      "labels": {}
+      "title": "TabSettings"
     },
     "DemoNested": {
-      "title": "DemoNested",
-      "buttons": {}
+      "title": "DemoNested"
     },
     "NestedHome": {
       "title": "NestedHome",
-      "buttons": {
-        "goToNestedSettings": "Go To Nested Settings"
-      }
+      "goToNestedSettings": "Go To Nested Settings"
     },
     "NestedSettings": {
       "title": "NestedSettings",
-      "buttons": {
-        "goToNestedHome": "Go To Nested Home"
-      }
+      "goToNestedHome": "Go To Nested Home"
     },
     "DemoRNComponents": {
-      "title": "DemoRNComponents",
-      "buttons": {}
+      "title": "DemoRNComponents"
     },
     "RNHome": {
       "title": "RNHome",
-      "buttons": {}
+      "btnAccessibility": "Accessibility",
+      "pressMe": "Press Me",
+      "pressed": "Pressed!",
+      "hideModal": "Hide Modal",
+      "showModal": "Show Modal",
+      "touchHere": "Touch Here",
+      "pressHere": "Press Here",
+      "toggleStatusBar": "Toggle StatusBar",
+      "changeStatusBarStyle": "Change StatusBar Style",
+      "lbAccessibility": "Accessibility Label(VoiceOver will read this string)",
+      "xOnPress": "x onPress",
+      "onPress": "onPress",
+      "modalClosed": "Modal has been closed.",
+      "helloWorld": "Hello World!",
+      "uselessPlaceholder": "Useless Placeholder",
+      "count": "Count: "
     },
     "RNSectionList": {
-      "title": "RNSectionList",
-      "buttons": {}
+      "title": "RNSectionList"
     },
     "RNFlatList": {
-      "title": "RNFlatList",
-      "buttons": {}
+      "title": "RNFlatList"
     },
     "RNNoKeyboard": {
-      "title": "RNNoKeyboard",
-      "buttons": {}
+      "title": "RNNoKeyboard"
     },
     "RNSafeArea": {
-      "title": "RNSafeArea",
-      "buttons": {}
+      "title": "RNSafeArea"
     },
     "RNVirtualizedList": {
-      "title": "RNVirtualizedList",
-      "buttons": {}
+      "title": "RNVirtualizedList"
     },
     "DemoBitcoin": {
-      "title": "DemoBitcoin",
-      "buttons": {}
+      "title": "DemoBitcoin"
     },
     "BitcoinHome": {
-      "title": "BitcoinHome",
-      "buttons": {}
+      "title": "BitcoinHome"
     },
     "BitcoinAlert": {
       "title": "BitcoinAlert",
-      "buttons": {},
-      "labels": {
-        "paramIsPush": "Param isPush : "
-      }
+      "paramIsPush": "Param isPush: "
     },
     "Settings": {
       "title": "Settings",
-      "buttons": {}
+      "darkTheme": "Dark theme",
+      "language": "Language",
+      "rightToLeft": "Right to left"
     },
     "DemoSuspense": {
       "title": "DemoSuspense",
-      "buttons": {},
-      "labels": {
-        "lazyComponentTitle": "I'm late,but only one time!"
-      }
+      "lazyComponentTitle": "I'm late,but only one time!"
     },
     "DemoTheme": {
       "title": "DemoTheme",
-      "buttons": {
-        "btnCustom": "TOButton Themed From RN",
-        "btnFromPaper": "Button From Paper"
-      }
+      "btnCustom": "TOButton Themed From RN",
+      "btnFromPaper": "Button From Paper"
     }
   },
-  "CFBundleDisplayName": "CF Bundle DisplayName A",
+  "CFBundleDisplayName": "CF Bundle DisplayName",
   "NSContactsUsageDescription": "NSContactsUsageDescription"
 }

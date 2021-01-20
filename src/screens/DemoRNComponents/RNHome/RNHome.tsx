@@ -11,17 +11,22 @@ import {
     touchableWithoutFeedbackStyles
 } from "./styles";
 import containerStyle from "../../../containers/box";
+import {useTranslation} from "react-i18next";
+import {stFactory} from "../../../i18n/short-t";
 
 const RNHome: React.FC = () => {
+    const {t} = useTranslation();
+    const i18nPrefix = 'screens.RNHome';
+    const st = stFactory(t, i18nPrefix);
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [modalVisible, setModalVisible] = useState(false);
     const [timesPressed, setTimesPressed] = useState(0);
     let textLog = '';
     if (timesPressed > 1) {
-        textLog = timesPressed + 'x onPress';
+        textLog = timesPressed + st(`xOnPress`);
     } else if (timesPressed > 0) {
-        textLog = 'onPress';
+        textLog = st(`onPress`);
     }
 
     const imageBackgroundImage = {uri: "https://reactjs.org/logo-og.png"};
@@ -40,8 +45,8 @@ const RNHome: React.FC = () => {
         }
         return setStyleStatusBar(styleTypes[styleId]);
     }
-
-    const [textInputValue, onChangeText] = React.useState('Useless Placeholder');
+    const uselessPlaceholder = st(`uselessPlaceholder`)
+    const [textInputValue, onChangeText] = React.useState(uselessPlaceholder);
     const [touchableHighlightCount, setTouchableHighlightCount] = useState(0);
     const onTouchableHighlightPress = () => setTouchableHighlightCount(touchableHighlightCount + 1);
 
@@ -64,9 +69,9 @@ const RNHome: React.FC = () => {
             <View style={containerStyle.box}>
                 <Button
                     onPress={() => null}
-                    title="Accessibility Label"
+                    title={st(`btnAccessibility`)}
                     color="#841584"
-                    accessibilityLabel="Accessibility Label"
+                    accessibilityLabel={st(`lbAccessibility`)}
                 />
             </View>
             <View style={containerStyle.box}>
@@ -115,7 +120,7 @@ const RNHome: React.FC = () => {
                     ]}>
                     {({pressed}) => (
                         <Text style={pressableStyles.text}>
-                            {pressed ? 'Pressed!' : 'Press Me'}
+                            {pressed ? st(`pressed`) : st(`pressMe`)}
                         </Text>
                     )}
                 </Pressable>
@@ -130,12 +135,12 @@ const RNHome: React.FC = () => {
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
+                        Alert.alert(st(`modalClosed`));
                     }}
                 >
                     <View style={modalStyles.centeredView}>
                         <View style={modalStyles.modalView}>
-                            <Text style={modalStyles.modalText}>Hello World!</Text>
+                            <Text style={modalStyles.modalText}>{st(`helloWorld`)}</Text>
 
                             <TouchableHighlight
                                 style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}
@@ -143,7 +148,7 @@ const RNHome: React.FC = () => {
                                     setModalVisible(!modalVisible);
                                 }}
                             >
-                                <Text style={modalStyles.textStyle}>Hide Modal</Text>
+                                <Text style={modalStyles.textStyle}>{st(`hideModal`)}</Text>
                             </TouchableHighlight>
                         </View>
                     </View>
@@ -155,7 +160,7 @@ const RNHome: React.FC = () => {
                         setModalVisible(true);
                     }}
                 >
-                    <Text style={modalStyles.textStyle}>Show Modal</Text>
+                    <Text style={modalStyles.textStyle}>{st(`showModal`)}</Text>
                 </TouchableHighlight>
             </View>
 
@@ -172,7 +177,7 @@ const RNHome: React.FC = () => {
             <View style={containerStyle.box}>
                 <TouchableHighlight onPress={onTouchableHighlightPress}>
                     <View style={touchableHighlightStyles.button}>
-                        <Text>Touch Here</Text>
+                        <Text>{st(`touchHere`)}</Text>
                     </View>
                 </TouchableHighlight>
                 <View style={touchableHighlightStyles.countContainer}>
@@ -184,13 +189,13 @@ const RNHome: React.FC = () => {
             </View>
             <View style={containerStyle.box}>
                 <View style={touchableOpacityStyles.countContainer}>
-                    <Text>Count: {touchableOpacityCount}</Text>
+                    <Text>{st(`count`)}{touchableOpacityCount}</Text>
                 </View>
                 <TouchableOpacity
                     style={touchableOpacityStyles.button}
                     onPress={onTouchableOpacityPress}
                 >
-                    <Text>Press Here</Text>
+                    <Text>{st(`pressHere`)}</Text>
                 </TouchableOpacity>
             </View>
             <View style={containerStyle.box}>
@@ -199,7 +204,7 @@ const RNHome: React.FC = () => {
                 </View>
                 <TouchableWithoutFeedback onPress={onTouchableWithoutFeedbackPress}>
                     <View style={touchableWithoutFeedbackStyles.button}>
-                        <Text>Touch Here</Text>
+                        <Text>{st(`touchHere`)}</Text>
                     </View>
                 </TouchableWithoutFeedback>
             </View>
@@ -213,10 +218,10 @@ const RNHome: React.FC = () => {
                     <StatusBar hidden={visibleStatusBar}/>
                 </View>
                 <View style={statusBarStyles.buttonContainer}>
-                    <Button title="Toggle StatusBar" onPress={() => changeVisibilityStatusBar()}/>
+                    <Button title={st(`toggleStatusBar`)} onPress={() => changeVisibilityStatusBar()}/>
                 </View>
                 <View style={statusBarStyles.buttonContainer}>
-                    <Button title="Change StatusBar Style" onPress={() => changeStyleStatusBar()}/>
+                    <Button title={st(`changeStatusBarStyle`)} onPress={() => changeStyleStatusBar()}/>
                 </View>
             </View>
         </ScrollView>);

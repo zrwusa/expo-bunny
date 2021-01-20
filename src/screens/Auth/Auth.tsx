@@ -4,26 +4,28 @@ import {signIn, signInGoogle, signInDummy} from "../../stores/auth/actions";
 import {useDispatch} from "react-redux";
 import {ButtonRNE,TextInput} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
+import {stFactory} from "../../i18n/short-t";
 
 export const SignInScreen = () => {
     const dispatch = useDispatch();
     const {t} = useTranslation();
     const i18nPrefix = 'screens.SignIn';
+    const st = stFactory(t, i18nPrefix);
     return (
         <View>
-            <TextInput placeholder={t(`${i18nPrefix}.labels.username`)}/>
-            <TextInput placeholder={t(`${i18nPrefix}.labels.password`)} secureTextEntry/>
+            <TextInput placeholder={st(`username`)}/>
+            <TextInput placeholder={st(`password`)} secureTextEntry/>
             <ButtonRNE onPress={() => {
                 dispatch(signIn({email: 'bruno@email.com', password: 'bruno'}))
-            }} title={t(`${i18nPrefix}.buttons.signIn`)}/>
+            }} title={st(`signIn`)}/>
             <ButtonRNE onPress={() => {
                 dispatch(signInDummy())
-            }} title={t(`${i18nPrefix}.buttons.signInDummy`)}/>
+            }} title={st(`signInDummy`)}/>
             {
                 Platform.OS !== 'web'
                     ? <ButtonRNE onPress={() => {
                         dispatch(signInGoogle())
-                    }} title={t(`${i18nPrefix}.buttons.signInGoogle`)}/>
+                    }} title={st(`signInGoogle`)}/>
                     : <></>
             }
         </View>

@@ -2,6 +2,7 @@ import React from 'react';
 import {View} from "../../components/base-ui";
 import styles from "./styles";
 import {useTranslation} from "react-i18next";
+import {stFactory} from "../../i18n/short-t";
 
 const DemoLazy100 = React.lazy(async () => {
         const module = await import('../../components/DemoLazy/DemoLazy')
@@ -20,10 +21,11 @@ const DemoLazy2000 = React.lazy(async () => {
 export const DemoSuspenseScreen = () => {
     const {t} = useTranslation();
     const i18nPrefix = 'screens.DemoSuspense';
+    const st = stFactory(t, i18nPrefix);
     return (
         <View style={styles.container}>
-            <DemoLazy100 title={t(`${i18nPrefix}.labels.lazyComponentTitle`)}/>
-            <DemoLazy2000 title={t(`${i18nPrefix}.labels.lazyComponentTitle`)}/>
+            <DemoLazy100 title={st(`lazyComponentTitle`)}/>
+            <DemoLazy2000 title={st(`lazyComponentTitle`)}/>
         </View>
     )
 }

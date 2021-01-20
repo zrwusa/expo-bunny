@@ -6,6 +6,7 @@ import {RootStackParam} from "../../types/stacks";
 import {BoxShadow} from "react-native-shadow";
 import styles from "./styles";
 import {withTranslation, WithTranslation} from 'react-i18next';
+import {stFactory} from "../../i18n/short-t";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
@@ -32,15 +33,16 @@ class DemoRouteScreen extends Component<Props> {
         const {id, isHuman, sort} = this.props.route.params;
         const {t} = this.props;
         const i18nPrefix = 'screens.DemoRoute';
+        const st = stFactory(t, i18nPrefix);
         return (<View style={styles.container}>
             {/*<BoxShadow setting={shadowOpt}>*/}
             <View style={styles.wrap}>
-                <Text>{t(`${i18nPrefix}.labels.paramId`)}{id}</Text>
-                <Text>{t(`${i18nPrefix}.labels.typeofId`)}{typeof id}</Text>
-                <Text>{t(`${i18nPrefix}.labels.paramIsHuman`)}{isHuman.toString()}</Text>
-                <Text>{t(`${i18nPrefix}.labels.typeofIsHuman`)}{typeof isHuman}</Text>
-                <Text>{t(`${i18nPrefix}.labels.paramSort`)}{sort}</Text>
-                <Text>{t(`${i18nPrefix}.labels.typeofSort`)}{typeof sort}</Text>
+                <Text>{st(`paramId`)}{id}</Text>
+                <Text>{st(`typeofId`)}{typeof id}</Text>
+                <Text>{st(`paramIsHuman`)}{isHuman.toString()}</Text>
+                <Text>{st(`typeofIsHuman`)}{typeof isHuman}</Text>
+                <Text>{st(`paramSort`)}{sort}</Text>
+                <Text>{st(`typeofSort`)}{typeof sort}</Text>
             </View>
 
             {/*</BoxShadow>*/}
