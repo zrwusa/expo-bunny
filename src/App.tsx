@@ -64,7 +64,7 @@ function App() {
             } finally {
                 mockPreparingTimer = setTimeout(() => {
                     setIsReady(true);
-                }, 1000)
+                }, 1)
                 // setIsReady(true);
             }
         };

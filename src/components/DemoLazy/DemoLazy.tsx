@@ -1,14 +1,14 @@
 import React from "react";
+import {Text, View} from "../base-ui"
+import {styles} from "./styles";
 
-export const DemoLazy100 = React.lazy(async () => {
-        const module = await import('./DemoLazyReality')
-        await new Promise(resolve => setTimeout(resolve, 100));
-        return {default: module.DemoLazyReality}
-    }
-);
-export const DemoLazy2000 = React.lazy(async () => {
-        const module = await import('./DemoLazyReality')
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        return {default: module.DemoLazyReality}
-    }
-);
+interface Props {
+    title:string
+}
+export const DemoLazy: React.FC<Props> = (props) => {
+    return (
+        <View>
+            <Text style={styles.text}>{props.title}</Text>
+        </View>
+    )
+}

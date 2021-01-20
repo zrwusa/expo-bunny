@@ -3,7 +3,7 @@ import api from "../../common/api";
 import {View, Text, ButtonTO, TextBtn} from "../base-ui";
 import {DemoEmployee} from "../../types/models";
 
-type Props = { title: string, }
+type Props = { title: string, buttonTitle:string}
 type States = { name: string, employees: Array<DemoEmployee>, }
 
 class DemoRequest extends Component<Props, States> {
@@ -29,10 +29,11 @@ class DemoRequest extends Component<Props, States> {
 
 
     render(): React.ReactNode {
+        const {buttonTitle} = this.props
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>{this.state.name}</Text>
-            <ButtonTO onPress={this.getEmployees}><TextBtn>Click me to get employees</TextBtn></ButtonTO>
+            <ButtonTO onPress={this.getEmployees}><TextBtn>{buttonTitle}</TextBtn></ButtonTO>
             <View>
                 {this.state.employees.map((employee) =>
                     <Text key={employee.email.toString()}>

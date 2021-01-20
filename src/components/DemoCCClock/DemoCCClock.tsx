@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {View, Text, ButtonTO, TextBtn} from "../base-ui";
 
-type Props = { title: string, }
+type Props = { title: string, goButtonTitle:string,stopButtonTitle:string,tipLabel:string}
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
 
 class DemoCCClock extends Component<Props, States> {
@@ -36,11 +36,12 @@ class DemoCCClock extends Component<Props, States> {
     }
 
     render(): React.ReactNode {
+        const {tipLabel,goButtonTitle,stopButtonTitle} = this.props;
         return (<View>
             <Text>{this.props.title}</Text>
-            <Text>The current time is {this.state.time.toLocaleTimeString()}</Text>
-            <ButtonTO onPress={this.stop}><TextBtn>Stop</TextBtn></ButtonTO>
-            <ButtonTO onPress={this.go}><TextBtn>Go</TextBtn></ButtonTO>
+            <Text>{tipLabel}{this.state.time.toLocaleTimeString()}</Text>
+            <ButtonTO onPress={this.go}><TextBtn>{goButtonTitle}</TextBtn></ButtonTO>
+            <ButtonTO onPress={this.stop}><TextBtn>{stopButtonTitle}</TextBtn></ButtonTO>
         </View>);
     }
 

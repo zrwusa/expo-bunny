@@ -142,7 +142,10 @@ const node: Screen = {
             component: DemoShareScreen, name: "DemoShare", path: "demo-share",
             options: customOptions,
         },
-        // {component: SignInScreen, name: "SignIn", path: "sign-in"},
+        // {
+        //     component: SignInScreen, name: "SignIn", path: "sign-in",
+        //     options: customOptions
+        // },
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
             options: customOptions,
@@ -277,14 +280,17 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
         Navigator
             ? <Navigator {...rest}>
                 {authState && (authState.accessToken === undefined)
-                    ? (<ScreenComponent name="SignIn" component={SignInScreen}/>)
+                    ? (<ScreenComponent component={SignInScreen} name="SignIn" options={{
+                        ...customOptions,
+                        title: t(`screens.SignIn.title`)
+                    }}/>)
                     : (<>
                         {node.screens && node.screens.map((screen) => {
                             return (screen.screens && screen.screens.length > 0
                                 ? <ScreenComponent {...screen}
                                                    options={{
                                                        ...screen.options,
-                                                       title: t(`screen_titles.${screen.name}`)
+                                                       title: t(`screens.${screen.name}.title`)
                                                    }} key={screen.name}>
                                     {(navProps: any) => {
                                         return <RecursiveNavigator {...navProps} node={screen}/>
@@ -293,7 +299,7 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
                                 : <ScreenComponent {...screen}
                                                    options={{
                                                        ...screen.options,
-                                                       title: t(`screen_titles.${screen.name}`)
+                                                       title: t(`screens.${screen.name}.title`)
                                                    }} key={screen.name}/>)
                         })}
                     </>)

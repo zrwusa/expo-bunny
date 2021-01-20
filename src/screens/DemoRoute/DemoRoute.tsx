@@ -5,11 +5,12 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types/stacks";
 import {BoxShadow} from "react-native-shadow";
 import styles from "./styles";
+import {withTranslation, WithTranslation} from 'react-i18next';
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
 
-type Props = { route: ProfileRouteProp; navigation: ProfileNavigationProp; };
+type Props = { route: ProfileRouteProp; navigation: ProfileNavigationProp; } & WithTranslation;
 // const shadowOpt = {
 //     width: 160,
 //     height: 40,
@@ -29,15 +30,17 @@ class DemoRouteScreen extends Component<Props> {
 
     render(): React.ReactNode {
         const {id, isHuman, sort} = this.props.route.params;
+        const {t} = this.props;
+        const i18nPrefix = 'screens.DemoRoute';
         return (<View style={styles.container}>
             {/*<BoxShadow setting={shadowOpt}>*/}
             <View style={styles.wrap}>
-                <Text>param id = {id}</Text>
-                <Text>typeof id:{typeof id}</Text>
-                <Text>param isHuman = {isHuman.toString()}</Text>
-                <Text>typeof id:{typeof isHuman}</Text>
-                <Text>param sort = {sort}</Text>
-                <Text>typeof id:{typeof sort}</Text>
+                <Text>{t(`${i18nPrefix}.labels.paramId`)}{id}</Text>
+                <Text>{t(`${i18nPrefix}.labels.typeofId`)}{typeof id}</Text>
+                <Text>{t(`${i18nPrefix}.labels.paramIsHuman`)}{isHuman.toString()}</Text>
+                <Text>{t(`${i18nPrefix}.labels.typeofIsHuman`)}{typeof isHuman}</Text>
+                <Text>{t(`${i18nPrefix}.labels.paramSort`)}{sort}</Text>
+                <Text>{t(`${i18nPrefix}.labels.typeofSort`)}{typeof sort}</Text>
             </View>
 
             {/*</BoxShadow>*/}
@@ -45,4 +48,4 @@ class DemoRouteScreen extends Component<Props> {
     }
 }
 
-export default DemoRouteScreen;
+export default withTranslation()(DemoRouteScreen);

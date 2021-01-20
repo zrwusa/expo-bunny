@@ -196,6 +196,7 @@ export const themeWarehouse: ThemeWarehouse = {
         dark: ''
     },
 }
+
 const isLeafParent = (obj: object) => {
     let isLeaf: boolean = true
     Object.values(obj).forEach(value => {
@@ -211,9 +212,9 @@ const isSameStructure = (objA: unknown, objB: unknown) => {
     let objBTraversable = objB as TraversableNested;
     const objAKeys = Object.keys(objATraversable)
     const objBKeys = Object.keys(objBTraversable)
-    let isSame: boolean = true
+    let isSame = true
     if (objAKeys.length !== objBKeys.length) {
-        return isSame= false
+        return isSame = false
     } else {
         objAKeys.forEach((i) => {
             if (!objBKeys.includes(i)) {
@@ -231,8 +232,10 @@ const extractThemesFromWarehouse = (arg: unknown, themeName: string) => {
     nodeKeys.forEach(k => {
         if (!isSameStructure(themeWarehouseNode[k], EThemes)) {
             themeNode[k] = extractThemesFromWarehouse(themeWarehouseNode[k], themeName)
-        } else {
+        } else if (isLeafParent(themeWarehouseNode[k])) {
             themeNode[k] = themeWarehouseNode[k][themeName]
+        } else {
+            themeNode[k] = {}
         }
     })
     return themeNode;

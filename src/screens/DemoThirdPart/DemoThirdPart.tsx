@@ -3,8 +3,9 @@ import {View} from "react-native";
 import {ListItem, Avatar, Button} from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DemoButtonStyledRNE, DemoIconCssStyled} from "../../components/base-ui";
+import {withTranslation,WithTranslation} from "react-i18next";
 
-type Props = { title?: string }
+type Props = { title?: string } & WithTranslation
 type States = { name: string }
 
 class DemoThirdPartScreen extends Component<Props, States> {
@@ -13,6 +14,8 @@ class DemoThirdPartScreen extends Component<Props, States> {
     }
 
     render(): React.ReactNode {
+        const {t} = this.props;
+        const i18nPrefix = 'screens.DemoThirdPart';
         const list = [
             {
                 name: "Amy Farha",
@@ -27,7 +30,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
         ];
         return (<View>
             <Button icon={<Icon name="air-horn" style={{color: '#FFFFFF'}}/>}
-                    title="Button with icon"/>
+                    title={t(`${i18nPrefix}.buttons.buttonWithIcon`)}/>
             <View>
                 {list.map((l, i) => (
                     <ListItem key={i} bottomDivider>
@@ -41,11 +44,11 @@ class DemoThirdPartScreen extends Component<Props, States> {
             </View>
             <View>
                 <DemoButtonStyledRNE icon={<DemoIconCssStyled name="air-horn"/>}
-                                     title="Button with icon"/>
+                                     title={t(`${i18nPrefix}.buttons.buttonWithIcon`)}/>
                 <DemoIconCssStyled name="air-horn"/>
             </View>
         </View>);
     }
 }
 
-export default DemoThirdPartScreen;
+export default withTranslation()(DemoThirdPartScreen);

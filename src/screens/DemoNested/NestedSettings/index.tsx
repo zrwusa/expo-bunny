@@ -1,2 +1,2 @@
-export {default} from "./DemoNested";
-export * from "./DemoNested";
+export {default} from "./NestedSettings";
+export * from "./NestedSettings";

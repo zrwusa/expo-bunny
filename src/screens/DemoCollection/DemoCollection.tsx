@@ -6,8 +6,9 @@ import {View, TextInput} from "../../components/base-ui";
 import styles from "./styles";
 import containerStyle from "../../containers/box";
 import {DemoSvg} from "../../components/DemoSvg";
+import {WithTranslation, withTranslation} from "react-i18next";
 
-type Props = { title?: string }
+type Props = { title?: string } & WithTranslation
 type States = { name: string }
 
 class DemoCollectionScreen extends Component<Props, States> {
@@ -16,24 +17,29 @@ class DemoCollectionScreen extends Component<Props, States> {
     }
 
     render(): React.ReactNode {
+        const {t} = this.props;
+        const i18nPrefix = 'screens.DemoCollection';
         return (<View style={styles.container}>
             <View style={containerStyle.box}>
-                <DemoFCCard title="FunctionComponent"/>
+                <DemoFCCard title={t(`${i18nPrefix}.labels.functionComponent`)}/>
             </View>
             <View style={containerStyle.box}>
-                <DemoCCClock title="ClassComponent"/>
+                <DemoCCClock title={t(`${i18nPrefix}.labels.classComponent`)}
+                             tipLabel={t(`${i18nPrefix}.labels.tipLabel`)}
+                             goButtonTitle={t(`${i18nPrefix}.buttons.go`)}
+                             stopButtonTitle={t(`${i18nPrefix}.buttons.stop`)}/>
             </View>
             <View style={containerStyle.box}>
-                <DemoRequest title={"Request"}/>
+                <DemoRequest title={t(`${i18nPrefix}.labels.request`)} buttonTitle={t(`${i18nPrefix}.buttons.request`)}/>
             </View>
             <View style={containerStyle.box}>
-                <TextInput placeholder={"Placeholder"}/>
+                <TextInput placeholder={t(`${i18nPrefix}.labels.placeholder`)}/>
             </View>
             <View style={containerStyle.box}>
-                <DemoSvg />
+                <DemoSvg/>
             </View>
         </View>);
     }
 }
 
-export default DemoCollectionScreen
+export default withTranslation()(DemoCollectionScreen)

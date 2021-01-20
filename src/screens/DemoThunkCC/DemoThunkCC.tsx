@@ -7,12 +7,13 @@ import {DemoThunkPayload} from "../../types/payloads";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import containerStyle from "../../containers/box";
+import {WithTranslation, withTranslation} from "react-i18next";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
     demoThunk: async (data: DemoThunkPayload) => dispatch(demoThunk(data)),
 });
-type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> ;
+type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & WithTranslation ;
 
 export class DemoThunkCCScreen extends React.Component<Props> {
     constructor(props: Props) {
@@ -30,15 +31,17 @@ export class DemoThunkCCScreen extends React.Component<Props> {
     }
 
     render(): React.ReactNode {
+        const {t} = this.props;
+        const i18nPrefix = 'screens.DemoThunkCC';
         const {text, id} = this.props;
-        return <View>
+        return (
             <View style={containerStyle.box}>
-                <Text>text:{text}</Text>
-                <Text>id:{id}</Text>
-                <ButtonRNE onPress={this.handleThunk} title="Thunk dispatch"/>
+                <Text>{t(`${i18nPrefix}.labels.text`)}{text}</Text>
+                <Text>{t(`${i18nPrefix}.labels.id`)}{id}</Text>
+                <ButtonRNE onPress={this.handleThunk} title={t(`${i18nPrefix}.buttons.thunkDispatch`)}/>
             </View>
-        </View>;
+        );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DemoThunkCCScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(DemoThunkCCScreen));
