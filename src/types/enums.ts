@@ -10,7 +10,10 @@ export enum EAuth {
 export enum ESys {
     ERROR = "ERROR",
     WARN = "WARN",
+    RESTORE_IS_READY = "RESTORE_IS_READY",
     RESTORE_THEME = "RESTORE_THEME",
+    RESTORE_LANGUAGE = "RESTORE_LANGUAGE",
+    RESTORE_NAV_INITIAL_STATE = "RESTORE_NAV_INITIAL_STATE",
 }
 
 export enum EDemoHello {
@@ -31,6 +34,11 @@ export enum EDemoMap {
 export const EThemes: Traversable = {
     default: 'default',
     dark: 'dark',
+}
+
+export const ELanguage = {
+    en: 'en',
+    zh: 'zh',
 }
 
 

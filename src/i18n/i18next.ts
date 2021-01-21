@@ -4,7 +4,6 @@ import zhHansCN from "./zh-Hans-CN.json";
 import he from "./he.json";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
-import * as Localization from "expo-localization";
 
 const init = async () => {
     return await i18n
@@ -27,7 +26,7 @@ const init = async () => {
                     translation: he
                 }
             },
-            lng: Localization.locale,
+            lng: "en",
             fallbackLng: "en",
             interpolation: {
                 escapeValue: false
@@ -37,7 +36,7 @@ const init = async () => {
 
 init()
     .then(() => {
-        console.log('Initialed i18n')
+        console.log('Initialed i18n',i18n.language)
     })
 
 export default i18n

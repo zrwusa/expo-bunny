@@ -1,4 +1,5 @@
 import {GoogleUser} from "expo-google-app-auth";
+import {InitialState} from "@react-navigation/native";
 
 export interface DemoHello {
     name: string,
@@ -74,7 +75,10 @@ export type Auth = {
 export type Sys = {
     error: string,
     warn: string,
+    isReady: boolean,
     themeName: string,
+    language: string,
+    navInitialState?: InitialState
 }
 
 export interface RootState {

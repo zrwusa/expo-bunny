@@ -1,5 +1,6 @@
 import {GoogleUser} from "expo-google-app-auth/src/Google";
 import {UserRes} from "./models";
+import {InitialState} from "@react-navigation/native";
 
 export interface SignInPayload {
     email: string;
@@ -33,6 +34,18 @@ export interface SysWarnPayload {
 
 export interface RestoreThemePayload {
     themeName: string;
+}
+
+export interface RestoreLanguagePayload {
+    language: string;
+}
+
+export interface RestoreNavInitialStatePayload {
+    navInitialState: InitialState;
+}
+
+export interface RestoreIsReadyPayload {
+    isReady: boolean;
 }
 
 export interface DemoHelloPayload {

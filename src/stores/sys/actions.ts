@@ -2,8 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {Sys} from "../../types/models";
-import {RestoreThemePayload, SysErrorPayload, SysWarnPayload} from "../../types/payloads";
-import {RestoreTheme, SysError, SysWarn} from "../../types/actions";
+import {
+    RestoreIsReadyPayload,
+    RestoreLanguagePayload,
+    RestoreNavInitialStatePayload,
+    RestoreThemePayload,
+    SysErrorPayload,
+    SysWarnPayload
+} from "../../types/payloads";
+import {RestoreIsReady, RestoreLanguage, RestoreNavInitialState, RestoreTheme, SysError, SysWarn} from "../../types/actions";
 import {ESys} from "../../types/enums";
 import BunnyConstants from "../../common/constants";
 
@@ -41,4 +48,38 @@ export const restoreAndSaveTheme: ActionCreator<ThunkAction<Promise<Action>, Sys
     };
 };
 
-export type SysActions = SysError | SysWarn | RestoreTheme;
+export const restoreLanguage: (payload: RestoreLanguagePayload) => RestoreLanguage = (payload) => {
+    return {
+        type: ESys.RESTORE_LANGUAGE,
+        payload: payload,
+    };
+};
+
+export const restoreAndSaveLanguage: ActionCreator<ThunkAction<Promise<Action>, Sys, void, RestoreLanguage>> = (payload: RestoreLanguagePayload) => {
+    return async (dispatch: Dispatch<RestoreLanguage | SysError>): Promise<Action> => {
+        let result;
+        try {
+            await AsyncStorage.setItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY, payload.language);
+            result = dispatch(restoreLanguage(payload))
+        } catch (err) {
+            result = dispatch(sysError({error: err.toString()}))
+        }
+        return result;
+    };
+};
+
+export const restoreNavInitialState: (payload: RestoreNavInitialStatePayload) => RestoreNavInitialState = (payload) => {
+    return {
+        type: ESys.RESTORE_NAV_INITIAL_STATE,
+        payload: payload,
+    };
+};
+
+export const restoreIsReady: (payload: RestoreIsReadyPayload) => RestoreIsReady = (payload) => {
+    return {
+        type: ESys.RESTORE_IS_READY,
+        payload: payload,
+    };
+};
+
+export type SysActions = RestoreIsReady | SysError | SysWarn | RestoreTheme | RestoreLanguage | RestoreNavInitialState;

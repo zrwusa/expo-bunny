@@ -1,26 +1,24 @@
 import * as React from "react";
 import SettingsItem from "./SettingsItem";
 import {useDispatch, useSelector} from "react-redux";
-import {restoreAndSaveTheme} from "../../stores/sys/actions";
+import {restoreAndSaveLanguage, restoreAndSaveTheme} from "../../stores/sys/actions";
 import {RootState} from "../../types/models";
 import {I18nManager} from "react-native";
 import styles from "./styles";
-import {EThemes} from "../../types/enums";
+import {ELanguage, EThemes} from "../../types/enums";
 import {restartApp} from '../../restart';
 import BunnyConstants from "../../common/constants";
-import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {View} from "../../components/base-ui";
 import {stFactory} from "../../i18n/short-t";
 
 export default function SettingsScreen() {
-    const [lang, setLang] = useState(false);
     const {t, i18n} = useTranslation();
     const i18nPrefix = 'screens.Settings';
     const st = stFactory(t, i18nPrefix);
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
     const dispatch = useDispatch()
-    const {themeName} = sysState;
+    const {themeName, language} = sysState;
 
     return (
         <View style={styles.container}>
@@ -32,12 +30,11 @@ export default function SettingsScreen() {
                 }}
             />
             <SettingsItem label={st(`language`)}
-                          value={lang}
+                          value={language === ELanguage.zh}
                           onValueChange={(value) => {
-                              let lang = value ? "zh" : "en";
-                              i18n.changeLanguage(lang).then(() => {
-                                  setLang(value)
-                              })
+                              const lang = value ? ELanguage.zh : ELanguage.en;
+                              i18n.changeLanguage(lang).then(() => undefined)
+                              dispatch(restoreAndSaveLanguage({language: lang}));
                           }}/>
             <SettingsItem
                 label={st(`rightToLeft`)}

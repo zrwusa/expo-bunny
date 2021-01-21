@@ -1,9 +1,18 @@
 import {AxiosError} from "axios";
 import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "./enums";
 import {
-    DemoHello2Payload, DemoHelloPayload, DemoThunkSuccessPayload,
-    RestoreAuthGooglePayload, RestoreAuthPayload, RestoreThemePayload, SignOutPayload,
-    SysErrorPayload, SysWarnPayload
+    DemoHello2Payload,
+    DemoHelloPayload,
+    DemoThunkSuccessPayload,
+    RestoreAuthGooglePayload,
+    RestoreAuthPayload,
+    RestoreIsReadyPayload,
+    RestoreLanguagePayload,
+    RestoreNavInitialStatePayload,
+    RestoreThemePayload,
+    SignOutPayload,
+    SysErrorPayload,
+    SysWarnPayload
 } from "./payloads";
 import {NearbyFilm, Region} from "./models";
 
@@ -48,6 +57,20 @@ export interface RestoreTheme {
     payload: RestoreThemePayload;
 }
 
+export interface RestoreLanguage {
+    type: ESys.RESTORE_LANGUAGE;
+    payload: RestoreLanguagePayload;
+}
+
+export interface RestoreNavInitialState {
+    type: ESys.RESTORE_NAV_INITIAL_STATE;
+    payload: RestoreNavInitialStatePayload;
+}
+
+export interface RestoreIsReady {
+    type: ESys.RESTORE_IS_READY;
+    payload: RestoreIsReadyPayload;
+}
 
 export interface DemoThunkSuccess {
     type: EDemoThunk.DEMO_THUNK_SUCCESS;
