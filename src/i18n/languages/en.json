@@ -15,7 +15,8 @@
       "route": "Route",
       "tab": "Tab",
       "nestedNavigation": "Nested Navigation",
-      "passParamsFromRootToLeaf": "Pass Params From Root To Leaf",
+      "passParamsFromRootToLeaf": "Root To Leaf",
+      "passParamsFromRootToLeafTab": "Root To Leaf(Tab)",
       "FCReduxHook": "FC Redux Hook",
       "thunkCC": "Thunk CC",
       "map": "Map",
@@ -32,7 +33,8 @@
     "Profile": {
       "title": "Profile",
       "profileScreenId": "Profile Screen id:",
-      "goToHomeScreen": "Go to HomeScreen"
+      "goToHomeScreen": "Go to HomeScreen",
+      "email": "Email: "
     },
     "DemoFCReduxHook": {
       "title": "DemoFCReduxHook",

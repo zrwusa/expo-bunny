@@ -15,7 +15,8 @@
       "route": "路由",
       "tab": "底部导航",
       "nestedNavigation": "嵌套导航",
-      "passParamsFromRootToLeaf": "从根节点到叶子节点参数传递",
+      "passParamsFromRootToLeaf": "根节点到叶子节点传参",
+      "passParamsFromRootToLeafTab": "根节点到叶子节点(底部导航)",
       "FCReduxHook": "函数组件 Redux Hooks",
       "thunkCC": "类组件 Thunk",
       "map": "地图",
@@ -32,7 +33,8 @@
     "Profile": {
       "title": "我的",
       "profileScreenId": "个人资料id: ",
-      "goToHomeScreen": "跳转到首页"
+      "goToHomeScreen": "返回首页",
+      "email": "邮箱: "
     },
     "DemoFCReduxHook": {
       "title": "样例-函数组件 & Redux & Hooks",

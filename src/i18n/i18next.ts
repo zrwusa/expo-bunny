@@ -1,7 +1,6 @@
-import en from "./en.json";
-import zh from "./zh.json";
-import zhHansCN from "./zh-Hans-CN.json";
-import he from "./he.json";
+import en from "./languages/en.json";
+import zhHansCN from "./languages/zh-Hans-CN.json";
+import he from "./languages/he.json";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 
@@ -14,7 +13,7 @@ const init = async () => {
                     translation: en
                 },
                 "zh": {
-                    translation: zh
+                    translation: zhHansCN
                 },
                 "zh-Hans": {
                     translation: zhHansCN

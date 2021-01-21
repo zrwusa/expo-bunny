@@ -9,7 +9,7 @@ import {
     DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
     NavigationContainer
 } from "@react-navigation/native";
-import RootNavigator, {getScreensConfig} from "./navigator/RootNavigator";
+import RootNavigator, {getScreensConfig} from "./navigation/RootNavigator";
 import {EThemes} from "./types/enums";
 import BunnyConstants from "./common/constants";
 import {RootState} from "./types/models";
@@ -41,7 +41,6 @@ function App() {
     }, [navInitialState])
 
     React.useEffect(() => {
-        console.log('---useEffect')
         let mockPreparingTimer = BunnyConstants.fooTimeout;
         const bootstrapAsync = async () => {
             try {
@@ -69,7 +68,6 @@ function App() {
                     try {
                         const languageSaved = await AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY);
                         languageSaved && dispatch(restoreLanguage({language: languageSaved}));
-                        // await i18n.changeLanguage(language)
                         AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY)
                             .then((language) => {
                                 const lang = language || localization.locale;

@@ -4,18 +4,18 @@ export type RootStackParam = {
     Profile: { id: string };
     DemoFCReduxHook: undefined;
     DemoCollection: undefined;
-    DemoRoute: { id: string ,isHuman:boolean, sort?: 'latest' | 'top' };
+    DemoRoute: { id: string, isHuman: boolean, sort?: 'latest' | 'top' };
     DemoThirdPart: undefined;
     DemoThunkCC: undefined;
     DemoMap: undefined;
     TestMap: undefined;
-    DemoTab: undefined;
-    DemoNested: undefined;
+    DemoTab: undefined | { screen: string; params: { [key: string]: any } };
+    DemoNested: undefined | { screen: string; params: { [key: string]: any } };
     DemoRNComponents: undefined;
     DemoShare: undefined;
     DemoTheme: undefined;
     DemoSuspense: undefined;
-    DemoBitcoin: undefined | { screen: 'BitcoinAlert'; params: { isPush: boolean } };
+    DemoBitcoin: undefined | { screen: string; params: { [key: string]: any } };
     Settings: undefined;
 };
 

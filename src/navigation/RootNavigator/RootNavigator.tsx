@@ -1,5 +1,5 @@
 import React, {ComponentClass, FunctionComponent} from "react";
-import * as Stacks from "../../stacks";
+import * as Stacks from "../stacks";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types/models";
 import HomeScreen from "../../screens/Home";

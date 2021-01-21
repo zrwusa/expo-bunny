@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {
     RootStackParam, DemoNestedStackParam, DemoTabStackParam,
     DemoTabRNComponentsStackParam, DemoBitcoinStackParam
-} from "../types/stacks";
+} from "../../types/stacks";
 
 export const RootStack = createStackNavigator<RootStackParam>();
 
