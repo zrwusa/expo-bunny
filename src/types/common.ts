@@ -5,8 +5,6 @@ export interface Config {
         parse?: Record<string, (value: string) => any>,
         stringify?: Record<string, (value: any) => string>,
         screens?: Config,
-        initialRouteName?: string,
-        options?:any,
-        tabBarOptions?:any
+        initialRouteName?: string
     };
 }

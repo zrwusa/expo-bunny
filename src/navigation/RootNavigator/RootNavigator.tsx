@@ -36,6 +36,7 @@ import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 import {useTranslation} from "react-i18next";
 import DrawerHomeScreen from "../../screens/DemoDrawer/DrawerHome/DrawerHome";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/DrawerSettings/DrawerSettings";
+import {DrawerType} from "react-native-gesture-handler/DrawerLayout";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -45,7 +46,8 @@ type Screen = {
     stringify?: Record<string, (value: string) => any>;
     screens?: Screen[];
     initialParams?: Object;
-    stack?: typeof Stacks.RootStack
+    stack?:
+        typeof Stacks.RootStack
         | typeof Stacks.DemoNestedStack
         | typeof Stacks.DemoTabStack
         | typeof Stacks.DemoTabRNComponentsStack
@@ -53,8 +55,10 @@ type Screen = {
         | typeof Stacks.DemoDrawerStack,
     signInComponent?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
     options?: any,
-    screenOptions?:any,
-    tabBarOptions?: any
+    screenOptions?: any,
+    tabBarOptions?: any,
+    drawerType?: DrawerType,
+    openByDefault?: boolean
 };
 
 const customHeaderRight = () => {
@@ -70,7 +74,7 @@ const customHeaderRight = () => {
     />
 }
 
-const customOptions = {
+const generalOptions = {
     headerRight: customHeaderRight,
     headerStyle: {
         height: Platform.select({
@@ -90,27 +94,24 @@ const node: Screen = {
     stack: Stacks.RootStack,
     name: "RootStack",
     signInComponent: SignInScreen,
+    screenOptions: generalOptions,
     screens: [
         {
             component: HomeScreen, name: "Home", path: "home",
-            options: customOptions,
         },
         {
             component: ProfileScreen, name: "Profile", path: "profile/:id",
             parse: {
                 id: (id: string) => `${id}`,
             },
-            options: customOptions
         },
         {
             component: DemoFCReduxHookScreen,
             name: "DemoFCReduxHook", path: "demo-fc-redux-hook",
-            options: customOptions
         },
         {
             component: DemoCollectionScreen,
             name: "DemoCollection", path: "demo-collection",
-            options: customOptions,
         },
         {
             component: DemoRouteScreen,
@@ -128,35 +129,29 @@ const node: Screen = {
                     return id
                 }
             },
-            options: customOptions,
         },
         {
             component: DemoThirdPartScreen, name: "DemoThirdPart", path: "demo-third-part",
-            options: customOptions,
         },
         {
             component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc",
-            options: customOptions,
         },
         {
             component: DemoMapScreen, name: "DemoMap", path: "demo-map",
-            options: customOptions,
         },
         {
             component: TestMapScreen, name: "TestMap", path: "test-map",
-            options: customOptions,
         },
         {
             component: DemoShareScreen, name: "DemoShare", path: "demo-share",
-            options: customOptions,
         },
         // {
         //     component: SignInScreen, name: "SignIn", path: "sign-in",
-        //     options: customOptions
+        //     options: generalOptions
         // },
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
-            options: customOptions,
+            options: generalOptions,
             tabBarOptions: tabBarOptions,
             screens: [
                 {
@@ -176,9 +171,16 @@ const node: Screen = {
             ]
         },
         {
-            name: "DemoDrawer", stack: Stacks.DemoDrawerStack, path: "demo-drawer",
-            options: customOptions,
-            screenOptions:{ headerShown: true },
+            name: "DemoDrawer",
+            stack: Stacks.DemoDrawerStack,
+            path: "demo-drawer",
+            drawerType: "front",
+            openByDefault: false,
+            options: {...generalOptions, headerShown: true},
+            screenOptions: {
+                headerShown: true,
+                headerStatusBarHeight:Platform.select({native:0})
+            },
             screens: [
                 {
                     component: DrawerHomeScreen,
@@ -198,12 +200,13 @@ const node: Screen = {
         },
         {
             name: "DemoNested", path: "demo-nested", stack: Stacks.DemoNestedStack,
+            options: {...generalOptions, headerShown: true},
+            screenOptions: generalOptions,
             screens: [
                 {
                     component: NestedHomeScreen,
                     name: "NestedHome",
                     path: "nested-home",
-                    options: customOptions,
                 },
                 {
                     component: NestedSettingsScreen,
@@ -212,7 +215,6 @@ const node: Screen = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
-                    options: customOptions,
                 }
             ]
         },
@@ -220,43 +222,37 @@ const node: Screen = {
             name: "DemoRNComponents",
             path: "demo-tab-rn-components",
             stack: Stacks.DemoTabRNComponentsStack,
-            options: customOptions,
+            screenOptions: generalOptions,
             screens: [
                 {
                     component: RNHome,
                     name: "RNHome",
                     path: "rn-home",
-                    options: customOptions,
                 },
                 {
                     component: RNSectionListScreen,
                     name: "RNSectionList",
                     path: "rn-section-list",
-                    options: customOptions,
                 },
                 {
                     component: RNFlatListScreen,
                     name: "RNFlatList",
                     path: "rn-flat-list",
-                    options: customOptions,
                 },
                 {
                     component: RNKeyboardAvoidingScreen,
                     name: "RNNoKeyboard",
                     path: "rn-keyboard-avoiding",
-                    options: customOptions,
                 },
                 {
                     component: RNSafeAreaScreen,
                     name: "RNSafeArea",
                     path: "rn-safe-area",
-                    options: customOptions,
                 },
                 {
                     component: RNVirtualizedListScreen,
                     name: "RNVirtualizedList",
                     path: "rn-virtualized-list",
-                    options: customOptions,
                 }
 
             ]
@@ -265,34 +261,32 @@ const node: Screen = {
             name: "DemoBitcoin",
             stack: Stacks.DemoBitcoinStack,
             path: "demo-bitcoin",
-            options: customOptions,
+            screenOptions: generalOptions,
             screens: [
                 {
                     component: BitcoinHomeScreen,
                     name: "BitcoinHome",
                     path: "bitcoin-home",
-                    options: customOptions,
                 },
                 {
                     component: BitcoinAlertScreen,
                     name: "BitcoinAlert",
                     path: "bitcoin-alert/:isPush",
                     initialParams: {"isPush": true},
-                    options: customOptions,
                 }
             ]
         },
         {
             component: SettingsScreen, name: "Settings", path: "settings",
-            options: customOptions,
+            options: generalOptions,
         },
         {
             component: DemoSuspenseScreen, name: "DemoSuspense", path: "demo-suspense",
-            options: customOptions,
+            options: generalOptions,
         },
         {
             component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme",
-            options: customOptions,
+            options: generalOptions,
         },
     ]
 }
@@ -310,7 +304,7 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
             ? <Navigator {...rest}>
                 {authState && (authState.accessToken === undefined)
                     ? (<ScreenComponent component={SignInScreen} name="SignIn" options={{
-                        ...customOptions,
+                        ...generalOptions,
                         title: t(`screens.SignIn.title`)
                     }}/>)
                     : (<>
@@ -350,8 +344,9 @@ const recursiveConfig = (screens: Screen[]): Config => {
             screens: (screen.screens && screen.screens.length) ? recursiveConfig(screen.screens) : undefined,
             parse: screen.parse,
             stringify: screen.stringify,
-            options: screen.options,
-            tabBarOptions: screen.tabBarOptions || undefined
+            // options: screen.options,
+            // tabBarOptions: screen.tabBarOptions || undefined,
+            // screenOptions: screen.screenOptions
         }
     })
     return obj;

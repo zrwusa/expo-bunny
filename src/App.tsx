@@ -38,11 +38,12 @@ function App() {
 
     const navInitialStateMemorized = useMemo(() => {
         return navInitialState;
-    }, [navInitialState])
+    }, [navInitialState]);
 
     React.useEffect(() => {
         let mockPreparingTimer = BunnyConstants.fooTimeout;
         const bootstrapAsync = async () => {
+            dispatch(restoreIsReady({isReady: false}));
             try {
                 const accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
                 const user = await AsyncStorage.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
@@ -81,7 +82,7 @@ function App() {
                                 const savedState = await AsyncStorage.getItem(BunnyConstants.NAV_STATE_PERSISTENCE_KEY);
                                 const state = savedState ? JSON.parse(savedState) : undefined;
                                 if (state !== undefined) {
-                                    dispatch(restoreNavInitialState(state));
+                                    dispatch(restoreNavInitialState({navInitialState: state}));
                                 }
                             }
                         } catch (err) {
