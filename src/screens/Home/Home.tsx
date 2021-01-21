@@ -32,6 +32,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>{st(`route`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoTab')}>
                         <TextBtn>{st(`tab`)}</TextBtn></ButtonTO>
+                    <ButtonTO onPress={() => navigation.navigate('DemoDrawer')}>
+                        <TextBtn>{st(`drawer`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoNested')}>
                         <TextBtn>{st(`nestedNavigation`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoNested',

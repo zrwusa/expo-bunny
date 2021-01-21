@@ -10,6 +10,7 @@ export type RootStackParam = {
     DemoMap: undefined;
     TestMap: undefined;
     DemoTab: undefined | { screen: string; params: { [key: string]: any } };
+    DemoDrawer: undefined | { screen: string; params: { [key: string]: any } };
     DemoNested: undefined | { screen: string; params: { [key: string]: any } };
     DemoRNComponents: undefined;
     DemoShare: undefined;
@@ -27,6 +28,11 @@ export type DemoNestedStackParam = {
 export type DemoTabStackParam = {
     TabHome: undefined;
     TabSettings: { item: string };
+};
+
+export type DemoDrawerStackParam = {
+    DrawerHome: undefined;
+    DrawerSettings: { item: string };
 };
 
 export type DemoBitcoinStackParam = {

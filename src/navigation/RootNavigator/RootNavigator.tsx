@@ -34,6 +34,8 @@ import {restoreAndSaveTheme} from "../../stores/sys/actions";
 import SettingsItem from "../../screens/Settings/SettingsItem/SettingsItem";
 import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 import {useTranslation} from "react-i18next";
+import DrawerHomeScreen from "../../screens/DemoDrawer/DrawerHome/DrawerHome";
+import DrawerSettingsScreen from "../../screens/DemoDrawer/DrawerSettings/DrawerSettings";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -43,9 +45,15 @@ type Screen = {
     stringify?: Record<string, (value: string) => any>;
     screens?: Screen[];
     initialParams?: Object;
-    stack?: typeof Stacks.RootStack | typeof Stacks.DemoNestedStack | typeof Stacks.DemoTabStack | typeof Stacks.DemoTabRNComponentsStack | typeof Stacks.DemoBitcoinStack,
+    stack?: typeof Stacks.RootStack
+        | typeof Stacks.DemoNestedStack
+        | typeof Stacks.DemoTabStack
+        | typeof Stacks.DemoTabRNComponentsStack
+        | typeof Stacks.DemoBitcoinStack
+        | typeof Stacks.DemoDrawerStack,
     signInComponent?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
     options?: any,
+    screenOptions?:any,
     tabBarOptions?: any
 };
 
@@ -168,6 +176,27 @@ const node: Screen = {
             ]
         },
         {
+            name: "DemoDrawer", stack: Stacks.DemoDrawerStack, path: "demo-drawer",
+            options: customOptions,
+            screenOptions:{ headerShown: true },
+            screens: [
+                {
+                    component: DrawerHomeScreen,
+                    name: "DrawerHome",
+                    path: "drawer-home",
+                },
+                {
+                    component: DrawerSettingsScreen,
+                    name: "DrawerSettings",
+                    path: "drawer-settings/:item",
+                    initialParams: {"item": "item-001"},
+                    parse: {
+                        item: (item: string) => `${item}`,
+                    },
+                }
+            ]
+        },
+        {
             name: "DemoNested", path: "demo-nested", stack: Stacks.DemoNestedStack,
             screens: [
                 {
@@ -273,10 +302,10 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {t} = useTranslation();
     const {stack, ...rest} = node;
     const Navigator = stack?.Navigator;
+    // console.log('---stack,Navigator',stack,Navigator)
     let ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
     const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
-
-    return (
+    const jsxNode = (
         Navigator
             ? <Navigator {...rest}>
                 {authState && (authState.accessToken === undefined)
@@ -307,6 +336,8 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
             </Navigator>
             : null
     );
+    // console.log(`---jsxNode`,jsxNode)
+    return jsxNode;
 }
 
 const RootNavigator: React.FC = () => <RecursiveNavigator node={node}/>;

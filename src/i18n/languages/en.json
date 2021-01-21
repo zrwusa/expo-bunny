@@ -14,6 +14,7 @@
       "profile": "Profile",
       "route": "Route",
       "tab": "Tab",
+      "drawer": "Drawer",
       "nestedNavigation": "Nested Navigation",
       "passParamsFromRootToLeaf": "Root To Leaf",
       "passParamsFromRootToLeafTab": "Root To Leaf(Tab)",
@@ -102,6 +103,15 @@
     },
     "TabSettings": {
       "title": "TabSettings"
+    },
+    "DemoDrawer": {
+      "title": "DemoDrawer"
+    },
+    "DrawerHome": {
+      "title": "DrawerHome"
+    },
+    "DrawerSettings": {
+      "title": "DrawerSettings"
     },
     "DemoNested": {
       "title": "DemoNested"
