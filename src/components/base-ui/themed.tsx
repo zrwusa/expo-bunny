@@ -27,6 +27,7 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...r
         backgroundColor: colors.demoColor1,
         marginTop: measure.spacings.s,
         borderRadius: borderRadius.xs,
+        fontSize:measure.fontSizes.m,
         ...styleObj
     }} {...rest} >{children}</TouchableOpacityRN>);
 }
@@ -37,9 +38,9 @@ export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
     return (<TextRN style={{
         color: colors.btnTextColor,
         paddingVertical: measure.spacings.s,
-        paddingHorizontal: measure.spacings.l,
+        paddingHorizontal: measure.spacings.m,
         fontFamily: fonts.regular.fontFamily,
-        fontSize: measure.fontSizes.l,
+        fontSize: measure.fontSizes.m,
         ...styleObj
     }} {...rest}>{children}</TextRN>);
 }

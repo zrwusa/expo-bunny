@@ -8,6 +8,7 @@ import {stFactory} from "../../i18n/short-t";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types/models";
 import {Avatar} from "react-native-elements";
+import containerStyle from "../../containers";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
@@ -20,7 +21,7 @@ function ProfileScreen({route, navigation}: Props) {
     const st = stFactory(t, i18nPrefix);
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={[containerStyle.screen,containerStyle.centralized]}>
             <Avatar source={{uri: avatar_url}}/>
             <Text>{st(`profileScreenId`)}{route.params.id}</Text>
             <Text>{st(`email`)}{user?.email}</Text>

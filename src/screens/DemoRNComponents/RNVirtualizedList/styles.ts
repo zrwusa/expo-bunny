@@ -1,11 +1,6 @@
 import {StyleSheet} from "react-native";
-import BunnyConstants from "../../../common/constants";
 
 export const virtualizedListStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // marginTop: BunnyConstants.statusBarHeight,
-    },
     item: {
         backgroundColor: '#bfbfbf',
         height: 150,

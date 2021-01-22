@@ -6,7 +6,7 @@ export const CARD_HEIGHT = height / 4;
 export const CARD_WIDTH = CARD_HEIGHT - 50;
 
 const styles = StyleSheet.create({
-    container: {
+    mapView: {
         flex: 1,
     },
     scrollView: {

@@ -184,7 +184,8 @@
     "DemoTheme": {
       "title": "DemoTheme",
       "btnCustom": "TOButton Themed From RN",
-      "btnFromPaper": "Button From Paper"
+      "btnFromPaper": "Button From Paper",
+      "demoShadow": "Demo shadow compatible with Android"
     }
   },
   "CFBundleDisplayName": "CF Bundle DisplayName",

@@ -3,12 +3,6 @@ import BunnyConstants from "../../../common/constants";
 
 const window = Dimensions.get("window");
 
-export const screenStyles = StyleSheet.create({
-    container: {
-        justifyContent: "center",
-    },
-});
-
 export const activityIndicatorStyles = StyleSheet.create({
     horizontal: {
         flexDirection: "row",
@@ -17,8 +11,7 @@ export const activityIndicatorStyles = StyleSheet.create({
     }
 })
 
-export const switchStyles = StyleSheet.create({
-})
+export const switchStyles = StyleSheet.create({})
 
 export const imageStyles = StyleSheet.create({
     tinyLogo: {
@@ -231,18 +224,3 @@ export const virtualizedListStyles = StyleSheet.create({
         fontSize: 32,
     },
 })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
-// export const xxxStyles = StyleSheet.create({
-//
-// })
-// export const xxxStyles = StyleSheet.create({
-//
-// })

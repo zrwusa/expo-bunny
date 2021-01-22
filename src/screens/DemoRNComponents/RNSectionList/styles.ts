@@ -1,10 +1,7 @@
 import {StyleSheet} from "react-native";
-import BunnyConstants from "../../../common/constants";
 
 export const sectionListStyles = StyleSheet.create({
     container: {
-        flex: 1,
-        // marginTop: BunnyConstants.statusBarHeight,
         marginHorizontal: 2
     },
     item: {

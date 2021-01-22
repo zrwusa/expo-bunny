@@ -8,6 +8,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
+import containerStyle from "../../containers";
 
 type SelectedImage = {
     localUri: string
@@ -64,21 +65,21 @@ export function DemoShareScreen() {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={[containerStyle.screen,containerStyle.centralized]}>
             <View style={{marginTop: 50}}>
                 <Button onPress={onShare} title={st(`shareMessage`)}/>
             </View>
             {
                 (selectedImage && selectedImage.localUri)
                     ? (
-                        <View style={styles.container}>
+                        <View style={containerStyle.centralized}>
                             <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail}></Image>
                             <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
                                 <Text style={styles.buttonText}>Share this photo</Text>
                             </TouchableOpacity>
                         </View>
                     )
-                    : <View style={styles.container}>
+                    : <View style={containerStyle.centralized}>
                         <Image source={{uri: 'https://i.imgur.com/TkIrScD.png'}} style={styles.logo}/>
                         <Text style={styles.instructions}>
                             {st(`pressButtonTip`)}

@@ -1,13 +1,12 @@
 import * as React from "react";
-import {ScrollView, Switch, View} from "react-native";
+import {ScrollView, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {signOutAndRemove} from "../../stores/auth/actions";
 import {RootStackParam} from "../../types/stacks";
-import styles from "./styles";
 import {ButtonTO, TextBtn, Text} from "../../components/base-ui";
-import containerStyle from "../../containers/box";
+import containerStyle from "../../containers";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
 
@@ -23,8 +22,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
 
     return (
         <ScrollView>
-            <View style={styles.screen}>
-                <View style={containerStyle.box}>
+            <View style={containerStyle.screen}>
+                <View style={containerStyle.card}>
                     <Text>{st(`navAndRoute`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
                         <TextBtn>{st(`profile`)}</TextBtn></ButtonTO>
@@ -47,24 +46,21 @@ function HomeScreen({navigation}: HomeScreenProps) {
                             params: {isPush: true},
                         })}><TextBtn>{st(`passParamsFromRootToLeafTab`)}</TextBtn></ButtonTO>
                 </View>
-
-                <View style={containerStyle.box}>
+                <View style={containerStyle.card}>
                     <Text>{st(`redux`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoFCReduxHook')}>
                         <TextBtn>{st(`FCReduxHook`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoThunkCC')}>
                         <TextBtn>{st(`thunkCC`)}</TextBtn></ButtonTO>
                 </View>
-
-                <View style={containerStyle.box}>
+                <View style={containerStyle.card}>
                     <Text>{st(`nativeCapabilities`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoMap')}>
                         <TextBtn>{st(`map`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoShare')}>
                         <TextBtn>{st(`share`)}</TextBtn></ButtonTO>
                 </View>
-
-                <View style={containerStyle.box}>
+                <View style={containerStyle.card}>
                     <Text>{st(`componentsAndThemes`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoThirdPart')}>
                         <TextBtn>{st(`thirdPart`)}</TextBtn></ButtonTO>
@@ -77,21 +73,18 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>
                         <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>
                 </View>
-
-                <View style={containerStyle.box}>
+                <View style={containerStyle.card}>
                     <Text>{st(`others`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoBitcoin')}>
                         <TextBtn>{st(`bitcoin`)}</TextBtn></ButtonTO>
                 </View>
-
-                <View style={containerStyle.box}>
+                <View style={containerStyle.card}>
                     <Text>{st(`system`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('Settings')}>
                         <TextBtn>{st(`settings`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => dispatch(signOutAndRemove())}>
                         <TextBtn>{st(`signOut`)}</TextBtn></ButtonTO>
                 </View>
-
             </View>
         </ScrollView>
     );

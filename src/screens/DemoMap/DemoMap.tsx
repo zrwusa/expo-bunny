@@ -8,10 +8,11 @@ import {Action} from "redux";
 import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
 import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
-import MapView from "react-native-maps";
+import MapView, {PROVIDER_GOOGLE,PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../common/constants";
 import {sysError} from "../../stores/sys/actions";
 import styles, {CARD_WIDTH} from "./styles";
+import containerStyle from "../../containers";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -120,12 +121,12 @@ class DemoMapScreen extends Component<Props> {
         });
 
         return (
-            <View style={styles.container}>
+            <View style={containerStyle.screen}>
                 <MapView
                     ref={this.mapView}
                     initialRegion={this.props.region}
-                    style={styles.container}
-                    // provider={PROVIDER_GOOGLE}
+                    style={styles.mapView}
+                    provider={PROVIDER_DEFAULT}
                 >
                     {this.props.demoNearbyFilms.length > 0 && this.props.demoNearbyFilms.map((marker, index) => {
                         const scaleStyle = {

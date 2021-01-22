@@ -4,7 +4,7 @@ import DemoCCClock from "../../components/DemoCCClock";
 import DemoRequest from "../../components/DemoRequest";
 import {View, TextInput} from "../../components/base-ui";
 import styles from "./styles";
-import containerStyle from "../../containers/box";
+import containerStyle from "../../containers";
 import {DemoSvg} from "../../components/DemoSvg";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
@@ -21,26 +21,28 @@ class DemoCollectionScreen extends Component<Props, States> {
         const {t} = this.props;
         const i18nPrefix = 'screens.DemoCollection';
         const st = stFactory(t, i18nPrefix);
-        return (<View style={styles.container}>
-            <View style={containerStyle.box}>
-                <DemoFCCard title={st(`functionComponent`)}/>
+        return (
+            <View  style={containerStyle.screen}>
+                <View style={containerStyle.card}>
+                    <DemoFCCard title={st(`functionComponent`)}/>
+                </View>
+                <View style={containerStyle.card}>
+                    <DemoCCClock title={st(`classComponent`)}
+                                 tipLabel={st(`tipLabel`)}
+                                 goButtonTitle={st(`go`)}
+                                 stopButtonTitle={st(`stop`)}/>
+                </View>
+                <View style={containerStyle.card}>
+                    <DemoRequest title={st(`lbRequest`)} buttonTitle={st(`btnRequest`)}/>
+                </View>
+                <View style={containerStyle.card}>
+                    <TextInput placeholder={st(`placeholder`)}/>
+                </View>
+                <View style={containerStyle.card}>
+                    <DemoSvg/>
+                </View>
             </View>
-            <View style={containerStyle.box}>
-                <DemoCCClock title={st(`classComponent`)}
-                             tipLabel={st(`tipLabel`)}
-                             goButtonTitle={st(`go`)}
-                             stopButtonTitle={st(`stop`)}/>
-            </View>
-            <View style={containerStyle.box}>
-                <DemoRequest title={st(`lbRequest`)} buttonTitle={st(`btnRequest`)}/>
-            </View>
-            <View style={containerStyle.box}>
-                <TextInput placeholder={st(`placeholder`)}/>
-            </View>
-            <View style={containerStyle.box}>
-                <DemoSvg/>
-            </View>
-        </View>);
+        );
     }
 }
 

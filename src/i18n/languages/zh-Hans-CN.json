@@ -14,6 +14,7 @@
       "profile": "我的",
       "route": "路由",
       "tab": "底部导航",
+      "drawer": "抽屉导航",
       "nestedNavigation": "嵌套导航",
       "passParamsFromRootToLeaf": "根节点到叶子节点传参",
       "passParamsFromRootToLeafTab": "根节点到叶子节点(底部导航)",
@@ -103,6 +104,15 @@
     "TabSettings": {
       "title": "选项卡-设置"
     },
+    "DemoDrawer": {
+      "title": "样例-抽屉"
+    },
+    "DrawerHome": {
+      "title": "抽屉-首页"
+    },
+    "DrawerSettings": {
+      "title": "抽屉-设置"
+    },
     "DemoNested": {
       "title": "样例-嵌套"
     },
@@ -174,7 +184,8 @@
     "DemoTheme": {
       "title": "样例-主题",
       "btnCustom": "RN按钮",
-      "btnFromPaper": "RNE按钮"
+      "btnFromPaper": "RNE按钮",
+      "demoShadow": "阴影样式，兼容安卓"
     }
   },
   "CFBundleDisplayName": "中文 CF Bundle DisplayName",

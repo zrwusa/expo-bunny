@@ -3,6 +3,7 @@ import {View, SafeAreaView, VirtualizedList} from "react-native";
 import {Text} from "../../../components/base-ui"
 import {virtualizedListStyles} from "./styles";
 import {useTheme} from "../../../styles/theme";
+import containerStyle from "../../../containers";
 
 type Item = {
     id: string;
@@ -41,7 +42,7 @@ const VirtualizedListItem = ({title}: Item) => {
 
 const RNVirtualizedListScreen: React.FC = () => {
     return (
-        <SafeAreaView style={virtualizedListStyles.container}>
+        <SafeAreaView style={containerStyle.screen}>
             <VirtualizedList
                 data={VIRTUALIZED_LIST_DATA}
                 initialNumToRender={6}

@@ -1,9 +1,6 @@
 import {StyleSheet} from "react-native";
 
 export const keyboardAvoidingViewStyles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     inner: {
         padding: 24,
         flex: 1,

@@ -6,7 +6,7 @@ import {DemoThunk, RootState} from "../../types/models";
 import {DemoThunkPayload} from "../../types/payloads";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
-import containerStyle from "../../containers/box";
+import containerStyle from "../../containers";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
 
@@ -37,10 +37,12 @@ export class DemoThunkCCScreen extends React.Component<Props> {
         const {text, id} = this.props;
         const st = stFactory(t, i18nPrefix);
         return (
-            <View style={containerStyle.box}>
-                <Text>{st(`text`)}{text}</Text>
-                <Text>{st(`id`)}{id}</Text>
-                <ButtonRNE onPress={this.handleThunk} title={st(`thunkDispatch`)}/>
+            <View style={containerStyle.screen}>
+                <View style={containerStyle.card}>
+                    <Text>{st(`text`)}{text}</Text>
+                    <Text>{st(`id`)}{id}</Text>
+                    <ButtonRNE onPress={this.handleThunk} title={st(`thunkDispatch`)}/>
+                </View>
             </View>
         );
     }

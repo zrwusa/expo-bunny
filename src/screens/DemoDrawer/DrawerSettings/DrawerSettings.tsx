@@ -3,7 +3,7 @@ import {View, Text} from "../../../components/base-ui";
 import {RouteProp} from "@react-navigation/native";
 import {DrawerNavigationProp} from "@react-navigation/drawer";
 import {DemoDrawerStackParam} from "../../../types/stacks";
-import containerStyle from "../../../containers/box";
+import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../i18n/short-t";
 
@@ -16,9 +16,11 @@ export function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
     const i18nPrefix = "screens.DrawerSettings";
     const st = stFactory(t, i18nPrefix);
     return (
-        <View style={containerStyle.box}>
-            <Text>{st(`title`)}</Text>
-            <Text>{route.params.item}</Text>
+        <View style={containerStyle.screen}>
+            <View style={containerStyle.card}>
+                <Text>{st(`title`)}</Text>
+                <Text>{route.params.item}</Text>
+            </View>
         </View>
     );
 }

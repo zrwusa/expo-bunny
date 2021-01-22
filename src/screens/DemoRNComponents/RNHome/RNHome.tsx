@@ -6,11 +6,10 @@ import {
 } from "react-native";
 import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/base-ui";
 import {
-    screenStyles, activityIndicatorStyles, switchStyles, imageStyles, imageBackgroundStyles,
-    modalStyles, pressableStyles, statusBarStyles, touchableHighlightStyles, touchableOpacityStyles,
-    touchableWithoutFeedbackStyles
+    imageStyles, imageBackgroundStyles,modalStyles, pressableStyles, statusBarStyles,
+    touchableHighlightStyles, touchableOpacityStyles,touchableWithoutFeedbackStyles
 } from "./styles";
-import containerStyle from "../../../containers/box";
+import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../i18n/short-t";
 
@@ -59,14 +58,14 @@ const RNHome: React.FC = () => {
         setTouchableWithoutFeedbackCount(touchableWithoutFeedbackCount + 1);
     };
     return (
-        <ScrollView contentContainerStyle={screenStyles.container}>
-            <View style={containerStyle.box}>
+        <ScrollView contentContainerStyle={containerStyle.centralized}>
+            <View style={containerStyle.card}>
                 <ActivityIndicator/>
                 <ActivityIndicator size="large"/>
                 <ActivityIndicator size="small" color="#0000ff"/>
                 <ActivityIndicator size="large" color="#00ff00"/>
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <Button
                     onPress={() => null}
                     title={st(`btnAccessibility`)}
@@ -74,7 +73,7 @@ const RNHome: React.FC = () => {
                     accessibilityLabel={st(`lbAccessibility`)}
                 />
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <Switch
                     trackColor={{false: "#767577", true: "#81b0ff"}}
                     thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -83,7 +82,7 @@ const RNHome: React.FC = () => {
                     value={isEnabled}
                 />
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <Image
                     style={imageStyles.tinyLogo}
                     source={{
@@ -98,14 +97,14 @@ const RNHome: React.FC = () => {
                     }}
                 />
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
                     <Text style={imageBackgroundStyles.text}>Inside</Text>
                 </ImageBackground>
             </View>
 
 
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <Pressable
                     onPress={() => {
                         setTimesPressed((current) => current + 1);
@@ -164,17 +163,17 @@ const RNHome: React.FC = () => {
                 </TouchableHighlight>
             </View>
 
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <Text>Picker ???</Text>
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                     onChangeText={text => onChangeText(text)}
                     value={textInputValue}
                 />
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <TouchableHighlight onPress={onTouchableHighlightPress}>
                     <View style={touchableHighlightStyles.button}>
                         <Text>{st(`touchHere`)}</Text>
@@ -187,7 +186,7 @@ const RNHome: React.FC = () => {
                 </View>
 
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <View style={touchableOpacityStyles.countContainer}>
                     <Text>{st(`count`)}{touchableOpacityCount}</Text>
                 </View>
@@ -198,7 +197,7 @@ const RNHome: React.FC = () => {
                     <Text>{st(`pressHere`)}</Text>
                 </TouchableOpacity>
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <View style={touchableWithoutFeedbackStyles.countContainer}>
                     <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
                 </View>
@@ -208,7 +207,7 @@ const RNHome: React.FC = () => {
                     </View>
                 </TouchableWithoutFeedback>
             </View>
-            <View style={containerStyle.box}>
+            <View style={containerStyle.card}>
                 <View>
                     <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
                     <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>

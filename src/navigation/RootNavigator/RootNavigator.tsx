@@ -75,19 +75,30 @@ const customHeaderRight = () => {
 }
 
 const generalOptions = {
+    animationEnabled: true,
     headerRight: customHeaderRight,
     headerStyle: {
         height: Platform.select({
-            web: 44,
+            web: 50,
             android: 64,
         })
     }
 }
 
+const customDrawerOptions = {
+    headerStyle: {
+        height: Platform.select({
+            web: 50,
+            android: 64,
+            ios:50,
+        })
+    },
+    headerShown: true,
+    headerStatusBarHeight: Platform.select({native: 0})
+}
+
 const tabBarOptions = {
-    labelStyle: {fontSize: 12},
     tabStyle: {justifyContent: 'center'},
-    style: {backgroundColor: 'powderblue'},
 }
 
 const node: Screen = {
@@ -177,10 +188,7 @@ const node: Screen = {
             drawerType: "front",
             openByDefault: false,
             options: {...generalOptions, headerShown: true},
-            screenOptions: {
-                headerShown: true,
-                headerStatusBarHeight:Platform.select({native:0})
-            },
+            screenOptions: customDrawerOptions,
             screens: [
                 {
                     component: DrawerHomeScreen,
@@ -223,6 +231,7 @@ const node: Screen = {
             path: "demo-tab-rn-components",
             stack: Stacks.DemoTabRNComponentsStack,
             screenOptions: generalOptions,
+            tabBarOptions:tabBarOptions,
             screens: [
                 {
                     component: RNHome,
@@ -262,6 +271,7 @@ const node: Screen = {
             stack: Stacks.DemoBitcoinStack,
             path: "demo-bitcoin",
             screenOptions: generalOptions,
+            tabBarOptions: tabBarOptions,
             screens: [
                 {
                     component: BitcoinHomeScreen,
@@ -309,21 +319,19 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
                     }}/>)
                     : (<>
                         {node.screens && node.screens.map((screen) => {
-                            return (screen.screens && screen.screens.length > 0
-                                ? <ScreenComponent {...screen}
-                                                   options={{
-                                                       ...screen.options,
-                                                       title: t(`screens.${screen.name}.title`)
-                                                   }} key={screen.name}>
-                                    {(navProps: any) => {
+                            return <ScreenComponent {...screen}
+                                                    options={{
+                                                        ...screen.options,
+                                                        title: t(`screens.${screen.name}.title`)
+                                                    }} key={screen.name}>
+                                {(screen.screens && screen.screens.length > 0)
+                                    ?
+                                    (navProps: any) => {
                                         return <RecursiveNavigator {...navProps} node={screen}/>
-                                    }}
-                                </ScreenComponent>
-                                : <ScreenComponent {...screen}
-                                                   options={{
-                                                       ...screen.options,
-                                                       title: t(`screens.${screen.name}.title`)
-                                                   }} key={screen.name}/>)
+                                    }
+                                    : null
+                                }
+                            </ScreenComponent>
                         })}
                     </>)
                 }

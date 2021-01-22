@@ -5,12 +5,13 @@ import {
 } from "react-native";
 import {Text, Button, TextInput} from "../../../components/base-ui";
 import {keyboardAvoidingViewStyles} from "./styles";
+import containerStyle from "../../../containers";
 
 export const RNKeyboardAvoidingScreen: React.FC = () => {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={keyboardAvoidingViewStyles.container}
+            style={containerStyle.screen}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={keyboardAvoidingViewStyles.inner}>

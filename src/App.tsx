@@ -67,13 +67,10 @@ function App() {
                     dispatch(sysError(err.toString()));
                 } finally {
                     try {
-                        const languageSaved = await AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY);
-                        languageSaved && dispatch(restoreLanguage({language: languageSaved}));
-                        AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY)
-                            .then((language) => {
-                                const lang = language || localization.locale;
-                                language && i18n.changeLanguage(lang);
-                            });
+                        const language = await AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY)
+                        const lang = language || localization.locale.substring(0, 2);
+                        lang && await i18n.changeLanguage(lang);
+                        lang && dispatch(restoreLanguage({language: lang}));
                     } catch (err) {
                         dispatch(sysError(err.toString()));
                     } finally {

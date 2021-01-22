@@ -3,8 +3,9 @@ import {View} from "react-native";
 import {ListItem, Avatar, Button} from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DemoButtonStyledRNE, DemoIconCssStyled} from "../../components/base-ui";
-import {withTranslation,WithTranslation} from "react-i18next";
+import {withTranslation, WithTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
+import containerStyle from "../../containers";
 
 type Props = { title?: string } & WithTranslation
 type States = { name: string }
@@ -30,26 +31,28 @@ class DemoThirdPartScreen extends Component<Props, States> {
                 subtitle: "Rios"
             },
         ];
-        return (<View>
-            <Button icon={<Icon name="air-horn" style={{color: '#FFFFFF'}}/>}
-                    title={st(`buttonWithIcon`)}/>
-            <View>
-                {list.map((l, i) => (
-                    <ListItem key={i} bottomDivider>
-                        <Avatar source={{uri: l.avatar_url}}/>
-                        <ListItem.Content>
-                            <ListItem.Title>{l.name}</ListItem.Title>
-                            <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                ))}
+        return (
+            <View style={containerStyle.screen}>
+                <Button icon={<Icon name="air-horn" style={{color: '#FFFFFF'}}/>}
+                        title={st(`buttonWithIcon`)}/>
+                <View>
+                    {list.map((l, i) => (
+                        <ListItem key={i} bottomDivider>
+                            <Avatar source={{uri: l.avatar_url}}/>
+                            <ListItem.Content>
+                                <ListItem.Title>{l.name}</ListItem.Title>
+                                <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
+                            </ListItem.Content>
+                        </ListItem>
+                    ))}
+                </View>
+                <View>
+                    <DemoButtonStyledRNE icon={<DemoIconCssStyled name="air-horn"/>}
+                                         title={st(`buttonWithIcon`)}/>
+                    <DemoIconCssStyled name="air-horn"/>
+                </View>
             </View>
-            <View>
-                <DemoButtonStyledRNE icon={<DemoIconCssStyled name="air-horn"/>}
-                                     title={st(`buttonWithIcon`)}/>
-                <DemoIconCssStyled name="air-horn"/>
-            </View>
-        </View>);
+        );
     }
 }
 
