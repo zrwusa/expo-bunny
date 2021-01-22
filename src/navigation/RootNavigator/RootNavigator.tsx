@@ -37,6 +37,8 @@ import {useTranslation} from "react-i18next";
 import DrawerHomeScreen from "../../screens/DemoDrawer/DrawerHome/DrawerHome";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/DrawerSettings/DrawerSettings";
 import {DrawerType} from "react-native-gesture-handler/DrawerLayout";
+// import {DefaultNavigatorOptions, EventMapBase, RouteConfig} from "@react-navigation/core/src/types";
+// import {NavigationState, ParamListBase} from "@react-navigation/routers";
 
 type Screen = {
     component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
@@ -58,7 +60,8 @@ type Screen = {
     screenOptions?: any,
     tabBarOptions?: any,
     drawerType?: DrawerType,
-    openByDefault?: boolean
+    openByDefault?: boolean,
+    headerMode?:"float" | "none" | "screen" | undefined,
 };
 
 const customHeaderRight = () => {
@@ -105,10 +108,13 @@ const node: Screen = {
     stack: Stacks.RootStack,
     name: "RootStack",
     signInComponent: SignInScreen,
-    screenOptions: generalOptions,
+    options:generalOptions,
+    headerMode:'float',
+    screenOptions: {...generalOptions},
     screens: [
         {
             component: HomeScreen, name: "Home", path: "home",
+
         },
         {
             component: ProfileScreen, name: "Profile", path: "profile/:id",

@@ -104,9 +104,7 @@ function App() {
             <AppearanceProvider>
                 <ThemeProvider theme={theme}>
                     <PaperProvider theme={themePaper}>
-                        {Platform.OS === 'ios' && (
-                            <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
-                        )}
+                        <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
                         <NavigationContainer linking={linking}
                                              theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
                                              fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
