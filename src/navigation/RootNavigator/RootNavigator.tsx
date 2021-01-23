@@ -1,4 +1,4 @@
-import React, {ComponentClass, FunctionComponent} from "react";
+import React, {ComponentType} from "react";
 import * as Stacks from "../stacks";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types/models";
@@ -23,7 +23,6 @@ import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardA
 import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea";
 import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
 import DemoShareScreen from "../../screens/DemoShare";
-import {Config} from "../../types/common";
 import {Platform, View} from "react-native";
 import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
@@ -36,33 +35,14 @@ import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 import {useTranslation} from "react-i18next";
 import DrawerHomeScreen from "../../screens/DemoDrawer/DrawerHome/DrawerHome";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/DrawerSettings/DrawerSettings";
-import {DrawerType} from "react-native-gesture-handler/DrawerLayout";
-// import {DefaultNavigatorOptions, EventMapBase, RouteConfig} from "@react-navigation/core/src/types";
-// import {NavigationState, ParamListBase} from "@react-navigation/routers";
-
-type Screen = {
-    component?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
-    path?: string;
-    name: string;
-    parse?: Record<string, (value: string) => any>;
-    stringify?: Record<string, (value: string) => any>;
-    screens?: Screen[];
-    initialParams?: Object;
-    stack?:
-        typeof Stacks.RootStack
-        | typeof Stacks.DemoNestedStack
-        | typeof Stacks.DemoTabStack
-        | typeof Stacks.DemoTabRNComponentsStack
-        | typeof Stacks.DemoBitcoinStack
-        | typeof Stacks.DemoDrawerStack,
-    signInComponent?: ComponentClass<any, any> | FunctionComponent<any> | undefined;
-    options?: any,
-    screenOptions?: any,
-    tabBarOptions?: any,
-    drawerType?: DrawerType,
-    openByDefault?: boolean,
-    headerMode?:"float" | "none" | "screen" | undefined,
-};
+import {DefaultNavigatorOptions, RouteConfig} from "@react-navigation/core/src/types";
+import {BottomTabBarOptions, BottomTabNavigationConfig, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import {DrawerNavigationConfig, DrawerNavigationOptions} from "@react-navigation/drawer/lib/typescript/src/types";
+import {StackNavigationOptions} from "@react-navigation/stack";
+import {DrawerRouterOptions, StackRouterOptions, TabRouterOptions} from "@react-navigation/native";
+import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
+import {Traversable} from "../../types/helpers";
+import {ParamListBase} from "@react-navigation/routers";
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -93,28 +73,55 @@ const customDrawerOptions = {
         height: Platform.select({
             web: 50,
             android: 64,
-            ios:50,
+            ios: 50,
         })
     },
     headerShown: true,
     headerStatusBarHeight: Platform.select({native: 0})
 }
 
-const tabBarOptions = {
+const tabBarOptions: BottomTabBarOptions = {
     tabStyle: {justifyContent: 'center'},
 }
+
+type Config = {
+    component?: ComponentType<any>,
+    stack?:
+        typeof Stacks.RootStack
+        | typeof Stacks.DemoNestedStack
+        | typeof Stacks.DemoTabStack
+        | typeof Stacks.DemoTabRNComponentsStack
+        | typeof Stacks.DemoBitcoinStack
+        | typeof Stacks.DemoDrawerStack,
+    signInComponent?: ComponentType<any>,
+    screens?: Screen[],
+
+    path?: string,
+    exact?: boolean,
+    parse?: Record<string, (value: string) => any>,
+    stringify?: Record<string, (value: any) => string>,
+    initialRouteName?: string,
+    [key: string]: any
+    // name:string,
+};
+type Screen =
+    (Partial<DefaultNavigatorOptions<BottomTabNavigationOptions> & TabRouterOptions & BottomTabNavigationConfig>
+        | Partial<DefaultNavigatorOptions<DrawerNavigationOptions> & DrawerRouterOptions & DrawerNavigationConfig>
+        | Partial<DefaultNavigatorOptions<StackNavigationOptions> & StackRouterOptions & StackNavigationConfig>)
+    & Partial<RouteConfig<ParamListBase, string, any, any, any>>
+    & Config;
+
 
 const node: Screen = {
     stack: Stacks.RootStack,
     name: "RootStack",
     signInComponent: SignInScreen,
-    options:generalOptions,
-    headerMode:'float',
+    options: generalOptions,
+    headerMode: 'float',
     screenOptions: {...generalOptions},
     screens: [
         {
             component: HomeScreen, name: "Home", path: "home",
-
         },
         {
             component: ProfileScreen, name: "Profile", path: "profile/:id",
@@ -162,10 +169,6 @@ const node: Screen = {
         {
             component: DemoShareScreen, name: "DemoShare", path: "demo-share",
         },
-        // {
-        //     component: SignInScreen, name: "SignIn", path: "sign-in",
-        //     options: generalOptions
-        // },
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
             options: generalOptions,
@@ -237,7 +240,7 @@ const node: Screen = {
             path: "demo-tab-rn-components",
             stack: Stacks.DemoTabRNComponentsStack,
             screenOptions: generalOptions,
-            tabBarOptions:tabBarOptions,
+            tabBarOptions: tabBarOptions,
             screens: [
                 {
                     component: RNHome,
@@ -349,25 +352,31 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
 }
 
 const RootNavigator: React.FC = () => <RecursiveNavigator node={node}/>;
-
 const recursiveConfig = (screens: Screen[]): Config => {
     let obj: Config = {};
     screens.forEach(screen => {
-        obj[screen.name] = {
-            path: screen.path,
-            screens: (screen.screens && screen.screens.length) ? recursiveConfig(screen.screens) : undefined,
-            parse: screen.parse,
-            stringify: screen.stringify,
-            // options: screen.options,
-            // tabBarOptions: screen.tabBarOptions || undefined,
-            // screenOptions: screen.screenOptions
+        const name = screen.name;
+        if (name) {
+            obj[name] = {
+                path: screen.path,
+                parse: screen.parse,
+                stringify: screen.stringify,
+                exact: screen.exact,
+                initialRouteName: screen.initialParams,
+                screens: (screen.screens && screen.screens.length) ? recursiveConfig(screen.screens) : undefined,
+            }
+        } else {
+            obj = {}
         }
     })
     return obj;
 };
 
-export const getScreensConfig = (): Config | undefined => {
-    return recursiveConfig([node]).RootStack.screens
+export const getScreensConfig = (): Screen[] | undefined => {
+    const config = recursiveConfig([node]) as Traversable;
+    return Object.keys(config)[0]
+        ? (config[Object.keys(config)[0]] as unknown as Config).screens
+        : undefined;
 }
 
 export default RootNavigator;
