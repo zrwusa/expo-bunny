@@ -9,7 +9,7 @@ export function TabHomeScreen() {
     const i18nPrefix = 'screens.TabHome';
     const st = stFactory(t, i18nPrefix);
     return (
-        <View style={containerStyle.screen}>
+        <View style={[containerStyle.screen]}>
             <View style={containerStyle.card}>
                 <Text>{st(`title`)}</Text>
             </View>

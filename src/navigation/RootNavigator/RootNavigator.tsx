@@ -39,10 +39,11 @@ import {DefaultNavigatorOptions, RouteConfig} from "@react-navigation/core/src/t
 import {BottomTabBarOptions, BottomTabNavigationConfig, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 import {DrawerNavigationConfig, DrawerNavigationOptions} from "@react-navigation/drawer/lib/typescript/src/types";
 import {StackNavigationOptions} from "@react-navigation/stack";
-import {DrawerRouterOptions, StackRouterOptions, TabRouterOptions} from "@react-navigation/native";
+import {DrawerRouterOptions, PathConfigMap, StackRouterOptions, TabRouterOptions} from "@react-navigation/native";
 import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
-import {Traversable} from "../../types/helpers";
+import {Traversable, TraversableNested} from "../../types/helpers";
 import {ParamListBase} from "@react-navigation/routers";
+import {Icon} from "../../components/base-ui";
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -57,7 +58,7 @@ const customHeaderRight = () => {
     />
 }
 
-const generalOptions = {
+const optionsHeaderAndAnimation: StackNavigationOptions = {
     animationEnabled: true,
     headerRight: customHeaderRight,
     headerStyle: {
@@ -68,7 +69,7 @@ const generalOptions = {
     }
 }
 
-const customDrawerOptions = {
+const optionsDraw: DrawerNavigationOptions = {
     headerStyle: {
         height: Platform.select({
             web: 50,
@@ -83,6 +84,7 @@ const customDrawerOptions = {
 const tabBarOptions: BottomTabBarOptions = {
     tabStyle: {justifyContent: 'center'},
 }
+
 
 type Config = {
     component?: ComponentType<any>,
@@ -112,13 +114,77 @@ type Screen =
     & Config;
 
 
+const getIconName = (routeName: string, focused: boolean) => {
+    type IconFontConfig = {
+        default: string,
+        focused: string,
+    }
+    const iconConfig: TraversableNested = {
+        TabHome: {
+            default: 'home',
+            focused: 'home',
+        },
+        TabSettings: {
+            default: 'account-settings',
+            focused: 'account-settings',
+        },
+        BitcoinHome: {
+            default: 'bitcoin',
+            focused: 'bitcoin',
+        },
+        BitcoinAlert:{
+            default: 'table-clock',
+            focused: 'table-clock',
+        },
+        RNFlatList: {
+            default: 'view-sequential',
+            focused: 'view-sequential',
+        },
+        RNHome: {
+            default: 'home-assistant',
+            focused: 'home-assistant',
+        },
+        RNNoKeyboard: {
+            default: 'keyboard-off',
+            focused: 'keyboard-off',
+        },
+        RNSafeArea: {
+            default: 'safe-square',
+            focused: 'safe-square',
+        },
+        RNSectionList: {
+            default: 'view-list',
+            focused: 'view-list',
+        },
+        RNVirtualizedList: {
+            default: 'playlist-plus',
+            focused: 'playlist-plus',
+        }
+    }
+    const key = focused ? 'focused' : 'default';
+    const routeIconObj = iconConfig[routeName] as IconFontConfig;
+    if (routeIconObj && routeIconObj[key]) {
+        return routeIconObj[key]
+    } else {
+        return ''
+    }
+}
+
+const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => ({
+    tabBarIcon: ({focused, color, size}) => {
+        const name = getIconName(route.name, focused)
+        return <Icon name={name} style={{color: color}} size={size}/>;
+    }
+})
+
+
 const node: Screen = {
     stack: Stacks.RootStack,
     name: "RootStack",
     signInComponent: SignInScreen,
-    options: generalOptions,
+    options: optionsHeaderAndAnimation,
     headerMode: 'float',
-    screenOptions: {...generalOptions},
+    screenOptions: {...optionsHeaderAndAnimation},
     screens: [
         {
             component: HomeScreen, name: "Home", path: "home",
@@ -171,8 +237,9 @@ const node: Screen = {
         },
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
-            options: generalOptions,
+            options: optionsHeaderAndAnimation,
             tabBarOptions: tabBarOptions,
+            screenOptions: screenOptionsTabBarIcon,
             screens: [
                 {
                     component: TabHomeScreen,
@@ -196,8 +263,8 @@ const node: Screen = {
             path: "demo-drawer",
             drawerType: "front",
             openByDefault: false,
-            options: {...generalOptions, headerShown: true},
-            screenOptions: customDrawerOptions,
+            options: {...optionsHeaderAndAnimation, headerShown: true},
+            screenOptions: optionsDraw,
             screens: [
                 {
                     component: DrawerHomeScreen,
@@ -217,8 +284,8 @@ const node: Screen = {
         },
         {
             name: "DemoNested", path: "demo-nested", stack: Stacks.DemoNestedStack,
-            options: {...generalOptions, headerShown: true},
-            screenOptions: generalOptions,
+            options: {...optionsHeaderAndAnimation, headerShown: true},
+            screenOptions: optionsHeaderAndAnimation,
             screens: [
                 {
                     component: NestedHomeScreen,
@@ -239,7 +306,7 @@ const node: Screen = {
             name: "DemoRNComponents",
             path: "demo-tab-rn-components",
             stack: Stacks.DemoTabRNComponentsStack,
-            screenOptions: generalOptions,
+            screenOptions: screenOptionsTabBarIcon,
             tabBarOptions: tabBarOptions,
             screens: [
                 {
@@ -248,14 +315,19 @@ const node: Screen = {
                     path: "rn-home",
                 },
                 {
+                    component: RNFlatListScreen,
+                    name: "RNFlatList",
+                    path: "rn-flat-list",
+                },
+                {
                     component: RNSectionListScreen,
                     name: "RNSectionList",
                     path: "rn-section-list",
                 },
                 {
-                    component: RNFlatListScreen,
-                    name: "RNFlatList",
-                    path: "rn-flat-list",
+                    component: RNVirtualizedListScreen,
+                    name: "RNVirtualizedList",
+                    path: "rn-virtualized-list",
                 },
                 {
                     component: RNKeyboardAvoidingScreen,
@@ -266,20 +338,14 @@ const node: Screen = {
                     component: RNSafeAreaScreen,
                     name: "RNSafeArea",
                     path: "rn-safe-area",
-                },
-                {
-                    component: RNVirtualizedListScreen,
-                    name: "RNVirtualizedList",
-                    path: "rn-virtualized-list",
                 }
-
             ]
         },
         {
             name: "DemoBitcoin",
             stack: Stacks.DemoBitcoinStack,
             path: "demo-bitcoin",
-            screenOptions: generalOptions,
+            screenOptions: screenOptionsTabBarIcon,
             tabBarOptions: tabBarOptions,
             screens: [
                 {
@@ -297,15 +363,15 @@ const node: Screen = {
         },
         {
             component: SettingsScreen, name: "Settings", path: "settings",
-            options: generalOptions,
+            options: optionsHeaderAndAnimation,
         },
         {
             component: DemoSuspenseScreen, name: "DemoSuspense", path: "demo-suspense",
-            options: generalOptions,
+            options: optionsHeaderAndAnimation,
         },
         {
             component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme",
-            options: generalOptions,
+            options: optionsHeaderAndAnimation,
         },
     ]
 }
@@ -313,7 +379,7 @@ const node: Screen = {
 type RecursiveNavigatorProps = { node: Screen }
 const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {t} = useTranslation();
-    const {stack, ...rest} = node;
+    const {stack, component, signInComponent, screens, path, exact, parse, stringify, initialParams, ...rest} = node;
     const Navigator = stack?.Navigator;
     // console.log('---stack,Navigator',stack,Navigator)
     let ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
@@ -323,7 +389,7 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
             ? <Navigator {...rest}>
                 {authState && (authState.accessToken === undefined)
                     ? (<ScreenComponent component={SignInScreen} name="SignIn" options={{
-                        ...generalOptions,
+                        ...optionsHeaderAndAnimation,
                         title: t(`screens.SignIn.title`)
                     }}/>)
                     : (<>
@@ -372,11 +438,9 @@ const recursiveConfig = (screens: Screen[]): Config => {
     return obj;
 };
 
-export const getScreensConfig = (): Screen[] | undefined => {
+export const getScreensConfig = (): PathConfigMap => {
     const config = recursiveConfig([node]) as Traversable;
-    return Object.keys(config)[0]
-        ? (config[Object.keys(config)[0]] as unknown as Config).screens
-        : undefined;
+    return (config[Object.keys(config)[0]] as unknown as Config).screens as unknown as PathConfigMap;
 }
 
 export default RootNavigator;

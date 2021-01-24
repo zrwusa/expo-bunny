@@ -60,7 +60,7 @@ export const DemoButtonStyledRNE = styled(ButtonElement).attrs({
 
 export const DemoIconCssStyled = styled(Icon)`
   font-size: ${measure.fontSizes.m}px;
-  color:${DefaultTheme.colors.demoColor0};
+  color:${DefaultTheme.colors.primary};
   padding: ${measure.spacings.s}px;
 `
 

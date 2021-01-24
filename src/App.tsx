@@ -5,10 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import * as Linking from "expo-linking";
 import {Provider as PaperProvider} from "react-native-paper";
 import {AppearanceProvider, useColorScheme} from "react-native-appearance";
-import {
-    DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
-    NavigationContainer
-} from "@react-navigation/native";
+import {DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav, NavigationContainer} from "@react-navigation/native";
 import RootNavigator, {getScreensConfig} from "./navigation/RootNavigator";
 import {EThemes} from "./types/enums";
 import BunnyConstants from "./common/constants";

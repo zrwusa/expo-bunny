@@ -1,4 +1,5 @@
 {
+  "exclude": ["backup/","web-build/","note.txt","test.json"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
