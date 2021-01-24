@@ -1,12 +1,14 @@
+import {TraversableNested} from "../types/helpers";
+
 export function getValue<T, K extends keyof T>(obj: T, names: K[]): Array<T[K]> {
     return names.map(i => obj[i])
 }
 
-function isObject(object) {
+function isObject(object: string | object | boolean | Function | number) {
     return object != null && typeof object === 'object';
 }
 
-export function deepEqual(object1, object2) {
+export function deepEqual(object1: TraversableNested, object2: TraversableNested) {
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);
 

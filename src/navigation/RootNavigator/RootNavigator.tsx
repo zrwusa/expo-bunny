@@ -1,4 +1,4 @@
-import React, {ComponentType} from "react";
+import * as React from "react";
 import * as Stacks from "../stacks";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types/models";
@@ -35,15 +35,15 @@ import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 import {useTranslation} from "react-i18next";
 import DrawerHomeScreen from "../../screens/DemoDrawer/DrawerHome/DrawerHome";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/DrawerSettings/DrawerSettings";
-import {DefaultNavigatorOptions, RouteConfig} from "@react-navigation/core/src/types";
-import {BottomTabBarOptions, BottomTabNavigationConfig, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
-import {DrawerNavigationConfig, DrawerNavigationOptions} from "@react-navigation/drawer/lib/typescript/src/types";
+import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
+import {BottomTabBarOptions, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import {DrawerNavigationOptions} from "@react-navigation/drawer/lib/typescript/src/types";
 import {StackNavigationOptions} from "@react-navigation/stack";
-import {DrawerRouterOptions, PathConfigMap, StackRouterOptions, TabRouterOptions} from "@react-navigation/native";
-import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
+import {PathConfigMap} from "@react-navigation/native";
 import {Traversable, TraversableNested} from "../../types/helpers";
-import {ParamListBase} from "@react-navigation/routers";
 import {Icon} from "../../components/base-ui";
+import {Config, ConfigTraversable, RecursiveNavigatorProps, Screen} from "../../types/common"
+import {getIconName, propsExtract} from "../../common/tools";
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -85,91 +85,6 @@ const tabBarOptions: BottomTabBarOptions = {
     tabStyle: {justifyContent: 'center'},
 }
 
-
-type Config = {
-    component?: ComponentType<any>,
-    stack?:
-        typeof Stacks.RootStack
-        | typeof Stacks.DemoNestedStack
-        | typeof Stacks.DemoTabStack
-        | typeof Stacks.DemoTabRNComponentsStack
-        | typeof Stacks.DemoBitcoinStack
-        | typeof Stacks.DemoDrawerStack,
-    signInComponent?: ComponentType<any>,
-    screens?: Screen[],
-
-    path?: string,
-    exact?: boolean,
-    parse?: Record<string, (value: string) => any>,
-    stringify?: Record<string, (value: any) => string>,
-    initialRouteName?: string,
-    [key: string]: any
-    // name:string,
-};
-type Screen =
-    (Partial<DefaultNavigatorOptions<BottomTabNavigationOptions> & TabRouterOptions & BottomTabNavigationConfig>
-        | Partial<DefaultNavigatorOptions<DrawerNavigationOptions> & DrawerRouterOptions & DrawerNavigationConfig>
-        | Partial<DefaultNavigatorOptions<StackNavigationOptions> & StackRouterOptions & StackNavigationConfig>)
-    & Partial<RouteConfig<ParamListBase, string, any, any, any>>
-    & Config;
-
-
-const getIconName = (routeName: string, focused: boolean) => {
-    type IconFontConfig = {
-        default: string,
-        focused: string,
-    }
-    const iconConfig: TraversableNested = {
-        TabHome: {
-            default: 'home',
-            focused: 'home',
-        },
-        TabSettings: {
-            default: 'account-settings',
-            focused: 'account-settings',
-        },
-        BitcoinHome: {
-            default: 'bitcoin',
-            focused: 'bitcoin',
-        },
-        BitcoinAlert:{
-            default: 'table-clock',
-            focused: 'table-clock',
-        },
-        RNFlatList: {
-            default: 'view-sequential',
-            focused: 'view-sequential',
-        },
-        RNHome: {
-            default: 'home-assistant',
-            focused: 'home-assistant',
-        },
-        RNNoKeyboard: {
-            default: 'keyboard-off',
-            focused: 'keyboard-off',
-        },
-        RNSafeArea: {
-            default: 'safe-square',
-            focused: 'safe-square',
-        },
-        RNSectionList: {
-            default: 'view-list',
-            focused: 'view-list',
-        },
-        RNVirtualizedList: {
-            default: 'playlist-plus',
-            focused: 'playlist-plus',
-        }
-    }
-    const key = focused ? 'focused' : 'default';
-    const routeIconObj = iconConfig[routeName] as IconFontConfig;
-    if (routeIconObj && routeIconObj[key]) {
-        return routeIconObj[key]
-    } else {
-        return ''
-    }
-}
-
 const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => ({
     tabBarIcon: ({focused, color, size}) => {
         const name = getIconName(route.name, focused)
@@ -177,13 +92,12 @@ const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOption
     }
 })
 
-
 const node: Screen = {
     stack: Stacks.RootStack,
     name: "RootStack",
     signInComponent: SignInScreen,
     options: optionsHeaderAndAnimation,
-    headerMode: 'float',
+    headerMode: "float",
     screenOptions: {...optionsHeaderAndAnimation},
     screens: [
         {
@@ -376,50 +290,45 @@ const node: Screen = {
     ]
 }
 
-type RecursiveNavigatorProps = { node: Screen }
 const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {t} = useTranslation();
-    const {stack, component, signInComponent, screens, path, exact, parse, stringify, initialParams, ...rest} = node;
+    const {stack, ...rest} = node;
     const Navigator = stack?.Navigator;
-    // console.log('---stack,Navigator',stack,Navigator)
-    let ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
+    const props = propsExtract(node);
+    const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
     const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
-    const jsxNode = (
-        Navigator
-            ? <Navigator {...rest}>
-                {authState && (authState.accessToken === undefined)
-                    ? (<ScreenComponent component={SignInScreen} name="SignIn" options={{
-                        ...optionsHeaderAndAnimation,
-                        title: t(`screens.SignIn.title`)
-                    }}/>)
-                    : (<>
-                        {node.screens && node.screens.map((screen) => {
-                            return <ScreenComponent {...screen}
-                                                    options={{
-                                                        ...screen.options,
-                                                        title: t(`screens.${screen.name}.title`)
-                                                    }} key={screen.name}>
-                                {(screen.screens && screen.screens.length > 0)
-                                    ?
-                                    (navProps: any) => {
-                                        return <RecursiveNavigator {...navProps} node={screen}/>
-                                    }
-                                    : null
+    return Navigator
+        ? <Navigator {...props}>
+            {authState && authState.accessToken === undefined
+                ? <ScreenComponent component={SignInScreen} name="SignIn" options={{
+                    ...optionsHeaderAndAnimation,
+                    title: t(`screens.SignIn.title`)
+                }}/>
+                : <>
+                    {node.screens && node.screens.map((screen) => {
+                        return <ScreenComponent {...screen}
+                                                options={{
+                                                    ...screen.options,
+                                                    title: t(`screens.${screen.name}.title`)
+                                                }} key={screen.name}>
+                            {(screen.screens && screen.screens.length > 0)
+                                ?
+                                (navProps: any) => {
+                                    return <RecursiveNavigator {...navProps} node={screen}/>
                                 }
-                            </ScreenComponent>
-                        })}
-                    </>)
-                }
-            </Navigator>
-            : null
-    );
-    // console.log(`---jsxNode`,jsxNode)
-    return jsxNode;
+                                : null
+                            }
+                        </ScreenComponent>
+                    })}
+                </>
+            }
+        </Navigator>
+        : null;
 }
 
 const RootNavigator: React.FC = () => <RecursiveNavigator node={node}/>;
 const recursiveConfig = (screens: Screen[]): Config => {
-    let obj: Config = {};
+    let obj: ConfigTraversable = {};
     screens.forEach(screen => {
         const name = screen.name;
         if (name) {

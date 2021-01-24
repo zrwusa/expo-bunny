@@ -7,11 +7,11 @@ export type DeepLeavesWrap<T, U> = T extends { [key: string]: any } ? { [P in ke
                 : { [M in keyof U]: T }
 
 export type Traversable = {
-    [key: string]: string|object|number|boolean|Function
+    [key: string]: any
 }
 
 export type TraversableNested = {
-    [key: string]: TraversableNested|string|object|number|boolean|Function
+    [key: string]: any
 }
 
 export type TypeName<T> = T extends string
