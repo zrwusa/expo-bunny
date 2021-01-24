@@ -1,6 +1,6 @@
-import color from 'color';
-import {palette} from './palette';
-import {configureFonts} from './fonts';
+import color from "color";
+import {palette} from "./palette";
+import {configureFonts} from "./fonts";
 import {Theme} from "../../types/styles";
 
 export const DefaultTheme: Theme = {

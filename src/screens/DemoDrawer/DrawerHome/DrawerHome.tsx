@@ -9,7 +9,7 @@ export function DrawerHomeScreen() {
     const i18nPrefix = 'screens.DrawerHome';
     const st = stFactory(t, i18nPrefix);
     return (
-        <View  style={containerStyle.screen}>
+        <View style={containerStyle.screen}>
             <View style={containerStyle.card}>
                 <Text>{st(`title`)}</Text>
             </View>

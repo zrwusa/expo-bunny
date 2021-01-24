@@ -28,7 +28,7 @@ import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
 import SettingsScreen from "../../screens/Settings";
 import DemoThemeScreen from "../../screens/DemoTheme";
-import {EThemes} from "../../types/enums";
+import {EThemes} from "../../common/constants";
 import {restoreAndSaveTheme} from "../../stores/sys/actions";
 import SettingsItem from "../../screens/Settings/SettingsItem/SettingsItem";
 import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
@@ -40,7 +40,7 @@ import {BottomTabBarOptions, BottomTabNavigationOptions} from "@react-navigation
 import {DrawerNavigationOptions} from "@react-navigation/drawer/lib/typescript/src/types";
 import {StackNavigationOptions} from "@react-navigation/stack";
 import {PathConfigMap} from "@react-navigation/native";
-import {Traversable, TraversableNested} from "../../types/helpers";
+import {Traversable} from "../../types/helpers";
 import {Icon} from "../../components/base-ui";
 import {Config, ConfigTraversable, RecursiveNavigatorProps, Screen} from "../../types/common"
 import {getIconName, propsExtract} from "../../common/tools";
@@ -326,7 +326,7 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
         : null;
 }
 
-const RootNavigator: React.FC = () => <RecursiveNavigator node={node}/>;
+const NavigatorTree: React.FC = () => <RecursiveNavigator node={node}/>;
 const recursiveConfig = (screens: Screen[]): Config => {
     let obj: ConfigTraversable = {};
     screens.forEach(screen => {
@@ -352,4 +352,4 @@ export const getScreensConfig = (): PathConfigMap => {
     return (config[Object.keys(config)[0]] as unknown as Config).screens as unknown as PathConfigMap;
 }
 
-export default RootNavigator;
+export default NavigatorTree;

@@ -13,7 +13,7 @@ const DemoThemeScreen = () => {
     const st = stFactory(t, i18nPrefix);
 
     return (
-        <ScrollView contentContainerStyle={[containerStyle.centralized,{height:'100%'}]}>
+        <ScrollView contentContainerStyle={[containerStyle.centralized, {height: '100%'}]}>
             <DemoTOButtonThemedRN>
                 <DemoTextThemedRN>{st(`btnCustom`)}</DemoTextThemedRN>
             </DemoTOButtonThemedRN>

@@ -65,7 +65,7 @@ export function DemoShareScreen() {
     };
 
     return (
-        <View style={[containerStyle.screen,containerStyle.centralized]}>
+        <View style={[containerStyle.screen, containerStyle.centralized]}>
             <View style={{marginTop: 50}}>
                 <Button onPress={onShare} title={st(`shareMessage`)}/>
             </View>

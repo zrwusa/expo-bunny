@@ -8,7 +8,7 @@ import {Action} from "redux";
 import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
 import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
-import MapView, {PROVIDER_GOOGLE,PROVIDER_DEFAULT} from "react-native-maps";
+import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../common/constants";
 import {sysError} from "../../stores/sys/actions";
 import styles, {CARD_WIDTH} from "./styles";
@@ -180,16 +180,6 @@ class DemoMapScreen extends Component<Props> {
             </View>
         );
     }
-
-    // onMapviewMarkerPress(mapEvent: MapEvent<{ action: "marker-press"; id: string }>) {
-    //     const mapView = this.mapView.current;
-    //     const markerData = mapEvent.nativeEvent.coordinate;
-    //     mapView && mapView.animateToRegion({
-    //         latitude: markerData.latitude,
-    //         longitude: markerData.longitude,
-    //         ...BunnyConstants.latLngDeltaGrace
-    //     });
-    // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DemoMapScreen);

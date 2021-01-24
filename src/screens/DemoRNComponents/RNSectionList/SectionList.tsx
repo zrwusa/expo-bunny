@@ -42,7 +42,7 @@ function SectionListScreen() {
     );
 
     return (
-        <SafeAreaView style={[containerStyle.screen,sectionListStyles.container]}>
+        <SafeAreaView style={[containerStyle.screen, sectionListStyles.container]}>
             <SectionList
                 sections={SECTION_LIST_DATA}
                 keyExtractor={(item, index) => item + index}

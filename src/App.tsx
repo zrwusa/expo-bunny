@@ -6,9 +6,8 @@ import * as Linking from "expo-linking";
 import {Provider as PaperProvider} from "react-native-paper";
 import {AppearanceProvider, useColorScheme} from "react-native-appearance";
 import {DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav, NavigationContainer} from "@react-navigation/native";
-import RootNavigator, {getScreensConfig} from "./navigation/RootNavigator";
-import {EThemes} from "./types/enums";
-import BunnyConstants from "./common/constants";
+import NavigatorTree, {getScreensConfig} from "./navigation/NavigatorTree";
+import BunnyConstants,{EThemes} from "./common/constants";
 import {RootState} from "./types/models";
 import {restoreAuth} from "./stores/auth/actions";
 import {restoreIsReady, restoreLanguage, restoreNavInitialState, restoreTheme, sysError} from "./stores/sys/actions";
@@ -112,7 +111,7 @@ function App() {
                                                      JSON.stringify(state)
                                                  )
                                              }>
-                            <RootNavigator/>
+                            <NavigatorTree/>
                         </NavigationContainer>
                     </PaperProvider>
                 </ThemeProvider>

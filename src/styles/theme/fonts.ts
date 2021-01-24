@@ -1,6 +1,6 @@
-import {Platform, PlatformOSType} from 'react-native';
+import {Platform, PlatformOSType} from "react-native";
 import {FontConfig, Fonts, FontsWrapped} from "../../types/styles";
-import {EThemes} from "../../types/enums";
+import {EThemes} from "../../common/constants";
 import {TraversableNested} from "../../types/helpers";
 
 const fontConfig: FontConfig = {

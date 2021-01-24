@@ -1,15 +1,15 @@
 import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
-    demoShadow:{
+    demoShadow: {
         width: 300,
         height: 50,
         borderRadius: 2,
         backgroundColor: "#fff",
 
         elevation: 22,
-        justifyContent:"center",
-        alignItems:"center",
+        justifyContent: "center",
+        alignItems: "center",
 
         shadowColor: "#000",
         shadowOffset: {

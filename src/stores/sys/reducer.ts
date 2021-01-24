@@ -1,15 +1,15 @@
-import {ELanguage, ESys} from "../../types/enums";
+import {ELanguage, ESys} from "../../common/constants";
 import {Sys} from "../../types/models";
 import {SysActions} from "./actions";
-import {EThemes} from "../../types/enums";
+import {EThemes} from "../../common/constants";
 
 const initialState: Sys = {
-    isReady:false,
+    isReady: false,
     error: "",
     warn: "",
     themeName: EThemes.DEFAULT,
     language: ELanguage.en,
-    navInitialState:undefined
+    navInitialState: undefined
 };
 
 export function sysStateReducer(state: Sys = initialState, {type, payload}: SysActions): Sys {

@@ -3,7 +3,7 @@ import {View} from "../base-ui"
 import {styles} from "./styles";
 import Svg, {Circle, Rect, SvgUri} from "react-native-svg";
 import SVGR from "./SVGR"
-import SvgLocalFileXML from "./SvgLocalFileXML"
+// import SvgLocalFileXML from "./SvgLocalFileXML"
 import {Platform} from "react-native";
 
 export const DemoSvg: React.FC = () => {

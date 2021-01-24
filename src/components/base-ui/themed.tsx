@@ -30,7 +30,7 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...r
         backgroundColor: colors.demoColor1,
         marginTop: measure.spacings.s,
         borderRadius: borderRadius.xs,
-        fontSize:measure.fontSizes.m,
+        fontSize: measure.fontSizes.m,
         ...styleObj
     }} {...rest} >{children}</TouchableOpacityRN>);
 }
@@ -134,11 +134,11 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
             ...styleObj
         }} {...rest} />);
 }
-export const Icon: React.FC<IconProps> = ({children, style,name,...rest}) => {
+export const Icon: React.FC<IconProps> = ({children, style, name, ...rest}) => {
     const {colors} = useTheme();
     const styleObj = getStyleObj(style);
     return (<IconVector
-        name = {name}
+        name={name}
         style={{
             color: colors.background,
             ...styleObj

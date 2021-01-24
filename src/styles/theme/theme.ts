@@ -3,7 +3,7 @@ import {ThemeWarehouse} from "../../types/styles";
 import color from "color";
 import {palette} from "./palette";
 import {TraversableNested} from "../../types/helpers";
-import {EThemes} from "../../types/enums";
+import {EThemes} from "../../common/constants";
 
 const fonts = configureFontsWarehouse();
 

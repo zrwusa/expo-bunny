@@ -6,8 +6,8 @@ import {
 } from "react-native";
 import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/base-ui";
 import {
-    imageStyles, imageBackgroundStyles,modalStyles, pressableStyles, statusBarStyles,
-    touchableHighlightStyles, touchableOpacityStyles,touchableWithoutFeedbackStyles
+    imageStyles, imageBackgroundStyles, modalStyles, pressableStyles, statusBarStyles,
+    touchableHighlightStyles, touchableOpacityStyles, touchableWithoutFeedbackStyles
 } from "./styles";
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";

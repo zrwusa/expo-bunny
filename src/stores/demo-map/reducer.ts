@@ -1,4 +1,4 @@
-import {EDemoMap} from "../../types/enums";
+import {EDemoMap} from "../../common/constants";
 import BunnyConstants from "../../common/constants";
 import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import {DemoMapActions} from "./actions";

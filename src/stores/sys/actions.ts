@@ -3,15 +3,14 @@ import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {Sys} from "../../types/models";
 import {
-    RestoreIsReadyPayload,
-    RestoreLanguagePayload,
-    RestoreNavInitialStatePayload,
-    RestoreThemePayload,
-    SysErrorPayload,
-    SysWarnPayload
+    RestoreIsReadyPayload, RestoreLanguagePayload, RestoreNavInitialStatePayload,
+    RestoreThemePayload, SysErrorPayload, SysWarnPayload
 } from "../../types/payloads";
-import {RestoreIsReady, RestoreLanguage, RestoreNavInitialState, RestoreTheme, SysError, SysWarn} from "../../types/actions";
-import {ESys} from "../../types/enums";
+import {
+    RestoreIsReady, RestoreLanguage, RestoreNavInitialState,
+    RestoreTheme, SysError, SysWarn
+} from "../../types/actions";
+import {ESys} from "../../common/constants";
 import BunnyConstants from "../../common/constants";
 
 export const sysError: (payload: SysErrorPayload) => SysError = (payload) => {

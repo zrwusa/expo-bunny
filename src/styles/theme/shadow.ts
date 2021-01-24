@@ -1,5 +1,5 @@
-import {palette} from './palette';
-import {Animated} from 'react-native';
+import {palette} from "./palette";
+import {Animated} from "react-native";
 
 const SHADOW_COLOR = palette.black;
 const SHADOW_OPACITY = 0.24;

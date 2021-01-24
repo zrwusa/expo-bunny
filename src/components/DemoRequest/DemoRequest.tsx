@@ -3,7 +3,7 @@ import api from "../../common/api";
 import {View, Text, ButtonTO, TextBtn} from "../base-ui";
 import {DemoEmployee} from "../../types/models";
 
-type Props = { title: string, buttonTitle:string}
+type Props = { title: string, buttonTitle: string }
 type States = { name: string, employees: Array<DemoEmployee>, }
 
 class DemoRequest extends Component<Props, States> {

@@ -24,13 +24,13 @@ function ProfileScreen({route, navigation}: Props) {
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
     return (
         <ScrollView>
-            <View style={[containerStyle.screen,containerStyle.centralized]}>
+            <View style={[containerStyle.screen, containerStyle.centralized]}>
 
-            <Avatar source={{uri: avatar_url}}/>
-            <Text>{st(`profileScreenId`)}{route.params.id}</Text>
-            <Text>{st(`email`)}{user?.email}</Text>
-            <Button title={st(`goToHomeScreen`)} onPress={() => navigation.navigate('Home')}/>
-            <View style={styles.tallBlock}/>
+                <Avatar source={{uri: avatar_url}}/>
+                <Text>{st(`profileScreenId`)}{route.params.id}</Text>
+                <Text>{st(`email`)}{user?.email}</Text>
+                <Button title={st(`goToHomeScreen`)} onPress={() => navigation.navigate('Home')}/>
+                <View style={styles.tallBlock}/>
             </View>
         </ScrollView>
     )

@@ -3,8 +3,9 @@ import {Text, View} from "../base-ui"
 import {styles} from "./styles";
 
 interface Props {
-    title:string
+    title: string
 }
+
 export const DemoLazy: React.FC<Props> = (props) => {
     return (
         <View>

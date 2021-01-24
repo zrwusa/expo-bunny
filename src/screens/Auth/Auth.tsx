@@ -2,7 +2,7 @@ import {Platform, View} from "react-native";
 import * as React from "react";
 import {signIn, signInGoogle, signInDummy} from "../../stores/auth/actions";
 import {useDispatch} from "react-redux";
-import {ButtonRNE,TextInput} from "../../components/base-ui";
+import {ButtonRNE, TextInput} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
 import containerStyle from "../../containers";

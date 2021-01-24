@@ -3,7 +3,6 @@ import DemoFCCard from "../../components/DemoFCCard";
 import DemoCCClock from "../../components/DemoCCClock";
 import DemoRequest from "../../components/DemoRequest";
 import {View, TextInput} from "../../components/base-ui";
-import styles from "./styles";
 import containerStyle from "../../containers";
 import {DemoSvg} from "../../components/DemoSvg";
 import {WithTranslation, withTranslation} from "react-i18next";
@@ -22,7 +21,7 @@ class DemoCollectionScreen extends Component<Props, States> {
         const i18nPrefix = 'screens.DemoCollection';
         const st = stFactory(t, i18nPrefix);
         return (
-            <View  style={containerStyle.screen}>
+            <View style={containerStyle.screen}>
                 <View style={containerStyle.card}>
                     <DemoFCCard title={st(`functionComponent`)}/>
                 </View>

@@ -1,6 +1,6 @@
-import color from 'color';
-import {Animated} from 'react-native';
-import {DarkTheme} from './DarkTheme';
+import color from "color";
+import {Animated} from "react-native";
+import {DarkTheme} from "./DarkTheme";
 
 export default function overlay(
     elevation: number | Animated.Value = 1,

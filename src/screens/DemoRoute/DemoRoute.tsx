@@ -24,7 +24,7 @@ class DemoRouteScreen extends Component<Props> {
         const i18nPrefix = 'screens.DemoRoute';
         const st = stFactory(t, i18nPrefix);
         return (
-            <View style={[containerStyle.screen,containerStyle.centralized]}>
+            <View style={[containerStyle.screen, containerStyle.centralized]}>
                 <View style={styles.wrap}>
                     <Text>{st(`paramId`)}{id}</Text>
                     <Text>{st(`typeofId`)}{typeof id}</Text>

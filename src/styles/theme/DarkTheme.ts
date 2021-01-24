@@ -1,6 +1,6 @@
-import color from 'color';
-import {DefaultTheme} from './DefaultTheme';
-import {palette} from './palette';
+import color from "color";
+import {DefaultTheme} from "./DefaultTheme";
+import {palette} from "./palette";
 import {Theme} from "../../types/styles";
 
 export const DarkTheme: Theme = {
