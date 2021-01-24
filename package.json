@@ -14,7 +14,8 @@
     "eject": "expo eject",
     "clear:watchman": "watchman watch-del-all",
     "clear:rn": "react-native clean-project",
-    "web:serve": "http-server -P http://localhost:8080? web-build/"
+    "web:serve": "http-server -P http://localhost:8080? web-build/",
+    "p": "expo publish"
   },
   "dependencies": {
     "@babel/core": "~7.9.0",

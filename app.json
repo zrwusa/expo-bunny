@@ -43,11 +43,9 @@
       "userInterfaceStyle": "light"
     },
     "locales": {
-      "en": "./localization/en.json",
-      "zh": "./localization/zh-Hans-CN.json",
-      "zh-Hans": "./localization/zh-Hans-CN.json",
-      "zh-Hans-CN": "./localization/zh-Hans-CN.json",
-      "he": "./localization/he.json"
+      "en": "src/i18n/languages/en.json",
+      "zh": "src/i18n/languages/zh-Hans-CN.json",
+      "he": "src/i18n/languages/he.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"

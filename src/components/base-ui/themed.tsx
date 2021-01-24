@@ -18,8 +18,8 @@ import {
 import React from "react";
 import {getStyleObj, measure} from "../../styles/helpers";
 import styled from "styled-components/native";
-import IconVector from "react-native-vector-icons/MaterialCommunityIcons";
-import {IconProps} from "react-native-vector-icons/Icon";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {MaterialCommunityIconsProps} from "../../types/styles";
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
@@ -134,18 +134,21 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
             ...styleObj
         }} {...rest} />);
 }
-export const Icon: React.FC<IconProps> = ({children, style, name, ...rest}) => {
+
+export const Icon: React.FC<MaterialCommunityIconsProps> = ({children, style, name, ...rest}) => {
     const {colors} = useTheme();
     const styleObj = getStyleObj(style);
-    return (<IconVector
+    return (<MaterialCommunityIcons
         name={name}
         style={{
             color: colors.background,
+            fontSize:measure.fontSizes.xl,
             ...styleObj
-        }}  {...rest} >{children}</IconVector>);
+        }}
+    />);
 }
 
-export const Icon1 = styled(IconVector)`
+export const Icon1 = styled(MaterialCommunityIcons)`
   font-size: ${measure.fontSizes.m}px;
   color:${DefaultTheme.colors.primary};
   padding: ${measure.spacings.s}px;
