@@ -1,33 +1,17 @@
 import {ComponentType} from "react";
 import * as Stacks from "../navigation/stacks";
 import {Traversable} from "./helpers";
-import {BottomTabNavigationConfig, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
-import {DrawerNavigationConfig, DrawerNavigationOptions} from "@react-navigation/drawer/lib/typescript/src/types";
 import {StackNavigationOptions} from "@react-navigation/stack";
-import {DefaultNavigatorOptions, EventMapBase, RouteConfig} from "@react-navigation/core/src/types";
-import {DrawerRouterOptions, StackRouterOptions, TabRouterOptions} from "@react-navigation/native";
+import {
+    DefaultNavigatorOptions, DrawerRouterOptions, EventMapBase,
+    RouteConfig, StackRouterOptions, TabRouterOptions
+} from "@react-navigation/native";
 import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
 import {NavigationState, ParamListBase} from "@react-navigation/routers";
-import {
-    DemoBitcoinStackParam,
-    DemoDrawerStackParam,
-    DemoNestedStackParam,
-    DemoTabRNComponentsStackParam,
-    DemoTabStackParam,
-    RootStackParam
-} from "./stacks";
-
-// export interface Config {
-//     [key: string]: {
-//         path?: string,
-//         exact?: boolean,
-//         parse?: Record<string, (value: string) => any>,
-//         stringify?: Record<string, (value: any) => string>,
-//         screens?: Config,
-//         initialRouteName?: string
-//     };
-// }
-
+import {BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
+import {BottomTabNavigationConfig} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import {DrawerNavigationOptions} from "@react-navigation/drawer";
+import {DrawerNavigationConfig} from "@react-navigation/drawer/lib/typescript/src/types";
 
 export type Config = {
     component?: ComponentType<any>,
@@ -70,17 +54,3 @@ export type Screen =
 
 export type RecursiveNavigatorProps = { node: Screen }
 
-type ParamList1 =
-    RootStackParam
-    | DemoNestedStackParam
-    | DemoTabStackParam
-    | DemoTabRNComponentsStackParam
-    | DemoBitcoinStackParam
-    | DemoDrawerStackParam;
-type ParamList2 =
-    RootStackParam
-    & DemoNestedStackParam
-    & DemoTabStackParam
-    & DemoTabRNComponentsStackParam
-    & DemoBitcoinStackParam
-    & DemoDrawerStackParam;

@@ -44,3 +44,20 @@ export type DemoTabRNComponentsStackParam = {
     TabRNComponentsHome: undefined;
     TabRNComponentsSettings: undefined;
 };
+
+export type StackParamListUnion =
+    RootStackParam
+    | DemoNestedStackParam
+    | DemoTabStackParam
+    | DemoTabRNComponentsStackParam
+    | DemoBitcoinStackParam
+    | DemoDrawerStackParam;
+
+export type StackParamListIntersection =
+    RootStackParam
+    & DemoNestedStackParam
+    & DemoTabStackParam
+    & DemoTabRNComponentsStackParam
+    & DemoBitcoinStackParam
+    & DemoDrawerStackParam;
+
