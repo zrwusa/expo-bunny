@@ -22,6 +22,7 @@
       "thunkCC": "Thunk CC",
       "map": "Map",
       "share": "Share",
+      "notification": "Notification",
       "thirdPart": "Third Part",
       "componentCollection": "Component Collection",
       "RNAllInOne": "RN All In One",
@@ -86,6 +87,9 @@
       "permissionNotGranted": "Permission to access camera roll is required!",
       "notAvailable": "Uh oh, sharing isn't available on your platform",
       "pickAPhoto": "Pick a photo"
+    },
+    "DemoNotification": {
+      "title": "DemoNotification"
     },
     "SignIn": {
       "title": "SignIn",
@@ -188,6 +192,6 @@
       "demoShadow": "Demo shadow compatible with Android"
     }
   },
-  "CFBundleDisplayName": "CF Bundle DisplayName",
+  "CFBundleDisplayName": "ExpoReactBunny",
   "NSContactsUsageDescription": "NSContactsUsageDescription"
 }

@@ -44,6 +44,7 @@ import {Traversable} from "../../types/helpers";
 import {Icon} from "../../components/base-ui";
 import {Config, ConfigTraversable, RecursiveNavigatorProps, Screen} from "../../types/common"
 import {getIconName, propsExtract} from "../../common/tools";
+import DemoNotificationScreen from "../../screens/DemoNotification";
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -148,6 +149,9 @@ const node: Screen = {
         },
         {
             component: DemoShareScreen, name: "DemoShare", path: "demo-share",
+        },
+        {
+            component: DemoNotificationScreen, name: "DemoNotification", path: "demo-notification",
         },
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",

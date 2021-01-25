@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import {Button as ButtonElement, ButtonProps as ButtonElementProps} from "react-native-elements";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {Text as TextRN, TextProps, TouchableOpacityProps} from "react-native";
 import {TouchableOpacity} from "react-native";
 import React from "react";
@@ -58,7 +58,7 @@ export const DemoButtonStyledRNE = styled(ButtonElement).attrs({
     },
 })``
 
-export const DemoIconCssStyled = styled(Icon)`
+export const DemoIconCssStyled = styled(MaterialCommunityIcons)`
   font-size: ${measure.fontSizes.m}px;
   color:${DefaultTheme.colors.primary};
   padding: ${measure.spacings.s}px;

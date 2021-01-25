@@ -22,6 +22,7 @@
       "thunkCC": "类组件 Thunk",
       "map": "地图",
       "share": "分享",
+      "notification": "推送消息",
       "thirdPart": "第三方组件",
       "componentCollection": "组件合集",
       "RNAllInOne": "所有RN组件",
@@ -86,6 +87,9 @@
       "permissionNotGranted": "访问未被同意!",
       "notAvailable": "哦，你的平台不支持分享功能",
       "pickAPhoto": "选一张照片"
+    },
+    "DemoNotification": {
+      "title": "样例-推送"
     },
     "SignIn": {
       "title": "登录",
@@ -188,6 +192,6 @@
       "demoShadow": "阴影样式，兼容安卓"
     }
   },
-  "CFBundleDisplayName": "中文 CF Bundle DisplayName",
-  "NSContactsUsageDescription": "中文 NSContactsUsageDescription"
+  "CFBundleDisplayName": "ExpoReact兔子",
+  "NSContactsUsageDescription": "中文NSContactsUsageDescription"
 }

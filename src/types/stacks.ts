@@ -14,6 +14,7 @@ export type RootStackParam = {
     DemoNested: undefined | { screen: string; params: { [key: string]: any } };
     DemoRNComponents: undefined;
     DemoShare: undefined;
+    DemoNotification: undefined;
     DemoTheme: undefined;
     DemoSuspense: undefined;
     DemoBitcoin: undefined | { screen: string; params: { [key: string]: any } };

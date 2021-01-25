@@ -17,6 +17,7 @@ import {Theme} from "./types/styles";
 import {Preparing} from "./components/Preparing";
 import {useTranslation} from "react-i18next";
 import * as localization from "expo-localization";
+import Sys from "./components/Sys";
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;

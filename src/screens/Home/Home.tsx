@@ -59,6 +59,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>{st(`map`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoShare')}>
                         <TextBtn>{st(`share`)}</TextBtn></ButtonTO>
+                    <ButtonTO onPress={() => navigation.navigate('DemoNotification')}>
+                        <TextBtn>{st(`notification`)}</TextBtn></ButtonTO>
                 </View>
                 <View style={containerStyle.card}>
                     <Text>{st(`componentsAndThemes`)}</Text>

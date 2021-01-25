@@ -1,6 +1,7 @@
 import {DeepLeavesWrap} from "./helpers";
 import {IconProps} from "react-native-vector-icons/Icon";
-import glyphMap from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
+import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
+import {getIconCustomMap} from "../common/tools";
 
 type Mode = 'adaptive' | 'exact';
 
@@ -90,14 +91,21 @@ export type FontsWrapped = DeepLeavesWrap<Fonts, Themes>
 
 export type ThemeWarehouse = DeepLeavesWrap<Theme, Themes>
 
-export type MyMap<T> = {
+export type IconMap<T> = {
     [ P in keyof T ]: number
 };
 
-export type MapKeys = keyof MyMap<typeof glyphMap>
+export type IconKeys = keyof IconMap<typeof glyphMap>
+
+const glyphCustomMap = getIconCustomMap()
+export type IconCustomKeys = keyof IconMap<typeof glyphCustomMap>
 
 export interface MaterialCommunityIconsProps extends IconProps {
-    name: MapKeys
+    name: IconKeys
+}
+
+export interface MaterialCommunityCustomIconsProps extends IconProps {
+    name: IconCustomKeys
 }
 
 export type Palette = {

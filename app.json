@@ -27,7 +27,7 @@
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true
       },
-      "userInterfaceStyle": "dark"
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "adaptiveIcon": {
@@ -40,12 +40,13 @@
           "apiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
         }
       },
-      "userInterfaceStyle": "light"
+      "userInterfaceStyle": "automatic",
+      "useNextNotificationsApi": true
     },
     "locales": {
-      "en": "src/i18n/languages/en.json",
-      "zh": "src/i18n/languages/zh-Hans-CN.json",
-      "he": "src/i18n/languages/he.json"
+      "en": "./src/i18n/languages/en.json",
+      "zh": "./src/i18n/languages/zh-Hans-CN.json",
+      "he": "./src/i18n/languages/he.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
