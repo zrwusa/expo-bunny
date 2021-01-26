@@ -15,7 +15,6 @@ import TestMapScreen from "../../screens/TestMap";
 import TabHomeScreen from "../../screens/DemoTab/TabHome";
 import TabSettingsScreen from "../../screens/DemoTab/TabSettings";
 import NestedHomeScreen from "../../screens/DemoNested/NestedHome";
-import NestedSettingsScreen from "../../screens/DemoNested/NestedSettings";
 import RNHome from "../../screens/DemoRNComponents/RNHome";
 import RNSectionListScreen from "../../screens/DemoRNComponents/RNSectionList";
 import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
@@ -42,9 +41,11 @@ import {StackNavigationOptions} from "@react-navigation/stack";
 import {PathConfigMap} from "@react-navigation/native";
 import {Traversable} from "../../types/helpers";
 import {Icon} from "../../components/base-ui";
-import {Config, ConfigTraversable, RecursiveNavigatorProps, Screen} from "../../types/common"
+import {LinkingConfig, LinkingConfigTraversable, RecursiveNavigatorProps, NavigatorTreeNode} from "../../types/common"
 import {getIconName, propsExtract} from "../../common/tools";
 import DemoNotificationScreen from "../../screens/DemoNotification";
+import NestedLv2HomeScreen from "../../screens/DemoNested/NestedSettings/NestedLv2Home/NestedLv2Home";
+import NestedLv2SettingsScreen from "../../screens/DemoNested/NestedSettings/NestedLv2Settings";
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -86,37 +87,43 @@ const tabBarOptions: BottomTabBarOptions = {
     tabStyle: {justifyContent: 'center'},
 }
 
-const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => ({
-    tabBarIcon: ({focused, color, size}) => {
-        const name = getIconName(route.name, focused)
-        return <Icon name={name} style={{color: color}} size={size}/>;
+const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => {
+    return {
+        tabBarIcon: ({focused, color, size}) => {
+            const name = getIconName(route.name, focused)
+            return <Icon name={name} style={{color: color}} size={size}/>;
+        }
     }
-})
+}
 
-const node: Screen = {
+const node: NavigatorTreeNode = {
     stack: Stacks.RootStack,
+    navigatorType: 'stack',
     name: "RootStack",
     signInComponent: SignInScreen,
     options: optionsHeaderAndAnimation,
     headerMode: "float",
     screenOptions: {...optionsHeaderAndAnimation},
-    screens: [
+    childrenNode: [
         {
-            component: HomeScreen, name: "Home", path: "home",
+            component: HomeScreen, name: "Home", path: "home", navigatorType: 'stack'
         },
         {
             component: ProfileScreen, name: "Profile", path: "profile/:id",
             parse: {
                 id: (id: string) => `${id}`,
             },
+            navigatorType: 'stack'
         },
         {
             component: DemoFCReduxHookScreen,
             name: "DemoFCReduxHook", path: "demo-fc-redux-hook",
+            navigatorType: 'stack'
         },
         {
             component: DemoCollectionScreen,
             name: "DemoCollection", path: "demo-collection",
+            navigatorType: 'stack'
         },
         {
             component: DemoRouteScreen,
@@ -134,35 +141,38 @@ const node: Screen = {
                     return id
                 }
             },
+            navigatorType: 'stack'
         },
         {
-            component: DemoThirdPartScreen, name: "DemoThirdPart", path: "demo-third-part",
+            component: DemoThirdPartScreen, name: "DemoThirdPart", path: "demo-third-part", navigatorType: 'stack'
         },
         {
-            component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc",
+            component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc", navigatorType: 'stack'
         },
         {
-            component: DemoMapScreen, name: "DemoMap", path: "demo-map",
+            component: DemoMapScreen, name: "DemoMap", path: "demo-map", navigatorType: 'stack'
         },
         {
-            component: TestMapScreen, name: "TestMap", path: "test-map",
+            component: TestMapScreen, name: "TestMap", path: "test-map", navigatorType: 'stack'
         },
         {
-            component: DemoShareScreen, name: "DemoShare", path: "demo-share",
+            component: DemoShareScreen, name: "DemoShare", path: "demo-share", navigatorType: 'stack'
         },
         {
-            component: DemoNotificationScreen, name: "DemoNotification", path: "demo-notification",
+            component: DemoNotificationScreen, name: "DemoNotification", path: "demo-notification", navigatorType: 'stack'
         },
         {
             name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
             options: optionsHeaderAndAnimation,
             tabBarOptions: tabBarOptions,
             screenOptions: screenOptionsTabBarIcon,
-            screens: [
+            navigatorType: 'tab',
+            childrenNode: [
                 {
                     component: TabHomeScreen,
                     name: "TabHome",
                     path: "tab-home",
+                    navigatorType: 'tab'
                 },
                 {
                     component: TabSettingsScreen,
@@ -172,6 +182,7 @@ const node: Screen = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
+                    navigatorType: 'tab'
                 }
             ]
         },
@@ -183,11 +194,13 @@ const node: Screen = {
             openByDefault: false,
             options: {...optionsHeaderAndAnimation, headerShown: true},
             screenOptions: optionsDraw,
-            screens: [
+            navigatorType: 'drawer',
+            childrenNode: [
                 {
                     component: DrawerHomeScreen,
                     name: "DrawerHome",
                     path: "drawer-home",
+                    navigatorType: 'drawer'
                 },
                 {
                     component: DrawerSettingsScreen,
@@ -197,26 +210,48 @@ const node: Screen = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
+                    navigatorType: 'drawer'
                 }
             ]
         },
         {
-            name: "DemoNested", path: "demo-nested", stack: Stacks.DemoNestedStack,
+            stack: Stacks.DemoNestedStack,
+            name: "DemoNested",
+            path: "demo-nested",
             options: {...optionsHeaderAndAnimation, headerShown: true},
             screenOptions: optionsHeaderAndAnimation,
-            screens: [
+            navigatorType: 'stack',
+            childrenNode: [
                 {
                     component: NestedHomeScreen,
                     name: "NestedHome",
                     path: "nested-home",
+                    navigatorType: 'stack',
                 },
                 {
-                    component: NestedSettingsScreen,
+                    stack: Stacks.DemoNestedLv2Stack,
                     name: "NestedSettings",
                     path: "nested-settings/:item",
-                    parse: {
-                        item: (item: string) => `${item}`,
-                    },
+                    options: { headerShown: true},
+                    screenOptions: optionsHeaderAndAnimation,
+                    navigatorType: 'stack',
+                    childrenNode: [
+                        {
+                            component: NestedLv2HomeScreen,
+                            name: "NestedLv2Home",
+                            path: "nested-lv2-home",
+                            navigatorType: 'stack',
+                        },
+                        {
+                            component: NestedLv2SettingsScreen,
+                            name: "NestedLv2Settings",
+                            path: "nested-lv2-settings/:itemlv2",
+                            parse: {
+                                itemlv2: (itemlv2: string) => `${itemlv2}`,
+                            },
+                            navigatorType: 'stack',
+                        }
+                    ]
                 }
             ]
         },
@@ -226,36 +261,43 @@ const node: Screen = {
             stack: Stacks.DemoTabRNComponentsStack,
             screenOptions: screenOptionsTabBarIcon,
             tabBarOptions: tabBarOptions,
-            screens: [
+            navigatorType: 'tab',
+            childrenNode: [
                 {
                     component: RNHome,
                     name: "RNHome",
                     path: "rn-home",
+                    navigatorType: 'tab',
                 },
                 {
                     component: RNFlatListScreen,
                     name: "RNFlatList",
                     path: "rn-flat-list",
+                    navigatorType: 'tab',
                 },
                 {
                     component: RNSectionListScreen,
                     name: "RNSectionList",
                     path: "rn-section-list",
+                    navigatorType: 'tab',
                 },
                 {
                     component: RNVirtualizedListScreen,
                     name: "RNVirtualizedList",
                     path: "rn-virtualized-list",
+                    navigatorType: 'tab',
                 },
                 {
                     component: RNKeyboardAvoidingScreen,
                     name: "RNNoKeyboard",
                     path: "rn-keyboard-avoiding",
+                    navigatorType: 'tab',
                 },
                 {
                     component: RNSafeAreaScreen,
                     name: "RNSafeArea",
                     path: "rn-safe-area",
+                    navigatorType: 'tab',
                 }
             ]
         },
@@ -265,38 +307,41 @@ const node: Screen = {
             path: "demo-bitcoin",
             screenOptions: screenOptionsTabBarIcon,
             tabBarOptions: tabBarOptions,
-            screens: [
+            navigatorType: 'tab',
+            childrenNode: [
                 {
                     component: BitcoinHomeScreen,
                     name: "BitcoinHome",
                     path: "bitcoin-home",
+                    navigatorType: 'tab',
                 },
                 {
                     component: BitcoinAlertScreen,
                     name: "BitcoinAlert",
                     path: "bitcoin-alert/:isPush",
                     initialParams: {"isPush": true},
+                    navigatorType: 'tab',
                 }
             ]
         },
         {
             component: SettingsScreen, name: "Settings", path: "settings",
-            options: optionsHeaderAndAnimation,
+            options: optionsHeaderAndAnimation, navigatorType: 'stack',
         },
         {
             component: DemoSuspenseScreen, name: "DemoSuspense", path: "demo-suspense",
-            options: optionsHeaderAndAnimation,
+            options: optionsHeaderAndAnimation, navigatorType: 'stack',
         },
         {
             component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme",
-            options: optionsHeaderAndAnimation,
+            options: optionsHeaderAndAnimation, navigatorType: 'stack',
         },
     ]
 }
 
 const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {t} = useTranslation();
-    const {stack, ...rest} = node;
+    const {stack} = node;
     const Navigator = stack?.Navigator;
     const props = propsExtract(node);
     const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
@@ -309,16 +354,16 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
                     title: t(`screens.SignIn.title`)
                 }}/>
                 : <>
-                    {node.screens && node.screens.map((screen) => {
-                        return <ScreenComponent {...screen}
+                    {node.childrenNode && node.childrenNode.map((childScreen) => {
+                        return <ScreenComponent {...childScreen}
                                                 options={{
-                                                    ...screen.options,
-                                                    title: t(`screens.${screen.name}.title`)
-                                                }} key={screen.name}>
-                            {(screen.screens && screen.screens.length > 0)
+                                                    ...childScreen.options,
+                                                    title: t(`screens.${childScreen.name}.title`)
+                                                }} key={childScreen.name}>
+                            {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
                                 ?
                                 (navProps: any) => {
-                                    return <RecursiveNavigator {...navProps} node={screen}/>
+                                    return <RecursiveNavigator {...navProps} node={childScreen}/>
                                 }
                                 : null
                             }
@@ -331,18 +376,18 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
 }
 
 const NavigatorTree: React.FC = () => <RecursiveNavigator node={node}/>;
-const recursiveConfig = (screens: Screen[]): Config => {
-    let obj: ConfigTraversable = {};
-    screens.forEach(screen => {
-        const name = screen.name;
+const recursiveConfig = (childrenNode: NavigatorTreeNode[]): LinkingConfig => {
+    let obj: LinkingConfigTraversable = {};
+    childrenNode.forEach(child => {
+        const name = child.name;
         if (name) {
             obj[name] = {
-                path: screen.path,
-                parse: screen.parse,
-                stringify: screen.stringify,
-                exact: screen.exact,
-                initialRouteName: screen.initialParams,
-                screens: (screen.screens && screen.screens.length) ? recursiveConfig(screen.screens) : undefined,
+                path: child.path,
+                parse: child.parse,
+                stringify: child.stringify,
+                exact: child.exact,
+                initialRouteName: child.initialParams,
+                screens: (child.childrenNode && child.childrenNode.length) ? recursiveConfig(child.childrenNode) : undefined,
             }
         } else {
             obj = {}
@@ -351,9 +396,9 @@ const recursiveConfig = (screens: Screen[]): Config => {
     return obj;
 };
 
-export const getScreensConfig = (): PathConfigMap => {
+export const getLinkingConfigScreens = (): PathConfigMap => {
     const config = recursiveConfig([node]) as Traversable;
-    return (config[Object.keys(config)[0]] as unknown as Config).screens as unknown as PathConfigMap;
+    return (config[Object.keys(config)[0]] as unknown as LinkingConfig).screens as unknown as PathConfigMap;
 }
 
 export default NavigatorTree;

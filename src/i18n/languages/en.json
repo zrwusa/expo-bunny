@@ -118,15 +118,23 @@
       "title": "DrawerSettings"
     },
     "DemoNested": {
-      "title": "DemoNested"
+      "title": "Nested-Lv0"
     },
     "NestedHome": {
-      "title": "NestedHome",
+      "title": "Nested-Lv1-Home",
       "goToNestedSettings": "Go To Nested Settings"
     },
     "NestedSettings": {
-      "title": "NestedSettings",
+      "title": "Nested-Lv1-Settings",
       "goToNestedHome": "Go To Nested Home"
+    },
+    "NestedLv2Home": {
+      "title": "Nested-Lv2-Home",
+      "goToNestedLv2Settings": "Go To Nested Lv2 Settings"
+    },
+    "NestedLv2Settings": {
+      "title": "Nested-Lv2-Settings",
+      "goToNestedLv2Home": "Go To Nested Lv2 Home"
     },
     "DemoRNComponents": {
       "title": "DemoRNComponents"

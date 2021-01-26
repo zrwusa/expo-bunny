@@ -33,13 +33,19 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>{st(`tab`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoDrawer')}>
                         <TextBtn>{st(`drawer`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoNested')}>
-                        <TextBtn>{st(`nestedNavigation`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoNested',
-                        {
+                        {screen: 'NestedHome'})}>
+                        <TextBtn>{st(`nestedNavigation`)}</TextBtn></ButtonTO>
+                    <ButtonTO onPress={() =>
+                        navigation.navigate('DemoNested', {
                             screen: 'NestedSettings',
-                            params: {item: "001"},
-                        })}><TextBtn>{st(`passParamsFromRootToLeaf`)}</TextBtn></ButtonTO>
+                            params: {
+                                item: "001",
+                                screen: 'NestedLv2Settings',
+                                params: {itemlv2: "002"},
+                            },
+                        })
+                    }><TextBtn>{st(`passParamsFromRootToLeaf`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoBitcoin',
                         {
                             screen: 'BitcoinAlert',

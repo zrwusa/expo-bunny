@@ -118,15 +118,23 @@
       "title": "抽屉-设置"
     },
     "DemoNested": {
-      "title": "样例-嵌套"
+      "title": "嵌套-Lv0"
     },
     "NestedHome": {
-      "title": "嵌套-首页",
+      "title": "嵌套-Lv1-首页",
       "goToNestedSettings": "跳转至嵌套设置"
     },
     "NestedSettings": {
-      "title": "嵌套设置",
+      "title": "嵌套-Lv1-设置",
       "goToNestedHome": "跳转至嵌套首页"
+    },
+    "NestedLv2Home": {
+      "title": "嵌套-Lv2-首页",
+      "goToNestedLv2Settings": "跳转到 嵌套-Lv2-设置"
+    },
+    "NestedLv2Settings": {
+      "title": "嵌套-Lv2-设置",
+      "goToNestedLv2Home": "跳转到 嵌套-Lv2-首页"
     },
     "DemoRNComponents": {
       "title": "样例-RN组件"

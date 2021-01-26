@@ -11,7 +11,7 @@ export type RootStackParam = {
     TestMap: undefined;
     DemoTab: undefined | { screen: string; params: { [key: string]: any } };
     DemoDrawer: undefined | { screen: string; params: { [key: string]: any } };
-    DemoNested: undefined | { screen: string; params: { [key: string]: any } };
+    DemoNested: undefined | { screen: string; params?: { [key: string]: any } };
     DemoRNComponents: undefined;
     DemoShare: undefined;
     DemoNotification: undefined;
@@ -24,6 +24,11 @@ export type RootStackParam = {
 export type DemoNestedStackParam = {
     NestedHome: undefined;
     NestedSettings: { item: string };
+};
+
+export type DemoNestedLv2StackParam = {
+    NestedLv2Home: undefined;
+    NestedLv2Settings: { itemlv2: string };
 };
 
 export type DemoTabStackParam = {

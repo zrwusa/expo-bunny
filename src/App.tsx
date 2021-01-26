@@ -5,9 +5,12 @@ import {useDispatch, useSelector} from "react-redux";
 import * as Linking from "expo-linking";
 import {Provider as PaperProvider} from "react-native-paper";
 import {AppearanceProvider, useColorScheme} from "react-native-appearance";
-import {DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav, NavigationContainer} from "@react-navigation/native";
-import NavigatorTree, {getScreensConfig} from "./navigation/NavigatorTree";
-import BunnyConstants,{EThemes} from "./common/constants";
+import {
+    DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
+    NavigationContainer, NavigationContainerRef
+} from "@react-navigation/native";
+import NavigatorTree, {getLinkingConfigScreens} from "./navigation/NavigatorTree";
+import BunnyConstants, {EThemes} from "./common/constants";
 import {RootState} from "./types/models";
 import {restoreAuth} from "./stores/auth/actions";
 import {restoreIsReady, restoreLanguage, restoreNavInitialState, restoreTheme, sysError} from "./stores/sys/actions";
@@ -17,13 +20,13 @@ import {Theme} from "./types/styles";
 import {Preparing} from "./components/Preparing";
 import {useTranslation} from "react-i18next";
 import * as localization from "expo-localization";
-import Sys from "./components/Sys";
+import {useReduxDevToolsExtension} from '@react-navigation/devtools';
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
 const darkTheme = themes.dark as unknown as Theme;
 const basePath = Linking.makeUrl('/');
-const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screens: getScreensConfig()}};
+const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screens: getLinkingConfigScreens()}};
 
 function App() {
     const dispatch = useDispatch();
@@ -32,6 +35,7 @@ function App() {
     const theme = (themeName === EThemes.dark) ? darkTheme : defaultTheme;
     const themePaper = theme as ReactNativePaper.Theme;
     const sysScheme = useColorScheme();
+
 
     const navInitialStateMemorized = useMemo(() => {
         return navInitialState;
@@ -96,13 +100,18 @@ function App() {
         return () => clearTimeout(mockPreparingTimer);
     }, []);
 
+    const navigationRef = React.useRef<NavigationContainerRef>(null);
+
+    useReduxDevToolsExtension(navigationRef);
+
     return isReady
         ? (
             <AppearanceProvider>
                 <ThemeProvider theme={theme}>
                     <PaperProvider theme={themePaper}>
                         <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
-                        <NavigationContainer linking={linking}
+                        <NavigationContainer ref={navigationRef}
+                                             linking={linking}
                                              theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
                                              fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
                                              initialState={navInitialStateMemorized}
