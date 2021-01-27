@@ -44,7 +44,7 @@ import {Icon} from "../../components/base-ui";
 import {LinkingConfig, LinkingConfigTraversable, RecursiveNavigatorProps, NavigatorTreeNode} from "../../types/common"
 import {getIconName, propsExtract} from "../../common/tools";
 import DemoNotificationScreen from "../../screens/DemoNotification";
-import NestedLv2HomeScreen from "../../screens/DemoNested/NestedSettings/NestedLv2Home/NestedLv2Home";
+import NestedLv2HomeScreen from "../../screens/DemoNested/NestedSettings/NestedLv2Home";
 import NestedLv2SettingsScreen from "../../screens/DemoNested/NestedSettings/NestedLv2Settings";
 
 const customHeaderRight = () => {
@@ -98,32 +98,38 @@ const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOption
 
 const node: NavigatorTreeNode = {
     stack: Stacks.RootStack,
-    navigatorType: 'stack',
     name: "RootStack",
     signInComponent: SignInScreen,
     options: optionsHeaderAndAnimation,
     headerMode: "float",
-    screenOptions: {...optionsHeaderAndAnimation},
+    screenOptions: optionsHeaderAndAnimation,
+    navigatorType: "stack",
     childrenNode: [
         {
-            component: HomeScreen, name: "Home", path: "home", navigatorType: 'stack'
+            component: HomeScreen,
+            name: "Home",
+            path: "home",
+            navigatorType: "stack"
         },
         {
-            component: ProfileScreen, name: "Profile", path: "profile/:id",
+            component: ProfileScreen,
+            name: "Profile", path: "profile/:id",
             parse: {
                 id: (id: string) => `${id}`,
             },
-            navigatorType: 'stack'
+            navigatorType: "stack"
         },
         {
             component: DemoFCReduxHookScreen,
-            name: "DemoFCReduxHook", path: "demo-fc-redux-hook",
-            navigatorType: 'stack'
+            name: "DemoFCReduxHook",
+            path: "demo-fc-redux-hook",
+            navigatorType: "stack"
         },
         {
             component: DemoCollectionScreen,
-            name: "DemoCollection", path: "demo-collection",
-            navigatorType: 'stack'
+            name: "DemoCollection",
+            path: "demo-collection",
+            navigatorType: "stack"
         },
         {
             component: DemoRouteScreen,
@@ -141,38 +147,57 @@ const node: NavigatorTreeNode = {
                     return id
                 }
             },
-            navigatorType: 'stack'
+            navigatorType: "stack"
         },
         {
-            component: DemoThirdPartScreen, name: "DemoThirdPart", path: "demo-third-part", navigatorType: 'stack'
+            component: DemoThirdPartScreen,
+            name: "DemoThirdPart",
+            path: "demo-third-part",
+            navigatorType: "stack"
         },
         {
-            component: DemoThunkCCScreen, name: "DemoThunkCC", path: "demo-thunk-cc", navigatorType: 'stack'
+            component: DemoThunkCCScreen,
+            name: "DemoThunkCC",
+            path: "demo-thunk-cc",
+            navigatorType: "stack"
         },
         {
-            component: DemoMapScreen, name: "DemoMap", path: "demo-map", navigatorType: 'stack'
+            component: DemoMapScreen,
+            name: "DemoMap",
+            path: "demo-map",
+            navigatorType: "stack"
         },
         {
-            component: TestMapScreen, name: "TestMap", path: "test-map", navigatorType: 'stack'
+            component: TestMapScreen,
+            name: "TestMap",
+            path: "test-map",
+            navigatorType: "stack"
         },
         {
-            component: DemoShareScreen, name: "DemoShare", path: "demo-share", navigatorType: 'stack'
+            component: DemoShareScreen,
+            name: "DemoShare",
+            path: "demo-share",
+            navigatorType: "stack"
         },
         {
-            component: DemoNotificationScreen, name: "DemoNotification", path: "demo-notification", navigatorType: 'stack'
+            component: DemoNotificationScreen,
+            name: "DemoNotification",
+            path: "demo-notification",
+            navigatorType: "stack"
         },
         {
-            name: "DemoTab", stack: Stacks.DemoTabStack, path: "demo-tab",
+            name: "DemoTab", stack: Stacks.DemoTabStack,
+            path: "demo-tab",
             options: optionsHeaderAndAnimation,
             tabBarOptions: tabBarOptions,
             screenOptions: screenOptionsTabBarIcon,
-            navigatorType: 'tab',
+            navigatorType: "tab",
             childrenNode: [
                 {
                     component: TabHomeScreen,
                     name: "TabHome",
                     path: "tab-home",
-                    navigatorType: 'tab'
+                    navigatorType: "tab"
                 },
                 {
                     component: TabSettingsScreen,
@@ -182,7 +207,7 @@ const node: NavigatorTreeNode = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
-                    navigatorType: 'tab'
+                    navigatorType: "tab"
                 }
             ]
         },
@@ -194,13 +219,13 @@ const node: NavigatorTreeNode = {
             openByDefault: false,
             options: {...optionsHeaderAndAnimation, headerShown: true},
             screenOptions: optionsDraw,
-            navigatorType: 'drawer',
+            navigatorType: "drawer",
             childrenNode: [
                 {
                     component: DrawerHomeScreen,
                     name: "DrawerHome",
                     path: "drawer-home",
-                    navigatorType: 'drawer'
+                    navigatorType: "drawer"
                 },
                 {
                     component: DrawerSettingsScreen,
@@ -210,7 +235,7 @@ const node: NavigatorTreeNode = {
                     parse: {
                         item: (item: string) => `${item}`,
                     },
-                    navigatorType: 'drawer'
+                    navigatorType: "drawer"
                 }
             ]
         },
@@ -220,27 +245,27 @@ const node: NavigatorTreeNode = {
             path: "demo-nested",
             options: {...optionsHeaderAndAnimation, headerShown: true},
             screenOptions: optionsHeaderAndAnimation,
-            navigatorType: 'stack',
+            navigatorType: "stack",
             childrenNode: [
                 {
                     component: NestedHomeScreen,
                     name: "NestedHome",
                     path: "nested-home",
-                    navigatorType: 'stack',
+                    navigatorType: "stack",
                 },
                 {
                     stack: Stacks.DemoNestedLv2Stack,
                     name: "NestedSettings",
                     path: "nested-settings/:item",
-                    options: { headerShown: true},
+                    options: {headerShown: true},
                     screenOptions: optionsHeaderAndAnimation,
-                    navigatorType: 'stack',
+                    navigatorType: "stack",
                     childrenNode: [
                         {
                             component: NestedLv2HomeScreen,
                             name: "NestedLv2Home",
                             path: "nested-lv2-home",
-                            navigatorType: 'stack',
+                            navigatorType: "stack",
                         },
                         {
                             component: NestedLv2SettingsScreen,
@@ -249,7 +274,7 @@ const node: NavigatorTreeNode = {
                             parse: {
                                 itemlv2: (itemlv2: string) => `${itemlv2}`,
                             },
-                            navigatorType: 'stack',
+                            navigatorType: "stack",
                         }
                     ]
                 }
@@ -261,43 +286,43 @@ const node: NavigatorTreeNode = {
             stack: Stacks.DemoTabRNComponentsStack,
             screenOptions: screenOptionsTabBarIcon,
             tabBarOptions: tabBarOptions,
-            navigatorType: 'tab',
+            navigatorType: "tab",
             childrenNode: [
                 {
                     component: RNHome,
                     name: "RNHome",
                     path: "rn-home",
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 },
                 {
                     component: RNFlatListScreen,
                     name: "RNFlatList",
                     path: "rn-flat-list",
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 },
                 {
                     component: RNSectionListScreen,
                     name: "RNSectionList",
                     path: "rn-section-list",
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 },
                 {
                     component: RNVirtualizedListScreen,
                     name: "RNVirtualizedList",
                     path: "rn-virtualized-list",
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 },
                 {
                     component: RNKeyboardAvoidingScreen,
                     name: "RNNoKeyboard",
                     path: "rn-keyboard-avoiding",
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 },
                 {
                     component: RNSafeAreaScreen,
                     name: "RNSafeArea",
                     path: "rn-safe-area",
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 }
             ]
         },
@@ -307,34 +332,43 @@ const node: NavigatorTreeNode = {
             path: "demo-bitcoin",
             screenOptions: screenOptionsTabBarIcon,
             tabBarOptions: tabBarOptions,
-            navigatorType: 'tab',
+            navigatorType: "tab",
             childrenNode: [
                 {
                     component: BitcoinHomeScreen,
                     name: "BitcoinHome",
                     path: "bitcoin-home",
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 },
                 {
                     component: BitcoinAlertScreen,
                     name: "BitcoinAlert",
                     path: "bitcoin-alert/:isPush",
                     initialParams: {"isPush": true},
-                    navigatorType: 'tab',
+                    navigatorType: "tab",
                 }
             ]
         },
         {
-            component: SettingsScreen, name: "Settings", path: "settings",
-            options: optionsHeaderAndAnimation, navigatorType: 'stack',
+            component: SettingsScreen,
+            name: "Settings",
+            path: "settings",
+            options: optionsHeaderAndAnimation,
+            navigatorType: "stack",
         },
         {
-            component: DemoSuspenseScreen, name: "DemoSuspense", path: "demo-suspense",
-            options: optionsHeaderAndAnimation, navigatorType: 'stack',
+            component: DemoSuspenseScreen,
+            name: "DemoSuspense",
+            path: "demo-suspense",
+            options: optionsHeaderAndAnimation,
+            navigatorType: "stack",
         },
         {
-            component: DemoThemeScreen, name: "DemoTheme", path: "demo-theme",
-            options: optionsHeaderAndAnimation, navigatorType: 'stack',
+            component: DemoThemeScreen,
+            name: "DemoTheme",
+            path: "demo-theme",
+            options: optionsHeaderAndAnimation,
+            navigatorType: "stack",
         },
     ]
 }
