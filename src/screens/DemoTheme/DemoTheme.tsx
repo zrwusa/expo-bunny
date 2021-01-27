@@ -1,6 +1,6 @@
 import React from "react";
 import {ScrollView} from "react-native";
-import {DemoTextThemedRN, DemoTOButtonThemedRN, Text, View} from "../../components/base-ui";
+import {DemoTextRNThemed, DemoButtonTORNThemed, Text, View} from "../../components/base-ui";
 import {Button as ButtonP, Text as TextP} from "react-native-paper";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
@@ -14,9 +14,9 @@ const DemoThemeScreen = () => {
 
     return (
         <ScrollView contentContainerStyle={[containerStyle.centralized, {height: '100%'}]}>
-            <DemoTOButtonThemedRN>
-                <DemoTextThemedRN>{st(`btnCustom`)}</DemoTextThemedRN>
-            </DemoTOButtonThemedRN>
+            <DemoButtonTORNThemed>
+                <DemoTextRNThemed>{st(`btnCustom`)}</DemoTextRNThemed>
+            </DemoButtonTORNThemed>
             <ButtonP><TextP>{st(`btnFromPaper`)}</TextP></ButtonP>
             <View style={styles.demoShadow}>
                 <Text>{st(`demoShadow`)}</Text>

@@ -29,6 +29,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>{st(`profile`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
                         <TextBtn>{st(`route`)}</TextBtn></ButtonTO>
+                    <ButtonTO onPress={() => navigation.navigate('DemoModal',{screen:'ModalHome'})}>
+                        <TextBtn>{st(`demoModal`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoTab')}>
                         <TextBtn>{st(`tab`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoDrawer')}>

@@ -150,8 +150,63 @@ export const Icon: React.FC<MaterialCommunityIconsProps> = ({children, style, na
     />);
 }
 
-export const Icon1 = styled(MaterialCommunityIcons)`
+
+
+// Support theme switch
+export const DemoButtonTORNThemed: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
+    const {colors, borderRadius} = useTheme();
+    const styleObj = getStyleObj(style)
+    return (<TouchableOpacity style={{
+        backgroundColor: colors.demoColor1,
+        marginTop: measure.spacings.s,
+        borderRadius: borderRadius.xs,
+        paddingVertical:measure.spacings.s,
+        ...styleObj,
+    }} {...rest} >{children}</TouchableOpacity>);
+}
+
+// Support theme switch
+export const DemoTextRNThemed: React.FC<TextProps> = ({children, style, ...rest}) => {
+    const {colors, fonts} = useTheme();
+    const styleObj = getStyleObj(style)
+    return (<TextRN style={{
+        color: colors.demoColor0,
+        paddingVertical: measure.spacings.s,
+        paddingHorizontal: measure.spacings.l,
+        fontFamily: fonts.regular.fontFamily,
+        ...styleObj,
+    }} {...rest}>{children}</TextRN>);
+}
+
+// The theme switch is not supported, but for future scalability,
+// try to use the theme to standardize the definition and use of properties
+export const DemoButtonRNStyled = styled.Button({
+    backgroundColor: DefaultTheme.colors.transparent,
+    margin: measure.spacings.s
+})
+
+export const DemoTextCssStyledRN = styled.Text`
+  color: ${DefaultTheme.colors.demoColor1};
+  text-align: center;
+  font-size: ${measure.fontSizes.m}px;
+`
+
+export const DemoButtonRNEStyled = styled(ButtonElement).attrs({
+    buttonStyle: {
+        backgroundColor: DefaultTheme.colors.demoColor1,
+        borderRadius: DefaultTheme.borderRadius.xl
+    },
+    titleStyle: {
+        color: DefaultTheme.colors.demoColor0
+    },
+    containerStyle: {
+        width: measure.sizes.s12,
+    },
+})``
+
+export const DemoIconCssStyled = styled(MaterialCommunityIcons)`
   font-size: ${measure.fontSizes.m}px;
   color:${DefaultTheme.colors.primary};
   padding: ${measure.spacings.s}px;
 `
+

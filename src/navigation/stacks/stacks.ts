@@ -8,6 +8,8 @@ import {
 
 export const RootStack = createStackNavigator<RootStackParam>();
 
+export const DemoModalStack = createStackNavigator<RootStackParam>();
+
 export const DemoNestedLv1Stack = createStackNavigator<DemoNestedLv1StackParam>();
 
 export const DemoNestedLv2Stack = createStackNavigator<DemoNestedLv2StackParam>();

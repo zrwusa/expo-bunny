@@ -2,6 +2,7 @@ export type RootStackParam = {
     Home: undefined;
     SignIn: undefined;
     Profile: { id: string };
+    DemoModal: undefined | { screen: string; params?: { [key: string]: any } };
     DemoFCReduxHook: undefined;
     DemoCollection: undefined;
     DemoRoute: { id: string, isHuman: boolean, sort?: 'latest' | 'top' };
@@ -9,16 +10,20 @@ export type RootStackParam = {
     DemoThunkCC: undefined;
     DemoMap: undefined;
     TestMap: undefined;
-    DemoTab: undefined | { screen: string; params: { [key: string]: any } };
-    DemoDrawer: undefined | { screen: string; params: { [key: string]: any } };
+    DemoTab: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoDrawer: undefined | { screen: string; params?: { [key: string]: any } };
     DemoNestedLv0: undefined | { screen: string; params?: { [key: string]: any } };
     DemoRNComponents: undefined;
     DemoShare: undefined;
     DemoNotification: undefined;
     DemoTheme: undefined;
     DemoSuspense: undefined;
-    DemoBitcoin: undefined | { screen: string; params: { [key: string]: any } };
+    DemoBitcoin: undefined | { screen: string; params?: { [key: string]: any } };
     Settings: undefined;
+};
+
+export type DemoModalStackParam = {
+    ModalHome: undefined;
 };
 
 export type DemoNestedLv1StackParam = {

@@ -46,6 +46,7 @@ import DemoNotificationScreen from "../../screens/DemoNotification";
 import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
 import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
 import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Settings";
+import ModalHomeScreen from "../../screens/DemoModal/ModalHome";
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -113,12 +114,14 @@ const node: NavigatorTreeNode = {
         },
         {
             component: ProfileScreen,
-            name: "Profile", path: "profile/:id",
+            name: "Profile",
+            path: "profile/:id",
             parse: {
                 id: (id: string) => `${id}`,
             },
             navigatorType: "stack"
         },
+
         {
             component: DemoFCReduxHookScreen,
             name: "DemoFCReduxHook",
@@ -186,7 +189,46 @@ const node: NavigatorTreeNode = {
             navigatorType: "stack"
         },
         {
-            name: "DemoTab", stack: Stacks.DemoTabStack,
+            name: "DemoModal",
+            stack: Stacks.DemoModalStack,
+            path: "demo-modal",
+            navigatorType: "stack",
+            mode: "modal",
+            headerMode: "none",
+            childrenNode: [
+                {
+                    component: ModalHomeScreen,
+                    name: "ModalHome",
+                    path: "modal-home",
+                    navigatorType: "stack",
+                    options: {
+                        animationEnabled: true,
+                        cardStyle: {backgroundColor: 'transparent'},
+                        cardOverlayEnabled: true,
+                        cardStyleInterpolator: ({current: {progress}}: any) => {
+                            return {
+                                cardStyle: {
+                                    opacity: progress.interpolate({
+                                        inputRange: [0, 0.5, 0.9, 1],
+                                        outputRange: [0, 0.25, 0.7, 1],
+                                    }),
+                                },
+                                overlayStyle: {
+                                    opacity: progress.interpolate({
+                                        inputRange: [0, 1],
+                                        outputRange: [0, 0.5],
+                                        extrapolate: 'clamp',
+                                    }),
+                                },
+                            };
+                        },
+                    }
+                }
+            ]
+        },
+        {
+            name: "DemoTab",
+            stack: Stacks.DemoTabStack,
             path: "demo-tab",
             options: optionsHeaderAndAnimation,
             tabBarOptions: tabBarOptions,
@@ -217,7 +259,10 @@ const node: NavigatorTreeNode = {
             path: "demo-drawer",
             drawerType: "front",
             openByDefault: false,
-            options: {...optionsHeaderAndAnimation, headerShown: true},
+            options: {
+                ...optionsHeaderAndAnimation,
+                headerShown: true
+            },
             screenOptions: optionsDraw,
             navigatorType: "drawer",
             childrenNode: [
@@ -243,8 +288,12 @@ const node: NavigatorTreeNode = {
             stack: Stacks.DemoNestedLv1Stack,
             name: "DemoNestedLv0",
             path: "demo-nested",
-            options: {...optionsHeaderAndAnimation, headerShown: true},
+            options: {
+                ...optionsHeaderAndAnimation,
+                headerShown: true
+            },
             screenOptions: optionsHeaderAndAnimation,
+            // initialRouteName:"NestedLv1Home",
             navigatorType: "stack",
             childrenNode: [
                 {
@@ -260,6 +309,7 @@ const node: NavigatorTreeNode = {
                     options: {headerShown: true},
                     screenOptions: optionsHeaderAndAnimation,
                     navigatorType: "stack",
+                    // initialRouteName:"NestedLv2HomeScreen",
                     childrenNode: [
                         {
                             component: NestedLv2HomeScreen,

@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import {
     ActivityIndicator, Switch, View, ScrollView,
-    Image, ImageBackground, Modal, TouchableHighlight, Alert,
+    Image, ImageBackground, TouchableHighlight, Alert,
     StatusBar, StatusBarStyle, TouchableWithoutFeedback,
+    Modal
 } from "react-native";
 import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/base-ui";
 import {
@@ -58,169 +59,171 @@ const RNHome: React.FC = () => {
         setTouchableWithoutFeedbackCount(touchableWithoutFeedbackCount + 1);
     };
     return (
-        <ScrollView contentContainerStyle={containerStyle.centralized}>
-            <View style={containerStyle.card}>
-                <ActivityIndicator/>
-                <ActivityIndicator size="large"/>
-                <ActivityIndicator size="small" color="#0000ff"/>
-                <ActivityIndicator size="large" color="#00ff00"/>
-            </View>
-            <View style={containerStyle.card}>
-                <Button
-                    onPress={() => null}
-                    title={st(`btnAccessibility`)}
-                    color="#841584"
-                    accessibilityLabel={st(`lbAccessibility`)}
-                />
-            </View>
-            <View style={containerStyle.card}>
-                <Switch
-                    trackColor={{false: "#767577", true: "#81b0ff"}}
-                    thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                />
-            </View>
-            <View style={containerStyle.card}>
-                <Image
-                    style={imageStyles.tinyLogo}
-                    source={{
-                        uri: 'https://reactnative.dev/img/tiny_logo.png',
-                    }}
-                />
-                <Image
-                    style={imageStyles.logo}
-                    source={{
-                        uri:
-                            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-                    }}
-                />
-            </View>
-            <View style={containerStyle.card}>
-                <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
-                    <Text style={imageBackgroundStyles.text}>Inside</Text>
-                </ImageBackground>
-            </View>
-
-
-            <View style={containerStyle.card}>
-                <Pressable
-                    onPress={() => {
-                        setTimesPressed((current) => current + 1);
-                    }}
-                    style={({pressed}) => [
-                        {
-                            backgroundColor: pressed
-                                ? 'rgb(210, 230, 255)'
-                                : 'white'
-                        },
-                        pressableStyles.wrapperCustom
-                    ]}>
-                    {({pressed}) => (
-                        <Text style={pressableStyles.text}>
-                            {pressed ? st(`pressed`) : st(`pressMe`)}
-                        </Text>
-                    )}
-                </Pressable>
-                <View style={pressableStyles.logBox}>
-                    <Text testID="pressable_press_console">{textLog}</Text>
+        <ScrollView>
+            <View style={containerStyle.screen}>
+                <View style={containerStyle.card}>
+                    <ActivityIndicator/>
+                    <ActivityIndicator size="large"/>
+                    <ActivityIndicator size="small" color="#0000ff"/>
+                    <ActivityIndicator size="large" color="#00ff00"/>
                 </View>
-            </View>
+                <View style={containerStyle.card}>
+                    <Button
+                        onPress={() => null}
+                        title={st(`btnAccessibility`)}
+                        color="#841584"
+                        accessibilityLabel={st(`lbAccessibility`)}
+                    />
+                </View>
+                <View style={containerStyle.card}>
+                    <Switch
+                        trackColor={{false: "#767577", true: "#81b0ff"}}
+                        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
+                </View>
+                <View style={containerStyle.card}>
+                    <Image
+                        style={imageStyles.tinyLogo}
+                        source={{
+                            uri: 'https://reactnative.dev/img/tiny_logo.png',
+                        }}
+                    />
+                    <Image
+                        style={imageStyles.logo}
+                        source={{
+                            uri:
+                                'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+                        }}
+                    />
+                </View>
+                <View style={containerStyle.card}>
+                    <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
+                        <Text style={imageBackgroundStyles.text}>Inside</Text>
+                    </ImageBackground>
+                </View>
 
-            <View style={modalStyles.centeredView}>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        Alert.alert(st(`modalClosed`));
-                    }}
-                >
-                    <View style={modalStyles.centeredView}>
-                        <View style={modalStyles.modalView}>
-                            <Text style={modalStyles.modalText}>{st(`helloWorld`)}</Text>
 
-                            <TouchableHighlight
-                                style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}
-                                onPress={() => {
-                                    setModalVisible(!modalVisible);
-                                }}
-                            >
-                                <Text style={modalStyles.textStyle}>{st(`hideModal`)}</Text>
-                            </TouchableHighlight>
+                <View style={containerStyle.card}>
+                    <Pressable
+                        onPress={() => {
+                            setTimesPressed((current) => current + 1);
+                        }}
+                        style={({pressed}) => [
+                            {
+                                backgroundColor: pressed
+                                    ? 'rgb(210, 230, 255)'
+                                    : 'white'
+                            },
+                            pressableStyles.wrapperCustom
+                        ]}>
+                        {({pressed}) => (
+                            <Text style={pressableStyles.text}>
+                                {pressed ? st(`pressed`) : st(`pressMe`)}
+                            </Text>
+                        )}
+                    </Pressable>
+                    <View style={pressableStyles.logBox}>
+                        <Text testID="pressable_press_console">{textLog}</Text>
+                    </View>
+                </View>
+
+                <View style={modalStyles.centeredView}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert(st(`modalClosed`));
+                        }}
+                    >
+                        <View style={modalStyles.centeredView}>
+                            <View style={modalStyles.modalView}>
+                                <Text style={modalStyles.modalText}>{st(`helloWorld`)}</Text>
+
+                                <TouchableHighlight
+                                    style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}
+                                    onPress={() => {
+                                        setModalVisible(!modalVisible);
+                                    }}
+                                >
+                                    <Text style={modalStyles.textStyle}>{st(`hideModal`)}</Text>
+                                </TouchableHighlight>
+                            </View>
                         </View>
-                    </View>
-                </Modal>
+                    </Modal>
 
-                <TouchableHighlight
-                    style={modalStyles.openButton}
-                    onPress={() => {
-                        setModalVisible(true);
-                    }}
-                >
-                    <Text style={modalStyles.textStyle}>{st(`showModal`)}</Text>
-                </TouchableHighlight>
-            </View>
-
-            <View style={containerStyle.card}>
-                <Text>Picker ???</Text>
-            </View>
-            <View style={containerStyle.card}>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={text => onChangeText(text)}
-                    value={textInputValue}
-                />
-            </View>
-            <View style={containerStyle.card}>
-                <TouchableHighlight onPress={onTouchableHighlightPress}>
-                    <View style={touchableHighlightStyles.button}>
-                        <Text>{st(`touchHere`)}</Text>
-                    </View>
-                </TouchableHighlight>
-                <View style={touchableHighlightStyles.countContainer}>
-                    <Text style={touchableHighlightStyles.countText}>
-                        {touchableHighlightCount ? touchableHighlightCount : null}
-                    </Text>
+                    <TouchableHighlight
+                        style={modalStyles.openButton}
+                        onPress={() => {
+                            setModalVisible(true);
+                        }}
+                    >
+                        <Text style={modalStyles.textStyle}>{st(`showModal`)}</Text>
+                    </TouchableHighlight>
                 </View>
 
-            </View>
-            <View style={containerStyle.card}>
-                <View style={touchableOpacityStyles.countContainer}>
-                    <Text>{st(`count`)}{touchableOpacityCount}</Text>
+                <View style={containerStyle.card}>
+                    <Text>Picker ???</Text>
                 </View>
-                <TouchableOpacity
-                    style={touchableOpacityStyles.button}
-                    onPress={onTouchableOpacityPress}
-                >
-                    <Text>{st(`pressHere`)}</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={containerStyle.card}>
-                <View style={touchableWithoutFeedbackStyles.countContainer}>
-                    <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
+                <View style={containerStyle.card}>
+                    <TextInput
+                        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                        onChangeText={text => onChangeText(text)}
+                        value={textInputValue}
+                    />
                 </View>
-                <TouchableWithoutFeedback onPress={onTouchableWithoutFeedbackPress}>
-                    <View style={touchableWithoutFeedbackStyles.button}>
-                        <Text>{st(`touchHere`)}</Text>
+                <View style={containerStyle.card}>
+                    <TouchableHighlight onPress={onTouchableHighlightPress}>
+                        <View style={touchableHighlightStyles.button}>
+                            <Text>{st(`touchHere`)}</Text>
+                        </View>
+                    </TouchableHighlight>
+                    <View style={touchableHighlightStyles.countContainer}>
+                        <Text style={touchableHighlightStyles.countText}>
+                            {touchableHighlightCount ? touchableHighlightCount : null}
+                        </Text>
                     </View>
-                </TouchableWithoutFeedback>
-            </View>
-            <View style={containerStyle.card}>
-                <View>
-                    <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
-                    <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>
+
                 </View>
-                <StatusBar backgroundColor="blue" barStyle={styleStatusBar}/>
-                <View>
-                    <StatusBar hidden={visibleStatusBar}/>
+                <View style={containerStyle.card}>
+                    <View style={touchableOpacityStyles.countContainer}>
+                        <Text>{st(`count`)}{touchableOpacityCount}</Text>
+                    </View>
+                    <TouchableOpacity
+                        style={touchableOpacityStyles.button}
+                        onPress={onTouchableOpacityPress}
+                    >
+                        <Text>{st(`pressHere`)}</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={statusBarStyles.buttonContainer}>
-                    <Button title={st(`toggleStatusBar`)} onPress={() => changeVisibilityStatusBar()}/>
+                <View style={containerStyle.card}>
+                    <View style={touchableWithoutFeedbackStyles.countContainer}>
+                        <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
+                    </View>
+                    <TouchableWithoutFeedback onPress={onTouchableWithoutFeedbackPress}>
+                        <View style={touchableWithoutFeedbackStyles.button}>
+                            <Text>{st(`touchHere`)}</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
                 </View>
-                <View style={statusBarStyles.buttonContainer}>
-                    <Button title={st(`changeStatusBarStyle`)} onPress={() => changeStyleStatusBar()}/>
+                <View style={containerStyle.card}>
+                    <View>
+                        <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
+                        <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>
+                    </View>
+                    <StatusBar backgroundColor="blue" barStyle={styleStatusBar}/>
+                    <View>
+                        <StatusBar hidden={visibleStatusBar}/>
+                    </View>
+                    <View style={statusBarStyles.buttonContainer}>
+                        <Button title={st(`toggleStatusBar`)} onPress={() => changeVisibilityStatusBar()}/>
+                    </View>
+                    <View style={statusBarStyles.buttonContainer}>
+                        <Button title={st(`changeStatusBarStyle`)} onPress={() => changeStyleStatusBar()}/>
+                    </View>
                 </View>
             </View>
         </ScrollView>);

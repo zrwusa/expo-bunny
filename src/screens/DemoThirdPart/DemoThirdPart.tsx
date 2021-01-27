@@ -1,8 +1,7 @@
 import React, {Component} from "react";
-import {View} from "react-native";
 import {ListItem, Avatar, Button} from "react-native-elements";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import {DemoButtonStyledRNE, DemoIconCssStyled} from "../../components/base-ui";
+import {ButtonRNE, Icon,View} from "../../components/base-ui";
 import {withTranslation, WithTranslation} from "react-i18next";
 import {stFactory} from "../../i18n/short-t";
 import containerStyle from "../../containers";
@@ -47,9 +46,8 @@ class DemoThirdPartScreen extends Component<Props, States> {
                     ))}
                 </View>
                 <View>
-                    <DemoButtonStyledRNE icon={<DemoIconCssStyled name="air-horn"/>}
-                                         title={st(`buttonWithIcon`)}/>
-                    <DemoIconCssStyled name="air-horn"/>
+                    <ButtonRNE icon={<Icon name="air-horn"/>} title={st(`buttonWithIcon`)}/>
+                    <Icon name="air-horn"/>
                 </View>
             </View>
         );
