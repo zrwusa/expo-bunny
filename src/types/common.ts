@@ -30,7 +30,7 @@ export type StackConfig = {
     component?: ComponentType<any>,
     stack?:
         typeof Stacks.RootStack
-        | typeof Stacks.DemoNestedStack
+        | typeof Stacks.DemoNestedLv1Stack
         | typeof Stacks.DemoNestedLv2Stack
         | typeof Stacks.DemoTabStack
         | typeof Stacks.DemoTabRNComponentsStack

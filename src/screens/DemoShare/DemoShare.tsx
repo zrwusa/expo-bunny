@@ -1,7 +1,7 @@
 import styles from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
-import {View, Text, Button, TouchableOpacity, Image, ButtonTO} from "../../components/base-ui";
+import {View, Text, TouchableOpacity, Image, ButtonTO, TextBtn} from "../../components/base-ui";
 import {useDispatch} from "react-redux";
 import {sysError} from "../../stores/sys/actions";
 import * as ImagePicker from "expo-image-picker";
@@ -67,7 +67,9 @@ export function DemoShareScreen() {
     return (
         <View style={[containerStyle.screen, containerStyle.centralized]}>
             <View style={{marginTop: 50}}>
-                <Button onPress={onShare} title={st(`shareMessage`)}/>
+                <ButtonTO onPress={onShare}>
+                    <TextBtn>{st(`shareMessage`)}</TextBtn>
+                </ButtonTO>
             </View>
             {
                 (selectedImage && selectedImage.localUri)

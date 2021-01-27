@@ -15,6 +15,7 @@ export const DemoTOButtonThemedRN: React.FC<TouchableOpacityProps> = ({children,
         backgroundColor: colors.demoColor1,
         marginTop: measure.spacings.s,
         borderRadius: borderRadius.xs,
+        paddingVertical:measure.spacings.s,
         ...styleObj,
     }} {...rest} >{children}</TouchableOpacity>);
 }

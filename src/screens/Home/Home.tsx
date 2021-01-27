@@ -33,11 +33,11 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>{st(`tab`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoDrawer')}>
                         <TextBtn>{st(`drawer`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoNested')}>
+                    <ButtonTO onPress={() => navigation.navigate('DemoNestedLv0')}>
                         <TextBtn>{st(`nestedNavigation`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() =>
-                        navigation.navigate('DemoNested', {
-                            screen: 'NestedSettings',
+                        navigation.navigate('DemoNestedLv0', {
+                            screen: 'NestedLv1Settings',
                             params: {
                                 item: "001",
                                 screen: 'NestedLv2Settings',

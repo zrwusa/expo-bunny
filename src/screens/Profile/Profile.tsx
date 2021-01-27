@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, Text, Button} from "../../components/base-ui";
+import {View, Text, ButtonTO, TextBtn} from "../../components/base-ui";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types/stacks";
@@ -29,7 +29,9 @@ function ProfileScreen({route, navigation}: Props) {
                 <Avatar source={{uri: avatar_url}}/>
                 <Text>{st(`profileScreenId`)}{route.params.id}</Text>
                 <Text>{st(`email`)}{user?.email}</Text>
-                <Button title={st(`goToHomeScreen`)} onPress={() => navigation.navigate('Home')}/>
+                <ButtonTO onPress={() => navigation.navigate('Home')}>
+                    <TextBtn>{st(`goToHomeScreen`)}</TextBtn>
+                </ButtonTO>
                 <View style={styles.tallBlock}/>
             </View>
         </ScrollView>

@@ -15,9 +15,9 @@
       "route": "路由",
       "tab": "底部导航",
       "drawer": "抽屉导航",
-      "nestedNavigation": "嵌套导航",
+      "nestedNavigation": "《嵌套-Lv0-首页》（默认到《嵌套-Lv1-首页》）",
       "passParamsFromRootToLeaf": "根节点到叶子节点传参",
-      "passParamsFromRootToLeafTab": "根节点到叶子节点(底部导航)",
+      "passParamsFromRootToLeafTab": "根节点到叶子节点（底部导航）",
       "FCReduxHook": "函数组件 Redux Hooks",
       "thunkCC": "类组件 Thunk",
       "map": "地图",
@@ -94,7 +94,7 @@
     "SignIn": {
       "title": "登录",
       "signIn": "登录",
-      "signInDummy": "登录 (Dummy)",
+      "signInDummy": "登录 （Dummy）",
       "signInGoogle": "登录 Google",
       "username": "用户名",
       "password": "密码"
@@ -117,24 +117,24 @@
     "DrawerSettings": {
       "title": "抽屉-设置"
     },
-    "DemoNested": {
+    "DemoNestedLv0": {
       "title": "嵌套-Lv0"
     },
-    "NestedHome": {
+    "NestedLv1Home": {
       "title": "嵌套-Lv1-首页",
-      "goToNestedSettings": "跳转至嵌套设置"
+      "goToNestedLv1Settings": "跳转到《嵌套-Lv1-设置》（默认《嵌套-Lv2-首页》）"
     },
-    "NestedSettings": {
+    "NestedLv1Settings": {
       "title": "嵌套-Lv1-设置",
-      "goToNestedHome": "跳转至嵌套首页"
+      "goToNestedHome": "跳转到《嵌套-Lv1-首页》"
     },
     "NestedLv2Home": {
       "title": "嵌套-Lv2-首页",
-      "goToNestedLv2Settings": "跳转到 嵌套-Lv2-设置"
+      "goToNestedLv2Settings": "跳转到《嵌套-Lv2-设置》"
     },
     "NestedLv2Settings": {
       "title": "嵌套-Lv2-设置",
-      "goToNestedLv2Home": "跳转到 嵌套-Lv2-首页"
+      "goToNestedLv2Home": "跳转到《嵌套-Lv2-首页》"
     },
     "DemoRNComponents": {
       "title": "样例-RN组件"
@@ -150,7 +150,7 @@
       "pressHere": "按下此处",
       "toggleStatusBar": "切换StatusBar",
       "changeStatusBarStyle": "更改StatusBar样式",
-      "lbAccessibility": "辅助功能标签(VoiceOver 将读取此字符串)",
+      "lbAccessibility": "辅助功能标签（VoiceOver 将读取此字符串）",
       "xOnPress": "X 按压",
       "onPress": "按压",
       "modalClosed": "模态框已关闭。",

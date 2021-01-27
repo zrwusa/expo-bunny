@@ -14,7 +14,6 @@ import DemoThunkCCScreen from "../../screens/DemoThunkCC";
 import TestMapScreen from "../../screens/TestMap";
 import TabHomeScreen from "../../screens/DemoTab/TabHome";
 import TabSettingsScreen from "../../screens/DemoTab/TabSettings";
-import NestedHomeScreen from "../../screens/DemoNested/NestedHome";
 import RNHome from "../../screens/DemoRNComponents/RNHome";
 import RNSectionListScreen from "../../screens/DemoRNComponents/RNSectionList";
 import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
@@ -44,8 +43,9 @@ import {Icon} from "../../components/base-ui";
 import {LinkingConfig, LinkingConfigTraversable, RecursiveNavigatorProps, NavigatorTreeNode} from "../../types/common"
 import {getIconName, propsExtract} from "../../common/tools";
 import DemoNotificationScreen from "../../screens/DemoNotification";
-import NestedLv2HomeScreen from "../../screens/DemoNested/NestedSettings/NestedLv2Home";
-import NestedLv2SettingsScreen from "../../screens/DemoNested/NestedSettings/NestedLv2Settings";
+import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
+import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
+import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Settings";
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -240,22 +240,22 @@ const node: NavigatorTreeNode = {
             ]
         },
         {
-            stack: Stacks.DemoNestedStack,
-            name: "DemoNested",
+            stack: Stacks.DemoNestedLv1Stack,
+            name: "DemoNestedLv0",
             path: "demo-nested",
             options: {...optionsHeaderAndAnimation, headerShown: true},
             screenOptions: optionsHeaderAndAnimation,
             navigatorType: "stack",
             childrenNode: [
                 {
-                    component: NestedHomeScreen,
-                    name: "NestedHome",
+                    component: NestedLv1HomeScreen,
+                    name: "NestedLv1Home",
                     path: "nested-home",
                     navigatorType: "stack",
                 },
                 {
                     stack: Stacks.DemoNestedLv2Stack,
-                    name: "NestedSettings",
+                    name: "NestedLv1Settings",
                     path: "nested-settings/:item",
                     options: {headerShown: true},
                     screenOptions: optionsHeaderAndAnimation,

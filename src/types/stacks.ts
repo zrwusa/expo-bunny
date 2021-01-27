@@ -11,7 +11,7 @@ export type RootStackParam = {
     TestMap: undefined;
     DemoTab: undefined | { screen: string; params: { [key: string]: any } };
     DemoDrawer: undefined | { screen: string; params: { [key: string]: any } };
-    DemoNested: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoNestedLv0: undefined | { screen: string; params?: { [key: string]: any } };
     DemoRNComponents: undefined;
     DemoShare: undefined;
     DemoNotification: undefined;
@@ -21,9 +21,9 @@ export type RootStackParam = {
     Settings: undefined;
 };
 
-export type DemoNestedStackParam = {
-    NestedHome: undefined;
-    NestedSettings: { item: string };
+export type DemoNestedLv1StackParam = {
+    NestedLv1Home: undefined;
+    NestedLv1Settings: { item: string };
 };
 
 export type DemoNestedLv2StackParam = {
@@ -53,7 +53,7 @@ export type DemoTabRNComponentsStackParam = {
 
 export type StackParamListUnion =
     RootStackParam
-    | DemoNestedStackParam
+    | DemoNestedLv1StackParam
     | DemoTabStackParam
     | DemoTabRNComponentsStackParam
     | DemoBitcoinStackParam
@@ -61,7 +61,7 @@ export type StackParamListUnion =
 
 export type StackParamListIntersection =
     RootStackParam
-    & DemoNestedStackParam
+    & DemoNestedLv1StackParam
     & DemoTabStackParam
     & DemoTabRNComponentsStackParam
     & DemoBitcoinStackParam

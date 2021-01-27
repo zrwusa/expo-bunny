@@ -15,7 +15,7 @@
       "route": "Route",
       "tab": "Tab",
       "drawer": "Drawer",
-      "nestedNavigation": "Nested Navigation",
+      "nestedNavigation": "<Nested Lv0 Home>(Default To<Nested Lv1 Home>)",
       "passParamsFromRootToLeaf": "Root To Leaf",
       "passParamsFromRootToLeafTab": "Root To Leaf(Tab)",
       "FCReduxHook": "FC Redux Hook",
@@ -117,24 +117,24 @@
     "DrawerSettings": {
       "title": "DrawerSettings"
     },
-    "DemoNested": {
+    "DemoNestedLv0": {
       "title": "Nested-Lv0"
     },
-    "NestedHome": {
+    "NestedLv1Home": {
       "title": "Nested-Lv1-Home",
-      "goToNestedSettings": "Go To Nested Settings"
+      "goToNestedLv1Settings": "Go To <Nested Lv1 Settings>(Default to <Nested Lv2 Home>)"
     },
-    "NestedSettings": {
+    "NestedLv1Settings": {
       "title": "Nested-Lv1-Settings",
-      "goToNestedHome": "Go To Nested Home"
+      "goToNestedHome": "Go To <Nested Lv1 Home>"
     },
     "NestedLv2Home": {
       "title": "Nested-Lv2-Home",
-      "goToNestedLv2Settings": "Go To Nested Lv2 Settings"
+      "goToNestedLv2Settings": "Go To <Nested Lv2 Settings>"
     },
     "NestedLv2Settings": {
       "title": "Nested-Lv2-Settings",
-      "goToNestedLv2Home": "Go To Nested Lv2 Home"
+      "goToNestedLv2Home": "Go To <Nested Lv2 Home>"
     },
     "DemoRNComponents": {
       "title": "DemoRNComponents"

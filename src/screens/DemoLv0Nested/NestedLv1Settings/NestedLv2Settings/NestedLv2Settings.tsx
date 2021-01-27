@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, Button} from "../../../../components/base-ui";
+import {View, ButtonTO, TextBtn} from "../../../../components/base-ui";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedLv2StackParam} from "../../../../types/stacks";
@@ -18,8 +18,9 @@ function NestedLv2SettingsScreen({route, navigation}: NestedLv2SettingsProps) {
     return (
         <View style={containerStyle.screen}>
             <View style={containerStyle.card}>
-                <Button title={st(`goToNestedLv2Home`)}
-                        onPress={() => navigation.navigate('NestedLv2Home')}/>
+                <ButtonTO onPress={() => navigation.navigate('NestedLv2Home')}>
+                    <TextBtn>{st(`goToNestedLv2Home`)}</TextBtn>
+                </ButtonTO>
             </View>
         </View>
     );
