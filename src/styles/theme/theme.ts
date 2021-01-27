@@ -249,3 +249,9 @@ export const getThemes = () => {
     })
     return themes;
 }
+
+export const themes = getThemes();
+
+const firstTheme = themes[Object.keys(themes)[0]];
+
+export const defaultTheme = firstTheme || undefined;

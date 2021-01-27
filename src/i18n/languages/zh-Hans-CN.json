@@ -12,6 +12,7 @@
       "others": "其他",
       "system": "系统",
       "profile": "我的",
+      "demoModal": "模态框",
       "route": "路由",
       "tab": "底部导航",
       "drawer": "抽屉导航",
@@ -37,6 +38,9 @@
       "profileScreenId": "个人资料id: ",
       "goToHomeScreen": "返回首页",
       "email": "邮箱: "
+    },
+    "DemoModal": {
+      "title": "模态框"
     },
     "DemoFCReduxHook": {
       "title": "样例-函数组件 & Redux & Hooks",

@@ -1,5 +1,5 @@
 import {createTheming} from "@callstack/react-theme-provider";
-import {DefaultTheme} from "./DefaultTheme";
 import {Theme} from "../../types/styles";
+import {defaultTheme} from "./theme";
 
-export const {ThemeProvider, withTheme, useTheme} = createTheming<Theme>(DefaultTheme as Theme);
+export const {ThemeProvider, withTheme, useTheme} = createTheming<Theme>(defaultTheme);

@@ -2,36 +2,55 @@ import {DeepLeavesWrap} from "./helpers";
 import {IconProps} from "react-native-vector-icons/Icon";
 import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import {getIconCustomMap} from "../common/tools";
+import {ReactNode} from "react";
 
-type Mode = 'adaptive' | 'exact';
+export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
+export type ResponsiveInstance = { wp: Function, hp: Function };
+export type Dimension = { width: number, height: number };
+
+export type DimensionConfig = {
+    "bunnyUI": Dimension,
+    iphoneX: Dimension,
+    "iPad": Dimension,
+    "pixel2XL": Dimension,
+    "custom1": Dimension,
+    "custom2": Dimension,
+    "custom3": Dimension
+}
+
+export type ResponsiveProviderProps = {
+    children: ReactNode,
+};
+
+export type Mode = 'adaptive' | 'exact';
 
 export type Font = {
-    fontFamily: string;
-    fontWeight?: string;
+    fontFamily: string,
+    fontWeight?: string,
 }
 
 export type Fonts = {
-    regular: Font;
-    medium: Font;
-    light: Font;
-    thin: Font;
+    regular: Font,
+    medium: Font,
+    light: Font,
+    thin: Font,
     demoFont0: Font,
     demoFont1: Font,
 }
 
 export interface Colors {
-    primary: string;
-    background: string;
-    surface: string;
-    accent: string;
-    error: string;
-    text: string;
-    onSurface: string;
-    onBackground: string;
-    disabled: string;
-    placeholder: string;
-    backdrop: string;
-    notification: string;
+    primary: string,
+    background: string,
+    surface: string,
+    accent: string,
+    error: string,
+    text: string,
+    onSurface: string,
+    onBackground: string,
+    disabled: string,
+    placeholder: string,
+    backdrop: string,
+    notification: string,
     demoColor0: string,
     demoColor1: string,
     btnBgColor: string,
@@ -40,18 +59,18 @@ export interface Colors {
 }
 
 export interface Animation {
-    scale: number;
+    scale: number,
     demoProperty0: number,
     demoProperty1: number,
 }
 
 export interface Theme {
-    dark: boolean;
-    mode?: Mode;
-    roundness: number;
-    colors: Colors;
-    fonts: Fonts;
-    animation: Animation;
+    dark: boolean,
+    mode?: Mode,
+    roundness: number,
+    colors: Colors,
+    fonts: Fonts,
+    animation: Animation,
     borderRadius: {
         xxs: number,
         xs: number,
@@ -92,8 +111,8 @@ export type FontsWrapped = DeepLeavesWrap<Fonts, Themes>
 export type ThemeWarehouse = DeepLeavesWrap<Theme, Themes>
 
 export type IconMap<T> = {
-    [ P in keyof T ]: number
-};
+    [P in keyof T]: number
+}
 
 export type IconKeys = keyof IconMap<typeof glyphMap>
 

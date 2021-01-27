@@ -21,6 +21,8 @@ import {Preparing} from "./components/Preparing";
 import {useTranslation} from "react-i18next";
 import * as localization from "expo-localization";
 import {useReduxDevToolsExtension} from '@react-navigation/devtools';
+import {ResponsiveProvider} from "./styles/responsive/responsiveHooks";
+import {RequestProvider} from "./common/requestHooks";
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
@@ -107,24 +109,28 @@ function App() {
     return isReady
         ? (
             <AppearanceProvider>
-                <ThemeProvider theme={theme}>
-                    <PaperProvider theme={themePaper}>
-                        <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
-                        <NavigationContainer ref={navigationRef}
-                                             linking={linking}
-                                             theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
-                                             fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
-                                             initialState={navInitialStateMemorized}
-                                             onStateChange={(state) =>
-                                                 AsyncStorage.setItem(
-                                                     BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
-                                                     JSON.stringify(state)
-                                                 )
-                                             }>
-                            <NavigatorTree/>
-                        </NavigationContainer>
-                    </PaperProvider>
-                </ThemeProvider>
+                <ResponsiveProvider>
+                    <RequestProvider>
+                        <ThemeProvider theme={theme}>
+                            <PaperProvider theme={themePaper}>
+                                <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
+                                <NavigationContainer ref={navigationRef}
+                                                     linking={linking}
+                                                     theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
+                                                     fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
+                                                     initialState={navInitialStateMemorized}
+                                                     onStateChange={(state) =>
+                                                         AsyncStorage.setItem(
+                                                             BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
+                                                             JSON.stringify(state)
+                                                         )
+                                                     }>
+                                    <NavigatorTree/>
+                                </NavigationContainer>
+                            </PaperProvider>
+                        </ThemeProvider>
+                    </RequestProvider>
+                </ResponsiveProvider>
             </AppearanceProvider>
         )
         : (<Preparing/>)

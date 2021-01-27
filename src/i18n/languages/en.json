@@ -12,6 +12,7 @@
       "others": "Others",
       "system": "System",
       "profile": "Profile",
+      "demoModal": "Modal",
       "route": "Route",
       "tab": "Tab",
       "drawer": "Drawer",
@@ -37,6 +38,9 @@
       "profileScreenId": "Profile Screen id:",
       "goToHomeScreen": "Go to HomeScreen",
       "email": "Email: "
+    },
+    "DemoModal": {
+      "title": "DemoModal"
     },
     "DemoFCReduxHook": {
       "title": "DemoFCReduxHook",

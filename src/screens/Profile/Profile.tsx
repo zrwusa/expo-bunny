@@ -11,6 +11,8 @@ import {Avatar} from "react-native-elements";
 import containerStyle from "../../containers";
 import {ScrollView} from "react-native";
 import styles from "./styles";
+import {useResponsive} from "../../styles/responsive/responsiveHooks";
+import {useRequest} from "../../common/requestHooks";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
@@ -18,6 +20,17 @@ type Props = { route: ProfileRouteProp; navigation: ProfileNavigationProp; };
 
 function ProfileScreen({route, navigation}: Props) {
     const {user} = useSelector((rootState: RootState) => rootState.authState);
+    const {bunnyUI} = useResponsive();
+    const {wp, hp} = bunnyUI;
+
+    console.log('---test responsiveHooks', wp(100), hp(100))
+    const request = useRequest();
+    request.get(`/employees`)
+        .then(res => {
+            console.log('---test requestHooks', res)
+        })
+        .catch(err => {
+        })
     const {t} = useTranslation();
     const i18nPrefix = 'screens.Profile';
     const st = stFactory(t, i18nPrefix);
