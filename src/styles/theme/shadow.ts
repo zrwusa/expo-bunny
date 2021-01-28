@@ -1,7 +1,7 @@
-import {palette} from "./palette";
+import {pl} from "../utils";
 import {Animated} from "react-native";
 
-const SHADOW_COLOR = palette.black;
+const SHADOW_COLOR = pl.black;
 const SHADOW_OPACITY = 0.24;
 
 export default function shadow(elevation: number | Animated.Value = 0) {

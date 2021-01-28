@@ -1,14 +1,13 @@
 import {StyleSheet} from "react-native";
-import {measure} from "../styles/helpers";
-import {palette} from "../styles/theme";
+import {ms, pl} from "../styles/utils";
 
 const containerStyle = StyleSheet.create({
     card: {
-        margin: measure.spacings.l,
-        padding: measure.spacings.m,
-        borderColor: palette.grey500,
-        borderWidth: measure.spacings.xxs,
-        borderRadius: measure.borderRadius.s,
+        margin: ms.sp.l,
+        padding: ms.sp.m,
+        borderColor: pl.grey500,
+        borderWidth: ms.sp.xxs,
+        borderRadius: ms.br.s,
     },
     screen: {
         flex: 1,

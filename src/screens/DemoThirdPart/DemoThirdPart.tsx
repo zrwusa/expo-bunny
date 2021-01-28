@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {ListItem, Avatar, Button} from "react-native-elements";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import {ButtonRNE, Icon,View} from "../../components/base-ui";
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {ButtonRNE, Icon, View} from "../../components/base-ui";
 import {withTranslation, WithTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 import containerStyle from "../../containers";
 
 type Props = { title?: string } & WithTranslation

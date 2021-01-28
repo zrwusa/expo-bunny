@@ -1,5 +1,5 @@
-import {EDemoMap} from "../../common/constants";
-import BunnyConstants from "../../common/constants";
+import {EDemoMap} from "../../utils/constants";
+import BunnyConstants from "../../utils/constants";
 import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import {DemoMapActions} from "./actions";
 

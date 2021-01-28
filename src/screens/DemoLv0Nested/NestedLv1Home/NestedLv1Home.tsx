@@ -5,11 +5,11 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedLv1StackParam} from "../../../types/stacks";
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../i18n/short-t";
+import {stFactory} from "../../../lang/short-t";
 
 type NestedLv1HomeRouteProp = RouteProp<DemoNestedLv1StackParam, 'NestedLv1Home'>;
 type NestedLv1HomeNavigationProp = StackNavigationProp<DemoNestedLv1StackParam, 'NestedLv1Home'>;
-type NestedLv1HomeProps = { route: NestedLv1HomeRouteProp, navigation: NestedLv1HomeNavigationProp }
+export type NestedLv1HomeProps = { route: NestedLv1HomeRouteProp, navigation: NestedLv1HomeNavigationProp }
 
 function NestedLv1HomeScreen({route, navigation}: NestedLv1HomeProps) {
     const {t} = useTranslation();
@@ -18,7 +18,7 @@ function NestedLv1HomeScreen({route, navigation}: NestedLv1HomeProps) {
     return (
         <View style={containerStyle.screen}>
             <View style={containerStyle.card}>
-                <ButtonTO onPress={() => navigation.navigate('NestedLv1Settings', {item: "001"})} >
+                <ButtonTO onPress={() => navigation.navigate('NestedLv1Settings', {item: "001"})}>
                     <TextBtn>{st(`goToNestedLv1Settings`)}</TextBtn>
                 </ButtonTO>
             </View>

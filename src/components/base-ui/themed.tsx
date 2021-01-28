@@ -16,23 +16,23 @@ import {
     ButtonProps, ImageProps, StyleSheet, PressableProps
 } from "react-native";
 import React from "react";
-import {getStyleObj, measure} from "../../styles/helpers";
 import styled from "styled-components/native";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {MaterialCommunityIconsProps} from "../../types/styles";
+import {getStyleObj, ms} from "../../styles/utils";
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
 export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const {colors, borderRadius} = useTheme();
+    const {colors} = useTheme();
     const styleObj = getStyleObj(style);
     return (<TouchableOpacityRN style={{
-        backgroundColor: colors.demoColor1,
-        marginTop: measure.spacings.s,
-        borderRadius: borderRadius.xs,
-        fontSize: measure.fontSizes.m,
-        paddingVertical:measure.spacings.s,
-        alignItems:"center",
+        backgroundColor: colors.primary,
+        marginTop: ms.sp.s,
+        borderRadius: ms.br.xs,
+        fontSize: ms.fs.m,
+        paddingVertical: ms.sp.s,
+        alignItems: "center",
         ...styleObj
     }} {...rest} >{children}</TouchableOpacityRN>);
 }
@@ -41,11 +41,11 @@ export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
     const styleObj = getStyleObj(style);
     return (<TextRN style={{
-        color: colors.btnTextColor,
-        paddingVertical: measure.spacings.s,
-        paddingHorizontal: measure.spacings.m,
+        color: colors.btnText,
+        paddingVertical: ms.sp.xs,
+        paddingHorizontal: ms.sp.m,
         fontFamily: fonts.regular.fontFamily,
-        fontSize: measure.fontSizes.m,
+        fontSize: ms.fs.m,
         ...styleObj
     }} {...rest}>{children}</TextRN>);
 }
@@ -62,13 +62,14 @@ export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
     return (<TextRN style={{
         color: colors.text,
         fontFamily: fonts.regular.fontFamily,
+        fontSize: ms.fs.m,
         ...styleObj
     }} {...rest}>{children}</TextRN>);
 }
 
 export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
     const {colors} = useTheme();
-    return (<ButtonRN color={color || colors.btnBgColor}  {...rest} />);
+    return (<ButtonRN color={color || colors.btnBg}  {...rest} />);
 }
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
@@ -101,25 +102,24 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
         }}  {...rest} >{children}</ImageRN>);
 }
 
-
 export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
-    const {colors, borderRadius} = useTheme();
+    const {colors} = useTheme();
     const buttonStyleObj = getStyleObj(buttonStyle);
     const titleStyleObj = getStyleObj(titleStyle);
     const containerStyleObj = getStyleObj(containerStyle);
 
     return (<ButtonElement
         buttonStyle={{
-            backgroundColor: colors.btnBgColor,
-            borderRadius: borderRadius.s,
+            backgroundColor: colors.btnBg,
+            borderRadius: ms.br.s,
             ...buttonStyleObj,
         }}
         titleStyle={{
-            color: colors.btnTextColor,
+            color: colors.btnText,
             ...titleStyleObj
         }}
         containerStyle={{
-            width: measure.sizes.s12,
+            width: ms.sz.s12,
             ...containerStyleObj
         }} {...rest}>{children}</ButtonElement>);
 }
@@ -131,8 +131,8 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     return (<TextInputRN
         style={{
             color: colors.text,
-            paddingHorizontal: measure.spacings.l,
-            paddingVertical: measure.spacings.s,
+            paddingHorizontal: ms.sp.l,
+            paddingVertical: ms.sp.s,
             ...styleObj
         }} {...rest} />);
 }
@@ -144,69 +144,42 @@ export const Icon: React.FC<MaterialCommunityIconsProps> = ({children, style, na
         name={name}
         style={{
             color: colors.background,
-            fontSize:measure.fontSizes.xl,
+            fontSize: ms.fs.xl,
             ...styleObj
         }}
     />);
 }
 
 
-
-// Support theme switch
-export const DemoButtonTORNThemed: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const {colors, borderRadius} = useTheme();
-    const styleObj = getStyleObj(style)
-    return (<TouchableOpacity style={{
-        backgroundColor: colors.demoColor1,
-        marginTop: measure.spacings.s,
-        borderRadius: borderRadius.xs,
-        paddingVertical:measure.spacings.s,
-        ...styleObj,
-    }} {...rest} >{children}</TouchableOpacity>);
-}
-
-// Support theme switch
-export const DemoTextRNThemed: React.FC<TextProps> = ({children, style, ...rest}) => {
-    const {colors, fonts} = useTheme();
-    const styleObj = getStyleObj(style)
-    return (<TextRN style={{
-        color: colors.demoColor0,
-        paddingVertical: measure.spacings.s,
-        paddingHorizontal: measure.spacings.l,
-        fontFamily: fonts.regular.fontFamily,
-        ...styleObj,
-    }} {...rest}>{children}</TextRN>);
-}
-
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
 export const DemoButtonRNStyled = styled.Button({
     backgroundColor: DefaultTheme.colors.transparent,
-    margin: measure.spacings.s
+    margin: ms.sp.s
 })
 
 export const DemoTextCssStyledRN = styled.Text`
-  color: ${DefaultTheme.colors.demoColor1};
+  color: ${DefaultTheme.colors.btnText};
   text-align: center;
-  font-size: ${measure.fontSizes.m}px;
+  font-size: ${ms.fs.m}px;
 `
 
 export const DemoButtonRNEStyled = styled(ButtonElement).attrs({
     buttonStyle: {
-        backgroundColor: DefaultTheme.colors.demoColor1,
-        borderRadius: DefaultTheme.borderRadius.xl
+        backgroundColor: DefaultTheme.colors.background,
+        borderRadius: ms.br.xl
     },
     titleStyle: {
-        color: DefaultTheme.colors.demoColor0
+        color: DefaultTheme.colors.text
     },
     containerStyle: {
-        width: measure.sizes.s12,
+        width: ms.sz.s12,
     },
 })``
 
 export const DemoIconCssStyled = styled(MaterialCommunityIcons)`
-  font-size: ${measure.fontSizes.m}px;
+  font-size: ${ms.fs.m}px;
   color:${DefaultTheme.colors.primary};
-  padding: ${measure.spacings.s}px;
+  padding: ${ms.sp.s}px;
 `
 

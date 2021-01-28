@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from "react-native";
-import BunnyConstants from "../../../common/constants";
+import BunnyConstants from "../../../utils/constants";
 
 const window = Dimensions.get("window");
 

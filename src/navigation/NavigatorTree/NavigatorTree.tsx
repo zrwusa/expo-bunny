@@ -11,7 +11,6 @@ import DemoRouteScreen from "../../screens/DemoRoute";
 import DemoThirdPartScreen from "../../screens/DemoThirdPart";
 import DemoMapScreen from "../../screens/DemoMap/DemoMap";
 import DemoThunkCCScreen from "../../screens/DemoThunkCC";
-import TestMapScreen from "../../screens/TestMap";
 import TabHomeScreen from "../../screens/DemoTab/TabHome";
 import TabSettingsScreen from "../../screens/DemoTab/TabSettings";
 import RNHome from "../../screens/DemoRNComponents/RNHome";
@@ -21,12 +20,12 @@ import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardA
 import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea";
 import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
 import DemoShareScreen from "../../screens/DemoShare";
-import {Platform, View} from "react-native";
+import {Platform, TouchableOpacity, View} from "react-native";
 import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
 import SettingsScreen from "../../screens/Settings";
 import DemoThemeScreen from "../../screens/DemoTheme";
-import {EThemes} from "../../common/constants";
+import {EThemes} from "../../utils/constants";
 import {restoreAndSaveTheme} from "../../stores/sys/actions";
 import SettingsItem from "../../screens/Settings/SettingsItem/SettingsItem";
 import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
@@ -37,16 +36,20 @@ import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
 import {BottomTabBarOptions, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 import {DrawerNavigationOptions} from "@react-navigation/drawer/lib/typescript/src/types";
 import {StackNavigationOptions} from "@react-navigation/stack";
-import {PathConfigMap} from "@react-navigation/native";
-import {Traversable} from "../../types/helpers";
+import {DrawerActions, PathConfigMap} from "@react-navigation/native";
+import {Traversable} from "../../types/utils";
 import {Icon} from "../../components/base-ui";
-import {LinkingConfig, LinkingConfigTraversable, RecursiveNavigatorProps, NavigatorTreeNode} from "../../types/common"
-import {getIconName, propsExtract} from "../../common/tools";
+import {LinkingConfig, LinkingConfigTraversable, RecursiveNavigatorProps, NavigatorTreeNode} from "../../types/utils"
+import {getIconName, propsExtract} from "../../utils/helpers";
 import DemoNotificationScreen from "../../screens/DemoNotification";
 import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
 import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
 import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Settings";
 import ModalHomeScreen from "../../screens/DemoModal/ModalHome";
+import {responsiveFromUE, ms} from "../../styles/utils";
+import {useTheme} from "../../styles/theme";
+
+const {wp, hp} = responsiveFromUE.iphoneX;
 
 const customHeaderRight = () => {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
@@ -64,28 +67,54 @@ const customHeaderRight = () => {
 const optionsHeaderAndAnimation: StackNavigationOptions = {
     animationEnabled: true,
     headerRight: customHeaderRight,
+    headerTitleStyle: {
+        fontSize: ms.fs.m
+    },
+    headerLeftContainerStyle: {},
+    headerBackImage: ({tintColor}) => <Icon name="chevron-left"
+                                            style={{
+                                                fontSize: ms.fs.xxl,
+                                                color: tintColor
+                                            }}/>,
     headerStyle: {
         height: Platform.select({
-            web: 50,
-            android: 64,
+            web: wp(50),
         })
     }
 }
 
-const optionsDraw: DrawerNavigationOptions = {
-    headerStyle: {
-        height: Platform.select({
-            web: 50,
-            android: 64,
-            ios: 50,
-        })
-    },
-    headerShown: true,
-    headerStatusBarHeight: Platform.select({native: 0})
+const optionsDraw: DrawerNavigationOptions = ({navigation}) => {
+    return {
+        headerStyle: {
+            height:wp(50)
+        },
+        headerShown: true,
+        headerLeft: ({tintColor}: any) => {
+            const {colors} = useTheme()
+            return (<TouchableOpacity onPress={() => {
+                navigation.dispatch(DrawerActions.toggleDrawer())
+            }}>
+                <Icon name="menu"
+                      style={{
+                          paddingLeft: ms.sp.l,
+                          fontSize: ms.fs.l,
+                          color: colors.text
+                      }}/>
+            </TouchableOpacity>)
+        },
+        headerStatusBarHeight: Platform.select({native: 0})
+    }
+
 }
 
 const tabBarOptions: BottomTabBarOptions = {
     tabStyle: {justifyContent: 'center'},
+    labelStyle: {
+        fontSize: ms.fs.xxs,
+    },
+    style: {
+        // height: wp(50)
+    }
 }
 
 const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => {
@@ -168,12 +197,6 @@ const node: NavigatorTreeNode = {
             component: DemoMapScreen,
             name: "DemoMap",
             path: "demo-map",
-            navigatorType: "stack"
-        },
-        {
-            component: TestMapScreen,
-            name: "TestMap",
-            path: "test-map",
             navigatorType: "stack"
         },
         {

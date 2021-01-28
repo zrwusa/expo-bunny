@@ -9,7 +9,7 @@ import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
 import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
-import BunnyConstants from "../../common/constants";
+import BunnyConstants from "../../utils/constants";
 import {sysError} from "../../stores/sys/actions";
 import styles, {CARD_WIDTH} from "./styles";
 import containerStyle from "../../containers";
@@ -23,16 +23,16 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMap, void, Action>) => (
     restoreRegion: (region: Region) => dispatch(restoreRegion(region)),
     sysError: (err: SysErrorPayload) => dispatch(sysError(err))
 });
-type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps> & BareProps;
+export type DemoMapProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps> & BareProps;
 
-class DemoMapScreen extends Component<Props> {
+class DemoMapScreen extends Component<DemoMapProps> {
 
     private mapView = createRef<MapView>()
     private index: number = 0;
     private regionTimeout: ReturnType<typeof setTimeout> = setTimeout(() => '', 1000);
     private animation: Animated.Value = new Animated.Value(0);
 
-    constructor(props: Props) {
+    constructor(props: DemoMapProps) {
         super(props);
         this.getCurLocation = this.getCurLocation.bind(this);
         this.onMarkerPress = this.onMarkerPress.bind(this);

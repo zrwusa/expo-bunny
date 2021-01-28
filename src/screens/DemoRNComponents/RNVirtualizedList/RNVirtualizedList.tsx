@@ -10,37 +10,36 @@ type Item = {
     title: string;
 }
 
-const VIRTUALIZED_LIST_DATA: Item[] = [];
-
-const getVirtualizedListItem = (data: [], index: number) => {
-    return {
-        id: Math.random().toString(12).substring(0),
-        title: `Item ${index + 1}`,
-    }
-}
-
-const getVirtualizedListItemCount = (data: []) => {
-    return 1000;
-}
-
-const VirtualizedListItem = ({title}: Item) => {
-    const {colors} = useTheme()
-
-    return (
-        <View style={{
-            backgroundColor: colors.background,
-            height: 150,
-            justifyContent: 'center',
-            marginVertical: 2,
-            marginHorizontal: 2,
-            padding: 20,
-        }}>
-            <Text style={virtualizedListStyles.title}>{title}</Text>
-        </View>
-    );
-}
-
 const RNVirtualizedListScreen: React.FC = () => {
+    const VIRTUALIZED_LIST_DATA: Item[] = [];
+
+    const getVirtualizedListItem = (data: [], index: number) => {
+        return {
+            id: Math.random().toString(12).substring(0),
+            title: `Item ${index + 1}`,
+        }
+    }
+
+    const getVirtualizedListItemCount = (data: []) => {
+        return 1000;
+    }
+
+    const VirtualizedListItem = ({title}: Item) => {
+        const {colors} = useTheme()
+
+        return (
+            <View style={{
+                backgroundColor: colors.background,
+                height: 150,
+                justifyContent: 'center',
+                marginVertical: 2,
+                marginHorizontal: 2,
+                padding: 20,
+            }}>
+                <Text style={virtualizedListStyles.title}>{title}</Text>
+            </View>
+        );
+    }
     return (
         <SafeAreaView style={containerStyle.screen}>
             <VirtualizedList

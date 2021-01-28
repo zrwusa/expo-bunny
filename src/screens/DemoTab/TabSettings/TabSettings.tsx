@@ -5,13 +5,13 @@ import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {DemoTabStackParam} from "../../../types/stacks";
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../i18n/short-t";
+import {stFactory} from "../../../lang/short-t";
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;
-type TabSettingsProps = { route: TabSettingsRouteProp, navigation: TabSettingsNavigationProp }
+export type TabSettingsProps = { route: TabSettingsRouteProp, navigation: TabSettingsNavigationProp }
 
-export function TabSettingsScreen({route, navigation}: TabSettingsProps) {
+function TabSettingsScreen({route, navigation}: TabSettingsProps) {
     const {t} = useTranslation();
     const i18nPrefix = "screens.TabSettings";
     const st = stFactory(t, i18nPrefix);

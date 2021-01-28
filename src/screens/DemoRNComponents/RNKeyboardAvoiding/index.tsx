@@ -1,2 +1,2 @@
-export { default } from "./KeyboardAvoiding";
+export {default} from "./KeyboardAvoiding";
 export * from "./KeyboardAvoiding";

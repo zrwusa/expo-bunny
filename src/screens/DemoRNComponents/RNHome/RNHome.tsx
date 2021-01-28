@@ -12,7 +12,7 @@ import {
 } from "./styles";
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../i18n/short-t";
+import {stFactory} from "../../../lang/short-t";
 
 const RNHome: React.FC = () => {
     const {t} = useTranslation();

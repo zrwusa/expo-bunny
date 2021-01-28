@@ -1,7 +1,7 @@
-import api from "../../common/api";
+import api from "../../utils/api";
 import {RestoreAuth, RestoreAuthGoogle, SignOut, SysError, SysWarn} from "../../types/actions";
 import {RestoreAuthGooglePayload, RestoreAuthPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
-import {EAuth} from "../../common/constants";
+import {EAuth} from "../../utils/constants";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {IOS_CLIENT_ID, ANDROID_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO, ANDROID_CLIENT_ID_FOR_EXPO} from '@env';
@@ -10,7 +10,7 @@ import {ThunkAction} from "redux-thunk";
 import {sysError, sysWarn} from "../sys/actions";
 import {Auth, AuthRes} from "../../types/models";
 import {AxiosResponse} from "axios";
-import BunnyConstants from "../../common/constants";
+import BunnyConstants from "../../utils/constants";
 
 export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreAuth>> = (reqParams: SignInPayload) => {
     return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {

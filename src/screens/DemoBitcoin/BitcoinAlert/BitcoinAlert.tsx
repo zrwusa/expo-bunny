@@ -6,13 +6,13 @@ import {DemoBitcoinStackParam} from "../../../types/stacks";
 import {Text} from "../../../components/base-ui";
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../i18n/short-t";
+import {stFactory} from "../../../lang/short-t";
 
 type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
-type BitcoinAlertProps = { route: BitcoinAlertRouteProp, navigation: BitcoinAlertNavigationProp }
+export type BitcoinAlertProps = { route: BitcoinAlertRouteProp, navigation: BitcoinAlertNavigationProp }
 
-export function BitcoinAlertScreen({route, navigation}: BitcoinAlertProps) {
+function BitcoinAlertScreen({route, navigation}: BitcoinAlertProps) {
     const {t} = useTranslation();
     const i18nPrefix = 'screens.BitcoinAlert';
     const st = stFactory(t, i18nPrefix);

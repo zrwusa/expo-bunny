@@ -1,5 +1,8 @@
 import {Dimensions, StyleSheet} from "react-native";
+import {responsiveFromUE} from "../../styles/utils";
+import {ms} from "../../styles/utils";
 
+const {wp, hp} = responsiveFromUE.iphoneX;
 const {width, height} = Dimensions.get("window");
 
 export const CARD_HEIGHT = height / 4;
@@ -11,23 +14,23 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         position: "absolute",
-        bottom: 30,
+        bottom: wp(30),
         left: 0,
         right: 0,
-        paddingVertical: 2,
+        paddingVertical: ms.sp.xs,
     },
     endPadding: {
         paddingRight: width - CARD_WIDTH,
     },
     card: {
-        padding: 4,
-        elevation: 2,
+        padding: ms.sp.s,
+        elevation: wp(2),
         backgroundColor: "#FFF",
-        marginHorizontal: 10,
+        marginHorizontal: ms.sp.m,
         shadowColor: "#000",
-        shadowRadius: 5,
+        shadowRadius: ms.br.xs,
         shadowOpacity: 0.3,
-        shadowOffset: {width: 2, height: -2},
+        shadowOffset: {width: ms.sp.xs, height: -ms.sp.xs},
         height: CARD_HEIGHT,
         width: CARD_WIDTH,
         overflow: "hidden",
@@ -42,12 +45,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     cardTitle: {
-        fontSize: 12,
-        marginTop: 5,
+        fontSize: ms.fs.xs,
+        marginTop: ms.sp.s,
         fontWeight: "bold",
     },
     cardDescription: {
-        fontSize: 12,
+        fontSize: ms.fs.xs,
         color: "#444",
     },
     markerWrap: {
@@ -55,18 +58,18 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     marker: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
+        width: wp(20),
+        height: wp(20),
+        borderRadius: ms.br.s,
         backgroundColor: "rgba(130,4,150, 0.9)",
     },
     ring: {
-        width: 28,
-        height: 28,
-        borderRadius: 14,
+        width: wp(28),
+        height: wp(28),
+        borderRadius: ms.br.m,
         backgroundColor: "rgba(130,4,150, 0.3)",
         position: "absolute",
-        borderWidth: 1,
+        borderWidth: ms.sp.xxs,
         borderColor: "rgba(130,4,150, 0.5)",
     },
 });

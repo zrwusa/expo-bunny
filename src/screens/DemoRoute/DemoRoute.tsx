@@ -5,16 +5,16 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types/stacks";
 import styles from "./styles";
 import {withTranslation, WithTranslation} from 'react-i18next';
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 import containerStyle from "../../containers";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
 
-type Props = { route: ProfileRouteProp; navigation: ProfileNavigationProp; } & WithTranslation;
+export type DemoRouteProps = { route: ProfileRouteProp; navigation: ProfileNavigationProp; } & WithTranslation;
 
-class DemoRouteScreen extends Component<Props> {
-    constructor(props: Props) {
+class DemoRouteScreen extends Component<DemoRouteProps> {
+    constructor(props: DemoRouteProps) {
         super(props);
     }
 

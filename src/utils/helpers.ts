@@ -1,12 +1,11 @@
-import {Traversable, TraversableNested} from "../types/helpers";
-import {NavigatorTreeNode} from "../types/common";
+import {Traversable, TraversableNested} from "../types/utils";
+import {NavigatorTreeNode} from "../types/utils";
 import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import {MaterialCommunityIconsProps} from "../types/styles";
-import {Alert} from "react-native";
 
 export const propsExtract = (node: NavigatorTreeNode) => {
     const {
-        name, stack, component, childrenNode, signInComponent,navigatorType,
+        name, stack, component, childrenNode, signInComponent, navigatorType,
         path, exact, parse, stringify,
         initialParams, screenOptions, detachInactiveScreens, initialRouteName,
         statusBarAnimation, sceneContainerStyle,
@@ -33,7 +32,6 @@ export const propsExtract = (node: NavigatorTreeNode) => {
         keyboardDismissMode, minSwipeDistance, overlayColor, lazy, detachInactiveScreens,
         gestureHandlerProps, sceneContainerStyle, drawerStyle, drawerContent, drawerContentOptions
     };
-    const Navigator = stack?.Navigator;
 
     const propsMap: Traversable = {"stack": stackProps, "tab": tabProps, "drawer": drawerProps};
     return propsMap[navigatorType];

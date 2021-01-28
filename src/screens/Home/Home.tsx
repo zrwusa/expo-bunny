@@ -8,7 +8,7 @@ import {RootStackParam} from "../../types/stacks";
 import {ButtonTO, TextBtn, Text} from "../../components/base-ui";
 import containerStyle from "../../containers";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -29,8 +29,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>{st(`profile`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
                         <TextBtn>{st(`route`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoModal',{screen:'ModalHome'})}>
-                        <TextBtn>{st(`demoModal`)}</TextBtn></ButtonTO>
+                    {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
+                    {/*    <TextBtn>{st(`demoModal`)}</TextBtn></ButtonTO>*/}
                     <ButtonTO onPress={() => navigation.navigate('DemoTab')}>
                         <TextBtn>{st(`tab`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoDrawer')}>

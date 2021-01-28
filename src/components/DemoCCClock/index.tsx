@@ -1,2 +1,2 @@
-export { default } from "./DemoCCClock";
+export {default} from "./DemoCCClock";
 export * from "./DemoCCClock";

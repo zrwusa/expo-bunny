@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import api from "../../common/api";
+import api from "../../utils/api";
 import {View, Text, ButtonTO, TextBtn} from "../base-ui";
 import {DemoEmployee} from "../../types/models";
 

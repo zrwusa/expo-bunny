@@ -1,11 +1,12 @@
 import React from "react";
 import {ScrollView} from "react-native";
-import {DemoTextRNThemed, DemoButtonTORNThemed, Text, View} from "../../components/base-ui";
+import {Button, Text, View} from "../../components/base-ui";
 import {Button as ButtonP, Text as TextP} from "react-native-paper";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 import styles from "./styles";
 import containerStyle from "../../containers";
+import BunnyConstants from "../../utils/constants";
 
 const DemoThemeScreen = () => {
     const {t} = useTranslation();
@@ -14,9 +15,7 @@ const DemoThemeScreen = () => {
 
     return (
         <ScrollView contentContainerStyle={[containerStyle.centralized, {height: '100%'}]}>
-            <DemoButtonTORNThemed>
-                <DemoTextRNThemed>{st(`btnCustom`)}</DemoTextRNThemed>
-            </DemoButtonTORNThemed>
+            <Button title={st(`btnCustom`)} onPress={BunnyConstants.fnNoop}/>
             <ButtonP><TextP>{st(`btnFromPaper`)}</TextP></ButtonP>
             <View style={styles.demoShadow}>
                 <Text>{st(`demoShadow`)}</Text>

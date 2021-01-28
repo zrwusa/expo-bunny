@@ -1,4 +1,4 @@
-import {EAuth} from "../../common/constants";
+import {EAuth} from "../../utils/constants";
 import {AuthActions} from "./actions";
 import {Auth} from "../../types/models";
 import {RestoreAuthPayload, RestoreAuthGooglePayload} from "../../types/payloads";

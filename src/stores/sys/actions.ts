@@ -10,8 +10,8 @@ import {
     RestoreIsReady, RestoreLanguage, RestoreNavInitialState,
     RestoreTheme, SysError, SysWarn
 } from "../../types/actions";
-import {ESys} from "../../common/constants";
-import BunnyConstants from "../../common/constants";
+import {ESys} from "../../utils/constants";
+import BunnyConstants from "../../utils/constants";
 
 export const sysError: (payload: SysErrorPayload) => SysError = (payload) => {
     return {

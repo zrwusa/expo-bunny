@@ -1,23 +1,25 @@
 import {StyleSheet} from "react-native";
+import {ms, responsiveFromUE} from "../../styles/utils";
 
+const {wp, hp} = responsiveFromUE.iphoneX;
 const styles = StyleSheet.create({
     demoShadow: {
-        width: 300,
-        height: 50,
-        borderRadius: 2,
+        width: wp(300),
+        height: wp(50),
+        borderRadius: ms.br.s,
         backgroundColor: "#fff",
 
-        elevation: 22,
+        elevation: wp(22),
         justifyContent: "center",
         alignItems: "center",
 
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 11,
+            height: wp(11),
         },
         shadowOpacity: 0.2,
-        shadowRadius: 14.78
+        shadowRadius: wp(14.78)
     }
 });
 export default styles;

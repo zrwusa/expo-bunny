@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {Text, View, Button, Platform} from 'react-native';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -42,7 +42,7 @@ export default function DemoNotificationScreen() {
                 justifyContent: 'space-around',
             }}>
             <Text>Your expo push token: {expoPushToken}</Text>
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Text>Title: {notification && notification.request.content.title} </Text>
                 <Text>Body: {notification && notification.request.content.body}</Text>
                 <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
@@ -62,19 +62,19 @@ async function schedulePushNotification() {
         content: {
             title: "You've got mail! 📬",
             body: 'Here is the notification body',
-            data: { data: 'goes here' },
+            data: {data: 'goes here'},
         },
-        trigger: { seconds: 2 },
+        trigger: {seconds: 2},
     });
 }
 
 async function registerForPushNotificationsAsync() {
     let token;
     if (Constants.isDevice) {
-        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        const {status: existingStatus} = await Notifications.getPermissionsAsync();
         let finalStatus = existingStatus;
         if (existingStatus !== 'granted') {
-            const { status } = await Notifications.requestPermissionsAsync();
+            const {status} = await Notifications.requestPermissionsAsync();
             finalStatus = status;
         }
         if (finalStatus !== 'granted') {

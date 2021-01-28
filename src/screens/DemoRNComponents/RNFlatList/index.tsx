@@ -1,2 +1,2 @@
-export { default } from "./FlatList";
+export {default} from "./FlatList";
 export * from "./FlatList";

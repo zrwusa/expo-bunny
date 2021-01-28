@@ -1,28 +1,32 @@
 import {StyleSheet} from "react-native";
+import responsive from "../../styles/utils/responsive";
+import {ms} from "../../styles/utils";
+import {pl} from "../../styles/utils";
 
+const {wp, hp} = responsive.iphoneX;
 const styles = StyleSheet.create({
     logo: {
-        width: 305,
-        height: 159,
-        marginBottom: 20,
+        width: wp(305),
+        height: wp(159),
+        marginBottom: ms.sp.l,
     },
     instructions: {
         color: '#888',
-        fontSize: 18,
-        marginHorizontal: 15,
-        marginBottom: 10,
+        fontSize: ms.fs.m,
+        marginHorizontal: ms.sp.l,
+        marginBottom: ms.sp.m,
     },
     button: {
-        padding: 20,
-        borderRadius: 5,
+        padding: ms.sp.l,
+        borderRadius: ms.br.xs,
     },
     buttonText: {
-        fontSize: 20,
-        color: '#fff',
+        fontSize: ms.fs.l,
+        color: pl.white,
     },
     thumbnail: {
-        width: 300,
-        height: 300,
+        width: wp(300),
+        height: wp(300),
         resizeMode: 'contain',
     },
 });

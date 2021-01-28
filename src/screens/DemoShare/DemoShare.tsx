@@ -7,14 +7,14 @@ import {sysError} from "../../stores/sys/actions";
 import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 import containerStyle from "../../containers";
 
 type SelectedImage = {
     localUri: string
 }
 
-export function DemoShareScreen() {
+function DemoShareScreen() {
     const {t} = useTranslation();
     const i18nPrefix = 'screens.DemoShare';
     const st = stFactory(t, i18nPrefix);

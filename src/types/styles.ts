@@ -1,7 +1,7 @@
-import {DeepLeavesWrap} from "./helpers";
+import {DeepLeavesWrap} from "./utils";
 import {IconProps} from "react-native-vector-icons/Icon";
 import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {getIconCustomMap} from "../common/tools";
+import {getIconCustomMap} from "../utils/helpers";
 import {ReactNode} from "react";
 
 export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
@@ -10,7 +10,7 @@ export type Dimension = { width: number, height: number };
 
 export type DimensionConfig = {
     "bunnyUI": Dimension,
-    iphoneX: Dimension,
+    "iphoneX": Dimension,
     "iPad": Dimension,
     "pixel2XL": Dimension,
     "custom1": Dimension,
@@ -33,9 +33,7 @@ export type Fonts = {
     regular: Font,
     medium: Font,
     light: Font,
-    thin: Font,
-    demoFont0: Font,
-    demoFont1: Font,
+    thin: Font
 }
 
 export interface Colors {
@@ -51,17 +49,13 @@ export interface Colors {
     placeholder: string,
     backdrop: string,
     notification: string,
-    demoColor0: string,
-    demoColor1: string,
-    btnBgColor: string,
-    btnTextColor: string,
+    btnBg: string,
+    btnText: string,
     transparent: string,
 }
 
 export interface Animation {
     scale: number,
-    demoProperty0: number,
-    demoProperty1: number,
 }
 
 export interface Theme {
@@ -71,15 +65,6 @@ export interface Theme {
     colors: Colors,
     fonts: Fonts,
     animation: Animation,
-    borderRadius: {
-        xxs: number,
-        xs: number,
-        s: number,
-        m: number,
-        l: number,
-        xl: number,
-        xxl: number,
-    },
     typography: {
         header: {
             fontFamily: string,
@@ -91,8 +76,6 @@ export interface Theme {
             fontSize?: number,
         }
     },
-    demoThemeProperty0: string,
-    demoThemeProperty1: string,
 }
 
 export type FontConfig = {

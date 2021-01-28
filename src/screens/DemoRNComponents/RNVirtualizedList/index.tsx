@@ -1,2 +1,2 @@
-export { default } from "./RNVirtualizedList";
+export {default} from "./RNVirtualizedList";
 export * from "./RNVirtualizedList";

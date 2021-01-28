@@ -6,13 +6,13 @@ import {View, TextInput} from "../../components/base-ui";
 import containerStyle from "../../containers";
 import {DemoSvg} from "../../components/DemoSvg";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 
-type Props = { title?: string } & WithTranslation
+export type DemoCollectionProps = { title?: string } & WithTranslation
 type States = { name: string }
 
-class DemoCollectionScreen extends Component<Props, States> {
-    constructor(props: Props) {
+class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
+    constructor(props: DemoCollectionProps) {
         super(props);
     }
 

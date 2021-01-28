@@ -3,7 +3,7 @@ import {SafeAreaView} from "react-native";
 import {Text} from "../../../components/base-ui";
 import containerStyle from "../../../containers";
 
-export const RNFlatListScreen: React.FC = () => {
+const RNFlatListScreen: React.FC = () => {
     return (
         <SafeAreaView style={[containerStyle.screen, containerStyle.centralized]}>
             <Text>Safe Area View</Text>

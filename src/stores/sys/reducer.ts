@@ -1,7 +1,7 @@
-import {ELanguage, ESys} from "../../common/constants";
+import {ELanguage, ESys} from "../../utils/constants";
 import {Sys} from "../../types/models";
 import {SysActions} from "./actions";
-import {EThemes} from "../../common/constants";
+import {EThemes} from "../../utils/constants";
 
 const initialState: Sys = {
     isReady: false,

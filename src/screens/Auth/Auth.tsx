@@ -4,7 +4,7 @@ import {signIn, signInGoogle, signInDummy} from "../../stores/auth/actions";
 import {useDispatch} from "react-redux";
 import {ButtonRNE, TextInput} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 import containerStyle from "../../containers";
 
 export const SignInScreen = () => {

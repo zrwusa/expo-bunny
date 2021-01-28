@@ -1,7 +1,7 @@
 import {Platform, PlatformOSType} from "react-native";
 import {FontConfig, Fonts, FontsWrapped} from "../../types/styles";
-import {EThemes} from "../../common/constants";
-import {TraversableNested} from "../../types/helpers";
+import {EThemes} from "../../utils/constants";
+import {TraversableNested} from "../../types/utils";
 
 const fontConfig: FontConfig = {
     web: {
@@ -19,14 +19,6 @@ const fontConfig: FontConfig = {
         },
         thin: {
             fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
-            fontWeight: '100' as '100',
-        },
-        demoFont0: {
-            fontFamily: 'DemoFont0',
-            fontWeight: '100' as '100',
-        },
-        demoFont1: {
-            fontFamily: 'DemoFont1',
             fontWeight: '100' as '100',
         },
     },
@@ -47,14 +39,6 @@ const fontConfig: FontConfig = {
             fontFamily: 'System',
             fontWeight: '100' as '100',
         },
-        demoFont0: {
-            fontFamily: 'DemoFont0',
-            fontWeight: '100' as '100',
-        },
-        demoFont1: {
-            fontFamily: 'DemoFont1',
-            fontWeight: '100' as '100',
-        },
     },
     default: {
         regular: {
@@ -72,14 +56,6 @@ const fontConfig: FontConfig = {
         thin: {
             fontFamily: 'sans-serif-thin',
             fontWeight: 'normal' as 'normal',
-        },
-        demoFont0: {
-            fontFamily: 'DemoFont0',
-            fontWeight: '100' as '100',
-        },
-        demoFont1: {
-            fontFamily: 'DemoFont1',
-            fontWeight: '100' as '100',
         },
     },
 };
@@ -110,8 +86,12 @@ export function configureFonts(
     return Platform.select({...fontConfig, ...config}) as Fonts;
 }
 
+export const fonts = configureFonts();
+
 export function configureFontsWarehouse(
     config?: { [platform in PlatformOSType | 'default']?: FontsWrapped }
 ): FontsWrapped {
     return Platform.select({...getFontConfigLeavesWrappedWithThemeNames(), ...config}) as FontsWrapped;
 }
+
+export const fontsWarehouse = configureFontsWarehouse();

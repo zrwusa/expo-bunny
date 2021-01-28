@@ -5,13 +5,13 @@ import {DrawerNavigationProp} from "@react-navigation/drawer";
 import {DemoDrawerStackParam} from "../../../types/stacks";
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../i18n/short-t";
+import {stFactory} from "../../../lang/short-t";
 
 type DrawerSettingsRouteProp = RouteProp<DemoDrawerStackParam, 'DrawerSettings'>;
 type DrawerSettingsNavigationProp = DrawerNavigationProp<DemoDrawerStackParam, 'DrawerSettings'>;
-type DrawerSettingsProps = { route: DrawerSettingsRouteProp, navigation: DrawerSettingsNavigationProp }
+export type DrawerSettingsProps = { route: DrawerSettingsRouteProp, navigation: DrawerSettingsNavigationProp }
 
-export function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
+function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
     const {t} = useTranslation();
     const i18nPrefix = "screens.DrawerSettings";
     const st = stFactory(t, i18nPrefix);

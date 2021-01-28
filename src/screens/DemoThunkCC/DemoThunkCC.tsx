@@ -8,7 +8,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import containerStyle from "../../containers";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) =>
 });
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & WithTranslation ;
 
-export class DemoThunkCCScreen extends React.Component<Props> {
+class DemoThunkCCScreen extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleThunk = this.handleThunk.bind(this);

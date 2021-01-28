@@ -1,2 +1,2 @@
-export { default } from "./DemoRoute";
+export {default} from "./DemoRoute";
 export * from "./DemoRoute";

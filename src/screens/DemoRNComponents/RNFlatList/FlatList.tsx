@@ -3,7 +3,7 @@ import {FlatList, SafeAreaView, View, Text} from "react-native";
 import {flatListStyles} from "./styles";
 import containerStyle from "../../../containers";
 
-export const RNFlatListScreen: React.FC = () => {
+const RNFlatListScreen: React.FC = () => {
     type IFlatListItem = {
         id: string;
         title: string;

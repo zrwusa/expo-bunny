@@ -1,11 +1,11 @@
 import {widthPercentageToDP as wp2dp, heightPercentageToDP as hp2dp} from "react-native-responsive-screen";
-import appConfig from "../../app.config.json";
+import ueConfig from "../../ue-config";
 import {Dimension, Responsive} from "../../types/styles";
-import {TraversableNested} from "../../types/helpers";
+import {TraversableNested} from "../../types/utils";
 
 export const responsiveInit = () => {
     let responsive: TraversableNested = {}
-    Object.entries(appConfig.UE.dimensions).forEach((dimension) => {
+    Object.entries(ueConfig.UE.dimensions).forEach((dimension) => {
         responsive[dimension[0]] = {
             wp: (width: number) => {
                 return wp2dp((width / dimension[1]['width']) * 100 + '%');
@@ -16,6 +16,6 @@ export const responsiveInit = () => {
     })
     return responsive as Responsive;
 }
+export const responsiveFromUE = responsiveInit();
 
-export default responsiveInit()
-
+export const responsiveIphoneX = responsiveFromUE.iphoneX

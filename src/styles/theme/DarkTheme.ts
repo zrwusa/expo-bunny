@@ -1,6 +1,6 @@
 import color from "color";
 import {DefaultTheme} from "./DefaultTheme";
-import {palette} from "./palette";
+import {pl} from "../utils";
 import {Theme} from "../../types/styles";
 
 export const DarkTheme: Theme = {
@@ -9,23 +9,21 @@ export const DarkTheme: Theme = {
     mode: 'adaptive',
     colors: {
         ...DefaultTheme.colors,
-        primary: palette.purple400,
-        accent: palette.tealA700,
-        background: palette.black900,
-        surface: palette.black900,
-        error: palette.pink300,
-        onBackground: palette.white,
-        onSurface: palette.white,
-        text: palette.white,
-        disabled: color(palette.white).alpha(0.38).rgb().string(),
-        placeholder: color(palette.white).alpha(0.54).rgb().string(),
-        backdrop: color(palette.black).alpha(0.5).rgb().string(),
-        notification: palette.pinkA100,
+        primary: pl.purple400,
+        accent: pl.tealA700,
+        background: pl.black900,
+        surface: pl.black900,
+        error: pl.pink300,
+        onBackground: pl.white,
+        onSurface: pl.white,
+        text: pl.white,
+        disabled: color(pl.white).alpha(0.38).rgb().string(),
+        placeholder: color(pl.white).alpha(0.54).rgb().string(),
+        backdrop: color(pl.black).alpha(0.5).rgb().string(),
+        notification: pl.pinkA100,
 
-        btnTextColor: palette.white,
-        btnBgColor: palette.orange800,
-        transparent: palette.transparent,
-        demoColor0: palette.white,
-        demoColor1: palette.orange800,
+        btnText: pl.white,
+        btnBg: pl.orange800,
+        transparent: pl.transparent,
     },
 };

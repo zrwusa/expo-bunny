@@ -10,7 +10,7 @@ import {
     NavigationContainer, NavigationContainerRef
 } from "@react-navigation/native";
 import NavigatorTree, {getLinkingConfigScreens} from "./navigation/NavigatorTree";
-import BunnyConstants, {EThemes} from "./common/constants";
+import BunnyConstants, {EThemes} from "./utils/constants";
 import {RootState} from "./types/models";
 import {restoreAuth} from "./stores/auth/actions";
 import {restoreIsReady, restoreLanguage, restoreNavInitialState, restoreTheme, sysError} from "./stores/sys/actions";
@@ -22,7 +22,7 @@ import {useTranslation} from "react-i18next";
 import * as localization from "expo-localization";
 import {useReduxDevToolsExtension} from '@react-navigation/devtools';
 import {ResponsiveProvider} from "./styles/responsive/responsiveHooks";
-import {RequestProvider} from "./common/requestHooks";
+import {RequestProvider} from "./utils/requestHooks";
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;

@@ -1,4 +1,4 @@
-import {Traversable} from "../types/helpers";
+import {Traversable} from "../types/utils";
 
 const BunnyConstants = {
     latLngDeltaGrace: {
@@ -11,10 +11,10 @@ const BunnyConstants = {
     NAV_STATE_PERSISTENCE_KEY: 'NAVIGATION_STATE',
     ACCESS_TOKEN_PERSISTENCE_KEY: 'ACCESS_TOKEN',
     USER_PERSISTENCE_KEY: 'USER',
+    fnNoop: () => undefined,
     fooInterval: setInterval((): void => undefined, 0),
     fooTimeout: setTimeout((): void => undefined, 0),
 }
-
 
 export enum EAuth {
     SIGN_IN = "SIGN_IN",

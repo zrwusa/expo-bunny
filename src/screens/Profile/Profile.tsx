@@ -4,7 +4,7 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types/stacks";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types/models";
 import {Avatar} from "react-native-elements";
@@ -12,7 +12,7 @@ import containerStyle from "../../containers";
 import {ScrollView} from "react-native";
 import styles from "./styles";
 import {useResponsive} from "../../styles/responsive/responsiveHooks";
-import {useRequest} from "../../common/requestHooks";
+import {useRequest} from "../../utils/requestHooks";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;

@@ -1,13 +1,13 @@
 import * as React from "react";
-import defaultResponsive from "../helpers/responsive";
+import {responsiveFromUE} from "../utils";
 import {Responsive, ResponsiveProviderProps} from "../../types/styles";
 
-const ResponsiveContext = React.createContext<Responsive>(defaultResponsive);
+const ResponsiveContext = React.createContext<Responsive>(responsiveFromUE);
 
 function ResponsiveProvider(props: ResponsiveProviderProps): JSX.Element {
     const {children} = props;
     return (
-        <ResponsiveContext.Provider value={defaultResponsive}>
+        <ResponsiveContext.Provider value={responsiveFromUE}>
             {children}
         </ResponsiveContext.Provider>
     );

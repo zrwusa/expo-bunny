@@ -1,14 +1,14 @@
 import {StyleSheet} from "react-native";
-import {palette} from "../../styles/theme";
+import {pl} from "../../styles/utils";
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: palette.grey600,
+        backgroundColor: pl.grey600,
         justifyContent: "center",
         alignItems: "center",
     },
     text: {
-        color: palette.cyan600,
+        color: pl.cyan600,
         fontSize: 16
     }
 })

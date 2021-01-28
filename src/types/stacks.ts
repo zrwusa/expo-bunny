@@ -9,7 +9,6 @@ export type RootStackParam = {
     DemoThirdPart: undefined;
     DemoThunkCC: undefined;
     DemoMap: undefined;
-    TestMap: undefined;
     DemoTab: undefined | { screen: string; params?: { [key: string]: any } };
     DemoDrawer: undefined | { screen: string; params?: { [key: string]: any } };
     DemoNestedLv0: undefined | { screen: string; params?: { [key: string]: any } };

@@ -280,3 +280,5 @@ export const palette: Palette = {
     white: '#ffffff',
     transparent: 'transparent',
 }
+
+export const pl = palette

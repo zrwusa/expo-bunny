@@ -1,8 +1,8 @@
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
-import {EDemoMap} from "../../common/constants";
+import {EDemoMap} from "../../utils/constants";
 import {DemoMap, NearbyFilm, Region} from "../../types/models";
-import api from "../../common/api";
+import api from "../../utils/api";
 import {GetNearbyFilmsReqParams} from "../../types/payloads";
 import {RestoreNearbyFilms, RestoreRegion, SysError} from "../../types/actions";
 import {sysError} from "../sys/actions";

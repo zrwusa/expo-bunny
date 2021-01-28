@@ -11,11 +11,11 @@ const Sys: React.FC<Props> = ({title}) => {
         <View>
             <Text>{title}</Text>
             {
-                (sysState.error||sysState.warn)?
-                <View>
-                    <TextInput value={sysState.error||sysState.warn}/>
+                (sysState.error || sysState.warn) ?
+                    <View>
+                        <TextInput value={sysState.error || sysState.warn}/>
 
-                </View>:
+                    </View> :
                     <></>
             }
             <Button title="clear" onPress={() => {

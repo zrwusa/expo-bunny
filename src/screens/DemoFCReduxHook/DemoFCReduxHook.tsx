@@ -5,7 +5,7 @@ import {RootState} from "../../types/models";
 import {ButtonRNE, Text, View} from "../../components/base-ui";
 import containerStyle from "../../containers";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../i18n/short-t";
+import {stFactory} from "../../lang/short-t";
 
 const DemoFCReduxHookScreen: React.FC = () => {
     const {t} = useTranslation();
