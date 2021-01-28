@@ -44,9 +44,9 @@
       "useNextNotificationsApi": true
     },
     "locales": {
-      "en": "./src/i18n/languages/en.json",
-      "zh": "./src/i18n/languages/zh-Hans-CN.json",
-      "he": "./src/i18n/languages/he.json"
+      "en": "./src/lang/languages/en.json",
+      "zh": "./src/lang/languages/zh-Hans-CN.json",
+      "he": "./src/lang/languages/he.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
