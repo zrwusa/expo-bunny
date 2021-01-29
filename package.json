@@ -9,6 +9,7 @@
     "debug:prod": "expo start --no-dev",
     "debug:prod:minify": "expo start --no-dev --minify",
     "clear:start:ios": "expo start --clear --ios",
+    "build": "next build",
     "build:ios": "expo build:ios",
     "build:clear:ios": "expo build:ios --clear-provisioning-profile",
     "build:android": "expo build:android",
