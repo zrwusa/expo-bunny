@@ -1,7 +1,7 @@
 import * as React from "react";
 import {View, Text} from "../../../components/base-ui";
 import {RouteProp} from "@react-navigation/native";
-import {DrawerNavigationProp} from "@react-navigation/drawer";
+import {DrawerNavigationProp} from "react-navigation-drawer-no-warnings";
 import {DemoDrawerStackParam} from "../../../types/stacks";
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";

@@ -7,10 +7,10 @@ import {
 } from "@react-navigation/native";
 import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
 import {NavigationState, ParamListBase} from "@react-navigation/routers";
-import {BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
-import {BottomTabNavigationConfig} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
-import {DrawerNavigationOptions} from "@react-navigation/drawer";
-import {DrawerNavigationConfig} from "@react-navigation/drawer/lib/typescript/src/types";
+import {BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings";
+import {BottomTabNavigationConfig} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
+import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
+import {DrawerNavigationConfig} from "react-navigation-drawer-no-warnings/lib/typescript/src/types";
 
 export type NavigatorType = 'stack' | 'tab' | 'drawer';
 

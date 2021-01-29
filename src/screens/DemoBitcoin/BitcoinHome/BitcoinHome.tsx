@@ -2,7 +2,7 @@ import * as React from "react";
 import {View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {DemoBitcoinStackParam} from "../../../types/stacks";
-import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
+import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {Text} from "../../../components/base-ui"
 import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
