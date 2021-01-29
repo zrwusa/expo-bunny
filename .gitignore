@@ -24,3 +24,4 @@ test.html
 .env
 .expo-shared/
 yarn-error.log
+.next/

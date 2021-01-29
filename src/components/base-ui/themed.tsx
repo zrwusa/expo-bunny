@@ -31,7 +31,7 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...r
         marginTop: ms.sp.s,
         borderRadius: ms.br.xs,
         fontSize: ms.fs.m,
-        paddingVertical: ms.sp.s,
+        paddingVertical: ms.sp.m,
         alignItems: "center",
         ...styleObj
     }} {...rest} >{children}</TouchableOpacityRN>);

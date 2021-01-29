@@ -3,7 +3,7 @@ import {RestoreAuth, RestoreAuthGoogle, SignOut, SysError, SysWarn} from "../../
 import {RestoreAuthGooglePayload, RestoreAuthPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
 import {EAuth} from "../../utils/constants";
 import * as Google from "expo-google-app-auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorageNext from "../../utils/AsyncStorageNext";
 import {IOS_CLIENT_ID, ANDROID_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO, ANDROID_CLIENT_ID_FOR_EXPO} from '@env';
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
@@ -18,10 +18,10 @@ export const signIn: ActionCreator<ThunkAction<Promise<Action>, Auth, void, Rest
         try {
             const {data} = await api.post<SignInPayload, AxiosResponse<AuthRes>>(`/auth/login`, reqParams)
             data.access_token
-                ? await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
+                ? await AsyncStorageNext.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
                 : dispatch(sysError({error: 'No access_token responded'}))
             data.user
-                ? await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
+                ? await AsyncStorageNext.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
                 : dispatch(sysError({error: 'No user info responded'}))
             result = dispatch(restoreAuth(data))
         } catch (err) {
@@ -35,9 +35,9 @@ export const signInDummy: ActionCreator<ThunkAction<Promise<Action>, Auth, void,
     return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorage.setItem('accessToken', 'access_token_dummy')
+            await AsyncStorageNext.setItem('accessToken', 'access_token_dummy')
             const userDummy = {email: 'dummy@dummy.com', nickname: 'dummy nickname'}
-            await AsyncStorage.setItem('user', JSON.stringify(userDummy))
+            await AsyncStorageNext.setItem('user', JSON.stringify(userDummy))
             result = dispatch(restoreAuth({
                 access_token: 'access_token_dummy',
                 user: userDummy
@@ -68,8 +68,8 @@ export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void
                     const {accessToken, user} = loginResult;
                     if (accessToken) {
                         try {
-                            await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, accessToken)
-                            await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
+                            await AsyncStorageNext.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, accessToken)
+                            await AsyncStorageNext.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
                             result = dispatch(restoreAuthGoogle(loginResult));
                         } catch (err) {
                             result = dispatch(sysError({error: err.toString()}))
@@ -92,7 +92,7 @@ export const signOutAndRemove: ActionCreator<ThunkAction<Promise<Action>, Auth, 
     return async (dispatch: Dispatch<SignOut | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorage.removeItem('accessToken')
+            await AsyncStorageNext.removeItem('accessToken')
             result = dispatch(signOut({}));
 
         } catch (err) {

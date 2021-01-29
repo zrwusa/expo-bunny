@@ -8,12 +8,12 @@ import {DemoLazyLoading} from "./components/DemoLazyLoading";
 
 export default function () {
     return (
-        <Suspense fallback={<DemoLazyLoading/>}>
+        // <Suspense fallback={<DemoLazyLoading/>}>
             <ReduxProvider store={store}>
                 <I18nextProvider i18n={i18n}>
                     <App/>
                 </I18nextProvider>
             </ReduxProvider>
-        </Suspense>
+        // </Suspense>
     )
 }

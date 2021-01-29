@@ -1,2 +1,2 @@
-export {default} from "./TabHome";
-export * from "./TabHome";
+export {default} from "./DrawerHome";
+export * from "./DrawerHome";

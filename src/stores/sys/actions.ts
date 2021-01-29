@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorageNext from "../../utils/AsyncStorageNext";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {Sys} from "../../types/models";
@@ -38,7 +38,7 @@ export const restoreAndSaveTheme: ActionCreator<ThunkAction<Promise<Action>, Sys
     return async (dispatch: Dispatch<RestoreTheme | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, payload.themeName);
+            await AsyncStorageNext.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, payload.themeName);
             result = dispatch(restoreTheme(payload))
         } catch (err) {
             result = dispatch(sysError({error: err.toString()}))
@@ -58,7 +58,7 @@ export const restoreAndSaveLanguage: ActionCreator<ThunkAction<Promise<Action>, 
     return async (dispatch: Dispatch<RestoreLanguage | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorage.setItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY, payload.language);
+            await AsyncStorageNext.setItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY, payload.language);
             result = dispatch(restoreLanguage(payload))
         } catch (err) {
             result = dispatch(sysError({error: err.toString()}))

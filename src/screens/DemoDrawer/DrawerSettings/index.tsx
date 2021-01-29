@@ -1,2 +1,2 @@
-export {default} from "./TabSettings";
-export * from "./TabSettings";
+export {default} from "./DrawerSettings";
+export * from "./DrawerSettings";

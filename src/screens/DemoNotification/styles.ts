@@ -1,9 +1,9 @@
 import {StyleSheet} from "react-native";
-import responsive from "../../styles/utils/responsive";
+import {responsiveFromUE} from "../../styles/utils/responsive";
 import {ms} from "../../styles/utils";
 import {pl} from "../../styles/utils";
 
-const {wp, hp} = responsive.iphoneX;
+const {wp, hp} = responsiveFromUE.iphoneX;
 const styles = StyleSheet.create({
     logo: {
         width: wp(305),
