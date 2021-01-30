@@ -35,7 +35,6 @@ const init = async () => {
 
 init()
     .then(() => {
-        console.log('Initialed i18n', i18n.language)
     })
 
 export default i18n

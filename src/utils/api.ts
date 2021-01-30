@@ -1,8 +1,6 @@
 import axios from "axios";
 import store from "../stores";
-
-const isDevServerProxy = false;
-const isRemoteBackEnd = true;
+import bunnyConfig from "../config.json";
 
 // interface Seal {
 //     name: string;
@@ -16,12 +14,15 @@ const isRemoteBackEnd = true;
 //     return fetch(url).then((res) => res.json());
 // };
 
+const httpPrefix = bunnyConfig.isHttps ? 'https://' : 'http://';
+const feApiTail = bunnyConfig.isDevServerProxy ? Object.keys(bunnyConfig.devServerProxy)[0] : '';
+
 const api = axios.create({
-    baseURL: isDevServerProxy
-        ? `http://192.168.50.19:3006/api`
-        : isRemoteBackEnd
-            ? `http://35.197.159.128`
-            : `http://192.168.50.19:4006`
+    baseURL: bunnyConfig.isDevServerProxy
+        ? `${bunnyConfig.devServer.domain}${bunnyConfig.devServer.port}${feApiTail}`
+        : bunnyConfig.isRemoteBackEnd
+            ? `${httpPrefix}${bunnyConfig.remoteBackEnd.domain}:${bunnyConfig.remoteBackEnd.port}`
+            : `${httpPrefix}${bunnyConfig.localBackEnd.domain}:${bunnyConfig.localBackEnd.port}`,
 });
 
 api.interceptors.request.use(
@@ -34,10 +35,12 @@ api.interceptors.request.use(
                 // "Content-Type": "application/x-www-form-urlencoded"
             }
         }
+        if (bunnyConfig.isHttps) {
+        }
         return config;
     },
-    error => {
-        Promise.reject(error)
+    async error => {
+        return Promise.reject(error)
     });
 
 api.interceptors.response.use(
@@ -46,7 +49,7 @@ api.interceptors.response.use(
     },
     async function (error) {
         if (error.response === undefined) {
-            console.warn(`[React Bunny Warn]Request failed,first do not forget to run the mock server in another terminal with command 'yarn mock'`)
+            console.error(`[React Bunny Warn]Request failed,first do not forget to run the mock server in another terminal with command 'yarn mock'`)
         }
         const originalRequest = error.config;
         // if (!response.ok) {

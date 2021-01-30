@@ -1,11 +1,11 @@
 import {widthPercentageToDP as wp2dp, heightPercentageToDP as hp2dp} from "react-native-responsive-screen";
-import ueConfig from "../../ue-config";
+import bunnyConfig from "../../config.json";
 import {Dimension, Responsive} from "../../types/styles";
 import {TraversableNested} from "../../types/utils";
 
 export const responsiveInit = () => {
     let responsive: TraversableNested = {}
-    Object.entries(ueConfig.UE.dimensions).forEach((dimension) => {
+    Object.entries(bunnyConfig.UE.dimensions).forEach((dimension) => {
         responsive[dimension[0]] = {
             wp: (width: number) => {
                 return wp2dp((width / dimension[1]['width']) * 100 + '%');
