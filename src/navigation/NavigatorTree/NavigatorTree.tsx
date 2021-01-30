@@ -455,7 +455,8 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
     return Navigator
         ? <Navigator {...props}>
-            {authState && authState.accessToken === undefined
+            {/*{authState && authState.accessToken === undefined*/}
+            {false
                 ? <ScreenComponent component={SignInScreen} name="SignIn" options={{
                     ...optionsHeaderAndAnimation,
                     title: t(`screens.SignIn.title`)

@@ -92,7 +92,8 @@ export const signOutAndRemove: ActionCreator<ThunkAction<Promise<Action>, Auth, 
     return async (dispatch: Dispatch<SignOut | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorageNext.removeItem('accessToken')
+            await AsyncStorageNext.removeItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY)
+            await AsyncStorageNext.removeItem(BunnyConstants.USER_PERSISTENCE_KEY)
             result = dispatch(signOut({}));
 
         } catch (err) {
