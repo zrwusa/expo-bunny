@@ -193,12 +193,12 @@ const node: NavigatorTreeNode = {
             path: "demo-thunk-cc",
             navigatorType: "stack"
         },
-        // {
-        //     component: DemoMapScreen,
-        //     name: "DemoMap",
-        //     path: "demo-map",
-        //     navigatorType: "stack"
-        // },
+        {
+            component: DemoMapScreen,
+            name: "DemoMap",
+            path: "demo-map",
+            navigatorType: "stack"
+        },
         {
             component: DemoShareScreen,
             name: "DemoShare",

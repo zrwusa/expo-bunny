@@ -12,6 +12,13 @@ const withTM = require('next-transpile-modules')([
 module.exports = withPlugins(
     [withTM, withFonts, withImages, [withExpo, { projectRoot: __dirname }]],
     {
-        // ...
+        webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+            // Note: we provide webpack above so you should not `require` it
+            // Perform customizations to webpack config
+            config.resolve.alias['react-native-maps'] = 'react-native-web-maps';
+
+            // Important: return the modified config
+            return config
+        },
     }
 )
