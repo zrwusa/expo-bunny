@@ -23,6 +23,8 @@ I know you don't want a complicated project, what you want is a collection of sa
 </tbody>
 </table>
 
+
+
 ## Installation
 ### For Expo
 ```sh
@@ -43,6 +45,8 @@ npm next dev
 yarn
 yarn next dev
 ```
+
+
 
 ## Online Simples
 [Web online deployed stable](https://expo-react-bunny-o2i2acv6l.vercel.app)
@@ -65,6 +69,8 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 // start your emulator
 // dray the downloaded apk file to emulator
 ```
+
+
 ## Development
 
 ### local web server
