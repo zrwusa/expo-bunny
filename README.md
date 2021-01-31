@@ -1,13 +1,7 @@
 # expo-react-bunny
-
-[Check web online deployed](https://expo-react-bunny-hponcn6zk.vercel.app)
-
-[Check iOS Android online deployed](https://expo.io/@zrwusa/projects/expo-react-bunny)
-
-
 React Native,Typescript,Redux,Mock server,JWT Auth,Google Auth,Expo,React Navigation,Next.js for deploying
 Write once run everywhere,iOS Android Web
-I know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal！.
+I know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal!
 
 <table>
 <thead><tr><th>Feature</th><th>Desc</th></tr></thead>
@@ -28,3 +22,68 @@ I know you don't want a complicated project, what you want is a collection of sa
 <tr><td>Https localhost Self Signed Certification</td><td>  </td></tr>
 </tbody>
 </table>
+
+For Expo
+```sh
+// with yarn
+yarn
+yarn start
+// with npm
+npm install
+npm start
+```
+
+For Next.js
+```sh
+// with npm
+npm install
+npm next dev
+// with yarn
+yarn
+yarn next dev
+```
+
+[Check web online deployed stable](https://expo-react-bunny-o2i2acv6l.vercel.app)
+[Check web online deployed latest](https://expo-react-bunny.vercel.app)
+[Check iOS Android online deployed](https://expo.io/@zrwusa/projects/expo-react-bunny)
+
+[App iOS for simulator stable](https://expo.io/artifacts/1f58c134-13f1-4021-9a63-b436bfda8a4b)
+
+```sh
+gunzip -c expo-react-bunny-9ed62349-af09-4cf9-8a33-d52cdd3c01a4-simulator.tar.gz | tar xopf -
+// start your simulator first
+xcrun simctl install booted ./expo-react-bunny.app
+xcrun simctl launch booted com.zrwusa.expo-react-bunny
+```
+
+[App Android apk stable](https:google.com)
+```sh
+// start your emulator
+// dray the downloaded apk file to emulator
+```
+
+
+For responsive development
+
+src/config.json
+
+  "UE": {
+    "dimensions": {
+      "DesignName": {
+        "width": 360,
+        "height": 640
+      }
+      ...
+    }
+  }
+
+in your pages or styles
+
+```javascript
+import {ms, responsiveFromUE} from "../../styles/utils";
+const {wp, hp} = responsiveFromUE.DesignName;
+```
+
+ms: measure util defined sizes for styles(recommend use this to keep consistency)
+wp: width to DP based on your designs
+hp: height to DP based on your designs
