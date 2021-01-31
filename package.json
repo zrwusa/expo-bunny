@@ -3,8 +3,8 @@
   "version": "0.9.0.1",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
     "ios": "expo start --ios",
+    "android": "expo start --android",
     "web": "expo start --web",
     "web:https": "expo start --web --https",
     "debug:prod": "expo start --no-dev",
@@ -12,15 +12,16 @@
     "clear:start:ios": "expo start --clear --ios",
     "build": "next build",
     "build:ios": "expo build:ios",
-    "build:clear:ios": "expo build:ios --clear-provisioning-profile",
+    "build:web": "expo build:web",
     "build:android": "expo build:android",
+    "build:clear:ios": "expo build:ios --clear-provisioning-profile",
+    "p": "expo publish",
     "mock": "node mock/server.js",
-    "eject": "expo eject",
+    "web:serve": "http-server -P http://localhost:8080? web-build/",
     "clear:watchman": "watchman watch-del-all",
     "clear:rn": "react-native clean-project",
     "clear:android": "expo start --android --reset-cache",
-    "web:serve": "http-server -P http://localhost:8080? web-build/",
-    "p": "expo publish"
+    "eject": "expo eject"
   },
   "dependencies": {
     "@babel/core": "~7.9.0",

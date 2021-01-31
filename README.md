@@ -23,7 +23,8 @@ I know you don't want a complicated project, what you want is a collection of sa
 </tbody>
 </table>
 
-For Expo
+## Installation
+### For Expo
 ```sh
 // with yarn
 yarn
@@ -33,7 +34,7 @@ npm install
 npm start
 ```
 
-For Next.js
+### For Next.js
 ```sh
 // with npm
 npm install
@@ -43,6 +44,7 @@ yarn
 yarn next dev
 ```
 
+## Online Simples
 [Web online deployed stable](https://expo-react-bunny-o2i2acv6l.vercel.app)
 
 [Web online deployed latest](https://expo-react-bunny.vercel.app)
@@ -63,9 +65,14 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 // start your emulator
 // dray the downloaded apk file to emulator
 ```
+## Development
 
-
-For responsive development
+### local web server
+```sh
+yarn build:web
+yarn web:server
+```
+### For responsive development
 
 Just configure the dimensions size used by the designer, responsiveFromUE will automatically be compatible different devices
 
