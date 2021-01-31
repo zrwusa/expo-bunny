@@ -1,4 +1,4 @@
-{
+export default {
   "version": 2,
   "rewrites": [
     {
