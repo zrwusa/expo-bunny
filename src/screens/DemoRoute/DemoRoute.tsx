@@ -21,8 +21,7 @@ class DemoRouteScreen extends Component<DemoRouteProps> {
     render(): React.ReactNode {
         const {id, isHuman, sort} = this.props.route.params;
         const {t} = this.props;
-        const i18nPrefix = 'screens.DemoRoute';
-        const st = stFactory(t, i18nPrefix);
+        const st = stFactory(t, 'screens.DemoRoute');
         return (
             <View style={[containerStyle.screen, containerStyle.centralized]}>
                 <View style={styles.wrap}>

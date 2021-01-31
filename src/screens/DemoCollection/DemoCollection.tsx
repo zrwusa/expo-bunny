@@ -18,8 +18,7 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
 
     render(): React.ReactNode {
         const {t} = this.props;
-        const i18nPrefix = 'screens.DemoCollection';
-        const st = stFactory(t, i18nPrefix);
+        const st = stFactory(t, 'screens.DemoCollection');
         return (
             <View style={containerStyle.screen}>
                 <View style={containerStyle.card}>

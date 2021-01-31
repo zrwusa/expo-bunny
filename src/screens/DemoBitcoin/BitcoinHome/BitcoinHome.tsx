@@ -15,8 +15,7 @@ export type BitcoinHomeProps = { route: BitcoinHomeRouteProp, navigation: Bitcoi
 
 function BitcoinHomeScreen({route, navigation}: BitcoinHomeProps) {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.BitcoinHome'
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.BitcoinHome');
 
     return (
         <View style={containerStyle.screen}>

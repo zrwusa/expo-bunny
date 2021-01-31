@@ -6,8 +6,7 @@ import {stFactory} from "../../../lang/short-t";
 
 function DrawerHomeScreen() {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.DrawerHome';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.DrawerHome');
     return (
         <View style={containerStyle.screen}>
             <View style={containerStyle.card}>

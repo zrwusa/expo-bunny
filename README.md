@@ -31,6 +31,7 @@ I know you don't want a complicated project, what you want is a collection of sa
 // with yarn
 yarn
 yarn start
+
 // with npm
 npm install
 npm start
@@ -41,6 +42,7 @@ npm start
 // with npm
 npm install
 npm next dev
+
 // with yarn
 yarn
 yarn next dev
@@ -67,7 +69,7 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 [App Android apk stable](https://expo.io/artifacts/28b3cb5d-536d-4ee2-a2f9-6f2a4eaef61a)
 ```sh
 // start your emulator
-// dray the downloaded apk file to emulator
+// drag the downloaded apk file to emulator
 ```
 
 

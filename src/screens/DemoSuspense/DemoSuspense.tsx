@@ -20,8 +20,7 @@ const DemoLazy2000 = React.lazy(async () => {
 
 export const DemoSuspenseScreen = () => {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.DemoSuspense';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.DemoSuspense');
     return (
         <View style={[containerStyle.screen, containerStyle.centralized]}>
             <DemoLazy100 title={st(`lazyComponentTitle`)}/>

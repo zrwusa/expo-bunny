@@ -9,8 +9,7 @@ import {stFactory} from "../../lang/short-t";
 
 const DemoFCReduxHookScreen: React.FC = () => {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.DemoFCReduxHook';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.DemoFCReduxHook');
     const dispatch = useDispatch();
     const demoHelloState = useSelector((store: RootState) => store.demoHelloState);
     return (

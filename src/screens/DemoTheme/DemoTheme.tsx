@@ -10,8 +10,7 @@ import BunnyConstants from "../../utils/constants";
 
 const DemoThemeScreen = () => {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.DemoTheme';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.DemoTheme');
 
     return (
         <ScrollView contentContainerStyle={[containerStyle.centralized, {height: '100%'}]}>

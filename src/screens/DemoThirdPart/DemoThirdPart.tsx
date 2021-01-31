@@ -16,8 +16,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
 
     render(): React.ReactNode {
         const {t} = this.props;
-        const i18nPrefix = 'screens.DemoThirdPart';
-        const st = stFactory(t, i18nPrefix);
+        const st = stFactory(t, 'screens.DemoThirdPart');
         const list = [
             {
                 name: "Amy Farha",

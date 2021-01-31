@@ -33,9 +33,8 @@ class DemoThunkCCScreen extends React.Component<Props> {
 
     render(): React.ReactNode {
         const {t} = this.props;
-        const i18nPrefix = 'screens.DemoThunkCC';
         const {text, id} = this.props;
-        const st = stFactory(t, i18nPrefix);
+        const st = stFactory(t, 'screens.DemoThunkCC');
         return (
             <View style={containerStyle.screen}>
                 <View style={containerStyle.card}>

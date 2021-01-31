@@ -16,8 +16,7 @@ export type HomeScreenProps = { route: HomeRouteProp; navigation: HomeNavigation
 
 function HomeScreen({navigation}: HomeScreenProps) {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.Home';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.Home');
     const dispatch = useDispatch();
 
     return (

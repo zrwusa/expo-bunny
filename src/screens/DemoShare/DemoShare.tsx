@@ -16,8 +16,7 @@ type SelectedImage = {
 
 function DemoShareScreen() {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.DemoShare';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.DemoShare');
     const dispatch = useDispatch();
     const onShare = async () => {
         try {

@@ -14,8 +14,7 @@ import containerStyle from "../../containers";
 
 export default function SettingsScreen() {
     const {t, i18n} = useTranslation();
-    const i18nPrefix = 'screens.Settings';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.Settings');
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
     const dispatch = useDispatch()
     const {themeName, language} = sysState;

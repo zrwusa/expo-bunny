@@ -13,8 +13,7 @@ export type DrawerSettingsProps = { route: DrawerSettingsRouteProp, navigation: 
 
 function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
     const {t} = useTranslation();
-    const i18nPrefix = "screens.DrawerSettings";
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.DrawerSettings');
     return (
         <View style={containerStyle.screen}>
             <View style={containerStyle.card}>

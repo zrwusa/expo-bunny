@@ -16,8 +16,7 @@ import {stFactory} from "../../../lang/short-t";
 
 const RNHome: React.FC = () => {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.RNHome';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.RNHome');
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [modalVisible, setModalVisible] = useState(false);

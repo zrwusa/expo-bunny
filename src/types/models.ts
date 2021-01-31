@@ -1,5 +1,6 @@
 import {GoogleUser} from "expo-google-app-auth";
 import {InitialState} from "@react-navigation/native";
+import {ImageSourcePropType} from "react-native";
 
 export interface DemoHello {
     name: string,
@@ -31,7 +32,7 @@ export type NearbyFilm = {
         latitude: number,
         longitude: number,
     },
-    image: {
+    image: ImageSourcePropType | {
         uri: string,
     },
     description: string,

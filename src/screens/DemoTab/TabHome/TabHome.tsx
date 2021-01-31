@@ -6,8 +6,7 @@ import {stFactory} from "../../../lang/short-t";
 
 function TabHomeScreen() {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.TabHome';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.TabHome');
     return (
         <View style={[containerStyle.screen]}>
             <View style={containerStyle.card}>

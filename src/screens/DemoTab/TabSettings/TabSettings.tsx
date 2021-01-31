@@ -13,8 +13,7 @@ export type TabSettingsProps = { route: TabSettingsRouteProp, navigation: TabSet
 
 function TabSettingsScreen({route, navigation}: TabSettingsProps) {
     const {t} = useTranslation();
-    const i18nPrefix = "screens.TabSettings";
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.TabSettings');
     return (
         <View style={containerStyle.screen}>
             <View style={containerStyle.card}>

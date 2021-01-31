@@ -13,8 +13,7 @@ export type NestedLv2SettingsProps = { route: NestedLv2SettingsRouteProp, naviga
 
 function NestedLv2SettingsScreen({route, navigation}: NestedLv2SettingsProps) {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.NestedLv2Settings';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.NestedLv2Settings');
     return (
         <View style={containerStyle.screen}>
             <View style={containerStyle.card}>

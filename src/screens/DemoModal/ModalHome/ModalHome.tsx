@@ -14,8 +14,7 @@ export type ModalHomeProps = { route: ModalHomeRouteProp; navigation: ModalHomeN
 
 function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.ModalHome';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.ModalHome');
     return (
         <ScrollView>
             <View style={[containerStyle.screen, containerStyle.centralized]}>

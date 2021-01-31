@@ -9,10 +9,13 @@ const withTM = require('next-transpile-modules')([
     // you can add other modules that need traspiling here
 ])
 
-
 const isDev = process.env.NODE_ENV === "development";
+let withArray = [withTM, withFonts, withImages, [withExpo, {projectRoot: __dirname}]];
 
-const withArray = isDev ? [withTM, withFonts, withImages, [withExpo, {projectRoot: __dirname}]] : [withTM, withFonts, withImages, withOffline, [withExpo, {projectRoot: __dirname}]];
+if(!isDev){
+    withArray.push(withOffline);
+}
+
 const nextConfigOffline = isDev ? {} : {
     target: 'serverless',
     transformManifest: manifest => ['/'].concat(manifest), // add the homepage to the cache
