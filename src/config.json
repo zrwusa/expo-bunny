@@ -12,7 +12,7 @@
       }
     }
   },
-  "isRemoteBackEnd": false,
+  "isRemoteBackEnd": true,
   "isHttps": false,
   "remoteBackEnd": {
     "domain": "35.197.159.128",
