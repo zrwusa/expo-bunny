@@ -12,6 +12,15 @@ const withTM = require('next-transpile-modules')([
 module.exports = withPlugins(
     [withTM, withFonts, withImages, [withExpo, { projectRoot: __dirname }]],
     {
+        async rewrites() {
+            return [
+                // Rewrite everything else to use `pages/index`
+                {
+                    source: '/:path*',
+                    destination: '/',
+                },
+            ];
+        },
         webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
             // Note: we provide webpack above so you should not `require` it
             // Perform customizations to webpack config
