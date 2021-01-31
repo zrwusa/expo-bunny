@@ -43,9 +43,11 @@ yarn
 yarn next dev
 ```
 
-[Check web online deployed stable](https://expo-react-bunny-o2i2acv6l.vercel.app)
-[Check web online deployed latest](https://expo-react-bunny.vercel.app)
-[Check iOS Android online deployed](https://expo.io/@zrwusa/projects/expo-react-bunny)
+[Web online deployed stable](https://expo-react-bunny-o2i2acv6l.vercel.app)
+
+[Web online deployed latest](https://expo-react-bunny.vercel.app)
+
+[iOS Android online deployed](https://expo.io/@zrwusa/projects/expo-react-bunny)
 
 [App iOS for simulator stable](https://expo.io/artifacts/1f58c134-13f1-4021-9a63-b436bfda8a4b)
 
@@ -56,7 +58,7 @@ xcrun simctl install booted ./expo-react-bunny.app
 xcrun simctl launch booted com.zrwusa.expo-react-bunny
 ```
 
-[App Android apk stable](https:google.com)
+[App Android apk stable](https://expo.io/artifacts/28b3cb5d-536d-4ee2-a2f9-6f2a4eaef61a)
 ```sh
 // start your emulator
 // dray the downloaded apk file to emulator
@@ -64,6 +66,8 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 
 
 For responsive development
+
+Just configure the dimensions size used by the designer, responsiveFromUE will automatically be compatible different devices
 
 src/config.json
 
@@ -85,5 +89,7 @@ const {wp, hp} = responsiveFromUE.DesignName;
 ```
 
 ms: measure util defined sizes for styles(recommend use this to keep consistency)
+
 wp: width to DP based on your designs
+
 hp: height to DP based on your designs
