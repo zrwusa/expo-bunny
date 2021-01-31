@@ -35,9 +35,9 @@ export const signInDummy: ActionCreator<ThunkAction<Promise<Action>, Auth, void,
     return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorageNext.setItem('accessToken', 'access_token_dummy')
+            await AsyncStorageNext.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, 'access_token_dummy')
             const userDummy = {email: 'dummy@dummy.com', nickname: 'dummy nickname'}
-            await AsyncStorageNext.setItem('user', JSON.stringify(userDummy))
+            await AsyncStorageNext.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(userDummy))
             result = dispatch(restoreAuth({
                 access_token: 'access_token_dummy',
                 user: userDummy
