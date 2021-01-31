@@ -3,7 +3,7 @@ const { withExpo } = require('@expo/next-adapter')
 const withFonts = require('next-fonts')
 const withImages = require('next-images')
 const withPlugins = require('next-compose-plugins')
-const withOffline = require('next-offline')
+// const withOffline = require('next-offline')
 
 const withTM = require('next-transpile-modules')([
     'expo-next-react-navigation',
@@ -11,7 +11,7 @@ const withTM = require('next-transpile-modules')([
 ])
 
 module.exports = withPlugins(
-    [withTM, withFonts, withImages,withOffline, [withExpo, { projectRoot: __dirname }]],
+    [withTM, withFonts, withImages, [withExpo, { projectRoot: __dirname }]],
     {
         async rewrites() {
             return [
