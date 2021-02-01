@@ -195,7 +195,8 @@
     },
     "DemoSuspense": {
       "title": "样例-Suspense",
-      "lazyComponentTitle": "我迟到了，但只会迟到一次，请多包涵"
+      "lazyComponentTitle": "我迟到了，但只会迟到一次，请多包涵",
+      "noSupporting": "SSR不支持React.lazy或者Suspense"
     },
     "DemoTheme": {
       "title": "样例-主题",

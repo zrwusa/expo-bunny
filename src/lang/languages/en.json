@@ -195,7 +195,8 @@
     },
     "DemoSuspense": {
       "title": "DemoSuspense",
-      "lazyComponentTitle": "I'm late,but only one time!"
+      "lazyComponentTitle": "I'm late,but only one time!",
+      "noSupporting": "SSR does not support React.lazy or Suspense"
     },
     "DemoTheme": {
       "title": "DemoTheme",

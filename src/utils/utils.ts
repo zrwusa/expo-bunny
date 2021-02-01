@@ -38,5 +38,7 @@ export function isEqualType<T>(obj: unknown) {
     }
 }
 
+export const isServerSide = typeof window === "undefined";
+
 
 

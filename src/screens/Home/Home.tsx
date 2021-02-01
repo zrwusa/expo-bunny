@@ -79,8 +79,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <TextBtn>{st(`RNAllInOne`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoTheme')}>
                         <TextBtn>{st(`demoTheme`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>
-                        <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>
+                    {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
+                    {/*    <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>*/}
                 </View>
                 <View style={containerStyle.card}>
                     <Text>{st(`others`)}</Text>
