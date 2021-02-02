@@ -64,6 +64,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Text>{st(`nativeCapabilities`)}</Text>
                     <ButtonTO onPress={() => navigation.navigate('DemoMap')}>
                         <TextBtn>{st(`map`)}</TextBtn></ButtonTO>
+                    <ButtonTO onPress={() => navigation.navigate('DemoChat')}>
+                        <TextBtn>{st(`chat`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoShare')}>
                         <TextBtn>{st(`share`)}</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoNotification')}>

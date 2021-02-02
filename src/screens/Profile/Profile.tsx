@@ -39,15 +39,15 @@ function ProfileScreen({route, navigation}: Props) {
                 <Avatar source={{uri: avatar_url}}/>
                 <Text>{st(`profileScreenId`)}{route.params.id}</Text>
                 <Text>{st(`email`)}{user?.email}</Text>
-                <ButtonTO onPress={() => navigation.navigate('Home')}>
-                    <TextBtn>{st(`goToHomeScreen`)}</TextBtn>
-                </ButtonTO>
                 <ImageProgressive
-                    sourcePH={{uri: `https://images.pexels.com/photos/671557/pexels-photo-671557.jpeg?w=${wp(80)}`}}
-                    source={{uri: `https://images.pexels.com/photos/671557/pexels-photo-671557.jpeg?w=${wp(800)}`}}
+                    sourcePH={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-placeholder.jpg`}}
+                    source={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg`}}
                     style={{width: wp(400), height: wp(400)}}
                     resizeMode="cover"
                 />
+                <ButtonTO onPress={() => navigation.navigate('Home')}>
+                    <TextBtn>{st(`goToHomeScreen`)}</TextBtn>
+                </ButtonTO>
                 <View style={styles.tallBlock}/>
             </View>
         </ScrollView>

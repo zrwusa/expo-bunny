@@ -48,6 +48,7 @@ import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settin
 import ModalHomeScreen from "../../screens/DemoModal/ModalHome";
 import {responsiveFromUE, ms} from "../../styles/utils";
 import {useTheme} from "../../styles/theme";
+import DemoChatScreen from "../../screens/DemoChat";
 
 const {wp, hp} = responsiveFromUE.iphoneX;
 
@@ -83,10 +84,10 @@ const optionsHeaderAndAnimation: StackNavigationOptions = {
     }
 }
 
-const optionsDraw = ({navigation}:any) => {
+const optionsDraw = ({navigation}: any) => {
     return {
         headerStyle: {
-            height:wp(50)
+            height: wp(50)
         },
         headerShown: true,
         headerLeft: ({tintColor}: any) => {
@@ -197,6 +198,12 @@ const node: NavigatorTreeNode = {
             component: DemoMapScreen,
             name: "DemoMap",
             path: "demo-map",
+            navigatorType: "stack"
+        },
+        {
+            component: DemoChatScreen,
+            name: "DemoChat",
+            path: "demo-chat",
             navigatorType: "stack"
         },
         {

@@ -17,7 +17,7 @@ export type ImageProgressiveProps = {
     sourcePH: ImageSourcePropType,
     source: ImageSourcePropType,
     style: StyleProp<ImageStyle>,
-    resizeMode:ImageResizeMode
+    resizeMode: ImageResizeMode
 }
 
 class ImageProgressive extends React.Component<ImageProgressiveProps> {

@@ -22,6 +22,7 @@
       "FCReduxHook": "FC Redux Hook",
       "thunkCC": "Thunk CC",
       "map": "Map",
+      "chat": "Chat",
       "share": "Share",
       "notification": "Notification",
       "thirdPart": "Third Part",
@@ -79,6 +80,9 @@
     },
     "DemoMap": {
       "title": "DemoMap"
+    },
+    "DemoChat": {
+      "title": "DemoChat"
     },
     "TestMap": {
       "title": "TestMap"
