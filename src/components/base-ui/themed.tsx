@@ -18,9 +18,9 @@ import {
 import React from "react";
 import styled from "styled-components/native";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
-import {IcoMoonProps, MaterialCommunityCustomIconsProps, MaterialCommunityIconsProps} from "../../types/styles";
+import {IcoMoonProps, MaterialCommunityIconsProps} from "../../types/styles";
 import {getStyleObj, ms} from "../../styles/utils";
-import selection from "../../assets/fonts/icomoon/selection.json"
+import selection from "../../assets/fonts/icomoon-cus/selection.json"
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 

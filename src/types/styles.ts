@@ -1,9 +1,9 @@
 import {DeepLeavesWrap, JsonKeys} from "./utils";
 import {IconProps} from "react-native-vector-icons/Icon";
-import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {glyphIcoMoonMap, glyphMCCustomMap} from "../utils/helpers";
+import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
+import {glyphMaterialCommunityCustomMap} from "../utils/helpers";
 import {ReactNode} from "react";
-import glyphIcoMoon from "../assets/fonts/icomoon/glyph.json"
+import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
 
 export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
 export type ResponsiveInstance = { wp: Function, hp: Function };
@@ -79,7 +79,7 @@ export interface Theme {
     },
 }
 
-export type FontConfig = {
+export type FontConfigPlatform = {
     web: Fonts,
     ios: Fonts,
     default: Fonts
@@ -94,23 +94,87 @@ export type FontsWrapped = DeepLeavesWrap<Fonts, Themes>
 
 export type ThemeWarehouse = DeepLeavesWrap<Theme, Themes>
 
-export type IconKeys = JsonKeys<typeof glyphMap>
+export type MaterialCommunityIconKeys = JsonKeys<typeof glyphMaterialCommunityMap>
 
-export type IconMCCustomKeys = JsonKeys<typeof glyphMCCustomMap>
+export type MaterialCommunityCustomIconsKeys = JsonKeys<typeof glyphMaterialCommunityCustomMap>
 
-export type IcoMoonKeys = JsonKeys<typeof glyphIcoMoon>
-
+export type IcoMoonKeys = JsonKeys<typeof glyphMapIcoMoon>
 
 export interface MaterialCommunityIconsProps extends IconProps {
-    name: IconKeys
+    name: MaterialCommunityIconKeys
 }
 
 export interface MaterialCommunityCustomIconsProps extends IconProps {
-    name: IconMCCustomKeys
+    name: MaterialCommunityCustomIconsKeys
 }
 
 export interface IcoMoonProps extends IconProps {
     name: IcoMoonKeys
+}
+
+export type RouteIconFontConfig = {
+    default: string,
+    focused: string,
+}
+export type IcoMoonSelectionPreferences = {
+    "showGlyphs": boolean,
+    "showCodes": boolean,
+    "showQuickUse": boolean,
+    "showQuickUse2": boolean,
+    "showSVGs": boolean,
+    "fontPref": {
+        "prefix": string,
+        "metadata": {
+            "fontFamily": string
+        },
+        "metrics": {
+            "emSize": number,
+            "baseline": number,
+            "whitespace": number
+        },
+        "embed": boolean
+    },
+    "imagePref": {
+        "prefix": string,
+        "png": boolean,
+        "useClassSelector": boolean,
+        "color": number,
+        "bgColor": number,
+        "name": string,
+        "classSelector": string
+    },
+    "historySize": number
+}
+export type IcoMoonSelection = {
+    "IcoMoonType": string,
+    "icons":IcoMoonSelectionIcon[],
+    "height": number,
+    "metadata": {
+        "name": string
+    },
+    "preferences": IcoMoonSelectionPreferences
+}
+export type IcoMoonSelectionIcon = {
+    "icon": {
+        "paths": string[],
+        "attrs": [],
+        "isMulticolor": boolean,
+        "isMulticolor2": boolean,
+        "tags": string[],
+        "grid": number
+    },
+    "attrs": [],
+    "properties": {
+        "ligatures": string,
+        "id": number,
+        "order": number,
+        "prevSize": number,
+        "code": number,
+        "name": string
+    },
+    "setIdx": number,
+    "setId": number,
+    "iconIdx": number
 }
 
 export type Palette = {

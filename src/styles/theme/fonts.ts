@@ -1,9 +1,9 @@
 import {Platform, PlatformOSType} from "react-native";
-import {FontConfig, Fonts, FontsWrapped} from "../../types/styles";
+import {FontConfigPlatform, Fonts, FontsWrapped} from "../../types/styles";
 import {EThemes} from "../../utils/constants";
 import {TraversableNested} from "../../types/utils";
 
-const fontConfig: FontConfig = {
+const fontConfig: FontConfigPlatform = {
     web: {
         regular: {
             fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',

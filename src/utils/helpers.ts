@@ -1,10 +1,10 @@
 import {Traversable, TraversableNested} from "../types/utils";
 import {NavigatorTreeNode} from "../types/utils";
-import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {IcoMoonKeys, MaterialCommunityIconsProps} from "../types/styles";
-import icomoonSelection from "../assets/fonts/icomoon/selection.json";
+import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
+import {IcoMoonKeys, IcoMoonSelection, IcoMoonSelectionIcon, RouteIconFontConfig} from "../types/styles";
+import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 
-export const propsExtract = (node: NavigatorTreeNode) => {
+export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
         name, stack, component, childrenNode, signInComponent, navigatorType,
         path, exact, parse, stringify,
@@ -38,7 +38,7 @@ export const propsExtract = (node: NavigatorTreeNode) => {
     return propsMap[navigatorType];
 }
 
-export const iconCustomConfig: TraversableNested = {
+export const tabBarIconNameConfigMC: TraversableNested = {
     TabHome: {
         default: 'home',
         focused: 'home',
@@ -80,7 +80,8 @@ export const iconCustomConfig: TraversableNested = {
         focused: 'playlist-plus',
     }
 }
-export const icoMoonConfig: TraversableNested = {
+
+export const tabBarIconNameConfig: TraversableNested = {
     TabHome: {
         default: 'home',
         focused: 'home',
@@ -90,42 +91,42 @@ export const icoMoonConfig: TraversableNested = {
         focused: 'settings',
     },
     BitcoinHome: {
-        default: 'attach_money',
-        focused: 'attach_money',
+        default: 'dollar',
+        focused: 'dollar',
     },
     BitcoinAlert: {
-        default: 'add_alert',
-        focused: 'add_alert',
+        default: 'alarm',
+        focused: 'alarm',
     },
     RNFlatList: {
-        default: 'format_list_bulleted',
-        focused: 'format_list_bulleted',
+        default: 'list',
+        focused: 'list',
     },
     RNHome: {
-        default: 'subject',
-        focused: 'subject',
+        default: 'home1',
+        focused: 'home1',
     },
     RNNoKeyboard: {
-        default: 'keyboard_hide',
-        focused: 'keyboard_hide',
+        default: 'keyboard1',
+        focused: 'keyboard1',
     },
     RNSafeArea: {
-        default: 'subject',
-        focused: 'subject',
+        default: 'umbrella',
+        focused: 'umbrella',
     },
     RNSectionList: {
-        default: 'list_alt',
-        focused: 'list_alt',
+        default: 'th-menu-outline',
+        focused: 'th-menu-outline',
     },
     RNVirtualizedList: {
-        default: 'view_list',
-        focused: 'view_list',
+        default: 'two-fingers-swipe-up',
+        focused: 'two-fingers-swipe-up',
     }
 }
 
-const getIconMCCustomMap = (iconConfig:any) => {
+const getIconMCCustomMap = (iconConfig: any) => {
     let map: TraversableNested = {};
-    let glyphMapT: TraversableNested = glyphMap;
+    let glyphMapT: TraversableNested = glyphMaterialCommunityMap;
     Object.keys(iconConfig).forEach((key) => {
         const defaultKey = iconConfig[key]['default'];
         const focusedKey = iconConfig[key]['focused'];
@@ -135,32 +136,24 @@ const getIconMCCustomMap = (iconConfig:any) => {
     return map as object;
 }
 
-export const glyphMCCustomMap = getIconMCCustomMap(icoMoonConfig)
-export const getIcoMoonMap = () => {
+export const glyphMaterialCommunityCustomMap = getIconMCCustomMap(tabBarIconNameConfig)
+
+export const icoMoonSelectionToGlyphMap = (icoMoonSelection:IcoMoonSelection) => {
     let map: TraversableNested = {};
-    const {icons} = icomoonSelection;
-    for (const i in icons) {
+    const {icons} = icoMoonSelection;
+    for (const i in icons as IcoMoonSelectionIcon[]) {
         const iconProperties = icons[i].properties
         const {name, code} = iconProperties;
         map[name.toString()] = code;
     }
-
     return map as object;
 }
+export const glyphIcoMoonMap = icoMoonSelectionToGlyphMap(icoMoonSelection as IcoMoonSelection)
 
-export const glyphIcoMoonMap = getIcoMoonMap()
-
-type IconName = MaterialCommunityIconsProps['name'];
-
-export const getIconName = (routeName: string, focused: boolean): IcoMoonKeys => {
-    type IconFontConfig = {
-        default: string,
-        focused: string,
-    }
-
+export const getIconNameByRoute = (routeName: string, focused: boolean): IcoMoonKeys => {
     const key = focused ? 'focused' : 'default';
-    const routeIconObj = icoMoonConfig[routeName] as IconFontConfig;
-    let iconName = '';
+    const routeIconObj = tabBarIconNameConfig[routeName] as RouteIconFontConfig;
+    let iconName;
     if (routeIconObj && routeIconObj[key]) {
         iconName = routeIconObj[key];
     } else {

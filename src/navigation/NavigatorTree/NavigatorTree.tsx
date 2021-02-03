@@ -40,7 +40,7 @@ import {DrawerActions, PathConfigMap} from "@react-navigation/native";
 import {Traversable} from "../../types/utils";
 import {IcoMoon} from "../../components/base-ui";
 import {LinkingConfig, LinkingConfigTraversable, RecursiveNavigatorProps, NavigatorTreeNode} from "../../types/utils"
-import {getIconName, propsExtract} from "../../utils/helpers";
+import {getIconNameByRoute, navigatorPropsExtract} from "../../utils/helpers";
 import DemoNotificationScreen from "../../screens/DemoNotification";
 import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
 import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
@@ -73,7 +73,7 @@ const optionsHeaderAndAnimation: StackNavigationOptions = {
     },
     headerLeftContainerStyle: {},
     headerBackImage: ({tintColor}) => <IcoMoon
-        name="keyboard_arrow_left"
+        name="chevron-left1"
         style={{
             fontSize: ms.fs.xxl,
             color: tintColor
@@ -98,11 +98,11 @@ const optionsDraw = ({navigation}: any) => {
             }}>
                 <IcoMoon
                     name="menu"
-                        style={{
-                            paddingLeft: ms.sp.l,
-                            fontSize: ms.fs.l,
-                            color: colors.text
-                        }}/>
+                    style={{
+                        paddingLeft: ms.sp.l,
+                        fontSize: ms.fs.l,
+                        color: colors.text
+                    }}/>
             </TouchableOpacity>)
         },
         headerStatusBarHeight: Platform.select({native: 0})
@@ -123,7 +123,7 @@ const tabBarOptions: BottomTabBarOptions = {
 const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => {
     return {
         tabBarIcon: ({focused, color, size}) => {
-            const name = getIconName(route.name, focused)
+            const name = getIconNameByRoute(route.name, focused)
             return <IcoMoon name={name} style={{color: color}} size={size}/>;
         }
     }
@@ -459,7 +459,7 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {t} = useTranslation();
     const {stack} = node;
     const Navigator = stack?.Navigator;
-    const props = propsExtract(node);
+    const props = navigatorPropsExtract(node);
     const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
     const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
     return Navigator

@@ -24,7 +24,7 @@ import {useReduxDevToolsExtension} from '@react-navigation/devtools';
 import {ResponsiveProvider} from "./styles/responsive/responsiveHooks";
 import {RequestProvider} from "./utils/requestHooks";
 import {loadAsync} from "expo-font";
-import icoMoonFont from "./assets/fonts/icomoon/icomoon.ttf"
+import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
