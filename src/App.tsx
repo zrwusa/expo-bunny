@@ -7,7 +7,7 @@ import {Provider as PaperProvider} from "react-native-paper";
 import {AppearanceProvider, useColorScheme} from "react-native-appearance";
 import {
     DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
-    NavigationContainer, NavigationContainerRef
+    NavigationContainer, NavigationContainerRef,LinkingOptions
 } from "@react-navigation/native";
 import NavigatorTree, {getLinkingConfigScreens} from "./navigation/NavigatorTree";
 import BunnyConstants, {EThemes} from "./utils/constants";
@@ -29,8 +29,17 @@ import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
 const darkTheme = themes.dark as unknown as Theme;
-const basePath = Linking.makeUrl('/');
-const linking = {prefixes: [basePath], config: {initialRouteName: "Home", screens: getLinkingConfigScreens()}};
+export const basePath = Linking.makeUrl('/');
+const linking = {
+    prefixes: [basePath],
+    config: {initialRouteName: "Home", screens: getLinkingConfigScreens()},
+    // getStateFromPath: (path, options) => {
+    //     debugger
+    // },
+    // getPathFromState(state, config) {
+    //     debugger
+    // }
+};
 
 function App() {
     const dispatch = useDispatch();
@@ -125,7 +134,7 @@ function App() {
                                                      linking={linking}
                                                      theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
                                                      fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
-                                                     initialState={navInitialStateMemorized}
+                                                     initialState={navInitialState}
                                                      onStateChange={(state) =>
                                                          AsyncStorageNext.setItem(
                                                              BunnyConstants.NAV_STATE_PERSISTENCE_KEY,

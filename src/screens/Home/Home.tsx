@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ScrollView, View} from "react-native";
-import {RouteProp} from "@react-navigation/native";
+import {Link, RouteProp,useLinkTo} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {signOutAndRemove} from "../../stores/auth/actions";
@@ -18,14 +18,17 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.Home');
     const dispatch = useDispatch();
-
+    const linkTo = useLinkTo();
     return (
         <ScrollView>
             <View style={containerStyle.screen}>
                 <View style={containerStyle.card}>
                     <Text>{st(`navAndRoute`)}</Text>
+                    <Link to={"/profile/002"}>{st(`profile`)}(Link)</Link>
+                    <ButtonTO onPress={() => linkTo("/profile/002")}>
+                        <TextBtn>{st(`profile`)}(useLinkTo)</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
-                        <TextBtn>{st(`profile`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`profile`)}(TouchableOpacity)</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
                         <TextBtn>{st(`route`)}</TextBtn></ButtonTO>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
