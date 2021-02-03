@@ -13,14 +13,16 @@ import {
     TouchableOpacityProps,
     ViewProps,
     TextInputProps,
-    ButtonProps, ImageProps, StyleSheet, PressableProps
+    ButtonProps, ImageProps, StyleSheet, PressableProps, GestureResponderEvent
 } from "react-native";
+import {Link as LinkReactNavigation} from "@react-navigation/native";
 import React from "react";
 import styled from "styled-components/native";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
 import {IcoMoonProps, MaterialCommunityIconsProps} from "../../types/styles";
 import {getStyleObj, ms} from "../../styles/utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
+import {NavigationAction} from "@react-navigation/core";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -39,7 +41,30 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...r
         ...styleObj
     }} {...rest} >{children}</TouchableOpacityRN>);
 }
+export type LinkProps = {
+    to: string;
+    action?: NavigationAction;
+    target?: string;
+    onPress?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent) => void;
+} & (TextProps & {
+    children: React.ReactNode;
+});
 
+export const Link: React.FC<LinkProps> = ({children, style, to, action, ...rest}) => {
+    const {colors, fonts} = useTheme();
+    const styleObj = getStyleObj(style);
+    return (<LinkReactNavigation style={{
+        backgroundColor: colors.primary,
+        marginTop: ms.sp.s,
+        borderRadius: ms.br.xs,
+        fontSize: ms.fs.m,
+        paddingVertical: ms.sp.m,
+        alignItems: "center",
+        ...styleObj
+    }} to={to} action={action} {...rest}>
+        <TextBtn style={{alignItems: "center"}}>{children}</TextBtn>
+    </LinkReactNavigation>)
+}
 export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
     const styleObj = getStyleObj(style);

@@ -1,11 +1,11 @@
 import * as React from "react";
 import {ScrollView, View} from "react-native";
-import {Link, RouteProp,useLinkTo} from "@react-navigation/native";
+import {RouteProp, useLinkTo} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {signOutAndRemove} from "../../stores/auth/actions";
 import {RootStackParam} from "../../types/stacks";
-import {ButtonTO, TextBtn, Text} from "../../components/base-ui";
+import {ButtonTO, TextBtn, Text, Link} from "../../components/base-ui";
 import containerStyle from "../../containers";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
@@ -24,21 +24,21 @@ function HomeScreen({navigation}: HomeScreenProps) {
             <View style={containerStyle.screen}>
                 <View style={containerStyle.card}>
                     <Text>{st(`navAndRoute`)}</Text>
-                    <Link to={"/profile/002"}>{st(`profile`)}(Link)</Link>
+                    <Link to="/demo-tab/tab-home">{st(`tab`)}</Link>
+                    <Link to="/demo-drawer/drawer-home">{st(`drawer`)}</Link>
+
+                    <Link to="/profile/002">{st(`profile`)}(Link)</Link>
                     <ButtonTO onPress={() => linkTo("/profile/002")}>
                         <TextBtn>{st(`profile`)}(useLinkTo)</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
                         <TextBtn>{st(`profile`)}(TouchableOpacity)</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
-                        <TextBtn>{st(`route`)}</TextBtn></ButtonTO>
+                        <TextBtn>{st(`route`)}(TouchableOpacity)</TextBtn></ButtonTO>
+                    <Link to="/demo-route?id=1&isHuman=false&sort=top">{st(`route`)}(Link)</Link>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
                     {/*    <TextBtn>{st(`demoModal`)}</TextBtn></ButtonTO>*/}
-                    <ButtonTO onPress={() => navigation.navigate('DemoTab')}>
-                        <TextBtn>{st(`tab`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoDrawer')}>
-                        <TextBtn>{st(`drawer`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoNestedLv0')}>
-                        <TextBtn>{st(`nestedNavigation`)}</TextBtn></ButtonTO>
+
+                    <Link to="/demo-nested/nested-home">{st(`nestedNavigation`)}</Link>
                     <ButtonTO onPress={() =>
                         navigation.navigate('DemoNestedLv0', {
                             screen: 'NestedLv1Settings',
@@ -49,53 +49,38 @@ function HomeScreen({navigation}: HomeScreenProps) {
                                     itemlv2: "002"
                                 },
                             },
-                        })}><TextBtn>{st(`passParamsFromRootToLeaf`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoBitcoin',
-                        {
-                            screen: 'BitcoinAlert',
-                            params: {isPush: true},
-                        })}><TextBtn>{st(`passParamsFromRootToLeafTab`)}</TextBtn></ButtonTO>
+                        })}><TextBtn>{st(`passParamsFromRootToLeaf`)}(TouchableOpacity)</TextBtn></ButtonTO>
+                    <Link to="/demo-nested/nested-settings/001/nested-lv2-settings/002">{st(`passParamsFromRootToLeaf`)}(Link)</Link>
+                    <Link to="/demo-bitcoin/bitcoin-alert/true">{st(`passParamsFromRootToLeafTab`)}(Link)</Link>
                 </View>
                 <View style={containerStyle.card}>
                     <Text>{st(`redux`)}</Text>
-                    <ButtonTO onPress={() => navigation.navigate('DemoFCReduxHook')}>
-                        <TextBtn>{st(`FCReduxHook`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoThunkCC')}>
-                        <TextBtn>{st(`thunkCC`)}</TextBtn></ButtonTO>
+                    <Link to="/demo-fc-redux-hook">{st(`FCReduxHook`)}</Link>
+                    <Link to="/demo-thunk-cc">{st(`thunkCC`)}</Link>
                 </View>
                 <View style={containerStyle.card}>
                     <Text>{st(`nativeCapabilities`)}</Text>
-                    <ButtonTO onPress={() => navigation.navigate('DemoMap')}>
-                        <TextBtn>{st(`map`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoChat')}>
-                        <TextBtn>{st(`chat`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoShare')}>
-                        <TextBtn>{st(`share`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoNotification')}>
-                        <TextBtn>{st(`notification`)}</TextBtn></ButtonTO>
+                    <Link to="/demo-map">{st(`map`)}</Link>
+                    <Link to="/demo-chat">{st(`chat`)}</Link>
+                    <Link to="/demo-share">{st(`share`)}</Link>
+                    <Link to="/demo-notification">{st(`notification`)}</Link>
                 </View>
                 <View style={containerStyle.card}>
                     <Text>{st(`componentsAndThemes`)}</Text>
-                    <ButtonTO onPress={() => navigation.navigate('DemoThirdPart')}>
-                        <TextBtn>{st(`thirdPart`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoCollection')}>
-                        <TextBtn>{st(`componentCollection`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoRNComponents')}>
-                        <TextBtn>{st(`RNAllInOne`)}</TextBtn></ButtonTO>
-                    <ButtonTO onPress={() => navigation.navigate('DemoTheme')}>
-                        <TextBtn>{st(`demoTheme`)}</TextBtn></ButtonTO>
+                    <Link to="/demo-third-part">{st(`thirdPart`)}</Link>
+                    <Link to="/demo-collection">{st(`componentCollection`)}</Link>
+                    <Link to="/demo-tab-rn-components/rn-home">{st(`RNAllInOne`)}</Link>
+                    <Link to="/demo-theme">{st(`demoTheme`)}</Link>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
                     {/*    <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>*/}
                 </View>
                 <View style={containerStyle.card}>
                     <Text>{st(`others`)}</Text>
-                    <ButtonTO onPress={() => navigation.navigate('DemoBitcoin')}>
-                        <TextBtn>{st(`bitcoin`)}</TextBtn></ButtonTO>
+                    <Link to="/demo-bitcoin/bitcoin-home">{st(`bitcoin`)}</Link>
                 </View>
                 <View style={containerStyle.card}>
                     <Text>{st(`system`)}</Text>
-                    <ButtonTO onPress={() => navigation.navigate('Settings')}>
-                        <TextBtn>{st(`settings`)}</TextBtn></ButtonTO>
+                    <Link to="/settings">{st(`settings`)}</Link>
                     <ButtonTO onPress={() => dispatch(signOutAndRemove())}>
                         <TextBtn>{st(`signOut`)}</TextBtn></ButtonTO>
                 </View>
