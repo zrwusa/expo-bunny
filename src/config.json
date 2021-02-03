@@ -25,8 +25,8 @@
   "UE": {
     "dimensions": {
       "bunnyUI": {
-        "width": 450,
-        "height": 800
+        "width": 375,
+        "height": 812
       },
       "iphoneX": {
         "width": 375,

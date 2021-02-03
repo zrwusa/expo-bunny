@@ -88,6 +88,9 @@ export type TypeName<T> = T extends string
                     ? "function"
                     : "object";
 
+export type JsonKeys<T> = keyof {
+    [P in keyof T]: number
+}
 
 
 

@@ -6,12 +6,11 @@ const withPlugins = require('next-compose-plugins')
 const withOffline = require('next-offline')
 const withTM = require('next-transpile-modules')([
     'expo-next-react-navigation',
-    // you can add other modules that need traspiling here
+    // you can add other modules that need transpiling here
 ])
 
 const isDev = process.env.NODE_ENV === "development";
 let withArray = [withTM, withFonts, withImages, [withExpo, {projectRoot: __dirname}]];
-
 if(!isDev){
     withArray.push(withOffline);
 }
@@ -61,7 +60,6 @@ module.exports = withPlugins(
             // Perform customizations to webpack config
             config.resolve.alias['react-native-maps'] = 'react-native-web-maps';
 
-            // Important: return the modified config
             return config
         },
     }

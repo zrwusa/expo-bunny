@@ -17,9 +17,12 @@ import {
 } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
-import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {MaterialCommunityIconsProps} from "../../types/styles";
+import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
+import {IcoMoonProps, MaterialCommunityCustomIconsProps, MaterialCommunityIconsProps} from "../../types/styles";
 import {getStyleObj, ms} from "../../styles/utils";
+import selection from "../../assets/fonts/icomoon/selection.json"
+
+export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
@@ -137,7 +140,7 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
         }} {...rest} />);
 }
 
-export const Icon: React.FC<MaterialCommunityIconsProps> = ({children, style, name, ...rest}) => {
+export const IconMC: React.FC<MaterialCommunityIconsProps> = ({children, style, name, ...rest}) => {
     const {colors} = useTheme();
     const styleObj = getStyleObj(style);
     return (<MaterialCommunityIcons
@@ -150,6 +153,20 @@ export const Icon: React.FC<MaterialCommunityIconsProps> = ({children, style, na
     />);
 }
 
+export const IcoMoon: React.FC<IcoMoonProps> = ({children, style, name, size, color, ...rest}) => {
+    const {colors} = useTheme();
+    const styleObj = getStyleObj(style);
+    return (<IconFromIcoMoon
+        name={name}
+        size={size}
+        color={color}
+        style={{
+            color: colors.primary,
+            fontSize: ms.fs.xl,
+            ...styleObj
+        }}
+    />);
+}
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
@@ -182,4 +199,5 @@ export const DemoIconCssStyled = styled(MaterialCommunityIcons)`
   color:${DefaultTheme.colors.primary};
   padding: ${ms.sp.s}px;
 `
+
 

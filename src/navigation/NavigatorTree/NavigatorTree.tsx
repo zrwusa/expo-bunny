@@ -38,7 +38,7 @@ import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings/lib/t
 import {StackNavigationOptions} from "@react-navigation/stack";
 import {DrawerActions, PathConfigMap} from "@react-navigation/native";
 import {Traversable} from "../../types/utils";
-import {Icon} from "../../components/base-ui";
+import {IcoMoon} from "../../components/base-ui";
 import {LinkingConfig, LinkingConfigTraversable, RecursiveNavigatorProps, NavigatorTreeNode} from "../../types/utils"
 import {getIconName, propsExtract} from "../../utils/helpers";
 import DemoNotificationScreen from "../../screens/DemoNotification";
@@ -72,11 +72,12 @@ const optionsHeaderAndAnimation: StackNavigationOptions = {
         fontSize: ms.fs.m
     },
     headerLeftContainerStyle: {},
-    headerBackImage: ({tintColor}) => <Icon name="chevron-left"
-                                            style={{
-                                                fontSize: ms.fs.xxl,
-                                                color: tintColor
-                                            }}/>,
+    headerBackImage: ({tintColor}) => <IcoMoon
+        name="keyboard_arrow_left"
+        style={{
+            fontSize: ms.fs.xxl,
+            color: tintColor
+        }}/>,
     headerStyle: {
         height: Platform.select({
             web: wp(50),
@@ -95,12 +96,13 @@ const optionsDraw = ({navigation}: any) => {
             return (<TouchableOpacity onPress={() => {
                 navigation.dispatch(DrawerActions.toggleDrawer())
             }}>
-                <Icon name="menu"
-                      style={{
-                          paddingLeft: ms.sp.l,
-                          fontSize: ms.fs.l,
-                          color: colors.text
-                      }}/>
+                <IcoMoon
+                    name="menu"
+                        style={{
+                            paddingLeft: ms.sp.l,
+                            fontSize: ms.fs.l,
+                            color: colors.text
+                        }}/>
             </TouchableOpacity>)
         },
         headerStatusBarHeight: Platform.select({native: 0})
@@ -122,7 +124,7 @@ const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOption
     return {
         tabBarIcon: ({focused, color, size}) => {
             const name = getIconName(route.name, focused)
-            return <Icon name={name} style={{color: color}} size={size}/>;
+            return <IcoMoon name={name} style={{color: color}} size={size}/>;
         }
     }
 }

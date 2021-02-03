@@ -1,7 +1,8 @@
 import {Traversable, TraversableNested} from "../types/utils";
 import {NavigatorTreeNode} from "../types/utils";
 import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {MaterialCommunityIconsProps} from "../types/styles";
+import {IcoMoonKeys, MaterialCommunityIconsProps} from "../types/styles";
+import icomoonSelection from "../assets/fonts/icomoon/selection.json";
 
 export const propsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -37,7 +38,7 @@ export const propsExtract = (node: NavigatorTreeNode) => {
     return propsMap[navigatorType];
 }
 
-export const iconConfig: TraversableNested = {
+export const iconCustomConfig: TraversableNested = {
     TabHome: {
         default: 'home',
         focused: 'home',
@@ -79,8 +80,50 @@ export const iconConfig: TraversableNested = {
         focused: 'playlist-plus',
     }
 }
+export const icoMoonConfig: TraversableNested = {
+    TabHome: {
+        default: 'home',
+        focused: 'home',
+    },
+    TabSettings: {
+        default: 'settings',
+        focused: 'settings',
+    },
+    BitcoinHome: {
+        default: 'attach_money',
+        focused: 'attach_money',
+    },
+    BitcoinAlert: {
+        default: 'add_alert',
+        focused: 'add_alert',
+    },
+    RNFlatList: {
+        default: 'format_list_bulleted',
+        focused: 'format_list_bulleted',
+    },
+    RNHome: {
+        default: 'subject',
+        focused: 'subject',
+    },
+    RNNoKeyboard: {
+        default: 'keyboard_hide',
+        focused: 'keyboard_hide',
+    },
+    RNSafeArea: {
+        default: 'subject',
+        focused: 'subject',
+    },
+    RNSectionList: {
+        default: 'list_alt',
+        focused: 'list_alt',
+    },
+    RNVirtualizedList: {
+        default: 'view_list',
+        focused: 'view_list',
+    }
+}
 
-export const getIconCustomMap = () => {
+const getIconMCCustomMap = (iconConfig:any) => {
     let map: TraversableNested = {};
     let glyphMapT: TraversableNested = glyphMap;
     Object.keys(iconConfig).forEach((key) => {
@@ -92,20 +135,36 @@ export const getIconCustomMap = () => {
     return map as object;
 }
 
+export const glyphMCCustomMap = getIconMCCustomMap(icoMoonConfig)
+export const getIcoMoonMap = () => {
+    let map: TraversableNested = {};
+    const {icons} = icomoonSelection;
+    for (const i in icons) {
+        const iconProperties = icons[i].properties
+        const {name, code} = iconProperties;
+        map[name.toString()] = code;
+    }
+
+    return map as object;
+}
+
+export const glyphIcoMoonMap = getIcoMoonMap()
+
 type IconName = MaterialCommunityIconsProps['name'];
-export const getIconName = (routeName: string, focused: boolean): IconName => {
+
+export const getIconName = (routeName: string, focused: boolean): IcoMoonKeys => {
     type IconFontConfig = {
         default: string,
         focused: string,
     }
 
     const key = focused ? 'focused' : 'default';
-    const routeIconObj = iconConfig[routeName] as IconFontConfig;
+    const routeIconObj = icoMoonConfig[routeName] as IconFontConfig;
     let iconName = '';
     if (routeIconObj && routeIconObj[key]) {
         iconName = routeIconObj[key];
     } else {
         iconName = '';
     }
-    return iconName as IconName
+    return iconName as IcoMoonKeys
 }

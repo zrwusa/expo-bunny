@@ -23,6 +23,8 @@ import * as localization from "expo-localization";
 import {useReduxDevToolsExtension} from '@react-navigation/devtools';
 import {ResponsiveProvider} from "./styles/responsive/responsiveHooks";
 import {RequestProvider} from "./utils/requestHooks";
+import {loadAsync} from "expo-font";
+import icoMoonFont from "./assets/fonts/icomoon/icomoon.ttf"
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
@@ -47,49 +49,55 @@ function App() {
         const bootstrapAsync = async () => {
             dispatch(restoreIsReady({isReady: false}));
             try {
-                const accessToken = await AsyncStorageNext.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
-                const user = await AsyncStorageNext.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
-                accessToken && dispatch(restoreAuth({
-                    access_token: accessToken,
-                    user: user ? JSON.parse(user) : {}
-                }));
+                await loadAsync({IcoMoon: icoMoonFont})
             } catch (err) {
                 dispatch(sysError(err.toString()));
             } finally {
                 try {
-                    const themeNameSaved = await AsyncStorageNext.getItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY);
-                    let themeName;
-                    if (themeNameSaved) {
-                        themeName = (themeNameSaved === EThemes.dark) ? EThemes.dark : EThemes.default;
-                    } else {
-                        themeName = (sysScheme === EThemes.dark) ? EThemes.dark : EThemes.default;
-                    }
-                    dispatch(restoreTheme({themeName: themeName}));
+                    const accessToken = await AsyncStorageNext.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
+                    const user = await AsyncStorageNext.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
+                    accessToken && dispatch(restoreAuth({
+                        access_token: accessToken,
+                        user: user ? JSON.parse(user) : {}
+                    }));
                 } catch (err) {
                     dispatch(sysError(err.toString()));
                 } finally {
                     try {
-                        const language = await AsyncStorageNext.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY)
-                        const lang = language || localization.locale.substring(0, 2);
-                        lang && await i18n.changeLanguage(lang);
-                        lang && dispatch(restoreLanguage({language: lang}));
+                        const themeNameSaved = await AsyncStorageNext.getItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY);
+                        let themeName;
+                        if (themeNameSaved) {
+                            themeName = (themeNameSaved === EThemes.dark) ? EThemes.dark : EThemes.default;
+                        } else {
+                            themeName = (sysScheme === EThemes.dark) ? EThemes.dark : EThemes.default;
+                        }
+                        dispatch(restoreTheme({themeName: themeName}));
                     } catch (err) {
                         dispatch(sysError(err.toString()));
                     } finally {
                         try {
-                            if (Platform.OS !== 'web') {
-                                const savedState = await AsyncStorageNext.getItem(BunnyConstants.NAV_STATE_PERSISTENCE_KEY);
-                                const state = savedState ? JSON.parse(savedState) : undefined;
-                                if (state !== undefined) {
-                                    dispatch(restoreNavInitialState({navInitialState: state}));
-                                }
-                            }
+                            const language = await AsyncStorageNext.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY)
+                            const lang = language || localization.locale.substring(0, 2);
+                            lang && await i18n.changeLanguage(lang);
+                            lang && dispatch(restoreLanguage({language: lang}));
                         } catch (err) {
                             dispatch(sysError(err.toString()));
                         } finally {
-                            mockPreparingTimer = setTimeout(() => {
-                                dispatch(restoreIsReady({isReady: true}));
-                            }, 1)
+                            try {
+                                if (Platform.OS !== 'web') {
+                                    const savedState = await AsyncStorageNext.getItem(BunnyConstants.NAV_STATE_PERSISTENCE_KEY);
+                                    const state = savedState ? JSON.parse(savedState) : undefined;
+                                    if (state !== undefined) {
+                                        dispatch(restoreNavInitialState({navInitialState: state}));
+                                    }
+                                }
+                            } catch (err) {
+                                dispatch(sysError(err.toString()));
+                            } finally {
+                                mockPreparingTimer = setTimeout(() => {
+                                    dispatch(restoreIsReady({isReady: true}));
+                                }, 1)
+                            }
                         }
                     }
                 }

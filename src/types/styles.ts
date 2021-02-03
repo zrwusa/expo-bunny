@@ -1,8 +1,9 @@
-import {DeepLeavesWrap} from "./utils";
+import {DeepLeavesWrap, JsonKeys} from "./utils";
 import {IconProps} from "react-native-vector-icons/Icon";
 import glyphMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {getIconCustomMap} from "../utils/helpers";
+import {glyphIcoMoonMap, glyphMCCustomMap} from "../utils/helpers";
 import {ReactNode} from "react";
+import glyphIcoMoon from "../assets/fonts/icomoon/glyph.json"
 
 export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
 export type ResponsiveInstance = { wp: Function, hp: Function };
@@ -93,21 +94,23 @@ export type FontsWrapped = DeepLeavesWrap<Fonts, Themes>
 
 export type ThemeWarehouse = DeepLeavesWrap<Theme, Themes>
 
-export type IconMap<T> = {
-    [P in keyof T]: number
-}
+export type IconKeys = JsonKeys<typeof glyphMap>
 
-export type IconKeys = keyof IconMap<typeof glyphMap>
+export type IconMCCustomKeys = JsonKeys<typeof glyphMCCustomMap>
 
-const glyphCustomMap = getIconCustomMap()
-export type IconCustomKeys = keyof IconMap<typeof glyphCustomMap>
+export type IcoMoonKeys = JsonKeys<typeof glyphIcoMoon>
+
 
 export interface MaterialCommunityIconsProps extends IconProps {
     name: IconKeys
 }
 
 export interface MaterialCommunityCustomIconsProps extends IconProps {
-    name: IconCustomKeys
+    name: IconMCCustomKeys
+}
+
+export interface IcoMoonProps extends IconProps {
+    name: IcoMoonKeys
 }
 
 export type Palette = {
