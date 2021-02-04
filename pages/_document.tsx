@@ -1,4 +1,4 @@
-import { getInitialProps } from '@expo/next-adapter/document';
+import {getInitialProps} from '@expo/next-adapter/document';
 import Document, {Head, Html, Main, NextScript} from 'next/document';
 import React from 'react';
 
@@ -6,19 +6,15 @@ class CustomDocument extends Document {
     render() {
         return (
             <Html>
-            <Head>
-                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                <script
-                    async
-                    defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
-                    type="text/javascript" />
-            </Head>
-            <body>
-            <Main />
+                <Head>
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
 
-            <NextScript />
-            </body>
+                </Head>
+                <body>
+                <Main/>
+
+                <NextScript/>
+                </body>
             </Html>
         );
     }

@@ -1,4 +1,5 @@
 {
+  "title": "ExpoBunny",
   "devServer": {
     "domain": "localhost",
     "port": 3006

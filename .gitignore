@@ -21,7 +21,7 @@ __tests__/
 note.md
 test.json
 test.html
-#.env
+.env
 .expo-shared/
 yarn-error.log
 .next/

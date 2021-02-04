@@ -1,4 +1,4 @@
-import {Button as ButtonElement, ButtonProps as ButtonElementProps} from "react-native-elements";
+import {Button as ButtonElement, ButtonProps as ButtonElementProps,Text as TextElement,TextProps as TextElementProps} from "react-native-elements";
 import {DefaultTheme, useTheme} from "../../styles/theme";
 import {
     Text as TextRN,
@@ -23,6 +23,7 @@ import {IcoMoonProps, MaterialCommunityIconsProps} from "../../types/styles";
 import {getStyleObj, ms} from "../../styles/utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
 import {NavigationAction} from "@react-navigation/core";
+import {LinkProps} from "../../types/components";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -41,14 +42,7 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...r
         ...styleObj
     }} {...rest} >{children}</TouchableOpacityRN>);
 }
-export type LinkProps = {
-    to: string;
-    action?: NavigationAction;
-    target?: string;
-    onPress?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent) => void;
-} & (TextProps & {
-    children: React.ReactNode;
-});
+
 
 export const Link: React.FC<LinkProps> = ({children, style, to, action, ...rest}) => {
     const {colors, fonts} = useTheme();
@@ -65,6 +59,7 @@ export const Link: React.FC<LinkProps> = ({children, style, to, action, ...rest}
         <TextBtn style={{alignItems: "center"}}>{children}</TextBtn>
     </LinkReactNavigation>)
 }
+
 export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
     const styleObj = getStyleObj(style);
@@ -128,6 +123,16 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
             backgroundColor: colors.background,
             ...styleObj
         }}  {...rest} >{children}</ImageRN>);
+}
+
+export const TextRNE: React.FC<TextElementProps> = ({children,style,  ...rest}) => {
+    const {colors} = useTheme();
+    const styleObj = getStyleObj(style);
+    return (<TextElement
+        style={{
+            ...styleObj
+        }}
+        {...rest}>{children}</TextElement>);
 }
 
 export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
