@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from "react-native";
-import {responsiveFromUE} from "../../styles/utils";
+import responsiveFromUE from "../../styles/utils";
 import {ms} from "../../styles/utils";
 
 const {wp, hp} = responsiveFromUE.iphoneX;

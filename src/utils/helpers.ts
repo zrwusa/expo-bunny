@@ -138,7 +138,7 @@ const getIconMCCustomMap = (iconConfig: any) => {
 
 export const glyphMaterialCommunityCustomMap = getIconMCCustomMap(tabBarIconNameConfig)
 
-export const icoMoonSelectionToGlyphMap = (icoMoonSelection:IcoMoonSelection) => {
+export const icoMoonSelectionToGlyphMap = (icoMoonSelection: IcoMoonSelection) => {
     let map: TraversableNested = {};
     const {icons} = icoMoonSelection;
     for (const i in icons as IcoMoonSelectionIcon[]) {

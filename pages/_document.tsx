@@ -5,10 +5,9 @@ import React from 'react';
 class CustomDocument extends Document {
     render() {
         return (
-            <Html>
+            <Html lang="en">
                 <Head>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-
                 </Head>
                 <body>
                 <Main/>

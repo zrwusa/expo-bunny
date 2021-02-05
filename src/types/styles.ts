@@ -14,6 +14,7 @@ export type DimensionConfig = {
     "iphoneX": Dimension,
     "iPad": Dimension,
     "pixel2XL": Dimension,
+    "pcBrowser": Dimension,
     "custom1": Dimension,
     "custom2": Dimension,
     "custom3": Dimension
@@ -147,7 +148,7 @@ export type IcoMoonSelectionPreferences = {
 }
 export type IcoMoonSelection = {
     "IcoMoonType": string,
-    "icons":IcoMoonSelectionIcon[],
+    "icons": IcoMoonSelectionIcon[],
     "height": number,
     "metadata": {
         "name": string

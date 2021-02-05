@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {ButtonRNE, TextInput} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
-import containerStyle from "../../containers";
+import getContainerStyles from "../../containers";
 
 export const SignInScreen = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const SignInScreen = () => {
     const st = stFactory(t, i18nPrefix);
 
     return (
-        <View style={containerStyle.screen}>
+        <View style={getContainerStyles().screen}>
             <TextInput placeholder={st(`username`)}/>
             <TextInput placeholder={st(`password`)} secureTextEntry/>
             <ButtonRNE onPress={() => {

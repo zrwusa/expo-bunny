@@ -10,9 +10,9 @@ import {
     imageStyles, imageBackgroundStyles, modalStyles, pressableStyles, statusBarStyles,
     touchableHighlightStyles, touchableOpacityStyles, touchableWithoutFeedbackStyles
 } from "./styles";
-import containerStyle from "../../../containers";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../lang/short-t";
+import getContainerStyles from "../../../containers";
 
 const RNHome: React.FC = () => {
     const {t} = useTranslation();
@@ -32,6 +32,8 @@ const RNHome: React.FC = () => {
     const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
+    const containerStyles = getContainerStyles()
+
 
     const changeVisibilityStatusBar = () => {
         setVisibleStatusBar(!visibleStatusBar);
@@ -59,14 +61,14 @@ const RNHome: React.FC = () => {
     };
     return (
         <ScrollView>
-            <View style={containerStyle.screen}>
-                <View style={containerStyle.card}>
+            <View style={containerStyles.screen}>
+                <View style={containerStyles.card}>
                     <ActivityIndicator/>
                     <ActivityIndicator size="large"/>
                     <ActivityIndicator size="small" color="#0000ff"/>
                     <ActivityIndicator size="large" color="#00ff00"/>
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <Button
                         onPress={() => null}
                         title={st(`btnAccessibility`)}
@@ -74,7 +76,7 @@ const RNHome: React.FC = () => {
                         accessibilityLabel={st(`lbAccessibility`)}
                     />
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <Switch
                         trackColor={{false: "#767577", true: "#81b0ff"}}
                         thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -83,7 +85,7 @@ const RNHome: React.FC = () => {
                         value={isEnabled}
                     />
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <Image
                         style={imageStyles.tinyLogo}
                         source={{
@@ -98,14 +100,14 @@ const RNHome: React.FC = () => {
                         }}
                     />
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
                         <Text style={imageBackgroundStyles.text}>Inside</Text>
                     </ImageBackground>
                 </View>
 
 
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <Pressable
                         onPress={() => {
                             setTimesPressed((current) => current + 1);
@@ -164,17 +166,17 @@ const RNHome: React.FC = () => {
                     </TouchableHighlight>
                 </View>
 
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <Text>Picker ???</Text>
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <TextInput
                         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                         onChangeText={text => onChangeText(text)}
                         value={textInputValue}
                     />
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <TouchableHighlight onPress={onTouchableHighlightPress}>
                         <View style={touchableHighlightStyles.button}>
                             <Text>{st(`touchHere`)}</Text>
@@ -187,7 +189,7 @@ const RNHome: React.FC = () => {
                     </View>
 
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <View style={touchableOpacityStyles.countContainer}>
                         <Text>{st(`count`)}{touchableOpacityCount}</Text>
                     </View>
@@ -198,7 +200,7 @@ const RNHome: React.FC = () => {
                         <Text>{st(`pressHere`)}</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <View style={touchableWithoutFeedbackStyles.countContainer}>
                         <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
                     </View>
@@ -208,7 +210,7 @@ const RNHome: React.FC = () => {
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
-                <View style={containerStyle.card}>
+                <View style={containerStyles.card}>
                     <View>
                         <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
                         <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>

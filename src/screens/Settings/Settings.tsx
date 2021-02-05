@@ -10,7 +10,7 @@ import BunnyConstants from "../../utils/constants";
 import {useTranslation} from "react-i18next";
 import {View} from "../../components/base-ui";
 import {stFactory} from "../../lang/short-t";
-import containerStyle from "../../containers";
+import getContainerStyles from "../../containers";
 
 export default function SettingsScreen() {
     const {t, i18n} = useTranslation();
@@ -18,9 +18,10 @@ export default function SettingsScreen() {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
     const dispatch = useDispatch()
     const {themeName, language} = sysState;
+    const containerStyles = getContainerStyles()
 
     return (
-        <View style={containerStyle.screen}>
+        <View style={containerStyles.screen}>
             <SettingsItem
                 label={st(`darkTheme`)}
                 value={themeName === EThemes.dark}

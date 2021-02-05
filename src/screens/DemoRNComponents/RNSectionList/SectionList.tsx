@@ -2,8 +2,8 @@ import React from "react";
 import {SafeAreaView, View, SectionList} from "react-native";
 import {Text} from "../../../components/base-ui";
 import {useTheme} from "../../../styles/theme";
-import containerStyle from "../../../containers";
 import {sectionListStyles} from "./styles";
+import getContainerStyles from "../../../containers";
 
 function SectionListScreen() {
     const {colors} = useTheme()
@@ -40,9 +40,10 @@ function SectionListScreen() {
             <Text style={{fontSize: 24}}>{title}</Text>
         </View>
     );
+    const containerStyles = getContainerStyles()
 
     return (
-        <SafeAreaView style={[containerStyle.screen, sectionListStyles.container]}>
+        <SafeAreaView style={[containerStyles.screen, sectionListStyles.container]}>
             <SectionList
                 sections={SECTION_LIST_DATA}
                 keyExtractor={(item, index) => item + index}

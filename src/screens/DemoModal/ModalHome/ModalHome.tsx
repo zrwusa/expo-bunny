@@ -4,9 +4,9 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../lang/short-t";
-import containerStyle from "../../../containers";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types/stacks";
+import getContainerStyles from "../../../containers";
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;
@@ -15,9 +15,11 @@ export type ModalHomeProps = { route: ModalHomeRouteProp; navigation: ModalHomeN
 function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.ModalHome');
+    const containerStyles = getContainerStyles()
+
     return (
         <ScrollView>
-            <View style={[containerStyle.screen, containerStyle.centralized]}>
+            <View style={[containerStyles.screen, containerStyles.centralized]}>
             </View>
         </ScrollView>
     )

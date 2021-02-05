@@ -1,5 +1,4 @@
 {
-  "title": "ExpoBunny",
   "devServer": {
     "domain": "localhost",
     "port": 3006
@@ -40,6 +39,10 @@
       "pixel2XL": {
         "width": 768,
         "height": 1024
+      },
+      "pcBrowser": {
+        "width": 1366,
+        "height": 784
       },
       "custom1": {
         "width": 450,

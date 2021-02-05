@@ -2,14 +2,12 @@ import React, {useMemo} from "react";
 import {Platform, StatusBar, Text} from "react-native";
 import AsyncStorageNext from "./utils/AsyncStorageNext";
 import {useDispatch, useSelector} from "react-redux";
-import * as Linking from "expo-linking";
 import {Provider as PaperProvider} from "react-native-paper";
 import {AppearanceProvider, useColorScheme} from "react-native-appearance";
 import {
     DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
-    NavigationContainer, NavigationContainerRef,LinkingOptions
 } from "@react-navigation/native";
-import NavigatorTree, {getLinkingConfigScreens} from "./navigation/NavigatorTree";
+import NavigatorTree from "./navigation/NavigatorTree";
 import BunnyConstants, {EThemes} from "./utils/constants";
 import {RootState} from "./types/models";
 import {restoreAuth} from "./stores/auth/actions";
@@ -20,26 +18,15 @@ import {Theme} from "./types/styles";
 import {Preparing} from "./components/Preparing";
 import {useTranslation} from "react-i18next";
 import * as localization from "expo-localization";
-import {useReduxDevToolsExtension} from '@react-navigation/devtools';
-import {ResponsiveProvider} from "./styles/responsive/responsiveHooks";
 import {RequestProvider} from "./utils/requestHooks";
 import {loadAsync} from "expo-font";
 import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
+import {ResponsiveProvider} from "./styles/responsive";
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
 const darkTheme = themes.dark as unknown as Theme;
-export const basePath = Linking.makeUrl('/');
-const linking = {
-    prefixes: [basePath],
-    config: {initialRouteName: "Home", screens: getLinkingConfigScreens()},
-    // getStateFromPath: (path, options) => {
-    //     debugger
-    // },
-    // getPathFromState(state, config) {
-    //     debugger
-    // }
-};
+
 
 function App() {
     const dispatch = useDispatch();
@@ -118,9 +105,6 @@ function App() {
         return () => clearTimeout(mockPreparingTimer);
     }, []);
 
-    const navigationRef = React.useRef<NavigationContainerRef>(null);
-
-    useReduxDevToolsExtension(navigationRef);
 
     return isReady
         ? (
@@ -130,19 +114,18 @@ function App() {
                         <ThemeProvider theme={theme}>
                             <PaperProvider theme={themePaper}>
                                 <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
-                                <NavigationContainer ref={navigationRef}
-                                                     linking={linking}
-                                                     theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
-                                                     fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
-                                                     initialState={navInitialState}
-                                                     onStateChange={(state) =>
-                                                         AsyncStorageNext.setItem(
-                                                             BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
-                                                             JSON.stringify(state)
-                                                         )
-                                                     }>
-                                    <NavigatorTree/>
-                                </NavigationContainer>
+                                <NavigatorTree
+                                    theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
+                                    fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
+                                    initialState={navInitialStateMemorized}
+                                    onStateChange={(state) =>
+                                        AsyncStorageNext.setItem(
+                                            BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
+                                            JSON.stringify(state)
+                                        )
+                                    }
+
+                                />
                             </PaperProvider>
                         </ThemeProvider>
                     </RequestProvider>

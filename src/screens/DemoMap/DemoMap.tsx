@@ -12,7 +12,9 @@ import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../utils/constants";
 import {sysError} from "../../stores/sys/actions";
 import styles, {CARD_WIDTH} from "./styles";
-import containerStyle from "../../containers";
+import {WithResponsive, withResponsive} from "../../styles/responsive/withResponsive";
+import {WithMeasure, withMeasure} from "../../styles/utils/withMeasure";
+import getContainerStyles from "../../containers";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -23,7 +25,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMap, void, Action>) => (
     restoreRegion: (region: Region) => dispatch(restoreRegion(region)),
     sysError: (err: SysErrorPayload) => dispatch(sysError(err))
 });
-export type DemoMapProps = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps> & BareProps;
+export type DemoMapProps = ReturnType<typeof mapDispatchToProps>
+    & ReturnType<typeof mapStateToProps> & BareProps & WithResponsive & WithMeasure;
 
 class DemoMapScreen extends Component<DemoMapProps> {
 
@@ -101,6 +104,8 @@ class DemoMapScreen extends Component<DemoMapProps> {
 
 
     render(): React.ReactNode {
+        const {measure, responsive} = this.props;
+        const containerStyles = getContainerStyles(measure, responsive);
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {
             const inputRange = [
                 (index - 1) * CARD_WIDTH,
@@ -121,7 +126,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
         });
 
         return (
-            <View style={containerStyle.screen}>
+            <View style={containerStyles.screen}>
                 <MapView
                     ref={this.mapView}
                     initialRegion={this.props.region}
@@ -182,4 +187,4 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DemoMapScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(withResponsive(withMeasure(DemoMapScreen)));

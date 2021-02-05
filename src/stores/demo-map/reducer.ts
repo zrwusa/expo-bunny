@@ -21,7 +21,7 @@ const initialState: DemoMap = {
             },
             "title": "Best Place",
             "description": "This is the best place in Portland",
-            "image": {uri:"https://raw.githubusercontent.com/zrwusa/assets/master/images/bunny2.jpg"}
+            "image": {uri: "https://raw.githubusercontent.com/zrwusa/assets/master/images/bunny2.jpg"}
         },
         {
             "coordinate": {

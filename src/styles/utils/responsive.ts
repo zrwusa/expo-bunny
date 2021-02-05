@@ -3,7 +3,7 @@ import bunnyConfig from "../../config.json";
 import {Dimension, Responsive} from "../../types/styles";
 import {TraversableNested} from "../../types/utils";
 
-export const responsiveInit = () => {
+export const _getResponsive = () => {
     let responsive: TraversableNested = {}
     Object.entries(bunnyConfig.UE.dimensions).forEach((dimension) => {
         responsive[dimension[0]] = {
@@ -16,6 +16,7 @@ export const responsiveInit = () => {
     })
     return responsive as Responsive;
 }
-export const responsiveFromUE = responsiveInit();
-
+const responsiveFromUE = _getResponsive();
+export const getResponsive = _getResponsive
+export default responsiveFromUE;
 export const responsiveIphoneX = responsiveFromUE.iphoneX

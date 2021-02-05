@@ -1,9 +1,11 @@
 import React from "react";
 import {FlatList, SafeAreaView, View, Text} from "react-native";
 import {flatListStyles} from "./styles";
-import containerStyle from "../../../containers";
+import getContainerStyles from "../../../containers";
 
 const RNFlatListScreen: React.FC = () => {
+    const containerStyles = getContainerStyles()
+
     type IFlatListItem = {
         id: string;
         title: string;
@@ -30,7 +32,7 @@ const RNFlatListScreen: React.FC = () => {
     );
 
     return (
-        <SafeAreaView style={containerStyle.screen}>
+        <SafeAreaView style={containerStyles.screen}>
             <FlatList
                 data={FLAT_LIST_DATA}
                 renderItem={({item}: any) => (
