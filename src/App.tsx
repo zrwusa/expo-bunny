@@ -108,6 +108,8 @@ function App() {
 
     return isReady
         ? (
+            // Context or HOC(with*) or Hooks(use*)
+            // Providers are Prepared for using the Context method to pass global props, the follow-up recommends HOCs, most recommend Hooks(explicitly dependencies vs HOCs) in the latest React version
             <AppearanceProvider>
                 <ResponsiveProvider>
                     <RequestProvider>

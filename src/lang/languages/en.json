@@ -57,6 +57,10 @@
       "functionComponent": "Function Component",
       "classComponent": "Class Component",
       "lbRequest": "Make a request",
+      "iAmPure": "React.PureComponent",
+      "iAmRegular": "React.component",
+      "iHaveBeenRendered": "I have been rendered",
+      "renderedUnit": "time(s)",
       "placeholder": "Placeholder",
       "tipLabel": "The current time: "
     },

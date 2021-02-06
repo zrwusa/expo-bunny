@@ -11,10 +11,11 @@ import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../utils/constants";
 import {sysError} from "../../stores/sys/actions";
-import styles, {CARD_WIDTH} from "./styles";
+import {getCardSize} from "./styles";
 import {WithResponsive, withResponsive} from "../../styles/responsive/withResponsive";
 import {WithMeasure, withMeasure} from "../../styles/utils/withMeasure";
 import getContainerStyles from "../../containers";
+import getStyles from "./styles";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -60,8 +61,10 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 
     async componentDidMount() {
+        const {measure, responsive} = this.props;
+        const {wp} = responsive.iphoneX;
         this.animation.addListener(({value}) => {
-            let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+            let index = Math.floor(value / getCardSize(measure,responsive).width + wp(0.3)); // animate 30% away from landing on the next item
             if (index >= this.props.demoNearbyFilms.length) {
                 index = this.props.demoNearbyFilms.length - 1;
             }
@@ -79,7 +82,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
                             latitudeDelta: this.props.region.latitudeDelta,
                             longitudeDelta: this.props.region.longitudeDelta,
                         },
-                        350
+                        wp(350)
                     );
                 }
             }, 10)
@@ -106,11 +109,14 @@ class DemoMapScreen extends Component<DemoMapProps> {
     render(): React.ReactNode {
         const {measure, responsive} = this.props;
         const containerStyles = getContainerStyles(measure, responsive);
+        const styles = getStyles(measure, responsive);
+        const {wp} = responsive.iphoneX;
+        const {width}  = getCardSize(measure,responsive)
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {
             const inputRange = [
-                (index - 1) * CARD_WIDTH,
-                index * CARD_WIDTH,
-                ((index + 1) * CARD_WIDTH),
+                (index - 1) * width,
+                index * width,
+                ((index + 1) * width),
             ];
             const scale = this.animation.interpolate({
                 inputRange,
@@ -158,7 +164,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
                 </MapView>
                 <Animated.ScrollView horizontal scrollEventThrottle={1}
                                      showsHorizontalScrollIndicator={false}
-                                     snapToInterval={CARD_WIDTH}
+                                     snapToInterval={width}
                                      onScroll={Animated.event([{
                                              nativeEvent: {
                                                  contentOffset: {

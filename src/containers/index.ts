@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
-import {Measure, pl, useMeasure} from "../styles/utils";
-import {Responsive} from "../types/styles";
+import {pl, useMeasure} from "../styles/utils";
+import {Measure, Responsive} from "../types/styles";
 import {useResponsive} from "../styles/responsive";
 
 const getContainerStyles = (measureParam?: Measure, responsiveParam?: Responsive) => {

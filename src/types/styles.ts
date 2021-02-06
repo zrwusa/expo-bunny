@@ -70,12 +70,11 @@ export interface Theme {
     typography: {
         header: {
             fontFamily: string,
-            fontSize?: number,
             fontWeight?: string,
         },
         body: {
             fontFamily: string,
-            fontSize?: number,
+            fontWeight?: string,
         }
     },
 }
@@ -177,7 +176,61 @@ export type IcoMoonSelectionIcon = {
     "setId": number,
     "iconIdx": number
 }
-
+export type Measure = {
+    breakpoints: {
+        smallPhone: number,
+        phone: number,
+        tablet: number,
+    },
+    spacings: Size,
+    sizes: {
+        s1: string,
+        s2: string,
+        s3: string,
+        s4: string,
+        s5: string,
+        s6: string,
+        s7: string,
+        s8: string,
+        s9: string,
+        s10: string,
+        s11: string,
+        s12: string,
+    },
+    fontSizes: Size,
+    borderRadius: Size,
+    bp: {
+        smallPhone: number,
+        phone: number,
+        tablet: number,
+    },
+    sz: {
+        s1: string,
+        s2: string,
+        s3: string,
+        s4: string,
+        s5: string,
+        s6: string,
+        s7: string,
+        s8: string,
+        s9: string,
+        s10: string,
+        s11: string,
+        s12: string,
+    },
+    sp: Size,
+    fs: Size,
+    br: Size
+}
+export type Size = {
+    xxs: number,
+    xs: number,
+    s: number,
+    m: number,
+    l: number,
+    xl: number,
+    xxl: number,
+}
 export type Palette = {
     red50: string,
     red100: string,

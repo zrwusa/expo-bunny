@@ -57,6 +57,10 @@
       "functionComponent": "函数组件",
       "classComponent": "类组件",
       "lbRequest": "发出请求",
+      "iAmPure": "React.PureComponent",
+      "iAmRegular": "React.component",
+      "iHaveBeenRendered": "我被渲染了",
+      "renderedUnit": "次",
       "placeholder": "Placeholder",
       "tipLabel": "当前时间: "
     },

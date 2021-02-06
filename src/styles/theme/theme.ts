@@ -3,120 +3,115 @@ import {ThemeWarehouse} from "../../types/styles";
 import color from "color";
 import {TraversableNested} from "../../types/utils";
 import {EThemes} from "../../utils/constants";
-import {ms, pl} from "../utils";
+import {pl} from "../utils";
 
-export const themeWarehouse: ThemeWarehouse = {
-    dark: {
-        default: false,
-        dark: true
-    },
-    roundness: {
-        default: 4,
-        dark: 4,
-    },
-    mode: {
-        default: '',
-        dark: 'adaptive'
-    },
-    colors: {
-        primary: {
-            default: pl.teal400,
-            dark: pl.orange800,
+export const getThemeWareHouse = () => {
+    const themeWarehouse: ThemeWarehouse = {
+        dark: {
+            default: false,
+            dark: true
         },
-        accent: {
-            default: pl.blue400,
-            dark: pl.tealA700
+        roundness: {
+            default: 4,
+            dark: 4,
         },
-        background: {
-            default: pl.grey200,
-            dark: pl.black900
+        mode: {
+            default: '',
+            dark: 'adaptive'
         },
-        surface: {
-            default: pl.white,
-            dark: pl.black900
-        },
-        error: {
-            default: pl.red600,
-            dark: pl.pink300
-        },
-        text: {
-            default: pl.black,
-            dark: pl.white
-        },
-        notification: {
-            default: pl.pinkA400,
-            dark: pl.pinkA100,
-        },
-        transparent: {
-            default: pl.transparent,
-            dark: pl.transparent,
-        },
-        onBackground: {
-            default: pl.black,
-            dark: pl.white
-        },
-        onSurface: {
-            default: pl.black,
-            dark: pl.white
-        },
-        backdrop: {
-            default: color(pl.black).alpha(0.5).rgb().string(),
-            dark: color(pl.black).alpha(0.5).rgb().string(),
-        },
-        disabled: {
-            default: color(pl.black).alpha(0.26).rgb().string(),
-            dark: color(pl.white).alpha(0.38).rgb().string(),
-        },
-        placeholder: {
-            default: color(pl.black).alpha(0.54).rgb().string(),
-            dark: color(pl.white).alpha(0.54).rgb().string(),
-        },
+        colors: {
+            primary: {
+                default: pl.teal400,
+                dark: pl.orange800,
+            },
+            accent: {
+                default: pl.blue400,
+                dark: pl.tealA700
+            },
+            background: {
+                default: pl.grey200,
+                dark: pl.black900
+            },
+            surface: {
+                default: pl.white,
+                dark: pl.black900
+            },
+            error: {
+                default: pl.red600,
+                dark: pl.pink300
+            },
+            text: {
+                default: pl.black,
+                dark: pl.white
+            },
+            notification: {
+                default: pl.pinkA400,
+                dark: pl.pinkA100,
+            },
+            transparent: {
+                default: pl.transparent,
+                dark: pl.transparent,
+            },
+            onBackground: {
+                default: pl.black,
+                dark: pl.white
+            },
+            onSurface: {
+                default: pl.black,
+                dark: pl.white
+            },
+            backdrop: {
+                default: color(pl.black).alpha(0.5).rgb().string(),
+                dark: color(pl.black).alpha(0.5).rgb().string(),
+            },
+            disabled: {
+                default: color(pl.black).alpha(0.26).rgb().string(),
+                dark: color(pl.white).alpha(0.38).rgb().string(),
+            },
+            placeholder: {
+                default: color(pl.black).alpha(0.54).rgb().string(),
+                dark: color(pl.white).alpha(0.54).rgb().string(),
+            },
 
 
-        btnText: {
-            default: pl.white,
-            dark: pl.white,
-        },
-        btnBg: {
-            default: pl.teal400,
-            dark: pl.orange800,
-        },
-    },
-    fonts: {
-        ...fontsWarehouse,
-    },
-    animation: {
-        scale: {
-            default: 1.0,
-            dark: 1.0
-        },
-    },
-    typography: {
-        header: {
-            fontFamily: {
-                default: fontsWarehouse.regular.fontFamily.default,
-                dark: fontsWarehouse.regular.fontFamily.dark,
+            btnText: {
+                default: pl.white,
+                dark: pl.white,
             },
-            fontSize: {
-                default: ms.fs.xl,
-                dark: ms.fs.xl,
-            },
-            fontWeight: {
-                default: 'bold',
-                dark: 'bold'
+            btnBg: {
+                default: pl.teal400,
+                dark: pl.orange800,
             },
         },
-        body: {
-            fontFamily: {
-                default: fontsWarehouse.regular.fontFamily.default,
-                dark: fontsWarehouse.regular.fontFamily.dark,
+        fonts: {
+            ...fontsWarehouse,
+        },
+        animation: {
+            scale: {
+                default: 1.0,
+                dark: 1.0
             },
-            fontSize: {
-                default: ms.fs.m,
-                dark: ms.fs.m,
+        },
+        typography: {
+            header: {
+                fontFamily: {
+                    default: fontsWarehouse.regular.fontFamily.default,
+                    dark: fontsWarehouse.regular.fontFamily.dark,
+                },
+                fontWeight: {
+                    default: 'bold',
+                    dark: 'bold'
+                },
             },
-        }
-    },
+            body: {
+                fontFamily: {
+                    default: fontsWarehouse.regular.fontFamily.default,
+                    dark: fontsWarehouse.regular.fontFamily.dark,
+                },
+            }
+        },
+    }
+    return themeWarehouse;
 }
 
 const isLeafParent = (obj: object) => {
@@ -167,7 +162,7 @@ export const getThemes = () => {
     let themes: TraversableNested = {};
     const themeNames = Object.values(EThemes) as TraversableNested
     themeNames.forEach((name: string) => {
-        themes[name] = extractThemesFromWarehouse(themeWarehouse, name)
+        themes[name] = extractThemesFromWarehouse(getThemeWareHouse(), name)
     })
     return themes;
 }

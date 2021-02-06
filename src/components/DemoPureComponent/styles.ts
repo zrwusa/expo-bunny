@@ -5,5 +5,10 @@ export const getStyles = (responsive: Responsive,ms?: Measure) => {
     const {iphoneX} = responsive;
     const {wp} = iphoneX
     return StyleSheet.create({
+        demoResponsive: {
+            width: wp(100),
+            height:wp(20),
+            backgroundColor: "yellow",
+        }
     });
 }

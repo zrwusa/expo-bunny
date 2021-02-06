@@ -1,5 +1,3 @@
-export * from "./DefaultTheme"
-export * from "./DarkTheme"
 export * from "./theming"
 export * from "./fonts"
 export * from "./shadow"

@@ -10,6 +10,7 @@ import {ScrollView} from "react-native";
 import getContainerStyles from "../../containers";
 import {WithResponsive, withResponsive} from "../../styles/responsive/withResponsive";
 import {WithMeasure, withMeasure} from "../../styles/utils/withMeasure";
+import {DemoPureComponent,DemoRegularComponent} from "../../components/DemoPureComponent";
 
 export type DemoCollectionProps = { title?: string }
     & WithTranslation & WithResponsive & WithMeasure
@@ -36,6 +37,18 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
                                      tipLabel={st(`tipLabel`)}
                                      goButtonTitle={st(`go`)}
                                      stopButtonTitle={st(`stop`)}/>
+                    </View>
+                    <View style={containerStyles.card}>
+                        <DemoRegularComponent title={st(`iAmRegular`)}
+                                              labelBeenRendered={st(`iHaveBeenRendered`)}
+                                              labelRenderedUnit={st(`renderedUnit`)}
+                        />
+                    </View>
+                    <View style={containerStyles.card}>
+                        <DemoPureComponent title={st(`iAmPure`)}
+                                           labelBeenRendered={st(`iHaveBeenRendered`)}
+                                           labelRenderedUnit={st(`renderedUnit`)}
+                        />
                     </View>
                     <View style={containerStyles.card}>
                         <DemoRequest title={st(`lbRequest`)} buttonTitle={st(`btnRequest`)}/>

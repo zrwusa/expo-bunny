@@ -6,9 +6,9 @@ import {useResponsive} from "../../styles/responsive";
 export const getStyles = () => {
     const {colors} = useTheme()
     const responsiveFromUE = useResponsive()
-    const measure = useMeasure()
+    const ms = useMeasure()
 
-    const {wp, hp} = responsiveFromUE.iphoneX
+    const {wp, hp} = responsiveFromUE.iphoneX;
     return StyleSheet.create({
         imageProgressive: {
             width: wp(370),

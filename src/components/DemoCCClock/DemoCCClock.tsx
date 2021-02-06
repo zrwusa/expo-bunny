@@ -1,15 +1,12 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {View, Text, ButtonTO, TextBtn} from "../base-ui";
-import {WithMeasure, withMeasure} from "../../styles/utils/withMeasure";
-import {getStyles} from "./styles";
-import {WithResponsive, withResponsive} from "../../styles/responsive/withResponsive";
+import {withResponsive, WithResponsive} from "../../styles/responsive/withResponsive";
 
 type Props = { title: string, goButtonTitle: string, stopButtonTitle: string, tipLabel: string }
-    & WithMeasure & WithResponsive
+    & WithResponsive
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
 
-class DemoCCClock extends Component<Props, States> {
-
+class DemoCCClock extends PureComponent<Props, States> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -41,10 +38,8 @@ class DemoCCClock extends Component<Props, States> {
     }
 
     render(): React.ReactNode {
-        const {tipLabel, goButtonTitle, stopButtonTitle, measure, responsive} = this.props;
-        const styles = getStyles(measure, responsive)
+        const {tipLabel, goButtonTitle, stopButtonTitle} = this.props;
         return (<View>
-            <View style={styles.demoMeasureAndResponsive}/>
             <Text>{this.props.title}</Text>
             <Text>{tipLabel}{this.state.time.toLocaleTimeString()}</Text>
             <ButtonTO onPress={this.go}><TextBtn>{goButtonTitle}</TextBtn></ButtonTO>
@@ -57,4 +52,5 @@ class DemoCCClock extends Component<Props, States> {
     }
 }
 
-export default withResponsive(withMeasure(DemoCCClock));
+// HOC to pass responsive
+export default withResponsive(DemoCCClock);

@@ -1,21 +1,21 @@
 import * as React from "react";
-import responsiveFromUE, {getResponsive} from "../utils";
-import {Responsive, ResponsiveProviderProps} from "../../types/styles";
+import {ResponsiveProviderProps} from "../../types/styles";
 import {Dimensions, ScaledSize} from "react-native";
-
-const ResponsiveContext = React.createContext<Responsive>(responsiveFromUE);
+import ResponsiveContext from "./responsiveContext";
+import getResponsive from "../utils/responsive";
+import _ from "lodash"
+import BunnyConstants from "../../utils/constants";
 
 function ResponsiveProvider(props: ResponsiveProviderProps): JSX.Element {
     const {children} = props;
-    const [dimensions] = React.useState(Dimensions.get('window'));
-    const [reCalculatedResponsiveFromUE, setReCalculatedResponsiveFromUE] = React.useState(responsiveFromUE)
+    const [reCalculatedResponsiveFromUE, setReCalculatedResponsiveFromUE] = React.useState(getResponsive())
     React.useEffect(() => {
-        const onDimensionsChange = ({window}: { window: ScaledSize }) => {
+        const onDimensionsChange = _.throttle(({window}: { window: ScaledSize }) => {
             setReCalculatedResponsiveFromUE(getResponsive())
-        };
+        },BunnyConstants.throttleWait);
         Dimensions.addEventListener('change', onDimensionsChange);
         return () => Dimensions.removeEventListener('change', onDimensionsChange);
-    }, [dimensions]);
+    }, []);
     return (
         <ResponsiveContext.Provider value={reCalculatedResponsiveFromUE}>
             {children}
@@ -23,4 +23,4 @@ function ResponsiveProvider(props: ResponsiveProviderProps): JSX.Element {
     );
 }
 
-export {ResponsiveProvider, ResponsiveContext};
+export {ResponsiveProvider};

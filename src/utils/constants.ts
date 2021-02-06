@@ -13,6 +13,7 @@ const BunnyConstants = {
     USER_PERSISTENCE_KEY: 'USER',
     dummyUser: {email: 'dummy@dummy.com', nickname: 'dummy nickname'},
     dummyAccessToken: 'access_token_dummy',
+    throttleWait:500,
     fnNoop: () => undefined,
     fooInterval: setInterval((): void => undefined, 0),
     fooTimeout: setTimeout((): void => undefined, 0),
