@@ -1,12 +1,21 @@
-import {useState, useEffect} from 'react';
-import {Dimensions, ScaledSize} from "react-native";
-import {Measure, Responsive} from "../../types/styles";
-import {useResponsive} from "../responsive";
-import _ from "lodash"
-import BunnyConstants from "../../utils/constants";
+import {widthPercentageToDP as wp2dp, heightPercentageToDP as hp2dp} from "./responsiveScreen";
+import bunnyConfig from "../../config.json";
+import {Dimension, Measure, Responsive} from "../../types/styles";
+import {TraversableNested} from "../../types/utils";
 
-export const getMeasure = (responsive: Responsive): Measure => {
-    const {wp} = responsive.iphoneX;
+const getSmartStyle = () => {
+    let responsive: TraversableNested = {}
+    Object.entries(bunnyConfig.UE.dimensions).forEach((dimension) => {
+        responsive[dimension[0]] = {
+            wp: (width: number) => {
+                return wp2dp((width / dimension[1]['width']));
+            }, hp: (height: number) => {
+                return hp2dp((height / dimension[1]['height']));
+            }
+        } as unknown as Dimension;
+    })
+    const _responsive = responsive as Responsive;
+    const {wp} = _responsive.iphoneX;
 
     const measureObj = {
         breakpoints: {
@@ -56,26 +65,21 @@ export const getMeasure = (responsive: Responsive): Measure => {
             xxl: wp(128),
         },
     };
-    return {
+    const _measure = {
         ...measureObj,
         bp: measureObj.breakpoints,
         sz: measureObj.sizes,
         sp: measureObj.spacings,
         fs: measureObj.fontSizes,
         br: measureObj.borderRadius
+    } as Measure;
+
+    return {
+        responsive: _responsive,
+        measure: _measure,
+        ms: _measure,
     }
 }
 
 
-export const useMeasure = () => {
-    const responsive = useResponsive();
-    const [measure, setMeasure] = useState(getMeasure(responsive));
-    useEffect(() => {
-        const onDimensionsChange = _.throttle(({window}: { window: ScaledSize }) => {
-            setMeasure(getMeasure(responsive))
-        }, BunnyConstants.throttleWait);
-        Dimensions.addEventListener('change', onDimensionsChange);
-        return () => Dimensions.removeEventListener('change', onDimensionsChange);
-    });
-    return measure;
-}
+export default getSmartStyle

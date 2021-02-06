@@ -11,6 +11,7 @@ import {useTranslation} from "react-i18next";
 import {View} from "../../components/base-ui";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
+import {useSmartStyle} from "../../styles/smart-style";
 
 export default function SettingsScreen() {
     const {t, i18n} = useTranslation();
@@ -18,7 +19,8 @@ export default function SettingsScreen() {
     const sysState = useSelector((rootState: RootState) => rootState.sysState)
     const dispatch = useDispatch()
     const {themeName, language} = sysState;
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <View style={containerStyles.screen}>

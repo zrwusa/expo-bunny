@@ -1,10 +1,9 @@
 import {StyleSheet} from "react-native";
-import {useResponsive} from "../../styles/responsive";
-import {useMeasure} from "../../styles/utils";
+import {useSmartStyle} from "../../styles/smart-style";
 
 export const getStyles = () => {
-    const responsive = useResponsive()
-    const ms = useMeasure();
+    const {ms, responsive} = useSmartStyle();
+
     const {wp} = responsive.iphoneX;
     return StyleSheet.create({
         demoShadow: {

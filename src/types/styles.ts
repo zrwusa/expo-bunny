@@ -4,10 +4,26 @@ import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-nat
 import {glyphMaterialCommunityCustomMap} from "../utils/helpers";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
+import {ScaledSize} from "react-native";
 
+export type ResponsiveEvent = {
+    addEventListener(
+        type: 'change',
+        handler: ({window, screen}: { window: ScaledSize; screen: ScaledSize }) => void,
+    ): void;
+    removeEventListener(
+        type: 'change',
+        handler: ({window, screen}: { window: ScaledSize; screen: ScaledSize }) => void,
+    ): void;
+}
 export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
 export type ResponsiveInstance = { wp: Function, hp: Function };
 export type Dimension = { width: number, height: number };
+export type SmartStyle = {
+    responsive: Responsive,
+    measure: Measure,
+    ms: Measure,
+}
 
 export type DimensionConfig = {
     "bunnyUI": Dimension,
@@ -21,6 +37,10 @@ export type DimensionConfig = {
 }
 
 export type ResponsiveProviderProps = {
+    children: ReactNode,
+};
+
+export type MeasureProviderProps = {
     children: ReactNode,
 };
 

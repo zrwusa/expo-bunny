@@ -3,6 +3,7 @@ import {View, Text} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
+import {useSmartStyle} from "../../styles/smart-style";
 // import {isServerSide} from "../../utils/utils";
 
 const DemoLazy100 = React.lazy(async () => {
@@ -22,7 +23,8 @@ const DemoLazy2000 = React.lazy(async () => {
 export const DemoSuspenseScreen = () => {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.DemoSuspense');
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <View style={[containerStyles.screen, containerStyles.centralized]}>

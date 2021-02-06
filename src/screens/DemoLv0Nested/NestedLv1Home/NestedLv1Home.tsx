@@ -6,6 +6,7 @@ import {DemoNestedLv1StackParam} from "../../../types/stacks";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../lang/short-t";
 import getContainerStyles from "../../../containers";
+import {useSmartStyle} from "../../../styles/smart-style";
 
 type NestedLv1HomeRouteProp = RouteProp<DemoNestedLv1StackParam, 'NestedLv1Home'>;
 type NestedLv1HomeNavigationProp = StackNavigationProp<DemoNestedLv1StackParam, 'NestedLv1Home'>;
@@ -14,7 +15,8 @@ export type NestedLv1HomeProps = { route: NestedLv1HomeRouteProp, navigation: Ne
 function NestedLv1HomeScreen({route, navigation}: NestedLv1HomeProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.NestedLv1Home');
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <View style={containerStyles.screen}>

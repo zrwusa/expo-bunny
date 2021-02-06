@@ -12,6 +12,7 @@ import {ScrollView} from "react-native";
 import {getStyles} from "./styles";
 import ImageProgressive from "../../components/base-ui/ImageProgressive";
 import getContainerStyles from "../../containers";
+import {useSmartStyle} from "../../styles/smart-style";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
@@ -23,7 +24,8 @@ function ProfileScreen({route, navigation}: Props) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.Profile');
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <ScrollView>

@@ -6,9 +6,11 @@ import {
 import {Text, Button, TextInput} from "../../../components/base-ui";
 import {keyboardAvoidingViewStyles} from "./styles";
 import getContainerStyles from "../../../containers";
+import {useSmartStyle} from "../../../styles/smart-style";
 
 const RNKeyboardAvoidingScreen: React.FC = () => {
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <KeyboardAvoidingView

@@ -4,6 +4,7 @@ import {Text} from "../../../components/base-ui";
 import {useTheme} from "../../../styles/theme";
 import {sectionListStyles} from "./styles";
 import getContainerStyles from "../../../containers";
+import {useSmartStyle} from "../../../styles/smart-style";
 
 function SectionListScreen() {
     const {colors} = useTheme()
@@ -40,7 +41,8 @@ function SectionListScreen() {
             <Text style={{fontSize: 24}}>{title}</Text>
         </View>
     );
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <SafeAreaView style={[containerStyles.screen, sectionListStyles.container]}>

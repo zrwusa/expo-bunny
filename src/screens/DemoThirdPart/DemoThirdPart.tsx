@@ -4,10 +4,9 @@ import {ButtonRNE, IconMC, View} from "../../components/base-ui";
 import {withTranslation, WithTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
-import {WithResponsive, withResponsive} from "../../styles/responsive/withResponsive";
-import {WithMeasure, withMeasure} from "../../styles/utils/withMeasure";
+import {withSmartStyle, WithSmartStyle} from "../../styles/smart-style";
 
-type Props = { title?: string } & WithTranslation & WithResponsive & WithMeasure;
+type Props = { title?: string } & WithTranslation & WithSmartStyle;
 type States = { name: string }
 
 class DemoThirdPartScreen extends Component<Props, States> {
@@ -16,7 +15,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
     }
 
     render(): React.ReactNode {
-        const {t, measure, responsive} = this.props;
+        const {t, smartStyle} = this.props;
         const st = stFactory(t, 'screens.DemoThirdPart');
         const list = [
             {
@@ -30,7 +29,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
                 subtitle: "Rios"
             },
         ];
-        const containerStyles = getContainerStyles(measure, responsive)
+        const containerStyles = getContainerStyles(smartStyle)
 
         return (
             <View style={containerStyles.screen}>
@@ -56,4 +55,4 @@ class DemoThirdPartScreen extends Component<Props, States> {
     }
 }
 
-export default withTranslation()(withResponsive(withMeasure(DemoThirdPartScreen)));
+export default withTranslation()(withSmartStyle(DemoThirdPartScreen));

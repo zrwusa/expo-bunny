@@ -1,11 +1,9 @@
 import {StyleSheet, Platform} from "react-native";
-import {useMeasure} from "../../../styles/utils";
-import {useResponsive} from "../../../styles/responsive";
+import {useSmartStyle} from "../../../styles/smart-style";
 
 
 export const getStyle = () => {
-    const ms = useMeasure();
-    const responsive = useResponsive();
+    const {ms, responsive} = useSmartStyle();
     const {wp, hp} = responsive.iphoneX;
     return StyleSheet.create({
         item: {

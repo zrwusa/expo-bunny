@@ -7,14 +7,13 @@ import styles from "./styles";
 import {withTranslation, WithTranslation} from 'react-i18next';
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
-import {WithMeasure, withMeasure} from "../../styles/utils/withMeasure";
-import {WithResponsive, withResponsive} from "../../styles/responsive/withResponsive";
+import {withSmartStyle, WithSmartStyle} from "../../styles/smart-style";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
 
 export type DemoRouteProps = { route: ProfileRouteProp; navigation: ProfileNavigationProp; }
-    & WithTranslation & WithResponsive & WithMeasure;
+    & WithTranslation & WithSmartStyle;
 
 class DemoRouteScreen extends Component<DemoRouteProps> {
     constructor(props: DemoRouteProps) {
@@ -23,9 +22,10 @@ class DemoRouteScreen extends Component<DemoRouteProps> {
 
     render(): React.ReactNode {
         const {id, isHuman, sort} = this.props.route.params;
-        const {t, measure, responsive} = this.props;
+        const {t, smartStyle} = this.props;
+        debugger
         const st = stFactory(t, 'screens.DemoRoute');
-        const containerStyles = getContainerStyles(measure, responsive)
+        const containerStyles = getContainerStyles(smartStyle)
 
         return (
             <View style={[containerStyles.screen, containerStyles.centralized]}>
@@ -42,4 +42,4 @@ class DemoRouteScreen extends Component<DemoRouteProps> {
     }
 }
 
-export default withTranslation()(withResponsive(withMeasure(DemoRouteScreen)));
+export default withTranslation()(withSmartStyle(DemoRouteScreen));

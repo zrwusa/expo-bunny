@@ -8,12 +8,11 @@ import {WithTranslation, withTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import {ScrollView} from "react-native";
 import getContainerStyles from "../../containers";
-import {WithResponsive, withResponsive} from "../../styles/responsive/withResponsive";
-import {WithMeasure, withMeasure} from "../../styles/utils/withMeasure";
-import {DemoPureComponent,DemoRegularComponent} from "../../components/DemoPureComponent";
+import {DemoPureComponent, DemoRegularComponent} from "../../components/DemoPureComponent";
+import {useSmartStyle, withSmartStyle, WithSmartStyle} from "../../styles/smart-style";
 
 export type DemoCollectionProps = { title?: string }
-    & WithTranslation & WithResponsive & WithMeasure
+    & WithTranslation & WithSmartStyle
 type States = { name: string }
 
 class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
@@ -22,9 +21,9 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
     }
 
     render(): React.ReactNode {
-        const {t, measure, responsive} = this.props;
+        const {t, smartStyle} = this.props;
         const st = stFactory(t, 'screens.DemoCollection');
-        const containerStyles = getContainerStyles(measure, responsive);
+        const containerStyles = getContainerStyles(smartStyle);
 
         return (
             <ScrollView>
@@ -65,4 +64,4 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
     }
 }
 
-export default withTranslation()(withResponsive(withMeasure(DemoCollectionScreen)))
+export default withTranslation()(withSmartStyle(DemoCollectionScreen))

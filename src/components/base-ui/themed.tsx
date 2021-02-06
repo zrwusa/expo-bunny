@@ -23,9 +23,10 @@ import React from "react";
 import styled, {ReactNativeThemedStyledFunction} from "styled-components/native";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
 import {IcoMoonProps, MaterialCommunityIconsProps} from "../../types/styles";
-import {getStyleObj, useMeasure} from "../../styles/utils";
+import {getStyleObj} from "../../styles/utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
 import {LinkProps} from "../../types/components";
+import {useSmartStyle} from "../../styles/smart-style";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -33,7 +34,7 @@ export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'i
 // try to use the theme to standardize the definition and use of properties
 export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {colors} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
     const styleObj = getStyleObj(style);
     return (<TouchableOpacityRN style={{
         backgroundColor: colors.primary,
@@ -50,7 +51,7 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...r
 export const Link: React.FC<LinkProps> = ({children, style, to, action, ...rest}) => {
     const {colors, fonts} = useTheme();
     const styleObj = getStyleObj(style);
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     return (<LinkReactNavigation style={{
         backgroundColor: colors.primary,
@@ -67,7 +68,7 @@ export const Link: React.FC<LinkProps> = ({children, style, to, action, ...rest}
 
 export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
     const styleObj = getStyleObj(style);
     return (<TextRN style={{
         color: colors.btnText,
@@ -81,7 +82,7 @@ export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
 
 export const View: React.FC<ViewProps> = ({children, ...rest}) => {
     const {} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     return (<ViewRN {...rest}>{children}</ViewRN>);
 }
@@ -89,7 +90,7 @@ export const View: React.FC<ViewProps> = ({children, ...rest}) => {
 export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useTheme();
     const styleObj = getStyleObj(style);
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     return (<TextRN style={{
         color: colors.text,
@@ -101,14 +102,14 @@ export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
 
 export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
     const {colors} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
     return (<ButtonRN color={color || colors.btnBg}
                       {...rest} />);
 }
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {colors} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     const styleObj = getStyleObj(style);
     return (<TouchableOpacityRN
@@ -120,7 +121,7 @@ export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, sty
 
 export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) => {
     const {colors} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     const styleObj = getStyleObj(style);
     return (<PressableRN
@@ -133,7 +134,7 @@ export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) 
 export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
     const {colors} = useTheme();
 
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     const styleObj = getStyleObj(style);
     return (<ImageRN
@@ -145,7 +146,7 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
 
 export const TextRNE: React.FC<TextElementProps> = ({children, style, ...rest}) => {
     const {colors} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     const styleObj = getStyleObj(style);
     return (<TextElement
@@ -160,7 +161,7 @@ export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, 
     const buttonStyleObj = getStyleObj(buttonStyle);
     const titleStyleObj = getStyleObj(titleStyle);
     const containerStyleObj = getStyleObj(containerStyle);
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     return (<ButtonElement
         buttonStyle={{
@@ -181,7 +182,7 @@ export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, 
 export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     const {colors} = useTheme();
     const styleObj = getStyleObj(style);
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     return (<TextInputRN
         style={{
@@ -194,7 +195,7 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
 
 export const IconMC: React.FC<MaterialCommunityIconsProps> = ({children, style, name, ...rest}) => {
     const {colors} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     const styleObj = getStyleObj(style);
     return (<MaterialCommunityIcons
@@ -209,7 +210,7 @@ export const IconMC: React.FC<MaterialCommunityIconsProps> = ({children, style, 
 
 export const IcoMoon: React.FC<IcoMoonProps> = ({children, style, name, size, color, ...rest}) => {
     const {colors} = useTheme();
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
 
     const styleObj = getStyleObj(style);
     return (<IconFromIcoMoon

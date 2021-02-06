@@ -6,13 +6,15 @@ import {ButtonRNE, Text, View} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
+import {useSmartStyle} from "../../styles/smart-style";
 
 const DemoFCReduxHookScreen: React.FC = () => {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.DemoFCReduxHook');
     const dispatch = useDispatch();
     const demoHelloState = useSelector((store: RootState) => store.demoHelloState);
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <View style={containerStyles.screen}>

@@ -2,9 +2,11 @@ import React from "react";
 import {SafeAreaView} from "react-native";
 import {Text} from "../../../components/base-ui";
 import getContainerStyles from "../../../containers";
+import {useSmartStyle} from "../../../styles/smart-style";
 
 const RNFlatListScreen: React.FC = () => {
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <SafeAreaView style={[containerStyles.screen, containerStyles.centralized]}>

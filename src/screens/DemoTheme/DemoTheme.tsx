@@ -6,12 +6,14 @@ import {stFactory} from "../../lang/short-t";
 import {getStyles} from "./styles";
 import BunnyConstants from "../../utils/constants";
 import getContainerStyles from "../../containers";
+import {useSmartStyle} from "../../styles/smart-style";
 
 const DemoThemeScreen = () => {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.DemoTheme');
     const styles = getStyles();
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <ScrollView contentContainerStyle={[containerStyles.centralized, {height: '100%'}]}>

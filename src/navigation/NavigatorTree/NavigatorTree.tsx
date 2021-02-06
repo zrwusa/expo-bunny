@@ -53,13 +53,12 @@ import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
 import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
 import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Settings";
 import ModalHomeScreen from "../../screens/DemoModal/ModalHome";
-import {useMeasure} from "../../styles/utils";
 import {useTheme} from "../../styles/theme";
 import DemoChatScreen from "../../screens/DemoChat";
 import {useReduxDevToolsExtension} from "@react-navigation/devtools";
-import {useResponsive} from "../../styles/responsive";
 import * as Linking from "expo-linking";
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
+import {useSmartStyle} from "../../styles/smart-style";
 
 export const basePath = Linking.makeUrl('/');
 
@@ -107,10 +106,9 @@ type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 }
 
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
-    const responsiveFromUE = useResponsive();
-    const ms = useMeasure();
+    const {ms, responsive} = useSmartStyle();
+    const {wp} = responsive.iphoneX;
     const {t} = useTranslation();
-    const {wp, hp} = responsiveFromUE.iphoneX;
     const customHeaderRight = () => {
         const sysState = useSelector((rootState: RootState) => rootState.sysState)
         const dispatch = useDispatch()
@@ -544,10 +542,13 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const navigationRef = React.useRef<NavigationContainerRef>(null);
 
     useReduxDevToolsExtension(navigationRef);
-    return <NavigationContainer documentTitle={{
-        formatter: (options, route) =>
-            `${options?.title ?? route?.name} - ${t('titleFormat')}`,
-    }} {...props} linking={linking} ref={navigationRef}>
+    return <NavigationContainer
+        documentTitle={{
+            formatter: (options, route) => `${options?.title ?? route?.name} - ${t('titleFormat')}`,
+        }}
+        {...props}
+        linking={linking}
+        ref={navigationRef}>
         <RecursiveNavigator node={node}/>
     </NavigationContainer>
 };

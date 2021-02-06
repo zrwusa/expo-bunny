@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
 import {View, Text, ButtonTO, TextBtn} from "../base-ui";
-import {withResponsive, WithResponsive} from "../../styles/responsive/withResponsive";
+import {WithSmartStyle, withSmartStyle} from "../../styles/smart-style";
 
 type Props = { title: string, goButtonTitle: string, stopButtonTitle: string, tipLabel: string }
-    & WithResponsive
+    & WithSmartStyle
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
 
 class DemoCCClock extends PureComponent<Props, States> {
@@ -52,5 +52,5 @@ class DemoCCClock extends PureComponent<Props, States> {
     }
 }
 
-// HOC to pass responsive
-export default withResponsive(DemoCCClock);
+// HOC to pass smartStyle
+export default withSmartStyle(DemoCCClock);

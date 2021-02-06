@@ -1,5 +1,8 @@
-import React from 'react';
-import {View, StyleSheet, Animated, ImageSourcePropType, StyleProp, ImageStyle, ImageResizeMode} from 'react-native';
+import React from "react";
+import {
+    View, StyleSheet, Animated, ImageSourcePropType,
+    StyleProp, ImageStyle, ImageResizeMode
+} from "react-native";
 
 const styles = StyleSheet.create({
     imageOverlay: {

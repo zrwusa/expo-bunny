@@ -1,11 +1,10 @@
 import {StyleSheet} from "react-native";
-import {pl, useMeasure} from "../styles/utils";
-import {Measure, Responsive} from "../types/styles";
-import {useResponsive} from "../styles/responsive";
+import {pl} from "../styles/utils";
+import {SmartStyle} from "../types/styles";
 
-const getContainerStyles = (measureParam?: Measure, responsiveParam?: Responsive) => {
-    const ms = measureParam || useMeasure();
-    const responsive = responsiveParam || useResponsive()
+const getContainerStyles = (smartStyle: SmartStyle) => {
+    debugger
+    const {ms} = smartStyle;
     return StyleSheet.create({
         card: {
             margin: ms.sp.l,

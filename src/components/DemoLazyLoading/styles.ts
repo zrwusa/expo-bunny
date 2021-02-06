@@ -1,9 +1,9 @@
 import {StyleSheet} from "react-native";
-import {useMeasure} from "../../styles/utils";
 import {pl} from "../../styles/utils";
+import {useSmartStyle} from "../../styles/smart-style";
 
 const getStyles = () => {
-    const ms = useMeasure();
+    const {ms} = useSmartStyle();
     return StyleSheet.create({
         container: {
             flex: 1,

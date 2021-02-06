@@ -9,6 +9,7 @@ import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
+import {useSmartStyle} from "../../styles/smart-style";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
@@ -35,7 +36,8 @@ class DemoThunkCCScreen extends React.Component<Props> {
         const {t} = this.props;
         const {text, id} = this.props;
         const st = stFactory(t, 'screens.DemoThunkCC');
-        const containerStyles = getContainerStyles()
+        const smartStyle = useSmartStyle();
+        const containerStyles = getContainerStyles(smartStyle);
 
         return (
             <View style={containerStyles.screen}>

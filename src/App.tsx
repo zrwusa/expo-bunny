@@ -21,7 +21,7 @@ import * as localization from "expo-localization";
 import {RequestProvider} from "./utils/requestHooks";
 import {loadAsync} from "expo-font";
 import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
-import {ResponsiveProvider} from "./styles/responsive";
+import {SmartStyleProvider} from "./styles/smart-style";
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
@@ -111,7 +111,7 @@ function App() {
             // Context or HOC(with*) or Hooks(use*)
             // Providers are Prepared for using the Context method to pass global props, the follow-up recommends HOCs, most recommend Hooks(explicitly dependencies vs HOCs) in the latest React version
             <AppearanceProvider>
-                <ResponsiveProvider>
+                <SmartStyleProvider>
                     <RequestProvider>
                         <ThemeProvider theme={theme}>
                             <PaperProvider theme={themePaper}>
@@ -126,12 +126,11 @@ function App() {
                                             JSON.stringify(state)
                                         )
                                     }
-
                                 />
                             </PaperProvider>
                         </ThemeProvider>
                     </RequestProvider>
-                </ResponsiveProvider>
+                </SmartStyleProvider>
             </AppearanceProvider>
         )
         : (<Preparing/>)

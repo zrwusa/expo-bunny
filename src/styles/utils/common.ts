@@ -1,7 +1,7 @@
 export function throttle(func: Function, limit: number): Function {
     let inThrottle: boolean;
 
-    return function(this: any): any {
+    return function (this: any): any {
         const args = arguments;
         const context = this;
 
@@ -25,6 +25,7 @@ export type Options = {
 
 export interface DebouncedFunction<F extends Procedure> {
     (this: ThisParameterType<F>, ...args: Parameters<F>): void;
+
     cancel: () => void;
 }
 

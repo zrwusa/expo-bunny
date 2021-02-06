@@ -2,9 +2,11 @@ import React from "react";
 import {FlatList, SafeAreaView, View, Text} from "react-native";
 import {flatListStyles} from "./styles";
 import getContainerStyles from "../../../containers";
+import {useSmartStyle} from "../../../styles/smart-style";
 
 const RNFlatListScreen: React.FC = () => {
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     type IFlatListItem = {
         id: string;

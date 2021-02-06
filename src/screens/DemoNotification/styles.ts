@@ -2,10 +2,10 @@ import {StyleSheet} from "react-native";
 import {pl} from "../../styles/utils";
 import {Measure, Responsive} from "../../types/styles";
 
-const getStyles = (measure:Measure,responsive:Responsive)=>{
+const getStyles = (measure: Measure, responsive: Responsive) => {
     const {wp, hp} = responsive.iphoneX;
     const ms = measure;
-    return  StyleSheet.create({
+    return StyleSheet.create({
         logo: {
             width: wp(305),
             height: wp(159),

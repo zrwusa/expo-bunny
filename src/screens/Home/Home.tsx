@@ -9,6 +9,7 @@ import {ButtonTO, TextBtn, Text, Link} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
+import {useSmartStyle} from "../../styles/smart-style";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -19,7 +20,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const st = stFactory(t, 'screens.Home');
     const dispatch = useDispatch();
     const linkTo = useLinkTo();
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <ScrollView>

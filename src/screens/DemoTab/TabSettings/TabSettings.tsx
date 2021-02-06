@@ -6,6 +6,7 @@ import {DemoTabStackParam} from "../../../types/stacks";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../lang/short-t";
 import getContainerStyles from "../../../containers";
+import {useSmartStyle} from "../../../styles/smart-style";
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;
@@ -14,7 +15,8 @@ export type TabSettingsProps = { route: TabSettingsRouteProp, navigation: TabSet
 function TabSettingsScreen({route, navigation}: TabSettingsProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.TabSettings');
-    const containerStyles = getContainerStyles()
+    const smartStyle = useSmartStyle();
+    const containerStyles = getContainerStyles(smartStyle);
 
     return (
         <View style={containerStyles.screen}>

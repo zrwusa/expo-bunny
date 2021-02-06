@@ -10,7 +10,7 @@ import bunnyConfig from "../config.json";
 //     "/user": { name: string; age: number; phone: string };
 //     "/seals": { seal: Seal[] };
 // }
-// const apiXXX = <URL extends keyof API>(url: URL): Promise<API[URL]> => {
+// const apiTODO = <URL extends keyof API>(url: URL): Promise<API[URL]> => {
 //     return fetch(url).then((res) => res.json());
 // };
 
