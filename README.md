@@ -51,7 +51,7 @@ yarn next dev
 
 
 ## Online Simples
-[Web online deployed stable](https://expo-react-bunny-o2i2acv6l.vercel.app)
+[Web online deployed stable](https://expo-react-bunny-r0lgewwmn.vercel.app)
 
 [Web online deployed latest](https://expo-react-bunny.vercel.app)
 
