@@ -1,28 +1,23 @@
 import {StyleSheet} from "react-native";
-import {useSmartStyle} from "../../styles/smart-style";
+import {useSizer} from "../../styles/sizer";
+import {useTheme} from "../../styles/theme";
 
 export const getStyles = () => {
-    const {ms, responsive} = useSmartStyle();
-
+    const {ms, responsive} = useSizer();
+    const {colors} = useTheme();
     const {wp} = responsive.iphoneX;
     return StyleSheet.create({
         demoShadow: {
-            width: wp(300),
-            height: wp(50),
+            width: wp(326),
+            height: wp(140),
             borderRadius: ms.br.s,
-            backgroundColor: "#fff",
-
-            elevation: wp(22),
+            backgroundColor: colors.background,
             justifyContent: "center",
             alignItems: "center",
-
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: wp(11),
-            },
-            shadowOpacity: 0.2,
-            shadowRadius: wp(14.78)
+        },
+        demoSurface:{
+            width: wp(326),
+            height: wp(140),
         }
     });
 }

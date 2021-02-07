@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {Switch} from 'react-native-paper';
 import {getStyle} from "./styles";
-import {View, Text} from "../../../components/base-ui"
+import {View, Text, SwitchP} from "../../../components/base-ui"
 
 export type SettingsItemProps = {
     label: string;
@@ -14,7 +13,7 @@ export default function SettingsItem({label, value, onValueChange}: SettingsItem
     return (
         <View style={styles.item}>
             <Text>{label}</Text>
-            <Switch value={value} onValueChange={onValueChange}/>
+            <SwitchP value={value} onValueChange={onValueChange}/>
         </View>
     );
 }

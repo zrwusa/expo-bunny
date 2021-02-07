@@ -62,7 +62,6 @@ export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void
             switch (loginResult.type) {
                 case "cancel":
                     result = dispatch(sysWarn({warn: "Google login canceled"}));
-                    debugger
                     break
                 case "success":
                     const {accessToken, user} = loginResult;

@@ -6,16 +6,18 @@ import {ButtonRNE, TextInput} from "../../components/base-ui";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
-import {useSmartStyle} from "../../styles/smart-style";
+import {useSizer} from "../../styles/sizer";
+import {useTheme} from "../../styles/theme";
 
 export const SignInScreen = () => {
     const dispatch = useDispatch();
     const {t} = useTranslation();
     const i18nPrefix = 'screens.SignIn';
     const st = stFactory(t, i18nPrefix);
-    const smartStyle = useSmartStyle();
+    const sizer = useSizer();
+    const theme = useTheme();
     return (
-        <View style={getContainerStyles(smartStyle).screen}>
+        <View style={getContainerStyles(sizer, theme).screen}>
             <TextInput placeholder={st(`username`)}/>
             <TextInput placeholder={st(`password`)} secureTextEntry/>
             <ButtonRNE onPress={() => {

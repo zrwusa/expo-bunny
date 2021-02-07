@@ -4,7 +4,7 @@ import {Text} from "../../../components/base-ui"
 import {virtualizedListStyles} from "./styles";
 import {useTheme} from "../../../styles/theme";
 import getContainerStyles from "../../../containers";
-import {useSmartStyle} from "../../../styles/smart-style";
+import {useSizer} from "../../../styles/sizer";
 
 type Item = {
     id: string;
@@ -41,8 +41,9 @@ const RNVirtualizedListScreen: React.FC = () => {
             </View>
         );
     }
-    const smartStyle = useSmartStyle();
-    const containerStyles = getContainerStyles(smartStyle);
+    const sizer = useSizer();
+    const theme = useTheme();
+    const containerStyles = getContainerStyles(sizer, theme);
 
     return (
         <SafeAreaView style={containerStyles.screen}>

@@ -13,7 +13,8 @@ import {
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../lang/short-t";
 import getContainerStyles from "../../../containers";
-import {useSmartStyle} from "../../../styles/smart-style";
+import {useSizer} from "../../../styles/sizer";
+import {useTheme} from "../../../styles/theme";
 
 const RNHome: React.FC = () => {
     const {t} = useTranslation();
@@ -33,8 +34,9 @@ const RNHome: React.FC = () => {
     const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
-    const smartStyle = useSmartStyle();
-    const containerStyles = getContainerStyles(smartStyle);
+    const sizer = useSizer();
+    const theme = useTheme();
+    const containerStyles = getContainerStyles(sizer, theme);
 
 
     const changeVisibilityStatusBar = () => {

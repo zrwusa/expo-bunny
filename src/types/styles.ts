@@ -19,7 +19,7 @@ export type ResponsiveEvent = {
 export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
 export type ResponsiveInstance = { wp: Function, hp: Function };
 export type Dimension = { width: number, height: number };
-export type SmartStyle = {
+export type Sizer = {
     responsive: Responsive,
     measure: Measure,
     ms: Measure,
@@ -60,20 +60,50 @@ export type Fonts = {
 
 export interface Colors {
     primary: string,
-    background: string,
-    surface: string,
-    accent: string,
-    error: string,
+    secondary: string,
+    btnText: string,
+    btnActive: string,
+    btnTextSecondary: string,
+    btnActiveSecondary: string,
+
+    title: string,
+    titleSecondary: string,
     text: string,
+    textSecondary: string,
+    caption: string,
+    captionSecondary: string,
+    paragraph: string,
+    paragraphSecondary: string,
+    border: string,
+    borderSecondary: string,
+    surface: string,
+    surfaceSecondary: string,
+    background: string,
+    backgroundSecondary: string,
+    accent: string,
+    accentSecondary: string,
+
+    error: string,
+    errorSecondary: string,
+    warn: string,
+    warnSecondary: string,
+    notification: string,
+    notificationSecondary: string,
+    info: string,
+    infoSecondary: string,
+
     onSurface: string,
+    onSurfaceSecondary: string,
     onBackground: string,
+    onBackgroundSecondary: string,
     disabled: string,
     placeholder: string,
     backdrop: string,
-    notification: string,
-    btnBg: string,
-    btnText: string,
+    backdropSecondary: string,
+
     transparent: string,
+    paper: string,
+    paperSecondary:string,
 }
 
 export interface Animation {
@@ -83,21 +113,13 @@ export interface Animation {
 export interface Theme {
     dark: boolean,
     mode?: Mode,
-    roundness: number,
     colors: Colors,
     fonts: Fonts,
-    animation: Animation,
-    typography: {
-        header: {
-            fontFamily: string,
-            fontWeight?: string,
-        },
-        body: {
-            fontFamily: string,
-            fontWeight?: string,
-        }
-    },
+    roundness?: number,
+    animation?: Animation,
 }
+
+export type WithTheme = { theme: Theme }
 
 export type FontConfigPlatform = {
     web: Fonts,
@@ -136,6 +158,7 @@ export type RouteIconFontConfig = {
     default: string,
     focused: string,
 }
+
 export type IcoMoonSelectionPreferences = {
     "showGlyphs": boolean,
     "showCodes": boolean,
@@ -218,6 +241,7 @@ export type Measure = {
         s12: string,
     },
     fontSizes: Size,
+    lineHeight: Size,
     borderRadius: Size,
     bp: {
         smallPhone: number,
@@ -240,6 +264,7 @@ export type Measure = {
     },
     sp: Size,
     fs: Size,
+    lh: Size,
     br: Size
 }
 export type Size = {

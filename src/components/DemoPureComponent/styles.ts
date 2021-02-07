@@ -1,11 +1,11 @@
 import {StyleSheet} from "react-native";
-import {SmartStyle} from "../../types/styles";
+import {Sizer} from "../../types/styles";
 
-export const getStyles = (smartStyle: SmartStyle) => {
-    const {iphoneX} = smartStyle.responsive;
+export const getStyles = (sizer: Sizer) => {
+    const {iphoneX} = sizer.responsive;
     const {wp} = iphoneX
     return StyleSheet.create({
-        demoResponsive: {
+        demoSizer: {
             width: wp(100),
             height: wp(20),
             backgroundColor: "yellow",

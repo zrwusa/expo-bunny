@@ -1,17 +1,21 @@
 import {StyleSheet} from "react-native";
-import {pl} from "../styles/utils";
-import {SmartStyle} from "../types/styles";
+import {Sizer, Theme} from "../types/styles";
+import getSmartStyles from "../styles/utils/smartStyles";
 
-const getContainerStyles = (smartStyle: SmartStyle) => {
-    debugger
-    const {ms} = smartStyle;
+const getContainerStyles = (sizer: Sizer, theme: Theme) => {
+    const smartStyles = getSmartStyles(sizer,theme);
+    const {ms} = sizer;
+    const {colors} = theme;
     return StyleSheet.create({
         card: {
             margin: ms.sp.l,
             padding: ms.sp.m,
-            borderColor: pl.grey500,
+            borderColor: colors.border,
             borderWidth: ms.sp.xxs,
             borderRadius: ms.br.s,
+        },
+        cardTitle: {
+            ...smartStyles.h3
         },
         screen: {
             flex: 1,
@@ -22,7 +26,7 @@ const getContainerStyles = (smartStyle: SmartStyle) => {
         centralized: {
             justifyContent: 'center',
             alignItems: 'center'
-        }
+        },
     });
 }
 export default getContainerStyles;

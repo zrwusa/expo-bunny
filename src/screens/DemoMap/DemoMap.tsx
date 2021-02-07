@@ -14,7 +14,9 @@ import {sysError} from "../../stores/sys/actions";
 import {getCardSize} from "./styles";
 import getContainerStyles from "../../containers";
 import getStyles from "./styles";
-import {WithSmartStyle, withSmartStyle} from "../../styles/smart-style";
+import {WithSizer, withSizer} from "../../styles/sizer";
+import {withTheme} from "../../styles/theme";
+import {WithTheme} from "../../types/styles";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -26,7 +28,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMap, void, Action>) => (
     sysError: (err: SysErrorPayload) => dispatch(sysError(err))
 });
 export type DemoMapProps = ReturnType<typeof mapDispatchToProps>
-    & ReturnType<typeof mapStateToProps> & BareProps & WithSmartStyle;
+    & ReturnType<typeof mapStateToProps> & BareProps & WithSizer & WithTheme;
 
 class DemoMapScreen extends Component<DemoMapProps> {
 
@@ -60,11 +62,11 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 
     async componentDidMount() {
-        const {smartStyle} = this.props;
-        const {responsive} = smartStyle;
+        const {sizer} = this.props;
+        const {responsive} = sizer;
         const {wp} = responsive.iphoneX;
         this.animation.addListener(({value}) => {
-            let index = Math.floor(value / getCardSize(smartStyle).width + wp(0.3)); // animate 30% away from landing on the next item
+            let index = Math.floor(value / getCardSize(sizer).width + wp(0.3)); // animate 30% away from landing on the next item
             if (index >= this.props.demoNearbyFilms.length) {
                 index = this.props.demoNearbyFilms.length - 1;
             }
@@ -107,12 +109,12 @@ class DemoMapScreen extends Component<DemoMapProps> {
 
 
     render(): React.ReactNode {
-        const {smartStyle} = this.props;
-        const {responsive} = smartStyle;
-        const containerStyles = getContainerStyles(smartStyle);
-        const styles = getStyles(smartStyle);
+        const {sizer, theme} = this.props;
+        const {responsive} = sizer;
+        const containerStyles = getContainerStyles(sizer, theme);
+        const styles = getStyles(sizer);
         const {wp} = responsive.iphoneX;
-        const {width} = getCardSize(smartStyle)
+        const {width} = getCardSize(sizer)
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {
             const inputRange = [
                 (index - 1) * width,
@@ -194,4 +196,4 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withSmartStyle(DemoMapScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(withSizer(withTheme(DemoMapScreen)));

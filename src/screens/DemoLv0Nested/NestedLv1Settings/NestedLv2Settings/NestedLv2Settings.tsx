@@ -6,7 +6,8 @@ import {DemoNestedLv2StackParam} from "../../../../types/stacks";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../../lang/short-t";
 import getContainerStyles from "../../../../containers";
-import {useSmartStyle} from "../../../../styles/smart-style";
+import {useSizer} from "../../../../styles/sizer";
+import {useTheme} from "../../../../styles/theme";
 
 type NestedLv2SettingsRouteProp = RouteProp<DemoNestedLv2StackParam, 'NestedLv2Settings'>;
 type NestedLv2SettingsNavigationProp = StackNavigationProp<DemoNestedLv2StackParam, 'NestedLv2Settings'>;
@@ -15,8 +16,9 @@ export type NestedLv2SettingsProps = { route: NestedLv2SettingsRouteProp, naviga
 function NestedLv2SettingsScreen({route, navigation}: NestedLv2SettingsProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.NestedLv2Settings');
-    const smartStyle = useSmartStyle();
-    const containerStyles = getContainerStyles(smartStyle);
+    const sizer = useSizer();
+    const theme = useTheme();
+    const containerStyles = getContainerStyles(sizer, theme);
 
     return (
         <View style={containerStyles.screen}>

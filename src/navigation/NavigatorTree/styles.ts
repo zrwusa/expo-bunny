@@ -1,8 +1,8 @@
 import {Platform, StyleSheet} from "react-native";
-import {useSmartStyle} from "../../styles/smart-style";
+import {useSizer} from "../../styles/sizer";
 
 export const getStyles = () => {
-    const {measure, responsive} = useSmartStyle();
+    const {measure, responsive} = useSizer();
     const {wp} = responsive.iphoneX;
     return StyleSheet.create({
         headerBackImage: {

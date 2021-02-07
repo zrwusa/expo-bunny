@@ -7,7 +7,8 @@ import {stFactory} from "../../../lang/short-t";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types/stacks";
 import getContainerStyles from "../../../containers";
-import {useSmartStyle} from "../../../styles/smart-style";
+import {useSizer} from "../../../styles/sizer";
+import {useTheme} from "../../../styles/theme";
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;
@@ -16,8 +17,9 @@ export type ModalHomeProps = { route: ModalHomeRouteProp; navigation: ModalHomeN
 function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.ModalHome');
-    const smartStyle = useSmartStyle();
-    const containerStyles = getContainerStyles(smartStyle);
+    const sizer = useSizer();
+    const theme = useTheme();
+    const containerStyles = getContainerStyles(sizer, theme);
 
     return (
         <ScrollView>

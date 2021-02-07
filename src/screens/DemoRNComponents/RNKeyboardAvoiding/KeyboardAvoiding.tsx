@@ -6,11 +6,13 @@ import {
 import {Text, Button, TextInput} from "../../../components/base-ui";
 import {keyboardAvoidingViewStyles} from "./styles";
 import getContainerStyles from "../../../containers";
-import {useSmartStyle} from "../../../styles/smart-style";
+import {useSizer} from "../../../styles/sizer";
+import {useTheme} from "../../../styles/theme";
 
 const RNKeyboardAvoidingScreen: React.FC = () => {
-    const smartStyle = useSmartStyle();
-    const containerStyles = getContainerStyles(smartStyle);
+    const sizer = useSizer();
+    const theme = useTheme();
+    const containerStyles = getContainerStyles(sizer, theme);
 
     return (
         <KeyboardAvoidingView

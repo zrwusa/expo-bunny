@@ -3,7 +3,7 @@ import bunnyConfig from "../../config.json";
 import {Dimension, Measure, Responsive} from "../../types/styles";
 import {TraversableNested} from "../../types/utils";
 
-const getSmartStyle = () => {
+const getSizer = () => {
     let responsive: TraversableNested = {}
     Object.entries(bunnyConfig.UE.dimensions).forEach((dimension) => {
         responsive[dimension[0]] = {
@@ -55,6 +55,15 @@ const getSmartStyle = () => {
             xl: wp(24),
             xxl: wp(32),
         },
+        lineHeight: {
+            xxs: wp(16),
+            xs: wp(18),
+            s: wp(20),
+            m: wp(22),
+            l: wp(24),
+            xl: wp(30),
+            xxl: wp(38),
+        },
         borderRadius: {
             xxs: wp(2),
             xs: wp(4),
@@ -71,6 +80,7 @@ const getSmartStyle = () => {
         sz: measureObj.sizes,
         sp: measureObj.spacings,
         fs: measureObj.fontSizes,
+        lh: measureObj.lineHeight,
         br: measureObj.borderRadius
     } as Measure;
 
@@ -82,4 +92,4 @@ const getSmartStyle = () => {
 }
 
 
-export default getSmartStyle
+export default getSizer

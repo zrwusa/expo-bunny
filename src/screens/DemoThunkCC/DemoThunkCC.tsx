@@ -1,5 +1,5 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from "react";
+import {connect} from "react-redux";
 import {ButtonRNE, Text, View} from "../../components/base-ui";
 import {demoThunk} from "../../stores/demo-thunk/actions";
 import {DemoThunk, RootState} from "../../types/models";
@@ -9,13 +9,17 @@ import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
-import {useSmartStyle} from "../../styles/smart-style";
+import {WithSizer, withSizer} from "../../styles/sizer";
+import {withTheme} from "../../styles/theme";
+import {WithTheme} from "../../types/styles";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
     demoThunk: async (data: DemoThunkPayload) => dispatch(demoThunk(data)),
 });
-type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps> & WithTranslation ;
+type Props = ReturnType<typeof mapStateToProps>
+    & ReturnType<typeof mapDispatchToProps> & WithTranslation
+    & WithTheme & WithSizer;
 
 class DemoThunkCCScreen extends React.Component<Props> {
     constructor(props: Props) {
@@ -33,11 +37,10 @@ class DemoThunkCCScreen extends React.Component<Props> {
     }
 
     render(): React.ReactNode {
-        const {t} = this.props;
-        const {text, id} = this.props;
+        const {t, sizer} = this.props;
+        const {text, id, theme} = this.props;
         const st = stFactory(t, 'screens.DemoThunkCC');
-        const smartStyle = useSmartStyle();
-        const containerStyles = getContainerStyles(smartStyle);
+        const containerStyles = getContainerStyles(sizer, theme);
 
         return (
             <View style={containerStyles.screen}>
@@ -51,4 +54,4 @@ class DemoThunkCCScreen extends React.Component<Props> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(DemoThunkCCScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withTheme(withSizer(DemoThunkCCScreen))));

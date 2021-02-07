@@ -2,11 +2,13 @@ import React from "react";
 import {FlatList, SafeAreaView, View, Text} from "react-native";
 import {flatListStyles} from "./styles";
 import getContainerStyles from "../../../containers";
-import {useSmartStyle} from "../../../styles/smart-style";
+import {useSizer} from "../../../styles/sizer";
+import {useTheme} from "../../../styles/theme";
 
 const RNFlatListScreen: React.FC = () => {
-    const smartStyle = useSmartStyle();
-    const containerStyles = getContainerStyles(smartStyle);
+    const sizer = useSizer();
+    const theme = useTheme();
+    const containerStyles = getContainerStyles(sizer, theme);
 
     type IFlatListItem = {
         id: string;

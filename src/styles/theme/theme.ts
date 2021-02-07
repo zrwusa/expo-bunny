@@ -11,58 +11,144 @@ export const getThemeWareHouse = () => {
             default: false,
             dark: true
         },
-        roundness: {
-            default: 4,
-            dark: 4,
-        },
-        mode: {
-            default: '',
-            dark: 'adaptive'
-        },
         colors: {
             primary: {
                 default: pl.teal400,
                 dark: pl.orange800,
             },
-            accent: {
-                default: pl.blue400,
-                dark: pl.tealA700
+            secondary: {
+                default: pl.teal200,
+                dark: pl.orange600
             },
-            background: {
-                default: pl.grey200,
-                dark: pl.black900
-            },
-            surface: {
+            btnText: {
                 default: pl.white,
-                dark: pl.black900
+                dark: pl.orange50,
             },
-            error: {
-                default: pl.red600,
-                dark: pl.pink300
+            btnActive: {
+                default: pl.lightBlue100,
+                dark: pl.lightBlue100
+            },
+            btnTextSecondary: {
+                default: pl.red100,
+                dark: pl.indigo100
+            },
+            btnActiveSecondary: {
+                default: pl.lightBlue600,
+                dark: pl.deepPurple700
+            },
+            title: {
+                default: pl.grey800,
+                dark: pl.white
+            },
+            titleSecondary: {
+                default: pl.grey700,
+                dark: pl.grey300
             },
             text: {
                 default: pl.black,
                 dark: pl.white
             },
+            textSecondary: {
+                default: pl.grey800,
+                dark: pl.grey600
+            },
+            caption: {
+                default: pl.grey900,
+                dark: pl.grey500
+            },
+            captionSecondary: {
+                default: pl.grey800,
+                dark: pl.grey600
+            },
+            paragraph: {
+                default: pl.grey900,
+                dark: pl.grey200
+            },
+            paragraphSecondary: {
+                default: pl.grey700,
+                dark: pl.grey400
+            },
+            border: {
+                default: pl.grey500,
+                dark: pl.orange900
+            },
+            borderSecondary: {
+                default: pl.grey600,
+                dark: pl.amber500
+            },
+            surface: {
+                default: pl.grey50,
+                dark: pl.grey800
+            },
+            surfaceSecondary: {
+                default: pl.grey100,
+                dark: pl.grey900
+            },
+            background: {
+                default: pl.grey200,
+                dark: pl.black900
+            },
+            backgroundSecondary: {
+                default: pl.grey100,
+                dark: pl.grey800
+            },
+            accent: {
+                default: pl.blue400,
+                dark: pl.tealA700
+            },
+            accentSecondary: {
+                default: pl.blue300,
+                dark: pl.teal600
+            },
+
+            error: {
+                default: pl.red600,
+                dark: pl.pink300
+            },
+            errorSecondary: {
+                default: pl.red500,
+                dark: pl.pink200
+            },
+            warn: {
+                default: pl.yellow700,
+                dark: pl.yellow900
+            },
+            warnSecondary: {
+                default: pl.yellow600,
+                dark: pl.yellow800
+            },
             notification: {
                 default: pl.pinkA400,
                 dark: pl.pinkA100,
             },
-            transparent: {
-                default: pl.transparent,
-                dark: pl.transparent,
+            notificationSecondary: {
+                default: pl.pinkA200,
+                dark: pl.pinkA400,
+            },
+            info: {
+                default: pl.blue300,
+                dark: pl.blue500,
+            },
+            infoSecondary: {
+                default: pl.blue200,
+                dark: pl.blue400,
+            },
+
+            onSurface: {
+                default: pl.black,
+                dark: pl.white
+            },
+            onSurfaceSecondary: {
+                default: pl.black,
+                dark: pl.white
             },
             onBackground: {
                 default: pl.black,
                 dark: pl.white
             },
-            onSurface: {
+            onBackgroundSecondary: {
                 default: pl.black,
                 dark: pl.white
-            },
-            backdrop: {
-                default: color(pl.black).alpha(0.5).rgb().string(),
-                dark: color(pl.black).alpha(0.5).rgb().string(),
             },
             disabled: {
                 default: color(pl.black).alpha(0.26).rgb().string(),
@@ -72,43 +158,29 @@ export const getThemeWareHouse = () => {
                 default: color(pl.black).alpha(0.54).rgb().string(),
                 dark: color(pl.white).alpha(0.54).rgb().string(),
             },
-
-
-            btnText: {
-                default: pl.white,
-                dark: pl.white,
+            backdrop: {
+                default: color(pl.black).alpha(0.5).rgb().string(),
+                dark: color(pl.black).alpha(0.5).rgb().string(),
             },
-            btnBg: {
-                default: pl.teal400,
-                dark: pl.orange800,
+            backdropSecondary: {
+                default: color(pl.black).alpha(0.5).rgb().string(),
+                dark: color(pl.black).alpha(0.5).rgb().string(),
+            },
+            transparent: {
+                default: pl.transparent,
+                dark: pl.transparent,
+            },
+            paper: {
+                default: pl.yellow50,
+                dark: pl.amber50
+            },
+            paperSecondary: {
+                default: pl.lightGreen50,
+                dark: pl.green50
             },
         },
         fonts: {
             ...fontsWarehouse,
-        },
-        animation: {
-            scale: {
-                default: 1.0,
-                dark: 1.0
-            },
-        },
-        typography: {
-            header: {
-                fontFamily: {
-                    default: fontsWarehouse.regular.fontFamily.default,
-                    dark: fontsWarehouse.regular.fontFamily.dark,
-                },
-                fontWeight: {
-                    default: 'bold',
-                    dark: 'bold'
-                },
-            },
-            body: {
-                fontFamily: {
-                    default: fontsWarehouse.regular.fontFamily.default,
-                    dark: fontsWarehouse.regular.fontFamily.dark,
-                },
-            }
         },
     }
     return themeWarehouse;

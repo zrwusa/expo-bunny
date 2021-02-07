@@ -7,13 +7,16 @@ import styles from "./styles";
 import {withTranslation, WithTranslation} from 'react-i18next';
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
-import {withSmartStyle, WithSmartStyle} from "../../styles/smart-style";
+import {withSizer, WithSizer} from "../../styles/sizer";
+import {WithTheme} from "../../types/styles";
+import {withTheme} from "../../styles/theme";
+import getSmartStyles from "../../styles/utils/smartStyles";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
 
 export type DemoRouteProps = { route: ProfileRouteProp; navigation: ProfileNavigationProp; }
-    & WithTranslation & WithSmartStyle;
+    & WithTranslation & WithSizer & WithTheme;
 
 class DemoRouteScreen extends Component<DemoRouteProps> {
     constructor(props: DemoRouteProps) {
@@ -22,24 +25,25 @@ class DemoRouteScreen extends Component<DemoRouteProps> {
 
     render(): React.ReactNode {
         const {id, isHuman, sort} = this.props.route.params;
-        const {t, smartStyle} = this.props;
-        debugger
+        const {t, sizer, theme} = this.props;
         const st = stFactory(t, 'screens.DemoRoute');
-        const containerStyles = getContainerStyles(smartStyle)
-
+        const containerStyles = getContainerStyles(sizer, theme)
+        const smartStyles = getSmartStyles(sizer, theme);
         return (
             <View style={[containerStyles.screen, containerStyles.centralized]}>
                 <View style={styles.wrap}>
-                    <Text>{st(`paramId`)}{id}</Text>
-                    <Text>{st(`typeofId`)}{typeof id}</Text>
-                    <Text>{st(`paramIsHuman`)}{isHuman.toString()}</Text>
-                    <Text>{st(`typeofIsHuman`)}{typeof isHuman}</Text>
-                    <Text>{st(`paramSort`)}{sort}</Text>
-                    <Text>{st(`typeofSort`)}{typeof sort}</Text>
+                    <Text style={smartStyles.paragraph}>
+                        {st(`paramId`)}{id}{'\n'}
+                        {st(`typeofId`)}{typeof id}{'\n'}
+                        {st(`paramIsHuman`)}{isHuman.toString()}{'\n'}
+                        {st(`typeofIsHuman`)}{typeof isHuman}{'\n'}
+                        {st(`paramSort`)}{sort}{'\n'}
+                        {st(`typeofSort`)}{typeof sort}{'\n'}
+                    </Text>
                 </View>
             </View>
         );
     }
 }
 
-export default withTranslation()(withSmartStyle(DemoRouteScreen));
+export default withTranslation()(withSizer(withTheme(DemoRouteScreen)));

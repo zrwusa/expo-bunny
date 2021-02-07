@@ -1,10 +1,10 @@
 import {StyleSheet} from "react-native";
 import {useTheme} from "../../styles/theme"
-import {useSmartStyle} from "../../styles/smart-style";
+import {useSizer} from "../../styles/sizer";
 
 export const getStyles = () => {
     const {colors} = useTheme()
-    const {ms, responsive} = useSmartStyle();
+    const {ms, responsive} = useSizer();
     const {wp, hp} = responsive.iphoneX;
     return StyleSheet.create({
         imageProgressive: {

@@ -58,46 +58,12 @@ import DemoChatScreen from "../../screens/DemoChat";
 import {useReduxDevToolsExtension} from "@react-navigation/devtools";
 import * as Linking from "expo-linking";
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
-import {useSmartStyle} from "../../styles/smart-style";
+import {useSizer} from "../../styles/sizer";
 
 export const basePath = Linking.makeUrl('/');
 
-const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
-    const {t} = useTranslation();
-    const {stack} = node;
-    const Navigator = stack?.Navigator;
-    const props = navigatorPropsExtract(node);
-    const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
-    const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
-    return Navigator
-        ? <Navigator {...props}>
-            {authState && authState.accessToken === undefined
-                ? <ScreenComponent component={SignInScreen} name="SignIn" options={{
-                    title: t(`screens.SignIn.title`)
-                }}/>
-                : <>
-                    {node.childrenNode && node.childrenNode.map((childScreen) => {
-                        return <ScreenComponent {...childScreen}
-                                                options={{
-                                                    ...childScreen.options,
-                                                    title: t(`screens.${childScreen.name}.title`)
-                                                }} key={childScreen.name}>
-                            {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
-                                ?
-                                (navProps: any) => {
-                                    return <RecursiveNavigator {...navProps} node={childScreen}/>
-                                }
-                                : null
-                            }
-                        </ScreenComponent>
-                    })}
-                </>
-            }
-        </Navigator>
-        : null;
-}
 
-type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
+export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
     theme?: Theme | undefined;
     linking?: LinkingOptions | undefined;
     fallback?: React.ReactNode;
@@ -106,9 +72,10 @@ type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 }
 
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
-    const {ms, responsive} = useSmartStyle();
+    const {ms, responsive} = useSizer();
     const {wp} = responsive.iphoneX;
     const {t} = useTranslation();
+
     const customHeaderRight = () => {
         const sysState = useSelector((rootState: RootState) => rootState.sysState)
         const dispatch = useDispatch()
@@ -552,5 +519,40 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         <RecursiveNavigator node={node}/>
     </NavigationContainer>
 };
+
+const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
+    const {t} = useTranslation();
+    const {stack} = node;
+    const Navigator = stack?.Navigator;
+    const props = navigatorPropsExtract(node);
+    const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
+    const authState = (node.name === "RootStack") ? useSelector((store: RootState) => store.authState) : null;
+    return Navigator
+        ? <Navigator {...props}>
+            {authState && authState.accessToken === undefined
+                ? <ScreenComponent component={SignInScreen} name="SignIn" options={{
+                    title: t(`screens.SignIn.title`)
+                }}/>
+                : <>
+                    {node.childrenNode && node.childrenNode.map((childScreen) => {
+                        return <ScreenComponent {...childScreen}
+                                                options={{
+                                                    ...childScreen.options,
+                                                    title: t(`screens.${childScreen.name}.title`)
+                                                }} key={childScreen.name}>
+                            {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
+                                ?
+                                (navProps: any) => {
+                                    return <RecursiveNavigator {...navProps} node={childScreen}/>
+                                }
+                                : null
+                            }
+                        </ScreenComponent>
+                    })}
+                </>
+            }
+        </Navigator>
+        : null;
+}
 
 export default NavigatorTree;

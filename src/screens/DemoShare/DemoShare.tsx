@@ -9,7 +9,8 @@ import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
-import {useSmartStyle} from "../../styles/smart-style";
+import {useSizer} from "../../styles/sizer";
+import {useTheme} from "../../styles/theme";
 
 type SelectedImage = {
     localUri: string
@@ -63,8 +64,9 @@ function DemoShareScreen() {
         await Sharing.shareAsync(selectedImage.localUri);
         setSelectedImage({localUri: ''});
     };
-    const smartStyle = useSmartStyle();
-    const containerStyles = getContainerStyles(smartStyle);
+    const sizer = useSizer();
+    const theme = useTheme();
+    const containerStyles = getContainerStyles(sizer, theme);
 
 
     return (

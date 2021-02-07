@@ -4,9 +4,11 @@ import {ButtonRNE, IconMC, View} from "../../components/base-ui";
 import {withTranslation, WithTranslation} from "react-i18next";
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
-import {withSmartStyle, WithSmartStyle} from "../../styles/smart-style";
+import {withSizer, WithSizer} from "../../styles/sizer";
+import {withTheme} from "../../styles/theme";
+import {WithTheme} from "../../types/styles";
 
-type Props = { title?: string } & WithTranslation & WithSmartStyle;
+type Props = { title?: string } & WithTranslation & WithSizer & WithTheme;
 type States = { name: string }
 
 class DemoThirdPartScreen extends Component<Props, States> {
@@ -15,7 +17,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
     }
 
     render(): React.ReactNode {
-        const {t, smartStyle} = this.props;
+        const {t, sizer, theme} = this.props;
         const st = stFactory(t, 'screens.DemoThirdPart');
         const list = [
             {
@@ -29,7 +31,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
                 subtitle: "Rios"
             },
         ];
-        const containerStyles = getContainerStyles(smartStyle)
+        const containerStyles = getContainerStyles(sizer, theme)
 
         return (
             <View style={containerStyles.screen}>
@@ -55,4 +57,4 @@ class DemoThirdPartScreen extends Component<Props, States> {
     }
 }
 
-export default withTranslation()(withSmartStyle(DemoThirdPartScreen));
+export default withTranslation()(withSizer(withTheme(DemoThirdPartScreen)));

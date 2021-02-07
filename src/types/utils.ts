@@ -66,7 +66,7 @@ export type DeepLeavesWrap<T, U> = T extends { [key: string]: any } ? { [P in ke
         : T extends boolean ? { [M in keyof U]: boolean }
             : T extends string ? { [M in keyof U]: string }
                 // Todo : T extends (infer F) ? { [M in keyof U]: F}
-                : { [M in keyof U]: T }
+                : { [M in keyof U]: T };
 
 export type Traversable = {
     [key: string]: any

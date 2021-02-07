@@ -9,10 +9,12 @@ import {stFactory} from "../../lang/short-t";
 import {ScrollView} from "react-native";
 import getContainerStyles from "../../containers";
 import {DemoPureComponent, DemoRegularComponent} from "../../components/DemoPureComponent";
-import {useSmartStyle, withSmartStyle, WithSmartStyle} from "../../styles/smart-style";
+import {withSizer, WithSizer} from "../../styles/sizer";
+import {withTheme} from "../../styles/theme";
+import {WithTheme} from "../../types/styles";
 
 export type DemoCollectionProps = { title?: string }
-    & WithTranslation & WithSmartStyle
+    & WithTranslation & WithSizer & WithTheme
 type States = { name: string }
 
 class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
@@ -21,9 +23,9 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
     }
 
     render(): React.ReactNode {
-        const {t, smartStyle} = this.props;
+        const {t, sizer, theme} = this.props;
         const st = stFactory(t, 'screens.DemoCollection');
-        const containerStyles = getContainerStyles(smartStyle);
+        const containerStyles = getContainerStyles(sizer, theme);
 
         return (
             <ScrollView>
@@ -64,4 +66,4 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
     }
 }
 
-export default withTranslation()(withSmartStyle(DemoCollectionScreen))
+export default withTranslation()(withSizer(withTheme(DemoCollectionScreen)))

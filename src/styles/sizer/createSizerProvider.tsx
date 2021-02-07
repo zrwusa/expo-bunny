@@ -1,28 +1,28 @@
 import * as React from "react";
 import {MeasureProviderProps} from "../../types/styles";
-import {Dimensions, ScaledSize} from "react-native";
+import {Dimensions} from "react-native";
 import _ from "lodash"
 import BunnyConstants from "../../utils/constants";
 import {useEffect, useState} from "react";
-import getSmartStyle from "../utils/smartStyle";
-import SmartStyleContext from "./SmartStyleContent";
+import getSizer from "../utils/sizer";
+import SizerContext from "./SizerContent";
 
-function SmartStyleProvider(props: MeasureProviderProps): JSX.Element {
+function SizerProvider(props: MeasureProviderProps): JSX.Element {
     const {children} = props;
-    const [smartStyle, setSmartStyle] = useState(getSmartStyle());
+    const [sizer, setSizer] = useState(getSizer());
 
     useEffect(() => {
         const onDimensionsChange = _.throttle(() => {
-            setSmartStyle(getSmartStyle())
+            setSizer(getSizer())
         }, BunnyConstants.throttleWait);
         Dimensions.addEventListener('change', onDimensionsChange);
         return () => Dimensions.removeEventListener('change', onDimensionsChange);
     });
     return (
-        <SmartStyleContext.Provider value={smartStyle}>
+        <SizerContext.Provider value={sizer}>
             {children}
-        </SmartStyleContext.Provider>
+        </SizerContext.Provider>
     );
 }
 
-export {SmartStyleProvider};
+export {SizerProvider};
