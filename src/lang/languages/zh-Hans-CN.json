@@ -14,7 +14,7 @@
       "system": "系统",
       "profile": "我的",
       "demoModal": "模态框",
-      "route": "路由",
+      "route": "路由参数",
       "tab": "底部导航",
       "drawer": "抽屉导航",
       "nestedNavigation": "《嵌套-Lv0-首页》（默认到《嵌套-Lv1-首页》）",
@@ -65,7 +65,7 @@
       "tipLabel": "当前时间: "
     },
     "DemoRoute": {
-      "title": "样例-路由",
+      "title": "样例-路由参数",
       "paramId": "参数id: ",
       "typeofId": "参数id类型: ",
       "paramIsHuman": "参数isHuman: ",
@@ -211,7 +211,21 @@
       "title": "样例-主题",
       "btnCustom": "RN按钮",
       "btnFromPaper": "RNE按钮",
-      "demoShadow": "阴影样式，兼容安卓"
+      "demoShadow": "阴影样式，兼容安卓",
+      "demoButton": "按钮",
+      "demoButtonSec": "按钮（次要）",
+      "demoButtonDisabled": "按钮（未启用）",
+      "demoButtonThemedRNE": "来自RNE的带有主题功能的按钮",
+      "demoText": "文本",
+      "demoTextSec": "文本（次要）",
+      "demoTitle": "标题",
+      "demoTitleSec": "标题（次要）",
+      "demoCaption": "字幕",
+      "demoCaptionSec": "字幕（次要）",
+      "demoParagraph": "段落",
+      "demoParagraphSec": "段落（次要）",
+      "demoSurface": "表面",
+      "demoSurfaceSec": "表面（次要）"
     }
   },
   "CFBundleDisplayName": "ExpoReact兔子",

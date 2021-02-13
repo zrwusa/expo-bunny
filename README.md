@@ -1,7 +1,13 @@
 # expo-react-bunny
-React Native,Typescript,Redux,Mock server,JWT Auth,Google Auth,Expo,React Navigation,Next.js for deploying
-Write once run everywhere,iOS Android Web
 I know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal!
+
+# Tech Stack
+- React Native,
+- Typescript,
+- Redux,
+- Expo,
+- Next.js for deploying
+
 
 <table>
 <thead><tr><th>Feature</th><th>Desc</th></tr></thead>
@@ -23,7 +29,10 @@ I know you don't want a complicated project, what you want is a collection of sa
 </tbody>
 </table>
 
-
+                            1.Don’t repeat yourself (DRY)
+                            2.Do one thing (DOT) (from Unix philosophy)
+                            3.Separation of concerns
+                            4.The principle of least knowledge (Law of Demeter)
 
 ## Installation
 ### For Expo
@@ -51,12 +60,13 @@ yarn next dev
 
 
 ## Online Simples
-[Web online deployed stable](https://expo-react-bunny-r0lgewwmn.vercel.app)
+[Expo online deployed stable](https://expo.io/@zrwusa/projects/expo-react-bunny)
 
-[Web online deployed latest](https://expo-react-bunny.vercel.app)
+[Web Next.js online deployed stable](https://expo-react-bunny-r0lgewwmn.vercel.app)
 
-[iOS Android online deployed](https://expo.io/@zrwusa/projects/expo-react-bunny)
+[Web Next.js online deployed latest](https://expo-react-bunny.vercel.app)
 
+## Downloads
 [App iOS for simulator stable](https://expo.io/artifacts/1f58c134-13f1-4021-9a63-b436bfda8a4b)
 
 ```sh
@@ -99,8 +109,8 @@ src/config.json
 in your pages or styles
 
 ```javascript
-import {ms, responsiveFromUE} from "../../styles/utils";
-const {wp, hp} = responsiveFromUE.DesignName;
+    const {ms, responsive} = useSizer();
+    const {wp} = responsive.iphoneX;
 ```
 
 ms: measure util defined sizes for styles(recommend use this to keep consistency)
@@ -108,4 +118,22 @@ ms: measure util defined sizes for styles(recommend use this to keep consistency
 wp: width to DP based on your designs
 
 hp: height to DP based on your designs
+
+You can define multiple design configurations, because your designs are often not designed by the same designer
+
+### For explicit navigation tree
+
+NavigationTree: Explicitly define a navigation tree, and the navigation of the entire App is clear at a glance. 
+
+Navigator components are automatically generated through configuration, 
+
+and the nesting relationship between Navigators is automatically generated. 
+
+There is no need to define Navigator components separately, 
+
+just care about Screens components.
+
+At the same time,linking configuration is automatically generated. 
+
+No modification of React Navigation, you can use any configuration of React Navigation with confidence.
 

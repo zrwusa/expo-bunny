@@ -3,15 +3,18 @@ import {Platform, StatusBar, Text} from "react-native";
 import AsyncStorageNext from "./utils/AsyncStorageNext";
 import {useDispatch, useSelector} from "react-redux";
 import {Provider as PaperProvider} from "react-native-paper";
+import {ThemeProvider as ThemeProviderRNE, Theme as ThemeRNE} from "react-native-elements";
 import {AppearanceProvider, useColorScheme} from "react-native-appearance";
 import {
-    DarkTheme as DarkThemeNav, DefaultTheme as DefaultThemeNav,
+    Theme as ThemeNavigation
 } from "@react-navigation/native";
-import NavigatorTree from "./navigation/NavigatorTree";
 import BunnyConstants, {EThemes} from "./utils/constants";
 import {RootState} from "./types/models";
 import {restoreAuth} from "./stores/auth/actions";
-import {restoreIsReady, restoreLanguage, restoreNavInitialState, restoreTheme, sysError} from "./stores/sys/actions";
+import {
+    restoreIsReady, restoreLanguage, restoreNavInitialState,
+    restoreTheme, sysError
+} from "./stores/sys/actions";
 import {ThemeProvider} from "./styles/theme";
 import {getThemes} from "./styles/theme/theme";
 import {Theme} from "./types/styles";
@@ -22,6 +25,9 @@ import {RequestProvider} from "./utils/requestHooks";
 import {loadAsync} from "expo-font";
 import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
 import {SizerProvider} from "./styles/sizer";
+import NavigationTree from "./navigation/NavigationTree";
+
+
 
 const themes = getThemes();
 const defaultTheme = themes.default as unknown as Theme;
@@ -33,7 +39,6 @@ function App() {
     const {isReady, themeName, navInitialState} = useSelector((rootState: RootState) => rootState.sysState);
     const {t, i18n} = useTranslation();
     const theme = (themeName === EThemes.dark) ? darkTheme : defaultTheme;
-    const themePaper = theme as ReactNativePaper.Theme;
     const sysScheme = useColorScheme();
 
     const navInitialStateMemorized = useMemo(() => {
@@ -114,22 +119,25 @@ function App() {
                 <SizerProvider>
                     <RequestProvider>
                         <ThemeProvider theme={theme}>
-                            <PaperProvider theme={themePaper}>
-                                <StatusBar barStyle={Platform.select({
-                                    ios: theme.dark ? 'light-content' : 'dark-content',
-                                    android: sysScheme === EThemes.dark ? 'light-content' : 'dark-content'
-                                })}/>
-                                <NavigatorTree
-                                    theme={theme?.dark ? DarkThemeNav : DefaultThemeNav}
-                                    fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
-                                    initialState={navInitialStateMemorized}
-                                    onStateChange={(state) =>
-                                        AsyncStorageNext.setItem(
-                                            BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
-                                            JSON.stringify(state)
-                                        )
-                                    }
-                                />
+                            <PaperProvider theme={theme as ReactNativePaper.Theme}>
+                                {/*RNE does not support changing theme in runtime,need to be refreshed or restarted*/}
+                                <ThemeProviderRNE theme={theme as ThemeRNE}>
+                                    <StatusBar barStyle={Platform.select({
+                                        ios: theme.dark ? 'light-content' : 'dark-content',
+                                        android: sysScheme === EThemes.dark ? 'light-content' : 'dark-content'
+                                    })}/>
+                                    <NavigationTree
+                                        theme={theme as ThemeNavigation}
+                                        fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
+                                        initialState={navInitialStateMemorized}
+                                        onStateChange={(state) =>
+                                            AsyncStorageNext.setItem(
+                                                BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
+                                                JSON.stringify(state)
+                                            )
+                                        }
+                                    />
+                                </ThemeProviderRNE>
                             </PaperProvider>
                         </ThemeProvider>
                     </RequestProvider>

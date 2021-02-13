@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 import {getStyle} from "./styles";
-import {View, Text, SwitchP} from "../../../components/base-ui"
+import {View, Text, SwitchP} from "../../../components/base-ui";
 
 export type SettingsItemProps = {
     label: string;

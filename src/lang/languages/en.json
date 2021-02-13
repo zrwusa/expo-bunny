@@ -14,7 +14,7 @@
       "system": "System",
       "profile": "Profile",
       "demoModal": "Modal",
-      "route": "Route",
+      "route": "Route Params",
       "tab": "Tab",
       "drawer": "Drawer",
       "nestedNavigation": "<Nested Lv0 Home>(Default To<Nested Lv1 Home>)",
@@ -65,7 +65,7 @@
       "tipLabel": "The current time: "
     },
     "DemoRoute": {
-      "title": "DemoRoute",
+      "title": "DemoRoute Params",
       "paramId": "param id: ",
       "typeofId": "typeof id: ",
       "paramIsHuman": "param isHuman: ",
@@ -102,7 +102,10 @@
       "pickAPhoto": "Pick a photo"
     },
     "DemoNotification": {
-      "title": "DemoNotification"
+      "title": "DemoNotification",
+      "scheduleNotification": "Press to schedule a notification",
+      "failedToGetToken": "Failed to get push token for push notification!",
+      "mustUsePhysicalDevice": "Must use physical device for Push Notifications"
     },
     "SignIn": {
       "title": "SignIn",
@@ -194,7 +197,10 @@
     },
     "BitcoinAlert": {
       "title": "BitcoinAlert",
-      "paramIsPush": "Param isPush: "
+      "paramIsPush": "Param isPush: ",
+      "scheduleNotification": "Press to schedule a notification",
+      "failedToGetToken": "Failed to get push token for push notification!",
+      "mustUsePhysicalDevice": "Must use physical device for Push Notifications"
     },
     "Settings": {
       "title": "Settings",
@@ -211,7 +217,21 @@
       "title": "DemoTheme",
       "btnCustom": "TOButton Themed From RN",
       "btnFromPaper": "Button From Paper",
-      "demoShadow": "Demo shadow compatible with Android"
+      "demoShadow": "Demo shadow compatible with Android",
+      "demoButton": "Button",
+      "demoButtonSec": "Button secondary",
+      "demoButtonDisabled": "Button disabled",
+      "demoButtonThemedRNE": "Button themed from RNE",
+      "demoText": "Text",
+      "demoTextSec": "Text secondary",
+      "demoTitle": "Title",
+      "demoTitleSec": "Title secondary",
+      "demoCaption": "Caption",
+      "demoCaptionSec": "Caption secondary",
+      "demoParagraph": "Paragraph",
+      "demoParagraphSec": "Paragraph secondary",
+      "demoSurface": "Surface",
+      "demoSurfaceSec": "Surface secondary"
     }
   },
   "CFBundleDisplayName": "ExpoReactBunny",

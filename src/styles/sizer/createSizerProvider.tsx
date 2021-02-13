@@ -5,7 +5,7 @@ import _ from "lodash"
 import BunnyConstants from "../../utils/constants";
 import {useEffect, useState} from "react";
 import getSizer from "../utils/sizer";
-import SizerContext from "./SizerContent";
+import SizerContext from "./SizerContext";
 
 function SizerProvider(props: MeasureProviderProps): JSX.Element {
     const {children} = props;

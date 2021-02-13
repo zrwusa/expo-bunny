@@ -25,16 +25,16 @@ const DemoThemeScreen = () => {
             <View style={[containerStyles.screen, containerStyles.centralized]}>
                 <Card>
                     <ButtonTO style={smartStyle.btn}>
-                        <TextBtn>Button</TextBtn></ButtonTO>
+                        <TextBtn>{st(`demoButton`)}</TextBtn></ButtonTO>
                     <ButtonTO style={smartStyle.btnSecondary}>
-                        <TextBtn>Button secondary</TextBtn></ButtonTO>
-                    <Text style={smartStyle.text}>Text</Text>
-                    <Text style={smartStyle.textSecondary}>Text secondary</Text>
+                        <TextBtn>{st(`demoButtonSec`)}</TextBtn></ButtonTO>
+                    <Text style={smartStyle.text}>{st(`demoText`)}</Text>
+                    <Text style={smartStyle.textSecondary}>{st(`demoTextSec`)}</Text>
                     <ButtonTO style={smartStyle.btnDisabled}>
-                        <TextBtn>Button disabled</TextBtn></ButtonTO>
+                        <TextBtn>{st(`demoButtonDisabled`)}</TextBtn></ButtonTO>
                     <Button title={st(`btnCustom`)} onPress={BunnyConstants.fnNoop}/>
                     <ButtonTO><TextBtn>{st(`btnFromPaper`)}</TextBtn></ButtonTO>
-                    <ButtonRNE title="Button from RNE" />
+                    <ButtonRNE title={st(`demoButtonThemedRNE`)} />
                     <View style={[styles.demoShadow,smartStyle.shadow]}>
                         <Text>{st(`demoShadow`)}</Text>
                     </View>
@@ -44,12 +44,12 @@ const DemoThemeScreen = () => {
                     <Text style={smartStyle.h4}>h4</Text>
                     <Text style={smartStyle.h5}>h5</Text>
                     <Text style={smartStyle.h6}>h6</Text>
-                    <Text style={smartStyle.title}>Title</Text>
-                    <Text style={smartStyle.titleSecondary}>Title secondary</Text>
-                    <Text style={smartStyle.caption}>Caption</Text>
-                    <Text style={smartStyle.captionSecondary}>Caption secondary</Text>
+                    <Text style={smartStyle.title}>{st(`demoTitle`)}</Text>
+                    <Text style={smartStyle.titleSecondary}>{st(`demoTitleSec`)}</Text>
+                    <Text style={smartStyle.caption}>{st(`demoCaption`)}</Text>
+                    <Text style={smartStyle.captionSecondary}>{st(`demoCaptionSec`)}</Text>
                     <View style={smartStyle.box}>
-                        <Text style={smartStyle.h3}>Paragraph</Text>
+                        <Text style={smartStyle.h3}>{st(`demoParagraph`)}</Text>
                         <Text style={smartStyle.paragraph}>
                             1.Don’t repeat yourself (DRY){'\n'}
                             2.Do one thing (DOT) (from Unix philosophy){'\n'}
@@ -58,7 +58,7 @@ const DemoThemeScreen = () => {
                         </Text>
                     </View>
                     <View style={smartStyle.box}>
-                        <Text style={smartStyle.h3}>Paragraph Secondary</Text>
+                        <Text style={smartStyle.h3}>{st(`demoParagraphSec`)}</Text>
                         <Text style={smartStyle.paragraphSecondary}>
                             1.Don’t repeat yourself (DRY){'\n'}
                             2.Do one thing (DOT) (from Unix philosophy){'\n'}
@@ -67,10 +67,10 @@ const DemoThemeScreen = () => {
                         </Text>
                     </View>
                     <View style={[smartStyle.surface,styles.demoSurface]}>
-                        <Text style={smartStyle.h3}>Surface</Text>
+                        <Text style={smartStyle.h3}>{st(`demoSurface`)}</Text>
                     </View>
                     <View style={[smartStyle.surfaceSecondary,styles.demoSurface]}>
-                        <Text style={smartStyle.h3}>Surface secondary</Text>
+                        <Text style={smartStyle.h3}>{st(`demoSurfaceSec`)}</Text>
                     </View>
                 </Card>
             </View>

@@ -85,8 +85,8 @@ export interface Colors {
 
     error: string,
     errorSecondary: string,
-    warn: string,
-    warnSecondary: string,
+    warning: string,
+    warningSecondary: string,
     notification: string,
     notificationSecondary: string,
     info: string,
@@ -102,8 +102,28 @@ export interface Colors {
     backdropSecondary: string,
 
     transparent: string,
+    card: string,
     paper: string,
-    paperSecondary:string,
+    paperSecondary: string,
+
+    // ---start---  react-native-elements
+    // Not a best practice, for compatibility with react-native-elements.
+    // Obviously, the color variables defined in the react-native-elements theme is not standardized.
+    // In the theme, we should care about the role of these color variables rather than the specific values,
+    // such as 'primary success', not 'grey0, black'. The specific values should be named in the Palette.
+    white: string,
+    black: string,
+    grey0: string,
+    grey1: string,
+    grey2: string,
+    grey3: string,
+    grey4: string,
+    grey5: string,
+    greyOutline: string,
+    searchBg: string,
+    success: string,
+    divider: string,
+    // ---end---  react-native-elements
 }
 
 export interface Animation {
@@ -115,8 +135,18 @@ export interface Theme {
     mode?: Mode,
     colors: Colors,
     fonts: Fonts,
-    roundness?: number,
-    animation?: Animation,
+    roundness: number,
+    animation: Animation,
+    typography: {
+        header: {
+            fontFamily: string,
+            fontWeight?: string,
+        },
+        body: {
+            fontFamily: string,
+            fontWeight?: string,
+        }
+    },
 }
 
 export type WithTheme = { theme: Theme }
@@ -550,11 +580,36 @@ export type Palette = {
     grey800: string,
     grey900: string,
 
+    black800: string,
     black900: string,
 
     black: string,
+    blackContrast: string,
     white: string,
+    whiteContrast: string,
     transparent: string,
+
+    //---start---extra
+    grey290: string,
+    grey350: string,
+    grey380: string,
+    grey390: string,
+    grey410: string,
+    grey550: string,
+    grey750: string,
+    grey790: string,
+    grey810: string,
+    grey850: string,
+
+    blueGrey850: string,
+    lightGreenA720: string,
+    green610: string,
+    redA420: string,
+    red910: string,
+    yellow720: string,
+    yellow780: string,
+    blueGrey320: string,
+    //---end---extra
 }
 
 export type PaletteWithColors = {
@@ -831,11 +886,36 @@ export type PaletteWithColors = {
     grey800: '#424242',
     grey900: '#212121',
 
+    black800: '#242424',
     black900: '#121212',
 
     black: '#000000',
+    blackContrast: '#f2f2f2',
     white: '#ffffff',
+    whiteContrast: '#080808',
     transparent: 'transparent',
+
+    //---start--- react-native-elements
+    grey290: '#e1e8ee',
+    grey350: '#d8d8d8',
+    grey380: '#bcbbc1',
+    grey390: '#bdc6cf',
+    grey410: '#bbbbbb',
+    grey550: '#86939e',
+    grey750: '#5e6977',
+    grey790: '#43484d',
+    grey810: '#393e42',
+    grey850: '#272729',
+
+    blueGrey850: '#303337',
+    lightGreenA720: '#52c41a',
+    green610: '#439946',
+    redA420: '#ff190c',
+    red910: '#bf2c24',
+    yellow720: '#cfbe27',
+    yellow780: '#faad14',
+    blueGrey320: '#86939e',
+    //---end---extra
 }
 
 

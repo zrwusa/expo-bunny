@@ -11,6 +11,14 @@ export const getThemeWareHouse = () => {
             default: false,
             dark: true
         },
+        roundness: {
+            default: 4,
+            dark: 4,
+        },
+        mode: {
+            default: 'exact',
+            dark: 'adaptive'
+        },
         colors: {
             primary: {
                 default: pl.teal400,
@@ -69,27 +77,27 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey400
             },
             border: {
-                default: pl.grey500,
-                dark: pl.orange900
+                default: pl.grey350,
+                dark: pl.grey850
             },
             borderSecondary: {
                 default: pl.grey600,
                 dark: pl.amber500
             },
             surface: {
-                default: pl.grey50,
-                dark: pl.grey800
+                default: pl.white,
+                dark: pl.black900
             },
             surfaceSecondary: {
                 default: pl.grey100,
                 dark: pl.grey900
             },
             background: {
-                default: pl.grey200,
+                default: pl.grey100,
                 dark: pl.black900
             },
             backgroundSecondary: {
-                default: pl.grey100,
+                default: pl.grey50,
                 dark: pl.grey800
             },
             accent: {
@@ -100,20 +108,23 @@ export const getThemeWareHouse = () => {
                 default: pl.blue300,
                 dark: pl.teal600
             },
-
+            success: {
+                default: pl.lightGreenA720,
+                dark: pl.green610
+            },
             error: {
-                default: pl.red600,
-                dark: pl.pink300
+                default: pl.redA420,
+                dark: pl.red910
             },
             errorSecondary: {
                 default: pl.red500,
                 dark: pl.pink200
             },
-            warn: {
-                default: pl.yellow700,
-                dark: pl.yellow900
+            warning: {
+                default: pl.yellow780,
+                dark: pl.yellow720
             },
-            warnSecondary: {
+            warningSecondary: {
                 default: pl.yellow600,
                 dark: pl.yellow800
             },
@@ -178,9 +189,88 @@ export const getThemeWareHouse = () => {
                 default: pl.lightGreen50,
                 dark: pl.green50
             },
+            card:{
+                default: pl.white,
+                dark: pl.black900
+            },
+            divider:{
+                default: pl.grey390,
+                dark: pl.blueGrey320
+            },
+
+            // ---start---  react-native-elements
+            // Not a best practice, for compatibility with react-native-elements.
+            // Obviously, the color variables defined in the react-native-elements theme is not standardized.
+            // In the theme, we should care about the role of these color variables rather than the specific values,
+            // such as 'primary success', not 'grey0, black'. The specific values should be named in the palette.
+            white: {
+                default: pl.white,
+                dark: pl.black900
+            },
+            black: {
+                default: pl.black800,
+                dark: pl.black900
+            },
+            grey0: {
+                default: pl.grey810,
+                dark: pl.grey290
+            },
+            grey1: {
+                default: pl.grey790,
+                dark: pl.grey390
+            },
+            grey2: {
+                default: pl.grey750,
+                dark: pl.grey550
+            },
+            grey3: {
+                default: pl.grey550,
+                dark: pl.grey750
+            },
+            grey4: {
+                default: pl.grey390,
+                dark: pl.grey790
+            },
+            grey5: {
+                default: pl.grey290,
+                dark: pl.grey810
+            },
+            greyOutline: {
+                default: pl.grey410,
+                dark: pl.grey410
+            },
+            searchBg: {
+                default: pl.blueGrey850,
+                dark: pl.blueGrey850
+            },
+            // ---end---  react-native-elements
         },
         fonts: {
             ...fontsWarehouse,
+        },
+        animation: {
+            scale: {
+                default: 1.0,
+                dark: 1.0
+            },
+        },
+        typography: {
+            header: {
+                fontFamily: {
+                    default: fontsWarehouse.regular.fontFamily.default,
+                    dark: fontsWarehouse.regular.fontFamily.dark,
+                },
+                fontWeight: {
+                    default: 'bold',
+                    dark: 'bold'
+                },
+            },
+            body: {
+                fontFamily: {
+                    default: fontsWarehouse.regular.fontFamily.default,
+                    dark: fontsWarehouse.regular.fontFamily.dark,
+                },
+            }
         },
     }
     return themeWarehouse;

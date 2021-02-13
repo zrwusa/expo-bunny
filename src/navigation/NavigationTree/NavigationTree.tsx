@@ -25,8 +25,8 @@ import BitcoinHomeScreen from "../../screens/DemoBitcoin/BitcoinHome";
 import BitcoinAlertScreen from "../../screens/DemoBitcoin/BitcoinAlert";
 import SettingsScreen from "../../screens/Settings";
 import DemoThemeScreen from "../../screens/DemoTheme";
-import {EThemes} from "../../utils/constants";
-import {restoreAndSaveTheme} from "../../stores/sys/actions";
+import {ELanguage, EThemes} from "../../utils/constants";
+import {restoreAndSaveLanguage, restoreAndSaveTheme} from "../../stores/sys/actions";
 import SettingsItem from "../../screens/Settings/SettingsItem/SettingsItem";
 import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 import {useTranslation} from "react-i18next";
@@ -59,9 +59,9 @@ import {useReduxDevToolsExtension} from "@react-navigation/devtools";
 import * as Linking from "expo-linking";
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
 import {useSizer} from "../../styles/sizer";
+import {getStyles} from "./styles";
 
 export const basePath = Linking.makeUrl('/');
-
 
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
     theme?: Theme | undefined;
@@ -71,27 +71,38 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
     onReady?: (() => void) | undefined;
 }
 
-const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
+// Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
+const NavigationTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, responsive} = useSizer();
     const {wp} = responsive.iphoneX;
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
+    const styles = getStyles();
 
-    const customHeaderRight = () => {
-        const sysState = useSelector((rootState: RootState) => rootState.sysState)
+    const headerRight = () => {
+        const {themeName, language} = useSelector((rootState: RootState) => rootState.sysState)
         const dispatch = useDispatch()
-        const {themeName} = sysState;
-        return <SettingsItem
-            label=""
-            value={themeName === EThemes.dark}
-            onValueChange={(value) => {
-                dispatch(restoreAndSaveTheme({themeName: value ? EThemes.dark : EThemes.default}));
-            }}
-        />
+        return (<View style={styles.settingBox}>
+            <SettingsItem
+                label=""
+                value={themeName === EThemes.dark}
+                onValueChange={(value) => {
+                    dispatch(restoreAndSaveTheme({themeName: value ? EThemes.dark : EThemes.default}));
+                }}
+            />
+            {/*<SettingsItem*/}
+            {/*    label=""*/}
+            {/*    value={language === ELanguage.zh}*/}
+            {/*    onValueChange={(value) => {*/}
+            {/*        const lang = value ? ELanguage.zh : ELanguage.en;*/}
+            {/*        dispatch(restoreAndSaveLanguage({language: lang}));*/}
+            {/*        i18n.changeLanguage(lang).then(() => undefined)*/}
+            {/*    }}/>*/}
+        </View>)
     }
 
     const optionsHeaderAndAnimation: StackNavigationOptions = {
         animationEnabled: true,
-        headerRight: customHeaderRight,
+        headerRight: headerRight,
         headerTitleStyle: {
             fontSize: ms.fs.m
         },
@@ -131,7 +142,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             },
             headerStatusBarHeight: Platform.select({native: 0})
         }
-
     }
 
     const tabBarOptions: BottomTabBarOptions = {
@@ -478,6 +488,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             },
         ]
     }
+
     const recursiveConfig = (childrenNode: NavigatorTreeNode[]): LinkingConfig => {
         let obj: LinkingConfigTraversable = {};
         childrenNode.forEach(child => {
@@ -555,4 +566,4 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
         : null;
 }
 
-export default NavigatorTree;
+export default NavigationTree;

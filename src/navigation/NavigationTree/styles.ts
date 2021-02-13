@@ -19,6 +19,9 @@ export const getStyles = () => {
         },
         headerTitleStyle: {
             fontSize: measure.fontSizes.m
+        },
+        settingBox: {
+            flexDirection: 'row'
         }
     });
 }

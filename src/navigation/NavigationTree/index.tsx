@@ -1,2 +1,2 @@
-export {default} from "./NavigatorTree";
-export * from "./NavigatorTree";
+export {default} from "./NavigationTree";
+export * from "./NavigationTree";

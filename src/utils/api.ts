@@ -23,6 +23,7 @@ const api = axios.create({
         : bunnyConfig.isRemoteBackEnd
             ? `${httpPrefix}${bunnyConfig.remoteBackEnd.domain}:${bunnyConfig.remoteBackEnd.port}`
             : `${httpPrefix}${bunnyConfig.localBackEnd.domain}:${bunnyConfig.localBackEnd.port}`,
+    timeout:1000
 });
 
 api.interceptors.request.use(
@@ -49,7 +50,7 @@ api.interceptors.response.use(
     },
     async function (error) {
         if (error.response === undefined) {
-            console.error(`[React Bunny Warn]Request failed,first do not forget to run the mock server in another terminal with command 'yarn mock'`)
+            // console.error(`[React Bunny Warn]Request failed,first do not forget to run the mock server in another terminal with command 'yarn mock'`)
         }
         const originalRequest = error.config;
         // if (!response.ok) {

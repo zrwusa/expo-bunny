@@ -35,7 +35,7 @@ class DemoThirdPartScreen extends Component<Props, States> {
 
         return (
             <View style={containerStyles.screen}>
-                <Button icon={<IconMC name="air-horn" style={{color: '#FFFFFF'}}/>}
+                <Button icon={<IconMC name="air-horn"/>}
                         title={st(`buttonWithIcon`)}/>
                 <View>
                     {list.map((l, i) => (

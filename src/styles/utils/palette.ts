@@ -274,11 +274,36 @@ export const palette: Palette = {
     grey800: '#424242',
     grey900: '#212121',
 
+    black800: '#242424',
     black900: '#121212',
 
     black: '#000000',
+    blackContrast: '#f2f2f2',
     white: '#ffffff',
+    whiteContrast: '#080808',
     transparent: 'transparent',
+
+    //---start--- react-native-elements
+    grey290: '#e1e8ee',
+    grey350: '#d8d8d8',
+    grey380: '#bcbbc1',
+    grey390: '#bdc6cf',
+    grey410: '#bbbbbb',
+    grey550: '#86939e',
+    grey750: '#5e6977',
+    grey790: '#43484d',
+    grey810: '#393e42',
+    grey850: '#272729',
+
+    blueGrey850: '#303337',
+    lightGreenA720: '#52c41a',
+    green610: '#439946',
+    redA420: '#ff190c',
+    red910: '#bf2c24',
+    yellow720: '#cfbe27',
+    yellow780: '#faad14',
+    blueGrey320: '#86939e',
+    //---end--- react-native-elements
 }
 
 export const pl = palette

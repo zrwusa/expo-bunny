@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Sizer} from "../../types/styles";
-import SizerContent from "./SizerContent";
+import SizerContext from "./SizerContext";
 
-const useSizer = (): Sizer => React.useContext(SizerContent);
+const useSizer = (): Sizer => React.useContext(SizerContext);
 
 export {useSizer};
