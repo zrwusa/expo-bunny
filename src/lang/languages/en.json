@@ -200,7 +200,10 @@
       "paramIsPush": "Param isPush: ",
       "scheduleNotification": "Press to schedule a notification",
       "failedToGetToken": "Failed to get push token for push notification!",
-      "mustUsePhysicalDevice": "Must use physical device for Push Notifications"
+      "mustUsePhysicalDevice": "Must use physical device for Push Notifications",
+      "saveAlertSetting": "Save alert setting",
+      "saveQuickSettings": "Save quick alert settings",
+      "cancelAllAlertSettings": "Cancel all alert settings"
     },
     "Settings": {
       "title": "Settings",
