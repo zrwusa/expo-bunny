@@ -1,7 +1,7 @@
 import React from "react";
 import {View, SafeAreaView, VirtualizedList} from "react-native";
 import {Text} from "../../../components/base-ui"
-import {virtualizedListStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useTheme} from "../../../styles/theme";
 import getContainerStyles from "../../../containers";
 import {useSizer} from "../../../styles/sizer";
@@ -12,6 +12,11 @@ type Item = {
 }
 
 const RNVirtualizedListScreen: React.FC = () => {
+    const sizer = useSizer();
+    const theme = useTheme();
+    const styles = getStyles(sizer,theme)
+    const containerStyles = getContainerStyles(sizer, theme);
+
     const VIRTUALIZED_LIST_DATA: Item[] = [];
 
     const getVirtualizedListItem = (data: [], index: number) => {
@@ -37,13 +42,11 @@ const RNVirtualizedListScreen: React.FC = () => {
                 marginHorizontal: 2,
                 padding: 20,
             }}>
-                <Text style={virtualizedListStyles.title}>{title}</Text>
+                <Text style={styles.title}>{title}</Text>
             </View>
         );
     }
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
+
 
     return (
         <SafeAreaView style={containerStyles.screen}>

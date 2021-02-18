@@ -1,14 +1,14 @@
-import AsyncStorageNext from "../../utils/AsyncStorageNext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {Sys} from "../../types/models";
 import {
     RestoreIsReadyPayload, RestoreLanguagePayload, RestoreNavInitialStatePayload,
-    RestoreThemePayload, SysErrorPayload, SysWarnPayload
+    RestoreThemePayload, SysClearErrorPayload, SysErrorPayload, SysWarnPayload
 } from "../../types/payloads";
 import {
     RestoreIsReady, RestoreLanguage, RestoreNavInitialState,
-    RestoreTheme, SysError, SysWarn
+    RestoreTheme, SysClearErrors, SysError, SysWarn
 } from "../../types/actions";
 import {ESys} from "../../utils/constants";
 import BunnyConstants from "../../utils/constants";
@@ -16,6 +16,13 @@ import BunnyConstants from "../../utils/constants";
 export const sysError: (payload: SysErrorPayload) => SysError = (payload) => {
     return {
         type: ESys.ERROR,
+        payload: payload,
+    };
+};
+
+export const sysClearErrors: (payload: SysClearErrorPayload) => SysClearErrors = (payload) => {
+    return {
+        type: ESys.CLEAR_ERRORS,
         payload: payload,
     };
 };
@@ -38,10 +45,10 @@ export const restoreAndSaveTheme: ActionCreator<ThunkAction<Promise<Action>, Sys
     return async (dispatch: Dispatch<RestoreTheme | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorageNext.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, payload.themeName);
+            await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, payload.themeName);
             result = dispatch(restoreTheme(payload))
         } catch (err) {
-            result = dispatch(sysError({error: err.toString()}))
+            result = dispatch(sysError({error: err}))
         }
         return result;
     };
@@ -58,10 +65,10 @@ export const restoreAndSaveLanguage: ActionCreator<ThunkAction<Promise<Action>, 
     return async (dispatch: Dispatch<RestoreLanguage | SysError>): Promise<Action> => {
         let result;
         try {
-            await AsyncStorageNext.setItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY, payload.language);
+            await AsyncStorage.setItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY, payload.language);
             result = dispatch(restoreLanguage(payload))
         } catch (err) {
-            result = dispatch(sysError({error: err.toString()}))
+            result = dispatch(sysError({error: err}))
         }
         return result;
     };
@@ -81,4 +88,13 @@ export const restoreIsReady: (payload: RestoreIsReadyPayload) => RestoreIsReady 
     };
 };
 
-export type SysActions = RestoreIsReady | SysError | SysWarn | RestoreTheme | RestoreLanguage | RestoreNavInitialState;
+export class BusinessLogicError extends Error {
+    constructor(message:string) {
+        super(message);
+        this.name = "BusinessLogicError";
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, BusinessLogicError.prototype);
+    }
+}
+
+export type SysActions = RestoreIsReady | SysError | SysWarn | RestoreTheme | RestoreLanguage | RestoreNavInitialState | SysClearErrors;

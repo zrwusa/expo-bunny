@@ -1,14 +1,20 @@
 import {StyleSheet} from "react-native";
-import {pl} from "../../styles/utils";
+import {Sizer, Theme} from "../../types/styles";
 
-export const styles = StyleSheet.create({
-    container: {
-        backgroundColor: pl.grey600,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    text: {
-        color: pl.cyan600,
-        fontSize: 16
-    }
-})
+export const getStyles = (sizer: Sizer, theme: Theme) => {
+    const {ms, responsive} = sizer;
+    const {wp, hp} = responsive.iphoneX;
+    const {colors} = theme;
+
+    return StyleSheet.create({
+        container: {
+            backgroundColor: colors.background,
+            justifyContent: "center",
+            alignItems: "center",
+        },
+        text: {
+            color: colors.text,
+            fontSize: 16
+        }
+    });
+}

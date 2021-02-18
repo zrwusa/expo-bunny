@@ -1,10 +1,10 @@
-import {Sizer, Theme} from "../../types/styles";
+import {NamedStyles, Sizer, Theme} from "../../types/styles";
 
 const getSmartStyles = (sizer: Sizer, theme: Theme) => {
     const {ms, responsive} = sizer;
     const {colors, fonts} = theme;
     const {wp} = responsive.iphoneX;
-    return {
+    const styles: NamedStyles<any> = {
         h1: {
             fontSize: ms.fs.xxl,
             color: colors.title,
@@ -109,6 +109,12 @@ const getSmartStyles = (sizer: Sizer, theme: Theme) => {
         content: {},
         article: {},
         footer: {},
-    };
+        absoluteBottomLeft: {
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+        },
+    }
+    return styles;
 }
 export default getSmartStyles;

@@ -92,5 +92,9 @@ export type JsonKeys<T> = keyof {
     [P in keyof T]: number
 }
 
+const arr = ["1", 2, 4, 5, 6] as const;
+type Range = typeof arr[number];
+const a: Range = 2;
+
 
 

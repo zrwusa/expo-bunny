@@ -4,7 +4,7 @@ import {
     Platform, TouchableWithoutFeedback, Keyboard,
 } from "react-native";
 import {Text, Button, TextInput} from "../../../components/base-ui";
-import {keyboardAvoidingViewStyles} from "./styles";
+import {getStyles} from "./styles";
 import getContainerStyles from "../../../containers";
 import {useSizer} from "../../../styles/sizer";
 import {useTheme} from "../../../styles/theme";
@@ -13,6 +13,7 @@ const RNKeyboardAvoidingScreen: React.FC = () => {
     const sizer = useSizer();
     const theme = useTheme();
     const containerStyles = getContainerStyles(sizer, theme);
+    const styles = getStyles(sizer,theme)
 
     return (
         <KeyboardAvoidingView
@@ -20,10 +21,10 @@ const RNKeyboardAvoidingScreen: React.FC = () => {
             style={containerStyles.screen}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={keyboardAvoidingViewStyles.inner}>
-                    <Text style={keyboardAvoidingViewStyles.header}>Header</Text>
-                    <TextInput placeholder="Username" style={keyboardAvoidingViewStyles.textInput}/>
-                    <View style={keyboardAvoidingViewStyles.btnContainer}>
+                <View style={styles.inner}>
+                    <Text style={styles.header}>Header</Text>
+                    <TextInput placeholder="Username" style={styles.textInput}/>
+                    <View style={styles.btnContainer}>
                         <Button title="Submit" onPress={() => null}/>
                     </View>
                     <Text>Mock. No equivalent web APIs.</Text>

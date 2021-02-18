@@ -8,7 +8,7 @@ const getContainerStyles = (sizer: Sizer, theme: Theme) => {
     const {colors} = theme;
     return StyleSheet.create({
         card: {
-            margin: ms.sp.l,
+            margin: ms.sp.m,
             padding: ms.sp.m,
             borderColor: colors.border,
             borderWidth: ms.sp.xxs,

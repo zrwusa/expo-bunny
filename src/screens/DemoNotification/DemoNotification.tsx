@@ -1,23 +1,17 @@
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View, Button, Platform} from 'react-native';
 import {initialedNotification} from "../../utils/expoNotification";
 
 
 export default function DemoNotificationScreen() {
-    Notifications.setNotificationHandler({
-        handleNotification: async () => ({
-            shouldShowAlert: true,
-            shouldPlaySound: false,
-            shouldSetBadge: false,
-        }),
-    });
+
     let notificationReceivedListener = {
         remove: () => {
         }
     };
-    let notificationResponseListener = {
+    let notificationRespondedListener = {
         remove: () => {
         }
     };
@@ -27,6 +21,13 @@ export default function DemoNotificationScreen() {
     // const responseListener = useRef();
 
     useEffect(() => {
+        Notifications.setNotificationHandler({
+            handleNotification: async () => ({
+                shouldShowAlert: true,
+                shouldPlaySound: true,
+                shouldSetBadge: false,
+            }),
+        });
         registerForPushNotificationsAsync().then(token => {
             if (token) {
                 setExpoPushToken(token)
@@ -34,16 +35,17 @@ export default function DemoNotificationScreen() {
         });
 
         notificationReceivedListener = Notifications.addNotificationReceivedListener(notification => {
+            console.log('---notification',notification);
             setNotification(notification);
         });
 
-        notificationResponseListener = Notifications.addNotificationResponseReceivedListener(response => {
-            console.log(response);
+        notificationRespondedListener = Notifications.addNotificationResponseReceivedListener(response => {
+            console.log('---response',response);
         });
 
         return () => {
             Notifications.removeNotificationSubscription(notificationReceivedListener);
-            Notifications.removeNotificationSubscription(notificationResponseListener);
+            Notifications.removeNotificationSubscription(notificationRespondedListener);
         };
     }, []);
 
@@ -77,6 +79,7 @@ async function schedulePushNotification() {
         content: {
             title: "You've got mail! 📬",
             body: 'Here is the notification body',
+            sound: 'default',
             data: {data: 'goes here'},
         },
         trigger: {seconds: 2},
@@ -97,13 +100,12 @@ async function registerForPushNotificationsAsync() {
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log(token);
     } else {
         alert('Must use physical device for Push Notifications');
     }
 
     if (Platform.OS === 'android') {
-        Notifications.setNotificationChannelAsync('default', {
+        await Notifications.setNotificationChannelAsync('default', {
             name: 'default',
             importance: Notifications.AndroidImportance.MAX,
             vibrationPattern: [0, 250, 250, 250],
@@ -113,3 +115,8 @@ async function registerForPushNotificationsAsync() {
 
     return token;
 }
+// import {View,Text} from "../../components/base-ui";
+// import React from 'react';
+// export default function DemoNotificationScreen(){
+//     return (<View><Text>xxx</Text></View>)
+// }

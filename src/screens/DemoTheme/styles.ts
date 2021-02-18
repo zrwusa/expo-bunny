@@ -1,11 +1,10 @@
 import {StyleSheet} from "react-native";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {Sizer, Theme} from "../../types/styles";
 
-export const getStyles = () => {
-    const {ms, responsive} = useSizer();
-    const {colors} = useTheme();
-    const {wp} = responsive.iphoneX;
+export const getStyles = (sizer: Sizer, theme: Theme) => {
+    const {ms, responsive} = sizer;
+    const {wp, hp} = responsive.iphoneX;
+    const {colors} = theme;
     return StyleSheet.create({
         demoShadow: {
             width: wp(326),

@@ -1,8 +1,11 @@
 import {StyleSheet} from "react-native";
-import {Measure, Responsive} from "../../types/styles";
+import {Sizer, Theme} from "../../types/styles";
 
-export const getStyles = (responsive: Responsive, ms?: Measure) => {
-    const {iphoneX} = responsive;
-    const {wp} = iphoneX
-    return StyleSheet.create({});
+export const getStyles = (sizer: Sizer, theme: Theme) => {
+    const {ms, responsive} = sizer;
+    const {wp, hp} = responsive.iphoneX;
+    const {colors} = theme;
+
+    return StyleSheet.create({
+    });
 }

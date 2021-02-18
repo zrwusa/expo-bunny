@@ -24,8 +24,18 @@ export type RestoreAuthGooglePayload = {
     user: GoogleUser;
 }
 
+type TimeSpend={
+    timeSpend?:number
+}
+
 export interface SysErrorPayload {
-    error: string;
+    error: Error & TimeSpend;
+}
+
+export interface SysClearErrorPayload {
+    all?:boolean;
+    top?:number;
+    last?:number;
 }
 
 export interface SysWarnPayload {

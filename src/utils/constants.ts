@@ -28,6 +28,7 @@ export enum EAuth {
 
 export enum ESys {
     ERROR = "ERROR",
+    CLEAR_ERRORS = "CLEAR_ERRORS",
     WARN = "WARN",
     RESTORE_IS_READY = "RESTORE_IS_READY",
     RESTORE_THEME = "RESTORE_THEME",
@@ -58,6 +59,10 @@ export const EThemes: Traversable = {
 export const ELanguage = {
     en: 'en',
     zh: 'zh',
+}
+
+export const EHttpStatus = {
+    UNAUTHORIZED:401,
 }
 
 export default BunnyConstants

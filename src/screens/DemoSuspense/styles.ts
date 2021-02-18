@@ -1,4 +1,9 @@
 import {StyleSheet} from "react-native";
-
-const styles = StyleSheet.create({});
-export default styles;
+import {Sizer, Theme} from "../../types/styles";
+export const getStyles = (sizer: Sizer, theme: Theme) => {
+    const {ms, responsive} = sizer;
+    const {wp, hp} = responsive.iphoneX;
+    const {colors} = theme;
+    return StyleSheet.create({
+    });
+}

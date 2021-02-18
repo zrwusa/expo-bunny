@@ -4,7 +4,8 @@ import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-nat
 import {glyphMaterialCommunityCustomMap} from "../utils/helpers";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
-import {ScaledSize} from "react-native";
+import {ImageStyle, ScaledSize, TextStyle, ViewStyle} from "react-native";
+export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 
 export type ResponsiveEvent = {
     addEventListener(
@@ -42,6 +43,11 @@ export type ResponsiveProviderProps = {
 
 export type MeasureProviderProps = {
     children: ReactNode,
+};
+
+export type ThemeProviderProps = {
+    children: ReactNode,
+    theme:Theme
 };
 
 export type Mode = 'adaptive' | 'exact';

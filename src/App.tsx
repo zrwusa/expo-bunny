@@ -1,6 +1,6 @@
 import React, {useMemo} from "react";
 import {Platform, StatusBar, Text} from "react-native";
-import AsyncStorageNext from "./utils/AsyncStorageNext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch, useSelector} from "react-redux";
 import {Provider as PaperProvider} from "react-native-paper";
 import {ThemeProvider as ThemeProviderRNE, Theme as ThemeRNE} from "react-native-elements";
@@ -26,6 +26,7 @@ import {loadAsync} from "expo-font";
 import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
 import {SizerProvider} from "./styles/sizer";
 import NavigationTree from "./navigation/NavigationTree";
+import Sys from "./components/Sys";
 
 
 
@@ -55,8 +56,8 @@ function App() {
                 dispatch(sysError(err.toString()));
             } finally {
                 try {
-                    const accessToken = await AsyncStorageNext.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
-                    const user = await AsyncStorageNext.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
+                    const accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
+                    const user = await AsyncStorage.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
                     accessToken && dispatch(restoreAuth({
                         access_token: accessToken,
                         user: user ? JSON.parse(user) : {}
@@ -65,7 +66,7 @@ function App() {
                     dispatch(sysError(err.toString()));
                 } finally {
                     try {
-                        const themeNameSaved = await AsyncStorageNext.getItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY);
+                        const themeNameSaved = await AsyncStorage.getItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY);
                         let themeName;
                         if (themeNameSaved) {
                             themeName = (themeNameSaved === EThemes.dark) ? EThemes.dark : EThemes.default;
@@ -77,7 +78,7 @@ function App() {
                         dispatch(sysError(err.toString()));
                     } finally {
                         try {
-                            const language = await AsyncStorageNext.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY)
+                            const language = await AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY)
                             const lang = language || localization.locale.substring(0, 2);
                             lang && await i18n.changeLanguage(lang);
                             lang && dispatch(restoreLanguage({language: lang}));
@@ -86,7 +87,7 @@ function App() {
                         } finally {
                             try {
                                 if (Platform.OS !== 'web') {
-                                    const savedState = await AsyncStorageNext.getItem(BunnyConstants.NAV_STATE_PERSISTENCE_KEY);
+                                    const savedState = await AsyncStorage.getItem(BunnyConstants.NAV_STATE_PERSISTENCE_KEY);
                                     const state = savedState ? JSON.parse(savedState) : undefined;
                                     if (state !== undefined) {
                                         dispatch(restoreNavInitialState({navInitialState: state}));
@@ -131,12 +132,13 @@ function App() {
                                         fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
                                         initialState={navInitialStateMemorized}
                                         onStateChange={(state) =>
-                                            AsyncStorageNext.setItem(
+                                            AsyncStorage.setItem(
                                                 BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
                                                 JSON.stringify(state)
                                             )
                                         }
                                     />
+                                    <Sys />
                                 </ThemeProviderRNE>
                             </PaperProvider>
                         </ThemeProvider>

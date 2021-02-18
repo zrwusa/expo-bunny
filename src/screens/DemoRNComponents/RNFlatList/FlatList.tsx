@@ -1,6 +1,6 @@
 import React from "react";
 import {FlatList, SafeAreaView, View, Text} from "react-native";
-import {flatListStyles} from "./styles";
+import {getStyles} from "./styles";
 import getContainerStyles from "../../../containers";
 import {useSizer} from "../../../styles/sizer";
 import {useTheme} from "../../../styles/theme";
@@ -9,7 +9,7 @@ const RNFlatListScreen: React.FC = () => {
     const sizer = useSizer();
     const theme = useTheme();
     const containerStyles = getContainerStyles(sizer, theme);
-
+    const styles = getStyles(sizer, theme);
     type IFlatListItem = {
         id: string;
         title: string;
@@ -30,8 +30,8 @@ const RNFlatListScreen: React.FC = () => {
     ];
 
     const FlatListItem = ({title}: any) => (
-        <View style={flatListStyles.item}>
-            <Text style={flatListStyles.title}>{title}</Text>
+        <View style={styles.item}>
+            <Text style={styles.title}>{title}</Text>
         </View>
     );
 

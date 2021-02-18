@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from "react-native";
-import {Measure, Responsive, Sizer} from "../../types/styles";
+import {Sizer} from "../../types/styles";
 
 
 export const getCardSize = (sizer: Sizer) => {

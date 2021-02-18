@@ -74,8 +74,8 @@ export type Auth = {
 }
 
 export type Sys = {
-    error: string,
-    warn: string,
+    error: Error[],
+    warn: string[],
     isReady: boolean,
     themeName: string,
     language: string,

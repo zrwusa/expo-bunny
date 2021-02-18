@@ -1,10 +1,11 @@
 import {StyleSheet, Platform} from "react-native";
 import {useSizer} from "../../../styles/sizer";
+import {Sizer, Theme} from "../../../types/styles";
 
-
-export const getStyle = () => {
-    const {ms, responsive} = useSizer();
+export const getStyles = (sizer: Sizer, theme: Theme) => {
+    const {ms, responsive} = sizer;
     const {wp, hp} = responsive.iphoneX;
+    const {colors} = theme;
     return StyleSheet.create({
         item: {
             flexDirection: 'row',
@@ -27,7 +28,5 @@ export const getStyle = () => {
                 }
             }
         )
-
-
     });
 }

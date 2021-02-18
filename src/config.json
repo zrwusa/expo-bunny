@@ -22,6 +22,7 @@
     "domain": "192.168.50.19",
     "port": 8088
   },
+  "shouldCollectError": true,
   "UE": {
     "dimensions": {
       "bunnyUI": {

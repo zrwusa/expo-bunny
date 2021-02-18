@@ -1,10 +1,9 @@
 import {StyleSheet} from "react-native";
 import {pl} from "../../styles/utils";
-import {Measure, Responsive} from "../../types/styles";
-
-const getStyles = (measure: Measure, responsive: Responsive) => {
+import {Sizer, Theme} from "../../types/styles";
+export const getStyles = (sizer: Sizer, theme: Theme) => {
+    const {ms, responsive} = sizer;
     const {wp, hp} = responsive.iphoneX;
-    const ms = measure;
     return StyleSheet.create({
         logo: {
             width: wp(305),
@@ -31,6 +30,5 @@ const getStyles = (measure: Measure, responsive: Responsive) => {
             resizeMode: 'contain',
         },
     });
-}
 
-export default getStyles;
+}

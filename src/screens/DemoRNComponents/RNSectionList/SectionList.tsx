@@ -2,7 +2,7 @@ import React from "react";
 import {SafeAreaView, View, SectionList} from "react-native";
 import {Text} from "../../../components/base-ui";
 import {useTheme} from "../../../styles/theme";
-import {sectionListStyles} from "./styles";
+import {getStyles} from "./styles";
 import getContainerStyles from "../../../containers";
 import {useSizer} from "../../../styles/sizer";
 
@@ -43,10 +43,11 @@ function SectionListScreen() {
     );
     const sizer = useSizer();
     const theme = useTheme();
+    const styles = getStyles(sizer,theme)
     const containerStyles = getContainerStyles(sizer, theme);
 
     return (
-        <SafeAreaView style={[containerStyles.screen, sectionListStyles.container]}>
+        <SafeAreaView style={[containerStyles.screen, styles.container]}>
             <SectionList
                 sections={SECTION_LIST_DATA}
                 keyExtractor={(item, index) => item + index}

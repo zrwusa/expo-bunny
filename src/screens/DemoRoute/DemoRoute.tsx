@@ -3,7 +3,7 @@ import {View, Text} from "../../components/base-ui";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types/stacks";
-import styles from "./styles";
+import {getStyles} from "./styles";
 import {withTranslation, WithTranslation} from 'react-i18next';
 import {stFactory} from "../../lang/short-t";
 import getContainerStyles from "../../containers";
@@ -29,6 +29,8 @@ class DemoRouteScreen extends Component<DemoRouteProps> {
         const st = stFactory(t, 'screens.DemoRoute');
         const containerStyles = getContainerStyles(sizer, theme)
         const smartStyles = getSmartStyles(sizer, theme);
+        const styles = getStyles(sizer,theme);
+
         return (
             <View style={[containerStyles.screen, containerStyles.centralized]}>
                 <View style={styles.wrap}>

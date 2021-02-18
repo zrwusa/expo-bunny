@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants from "./constants";
-
+// const AsyncStorageNext = AsyncStorage
 const AsyncStorageNext = {
     getItem: async (key: string): Promise<string | null> => {
         if (process.platform === 'darwin') {

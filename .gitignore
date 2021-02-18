@@ -20,10 +20,11 @@ backup/
 __tests__/
 note.md
 test.json
+test-b.json
 test.html
 .env
 .expo-shared/
 yarn-error.log
 .next/
 
-.vercel
+.vercel/

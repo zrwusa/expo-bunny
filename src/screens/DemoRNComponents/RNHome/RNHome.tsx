@@ -6,15 +6,12 @@ import {
     Modal
 } from "react-native";
 import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/base-ui";
-import {
-    imageStyles, imageBackgroundStyles, modalStyles, pressableStyles, statusBarStyles,
-    touchableHighlightStyles, touchableOpacityStyles, touchableWithoutFeedbackStyles
-} from "./styles";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../lang/short-t";
 import getContainerStyles from "../../../containers";
 import {useSizer} from "../../../styles/sizer";
 import {useTheme} from "../../../styles/theme";
+import {getStyles} from "./styles";
 
 const RNHome: React.FC = () => {
     const {t} = useTranslation();
@@ -36,6 +33,20 @@ const RNHome: React.FC = () => {
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
     const sizer = useSizer();
     const theme = useTheme();
+    const {
+        activityIndicatorStyles,
+        switchStyles,
+        imageStyles,
+        imageBackgroundStyles,
+        modalStyles,
+        pressableStyles,
+        sectionListStyles,
+        statusBarStyles,
+        touchableHighlightStyles,
+        touchableOpacityStyles,
+        touchableWithoutFeedbackStyles,
+        virtualizedListStyles,
+    } = getStyles(sizer,theme)
     const containerStyles = getContainerStyles(sizer, theme);
 
 

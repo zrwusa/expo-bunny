@@ -14,11 +14,11 @@ import getSmartStyles from "../../styles/utils/smartStyles";
 const DemoThemeScreen = () => {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.DemoTheme');
-    const styles = getStyles();
     const sizer = useSizer();
     const theme = useTheme();
     const containerStyles = getContainerStyles(sizer, theme);
-    const smartStyle = getSmartStyles(sizer, theme)
+    const smartStyle = getSmartStyles(sizer, theme);
+    const styles = getStyles(sizer,theme);
 
     return (
         <ScrollView>

@@ -1,4 +1,4 @@
-import styles from "./styles";
+import {getStyles} from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
 import {View, Text, TouchableOpacity, Image, ButtonTO, TextBtn} from "../../components/base-ui";
@@ -67,7 +67,7 @@ function DemoShareScreen() {
     const sizer = useSizer();
     const theme = useTheme();
     const containerStyles = getContainerStyles(sizer, theme);
-
+    const styles = getStyles(sizer, theme);
 
     return (
         <View style={[containerStyles.screen, containerStyles.centralized]}>

@@ -97,7 +97,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.black900
             },
             backgroundSecondary: {
-                default: pl.grey50,
+                default: pl.grey200,
                 dark: pl.grey800
             },
             accent: {

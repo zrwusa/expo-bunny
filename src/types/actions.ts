@@ -10,7 +10,7 @@ import {
     RestoreLanguagePayload,
     RestoreNavInitialStatePayload,
     RestoreThemePayload,
-    SignOutPayload,
+    SignOutPayload, SysClearErrorPayload,
     SysErrorPayload,
     SysWarnPayload
 } from "./payloads";
@@ -45,6 +45,11 @@ export interface RestoreAuthGoogle {
 export interface SysError {
     type: ESys.ERROR;
     payload: SysErrorPayload;
+}
+
+export interface SysClearErrors {
+    type: ESys.CLEAR_ERRORS;
+    payload: SysClearErrorPayload;
 }
 
 export interface SysWarn {

@@ -2,7 +2,7 @@ import React, {Component, PureComponent} from "react";
 import {View, Text} from "../base-ui";
 import {getStyles} from "./styles";
 import SizerContext from "../../styles/sizer/SizerContext";
-import {ThemeContext} from "../../styles/theme/theming";
+import {ThemeContext} from "../../styles/theme";
 
 type Props = { title?: string, labelBeenRendered?: string, labelRenderedUnit?: string }
 
