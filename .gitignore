@@ -20,6 +20,7 @@ backup/
 __tests__/
 note.md
 test.json
+test.ts
 test-b.json
 test.html
 .env

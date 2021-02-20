@@ -7,6 +7,11 @@ export interface SignInPayload {
     password: string;
 }
 
+export interface RegisterPayload {
+    email: string;
+    password: string;
+}
+
 export interface SignOutPayload {
     username?: string;
 }
@@ -14,6 +19,10 @@ export interface SignOutPayload {
 export type RestoreAuthPayload = {
     access_token: string | undefined;
     user?: UserRes | null | undefined;
+}
+
+export type RestoreAuthRedirectionPayload = {
+    redirection: string ;
 }
 
 export type RestoreAuthGooglePayload = {

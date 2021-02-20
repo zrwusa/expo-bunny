@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Platform, View} from "react-native";
+import RNPickerSelect from "react-native-picker-select";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoBitcoinStackParam} from "../../../types/stacks";
@@ -23,10 +24,12 @@ type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 export type BitcoinAlertProps = { route?: BitcoinAlertRouteProp, navigation?: BitcoinAlertNavigationProp }
 
-function BitcoinAlertScreen({}: BitcoinAlertProps) {
+export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
     const {t} = useTranslation();
     const i18nPrefix = 'screens.BitcoinAlert';
     const st = stFactory(t, i18nPrefix);
+    const i18nSysPrefix = 'sys';
+    const stSys = stFactory(t, i18nSysPrefix);
     const sizer = useSizer();
     const theme = useTheme();
     const containerStyles = getContainerStyles(sizer, theme);
@@ -42,9 +45,9 @@ function BitcoinAlertScreen({}: BitcoinAlertProps) {
     };
 
 
-
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(initialedNotification);
+    const [granularity, setGranularity] = useState(0.05)
     const request = useRequest();
 
     const saveAlertSetting = async function () {
@@ -57,18 +60,19 @@ function BitcoinAlertScreen({}: BitcoinAlertProps) {
 
     const saveQuickAlertSettings = async function () {
         try {
-            await request.post('/push-notification/alert-quick-setting', {token: expoPushToken})
+            await request.post('/push-notification/alert-quick-setting', {token: expoPushToken,granularity})
         } catch (err) {
+            console.log('---saveQuickAlertSettings err',err)
             dispatch(sysError({error: err}))
         }
     }
 
     const cancelAllAlertSettings = async function () {
-        // try {
+        try {
             await request.put('/push-notification/cancel-all-alert-settings', {token: expoPushToken})
-        // } catch (err) {
-        //     dispatch(sysError({error: err}))
-        // }
+        } catch (err) {
+            dispatch(sysError({error: err}))
+        }
     }
 
     useEffect(() => {
@@ -80,18 +84,18 @@ function BitcoinAlertScreen({}: BitcoinAlertProps) {
             }),
         });
         const initPushNotification = async () => {
-           const token = await registerForPushNotificationsAsync({
-                failedToGetToken: st(`failedToGetToken`),
-                mustUsePhysicalDevice: st(`mustUsePhysicalDevice`)
+            const token = await registerForPushNotificationsAsync({
+                failedToGetToken: stSys(`failedToGetToken`),
+                mustUsePhysicalDevice: stSys(`mustUsePhysicalDevice`)
             })
             if (token) {
                 setExpoPushToken(token);
             }
-            // try {
+            try {
                 await request.post('/push-notification/register-device', {type: "BITCOIN_ALERT", token})
-            // } catch (err) {
-            //     dispatch(sysError({error: err}))
-            // }
+            } catch (err) {
+                dispatch(sysError({error: err}))
+            }
 
             notificationReceivedListener = Notifications.addNotificationReceivedListener((notification) => {
                 setNotification(notification);
@@ -111,14 +115,33 @@ function BitcoinAlertScreen({}: BitcoinAlertProps) {
 
     return Platform.OS !== 'web' ? (
         <View style={containerStyles.screen}>
-            <Text>Your expo push token: {expoPushToken}</Text>
-            {notification
-                ? <View style={containerStyles.centralized}>
-                    <Text>Title: {notification.request.content.title} </Text>
-                    <Text>Body: {notification.request.content.body}</Text>
-                    <Text>Data: {JSON.stringify(notification.request.content.data)}</Text>
-                </View>
-                : null}
+            <View>
+                <RNPickerSelect
+                    value={granularity}
+                    items={[
+                        {label: '0.1%', value: 0.001},
+                        {label: '1%', value: 0.01},
+                        {label: '5%', value: 0.05},
+                        {label: '10%', value: 0.1},
+                        {label: '20%', value: 0.2},
+                        {label: '30%', value: 0.3},
+                    ]}
+                    onValueChange={(itemValue) => setGranularity(itemValue)}
+                >
+                </RNPickerSelect>
+            </View>
+            <View>
+                <Text>Your expo push token: {expoPushToken}</Text>
+                {notification
+                    ? <View style={containerStyles.centralized}>
+                        <Text>Title: {notification.request.content.title} </Text>
+                        <Text>Body: {notification.request.content.body}</Text>
+                        <Text>Data: {JSON.stringify(notification.request.content.data)}</Text>
+                    </View>
+                    : null}
+            </View>
+
+
             <ButtonTO onPress={saveAlertSetting}>
                 <TextBtn>{st(`saveAlertSetting`)}</TextBtn>
             </ButtonTO>
@@ -132,7 +155,7 @@ function BitcoinAlertScreen({}: BitcoinAlertProps) {
     ) : (<Text>Dummy BitcoinAlert</Text>)
 }
 
-export default BitcoinAlertScreen;
+// export default BitcoinAlertScreen;
 // import {View,Text} from "../../../components/base-ui";
 // import React from 'react';
 // export default function BitcoinAlertScreen(){

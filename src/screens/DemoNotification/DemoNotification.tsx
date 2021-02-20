@@ -1,8 +1,11 @@
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import React, {useState, useEffect} from 'react';
-import {Text, View, Button, Platform} from 'react-native';
-import {initialedNotification} from "../../utils/expoNotification";
+import {View, Text, Button} from "../../components/base-ui";
+import {Platform} from 'react-native';
+import {initialedNotification, registerForPushNotificationsAsync, schedulePushNotification} from "../../utils/expoNotification";
+import {stFactory} from "../../lang/short-t";
+import {useTranslation} from "react-i18next";
 
 
 export default function DemoNotificationScreen() {
@@ -20,7 +23,40 @@ export default function DemoNotificationScreen() {
     // const notificationListener = useRef();
     // const responseListener = useRef();
 
+    const {t} = useTranslation()
+    const i18nSysPrefix = 'sys';
+    const stSys = stFactory(t, i18nSysPrefix);
+
     useEffect(() => {
+        // async function registerForPushNotificationsAsync() {
+        //     let token;
+        //     if (Constants.isDevice) {
+        //         const {status: existingStatus} = await Notifications.getPermissionsAsync();
+        //         let finalStatus = existingStatus;
+        //         if (existingStatus !== 'granted') {
+        //             const {status} = await Notifications.requestPermissionsAsync();
+        //             finalStatus = status;
+        //         }
+        //         if (finalStatus !== 'granted') {
+        //             alert('Failed to get push token for push notification!');
+        //             return;
+        //         }
+        //         token = (await Notifications.getExpoPushTokenAsync()).data;
+        //     } else {
+        //         alert('Must use physical device for Push Notifications');
+        //     }
+        //
+        //     if (Platform.OS === 'android') {
+        //         await Notifications.setNotificationChannelAsync('default', {
+        //             name: 'default',
+        //             importance: Notifications.AndroidImportance.MAX,
+        //             vibrationPattern: [0, 250, 250, 250],
+        //             lightColor: '#FF231F7C',
+        //         });
+        //     }
+        //     return token;
+        // }
+
         Notifications.setNotificationHandler({
             handleNotification: async () => ({
                 shouldShowAlert: true,
@@ -28,19 +64,23 @@ export default function DemoNotificationScreen() {
                 shouldSetBadge: false,
             }),
         });
-        registerForPushNotificationsAsync().then(token => {
-            if (token) {
-                setExpoPushToken(token)
-            }
-        });
+        registerForPushNotificationsAsync({
+            failedToGetToken: stSys(`failedToGetToken`),
+            mustUsePhysicalDevice: stSys(`mustUsePhysicalDevice`)
+        })
+            .then(token => {
+                if (token) {
+                    setExpoPushToken(token)
+                }
+            });
 
         notificationReceivedListener = Notifications.addNotificationReceivedListener(notification => {
-            console.log('---notification',notification);
+            console.log('---notification', notification);
             setNotification(notification);
         });
 
         notificationRespondedListener = Notifications.addNotificationResponseReceivedListener(response => {
-            console.log('---response',response);
+            console.log('---response', response);
         });
 
         return () => {
@@ -73,50 +113,3 @@ export default function DemoNotificationScreen() {
     ) : (<Text>Dummy notification</Text>)
 
 }
-
-async function schedulePushNotification() {
-    await Notifications.scheduleNotificationAsync({
-        content: {
-            title: "You've got mail! 📬",
-            body: 'Here is the notification body',
-            sound: 'default',
-            data: {data: 'goes here'},
-        },
-        trigger: {seconds: 2},
-    });
-}
-
-async function registerForPushNotificationsAsync() {
-    let token;
-    if (Constants.isDevice) {
-        const {status: existingStatus} = await Notifications.getPermissionsAsync();
-        let finalStatus = existingStatus;
-        if (existingStatus !== 'granted') {
-            const {status} = await Notifications.requestPermissionsAsync();
-            finalStatus = status;
-        }
-        if (finalStatus !== 'granted') {
-            alert('Failed to get push token for push notification!');
-            return;
-        }
-        token = (await Notifications.getExpoPushTokenAsync()).data;
-    } else {
-        alert('Must use physical device for Push Notifications');
-    }
-
-    if (Platform.OS === 'android') {
-        await Notifications.setNotificationChannelAsync('default', {
-            name: 'default',
-            importance: Notifications.AndroidImportance.MAX,
-            vibrationPattern: [0, 250, 250, 250],
-            lightColor: '#FF231F7C',
-        });
-    }
-
-    return token;
-}
-// import {View,Text} from "../../components/base-ui";
-// import React from 'react';
-// export default function DemoNotificationScreen(){
-//     return (<View><Text>xxx</Text></View>)
-// }

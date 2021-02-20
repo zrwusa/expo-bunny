@@ -1,13 +1,4 @@
 import 'setimmediate'
-// if (!global.localStorage) {
-//     global.localStorage = {
-//         clear: () => undefined,
-//         getItem: (key: string): string | null => '',
-//         key: (index: number): string | null => '',
-//         removeItem: (key: string): void => undefined,
-//         setItem: (key: string, value: string): void => undefined
-//     }
-// }
 import Index from '../src/index'
 import React from 'react'
 import Head from 'next/head'

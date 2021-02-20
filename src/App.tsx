@@ -58,10 +58,12 @@ function App() {
                 try {
                     const accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
                     const user = await AsyncStorage.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
-                    accessToken && dispatch(restoreAuth({
-                        access_token: accessToken,
-                        user: user ? JSON.parse(user) : {}
-                    }));
+                    if(accessToken){
+                        dispatch(restoreAuth({
+                            access_token: accessToken,
+                            user: user ? JSON.parse(user) : {}
+                        }));
+                    }
                 } catch (err) {
                     dispatch(sysError(err.toString()));
                 } finally {

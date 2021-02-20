@@ -178,6 +178,12 @@ const NavigationTree: React.FC<NavigatorTreeProps> = (props) => {
                 path: "home",
                 navigatorType: "stack"
             },
+            // {
+            //     component: SignInScreen,
+            //     name: "SignIn",
+            //     path: "sign-in",
+            //     navigatorType: "stack"
+            // },
             {
                 component: ProfileScreen,
                 name: "Profile",
@@ -187,7 +193,6 @@ const NavigationTree: React.FC<NavigatorTreeProps> = (props) => {
                 },
                 navigatorType: "stack"
             },
-
             {
                 component: DemoFCReduxHookScreen,
                 name: "DemoFCReduxHook",

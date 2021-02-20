@@ -1,7 +1,9 @@
 {
   "titleFormat": "ExpoReactBunny",
   "sys": {
-    "navigationFallback": "Navigation fallback..."
+    "navigationFallback": "Navigation fallback...",
+    "failedToGetToken": "Failed to get push token for push notification!",
+    "mustUsePhysicalDevice": "Must use physical device for Push Notifications"
   },
   "screens": {
     "Home": {
@@ -103,9 +105,7 @@
     },
     "DemoNotification": {
       "title": "DemoNotification",
-      "scheduleNotification": "Press to schedule a notification",
-      "failedToGetToken": "Failed to get push token for push notification!",
-      "mustUsePhysicalDevice": "Must use physical device for Push Notifications"
+      "scheduleNotification": "Press to schedule a notification"
     },
     "SignIn": {
       "title": "SignIn",

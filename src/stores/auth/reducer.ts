@@ -1,12 +1,13 @@
 import {EAuth} from "../../utils/constants";
 import {AuthActions} from "./actions";
 import {Auth} from "../../types/models";
-import {RestoreAuthPayload, RestoreAuthGooglePayload} from "../../types/payloads";
+import {RestoreAuthPayload, RestoreAuthGooglePayload, RestoreAuthRedirectionPayload} from "../../types/payloads";
 
 export const initialAuthState: Auth = {
     isLoading: true,
     isSignOut: false,
     accessToken: undefined,
+    redirection: undefined
 };
 
 export function authReducer(state: Auth = initialAuthState, {type, payload}: AuthActions): Auth {
@@ -31,6 +32,11 @@ export function authReducer(state: Auth = initialAuthState, {type, payload}: Aut
                 accessToken: (<RestoreAuthGooglePayload>payload).accessToken,
                 isLoading: false,
                 user: (<RestoreAuthGooglePayload>payload).user
+            };
+        case EAuth.RESTORE_AUTH_REDIRECTION:
+            return {
+                ...state,
+                redirection:(<RestoreAuthRedirectionPayload>payload).redirection
             };
         default:
             return state;

@@ -39,6 +39,19 @@ export const registerForPushNotificationsAsync = async (copywriting: Copywriting
     return token;
 }
 
+
+export const schedulePushNotification = async () => {
+    await Notifications.scheduleNotificationAsync({
+        content: {
+            title: "You've got mail! 📬",
+            body: 'Here is the notification body',
+            sound: 'default',
+            data: {data: 'goes here'},
+        },
+        trigger: {seconds: 2},
+    });
+}
+
 export const initialedNotification: Notification = {
     "request": {
         "trigger": {

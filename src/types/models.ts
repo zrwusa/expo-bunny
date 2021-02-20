@@ -70,7 +70,8 @@ export type Auth = {
     isLoading: boolean,
     isSignOut: boolean,
     accessToken: undefined | string | null,
-    user?: (UserRes | null) | GoogleUser
+    user?: (UserRes | null) | GoogleUser,
+    redirection?:string | void
 }
 
 export type Sys = {

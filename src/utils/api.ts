@@ -1,7 +1,9 @@
 import axios, {AxiosRequestConfig, AxiosResponse, Method} from "axios";
 import store from "../stores";
 import bunnyConfig from "../config.json";
+import {getStatusDes} from "./http-constants"
 import {sysError} from "../stores/sys/actions";
+import {restoreAuthRedirection} from "../stores/auth/actions";
 
 // interface Seal {
 //     name: string;
@@ -24,7 +26,7 @@ const api = axios.create({
         : bunnyConfig.isRemoteBackEnd
             ? `${httpPrefix}${bunnyConfig.remoteBackEnd.domain}:${bunnyConfig.remoteBackEnd.port}`
             : `${httpPrefix}${bunnyConfig.localBackEnd.domain}:${bunnyConfig.localBackEnd.port}`,
-    timeout: 1000
+    timeout: 2000
 });
 
 type TimeRecorder = {
@@ -65,24 +67,34 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
     (response) => {
+        // 200-300
         // console.log('---response.config',response.config)
         // if (response.config) {
         //     //perform the manipulation here and change the response object
         // }
-        // calculateTimeRecorder(response.config.timeRecorder);
-        // console.log('---response.config.timeRecorder', response.config.timeRecorder.duration)
-        if (response.status === 401) {
-            console.log('---response.status === 401', true)
-        }
+
+        const httpStatusDes = getStatusDes(response.status)
+        console.log('---interceptors response', response.status)
         return response
     },
     async function (error) {
-        // calculateTimeRecorder(error.config.timeRecorder);
-        // console.log('---error.config.timeRecorder.duration', error.config.timeRecorder.duration)
-
+        console.log('---interceptors error')
         const originalRequest = error.config;
-
-        if (error.response) {
+        // console.log('---error.response.data',error.response.data);
+        // console.log('---error.response.status',error.response.status);
+        // console.log('---error.response.headers',error.response.headers);
+        const {response, request} = error;
+        const {dispatch} = store;
+        if (response) {
+            //300-600
+            /*
+            * The request was made and the server responded with a
+            * status code that falls out of the range of 2xx
+            */
+            const {status} = response;
+            const {data} = response;
+            const httpStatusDes = getStatusDes(status)
+            console.log('---interceptors error.response');
             // if (!response.ok) {
             //     if ([401, 403].indexOf(response.status) !== -1) {
             //         // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
@@ -93,20 +105,36 @@ api.interceptors.response.use(
             //     const error = (data && data.message) || response.statusText;
             //     return Promise.reject(error);
             // }
-            if (error.response.status === 403 && !originalRequest._retry) {
+            console.log('---interceptors error.response.status,data', status, data);
+
+            if (status === 403 && !originalRequest._retry) {
+                console.log('---interceptors error.response.status === 403');
                 originalRequest._retry = true;
                 // const access_token = await refreshAccessToken();
                 const access_token = "";
                 axios.defaults.headers.common["Authorization"] = `Bearer ` + access_token;
                 return api(originalRequest);
-            } else if (error.response.status === 401) {
-
+            } else if (status === 401) {
+                return Promise.reject({serverProtocol: data, httpStatusDes});
+            } else if (status === 422) { //Business logic error
+                return Promise.reject({serverProtocol: data, httpStatusDes});
+            } else if (status === 409) {
+                dispatch(restoreAuthRedirection({redirection: 'login'}))
+                return Promise.reject({serverProtocol: data, httpStatusDes});
+            } else {
+                return Promise.reject({serverProtocol: data, httpStatusDes});
             }
-            // if (error.response && error.response.data) {
-            //     return Promise.reject(error.response.data);
-            // }
+        } else if (request) {
+            // 100-200 timeout
+            /*
+            * The request was made but no response was received, `error.request`
+            * is an instance of XMLHttpRequest in the browser and an instance
+            * of http.ClientRequest in Node.js
+            */
+            console.log('---interceptors error.request', JSON.stringify(error));
         } else {
-            // console.error(`[React Bunny Warn]Request failed,first do not forget to run the mock server in another terminal with command 'yarn mock'`)
+            // Something happened in setting up the request and triggered an Error
+            console.log('---interceptors error.message', error.message);
         }
         return Promise.reject(error);
     });
@@ -114,10 +142,14 @@ const request = async <T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig
     const startTime = new Date().getTime();
 
     try {
-        return await api.request(config);
+        const result = await api.request(config);
+        // console.log('---base request response')
+        return result;
     } catch (error) {
+        // console.log('---base request error')
         const timeSpent = new Date().getTime() - startTime;
         throw error // If throw error and not caught,React Native RedBox will catch the errors
+
         // if(bunnyConfig.shouldCollectError){
         //     const {dispatch} = store;
         //     const {request,response} = error;

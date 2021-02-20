@@ -1,6 +1,13 @@
 import api from "../../utils/api";
-import {RestoreAuth, RestoreAuthGoogle, SignOut, SysError, SysWarn} from "../../types/actions";
-import {RestoreAuthGooglePayload, RestoreAuthPayload, SignInPayload, SignOutPayload} from "../../types/payloads";
+import {RestoreAuth, RestoreAuthGoogle, RestoreAuthRedirection, SignOut, SysError, SysWarn} from "../../types/actions";
+import {
+    RegisterPayload,
+    RestoreAuthGooglePayload,
+    RestoreAuthPayload,
+    RestoreAuthRedirectionPayload,
+    SignInPayload,
+    SignOutPayload
+} from "../../types/payloads";
 import {EAuth} from "../../utils/constants";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -98,6 +105,31 @@ export const signInGoogle: ActionCreator<ThunkAction<Promise<Action>, Auth, void
     };
 };
 
+export const register: ActionCreator<ThunkAction<Promise<Action>, Auth, void, RestoreAuth>> = (reqParams: RegisterPayload) => {
+    return async (dispatch: Dispatch<RestoreAuth | SysError>): Promise<Action> => {
+        let result;
+        try {
+            const res = await api.post<RegisterPayload, AxiosResponse<AuthRes>>(`/auth/register`, reqParams)
+            const {data} = res;
+            console.log('---res',res)
+            if (res.data) {
+                data.access_token
+                    ? await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
+                    : dispatch(sysError({error: new BusinessLogicError('No access_token responded')}))
+                data.user
+                    ? await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
+                    : dispatch(sysError({error: new BusinessLogicError('No user info responded')}))
+                result = dispatch(restoreAuth(data))
+            } else {
+                result = dispatch(sysError({error: new BusinessLogicError('No data')}))
+            }
+        } catch (err) {
+            result = dispatch(sysError({error: err}))
+        }
+        return result;
+    };
+};
+
 export const signOutAndRemove: ActionCreator<ThunkAction<Promise<Action>, Auth, void, SignOut>> = () => {
     return async (dispatch: Dispatch<SignOut | SysError>): Promise<Action> => {
         let result;
@@ -119,6 +151,13 @@ export const restoreAuth: (payload: RestoreAuthPayload) => RestoreAuth = (payloa
     };
 };
 
+export const restoreAuthRedirection: (payload: RestoreAuthRedirectionPayload) => RestoreAuthRedirection = (payload) => {
+    return {
+        type: EAuth.RESTORE_AUTH_REDIRECTION,
+        payload: payload,
+    };
+};
+
 const signOut: (payload: SignOutPayload) => SignOut = (payload) => {
     return {
         type: EAuth.SIGN_OUT,
@@ -133,4 +172,4 @@ const restoreAuthGoogle: (payload: RestoreAuthGooglePayload) => RestoreAuthGoogl
     };
 };
 
-export type AuthActions = SignOut | RestoreAuth | RestoreAuthGoogle ;
+export type AuthActions = SignOut | RestoreAuth | RestoreAuthGoogle | RestoreAuthRedirection ;

@@ -5,7 +5,7 @@ import {
     DemoHelloPayload,
     DemoThunkSuccessPayload,
     RestoreAuthGooglePayload,
-    RestoreAuthPayload,
+    RestoreAuthPayload, RestoreAuthRedirectionPayload,
     RestoreIsReadyPayload,
     RestoreLanguagePayload,
     RestoreNavInitialStatePayload,
@@ -34,6 +34,11 @@ export interface SignOut {
 export interface RestoreAuth {
     type: EAuth.RESTORE_AUTH;
     payload: RestoreAuthPayload;
+}
+
+export interface RestoreAuthRedirection {
+    type: EAuth.RESTORE_AUTH_REDIRECTION;
+    payload: RestoreAuthRedirectionPayload;
 }
 
 export interface RestoreAuthGoogle {
