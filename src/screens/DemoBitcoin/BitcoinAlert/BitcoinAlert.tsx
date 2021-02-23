@@ -3,20 +3,20 @@ import {Platform, View} from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
-import {DemoBitcoinStackParam} from "../../../types/stacks";
-import {ButtonTO, Text, TextBtn} from "../../../components/base-ui";
+import {DemoBitcoinStackParam} from "../../../types";
+import {ButtonTO, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../lang/short-t";
+import {stFactory} from "../../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../../containers";
-import {useSizer} from "../../../styles/sizer";
-import {useTheme} from "../../../styles/theme";
+import {useSizeLabor} from "../../../providers/sizeLabor";
+import {useThemeLabor} from "../../../providers/themeLabor";
 import * as Notifications from "expo-notifications";
 import {useEffect, useState} from "react";
-import {useRequest} from "../../../utils/requestHooks";
+import {useRequest} from "../../../providers/requestHooks";
 import {
     initialedNotification,
     registerForPushNotificationsAsync
-} from "../../../utils/expoNotification";
+} from "../../../utils/expo-notification";
 import {sysError} from "../../../stores/sys/actions";
 import {useDispatch} from "react-redux";
 
@@ -26,13 +26,12 @@ export type BitcoinAlertProps = { route?: BitcoinAlertRouteProp, navigation?: Bi
 
 export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.BitcoinAlert';
-    const st = stFactory(t, i18nPrefix);
+    const st = stFactory(t, 'screens.BitcoinAlert');
     const i18nSysPrefix = 'sys';
     const stSys = stFactory(t, i18nSysPrefix);
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch()
 
     let notificationReceivedListener = {
@@ -60,9 +59,8 @@ export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
 
     const saveQuickAlertSettings = async function () {
         try {
-            await request.post('/push-notification/alert-quick-setting', {token: expoPushToken,granularity})
+            await request.post('/push-notification/alert-quick-setting', {token: expoPushToken, granularity})
         } catch (err) {
-            console.log('---saveQuickAlertSettings err',err)
             dispatch(sysError({error: err}))
         }
     }

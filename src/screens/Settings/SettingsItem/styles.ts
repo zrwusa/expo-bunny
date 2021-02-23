@@ -1,11 +1,11 @@
 import {StyleSheet, Platform} from "react-native";
-import {useSizer} from "../../../styles/sizer";
-import {Sizer, Theme} from "../../../types/styles";
+import {useSizeLabor} from "../../../providers/sizeLabor";
+import {SizeLabor, Theme, ThemeLabor} from "../../../types/styles";
 
-export const getStyles = (sizer: Sizer, theme: Theme) => {
-    const {ms, responsive} = sizer;
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {ms, responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
-    const {colors} = theme;
+    const {colors} = themeLabor.theme;
     return StyleSheet.create({
         item: {
             flexDirection: 'row',

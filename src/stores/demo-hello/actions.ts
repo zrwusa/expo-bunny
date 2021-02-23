@@ -1,4 +1,4 @@
-import {EDemoHello} from "../../utils/constants";
+import {EDemoHello} from "../../constants/constants";
 import {DemoHello2Payload, DemoHelloPayload} from "../../types/payloads";
 import {DemoHello, DemoHello2} from "../../types/actions";
 

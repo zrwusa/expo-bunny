@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import api from "../../utils/api";
-import {View, Text, ButtonTO, TextBtn} from "../base-ui";
+import {View, Text, ButtonTO, TextBtn} from "../UI";
 import {DemoEmployee} from "../../types/models";
 
 type Props = { title: string, buttonTitle: string }
@@ -18,29 +18,29 @@ class DemoRequest extends Component<Props, States> {
 
     async getEmployees() {
         let employees;
-        // try {
+        try {
             const res = await api.get(`/employees`);
-            if(res){
+            if (res) {
                 employees = res.data;
                 this.setState({employees: employees});
             }
 
-        // } catch (e) {
-        //     employees = [{email: "dummy email", first_name: "dummy first name,request failed"}];
-        // }
+        } catch (e) {
+            employees = [{email: "dummy email", first_name: "dummy first name,request failed"}];
+        }
 
     }
 
 
     render(): React.ReactNode {
-        const {buttonTitle} = this.props
+        const {buttonTitle} = this.props;
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>{this.state.name}</Text>
             <ButtonTO onPress={this.getEmployees}><TextBtn>{buttonTitle}</TextBtn></ButtonTO>
             <View>
                 {this.state.employees.map((employee) =>
-                    <Text key={employee.email.toString()}>
+                    <Text key={employee.id}>
                         {employee.first_name}
                     </Text>
                 )}

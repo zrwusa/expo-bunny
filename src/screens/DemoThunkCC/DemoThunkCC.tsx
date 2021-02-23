@@ -1,17 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ButtonRNE, Text, View} from "../../components/base-ui";
+import {ButtonRNE, Text, View} from "../../components/UI";
 import {demoThunk} from "../../stores/demo-thunk/actions";
 import {DemoThunk, RootState} from "../../types/models";
-import {DemoThunkPayload} from "../../types/payloads";
+import {DemoThunkPayload} from "../../types";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../containers";
-import {WithSizer, withSizer} from "../../styles/sizer";
-import {withTheme} from "../../styles/theme";
-import {WithTheme} from "../../types/styles";
+import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
+import {withThemeLabor} from "../../providers/themeLabor";
+import {WithThemeLabor} from "../../types";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) =>
 });
 type Props = ReturnType<typeof mapStateToProps>
     & ReturnType<typeof mapDispatchToProps> & WithTranslation
-    & WithTheme & WithSizer;
+    & WithThemeLabor & WithSizeLabor;
 
 class DemoThunkCCScreen extends React.Component<Props> {
     constructor(props: Props) {
@@ -37,10 +37,10 @@ class DemoThunkCCScreen extends React.Component<Props> {
     }
 
     render(): React.ReactNode {
-        const {t, sizer} = this.props;
-        const {text, id, theme} = this.props;
+        const {text, id, t, sizeLabor, themeLabor} = this.props;
+        const {theme} = themeLabor;
         const st = stFactory(t, 'screens.DemoThunkCC');
-        const containerStyles = getContainerStyles(sizer, theme);
+        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
         return (
             <View style={containerStyles.screen}>
@@ -54,4 +54,4 @@ class DemoThunkCCScreen extends React.Component<Props> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withTheme(withSizer(DemoThunkCCScreen))));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withThemeLabor(withSizeLabor(DemoThunkCCScreen))));

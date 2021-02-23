@@ -1,8 +1,8 @@
 import * as React from "react";
 import {getStyles} from "./styles";
-import {View, Text, SwitchP} from "../../../components/base-ui";
-import {useSizer} from "../../../styles/sizer";
-import {useTheme} from "../../../styles/theme";
+import {View, Text, SwitchP} from "../../../components/UI";
+import {useSizeLabor} from "../../../providers/sizeLabor";
+import {useThemeLabor} from "../../../providers/themeLabor";
 
 export type SettingsItemProps = {
     label: string;
@@ -11,9 +11,9 @@ export type SettingsItemProps = {
 };
 
 export default function SettingsItem({label, value, onValueChange}: SettingsItemProps) {
-    const sizer = useSizer();
-    const theme = useTheme();
-    const styles = getStyles(sizer,theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const styles = getStyles(sizeLabor, themeLabor);
     return (
         <View style={styles.item}>
             <Text>{label}</Text>

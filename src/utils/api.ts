@@ -1,9 +1,9 @@
-import axios, {AxiosRequestConfig, AxiosResponse, Method} from "axios";
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import store from "../stores";
 import bunnyConfig from "../config.json";
-import {getStatusDes} from "./http-constants"
-import {sysError} from "../stores/sys/actions";
-import {restoreAuthRedirection} from "../stores/auth/actions";
+import {getStatusDes} from "../constants/http"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BunnyConstants from "../constants/constants";
 
 // interface Seal {
 //     name: string;
@@ -29,36 +29,16 @@ const api = axios.create({
     timeout: 2000
 });
 
-type TimeRecorder = {
-    startTime: number,
-    endTime: number,
-    duration: number
-}
-
-const calculateTimeRecorder = (timeRecorder: TimeRecorder) => {
-    timeRecorder.endTime = new Date().getTime();
-    timeRecorder.duration = timeRecorder.endTime - timeRecorder.startTime;
-    return timeRecorder;
-}
-
 api.interceptors.request.use(
-    (config) => {
-
-        const {authState} = store.getState();
-        if (authState.accessToken) {
+    async (config) => {
+        const accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY)
+        if (accessToken) {
             config.headers = {
-                "Authorization": `Bearer ${authState.accessToken}`,
+                "Authorization": `Bearer ${accessToken}`,
                 // "Accept": "application/json",
                 // "Content-Type": "application/x-www-form-urlencoded"
             }
         }
-
-        // config.timeRecorder = {
-        //     startTime: new Date().getTime(),
-        //     endTime: 0,
-        //     duration: 0
-        // };
-
         return config;
     },
     async error => {
@@ -119,7 +99,7 @@ api.interceptors.response.use(
             } else if (status === 422) { //Business logic error
                 return Promise.reject({serverProtocol: data, httpStatusDes});
             } else if (status === 409) {
-                dispatch(restoreAuthRedirection({redirection: 'login'}))
+                // dispatch(restoreAuthRedirection({redirection: 'sign-in'}))
                 return Promise.reject({serverProtocol: data, httpStatusDes});
             } else {
                 return Promise.reject({serverProtocol: data, httpStatusDes});
@@ -138,7 +118,7 @@ api.interceptors.response.use(
         }
         return Promise.reject(error);
     });
-const request = async <T = any, R = AxiosResponse<T>>(config: AxiosRequestConfig) => {
+const request = async (config: AxiosRequestConfig) => {
     const startTime = new Date().getTime();
 
     try {

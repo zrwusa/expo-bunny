@@ -3,15 +3,15 @@ import {ScrollView, View} from "react-native";
 import {RouteProp, useLinkTo} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
-import {signOutAndRemove} from "../../stores/auth/actions";
-import {RootStackParam} from "../../types/stacks";
-import {ButtonTO, TextBtn, Link} from "../../components/base-ui";
+import {RootStackParam} from "../../types";
+import {ButtonTO, TextBtn, Link} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../containers";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
 import {Card} from "../../containers/Card";
+import {useAuthLabor} from "../../providers/authLabor";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -22,9 +22,10 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const st = stFactory(t, 'screens.Home');
     const dispatch = useDispatch();
     const linkTo = useLinkTo();
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {authFunctions} = useAuthLabor()
 
     return (
         <ScrollView>
@@ -82,7 +83,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 </Card>
                 <Card title={st(`system`)}>
                     <Link to="/settings">{st(`settings`)}</Link>
-                    <ButtonTO onPress={() => dispatch(signOutAndRemove())}>
+                    <ButtonTO onPress={() => {
+                        authFunctions.signOutAndRemove()
+                    }}>
                         <TextBtn>{st(`signOut`)}</TextBtn></ButtonTO>
                 </Card>
             </View>

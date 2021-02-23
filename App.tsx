@@ -1,6 +1,4 @@
 import {Platform} from "react-native";
-import BunnyConstants from "./src/utils/constants";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export {default} from "./src/index";
 

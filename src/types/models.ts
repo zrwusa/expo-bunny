@@ -1,4 +1,3 @@
-import {GoogleUser} from "expo-google-app-auth";
 import {InitialState} from "@react-navigation/native";
 import {ImageSourcePropType} from "react-native";
 
@@ -21,12 +20,14 @@ export type DemoThunk = {
 }
 
 export type DemoEmployee = {
+    id: number,
     first_name: string,
     last_name: string,
     email: string,
 }
 
 export type NearbyFilm = {
+    id: string,
     title: string,
     coordinate: {
         latitude: number,
@@ -50,30 +51,6 @@ export type DemoMap = {
     region: Region,
 }
 
-export type UserReq = {
-    email: string,
-    password: string,
-    nickname: string
-}
-
-export type UserRes = {
-    email: string,
-    nickname: string
-}
-
-export type AuthRes = {
-    access_token: string | undefined,
-    user?: UserRes | null,
-}
-
-export type Auth = {
-    isLoading: boolean,
-    isSignOut: boolean,
-    accessToken: undefined | string | null,
-    user?: (UserRes | null) | GoogleUser,
-    redirection?:string | void
-}
-
 export type Sys = {
     error: Error[],
     warn: string[],
@@ -85,7 +62,6 @@ export type Sys = {
 
 export interface RootState {
     sysState: Sys,
-    authState: Auth,
     demoHelloState: DemoHello,
     demoHello2State: DemoHello2,
     demoThunkState: DemoThunk,

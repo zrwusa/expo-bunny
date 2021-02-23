@@ -1,12 +1,12 @@
 import {StyleSheet} from "react-native";
-import {Sizer, Theme} from "../../types/styles";
-import getSmartStyles from "../../styles/utils/smartStyles";
+import {SizeLabor, ThemeLabor} from "../../types";
+import getSmartStyles from "../../utils/smartStyles";
 
-export const getStyles = (sizer: Sizer, theme: Theme) => {
-    const {ms, responsive} = sizer;
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {ms, responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
-    const {absoluteBottomLeft} = getSmartStyles(sizer, theme);
-    const {colors} = theme;
+    const {absoluteBottomLeft} = getSmartStyles(sizeLabor, themeLabor);
+    const {colors} = themeLabor.theme;
 
     return StyleSheet.create({
         errorConsole: {
@@ -15,15 +15,15 @@ export const getStyles = (sizer: Sizer, theme: Theme) => {
             zIndex: 1000,
             width: wp(375),
             // height: wp(200)
-            padding:ms.sp.s
+            padding: ms.sp.s
         },
-        errorText:{
+        errorText: {
             width: wp(375),
             height: wp(100),
         },
-        buttonBox:{
-            flexDirection:"row",
-           justifyContent:"space-evenly"
+        buttonBox: {
+            flexDirection: "row",
+            justifyContent: "space-evenly"
         }
     });
 }

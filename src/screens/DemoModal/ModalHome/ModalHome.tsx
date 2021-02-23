@@ -1,14 +1,14 @@
 import * as React from "react";
-import {View} from "../../../components/base-ui";
+import {View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../lang/short-t";
+import {stFactory} from "../../../providers/i18nLabor/short-t";
 import {ScrollView} from "react-native";
-import {DemoModalStackParam} from "../../../types/stacks";
+import {DemoModalStackParam} from "../../../types";
 import getContainerStyles from "../../../containers";
-import {useSizer} from "../../../styles/sizer";
-import {useTheme} from "../../../styles/theme";
+import {useSizeLabor} from "../../../providers/sizeLabor";
+import {useThemeLabor} from "../../../providers/themeLabor";
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;
@@ -17,9 +17,9 @@ export type ModalHomeProps = { route: ModalHomeRouteProp; navigation: ModalHomeN
 function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.ModalHome');
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
         <ScrollView>

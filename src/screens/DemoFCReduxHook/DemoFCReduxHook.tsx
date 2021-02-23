@@ -2,21 +2,21 @@ import React from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {demoHello} from "../../stores/demo-hello/actions";
 import {RootState} from "../../types/models";
-import {ButtonRNE, Text, View} from "../../components/base-ui";
+import {ButtonRNE, Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../containers";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
 
 const DemoFCReduxHookScreen: React.FC = () => {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.DemoFCReduxHook');
     const dispatch = useDispatch();
     const demoHelloState = useSelector((store: RootState) => store.demoHelloState);
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
         <View style={containerStyles.screen}>

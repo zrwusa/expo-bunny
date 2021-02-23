@@ -1,44 +1,44 @@
 import * as React from "react";
 import SettingsItem from "./SettingsItem";
-import {useDispatch, useSelector} from "react-redux";
-import {restoreAndSaveLanguage, restoreAndSaveTheme} from "../../stores/sys/actions";
-import {RootState} from "../../types/models";
 import {I18nManager} from "react-native";
-import {ELanguage, EThemes} from "../../utils/constants";
+import {ELanguage, EThemes} from "../../constants/constants";
 import {restartApp} from '../../restart';
-import BunnyConstants from "../../utils/constants";
+import BunnyConstants from "../../constants/constants";
 import {useTranslation} from "react-i18next";
-import {View} from "../../components/base-ui";
-import {stFactory} from "../../lang/short-t";
+import {View} from "../../components/UI";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../containers";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
+import {useState} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SettingsScreen() {
     const {t, i18n} = useTranslation();
     const st = stFactory(t, 'screens.Settings');
-    const sysState = useSelector((rootState: RootState) => rootState.sysState)
-    const dispatch = useDispatch()
-    const {themeName, language} = sysState;
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
-
+    const [language, setLanguage] = useState(i18n.language === ELanguage.zh)
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {theme, changeTheme} = themeLabor;
     return (
         <View style={containerStyles.screen}>
             <SettingsItem
                 label={st(`darkTheme`)}
-                value={themeName === EThemes.dark}
-                onValueChange={(value) => {
-                    dispatch(restoreAndSaveTheme({themeName: value ? EThemes.dark : EThemes.default}));
+                value={theme.dark}
+                onValueChange={async (value) => {
+                    const themeName = value ? EThemes.dark : EThemes.light;
+                    await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, themeName)
+                    changeTheme(themeName);
                 }}
             />
             <SettingsItem label={st(`language`)}
-                          value={language === ELanguage.zh}
-                          onValueChange={(value) => {
+                          value={language}
+                          onValueChange={async (value) => {
                               const lang = value ? ELanguage.zh : ELanguage.en;
-                              i18n.changeLanguage(lang).then(() => undefined)
-                              dispatch(restoreAndSaveLanguage({language: lang}));
+                              await i18n.changeLanguage(lang)
+                              await AsyncStorage.setItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY, lang);
+                              setLanguage(lang === ELanguage.zh);
                           }}/>
             <SettingsItem
                 label={st(`rightToLeft`)}

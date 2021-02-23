@@ -1,17 +1,17 @@
 import React from "react";
-import {Text, View} from "../base-ui"
+import {Text, View} from "../UI"
 import {getStyles} from "./styles";
-import {useTheme} from "../../styles/theme";
-import {useSizer} from "../../styles/sizer";
+import {useThemeLabor} from "../../providers/themeLabor";
+import {useSizeLabor} from "../../providers/sizeLabor";
 
 interface Props {
     title: string
 }
 
 export const DemoLazy: React.FC<Props> = (props) => {
-    const sizer = useSizer();
-    const theme = useTheme()
-    const styles = getStyles(sizer,theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const styles = getStyles(sizeLabor, themeLabor);
     return (
         <View>
             <Text style={styles.text}>{props.title}</Text>

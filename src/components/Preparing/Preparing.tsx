@@ -1,17 +1,22 @@
 import React from "react";
-import {View} from "../base-ui"
 import {getStyles} from "./styles";
-import {ActivityIndicator} from "react-native";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {ActivityIndicator,Text,View} from "react-native";
 
-export const Preparing: React.FC = () => {
-    const sizer = useSizer();
-    const theme = useTheme();
-    const styles = getStyles(sizer,theme)
+export type PreparingProps = { text?: string | JSX.Element }
+export const Preparing: React.FC<PreparingProps> = (props) => {
+    const {text} = props;
+    const styles = getStyles();
     return (
         <View style={styles.container}>
             <ActivityIndicator size="large"/>
+            {text
+                ? typeof text === 'string'
+                    ? <Text style={styles.text}>
+                        {text}
+                    </Text>
+                    : {text}
+                : null
+            }
         </View>
     )
 }

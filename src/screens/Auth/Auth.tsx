@@ -1,69 +1,59 @@
 import {Platform} from "react-native";
 import * as React from "react";
-import {signIn, signInGoogle, signInDummy, register} from "../../stores/auth/actions";
-import {useDispatch, useSelector} from "react-redux";
-import {View, Text, ButtonRNE, TextInput} from "../../components/base-ui";
+import {useDispatch} from "react-redux";
+import {View, ButtonRNE, TextInput} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../containers";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
-import {RootState} from "../../types/models";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
 import {useState} from "react";
+import {useAuthLabor} from "../../providers/authLabor";
 
-export type AuthProps = { type?: 'login' | 'register' }
-export const SignInScreen = (props: AuthProps) => {
+export type AuthProps = { type?: 'sign-in' | 'sign-up' }
+export const AuthScreen = (props: AuthProps) => {
     const dispatch = useDispatch();
     const {t} = useTranslation();
-    const i18nPrefix = 'screens.SignIn';
-    const st = stFactory(t, i18nPrefix);
-    const sizer = useSizer();
-    const theme = useTheme();
-    const {redirection} = useSelector((rootState: RootState) => rootState.authState)
-    const containerStyles = getContainerStyles(sizer, theme);
-    let initType;
-    if (props.type) {
-        initType = props.type;
-    } else {
-        initType = (redirection === 'login' || redirection === 'register') ? redirection : undefined;
-    }
-    const [type, setType] = useState(initType);
+    const st = stFactory(t, 'screens.Auth');
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const [type, setType] = useState('sign-in');
+    const {authFunctions} = useAuthLabor()
 
     return (
         <View style={containerStyles.screen}>
             <TextInput placeholder={st(`username`)}/>
             <TextInput placeholder={st(`password`)} secureTextEntry/>
             {
-                type === 'login'
+                type === 'sign-in'
                     ? <>
                         <ButtonRNE onPress={() => {
-                            dispatch(signIn({email: 'bruno@email.com', password: 'bruno'}))
+                            authFunctions.signIn({email: 'bruno@email.com', password: 'bruno'})
                         }} title={st(`signIn`)}/>
                         <ButtonRNE onPress={() => {
-                            dispatch(signInDummy())
+                            authFunctions.signInDummy()
                         }} title={st(`signInDummy`)}/>
                         <ButtonRNE onPress={() => {
-                            setType('register')
-                        }} title={st(`goToRegister`)}/>
+                            setType('signUp')
+                        }} title={st(`goToSignUp`)}/>
                     </>
                     : <>
                         <ButtonRNE onPress={() => {
-                            dispatch(register({email: 'bruno@email.com', password: 'bruno'}))
-                        }} title={st(`register`)}/>
+                            authFunctions.signUp({email: 'bruno@email.com', password: 'bruno'})
+                        }} title={st(`signUp`)}/>
                         <ButtonRNE onPress={() => {
-                            setType('login')
-                        }} title={st(`goToLogin`)}/>
+                            setType('sign-in')
+                        }} title={st(`goToSignIn`)}/>
                     </>
             }
             {
                 Platform.OS !== 'web'
                     ? <ButtonRNE onPress={() => {
-                        dispatch(signInGoogle())
+                        authFunctions.signInGoogle()
                     }} title={st(`signInGoogle`)}/>
                     : <></>
             }
         </View>
     );
 };
-
-

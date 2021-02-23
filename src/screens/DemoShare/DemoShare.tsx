@@ -1,16 +1,16 @@
 import {getStyles} from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
-import {View, Text, TouchableOpacity, Image, ButtonTO, TextBtn} from "../../components/base-ui";
+import {View, Text, TouchableOpacity, Image, ButtonTO, TextBtn} from "../../components/UI";
 import {useDispatch} from "react-redux";
 import {sysError} from "../../stores/sys/actions";
 import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../containers";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
 
 type SelectedImage = {
     localUri: string
@@ -64,10 +64,10 @@ function DemoShareScreen() {
         await Sharing.shareAsync(selectedImage.localUri);
         setSelectedImage({localUri: ''});
     };
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
-    const styles = getStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
 
     return (
         <View style={[containerStyles.screen, containerStyles.centralized]}>

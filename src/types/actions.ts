@@ -1,16 +1,11 @@
-import {AxiosError} from "axios";
-import {EAuth, EDemoHello, EDemoMap, EDemoThunk, ESys} from "../utils/constants";
+import {EDemoHello, EDemoMap, EDemoThunk, ESys} from "../constants";
 import {
     DemoHello2Payload,
     DemoHelloPayload,
     DemoThunkSuccessPayload,
-    RestoreAuthGooglePayload,
-    RestoreAuthPayload, RestoreAuthRedirectionPayload,
     RestoreIsReadyPayload,
-    RestoreLanguagePayload,
     RestoreNavInitialStatePayload,
-    RestoreThemePayload,
-    SignOutPayload, SysClearErrorPayload,
+    SysClearErrorPayload,
     SysErrorPayload,
     SysWarnPayload
 } from "./payloads";
@@ -25,27 +20,6 @@ export interface DemoHello2 {
     type: EDemoHello.DEMO_HELLO2;
     payload: DemoHello2Payload;
 }
-
-export interface SignOut {
-    type: EAuth.SIGN_OUT;
-    payload: SignOutPayload;
-}
-
-export interface RestoreAuth {
-    type: EAuth.RESTORE_AUTH;
-    payload: RestoreAuthPayload;
-}
-
-export interface RestoreAuthRedirection {
-    type: EAuth.RESTORE_AUTH_REDIRECTION;
-    payload: RestoreAuthRedirectionPayload;
-}
-
-export interface RestoreAuthGoogle {
-    type: EAuth.RESTORE_AUTH_GOOGLE;
-    payload: RestoreAuthGooglePayload;
-}
-
 
 export interface SysError {
     type: ESys.ERROR;
@@ -62,16 +36,6 @@ export interface SysWarn {
     payload: SysWarnPayload;
 }
 
-export interface RestoreTheme {
-    type: ESys.RESTORE_THEME;
-    payload: RestoreThemePayload;
-}
-
-export interface RestoreLanguage {
-    type: ESys.RESTORE_LANGUAGE;
-    payload: RestoreLanguagePayload;
-}
-
 export interface RestoreNavInitialState {
     type: ESys.RESTORE_NAV_INITIAL_STATE;
     payload: RestoreNavInitialStatePayload;
@@ -85,11 +49,6 @@ export interface RestoreIsReady {
 export interface DemoThunkSuccess {
     type: EDemoThunk.DEMO_THUNK_SUCCESS;
     payload: DemoThunkSuccessPayload;
-}
-
-export interface DemoThunkFailed {
-    type: EDemoThunk.DEMO_THUNK_FAILED;
-    payload: AxiosError;
 }
 
 export interface RestoreNearbyFilms {

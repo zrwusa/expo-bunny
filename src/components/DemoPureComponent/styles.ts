@@ -1,12 +1,12 @@
 import {StyleSheet} from "react-native";
-import {Sizer, Theme} from "../../types/styles";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-export const getStyles = (sizer: Sizer,theme:Theme) => {
-    const {iphoneX} = sizer.responsive;
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {iphoneX} = sizeLabor.responsive;
     const {wp} = iphoneX;
-    const {colors} = theme;
+    const {colors} = themeLabor.theme;
     return StyleSheet.create({
-        demoSizer: {
+        demoSizeLabor: {
             width: wp(100),
             height: wp(20),
             backgroundColor: colors.secondary,

@@ -25,6 +25,7 @@ export type LinkingConfig = {
 };
 
 export type StackConfig = {
+    key: string,
     navigatorType: NavigatorType,
     component?: ComponentType<any>,
     stack?:
@@ -35,8 +36,9 @@ export type StackConfig = {
         | typeof Stacks.DemoTabRNComponentsStack
         | typeof Stacks.DemoBitcoinStack
         | typeof Stacks.DemoDrawerStack,
-    signInComponent?: ComponentType<any>,
+    authScreen?: ComponentType<any>,
     childrenNode?: NavigatorTreeNode[],
+    authRequired: boolean,
 }
 
 export type LinkingConfigTraversable = LinkingConfig & Traversable

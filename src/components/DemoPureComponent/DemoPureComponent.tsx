@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
-import {View, Text} from "../base-ui";
+import {View, Text} from "../UI";
 import {getStyles} from "./styles";
-import SizerContext from "../../styles/sizer/SizerContext";
-import {ThemeContext} from "../../styles/theme";
+import {SizeLaborContext} from "../../providers/sizeLabor";
+import {ThemeLaborContext} from "../../providers/themeLabor";
 
 type Props = { title?: string, labelBeenRendered?: string, labelRenderedUnit?: string }
 
@@ -18,23 +18,23 @@ export class DemoPureComponent extends PureComponent<Props> {
         const {title, labelBeenRendered, labelRenderedUnit} = this.props;
         this.count++
         return (
-            // sizer from SizerContext
-            <SizerContext.Consumer>
-                {(sizer) => {
+            // sizeLabor from SizeLaborContext
+            <SizeLaborContext.Consumer>
+                {(sizeLabor) => {
                     return (
-                        <ThemeContext.Consumer>
-                            {(theme) => {
-                                const styles = getStyles(sizer, theme)
+                        <ThemeLaborContext.Consumer>
+                            {(themeLabor) => {
+                                const styles = getStyles(sizeLabor, themeLabor)
                                 return <View>
                                     <Text>{title}</Text>
-                                    <View style={styles.demoSizer}/>
+                                    <View style={styles.demoSizeLabor}/>
                                     <Text>{labelBeenRendered} {this.count} {labelRenderedUnit}</Text>
                                 </View>
                             }}
-                        </ThemeContext.Consumer>
+                        </ThemeLaborContext.Consumer>
                     )
                 }}
-            </SizerContext.Consumer>
+            </SizeLaborContext.Consumer>
         );
     }
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import {SafeAreaView} from "react-native";
-import {Text} from "../../../components/base-ui";
+import {Text} from "../../../components/UI";
 import getContainerStyles from "../../../containers";
-import {useSizer} from "../../../styles/sizer";
-import {useTheme} from "../../../styles/theme";
+import {useSizeLabor} from "../../../providers/sizeLabor";
+import {useThemeLabor} from "../../../providers/themeLabor";
 
 const RNFlatListScreen: React.FC = () => {
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
         <SafeAreaView style={[containerStyles.screen, containerStyles.centralized]}>

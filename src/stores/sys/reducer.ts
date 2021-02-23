@@ -1,31 +1,30 @@
-import {ELanguage, ESys} from "../../utils/constants";
+import {ELanguage, ESys} from "../../constants";
 import {Sys} from "../../types/models";
 import {SysActions} from "./actions";
-import {EThemes} from "../../utils/constants";
+import {EThemes} from "../../constants";
 import {
     RestoreIsReadyPayload,
-    RestoreLanguagePayload,
     RestoreNavInitialStatePayload,
-    RestoreThemePayload, SysClearErrorPayload,
+    SysClearErrorPayload,
     SysErrorPayload,
     SysWarnPayload
-} from "../../types/payloads";
+} from "../../types";
 
 const initialState: Sys = {
     isReady: false,
     error: [],
     warn: [""],
-    themeName: EThemes.DEFAULT,
+    themeName: EThemes.light,
     language: ELanguage.en,
     navInitialState: undefined
 };
 
-export function sysStateReducer(state: Sys = initialState, {type, payload}: SysActions): Sys {
+export function sysStateReducer(prevState: Sys = initialState, {type, payload}: SysActions): Sys {
     switch (type) {
         case ESys.RESTORE_IS_READY:
             const restoreIsReadyPayload = payload as RestoreIsReadyPayload
             return {
-                ...state,
+                ...prevState,
                 ...restoreIsReadyPayload,
             }
         case ESys.ERROR: {
@@ -33,52 +32,40 @@ export function sysStateReducer(state: Sys = initialState, {type, payload}: SysA
             // if (__DEV__) {
             //     console.error(sysErrorPayload.error)
             // }
-            state.error.push(sysErrorPayload.error);
+            prevState.error.push(sysErrorPayload.error);
             return {
-                ...state,
+                ...prevState,
             };
         }
-        case ESys.CLEAR_ERRORS:{
+        case ESys.CLEAR_ERRORS: {
             const sysClearErrorPayload = payload as SysClearErrorPayload
-            if(sysClearErrorPayload.all){
-                state.error=[]
-            }else if(sysClearErrorPayload.top){
-                state.error.splice(0,sysClearErrorPayload.top)
-            }else if (sysClearErrorPayload.last){
-                state.error.splice(state.error.length-sysClearErrorPayload.last,sysClearErrorPayload.last)
+            if (sysClearErrorPayload.all) {
+                prevState.error = []
+            } else if (sysClearErrorPayload.top) {
+                prevState.error.splice(0, sysClearErrorPayload.top)
+            } else if (sysClearErrorPayload.last) {
+                prevState.error.splice(prevState.error.length - sysClearErrorPayload.last, sysClearErrorPayload.last)
             }
-            return {...state};
+            return {...prevState};
         }
         case ESys.WARN: {
             const sysWarnPayload = payload as SysWarnPayload
             // if (__DEV__) {
             //     console.warn(sysWarnPayload.warn);
             // }
-            state.warn.push(sysWarnPayload.warn)
+            prevState.warn.push(sysWarnPayload.warn)
             return {
-                ...state,
+                ...prevState,
             };
         }
-        case ESys.RESTORE_THEME:
-            const restoreThemePayload = payload as RestoreThemePayload
-            return {
-                ...state,
-                ...restoreThemePayload
-            }
-        case ESys.RESTORE_LANGUAGE:
-            const restoreLanguagePayload = payload as RestoreLanguagePayload
-            return {
-                ...state,
-                ...restoreLanguagePayload
-            }
         case ESys.RESTORE_NAV_INITIAL_STATE:
             const restoreNavInitialStatePayload = payload as RestoreNavInitialStatePayload
             return {
-                ...state,
+                ...prevState,
                 ...restoreNavInitialStatePayload
             }
         default:
-            return state;
+            return prevState;
     }
 }
 

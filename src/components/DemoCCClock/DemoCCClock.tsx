@@ -1,9 +1,9 @@
 import React, {PureComponent} from "react";
-import {View, Text, ButtonTO, TextBtn} from "../base-ui";
-import {WithSizer, withSizer} from "../../styles/sizer";
+import {View, Text, ButtonTO, TextBtn} from "../UI";
+import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
 
 type Props = { title: string, goButtonTitle: string, stopButtonTitle: string, tipLabel: string }
-    & WithSizer
+    & WithSizeLabor
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
 
 class DemoCCClock extends PureComponent<Props, States> {
@@ -52,5 +52,5 @@ class DemoCCClock extends PureComponent<Props, States> {
     }
 }
 
-// HOC to pass sizer
-export default withSizer(DemoCCClock);
+// HOC to pass sizeLabor
+export default withSizeLabor(DemoCCClock);

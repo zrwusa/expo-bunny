@@ -1,0 +1,248 @@
+{
+  "titleFormat": "ExpoReactBunny",
+  "sys": {
+    "navigationFallback": "Navigation fallback...",
+    "failedToGetToken": "Failed to get push token for push notification!",
+    "mustUsePhysicalDevice": "Must use physical device for Push Notifications",
+    "I18nProviderLoading": "I18n Provider loading",
+    "AuthLaborProviderLoading": "AuthLabor Provider loading",
+    "ThemeProviderLoading": "Theme Provider loading"
+  },
+  "screens": {
+    "Home": {
+      "title": "Home",
+      "navAndRoute": "Nav & Route",
+      "redux": "Redux",
+      "nativeCapabilities": "Native Capabilities",
+      "componentsAndThemes": "Components & Themes",
+      "others": "Others",
+      "system": "System",
+      "profile": "Profile",
+      "demoModal": "Modal",
+      "route": "Route Params",
+      "tab": "Tab",
+      "drawer": "Drawer",
+      "nestedNavigation": "<Nested Lv0 Home>(Default To<Nested Lv1 Home>)",
+      "passParamsFromRootToLeaf": "Root To Leaf",
+      "passParamsFromRootToLeafTab": "Root To Leaf(Tab)",
+      "FCReduxHook": "FC Redux Hook",
+      "thunkCC": "Thunk CC",
+      "map": "Map",
+      "chat": "Chat",
+      "share": "Share",
+      "notification": "Notification",
+      "thirdPart": "Third Part",
+      "componentCollection": "Component Collection",
+      "RNAllInOne": "RN All In One",
+      "demoTheme": "Demo Theme",
+      "demoSuspense": "Demo Suspense",
+      "bitcoin": "Bitcoin",
+      "settings": "Settings",
+      "signOut": "Sign Out"
+    },
+    "Profile": {
+      "title": "Profile",
+      "profileScreenId": "Profile Screen id:",
+      "goToHomeScreen": "Go to HomeScreen",
+      "email": "Email: "
+    },
+    "DemoModal": {
+      "title": "DemoModal"
+    },
+    "DemoFCReduxHook": {
+      "title": "DemoFCReduxHook",
+      "dispatchSomething": "Dispatch something",
+      "order": "Order: "
+    },
+    "DemoCollection": {
+      "title": "DemoCollection",
+      "go": "Go",
+      "stop": "Stop",
+      "btnRequest": "Click me to get employees",
+      "functionComponent": "Function Component",
+      "classComponent": "Class Component",
+      "lbRequest": "Make a request",
+      "iAmPure": "React.PureComponent",
+      "iAmRegular": "React.component",
+      "iHaveBeenRendered": "I have been rendered",
+      "renderedUnit": "time(s)",
+      "placeholder": "Placeholder",
+      "tipLabel": "The current time: "
+    },
+    "DemoRoute": {
+      "title": "DemoRoute Params",
+      "paramId": "param id: ",
+      "typeofId": "typeof id: ",
+      "paramIsHuman": "param isHuman: ",
+      "typeofIsHuman": "typeof isHuman: ",
+      "paramSort": "param sort: ",
+      "typeofSort": "typeof sort: "
+    },
+    "DemoThirdPart": {
+      "title": "DemoThirdPart",
+      "buttonWithIcon": "Button with icon"
+    },
+    "DemoThunkCC": {
+      "title": "DemoThunkCC",
+      "thunkDispatch": "Thunk Dispatch",
+      "text": "Text: ",
+      "id": "id: "
+    },
+    "DemoMap": {
+      "title": "DemoMap"
+    },
+    "DemoChat": {
+      "title": "DemoChat"
+    },
+    "TestMap": {
+      "title": "TestMap"
+    },
+    "DemoShare": {
+      "title": "DemoShare",
+      "shareMessage": "Share Message",
+      "pressButtonTip": "Press the button below!",
+      "message": "React-bunny shared something to you",
+      "permissionNotGranted": "Permission to access camera roll is required!",
+      "notAvailable": "Uh oh, sharing isn't available on your platform",
+      "pickAPhoto": "Pick a photo"
+    },
+    "DemoNotification": {
+      "title": "DemoNotification",
+      "scheduleNotification": "Press to schedule a notification"
+    },
+    "Auth": {
+      "title": "Auth",
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "signInDummy": "Sign In(Dummy)",
+      "signInGoogle": "Sign In Google",
+      "goToSignUp": "Go to sign up",
+      "goToSignIn": "Go to sign in",
+      "username": "username",
+      "password": "password"
+    },
+    "DemoTab": {
+      "title": "DemoTab"
+    },
+    "TabHome": {
+      "title": "TabHome"
+    },
+    "TabSettings": {
+      "title": "TabSettings"
+    },
+    "DemoDrawer": {
+      "title": "DemoDrawer"
+    },
+    "DrawerHome": {
+      "title": "DrawerHome"
+    },
+    "DrawerSettings": {
+      "title": "DrawerSettings"
+    },
+    "DemoNestedLv0": {
+      "title": "Nested-Lv0"
+    },
+    "NestedLv1Home": {
+      "title": "Nested-Lv1-Home",
+      "goToNestedLv1Settings": "Go To <Nested Lv1 Settings>(Default to <Nested Lv2 Home>)"
+    },
+    "NestedLv1Settings": {
+      "title": "Nested-Lv1-Settings",
+      "goToNestedHome": "Go To <Nested Lv1 Home>"
+    },
+    "NestedLv2Home": {
+      "title": "Nested-Lv2-Home",
+      "goToNestedLv2Settings": "Go To <Nested Lv2 Settings>"
+    },
+    "NestedLv2Settings": {
+      "title": "Nested-Lv2-Settings",
+      "goToNestedLv2Home": "Go To <Nested Lv2 Home>"
+    },
+    "DemoRNComponents": {
+      "title": "DemoRNComponents"
+    },
+    "RNHome": {
+      "title": "RNHome",
+      "btnAccessibility": "Accessibility",
+      "pressMe": "Press Me",
+      "pressed": "Pressed!",
+      "hideModal": "Hide Modal",
+      "showModal": "Show Modal",
+      "touchHere": "Touch Here",
+      "pressHere": "Press Here",
+      "toggleStatusBar": "Toggle StatusBar",
+      "changeStatusBarStyle": "Change StatusBar Style",
+      "lbAccessibility": "Accessibility Label(VoiceOver will read this string)",
+      "xOnPress": "x onPress",
+      "onPress": "onPress",
+      "modalClosed": "Modal has been closed.",
+      "helloWorld": "Hello World!",
+      "uselessPlaceholder": "Useless Placeholder",
+      "count": "Count: "
+    },
+    "RNSectionList": {
+      "title": "RNSectionList"
+    },
+    "RNFlatList": {
+      "title": "RNFlatList"
+    },
+    "RNNoKeyboard": {
+      "title": "RNNoKeyboard"
+    },
+    "RNSafeArea": {
+      "title": "RNSafeArea"
+    },
+    "RNVirtualizedList": {
+      "title": "RNVirtualizedList"
+    },
+    "DemoBitcoin": {
+      "title": "DemoBitcoin"
+    },
+    "BitcoinHome": {
+      "title": "BitcoinHome"
+    },
+    "BitcoinAlert": {
+      "title": "BitcoinAlert",
+      "paramIsPush": "Param isPush: ",
+      "scheduleNotification": "Press to schedule a notification",
+      "failedToGetToken": "Failed to get push token for push notification!",
+      "mustUsePhysicalDevice": "Must use physical device for Push Notifications",
+      "saveAlertSetting": "Save alert setting",
+      "saveQuickSettings": "Save quick alert settings",
+      "cancelAllAlertSettings": "Cancel all alert settings"
+    },
+    "Settings": {
+      "title": "Settings",
+      "darkTheme": "Dark theme",
+      "language": "Language",
+      "rightToLeft": "Right to left"
+    },
+    "DemoSuspense": {
+      "title": "DemoSuspense",
+      "lazyComponentTitle": "I'm late,but only one time!",
+      "noSupporting": "SSR does not support React.lazy or Suspense"
+    },
+    "DemoTheme": {
+      "title": "DemoTheme",
+      "btnCustom": "TOButton Themed From RN",
+      "btnFromPaper": "Button From Paper",
+      "demoShadow": "Demo shadow compatible with Android",
+      "demoButton": "Button",
+      "demoButtonSec": "Button secondary",
+      "demoButtonDisabled": "Button disabled",
+      "demoButtonThemedRNE": "Button themed from RNE",
+      "demoText": "Text",
+      "demoTextSec": "Text secondary",
+      "demoTitle": "Title",
+      "demoTitleSec": "Title secondary",
+      "demoCaption": "Caption",
+      "demoCaptionSec": "Caption secondary",
+      "demoParagraph": "Paragraph",
+      "demoParagraphSec": "Paragraph secondary",
+      "demoSurface": "Surface",
+      "demoSurfaceSec": "Surface secondary"
+    }
+  },
+  "CFBundleDisplayName": "ExpoReactBunny",
+  "NSContactsUsageDescription": "NSContactsUsageDescription"
+}

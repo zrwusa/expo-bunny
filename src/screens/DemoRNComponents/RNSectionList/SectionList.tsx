@@ -1,14 +1,14 @@
 import React from "react";
 import {SafeAreaView, View, SectionList} from "react-native";
-import {Text} from "../../../components/base-ui";
-import {useTheme} from "../../../styles/theme";
+import {Text} from "../../../components/UI";
+import {useThemeLabor} from "../../../providers/themeLabor";
 import {getStyles} from "./styles";
 import getContainerStyles from "../../../containers";
-import {useSizer} from "../../../styles/sizer";
+import {useSizeLabor} from "../../../providers/sizeLabor";
 
 function SectionListScreen() {
-    const {colors} = useTheme()
-
+    const themeLabor = useThemeLabor()
+    const {colors} = themeLabor.theme;
     const SECTION_LIST_DATA = [
         {
             title: "Main dishes",
@@ -41,10 +41,9 @@ function SectionListScreen() {
             <Text style={{fontSize: 24}}>{title}</Text>
         </View>
     );
-    const sizer = useSizer();
-    const theme = useTheme();
-    const styles = getStyles(sizer,theme)
-    const containerStyles = getContainerStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const styles = getStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
         <SafeAreaView style={[containerStyles.screen, styles.container]}>

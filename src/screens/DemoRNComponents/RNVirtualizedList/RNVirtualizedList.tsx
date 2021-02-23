@@ -1,10 +1,10 @@
 import React from "react";
 import {View, SafeAreaView, VirtualizedList} from "react-native";
-import {Text} from "../../../components/base-ui"
+import {Text} from "../../../components/UI"
 import {getStyles} from "./styles";
-import {useTheme} from "../../../styles/theme";
+import {useThemeLabor} from "../../../providers/themeLabor";
 import getContainerStyles from "../../../containers";
-import {useSizer} from "../../../styles/sizer";
+import {useSizeLabor} from "../../../providers/sizeLabor";
 
 type Item = {
     id: string;
@@ -12,10 +12,10 @@ type Item = {
 }
 
 const RNVirtualizedListScreen: React.FC = () => {
-    const sizer = useSizer();
-    const theme = useTheme();
-    const styles = getStyles(sizer,theme)
-    const containerStyles = getContainerStyles(sizer, theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const styles = getStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     const VIRTUALIZED_LIST_DATA: Item[] = [];
 
@@ -31,7 +31,7 @@ const RNVirtualizedListScreen: React.FC = () => {
     }
 
     const VirtualizedListItem = ({title}: Item) => {
-        const {colors} = useTheme()
+        const {colors} = useThemeLabor().theme
 
         return (
             <View style={{

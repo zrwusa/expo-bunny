@@ -1,14 +1,14 @@
 import React from "react";
-import {Text, View} from "../base-ui"
+import {Text, View} from "../UI"
 import {getStyles} from "./styles";
 import {ActivityIndicator} from "react-native";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
 
 export const DemoLazyLoading: React.FC = () => {
-    const sizer = useSizer()
-    const theme = useTheme()
-    const styles = getStyles(sizer,theme);
+    const sizeLabor = useSizeLabor()
+    const themeLabor = useThemeLabor();
+    const styles = getStyles(sizeLabor, themeLabor);
     return (
         <View style={styles.container}>
             <ActivityIndicator size="large"/>

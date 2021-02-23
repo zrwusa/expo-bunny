@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, TextInput, Button} from "../base-ui";
+import {View, Text, TextInput, Button} from "../UI";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types/models";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
 import {getStyles} from "./styles";
 import {sysClearErrors} from "../../stores/sys/actions";
 
@@ -12,13 +12,13 @@ type Props = { title?: string }
 const Sys: React.FC<Props> = ({title}) => {
     const sysState = useSelector((store: RootState) => store.sysState);
     const [isShow, setIsShow] = useState(false)
-    const sizer = useSizer();
-    const theme = useTheme();
-    const styles = getStyles(sizer,theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const styles = getStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
-    useEffect(()=>{
-        setIsShow(sysState.error.length>0)
-    },[sysState.error.length])
+    useEffect(() => {
+        setIsShow(sysState.error.length > 0)
+    }, [sysState.error.length])
     return (
         isShow
             ? <View style={styles.errorConsole}>
@@ -32,7 +32,7 @@ const Sys: React.FC<Props> = ({title}) => {
                 }
                 <View style={styles.buttonBox}>
                     <Button title="clear" onPress={() => {
-                        dispatch(sysClearErrors({all:true}))
+                        dispatch(sysClearErrors({all: true}))
                     }}/>
                     <Button title="close" onPress={() => {
                         setIsShow(false)

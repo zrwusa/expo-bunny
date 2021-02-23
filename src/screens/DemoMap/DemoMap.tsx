@@ -1,6 +1,6 @@
 import React, {Component, createRef} from "react";
 import {Animated} from "react-native";
-import {View, Text, Image} from "../../components/base-ui";
+import {View, Text, Image} from "../../components/UI";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
 import {DemoMap, NearbyFilm, Region, RootState} from "../../types/models";
@@ -9,14 +9,14 @@ import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
 import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
-import BunnyConstants from "../../utils/constants";
+import BunnyConstants from "../../constants/constants";
 import {sysError} from "../../stores/sys/actions";
 import {getCardSize} from "./styles";
 import getContainerStyles from "../../containers";
 import getStyles from "./styles";
-import {WithSizer, withSizer} from "../../styles/sizer";
-import {withTheme} from "../../styles/theme";
-import {WithTheme} from "../../types/styles";
+import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
+import {withThemeLabor} from "../../providers/themeLabor";
+import {WithThemeLabor} from "../../types";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMap, void, Action>) => (
     sysError: (err: SysErrorPayload) => dispatch(sysError(err))
 });
 export type DemoMapProps = ReturnType<typeof mapDispatchToProps>
-    & ReturnType<typeof mapStateToProps> & BareProps & WithSizer & WithTheme;
+    & ReturnType<typeof mapStateToProps> & BareProps & WithSizeLabor & WithThemeLabor;
 
 class DemoMapScreen extends Component<DemoMapProps> {
 
@@ -62,11 +62,11 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 
     async componentDidMount() {
-        const {sizer} = this.props;
-        const {responsive} = sizer;
+        const {sizeLabor} = this.props;
+        const {responsive} = sizeLabor;
         const {wp} = responsive.iphoneX;
         this.animation.addListener(({value}) => {
-            let index = Math.floor(value / getCardSize(sizer).width + wp(0.3)); // animate 30% away from landing on the next item
+            let index = Math.floor(value / getCardSize(sizeLabor).width + wp(0.3)); // animate 30% away from landing on the next item
             if (index >= this.props.demoNearbyFilms.length) {
                 index = this.props.demoNearbyFilms.length - 1;
             }
@@ -109,12 +109,13 @@ class DemoMapScreen extends Component<DemoMapProps> {
 
 
     render(): React.ReactNode {
-        const {sizer, theme} = this.props;
-        const {responsive} = sizer;
-        const containerStyles = getContainerStyles(sizer, theme);
-        const styles = getStyles(sizer);
+        const {sizeLabor, themeLabor} = this.props;
+        const {theme} = themeLabor;
+        const {responsive} = sizeLabor;
+        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+        const styles = getStyles(sizeLabor);
         const {wp} = responsive.iphoneX;
-        const {width} = getCardSize(sizer)
+        const {width} = getCardSize(sizeLabor);
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {
             const inputRange = [
                 (index - 1) * width,
@@ -180,7 +181,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
                                      style={styles.scrollView}
                                      contentContainerStyle={styles.endPadding}>
                     {this.props.demoNearbyFilms.length > 0 && this.props.demoNearbyFilms.map((marker, index) => (
-                        <View style={styles.card} key={index}>
+                        <View style={styles.card} key={marker.id}>
                             <Image source={marker.image} style={styles.cardImage} resizeMode="cover"/>
                             <View style={styles.textContent}>
                                 <Text numberOfLines={1} style={styles.cardTitle}>{marker.title}</Text>
@@ -196,4 +197,4 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withSizer(withTheme(DemoMapScreen)));
+export default connect(mapStateToProps, mapDispatchToProps)(withSizeLabor(withThemeLabor(DemoMapScreen)));

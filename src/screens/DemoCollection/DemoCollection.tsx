@@ -2,19 +2,19 @@ import React, {Component} from "react";
 import DemoFCCard from "../../components/DemoFCCard";
 import DemoCCClock from "../../components/DemoCCClock";
 import DemoRequest from "../../components/DemoRequest";
-import {View, TextInput} from "../../components/base-ui";
+import {View, TextInput} from "../../components/UI";
 import {DemoSvg} from "../../components/DemoSvg";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import {ScrollView} from "react-native";
 import getContainerStyles from "../../containers";
 import {DemoPureComponent, DemoRegularComponent} from "../../components/DemoPureComponent";
-import {withSizer, WithSizer} from "../../styles/sizer";
-import {withTheme} from "../../styles/theme";
-import {WithTheme} from "../../types/styles";
+import {withSizeLabor, WithSizeLabor} from "../../providers/sizeLabor";
+import {withThemeLabor} from "../../providers/themeLabor";
+import {WithThemeLabor} from "../../types";
 
 export type DemoCollectionProps = { title?: string }
-    & WithTranslation & WithSizer & WithTheme
+    & WithTranslation & WithSizeLabor & WithThemeLabor
 type States = { name: string }
 
 class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
@@ -23,9 +23,10 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
     }
 
     render(): React.ReactNode {
-        const {t, sizer, theme} = this.props;
+        const {t, sizeLabor, themeLabor} = this.props;
+        const {theme} = themeLabor;
         const st = stFactory(t, 'screens.DemoCollection');
-        const containerStyles = getContainerStyles(sizer, theme);
+        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
         return (
             <ScrollView>
@@ -66,4 +67,4 @@ class DemoCollectionScreen extends Component<DemoCollectionProps, States> {
     }
 }
 
-export default withTranslation()(withSizer(withTheme(DemoCollectionScreen)))
+export default withTranslation()(withSizeLabor(withThemeLabor(DemoCollectionScreen)))

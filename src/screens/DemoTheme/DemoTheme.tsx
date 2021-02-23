@@ -1,24 +1,24 @@
 import React from "react";
 import {ScrollView} from "react-native";
-import {Button, ButtonRNE, ButtonTO, Text, TextBtn, View} from "../../components/base-ui";
+import {Button, ButtonRNE, ButtonTO, Text, TextBtn, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import {getStyles} from "./styles";
-import BunnyConstants from "../../utils/constants";
+import BunnyConstants from "../../constants/constants";
 import getContainerStyles from "../../containers";
-import {useSizer} from "../../styles/sizer";
-import {useTheme} from "../../styles/theme";
+import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/themeLabor";
 import {Card} from "../../containers/Card";
-import getSmartStyles from "../../styles/utils/smartStyles";
+import getSmartStyles from "../../utils/smartStyles";
 
 const DemoThemeScreen = () => {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.DemoTheme');
-    const sizer = useSizer();
-    const theme = useTheme();
-    const containerStyles = getContainerStyles(sizer, theme);
-    const smartStyle = getSmartStyles(sizer, theme);
-    const styles = getStyles(sizer,theme);
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const smartStyle = getSmartStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
 
     return (
         <ScrollView>
@@ -34,8 +34,8 @@ const DemoThemeScreen = () => {
                         <TextBtn>{st(`demoButtonDisabled`)}</TextBtn></ButtonTO>
                     <Button title={st(`btnCustom`)} onPress={BunnyConstants.fnNoop}/>
                     <ButtonTO><TextBtn>{st(`btnFromPaper`)}</TextBtn></ButtonTO>
-                    <ButtonRNE title={st(`demoButtonThemedRNE`)} />
-                    <View style={[styles.demoShadow,smartStyle.shadow]}>
+                    <ButtonRNE title={st(`demoButtonThemedRNE`)}/>
+                    <View style={[styles.demoShadow, smartStyle.shadow]}>
                         <Text>{st(`demoShadow`)}</Text>
                     </View>
                     <Text style={smartStyle.h1}>H1</Text>
@@ -66,10 +66,10 @@ const DemoThemeScreen = () => {
                             4.The principle of least knowledge (Law of Demeter)
                         </Text>
                     </View>
-                    <View style={[smartStyle.surface,styles.demoSurface]}>
+                    <View style={[smartStyle.surface, styles.demoSurface]}>
                         <Text style={smartStyle.h3}>{st(`demoSurface`)}</Text>
                     </View>
-                    <View style={[smartStyle.surfaceSecondary,styles.demoSurface]}>
+                    <View style={[smartStyle.surfaceSecondary, styles.demoSurface]}>
                         <Text style={smartStyle.h3}>{st(`demoSurfaceSec`)}</Text>
                     </View>
                 </Card>

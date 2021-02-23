@@ -1,6 +1,6 @@
 export type RootStackParam = {
     Home: undefined;
-    SignIn: undefined;
+    Auth: undefined;
     Profile: { id: string };
     DemoModal: undefined | { screen: string; params?: { [key: string]: any } };
     DemoFCReduxHook: undefined;
@@ -55,20 +55,3 @@ export type DemoTabRNComponentsStackParam = {
     TabRNComponentsHome: undefined;
     TabRNComponentsSettings: undefined;
 };
-
-export type StackParamListUnion =
-    RootStackParam
-    | DemoNestedLv1StackParam
-    | DemoTabStackParam
-    | DemoTabRNComponentsStackParam
-    | DemoBitcoinStackParam
-    | DemoDrawerStackParam;
-
-export type StackParamListIntersection =
-    RootStackParam
-    & DemoNestedLv1StackParam
-    & DemoTabStackParam
-    & DemoTabRNComponentsStackParam
-    & DemoBitcoinStackParam
-    & DemoDrawerStackParam;
-

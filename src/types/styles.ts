@@ -1,26 +1,18 @@
 import {DeepLeavesWrap, JsonKeys} from "./utils";
 import {IconProps} from "react-native-vector-icons/Icon";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {glyphMaterialCommunityCustomMap} from "../utils/helpers";
+import {glyphMaterialCommunityCustomMap} from "../helpers/helpers";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
-import {ImageStyle, ScaledSize, TextStyle, ViewStyle} from "react-native";
+import {ImageStyle, TextStyle, ViewStyle} from "react-native";
+import {ColorSchemeName} from "react-native-appearance";
+
 export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 
-export type ResponsiveEvent = {
-    addEventListener(
-        type: 'change',
-        handler: ({window, screen}: { window: ScaledSize; screen: ScaledSize }) => void,
-    ): void;
-    removeEventListener(
-        type: 'change',
-        handler: ({window, screen}: { window: ScaledSize; screen: ScaledSize }) => void,
-    ): void;
-}
 export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
 export type ResponsiveInstance = { wp: Function, hp: Function };
 export type Dimension = { width: number, height: number };
-export type Sizer = {
+export type SizeLabor = {
     responsive: Responsive,
     measure: Measure,
     ms: Measure,
@@ -47,8 +39,14 @@ export type MeasureProviderProps = {
 
 export type ThemeProviderProps = {
     children: ReactNode,
-    theme:Theme
+    themeLabor?: ThemeLabor
 };
+
+export type ThemeLabor = {
+    theme: Theme,
+    changeTheme: (themeName: ThemeName) => void,
+    sysColorSchemeName?: ColorSchemeName
+}
 
 export type Mode = 'adaptive' | 'exact';
 
@@ -155,7 +153,7 @@ export interface Theme {
     },
 }
 
-export type WithTheme = { theme: Theme }
+export type WithThemeLabor = { themeLabor: ThemeLabor }
 
 export type FontConfigPlatform = {
     web: Fonts,
@@ -163,9 +161,15 @@ export type FontConfigPlatform = {
     default: Fonts
 }
 
-export type Themes = {
-    default: string,
-    dark: string,
+// export type Themes = {
+//     light: string,
+//     dark: string,
+// }
+
+export type ThemeName = 'light' | 'dark';
+export type Themes = { [key in ThemeName]: Theme }
+export type EnumThemeNames = {
+    [key: string]: ThemeName
 }
 
 export type FontsWrapped = DeepLeavesWrap<Fonts, Themes>

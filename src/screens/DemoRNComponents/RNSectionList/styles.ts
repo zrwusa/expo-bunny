@@ -1,8 +1,8 @@
 import {StyleSheet} from "react-native";
-import {Sizer, Theme} from "../../../types/styles";
+import {SizeLabor, Theme, ThemeLabor} from "../../../types/styles";
 
-export const getStyles = (sizer: Sizer, theme: Theme) => {
-    const {ms, responsive} = sizer;
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {ms, responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
     return StyleSheet.create({
         container: {

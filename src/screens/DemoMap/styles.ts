@@ -1,9 +1,9 @@
 import {Dimensions, StyleSheet} from "react-native";
-import {Sizer} from "../../types/styles";
+import {SizeLabor} from "../../types/styles";
 
 
-export const getCardSize = (sizer: Sizer) => {
-    const {responsive} = sizer;
+export const getCardSize = (sizeLabor: SizeLabor) => {
+    const {responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
 
     const {width, height} = Dimensions.get("window");
@@ -16,12 +16,12 @@ export const getCardSize = (sizer: Sizer) => {
         height: CARD_HEIGHT
     }
 }
-const getStyles = (sizer: Sizer) => {
-    const {ms, responsive} = sizer;
+const getStyles = (sizeLabor: SizeLabor) => {
+    const {ms, responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
     const {width, height} = Dimensions.get("window");
 
-    const cardSize = getCardSize(sizer)
+    const cardSize = getCardSize(sizeLabor)
 
     return StyleSheet.create({
         mapView: {

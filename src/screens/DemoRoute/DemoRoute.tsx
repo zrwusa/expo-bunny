@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
-import {View, Text} from "../../components/base-ui";
+import {View, Text} from "../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParam} from "../../types/stacks";
+import {RootStackParam} from "../../types";
 import {getStyles} from "./styles";
 import {withTranslation, WithTranslation} from 'react-i18next';
-import {stFactory} from "../../lang/short-t";
+import {stFactory} from "../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../containers";
-import {withSizer, WithSizer} from "../../styles/sizer";
-import {WithTheme} from "../../types/styles";
-import {withTheme} from "../../styles/theme";
-import getSmartStyles from "../../styles/utils/smartStyles";
+import {withSizeLabor, WithSizeLabor} from "../../providers/sizeLabor";
+import {WithThemeLabor} from "../../types";
+import {withThemeLabor} from "../../providers/themeLabor";
+import getSmartStyles from "../../utils/smartStyles";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
 
 export type DemoRouteProps = { route: ProfileRouteProp; navigation: ProfileNavigationProp; }
-    & WithTranslation & WithSizer & WithTheme;
+    & WithTranslation & WithSizeLabor & WithThemeLabor;
 
 class DemoRouteScreen extends Component<DemoRouteProps> {
     constructor(props: DemoRouteProps) {
@@ -25,11 +25,12 @@ class DemoRouteScreen extends Component<DemoRouteProps> {
 
     render(): React.ReactNode {
         const {id, isHuman, sort} = this.props.route.params;
-        const {t, sizer, theme} = this.props;
+        const {t, sizeLabor, themeLabor} = this.props;
+        const {theme} = themeLabor;
         const st = stFactory(t, 'screens.DemoRoute');
-        const containerStyles = getContainerStyles(sizer, theme)
-        const smartStyles = getSmartStyles(sizer, theme);
-        const styles = getStyles(sizer,theme);
+        const containerStyles = getContainerStyles(sizeLabor, themeLabor)
+        const smartStyles = getSmartStyles(sizeLabor, themeLabor);
+        const styles = getStyles(sizeLabor, themeLabor);
 
         return (
             <View style={[containerStyles.screen, containerStyles.centralized]}>
@@ -48,4 +49,4 @@ class DemoRouteScreen extends Component<DemoRouteProps> {
     }
 }
 
-export default withTranslation()(withSizer(withTheme(DemoRouteScreen)));
+export default withTranslation()(withSizeLabor(withThemeLabor(DemoRouteScreen)));

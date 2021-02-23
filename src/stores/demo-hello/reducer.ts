@@ -1,4 +1,4 @@
-import {EDemoHello} from "../../utils/constants";
+import {EDemoHello} from "../../constants/constants";
 import {DemoHello} from "../../types/models";
 import {DemoHelloActions} from "./actions";
 
@@ -7,22 +7,22 @@ const initialState: DemoHello = {
     order: 0
 };
 
-export function demoHelloStateReducer(state: DemoHello = initialState, {type, payload}: DemoHelloActions): DemoHello {
+export function demoHelloStateReducer(prevState: DemoHello = initialState, {type, payload}: DemoHelloActions): DemoHello {
     switch (type) {
         case EDemoHello.DEMO_HELLO: {
             return {
-                ...state,
+                ...prevState,
                 ...payload,
             };
         }
         case EDemoHello.DEMO_HELLO2: {
             return {
-                ...state,
+                ...prevState,
                 ...payload,
             };
         }
         default:
-            return state;
+            return prevState;
     }
 }
 

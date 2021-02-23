@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants from "./constants";
+import BunnyConstants from "../constants/constants";
 // const AsyncStorageNext = AsyncStorage
 const AsyncStorageNext = {
     getItem: async (key: string): Promise<string | null> => {

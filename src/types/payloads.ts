@@ -1,5 +1,3 @@
-import {GoogleUser} from "expo-google-app-auth/src/Google";
-import {UserRes} from "./models";
 import {InitialState} from "@react-navigation/native";
 
 export interface SignInPayload {
@@ -7,34 +5,14 @@ export interface SignInPayload {
     password: string;
 }
 
-export interface RegisterPayload {
+export interface SignUpPayload {
     email: string;
     password: string;
 }
 
-export interface SignOutPayload {
-    username?: string;
-}
 
-export type RestoreAuthPayload = {
-    access_token: string | undefined;
-    user?: UserRes | null | undefined;
-}
-
-export type RestoreAuthRedirectionPayload = {
-    redirection: string ;
-}
-
-export type RestoreAuthGooglePayload = {
-    type: 'success';
-    accessToken: string | null;
-    idToken: string | null;
-    refreshToken: string | null;
-    user: GoogleUser;
-}
-
-type TimeSpend={
-    timeSpend?:number
+type TimeSpend = {
+    timeSpend?: number
 }
 
 export interface SysErrorPayload {
@@ -42,21 +20,13 @@ export interface SysErrorPayload {
 }
 
 export interface SysClearErrorPayload {
-    all?:boolean;
-    top?:number;
-    last?:number;
+    all?: boolean;
+    top?: number;
+    last?: number;
 }
 
 export interface SysWarnPayload {
     warn: string;
-}
-
-export interface RestoreThemePayload {
-    themeName: string;
-}
-
-export interface RestoreLanguagePayload {
-    language: string;
 }
 
 export interface RestoreNavInitialStatePayload {

@@ -1,11 +1,11 @@
 import {StyleSheet} from "react-native";
-import {Sizer, Theme} from "../types/styles";
-import getSmartStyles from "../styles/utils/smartStyles";
+import {SizeLabor, ThemeLabor} from "../types";
+import getSmartStyles from "../utils/smartStyles";
 
-const getContainerStyles = (sizer: Sizer, theme: Theme) => {
-    const smartStyles = getSmartStyles(sizer,theme);
-    const {ms} = sizer;
-    const {colors} = theme;
+const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const smartStyles = getSmartStyles(sizeLabor, themeLabor);
+    const {ms} = sizeLabor;
+    const {colors} = themeLabor.theme;
     return StyleSheet.create({
         card: {
             margin: ms.sp.m,

@@ -5,12 +5,12 @@ import {
     StatusBar, StatusBarStyle, TouchableWithoutFeedback,
     Modal
 } from "react-native";
-import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/base-ui";
+import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../lang/short-t";
+import {stFactory} from "../../../providers/i18nLabor/short-t";
 import getContainerStyles from "../../../containers";
-import {useSizer} from "../../../styles/sizer";
-import {useTheme} from "../../../styles/theme";
+import {useSizeLabor} from "../../../providers/sizeLabor";
+import {useThemeLabor} from "../../../providers/themeLabor";
 import {getStyles} from "./styles";
 
 const RNHome: React.FC = () => {
@@ -31,8 +31,8 @@ const RNHome: React.FC = () => {
     const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
-    const sizer = useSizer();
-    const theme = useTheme();
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
     const {
         activityIndicatorStyles,
         switchStyles,
@@ -46,8 +46,8 @@ const RNHome: React.FC = () => {
         touchableOpacityStyles,
         touchableWithoutFeedbackStyles,
         virtualizedListStyles,
-    } = getStyles(sizer,theme)
-    const containerStyles = getContainerStyles(sizer, theme);
+    } = getStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
 
     const changeVisibilityStatusBar = () => {
@@ -149,7 +149,7 @@ const RNHome: React.FC = () => {
                 <View style={modalStyles.centeredView}>
                     <Modal
                         animationType="slide"
-                        transparent={true}
+                        transparent
                         visible={modalVisible}
                         onRequestClose={() => {
                             Alert.alert(st(`modalClosed`));
