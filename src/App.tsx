@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useMemo} from "react";
 import {Platform, StatusBar, Text} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch, useSelector} from "react-redux";
@@ -6,7 +6,7 @@ import {AppearanceProvider} from "react-native-appearance";
 import {
     Theme as ThemeNavigation
 } from "@react-navigation/native";
-import BunnyConstants, {EThemes} from "./constants/constants";
+import BunnyConstants from "./constants/constants";
 import {RootState} from "./types/models";
 import {
     restoreIsReady, restoreNavInitialState, sysError

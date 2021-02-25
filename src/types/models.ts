@@ -20,7 +20,7 @@ export type DemoThunk = {
 }
 
 export type DemoEmployee = {
-    id: number,
+    _id: number,
     first_name: string,
     last_name: string,
     email: string,

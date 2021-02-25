@@ -25,20 +25,19 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const signIn = async (reqParams: SignInPayload) => {
         let result;
         try {
-            const res = await api.post<SignInPayload, AxiosResponse<AuthRes>>(`/auth/login`, reqParams)
-            const {data} = res;
-            if (res.data) {
-                data.access_token
-                    ? await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
-                    : dispatch(sysError({error: new BusinessLogicError('No access_token responded')}))
-                data.user
-                    ? await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
-                    : dispatch(sysError({error: new BusinessLogicError('No user info responded')}))
-                result = data;
-                setAuthLaborState({...authState, accessToken: result.access_token, user: result.user});
+            const {data} = await api.post<SignInPayload, AxiosResponse<AuthRes>>(`/auth/login`, reqParams)
+            if (data.access_token) {
+                await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
             } else {
-                result = dispatch(sysError({error: new BusinessLogicError('No data')}))
+                result = dispatch(sysError({error: new BusinessLogicError('No access_token responded')}))
             }
+            if (data.user) {
+                await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
+            } else {
+                result = dispatch(sysError({error: new BusinessLogicError('No user info responded')}))
+            }
+            setAuthLaborState({...authState, accessToken: data.access_token, user: data.user});
+            result = data;
         } catch (err) {
             result = dispatch(sysError({error: err}))
         }

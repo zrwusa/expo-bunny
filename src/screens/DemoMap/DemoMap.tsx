@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
 import {DemoMap, NearbyFilm, Region, RootState} from "../../types/models";
 import {Action} from "redux";
-import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types/payloads";
+import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types";
 import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
 import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
@@ -90,7 +90,6 @@ class DemoMapScreen extends Component<DemoMapProps> {
             }, 10)
         });
         // await this.getCurLocation();
-
         await this.props.getNearbyFilms({
             latitude: this.props.region.latitude,
             longitude: this.props.region.longitude,
