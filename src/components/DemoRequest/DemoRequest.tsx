@@ -10,33 +10,32 @@ function DemoRequest(props: Props) {
 
     const [employees, setEmployees] = useState<Array<DemoEmployee>>([])
 
-
     const granularity = 0.05;
     const expoPushToken = "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]";
     const saveAlertSetting = async function () {
         try {
-            await request.post('/push-notification/alert-setting', {toke: expoPushToken})
+            await request.post('/push-service/alert-settings', {toke: expoPushToken})
         } catch (err) {
         }
     }
 
     const saveQuickAlertSettings = async function () {
         try {
-            await request.post('/push-notification/alert-quick-setting', {token: expoPushToken, granularity})
+            await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
         } catch (err) {
         }
     }
 
     const cancelAllAlertSettings = async function () {
         try {
-            await request.put('/push-notification/cancel-all-alert-settings', {token: expoPushToken})
+            await request.delete(`/push-service/alert-settings?cancel_all=true&token=${expoPushToken}`)
         } catch (err) {
         }
     }
 
     const getEmployees = async () => {
         try {
-            await request.post('/push-notification/register-device', {
+            await request.post('/push-service/devices', {
                 type: "BITCOIN_ALERT",
                 token: "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]"
             })
@@ -44,7 +43,7 @@ function DemoRequest(props: Props) {
             await saveAlertSetting();
             await saveQuickAlertSettings();
             await cancelAllAlertSettings()
-            const res = await request.get(`/employee`);
+            const res = await request.get(`/employees`);
             // console.log('---DemoRequest res', res)
             // setEmployees(res.data)
         } catch (err) {

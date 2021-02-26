@@ -51,7 +51,7 @@ export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
 
     const saveAlertSetting = async function () {
         try {
-            await request.post('/push-notification/alert-setting', {toke: expoPushToken})
+            await request.post('/push-service/alert-settings', {toke: expoPushToken})
         } catch (err) {
             dispatch(sysError({error: err}))
         }
@@ -59,7 +59,7 @@ export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
 
     const saveQuickAlertSettings = async function () {
         try {
-            await request.post('/push-notification/alert-quick-setting', {token: expoPushToken, granularity})
+            await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
         } catch (err) {
             dispatch(sysError({error: err}))
         }
@@ -67,7 +67,7 @@ export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
 
     const cancelAllAlertSettings = async function () {
         try {
-            await request.put('/push-notification/cancel-all-alert-settings', {token: expoPushToken})
+            await request.delete(`/push-service/alert-settings?cancel_all=true&token=${expoPushToken}`)
         } catch (err) {
             dispatch(sysError({error: err}))
         }
@@ -90,7 +90,7 @@ export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
                 setExpoPushToken(token);
             }
             try {
-                await request.post('/push-notification/register-device', {type: "BITCOIN_ALERT", token})
+                await request.post('/push-service/devices', {type: "BITCOIN_ALERT", token})
             } catch (err) {
                 dispatch(sysError({error: err}))
             }

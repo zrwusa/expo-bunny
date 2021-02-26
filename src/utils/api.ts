@@ -4,9 +4,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants from "../constants/constants";
 import {BunnyAPIError} from "./utils";
 
-type ResponseProtocolStructureBunny<T> = {
+type BunnyAPIResponseProtocol<T> = {
     data: T | object,
     created_at?: string,
+    time_spend?: number,
     http_extra: {
         code?: number,
         message?: string,
@@ -27,11 +28,11 @@ type ResponseProtocolStructureBunny<T> = {
     }
 }
 
-type APIConfig<T> = {
+type BunnyAPIConfig<T> = {
     isHttps: boolean,
     timeout: number,
-    responseProtocolStructure: ResponseProtocolStructureBunny<T>,
-    errorClass: Error,
+    responseProtocolStructure: BunnyAPIResponseProtocol<T>,
+    errorClass: BunnyAPIError,
     interceptors: {
         request: {
             accessToken?(): Promise<string>,
@@ -105,43 +106,30 @@ apiBunny.interceptors.request.use(
 
 apiBunny.interceptors.response.use(
     (response) => {
-        // 200-300
-        // console.log('---response.config',response.config)
-        // if (response.config) {
-        //     //perform the manipulation here and change the response object
-        // }
-        console.log('---interceptors response', response.status)
+        // status 200-300
         return response
     },
     function (error) {
-        console.log('---interceptors error')
         const originalRequest = error.config;
         const {response, request} = error;
         if (response) {
-            //300-600
-            /*
-            * The request was made and the server responded with a
-            * status code that falls out of the range of 2xx
-            */
+            // status 300-600 The request was made and the server responded with a status code that falls out of the range of 2xx
             const {status} = response;
             const {data} = response;
-            console.log('---interceptors error.response');
-            console.log('---response.ok',response.ok)
-            // if (!response.ok) {
-            //     if ([401, 403].indexOf(response.status) !== -1) {
-            //         // auto logout if 401 Unauthorized or 403 Forbidden response returned from apiBunny
-            //         authenticationService.logout();
-            //         location.reload(true);
-            //     }
-            //
-            //     const error = (data && data.message) || response.statusText;
-            //     return Promise.reject(error);
-            // }
-            console.log('---interceptors error.response.status,data', status, data);
             switch (status) {
                 case 401:
                     break;
                 case 403:
+                    // if (!response.ok) {
+                    //     if ([401, 403].indexOf(response.status) !== -1) {
+                    //         // auto logout if 401 Unauthorized or 403 Forbidden response returned from apiBunny
+                    //         authenticationService.logout();
+                    //         location.reload(true);
+                    //     }
+                    //
+                    //     const error = (data && data.message) || response.statusText;
+                    //     return Promise.reject(error);
+                    // }
                     console.log('---interceptors error.response.status === 403');
                     originalRequest._retry = true;
                     // const access_token = await refreshAccessToken();
@@ -157,25 +145,19 @@ apiBunny.interceptors.response.use(
             }
             return Promise.reject(response)
         } else if (request) {
-            // 100-200 timeout
-            /*
-            * The request was made but no response was received, `error.request`
-            * is an instance of XMLHttpRequest in the browser and an instance
-            * of http.ClientRequest in Node.js
-            */
-            console.log('---interceptors error.request', JSON.stringify(error));
+            // status 100-200 timeout The request was made but no response was received, `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js
             return Promise.reject(request)
         } else {
             // Something happened in setting up the request and triggered an error
-            console.log('---interceptors error.message', error.message);
             return Promise.reject(error)
         }
     });
+
 const validAPIProtocolSuccessResponseStructure = (data: any) => {
     let isValid = false;
-    const {error_code,error_message,error_stack} = data.business_logic;
+    const {error_code, error_message, error_stack} = data.business_logic;
     if (error_code) {
-        throw new BunnyAPIError(error_message)
+        throw new BunnyAPIError(error_message, error_code, error_stack)
     } else {
         const {success_data} = data;
         if (success_data) {
@@ -187,47 +169,22 @@ const validAPIProtocolSuccessResponseStructure = (data: any) => {
     return isValid;
 }
 
-const validAPIProtocolError = (data: any) => {
-    const {error_code,error_message,error_stack} = data.business_logic;
-    return new BunnyAPIError(error_message,error_code,error_stack)
-}
-
 const request = async (config: AxiosRequestConfig) => {
-    const startTime = new Date().getTime();
     try {
         const result = await apiBunny.request(config);
-        console.log('---baseRequest try')
         if (validAPIProtocolSuccessResponseStructure(result.data)) {
             result.data = result.data.success_data
-            console.log('---baseRequest try validAPIProtocol(result.data)===true')
         } else {
-            console.log('---baseRequest try validAPIProtocol(result.data)===false')
             result.data = {}
         }
         return result;
-        // console.log('---base request response')
     } catch (error) {
-        // console.log('---base request error')
-        const timeSpent = new Date().getTime() - startTime;
-        // console.error('---error',error)
-        const businessError = validAPIProtocolError(error.data)
-        console.error('---businessError',businessError)
-        // throw (error)
-        throw (businessError)
-        // if(bunnyConfig.shouldCollectError){
-        //     const {dispatch} = store;
-        //     const {request,response} = error;
-        //     if (response) {
-        //         // Request made and server responded
-        //          dispatch(sysError({error: {...response,timeSpent}}))
-        //     } else if (request) {
-        //         // The request was made but no response was received
-        //          dispatch(sysError({error: {...request,timeSpent}}))
-        //     } else {
-        //         // Something happened in setting up the request that triggered an Error
-        //          dispatch(sysError({error: {...error,timeSpent}}))
-        //     }
-        // }
+        const {error_code, error_message, error_stack} = error.data.business_logic;
+        if (error_code) {
+            throw new BunnyAPIError(error_message, error_code, error_stack);
+        } else {
+            throw error
+        }
     }
 }
 
