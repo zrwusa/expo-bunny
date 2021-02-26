@@ -5,7 +5,8 @@ import {DemoMap, NearbyFilm, Region} from "../../types/models";
 import api from "../../utils/api";
 import {GetNearbyFilmsReqParams} from "../../types";
 import {RestoreNearbyFilms, RestoreRegion, SysError} from "../../types";
-import {BusinessLogicError, sysError} from "../sys/actions";
+import {sysError} from "../sys/actions";
+import {BusinessLogicError} from "../../utils";
 
 export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilms = (payload) => {
     return {
@@ -18,7 +19,7 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMap,
     return async (dispatch: Dispatch<RestoreNearbyFilms | SysError>): Promise<Action> => {
         let result;
         try {
-            const res = await api.get(`/nearby-film`, {params: {reqParams}});
+            const res = await api.get(`/nearby-films`, {params: {reqParams}});
             if (res.data) {
                 result = dispatch(restoreNearbyFilms(res.data));
             } else {

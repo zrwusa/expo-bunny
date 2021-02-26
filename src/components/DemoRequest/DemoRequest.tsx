@@ -44,8 +44,8 @@ function DemoRequest(props: Props) {
             await saveQuickAlertSettings();
             await cancelAllAlertSettings()
             const res = await request.get(`/employees`);
-            // console.log('---DemoRequest res', res)
-            // setEmployees(res.data)
+            console.log('---DemoRequest res', res)
+            setEmployees(res.data)
         } catch (err) {
 
         }

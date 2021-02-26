@@ -1,6 +1,5 @@
-import {EDemoHello} from "../../constants/constants";
-import {DemoHello2Payload, DemoHelloPayload} from "../../types/payloads";
-import {DemoHello, DemoHello2} from "../../types/actions";
+import {EDemoHello} from "../../constants";
+import {DemoHello, DemoHello2, DemoHello2Payload, DemoHelloPayload} from "../../types";
 
 export const demoHello: (payload: DemoHelloPayload) => DemoHello = (payload) => {
     return {

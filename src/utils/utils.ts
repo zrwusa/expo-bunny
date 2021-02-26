@@ -92,7 +92,7 @@ export class BunnyAPIError extends Error {
     protected serverErrorStack;
     protected serverErrorCode;
 
-    constructor(serverErrorMessage: string, serverErrorCode?:string,serverErrorStack?:string) {
+    constructor(serverErrorMessage: string, serverErrorCode?: string, serverErrorStack?: string) {
         super(serverErrorMessage);
         if (serverErrorStack) {
             this.serverErrorStack = serverErrorStack;
@@ -114,6 +114,22 @@ export class BunnyAPIError extends Error {
     toJson() {
         if (this.serverErrorStack) {
             return this.serverErrorStack
+        }
+    }
+}
+
+
+export class BusinessLogicError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = new.target.name;
+        if (typeof (Error as any).captureStackTrace === 'function') {
+            (Error as any).captureStackTrace(this, new.target);
+        }
+        if (typeof Object.setPrototypeOf === 'function') {
+            Object.setPrototypeOf(this, new.target.prototype);
+        } else {
+            (this as any).__proto__ = new.target.prototype;
         }
     }
 }

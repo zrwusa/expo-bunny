@@ -41,13 +41,4 @@ export const restoreIsReady: (payload: RestoreIsReadyPayload) => RestoreIsReady 
     };
 };
 
-export class BusinessLogicError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = "BusinessLogicError";
-        // Set the prototype explicitly.
-        Object.setPrototypeOf(this, BusinessLogicError.prototype);
-    }
-}
-
 export type SysActions = RestoreIsReady | SysError | SysWarn | RestoreNavInitialState | SysClearErrors;

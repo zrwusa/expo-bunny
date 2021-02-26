@@ -1,11 +1,11 @@
 import api from "../../utils/api";
-import {DemoThunkPayload, DemoThunkSuccessPayload} from "../../types/payloads";
-import {DemoThunkSuccess, SysError} from "../../types/actions";
-import {EDemoThunk} from "../../constants/constants";
+import {DemoThunkPayload, DemoThunkSuccessPayload,DemoThunkSuccess, SysError} from "../../types";
+import {EDemoThunk} from "../../constants";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {DemoThunk} from "../../types/models";
-import {BusinessLogicError, sysError} from "../sys/actions";
+import {sysError} from "../sys/actions";
+import {BusinessLogicError} from "../../utils";
 
 export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSuccess = (payload) => {
     return {

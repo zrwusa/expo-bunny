@@ -3,7 +3,7 @@ import {AuthLaborProviderProps, AuthRes, SignInPayload, SignUpPayload} from "../
 import {AuthLaborContext, authLaborContext} from "./AuthLaborContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants from "../../constants/constants";
-import {BusinessLogicError, sysError, sysWarn} from "../../stores/sys/actions";
+import {sysError, sysWarn} from "../../stores/sys/actions";
 import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
 import {Preparing} from "../../components/Preparing";
@@ -13,6 +13,7 @@ import api from "../../utils/api";
 import {AxiosResponse} from "axios";
 import * as Google from "expo-google-app-auth";
 import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, IOS_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO} from "@env";
+import {BusinessLogicError} from "../../utils";
 
 function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const {children, authFunctions, authedResult} = props;
