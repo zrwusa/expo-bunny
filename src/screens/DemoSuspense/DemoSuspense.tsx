@@ -1,22 +1,22 @@
 import React from 'react';
 import {View, Text} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";
-// import {isServerSide} from "../../utils/utils";
+import {wait} from "../../utils";
 
 const DemoLazy100 = React.lazy(async () => {
         const module = await import('../../components/DemoLazy/DemoLazy')
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await wait(100);
         return {default: module.DemoLazy}
     }
 );
 
 const DemoLazy2000 = React.lazy(async () => {
         const module = await import('../../components/DemoLazy/DemoLazy')
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await wait(2000);
         return {default: module.DemoLazy}
     }
 );

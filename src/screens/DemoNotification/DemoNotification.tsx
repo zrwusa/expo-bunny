@@ -1,10 +1,9 @@
-import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-import React, {useState, useEffect} from 'react';
-import {View, Text, Button} from "../../components/UI";
+import React, {useEffect, useState} from 'react';
+import {Button, Text, View} from "../../components/UI";
 import {Platform} from 'react-native';
 import {initialedNotification, registerForPushNotificationsAsync, schedulePushNotification} from "../../utils/expo-notification";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers/i18nLabor";
 import {useTranslation} from "react-i18next";
 
 

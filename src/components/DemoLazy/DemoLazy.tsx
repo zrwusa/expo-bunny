@@ -8,7 +8,7 @@ interface Props {
     title: string
 }
 
-export const DemoLazy: React.FC<Props> = (props) => {
+export const DemoLazy = (props: Props) => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor);

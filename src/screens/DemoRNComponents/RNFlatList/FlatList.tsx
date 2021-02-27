@@ -5,7 +5,7 @@ import getContainerStyles from "../../../containers";
 import {useSizeLabor} from "../../../providers/sizeLabor";
 import {useThemeLabor} from "../../../providers/themeLabor";
 
-const RNFlatListScreen: React.FC = () => {
+function RNFlatListScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);

@@ -1,4 +1,6 @@
+// Action payloads
 import {InitialState} from "@react-navigation/native";
+import {BunnyAPIStandardRequestParams} from "./api";
 
 export interface SignInPayload {
     email: string;
@@ -9,7 +11,6 @@ export interface SignUpPayload {
     email: string;
     password: string;
 }
-
 
 type TimeSpend = {
     timeSpend?: number
@@ -61,7 +62,9 @@ export interface GetNearbyFilmsReqParams {
     longitudeDelta: number;
 }
 
-
-
-
-
+export interface GetDemoSagaParams extends BunnyAPIStandardRequestParams {
+    filter?: {
+        id?: number,
+        text?: string
+    }
+}

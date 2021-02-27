@@ -3,14 +3,14 @@ import {Animated} from "react-native";
 import {View, Text, Image} from "../../components/UI";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
-import {DemoMap, NearbyFilm, Region, RootState} from "../../types/models";
+import {DemoMapState, NearbyFilm, Region, RootState} from "../../types";
 import {Action} from "redux";
 import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types";
-import {getNearbyFilms, restoreRegion} from "../../stores/demo-map/actions";
+import {getNearbyFilms, restoreRegion} from "../../actions";
 import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
-import {sysError} from "../../stores/sys/actions";
+import {sysError} from "../../actions";
 import {getCardSize} from "./styles";
 import getContainerStyles from "../../containers";
 import getStyles from "./styles";
@@ -22,7 +22,7 @@ const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
 type BareProps = { title?: string }
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoMapState});
-const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMap, void, Action>) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMapState, void, Action>) => ({
     getNearbyFilms: async (reqParams: GetNearbyFilmsReqParams) => dispatch(getNearbyFilms(reqParams)),
     restoreRegion: (region: Region) => dispatch(restoreRegion(region)),
     sysError: (err: SysErrorPayload) => dispatch(sysError(err))

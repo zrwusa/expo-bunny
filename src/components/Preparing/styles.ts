@@ -11,7 +11,7 @@ export const getStyles = () => {
         },
         text: {
             marginTop: 10,
-            fontSize:16,
+            fontSize: 16,
             color: pl.grey700,
         }
     });

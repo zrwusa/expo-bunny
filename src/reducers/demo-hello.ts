@@ -1,13 +1,13 @@
-import {EDemoHello} from "../../constants";
-import {DemoHello} from "../../types/models";
-import {DemoHelloActions} from "./actions";
+import {EDemoHello} from "../constants";
+import {DemoHelloState} from "../types/models";
+import {DemoHelloActions} from "../actions";
 
-const initialState: DemoHello = {
-    name: "initialed name",
-    order: 0
-};
 
-export function demoHelloStateReducer(prevState: DemoHello = initialState, {type, payload}: DemoHelloActions): DemoHello {
+export function demoHelloStateReducer(
+    prevState: DemoHelloState = {
+        name: "initialed name",
+        order: 0
+    }, {type, payload}: DemoHelloActions): DemoHelloState {
     switch (type) {
         case EDemoHello.DEMO_HELLO: {
             return {

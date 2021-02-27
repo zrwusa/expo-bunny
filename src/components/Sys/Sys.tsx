@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, TextInput, Button} from "../UI";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../types/models";
+import {RootState} from "../../types";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";
 import {getStyles} from "./styles";
-import {sysClearErrors} from "../../stores/sys/actions";
+import {sysClearErrors} from "../../actions";
 
 type Props = { title?: string }
 
-const Sys: React.FC<Props> = ({title}) => {
+const Sys = ({title}: Props) => {
     const sysState = useSelector((store: RootState) => store.sysState);
     const [isShow, setIsShow] = useState(false)
     const sizeLabor = useSizeLabor();

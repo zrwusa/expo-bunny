@@ -1,4 +1,4 @@
-import {NamedStyles, SizeLabor, ThemeLabor} from "../types/styles";
+import {NamedStyles, SizeLabor, ThemeLabor} from "../types";
 
 const getSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;

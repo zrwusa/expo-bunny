@@ -6,18 +6,18 @@ import {useThemeLabor} from "../../../providers/themeLabor";
 import getContainerStyles from "../../../containers";
 import {useSizeLabor} from "../../../providers/sizeLabor";
 
-type Item = {
+type VirtualizedListItem = {
     id: string;
     title: string;
 }
 
-const RNVirtualizedListScreen: React.FC = () => {
+function RNVirtualizedListScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
-    const VIRTUALIZED_LIST_DATA: Item[] = [];
+    const virtualizedListData: VirtualizedListItem[] = [];
 
     const getVirtualizedListItem = (data: [], index: number) => {
         return {
@@ -30,7 +30,7 @@ const RNVirtualizedListScreen: React.FC = () => {
         return 1000;
     }
 
-    const VirtualizedListItem = ({title}: Item) => {
+    const VirtualizedListItem = ({title}: VirtualizedListItem) => {
         const {colors} = useThemeLabor().theme
 
         return (
@@ -51,7 +51,7 @@ const RNVirtualizedListScreen: React.FC = () => {
     return (
         <SafeAreaView style={containerStyles.screen}>
             <VirtualizedList
-                data={VIRTUALIZED_LIST_DATA}
+                data={virtualizedListData}
                 initialNumToRender={6}
                 renderItem={({item}) => <VirtualizedListItem title={item.title} id={item.id}/>}
                 keyExtractor={item => item.id}

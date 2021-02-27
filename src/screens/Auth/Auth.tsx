@@ -3,7 +3,7 @@ import * as React from "react";
 import {useDispatch} from "react-redux";
 import {View, ButtonRNE, TextInput} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers";
 import getContainerStyles from "../../containers";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";

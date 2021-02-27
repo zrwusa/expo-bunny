@@ -44,7 +44,7 @@ import {
     LinkingConfig, LinkingConfigTraversable,
     RecursiveNavigatorProps, NavigatorTreeNode
 } from "../../types"
-import {getIconNameByRoute, navigatorPropsExtract} from "../../helpers";
+import {getIconNameByRoute, navigatorPropsExtract} from "../../common";
 import DemoNotificationScreen from "../../screens/DemoNotification";
 import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
 import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
@@ -60,6 +60,7 @@ import {getStyles} from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useAuthLabor} from "../../providers/authLabor";
 import {uuidV4} from "../../utils";
+import DemoSagaScreen from "../../screens/DemoSaga";
 
 export const basePath = Linking.makeUrl('/');
 
@@ -251,6 +252,14 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 component: DemoThunkCCScreen,
                 name: "DemoThunkCC",
                 path: "demo-thunk-cc",
+                navigatorType: "stack",
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoSagaScreen,
+                name: "DemoSaga",
+                path: "demo-saga",
                 navigatorType: "stack",
                 authRequired: false
             },

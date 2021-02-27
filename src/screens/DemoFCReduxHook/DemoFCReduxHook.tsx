@@ -1,19 +1,19 @@
 import React from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {demoHello} from "../../stores/demo-hello/actions";
-import {RootState} from "../../types/models";
+import {demoHello} from "../../actions";
 import {ButtonRNE, Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";
+import {RootState} from "../../types";
 
-const DemoFCReduxHookScreen: React.FC = () => {
+function DemoFCReduxHookScreen() {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.DemoFCReduxHook');
     const dispatch = useDispatch();
-    const demoHelloState = useSelector((store: RootState) => store.demoHelloState);
+    const demoHelloState = useSelector((rootState: RootState) => rootState.demoHelloState);
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
@@ -29,4 +29,5 @@ const DemoFCReduxHookScreen: React.FC = () => {
         </View>
     );
 }
+
 export default DemoFCReduxHookScreen;

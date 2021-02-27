@@ -5,7 +5,7 @@ import {DemoBitcoinStackParam} from "../../../types";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {Text} from "../../../components/UI"
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers/i18nLabor/short-t";
+import {stFactory} from "../../../providers/i18nLabor";
 import getContainerStyles from "../../../containers";
 import {useSizeLabor} from "../../../providers/sizeLabor";
 import {useThemeLabor} from "../../../providers/themeLabor";

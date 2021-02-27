@@ -1,19 +1,27 @@
 import React, {useState} from "react";
 import {
-    ActivityIndicator, Switch, View, ScrollView,
-    Image, ImageBackground, TouchableHighlight, Alert,
-    StatusBar, StatusBarStyle, TouchableWithoutFeedback,
-    Modal
+    ActivityIndicator,
+    Alert,
+    Image,
+    ImageBackground,
+    Modal,
+    ScrollView,
+    StatusBar,
+    StatusBarStyle,
+    Switch,
+    TouchableHighlight,
+    TouchableWithoutFeedback,
+    View
 } from "react-native";
-import {Button, Text, TextInput, TouchableOpacity, Pressable} from "../../../components/UI";
+import {Button, Pressable, Text, TextInput, TouchableOpacity} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers/i18nLabor/short-t";
+import {stFactory} from "../../../providers/i18nLabor";
 import getContainerStyles from "../../../containers";
 import {useSizeLabor} from "../../../providers/sizeLabor";
 import {useThemeLabor} from "../../../providers/themeLabor";
 import {getStyles} from "./styles";
 
-const RNHome: React.FC = () => {
+function RNHome() {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.RNHome');
     const [isEnabled, setIsEnabled] = useState(false);

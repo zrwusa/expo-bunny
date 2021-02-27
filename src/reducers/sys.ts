@@ -1,16 +1,16 @@
-import {ELanguage, ESys} from "../../constants";
-import {Sys} from "../../types/models";
-import {SysActions} from "./actions";
-import {EThemes} from "../../constants";
+import {ELanguage, ESys} from "../constants";
+import {SysState} from "../types/models";
+import {SysActions} from "../actions";
+import {EThemes} from "../constants";
 import {
     RestoreIsReadyPayload,
     RestoreNavInitialStatePayload,
     SysClearErrorPayload,
     SysErrorPayload,
     SysWarnPayload
-} from "../../types";
+} from "../types";
 
-const initialState: Sys = {
+const initialState: SysState = {
     isReady: false,
     error: [],
     warn: [""],
@@ -19,7 +19,7 @@ const initialState: Sys = {
     navInitialState: undefined
 };
 
-export function sysStateReducer(prevState: Sys = initialState, {type, payload}: SysActions): Sys {
+export function sysStateReducer(prevState: SysState = initialState, {type, payload}: SysActions): SysState {
     switch (type) {
         case ESys.RESTORE_IS_READY:
             const restoreIsReadyPayload = payload as RestoreIsReadyPayload

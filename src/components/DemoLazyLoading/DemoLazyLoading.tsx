@@ -5,7 +5,7 @@ import {ActivityIndicator} from "react-native";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";
 
-export const DemoLazyLoading: React.FC = () => {
+export function DemoLazyLoading() {
     const sizeLabor = useSizeLabor()
     const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor);

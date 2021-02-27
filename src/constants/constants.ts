@@ -52,6 +52,14 @@ export enum EDemoMap {
     RESTORE_REGION = "RESTORE_REGION",
 }
 
+export enum EDemoSaga {
+    GET_DEMO_SAGAS = 'GET_DEMO_SAGAS',
+    REQUEST_GET_DEMO_SAGAS = 'REQUEST_GET_DEMO_SAGAS',
+    RECEIVE_GET_DEMO_SAGAS = 'RECEIVE_GET_DEMO_SAGAS',
+    FAILED_GET_DEMO_SAGAS = 'FAILED_GET_DEMO_SAGAS',
+}
+
+
 export const EThemes: EnumThemeNames = {
     light: 'light',
     dark: 'dark',

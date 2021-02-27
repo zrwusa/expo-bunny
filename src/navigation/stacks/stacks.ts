@@ -4,7 +4,7 @@ import {createDrawerNavigator} from "react-navigation-drawer-no-warnings";
 import {
     RootStackParam, DemoNestedLv1StackParam, DemoTabStackParam,
     DemoTabRNComponentsStackParam, DemoBitcoinStackParam, DemoDrawerStackParam, DemoNestedLv2StackParam
-} from "../../types/stacks";
+} from "../../types/navigations";
 
 export const RootStack = createStackNavigator<RootStackParam>();
 

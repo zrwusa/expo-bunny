@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {RootStackParam} from "../../types";
 import {ButtonTO, TextBtn, Link} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";
@@ -63,6 +63,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 <Card title={st(`redux`)}>
                     <Link to="/demo-fc-redux-hook">{st(`FCReduxHook`)}</Link>
                     <Link to="/demo-thunk-cc">{st(`thunkCC`)}</Link>
+                    <Link to="/demo-saga">{st(`saga`)}</Link>
                 </Card>
                 <Card title={st(`nativeCapabilities`)}>
                     <Link to="/demo-map">{st(`map`)}</Link>

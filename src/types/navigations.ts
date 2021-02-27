@@ -1,3 +1,4 @@
+// Navigations
 export type RootStackParam = {
     Home: undefined;
     Auth: undefined;
@@ -8,6 +9,7 @@ export type RootStackParam = {
     DemoRoute: { id: string, isHuman: boolean, sort?: 'latest' | 'top' };
     DemoThirdPart: undefined;
     DemoThunkCC: undefined;
+    DemoSaga: undefined;
     DemoMap: undefined;
     DemoChat: undefined;
     DemoTab: undefined | { screen: string; params?: { [key: string]: any } };

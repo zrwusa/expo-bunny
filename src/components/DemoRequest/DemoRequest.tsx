@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {View, Text, ButtonTO, TextBtn} from "../UI";
-import {DemoEmployee} from "../../types/models";
-import {useRequest} from "../../providers/requestHooks";
+import {DemoEmployee} from "../../types";
+import {useRequest} from "../../providers/requestLabor/requestHooks";
 
 type Props = { title: string, buttonTitle: string }
 

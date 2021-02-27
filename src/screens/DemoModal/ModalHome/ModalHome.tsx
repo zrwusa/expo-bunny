@@ -3,7 +3,7 @@ import {View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers/i18nLabor/short-t";
+import {stFactory} from "../../../providers/i18nLabor";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types";
 import getContainerStyles from "../../../containers";

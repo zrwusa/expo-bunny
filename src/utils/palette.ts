@@ -1,4 +1,4 @@
-import {Palette} from "../types/styles";
+import {Palette} from "../types";
 
 export const palette: Palette = {
     red50: '#ffebee',

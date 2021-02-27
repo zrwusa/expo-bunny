@@ -1,20 +1,20 @@
 import React from "react";
 import {connect} from "react-redux";
 import {ButtonRNE, Text, View} from "../../components/UI";
-import {demoThunk} from "../../stores/demo-thunk/actions";
-import {DemoThunk, RootState} from "../../types/models";
+import {demoThunk} from "../../actions";
+import {DemoThunkState, RootState} from "../../types";
 import {DemoThunkPayload} from "../../types";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
 import {withThemeLabor} from "../../providers/themeLabor";
 import {WithThemeLabor} from "../../types";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
-const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunk, void, Action>) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action>) => ({
     demoThunk: async (data: DemoThunkPayload) => dispatch(demoThunk(data)),
 });
 type Props = ReturnType<typeof mapStateToProps>

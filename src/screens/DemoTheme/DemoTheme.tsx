@@ -2,7 +2,7 @@ import React from "react";
 import {ScrollView} from "react-native";
 import {Button, ButtonRNE, ButtonTO, Text, TextBtn, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers/i18nLabor";
 import {getStyles} from "./styles";
 import BunnyConstants from "../../constants/constants";
 import getContainerStyles from "../../containers";

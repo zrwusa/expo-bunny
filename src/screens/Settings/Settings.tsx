@@ -1,12 +1,12 @@
 import * as React from "react";
 import SettingsItem from "./SettingsItem";
 import {I18nManager} from "react-native";
-import {ELanguage, EThemes} from "../../constants/constants";
+import {ELanguage, EThemes} from "../../constants";
 import {restartApp} from '../../restart';
 import BunnyConstants from "../../constants/constants";
 import {useTranslation} from "react-i18next";
 import {View} from "../../components/UI";
-import {stFactory} from "../../providers/i18nLabor/short-t";
+import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";

@@ -1,23 +1,5 @@
-import {InitialState} from "@react-navigation/native";
+//Data models, such as database entities, api return value entities
 import {ImageSourcePropType} from "react-native";
-
-export interface DemoHello {
-    name: string,
-    order: number,
-}
-
-export interface DemoHello2 {
-    company: string,
-    companyId: string,
-    job: string,
-    jobId: string,
-    isHighP: boolean,
-}
-
-export type DemoThunk = {
-    id: number,
-    text: string,
-}
 
 export type DemoEmployee = {
     _id: number,
@@ -44,26 +26,4 @@ export type Region = {
     longitude: number,
     latitudeDelta: number,
     longitudeDelta: number,
-}
-
-export type DemoMap = {
-    demoNearbyFilms: NearbyFilm[],
-    region: Region,
-}
-
-export type Sys = {
-    error: Error[],
-    warn: string[],
-    isReady: boolean,
-    themeName: string,
-    language: string,
-    navInitialState?: InitialState
-}
-
-export interface RootState {
-    sysState: Sys,
-    demoHelloState: DemoHello,
-    demoHello2State: DemoHello2,
-    demoThunkState: DemoThunk,
-    demoMapState: DemoMap,
 }

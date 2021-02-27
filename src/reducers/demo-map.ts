@@ -1,10 +1,10 @@
-import {EDemoMap} from "../../constants";
-import BunnyConstants from "../../constants/constants";
-import {DemoMap, NearbyFilm, Region} from "../../types/models";
-import {DemoMapActions} from "./actions";
-import {uuidV4} from "../../utils";
+import {EDemoMap} from "../constants";
+import BunnyConstants from "../constants/constants";
+import {DemoMapState, NearbyFilm, Region} from "../types/models";
+import {DemoMapActions} from "../actions";
+import {uuidV4} from "../utils";
 
-const initialState: DemoMap = {
+const initialState = {
     demoNearbyFilms: [
         {
             "id": uuidV4(),
@@ -14,7 +14,7 @@ const initialState: DemoMap = {
             },
             "title": "initialed title",
             "description": "This is the best place in Portland",
-            "image": require('../../assets/images/bunny1.jpg')
+            "image": require('../assets/images/bunny1.jpg')
         },
         {
             "id": uuidV4(),
@@ -34,7 +34,7 @@ const initialState: DemoMap = {
             },
             "title": "Second Best Place",
             "description": "This is the second best place in Portland",
-            "image": require('../../assets/images/bunny3.jpg')
+            "image": require('../assets/images/bunny3.jpg')
         },
         {
             "id": uuidV4(),
@@ -44,7 +44,7 @@ const initialState: DemoMap = {
             },
             "title": "Third Best Place",
             "description": "This is the third best place in Portland",
-            "image": require('../../assets/images/bunny4.jpg')
+            "image": require('../assets/images/bunny4.jpg')
         }
     ],
     region: {
@@ -54,7 +54,7 @@ const initialState: DemoMap = {
     }
 };
 
-export function demoMapReducer(prevState: DemoMap = initialState, {type, payload}: DemoMapActions): DemoMap {
+export function demoMapStateReducer(prevState: DemoMapState = initialState, {type, payload}: DemoMapActions): DemoMapState {
     switch (type) {
         case EDemoMap.RESTORE_NEARBY_FILMS: {
             for (let item of payload) {

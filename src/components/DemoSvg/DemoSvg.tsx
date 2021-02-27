@@ -8,7 +8,7 @@ import {Platform} from "react-native";
 import {useThemeLabor} from "../../providers/themeLabor";
 import {useSizeLabor} from "../../providers/sizeLabor";
 
-export const DemoSvg: React.FC = () => {
+export const DemoSvg = () => {
     const sizeLabor = useSizeLabor()
     const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor);

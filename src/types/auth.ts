@@ -1,3 +1,4 @@
+// The Auth is brought out to integrate with the passport service in the future
 import {ReactNode} from "react";
 import {GoogleUser} from "expo-google-app-auth";
 
@@ -10,6 +11,7 @@ export type AuthRes = {
     access_token: string | undefined,
     user?: UserRes | null,
 }
+
 export type AuthedResult = {
     isLoading: boolean,
     isSignOut: boolean,

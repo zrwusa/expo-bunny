@@ -1,7 +1,7 @@
 import {DeepLeavesWrap, JsonKeys} from "./utils";
 import {IconProps} from "react-native-vector-icons/Icon";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {glyphMaterialCommunityCustomMap} from "../helpers/helpers";
+import {glyphMaterialCommunityCustomMap} from "../common";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
 import {ImageStyle, TextStyle, ViewStyle} from "react-native";

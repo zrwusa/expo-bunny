@@ -1,17 +1,26 @@
 import {createStore, applyMiddleware, combineReducers} from "redux";
-import {demoHelloStateReducer} from "./demo-hello";
 import thunkMiddleware from "redux-thunk";
-import {demoThunkReducer} from "./demo-thunk";
-import {sysStateReducer} from "./sys";
-import {demoMapReducer} from "./demo-map";
+import createSagaMiddleware from "redux-saga";
+import {
+    demoHelloStateReducer, demoMapStateReducer, demoThunkStateReducer,
+    sysStateReducer, demoSagaReducer
+} from "../reducers";
+import {sagaDemoSagas} from "../sagas"
+
+
+const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
     demoHelloState: demoHelloStateReducer,
-    demoThunkState: demoThunkReducer,
-    demoMapState: demoMapReducer,
+    demoThunkState: demoThunkStateReducer,
+    demoMapState: demoMapStateReducer,
     sysState: sysStateReducer,
+    demoSagaState: demoSagaReducer
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
-
+// const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+// const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+// you might choose one redux middleware which you prefer,just delete the demos you not prefer
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMiddleware));
+sagaMiddleware.run(sagaDemoSagas);
 export default store;

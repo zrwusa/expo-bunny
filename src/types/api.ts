@@ -60,3 +60,11 @@ export type BunnyAPIConfig<T> = {
     isDevServerProxy: boolean,
     devProxyPrefix: string,
 }
+
+export interface BunnyAPIStandardRequestParams {
+    pageNum?: number,
+    pageCount?: number,
+    filter?: {
+        id?: number
+    }
+}

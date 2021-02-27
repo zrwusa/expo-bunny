@@ -6,25 +6,25 @@ import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings"
 import {DemoBitcoinStackParam} from "../../../types";
 import {ButtonTO, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers/i18nLabor/short-t";
+import {stFactory} from "../../../providers";
 import getContainerStyles from "../../../containers";
 import {useSizeLabor} from "../../../providers/sizeLabor";
 import {useThemeLabor} from "../../../providers/themeLabor";
 import * as Notifications from "expo-notifications";
 import {useEffect, useState} from "react";
-import {useRequest} from "../../../providers/requestHooks";
+import {useRequest} from "../../../providers";
 import {
     initialedNotification,
     registerForPushNotificationsAsync
 } from "../../../utils/expo-notification";
-import {sysError} from "../../../stores/sys/actions";
+import {sysError} from "../../../actions";
 import {useDispatch} from "react-redux";
 
 type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 export type BitcoinAlertProps = { route?: BitcoinAlertRouteProp, navigation?: BitcoinAlertNavigationProp }
 
-export default function BitcoinAlertScreen({}: BitcoinAlertProps) {
+export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProps) {
     const {t} = useTranslation();
     const st = stFactory(t, 'screens.BitcoinAlert');
     const i18nSysPrefix = 'sys';

@@ -1,10 +1,10 @@
 import * as React from "react";
-import {View, ButtonTO, TextBtn} from "../../../../components/UI";
+import {ButtonTO, TextBtn, View} from "../../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {DemoNestedLv2StackParam} from "../../../../types/stacks";
+import {DemoNestedLv2StackParam} from "../../../../types";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../../providers/i18nLabor/short-t";
+import {stFactory} from "../../../../providers/i18nLabor";
 import getContainerStyles from "../../../../containers";
 import {useSizeLabor} from "../../../../providers/sizeLabor";
 import {useThemeLabor} from "../../../../providers/themeLabor";

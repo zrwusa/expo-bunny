@@ -1,9 +1,9 @@
 import React from "react";
 import {getStyles} from "./styles";
-import {ActivityIndicator,Text,View} from "react-native";
+import {ActivityIndicator, Text, View} from "react-native";
 
 export type PreparingProps = { text?: string | JSX.Element }
-export const Preparing: React.FC<PreparingProps> = (props) => {
+export const Preparing = (props: PreparingProps) => {
     const {text} = props;
     const styles = getStyles();
     return (
