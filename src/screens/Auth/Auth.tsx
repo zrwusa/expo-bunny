@@ -1,13 +1,13 @@
 import {Platform} from "react-native";
 import * as React from "react";
+import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {View, ButtonRNE, TextInput} from "../../components/UI";
+import {ButtonRNE, TextInput, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../providers";
 import getContainerStyles from "../../containers";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";
-import {useState} from "react";
 import {useAuthLabor} from "../../providers/authLabor";
 
 export type AuthProps = { type?: 'sign-in' | 'sign-up' }

@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "strict": true,
     "typeRoots": [
-      "src/@types",
+      "src/_types",
       "node_modules/@types"
     ],
     "target": "es5",

@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text} from "../UI";
+import {Text, View} from "../UI";
 
 type Props = { title: string, paragraph?: string, }
 

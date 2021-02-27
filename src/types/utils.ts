@@ -2,8 +2,12 @@ import {ComponentType} from "react";
 import * as Stacks from "../navigation/stacks";
 import {StackNavigationOptions} from "@react-navigation/stack";
 import {
-    DefaultNavigatorOptions, DrawerRouterOptions, EventMapBase,
-    RouteConfig, StackRouterOptions, TabRouterOptions
+    DefaultNavigatorOptions,
+    DrawerRouterOptions,
+    EventMapBase,
+    RouteConfig,
+    StackRouterOptions,
+    TabRouterOptions
 } from "@react-navigation/native";
 import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
 import {NavigationState, ParamListBase} from "@react-navigation/routers";

@@ -1,22 +1,18 @@
 import React, {Component, createRef} from "react";
 import {Animated} from "react-native";
-import {View, Text, Image} from "../../components/UI";
+import {Image, Text, View} from "../../components/UI";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
-import {DemoMapState, NearbyFilm, Region, RootState} from "../../types";
+import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState, SysErrorPayload, WithThemeLabor} from "../../types";
 import {Action} from "redux";
-import {GetNearbyFilmsReqParams, SysErrorPayload} from "../../types";
-import {getNearbyFilms, restoreRegion} from "../../actions";
+import {getNearbyFilms, restoreRegion, sysError} from "../../actions";
 import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
-import {sysError} from "../../actions";
-import {getCardSize} from "./styles";
+import getStyles, {getCardSize} from "./styles";
 import getContainerStyles from "../../containers";
-import getStyles from "./styles";
 import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
 import {withThemeLabor} from "../../providers/themeLabor";
-import {WithThemeLabor} from "../../types";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 

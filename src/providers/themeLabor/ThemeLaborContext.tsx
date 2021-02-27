@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ThemeName, ThemeLabor} from "../../types";
+import {ThemeLabor, ThemeName} from "../../types";
 import {defaultTheme} from "./theme";
 
 

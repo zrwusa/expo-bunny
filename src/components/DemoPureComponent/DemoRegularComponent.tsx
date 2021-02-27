@@ -1,5 +1,5 @@
-import React, {Component, PureComponent} from "react";
-import {View, Text} from "../UI";
+import React, {Component} from "react";
+import {Text, View} from "../UI";
 import {getStyles} from "./styles";
 import {SizeLaborContext} from "../../providers/sizeLabor";
 import {ThemeLaborContext} from "../../providers/themeLabor";

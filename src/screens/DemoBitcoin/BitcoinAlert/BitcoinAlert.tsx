@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import {Platform, View} from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import {RouteProp} from "@react-navigation/native";
@@ -6,17 +7,12 @@ import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings"
 import {DemoBitcoinStackParam} from "../../../types";
 import {ButtonTO, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers";
+import {stFactory, useRequest} from "../../../providers";
 import getContainerStyles from "../../../containers";
 import {useSizeLabor} from "../../../providers/sizeLabor";
 import {useThemeLabor} from "../../../providers/themeLabor";
 import * as Notifications from "expo-notifications";
-import {useEffect, useState} from "react";
-import {useRequest} from "../../../providers";
-import {
-    initialedNotification,
-    registerForPushNotificationsAsync
-} from "../../../utils/expo-notification";
+import {initialedNotification, registerForPushNotificationsAsync} from "../../../utils/expo-notification";
 import {sysError} from "../../../actions";
 import {useDispatch} from "react-redux";
 

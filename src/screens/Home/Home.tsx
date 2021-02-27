@@ -4,7 +4,7 @@ import {RouteProp, useLinkTo} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {RootStackParam} from "../../types";
-import {ButtonTO, TextBtn, Link} from "../../components/UI";
+import {ButtonTO, Link, TextBtn} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";

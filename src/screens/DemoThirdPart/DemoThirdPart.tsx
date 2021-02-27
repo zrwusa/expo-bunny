@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ListItem, Avatar, Button} from "react-native-elements";
+import {Avatar, Button, ListItem} from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import {ButtonRNE, IconMC, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";

@@ -1,4 +1,4 @@
-import {Dimensions, PixelRatio, ScaledSize} from 'react-native';
+import {Dimensions, PixelRatio} from 'react-native';
 
 
 const widthPercentageToDP = (widthPercent: string | number): number => {

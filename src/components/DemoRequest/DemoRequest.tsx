@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, ButtonTO, TextBtn} from "../UI";
+import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/requestLabor/requestHooks";
 

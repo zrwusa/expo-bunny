@@ -1,7 +1,6 @@
 import {fontsWarehouse} from "./fonts";
-import {Theme, Themes, ThemeWarehouse} from "../../types";
+import {Themes, ThemeWarehouse, TraversableNested} from "../../types";
 import color from "color";
-import {TraversableNested} from "../../types";
 import {EThemes} from "../../constants/constants";
 import {pl} from "../../utils";
 

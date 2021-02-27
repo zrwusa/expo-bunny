@@ -1,4 +1,4 @@
-import {View, Text} from "../components/UI";
+import {Text, View} from "../components/UI";
 import * as React from "react";
 import getContainerStyles from "./index";
 import {useThemeLabor} from "../providers/themeLabor";

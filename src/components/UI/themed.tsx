@@ -1,32 +1,30 @@
-import {
-    Button as ButtonElement, ButtonProps as ButtonElementProps,
-    Text as TextElement, TextProps as TextElementProps
-} from "react-native-elements";
+import {Button as ButtonElement, ButtonProps as ButtonElementProps, Text as TextElement, TextProps as TextElementProps} from "react-native-elements";
 import {useThemeLabor} from "../../providers/themeLabor";
 import {
-    Text as TextRN,
-    View as ViewRN,
-    TextInput as TextInputRN,
     Button as ButtonRN,
+    ButtonProps,
     Image as ImageRN,
-    TouchableOpacity as TouchableOpacityRN,
+    ImageProps,
     Pressable as PressableRN,
-    Share as ShareRN,
-    TextProps,
-    TouchableOpacityProps,
-    ViewProps,
+    PressableProps,
+    StyleProp,
+    Switch as SwitchRN,
+    Text as TextRN,
+    TextInput as TextInputRN,
     TextInputProps,
-    ButtonProps, ImageProps, StyleSheet,
-    PressableProps, GestureResponderEvent, Platform, Switch as SwitchRN, StyleProp, ViewStyle
+    TextProps,
+    TouchableOpacity as TouchableOpacityRN,
+    TouchableOpacityProps,
+    View as ViewRN,
+    ViewProps,
+    ViewStyle
 } from "react-native";
 import {useLinkProps} from "@react-navigation/native";
 import React from "react";
-import styled, {ReactNativeThemedStyledFunction} from "styled-components/native";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
-import {IcoMoonProps, MaterialCommunityIconsProps} from "../../types";
+import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from "../../types";
 import {getStyleObj} from "../../utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
-import {LinkProps} from "../../types";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {Switch as SwitchPaper} from "react-native-paper";
 

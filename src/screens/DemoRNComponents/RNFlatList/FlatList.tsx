@@ -1,5 +1,5 @@
 import React from "react";
-import {FlatList, SafeAreaView, View, Text} from "react-native";
+import {FlatList, SafeAreaView, Text, View} from "react-native";
 import {getStyles} from "./styles";
 import getContainerStyles from "../../../containers";
 import {useSizeLabor} from "../../../providers/sizeLabor";

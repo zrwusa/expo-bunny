@@ -1,7 +1,5 @@
-import {Traversable, TraversableNested} from "../types";
-import {NavigatorTreeNode} from "../types";
+import {IcoMoonKeys, IcoMoonSelection, IcoMoonSelectionIcon, NavigatorTreeNode, RouteIconFontConfig, Traversable, TraversableNested} from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {IcoMoonKeys, IcoMoonSelection, IcoMoonSelectionIcon, RouteIconFontConfig} from "../types";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants from "../constants/constants";

@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {demoHello} from "../../actions";
 import {ButtonRNE, Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";

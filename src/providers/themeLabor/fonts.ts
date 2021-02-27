@@ -1,7 +1,6 @@
 import {Platform, PlatformOSType} from "react-native";
-import {FontConfigPlatform, Fonts, FontsWrapped} from "../../types";
+import {FontConfigPlatform, Fonts, FontsWrapped, TraversableNested} from "../../types";
 import {EThemes} from "../../constants/constants";
-import {TraversableNested} from "../../types";
 
 const fontConfig: FontConfigPlatform = {
     web: {

@@ -1,7 +1,6 @@
-import {widthPercentageToDP as wp2dp, heightPercentageToDP as hp2dp} from "./responsiveScreen";
+import {heightPercentageToDP as hp2dp, widthPercentageToDP as wp2dp} from "./responsiveScreen";
 import bunnyConfig from "../../config.json";
-import {Dimension, Measure, Responsive} from "../../types";
-import {TraversableNested} from "../../types";
+import {Dimension, Measure, Responsive, TraversableNested} from "../../types";
 
 const getSizeLabor = () => {
     let responsive: TraversableNested = {}

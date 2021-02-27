@@ -1,9 +1,8 @@
 import api from "../utils/api";
-import {DemoThunkPayload, DemoThunkSuccessPayload, DemoThunkSuccessAction, SysErrorAction} from "../types";
+import {DemoThunkPayload, DemoThunkState, DemoThunkSuccessAction, DemoThunkSuccessPayload, SysErrorAction} from "../types";
 import {EDemoThunk} from "../constants";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
-import {DemoThunkState} from "../types/models";
 import {sysError} from "./sys";
 import {BusinessLogicError} from "../utils";
 

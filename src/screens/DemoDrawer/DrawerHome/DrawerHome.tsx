@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, Text} from "../../../components/UI";
+import {View} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../../providers/i18nLabor";
 import getContainerStyles from "../../../containers";

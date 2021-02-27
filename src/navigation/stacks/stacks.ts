@@ -2,8 +2,13 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "react-navigation-bottom-tabs-no-warnings";
 import {createDrawerNavigator} from "react-navigation-drawer-no-warnings";
 import {
-    RootStackParam, DemoNestedLv1StackParam, DemoTabStackParam,
-    DemoTabRNComponentsStackParam, DemoBitcoinStackParam, DemoDrawerStackParam, DemoNestedLv2StackParam
+    DemoBitcoinStackParam,
+    DemoDrawerStackParam,
+    DemoNestedLv1StackParam,
+    DemoNestedLv2StackParam,
+    DemoTabRNComponentsStackParam,
+    DemoTabStackParam,
+    RootStackParam
 } from "../../types/navigations";
 
 export const RootStack = createStackNavigator<RootStackParam>();

@@ -2,8 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {ButtonRNE, Text, View} from "../../components/UI";
 import {demoThunk} from "../../actions";
-import {DemoThunkState, RootState} from "../../types";
-import {DemoThunkPayload} from "../../types";
+import {DemoThunkPayload, DemoThunkState, RootState, WithThemeLabor} from "../../types";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
@@ -11,7 +10,6 @@ import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
 import {withThemeLabor} from "../../providers/themeLabor";
-import {WithThemeLabor} from "../../types";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action>) => ({

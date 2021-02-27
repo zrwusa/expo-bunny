@@ -1,5 +1,5 @@
 import React from "react";
-import {SafeAreaView, View, SectionList} from "react-native";
+import {SafeAreaView, SectionList, View} from "react-native";
 import {Text} from "../../../components/UI";
 import {useThemeLabor} from "../../../providers/themeLabor";
 import {getStyles} from "./styles";

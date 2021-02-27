@@ -1,14 +1,7 @@
-import {ELanguage, ESys} from "../constants";
+import {ELanguage, ESys, EThemes} from "../constants";
 import {SysState} from "../types/models";
 import {SysActions} from "../actions";
-import {EThemes} from "../constants";
-import {
-    RestoreIsReadyPayload,
-    RestoreNavInitialStatePayload,
-    SysClearErrorPayload,
-    SysErrorPayload,
-    SysWarnPayload
-} from "../types";
+import {RestoreIsReadyPayload, RestoreNavInitialStatePayload, SysClearErrorPayload, SysErrorPayload, SysWarnPayload} from "../types";
 
 const initialState: SysState = {
     isReady: false,

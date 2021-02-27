@@ -3,7 +3,8 @@ import {EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
 import {
     DemoHello2Payload,
     DemoHelloPayload,
-    DemoThunkSuccessPayload, GetDemoSagaParams,
+    DemoThunkSuccessPayload,
+    GetDemoSagaParams,
     RestoreIsReadyPayload,
     RestoreNavInitialStatePayload,
     SysClearErrorPayload,

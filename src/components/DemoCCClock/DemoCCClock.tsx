@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {View, Text, ButtonTO, TextBtn} from "../UI";
+import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
 
 type Props = { title: string, goButtonTitle: string, stopButtonTitle: string, tipLabel: string }

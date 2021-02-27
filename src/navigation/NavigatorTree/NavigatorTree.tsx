@@ -30,20 +30,11 @@ import {useTranslation} from "react-i18next";
 import DrawerHomeScreen from "../../screens/DemoDrawer/DrawerHome/DrawerHome";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/DrawerSettings/DrawerSettings";
 import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
-import {BottomTabBarOptions, BottomTabNavigationOptions}
-    from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
+import {BottomTabBarOptions, BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
 import {StackNavigationOptions} from "@react-navigation/stack";
-import {
-    DrawerActions,
-    NavigationContainer, NavigationContainerProps, NavigationContainerRef,
-    PathConfigMap
-} from "@react-navigation/native";
-import {ThemeName, Traversable} from "../../types";
+import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef, PathConfigMap} from "@react-navigation/native";
+import {LinkingConfig, LinkingConfigTraversable, NavigatorTreeNode, RecursiveNavigatorProps, ThemeName, Traversable} from "../../types";
 import {IcoMoon} from "../../components/UI";
-import {
-    LinkingConfig, LinkingConfigTraversable,
-    RecursiveNavigatorProps, NavigatorTreeNode
-} from "../../types"
 import {getIconNameByRoute, navigatorPropsExtract} from "../../common";
 import DemoNotificationScreen from "../../screens/DemoNotification";
 import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
@@ -61,6 +52,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useAuthLabor} from "../../providers/authLabor";
 import {uuidV4} from "../../utils";
 import DemoSagaScreen from "../../screens/DemoSaga";
+import {NotSupport} from "../../components/NotSupport";
 
 export const basePath = Linking.makeUrl('/');
 
@@ -289,7 +281,9 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             },
             {
                 key: uuidV4(),
-                component: DemoNotificationScreen,
+                component: Platform.OS !== 'web'
+                    ? DemoNotificationScreen
+                    : ()=><NotSupport text="Not supported on web"/>,
                 name: "DemoNotification",
                 path: "demo-notification",
                 navigatorType: "stack",
@@ -546,13 +540,14 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     },
                     {
                         key: uuidV4(),
-                        component: BitcoinAlertScreen,
+                        component: Platform.OS !== 'web'
+                            ? BitcoinAlertScreen
+                            : ()=><NotSupport text="Not supported on web"/>,
                         name: "BitcoinAlert",
                         path: "bitcoin-alert/:isPush",
                         initialParams: {"isPush": true},
                         navigatorType: "tab",
                         authRequired: false,
-
                     }
                 ]
             },
@@ -599,7 +594,9 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     stringify: child.stringify,
                     exact: child.exact,
                     initialRouteName: child.initialParams,
-                    screens: (child.childrenNode && child.childrenNode.length) ? recursiveConfig(child.childrenNode) : undefined,
+                    screens: (child.childrenNode && child.childrenNode.length)
+                        ? recursiveConfig(child.childrenNode)
+                        : undefined,
                 }
             } else {
                 obj = {}

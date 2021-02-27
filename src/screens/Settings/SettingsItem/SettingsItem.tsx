@@ -1,6 +1,6 @@
 import * as React from "react";
 import {getStyles} from "./styles";
-import {View, Text, SwitchP} from "../../../components/UI";
+import {SwitchP, Text, View} from "../../../components/UI";
 import {useSizeLabor} from "../../../providers/sizeLabor";
 import {useThemeLabor} from "../../../providers/themeLabor";
 

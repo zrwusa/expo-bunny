@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, ButtonTO, TextBtn} from "../../../components/UI";
+import {ButtonTO, TextBtn, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedLv1StackParam} from "../../../types";

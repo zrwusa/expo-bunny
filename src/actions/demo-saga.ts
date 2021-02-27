@@ -1,11 +1,4 @@
-import {
-    BunnyAPIStandardRequestParams,
-    FailedGetDemoSagasAction,
-    GetDemoSagaParams,
-    GetDemoSagasAction,
-    ReceiveGetDemoSagasAction,
-    RequestGetDemoSagasAction
-} from "../types";
+import {FailedGetDemoSagasAction, GetDemoSagaParams, ReceiveGetDemoSagasAction, RequestGetDemoSagasAction} from "../types";
 import {EDemoSaga} from "../constants";
 
 

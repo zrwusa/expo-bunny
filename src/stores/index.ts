@@ -1,10 +1,7 @@
-import {createStore, applyMiddleware, combineReducers} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
-import {
-    demoHelloStateReducer, demoMapStateReducer, demoThunkStateReducer,
-    sysStateReducer, demoSagaReducer
-} from "../reducers";
+import {demoHelloStateReducer, demoMapStateReducer, demoSagaReducer, demoThunkStateReducer, sysStateReducer} from "../reducers";
 import {sagaDemoSagas} from "../sagas"
 
 

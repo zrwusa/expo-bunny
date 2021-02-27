@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {GiftedChat, IMessage} from 'react-native-gifted-chat'
 
 function DemoChatScreen() {

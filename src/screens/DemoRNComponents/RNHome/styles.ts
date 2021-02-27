@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet} from "react-native";
 import BunnyConstants from "../../../constants/constants";
-import {SizeLabor, Theme, ThemeLabor} from "../../../types/styles";
+import {SizeLabor, ThemeLabor} from "../../../types/styles";
 
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {

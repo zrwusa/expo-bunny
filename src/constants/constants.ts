@@ -1,4 +1,4 @@
-import {EnumThemeNames, Traversable} from "../types";
+import {EnumThemeNames} from "../types";
 
 const BunnyConstants = {
     latLngDeltaGrace: {

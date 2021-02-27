@@ -1,5 +1,5 @@
 import React from "react";
-import {View, SafeAreaView, VirtualizedList} from "react-native";
+import {SafeAreaView, View, VirtualizedList} from "react-native";
 import {Text} from "../../../components/UI"
 import {getStyles} from "./styles";
 import {useThemeLabor} from "../../../providers/themeLabor";

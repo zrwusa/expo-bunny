@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React from "react";
 import DemoFCCard from "../../components/DemoFCCard";
 import DemoCCClock from "../../components/DemoCCClock";
 import DemoRequest from "../../components/DemoRequest";
-import {View, TextInput} from "../../components/UI";
+import {TextInput, View} from "../../components/UI";
 import {DemoSvg} from "../../components/DemoSvg";
 import {useTranslation} from "react-i18next";
 import {stFactory} from "../../providers/i18nLabor";

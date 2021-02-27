@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, Text} from "../../../components/UI";
+import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoTabStackParam} from "../../../types";

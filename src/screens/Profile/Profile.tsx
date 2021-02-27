@@ -1,5 +1,5 @@
 import * as React from "react";
-import {View, Text, ButtonTO, TextBtn, IcoMoon} from "../../components/UI";
+import {ButtonTO, IcoMoon, Text, TextBtn, View} from "../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";

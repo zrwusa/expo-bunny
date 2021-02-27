@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useState} from "react";
 import SettingsItem from "./SettingsItem";
 import {I18nManager} from "react-native";
 import {ELanguage, EThemes} from "../../constants";
@@ -10,7 +11,6 @@ import {stFactory} from "../../providers/i18nLabor";
 import getContainerStyles from "../../containers";
 import {useSizeLabor} from "../../providers/sizeLabor";
 import {useThemeLabor} from "../../providers/themeLabor";
-import {useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SettingsScreen() {

@@ -1,7 +1,5 @@
 import React from "react";
-import {
-    AuthLaborContextType,
-} from "../../types";
+import {AuthLaborContextType,} from "../../types";
 
 export const authLaborContext = {
     authFunctions: {

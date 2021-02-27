@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, TextInput, Button} from "../UI";
+import {Button, Text, TextInput, View} from "../UI";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {useSizeLabor} from "../../providers/sizeLabor";
