@@ -1,5 +1,5 @@
 import {DemoThunkActions} from "../actions";
-import {DemoThunkState} from "../types/models";
+import {DemoThunkState} from "../types";
 import {EDemoThunk} from "../constants";
 
 

@@ -1,6 +1,6 @@
 import {EDemoMap} from "../constants";
 import BunnyConstants from "../constants/constants";
-import {DemoMapState, NearbyFilm, Region} from "../types/models";
+import {DemoMapState, NearbyFilm, Region} from "../types";
 import {DemoMapActions} from "../actions";
 import {uuidV4} from "../utils";
 

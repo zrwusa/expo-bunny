@@ -1,5 +1,5 @@
 import {ELanguage, ESys, EThemes} from "../constants";
-import {SysState} from "../types/models";
+import {SysState} from "../types";
 import {SysActions} from "../actions";
 import {RestoreIsReadyPayload, RestoreNavInitialStatePayload, SysClearErrorPayload, SysErrorPayload, SysWarnPayload} from "../types";
 
@@ -61,5 +61,3 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             return prevState;
     }
 }
-
-

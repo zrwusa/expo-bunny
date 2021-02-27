@@ -1,5 +1,5 @@
 import {EDemoHello} from "../constants";
-import {DemoHelloState} from "../types/models";
+import {DemoHelloState} from "../types";
 import {DemoHelloActions} from "../actions";
 
 
