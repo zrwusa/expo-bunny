@@ -9,6 +9,7 @@ export type UserRes = {
 
 export type AuthRes = {
     access_token: string | undefined,
+    refresh_token: string | undefined,
     user?: UserRes | null,
 }
 
@@ -19,7 +20,7 @@ export type AuthedResult = {
     user?: (UserRes | null) | GoogleUser,
     redirection?: string | void
 }
-
+export type AuthLaborContextTypePartial = Partial<AuthLaborContextType>
 export type AuthLaborContextType = {
     authFunctions: {
         signIn: Function,
@@ -27,6 +28,7 @@ export type AuthLaborContextType = {
         signInDummy: Function,
         signOutAndRemove: Function,
         signUp: Function,
+        refreshAuth:Function
     },
     authedResult: AuthedResult
 }

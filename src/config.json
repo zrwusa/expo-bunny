@@ -15,12 +15,12 @@
   "isRemoteBackEnd": false,
   "isHttps": false,
   "remoteBackEnd": {
-    "domain": "35.197.159.128",
+    "domain": "34.126.104.144",
     "port": 80
   },
   "localBackEnd": {
     "domain": "192.168.50.19",
-    "port": 8088
+    "port": 80
   },
   "shouldCollectError": true,
   "UE": {

@@ -103,4 +103,20 @@ type Range = typeof arr[number];
 const a: Range = 2;
 
 
+/**
+ * A function that emits a side effect and does not return anything.
+ */
+export type Procedure = (...args: any[]) => void;
+
+export type DebounceOptions = {
+    isImmediate?: boolean;
+    maxWait?: number;
+};
+
+export interface DebouncedFunction<F extends Procedure> {
+    (this: ThisParameterType<F>, ...args: Parameters<F>): void;
+    cancel: () => void;
+}
+
+
 

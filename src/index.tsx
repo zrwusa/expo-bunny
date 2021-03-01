@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react';
 import {Provider as ReduxProvider} from "react-redux";
-import store from "./stores";
+import store from "./store";
 import App from "./App";
 import {DemoLazyLoading} from "./components/DemoLazyLoading";
 

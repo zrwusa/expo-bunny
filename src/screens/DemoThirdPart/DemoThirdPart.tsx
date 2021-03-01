@@ -3,13 +3,15 @@ import {Avatar, Button, ListItem} from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import {ButtonRNE, IconMC, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
 import {uuidV4} from "../../utils";
-import {useThemeLabor} from "../../providers/themeLabor";
+import {useThemeLabor} from "../../providers/theme-labor";
 
-type Props = { title?: string };
+interface Props {
+    title?: string
+};
 type States = { name: string, pickerValue: string }
 
 function DemoThirdPartScreen(props: Props) {
@@ -21,7 +23,7 @@ function DemoThirdPartScreen(props: Props) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.DemoThirdPart');
+    const st = shortenTFuciontKey(t, 'screens.DemoThirdPart');
 
     const list = [
         {

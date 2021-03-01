@@ -1,19 +1,19 @@
 import * as React from "react";
-import {getStyles} from "./styles";
+import {createStyles} from "./styles";
 import {SwitchP, Text, View} from "../../../components/UI";
-import {useSizeLabor} from "../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../providers/themeLabor";
+import {useSizeLabor} from "../../../providers/size-labor";
+import {useThemeLabor} from "../../../providers/theme-labor";
 
-export type SettingsItemProps = {
+export interface SettingsItemProps {
     label: string;
     value: boolean;
     onValueChange: ((value: boolean) => void) & Function;
-};
+}
 
 export default function SettingsItem({label, value, onValueChange}: SettingsItemProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor);
     return (
         <View style={styles.item}>
             <Text>{label}</Text>

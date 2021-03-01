@@ -6,20 +6,24 @@ import {useDispatch} from "react-redux";
 import {RootStackParam} from "../../types";
 import {ButtonTO, Link, TextBtn} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
-import {Card} from "../../containers/Card";
-import {useAuthLabor} from "../../providers/authLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
+import {Card} from "../../containers";
+import {useAuthLabor} from "../../providers/auth-labor";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
-export type HomeScreenProps = { route: HomeRouteProp; navigation: HomeNavigationProp; };
+
+export interface HomeScreenProps {
+    route: HomeRouteProp;
+    navigation: HomeNavigationProp;
+};
 
 function HomeScreen({navigation}: HomeScreenProps) {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.Home');
+    const st = shortenTFuciontKey(t, 'screens.Home');
     const dispatch = useDispatch();
     const linkTo = useLinkTo();
     const sizeLabor = useSizeLabor();

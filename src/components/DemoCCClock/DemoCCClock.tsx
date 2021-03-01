@@ -1,9 +1,14 @@
 import React, {PureComponent} from "react";
 import {ButtonTO, Text, TextBtn, View} from "../UI";
-import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
+import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 
-type Props = { title: string, goButtonTitle: string, stopButtonTitle: string, tipLabel: string }
-    & WithSizeLabor
+interface Props extends WithSizeLabor {
+    title: string,
+    goButtonTitle: string,
+    stopButtonTitle: string,
+    tipLabel: string
+}
+
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
 
 class DemoCCClock extends PureComponent<Props, States> {

@@ -1,10 +1,10 @@
 import React from "react";
 import {SafeAreaView, View, VirtualizedList} from "react-native";
 import {Text} from "../../../components/UI"
-import {getStyles} from "./styles";
-import {useThemeLabor} from "../../../providers/themeLabor";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
+import {createStyles} from "./styles";
+import {useThemeLabor} from "../../../providers/theme-labor";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
 
 type VirtualizedListItem = {
     id: string;
@@ -14,7 +14,7 @@ type VirtualizedListItem = {
 function RNVirtualizedListScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = createStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     const virtualizedListData: VirtualizedListItem[] = [];

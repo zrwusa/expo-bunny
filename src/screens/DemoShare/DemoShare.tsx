@@ -1,16 +1,16 @@
-import {getStyles} from "./styles";
+import {createStyles} from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
 import {ButtonTO, Image, Text, TextBtn, TouchableOpacity, View} from "../../components/UI";
 import {useDispatch} from "react-redux";
-import {sysError} from "../../actions";
+import {sysError} from "../../store/actions";
 import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
 
 type SelectedImage = {
     localUri: string
@@ -18,7 +18,7 @@ type SelectedImage = {
 
 function DemoShareScreen() {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.DemoShare');
+    const st = shortenTFuciontKey(t, 'screens.DemoShare');
     const dispatch = useDispatch();
     const onShare = async () => {
         try {
@@ -67,7 +67,7 @@ function DemoShareScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor);
 
     return (
         <View style={[containerStyles.screen, containerStyles.centralized]}>

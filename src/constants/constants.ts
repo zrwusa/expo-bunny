@@ -10,6 +10,7 @@ const BunnyConstants = {
     LANGUAGE_TYPE_PERSISTENCE_KEY: 'LANGUAGE_TYPE',
     NAV_STATE_PERSISTENCE_KEY: 'NAVIGATION_STATE',
     ACCESS_TOKEN_PERSISTENCE_KEY: 'ACCESS_TOKEN',
+    REFRESH_TOKEN_PERSISTENCE_KEY: 'REFRESH_TOKEN',
     USER_PERSISTENCE_KEY: 'USER',
     dummyUser: {email: 'dummy@dummy.com', nickname: 'dummy nickname'},
     dummyAccessToken: 'access_token_dummy',

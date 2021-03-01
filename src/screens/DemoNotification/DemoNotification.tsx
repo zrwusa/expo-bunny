@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Text, View} from "../../components/UI";
 import {Platform} from 'react-native';
 import {initialedNotification, registerForPushNotificationsAsync, schedulePushNotification} from "../../utils/expo-notification";
-import {stFactory} from "../../providers/i18nLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {useTranslation} from "react-i18next";
 
 
@@ -24,7 +24,7 @@ export default function DemoNotificationScreen() {
 
     const {t} = useTranslation()
     const i18nSysPrefix = 'sys';
-    const stSys = stFactory(t, i18nSysPrefix);
+    const stSys = shortenTFuciontKey(t, i18nSysPrefix);
 
     useEffect(() => {
         // async function registerForPushNotificationsAsync() {

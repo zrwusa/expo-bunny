@@ -1,5 +1,5 @@
 import {Button as ButtonElement, ButtonProps as ButtonElementProps, Text as TextElement, TextProps as TextElementProps} from "react-native-elements";
-import {useThemeLabor} from "../../providers/themeLabor";
+import {useThemeLabor} from "../../providers/theme-labor";
 import {
     Button as ButtonRN,
     ButtonProps,
@@ -25,7 +25,7 @@ import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-ico
 import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from "../../types";
 import {getStyleObj} from "../../utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
-import {useSizeLabor} from "../../providers/sizeLabor";
+import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');

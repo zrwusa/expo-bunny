@@ -1,6 +1,6 @@
 // Redux store states,different from models entities
 import {InitialState} from "@react-navigation/native";
-import {DemoSaga} from "../actions";
+import {DemoSaga} from "../store/actions";
 import {NearbyFilm, Region} from "./models";
 
 export type SysState = {

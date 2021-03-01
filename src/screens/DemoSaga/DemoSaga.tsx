@@ -1,13 +1,15 @@
 import React from "react";
 import {ButtonRNE, Text, View} from "../../components/UI";
 import {useDispatch, useSelector} from "react-redux";
-import {getDemoSagas} from "../../actions";
+import {getDemoSagas} from "../../store/actions";
 import {RootState} from "../../types";
+
 
 function DemoSagaScreen() {
     const dispatch = useDispatch();
     const demoSagaState = useSelector((rootState: RootState) => rootState.demoSagaState);
-    const {items} = demoSagaState
+    const {items} = demoSagaState;
+
     return (
         <View>
             <ButtonRNE onPress={() => {

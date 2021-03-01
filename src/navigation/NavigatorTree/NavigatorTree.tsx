@@ -35,21 +35,21 @@ import {StackNavigationOptions} from "@react-navigation/stack";
 import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef, PathConfigMap} from "@react-navigation/native";
 import {LinkingConfig, LinkingConfigTraversable, NavigatorTreeNode, RecursiveNavigatorProps, ThemeName, Traversable} from "../../types";
 import {IcoMoon} from "../../components/UI";
-import {getIconNameByRoute, navigatorPropsExtract} from "../../common";
+import {getIconNameByRoute, navigatorPropsExtract} from "../../helpers";
 import DemoNotificationScreen from "../../screens/DemoNotification";
 import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
 import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
 import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Settings";
 import ModalHomeScreen from "../../screens/DemoModal/ModalHome";
-import {useThemeLabor} from "../../providers/themeLabor";
+import {useThemeLabor} from "../../providers/theme-labor";
 import DemoChatScreen from "../../screens/DemoChat";
 import {useReduxDevToolsExtension} from "@react-navigation/devtools";
 import * as Linking from "expo-linking";
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {getStyles} from "./styles";
+import {useSizeLabor} from "../../providers/size-labor";
+import {createStyles} from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useAuthLabor} from "../../providers/authLabor";
+import {useAuthLabor} from "../../providers/auth-labor";
 import {uuidV4} from "../../utils";
 import DemoSagaScreen from "../../screens/DemoSaga";
 import {NotSupport} from "../../components/NotSupport";
@@ -69,7 +69,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
     const {t} = useTranslation();
-    const styles = getStyles();
+    const styles = createStyles();
 
     const headerRight = () => {
         const {theme, changeTheme} = useThemeLabor();
@@ -283,7 +283,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 key: uuidV4(),
                 component: Platform.OS !== 'web'
                     ? DemoNotificationScreen
-                    : ()=><NotSupport text="Not supported on web"/>,
+                    : () => <NotSupport text="Not supported on web"/>,
                 name: "DemoNotification",
                 path: "demo-notification",
                 navigatorType: "stack",
@@ -542,7 +542,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: Platform.OS !== 'web'
                             ? BitcoinAlertScreen
-                            : ()=><NotSupport text="Not supported on web"/>,
+                            : () => <NotSupport text="Not supported on web"/>,
                         name: "BitcoinAlert",
                         path: "bitcoin-alert/:isPush",
                         initialParams: {"isPush": true},

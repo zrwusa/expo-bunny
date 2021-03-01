@@ -4,19 +4,23 @@ import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoTabStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers/i18nLabor";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../providers/themeLabor";
-import {Card} from "../../../containers/Card";
+import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
+import {useThemeLabor} from "../../../providers/theme-labor";
+import {Card} from "../../../containers";
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;
-export type TabSettingsProps = { route: TabSettingsRouteProp, navigation: TabSettingsNavigationProp }
+
+export interface TabSettingsProps {
+    route: TabSettingsRouteProp,
+    navigation: TabSettingsNavigationProp
+}
 
 function TabSettingsScreen({route, navigation}: TabSettingsProps) {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.TabSettings');
+    const st = shortenTFuciontKey(t, 'screens.TabSettings');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);

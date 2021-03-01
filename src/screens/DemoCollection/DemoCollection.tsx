@@ -5,19 +5,19 @@ import DemoRequest from "../../components/DemoRequest";
 import {TextInput, View} from "../../components/UI";
 import {DemoSvg} from "../../components/DemoSvg";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {ScrollView} from "react-native";
-import getContainerStyles from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {DemoPureComponent, DemoRegularComponent} from "../../components/DemoPureComponent";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
 
 function DemoCollectionScreen() {
 
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.DemoCollection');
+    const st = shortenTFuciontKey(t, 'screens.DemoCollection');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (

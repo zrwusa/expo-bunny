@@ -2,23 +2,23 @@ import React from "react";
 import {ScrollView} from "react-native";
 import {Button, ButtonRNE, ButtonTO, Text, TextBtn, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
-import {getStyles} from "./styles";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {createStyles} from "./styles";
 import BunnyConstants from "../../constants/constants";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
-import {Card} from "../../containers/Card";
-import getSmartStyles from "../../utils/smartStyles";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
+import {Card} from "../../containers";
+import {createSmartStyles} from "../../utils";
 
 const DemoThemeScreen = () => {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.DemoTheme');
+    const st = shortenTFuciontKey(t, 'screens.DemoTheme');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const smartStyle = getSmartStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const smartStyle = createSmartStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor);
 
     return (
         <ScrollView>

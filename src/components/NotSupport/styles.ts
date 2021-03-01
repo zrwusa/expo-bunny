@@ -1,18 +1,21 @@
 import {StyleSheet} from "react-native";
-import {pl} from "../../utils";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-export const getStyles = () => {
+export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {theme} = themeLabor;
+    const {colors} = theme;
+    const {wp} = sizeLabor.responsive.iphoneX;
     return StyleSheet.create({
         container: {
             flex: 1,
-            backgroundColor: pl.grey100,
+            backgroundColor: colors.background,
             justifyContent: 'center',
             alignItems: 'center',
         },
         text: {
-            marginTop: 10,
-            fontSize: 16,
-            color: pl.grey700,
+            marginTop: wp(10),
+            fontSize: wp(16),
+            color: colors.text,
         }
     });
 }

@@ -1,23 +1,25 @@
 import React from "react";
 import {connect} from "react-redux";
 import {ButtonRNE, Text, View} from "../../components/UI";
-import {demoThunk} from "../../actions";
-import {DemoThunkPayload, DemoThunkState, RootState, WithThemeLabor} from "../../types";
+import {demoThunk} from "../../store/actions";
+import {DemoThunkPayload, DemoThunkState, RootState} from "../../types";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
-import getContainerStyles from "../../containers";
-import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
-import {withThemeLabor} from "../../providers/themeLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {getContainerStyles} from "../../containers";
+import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
+import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action>) => ({
     demoThunk: async (data: DemoThunkPayload) => dispatch(demoThunk(data)),
 });
-type Props = ReturnType<typeof mapStateToProps>
-    & ReturnType<typeof mapDispatchToProps> & WithTranslation
-    & WithThemeLabor & WithSizeLabor;
+
+interface Props extends ReturnType<typeof mapStateToProps>
+    , ReturnType<typeof mapDispatchToProps>, WithTranslation
+    , WithThemeLabor, WithSizeLabor {
+};
 
 class DemoThunkCCScreen extends React.Component<Props> {
     constructor(props: Props) {
@@ -37,7 +39,7 @@ class DemoThunkCCScreen extends React.Component<Props> {
     render(): React.ReactNode {
         const {text, id, t, sizeLabor, themeLabor} = this.props;
         const {theme} = themeLabor;
-        const st = stFactory(t, 'screens.DemoThunkCC');
+        const st = shortenTFuciontKey(t, 'screens.DemoThunkCC');
         const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
         return (

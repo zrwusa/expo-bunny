@@ -4,18 +4,22 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedLv2StackParam} from "../../../../types";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../../providers/i18nLabor";
-import getContainerStyles from "../../../../containers";
-import {useSizeLabor} from "../../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../../providers/themeLabor";
+import {shortenTFuciontKey} from "../../../../providers/i18n-labor";
+import {getContainerStyles} from "../../../../containers";
+import {useSizeLabor} from "../../../../providers/size-labor";
+import {useThemeLabor} from "../../../../providers/theme-labor";
 
 type NestedLv2SettingsRouteProp = RouteProp<DemoNestedLv2StackParam, 'NestedLv2Settings'>;
 type NestedLv2SettingsNavigationProp = StackNavigationProp<DemoNestedLv2StackParam, 'NestedLv2Settings'>;
-export type NestedLv2SettingsProps = { route: NestedLv2SettingsRouteProp, navigation: NestedLv2SettingsNavigationProp }
+
+export interface NestedLv2SettingsProps {
+    route: NestedLv2SettingsRouteProp,
+    navigation: NestedLv2SettingsNavigationProp
+}
 
 function NestedLv2SettingsScreen({route, navigation}: NestedLv2SettingsProps) {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.NestedLv2Settings');
+    const st = shortenTFuciontKey(t, 'screens.NestedLv2Settings');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);

@@ -4,17 +4,20 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {ButtonRNE, TextInput, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
-import {useAuthLabor} from "../../providers/authLabor";
+import {shortenTFuciontKey} from "../../providers";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
+import {useAuthLabor} from "../../providers/auth-labor";
 
-export type AuthProps = { type?: 'sign-in' | 'sign-up' }
+export interface AuthProps {
+    type?: 'sign-in' | 'sign-up'
+}
+
 export const AuthScreen = (props: AuthProps) => {
     const dispatch = useDispatch();
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.Auth');
+    const st = shortenTFuciontKey(t, 'screens.Auth');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);

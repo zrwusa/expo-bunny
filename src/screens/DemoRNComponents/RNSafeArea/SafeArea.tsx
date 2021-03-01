@@ -1,9 +1,9 @@
 import React from "react";
 import {SafeAreaView} from "react-native";
 import {Text} from "../../../components/UI";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../providers/themeLabor";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
+import {useThemeLabor} from "../../../providers/theme-labor";
 
 function RNFlatListScreen() {
     const sizeLabor = useSizeLabor();

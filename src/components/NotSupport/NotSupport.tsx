@@ -1,11 +1,18 @@
 import React from "react";
-import {getStyles} from "./styles";
+import {createStyles} from "./styles";
 import {Text, View} from "react-native";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
 
-export type NotSupportProps = { text?: string | JSX.Element }
+export interface NotSupportProps {
+    text?: string | JSX.Element
+}
+
 export const NotSupport = (props: NotSupportProps) => {
     const {text} = props;
-    const styles = getStyles();
+    const themeLabor = useThemeLabor();
+    const sizeLabor = useSizeLabor();
+    const styles = createStyles(sizeLabor, themeLabor);
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{text}</Text>

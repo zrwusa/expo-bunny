@@ -1,6 +1,25 @@
 # expo-react-bunny
 I know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal!
 
+# Architecture principles
+## Type Safety
+
+Critical bugs reported during the application runtime. Most of the time the bug involved calling a function with wrong parameters. 
+
+Although it can be solved by rigorous unit tests, but let's face it, we can not assure 100% test coverage and even then 100% cases being considered.
+ 
+So, it can turn out to be a million-dollar mistake. When I switched to TypeScript from plain Javascript then this problem got resolved.
+
+## Separation of Concern
+## Feature Encapsulation
+## Better Error Handling
+## Better Response Handling
+## Better Promise Management
+## Robust Unit Tests
+## Simple Deployability
+
+## SOLID patterns,UML diagram
+
 # Tech Stack
 - React Native,
 - Typescript,
@@ -137,3 +156,18 @@ At the same time,linking configuration is automatically generated.
 
 No modification of React Navigation, you can use any configuration of React Navigation with confidence.
 
+
+# Theories
+1.Premature optimization is the root of all evil (or at least most of it) in programming.
+
+— Donald Knuth, “Computer Programming as an Art” (1974).
+2.“The remaining 10 percent of the code accounts for the other 90 percent of the development time.”
+  — Tom Cargill, Bell Labs
+
+Architecture is needed to save time during the development process, to maintain the system’s testability and extensibility over a long development period.
+## architecture benefits
+ If our project is even 50% cheaper to maintain than it could be without a good architecture — it will save developers’ time and customer’s profit.
+ Building a good and clear architecture from the start of the project gives you the following benefits:
+ 1.costs:cheaper code maintenance (less time is required and cheaper financial costs);
+ 2.test:simplification of code testing (you will need fewer testers and have fewer missed “production bugs”);
+ 3.developer:easier to involve new developers into the project.

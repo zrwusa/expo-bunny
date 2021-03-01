@@ -15,15 +15,15 @@ import {
 } from "react-native";
 import {Button, Pressable, Text, TextInput, TouchableOpacity} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers/i18nLabor";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../providers/themeLabor";
-import {getStyles} from "./styles";
+import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
+import {useThemeLabor} from "../../../providers/theme-labor";
+import {createStyles} from "./styles";
 
 function RNHome() {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.RNHome');
+    const st = shortenTFuciontKey(t, 'screens.RNHome');
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [modalVisible, setModalVisible] = useState(false);
@@ -54,7 +54,7 @@ function RNHome() {
         touchableOpacityStyles,
         touchableWithoutFeedbackStyles,
         virtualizedListStyles,
-    } = getStyles(sizeLabor, themeLabor)
+    } = createStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
 

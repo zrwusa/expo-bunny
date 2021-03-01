@@ -2,19 +2,21 @@ import React, {useEffect, useState} from "react";
 import {Button, Text, TextInput, View} from "../UI";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
-import {getStyles} from "./styles";
-import {sysClearErrors} from "../../actions";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
+import {createStyles} from "./styles";
+import {sysClearErrors} from "../../store/actions";
 
-type Props = { title?: string }
+interface Props {
+    title?: string
+}
 
 const Sys = ({title}: Props) => {
     const sysState = useSelector((store: RootState) => store.sysState);
     const [isShow, setIsShow] = useState(false)
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     useEffect(() => {
         setIsShow(sysState.error.length > 0)

@@ -4,30 +4,34 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {Avatar} from "react-native-elements";
 import {ScrollView} from "react-native";
-import {getStyles} from "./styles";
+import {createStyles} from "./styles";
 import ImageProgressive from "../../components/UI/ImageProgressive";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
-import {useAuthLabor} from "../../providers/authLabor";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
+import {useAuthLabor} from "../../providers/auth-labor";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
-type Props = { route: ProfileRouteProp; navigation: ProfileNavigationProp; };
+
+interface Props {
+    route: ProfileRouteProp;
+    navigation: ProfileNavigationProp;
+};
 
 function ProfileScreen({route, navigation}: Props) {
     const {authedResult} = useAuthLabor()
     const {user} = authedResult;
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.Profile');
+    const st = shortenTFuciontKey(t, 'screens.Profile');
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = createStyles(sizeLabor, themeLabor)
     return (
         <ScrollView>
             <View style={[containerStyles.screen, containerStyles.centralized]}>

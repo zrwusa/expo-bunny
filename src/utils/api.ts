@@ -1,9 +1,9 @@
-import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+import axios, {AxiosResponse} from "axios";
 import bunnyConfig from "../config.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants from "../constants/constants";
 import {BunnyAPIError} from "./utils";
-
+import {authLaborContext} from "../providers/auth-labor";
 
 // interface Seal {
 //     name: string;
@@ -16,7 +16,51 @@ import {BunnyAPIError} from "./utils";
 // const apiTODO = <URL extends keyof API>(url: URL): Promise<API[URL]> => {
 //     return fetch(url).then((res) => res.json());
 // };
+const bunnyAPIProtocolResponseData = {
+    "http_extra": {
+        "code": "",
+        "message": "",
+        "des": "",
+        "error_code": 403,
+        "error_message": "Forbidden",
+        "error_des": "indicates that the server understood the request but refuses to authorize it.",
+        "error_stack": ""
+    },
+    "business_logic": {
+        "code": "",
+        "message": "",
+        "des": "",
+        "error_code": "B403",
+        "error_message": "Inappropriate access token is revoked",
+        "error_des": "",
+        "error_stack": ""
+    },
+    "success_data": {},
+    "time_spend": 2
+}
 
+type BunnyAPIProtocolResponseData<T> = {
+    "http_extra": {
+        "code": number,
+        "message": string,
+        "des": string,
+        "error_code": number,
+        "error_message": string,
+        "error_des": string,
+        "error_stack": string
+    },
+    "business_logic": {
+        "code": string,
+        "message": string,
+        "des": string,
+        "error_code": string,
+        "error_message": string,
+        "error_des": string,
+        "error_stack": string
+    },
+    "success_data"?: T,
+    "time_spend": number
+}
 const httpPrefix = bunnyConfig.isHttps ? 'https://' : 'http://';
 const devProxyPrefix = bunnyConfig.isDevServerProxy ? Object.keys(bunnyConfig.devServerProxy)[0] : '';
 
@@ -28,6 +72,7 @@ const apiBunny = axios.create({
             : `${httpPrefix}${bunnyConfig.localBackEnd.domain}:${bunnyConfig.localBackEnd.port}`,
     timeout: 2000
 });
+
 
 apiBunny.interceptors.request.use(
     async (config) => {
@@ -46,45 +91,66 @@ apiBunny.interceptors.request.use(
     });
 
 apiBunny.interceptors.response.use(
-    (response) => {
+    (response: AxiosResponse<BunnyAPIProtocolResponseData<any>>) => {
         // status 200-300
+        if (validAPIProtocolSuccessResponse(response.data)) {
+            response.data = response.data.success_data
+        } else {
+            response.data = {
+                "http_extra": {
+                    "code": 0,
+                    "message": "",
+                    "des": "",
+                    "error_code": 0,
+                    "error_message": "",
+                    "error_des": "",
+                    "error_stack": ""
+                },
+                "business_logic": {
+                    "code": "",
+                    "message": "",
+                    "des": "",
+                    "error_code": "",
+                    "error_message": "",
+                    "error_des": "",
+                    "error_stack": ""
+                },
+                "success_data": {},
+                "time_spend": 0
+            }
+        }
         return response
     },
-    function (error) {
-        const originalRequest = error.config;
-        const {response, request} = error;
+    async (error) => {
+        const {response, request, config} = error;
         if (response) {
             // status 300-600 The request was made and the server responded with a status code that falls out of the range of 2xx
             const {status} = response;
-            const {data} = response;
             switch (status) {
-                case 401:
-                    break;
                 case 403:
-                    // if (!response.ok) {
-                    //     if ([401, 403].indexOf(response.status) !== -1) {
-                    //         // auto logout if 401 Unauthorized or 403 Forbidden response returned from apiBunny
-                    //         authenticationService.logout();
-                    //         location.reload(true);
-                    //     }
-                    //
-                    //     const error = (data && data.message) || response.statusText;
-                    //     return Promise.reject(error);
-                    // }
-                    console.log('---interceptors error.response.status === 403');
-                    originalRequest._retry = true;
-                    // const access_token = await refreshAccessToken();
-                    const access_token = "";
-                    axios.defaults.headers.common["Authorization"] = `Bearer ` + access_token;
-                    return apiBunny(originalRequest);
-                case 409:
-                    break;
-                case 422:
-                    break;
+                    const refreshToken = await AsyncStorage.getItem(BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY)
+                    if (refreshToken) {
+                        const accessTokenNew = await authLaborContext.authFunctions.refreshAuth()
+                        if (accessTokenNew) {
+                            await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, accessTokenNew)
+                            const originalRequest = config;
+                            originalRequest._retry = true;
+                            return apiBunny(originalRequest);
+                        } else {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
                 default:
                     break;
             }
-            return Promise.reject(response)
+            const {error_code, error_message, error_stack} = error.data.business_logic;
+            if (error_code) {
+                return Promise.reject(new BunnyAPIError(error_message, error_code, error_stack));
+            } else {
+                return Promise.reject(response)
+            }
         } else if (request) {
             // status 100-200 timeout The request was made but no response was received, `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js
             return Promise.reject(request)
@@ -110,48 +176,48 @@ const validAPIProtocolSuccessResponse = (data: any) => {
     return isValid;
 }
 
-const request = async (config: AxiosRequestConfig) => {
-    try {
-        const result = await apiBunny.request(config);
-        if (validAPIProtocolSuccessResponse(result.data)) {
-            result.data = result.data.success_data
-        } else {
-            result.data = {}
-        }
-        return result;
-    } catch (error) {
-        const {error_code, error_message, error_stack} = error.data.business_logic;
-        if (error_code) {
-            throw new BunnyAPIError(error_message, error_code, error_stack);
-        } else {
-            throw error
-        }
-    }
-}
+// const request = async (config: AxiosRequestConfig) => {
+//     try {
+//         const result = await apiBunny.request(config);
+//         if (validAPIProtocolSuccessResponse(result.data)) {
+//             result.data = result.data.success_data
+//         } else {
+//             result.data = {}
+//         }
+//         return result;
+//     } catch (error) {
+//         const {error_code, error_message, error_stack} = error.data.business_logic;
+//         if (error_code) {
+//             throw new BunnyAPIError(error_message, error_code, error_stack);
+//         } else {
+//             throw error
+//         }
+//     }
+// }
+//
+// const baseRequest = {
+//     request: request,
+//     get: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
+//         return await request({...config, method: 'get', url});
+//     },
+//     delete: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
+//         return await request({...config, method: 'delete', url});
+//     },
+//     head: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
+//         return await request({...config, method: 'head', url});
+//     },
+//     options: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
+//         return await request({...config, method: 'options', url});
+//     },
+//     post: async <T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: AxiosRequestConfig) => {
+//         return await request({...config, method: 'post', url, data});
+//     },
+//     put: async <T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: AxiosRequestConfig) => {
+//         return await request({...config, method: 'put', url, data});
+//     },
+//     patch: async <T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: AxiosRequestConfig) => {
+//         return await request({...config, method: 'patch', url, data});
+//     }
+// }
 
-const baseRequest = {
-    request: request,
-    get: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
-        return await request({...config, method: 'get', url});
-    },
-    delete: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
-        return await request({...config, method: 'delete', url});
-    },
-    head: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
-        return await request({...config, method: 'head', url});
-    },
-    options: async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig) => {
-        return await request({...config, method: 'options', url});
-    },
-    post: async <T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: AxiosRequestConfig) => {
-        return await request({...config, method: 'post', url, data});
-    },
-    put: async <T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: AxiosRequestConfig) => {
-        return await request({...config, method: 'put', url, data});
-    },
-    patch: async <T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: AxiosRequestConfig) => {
-        return await request({...config, method: 'patch', url, data});
-    }
-}
-
-export default baseRequest;
+export default apiBunny;

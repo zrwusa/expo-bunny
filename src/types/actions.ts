@@ -12,7 +12,7 @@ import {
     SysWarnPayload
 } from "./payloads";
 import {NearbyFilm, Region} from "./models";
-import {DemoSaga} from "../actions";
+import {DemoSaga} from "../store/actions";
 
 export interface DemoHelloAction {
     type: EDemoHello.DEMO_HELLO;
@@ -81,6 +81,3 @@ export interface ReceiveGetDemoSagasAction {
 export interface FailedGetDemoSagasAction {
     type: EDemoSaga.FAILED_GET_DEMO_SAGAS,
 }
-
-
-

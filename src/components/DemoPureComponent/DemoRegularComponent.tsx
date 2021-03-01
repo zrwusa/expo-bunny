@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Text, View} from "../UI";
-import {getStyles} from "./styles";
-import {SizeLaborContext} from "../../providers/sizeLabor";
-import {ThemeLaborContext} from "../../providers/themeLabor";
+import {createStyles} from "./styles";
+import {SizeLaborContext} from "../../providers/size-labor";
+import {ThemeLaborContext} from "../../providers/theme-labor";
 
 type Props = { title?: string, labelBeenRendered?: string, labelRenderedUnit?: string }
 
@@ -25,7 +25,7 @@ export class DemoRegularComponent extends Component<Props> {
                     return (
                         <ThemeLaborContext.Consumer>
                             {(theme) => {
-                                const styles = getStyles(sizeLabor, theme)
+                                const styles = createStyles(sizeLabor, theme)
                                 return <View>
                                     <Text>{title}</Text>
                                     <View style={styles.demoSizeLabor}/>

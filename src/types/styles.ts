@@ -1,7 +1,7 @@
 import {DeepLeavesWrap, JsonKeys} from "./utils";
 import {IconProps} from "react-native-vector-icons/Icon";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {glyphMaterialCommunityCustomMap} from "../common";
+import {glyphMaterialCommunityCustomMap} from "../helpers";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
 import {ImageStyle, TextStyle, ViewStyle} from "react-native";
@@ -153,7 +153,6 @@ export interface Theme {
     },
 }
 
-export type WithThemeLabor = { themeLabor: ThemeLabor }
 
 export type FontConfigPlatform = {
     web: Fonts,

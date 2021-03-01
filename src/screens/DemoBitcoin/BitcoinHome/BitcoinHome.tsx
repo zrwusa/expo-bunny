@@ -5,19 +5,23 @@ import {DemoBitcoinStackParam} from "../../../types";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {Text} from "../../../components/UI"
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../../providers/i18nLabor";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../providers/themeLabor";
+import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
+import {useThemeLabor} from "../../../providers/theme-labor";
 
 type BitcoinHomeRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinHome'>;
 type BitcoinHomeNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinHome'>;
-export type BitcoinHomeProps = { route: BitcoinHomeRouteProp, navigation: BitcoinHomeNavigationProp }
+
+export interface BitcoinHomeProps {
+    route: BitcoinHomeRouteProp,
+    navigation: BitcoinHomeNavigationProp
+}
 
 
 function BitcoinHomeScreen({route, navigation}: BitcoinHomeProps) {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.BitcoinHome');
+    const st = shortenTFuciontKey(t, 'screens.BitcoinHome');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);

@@ -3,16 +3,16 @@ import {Animated} from "react-native";
 import {Image, Text, View} from "../../components/UI";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
-import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState, SysErrorPayload, WithThemeLabor} from "../../types";
+import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState, SysErrorPayload} from "../../types";
 import {Action} from "redux";
-import {getNearbyFilms, restoreRegion, sysError} from "../../actions";
+import {getNearbyFilms, restoreRegion, sysError} from "../../store/actions";
 import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
-import getStyles, {getCardSize} from "./styles";
-import getContainerStyles from "../../containers";
-import {WithSizeLabor, withSizeLabor} from "../../providers/sizeLabor";
-import {withThemeLabor} from "../../providers/themeLabor";
+import createStyles, {getCardSize} from "./styles";
+import {getContainerStyles} from "../../containers";
+import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
+import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -23,8 +23,11 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMapState, void, Action>)
     restoreRegion: (region: Region) => dispatch(restoreRegion(region)),
     sysError: (err: SysErrorPayload) => dispatch(sysError(err))
 });
-export type DemoMapProps = ReturnType<typeof mapDispatchToProps>
-    & ReturnType<typeof mapStateToProps> & BareProps & WithSizeLabor & WithThemeLabor;
+
+export interface DemoMapProps extends ReturnType<typeof mapDispatchToProps>,
+    ReturnType<typeof mapStateToProps>,
+    BareProps, WithSizeLabor, WithThemeLabor {
+}
 
 class DemoMapScreen extends Component<DemoMapProps> {
 
@@ -108,7 +111,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
         const {theme} = themeLabor;
         const {responsive} = sizeLabor;
         const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-        const styles = getStyles(sizeLabor);
+        const styles = createStyles(sizeLabor);
         const {wp} = responsive.iphoneX;
         const {width} = getCardSize(sizeLabor);
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {

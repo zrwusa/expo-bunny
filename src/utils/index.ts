@@ -1,5 +1,6 @@
 export * from "./stylesheet"
 export * from "./palette"
-export * from "./errorCollector"
+export * from "./error-collector"
 export * from "./common"
 export * from "./utils"
+export * from "./smart-styles"

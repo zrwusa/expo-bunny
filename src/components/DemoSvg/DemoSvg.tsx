@@ -1,17 +1,17 @@
 import React from "react";
 import {View} from "../UI"
-import {getStyles} from "./styles";
+import {createStyles} from "./styles";
 import Svg, {Circle, Rect, SvgUri} from "react-native-svg";
 import SVGR from "./SVGR"
 // import SvgLocalFileXML from "./SvgLocalFileXML"
 import {Platform} from "react-native";
-import {useThemeLabor} from "../../providers/themeLabor";
-import {useSizeLabor} from "../../providers/sizeLabor";
+import {useThemeLabor} from "../../providers/theme-labor";
+import {useSizeLabor} from "../../providers/size-labor";
 
 export const DemoSvg = () => {
     const sizeLabor = useSizeLabor()
     const themeLabor = useThemeLabor();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor);
     return (
         <View style={styles.container}>
             <Svg height="100" width="100" viewBox="0 0 100 100">

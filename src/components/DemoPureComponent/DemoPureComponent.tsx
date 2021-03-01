@@ -1,10 +1,14 @@
 import React, {PureComponent} from "react";
 import {Text, View} from "../UI";
-import {getStyles} from "./styles";
-import {SizeLaborContext} from "../../providers/sizeLabor";
-import {ThemeLaborContext} from "../../providers/themeLabor";
+import {createStyles} from "./styles";
+import {SizeLaborContext} from "../../providers/size-labor";
+import {ThemeLaborContext} from "../../providers/theme-labor";
 
-type Props = { title?: string, labelBeenRendered?: string, labelRenderedUnit?: string }
+interface Props {
+    title?: string,
+    labelBeenRendered?: string,
+    labelRenderedUnit?: string
+}
 
 // PureComponent ensures rendering just from props or contexts changing.Not rendered by parent component
 export class DemoPureComponent extends PureComponent<Props> {
@@ -24,7 +28,7 @@ export class DemoPureComponent extends PureComponent<Props> {
                     return (
                         <ThemeLaborContext.Consumer>
                             {(themeLabor) => {
-                                const styles = getStyles(sizeLabor, themeLabor)
+                                const styles = createStyles(sizeLabor, themeLabor)
                                 return <View>
                                     <Text>{title}</Text>
                                     <View style={styles.demoSizeLabor}/>

@@ -1,11 +1,14 @@
 import React from "react";
-import {getStyles} from "./styles";
+import {createStyles} from "./styles";
 import {ActivityIndicator, Text, View} from "react-native";
 
-export type PreparingProps = { text?: string | JSX.Element }
+export interface PreparingProps {
+    text?: string | JSX.Element
+}
+
 export const Preparing = (props: PreparingProps) => {
     const {text} = props;
-    const styles = getStyles();
+    const styles = createStyles();
     return (
         <View style={styles.container}>
             <ActivityIndicator size="large"/>

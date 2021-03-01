@@ -3,18 +3,21 @@ import {Text, View} from "../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
-import {getStyles} from "./styles";
+import {createStyles} from "./styles";
 import {useTranslation} from 'react-i18next';
-import {stFactory} from "../../providers/i18nLabor";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
-import getSmartStyles from "../../utils/smartStyles";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
+import {createSmartStyles} from "../../utils";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
 
-export type DemoRouteProps = { route: ProfileRouteProp; navigation: ProfileNavigationProp; }
+export interface DemoRouteProps {
+    route: ProfileRouteProp;
+    navigation: ProfileNavigationProp;
+}
 
 function DemoRouteScreen(props: DemoRouteProps) {
 
@@ -22,10 +25,10 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.DemoRoute');
+    const st = shortenTFuciontKey(t, 'screens.DemoRoute');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor)
-    const smartStyles = getSmartStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor);
 
     return (
         <View style={[containerStyles.screen, containerStyles.centralized]}>

@@ -1,7 +1,7 @@
 import {Platform, StyleSheet} from "react-native";
-import {useSizeLabor} from "../../providers/sizeLabor";
+import {useSizeLabor} from "../../providers/size-labor";
 
-export const getStyles = () => {
+export const createStyles = () => {
     const {measure, responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
     return StyleSheet.create({

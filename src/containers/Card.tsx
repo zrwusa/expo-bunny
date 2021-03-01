@@ -1,10 +1,12 @@
 import {Text, View} from "../components/UI";
 import * as React from "react";
-import getContainerStyles from "./index";
-import {useThemeLabor} from "../providers/themeLabor";
-import {useSizeLabor} from "../providers/sizeLabor";
+import {getContainerStyles} from "./index";
+import {useThemeLabor} from "../providers/theme-labor";
+import {useSizeLabor} from "../providers/size-labor";
 
-export type CardProps = { title?: string | JSX.Element };
+export interface CardProps {
+    title?: string | JSX.Element
+}
 
 export const Card: React.FC<CardProps> = (props) => {
     const {title, children} = props;

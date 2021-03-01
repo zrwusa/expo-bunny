@@ -1,16 +1,16 @@
 import React from "react";
 import {Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View,} from "react-native";
 import {Button, Text, TextInput} from "../../../components/UI";
-import {getStyles} from "./styles";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../providers/themeLabor";
+import {createStyles} from "./styles";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
+import {useThemeLabor} from "../../../providers/theme-labor";
 
 function RNKeyboardAvoidingScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = createStyles(sizeLabor, themeLabor)
 
     return (
         <KeyboardAvoidingView

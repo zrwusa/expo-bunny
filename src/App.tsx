@@ -6,18 +6,18 @@ import {AppearanceProvider} from "react-native-appearance";
 import {Theme as ThemeNavigation} from "@react-navigation/native";
 import BunnyConstants from "./constants/constants";
 import {RootState} from "./types";
-import {restoreIsReady, restoreNavInitialState, sysError} from "./actions";
-import {ThemeLaborContext, ThemeLaborProvider} from "./providers/themeLabor";
+import {restoreIsReady, restoreNavInitialState, sysError} from "./store/actions";
+import {ThemeLaborContext, ThemeLaborProvider} from "./providers/theme-labor";
 import {Preparing} from "./components/Preparing";
 import {useTranslation} from "react-i18next";
-import {RequestProvider} from "./providers/requestLabor";
+import {RequestProvider} from "./providers/request-labor";
 import {loadAsync} from "expo-font";
 import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
-import {SizeLaborProvider} from "./providers/sizeLabor";
+import {SizeLaborProvider} from "./providers/size-labor";
 import NavigatorTree from "./navigation/NavigatorTree";
 import Sys from "./components/Sys";
-import {AuthLaborProvider} from "./providers/authLabor";
-import {I18nLaborProvider} from "./providers/i18nLabor";
+import {AuthLaborProvider} from "./providers/auth-labor";
+import {I18nLaborProvider} from "./providers/i18n-labor";
 
 function App() {
     const dispatch = useDispatch();

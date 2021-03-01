@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {stFactory} from "../../providers/i18nLabor";
-import getContainerStyles from "../../containers";
-import {useSizeLabor} from "../../providers/sizeLabor";
-import {useThemeLabor} from "../../providers/themeLabor";
+import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {getContainerStyles} from "../../containers";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
 import {wait} from "../../utils";
 
 const DemoLazy100 = React.lazy(async () => {
@@ -23,7 +23,7 @@ const DemoLazy2000 = React.lazy(async () => {
 
 export const DemoSuspenseScreen = () => {
     const {t} = useTranslation();
-    const st = stFactory(t, 'screens.DemoSuspense');
+    const st = shortenTFuciontKey(t, 'screens.DemoSuspense');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);

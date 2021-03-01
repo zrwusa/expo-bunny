@@ -1,11 +1,11 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../types";
-import getSmartStyles from "../../utils/smartStyles";
+import {createSmartStyles} from "../../utils";
 
-export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
-    const {absoluteBottomLeft} = getSmartStyles(sizeLabor, themeLabor);
+    const {absoluteBottomLeft} = createSmartStyles(sizeLabor, themeLabor);
     const {colors} = themeLabor.theme;
 
     return StyleSheet.create({

@@ -1,19 +1,10 @@
 import React from "react";
-import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, StyleSheet, View} from "react-native";
+import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, View} from "react-native";
+import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
+import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
+import {createStyles} from "./styles";
 
-const styles = StyleSheet.create({
-    imageOverlay: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        top: 0,
-    },
-    container: {
-        backgroundColor: '#e1e4e8',
-    },
-});
-export type ImageProgressiveProps = {
+export interface ImageProgressiveProps extends WithSizeLabor, WithThemeLabor {
     sourcePH: ImageSourcePropType,
     source: ImageSourcePropType,
     style: StyleProp<ImageStyle>,
@@ -22,7 +13,6 @@ export type ImageProgressiveProps = {
 
 class ImageProgressive extends React.Component<ImageProgressiveProps> {
     thumbnailAnimated = new Animated.Value(0);
-
     imageAnimated = new Animated.Value(0);
 
     handleThumbnailLoad = () => {
@@ -44,11 +34,13 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
             sourcePH,
             source,
             style,
+            sizeLabor,
+            themeLabor,
             ...rest
         } = this.props;
-
+        const styles = createStyles(sizeLabor, themeLabor)
         return (
-            <View style={styles.container}>
+            <View style={styles.ImageProgressive.container}>
                 <Animated.Image
                     {...rest}
                     source={sourcePH}
@@ -59,7 +51,7 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
                 <Animated.Image
                     {...rest}
                     source={source}
-                    style={[styles.imageOverlay, {opacity: this.imageAnimated}, style]}
+                    style={[styles.ImageProgressive.imageOverlay, {opacity: this.imageAnimated}, style]}
                     onLoad={this.onImageLoad}
                 />
             </View>
@@ -67,4 +59,4 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
     }
 }
 
-export default ImageProgressive;
+export default withSizeLabor(withThemeLabor(ImageProgressive));

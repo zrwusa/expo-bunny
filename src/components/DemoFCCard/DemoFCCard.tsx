@@ -1,7 +1,10 @@
 import React from "react";
 import {Text, View} from "../UI";
 
-type Props = { title: string, paragraph?: string, }
+interface Props {
+    title: string,
+    paragraph?: string,
+}
 
 const DemoFCCard: React.FC<Props> = ({title, paragraph, children}) => {
     return (<View>

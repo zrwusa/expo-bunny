@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
-import {useRequest} from "../../providers/requestLabor/requestHooks";
+import {useRequest} from "../../providers/request-labor";
 
-type Props = { title: string, buttonTitle: string }
+interface Props {
+    title: string,
+    buttonTitle: string
+}
 
 function DemoRequest(props: Props) {
     const request = useRequest()
@@ -35,19 +38,18 @@ function DemoRequest(props: Props) {
 
     const getEmployees = async () => {
         try {
-            await request.post('/push-service/devices', {
-                type: "BITCOIN_ALERT",
-                token: "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]"
-            })
-
-            await saveAlertSetting();
-            await saveQuickAlertSettings();
-            await cancelAllAlertSettings()
+            // await request.post('/push-service/devices', {
+            //     type: "BITCOIN_ALERT",
+            //     token: "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]"
+            // })
+            // await saveAlertSetting();
+            // await saveQuickAlertSettings();
+            // await cancelAllAlertSettings()
             const res = await request.get(`/employees`);
             console.log('---DemoRequest res', res)
             setEmployees(res.data)
         } catch (err) {
-
+            console.log(err)
         }
     }
 

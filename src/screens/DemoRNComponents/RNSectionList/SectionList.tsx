@@ -1,10 +1,10 @@
 import React from "react";
 import {SafeAreaView, SectionList, View} from "react-native";
 import {Text} from "../../../components/UI";
-import {useThemeLabor} from "../../../providers/themeLabor";
-import {getStyles} from "./styles";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
+import {useThemeLabor} from "../../../providers/theme-labor";
+import {createStyles} from "./styles";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
 
 function SectionListScreen() {
     const themeLabor = useThemeLabor()
@@ -42,7 +42,7 @@ function SectionListScreen() {
         </View>
     );
     const sizeLabor = useSizeLabor();
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = createStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (

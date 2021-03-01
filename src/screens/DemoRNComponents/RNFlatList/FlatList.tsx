@@ -1,15 +1,15 @@
 import React from "react";
 import {FlatList, SafeAreaView, Text, View} from "react-native";
-import {getStyles} from "./styles";
-import getContainerStyles from "../../../containers";
-import {useSizeLabor} from "../../../providers/sizeLabor";
-import {useThemeLabor} from "../../../providers/themeLabor";
+import {createStyles} from "./styles";
+import {getContainerStyles} from "../../../containers";
+import {useSizeLabor} from "../../../providers/size-labor";
+import {useThemeLabor} from "../../../providers/theme-labor";
 
 function RNFlatListScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor);
     type IFlatListItem = {
         id: string;
         title: string;
