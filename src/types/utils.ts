@@ -115,6 +115,7 @@ export type DebounceOptions = {
 
 export interface DebouncedFunction<F extends Procedure> {
     (this: ThisParameterType<F>, ...args: Parameters<F>): void;
+
     cancel: () => void;
 }
 

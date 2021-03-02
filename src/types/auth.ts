@@ -28,7 +28,7 @@ export type AuthLaborContextType = {
         signInDummy: Function,
         signOutAndRemove: Function,
         signUp: Function,
-        refreshAuth:Function
+        refreshAuth: Function
     },
     authedResult: AuthedResult
 }

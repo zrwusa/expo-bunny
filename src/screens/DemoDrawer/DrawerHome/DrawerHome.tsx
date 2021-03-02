@@ -2,10 +2,9 @@ import * as React from "react";
 import {View} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../../providers/i18n-labor";
-import {getContainerStyles} from "../../../containers";
+import {Card, getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {Card} from "../../../containers";
 
 function DrawerHomeScreen() {
     const {t} = useTranslation();

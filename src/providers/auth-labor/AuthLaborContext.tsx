@@ -1,12 +1,13 @@
 import React from "react";
-import {AuthLaborContextType, AuthRes, SignInPayload, SignUpPayload,} from "../../types";
-import {apiAuth} from "./auth-api"
-import BunnyConstants from "../../constants/constants";
+import {AuthLaborContextType, AuthRes, SignInParams, SignUpParams,} from "../../types";
+import {apiAuth} from "../../helpers/auth-api"
+import BunnyConstants, {EBusinessInfo} from "../../constants/constants";
 import {AxiosResponse, Method} from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Google from "expo-google-app-auth";
 import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, IOS_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO} from "@env";
 import _ from "lodash";
+import {businessInfo, businessSuccess} from "../../helpers";
 
 type Config = {
     accessTokenPersistenceKey: string,
@@ -31,122 +32,90 @@ const getAccessToken = async () => {
     return await AsyncStorage.getItem(config.accessTokenPersistenceKey)
 }
 
-const signIn = async (params: SignInPayload) => {
-    const {data} = await apiAuth.put<SignInPayload, AxiosResponse<AuthRes>>(`/auth/login`, params)
+const signIn = async (params: SignInParams) => {
+    const {data} = await apiAuth.put<SignInParams, AxiosResponse<AuthRes>>(`/auth/login`, params)
     const {access_token, refresh_token, user} = data
     if (access_token && refresh_token) {
         await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, access_token)
         await AsyncStorage.setItem(BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY, refresh_token)
     } else {
-        // result = dispatch(sysError({error: new BusinessLogicError('No access_token or refresh_token responded')}))
+        return businessInfo(EBusinessInfo.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED)
     }
     if (user) {
         await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
     } else {
-        // result = dispatch(sysError({error: new BusinessLogicError('No user info responded')}))
+        return businessInfo(EBusinessInfo.NO_USER_INFO_RESPONDED)
     }
-    return {accessToken: access_token, user: user}
+    return businessSuccess({accessToken: access_token, user: user})
 }
 
 const signInDummy = async () => {
-    let result;
-    try {
-        await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, 'access_token_dummy')
-        const userDummy = {email: 'dummy@dummy.com', nickname: 'dummy nickname'}
-        await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(userDummy))
-        result = {
-            accessToken: 'access_token_dummy',
-            user: userDummy
-        };
-        return result;
-    } catch (err) {
-        // result = dispatch(sysError({error: err}))
-    }
-    return result;
+    await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, 'access_token_dummy')
+    const userDummy = {email: 'dummy@dummy.com', nickname: 'dummy nickname'}
+    await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(userDummy))
+    return businessSuccess({
+        accessToken: 'access_token_dummy',
+        user: userDummy
+    })
 };
 
 const signInGoogle = async () => {
-    let result;
-    try {
-        const loginResult = await Google.logInAsync({
-            iosClientId: `${IOS_CLIENT_ID_FOR_EXPO}`,
-            androidClientId: `${ANDROID_CLIENT_ID_FOR_EXPO}`,
-            iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
-            androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
-        });
-        if (loginResult) {
-            switch (loginResult.type) {
-                case "cancel":
-                    // result = dispatch(sysWarn({warn: "Google login canceled"}));
-                    break
-                case "success":
-                    const {accessToken, user} = loginResult;
-                    if (accessToken) {
-                        try {
-                            await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, accessToken)
-                            await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
-                            return result = loginResult;
-                        } catch (err) {
-                            // result = dispatch(sysError({error: err}))
-                        }
-                    } else {
-                        // result = dispatch(sysError({error: new BusinessLogicError('accessToken is null')}))
-                    }
-                    break
-                default:
-                // result = dispatch(sysError({error: new BusinessLogicError('Google loginResult has returned type neither success nor cancel')}));
-            }
-        } else {
-            // result = dispatch(sysError({error: new BusinessLogicError('No login result')}))
+    const loginResult = await Google.logInAsync({
+        iosClientId: `${IOS_CLIENT_ID_FOR_EXPO}`,
+        androidClientId: `${ANDROID_CLIENT_ID_FOR_EXPO}`,
+        iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
+        androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
+    });
+    if (loginResult) {
+        switch (loginResult.type) {
+            case "cancel":
+                return businessInfo(EBusinessInfo.G00GLE_LOGIN_CANCELED)
+            case "success":
+                const {accessToken, user} = loginResult;
+                if (accessToken) {
+                    await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, accessToken)
+                    await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
+                    return businessSuccess(loginResult)
+                } else {
+                    return businessInfo(EBusinessInfo.GOOGLE_ACCESS_TOKEN_NOT_EXISTS)
+                }
+            default:
+                return businessInfo(EBusinessInfo.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
         }
-    } catch (e) {
-        // result = dispatch(sysError({error: e}))
+    } else {
+        return businessInfo(EBusinessInfo.NO_GOOGLE_LOGIN_RESULT)
     }
-    return result;
 };
 
-const signUp = async (reqParams: SignUpPayload) => {
-    let result;
-    try {
-        const res = await apiAuth.post<SignUpPayload, AxiosResponse<AuthRes>>(`/auth/register`, reqParams)
-        const {data} = res;
-        if (data) {
-            if (data.access_token) {
-                await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
-            } else {
-                // dispatch(sysError({error: new BusinessLogicError('No access_token responded')}))
-            }
-
-            if (data.user) {
-                await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
-            } else {
-                // dispatch(sysError({error: new BusinessLogicError('No user info responded')}))
-            }
-            result = data
+const signUp = async (reqParams: SignUpParams) => {
+    const res = await apiAuth.post<SignUpParams, AxiosResponse<AuthRes>>(`/auth/register`, reqParams)
+    const {data} = res;
+    if (data) {
+        if (data.access_token) {
+            await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, data.access_token)
         } else {
-            // result = dispatch(sysError({error: new BusinessLogicError('No data')}))
+            return businessInfo(EBusinessInfo.NO_ACCESS_TOKEN_RESPONDED)
         }
-    } catch (err) {
-        // result = dispatch(sysError({error: err}))
+        if (data.user) {
+            await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(data.user))
+        } else {
+            return businessInfo(EBusinessInfo.NO_USER_INFO_RESPONDED)
+        }
+        return businessSuccess(data);
+
+    } else {
+        return businessInfo(EBusinessInfo.NO_DATA_RESPONDED)
     }
-    return result;
 }
 
 const signOutAndRemove = async () => {
-    let result;
-    try {
-        await AsyncStorage.removeItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
-        await AsyncStorage.removeItem(BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY);
-        await AsyncStorage.removeItem(BunnyConstants.USER_PERSISTENCE_KEY);
-        result = true;
-    } catch (err) {
-        // result = dispatch(sysError({error: err}))
-    }
-    return result;
+    await AsyncStorage.removeItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
+    await AsyncStorage.removeItem(BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY);
+    await AsyncStorage.removeItem(BunnyConstants.USER_PERSISTENCE_KEY);
+    return businessSuccess(true)
 };
 
 const refreshAuth = async () => {
-    // const {refreshToken, accessTokenPath, refreshApiMethod, refreshApiPath} = params;
     const refreshToken = await AsyncStorage.getItem(BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY);
     apiAuth.defaults.headers.common["Authorization"] = `Bearer ${refreshToken}`;
     const accessTokenPath = 'access_token';
@@ -156,14 +125,16 @@ const refreshAuth = async () => {
     if (res.data) {
         const accessToken = _.get(res.data, accessTokenPath);
         if (accessToken) {
-            return accessToken
+            await AsyncStorage.setItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY, accessToken)
+            return businessSuccess(accessToken)
         } else {
-            return undefined;
+            return businessInfo(EBusinessInfo.NO_ACCESS_TOKEN_RESPONDED)
         }
     } else {
-        return undefined;
+        return businessInfo(EBusinessInfo.NO_DATA_RESPONDED)
     }
 }
+
 export const authLaborContext = {
     authFunctions: {
         signIn,
@@ -171,7 +142,8 @@ export const authLaborContext = {
         signInDummy,
         signOutAndRemove,
         signUp,
-        refreshAuth
+        refreshAuth,
+        getAccessToken
     },
     authedResult: {
         isLoading: true,

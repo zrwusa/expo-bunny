@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from "redux-saga/effects"
 import * as actions from "../actions/demo-saga"
-import api from "../../utils/api";
+import api from "../../helpers/bunny-api";
 import {failedGetDemoSagas, getDemoSagas} from "../actions";
 import {EDemoSaga} from "../../constants";
 import {GetDemoSagaParams} from "../../types";

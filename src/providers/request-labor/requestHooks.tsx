@@ -1,6 +1,6 @@
 import {AxiosInstance} from 'axios';
 import React, {ReactNode} from 'react';
-import api from "../../utils/api";
+import api from "../../helpers/bunny-api";
 
 const RequestContext = React.createContext<typeof api>(new Proxy(api, {
         apply: () => {

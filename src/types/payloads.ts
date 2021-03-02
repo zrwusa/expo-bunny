@@ -2,12 +2,12 @@
 import {InitialState} from "@react-navigation/native";
 import {BunnyAPIStandardRequestParams} from "./api";
 
-export interface SignInPayload {
+export interface SignInParams {
     email: string;
     password: string;
 }
 
-export interface SignUpPayload {
+export interface SignUpParams {
     email: string;
     password: string;
 }

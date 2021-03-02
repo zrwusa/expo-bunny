@@ -2,7 +2,7 @@ import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {EDemoMap} from "../../constants";
 import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RestoreNearbyFilmsAction, RestoreRegionAction, SysErrorAction} from "../../types";
-import api from "../../utils/api";
+import api from "../../helpers/bunny-api";
 import {sysError} from "./sys";
 import {BusinessLogicError} from "../../utils";
 

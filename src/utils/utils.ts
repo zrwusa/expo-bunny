@@ -64,29 +64,6 @@ export const wait = async (ms: number, resolveValue?: any) => {
         }, ms)
     })
 }
-type BunnyAPIProtocol = {
-    "success_data": any,
-    "created_at": number,
-    "time_spend": number,
-    "http_extra": {
-        "code": number,
-        "message": string,
-        "des": string,
-        "error_code": number,
-        "error_message": string,
-        "error_des": string,
-        "error_stack": string
-    },
-    "business_logic": {
-        "code": string,
-        "message": string,
-        "des": string,
-        "error_code": string,
-        "error_message": string,
-        "error_des": string,
-        "error_stack": string
-    }
-}
 
 export class BunnyAPIError extends Error {
     protected serverErrorStack;
@@ -110,10 +87,28 @@ export class BunnyAPIError extends Error {
             (this as any).__proto__ = new.target.prototype;
         }
     }
+}
 
-    toJson() {
-        if (this.serverErrorStack) {
-            return this.serverErrorStack
+export class AuthAPIError extends Error {
+    protected serverErrorStack;
+    protected serverErrorCode;
+
+    constructor(serverErrorMessage: string, serverErrorCode?: string, serverErrorStack?: string) {
+        super(serverErrorMessage);
+        if (serverErrorStack) {
+            this.serverErrorStack = serverErrorStack;
+        }
+        if (serverErrorCode) {
+            this.serverErrorCode = serverErrorCode;
+        }
+        this.name = new.target.name;
+        if (typeof (Error as any).captureStackTrace === 'function') {
+            (Error as any).captureStackTrace(this, new.target);
+        }
+        if (typeof Object.setPrototypeOf === 'function') {
+            Object.setPrototypeOf(this, new.target.prototype);
+        } else {
+            (this as any).__proto__ = new.target.prototype;
         }
     }
 }

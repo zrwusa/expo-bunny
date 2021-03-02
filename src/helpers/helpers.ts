@@ -1,8 +1,19 @@
-import {IcoMoonKeys, IcoMoonSelection, IcoMoonSelectionIcon, NavigatorTreeNode, RouteIconFontConfig, Traversable, TraversableNested} from "../types";
+import {
+    BusinessReturn,
+    IcoMoonKeys,
+    IcoMoonSelection,
+    IcoMoonSelectionIcon,
+    NavigatorTreeNode,
+    RouteIconFontConfig,
+    Traversable,
+    TraversableNested
+} from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants from "../constants/constants";
+import BunnyConstants, {EBusinessInfo} from "../constants/constants";
+import {AuthAPIError, BunnyAPIError} from "../utils";
+import bunnyConfig from "../config.json";
 
 export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -171,5 +182,66 @@ export const checkAuthStatus = async () => {
         }
     } catch (e) {
         return false;
+    }
+}
+
+export const businessInfo = (EBusinessInfo: string): BusinessReturn => {
+    return {
+        success: false,
+        data: undefined,
+        message: EBusinessInfo
+    }
+}
+
+export const businessSuccess = (data: any): BusinessReturn => {
+    return {
+        success: true,
+        data: data,
+        message: ''
+    }
+}
+
+export const validBunnyAPIResponse = (data: any) => {
+    let isValid = false;
+    const {error_code, error_message, error_stack} = data.business_logic;
+    if (error_code) {
+        throw new BunnyAPIError(error_message, error_code, error_stack)
+    } else {
+        const {success_data} = data;
+        if (success_data) {
+            isValid = true
+        } else {
+            throw new BunnyAPIError(EBusinessInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+        }
+    }
+    return isValid;
+}
+
+export const validAuthAPIResponse = (data: any) => {
+    let isValid = false;
+    const {error_code, error_message, error_stack} = data.business_logic;
+    if (error_code) {
+        throw new AuthAPIError(error_message, error_code, error_stack)
+    } else {
+        const {success_data} = data;
+        if (success_data) {
+            isValid = true
+        } else {
+            throw new AuthAPIError(EBusinessInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+        }
+    }
+    return isValid;
+}
+
+export const getApiInstanceConfig = () => {
+    const httpPrefix = bunnyConfig.isHttps ? 'https://' : 'http://';
+    const devProxyPrefix = bunnyConfig.isDevServerProxy ? Object.keys(bunnyConfig.devServerProxy)[0] : '';
+    return {
+        baseURL: bunnyConfig.isDevServerProxy
+            ? `${bunnyConfig.devServer.domain}${bunnyConfig.devServer.port}${devProxyPrefix}`
+            : bunnyConfig.isRemoteBackEnd
+                ? `${httpPrefix}${bunnyConfig.remoteBackEnd.domain}:${bunnyConfig.remoteBackEnd.port}`
+                : `${httpPrefix}${bunnyConfig.localBackEnd.domain}:${bunnyConfig.localBackEnd.port}`,
+        timeout: 2000
     }
 }

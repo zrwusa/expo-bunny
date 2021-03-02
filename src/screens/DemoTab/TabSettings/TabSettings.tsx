@@ -5,10 +5,9 @@ import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings"
 import {DemoTabStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../../providers/i18n-labor";
-import {getContainerStyles} from "../../../containers";
+import {Card, getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {Card} from "../../../containers";
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;

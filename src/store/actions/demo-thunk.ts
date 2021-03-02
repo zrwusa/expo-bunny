@@ -1,4 +1,4 @@
-import api from "../../utils/api";
+import api from "../../helpers/bunny-api";
 import {DemoThunkPayload, DemoThunkState, DemoThunkSuccessAction, DemoThunkSuccessPayload, SysErrorAction} from "../../types";
 import {EDemoThunk} from "../../constants";
 import {Action, ActionCreator, Dispatch} from "redux";

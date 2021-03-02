@@ -1,7 +1,7 @@
 // todo description this provider
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {AuthLaborProviderProps, SignInPayload, SignUpPayload} from "../../types";
+import {AuthLaborProviderProps, SignInParams, SignUpParams} from "../../types";
 import {AuthLaborContext, authLaborContext} from "./AuthLaborContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants from "../../constants/constants";
@@ -10,6 +10,7 @@ import {useDispatch} from "react-redux";
 import {Preparing} from "../../components/Preparing";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../i18n-labor";
+import {BusinessLogicError} from "../../utils";
 
 function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const {children, authFunctions, authedResult} = props;
@@ -19,11 +20,16 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
 
     const [isReady, setIsReady] = useState(false);
     const [authState, setAuthLaborState] = useState(authedResult || authLaborContext.authedResult);
-    const signIn = async (reqParams: SignInPayload) => {
+    const signIn = async (reqParams: SignInParams) => {
         let result;
         try {
-            const signInResult = await authLaborContext.authFunctions.signIn(reqParams)
-            setAuthLaborState({...authState, ...signInResult});
+            result = await authLaborContext.authFunctions.signIn(reqParams)
+            const {success, data} = result;
+            if (success) {
+                setAuthLaborState({...authState, ...data});
+            } else {
+                result = dispatch(sysError({error: new BusinessLogicError(result.message)}))
+            }
         } catch (err) {
             result = dispatch(sysError({error: err}))
         }
@@ -34,7 +40,12 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
         let result;
         try {
             result = await authLaborContext.authFunctions.signInDummy();
-            setAuthLaborState({...authState, ...result});
+            const {success, data} = result;
+            if (success) {
+                setAuthLaborState({...authState, ...data});
+            } else {
+                result = dispatch(sysError({error: new BusinessLogicError(result.message)}))
+            }
         } catch (err) {
             result = dispatch(sysError({error: err}))
         }
@@ -45,8 +56,11 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
         let result;
         try {
             result = await authLaborContext.authFunctions.signInGoogle()
-            if (result) {
-                setAuthLaborState({...authState, accessToken: result.accessToken, user: result.user});
+            const {success, data} = result;
+            if (success) {
+                setAuthLaborState({...authState, ...data});
+            } else {
+                result = dispatch(sysError({error: new BusinessLogicError(result.message)}))
             }
         } catch (e) {
             result = dispatch(sysError({error: e}))
@@ -54,15 +68,15 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
         return result;
     };
 
-    const signUp = async (reqParams: SignUpPayload) => {
+    const signUp = async (params: SignUpParams) => {
         let result;
         try {
-            let res = await authLaborContext.authFunctions.signUp(reqParams)
-            if (res) {
-                result = res
-                setAuthLaborState({...authState, accessToken: result.access_token, user: result.user});
+            let result = await authLaborContext.authFunctions.signUp(params)
+            const {success, data, message} = result;
+            if (success) {
+                setAuthLaborState({...authState, accessToken: data.access_token, user: data.user});
             } else {
-
+                result = dispatch(sysError({error: new BusinessLogicError(message)}))
             }
         } catch (err) {
             result = dispatch(sysError({error: err}))
@@ -73,12 +87,12 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const signOutAndRemove = async () => {
         let result;
         try {
-            let res = await authLaborContext.authFunctions.signOutAndRemove()
-            // await AsyncStorage.removeItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
-            // await AsyncStorage.removeItem(BunnyConstants.USER_PERSISTENCE_KEY);
-            if(res){
+            let result = await authLaborContext.authFunctions.signOutAndRemove()
+            const {success, message} = result;
+            if (success) {
                 setAuthLaborState({...authState, accessToken: '', user: {}})
-                result = true;
+            } else {
+                result = dispatch(sysError({error: new BusinessLogicError(message)}))
             }
         } catch (err) {
             result = dispatch(sysError({error: err}))
@@ -89,17 +103,19 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const refreshAuth = async () => {
         let result;
         try {
-            const accessTokenNew = await authLaborContext.authFunctions.refreshAuth()
-            if(accessTokenNew){
-                setAuthLaborState({...authState, accessToken: accessTokenNew})
-                result = true;
+            result = await authLaborContext.authFunctions.refreshAuth()
+            const {success, data, message} = result;
+            if (success) {
+                setAuthLaborState({...authState, accessToken: data})
+            } else {
+                result = dispatch(sysError({error: new BusinessLogicError(message)}))
             }
         } catch (err) {
             result = dispatch(sysError({error: err}))
         }
         return result;
     };
-    const [authFunctionsState, setAuthLaborFunctionsState] = useState(authFunctions || {
+    const [authFunctionsState] = useState(authFunctions || {
         signIn,
         signInGoogle,
         signInDummy,
