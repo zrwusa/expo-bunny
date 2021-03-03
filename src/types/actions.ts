@@ -84,3 +84,6 @@ export interface ReceiveGetDemoSagasAction {
     payload: DemoSaga[]
 }
 
+export interface FailedGetDemoSagasAction {
+    type: EDemoSaga.FAILED_GET_DEMO_SAGAS,
+}
