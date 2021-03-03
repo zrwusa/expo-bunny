@@ -24,7 +24,6 @@ export enum EAuth {
     SIGN_IN = "SIGN_IN",
     SIGN_OUT = "SIGN_OUT",
     RESTORE_AUTH = "RESTORE_AUTH",
-    RESTORE_AUTH_REDIRECTION = "RESTORE_AUTH_REDIRECTION",
     RESTORE_AUTH_GOOGLE = "RESTORE_AUTH_GOOGLE",
 }
 
@@ -36,6 +35,10 @@ export enum ESys {
     RESTORE_THEME = "RESTORE_THEME",
     RESTORE_LANGUAGE = "RESTORE_LANGUAGE",
     RESTORE_NAV_INITIAL_STATE = "RESTORE_NAV_INITIAL_STATE",
+}
+
+export enum EBusinessLogic {
+    INFO = "INFO",
 }
 
 export enum EDemoHello {
@@ -53,19 +56,20 @@ export enum EDemoMap {
     RESTORE_REGION = "RESTORE_REGION",
 }
 
-export enum EBusinessInfo {
+export enum EBusinessLogicInfo {
     NO_ACCESS_TOKEN_RESPONDED = "No access_token responded",
+    NO_AUTH_API_RESPONDED = "No auth api responded",
     NO_USER_INFO_RESPONDED = "No user info responded",
     NO_DATA_RESPONDED = "No data responded",
     NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED = "No access token or refresh token responded",
-    G00GLE_LOGIN_CANCELED = "Google login canceled",
+    GOOGLE_LOGIN_CANCELED = "Google login canceled",
     GOOGLE_ACCESS_TOKEN_NOT_EXISTS = "Google accessToken not exists",
     GOOGLE_LOGIN_RESULT_TYPE_INVALID = "Google loginResult has returned type neither success nor cancel",
     NO_GOOGLE_LOGIN_RESULT = "No google login result",
     NO_ACCESS_TOKEN_RETURNED = "No access_token returned",
     NOT_CONFORM_TO_API_RESPONSE_STRUCTURE = "Not conform to BunnyAPI response structure",
-    // XXX = "Xxx",
-    // XXX = "Xxx",
+    NO_NEARBY_FILMS = "No nearby films",
+    NO_DEMO_THUNK_DATA = "No demo thunks response data",
     // XXX = "Xxx",
     // XXX = "Xxx",
     // XXX = "Xxx",
@@ -148,10 +152,5 @@ export const ELanguage = {
     en: 'en',
     zh: 'zh',
 }
-
-export const EHttpStatus = {
-    UNAUTHORIZED: 401,
-}
-
 
 export default BunnyConstants

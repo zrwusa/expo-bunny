@@ -23,8 +23,8 @@ interface Props {
 };
 
 function ProfileScreen({route, navigation}: Props) {
-    const {authedResult} = useAuthLabor()
-    const {user} = authedResult;
+    const {authResult} = useAuthLabor()
+    const {user} = authResult;
     const {t} = useTranslation();
     const st = shortenTFuciontKey(t, 'screens.Profile');
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';

@@ -1,5 +1,5 @@
 import {
-    BusinessReturn,
+    BusinessLogicReturn,
     IcoMoonKeys,
     IcoMoonSelection,
     IcoMoonSelectionIcon,
@@ -11,7 +11,7 @@ import {
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants, {EBusinessInfo} from "../constants/constants";
+import BunnyConstants, {EBusinessLogicInfo} from "../constants/constants";
 import {AuthAPIError, BunnyAPIError} from "../utils";
 import bunnyConfig from "../config.json";
 
@@ -185,15 +185,15 @@ export const checkAuthStatus = async () => {
     }
 }
 
-export const businessInfo = (EBusinessInfo: string): BusinessReturn => {
+export const businessLogicInfo = (businessLogicMsg: string): BusinessLogicReturn => {
     return {
         success: false,
         data: undefined,
-        message: EBusinessInfo
+        message: businessLogicMsg
     }
 }
 
-export const businessSuccess = (data: any): BusinessReturn => {
+export const businessSuccess = (data: any): BusinessLogicReturn => {
     return {
         success: true,
         data: data,
@@ -211,7 +211,7 @@ export const validBunnyAPIResponse = (data: any) => {
         if (success_data) {
             isValid = true
         } else {
-            throw new BunnyAPIError(EBusinessInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+            throw new BunnyAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
         }
     }
     return isValid;
@@ -227,7 +227,7 @@ export const validAuthAPIResponse = (data: any) => {
         if (success_data) {
             isValid = true
         } else {
-            throw new AuthAPIError(EBusinessInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+            throw new AuthAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
         }
     }
     return isValid;

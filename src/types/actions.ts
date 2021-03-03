@@ -1,6 +1,7 @@
 // Redux actions
-import {EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
+import {EBusinessLogic, EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
 import {
+    BusinessLogicInfoPayload,
     DemoHello2Payload,
     DemoHelloPayload,
     DemoThunkSuccessPayload,
@@ -27,6 +28,11 @@ export interface DemoHello2Action {
 export interface SysErrorAction {
     type: ESys.ERROR;
     payload: SysErrorPayload;
+}
+
+export interface BusinessLogicInfoAction {
+    type: EBusinessLogic.INFO;
+    payload: BusinessLogicInfoPayload;
 }
 
 export interface SysClearErrorsAction {
@@ -78,6 +84,3 @@ export interface ReceiveGetDemoSagasAction {
     payload: DemoSaga[]
 }
 
-export interface FailedGetDemoSagasAction {
-    type: EDemoSaga.FAILED_GET_DEMO_SAGAS,
-}

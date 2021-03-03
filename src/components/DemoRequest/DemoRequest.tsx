@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
@@ -10,9 +10,7 @@ interface Props {
 
 function DemoRequest(props: Props) {
     const request = useRequest()
-
     const [employees, setEmployees] = useState<Array<DemoEmployee>>([])
-
     const granularity = 0.05;
     const expoPushToken = "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]";
     const saveAlertSetting = async function () {
@@ -46,31 +44,26 @@ function DemoRequest(props: Props) {
             // await saveQuickAlertSettings();
             // await cancelAllAlertSettings()
             const res = await request.get(`/employees`);
-            console.log('---DemoRequest res', res)
             setEmployees(res.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 
-    useEffect(() => {
-
-    }, [])
-
-
     const {buttonTitle} = props;
-    console.log('---employees', employees)
     return (<View>
         <Text>{props.title}</Text>
         <ButtonTO onPress={async () => {
             await getEmployees()
         }}><TextBtn>{buttonTitle}</TextBtn></ButtonTO>
         <View>
-            {employees && employees.length > 0 ? employees.map((employee) =>
-                <Text key={employee._id}>
-                    {employee.email}
-                </Text>
-            ) : null}
+            {employees && employees.length > 0
+                ? employees.map((employee) =>
+                    <Text key={employee._id}>
+                        {employee.email}
+                    </Text>
+                ) :
+                null}
         </View>
     </View>);
 }

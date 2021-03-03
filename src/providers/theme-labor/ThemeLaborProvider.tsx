@@ -5,7 +5,7 @@ import {ThemeName, ThemeProviderProps} from "../../types";
 import {ThemeLaborContext} from "./ThemeLaborContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants, {EThemes} from "../../constants/constants";
-import {sysError} from "../../store/actions/sys";
+import {sysError} from "../../store/actions";
 import {useColorScheme} from "react-native-appearance";
 import {useDispatch} from "react-redux";
 import {Preparing} from "../../components/Preparing";

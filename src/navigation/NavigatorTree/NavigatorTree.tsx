@@ -635,10 +635,10 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const Navigator = stack?.Navigator;
     const props = navigatorPropsExtract(node);
     const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
-    const {authedResult} = useAuthLabor()
+    const {authResult} = useAuthLabor()
     return Navigator
         ? <Navigator {...props}>
-            {authedResult && !authedResult.accessToken
+            {authResult && !authResult.accessToken
                 ? <ScreenComponent component={AuthScreen} name="Auth" options={{
                     title: t(`screens.Auth.title`)
                 }}/>

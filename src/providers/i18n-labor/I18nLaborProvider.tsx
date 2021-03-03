@@ -3,8 +3,6 @@ import * as React from "react";
 import {ReactNode, useEffect, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants from "../../constants/constants";
-import {sysError} from "../../store/actions";
-import {useDispatch} from "react-redux";
 import * as localization from "expo-localization";
 import {I18nLaborContext} from "./I18nLaborContext";
 import i18next from "./i18next";
@@ -20,7 +18,6 @@ export interface I18nProviderProps {
 }
 
 function I18nLaborProvider(props: I18nProviderProps): JSX.Element {
-    const dispatch = useDispatch();
     const [isReady, setIsReady] = useState(false);
     const {t} = useTranslation();
     const st = shortenTFuciontKey(t, `sys`)
@@ -29,13 +26,9 @@ function I18nLaborProvider(props: I18nProviderProps): JSX.Element {
 
     useEffect(() => {
         const bootstrapAsync = async () => {
-            try {
-                const language = await AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY);
-                const lang = language || localization.locale.substring(0, 2);
-                lang && await i18nValue.changeLanguage(lang);
-            } catch (err) {
-                dispatch(sysError(err.toString()));
-            }
+            const language = await AsyncStorage.getItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY);
+            const lang = language || localization.locale.substring(0, 2);
+            lang && await i18nValue.changeLanguage(lang);
         }
         bootstrapAsync().then(() => {
             setIsReady(true)

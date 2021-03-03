@@ -9,6 +9,7 @@ import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useAuthLabor} from "../../providers/auth-labor";
+import {sysError} from "../../store/actions";
 
 export interface AuthProps {
     type?: 'sign-in' | 'sign-up'
@@ -31,19 +32,31 @@ export const AuthScreen = (props: AuthProps) => {
             {
                 type === 'sign-in'
                     ? <>
-                        <ButtonRNE onPress={() => {
-                            authFunctions.signIn({email: 'bruno@email.com', password: 'bruno'})
+                        <ButtonRNE onPress={async () => {
+                            try {
+                                await authFunctions.signIn({email: 'bruno@email.com', password: 'bruno'})
+                            } catch (e) {
+                                dispatch(sysError({error: e}))
+                            }
                         }} title={st(`signIn`)}/>
-                        <ButtonRNE onPress={() => {
-                            authFunctions.signInDummy()
+                        <ButtonRNE onPress={async () => {
+                            try {
+                                await authFunctions.signInDummy()
+                            } catch (e) {
+                                dispatch(sysError({error: e}))
+                            }
                         }} title={st(`signInDummy`)}/>
                         <ButtonRNE onPress={() => {
                             setType('signUp')
                         }} title={st(`goToSignUp`)}/>
                     </>
                     : <>
-                        <ButtonRNE onPress={() => {
-                            authFunctions.signUp({email: 'bruno@email.com', password: 'bruno'})
+                        <ButtonRNE onPress={async () => {
+                            try {
+                                await authFunctions.signUp({email: 'bruno@email.com', password: 'bruno'})
+                            } catch (e) {
+                                dispatch(sysError({error: e}))
+                            }
                         }} title={st(`signUp`)}/>
                         <ButtonRNE onPress={() => {
                             setType('sign-in')
@@ -52,8 +65,12 @@ export const AuthScreen = (props: AuthProps) => {
             }
             {
                 Platform.OS !== 'web'
-                    ? <ButtonRNE onPress={() => {
-                        authFunctions.signInGoogle()
+                    ? <ButtonRNE onPress={async () => {
+                        try {
+                            await authFunctions.signInGoogle()
+                        } catch (e) {
+                            dispatch(sysError({error: e}))
+                        }
                     }} title={st(`signInGoogle`)}/>
                     : <></>
             }

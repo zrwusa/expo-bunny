@@ -36,7 +36,6 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 <Card title={st(`navAndRoute`)}>
                     <Link to="/demo-tab/tab-home">{st(`tab`)}</Link>
                     <Link to="/demo-drawer/drawer-home">{st(`drawer`)}</Link>
-
                     <Link to="/profile/002">{st(`profile`)}(Link)</Link>
                     <ButtonTO onPress={() => linkTo("/profile/002")}>
                         <TextBtn>{st(`profile`)}(useLinkTo)</TextBtn></ButtonTO>
@@ -87,8 +86,11 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 </Card>
                 <Card title={st(`system`)}>
                     <Link to="/settings">{st(`settings`)}</Link>
-                    <ButtonTO onPress={() => {
-                        authFunctions.signOutAndRemove()
+                    <ButtonTO onPress={async () => {
+                        try {
+                           await authFunctions.signOut()
+                        }catch (err){
+                        }
                     }}>
                         <TextBtn>{st(`signOut`)}</TextBtn></ButtonTO>
                 </Card>

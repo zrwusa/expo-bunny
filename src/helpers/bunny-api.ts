@@ -4,7 +4,7 @@ import {authLaborContext} from "../providers/auth-labor";
 import {getApiInstanceConfig, validBunnyAPIResponse} from "./index";
 import {BunnyAPIProtocolResponseData} from "../types";
 
-export const bunnyAPIInitResponseData = {
+export const defaultBunnyAPIResponseData = {
     "http_extra": {
         "code": 0,
         "message": "",
@@ -29,7 +29,6 @@ export const bunnyAPIInitResponseData = {
 
 const bunnyAPI = axios.create(getApiInstanceConfig());
 
-
 bunnyAPI.interceptors.request.use(
     async (config) => {
         const accessToken = await authLaborContext.authFunctions.getAccessToken();
@@ -48,7 +47,7 @@ bunnyAPI.interceptors.response.use(
         if (validBunnyAPIResponse(response.data)) {
             response.data = response.data.success_data
         } else {
-            response.data = bunnyAPIInitResponseData
+            response.data = defaultBunnyAPIResponseData
         }
         return response
     },
@@ -59,30 +58,43 @@ bunnyAPI.interceptors.response.use(
             const {status} = response;
             switch (status) {
                 case 403:
-                    const result = await authLaborContext.authFunctions.refreshAuth()
-                    const {success} = result;
-                    if (success) {
-                        const originalRequest = config;
-                        originalRequest._retry = true;
-                        return bunnyAPI(originalRequest);
-                    } else {
-                        break;
+                    let result;
+                    const {authFunctions} = authLaborContext;
+                    const {refreshAuth, signOut} = authFunctions;
+                    try {
+                        result = await refreshAuth()
+                        const {success} = result;
+                        if (success) {
+                            const originalRequest = config;
+                            originalRequest._retry = true;
+                            return bunnyAPI(originalRequest);
+                        } else {
+                            await signOut()
+                        }
+                    } catch (e) {
+                        console.error(e);
+                        await signOut()
                     }
+                    break;
                 default:
                     break;
             }
             const {error_code, error_message, error_stack} = error.data.business_logic;
             if (error_code) {
-                return Promise.reject(new BunnyAPIError(error_message, error_code, error_stack));
+                throw new BunnyAPIError(error_message, error_code, error_stack);
+                // return Promise.reject(new BunnyAPIError(error_message, error_code, error_stack));
             } else {
-                return Promise.reject(response)
+                throw error
+                // return Promise.reject(response)
             }
         } else if (request) {
             // status 100-200 timeout The request was made but no response was received, `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js
-            return Promise.reject(request)
+            throw error;
+            // return Promise.reject(request)
         } else {
             // Something happened in setting up the request and triggered an error
-            return Promise.reject(error)
+            throw error
+            // return Promise.reject(error)
         }
     });
 

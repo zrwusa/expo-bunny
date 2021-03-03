@@ -2,6 +2,7 @@
 import {InitialState} from "@react-navigation/native";
 import {DemoSaga} from "../store/actions";
 import {NearbyFilm, Region} from "./models";
+import {BusinessLogicReturn} from "./business";
 
 export type SysState = {
     error: Error[],
@@ -10,6 +11,10 @@ export type SysState = {
     themeName: string,
     language: string,
     navInitialState?: InitialState
+}
+
+export type BusinessLogicState = {
+    infos: BusinessLogicReturn[]
 }
 
 export interface DemoHelloState {

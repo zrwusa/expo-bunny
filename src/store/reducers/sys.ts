@@ -19,7 +19,7 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
                 ...prevState,
                 ...restoreIsReadyPayload,
             }
-        case ESys.ERROR: {
+        case ESys.ERROR:
             const sysErrorPayload = payload as SysErrorPayload
             // if (__DEV__) {
             //     console.error(sysErrorPayload.error)
@@ -28,8 +28,8 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             return {
                 ...prevState,
             };
-        }
-        case ESys.CLEAR_ERRORS: {
+
+        case ESys.CLEAR_ERRORS:
             const sysClearErrorPayload = payload as SysClearErrorPayload
             if (sysClearErrorPayload.all) {
                 prevState.error = []
@@ -39,8 +39,8 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
                 prevState.error.splice(prevState.error.length - sysClearErrorPayload.last, sysClearErrorPayload.last)
             }
             return {...prevState};
-        }
-        case ESys.WARN: {
+
+        case ESys.WARN:
             const sysWarnPayload = payload as SysWarnPayload
             // if (__DEV__) {
             //     console.warn(sysWarnPayload.warn);
@@ -49,7 +49,7 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             return {
                 ...prevState,
             };
-        }
+
         case ESys.RESTORE_NAV_INITIAL_STATE:
             const restoreNavInitialStatePayload = payload as RestoreNavInitialStatePayload
             return {

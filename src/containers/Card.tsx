@@ -1,6 +1,6 @@
 import {Text, View} from "../components/UI";
 import * as React from "react";
-import {getContainerStyles} from "./index";
+import {getContainerStyles} from "./styles";
 import {useThemeLabor} from "../providers/theme-labor";
 import {useSizeLabor} from "../providers/size-labor";
 

@@ -3,7 +3,7 @@ import {AuthAPIError} from "../utils";
 import {getApiInstanceConfig, validAuthAPIResponse} from "./index";
 import {AuthAPIProtocolResponseData} from "../types";
 
-export const authAPIInitResponseData = {
+export const defaultAuthAPIResponseData = {
     "http_extra": {
         "code": 0,
         "message": "",
@@ -40,7 +40,7 @@ apiAuth.interceptors.response.use(
         if (validAuthAPIResponse(response.data)) {
             response.data = response.data.success_data
         } else {
-            response.data = authAPIInitResponseData
+            response.data = defaultAuthAPIResponseData
         }
         return response
     },
@@ -50,15 +50,15 @@ apiAuth.interceptors.response.use(
             // status 300-600 The request was made and the server responded with a status code that falls out of the range of 2xx
             const {error_code, error_message, error_stack} = response.data.business_logic;
             if (error_code) {
-                return Promise.reject(new AuthAPIError(error_message, error_code, error_stack));
+                throw new AuthAPIError(error_message, error_code, error_stack)
             } else {
-                return Promise.reject(error)
+                throw error
             }
         } else if (request) {
             // status 100-200 timeout The request was made but no response was received, `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js
-            return Promise.reject(request)
+            throw error
         } else {
             // Something happened in setting up the request and triggered an error
-            return Promise.reject(error)
+            throw error
         }
     });
