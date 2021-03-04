@@ -1,7 +1,6 @@
 import axios, {AxiosResponse} from "axios";
-import {BunnyAPIError} from "../utils";
 import {authLaborContext} from "../providers/auth-labor";
-import {getApiInstanceConfig, validBunnyAPIResponse} from "./index";
+import {getApiInstanceConfig, checkBunnyAPIProtocol} from "./index";
 import {BunnyAPIProtocolResponseData} from "../types";
 
 export const defaultBunnyAPIResponseData = {
@@ -44,11 +43,10 @@ bunnyAPI.interceptors.request.use(
 bunnyAPI.interceptors.response.use(
     (response: AxiosResponse<BunnyAPIProtocolResponseData<any>>) => {
         // status 200-300
-        if (validBunnyAPIResponse(response.data)) {
-            response.data = response.data.success_data
-        } else {
+        if (!checkBunnyAPIProtocol(response.data)) {
             response.data = defaultBunnyAPIResponseData
         }
+        response.data = response.data.success_data
         return response
     },
     async (error) => {
@@ -72,29 +70,21 @@ bunnyAPI.interceptors.response.use(
                             await signOut()
                         }
                     } catch (e) {
-                        console.error(e);
                         await signOut()
                     }
                     break;
                 default:
                     break;
             }
-            const {error_code, error_message, error_stack} = error.data.business_logic;
-            if (error_code) {
-                throw new BunnyAPIError(error_message, error_code, error_stack);
-                // return Promise.reject(new BunnyAPIError(error_message, error_code, error_stack));
-            } else {
+            if (checkBunnyAPIProtocol(response.data)) {
                 throw error
-                // return Promise.reject(response)
             }
         } else if (request) {
             // status 100-200 timeout The request was made but no response was received, `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js
             throw error;
-            // return Promise.reject(request)
         } else {
             // Something happened in setting up the request and triggered an error
             throw error
-            // return Promise.reject(error)
         }
     });
 

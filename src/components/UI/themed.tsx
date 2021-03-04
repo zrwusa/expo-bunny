@@ -166,11 +166,14 @@ export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, 
     return (<ButtonElement
         buttonStyle={{
             backgroundColor: colors.primary,
-            borderRadius: ms.br.s,
+            marginTop: ms.sp.s,
+            borderRadius: ms.br.xs,
+            paddingVertical: ms.sp.m,
             ...buttonStyleObj,
         }}
         titleStyle={{
             color: colors.btnText,
+            fontSize: ms.fs.m,
             ...titleStyleObj
         }}
         containerStyle={{
@@ -187,8 +190,10 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     return (<TextInputRN
         style={{
             color: colors.text,
+            marginTop: ms.sp.s,
             paddingHorizontal: ms.sp.l,
-            paddingVertical: ms.sp.s,
+            paddingVertical: ms.sp.m,
+            fontSize: ms.fs.m,
             ...styleObj
         }} {...rest} />);
 }

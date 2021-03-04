@@ -20,38 +20,40 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
 
     useEffect(() => {
         const bootstrapAsync = async () => {
-            EventRegister.addEventListener("sign-in-success", (data) => {
+            EventRegister.addEventListener("signInSuccess", (data) => {
                 setAuthState({...authResult, ...data});
             })
-            // authLaborContext.eventTarget.addEventListener('sign-in-success', ((e: CustomEvent) => {
+            // authLaborContext.eventTarget.addEventListener('signInSuccess', ((e: CustomEvent) => {
             //     setAuthState({...authResult, ...e.detail});
             // }) as EventListener)
 
-            EventRegister.addEventListener('sign-in-dummy-success', (data) => {
+            EventRegister.addEventListener('signInDummySuccess', (data) => {
                 setAuthState({...authResult, ...data});
             })
 
-            EventRegister.addEventListener('sign-in-google-success', (data) => {
+            EventRegister.addEventListener('signInGoogleSuccess', (data) => {
                 setAuthState({...authResult, ...data});
             })
 
-            EventRegister.addEventListener('sign-up-success', (data) => {
+            EventRegister.addEventListener('signUpSuccess', (data) => {
                 setAuthState({...authResult, ...data});
             })
 
-            EventRegister.addEventListener('sign-out-and-remove-success', (data) => {
-                setAuthState({...authResult, accessToken: '', user: {}})
+            EventRegister.addEventListener('signOutSuccess', (data) => {
+                setAuthState({...authResult, accessToken: '', user: {},isSignedIn:false})
             })
 
-            EventRegister.addEventListener('refresh-auth-success', (data) => {
+            EventRegister.addEventListener('refreshAuthSuccess', (data) => {
                 setAuthState({...authResult, accessToken: data})
             })
 
             const accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
+            const refreshToken = await AsyncStorage.getItem(BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY);
             const user = await AsyncStorage.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
-            setAuthState({...authResult, accessToken: accessToken, user: user ? JSON.parse(user) : {}})
+            setAuthState({...authResult, accessToken,refreshToken, user: user ? JSON.parse(user) : {}})
         }
-        bootstrapAsync().then(() => {
+        bootstrapAsync()
+            .then(() => {
             setIsReady(true)
         })
     }, [])

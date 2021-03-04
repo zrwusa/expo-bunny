@@ -20,12 +20,6 @@ const BunnyConstants = {
     fooTimeout: setTimeout((): void => undefined, 0),
 }
 
-export enum EAuth {
-    SIGN_IN = "SIGN_IN",
-    SIGN_OUT = "SIGN_OUT",
-    RESTORE_AUTH = "RESTORE_AUTH",
-    RESTORE_AUTH_GOOGLE = "RESTORE_AUTH_GOOGLE",
-}
 
 export enum ESys {
     ERROR = "ERROR",
@@ -63,7 +57,7 @@ export enum EBusinessLogicInfo {
     NO_DATA_RESPONDED = "No data responded",
     NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED = "No access token or refresh token responded",
     GOOGLE_LOGIN_CANCELED = "Google login canceled",
-    GOOGLE_ACCESS_TOKEN_NOT_EXISTS = "Google accessToken not exists",
+    GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS = "Google access token or refresh token not exists",
     GOOGLE_LOGIN_RESULT_TYPE_INVALID = "Google loginResult has returned type neither success nor cancel",
     NO_GOOGLE_LOGIN_RESULT = "No google login result",
     NO_ACCESS_TOKEN_RETURNED = "No access_token returned",

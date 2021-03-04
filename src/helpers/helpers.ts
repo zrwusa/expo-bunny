@@ -201,35 +201,31 @@ export const businessSuccess = (data: any): BusinessLogicReturn => {
     }
 }
 
-export const validBunnyAPIResponse = (data: any) => {
+export const checkBunnyAPIProtocol = (data: any) => {
     let isValid = false;
-    const {error_code, error_message, error_stack} = data.business_logic;
+    const {success_data, business_logic} = data;
+    const {error_code, error_message, error_stack} = business_logic;
     if (error_code) {
         throw new BunnyAPIError(error_message, error_code, error_stack)
-    } else {
-        const {success_data} = data;
-        if (success_data) {
-            isValid = true
-        } else {
-            throw new BunnyAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
-        }
     }
+    if (!success_data) {
+        throw new BunnyAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+    }
+    isValid = true
     return isValid;
 }
 
-export const validAuthAPIResponse = (data: any) => {
+export const checkAuthAPIProtocol = (data: any) => {
     let isValid = false;
-    const {error_code, error_message, error_stack} = data.business_logic;
+    const {success_data, business_logic} = data;
+    const {error_code, error_message, error_stack} = business_logic;
     if (error_code) {
         throw new AuthAPIError(error_message, error_code, error_stack)
-    } else {
-        const {success_data} = data;
-        if (success_data) {
-            isValid = true
-        } else {
-            throw new AuthAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
-        }
     }
+    if (!success_data) {
+        throw new AuthAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+    }
+    isValid = true
     return isValid;
 }
 

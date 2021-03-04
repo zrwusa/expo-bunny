@@ -23,25 +23,20 @@ const config: AuthContextConfig = {
     userValuePath: 'user',
     accessTokenPersistenceKey: BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY,
     refreshTokenPersistenceKey: BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY,
+    userPersistenceKey: BunnyConstants.USER_PERSISTENCE_KEY,
     storageType: 'LOCAL_STORAGE',
 }
 
 const {
-    accessTokenPersistenceKey, refreshTokenPersistenceKey,
+    accessTokenPersistenceKey, refreshTokenPersistenceKey, userPersistenceKey,
     signInAPIPath, registerAPIPath, accessTokenValuePath, refreshAPIMethod,
     signInAPIMethod, registerAPIMethod, refreshAPIPath, refreshTokenValuePath,
     userValuePath
 } =
     config;
 
-const getAccessToken = async () => {
-    const accessToken = await AsyncStorage.getItem(accessTokenPersistenceKey)
-    EventRegister.emit('get-access-token-success', accessToken)
-    return accessToken
-}
 
-const signIn = async (params: SignInParams) => {
-    const res = await apiAuth.request<SignInParams, AxiosResponse<AuthRes>>({method: signInAPIMethod, url: signInAPIPath, data: params})
+const signInOrSignUp = async (res: any) => {
     if (!res) {
         return businessLogicInfo(EBusinessLogicInfo.NO_AUTH_API_RESPONDED)
     }
@@ -63,22 +58,35 @@ const signIn = async (params: SignInParams) => {
         await signOut()
         return businessLogicInfo(EBusinessLogicInfo.NO_USER_INFO_RESPONDED)
     } else {
-        await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
+        await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
     }
-    const result = {accessToken, refreshToken, user}
-    EventRegister.emit('sign-in-success', result)
+    const result = {accessToken, refreshToken, user,isSignedIn:true}
     return businessSuccess(result)
 }
 
-const signInDummy = async () => {
-    await AsyncStorage.setItem(accessTokenPersistenceKey, 'access_token_dummy')
-    const userDummy = {email: 'dummy@dummy.com', nickname: 'dummy nickname'}
-    await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(userDummy))
-    const result = {
-        accessToken: 'access_token_dummy',
-        user: userDummy
+const signIn = async (params: SignInParams) => {
+    const res = await apiAuth.request<SignInParams, AxiosResponse<AuthRes>>({method: signInAPIMethod, url: signInAPIPath, data: params})
+    const inOrUpResult = await signInOrSignUp(res);
+    if (inOrUpResult.success) {
+        EventRegister.emit('signInSuccess', inOrUpResult.data)
     }
-    EventRegister.emit('sign-in-dummy-success', result)
+    return inOrUpResult;
+}
+
+const signInDummy = async () => {
+    const accessToken = 'access_token_dummy';
+    const refreshToken = 'refresh_token_dummy';
+    const user = {email: 'dummy@dummy.com', nickname: 'dummy nickname'};
+    await AsyncStorage.setItem(accessTokenPersistenceKey, 'access_token_dummy')
+    await AsyncStorage.setItem(refreshTokenPersistenceKey, 'refresh_token_dummy')
+    await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
+    const result = {
+        accessToken,
+        refreshToken,
+        user,
+        isSignedIn:true
+    }
+    EventRegister.emit('signInDummySuccess', result)
     return businessSuccess(result)
 };
 
@@ -97,14 +105,21 @@ const signInGoogle = async () => {
         case "cancel":
             return businessLogicInfo(EBusinessLogicInfo.GOOGLE_LOGIN_CANCELED)
         case "success":
-            const {accessToken, user} = loginResult;
-            if (!accessToken) {
-                return businessLogicInfo(EBusinessLogicInfo.GOOGLE_ACCESS_TOKEN_NOT_EXISTS)
+            const {accessToken, refreshToken, user} = loginResult;
+            if (!accessToken || !refreshToken) {
+                return businessLogicInfo(EBusinessLogicInfo.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
             }
             await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
-            await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
-            EventRegister.emit('sign-in-google-success', loginResult)
-            return businessSuccess(loginResult)
+            await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken)
+            await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
+            const result = {
+                accessToken,
+                refreshToken,
+                user,
+                isSignedIn:true
+            }
+            EventRegister.emit('signInGoogleSuccess', result)
+            return businessSuccess(result)
         default:
             return businessLogicInfo(EBusinessLogicInfo.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
     }
@@ -112,35 +127,18 @@ const signInGoogle = async () => {
 
 const signUp = async (params: SignUpParams) => {
     const res = await apiAuth.request({method: registerAPIMethod, url: registerAPIPath, data: params})
-    if (!res) {
-        return businessLogicInfo(EBusinessLogicInfo.NO_AUTH_API_RESPONDED)
+    const inOrUpResult = await signInOrSignUp(res);
+    if (inOrUpResult.success) {
+        EventRegister.emit('signUpSuccess', inOrUpResult.data)
     }
-    const {data} = res;
-    if (!data) {
-        return businessLogicInfo(EBusinessLogicInfo.NO_DATA_RESPONDED)
-    }
-    const accessToken = _.get(data, accessTokenValuePath)
-    const user = _.get(data, userValuePath)
-    if (accessToken) {
-        await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
-    } else {
-        return businessLogicInfo(EBusinessLogicInfo.NO_ACCESS_TOKEN_RESPONDED)
-    }
-    if (user) {
-        await AsyncStorage.setItem(BunnyConstants.USER_PERSISTENCE_KEY, JSON.stringify(user))
-    } else {
-        return businessLogicInfo(EBusinessLogicInfo.NO_USER_INFO_RESPONDED)
-    }
-    const result = {accessToken, user}
-    EventRegister.emit('sign-up-success', result)
-    return businessSuccess(result);
+    return inOrUpResult;
 }
 
 const signOut = async () => {
     await AsyncStorage.removeItem(accessTokenPersistenceKey);
     await AsyncStorage.removeItem(refreshTokenPersistenceKey);
-    await AsyncStorage.removeItem(BunnyConstants.USER_PERSISTENCE_KEY);
-    EventRegister.emit('sign-out-and-remove-success', true)
+    await AsyncStorage.removeItem(userPersistenceKey);
+    EventRegister.emit('signOutSuccess', true)
     return businessSuccess(true)
 };
 
@@ -162,8 +160,14 @@ const refreshAuth = async (): Promise<BusinessLogicReturn> => {
         return businessLogicInfo(EBusinessLogicInfo.NO_ACCESS_TOKEN_RESPONDED)
     }
     await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
-    EventRegister.emit('refresh-auth-success', accessToken)
+    EventRegister.emit('refreshAuthSuccess', accessToken)
     return businessSuccess(accessToken)
+}
+
+const getAccessToken = async () => {
+    const accessToken = await AsyncStorage.getItem(accessTokenPersistenceKey)
+    EventRegister.emit('get-access-token-success', accessToken)
+    return accessToken
 }
 
 export const authLaborContext: AuthLaborContextType = {
@@ -181,8 +185,7 @@ export const authLaborContext: AuthLaborContextType = {
         accessToken: '',
         refreshToken: '',
         user: {}
-    },
-    // eventTarget
+    }
 }
 
 export const AuthLaborContext = React.createContext<AuthLaborContextType>(authLaborContext);
