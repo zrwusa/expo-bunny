@@ -24,17 +24,19 @@ export const AuthScreen = (props: AuthProps) => {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const [type, setType] = useState('sign-in');
     const {authFunctions} = useAuthLabor()
+    const [username,setUsername] = useState('')
+    const [password,setPassword] = useState('')
 
     return (
         <View style={containerStyles.screen}>
-            <TextInput placeholder={st(`username`)}/>
-            <TextInput placeholder={st(`password`)} secureTextEntry/>
+            <TextInput placeholder={st(`username`)} value={username} onChangeText={(value)=>{setUsername(value)}}/>
+            <TextInput placeholder={st(`password`)} value={password} onChangeText={(value)=>{setPassword(value)}} secureTextEntry/>
             {
                 type === 'sign-in'
                     ? <>
                         <ButtonRNE onPress={async () => {
                             try {
-                                await authFunctions.signIn({email: 'bruno@email.com', password: 'bruno'})
+                                await authFunctions.signIn({email: username, password: password})
                             } catch (e) {
                                 dispatch(sysError({error: e}))
                             }
@@ -53,7 +55,7 @@ export const AuthScreen = (props: AuthProps) => {
                     : <>
                         <ButtonRNE onPress={async () => {
                             try {
-                                await authFunctions.signUp({email: 'bruno@email.com', password: 'bruno'})
+                                await authFunctions.signUp({email: username, password: password})
                             } catch (e) {
                                 dispatch(sysError({error: e}))
                             }
