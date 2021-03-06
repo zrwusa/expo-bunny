@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
+import {useDispatch} from "react-redux";
+import {collectBusinessLogicInfo} from "../../store/actions/business-logic";
+import {businessLogicInfo} from "../../helpers";
 
 interface Props {
     title: string,
@@ -10,6 +13,7 @@ interface Props {
 
 function DemoRequest(props: Props) {
     const request = useRequest()
+    const dispatch = useDispatch();
     const [employees, setEmployees] = useState<Array<DemoEmployee>>([])
     const granularity = 0.05;
     const expoPushToken = "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]";
@@ -21,10 +25,12 @@ function DemoRequest(props: Props) {
     }
 
     const saveQuickAlertSettings = async function () {
-        try {
+        // try {
+            console.log('---demo-request saveQuickAlertSettings,expoPushToken',expoPushToken)
             await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
-        } catch (err) {
-        }
+        // } catch (err) {
+        //     console.error(err)
+        // }
     }
 
     const cancelAllAlertSettings = async function () {
@@ -40,11 +46,12 @@ function DemoRequest(props: Props) {
             //     token: "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]"
             // })
             // await saveAlertSetting();
-            // await saveQuickAlertSettings();
+            await saveQuickAlertSettings();
             // await cancelAllAlertSettings()
+            // dispatch(collectBusinessLogicInfo({error: businessLogicInfo('test')}))
 
-            const res = await request.get(`/employees`);
-            setEmployees(res.data)
+            // const res = await request.get(`/employees`);
+            // setEmployees(res.data)
         } catch (err) {
             console.error(err)
         }

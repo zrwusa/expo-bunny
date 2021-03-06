@@ -40,7 +40,7 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
             })
 
             EventRegister.addEventListener('signOutSuccess', (data) => {
-                setAuthState({...authResult, accessToken: '', user: {},isSignedIn:false})
+                setAuthState({...authResult, accessToken: '', user: {}, isSignedIn: false})
             })
 
             EventRegister.addEventListener('refreshAuthSuccess', (data) => {
@@ -50,12 +50,12 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
             const accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
             const refreshToken = await AsyncStorage.getItem(BunnyConstants.REFRESH_TOKEN_PERSISTENCE_KEY);
             const user = await AsyncStorage.getItem(BunnyConstants.USER_PERSISTENCE_KEY);
-            setAuthState({...authResult, accessToken,refreshToken, user: user ? JSON.parse(user) : {}})
+            setAuthState({...authResult, accessToken, refreshToken, user: user ? JSON.parse(user) : {}})
         }
         bootstrapAsync()
             .then(() => {
-            setIsReady(true)
-        })
+                setIsReady(true)
+            })
     }, [])
 
     return (

@@ -48,6 +48,7 @@ export interface DemoSagaState {
 
 export interface RootState {
     sysState: SysState,
+    blInfoState: BusinessLogicState,
     demoHelloState: DemoHelloState,
     demoHello2State: DemoHello2State,
     demoThunkState: DemoThunkState,

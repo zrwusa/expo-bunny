@@ -1,12 +1,5 @@
 import api from "../../helpers/bunny-api";
-import {
-    BusinessLogicInfoAction,
-    DemoThunkPayload,
-    DemoThunkState,
-    DemoThunkSuccessAction,
-    DemoThunkSuccessPayload,
-    SysErrorAction
-} from "../../types";
+import {CollectBLInfoAction, DemoThunkPayload, DemoThunkState, DemoThunkSuccessAction, DemoThunkSuccessPayload, SysErrorAction} from "../../types";
 import {EBusinessLogicInfo, EDemoThunk} from "../../constants";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
@@ -22,7 +15,7 @@ export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSu
 };
 
 export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkState, void, DemoThunkSuccessAction>> = (reqParams: DemoThunkPayload) => {
-    return async (dispatch: Dispatch<DemoThunkSuccessAction | SysErrorAction | BusinessLogicInfoAction>): Promise<Action> => {
+    return async (dispatch: Dispatch<DemoThunkSuccessAction | SysErrorAction | CollectBLInfoAction>): Promise<Action> => {
         let result;
         try {
             const res = await api.post(`/demo_thunks`, reqParams);

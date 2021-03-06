@@ -24,13 +24,17 @@ export const AuthScreen = (props: AuthProps) => {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const [type, setType] = useState('sign-in');
     const {authFunctions} = useAuthLabor()
-    const [username,setUsername] = useState('')
-    const [password,setPassword] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     return (
         <View style={containerStyles.screen}>
-            <TextInput placeholder={st(`username`)} value={username} onChangeText={(value)=>{setUsername(value)}}/>
-            <TextInput placeholder={st(`password`)} value={password} onChangeText={(value)=>{setPassword(value)}} secureTextEntry/>
+            <TextInput placeholder={st(`username`)} value={username} onChangeText={(value) => {
+                setUsername(value)
+            }}/>
+            <TextInput placeholder={st(`password`)} value={password} onChangeText={(value) => {
+                setPassword(value)
+            }} secureTextEntry/>
             {
                 type === 'sign-in'
                     ? <>

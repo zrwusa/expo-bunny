@@ -15,6 +15,8 @@ import * as Notifications from "expo-notifications";
 import {initialedNotification, registerForPushNotificationsAsync} from "../../../utils/expo-notification";
 import {sysError} from "../../../store/actions";
 import {useDispatch} from "react-redux";
+import {collectBusinessLogicInfo} from "../../../store/actions/business-logic";
+import {businessLogicInfo} from "../../../helpers";
 
 type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
@@ -58,11 +60,17 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     }
 
     const saveQuickAlertSettings = async function () {
-        try {
-            await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
-        } catch (err) {
-            dispatch(sysError({error: err}))
+        console.log('---saveQuickAlertSettings',expoPushToken)
+        if (!expoPushToken) {
+            dispatch(collectBusinessLogicInfo({error: businessLogicInfo('no expoPushToken')}))
+        } else {
+            try {
+                await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
+            } catch (err) {
+                dispatch(sysError({error: err}))
+            }
         }
+
     }
 
     const cancelAllAlertSettings = async function () {

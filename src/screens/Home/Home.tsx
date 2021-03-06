@@ -88,8 +88,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Link to="/settings">{st(`settings`)}</Link>
                     <ButtonTO onPress={async () => {
                         try {
-                           await authFunctions.signOut()
-                        }catch (err){
+                            await authFunctions.signOut()
+                        } catch (err) {
                         }
                     }}>
                         <TextBtn>{st(`signOut`)}</TextBtn></ButtonTO>

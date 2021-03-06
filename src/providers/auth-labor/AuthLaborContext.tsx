@@ -60,7 +60,7 @@ const signInOrSignUp = async (res: any) => {
     } else {
         await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
     }
-    const result = {accessToken, refreshToken, user,isSignedIn:true}
+    const result = {accessToken, refreshToken, user, isSignedIn: true}
     return businessSuccess(result)
 }
 
@@ -84,7 +84,7 @@ const signInDummy = async () => {
         accessToken,
         refreshToken,
         user,
-        isSignedIn:true
+        isSignedIn: true
     }
     EventRegister.emit('signInDummySuccess', result)
     return businessSuccess(result)
@@ -116,7 +116,7 @@ const signInGoogle = async () => {
                 accessToken,
                 refreshToken,
                 user,
-                isSignedIn:true
+                isSignedIn: true
             }
             EventRegister.emit('signInGoogleSuccess', result)
             return businessSuccess(result)

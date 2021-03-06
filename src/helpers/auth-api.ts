@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {getApiInstanceConfig, checkAuthAPIProtocol} from "./index";
+import {checkAuthAPIProtocol, getApiInstanceConfig} from "./index";
 import {AuthAPIProtocolResponseData} from "../types";
 
 export const defaultAuthAPIResponseData = {
@@ -28,6 +28,7 @@ export const apiAuth = axios.create(getApiInstanceConfig());
 
 apiAuth.interceptors.request.use(
     async (config) => {
+        config.headers['Content-Type'] = 'application/json'
         return config;
     },
     async error => {
@@ -47,7 +48,7 @@ apiAuth.interceptors.response.use(
         const {response, request} = error;
         if (response) {
             // status 300-600 The request was made and the server responded with a status code that falls out of the range of 2xx
-            if(checkAuthAPIProtocol(response.data)){
+            if (checkAuthAPIProtocol(response.data)) {
                 throw error
             }
         } else if (request) {

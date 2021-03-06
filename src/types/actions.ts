@@ -1,6 +1,7 @@
 // Redux actions
 import {EBusinessLogic, EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
 import {
+    BLInfoClearInfosPayload,
     BusinessLogicInfoPayload,
     DemoHello2Payload,
     DemoHelloPayload,
@@ -30,9 +31,14 @@ export interface SysErrorAction {
     payload: SysErrorPayload;
 }
 
-export interface BusinessLogicInfoAction {
+export interface CollectBLInfoAction {
     type: EBusinessLogic.INFO;
     payload: BusinessLogicInfoPayload;
+}
+
+export interface BLInfoClearInfosAction {
+    type: EBusinessLogic.CLEAR_INFOS;
+    payload: BLInfoClearInfosPayload;
 }
 
 export interface SysClearErrorsAction {

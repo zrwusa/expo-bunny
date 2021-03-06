@@ -31,8 +31,11 @@ const bunnyAPI = axios.create(getApiInstanceConfig());
 bunnyAPI.interceptors.request.use(
     async (config) => {
         const accessToken = await authLaborContext.authFunctions.getAccessToken();
+        // "Accept": "application/json",
+        // "Content-Type": "application/x-www-form-urlencoded"
+        config.headers['Content-Type'] = 'application/json'
         if (accessToken) {
-            config.headers = {Authorization: `Bearer ${accessToken}`}
+            config.headers['Authorization'] = `Bearer ${accessToken}`
         }
         return config;
     },

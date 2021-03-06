@@ -53,7 +53,7 @@ export type AuthContextConfig = {
     userValuePath: string,
     accessTokenPersistenceKey: string,
     refreshTokenPersistenceKey: string,
-    userPersistenceKey:string,
+    userPersistenceKey: string,
     storageType?: 'LOCAL_STORAGE' | 'NONE'
 }
 

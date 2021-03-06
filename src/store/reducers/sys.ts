@@ -21,9 +21,6 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             }
         case ESys.ERROR:
             const sysErrorPayload = payload as SysErrorPayload
-            // if (__DEV__) {
-            //     console.error(sysErrorPayload.error)
-            // }
             prevState.error.push(sysErrorPayload.error);
             return {
                 ...prevState,
@@ -42,9 +39,6 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
 
         case ESys.WARN:
             const sysWarnPayload = payload as SysWarnPayload
-            // if (__DEV__) {
-            //     console.warn(sysWarnPayload.warn);
-            // }
             prevState.warn.push(sysWarnPayload.warn)
             return {
                 ...prevState,

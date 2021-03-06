@@ -18,6 +18,7 @@ import NavigatorTree from "./navigation/NavigatorTree";
 import Sys from "./components/Sys";
 import {AuthLaborProvider} from "./providers/auth-labor";
 import {I18nLaborProvider} from "./providers/i18n-labor";
+import BLInfo from "./components/BLInfo";
 
 function App() {
     const dispatch = useDispatch();
@@ -85,6 +86,7 @@ function App() {
                                                 }
                                             />
                                             <Sys/>
+                                            <BLInfo/>
                                         </>
                                     }}
                                     </ThemeLaborContext.Consumer>

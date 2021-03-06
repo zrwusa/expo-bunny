@@ -2,7 +2,7 @@ import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {EBusinessLogicInfo, EDemoMap} from "../../constants";
 import {
-    BusinessLogicInfoAction,
+    CollectBLInfoAction,
     DemoMapState,
     GetNearbyFilmsReqParams,
     NearbyFilm,
@@ -24,7 +24,7 @@ export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAc
 };
 
 export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapState, void, RestoreNearbyFilmsAction>> = (reqParams: GetNearbyFilmsReqParams) => {
-    return async (dispatch: Dispatch<RestoreNearbyFilmsAction | SysErrorAction | BusinessLogicInfoAction>): Promise<Action> => {
+    return async (dispatch: Dispatch<RestoreNearbyFilmsAction | SysErrorAction | CollectBLInfoAction>): Promise<Action> => {
         let result;
         try {
             const res = await api.get(`/nearby-films`, {params: {reqParams}});

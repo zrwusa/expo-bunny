@@ -25,6 +25,12 @@ export interface BusinessLogicInfoPayload {
     error: BusinessLogicReturn;
 }
 
+export interface BLInfoClearInfosPayload {
+    all?: boolean;
+    top?: number;
+    last?: number;
+}
+
 export interface SysClearErrorPayload {
     all?: boolean;
     top?: number;

@@ -1,5 +1,6 @@
 import {
-    BusinessLogicReturn, ErrorClass,
+    BusinessLogicReturn,
+    ErrorClass,
     IcoMoonKeys,
     IcoMoonSelection,
     IcoMoonSelectionIcon,

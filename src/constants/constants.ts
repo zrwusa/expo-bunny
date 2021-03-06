@@ -33,6 +33,7 @@ export enum ESys {
 
 export enum EBusinessLogic {
     INFO = "INFO",
+    CLEAR_INFOS = "CLEAR_INFOS"
 }
 
 export enum EDemoHello {

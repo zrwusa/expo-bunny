@@ -1,7 +1,14 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
-import {demoHelloStateReducer, demoMapStateReducer, demoSagaReducer, demoThunkStateReducer, sysStateReducer} from "./reducers";
+import {
+    businessLogicStateReducer,
+    demoHelloStateReducer,
+    demoMapStateReducer,
+    demoSagaReducer,
+    demoThunkStateReducer,
+    sysStateReducer
+} from "./reducers";
 import {sagaDemoSagas} from "./sagas"
 
 
@@ -12,6 +19,7 @@ const rootReducer = combineReducers({
     demoThunkState: demoThunkStateReducer,
     demoMapState: demoMapStateReducer,
     sysState: sysStateReducer,
+    blInfoState: businessLogicStateReducer,
     demoSagaState: demoSagaReducer
 });
 
