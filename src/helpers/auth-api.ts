@@ -3,26 +3,26 @@ import {getApiInstanceConfig, checkAuthAPIProtocol} from "./index";
 import {AuthAPIProtocolResponseData} from "../types";
 
 export const defaultAuthAPIResponseData = {
-    "http_extra": {
+    "httpExtra": {
         "code": 0,
         "message": "",
-        "des": "",
-        "error_code": 0,
-        "error_message": "",
-        "error_des": "",
-        "error_stack": ""
+        "description": "",
+        "errorCode": 0,
+        "errorMessage": "",
+        "errorDescription": "",
+        "errorStack": ""
     },
-    "business_logic": {
+    "businessLogic": {
         "code": "",
         "message": "",
-        "des": "",
-        "error_code": "",
-        "error_message": "",
-        "error_des": "",
-        "error_stack": ""
+        "description": "",
+        "errorCode": "",
+        "errorMessage": "",
+        "errorDescription": "",
+        "errorStack": ""
     },
-    "success_data": {},
-    "time_spend": 0
+    "successData": {},
+    "timeSpent": 0
 }
 export const apiAuth = axios.create(getApiInstanceConfig());
 
@@ -37,7 +37,7 @@ apiAuth.interceptors.response.use(
     (response: AxiosResponse<AuthAPIProtocolResponseData<any>>) => {
         // status 200-300
         if (checkAuthAPIProtocol(response.data)) {
-            response.data = response.data.success_data
+            response.data = response.data.successData
         } else {
             response.data = defaultAuthAPIResponseData
         }

@@ -1,29 +1,29 @@
 import axios, {AxiosResponse} from "axios";
 import {authLaborContext} from "../providers/auth-labor";
-import {getApiInstanceConfig, checkBunnyAPIProtocol} from "./index";
+import {checkBunnyAPIProtocol, getApiInstanceConfig} from "./index";
 import {BunnyAPIProtocolResponseData} from "../types";
 
 export const defaultBunnyAPIResponseData = {
-    "http_extra": {
+    "httpExtra": {
         "code": 0,
         "message": "",
-        "des": "",
-        "error_code": 0,
-        "error_message": "",
-        "error_des": "",
-        "error_stack": ""
+        "description": "",
+        "errorCode": 0,
+        "errorMessage": "",
+        "errorDescription": "",
+        "errorStack": ""
     },
-    "business_logic": {
+    "businessLogic": {
         "code": "",
         "message": "",
-        "des": "",
-        "error_code": "",
-        "error_message": "",
-        "error_des": "",
-        "error_stack": ""
+        "description": "",
+        "errorCode": "",
+        "errorMessage": "",
+        "errorDescription": "",
+        "errorStack": ""
     },
-    "success_data": {},
-    "time_spend": 0
+    "successData": null,
+    "timeSpent": 0
 }
 
 const bunnyAPI = axios.create(getApiInstanceConfig());
@@ -46,31 +46,32 @@ bunnyAPI.interceptors.response.use(
         if (!checkBunnyAPIProtocol(response.data)) {
             response.data = defaultBunnyAPIResponseData
         }
-        response.data = response.data.success_data
+        response.data = response.data.successData
         return response
     },
     async (error) => {
         const {response, request, config} = error;
         if (response) {
             // status 300-600 The request was made and the server responded with a status code that falls out of the range of 2xx
-            const {status} = response;
+            const {status, data} = response;
             switch (status) {
-                case 403:
-                    let result;
-                    const {authFunctions} = authLaborContext;
-                    const {refreshAuth, signOut} = authFunctions;
-                    try {
-                        result = await refreshAuth()
-                        const {success} = result;
-                        if (success) {
+                case 401:
+                    const {businessLogic} = data
+                    const {errorCode} = businessLogic
+                    if (['BBL002','BBL003','BBL004','BBL005'].includes(errorCode)) {
+                        const {authFunctions} = authLaborContext;
+                        const {refreshAuth, signOut} = authFunctions;
+                        try {
+                            const {success} = await refreshAuth()
+                            if (!success) {
+                                await signOut()
+                            }
                             const originalRequest = config;
                             originalRequest._retry = true;
                             return bunnyAPI(originalRequest);
-                        } else {
+                        } catch (e) {
                             await signOut()
                         }
-                    } catch (e) {
-                        await signOut()
                     }
                     break;
                 default:

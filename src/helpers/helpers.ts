@@ -1,5 +1,5 @@
 import {
-    BusinessLogicReturn,
+    BusinessLogicReturn, ErrorClass,
     IcoMoonKeys,
     IcoMoonSelection,
     IcoMoonSelectionIcon,
@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants, {EBusinessLogicInfo} from "../constants/constants";
 import {AuthAPIError, BunnyAPIError} from "../utils";
 import bunnyConfig from "../config.json";
+import _ from "lodash";
 
 export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -201,32 +202,29 @@ export const businessSuccess = (data: any): BusinessLogicReturn => {
     }
 }
 
+export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
+    const {successData, businessLogic, httpExtra} = data;
+    const dataKeys = Object.keys(data)
+    const isDataKeysEqual = _.isEqual(dataKeys, ["timeSpent", "successData", "httpExtra", "businessLogic"])
+    const {errorCode, errorMessage, errorStack} = businessLogic;
+    const blKeys = Object.keys(businessLogic);
+    const isBLKeysEqual = _.isEqual(blKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
+    const httpExtraKeys = Object.keys(httpExtra);
+    const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
+    if (!isDataKeysEqual || !isBLKeysEqual || !isHttpExtraKeysEqual) {
+        throw new PErrorClass(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+    }
+    if (errorCode) {
+        throw new PErrorClass(errorMessage, errorCode, errorStack)
+    }
+    return true;
+}
 export const checkBunnyAPIProtocol = (data: any) => {
-    let isValid = false;
-    const {success_data, business_logic} = data;
-    const {error_code, error_message, error_stack} = business_logic;
-    if (error_code) {
-        throw new BunnyAPIError(error_message, error_code, error_stack)
-    }
-    if (!success_data) {
-        throw new BunnyAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
-    }
-    isValid = true
-    return isValid;
+    return checkCommonAPIProtocol(data, BunnyAPIError)
 }
 
 export const checkAuthAPIProtocol = (data: any) => {
-    let isValid = false;
-    const {success_data, business_logic} = data;
-    const {error_code, error_message, error_stack} = business_logic;
-    if (error_code) {
-        throw new AuthAPIError(error_message, error_code, error_stack)
-    }
-    if (!success_data) {
-        throw new AuthAPIError(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
-    }
-    isValid = true
-    return isValid;
+    return checkCommonAPIProtocol(data, AuthAPIError)
 }
 
 export const getApiInstanceConfig = () => {

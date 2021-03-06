@@ -11,8 +11,8 @@ export type UserRes = {
 }
 
 export type AuthRes = {
-    access_token: string | undefined,
-    refresh_token: string | undefined,
+    accessToken: string | undefined,
+    refreshToken: string | undefined,
     user?: UserRes | null,
 }
 

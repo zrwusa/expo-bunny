@@ -2,49 +2,49 @@ import {AuthAPIError, BunnyAPIError} from "../utils";
 import {BusinessLogicReturn} from "./business";
 
 export type BunnyAPIProtocolResponseData<T> = {
-    "http_extra": {
+    "httpExtra": {
         "code": number,
         "message": string,
-        "des": string,
-        "error_code": number,
-        "error_message": string,
-        "error_des": string,
-        "error_stack": string
+        "description": string,
+        "errorCode": number,
+        "errorMessage": string,
+        "errorDescription": string,
+        "errorStack": string
     },
-    "business_logic": {
+    "businessLogic": {
         "code": string,
         "message": string,
-        "des": string,
-        "error_code": string,
-        "error_message": string,
-        "error_des": string,
-        "error_stack": string
+        "description": string,
+        "errorCode": string,
+        "errorMessage": string,
+        "errorDescription": string,
+        "errorStack": string
     },
-    "success_data"?: T,
-    "time_spend": number
+    "successData"?: T,
+    "timeSpent": number
 }
 
 export type AuthAPIProtocolResponseData<T> = {
-    "http_extra": {
+    "httpExtra": {
         "code": number,
         "message": string,
-        "des": string,
-        "error_code": number,
-        "error_message": string,
-        "error_des": string,
-        "error_stack": string
+        "description": string,
+        "errorCode": number,
+        "errorMessage": string,
+        "errorDescription": string,
+        "errorStack": string
     },
-    "business_logic": {
+    "businessLogic": {
         "code": string,
         "message": string,
-        "des": string,
-        "error_code": string,
-        "error_message": string,
-        "error_des": string,
-        "error_stack": string
+        "description": string,
+        "errorCode": string,
+        "errorMessage": string,
+        "errorDescription": string,
+        "errorStack": string
     },
-    "success_data"?: T,
-    "time_spend": number
+    "successData"?: T,
+    "timeSpent": number
 }
 
 export type APIStatusMap = Partial<{
@@ -69,11 +69,15 @@ export type APIStatusMap = Partial<{
     TooManyRequests: 429 | number,     // too many requests,the server can not process now
     NotImplemented: 501 | number,      // need to be implemented
 }>
+
+export type ErrorClass = typeof BunnyAPIError | typeof AuthAPIError;
+
+
 export type APIConfig<T> = {
     isHttps: boolean,
     timeout: number,
     responseProtocolStructure: BunnyAPIProtocolResponseData<T> | AuthAPIProtocolResponseData<T>,
-    errorClass: typeof BunnyAPIError | typeof AuthAPIError,
+    errorClass: ErrorClass,
     interceptors: {
         requestConfig: {
             accessTokenFn?(): Promise<string | null | undefined>,
@@ -97,3 +101,5 @@ export interface BunnyAPIStandardRequestParams {
         id?: number
     }
 }
+
+

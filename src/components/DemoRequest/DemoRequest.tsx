@@ -33,7 +33,6 @@ function DemoRequest(props: Props) {
         } catch (err) {
         }
     }
-
     const getEmployees = async () => {
         try {
             // await request.post('/push-service/devices', {
@@ -43,6 +42,7 @@ function DemoRequest(props: Props) {
             // await saveAlertSetting();
             // await saveQuickAlertSettings();
             // await cancelAllAlertSettings()
+
             const res = await request.get(`/employees`);
             setEmployees(res.data)
         } catch (err) {
