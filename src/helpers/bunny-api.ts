@@ -58,20 +58,16 @@ bunnyAPI.interceptors.response.use(
                 case 401:
                     const {businessLogic} = data
                     const {errorCode} = businessLogic
-                    if (['BBL002','BBL003','BBL004','BBL005'].includes(errorCode)) {
+                    if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005'].includes(errorCode)) {
                         const {authFunctions} = authLaborContext;
                         const {refreshAuth, signOut} = authFunctions;
-                        try {
-                            const {success} = await refreshAuth()
-                            if (!success) {
-                                await signOut()
-                            }
-                            const originalRequest = config;
-                            originalRequest._retry = true;
-                            return bunnyAPI(originalRequest);
-                        } catch (e) {
+                        const {success} = await refreshAuth()
+                        if (!success) {
                             await signOut()
                         }
+                        const originalRequest = config;
+                        originalRequest._retry = true;
+                        return bunnyAPI(originalRequest);
                     }
                     break;
                 default:
