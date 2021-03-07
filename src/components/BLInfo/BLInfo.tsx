@@ -31,7 +31,7 @@ const BLInfo = ({title}: Props) => {
                 {
                     (blInfoState.infos) ?
                         <View>
-                            <TextInput style={styles.errorText} multiline value={xxx}/>
+                            <TextInput style={styles.errorText} multiline value={xxx.toString()}/>
                         </View> :
                         <></>
                 }
