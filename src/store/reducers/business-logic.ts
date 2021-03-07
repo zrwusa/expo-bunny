@@ -1,20 +1,20 @@
-import {EBusinessLogic} from "../../constants";
-import {BLInfoClearInfosPayload, BusinessLogicInfoPayload, BusinessLogicState,} from "../../types";
-import {BusinessLogicActions} from "../actions";
+import {EBL} from "../../constants";
+import {BLInfoClearInfosPayload, BLInfoPayload, BLState,} from "../../types";
+import {BLActions} from "../actions";
 
-const initialState: BusinessLogicState = {
+const initialState: BLState = {
     infos: []
 };
 
-export function businessLogicStateReducer(prevState: BusinessLogicState = initialState, {type, payload}: BusinessLogicActions): BusinessLogicState {
+export function blStateReducer(prevState: BLState = initialState, {type, payload}: BLActions): BLState {
     switch (type) {
-        case EBusinessLogic.INFO:
-            const businessErrorPayload = payload as BusinessLogicInfoPayload
+        case EBL.INFO:
+            const businessErrorPayload = payload as BLInfoPayload
             prevState.infos.push(businessErrorPayload.error);
             return {
                 ...prevState,
             };
-        case EBusinessLogic.CLEAR_INFOS:
+        case EBL.CLEAR_INFOS:
             const blInfoClearInfosPayload = payload as BLInfoClearInfosPayload
             if (blInfoClearInfosPayload.all) {
                 prevState.infos = []

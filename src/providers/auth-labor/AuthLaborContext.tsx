@@ -1,13 +1,13 @@
 import React from "react";
-import {AuthContextConfig, AuthLaborContextType, AuthRes, BusinessLogicReturn, SignInParams, SignUpParams,} from "../../types";
+import {AuthContextConfig, AuthLaborContextType, AuthRes, BLReturn, SignInParams, SignUpParams,} from "../../types";
 import {apiAuth} from "../../helpers/auth-api"
-import BunnyConstants, {EBusinessLogicInfo} from "../../constants/constants";
+import BunnyConstants, {EBLInfo} from "../../constants/constants";
 import {AxiosResponse} from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Google from "expo-google-app-auth";
 import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, IOS_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO} from "@env";
 import _ from "lodash";
-import {businessLogicInfo, businessSuccess} from "../../helpers";
+import {blInfo, businessSuccess} from "../../helpers";
 import {EventRegister} from 'react-native-event-listeners'
 
 
@@ -38,25 +38,25 @@ const {
 
 const signInOrSignUp = async (res: any) => {
     if (!res) {
-        return businessLogicInfo(EBusinessLogicInfo.NO_AUTH_API_RESPONDED)
+        return blInfo(EBLInfo.NO_AUTH_API_RESPONDED)
     }
     const {data} = res;
     if (!data) {
-        return businessLogicInfo(EBusinessLogicInfo.NO_DATA_RESPONDED)
+        return blInfo(EBLInfo.NO_DATA_RESPONDED)
     }
     const accessToken = _.get(data, accessTokenValuePath);
     const refreshToken = _.get(data, refreshTokenValuePath);
     const user = _.get(data, userValuePath);
     if (!(accessToken && refreshToken)) {
         await signOut()
-        return businessLogicInfo(EBusinessLogicInfo.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED)
+        return blInfo(EBLInfo.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED)
     } else {
         await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
         await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken)
     }
     if (!user) {
         await signOut()
-        return businessLogicInfo(EBusinessLogicInfo.NO_USER_INFO_RESPONDED)
+        return blInfo(EBLInfo.NO_USER_INFO_RESPONDED)
     } else {
         await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
     }
@@ -98,16 +98,16 @@ const signInGoogle = async () => {
         androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
     });
     if (!loginResult) {
-        return businessLogicInfo(EBusinessLogicInfo.NO_GOOGLE_LOGIN_RESULT)
+        return blInfo(EBLInfo.NO_GOOGLE_LOGIN_RESULT)
     }
 
     switch (loginResult.type) {
         case "cancel":
-            return businessLogicInfo(EBusinessLogicInfo.GOOGLE_LOGIN_CANCELED)
+            return blInfo(EBLInfo.GOOGLE_LOGIN_CANCELED)
         case "success":
             const {accessToken, refreshToken, user} = loginResult;
             if (!accessToken || !refreshToken) {
-                return businessLogicInfo(EBusinessLogicInfo.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
+                return blInfo(EBLInfo.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
             }
             await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
             await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken)
@@ -121,7 +121,7 @@ const signInGoogle = async () => {
             EventRegister.emit('signInGoogleSuccess', result)
             return businessSuccess(result)
         default:
-            return businessLogicInfo(EBusinessLogicInfo.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
+            return blInfo(EBLInfo.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
     }
 };
 
@@ -142,22 +142,22 @@ const signOut = async () => {
     return businessSuccess(true)
 };
 
-const refreshAuth = async (): Promise<BusinessLogicReturn> => {
+const refreshAuth = async (): Promise<BLReturn> => {
     const refreshToken = await AsyncStorage.getItem(refreshTokenPersistenceKey);
     apiAuth.defaults.headers.common["Authorization"] = `Bearer ${refreshToken}`;
     const res = await apiAuth.request({method: refreshAPIMethod, url: refreshAPIPath})
     if (!res) {
-        return businessLogicInfo(EBusinessLogicInfo.NO_AUTH_API_RESPONDED)
+        return blInfo(EBLInfo.NO_AUTH_API_RESPONDED)
     }
     const {data} = res;
     if (!data) {
         await signOut()
-        return businessLogicInfo(EBusinessLogicInfo.NO_DATA_RESPONDED)
+        return blInfo(EBLInfo.NO_DATA_RESPONDED)
     }
     const accessToken = _.get(data, accessTokenValuePath);
     if (!accessToken) {
         await signOut()
-        return businessLogicInfo(EBusinessLogicInfo.NO_ACCESS_TOKEN_RESPONDED)
+        return blInfo(EBLInfo.NO_ACCESS_TOKEN_RESPONDED)
     }
     await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
     EventRegister.emit('refreshAuthSuccess', accessToken)

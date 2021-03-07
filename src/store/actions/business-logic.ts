@@ -1,18 +1,18 @@
-import {BLInfoClearInfosAction, BLInfoClearInfosPayload, BusinessLogicInfoPayload, CollectBLInfoAction,} from "../../types";
-import {EBusinessLogic} from "../../constants";
+import {BLInfoClearInfosAction, BLInfoClearInfosPayload, BLInfoPayload, CollectBLInfoAction,} from "../../types";
+import {EBL} from "../../constants";
 
-export const collectBusinessLogicInfo: (payload: BusinessLogicInfoPayload) => CollectBLInfoAction = (payload) => {
+export const collectBLInfo: (payload: BLInfoPayload) => CollectBLInfoAction = (payload) => {
     return {
-        type: EBusinessLogic.INFO,
+        type: EBL.INFO,
         payload: payload,
     };
 };
 
 export const blInfoClearInfos: (payload: BLInfoClearInfosPayload) => BLInfoClearInfosAction = (payload) => {
     return {
-        type: EBusinessLogic.CLEAR_INFOS,
+        type: EBL.CLEAR_INFOS,
         payload: payload,
     };
 };
 
-export type BusinessLogicActions = CollectBLInfoAction | BLInfoClearInfosAction;
+export type BLActions = CollectBLInfoAction | BLInfoClearInfosAction;

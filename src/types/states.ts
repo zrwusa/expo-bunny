@@ -2,7 +2,7 @@
 import {InitialState} from "@react-navigation/native";
 import {DemoSaga} from "../store/actions";
 import {NearbyFilm, Region} from "./models";
-import {BusinessLogicReturn} from "./business";
+import {BLReturn} from "./business";
 
 export type SysState = {
     error: Error[],
@@ -13,8 +13,8 @@ export type SysState = {
     navInitialState?: InitialState
 }
 
-export type BusinessLogicState = {
-    infos: BusinessLogicReturn[]
+export type BLState = {
+    infos: BLReturn[]
 }
 
 export interface DemoHelloState {
@@ -48,7 +48,7 @@ export interface DemoSagaState {
 
 export interface RootState {
     sysState: SysState,
-    blInfoState: BusinessLogicState,
+    blInfoState: BLState,
     demoHelloState: DemoHelloState,
     demoHello2State: DemoHello2State,
     demoThunkState: DemoThunkState,

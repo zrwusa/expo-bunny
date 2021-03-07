@@ -31,7 +31,7 @@ export enum ESys {
     RESTORE_NAV_INITIAL_STATE = "RESTORE_NAV_INITIAL_STATE",
 }
 
-export enum EBusinessLogic {
+export enum EBL {
     INFO = "INFO",
     CLEAR_INFOS = "CLEAR_INFOS"
 }
@@ -51,7 +51,7 @@ export enum EDemoMap {
     RESTORE_REGION = "RESTORE_REGION",
 }
 
-export enum EBusinessLogicInfo {
+export enum EBLInfo {
     NO_ACCESS_TOKEN_RESPONDED = "No access_token responded",
     NO_AUTH_API_RESPONDED = "No auth api responded",
     NO_USER_INFO_RESPONDED = "No user info responded",

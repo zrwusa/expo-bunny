@@ -1,4 +1,4 @@
-export type BusinessLogicReturn = {
+export type BLReturn = {
     success: boolean,
     data: any,
     message: string

@@ -13,10 +13,10 @@ import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import * as Notifications from "expo-notifications";
 import {initialedNotification, registerForPushNotificationsAsync} from "../../../utils/expo-notification";
-import {sysError} from "../../../store/actions";
+import {collectBLInfo, sysError} from "../../../store/actions";
 import {useDispatch} from "react-redux";
-import {collectBusinessLogicInfo} from "../../../store/actions/business-logic";
-import {businessLogicInfo} from "../../../helpers";
+import {blInfo} from "../../../helpers";
+import {createStyles} from "./styles";
 
 type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
@@ -34,6 +34,7 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()
 
     let notificationReceivedListener = {
@@ -49,6 +50,9 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(initialedNotification);
     const [granularity, setGranularity] = useState(0.05)
+    const [reminder, setReminder] = useState({times: 3, interval: '1m'})
+    const [currentPrice,setCurrentPrice] = useState(0)
+
     const request = useRequest();
 
     const saveAlertSetting = async function () {
@@ -60,12 +64,11 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     }
 
     const saveQuickAlertSettings = async function () {
-        console.log('---saveQuickAlertSettings',expoPushToken)
         if (!expoPushToken) {
-            dispatch(collectBusinessLogicInfo({error: businessLogicInfo('no expoPushToken')}))
+            dispatch(collectBLInfo({error: blInfo('no expoPushToken')}))
         } else {
             try {
-                await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
+                await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity,reminder})
             } catch (err) {
                 dispatch(sysError({error: err}))
             }
@@ -99,7 +102,14 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
             }
             try {
                 await request.post('/push-service/devices', {type: "BITCOIN_ALERT", token})
+
             } catch (err) {
+                dispatch(sysError({error: err}))
+            }
+            try{
+                const {data} = await request.get('/bitcoin-prices')
+                setCurrentPrice(data)
+            }catch (err) {
                 dispatch(sysError({error: err}))
             }
 
@@ -122,35 +132,65 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     return Platform.OS !== 'web' ? (
         <View style={containerStyles.screen}>
             <View>
-                <RNPickerSelect
-                    value={granularity}
-                    items={[
-                        {label: '0.1%', value: 0.001},
-                        {label: '1%', value: 0.01},
-                        {label: '5%', value: 0.05},
-                        {label: '10%', value: 0.1},
-                        {label: '20%', value: 0.2},
-                        {label: '30%', value: 0.3},
-                    ]}
-                    onValueChange={(itemValue) => setGranularity(itemValue)}
-                >
-                </RNPickerSelect>
+                <Text style={styles.granularity.label}>{st(`currentPriceLabel`)}</Text>
+                <Text>{currentPrice}</Text>
+                <Text style={styles.granularity.label}>{st(`granularity`)}</Text>
+                <RNPickerSelect style={styles.pickerSelector}
+                                value={granularity}
+                                items={[
+                                    {label: '0.1%', value: 0.001},
+                                    {label: '1%', value: 0.01},
+                                    {label: '5%', value: 0.05},
+                                    {label: '10%', value: 0.1},
+                                    {label: '20%', value: 0.2},
+                                    {label: '30%', value: 0.3},
+                                ]}
+                                onValueChange={(itemValue) => setGranularity(itemValue)}
+                />
+                <Text style={styles.reminder.label}>{st(`remindTimesLabel`)}</Text>
+                <RNPickerSelect style={styles.pickerSelector}
+                                value={reminder.times}
+                                items={[
+                                    {label: '1', value: 1},
+                                    {label: '2', value: 2},
+                                    {label: '3', value: 3},
+                                    {label: '5', value: 5},
+                                    {label: '10', value: 10},
+                                    {label: '20', value: 20},
+                                ]}
+                                onValueChange={(itemValue) => setReminder({...reminder, times: itemValue})}
+                />
+                <Text style={styles.reminder.label}>{st(`remindIntervalLabel`)}</Text>
+                <RNPickerSelect style={styles.pickerSelector}
+                                value={reminder.interval}
+                                items={[
+                                    {label: '1s', value: '1s'},
+                                    {label: '10s', value: '10s'},
+                                    {label: '1m', value: '1m'},
+                                    {label: '5m', value: '5m'},
+                                    {label: '10m', value:'10m'},
+                                    {label: '30m', value:'30m'},
+                                    {label: '1h', value: '1h'},
+                                    {label: '2h', value: '2h'},
+                                ]}
+                                onValueChange={(itemValue) => setReminder({...reminder, interval: itemValue})}
+                />
             </View>
             <View>
-                <Text>Your expo push token: {expoPushToken}</Text>
-                {notification
-                    ? <View style={containerStyles.centralized}>
-                        <Text>Title: {notification.request.content.title} </Text>
-                        <Text>Body: {notification.request.content.body}</Text>
-                        <Text>Data: {JSON.stringify(notification.request.content.data)}</Text>
-                    </View>
-                    : null}
+                {/*<Text>Your expo push token: {expoPushToken}</Text>*/}
+                {
+                    notification
+                        ? <View style={containerStyles.centralized}>
+                            <Text>Title: {notification.request.content.title} </Text>
+                            <Text>Body: {notification.request.content.body}</Text>
+                            {/*<Text>Data: {JSON.stringify(notification.request.content.data)}</Text>*/}
+                        </View>
+                        : null
+                }
             </View>
-
-
-            <ButtonTO onPress={saveAlertSetting}>
-                <TextBtn>{st(`saveAlertSetting`)}</TextBtn>
-            </ButtonTO>
+            {/*<ButtonTO onPress={saveAlertSetting}>*/}
+            {/*    <TextBtn>{st(`saveAlertSetting`)}</TextBtn>*/}
+            {/*</ButtonTO>*/}
             <ButtonTO onPress={saveQuickAlertSettings}>
                 <TextBtn>{st(`saveQuickSettings`)}</TextBtn>
             </ButtonTO>
@@ -160,10 +200,3 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
         </View>
     ) : (<Text>Dummy BitcoinAlert</Text>)
 }
-
-// export default BitcoinAlertScreen;
-// import {View,Text} from "../../../components/base-ui";
-// import React from 'react';
-// export default function BitcoinAlertScreen(){
-//     return (<View><Text>xxx</Text></View>)
-// }

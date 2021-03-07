@@ -1,7 +1,7 @@
 // Action payloads
 import {InitialState} from "@react-navigation/native";
 import {BunnyAPIStandardRequestParams} from "./api";
-import {BusinessLogicReturn} from "./business";
+import {BLReturn} from "./business";
 
 export interface SignInParams {
     email: string;
@@ -21,8 +21,8 @@ export interface SysErrorPayload {
     error: Error & TimeSpend;
 }
 
-export interface BusinessLogicInfoPayload {
-    error: BusinessLogicReturn;
+export interface BLInfoPayload {
+    error: BLReturn;
 }
 
 export interface BLInfoClearInfosPayload {

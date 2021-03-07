@@ -1,5 +1,5 @@
 import {AuthAPIError, BunnyAPIError} from "../utils";
-import {BusinessLogicReturn} from "./business";
+import {BLReturn} from "./business";
 
 export type BunnyAPIProtocolResponseData<T> = {
     "httpExtra": {
@@ -84,7 +84,7 @@ export type APIConfig<T> = {
         },
         responseConfig: {
             errorDealConfig: {
-                refreshAuthFn?(): Promise<BusinessLogicReturn>,
+                refreshAuthFn?(): Promise<BLReturn>,
             },
             STATUS: APIStatusMap
         }

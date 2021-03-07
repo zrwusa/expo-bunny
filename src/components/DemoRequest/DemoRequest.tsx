@@ -3,8 +3,8 @@ import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";
-import {collectBusinessLogicInfo} from "../../store/actions/business-logic";
-import {businessLogicInfo} from "../../helpers";
+import {collectBLInfo} from "../../store/actions/business-logic";
+import {blInfo} from "../../helpers";
 
 interface Props {
     title: string,
@@ -48,8 +48,8 @@ function DemoRequest(props: Props) {
             // await saveAlertSetting();
             // await saveQuickAlertSettings();
             // await cancelAllAlertSettings()
-            // dispatch(collectBusinessLogicInfo({error: businessLogicInfo('test')}))
-
+            // dispatch(collectBLInfo({error: blInfo('test')}))
+            // const {data} = await request.get('/bitcoin-prices')
             const res = await request.get(`/employees`);
             setEmployees(res.data)
         } catch (err) {

@@ -2,7 +2,7 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 import {
-    businessLogicStateReducer,
+    blStateReducer,
     demoHelloStateReducer,
     demoMapStateReducer,
     demoSagaReducer,
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
     demoThunkState: demoThunkStateReducer,
     demoMapState: demoMapStateReducer,
     sysState: sysStateReducer,
-    blInfoState: businessLogicStateReducer,
+    blInfoState: blStateReducer,
     demoSagaState: demoSagaReducer
 });
 

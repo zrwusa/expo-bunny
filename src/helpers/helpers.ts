@@ -1,5 +1,5 @@
 import {
-    BusinessLogicReturn,
+    BLReturn,
     ErrorClass,
     IcoMoonKeys,
     IcoMoonSelection,
@@ -12,7 +12,7 @@ import {
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants, {EBusinessLogicInfo} from "../constants/constants";
+import BunnyConstants, {EBLInfo} from "../constants/constants";
 import {AuthAPIError, BunnyAPIError} from "../utils";
 import bunnyConfig from "../config.json";
 import _ from "lodash";
@@ -187,15 +187,15 @@ export const checkAuthStatus = async () => {
     }
 }
 
-export const businessLogicInfo = (businessLogicMsg: string): BusinessLogicReturn => {
+export const blInfo = (blMsg: string): BLReturn => {
     return {
         success: false,
         data: undefined,
-        message: businessLogicMsg
+        message: blMsg
     }
 }
 
-export const businessSuccess = (data: any): BusinessLogicReturn => {
+export const businessSuccess = (data: any): BLReturn => {
     return {
         success: true,
         data: data,
@@ -213,7 +213,7 @@ export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     const httpExtraKeys = Object.keys(httpExtra);
     const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
     if (!isDataKeysEqual || !isBLKeysEqual || !isHttpExtraKeysEqual) {
-        throw new PErrorClass(EBusinessLogicInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+        throw new PErrorClass(EBLInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
     }
     if (errorCode) {
         throw new PErrorClass(errorMessage, errorCode, errorStack)

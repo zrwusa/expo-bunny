@@ -1,11 +1,11 @@
 import api from "../../helpers/bunny-api";
 import {CollectBLInfoAction, DemoThunkPayload, DemoThunkState, DemoThunkSuccessAction, DemoThunkSuccessPayload, SysErrorAction} from "../../types";
-import {EBusinessLogicInfo, EDemoThunk} from "../../constants";
+import {EBLInfo, EDemoThunk} from "../../constants";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {sysError} from "./sys";
-import {collectBusinessLogicInfo} from "./business-logic";
-import {businessLogicInfo} from "../../helpers";
+import {collectBLInfo} from "./business-logic";
+import {blInfo} from "../../helpers";
 
 export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSuccessAction = (payload) => {
     return {
@@ -22,7 +22,7 @@ export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkStat
             if (res.data) {
                 result = dispatch(demoThunkSuccess(res.data));
             } else {
-                result = dispatch(collectBusinessLogicInfo({error: businessLogicInfo(EBusinessLogicInfo.NO_DEMO_THUNK_DATA)}));
+                result = dispatch(collectBLInfo({error: blInfo(EBLInfo.NO_DEMO_THUNK_DATA)}));
             }
         } catch (err) {
             result = dispatch(sysError({error: err}))

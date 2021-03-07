@@ -1,6 +1,6 @@
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
-import {EBusinessLogicInfo, EDemoMap} from "../../constants";
+import {EBLInfo, EDemoMap} from "../../constants";
 import {
     CollectBLInfoAction,
     DemoMapState,
@@ -13,8 +13,8 @@ import {
 } from "../../types";
 import api from "../../helpers/bunny-api";
 import {sysError} from "./sys";
-import {collectBusinessLogicInfo} from "./business-logic";
-import {businessLogicInfo} from "../../helpers";
+import {collectBLInfo} from "./business-logic";
+import {blInfo} from "../../helpers";
 
 export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAction = (payload) => {
     return {
@@ -31,7 +31,7 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapS
             if (res.data) {
                 result = dispatch(restoreNearbyFilms(res.data));
             } else {
-                result = dispatch(collectBusinessLogicInfo({error: businessLogicInfo(EBusinessLogicInfo.NO_NEARBY_FILMS)}));
+                result = dispatch(collectBLInfo({error: blInfo(EBLInfo.NO_NEARBY_FILMS)}));
             }
         } catch (err) {
             result = dispatch(sysError({error: err}));
