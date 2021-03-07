@@ -15,7 +15,7 @@ function DemoRequest(props: Props) {
     const request = useRequest()
     const dispatch = useDispatch();
     const [employees, setEmployees] = useState<Array<DemoEmployee>>([])
-    const granularity = 0.05;
+    const granularity = 0.0001;
     const expoPushToken = "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]";
     const saveAlertSetting = async function () {
         try {
@@ -46,12 +46,12 @@ function DemoRequest(props: Props) {
             //     token: "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]"
             // })
             // await saveAlertSetting();
-            await saveQuickAlertSettings();
+            // await saveQuickAlertSettings();
             // await cancelAllAlertSettings()
             // dispatch(collectBusinessLogicInfo({error: businessLogicInfo('test')}))
 
-            // const res = await request.get(`/employees`);
-            // setEmployees(res.data)
+            const res = await request.get(`/employees`);
+            setEmployees(res.data)
         } catch (err) {
             console.error(err)
         }
