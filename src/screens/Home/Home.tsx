@@ -32,7 +32,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
 
     return (
         <ScrollView>
-            <View style={containerStyles.screen}>
+            <View style={containerStyles.Screen}>
                 <Card title={st(`navAndRoute`)}>
                     <Link to="/demo-tab/tab-home">{st(`tab`)}</Link>
                     <Link to="/demo-drawer/drawer-home">{st(`drawer`)}</Link>

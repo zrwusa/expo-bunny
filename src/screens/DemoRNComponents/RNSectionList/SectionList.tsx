@@ -46,7 +46,7 @@ function SectionListScreen() {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
-        <SafeAreaView style={[containerStyles.screen, styles.container]}>
+        <SafeAreaView style={[containerStyles.Screen, styles.container]}>
             <SectionList
                 sections={SECTION_LIST_DATA}
                 keyExtractor={(item, index) => item + index}

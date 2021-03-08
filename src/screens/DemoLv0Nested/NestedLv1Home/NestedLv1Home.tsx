@@ -25,8 +25,8 @@ function NestedLv1HomeScreen({route, navigation}: NestedLv1HomeProps) {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={containerStyles.screen}>
-            <View style={containerStyles.card}>
+        <View style={containerStyles.Screen}>
+            <View style={containerStyles.Card}>
                 <ButtonTO onPress={() => navigation.navigate('NestedLv1Settings', {item: "001"})}>
                     <TextBtn>{st(`goToNestedLv1Settings`)}</TextBtn>
                 </ButtonTO>

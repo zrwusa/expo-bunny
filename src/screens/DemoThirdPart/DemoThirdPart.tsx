@@ -42,7 +42,7 @@ function DemoThirdPartScreen(props: Props) {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor)
 
     return (
-        <View style={containerStyles.screen}>
+        <View style={containerStyles.Screen}>
             <Button icon={<IconMC name="air-horn"/>}
                     title={st(`buttonWithIcon`)}/>
             <View>

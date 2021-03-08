@@ -13,6 +13,7 @@ import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useAuthLabor} from "../../providers/auth-labor";
+import {createSmartStyles} from "../../utils";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
@@ -32,9 +33,10 @@ function ProfileScreen({route, navigation}: Props) {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor)
+    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
     return (
         <ScrollView>
-            <View style={[containerStyles.screen, containerStyles.centralized]}>
+            <View style={[containerStyles.Screen, smartStyles.centralized]}>
                 <Avatar source={{uri: avatar_url}}/>
                 <Text>{st(`profileScreenId`)}{route.params.id}</Text>
                 <Text>{st(`email`)}{user?.email}</Text>

@@ -6,30 +6,18 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp, hp} = responsive.iphoneX;
     const {colors} = themeLabor.theme;
 
-    const pickerSelector = StyleSheet.create({
-        inputIOS: {
-            fontSize: ms.fs.l,
-            paddingVertical: ms.sp.m,
-            paddingHorizontal: ms.sp.m,
-            borderWidth: ms.sp.xxs,
-            borderColor: colors.border,
-            borderRadius: ms.br.s,
-            color: colors.text,
-            paddingRight: ms.sp.xl// to ensure the text is never behind the icon
-        },
-        inputAndroid: {
-            fontSize: ms.fs.l,
-            paddingVertical: ms.sp.m,
-            paddingHorizontal: ms.sp.m,
-            borderWidth: ms.sp.s,
-            borderColor: colors.border,
-            borderRadius: ms.br.s,
-            color: colors.text,
-            paddingRight: ms.sp.xl// to ensure the text is never behind the icon
-        }
-    });
+    const currentPrice = StyleSheet.create({
+        text:{fontSize:ms.fs.l},
+        box:{
+            padding:ms.sp.m,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+           }
+    })
     const granularity = StyleSheet.create({
-        label: {fontSize:ms.fs.l}
+        label: {fontSize:ms.fs.l},
+
     });
 
     const reminder = StyleSheet.create({
@@ -37,5 +25,5 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     });
 
 
-    return {pickerSelector,granularity,reminder}
+    return {currentPrice,granularity,reminder}
 }

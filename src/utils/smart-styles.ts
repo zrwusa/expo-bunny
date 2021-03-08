@@ -1,10 +1,10 @@
-import {NamedStyles, SizeLabor, ThemeLabor} from "../types";
-
+import {SizeLabor, ThemeLabor} from "../types";
+import {StyleSheet} from "react-native";
 export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;
     const {colors, fonts} = themeLabor.theme;
     const {wp} = responsive.iphoneX;
-    const styles: NamedStyles<any> = {
+    return StyleSheet.create({
         h1: {
             fontSize: ms.fs.xxl,
             color: colors.title,
@@ -84,6 +84,44 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             padding: ms.sp.s,
             marginVertical: ms.sp.s,
         },
+        row: {
+            flexDirection: 'row',
+        },
+        col:{
+            flex:1,
+            marginRight:ms.sp.s
+        },
+        col1:{
+            flex:1,
+            marginRight:ms.sp.s
+        },
+        col2:{
+            flex:2,
+            marginRight:ms.sp.s
+        },
+        col3:{
+            flex:3,
+            marginRight:ms.sp.s
+        },
+        col4:{
+            flex:4,
+            marginRight:ms.sp.s
+        },
+        colLast:{
+            marginRight:0
+        },
+        around: {
+            justifyContent:'space-around'
+        },
+        between:{
+            justifyContent: 'space-between'
+        },
+        evenly:{
+            justifyContent: 'space-evenly'
+        },
+        center: {
+            justifyContent: 'center',
+        },
         shadow: {
             shadowColor: colors.text,
             shadowOffset: {
@@ -97,9 +135,7 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
         screen: {
             flex: 1,
         },
-        contentContainer: {
-            justifyContent: 'center',
-        },
+
         centralized: {
             justifyContent: 'center',
             alignItems: 'center',
@@ -114,6 +150,5 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             bottom: 0,
             left: 0,
         },
-    }
-    return styles;
+    })
 }

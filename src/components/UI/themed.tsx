@@ -27,6 +27,7 @@ import {getStyleObj} from "../../utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
 import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
+import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from "react-native-picker-select";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -249,6 +250,71 @@ export const IcoMoon: React.FC<IcoMoonProps> = ({children, style, name, size, co
         }}
     />);
 }
+
+export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, style, Icon, ...rest}) => {
+    const {colors} = useThemeLabor().theme;
+    const {ms,responsive} = useSizeLabor();
+    const {wp} = responsive.iphoneX;
+
+    const styleObj = getStyleObj(style);
+    const iconStyle = styleObj.icon;
+    const IconProp = Icon || (()=><IcoMoon name="chevron-right"
+                                      style={{
+                                          marginTop: ms.sp.m,
+                                          marginRight: ms.sp.m,
+                                          color: colors.border,
+                                          ...iconStyle
+                                      }}
+        size={wp(10)}
+    />)
+
+    return (<ReactNativePickerSelect
+        // style={styles.pickerSelector}
+        style={{
+            inputIOS: {
+                fontSize: ms.fs.l,
+                paddingVertical: ms.sp.m,
+                paddingHorizontal: ms.sp.m,
+                color: colors.text,
+                paddingRight: ms.sp.xl// to ensure the text is never behind the icon
+            },
+            inputAndroid: {
+                fontSize: ms.fs.l,
+                paddingVertical: ms.sp.m,
+                paddingHorizontal: ms.sp.m,
+                color: colors.text,
+                paddingRight: ms.sp.xl// to ensure the text is never behind the icon
+            },
+            ...styleObj
+        }}
+        touchableWrapperProps={{
+            activeOpacity: 0.2,
+        }}
+
+        {...rest}
+        // value={}
+        // placeholder={}
+        // items={}
+        // onValueChange={}
+        Icon={IconProp}
+    />);
+}
+
+// <RNPickerSelect
+//     style={styles.pickerSelector}
+//                 touchableWrapperProps={{
+//                     activeOpacity: 0.2,
+//                 }}
+//                 value={}
+//                 placeholder={}
+//                 items={}
+//                 onValueChange={}
+//                 Icon={() => {
+//                     return <IcoMoon name="chevron-right"
+//                                     style={styles.pickerSelector.icon}
+//                                     size={wp(10)}/>
+//                 }}
+// />
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties

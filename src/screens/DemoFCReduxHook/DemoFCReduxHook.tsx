@@ -19,8 +19,8 @@ function DemoFCReduxHookScreen() {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={containerStyles.screen}>
-            <View style={containerStyles.card}>
+        <View style={containerStyles.Screen}>
+            <View style={containerStyles.Card}>
                 <Text>{st(`order`)}{demoHelloState.order}</Text>
                 <ButtonRNE title={st(`dispatchSomething`)}
                            onPress={() => dispatch(demoHello({order: demoHelloState.order + 1}))}/>

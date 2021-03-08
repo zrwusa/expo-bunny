@@ -22,7 +22,7 @@ export default function SettingsScreen() {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {theme, changeTheme} = themeLabor;
     return (
-        <View style={containerStyles.screen}>
+        <View style={containerStyles.Screen}>
             <SettingsItem
                 label={st(`darkTheme`)}
                 value={theme.dark}

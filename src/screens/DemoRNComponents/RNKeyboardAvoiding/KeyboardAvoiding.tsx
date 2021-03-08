@@ -15,7 +15,7 @@ function RNKeyboardAvoidingScreen() {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={containerStyles.screen}
+            style={containerStyles.Screen}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.inner}>

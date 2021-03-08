@@ -43,8 +43,8 @@ class DemoThunkCCScreen extends React.Component<Props> {
         const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
         return (
-            <View style={containerStyles.screen}>
-                <View style={containerStyles.card}>
+            <View style={containerStyles.Screen}>
+                <View style={containerStyles.Card}>
                     <Text>{st(`text`)}{text}</Text>
                     <Text>{st(`id`)}{id}</Text>
                     <ButtonRNE onPress={this.handleThunk} title={st(`thunkDispatch`)}/>

@@ -13,10 +13,10 @@ export const Card: React.FC<CardProps> = (props) => {
     const themeLabor = useThemeLabor();
     const sizeLabor = useSizeLabor();
     const styles = getContainerStyles(sizeLabor, themeLabor);
-    return (<View style={styles.card}>
+    return (<View style={styles.Card}>
         {title
             ? typeof title === 'string'
-                ? <Text style={styles.cardTitle}>
+                ? <Text style={styles.CardTitle}>
                     {title}
                 </Text>
                 : {title}

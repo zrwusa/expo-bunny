@@ -28,7 +28,7 @@ export const AuthScreen = (props: AuthProps) => {
     const [password, setPassword] = useState('')
 
     return (
-        <View style={containerStyles.screen}>
+        <View style={containerStyles.Screen}>
             <TextInput placeholder={st(`username`)} value={username} onChangeText={(value) => {
                 setUsername(value)
             }}/>

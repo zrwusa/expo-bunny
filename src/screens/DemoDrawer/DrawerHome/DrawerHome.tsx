@@ -13,7 +13,7 @@ function DrawerHomeScreen() {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     return (
-        <View style={containerStyles.screen}>
+        <View style={containerStyles.Screen}>
             <Card title={st(`title`)}>
             </Card>
         </View>

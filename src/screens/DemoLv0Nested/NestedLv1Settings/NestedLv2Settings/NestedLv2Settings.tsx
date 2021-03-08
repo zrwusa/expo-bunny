@@ -25,8 +25,8 @@ function NestedLv2SettingsScreen({route, navigation}: NestedLv2SettingsProps) {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={containerStyles.screen}>
-            <View style={containerStyles.card}>
+        <View style={containerStyles.Screen}>
+            <View style={containerStyles.Card}>
                 <ButtonTO onPress={() => navigation.navigate('NestedLv2Home')}>
                     <TextBtn>{st(`goToNestedLv2Home`)}</TextBtn>
                 </ButtonTO>

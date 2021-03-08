@@ -22,35 +22,35 @@ function DemoCollectionScreen() {
 
     return (
         <ScrollView>
-            <View style={containerStyles.screen}>
-                <View style={containerStyles.card}>
+            <View style={containerStyles.Screen}>
+                <View style={containerStyles.Card}>
                     <DemoFCCard title={st(`functionComponent`)}/>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <DemoCCClock title={st(`classComponent`)}
                                  tipLabel={st(`tipLabel`)}
                                  goButtonTitle={st(`go`)}
                                  stopButtonTitle={st(`stop`)}/>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <DemoRegularComponent title={st(`iAmRegular`)}
                                           labelBeenRendered={st(`iHaveBeenRendered`)}
                                           labelRenderedUnit={st(`renderedUnit`)}
                     />
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <DemoPureComponent title={st(`iAmPure`)}
                                        labelBeenRendered={st(`iHaveBeenRendered`)}
                                        labelRenderedUnit={st(`renderedUnit`)}
                     />
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <DemoRequest title={st(`lbRequest`)} buttonTitle={st(`btnRequest`)}/>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <TextInput placeholder={st(`placeholder`)}/>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <DemoSvg/>
                 </View>
             </View>

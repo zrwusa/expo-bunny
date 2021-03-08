@@ -26,8 +26,8 @@ function BitcoinHomeScreen({route, navigation}: BitcoinHomeProps) {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     return (
-        <View style={containerStyles.screen}>
-            <View style={containerStyles.card}>
+        <View style={containerStyles.Screen}>
+            <View style={containerStyles.Card}>
                 <Text>{st(`title`)}</Text>
             </View>
         </View>

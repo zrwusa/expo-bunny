@@ -1,11 +1,10 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {Platform, View} from "react-native";
-import RNPickerSelect from "react-native-picker-select";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoBitcoinStackParam} from "../../../types";
-import {ButtonTO, Text, TextBtn} from "../../../components/UI";
+import {ButtonTO, RNPickerSelect, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey, useRequest} from "../../../providers";
 import {getContainerStyles} from "../../../containers";
@@ -17,6 +16,7 @@ import {collectBLInfo, sysError} from "../../../store/actions";
 import {useDispatch} from "react-redux";
 import {blInfo} from "../../../helpers";
 import {createStyles} from "./styles";
+import {createSmartStyles} from "../../../utils";
 
 type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
 type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
@@ -34,6 +34,8 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {row,col1,col4,colLast} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()
 
@@ -51,24 +53,16 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     const [notification, setNotification] = useState(initialedNotification);
     const [granularity, setGranularity] = useState(0.05)
     const [reminder, setReminder] = useState({times: 3, interval: '1m'})
-    const [currentPrice,setCurrentPrice] = useState(0)
+    const [currentPrice, setCurrentPrice] = useState(0)
 
     const request = useRequest();
-
-    const saveAlertSetting = async function () {
-        try {
-            await request.post('/push-service/alert-settings', {toke: expoPushToken})
-        } catch (err) {
-            dispatch(sysError({error: err}))
-        }
-    }
 
     const saveQuickAlertSettings = async function () {
         if (!expoPushToken) {
             dispatch(collectBLInfo({error: blInfo('no expoPushToken')}))
         } else {
             try {
-                await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity,reminder})
+                await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity, reminder})
             } catch (err) {
                 dispatch(sysError({error: err}))
             }
@@ -106,10 +100,10 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
             } catch (err) {
                 dispatch(sysError({error: err}))
             }
-            try{
+            try {
                 const {data} = await request.get('/bitcoin-prices')
                 setCurrentPrice(data)
-            }catch (err) {
+            } catch (err) {
                 dispatch(sysError({error: err}))
             }
 
@@ -128,75 +122,98 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
         };
     }, []);
 
-
+    const granularityLabelPrefix = st(`granularity`).padEnd(35, '\u2004');
+    const remindTimesLabelPrefix = st(`remindTimesLabel`).padEnd(35, '\u2004');
+    const remindIntervalLabelPrefix = st(`remindIntervalLabel`).padEnd(35, '\u2004');
+    const currentPriceLabelPrefix = st(`currentPriceLabel`).padEnd(35, '\u2004');
     return Platform.OS !== 'web' ? (
-        <View style={containerStyles.screen}>
-            <View>
-                <Text style={styles.granularity.label}>{st(`currentPriceLabel`)}</Text>
-                <Text>{currentPrice}</Text>
-                <Text style={styles.granularity.label}>{st(`granularity`)}</Text>
-                <RNPickerSelect style={styles.pickerSelector}
-                                value={granularity}
-                                items={[
-                                    {label: '0.1%', value: 0.001},
-                                    {label: '1%', value: 0.01},
-                                    {label: '5%', value: 0.05},
-                                    {label: '10%', value: 0.1},
-                                    {label: '20%', value: 0.2},
-                                    {label: '30%', value: 0.3},
-                                ]}
-                                onValueChange={(itemValue) => setGranularity(itemValue)}
+        <View style={containerStyles.Screen}>
+            <View style={containerStyles.Card}>
+                <View style={styles.currentPrice.box}>
+                    <Text style={styles.currentPrice.text}>{currentPriceLabelPrefix + currentPrice}</Text>
+                </View>
+                <RNPickerSelect
+                    value={granularity}
+                    placeholder={{label: "Select " + granularityLabelPrefix, value: 0}}
+                    items={[
+                        {label: '0.1%', value: 0.001, inputLabel: granularityLabelPrefix + '0.1%'},
+                        {label: '1%', value: 0.01, inputLabel: granularityLabelPrefix + '1%'},
+                        {label: '5%', value: 0.05, inputLabel: granularityLabelPrefix + '5%'},
+                        {label: '10%', value: 0.1, inputLabel: granularityLabelPrefix + '10%'},
+                        {label: '20%', value: 0.2, inputLabel: granularityLabelPrefix + '20%'},
+                        {label: '30%', value: 0.3, inputLabel: granularityLabelPrefix + '30%'},
+                    ]}
+                    onValueChange={(itemValue) => setGranularity(itemValue)}
+
                 />
-                <Text style={styles.reminder.label}>{st(`remindTimesLabel`)}</Text>
-                <RNPickerSelect style={styles.pickerSelector}
-                                value={reminder.times}
-                                items={[
-                                    {label: '1', value: 1},
-                                    {label: '2', value: 2},
-                                    {label: '3', value: 3},
-                                    {label: '5', value: 5},
-                                    {label: '10', value: 10},
-                                    {label: '20', value: 20},
-                                ]}
-                                onValueChange={(itemValue) => setReminder({...reminder, times: itemValue})}
+                <RNPickerSelect
+                    value={reminder.times}
+                    placeholder={{label: "Select " + remindTimesLabelPrefix, value: 0}}
+                    items={[
+                        {label: '1', value: 1, inputLabel: remindTimesLabelPrefix + ' 1 time'},
+                        {label: '2', value: 2, inputLabel: remindTimesLabelPrefix + ' 2 times'},
+                        {label: '3', value: 3, inputLabel: remindTimesLabelPrefix + ' 3 times'},
+                        {label: '5', value: 5, inputLabel: remindTimesLabelPrefix + ' 5 times'},
+                        {label: '10', value: 10, inputLabel: remindTimesLabelPrefix + ' 10 times'},
+                        {label: '20', value: 20, inputLabel: remindTimesLabelPrefix + ' 20 times'},
+                    ]}
+                    onValueChange={(itemValue) => setReminder({...reminder, times: itemValue})}
                 />
-                <Text style={styles.reminder.label}>{st(`remindIntervalLabel`)}</Text>
-                <RNPickerSelect style={styles.pickerSelector}
-                                value={reminder.interval}
-                                items={[
-                                    {label: '1s', value: '1s'},
-                                    {label: '10s', value: '10s'},
-                                    {label: '1m', value: '1m'},
-                                    {label: '5m', value: '5m'},
-                                    {label: '10m', value:'10m'},
-                                    {label: '30m', value:'30m'},
-                                    {label: '1h', value: '1h'},
-                                    {label: '2h', value: '2h'},
-                                ]}
-                                onValueChange={(itemValue) => setReminder({...reminder, interval: itemValue})}
+                <RNPickerSelect
+                    value={reminder.interval}
+                    placeholder={{label: "Select " + remindIntervalLabelPrefix, value: ''}}
+                    items={[
+                        {label: '1s', value: '1s', inputLabel: remindIntervalLabelPrefix + ' 1s'},
+                        {label: '10s', value: '10s', inputLabel: remindIntervalLabelPrefix + ' 10s'},
+                        {label: '1m', value: '1m', inputLabel: remindIntervalLabelPrefix + ' 1m'},
+                        {label: '5m', value: '5m', inputLabel: remindIntervalLabelPrefix + ' 5m'},
+                        {label: '10m', value: '10m', inputLabel: remindIntervalLabelPrefix + ' 10m'},
+                        {label: '30m', value: '30m', inputLabel: remindIntervalLabelPrefix + ' 30m'},
+                        {label: '1h', value: '1h', inputLabel: remindIntervalLabelPrefix + ' 1h'},
+                        {label: '2h', value: '2h', inputLabel: remindIntervalLabelPrefix + ' 2h'},
+                    ]}
+                    onValueChange={(itemValue) => setReminder({...reminder, interval: itemValue})}
                 />
             </View>
-            <View>
+            <View style={containerStyles.Card}>
                 {/*<Text>Your expo push token: {expoPushToken}</Text>*/}
                 {
                     notification
-                        ? <View style={containerStyles.centralized}>
-                            <Text>Title: {notification.request.content.title} </Text>
-                            <Text>Body: {notification.request.content.body}</Text>
-                            {/*<Text>Data: {JSON.stringify(notification.request.content.data)}</Text>*/}
+                        ? <View>
+                            <View style={row}>
+                                <View style={col1}>
+                                    <Text>Title:</Text>
+                                </View>
+                                <View style={col4}>
+                                    <Text>{notification.request.content.title} </Text>
+                                </View>
+                                {/*<Text>Data: {JSON.stringify(notification.request.content.data)}</Text>*/}
+                            </View>
+                            <View style={row}>
+                                <View style={col1}>
+                                    <Text>Body:</Text>
+                                </View>
+                                <View style={col4}>
+                                    <Text>{notification.request.content.body} </Text>
+                                </View>
+                            </View>
                         </View>
                         : null
                 }
             </View>
-            {/*<ButtonTO onPress={saveAlertSetting}>*/}
-            {/*    <TextBtn>{st(`saveAlertSetting`)}</TextBtn>*/}
-            {/*</ButtonTO>*/}
-            <ButtonTO onPress={saveQuickAlertSettings}>
-                <TextBtn>{st(`saveQuickSettings`)}</TextBtn>
-            </ButtonTO>
-            <ButtonTO onPress={cancelAllAlertSettings}>
-                <TextBtn>{st(`cancelAllAlertSettings`)}</TextBtn>
-            </ButtonTO>
+
+            <View style={containerStyles.RowCard}>
+                <View style={col1}>
+                    <ButtonTO onPress={saveQuickAlertSettings}>
+                        <TextBtn>{st(`saveQuickSettings`)}</TextBtn>
+                    </ButtonTO>
+                </View>
+                <View style={[col1,colLast]}>
+                    <ButtonTO onPress={cancelAllAlertSettings}>
+                        <TextBtn>{st(`cancelAllAlertSettings`)}</TextBtn>
+                    </ButtonTO>
+                </View>
+            </View>
         </View>
     ) : (<Text>Dummy BitcoinAlert</Text>)
 }

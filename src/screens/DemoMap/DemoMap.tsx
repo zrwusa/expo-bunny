@@ -134,7 +134,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
         });
 
         return (
-            <View style={containerStyles.screen}>
+            <View style={containerStyles.Screen}>
                 <MapView
                     ref={this.mapView}
                     initialRegion={this.props.region}

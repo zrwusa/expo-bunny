@@ -49,7 +49,7 @@ function RNVirtualizedListScreen() {
 
 
     return (
-        <SafeAreaView style={containerStyles.screen}>
+        <SafeAreaView style={containerStyles.Screen}>
             <VirtualizedList
                 data={virtualizedListData}
                 initialNumToRender={6}

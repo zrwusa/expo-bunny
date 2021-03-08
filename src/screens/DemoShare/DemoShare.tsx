@@ -11,6 +11,7 @@ import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
+import {createSmartStyles} from "../../utils";
 
 type SelectedImage = {
     localUri: string
@@ -68,9 +69,9 @@ function DemoShareScreen() {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor);
-
+    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
     return (
-        <View style={[containerStyles.screen, containerStyles.centralized]}>
+        <View style={[containerStyles.Screen, smartStyles.centralized]}>
             <View style={{marginTop: 50}}>
                 <ButtonTO onPress={onShare}>
                     <TextBtn>{st(`shareMessage`)}</TextBtn>
@@ -79,14 +80,14 @@ function DemoShareScreen() {
             {
                 (selectedImage && selectedImage.localUri)
                     ? (
-                        <View style={containerStyles.centralized}>
+                        <View style={smartStyles.centralized}>
                             <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail}></Image>
                             <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
                                 <Text style={styles.buttonText}>Share this photo</Text>
                             </TouchableOpacity>
                         </View>
                     )
-                    : <View style={containerStyles.centralized}>
+                    : <View style={smartStyles.centralized}>
                         <Image source={{uri: 'https://i.imgur.com/TkIrScD.png'}} style={styles.logo}/>
                         <Text style={styles.instructions}>
                             {st(`pressButtonTip`)}

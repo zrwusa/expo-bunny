@@ -7,25 +7,27 @@ export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor)
     const {ms} = sizeLabor;
     const {colors} = themeLabor.theme;
     return StyleSheet.create({
-        card: {
+        Card: {
             margin: ms.sp.m,
             padding: ms.sp.m,
             borderColor: colors.border,
             borderWidth: ms.sp.xxs,
             borderRadius: ms.br.s,
         },
-        cardTitle: {
+        RowCard: {
+            margin: ms.sp.m,
+            padding: ms.sp.m,
+            borderColor: colors.border,
+            borderWidth: ms.sp.xxs,
+            borderRadius: ms.br.s,
+            ...smartStyles.row,
+            ...smartStyles.evenly
+        },
+        CardTitle: {
             ...smartStyles.h3
         },
-        screen: {
+        Screen: {
             flex: 1,
-        },
-        contentContainer: {
-            justifyContent: 'center',
-        },
-        centralized: {
-            justifyContent: 'center',
-            alignItems: 'center'
         },
     });
 }

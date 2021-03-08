@@ -16,60 +16,60 @@ const DemoThemeScreen = () => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const smartStyle = createSmartStyles(sizeLabor, themeLabor);
+    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor);
 
     return (
         <ScrollView>
-            <View style={[containerStyles.screen, containerStyles.centralized]}>
+            <View style={[containerStyles.Screen, smartStyles.centralized]}>
                 <Card>
-                    <ButtonTO style={smartStyle.btn}>
+                    <ButtonTO style={smartStyles.btn}>
                         <TextBtn>{st(`demoButton`)}</TextBtn></ButtonTO>
-                    <ButtonTO style={smartStyle.btnSecondary}>
+                    <ButtonTO style={smartStyles.btnSecondary}>
                         <TextBtn>{st(`demoButtonSec`)}</TextBtn></ButtonTO>
-                    <Text style={smartStyle.text}>{st(`demoText`)}</Text>
-                    <Text style={smartStyle.textSecondary}>{st(`demoTextSec`)}</Text>
-                    <ButtonTO style={smartStyle.btnDisabled}>
+                    <Text style={smartStyles.text}>{st(`demoText`)}</Text>
+                    <Text style={smartStyles.textSecondary}>{st(`demoTextSec`)}</Text>
+                    <ButtonTO style={smartStyles.btnDisabled}>
                         <TextBtn>{st(`demoButtonDisabled`)}</TextBtn></ButtonTO>
                     <Button title={st(`btnCustom`)} onPress={BunnyConstants.fnNoop}/>
                     <ButtonTO><TextBtn>{st(`btnFromPaper`)}</TextBtn></ButtonTO>
                     <ButtonRNE title={st(`demoButtonThemedRNE`)}/>
-                    <View style={[styles.demoShadow, smartStyle.shadow]}>
+                    <View style={[styles.demoShadow, smartStyles.shadow]}>
                         <Text>{st(`demoShadow`)}</Text>
                     </View>
-                    <Text style={smartStyle.h1}>H1</Text>
-                    <Text style={smartStyle.h2}>h2</Text>
-                    <Text style={smartStyle.h3}>h3</Text>
-                    <Text style={smartStyle.h4}>h4</Text>
-                    <Text style={smartStyle.h5}>h5</Text>
-                    <Text style={smartStyle.h6}>h6</Text>
-                    <Text style={smartStyle.title}>{st(`demoTitle`)}</Text>
-                    <Text style={smartStyle.titleSecondary}>{st(`demoTitleSec`)}</Text>
-                    <Text style={smartStyle.caption}>{st(`demoCaption`)}</Text>
-                    <Text style={smartStyle.captionSecondary}>{st(`demoCaptionSec`)}</Text>
-                    <View style={smartStyle.box}>
-                        <Text style={smartStyle.h3}>{st(`demoParagraph`)}</Text>
-                        <Text style={smartStyle.paragraph}>
+                    <Text style={smartStyles.h1}>H1</Text>
+                    <Text style={smartStyles.h2}>h2</Text>
+                    <Text style={smartStyles.h3}>h3</Text>
+                    <Text style={smartStyles.h4}>h4</Text>
+                    <Text style={smartStyles.h5}>h5</Text>
+                    <Text style={smartStyles.h6}>h6</Text>
+                    <Text style={smartStyles.title}>{st(`demoTitle`)}</Text>
+                    <Text style={smartStyles.titleSecondary}>{st(`demoTitleSec`)}</Text>
+                    <Text style={smartStyles.caption}>{st(`demoCaption`)}</Text>
+                    <Text style={smartStyles.captionSecondary}>{st(`demoCaptionSec`)}</Text>
+                    <View style={smartStyles.box}>
+                        <Text style={smartStyles.h3}>{st(`demoParagraph`)}</Text>
+                        <Text style={smartStyles.paragraph}>
                             1.Don’t repeat yourself (DRY){'\n'}
                             2.Do one thing (DOT) (from Unix philosophy){'\n'}
                             3.Separation of concerns{'\n'}
                             4.The principle of least knowledge (Law of Demeter)
                         </Text>
                     </View>
-                    <View style={smartStyle.box}>
-                        <Text style={smartStyle.h3}>{st(`demoParagraphSec`)}</Text>
-                        <Text style={smartStyle.paragraphSecondary}>
+                    <View style={smartStyles.box}>
+                        <Text style={smartStyles.h3}>{st(`demoParagraphSec`)}</Text>
+                        <Text style={smartStyles.paragraphSecondary}>
                             1.Don’t repeat yourself (DRY){'\n'}
                             2.Do one thing (DOT) (from Unix philosophy){'\n'}
                             3.Separation of concerns{'\n'}
                             4.The principle of least knowledge (Law of Demeter)
                         </Text>
                     </View>
-                    <View style={[smartStyle.surface, styles.demoSurface]}>
-                        <Text style={smartStyle.h3}>{st(`demoSurface`)}</Text>
+                    <View style={[smartStyles.surface, styles.demoSurface]}>
+                        <Text style={smartStyles.h3}>{st(`demoSurface`)}</Text>
                     </View>
-                    <View style={[smartStyle.surfaceSecondary, styles.demoSurface]}>
-                        <Text style={smartStyle.h3}>{st(`demoSurfaceSec`)}</Text>
+                    <View style={[smartStyles.surfaceSecondary, styles.demoSurface]}>
+                        <Text style={smartStyles.h3}>{st(`demoSurfaceSec`)}</Text>
                     </View>
                 </Card>
             </View>

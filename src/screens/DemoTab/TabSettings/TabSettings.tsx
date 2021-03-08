@@ -25,7 +25,7 @@ function TabSettingsScreen({route, navigation}: TabSettingsProps) {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={containerStyles.screen}>
+        <View style={containerStyles.Screen}>
             <Card title={st(`title`)}>
                 <Text>{route.params.item}</Text>
             </Card>

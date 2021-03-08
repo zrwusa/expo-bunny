@@ -31,7 +31,7 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const styles = createStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={[containerStyles.screen, containerStyles.centralized]}>
+        <View style={[containerStyles.Screen, smartStyles.centralized]}>
             <View style={styles.wrap}>
                 <Text style={smartStyles.paragraph}>
                     {st(`paramId`)}{id}{'\n'}

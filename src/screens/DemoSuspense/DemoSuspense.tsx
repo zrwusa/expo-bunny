@@ -5,7 +5,7 @@ import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {wait} from "../../utils";
+import {createSmartStyles, wait} from "../../utils";
 
 const DemoLazy100 = React.lazy(async () => {
         const module = await import('../../components/DemoLazy/DemoLazy')
@@ -27,9 +27,9 @@ export const DemoSuspenseScreen = () => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-
+    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
     return (
-        <View style={[containerStyles.screen, containerStyles.centralized]}>
+        <View style={[containerStyles.Screen, smartStyles.centralized]}>
             {/*{isServerSide*/}
             {/*    ? <Text>SSR does not support React.lazy</Text> :*/}
             {/*    <>*/}

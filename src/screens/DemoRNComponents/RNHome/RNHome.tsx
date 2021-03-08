@@ -84,14 +84,14 @@ function RNHome() {
     };
     return (
         <ScrollView>
-            <View style={containerStyles.screen}>
-                <View style={containerStyles.card}>
+            <View style={containerStyles.Screen}>
+                <View style={containerStyles.Card}>
                     <ActivityIndicator/>
                     <ActivityIndicator size="large"/>
                     <ActivityIndicator size="small" color="#0000ff"/>
                     <ActivityIndicator size="large" color="#00ff00"/>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <Button
                         onPress={() => null}
                         title={st(`btnAccessibility`)}
@@ -99,7 +99,7 @@ function RNHome() {
                         accessibilityLabel={st(`lbAccessibility`)}
                     />
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <Switch
                         trackColor={{false: "#767577", true: "#81b0ff"}}
                         thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -108,7 +108,7 @@ function RNHome() {
                         value={isEnabled}
                     />
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <Image
                         style={imageStyles.tinyLogo}
                         source={{
@@ -123,14 +123,14 @@ function RNHome() {
                         }}
                     />
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
                         <Text style={imageBackgroundStyles.text}>Inside</Text>
                     </ImageBackground>
                 </View>
 
 
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <Pressable
                         onPress={() => {
                             setTimesPressed((current) => current + 1);
@@ -189,17 +189,17 @@ function RNHome() {
                     </TouchableHighlight>
                 </View>
 
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <Text>Picker ???</Text>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <TextInput
                         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                         onChangeText={text => onChangeText(text)}
                         value={textInputValue}
                     />
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <TouchableHighlight onPress={onTouchableHighlightPress}>
                         <View style={touchableHighlightStyles.button}>
                             <Text>{st(`touchHere`)}</Text>
@@ -212,7 +212,7 @@ function RNHome() {
                     </View>
 
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <View style={touchableOpacityStyles.countContainer}>
                         <Text>{st(`count`)}{touchableOpacityCount}</Text>
                     </View>
@@ -223,7 +223,7 @@ function RNHome() {
                         <Text>{st(`pressHere`)}</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <View style={touchableWithoutFeedbackStyles.countContainer}>
                         <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
                     </View>
@@ -233,7 +233,7 @@ function RNHome() {
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
-                <View style={containerStyles.card}>
+                <View style={containerStyles.Card}>
                     <View>
                         <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
                         <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>

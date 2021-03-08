@@ -36,7 +36,7 @@ function RNFlatListScreen() {
     );
 
     return (
-        <SafeAreaView style={containerStyles.screen}>
+        <SafeAreaView style={containerStyles.Screen}>
             <FlatList
                 data={FLAT_LIST_DATA}
                 renderItem={({item}: any) => (

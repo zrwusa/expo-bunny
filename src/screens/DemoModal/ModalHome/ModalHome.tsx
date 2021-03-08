@@ -9,6 +9,7 @@ import {DemoModalStackParam} from "../../../types";
 import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
+import {createSmartStyles} from "../../../utils";
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;
@@ -16,7 +17,7 @@ type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHo
 export interface ModalHomeProps {
     route: ModalHomeRouteProp;
     navigation: ModalHomeNavigationProp;
-};
+}
 
 function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const {t} = useTranslation();
@@ -24,10 +25,10 @@ function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-
+    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
     return (
         <ScrollView>
-            <View style={[containerStyles.screen, containerStyles.centralized]}>
+            <View style={[containerStyles.Screen, smartStyles.centralized]}>
             </View>
         </ScrollView>
     )
