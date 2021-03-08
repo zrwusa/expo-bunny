@@ -1,6 +1,17 @@
 import {ELanguage, ESys, EThemes} from "../../constants";
-import {RestoreIsReadyPayload, RestoreNavInitialStatePayload, SysClearErrorPayload, SysErrorPayload, SysState, SysWarnPayload} from "../../types";
+import {
+    RequestReceivedPayload,
+    RequestFailedPayload,
+    RequestingPayload,
+    RestoreIsReadyPayload,
+    RestoreNavInitialStatePayload,
+    SysClearErrorPayload,
+    SysErrorPayload,
+    SysState,
+    SysWarnPayload
+} from "../../types";
 import {SysActions} from "../actions";
+import _ from "lodash";
 
 const initialState: SysState = {
     isReady: false,
@@ -8,7 +19,8 @@ const initialState: SysState = {
     warn: [""],
     themeName: EThemes.light,
     language: ELanguage.en,
-    navInitialState: undefined
+    navInitialState: undefined,
+    requestStatuses: []
 };
 
 export function sysStateReducer(prevState: SysState = initialState, {type, payload}: SysActions): SysState {
@@ -50,6 +62,36 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
                 ...prevState,
                 ...restoreNavInitialStatePayload
             }
+        case ESys.REQUESTING:
+            const requestingPayload = payload as RequestingPayload
+            prevState.requestStatuses.push({id: requestingPayload.id, status: 'FETCHING'})
+            return {
+                ...prevState,
+            };
+        case ESys.REQUEST_RECEIVED:
+            const receivedPayload = payload as RequestReceivedPayload
+            _.remove(prevState.requestStatuses,item=>item.id===receivedPayload.id)
+            // prevState.requestStatuses.map(item=>{
+            //     if(item.id===receivedPayload.id){
+            //         item.status = 'SUCCESS'
+            //     }
+            // })
+            return {
+                ...prevState,
+            };
+        case ESys.REQUEST_FAILED:
+            const requestFailedPayload = payload as RequestFailedPayload
+            _.remove(prevState.requestStatuses,item=>item.id===requestFailedPayload.id)
+
+            // prevState.requestStatuses.map(item=>{
+            //     if(item.id===requestFailedPayload.id){
+            //         item.status = 'FAILED'
+            //     }
+            // })
+
+            return {
+                ...prevState,
+            };
         default:
             return prevState;
     }

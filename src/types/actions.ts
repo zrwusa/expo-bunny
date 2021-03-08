@@ -6,15 +6,16 @@ import {
     DemoHello2Payload,
     DemoHelloPayload,
     DemoThunkSuccessPayload,
-    GetDemoSagaParams,
+    RequestReceivedPayload,
+    RequestFailedPayload,
+    RequestingPayload,
     RestoreIsReadyPayload,
     RestoreNavInitialStatePayload,
     SysClearErrorPayload,
     SysErrorPayload,
     SysWarnPayload
 } from "./payloads";
-import {NearbyFilm, Region} from "./models";
-import {DemoSaga} from "../store/actions";
+import {DemoSaga, NearbyFilm, Region} from "./models";
 
 export interface DemoHelloAction {
     type: EDemoHello.DEMO_HELLO;
@@ -61,6 +62,22 @@ export interface RestoreIsReadyAction {
     payload: RestoreIsReadyPayload;
 }
 
+export interface RequestingAction {
+    type: ESys.REQUESTING;
+    payload: RequestingPayload;
+}
+
+export interface RequestReceivedAction {
+    type: ESys.REQUEST_RECEIVED;
+    payload: RequestReceivedPayload;
+}
+
+export interface RequestFailedAction {
+    type: ESys.REQUEST_FAILED;
+    payload: RequestFailedPayload;
+}
+
+
 export interface DemoThunkSuccessAction {
     type: EDemoThunk.DEMO_THUNK_SUCCESS;
     payload: DemoThunkSuccessPayload;
@@ -76,11 +93,6 @@ export interface RestoreRegionAction {
     payload: Region;
 }
 
-export interface GetDemoSagasAction {
-    type: EDemoSaga.GET_DEMO_SAGAS,
-    params: GetDemoSagaParams
-}
-
 export interface RequestGetDemoSagasAction {
     type: EDemoSaga.REQUEST_GET_DEMO_SAGAS,
 }
@@ -88,8 +100,4 @@ export interface RequestGetDemoSagasAction {
 export interface ReceiveGetDemoSagasAction {
     type: EDemoSaga.RECEIVE_GET_DEMO_SAGAS,
     payload: DemoSaga[]
-}
-
-export interface FailedGetDemoSagasAction {
-    type: EDemoSaga.FAILED_GET_DEMO_SAGAS,
 }

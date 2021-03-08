@@ -49,6 +49,20 @@ export interface RestoreIsReadyPayload {
     isReady: boolean;
 }
 
+
+
+export interface RequestingPayload {
+    id:string;
+}
+
+export interface RequestReceivedPayload {
+    id:string;
+}
+
+export interface RequestFailedPayload {
+    id:string;
+}
+
 export interface DemoHelloPayload {
     order: number;
 }

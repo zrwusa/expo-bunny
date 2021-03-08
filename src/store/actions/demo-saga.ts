@@ -1,22 +1,10 @@
-import {FailedGetDemoSagasAction, GetDemoSagaParams, ReceiveGetDemoSagasAction, RequestGetDemoSagasAction} from "../../types";
+import {DemoSaga, GetDemoSagaParams, ReceiveGetDemoSagasAction, RequestGetDemoSagasAction} from "../../types";
 import {EDemoSaga} from "../../constants";
-
-
-export type DemoSaga = {
-    id: number,
-    text: string
-}
 
 export function getDemoSagas(params: GetDemoSagaParams) {
     return {
         type: EDemoSaga.GET_DEMO_SAGAS,
         params
-    }
-}
-
-export function requestGetDemoSagas() {
-    return {
-        type: EDemoSaga.REQUEST_GET_DEMO_SAGAS,
     }
 }
 
@@ -27,10 +15,4 @@ export function receiveGetDemoSagas(sagas: DemoSaga[]) {
     }
 }
 
-export function failedGetDemoSagas() {
-    return {
-        type: EDemoSaga.FAILED_GET_DEMO_SAGAS,
-    }
-}
-
-export type DemoSagaActions = RequestGetDemoSagasAction | ReceiveGetDemoSagasAction | FailedGetDemoSagasAction;
+export type DemoSagaActions = RequestGetDemoSagasAction | ReceiveGetDemoSagasAction;

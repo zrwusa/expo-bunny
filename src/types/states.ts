@@ -1,8 +1,12 @@
 // Redux store states,different from models entities
 import {InitialState} from "@react-navigation/native";
-import {DemoSaga} from "../store/actions";
-import {NearbyFilm, Region} from "./models";
+import {DemoSaga, NearbyFilm, Region} from "./models";
 import {BLReturn} from "./business";
+
+export interface RequestStatus {
+    id: string;
+    status: 'FETCHING'|'SUCCESS'|'FAILED';
+}
 
 export type SysState = {
     error: Error[],
@@ -10,7 +14,8 @@ export type SysState = {
     isReady: boolean,
     themeName: string,
     language: string,
-    navInitialState?: InitialState
+    navInitialState?: InitialState,
+    requestStatuses: RequestStatus[]
 }
 
 export type BLState = {

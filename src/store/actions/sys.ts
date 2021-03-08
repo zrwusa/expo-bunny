@@ -1,4 +1,8 @@
 import {
+    RequestReceivedAction,
+    RequestReceivedPayload, RequestFailedAction, RequestFailedPayload,
+    RequestingAction,
+    RequestingPayload,
     RestoreIsReadyAction,
     RestoreIsReadyPayload,
     RestoreNavInitialStateAction,
@@ -48,4 +52,33 @@ export const restoreIsReady: (payload: RestoreIsReadyPayload) => RestoreIsReadyA
     };
 };
 
-export type SysActions = RestoreIsReadyAction | SysErrorAction | SysWarnAction | RestoreNavInitialStateAction | SysClearErrorsAction;
+export const requesting: (payload: RequestingPayload) => RequestingAction = (payload) => {
+    return {
+        type: ESys.REQUESTING,
+        payload: payload,
+    };
+};
+
+export const requestReceived: (payload: RequestReceivedPayload) => RequestReceivedAction = (payload) => {
+    return {
+        type: ESys.REQUEST_RECEIVED,
+        payload: payload,
+    };
+};
+
+export const requestFailed: (payload: RequestFailedPayload) => RequestFailedAction = (payload) => {
+    return {
+        type: ESys.REQUEST_FAILED,
+        payload: payload,
+    };
+};
+
+export type SysActions =
+    RestoreIsReadyAction
+    | SysErrorAction
+    | SysWarnAction
+    | RestoreNavInitialStateAction
+    | SysClearErrorsAction
+    | RequestingAction
+    | RequestReceivedAction
+    | RequestFailedAction;
