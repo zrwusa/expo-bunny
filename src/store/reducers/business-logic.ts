@@ -1,27 +1,27 @@
 import {EBL} from "../../constants";
-import {BLInfoClearInfosPayload, BLInfoPayload, BLState,} from "../../types";
+import {BLResult, BLState, ClearBLResultPayload,} from "../../types";
 import {BLActions} from "../actions";
 
 const initialState: BLState = {
-    infos: []
+    results: []
 };
 
 export function blStateReducer(prevState: BLState = initialState, {type, payload}: BLActions): BLState {
     switch (type) {
-        case EBL.INFO:
-            const businessErrorPayload = payload as BLInfoPayload
-            prevState.infos.push(businessErrorPayload.error);
+        case EBL.COLLECT_BL_RESULT:
+            const businessErrorPayload = payload as BLResult
+            prevState.results.push(businessErrorPayload);
             return {
                 ...prevState,
             };
-        case EBL.CLEAR_INFOS:
-            const blInfoClearInfosPayload = payload as BLInfoClearInfosPayload
+        case EBL.CLEAR_BL_RESULT:
+            const blInfoClearInfosPayload = payload as ClearBLResultPayload
             if (blInfoClearInfosPayload.all) {
-                prevState.infos = []
+                prevState.results = []
             } else if (blInfoClearInfosPayload.top) {
-                prevState.infos.splice(0, blInfoClearInfosPayload.top)
+                prevState.results.splice(0, blInfoClearInfosPayload.top)
             } else if (blInfoClearInfosPayload.last) {
-                prevState.infos.splice(prevState.infos.length - blInfoClearInfosPayload.last, blInfoClearInfosPayload.last)
+                prevState.results.splice(prevState.results.length - blInfoClearInfosPayload.last, blInfoClearInfosPayload.last)
             }
             return {...prevState};
 

@@ -1,18 +1,39 @@
-import {DemoSaga, GetDemoSagaParams, ReceiveGetDemoSagasAction, RequestGetDemoSagasAction} from "../../types";
-import {EDemoSaga} from "../../constants";
+import {
+    CancelAlertSettingsAction,
+    CancelAlertSettingsParams,
+    ReceiveGetCurrentPriceAction,
+    ReceiveGetCurrentPricePayload,
+    RequestGetCurrentPriceAction,
+    SaveQuickAlertSettingsAction,
+    SaveQuickAlertSettingsParams
+} from "../../types";
+import {EDemoBitcoin} from "../../constants";
 
-export function getDemoSagas(params: GetDemoSagaParams) {
+export function saveQuickAlertSettings(params: SaveQuickAlertSettingsParams): SaveQuickAlertSettingsAction {
     return {
-        type: EDemoSaga.GET_DEMO_SAGAS,
-        params
+        type: EDemoBitcoin.SAVE_QUICK_ALERT_SETTINGS,
+        payload: params
     }
 }
 
-export function receiveGetDemoSagas(sagas: DemoSaga[]) {
+export function cancelAlertSettings(params: CancelAlertSettingsParams): CancelAlertSettingsAction {
     return {
-        type: EDemoSaga.RECEIVE_GET_DEMO_SAGAS,
-        payload: sagas
+        type: EDemoBitcoin.CANCEL_ALL_ALERT_SETTINGS,
+        payload: params
     }
 }
 
-export type DemoSagaActions = RequestGetDemoSagasAction | ReceiveGetDemoSagasAction;
+export function getCurrentPrice(): RequestGetCurrentPriceAction {
+    return {
+        type: EDemoBitcoin.GET_CURRENT_PRICE,
+    }
+}
+
+export function receiveGetCurrentPrice(payload: ReceiveGetCurrentPricePayload): ReceiveGetCurrentPriceAction {
+    return {
+        type: EDemoBitcoin.RECEIVE_CURRENT_PRICE,
+        payload: payload,
+    }
+}
+
+export type DemoBitcoinActions = SaveQuickAlertSettingsAction | RequestGetCurrentPriceAction | ReceiveGetCurrentPriceAction;

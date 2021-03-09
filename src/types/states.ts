@@ -1,13 +1,14 @@
 // Redux store states,different from models entities
 import {InitialState} from "@react-navigation/native";
 import {DemoSaga, NearbyFilm, Region} from "./models";
-import {BLReturn} from "./business";
+import {BLResult} from "./business";
 import {Notification} from "expo-notifications";
+import {RequestConfig} from "./payloads";
 
-export interface RequestStatus {
-    id: string;
-    status: 'FETCHING'|'SUCCESS'|'FAILED';
-}
+export type RequestStatus = {
+
+    status: 'FETCHING' | 'SUCCESS' | 'FAILED';
+} & RequestConfig
 
 export type SysState = {
     error: Error[],
@@ -20,7 +21,7 @@ export type SysState = {
 }
 
 export type BLState = {
-    infos: BLReturn[]
+    results: BLResult[]
 }
 
 export interface DemoHelloState {
@@ -52,17 +53,27 @@ export interface DemoSagaState {
     items: DemoSaga[]
 }
 
-export interface BitcoinAlertState {
-    notification:Notification,
-    currentPrice:number,
-    granularity:number,
-    expoPushToken:string,
-    reminder:{
+export type PickerSelectorItem<T> = {
+    label: string;
+    value: T;
+    key?: string | number;
+    color?: string;
+    inputLabel?: string;
+}
+
+export interface DemoBitcoinState {
+    notification: Notification,
+    currentPrice: number,
+    granularity: number,
+    expoPushToken: string,
+    reminder: {
         times: number,
         interval: string
     },
-    dictionaries:{
-
+    dictionaries: {
+        granularity: PickerSelectorItem<number>[],
+        times: PickerSelectorItem<number>[],
+        interval: PickerSelectorItem<string>[],
     }
 }
 
@@ -73,5 +84,6 @@ export interface RootState {
     demoHello2State: DemoHello2State,
     demoThunkState: DemoThunkState,
     demoMapState: DemoMapState,
-    demoSagaState: DemoSagaState
+    demoSagaState: DemoSagaState,
+    demoBitcoinState: DemoBitcoinState
 }

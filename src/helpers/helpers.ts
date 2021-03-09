@@ -1,5 +1,5 @@
 import {
-    BLReturn,
+    BLResult,
     ErrorClass,
     IcoMoonKeys,
     IcoMoonSelection,
@@ -12,7 +12,7 @@ import {
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants, {EBLInfo} from "../constants/constants";
+import BunnyConstants, {EBLMsg} from "../constants/constants";
 import {AuthAPIError, BunnyAPIError} from "../utils";
 import bunnyConfig from "../config.json";
 import _ from "lodash";
@@ -187,7 +187,7 @@ export const checkAuthStatus = async () => {
     }
 }
 
-export const blInfo = (blMsg: string): BLReturn => {
+export const blError = (blMsg: string): BLResult => {
     return {
         success: false,
         data: undefined,
@@ -195,11 +195,11 @@ export const blInfo = (blMsg: string): BLReturn => {
     }
 }
 
-export const businessSuccess = (data: any): BLReturn => {
+export const blSuccess = (data: any, message?: string): BLResult => {
     return {
         success: true,
         data: data,
-        message: ''
+        message: message || ''
     }
 }
 
@@ -213,7 +213,7 @@ export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     const httpExtraKeys = Object.keys(httpExtra);
     const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
     if (!isDataKeysEqual || !isBLKeysEqual || !isHttpExtraKeysEqual) {
-        throw new PErrorClass(EBLInfo.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
     }
     if (errorCode) {
         throw new PErrorClass(errorMessage, errorCode, errorStack)

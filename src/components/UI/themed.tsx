@@ -253,19 +253,19 @@ export const IcoMoon: React.FC<IcoMoonProps> = ({children, style, name, size, co
 
 export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, style, Icon, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const {ms,responsive} = useSizeLabor();
+    const {ms, responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
 
     const styleObj = getStyleObj(style);
     const iconStyle = styleObj.icon;
-    const IconProp = Icon || (()=><IcoMoon name="chevron-right"
-                                      style={{
-                                          marginTop: ms.sp.m,
-                                          marginRight: ms.sp.m,
-                                          color: colors.border,
-                                          ...iconStyle
-                                      }}
-        size={wp(10)}
+    const IconProp = Icon || (() => <IcoMoon name="chevron-right"
+                                             style={{
+                                                 marginTop: ms.sp.m,
+                                                 marginRight: ms.sp.m,
+                                                 color: colors.border,
+                                                 ...iconStyle
+                                             }}
+                                             size={wp(10)}
     />)
 
     return (<ReactNativePickerSelect

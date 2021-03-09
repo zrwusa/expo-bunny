@@ -1,18 +1,18 @@
-import {BLInfoClearInfosAction, BLInfoClearInfosPayload, BLInfoPayload, CollectBLInfoAction,} from "../../types";
+import {BLResult, ClearBLResultAction, ClearBLResultPayload, CollectBLResultAction,} from "../../types";
 import {EBL} from "../../constants";
 
-export const collectBLInfo: (payload: BLInfoPayload) => CollectBLInfoAction = (payload) => {
+export const collectBLResult: (payload: BLResult) => CollectBLResultAction = (payload) => {
     return {
-        type: EBL.INFO,
+        type: EBL.COLLECT_BL_RESULT,
         payload: payload,
     };
 };
 
-export const blInfoClearInfos: (payload: BLInfoClearInfosPayload) => BLInfoClearInfosAction = (payload) => {
+export const clearBLResults: (payload: ClearBLResultPayload) => ClearBLResultAction = (payload) => {
     return {
-        type: EBL.CLEAR_INFOS,
+        type: EBL.CLEAR_BL_RESULT,
         payload: payload,
     };
 };
 
-export type BLActions = CollectBLInfoAction | BLInfoClearInfosAction;
+export type BLActions = CollectBLResultAction | ClearBLResultAction;

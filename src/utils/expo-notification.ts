@@ -52,7 +52,7 @@ export const schedulePushNotification = async () => {
     });
 }
 
-export const initialedNotification: Notification = {
+export const defaultNotification: Notification = {
     "request": {
         "trigger": {
             "type": "push",

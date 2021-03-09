@@ -209,10 +209,10 @@
       "mustUsePhysicalDevice": "Must use physical device for Push Notifications",
       "saveAlertSetting": "Save",
       "saveQuickSettings": "Save",
-      "cancelAllAlertSettings": "Cancel",
+      "cancelAlertSettings": "Cancel",
       "granularity": "Granularity fluctuation range",
       "remindTimesLabel": "Remind times",
-      "remindIntervalLabel":"Remind interval",
+      "remindIntervalLabel": "Remind interval",
       "currentPriceLabel": "Current price"
     },
     "Settings": {

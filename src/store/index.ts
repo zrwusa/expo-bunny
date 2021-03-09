@@ -1,15 +1,9 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
-import {
-    blStateReducer,
-    demoHelloStateReducer,
-    demoMapStateReducer,
-    demoSagaReducer,
-    demoThunkStateReducer,
-    sysStateReducer
-} from "./reducers";
+import {blStateReducer, demoHelloStateReducer, demoMapStateReducer, demoSagaReducer, demoThunkStateReducer, sysStateReducer} from "./reducers";
 import {sagaDemoSagas} from "./sagas"
+import {demoBitcoinReducer} from "./reducers/demo-bitcoin";
 
 
 const sagaMiddleware = createSagaMiddleware()
@@ -20,7 +14,8 @@ const rootReducer = combineReducers({
     demoMapState: demoMapStateReducer,
     sysState: sysStateReducer,
     blInfoState: blStateReducer,
-    demoSagaState: demoSagaReducer
+    demoSagaState: demoSagaReducer,
+    demoBitcoinState: demoBitcoinReducer,
 });
 
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
@@ -28,4 +23,5 @@ const rootReducer = combineReducers({
 // you might choose one redux middleware which you prefer,just delete the demos you not prefer
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMiddleware));
 sagaMiddleware.run(sagaDemoSagas);
+// sagaMiddleware.run(saveQuickAlertSettingsSaga);
 export default store;

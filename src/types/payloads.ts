@@ -1,7 +1,7 @@
 // Action payloads
 import {InitialState} from "@react-navigation/native";
 import {BunnyAPIStandardRequestParams} from "./api";
-import {BLReturn} from "./business";
+import {Method} from "axios";
 
 export interface SignInParams {
     email: string;
@@ -21,11 +21,11 @@ export interface SysErrorPayload {
     error: Error & TimeSpend;
 }
 
-export interface BLInfoPayload {
-    error: BLReturn;
-}
+// export interface BLInfoPayload {
+//     info: BLResult;
+// }
 
-export interface BLInfoClearInfosPayload {
+export interface ClearBLResultPayload {
     all?: boolean;
     top?: number;
     last?: number;
@@ -49,18 +49,29 @@ export interface RestoreIsReadyPayload {
     isReady: boolean;
 }
 
-
+export interface RequestConfig {
+    method: Method;
+    url: string;
+    params?: any,
+    data?: any
+}
 
 export interface RequestingPayload {
-    id:string;
+    method: Method;
+    url: string;
+    params?: any
 }
 
 export interface RequestReceivedPayload {
-    id:string;
+    method: Method;
+    url: string;
+    params?: any;
 }
 
 export interface RequestFailedPayload {
-    id:string;
+    method: Method;
+    url: string;
+    params?: any;
 }
 
 export interface DemoHelloPayload {
@@ -93,3 +104,23 @@ export interface GetDemoSagaParams extends BunnyAPIStandardRequestParams {
         text?: string
     }
 }
+
+export interface SaveQuickAlertSettingsParams {
+    token: string,
+    granularity: number,
+    reminder: {
+        times: number,
+        interval: string
+    }
+}
+
+
+export interface CancelAlertSettingsParams {
+    token: string,
+    cancelAll: boolean,
+}
+
+export interface ReceiveGetCurrentPricePayload {
+    currentPrice: number,
+}
+

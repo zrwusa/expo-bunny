@@ -2,7 +2,7 @@
 import {ReactNode} from "react";
 import {GoogleUser} from "expo-google-app-auth";
 import {SignInParams, SignUpParams} from "./payloads";
-import {BLReturn} from "./business";
+import {BLResult} from "./business";
 import {Method} from "axios";
 
 export type UserRes = {
@@ -24,13 +24,13 @@ export type AuthResult = {
 }
 export type AuthLaborContextTypePartial = Partial<AuthLaborContextType>
 export type AuthFunctions = {
-    signIn: (params: SignInParams) => Promise<BLReturn>,
-    signInGoogle: () => Promise<BLReturn>,
-    signInDummy: () => Promise<BLReturn>,
-    signOut: () => Promise<BLReturn>,
-    signUp: (params: SignUpParams) => Promise<BLReturn>,
+    signIn: (params: SignInParams) => Promise<BLResult>,
+    signInGoogle: () => Promise<BLResult>,
+    signInDummy: () => Promise<BLResult>,
+    signOut: () => Promise<BLResult>,
+    signUp: (params: SignUpParams) => Promise<BLResult>,
     getAccessToken: () => Promise<string | null>,
-    refreshAuth: () => Promise<BLReturn>
+    refreshAuth: () => Promise<BLResult>
 }
 export type AuthLaborContextType = {
     authFunctions: AuthFunctions,

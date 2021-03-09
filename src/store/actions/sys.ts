@@ -1,8 +1,8 @@
 import {
-    RequestReceivedAction,
-    RequestReceivedPayload, RequestFailedAction, RequestFailedPayload,
+    RequestConfig,
+    RequestFailedAction,
     RequestingAction,
-    RequestingPayload,
+    RequestReceivedAction,
     RestoreIsReadyAction,
     RestoreIsReadyPayload,
     RestoreNavInitialStateAction,
@@ -52,21 +52,21 @@ export const restoreIsReady: (payload: RestoreIsReadyPayload) => RestoreIsReadyA
     };
 };
 
-export const requesting: (payload: RequestingPayload) => RequestingAction = (payload) => {
+export const requesting: (payload: RequestConfig) => RequestingAction = (payload) => {
     return {
         type: ESys.REQUESTING,
         payload: payload,
     };
 };
 
-export const requestReceived: (payload: RequestReceivedPayload) => RequestReceivedAction = (payload) => {
+export const requestReceived: (payload: RequestConfig) => RequestReceivedAction = (payload) => {
     return {
         type: ESys.REQUEST_RECEIVED,
         payload: payload,
     };
 };
 
-export const requestFailed: (payload: RequestFailedPayload) => RequestFailedAction = (payload) => {
+export const requestFailed: (payload: RequestConfig) => RequestFailedAction = (payload) => {
     return {
         type: ESys.REQUEST_FAILED,
         payload: payload,

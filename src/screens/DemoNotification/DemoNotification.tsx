@@ -2,7 +2,7 @@ import * as Notifications from 'expo-notifications';
 import React, {useEffect, useState} from 'react';
 import {Button, Text, View} from "../../components/UI";
 import {Platform} from 'react-native';
-import {initialedNotification, registerForPushNotificationsAsync, schedulePushNotification} from "../../utils/expo-notification";
+import {defaultNotification, registerForPushNotificationsAsync, schedulePushNotification} from "../../utils/expo-notification";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {useTranslation} from "react-i18next";
 
@@ -18,7 +18,7 @@ export default function DemoNotificationScreen() {
         }
     };
     const [expoPushToken, setExpoPushToken] = useState('');
-    const [notification, setNotification] = useState(initialedNotification);
+    const [notification, setNotification] = useState(defaultNotification);
     // const notificationListener = useRef();
     // const responseListener = useRef();
 

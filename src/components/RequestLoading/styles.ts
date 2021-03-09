@@ -1,5 +1,4 @@
 import {StyleSheet} from "react-native";
-import {pl} from "../../utils";
 import {SizeLabor, ThemeLabor} from "../../types";
 
 export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -8,14 +7,14 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {colors} = themeLabor.theme;
     return StyleSheet.create({
         container: {
-            position:'absolute',
-            zIndex:1000,
+            position: 'absolute',
+            zIndex: 1000,
             backgroundColor: colors.background,
-            opacity:0.8,
+            opacity: 0.8,
             justifyContent: 'center',
             alignItems: 'center',
-            height:'100%',
-            width:'100%'
+            height: '100%',
+            width: '100%'
         },
         text: {
             marginTop: ms.sp.m,

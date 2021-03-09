@@ -599,8 +599,8 @@ export type Palette = {
     transparent: string,
 
     //---start--- react-native-paper
-    green850:string,
-    deepPurple550:string,
+    green850: string,
+    deepPurple550: string,
     grey90: string,
     redA800: string,
     //---end--- react-native-paper
@@ -913,8 +913,8 @@ export type PaletteWithColors = {
     transparent: 'transparent',
 
     //---start--- react-native-paper
-    green850:'#03dac4',
-    deepPurple550:'#6200ee',
+    green850: '#03dac4',
+    deepPurple550: '#6200ee',
     grey90: '#f6f6f6',
     redA800: '#B00020',
     //---end--- react-native-paper

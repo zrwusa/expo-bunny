@@ -1,12 +1,13 @@
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
-import {EBLInfo, EDemoMap} from "../../constants";
+import {EBLMsg, EDemoMap} from "../../constants";
 import {
-    CollectBLInfoAction,
+    CollectBLResultAction,
     DemoMapState,
     GetNearbyFilmsReqParams,
     NearbyFilm,
     Region,
+    RequestConfig,
     RequestFailedAction,
     RequestingAction,
     RequestReceivedAction,
@@ -16,8 +17,8 @@ import {
 } from "../../types";
 import api from "../../helpers/bunny-api";
 import {requestFailed, requesting, requestReceived, sysError} from "./sys";
-import {collectBLInfo} from "./business-logic";
-import {blInfo} from "../../helpers";
+import {collectBLResult} from "./business-logic";
+import {blError} from "../../helpers";
 
 export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAction = (payload) => {
     return {
@@ -27,21 +28,22 @@ export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAc
 };
 
 export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapState, void, RestoreNearbyFilmsAction>> = (reqParams: GetNearbyFilmsReqParams) => {
-    return async (dispatch: Dispatch<RestoreNearbyFilmsAction | SysErrorAction | CollectBLInfoAction | RequestingAction | RequestReceivedAction | RequestFailedAction>): Promise<Action> => {
+    return async (dispatch: Dispatch<RestoreNearbyFilmsAction | SysErrorAction | CollectBLResultAction | RequestingAction | RequestReceivedAction | RequestFailedAction>): Promise<Action> => {
         let result;
+        const config: RequestConfig = {method: 'GET', url: '/nearby-films', params: reqParams};
         try {
-            result = dispatch(requesting({id: 'GET/nearby-films'}))
-            const res = await api.get(`/nearby-films`, {params: {reqParams}});
+            result = dispatch(requesting(config))
+            const res = await api.request(config);
             if (res.data) {
                 result = dispatch(restoreNearbyFilms(res.data));
-                result = dispatch(requestReceived({id: 'GET/nearby-films'}))
+                result = dispatch(requestReceived(config))
             } else {
-                result = dispatch(collectBLInfo({error: blInfo(EBLInfo.NO_NEARBY_FILMS)}));
+                result = dispatch(collectBLResult(blError(EBLMsg.NO_NEARBY_FILMS)));
             }
             return result;
         } catch (err) {
             result = dispatch(sysError({error: err}));
-            result = dispatch(requestFailed({id: 'GET/nearby-films'}))
+            result = dispatch(requestFailed(config))
             return result;
         }
     };

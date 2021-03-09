@@ -1,5 +1,6 @@
 import {SizeLabor, ThemeLabor} from "../types";
 import {StyleSheet} from "react-native";
+
 export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;
     const {colors, fonts} = themeLabor.theme;
@@ -87,36 +88,36 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
         row: {
             flexDirection: 'row',
         },
-        col:{
-            flex:1,
-            marginRight:ms.sp.s
+        col: {
+            flex: 1,
+            marginRight: ms.sp.s
         },
-        col1:{
-            flex:1,
-            marginRight:ms.sp.s
+        col1: {
+            flex: 1,
+            marginRight: ms.sp.s
         },
-        col2:{
-            flex:2,
-            marginRight:ms.sp.s
+        col2: {
+            flex: 2,
+            marginRight: ms.sp.s
         },
-        col3:{
-            flex:3,
-            marginRight:ms.sp.s
+        col3: {
+            flex: 3,
+            marginRight: ms.sp.s
         },
-        col4:{
-            flex:4,
-            marginRight:ms.sp.s
+        col4: {
+            flex: 4,
+            marginRight: ms.sp.s
         },
-        colLast:{
-            marginRight:0
+        colLast: {
+            marginRight: 0
         },
         around: {
-            justifyContent:'space-around'
+            justifyContent: 'space-around'
         },
-        between:{
+        between: {
             justifyContent: 'space-between'
         },
-        evenly:{
+        evenly: {
             justifyContent: 'space-evenly'
         },
         center: {

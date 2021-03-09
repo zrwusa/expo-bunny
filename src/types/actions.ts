@@ -1,21 +1,22 @@
 // Redux actions
-import {EBL, EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
+import {EBL, EDemoBitcoin, EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
 import {
-    BLInfoClearInfosPayload,
-    BLInfoPayload,
+    CancelAlertSettingsParams,
+    ClearBLResultPayload,
     DemoHello2Payload,
     DemoHelloPayload,
     DemoThunkSuccessPayload,
-    RequestReceivedPayload,
-    RequestFailedPayload,
-    RequestingPayload,
+    ReceiveGetCurrentPricePayload,
+    RequestConfig,
     RestoreIsReadyPayload,
     RestoreNavInitialStatePayload,
+    SaveQuickAlertSettingsParams,
     SysClearErrorPayload,
     SysErrorPayload,
     SysWarnPayload
 } from "./payloads";
 import {DemoSaga, NearbyFilm, Region} from "./models";
+import {BLResult} from "./business";
 
 export interface DemoHelloAction {
     type: EDemoHello.DEMO_HELLO;
@@ -32,14 +33,14 @@ export interface SysErrorAction {
     payload: SysErrorPayload;
 }
 
-export interface CollectBLInfoAction {
-    type: EBL.INFO;
-    payload: BLInfoPayload;
+export interface CollectBLResultAction {
+    type: EBL.COLLECT_BL_RESULT;
+    payload: BLResult;
 }
 
-export interface BLInfoClearInfosAction {
-    type: EBL.CLEAR_INFOS;
-    payload: BLInfoClearInfosPayload;
+export interface ClearBLResultAction {
+    type: EBL.CLEAR_BL_RESULT;
+    payload: ClearBLResultPayload;
 }
 
 export interface SysClearErrorsAction {
@@ -64,17 +65,17 @@ export interface RestoreIsReadyAction {
 
 export interface RequestingAction {
     type: ESys.REQUESTING;
-    payload: RequestingPayload;
+    payload: RequestConfig;
 }
 
 export interface RequestReceivedAction {
     type: ESys.REQUEST_RECEIVED;
-    payload: RequestReceivedPayload;
+    payload: RequestConfig;
 }
 
 export interface RequestFailedAction {
     type: ESys.REQUEST_FAILED;
-    payload: RequestFailedPayload;
+    payload: RequestConfig;
 }
 
 
@@ -100,4 +101,23 @@ export interface RequestGetDemoSagasAction {
 export interface ReceiveGetDemoSagasAction {
     type: EDemoSaga.RECEIVE_GET_DEMO_SAGAS,
     payload: DemoSaga[]
+}
+
+export interface SaveQuickAlertSettingsAction {
+    type: EDemoBitcoin.SAVE_QUICK_ALERT_SETTINGS,
+    payload: SaveQuickAlertSettingsParams
+}
+
+export interface CancelAlertSettingsAction {
+    type: EDemoBitcoin.CANCEL_ALL_ALERT_SETTINGS,
+    payload: CancelAlertSettingsParams
+}
+
+export interface RequestGetCurrentPriceAction {
+    type: EDemoBitcoin.GET_CURRENT_PRICE,
+}
+
+export interface ReceiveGetCurrentPriceAction {
+    type: EDemoBitcoin.RECEIVE_CURRENT_PRICE,
+    payload: ReceiveGetCurrentPricePayload
 }

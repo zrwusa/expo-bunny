@@ -35,8 +35,8 @@ export enum ESys {
 }
 
 export enum EBL {
-    INFO = "INFO",
-    CLEAR_INFOS = "CLEAR_INFOS"
+    COLLECT_BL_RESULT = "COLLECT_BL_RESULT",
+    CLEAR_BL_RESULT = "CLEAR_BL_RESULT"
 }
 
 export enum EDemoHello {
@@ -54,7 +54,7 @@ export enum EDemoMap {
     RESTORE_REGION = "RESTORE_REGION",
 }
 
-export enum EBLInfo {
+export enum EBLMsg {
     NO_ACCESS_TOKEN_RESPONDED = "No access_token responded",
     NO_AUTH_API_RESPONDED = "No auth api responded",
     NO_USER_INFO_RESPONDED = "No user info responded",
@@ -68,8 +68,8 @@ export enum EBLInfo {
     NOT_CONFORM_TO_API_RESPONSE_STRUCTURE = "Not conform to BunnyAPI response structure",
     NO_NEARBY_FILMS = "No nearby films",
     NO_DEMO_THUNK_DATA = "No demo thunks response data",
-    // XXX = "Xxx",
-    // XXX = "Xxx",
+    SAVE_QUICK_ALERT_SETTINGS_SUCCESS = "Save quick alert settings success",
+    CANCEL_ALL_ALERT_SETTINGS_SUCCESS = "Cancel all alert settings success",
     // XXX = "Xxx",
     // XXX = "Xxx",
     // XXX = "Xxx",
@@ -137,6 +137,14 @@ export enum EDemoSaga {
     GET_DEMO_SAGAS = 'GET_DEMO_SAGAS',
     REQUEST_GET_DEMO_SAGAS = 'REQUEST_GET_DEMO_SAGAS',
     RECEIVE_GET_DEMO_SAGAS = 'RECEIVE_GET_DEMO_SAGAS',
+}
+
+export enum EDemoBitcoin {
+    SAVE_QUICK_ALERT_SETTINGS = 'SAVE_QUICK_ALERT_SETTINGS',
+    CANCEL_ALL_ALERT_SETTINGS = 'CANCEL_ALL_ALERT_SETTINGS',
+    GET_CURRENT_PRICE = 'GET_CURRENT_PRICE',
+    RECEIVE_CURRENT_PRICE = 'RECEIVE_CURRENT_PRICE'
+
 }
 
 

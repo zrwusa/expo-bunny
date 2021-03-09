@@ -15,12 +15,11 @@ import {loadAsync} from "expo-font";
 import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
 import {SizeLaborProvider} from "./providers/size-labor";
 import NavigatorTree from "./navigation/NavigatorTree";
-import Sys from "./components/Sys";
 import {AuthLaborProvider} from "./providers/auth-labor";
 import {I18nLaborProvider} from "./providers/i18n-labor";
-import BLInfo from "./components/BLInfo";
 import RequestLoading from "./components/RequestLoading";
-import SnackToast from "./components/SnackToast";
+import BLToast from "./components/BLToast";
+import Sys from "./components/Sys";
 
 function App() {
     const dispatch = useDispatch();
@@ -87,10 +86,9 @@ function App() {
                                                     )
                                                 }
                                             />
-                                            {/*<Sys/>*/}
-                                            <BLInfo/>
+                                            <Sys/>
                                             <RequestLoading/>
-                                            <SnackToast/>
+                                            <BLToast/>
                                         </>
                                     }}
                                     </ThemeLaborContext.Consumer>

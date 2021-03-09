@@ -1,8 +1,8 @@
 import {ELanguage, ESys, EThemes} from "../../constants";
 import {
-    RequestReceivedPayload,
+    RequestConfig,
     RequestFailedPayload,
-    RequestingPayload,
+    RequestReceivedPayload,
     RestoreIsReadyPayload,
     RestoreNavInitialStatePayload,
     SysClearErrorPayload,
@@ -63,14 +63,14 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
                 ...restoreNavInitialStatePayload
             }
         case ESys.REQUESTING:
-            const requestingPayload = payload as RequestingPayload
-            prevState.requestStatuses.push({id: requestingPayload.id, status: 'FETCHING'})
+            const requestingPayload = payload as RequestConfig
+            prevState.requestStatuses.push({...requestingPayload, status: 'FETCHING'})
             return {
                 ...prevState,
             };
         case ESys.REQUEST_RECEIVED:
             const receivedPayload = payload as RequestReceivedPayload
-            _.remove(prevState.requestStatuses,item=>item.id===receivedPayload.id)
+            _.remove(prevState.requestStatuses, item => (item.url === receivedPayload.url && item.method === receivedPayload.method && item.params === receivedPayload.params))
             // prevState.requestStatuses.map(item=>{
             //     if(item.id===receivedPayload.id){
             //         item.status = 'SUCCESS'
@@ -81,7 +81,7 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             };
         case ESys.REQUEST_FAILED:
             const requestFailedPayload = payload as RequestFailedPayload
-            _.remove(prevState.requestStatuses,item=>item.id===requestFailedPayload.id)
+            _.remove(prevState.requestStatuses, item => (item.url === requestFailedPayload.url && item.method === requestFailedPayload.method && item.params === requestFailedPayload.params))
 
             // prevState.requestStatuses.map(item=>{
             //     if(item.id===requestFailedPayload.id){

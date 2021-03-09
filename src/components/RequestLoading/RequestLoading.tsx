@@ -15,7 +15,7 @@ const RequestLoading = () => {
     const styles = createStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     useEffect(() => {
-        const  fetchingRequests = sysState.requestStatuses.filter(item=>item.status ==='FETCHING')
+        const fetchingRequests = sysState.requestStatuses.filter(item => item.status === 'FETCHING')
         setIsShow(fetchingRequests.length > 0)
     }, [JSON.stringify(sysState.requestStatuses)])
     return (
