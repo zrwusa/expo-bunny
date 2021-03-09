@@ -2,6 +2,7 @@
 import {InitialState} from "@react-navigation/native";
 import {DemoSaga, NearbyFilm, Region} from "./models";
 import {BLReturn} from "./business";
+import {Notification} from "expo-notifications";
 
 export interface RequestStatus {
     id: string;
@@ -49,6 +50,20 @@ export type DemoMapState = {
 export interface DemoSagaState {
     isFetching: boolean,
     items: DemoSaga[]
+}
+
+export interface BitcoinAlertState {
+    notification:Notification,
+    currentPrice:number,
+    granularity:number,
+    expoPushToken:string,
+    reminder:{
+        times: number,
+        interval: string
+    },
+    dictionaries:{
+
+    }
 }
 
 export interface RootState {

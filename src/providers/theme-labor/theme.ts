@@ -1,7 +1,7 @@
 import {fontsWarehouse} from "./fonts";
 import {Themes, ThemeWarehouse, TraversableNested} from "../../types";
 import color from "color";
-import {EThemes} from "../../constants/constants";
+import {EThemes} from "../../constants";
 import {pl} from "../../utils";
 
 export const getThemeWareHouse = () => {
@@ -100,7 +100,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey800
             },
             accent: {
-                light: pl.blue400,
+                light: pl.green850,
                 dark: pl.tealA700
             },
             accentSecondary: {

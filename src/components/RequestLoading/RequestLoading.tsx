@@ -7,11 +7,7 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {createStyles} from "./styles";
 import {ActivityIndicator} from "react-native";
 
-interface Props {
-    title?: string
-}
-
-const RequestLoading = ({title}: Props) => {
+const RequestLoading = () => {
     const sysState = useSelector((store: RootState) => store.sysState);
     const [isShow, setIsShow] = useState(false)
     const sizeLabor = useSizeLabor();

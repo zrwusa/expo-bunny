@@ -27,7 +27,9 @@ export type Region = {
     latitudeDelta: number,
     longitudeDelta: number,
 }
+
 export type DemoSaga = {
     id: number,
     text: string
 }
+

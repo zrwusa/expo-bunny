@@ -20,6 +20,7 @@ import {AuthLaborProvider} from "./providers/auth-labor";
 import {I18nLaborProvider} from "./providers/i18n-labor";
 import BLInfo from "./components/BLInfo";
 import RequestLoading from "./components/RequestLoading";
+import SnackToast from "./components/SnackToast";
 
 function App() {
     const dispatch = useDispatch();
@@ -86,9 +87,10 @@ function App() {
                                                     )
                                                 }
                                             />
-                                            <Sys/>
+                                            {/*<Sys/>*/}
                                             <BLInfo/>
                                             <RequestLoading/>
+                                            <SnackToast/>
                                         </>
                                     }}
                                     </ThemeLaborContext.Consumer>

@@ -283,6 +283,13 @@ export const palette: Palette = {
     whiteContrast: '#080808',
     transparent: 'transparent',
 
+    //---start--- react-native-paper
+    green850:'#03dac4',
+    deepPurple550:'#6200ee',
+    grey90: '#f6f6f6',
+    redA800: '#B00020',
+    //---end--- react-native-paper
+
     //---start--- react-native-elements
     grey290: '#e1e8ee',
     grey350: '#d8d8d8',

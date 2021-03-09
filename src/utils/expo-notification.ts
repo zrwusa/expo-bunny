@@ -69,7 +69,8 @@ export const initialedNotification: Notification = {
             "attachments": [],
             "threadIdentifier": "",
         }
-    }, "date": new Date().getMilliseconds()
+    },
+    "date": new Date().getMilliseconds()
 };
 
 // const demoNotification: Notification = {

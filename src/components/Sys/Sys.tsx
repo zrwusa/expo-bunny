@@ -20,7 +20,7 @@ const Sys = ({title}: Props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         setIsShow(sysState.error.length > 0)
-    }, [sysState.error.length])
+    }, [JSON.stringify(sysState.error)])
     return (
         isShow
             ? <View style={styles.errorConsole}>

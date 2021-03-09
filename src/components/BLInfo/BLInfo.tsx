@@ -20,8 +20,8 @@ const BLInfo = ({title}: Props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         setIsShow(blInfoState.infos.length > 0)
-    }, [blInfoState.infos.length])
-    const xxx = blInfoState.infos.map((infos) => {
+    }, [JSON.stringify(blInfoState.infos)])
+    const infos = blInfoState.infos.map((infos) => {
         return JSON.stringify(infos) + '\n'
     })
     return (
@@ -31,7 +31,7 @@ const BLInfo = ({title}: Props) => {
                 {
                     (blInfoState.infos) ?
                         <View>
-                            <TextInput style={styles.errorText} multiline value={xxx.toString()}/>
+                            <TextInput style={styles.errorText} multiline value={infos.toString()}/>
                         </View> :
                         <></>
                 }

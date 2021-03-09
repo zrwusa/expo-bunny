@@ -598,7 +598,14 @@ export type Palette = {
     whiteContrast: string,
     transparent: string,
 
-    //---start---extra
+    //---start--- react-native-paper
+    green850:string,
+    deepPurple550:string,
+    grey90: string,
+    redA800: string,
+    //---end--- react-native-paper
+
+    //---start--- react-native-elements
     grey290: string,
     grey350: string,
     grey380: string,
@@ -618,7 +625,8 @@ export type Palette = {
     yellow720: string,
     yellow780: string,
     blueGrey320: string,
-    //---end---extra
+    //---end--- react-native-elements
+
 }
 
 export type PaletteWithColors = {
@@ -904,6 +912,13 @@ export type PaletteWithColors = {
     whiteContrast: '#080808',
     transparent: 'transparent',
 
+    //---start--- react-native-paper
+    green850:'#03dac4',
+    deepPurple550:'#6200ee',
+    grey90: '#f6f6f6',
+    redA800: '#B00020',
+    //---end--- react-native-paper
+
     //---start--- react-native-elements
     grey290: '#e1e8ee',
     grey350: '#d8d8d8',
@@ -924,7 +939,7 @@ export type PaletteWithColors = {
     yellow720: '#cfbe27',
     yellow780: '#faad14',
     blueGrey320: '#86939e',
-    //---end---extra
+    //---end--- react-native-elements
 }
 
 

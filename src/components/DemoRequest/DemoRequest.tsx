@@ -3,8 +3,6 @@ import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";
-import {collectBLInfo} from "../../store/actions/business-logic";
-import {blInfo} from "../../helpers";
 
 interface Props {
     title: string,
@@ -26,8 +24,8 @@ function DemoRequest(props: Props) {
 
     const saveQuickAlertSettings = async function () {
         // try {
-            console.log('---demo-request saveQuickAlertSettings,expoPushToken',expoPushToken)
-            await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
+        console.log('---demo-request saveQuickAlertSettings,expoPushToken', expoPushToken)
+        await request.post('/push-service/alert-quick-settings', {token: expoPushToken, granularity})
         // } catch (err) {
         //     console.error(err)
         // }
