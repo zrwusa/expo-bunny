@@ -19,16 +19,16 @@ const Sys = ({title}: Props) => {
     const styles = createStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     useEffect(() => {
-        setIsShow(sysState.error.length > 0)
-    }, [JSON.stringify(sysState.error)])
+        setIsShow(sysState.errors.length > 0)
+    }, [JSON.stringify(sysState.errors)])
     return (
         isShow
             ? <View style={styles.errorConsole}>
                 <Text>{title}</Text>
                 {
-                    (sysState.error || sysState.warn) ?
+                    (sysState.errors || sysState.warns) ?
                         <View>
-                            <TextInput style={styles.errorText} multiline value={sysState.error.join('\n').toString() || sysState.warn.toString()}/>
+                            <TextInput style={styles.errorText} multiline value={sysState.errors.join('\n').toString() || sysState.warns.toString()}/>
                         </View> :
                         <></>
                 }

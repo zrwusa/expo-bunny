@@ -3,7 +3,7 @@ import {Animated} from "react-native";
 import {Image, Text, View} from "../../components/UI";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
-import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState, SysErrorPayload} from "../../types";
+import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState} from "../../types";
 import {Action} from "redux";
 import {getNearbyFilms, restoreRegion, sysError} from "../../store/actions";
 import {connect} from "react-redux";
@@ -21,7 +21,7 @@ const mapStateToProps = (rootState: RootState) => ({...rootState.demoMapState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMapState, void, Action>) => ({
     getNearbyFilms: async (reqParams: GetNearbyFilmsReqParams) => dispatch(getNearbyFilms(reqParams)),
     restoreRegion: (region: Region) => dispatch(restoreRegion(region)),
-    sysError: (err: SysErrorPayload) => dispatch(sysError(err))
+    sysError: (err: Error) => dispatch(sysError(err))
 });
 
 export interface DemoMapProps extends ReturnType<typeof mapDispatchToProps>,

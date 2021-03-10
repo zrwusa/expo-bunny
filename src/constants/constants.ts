@@ -36,7 +36,8 @@ export enum ESys {
 
 export enum EBL {
     COLLECT_BL_RESULT = "COLLECT_BL_RESULT",
-    CLEAR_BL_RESULT = "CLEAR_BL_RESULT"
+    CLEAR_BL_RESULT = "CLEAR_BL_RESULT",
+    SET_BL_RESULT = "SET_BL_RESULT"
 }
 
 export enum EDemoHello {
@@ -70,7 +71,8 @@ export enum EBLMsg {
     NO_DEMO_THUNK_DATA = "No demo thunks response data",
     SAVE_QUICK_ALERT_SETTINGS_SUCCESS = "Save quick alert settings success",
     CANCEL_ALL_ALERT_SETTINGS_SUCCESS = "Cancel all alert settings success",
-    // XXX = "Xxx",
+    GET_CURRENT_PRICE_SUCCESS = "Get current price success",
+    GET_DEMO_SAGAS_SUCCESS = "Get demo sagas success",
     // XXX = "Xxx",
     // XXX = "Xxx",
     // XXX = "Xxx",

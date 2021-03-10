@@ -2,6 +2,7 @@
 import {InitialState} from "@react-navigation/native";
 import {BunnyAPIStandardRequestParams} from "./api";
 import {Method} from "axios";
+import {BLResult} from "./bl";
 
 export interface SignInParams {
     email: string;
@@ -13,12 +14,9 @@ export interface SignUpParams {
     password: string;
 }
 
-type TimeSpend = {
-    timeSpend?: number
-}
 
 export interface SysErrorPayload {
-    error: Error & TimeSpend;
+    error: Error;
 }
 
 // export interface BLInfoPayload {
@@ -29,6 +27,10 @@ export interface ClearBLResultPayload {
     all?: boolean;
     top?: number;
     last?: number;
+}
+
+export interface SetBLResultPayload {
+    blResult: BLResult
 }
 
 export interface SysClearErrorPayload {

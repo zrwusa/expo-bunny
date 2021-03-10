@@ -3,7 +3,7 @@ import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";
-import {cancelAlertSettings, saveQuickAlertSettings} from "../../store/actions"
+import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings} from "../../store/actions"
 
 interface Props {
     title: string,
@@ -52,7 +52,7 @@ function DemoRequest(props: Props) {
             dispatch(saveQuickAlertSettings({token: expoPushToken, granularity: 0.01, reminder: {times: 3, interval: '1s'}}))
             dispatch(cancelAlertSettings({token: expoPushToken, cancelAll: true}))
 
-            // dispatch(getCurrentPrice())
+            dispatch(getCurrentPrice())
             const res = await request.get(`/employees`);
             setEmployees(res.data)
         } catch (err) {

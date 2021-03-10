@@ -1,4 +1,4 @@
-import api from "../../helpers/bunny-api";
+import bunnyAPI from "../../helpers/bunny-api";
 import {
     CollectBLResultAction,
     DemoThunkPayload,
@@ -15,13 +15,13 @@ import {EBLMsg, EDemoThunk} from "../../constants";
 import {Action, ActionCreator, Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {requestFailed, requesting, requestReceived, sysError} from "./sys";
-import {collectBLResult} from "./business-logic";
+import {collectBLResult} from "./bl-result";
 import {blError} from "../../helpers";
 
 export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSuccessAction = (payload) => {
     return {
         type: EDemoThunk.DEMO_THUNK_SUCCESS,
-        payload: payload,
+        payload
     };
 };
 
@@ -31,7 +31,7 @@ export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkStat
         const config: RequestConfig = {url: '/demo-thunks', method: 'POST', data: reqParams}
         try {
             result = dispatch(requesting(config))
-            const res = await api.request(config);
+            const res = await bunnyAPI.request(config);
             if (res.data) {
                 result = dispatch(demoThunkSuccess(res.data));
                 result = dispatch(requestReceived(config))
@@ -39,8 +39,8 @@ export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkStat
                 result = dispatch(collectBLResult(blError(EBLMsg.NO_DEMO_THUNK_DATA)));
             }
             return result
-        } catch (err) {
-            result = dispatch(sysError({error: err}))
+        } catch (e) {
+            result = dispatch(sysError(e))
             result = dispatch(requestFailed(config))
             return result;
         }

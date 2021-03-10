@@ -1,5 +1,5 @@
 import {call, put, takeEvery} from "redux-saga/effects"
-import api from "../../helpers/bunny-api";
+import bunnyAPI from "../../helpers/bunny-api";
 import {
     collectBLResult,
     getDemoSagas,
@@ -11,7 +11,7 @@ import {
     sysError
 } from "../actions";
 import {EBLMsg, EDemoBitcoin, EDemoSaga} from "../../constants";
-import {CancelAlertSettingsAction, RequestConfig, RequestGetCurrentPriceAction, SaveQuickAlertSettingsAction,} from "../../types";
+import {CancelAlertSettingsAction, RequestConfig, SaveQuickAlertSettingsAction,} from "../../types";
 import {blSuccess} from "../../helpers";
 
 export const sagaDemoSagas = function* () {
@@ -22,11 +22,12 @@ export const sagaDemoSagas = function* () {
         const config: RequestConfig = {url, method, params}
         try {
             yield put(requesting(config))
-            const {data} = yield call(() => api.request(config));
+            const {data} = yield call(() => bunnyAPI.request(config));
+            yield put(collectBLResult(blSuccess(data, EBLMsg.GET_DEMO_SAGAS_SUCCESS, false)))
             yield put(receiveGetDemoSagas(data))
             yield put(requestReceived(config))
         } catch (e) {
-            yield put(sysError({error: e}));
+            yield put(sysError(e));
             yield put(requestFailed(config))
         }
     });
@@ -38,11 +39,11 @@ export const sagaDemoSagas = function* () {
         const config: RequestConfig = {url, method, data: payload}
         try {
             yield put(requesting(config))
-            const {data} = yield call(() => api.request(config));
+            const {data} = yield call(() => bunnyAPI.request(config));
             yield put(collectBLResult(blSuccess(data, EBLMsg.SAVE_QUICK_ALERT_SETTINGS_SUCCESS)))
             yield put(requestReceived(config))
         } catch (e) {
-            yield put(sysError({error: e}));
+            yield put(sysError(e));
             yield put(requestFailed(config))
         }
     });
@@ -54,26 +55,27 @@ export const sagaDemoSagas = function* () {
         const config: RequestConfig = {url, method, params: payload}
         try {
             yield put(requesting(config))
-            const {data} = yield call(() => api.request(config));
+            const {data} = yield call(() => bunnyAPI.request(config));
             yield put(collectBLResult(blSuccess(data, EBLMsg.CANCEL_ALL_ALERT_SETTINGS_SUCCESS)))
             yield put(requestReceived(config))
         } catch (e) {
-            yield put(sysError({error: e}));
+            yield put(sysError(e));
             yield put(requestFailed(config))
         }
     });
 
-    yield takeEvery(EDemoBitcoin.GET_CURRENT_PRICE, function* (action: RequestGetCurrentPriceAction) {
+    yield takeEvery(EDemoBitcoin.GET_CURRENT_PRICE, function* () {
         const url = '/bitcoin-prices';
         const method = 'GET';
         const config: RequestConfig = {url, method}
         try {
             yield put(requesting(config))
-            const {data} = yield call(() => api.get('/bitcoin-prices'));
+            const {data} = yield call(() => bunnyAPI.request(config));
             yield put(receiveGetCurrentPrice({currentPrice: data}))
+            yield put(collectBLResult(blSuccess(data, EBLMsg.GET_CURRENT_PRICE_SUCCESS, false)))
             yield put(requestReceived(config))
         } catch (e) {
-            yield put(sysError({error: e}));
+            yield put(sysError(e));
             yield put(requestFailed(config))
         }
     });

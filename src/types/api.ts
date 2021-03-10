@@ -1,5 +1,5 @@
 import {AuthAPIError, BunnyAPIError} from "../utils";
-import {BLResult} from "./business";
+import {BLResult} from "./bl";
 
 export type BunnyAPIProtocolResponseData<T> = {
     "httpExtra": {

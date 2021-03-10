@@ -6,7 +6,6 @@ import {
     RestoreIsReadyPayload,
     RestoreNavInitialStatePayload,
     SysClearErrorPayload,
-    SysErrorPayload,
     SysState,
     SysWarnPayload
 } from "../../types";
@@ -15,8 +14,8 @@ import _ from "lodash";
 
 const initialState: SysState = {
     isReady: false,
-    error: [],
-    warn: [""],
+    errors: [],
+    warns: [],
     themeName: EThemes.light,
     language: ELanguage.en,
     navInitialState: undefined,
@@ -32,8 +31,8 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
                 ...restoreIsReadyPayload,
             }
         case ESys.ERROR:
-            const sysErrorPayload = payload as SysErrorPayload
-            prevState.error.push(sysErrorPayload.error);
+            const sysErrorPayload = payload as Error
+            prevState.errors.push(sysErrorPayload);
             return {
                 ...prevState,
             };
@@ -41,17 +40,17 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
         case ESys.CLEAR_ERRORS:
             const sysClearErrorPayload = payload as SysClearErrorPayload
             if (sysClearErrorPayload.all) {
-                prevState.error = []
+                prevState.errors = []
             } else if (sysClearErrorPayload.top) {
-                prevState.error.splice(0, sysClearErrorPayload.top)
+                prevState.errors.splice(0, sysClearErrorPayload.top)
             } else if (sysClearErrorPayload.last) {
-                prevState.error.splice(prevState.error.length - sysClearErrorPayload.last, sysClearErrorPayload.last)
+                prevState.errors.splice(prevState.errors.length - sysClearErrorPayload.last, sysClearErrorPayload.last)
             }
             return {...prevState};
 
         case ESys.WARN:
             const sysWarnPayload = payload as SysWarnPayload
-            prevState.warn.push(sysWarnPayload.warn)
+            prevState.warns.push(sysWarnPayload.warn)
             return {
                 ...prevState,
             };
@@ -64,7 +63,7 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             }
         case ESys.REQUESTING:
             const requestingPayload = payload as RequestConfig
-            prevState.requestStatuses.push({...requestingPayload, status: 'FETCHING'})
+            prevState.requestStatuses.push({...requestingPayload, status: 'LOADING'})
             return {
                 ...prevState,
             };

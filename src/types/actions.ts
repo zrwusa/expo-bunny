@@ -12,11 +12,10 @@ import {
     RestoreNavInitialStatePayload,
     SaveQuickAlertSettingsParams,
     SysClearErrorPayload,
-    SysErrorPayload,
     SysWarnPayload
 } from "./payloads";
 import {DemoSaga, NearbyFilm, Region} from "./models";
-import {BLResult} from "./business";
+import {BLResult} from "./bl";
 
 export interface DemoHelloAction {
     type: EDemoHello.DEMO_HELLO;
@@ -30,7 +29,7 @@ export interface DemoHello2Action {
 
 export interface SysErrorAction {
     type: ESys.ERROR;
-    payload: SysErrorPayload;
+    payload: Error;
 }
 
 export interface CollectBLResultAction {
@@ -41,6 +40,11 @@ export interface CollectBLResultAction {
 export interface ClearBLResultAction {
     type: EBL.CLEAR_BL_RESULT;
     payload: ClearBLResultPayload;
+}
+
+export interface SetBLResultAction {
+    type: EBL.SET_BL_RESULT;
+    payload: BLResult;
 }
 
 export interface SysClearErrorsAction {

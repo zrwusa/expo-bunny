@@ -1,8 +1,8 @@
 import {AxiosInstance} from 'axios';
 import React, {ReactNode} from 'react';
-import api from "../../helpers/bunny-api";
+import bunnyAPI from "../../helpers/bunny-api";
 
-const RequestContext = React.createContext<typeof api>(new Proxy(api, {
+const RequestContext = React.createContext<typeof bunnyAPI>(new Proxy(bunnyAPI, {
         apply: () => {
             throw new Error('You must wrap your component in an RequestProvider');
         },
@@ -23,12 +23,12 @@ function RequestProvider(props: RequestProviderProps) {
     //     throw new Error('The component using the the context must be a descendant of the context provider')
     // }
     return (
-        <RequestContext.Provider value={axiosInstance || api}>
+        <RequestContext.Provider value={axiosInstance || bunnyAPI}>
             {children}
         </RequestContext.Provider>
     );
 }
 
-const useRequest = (): typeof api => React.useContext(RequestContext);
+const useRequest = (): typeof bunnyAPI => React.useContext(RequestContext);
 
 export {RequestProvider, useRequest};

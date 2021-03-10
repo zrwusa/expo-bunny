@@ -60,7 +60,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                             },
                         })}><TextBtn>{st(`passParamsFromRootToLeaf`)}(TouchableOpacity)</TextBtn></ButtonTO>
                     <Link to="/demo-nested/nested-settings/001/nested-lv2-settings/002">{st(`passParamsFromRootToLeaf`)}(Link)</Link>
-                    <Link to="/demo-bitcoin/bitcoin-alert/true">{st(`passParamsFromRootToLeafTab`)}(Link)</Link>
+                    <Link to="/demo-tab/tab-settings/item-001">{st(`passParamsFromRootToLeafTab`)}(Link)</Link>
                 </Card>
                 <Card title={st(`redux`)}>
                     <Link to="/demo-fc-redux-hook">{st(`FCReduxHook`)}</Link>

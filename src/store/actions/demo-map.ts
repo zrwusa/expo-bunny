@@ -15,15 +15,15 @@ import {
     RestoreRegionAction,
     SysErrorAction
 } from "../../types";
-import api from "../../helpers/bunny-api";
+import bunnyAPI from "../../helpers/bunny-api";
 import {requestFailed, requesting, requestReceived, sysError} from "./sys";
-import {collectBLResult} from "./business-logic";
+import {collectBLResult} from "./bl-result";
 import {blError} from "../../helpers";
 
 export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAction = (payload) => {
     return {
         type: EDemoMap.RESTORE_NEARBY_FILMS,
-        payload: payload,
+        payload
     };
 };
 
@@ -33,7 +33,7 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapS
         const config: RequestConfig = {method: 'GET', url: '/nearby-films', params: reqParams};
         try {
             result = dispatch(requesting(config))
-            const res = await api.request(config);
+            const res = await bunnyAPI.request(config);
             if (res.data) {
                 result = dispatch(restoreNearbyFilms(res.data));
                 result = dispatch(requestReceived(config))
@@ -41,8 +41,8 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapS
                 result = dispatch(collectBLResult(blError(EBLMsg.NO_NEARBY_FILMS)));
             }
             return result;
-        } catch (err) {
-            result = dispatch(sysError({error: err}));
+        } catch (e) {
+            result = dispatch(sysError(e));
             result = dispatch(requestFailed(config))
             return result;
         }
@@ -52,7 +52,7 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapS
 export const restoreRegion: (payload: Region) => RestoreRegionAction = (payload) => {
     return {
         type: EDemoMap.RESTORE_REGION,
-        payload: payload,
+        payload
     };
 };
 

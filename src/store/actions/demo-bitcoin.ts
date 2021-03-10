@@ -32,7 +32,7 @@ export function getCurrentPrice(): RequestGetCurrentPriceAction {
 export function receiveGetCurrentPrice(payload: ReceiveGetCurrentPricePayload): ReceiveGetCurrentPriceAction {
     return {
         type: EDemoBitcoin.RECEIVE_CURRENT_PRICE,
-        payload: payload,
+        payload
     }
 }
 

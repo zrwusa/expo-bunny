@@ -2,7 +2,7 @@
 import {ReactNode} from "react";
 import {GoogleUser} from "expo-google-app-auth";
 import {SignInParams, SignUpParams} from "./payloads";
-import {BLResult} from "./business";
+import {BLResult} from "./bl";
 import {Method} from "axios";
 
 export type UserRes = {

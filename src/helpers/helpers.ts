@@ -13,7 +13,7 @@ import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-nat
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants, {EBLMsg} from "../constants/constants";
-import {AuthAPIError, BunnyAPIError} from "../utils";
+import {AuthAPIError, BunnyAPIError, uuidV4} from "../utils";
 import bunnyConfig from "../config.json";
 import _ from "lodash";
 
@@ -187,24 +187,30 @@ export const checkAuthStatus = async () => {
     }
 }
 
-export const blError = (blMsg: string): BLResult => {
+export const blError = (blMsg: string, shouldShow?: boolean): BLResult => {
+    const shouldShowParam = shouldShow !== undefined ? shouldShow : true
     return {
+        id: uuidV4(),
         success: false,
         data: undefined,
-        message: blMsg
+        message: blMsg,
+        shouldShow: shouldShowParam
     }
 }
 
-export const blSuccess = (data: any, message?: string): BLResult => {
+export const blSuccess = (data: any, message?: string, shouldShow?: boolean): BLResult => {
+    const shouldShowParam = shouldShow !== undefined ? shouldShow : true
     return {
+        id: uuidV4(),
         success: true,
         data: data,
-        message: message || ''
+        message: message || '',
+        shouldShow: shouldShowParam
     }
 }
 
 export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
-    const {successData, businessLogic, httpExtra} = data;
+    const {businessLogic, httpExtra} = data;
     const dataKeys = Object.keys(data)
     const isDataKeysEqual = _.isEqual(dataKeys, ["timeSpent", "successData", "httpExtra", "businessLogic"])
     const {errorCode, errorMessage, errorStack} = businessLogic;

@@ -42,14 +42,14 @@ export const AuthScreen = (props: AuthProps) => {
                             try {
                                 await authFunctions.signIn({email: username, password: password})
                             } catch (e) {
-                                dispatch(sysError({error: e}))
+                                dispatch(sysError(e))
                             }
                         }} title={st(`signIn`)}/>
                         <ButtonRNE onPress={async () => {
                             try {
                                 await authFunctions.signInDummy()
                             } catch (e) {
-                                dispatch(sysError({error: e}))
+                                dispatch(sysError(e))
                             }
                         }} title={st(`signInDummy`)}/>
                         <ButtonRNE onPress={() => {
@@ -61,7 +61,7 @@ export const AuthScreen = (props: AuthProps) => {
                             try {
                                 await authFunctions.signUp({email: username, password: password})
                             } catch (e) {
-                                dispatch(sysError({error: e}))
+                                dispatch(sysError(e))
                             }
                         }} title={st(`signUp`)}/>
                         <ButtonRNE onPress={() => {
@@ -75,7 +75,7 @@ export const AuthScreen = (props: AuthProps) => {
                         try {
                             await authFunctions.signInGoogle()
                         } catch (e) {
-                            dispatch(sysError({error: e}))
+                            dispatch(sysError(e))
                         }
                     }} title={st(`signInGoogle`)}/>
                     : <></>

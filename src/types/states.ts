@@ -1,18 +1,18 @@
 // Redux store states,different from models entities
 import {InitialState} from "@react-navigation/native";
 import {DemoSaga, NearbyFilm, Region} from "./models";
-import {BLResult} from "./business";
+import {BLResult} from "./bl";
 import {Notification} from "expo-notifications";
 import {RequestConfig} from "./payloads";
 
 export type RequestStatus = {
 
-    status: 'FETCHING' | 'SUCCESS' | 'FAILED';
+    status: 'LOADING' | 'SUCCESS' | 'FAILED';
 } & RequestConfig
 
 export type SysState = {
-    error: Error[],
-    warn: string[],
+    errors: Error[],
+    warns: string[],
     isReady: boolean,
     themeName: string,
     language: string,
@@ -20,8 +20,8 @@ export type SysState = {
     requestStatuses: RequestStatus[]
 }
 
-export type BLState = {
-    results: BLResult[]
+export type BLResultState = {
+    blResults: BLResult[]
 }
 
 export interface DemoHelloState {
@@ -79,7 +79,7 @@ export interface DemoBitcoinState {
 
 export interface RootState {
     sysState: SysState,
-    blInfoState: BLState,
+    blResultState: BLResultState,
     demoHelloState: DemoHelloState,
     demoHello2State: DemoHello2State,
     demoThunkState: DemoThunkState,

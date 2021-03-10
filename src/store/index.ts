@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     demoThunkState: demoThunkStateReducer,
     demoMapState: demoMapStateReducer,
     sysState: sysStateReducer,
-    blInfoState: blStateReducer,
+    blResultState: blStateReducer,
     demoSagaState: demoSagaReducer,
     demoBitcoinState: demoBitcoinReducer,
 });

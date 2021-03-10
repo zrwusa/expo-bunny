@@ -4,14 +4,14 @@ import {DemoHello2Action, DemoHello2Payload, DemoHelloAction, DemoHelloPayload} 
 export const demoHello: (payload: DemoHelloPayload) => DemoHelloAction = (payload) => {
     return {
         type: EDemoHello.DEMO_HELLO,
-        payload: payload,
+        payload
     };
 };
 
 export const demoHello2: (payload: DemoHello2Payload) => DemoHello2Action = (payload) => {
     return {
         type: EDemoHello.DEMO_HELLO2,
-        payload: payload,
+        payload
     };
 };
 

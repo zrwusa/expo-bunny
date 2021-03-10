@@ -91,8 +91,8 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
             // }
             try {
                 dispatch(getCurrentPrice())
-            } catch (err) {
-                dispatch(sysError({error: err}))
+            } catch (e) {
+                dispatch(sysError(e))
             }
 
             notificationReceivedListener = Notifications
