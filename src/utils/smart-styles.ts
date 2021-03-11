@@ -5,7 +5,7 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
     const {ms, responsive} = sizeLabor;
     const {colors, fonts} = themeLabor.theme;
     const {wp} = responsive.iphoneX;
-    return StyleSheet.create({
+    const smartStyles:StyleSheet.NamedStyles<any> ={
         h1: {
             fontSize: ms.fs.xxl,
             color: colors.title,
@@ -151,5 +151,6 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             bottom: 0,
             left: 0,
         },
-    })
+    }
+    return smartStyles
 }

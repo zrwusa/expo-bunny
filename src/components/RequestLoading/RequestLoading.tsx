@@ -16,25 +16,12 @@ const RequestLoading = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const loadingRequests = requestStatuses.filter(item => item.status === 'LOADING')
-        // const timeoutHandler = setTimeout(() => {
-        //     clearTimeout(timeoutHandler)
-        //     setIsShow(loadingRequests.length > 0)
-        // }, 200)
         setIsShow(loadingRequests.length > 0)
-
     }, [JSON.stringify(requestStatuses)])
     return (
         isShow
             ? <View style={styles.container}>
                 <ActivityIndicator size="large"/>
-                {/*{text*/}
-                {/*    ? typeof text === 'string'*/}
-                {/*        ? <Text style={styles.text}>*/}
-                {/*            {text}*/}
-                {/*        </Text>*/}
-                {/*        : {text}*/}
-                {/*    : null*/}
-                {/*}*/}
             </View>
             : null
     );

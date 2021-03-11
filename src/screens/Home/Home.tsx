@@ -4,7 +4,7 @@ import {RouteProp, useLinkTo} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {RootStackParam} from "../../types";
-import {ButtonTO, Link, TextBtn} from "../../components/UI";
+import {ButtonTO, IcoMoon, Link, TextBtn} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {Card, getContainerStyles} from "../../containers";
@@ -18,7 +18,7 @@ type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
 export interface HomeScreenProps {
     route: HomeRouteProp;
     navigation: HomeNavigationProp;
-};
+}
 
 function HomeScreen({navigation}: HomeScreenProps) {
     const {t} = useTranslation();
@@ -29,21 +29,23 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
-
+    const {colors} = themeLabor.theme;
+    const {wp} = sizeLabor.responsive.iphoneX;
+    const iconColor = colors.btnText;
     return (
         <ScrollView>
             <View style={containerStyles.Screen}>
                 <Card title={st(`navAndRoute`)}>
-                    <Link to="/demo-tab/tab-home">{st(`tab`)}</Link>
+                    <Link to="/demo-tab/tab-home">{st(`tab`)}<IcoMoon name="home" style={{color: iconColor}}/></Link>
                     <Link to="/demo-drawer/drawer-home">{st(`drawer`)}</Link>
-                    <Link to="/profile/002">{st(`profile`)}(Link)</Link>
+                    <Link to="/profile/002">{st(`profile`)+`(Link)`}</Link>
                     <ButtonTO onPress={() => linkTo("/profile/002")}>
                         <TextBtn>{st(`profile`)}(useLinkTo)</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
                         <TextBtn>{st(`profile`)}(TouchableOpacity)</TextBtn></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
                         <TextBtn>{st(`route`)}(TouchableOpacity)</TextBtn></ButtonTO>
-                    <Link to="/demo-route?id=1&isHuman=false&sort=top">{st(`route`)}(Link)</Link>
+                    <Link to="/demo-route?id=1&isHuman=false&sort=top">{st(`route`)+`(Link)`}</Link>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
                     {/*    <TextBtn>{st(`demoModal`)}</TextBtn></ButtonTO>*/}
 
@@ -59,8 +61,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                                 },
                             },
                         })}><TextBtn>{st(`passParamsFromRootToLeaf`)}(TouchableOpacity)</TextBtn></ButtonTO>
-                    <Link to="/demo-nested/nested-settings/001/nested-lv2-settings/002">{st(`passParamsFromRootToLeaf`)}(Link)</Link>
-                    <Link to="/demo-tab/tab-settings/item-001">{st(`passParamsFromRootToLeafTab`)}(Link)</Link>
+                    <Link to="/demo-nested/nested-settings/001/nested-lv2-settings/002">{st(`passParamsFromRootToLeaf`)+`(Link)`}</Link>
+                    <Link to="/demo-tab/tab-settings/item-001">{st(`passParamsFromRootToLeafTab`)+`(Link)`}</Link>
                 </Card>
                 <Card title={st(`redux`)}>
                     <Link to="/demo-fc-redux-hook">{st(`FCReduxHook`)}</Link>

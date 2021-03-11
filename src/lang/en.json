@@ -27,6 +27,7 @@
       "passParamsFromRootToLeafTab": "Root To Leaf(Tab)",
       "FCReduxHook": "FC Redux Hook",
       "thunkCC": "Thunk CC",
+      "saga": "Redux Saga",
       "map": "Map",
       "chat": "Chat",
       "share": "Share",
@@ -87,6 +88,9 @@
       "thunkDispatch": "Thunk Dispatch",
       "text": "Text: ",
       "id": "id: "
+    },
+    "DemoSaga": {
+      "title": "DemoSaga"
     },
     "DemoMap": {
       "title": "DemoMap"

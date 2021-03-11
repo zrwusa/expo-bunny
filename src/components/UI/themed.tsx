@@ -157,6 +157,18 @@ export const TextRNE: React.FC<TextElementProps> = ({children, style, ...rest}) 
         {...rest}>{children}</TextElement>);
 }
 
+export const TextXXX: React.FC<TextElementProps> = ({children, style, ...rest}) => {
+    const {colors} = useThemeLabor().theme;
+    const {ms} = useSizeLabor();
+
+    const styleObj = getStyleObj(style);
+    return (<TextElement
+        style={{
+            ...styleObj
+        }}
+        {...rest}>{children}</TextElement>);
+}
+
 export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const buttonStyleObj = getStyleObj(buttonStyle);

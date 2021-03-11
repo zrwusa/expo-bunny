@@ -1,7 +1,12 @@
 {
   "titleFormat": "ExpoReact兔子",
   "sys": {
-    "navigationFallback": "导航回退..."
+    "navigationFallback": "导航回退...",
+    "failedToGetToken": "无法获得用于推送通知的Token！",
+    "mustUsePhysicalDevice": "必须使用真实设备推送通知",
+    "I18nProviderLoading": "语言国际化组件加载中",
+    "AuthLaborProviderLoading": "用户授权组件加载中",
+    "ThemeProviderLoading": "主题组件加载中"
   },
   "screens": {
     "Home": {
@@ -22,6 +27,7 @@
       "passParamsFromRootToLeafTab": "根节点到叶子节点（底部导航）",
       "FCReduxHook": "函数组件 Redux Hooks",
       "thunkCC": "类组件 Thunk",
+      "saga": "Redux Saga",
       "map": "地图",
       "chat": "聊天",
       "share": "分享",
@@ -83,6 +89,9 @@
       "text": "text: ",
       "id": "id: "
     },
+    "DemoSaga": {
+      "title": "样例-Saga"
+    },
     "DemoMap": {
       "title": "样例-地图"
     },
@@ -102,13 +111,17 @@
       "pickAPhoto": "选一张照片"
     },
     "DemoNotification": {
-      "title": "样例-推送"
+      "title": "样例-推送",
+      "scheduleNotification": "点击发送推送通知"
     },
     "Auth": {
       "title": "登录",
       "signIn": "登录",
+      "signUp": "Sign Up",
       "signInDummy": "登录 （Dummy）",
       "signInGoogle": "登录 Google",
+      "goToSignUp": "Go to sign up",
+      "goToSignIn": "Go to sign in",
       "username": "用户名",
       "password": "密码"
     },
@@ -194,7 +207,17 @@
     },
     "BitcoinAlert": {
       "title": "比特币-闹钟",
-      "paramIsPush": "参数isPush: "
+      "paramIsPush": "参数isPush: ",
+      "scheduleNotification": "点击发送推送通知",
+      "failedToGetToken": "无法获得用于推送的Token！",
+      "mustUsePhysicalDevice": "必须使用真实设备进行推送",
+      "saveAlertSetting": "保存闹钟设置",
+      "saveQuickSettings": "保存",
+      "cancelAlertSettings": "取消",
+      "granularity": "波动范围",
+      "remindTimesLabel": "提醒次数",
+      "remindIntervalLabel": "提醒周期",
+      "currentPriceLabel": "当前价格"
     },
     "Settings": {
       "title": "设置",

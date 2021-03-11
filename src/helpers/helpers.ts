@@ -51,73 +51,81 @@ export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     return propsMap[navigatorType];
 }
 
-export const tabBarIconNameConfigMC: TraversableNested = {
-    TabHome: {
-        default: 'home',
-        focused: 'home',
-    },
-    TabSettings: {
-        default: 'account-settings',
-        focused: 'account-settings',
-    },
-    BitcoinHome: {
-        default: 'bitcoin',
-        focused: 'bitcoin',
-    },
-    BitcoinAlert: {
-        default: 'table-clock',
-        focused: 'table-clock',
-    },
-    RNFlatList: {
-        default: 'view-sequential',
-        focused: 'view-sequential',
-    },
-    RNHome: {
-        default: 'home-assistant',
-        focused: 'home-assistant',
-    },
-    RNNoKeyboard: {
-        default: 'keyboard-off',
-        focused: 'keyboard-off',
-    },
-    RNSafeArea: {
-        default: 'safe-square',
-        focused: 'safe-square',
-    },
-    RNSectionList: {
-        default: 'view-list',
-        focused: 'view-list',
-    },
-    RNVirtualizedList: {
-        default: 'playlist-plus',
-        focused: 'playlist-plus',
-    }
-}
+// export const tabBarIconNameConfigMC: TraversableNested = {
+//     TabHome: {
+//         default: 'home',
+//         focused: 'home',
+//     },
+//     TabSettings: {
+//         default: 'account-settings',
+//         focused: 'account-settings',
+//     },
+//     BitcoinHome: {
+//         default: 'bitcoin',
+//         focused: 'bitcoin',
+//     },
+//     BitcoinAlert: {
+//         default: 'table-clock',
+//         focused: 'table-clock',
+//     },
+//     RNFlatList: {
+//         default: 'view-sequential',
+//         focused: 'view-sequential',
+//     },
+//     RNHome: {
+//         default: 'home-assistant',
+//         focused: 'home-assistant',
+//     },
+//     RNNoKeyboard: {
+//         default: 'keyboard-off',
+//         focused: 'keyboard-off',
+//     },
+//     RNSafeArea: {
+//         default: 'safe-square',
+//         focused: 'safe-square',
+//     },
+//     RNSectionList: {
+//         default: 'view-list',
+//         focused: 'view-list',
+//     },
+//     RNVirtualizedList: {
+//         default: 'playlist-plus',
+//         focused: 'playlist-plus',
+//     }
+// }
 
 export const tabBarIconNameConfig: TraversableNested = {
     TabHome: {
-        default: 'home',
-        focused: 'home',
+        default: 'home1',
+        focused: 'home1',
     },
     TabSettings: {
         default: 'settings',
         focused: 'settings',
     },
     BitcoinHome: {
-        default: 'dollar',
-        focused: 'dollar',
+        default: 'bargraph',
+        focused: 'bargraph',
     },
     BitcoinAlert: {
-        default: 'alarm',
-        focused: 'alarm',
-    },
-    RNFlatList: {
-        default: 'list',
-        focused: 'list',
+        default: 'alarmclock',
+        focused: 'alarmclock',
     },
     RNHome: {
-        default: 'home1',
-        focused: 'home1',
+        default: 'barometer',
+        focused: 'barometer',
+    },
+    RNFlatList: {
+        default: 'layout4',
+        focused: 'layout4',
+    },
+    RNSectionList: {
+        default: 'layout7',
+        focused: 'layout7',
+    },
+    RNVirtualizedList: {
+        default: 'two-fingers-swipe-up',
+        focused: 'two-fingers-swipe-up',
     },
     RNNoKeyboard: {
         default: 'keyboard1',
@@ -127,14 +135,6 @@ export const tabBarIconNameConfig: TraversableNested = {
         default: 'umbrella',
         focused: 'umbrella',
     },
-    RNSectionList: {
-        default: 'th-menu-outline',
-        focused: 'th-menu-outline',
-    },
-    RNVirtualizedList: {
-        default: 'two-fingers-swipe-up',
-        focused: 'two-fingers-swipe-up',
-    }
 }
 
 const getIconMCCustomMap = (iconConfig: any) => {
@@ -161,7 +161,7 @@ export const icoMoonSelectionToGlyphMap = (icoMoonSelection: IcoMoonSelection) =
     }
     return map as object;
 }
-export const glyphIcoMoonMap = icoMoonSelectionToGlyphMap(icoMoonSelection as IcoMoonSelection)
+// export const glyphIcoMoonMap = icoMoonSelectionToGlyphMap(icoMoonSelection as IcoMoonSelection)
 
 export const getIconNameByRoute = (routeName: string, focused: boolean): IcoMoonKeys => {
     const key = focused ? 'focused' : 'default';
