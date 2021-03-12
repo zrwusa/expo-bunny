@@ -10,12 +10,12 @@ import {
     TraversableNested
 } from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants, {EBLMsg} from "../constants/constants";
 import {AuthAPIError, BunnyAPIError, uuidV4} from "../utils";
 import bunnyConfig from "../config.json";
 import _ from "lodash";
+import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json"
 
 export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -50,49 +50,6 @@ export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const propsMap: Traversable = {"stack": stackProps, "tab": tabProps, "drawer": drawerProps};
     return propsMap[navigatorType];
 }
-
-// export const tabBarIconNameConfigMC: TraversableNested = {
-//     TabHome: {
-//         default: 'home',
-//         focused: 'home',
-//     },
-//     TabSettings: {
-//         default: 'account-settings',
-//         focused: 'account-settings',
-//     },
-//     BitcoinHome: {
-//         default: 'bitcoin',
-//         focused: 'bitcoin',
-//     },
-//     BitcoinAlert: {
-//         default: 'table-clock',
-//         focused: 'table-clock',
-//     },
-//     RNFlatList: {
-//         default: 'view-sequential',
-//         focused: 'view-sequential',
-//     },
-//     RNHome: {
-//         default: 'home-assistant',
-//         focused: 'home-assistant',
-//     },
-//     RNNoKeyboard: {
-//         default: 'keyboard-off',
-//         focused: 'keyboard-off',
-//     },
-//     RNSafeArea: {
-//         default: 'safe-square',
-//         focused: 'safe-square',
-//     },
-//     RNSectionList: {
-//         default: 'view-list',
-//         focused: 'view-list',
-//     },
-//     RNVirtualizedList: {
-//         default: 'playlist-plus',
-//         focused: 'playlist-plus',
-//     }
-// }
 
 export const tabBarIconNameConfig: TraversableNested = {
     TabHome: {
@@ -161,7 +118,7 @@ export const icoMoonSelectionToGlyphMap = (icoMoonSelection: IcoMoonSelection) =
     }
     return map as object;
 }
-// export const glyphIcoMoonMap = icoMoonSelectionToGlyphMap(icoMoonSelection as IcoMoonSelection)
+export const glyphIcoMoonMap = icoMoonSelectionToGlyphMap(icoMoonSelection as IcoMoonSelection)
 
 export const getIconNameByRoute = (routeName: string, focused: boolean): IcoMoonKeys => {
     const key = focused ? 'focused' : 'default';

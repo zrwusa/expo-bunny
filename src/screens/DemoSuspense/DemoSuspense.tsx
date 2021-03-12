@@ -27,7 +27,8 @@ export const DemoSuspenseScreen = () => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+
     return (
         <View style={[containerStyles.Screen, smartStyles.centralized]}>
             {/*{isServerSide*/}

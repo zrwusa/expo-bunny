@@ -33,14 +33,15 @@ function ProfileScreen({route, navigation}: Props) {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor)
-    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, smartStyles.centralized]}>
                 <Avatar source={{uri: avatar_url}}/>
                 <Text>{st(`profileScreenId`)}{route.params.id}</Text>
                 <Text>{st(`email`)}{user?.email}</Text>
-                <IcoMoon name="profile1" color="green"/>
+                <IcoMoon name="profile1"/>
                 <ImageProgressive
                     sourcePH={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-placeholder.jpg`}}
                     source={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg`}}

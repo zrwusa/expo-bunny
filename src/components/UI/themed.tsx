@@ -13,6 +13,7 @@ import {
     TextInput as TextInputRN,
     TextInputProps,
     TextProps,
+    TextStyle,
     TouchableOpacity as TouchableOpacityRN,
     TouchableOpacityProps,
     View as ViewRN,
@@ -23,7 +24,7 @@ import {useLinkProps} from "@react-navigation/native";
 import React from "react";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
 import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from "../../types";
-import {getStyleObj} from "../../utils";
+import {createSmartStyles, uuidV4} from "../../utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
 import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
@@ -31,38 +32,67 @@ import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectPro
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
+const getBtnChildren = (children: React.ReactNode) => {
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+    const {row, between, vCenter} = smartStyles;
+    let childrenNeedRender;
+    if (children) {
+        if (children instanceof Array && children.length > 0) {
+            const safeChildren = children.map(child => {
+                if (typeof child === 'string') {
+                    return <TextBtn key={uuidV4()}>{child}</TextBtn>
+                } else {
+                    return child
+                }
+            })
+            childrenNeedRender = <View style={[row, between, vCenter]}>{safeChildren}</View>
+        } else {
+            if (typeof children === 'string') {
+                childrenNeedRender = <TextBtn>{children}</TextBtn>
+            } else {
+                childrenNeedRender = children
+            }
+        }
+    }
+    return childrenNeedRender
+}
+
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
 export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
-    const styleObj = getStyleObj(style);
-    return (<TouchableOpacityRN style={{
+    const childrenNeedRender = getBtnChildren(children)
+    const mergedStyle = [{
         backgroundColor: colors.primary,
         marginTop: ms.sp.s,
         borderRadius: ms.br.xs,
         fontSize: ms.fs.m,
         paddingVertical: ms.sp.m,
-        alignItems: "center",
-        ...styleObj
-    }} {...rest} >{children}</TouchableOpacityRN>);
+        paddingHorizontal: ms.sp.m,
+    }, style]
+    return (<TouchableOpacityRN style={mergedStyle} {...rest} >{childrenNeedRender}</TouchableOpacityRN>);
 }
 
 export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}) => {
     const {onPress, ...props} = useLinkProps({to, action});
     const {colors} = useThemeLabor().theme;
-    const styleObj = getStyleObj(style);
-    const {ms} = useSizeLabor();
+    const sizeLabor = useSizeLabor();
+    const {ms} = sizeLabor;
+    const childrenNeedRender = getBtnChildren(children)
+    const mergedStyle = [{
+        backgroundColor: colors.primary,
+        marginTop: ms.sp.s,
+        borderRadius: ms.br.xs,
+        fontSize: ms.fs.m,
+        paddingVertical: ms.sp.m,
+        paddingHorizontal: ms.sp.m,
+    }, style]
     return (
-        <TouchableOpacityRN style={{
-            backgroundColor: colors.primary,
-            marginTop: ms.sp.s,
-            borderRadius: ms.br.xs,
-            fontSize: ms.fs.m,
-            paddingVertical: ms.sp.m,
-            ...styleObj
-        }} onPress={onPress} {...props} {...rest}>
-            <TextBtn style={{textAlign: "center"}}>{children}</TextBtn>
+        <TouchableOpacityRN style={mergedStyle} onPress={onPress} {...props} {...rest}>
+            {childrenNeedRender}
         </TouchableOpacityRN>
     );
 };
@@ -70,35 +100,28 @@ export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}
 export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
-    const styleObj = getStyleObj(style);
-    return (<TextRN style={{
+    const mergedStyle = [{
         color: colors.btnText,
-        paddingVertical: ms.sp.xs,
-        paddingHorizontal: ms.sp.m,
         fontFamily: fonts.regular.fontFamily,
         fontSize: ms.fs.m,
-        ...styleObj
-    }} {...rest}>{children}</TextRN>);
+    }, style]
+    return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
 }
 
-export const View: React.FC<ViewProps> = ({children, ...rest}) => {
-    const {} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-
-    return (<ViewRN {...rest}>{children}</ViewRN>);
+export const View: React.FC<ViewProps> = ({children, style, ...rest}) => {
+    const mergedStyle = [{}, style]
+    return (<ViewRN style={mergedStyle} {...rest}>{children}</ViewRN>);
 }
 
 export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useThemeLabor().theme;
-    const styleObj = getStyleObj(style);
     const {ms} = useSizeLabor();
-
-    return (<TextRN style={{
+    const mergedStyle = [{
         color: colors.text,
         fontFamily: fonts.regular.fontFamily,
         fontSize: ms.fs.m,
-        ...styleObj
-    }} {...rest}>{children}</TextRN>);
+    }, style]
+    return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
 }
 
 export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
@@ -110,50 +133,34 @@ export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-
-    const styleObj = getStyleObj(style);
+    const mergedStyle = [{
+        backgroundColor: colors.background,
+    }, style]
     return (<TouchableOpacityRN
-        style={{
-            backgroundColor: colors.background,
-            ...styleObj
-        }} {...rest} >{children}</TouchableOpacityRN>);
+        style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
 }
 
 export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-
-    const styleObj = getStyleObj(style);
-    return (<PressableRN
-        style={{
-            backgroundColor: colors.background,
-            ...styleObj
-        }} {...rest} >{children}</PressableRN>);
+    // const mergedStyle = [{
+    //     backgroundColor: colors.background,
+    // }, style]
+    return (<PressableRN style={style} {...rest} >{children}</PressableRN>);
 }
 
 export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-
-    const {ms} = useSizeLabor();
-
-    const styleObj = getStyleObj(style);
+    const mergedStyle = [{
+        backgroundColor: colors.background,
+    }, style]
     return (<ImageRN
-        style={{
-            backgroundColor: colors.background,
-            ...styleObj
-        }}  {...rest} >{children}</ImageRN>);
+        style={mergedStyle}  {...rest} >{children}</ImageRN>);
 }
 
 export const TextRNE: React.FC<TextElementProps> = ({children, style, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-
-    const styleObj = getStyleObj(style);
+    const mergedStyle = [{}, style]
     return (<TextElement
-        style={{
-            ...styleObj
-        }}
+        style={mergedStyle}
         {...rest}>{children}</TextElement>);
 }
 
@@ -161,54 +168,49 @@ export const TextXXX: React.FC<TextElementProps> = ({children, style, ...rest}) 
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
 
-    const styleObj = getStyleObj(style);
+    const mergedStyle = [{
+        backgroundColor: colors.background
+    }, style]
     return (<TextElement
-        style={{
-            ...styleObj
-        }}
+        style={mergedStyle}
         {...rest}>{children}</TextElement>);
 }
 
 export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const buttonStyleObj = getStyleObj(buttonStyle);
-    const titleStyleObj = getStyleObj(titleStyle);
-    const containerStyleObj = getStyleObj(containerStyle);
     const {ms} = useSizeLabor();
+    const mergedButtonStyle = [{
+        backgroundColor: colors.primary,
+        marginTop: ms.sp.s,
+        borderRadius: ms.br.xs,
+        paddingVertical: ms.sp.m,
+    }, buttonStyle]
+    const mergedTitleStyle = [{
+        color: colors.btnText,
+        fontSize: ms.fs.m,
+    }, titleStyle]
 
+    const mergedContainerStyle = [{
+        width: ms.sz.s12,
+    }, containerStyle]
     return (<ButtonElement
-        buttonStyle={{
-            backgroundColor: colors.primary,
-            marginTop: ms.sp.s,
-            borderRadius: ms.br.xs,
-            paddingVertical: ms.sp.m,
-            ...buttonStyleObj,
-        }}
-        titleStyle={{
-            color: colors.btnText,
-            fontSize: ms.fs.m,
-            ...titleStyleObj
-        }}
-        containerStyle={{
-            width: ms.sz.s12,
-            ...containerStyleObj
-        }} {...rest}>{children}</ButtonElement>);
+        buttonStyle={mergedButtonStyle}
+        titleStyle={mergedTitleStyle}
+        containerStyle={mergedContainerStyle} {...rest}>{children}</ButtonElement>);
 }
 
 export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const styleObj = getStyleObj(style);
     const {ms} = useSizeLabor();
-
+    const mergedStyle = [{
+        color: colors.text,
+        marginTop: ms.sp.s,
+        paddingHorizontal: ms.sp.l,
+        paddingVertical: ms.sp.m,
+        fontSize: ms.fs.m,
+    }, style]
     return (<TextInputRN
-        style={{
-            color: colors.text,
-            marginTop: ms.sp.s,
-            paddingHorizontal: ms.sp.l,
-            paddingVertical: ms.sp.m,
-            fontSize: ms.fs.m,
-            ...styleObj
-        }} {...rest} />);
+        style={mergedStyle} {...rest} />);
 }
 export type SwitchPaperProps = React.ComponentPropsWithRef<typeof SwitchRN> & {
     disabled?: boolean;
@@ -220,46 +222,39 @@ export type SwitchPaperProps = React.ComponentPropsWithRef<typeof SwitchRN> & {
 };
 export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const styleObj = getStyleObj(style);
-    const {ms, responsive} = useSizeLabor();
+    const {responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
-
+    const mergedStyle = [{
+        transform: [{scaleX: wp(1)}, {scaleY: wp(1)}],
+    }, style]
     return (<SwitchPaper color={colors.primary}
-                         style={{
-                             transform: [{scaleX: wp(1)}, {scaleY: wp(1)}],
-                             ...styleObj
-                         }} {...rest}/>);
+                         style={mergedStyle} {...rest}/>);
 }
 
-export const IconMC: React.FC<MaterialCommunityIconsProps> = ({children, style, name, ...rest}) => {
+export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<TextStyle> }> = ({children, style, name, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
 
-    const styleObj = getStyleObj(style);
+    const mergedStyle = [{
+        color: colors.background,
+        fontSize: ms.fs.xl,
+    }, style]
     return (<MaterialCommunityIcons
         name={name}
-        style={{
-            color: colors.background,
-            fontSize: ms.fs.xl,
-            ...styleObj
-        }}
+        style={mergedStyle}
     />);
 }
 
-export const IcoMoon: React.FC<IcoMoonProps> = ({children, style, name, size, color, ...rest}) => {
+export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> = ({children, style, name, size, color, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
-
-    const styleObj = getStyleObj(style);
+    const mergedStyle = [{
+        color: color || colors.primary,
+        fontSize: size || ms.fs.xl,
+    }, style]
     return (<IconFromIcoMoon
         name={name}
-        size={size}
-        color={color}
-        style={{
-            color: colors.primary,
-            fontSize: ms.fs.xl,
-            ...styleObj
-        }}
+        style={mergedStyle}
     />);
 }
 
@@ -268,14 +263,14 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
     const {ms, responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
 
-    const styleObj = getStyleObj(style);
-    const iconStyle = styleObj.icon;
+    // const styleObj = getStyleObj(style);
+    // const iconStyle = styleObj.icon;
+    const mergedIconStyle = []
     const IconProp = Icon || (() => <IcoMoon name="chevron-right"
                                              style={{
                                                  marginTop: ms.sp.m,
                                                  marginRight: ms.sp.m,
                                                  color: colors.border,
-                                                 ...iconStyle
                                              }}
                                              size={wp(10)}
     />)
@@ -297,7 +292,6 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
                 color: colors.text,
                 paddingRight: ms.sp.xl// to ensure the text is never behind the icon
             },
-            ...styleObj
         }}
         touchableWrapperProps={{
             activeOpacity: 0.2,
@@ -312,21 +306,6 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
     />);
 }
 
-// <RNPickerSelect
-//     style={styles.pickerSelector}
-//                 touchableWrapperProps={{
-//                     activeOpacity: 0.2,
-//                 }}
-//                 value={}
-//                 placeholder={}
-//                 items={}
-//                 onValueChange={}
-//                 Icon={() => {
-//                     return <IcoMoon name="chevron-right"
-//                                     style={styles.pickerSelector.icon}
-//                                     size={wp(10)}/>
-//                 }}
-// />
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties

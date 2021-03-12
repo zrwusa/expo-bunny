@@ -33,7 +33,7 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
     const {row, col1, col4, colLast} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()

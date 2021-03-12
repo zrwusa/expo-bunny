@@ -10,7 +10,8 @@ function RNFlatListScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+
     return (
         <SafeAreaView style={[containerStyles.Screen, smartStyles.centralized]}>
             <Text>Safe Area View</Text>

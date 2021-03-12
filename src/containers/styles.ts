@@ -3,7 +3,7 @@ import {SizeLabor, ThemeLabor} from "../types";
 import {createSmartStyles} from "../utils";
 
 export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
     const {ms} = sizeLabor;
     const {colors} = themeLabor.theme;
     return StyleSheet.create({
@@ -20,11 +20,11 @@ export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor)
             borderColor: colors.border,
             borderWidth: ms.sp.xxs,
             borderRadius: ms.br.s,
-            ...smartStyles.row,
-            ...smartStyles.evenly
+            ...smartStylesObj.row,
+            ...smartStylesObj.evenly
         },
         CardTitle: {
-            ...smartStyles.h3
+            ...smartStylesObj.h3
         },
         Screen: {
             flex: 1,

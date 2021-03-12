@@ -1,5 +1,5 @@
 import React from "react";
-import {ButtonRNE, Text, TextXXX, View} from "../../components/UI";
+import {ButtonRNE, IcoMoon, Link, Text, TextXXX, View} from "../../components/UI";
 import {useDispatch, useSelector} from "react-redux";
 import {getDemoSagas} from "../../store/actions";
 import {RootState} from "../../types";
@@ -15,11 +15,15 @@ function DemoSagaScreen() {
     const {items} = demoSagaState;
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = createStyles(sizeLabor,themeLabor)
-    const smartStyles  = createSmartStyles(sizeLabor, themeLabor);
+    const styles = createStyles(sizeLabor, themeLabor)
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+
+    const {colors} = themeLabor.theme
     return (
         <View>
-            <TextXXX style={[smartStyles.btn,{backgroundColor:'red'}]}>xxx</TextXXX>
+            <TextXXX style={[smartStyles.btn, {color: 'red'}]}>xxx</TextXXX>
+            <Link to="/demo-tab/tab-home" style={[smartStyles.row, smartStyles.between]}>{'aaa'}<IcoMoon name="home" style={{color: colors.btnText}}/></Link>
+
             <ButtonRNE onPress={() => {
                 dispatch(getDemoSagas({
                     pageNum: 1, pageCount: 10, filter: {

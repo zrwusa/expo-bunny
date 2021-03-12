@@ -1,11 +1,11 @@
-import {SizeLabor, ThemeLabor} from "../types";
+import {SizeLabor, ThemeLabor, TraversableNested} from "../types";
 import {StyleSheet} from "react-native";
 
 export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;
     const {colors, fonts} = themeLabor.theme;
     const {wp} = responsive.iphoneX;
-    const smartStyles:StyleSheet.NamedStyles<any> ={
+    const smartStyles = StyleSheet.create({
         h1: {
             fontSize: ms.fs.xxl,
             color: colors.title,
@@ -136,7 +136,9 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
         screen: {
             flex: 1,
         },
-
+        vCenter: {
+          alignItems: 'center'
+        },
         centralized: {
             justifyContent: 'center',
             alignItems: 'center',
@@ -147,10 +149,19 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
         article: {},
         footer: {},
         absoluteBottomLeft: {
-            position: "absolute",
+            position: 'absolute',
             bottom: 0,
             left: 0,
         },
-    }
-    return smartStyles
+    })
+
+    let smartStylesObj: StyleSheet.NamedStyles<any>;
+    const traversableSmartStyles = smartStyles as unknown as TraversableNested
+    smartStylesObj = Object.keys(traversableSmartStyles).reduce((newObject, key) => ({
+        ...newObject,
+        [key]: StyleSheet.flatten(traversableSmartStyles[key])
+    }), {})
+
+
+    return {smartStyles, smartStylesObj}
 }

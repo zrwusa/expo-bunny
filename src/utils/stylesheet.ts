@@ -2,7 +2,7 @@ import {StyleSheet} from "react-native";
 
 export const getStyleObj = (style: any) => {
     let result;
-    if(style){
+    if (style) {
         // console.log('---typeof style,style',typeof style,style)
         switch (typeof style) {
             case 'number':
@@ -12,8 +12,8 @@ export const getStyleObj = (style: any) => {
             case 'object':
                 if (style instanceof Array) {
                     let combineObj = {};
-                    for(let key in style) {
-                        console.log(style[key],StyleSheet.flatten(style[key]))
+                    for (let key in style) {
+                        console.log(style[key], StyleSheet.flatten(style[key]))
                         combineObj = {...combineObj, ...StyleSheet.flatten(style[key])}
                     }
                     result = combineObj;

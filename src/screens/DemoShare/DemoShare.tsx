@@ -69,7 +69,8 @@ function DemoShareScreen() {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor);
-    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+
     return (
         <View style={[containerStyles.Screen, smartStyles.centralized]}>
             <View style={{marginTop: 50}}>
@@ -81,7 +82,7 @@ function DemoShareScreen() {
                 (selectedImage && selectedImage.localUri)
                     ? (
                         <View style={smartStyles.centralized}>
-                            <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail}></Image>
+                            <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail} />
                             <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
                                 <Text style={styles.buttonText}>Share this photo</Text>
                             </TouchableOpacity>

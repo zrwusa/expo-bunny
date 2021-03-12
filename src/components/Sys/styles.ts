@@ -5,7 +5,8 @@ import {createSmartStyles} from "../../utils";
 export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
-    const {absoluteBottomLeft} = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
+    const {absoluteBottomLeft,row,evenly} = smartStylesObj;
     const {colors} = themeLabor.theme;
 
     return StyleSheet.create({
@@ -14,7 +15,6 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             backgroundColor: colors.backgroundSecondary,
             zIndex: 1000,
             width: wp(375),
-            // height: wp(200)
             padding: ms.sp.s
         },
         errorText: {
@@ -22,8 +22,8 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: wp(100),
         },
         buttonBox: {
-            flexDirection: "row",
-            justifyContent: "space-evenly"
+            ...row,
+            ...evenly
         }
     });
 }

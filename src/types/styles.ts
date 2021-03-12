@@ -236,16 +236,19 @@ export type IcoMoonSelection = {
     },
     "preferences": IcoMoonSelectionPreferences
 }
+type Attr = {
+    "fill"?: string
+}
 export type IcoMoonSelectionIcon = {
     "icon": {
         "paths": string[],
-        "attrs": [],
+        "attrs": Attr[],
         "isMulticolor": boolean,
         "isMulticolor2": boolean,
         "tags": string[],
         "grid": number
     },
-    "attrs": [],
+    "attrs": Attr[],
     "properties": {
         "ligatures": string,
         "id": number,

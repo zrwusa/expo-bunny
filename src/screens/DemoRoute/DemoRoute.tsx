@@ -27,7 +27,8 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const {t} = useTranslation();
     const st = shortenTFuciontKey(t, 'screens.DemoRoute');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor)
-    const smartStyles = createSmartStyles(sizeLabor, themeLabor);
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+
     const styles = createStyles(sizeLabor, themeLabor);
 
     return (
