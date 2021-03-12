@@ -531,7 +531,10 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 childrenNode: [
                     {
                         key: uuidV4(),
-                        component: BitcoinHomeScreen,
+                        // component:BitcoinHomeScreen,
+                        component: Platform.OS !== 'web'
+                            ? BitcoinHomeScreen
+                            : () => <NotSupport text="Not supported on web"/>,
                         name: "BitcoinHome",
                         path: "bitcoin-home",
                         navigatorType: "tab",

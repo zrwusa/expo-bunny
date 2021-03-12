@@ -10,6 +10,7 @@ module.exports = async function (env, argv) {
     }
     const config = await createExpoWebpackConfigAsync(envConfig, argv);
     config.resolve.alias['react-native-maps'] = 'react-native-web-maps';
+    // config.resolve.alias['react-native-svg'] = 'svgs';
     // Use the React refresh plugin in development mode
     if (isDev) {
         config.plugins.push(
