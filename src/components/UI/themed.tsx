@@ -7,7 +7,7 @@ import {
     ImageProps,
     Pressable as PressableRN,
     PressableProps,
-    StyleProp,
+    StyleProp, StyleSheet,
     Switch as SwitchRN,
     Text as TextRN,
     TextInput as TextInputRN,
@@ -104,7 +104,8 @@ export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
         color: colors.btnText,
         fontFamily: fonts.regular.fontFamily,
         fontSize: ms.fs.m,
-    }, style]
+        textAlign:'center',
+    } as TextStyle, style]
     return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
 }
 
@@ -126,9 +127,7 @@ export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
 
 export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-    return (<ButtonRN color={color || colors.primary}
-                      {...rest} />);
+    return (<ButtonRN color={color || colors.primary} {...rest} />);
 }
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
@@ -159,18 +158,6 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
 
 export const TextRNE: React.FC<TextElementProps> = ({children, style, ...rest}) => {
     const mergedStyle = [{}, style]
-    return (<TextElement
-        style={mergedStyle}
-        {...rest}>{children}</TextElement>);
-}
-
-export const TextXXX: React.FC<TextElementProps> = ({children, style, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-
-    const mergedStyle = [{
-        backgroundColor: colors.background
-    }, style]
     return (<TextElement
         style={mergedStyle}
         {...rest}>{children}</TextElement>);
@@ -262,9 +249,6 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
     const {colors} = useThemeLabor().theme;
     const {ms, responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
-
-    // const styleObj = getStyleObj(style);
-    // const iconStyle = styleObj.icon;
     const mergedIconStyle = []
     const IconProp = Icon || (() => <IcoMoon name="chevron-right"
                                              style={{
@@ -272,7 +256,7 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
                                                  marginRight: ms.sp.m,
                                                  color: colors.border,
                                              }}
-                                             size={wp(10)}
+                                             size={wp(20)}
     />)
 
     return (<ReactNativePickerSelect
@@ -298,10 +282,6 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
         }}
 
         {...rest}
-        // value={}
-        // placeholder={}
-        // items={}
-        // onValueChange={}
         Icon={IconProp}
     />);
 }

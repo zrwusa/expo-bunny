@@ -84,11 +84,7 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
             if (token) {
                 setExpoPushToken(token);
             }
-            // try {
-            //     await request.post('/push-service/devices', {type: "BITCOIN_ALERT", token})
-            // } catch (err) {
-            //     dispatch(sysError({error: err}))
-            // }
+
             try {
                 dispatch(getCurrentPrice())
             } catch (e) {
@@ -128,7 +124,7 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
         return item
     })
 
-    const currentPriceLabelPrefix = st(`currentPriceLabel`).padEnd(35, '\u2004');
+    const currentPriceLabelPrefix = st(`currentPriceLabel`).padEnd(30, '\u2004');
 
     return Platform.OS !== 'web' ? (
         <View style={containerStyles.Screen}>
