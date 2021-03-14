@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {ButtonRNE, TextInput, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useAuthLabor} from "../../providers/auth-labor";
@@ -21,7 +21,7 @@ export const AuthScreen = (props: AuthProps) => {
     const st = shortenTFuciontKey(t, 'screens.Auth');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const [type, setType] = useState('sign-in');
     const {authFunctions} = useAuthLabor()
     const [username, setUsername] = useState('')

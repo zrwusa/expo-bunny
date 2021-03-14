@@ -8,7 +8,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {createSmartStyles} from "../../utils";
@@ -67,7 +67,7 @@ function DemoShareScreen() {
     };
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
 

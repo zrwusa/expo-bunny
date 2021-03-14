@@ -1,7 +1,7 @@
-import {DemoBitcoinActions} from "../actions";
-import {EDemoBitcoin} from "../../constants";
+import {DemoCryptoCurrencyActions} from "../actions";
+import {EDemoCryptoCurrency} from "../../constants";
 
-export const demoBitcoinReducer = (
+export const demoCryptoCurrencyReducer = (
     prevState = {
         currentPrice: 0,
         dictionaries: {
@@ -33,10 +33,10 @@ export const demoBitcoinReducer = (
             ],
         }
     },
-    action: DemoBitcoinActions,
+    action: DemoCryptoCurrencyActions,
 ) => {
     switch (action.type) {
-        case EDemoBitcoin.RECEIVE_CURRENT_PRICE:
+        case EDemoCryptoCurrency.RECEIVE_CURRENT_PRICE:
             return {...prevState, ...action.payload}
         default:
             return prevState

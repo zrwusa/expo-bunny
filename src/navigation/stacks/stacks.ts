@@ -1,15 +1,17 @@
 import {createStackNavigator} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "react-navigation-bottom-tabs-no-warnings";
 import {createDrawerNavigator} from "react-navigation-drawer-no-warnings";
+import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import {
-    DemoBitcoinStackParam,
+    DemoCryptoCurrencyHomeTopStackParam,
+    DemoCryptoCurrencyStackParam,
     DemoDrawerStackParam,
     DemoNestedLv1StackParam,
     DemoNestedLv2StackParam,
     DemoTabRNComponentsStackParam,
     DemoTabStackParam,
     RootStackParam
-} from "../../types/navigations";
+} from "../../types";
 
 export const RootStack = createStackNavigator<RootStackParam>();
 
@@ -23,7 +25,9 @@ export const DemoTabStack = createBottomTabNavigator<DemoTabStackParam>();
 
 export const DemoDrawerStack = createDrawerNavigator<DemoDrawerStackParam>();
 
-export const DemoBitcoinStack = createBottomTabNavigator<DemoBitcoinStackParam>();
+export const DemoCryptoCurrencyStack = createBottomTabNavigator<DemoCryptoCurrencyStackParam>();
+
+export const DemoCryptoCurrencyHomeTopStack = createMaterialTopTabNavigator<DemoCryptoCurrencyHomeTopStackParam>();
 
 export const DemoTabRNComponentsStack = createBottomTabNavigator<DemoTabRNComponentsStackParam>();
 

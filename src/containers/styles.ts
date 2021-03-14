@@ -2,7 +2,7 @@ import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../types";
 import {createSmartStyles} from "../utils";
 
-export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const createContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
     const {ms} = sizeLabor;
     const {colors} = themeLabor.theme;

@@ -9,7 +9,7 @@ import {Avatar} from "react-native-elements";
 import {ScrollView} from "react-native";
 import {createStyles} from "./styles";
 import ImageProgressive from "../../components/UI/ImageProgressive";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useAuthLabor} from "../../providers/auth-labor";
@@ -31,7 +31,7 @@ function ProfileScreen({route, navigation}: Props) {
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor)
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
 

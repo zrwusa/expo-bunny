@@ -6,5 +6,10 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp, hp} = responsive.iphoneX;
     const {colors} = themeLabor.theme;
 
-    return StyleSheet.create({});
+    return StyleSheet.create({
+        btcChart: {
+            marginTop:wp(6),
+            paddingBottom:wp(6)
+        }
+    });
 }

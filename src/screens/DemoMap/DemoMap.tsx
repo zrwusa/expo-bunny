@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
 import createStyles, {getCardSize} from "./styles";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 
@@ -110,7 +110,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
         const {sizeLabor, themeLabor} = this.props;
         const {theme} = themeLabor;
         const {responsive} = sizeLabor;
-        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+        const containerStyles = createContainerStyles(sizeLabor, themeLabor);
         const styles = createStyles(sizeLabor);
         const {wp} = responsive.iphoneX;
         const {width} = getCardSize(sizeLabor);

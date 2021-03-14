@@ -1,9 +1,9 @@
 import axios, {AxiosResponse} from "axios";
 import {authLaborContext} from "../providers/auth-labor";
-import {checkBunnyAPIProtocol, getApiInstanceConfig} from "./index";
-import {BunnyAPIProtocolResponseData} from "../types";
+import {checkNomicsAPIProtocol, getApiInstanceConfig} from "./index";
+import {NomicsAPIProtocolResponseData} from "../types";
 
-export const defaultBunnyAPIResponseData = {
+export const defaultNomicsAPIResponseData = {
     "httpExtra": {
         "code": 0,
         "message": "",
@@ -26,9 +26,9 @@ export const defaultBunnyAPIResponseData = {
     "timeSpent": 0
 }
 
-const bunnyAPI = axios.create(getApiInstanceConfig('bunny'));
+const nomicsAPI = axios.create(getApiInstanceConfig('nomics'));
 
-bunnyAPI.interceptors.request.use(
+nomicsAPI.interceptors.request.use(
     async (config) => {
         const accessToken = await authLaborContext.authFunctions.getAccessToken();
         // "Accept": "application/json",
@@ -43,11 +43,11 @@ bunnyAPI.interceptors.request.use(
         return Promise.reject(error)
     });
 
-bunnyAPI.interceptors.response.use(
-    (response: AxiosResponse<BunnyAPIProtocolResponseData<any>>) => {
+nomicsAPI.interceptors.response.use(
+    (response: AxiosResponse<NomicsAPIProtocolResponseData<any>>) => {
         // status 200-300
-        if (!checkBunnyAPIProtocol(response.data)) {
-            response.data = defaultBunnyAPIResponseData
+        if (!checkNomicsAPIProtocol(response.data)) {
+            response.data = defaultNomicsAPIResponseData
         }
         response.data = response.data.successData
         return response
@@ -59,24 +59,24 @@ bunnyAPI.interceptors.response.use(
             const {status, data} = response;
             switch (status) {
                 case 401:
-                    const {businessLogic} = data
-                    const {errorCode} = businessLogic
-                    if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005'].includes(errorCode)) {
-                        const {authFunctions} = authLaborContext;
-                        const {refreshAuth, signOut} = authFunctions;
-                        const {success} = await refreshAuth()
-                        if (!success) {
-                            await signOut()
-                        }
-                        const originalRequest = config;
-                        originalRequest._retry = true;
-                        return bunnyAPI(originalRequest);
-                    }
+                    // const {businessLogic} = data
+                    // const {errorCode} = businessLogic
+                    // if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005'].includes(errorCode)) {
+                    //     const {authFunctions} = authLaborContext;
+                    //     const {refreshAuth, signOut} = authFunctions;
+                    //     const {success} = await refreshAuth()
+                    //     if (!success) {
+                    //         await signOut()
+                    //     }
+                    //     const originalRequest = config;
+                    //     originalRequest._retry = true;
+                    //     return nomicsAPI(originalRequest);
+                    // }
                     break;
                 default:
                     break;
             }
-            if (checkBunnyAPIProtocol(response.data)) {
+            if (checkNomicsAPIProtocol(response.data)) {
                 throw error
             }
         } else if (request) {
@@ -88,4 +88,4 @@ bunnyAPI.interceptors.response.use(
         }
     });
 
-export default bunnyAPI;
+export default nomicsAPI;

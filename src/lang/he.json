@@ -25,7 +25,7 @@
       "RNAllInOne": "RN כל אחד",
       "demoTheme": "ערכת נושא",
       "demoSuspense": "הדגמה Suspense",
-      "bitcoin": "ביטקוין",
+      "cryptoCurrency": "ביטקוין",
       "settings": "הגדרות",
       "signOut": "התנתקות"
     },
@@ -148,14 +148,14 @@
     "RNVirtualizedList": {
       "title": "RNVirtualizedList"
     },
-    "DemoBitcoin": {
+    "DemoCryptoCurrency": {
       "title": "ביטביטקוין"
     },
-    "BitcoinHome": {
-      "title": "BitcoinHome"
+    "CryptoCurrencyHome": {
+      "title": "CryptoCurrencyHome"
     },
-    "BitcoinAlert": {
-      "title": "Bitcoinהתרעה",
+    "CryptoCurrencyAlert": {
+      "title": "CryptoCurrencyהתרעה",
       "paramIsPush": "לחיצה על Param: "
     },
     "Settings": {

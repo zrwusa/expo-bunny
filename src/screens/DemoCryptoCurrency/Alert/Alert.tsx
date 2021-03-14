@@ -3,11 +3,11 @@ import {useEffect, useState} from "react";
 import {Platform, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
-import {DemoBitcoinStackParam, RootState} from "../../../types";
+import {DemoCryptoCurrencyStackParam, RootState} from "../../../types";
 import {ButtonTO, RNPickerSelect, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey, useRequest} from "../../../providers";
-import {getContainerStyles} from "../../../containers";
+import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import * as Notifications from "expo-notifications";
@@ -17,31 +17,31 @@ import {useDispatch, useSelector} from "react-redux";
 import {createStyles} from "./styles";
 import {createSmartStyles} from "../../../utils";
 
-type BitcoinAlertRouteProp = RouteProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
-type BitcoinAlertNavigationProp = BottomTabNavigationProp<DemoBitcoinStackParam, 'BitcoinAlert'>;
+type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyAlert'>;
+type CryptoCurrencyAlertNavigationProp = BottomTabNavigationProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyAlert'>;
 
-export interface BitcoinAlertProps {
-    route?: BitcoinAlertRouteProp,
-    navigation?: BitcoinAlertNavigationProp
+export interface CryptoCurrencyAlertProps {
+    route?: CryptoCurrencyAlertRouteProp,
+    navigation?: CryptoCurrencyAlertNavigationProp
 }
 
-export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProps) {
+export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCurrencyAlertProps) {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.BitcoinAlert');
+    const st = shortenTFuciontKey(t, 'screens.CryptoCurrencyAlert');
     const i18nSysPrefix = 'sys';
     const stSys = shortenTFuciontKey(t, i18nSysPrefix);
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
     const {row, col1, col4, colLast} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()
-    const demoBitcoinState = useSelector((rootState: RootState) => rootState.demoBitcoinState)
-    const dicGranularity = demoBitcoinState.dictionaries.granularity;
-    const dicReminderTimes = demoBitcoinState.dictionaries.times;
-    const dicReminderInterval = demoBitcoinState.dictionaries.interval;
-    const {currentPrice} = demoBitcoinState;
+    const demoCryptoCurrencyState = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
+    const dicGranularity = demoCryptoCurrencyState.dictionaries.granularity;
+    const dicReminderTimes = demoCryptoCurrencyState.dictionaries.times;
+    const dicReminderInterval = demoCryptoCurrencyState.dictionaries.interval;
+    const {currentPrice} = demoCryptoCurrencyState;
 
     let notificationReceivedListener = {
         remove: () => {
@@ -57,8 +57,6 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
     const [notification, setNotification] = useState(defaultNotification);
     const [granularity, setGranularity] = useState(0.05)
     const [reminder, setReminder] = useState({times: 3, interval: '1m'})
-
-    const request = useRequest();
 
     const handleSaveQuickAlertSettings = async function () {
         dispatch(saveQuickAlertSettings({token: expoPushToken, granularity, reminder}))
@@ -191,5 +189,5 @@ export default function BitcoinAlertScreen({route, navigation}: BitcoinAlertProp
                 </View>
             </View>
         </View>
-    ) : (<Text>Dummy BitcoinAlert</Text>)
+    ) : (<Text>Dummy CryptoCurrencyAlert</Text>)
 }

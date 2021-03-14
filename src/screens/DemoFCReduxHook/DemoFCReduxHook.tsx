@@ -4,7 +4,7 @@ import {demoHello} from "../../store/actions";
 import {ButtonRNE, Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {RootState} from "../../types";
@@ -16,7 +16,7 @@ function DemoFCReduxHookScreen() {
     const demoHelloState = useSelector((rootState: RootState) => rootState.demoHelloState);
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
     return (
         <View style={containerStyles.Screen}>

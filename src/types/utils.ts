@@ -7,7 +7,7 @@ import {
     EventMapBase,
     RouteConfig,
     StackRouterOptions,
-    TabRouterOptions
+    TabRouterOptions,
 } from "@react-navigation/native";
 import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
 import {NavigationState, ParamListBase} from "@react-navigation/routers";
@@ -15,8 +15,10 @@ import {BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnin
 import {BottomTabNavigationConfig} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
 import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 import {DrawerNavigationConfig} from "react-navigation-drawer-no-warnings/lib/typescript/src/types";
+import {MaterialTopTabNavigationOptions} from "@react-navigation/material-top-tabs";
+import {MaterialTopTabNavigationConfig} from "@react-navigation/material-top-tabs/lib/typescript/src/types";
 
-export type NavigatorType = 'stack' | 'tab' | 'drawer';
+export type NavigatorType = 'stack' | 'tab' | 'drawer' | 'top';
 
 export type LinkingConfig = {
     path?: string,
@@ -38,8 +40,9 @@ export type StackConfig = {
         | typeof Stacks.DemoNestedLv2Stack
         | typeof Stacks.DemoTabStack
         | typeof Stacks.DemoTabRNComponentsStack
-        | typeof Stacks.DemoBitcoinStack
-        | typeof Stacks.DemoDrawerStack,
+        | typeof Stacks.DemoCryptoCurrencyStack
+        | typeof Stacks.DemoDrawerStack
+        | typeof Stacks.DemoCryptoCurrencyHomeTopStack,
     authScreen?: ComponentType<any>,
     childrenNode?: NavigatorTreeNode[],
     authRequired: boolean,
@@ -47,9 +50,8 @@ export type StackConfig = {
 
 export type LinkingConfigTraversable = LinkingConfig & Traversable
 
-export type Options = BottomTabNavigationOptions | DrawerNavigationOptions | StackNavigationOptions;
+export type Options = BottomTabNavigationOptions | DrawerNavigationOptions | StackNavigationOptions | MaterialTopTabNavigationOptions;
 export type OptionsInner = DefaultNavigatorOptions<Options>;
-
 export type NavigatorTreeNode =
     Partial<OptionsInner>
     & Partial<TabRouterOptions>
@@ -60,6 +62,9 @@ export type NavigatorTreeNode =
 
     & Partial<StackRouterOptions>
     & Partial<StackNavigationConfig>
+
+    // & Partial<TabRouterOptions>
+    // & Partial<MaterialTopTabNavigationConfig>
 
     & Partial<RouteConfig<ParamListBase, any, NavigationState, {}, EventMapBase>>
     & LinkingConfig

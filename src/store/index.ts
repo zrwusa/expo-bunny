@@ -3,7 +3,7 @@ import thunkMiddleware from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 import {blStateReducer, demoHelloStateReducer, demoMapStateReducer, demoSagaReducer, demoThunkStateReducer, sysStateReducer} from "./reducers";
 import {sagaDemoSagas} from "./sagas"
-import {demoBitcoinReducer} from "./reducers/demo-bitcoin";
+import {demoCryptoCurrencyReducer} from "./reducers/demo-crypto-currency";
 
 
 const sagaMiddleware = createSagaMiddleware()
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     sysState: sysStateReducer,
     blResultState: blStateReducer,
     demoSagaState: demoSagaReducer,
-    demoBitcoinState: demoBitcoinReducer,
+    demoCryptoCurrencyState: demoCryptoCurrencyReducer,
 });
 
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

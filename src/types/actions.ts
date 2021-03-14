@@ -1,5 +1,5 @@
 // Redux actions
-import {EBL, EDemoBitcoin, EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
+import {EBL, EDemoCryptoCurrency, EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
 import {
     CancelAlertSettingsParams,
     ClearBLResultPayload,
@@ -108,20 +108,20 @@ export interface ReceiveGetDemoSagasAction {
 }
 
 export interface SaveQuickAlertSettingsAction {
-    type: EDemoBitcoin.SAVE_QUICK_ALERT_SETTINGS,
+    type: EDemoCryptoCurrency.SAVE_QUICK_ALERT_SETTINGS,
     payload: SaveQuickAlertSettingsParams
 }
 
 export interface CancelAlertSettingsAction {
-    type: EDemoBitcoin.CANCEL_ALL_ALERT_SETTINGS,
+    type: EDemoCryptoCurrency.CANCEL_ALL_ALERT_SETTINGS,
     payload: CancelAlertSettingsParams
 }
 
 export interface RequestGetCurrentPriceAction {
-    type: EDemoBitcoin.GET_CURRENT_PRICE,
+    type: EDemoCryptoCurrency.GET_CURRENT_PRICE,
 }
 
 export interface ReceiveGetCurrentPriceAction {
-    type: EDemoBitcoin.RECEIVE_CURRENT_PRICE,
+    type: EDemoCryptoCurrency.RECEIVE_CURRENT_PRICE,
     payload: ReceiveGetCurrentPricePayload
 }

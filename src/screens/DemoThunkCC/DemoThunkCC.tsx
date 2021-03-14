@@ -7,7 +7,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 
@@ -40,7 +40,7 @@ class DemoThunkCCScreen extends React.Component<Props> {
         const {text, id, t, sizeLabor, themeLabor} = this.props;
         const {theme} = themeLabor;
         const st = shortenTFuciontKey(t, 'screens.DemoThunkCC');
-        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+        const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
         return (
             <View style={containerStyles.Screen}>

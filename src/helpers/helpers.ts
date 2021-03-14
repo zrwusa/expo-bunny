@@ -1,4 +1,6 @@
 import {
+    APIConfigName,
+    APPConfig,
     BLResult,
     ErrorClass,
     IcoMoonKeys,
@@ -12,8 +14,8 @@ import {
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants, {EBLMsg} from "../constants/constants";
-import {AuthAPIError, BunnyAPIError, uuidV4} from "../utils";
-import bunnyConfig from "../config.json";
+import {AuthAPIError, BunnyAPIError, NomicsAPIError, uuidV4} from "../utils";
+import configORG from "../config.json";
 import _ from "lodash";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json"
 
@@ -47,7 +49,7 @@ export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
         gestureHandlerProps, sceneContainerStyle, drawerStyle, drawerContent, drawerContentOptions
     };
 
-    const propsMap: Traversable = {"stack": stackProps, "tab": tabProps, "drawer": drawerProps};
+    const propsMap: Traversable = {"stack": stackProps, "tab": tabProps, "drawer": drawerProps, "top": tabProps};
     return propsMap[navigatorType];
 }
 
@@ -60,11 +62,11 @@ export const tabBarIconNameConfig: TraversableNested = {
         default: 'settings',
         focused: 'settings',
     },
-    BitcoinHome: {
+    CryptoCurrencyHome: {
         default: 'bargraph',
         focused: 'bargraph',
     },
-    BitcoinAlert: {
+    CryptoCurrencyAlert: {
         default: 'alarmclock',
         focused: 'alarmclock',
     },
@@ -183,23 +185,38 @@ export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     }
     return true;
 }
-export const checkBunnyAPIProtocol = (data: any) => {
-    return checkCommonAPIProtocol(data, BunnyAPIError)
-}
 
 export const checkAuthAPIProtocol = (data: any) => {
     return checkCommonAPIProtocol(data, AuthAPIError)
 }
 
-export const getApiInstanceConfig = () => {
-    const httpPrefix = bunnyConfig.isHttps ? 'https://' : 'http://';
-    const devProxyPrefix = bunnyConfig.isDevServerProxy ? Object.keys(bunnyConfig.devServerProxy)[0] : '';
-    return {
-        baseURL: bunnyConfig.isDevServerProxy
-            ? `${bunnyConfig.devServer.domain}${bunnyConfig.devServer.port}${devProxyPrefix}`
-            : bunnyConfig.isRemoteBackEnd
-                ? `${httpPrefix}${bunnyConfig.remoteBackEnd.domain}:${bunnyConfig.remoteBackEnd.port}`
-                : `${httpPrefix}${bunnyConfig.localBackEnd.domain}:${bunnyConfig.localBackEnd.port}`,
-        timeout: 2000
+export const checkBunnyAPIProtocol = (data: any) => {
+    return checkCommonAPIProtocol(data, BunnyAPIError)
+}
+
+export const checkNomicsAPIProtocol = (data: any) => {
+    return checkCommonAPIProtocol(data, NomicsAPIError)
+}
+
+export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
+    const config = configORG as APPConfig
+    const apiConfig = config[apiConfigName];
+
+    if (apiConfig) {
+        const {
+            isHttps, isDevServerProxy, devServerProxy, devServer,
+            isRemoteBackEnd, remoteBackEnd, localBackEnd, timeout
+        } = apiConfig;
+        const httpPrefix = isHttps ? 'https://' : 'http://';
+        const devProxyPrefix = isDevServerProxy ? Object.keys(devServerProxy)[0] : '';
+        return {
+            baseURL: isDevServerProxy
+                ? `${devServer.domain}${devServer.port}${devProxyPrefix}`
+                : isRemoteBackEnd
+                    ? `${httpPrefix}${remoteBackEnd.domain}:${remoteBackEnd.port}`
+                    : `${httpPrefix}${localBackEnd.domain}:${localBackEnd.port}`,
+            timeout
+        }
     }
+
 }

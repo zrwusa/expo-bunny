@@ -10,7 +10,7 @@ import {
     requestReceived,
     sysError
 } from "../actions";
-import {EBLMsg, EDemoBitcoin, EDemoSaga} from "../../constants";
+import {EBLMsg, EDemoCryptoCurrency, EDemoSaga} from "../../constants";
 import {CancelAlertSettingsAction, RequestConfig, SaveQuickAlertSettingsAction,} from "../../types";
 import {blSuccess} from "../../helpers";
 
@@ -32,7 +32,7 @@ export const sagaDemoSagas = function* () {
         }
     });
 
-    yield takeEvery(EDemoBitcoin.SAVE_QUICK_ALERT_SETTINGS, function* (action: SaveQuickAlertSettingsAction) {
+    yield takeEvery(EDemoCryptoCurrency.SAVE_QUICK_ALERT_SETTINGS, function* (action: SaveQuickAlertSettingsAction) {
         const {payload} = action;
         const url = '/push-service/alert-quick-settings';
         const method = 'POST';
@@ -48,7 +48,7 @@ export const sagaDemoSagas = function* () {
         }
     });
 
-    yield takeEvery(EDemoBitcoin.CANCEL_ALL_ALERT_SETTINGS, function* (action: CancelAlertSettingsAction) {
+    yield takeEvery(EDemoCryptoCurrency.CANCEL_ALL_ALERT_SETTINGS, function* (action: CancelAlertSettingsAction) {
         const {payload} = action;
         const url = '/push-service/alert-settings';
         const method = 'DELETE';
@@ -64,8 +64,8 @@ export const sagaDemoSagas = function* () {
         }
     });
 
-    yield takeEvery(EDemoBitcoin.GET_CURRENT_PRICE, function* () {
-        const url = '/bitcoin-prices';
+    yield takeEvery(EDemoCryptoCurrency.GET_CURRENT_PRICE, function* () {
+        const url = '/crypto-currency-prices';
         const method = 'GET';
         const config: RequestConfig = {url, method}
         try {

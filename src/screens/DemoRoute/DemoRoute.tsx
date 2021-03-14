@@ -6,7 +6,7 @@ import {RootStackParam} from "../../types";
 import {createStyles} from "./styles";
 import {useTranslation} from 'react-i18next';
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {createSmartStyles} from "../../utils";
@@ -26,7 +26,7 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
     const st = shortenTFuciontKey(t, 'screens.DemoRoute');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor)
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor)
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
 
     const styles = createStyles(sizeLabor, themeLabor);

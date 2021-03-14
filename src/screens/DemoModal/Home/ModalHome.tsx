@@ -6,7 +6,7 @@ import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../../providers/i18n-labor";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types";
-import {getContainerStyles} from "../../../containers";
+import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {createSmartStyles} from "../../../utils";
@@ -24,7 +24,7 @@ function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const st = shortenTFuciontKey(t, 'screens.ModalHome');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
 
     return (

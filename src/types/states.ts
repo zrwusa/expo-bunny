@@ -61,7 +61,7 @@ export type PickerSelectorItem<T> = {
     inputLabel?: string;
 }
 
-export interface DemoBitcoinState {
+export interface DemoCryptoCurrencyState {
     notification: Notification,
     currentPrice: number,
     granularity: number,
@@ -85,5 +85,5 @@ export interface RootState {
     demoThunkState: DemoThunkState,
     demoMapState: DemoMapState,
     demoSagaState: DemoSagaState,
-    demoBitcoinState: DemoBitcoinState
+    demoCryptoCurrencyState: DemoCryptoCurrencyState
 }

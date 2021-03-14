@@ -37,7 +37,7 @@
       "RNAllInOne": "RN All In One",
       "demoTheme": "Demo Theme",
       "demoSuspense": "Demo Suspense",
-      "bitcoin": "Bitcoin",
+      "cryptoCurrency": "CryptoCurrency",
       "settings": "Settings",
       "signOut": "Sign Out"
     },
@@ -199,14 +199,20 @@
     "RNVirtualizedList": {
       "title": "RNVirtualizedList"
     },
-    "DemoBitcoin": {
-      "title": "DemoBitcoin"
+    "DemoCryptoCurrency": {
+      "title": "DemoCryptoCurrency"
     },
-    "BitcoinHome": {
-      "title": "BitcoinHome"
+    "CryptoCurrencyHome": {
+      "title": "CryptoCurrencyHome"
     },
-    "BitcoinAlert": {
-      "title": "BitcoinAlert",
+    "BTC": {
+      "title": "BTC"
+    },
+    "ETH": {
+      "title": "ETH"
+    },
+    "CryptoCurrencyAlert": {
+      "title": "CryptoCurrencyAlert",
       "paramIsPush": "Param isPush: ",
       "scheduleNotification": "Press to schedule a notification",
       "failedToGetToken": "Failed to get push token for push notification!",

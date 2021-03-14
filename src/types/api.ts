@@ -1,5 +1,27 @@
-import {AuthAPIError, BunnyAPIError} from "../utils";
-import {BLResult} from "./bl";
+import {AuthAPIError, BunnyAPIError, NomicsAPIError} from "../utils";
+
+export type AuthAPIProtocolResponseData<T> = {
+    "httpExtra": {
+        "code": number,
+        "message": string,
+        "description": string,
+        "errorCode": number,
+        "errorMessage": string,
+        "errorDescription": string,
+        "errorStack": string
+    },
+    "businessLogic": {
+        "code": string,
+        "message": string,
+        "description": string,
+        "errorCode": string,
+        "errorMessage": string,
+        "errorDescription": string,
+        "errorStack": string
+    },
+    "successData"?: T,
+    "timeSpent": number
+}
 
 export type BunnyAPIProtocolResponseData<T> = {
     "httpExtra": {
@@ -24,7 +46,7 @@ export type BunnyAPIProtocolResponseData<T> = {
     "timeSpent": number
 }
 
-export type AuthAPIProtocolResponseData<T> = {
+export type NomicsAPIProtocolResponseData<T> = {
     "httpExtra": {
         "code": number,
         "message": string,
@@ -69,30 +91,31 @@ export type APIStatusMap = Partial<{
     TooManyRequests: 429 | number,     // too many requests,the server can not process now
     NotImplemented: 501 | number,      // need to be implemented
 }>
+export type APIConfigName = 'auth' | 'bunny' | 'nomics';
+export type ErrorClass = typeof AuthAPIError | typeof BunnyAPIError | typeof NomicsAPIError;
 
-export type ErrorClass = typeof BunnyAPIError | typeof AuthAPIError;
 
-
-export type APIConfig<T> = {
-    isHttps: boolean,
-    timeout: number,
-    responseProtocolStructure: BunnyAPIProtocolResponseData<T> | AuthAPIProtocolResponseData<T>,
-    errorClass: ErrorClass,
-    interceptors: {
-        requestConfig: {
-            accessTokenFn?(): Promise<string | null | undefined>,
-        },
-        responseConfig: {
-            errorDealConfig: {
-                refreshAuthFn?(): Promise<BLResult>,
-            },
-            STATUS: APIStatusMap
-        }
-    },
-    isDevServerProxy?: boolean,
-    devProxyPrefix?: string,
-}
-
+// export type APIConfig<T> = {
+//     isHttps: boolean,
+//     timeout: number,
+//     responseProtocolStructure: BunnyAPIProtocolResponseData<T> | AuthAPIProtocolResponseData<T>,
+//     errorClass: ErrorClass,
+//     interceptors: {
+//         requestConfig: {
+//             accessTokenFn?(): Promise<string | null | undefined>,
+//         },
+//         responseConfig: {
+//             errorDealConfig: {
+//                 refreshAuthFn?(): Promise<BLResult>,
+//             },
+//             STATUS: APIStatusMap
+//         }
+//     },
+//     isDevServerProxy?: boolean,
+//     devProxyPrefix?: string,
+// }
+//
+//
 
 export interface BunnyAPIStandardRequestParams {
     pageNum?: number,
@@ -101,5 +124,53 @@ export interface BunnyAPIStandardRequestParams {
         id?: number
     }
 }
+
+export type APIConfig = {
+    "devServer": {
+        "domain": string,
+        "port": number
+    },
+    "isDevServerProxy": boolean,
+    "devServerProxy": {
+        "/api": {
+            "target": string,
+            "pathRewrite": {
+                "^/api-rewrite-path": string
+            }
+        }
+    },
+    "isRemoteBackEnd": false,
+    "isHttps": false,
+    "remoteBackEnd": {
+        "domain": string,
+        "port": number
+    },
+    "localBackEnd": {
+        "domain": string,
+        "port": number
+    },
+    "timeout":number,
+    "shouldCollectError": true
+}
+export type ConfigDimension = {
+    "width": number,
+    "height": number
+}
+export type APPConfig = {
+    [key in APIConfigName]: APIConfig;
+} & {
+    "UE": {
+        "dimensions": {
+            "bunnyUI"?: ConfigDimension;
+            "iphoneX"?: ConfigDimension;
+            "iPad"?: ConfigDimension;
+            "pixel2XL"?: ConfigDimension;
+            "pcBrowser"?: ConfigDimension;
+            "custom1"?: ConfigDimension;
+            "custom2"?: ConfigDimension;
+            "custom3"?: ConfigDimension;
+        };
+    };
+};
 
 

@@ -20,7 +20,7 @@ export type RootStackParam = {
     DemoNotification: undefined;
     DemoTheme: undefined;
     DemoSuspense: undefined;
-    DemoBitcoin: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoCryptoCurrency: undefined | { screen: string; params?: { [key: string]: any } };
     Settings: undefined;
 };
 
@@ -48,9 +48,14 @@ export type DemoDrawerStackParam = {
     DrawerSettings: { item: string };
 };
 
-export type DemoBitcoinStackParam = {
-    BitcoinHome: undefined;
-    BitcoinAlert: { isPush: boolean };
+export type DemoCryptoCurrencyStackParam = {
+    CryptoCurrencyHome: undefined;
+    CryptoCurrencyAlert: { isPush: boolean };
+};
+
+export type DemoCryptoCurrencyHomeTopStackParam = {
+    BTC: {type:string};
+    ETH: {type:string};
 };
 
 export type DemoTabRNComponentsStackParam = {

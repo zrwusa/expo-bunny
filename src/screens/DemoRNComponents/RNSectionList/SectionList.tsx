@@ -3,7 +3,7 @@ import {SafeAreaView, SectionList, View} from "react-native";
 import {Text} from "../../../components/UI";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {createStyles} from "./styles";
-import {getContainerStyles} from "../../../containers";
+import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 
 function SectionListScreen() {
@@ -43,7 +43,7 @@ function SectionListScreen() {
     );
     const sizeLabor = useSizeLabor();
     const styles = createStyles(sizeLabor, themeLabor)
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
     return (
         <SafeAreaView style={[containerStyles.Screen, styles.container]}>

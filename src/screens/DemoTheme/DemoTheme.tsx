@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {createStyles} from "./styles";
 import BunnyConstants from "../../constants/constants";
-import {Card, getContainerStyles} from "../../containers";
+import {Card, createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {createSmartStyles} from "../../utils";
@@ -15,7 +15,7 @@ const DemoThemeScreen = () => {
     const st = shortenTFuciontKey(t, 'screens.DemoTheme');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
 
     const styles = createStyles(sizeLabor, themeLabor);

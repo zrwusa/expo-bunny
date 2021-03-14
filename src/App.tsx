@@ -20,6 +20,8 @@ import {I18nLaborProvider} from "./providers/i18n-labor";
 import RequestLoading from "./components/RequestLoading";
 import BLToast from "./components/BLToast";
 import Sys from "./components/Sys";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 
 function App() {
     const dispatch = useDispatch();
@@ -71,27 +73,29 @@ function App() {
                         <RequestProvider>
                             <AuthLaborProvider>
                                 <ThemeLaborProvider>
-                                    <ThemeLaborContext.Consumer>{({theme}) => {
-                                        return <>
-                                            <StatusBar backgroundColor={Platform.OS === 'android' ? theme.colors.background : ''}
-                                                       barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
-                                            <NavigatorTree
-                                                theme={theme as ThemeNavigation}
-                                                fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
-                                                initialState={navInitialStateMemorized}
-                                                onStateChange={(state) =>
-                                                    AsyncStorage.setItem(
-                                                        BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
-                                                        JSON.stringify(state)
-                                                    )
-                                                }
-                                            />
-                                            <Sys/>
-                                            <RequestLoading/>
-                                            <BLToast/>
-                                        </>
-                                    }}
-                                    </ThemeLaborContext.Consumer>
+                                    <SafeAreaProvider>
+                                        <ThemeLaborContext.Consumer>{({theme}) => {
+                                            return <>
+                                                <StatusBar backgroundColor={Platform.OS === 'android' ? theme.colors.background : ''}
+                                                           barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
+                                                <NavigatorTree
+                                                    theme={theme as ThemeNavigation}
+                                                    fallback={<Text>{t(`sys.navigationFallback`)}</Text>}
+                                                    initialState={navInitialStateMemorized}
+                                                    onStateChange={(state) =>
+                                                        AsyncStorage.setItem(
+                                                            BunnyConstants.NAV_STATE_PERSISTENCE_KEY,
+                                                            JSON.stringify(state)
+                                                        )
+                                                    }
+                                                />
+                                                <Sys/>
+                                                <RequestLoading/>
+                                                <BLToast/>
+                                            </>
+                                        }}
+                                        </ThemeLaborContext.Consumer>
+                                    </SafeAreaProvider>
                                 </ThemeLaborProvider>
                             </AuthLaborProvider>
                         </RequestProvider>

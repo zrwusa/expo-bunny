@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useState} from "react";
-import SettingsItem from "./SettingsItem";
+import SettingsItem from "./Item";
 import {I18nManager} from "react-native";
 import {ELanguage, EThemes} from "../../constants";
 import {restartApp} from '../../restart';
@@ -8,7 +8,7 @@ import BunnyConstants from "../../constants/constants";
 import {useTranslation} from "react-i18next";
 import {View} from "../../components/UI";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
-import {getContainerStyles} from "../../containers";
+import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,7 +19,7 @@ export default function SettingsScreen() {
     const [language, setLanguage] = useState(i18n.language === ELanguage.zh)
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {theme, changeTheme} = themeLabor;
     return (
         <View style={containerStyles.Screen}>

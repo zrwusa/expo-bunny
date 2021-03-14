@@ -6,7 +6,7 @@ import {RootStackParam} from "../../types";
 import {ButtonTO, IcoMoon, Link, TextBtn} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
-import {Card, getContainerStyles} from "../../containers";
+import {Card, createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useAuthLabor} from "../../providers/auth-labor";
@@ -28,7 +28,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const linkTo = useLinkTo();
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
     const {wp} = sizeLabor.responsive.iphoneX;
     const {colors} = themeLabor.theme
@@ -122,9 +122,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     {/*    <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>*/}
                 </Card>
                 <Card title={st(`others`)}>
-                    <Link to="/demo-bitcoin/bitcoin-home">
-                        {st(`bitcoin`)}
-                        <IcoMoon name="bitcoin" size={wp(24)} {...iconColor}/></Link>
+                    <Link to="/demo-cryptoCurrency/cryptoCurrency-home/btc">
+                        {st(`cryptoCurrency`)}
+                        <IcoMoon name="cryptoCurrency" size={wp(24)} {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`system`)}>
                     <Link to="/settings">

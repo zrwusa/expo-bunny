@@ -24,7 +24,7 @@ export const defaultAuthAPIResponseData = {
     "successData": {},
     "timeSpent": 0
 }
-export const apiAuth = axios.create(getApiInstanceConfig());
+export const apiAuth = axios.create(getApiInstanceConfig('auth'));
 
 apiAuth.interceptors.request.use(
     async (config) => {

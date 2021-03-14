@@ -5,7 +5,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedLv2StackParam} from "../../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../../../providers/i18n-labor";
-import {getContainerStyles} from "../../../../containers";
+import {createContainerStyles} from "../../../../containers";
 import {useSizeLabor} from "../../../../providers/size-labor";
 import {useThemeLabor} from "../../../../providers/theme-labor";
 
@@ -22,7 +22,7 @@ function NestedLv2SettingsScreen({route, navigation}: NestedLv2SettingsProps) {
     const st = shortenTFuciontKey(t, 'screens.NestedLv2Settings');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
     return (
         <View style={containerStyles.Screen}>

@@ -3,7 +3,7 @@ import {SafeAreaView, View, VirtualizedList} from "react-native";
 import {Text} from "../../../components/UI"
 import {createStyles} from "./styles";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {getContainerStyles} from "../../../containers";
+import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 
 type VirtualizedListItem = {
@@ -15,7 +15,7 @@ function RNVirtualizedListScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const styles = createStyles(sizeLabor, themeLabor)
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
     const virtualizedListData: VirtualizedListItem[] = [];
 

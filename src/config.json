@@ -1,28 +1,85 @@
 {
-  "devServer": {
-    "domain": "localhost",
-    "port": 3006
-  },
-  "isDevServerProxy": false,
-  "devServerProxy": {
-    "/api": {
-      "target": "http://localhost:8000",
-      "pathRewrite": {
-        "^/api-rewrite-path": ""
+  "auth": {
+    "devServer": {
+      "domain": "localhost",
+      "port": 3006
+    },
+    "isDevServerProxy": false,
+    "devServerProxy": {
+      "/api": {
+        "target": "http://localhost:8000",
+        "pathRewrite": {
+          "^/api-rewrite-path": ""
+        }
       }
-    }
+    },
+    "isRemoteBackEnd": false,
+    "isHttps": false,
+    "remoteBackEnd": {
+      "domain": "34.126.104.144",
+      "port": 80
+    },
+    "localBackEnd": {
+      "domain": "192.168.50.19",
+      "port": 80
+    },
+    "timeout": 2000,
+    "shouldCollectError": true
   },
-  "isRemoteBackEnd": false,
-  "isHttps": false,
-  "remoteBackEnd": {
-    "domain": "34.126.104.144",
-    "port": 80
+  "bunny": {
+    "devServer": {
+      "domain": "localhost",
+      "port": 3006
+    },
+    "isDevServerProxy": false,
+    "devServerProxy": {
+      "/api": {
+        "target": "http://localhost:8000",
+        "pathRewrite": {
+          "^/api-rewrite-path": ""
+        }
+      }
+    },
+    "isRemoteBackEnd": false,
+    "isHttps": false,
+    "remoteBackEnd": {
+      "domain": "34.126.104.144",
+      "port": 80
+    },
+    "localBackEnd": {
+      "domain": "192.168.50.19",
+      "port": 80
+    },
+    "timeout": 2000,
+    "shouldCollectError": true
   },
-  "localBackEnd": {
-    "domain": "192.168.50.19",
-    "port": 80
+  "nomics": {
+    "devServer": {
+      "domain": "localhost",
+      "port": 3006
+    },
+    "isDevServerProxy": false,
+    "devServerProxy": {
+      "/api": {
+        "target": "http://localhost:8000",
+        "pathRewrite": {
+          "^/api-rewrite-path": ""
+        }
+      }
+    },
+    "isRemoteBackEnd": false,
+    "isHttps": false,
+    "remoteBackEnd": {
+      "domain": "34.126.104.144",
+      "port": 80
+    },
+    "localBackEnd": {
+      "domain": "192.168.50.19",
+      "port": 80
+    },
+    "timeout": 5000,
+    "shouldCollectError": true
   },
-  "shouldCollectError": true,
   "UE": {
     "dimensions": {
       "bunnyUI": {

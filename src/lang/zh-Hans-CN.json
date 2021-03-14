@@ -37,7 +37,7 @@
       "RNAllInOne": "所有RN组件",
       "demoTheme": "样例-主题",
       "demoSuspense": "样例-Suspense",
-      "bitcoin": "比特币",
+      "cryptoCurrency": "加密币",
       "settings": "设置",
       "signOut": "注销"
     },
@@ -199,14 +199,20 @@
     "RNVirtualizedList": {
       "title": "RN无限下拉列表"
     },
-    "DemoBitcoin": {
-      "title": "样例-比特币"
+    "DemoCryptoCurrency": {
+      "title": "样例-加密币"
     },
-    "BitcoinHome": {
-      "title": "比特币-首页"
+    "CryptoCurrencyHome": {
+      "title": "加密币-首页"
     },
-    "BitcoinAlert": {
-      "title": "比特币-闹钟",
+    "BTC": {
+      "title": "比特币"
+    },
+    "ETH": {
+      "title": "以太坊"
+    },
+    "CryptoCurrencyAlert": {
+      "title": "加密币-闹钟",
       "paramIsPush": "参数isPush: ",
       "scheduleNotification": "点击发送推送通知",
       "failedToGetToken": "无法获得用于推送的Token！",
