@@ -119,7 +119,7 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
                 }
             </View>
             <VictoryChart
-                padding={{top: wp(40),left:wp(4), bottom: wp(30), right: wp(20)}}
+                padding={{top: wp(40), left: wp(4), bottom: wp(30), right: wp(20)}}
                 animate={{
                     duration: 1000,
                 }}
@@ -140,7 +140,7 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
             >
                 <VictoryAxis crossAxis style={{
                     axis: {stroke: colors.accent},
-                    tickLabels:{padding:wp(2),fill: colors.primary}
+                    tickLabels: {padding: wp(2), fill: colors.primary}
                 }}/>
                 <VictoryAxis dependentAxis tickFormat={() => ``}
                              style={{

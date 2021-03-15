@@ -12,28 +12,28 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         tabs: {
             ...row,
             // ...around,
-            borderBottomColor:colors.border,
-            borderBottomWidth:wp(1),
+            borderBottomColor: colors.border,
+            borderBottomWidth: wp(1),
         },
         tab: {
-            flex:1,
+            flex: 1,
         },
-        tabText:{
-            fontSize:ms.fs.s,
-            padding:ms.sp.m,
-            paddingHorizontal:ms.sp.l,
-            textAlign:'center',
+        tabText: {
+            fontSize: ms.fs.s,
+            padding: ms.sp.m,
+            paddingHorizontal: ms.sp.l,
+            textAlign: 'center',
         },
-        tabTextActive:{
-          color:colors.primary
+        tabTextActive: {
+            color: colors.primary
         },
         active: {
-            borderBottomColor:colors.secondary,
-            borderBottomWidth:wp(2),
+            borderBottomColor: colors.secondary,
+            borderBottomWidth: wp(2),
         },
         inActive: {
-            borderBottomColor:colors.transparent,
-            borderBottomWidth:wp(2),
+            borderBottomColor: colors.transparent,
+            borderBottomWidth: wp(2),
         },
         btcChart: {
             marginTop: wp(36),

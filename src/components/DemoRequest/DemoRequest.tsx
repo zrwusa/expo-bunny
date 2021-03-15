@@ -65,10 +65,10 @@ function DemoRequest(props: Props) {
                 }
             }).then((res) => {
                 const {timestamps, prices} = res.data[0]
-                const xxx1 = timestamps.map((item:string, index:number) => {
+                const xxx1 = timestamps.map((item: string, index: number) => {
                     return {x: new Date(item), y: prices[index]}
                 })
-                console.log('xxx1',xxx1)
+                console.log('xxx1', xxx1)
             })
         } catch (err) {
             console.error(err)

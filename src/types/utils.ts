@@ -42,7 +42,7 @@ export type StackConfig = {
         | typeof Stacks.DemoTabRNComponentsStack
         | typeof Stacks.DemoCryptoCurrencyStack
         | typeof Stacks.DemoDrawerStack,
-        // | typeof Stacks.DemoCryptoCurrencyHomeTopStack,
+    // | typeof Stacks.DemoCryptoCurrencyHomeTopStack,
     authScreen?: ComponentType<any>,
     childrenNode?: NavigatorTreeNode[],
     authRequired: boolean,

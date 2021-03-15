@@ -29,7 +29,7 @@ export const createContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLab
         Screen: {
             flex: 1,
         },
-        Box:{
+        Box: {
             padding: ms.sp.m
         }
     });

@@ -149,7 +149,7 @@ export type APIConfig = {
         "domain": string,
         "port": number
     },
-    "timeout":number,
+    "timeout": number,
     "shouldCollectError": true
 }
 export type ConfigDimension = {

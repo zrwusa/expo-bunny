@@ -69,6 +69,7 @@ export const wait = async (ms: number, resolveValue?: any) => {
         }, ms)
     })
 }
+
 export class AuthAPIError extends Error {
     protected serverErrorStack;
     protected serverErrorCode;

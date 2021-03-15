@@ -6,7 +6,7 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;
     const {wp, hp} = responsive.iphoneX;
     const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
-    const {absoluteBottomLeft,row,evenly} = smartStylesObj;
+    const {absoluteBottomLeft, row, evenly} = smartStylesObj;
     const {colors} = themeLabor.theme;
 
     return StyleSheet.create({

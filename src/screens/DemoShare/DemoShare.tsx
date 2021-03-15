@@ -82,7 +82,7 @@ function DemoShareScreen() {
                 (selectedImage && selectedImage.localUri)
                     ? (
                         <View style={smartStyles.centralized}>
-                            <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail} />
+                            <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail}/>
                             <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
                                 <Text style={styles.buttonText}>Share this photo</Text>
                             </TouchableOpacity>

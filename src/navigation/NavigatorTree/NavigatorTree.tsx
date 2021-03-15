@@ -69,7 +69,7 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 // Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, responsive} = useSizeLabor();
-    const {wp,hp} = responsive.iphoneX;
+    const {wp, hp} = responsive.iphoneX;
     const {t} = useTranslation();
     const styles = createStyles();
     const insets = useSafeAreaInsets();

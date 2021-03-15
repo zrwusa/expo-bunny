@@ -6,7 +6,7 @@ import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings"
 import {DemoCryptoCurrencyStackParam, RootState} from "../../../types";
 import {ButtonTO, RNPickerSelect, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey, useRequest} from "../../../providers";
+import {shortenTFuciontKey} from "../../../providers";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
@@ -37,7 +37,7 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
     const {row, col1, col4, colLast} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()
-    const {currentPrice,dictionaries} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
+    const {currentPrice, dictionaries} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
     const dicGranularity = dictionaries.granularity;
     const dicReminderTimes = dictionaries.times;
     const dicReminderInterval = dictionaries.interval;

@@ -137,7 +137,7 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             flex: 1,
         },
         vCenter: {
-          alignItems: 'center'
+            alignItems: 'center'
         },
         centralized: {
             justifyContent: 'center',

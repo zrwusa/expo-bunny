@@ -1,5 +1,5 @@
 import React from "react";
-import {ButtonRNE,Text, View} from "../../components/UI";
+import {ButtonRNE, Text, View} from "../../components/UI";
 import {useDispatch, useSelector} from "react-redux";
 import {getDemoSagas} from "../../store/actions";
 import {RootState} from "../../types";

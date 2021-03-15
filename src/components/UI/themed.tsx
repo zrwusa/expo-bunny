@@ -7,7 +7,7 @@ import {
     ImageProps,
     Pressable as PressableRN,
     PressableProps,
-    StyleProp, StyleSheet,
+    StyleProp,
     Switch as SwitchRN,
     Text as TextRN,
     TextInput as TextInputRN,
@@ -104,7 +104,7 @@ export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
         color: colors.btnText,
         fontFamily: fonts.regular.fontFamily,
         fontSize: ms.fs.m,
-        textAlign:'center',
+        textAlign: 'center',
     } as TextStyle, style]
     return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
 }

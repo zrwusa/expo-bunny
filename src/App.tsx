@@ -20,7 +20,7 @@ import {I18nLaborProvider} from "./providers/i18n-labor";
 import RequestLoading from "./components/RequestLoading";
 import BLToast from "./components/BLToast";
 import Sys from "./components/Sys";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import {SafeAreaProvider} from "react-native-safe-area-context";
 
 
 function App() {
