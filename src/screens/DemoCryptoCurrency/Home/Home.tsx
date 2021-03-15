@@ -9,12 +9,11 @@ import {shortenTFuciontKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip} from "victory-native";
+import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip,VictoryVoronoiContainer} from "../../../components/Victory/Victory";
 import nomicsAPI from "../../../helpers/nomics-api";
 import {createStyles} from "./styles";
 import {addDays, createSmartStyles} from "../../../utils";
 import {useSelector} from "react-redux";
-import {VictoryVoronoiContainer} from "victory-native/lib";
 
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
@@ -68,7 +67,7 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
         }
         const res = await nomicsAPI.get('v1/currencies/sparkline', {
             params: {
-                key: '9d5780d97bce8d6019393ccbc5f0cd45',
+                // key: '9d5780d97bce8d6019393ccbc5f0cd45',
                 ids: type,
                 start,
                 end
@@ -127,7 +126,7 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
                 containerComponent={
                     <VictoryVoronoiContainer
                         voronoiDimension="x"
-                        labels={({datum}) => `x:${datum.x.toLocaleDateString()} \n y: ${datum.y}`}
+                        labels={({datum}:{datum :{x:Date,y:number}}) => `x:${datum.x.toLocaleDateString()} \n y: ${datum.y}`}
                         labelComponent={
                             <VictoryTooltip
                                 constrainToVisibleArea

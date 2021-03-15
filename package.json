@@ -10,7 +10,7 @@
     "debug:prod": "expo start --no-dev",
     "debug:prod:minify": "expo start --no-dev --minify",
     "clear:start:ios": "expo start --clear --ios",
-    "build": "yarn cache clean;next build",
+    "build": "next build",
     "build:ios": "expo build:ios",
     "build:web": "expo build:web",
     "build:android": "expo build:android",
