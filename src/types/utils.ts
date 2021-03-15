@@ -16,7 +16,7 @@ import {BottomTabNavigationConfig} from "react-navigation-bottom-tabs-no-warning
 import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 import {DrawerNavigationConfig} from "react-navigation-drawer-no-warnings/lib/typescript/src/types";
 import {MaterialTopTabNavigationOptions} from "@react-navigation/material-top-tabs";
-import {MaterialTopTabNavigationConfig} from "@react-navigation/material-top-tabs/lib/typescript/src/types";
+// import {MaterialTopTabNavigationConfig} from "@react-navigation/material-top-tabs/lib/typescript/src/types";
 
 export type NavigatorType = 'stack' | 'tab' | 'drawer' | 'top';
 
@@ -41,8 +41,8 @@ export type StackConfig = {
         | typeof Stacks.DemoTabStack
         | typeof Stacks.DemoTabRNComponentsStack
         | typeof Stacks.DemoCryptoCurrencyStack
-        | typeof Stacks.DemoDrawerStack
-        | typeof Stacks.DemoCryptoCurrencyHomeTopStack,
+        | typeof Stacks.DemoDrawerStack,
+        // | typeof Stacks.DemoCryptoCurrencyHomeTopStack,
     authScreen?: ComponentType<any>,
     childrenNode?: NavigatorTreeNode[],
     authRequired: boolean,

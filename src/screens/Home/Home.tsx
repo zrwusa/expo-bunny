@@ -37,10 +37,10 @@ function HomeScreen({navigation}: HomeScreenProps) {
         <ScrollView>
             <View style={containerStyles.Screen}>
                 <Card title={st(`navAndRoute`)}>
-                    <Link to="/demo-tab/tab-home">
+                    <Link to="/demo-tab/home">
                         {st(`tab`)}
                         <IcoMoon name="layout7" {...iconColor}/></Link>
-                    <Link to="/demo-drawer/drawer-home">{st(`drawer`)}
+                    <Link to="/demo-drawer/home">{st(`drawer`)}
                         <IcoMoon name="layout" {...iconColor}/></Link>
                     <Link to="/profile/002">
                         {st(`profile`) + `(Link)`}
@@ -59,7 +59,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
                     {/*    <TextBtn>{st(`demoModal`)}</TextBtn></ButtonTO>*/}
 
-                    <Link to="/demo-nested/nested-home">{st(`nestedNavigation`)}</Link>
+                    <Link to="/demo-nested/home">{st(`nestedNavigation`)}</Link>
                     <ButtonTO onPress={() =>
                         navigation.navigate('DemoNestedLv0', {
                             screen: 'NestedLv1Settings',
@@ -74,10 +74,10 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         {st(`passParamsFromRootToLeaf`) + '(TouchableOpacity)'}
                         <IcoMoon name="leaf" size={wp(21)} {...iconColor}/>
                     </ButtonTO>
-                    <Link to="/demo-nested/nested-settings/001/nested-lv2-settings/002">
+                    <Link to="/demo-nested/settings/001/lv2-settings/002">
                         {st(`passParamsFromRootToLeaf`) + `(Link)`}
                         <IcoMoon name="leaf" size={wp(21)} {...iconColor}/></Link>
-                    <Link to="/demo-tab/tab-settings/item-001">
+                    <Link to="/demo-tab/settings/item-001">
                         {st(`passParamsFromRootToLeafTab`) + `(Link)`}
                         <IcoMoon name="leaf" size={wp(21)} {...iconColor}/></Link>
                 </Card>
@@ -112,7 +112,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Link to="/demo-collection">
                         {st(`componentCollection`)}
                         <IcoMoon name="bus" {...iconColor}/></Link>
-                    <Link to="/demo-tab-rn-components/rn-home">
+                    <Link to="/demo-tab-rn-components/home">
                         {st(`RNAllInOne`)}
                         <IcoMoon name="bus" {...iconColor}/></Link>
                     <Link to="/demo-theme">
@@ -122,9 +122,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     {/*    <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>*/}
                 </Card>
                 <Card title={st(`others`)}>
-                    <Link to="/demo-cryptoCurrency/cryptoCurrency-home/btc">
+                    <Link to="/demo-crypto-currency/home">
                         {st(`cryptoCurrency`)}
-                        <IcoMoon name="cryptoCurrency" size={wp(24)} {...iconColor}/></Link>
+                        <IcoMoon name="bitcoin" size={wp(24)} {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`system`)}>
                     <Link to="/settings">

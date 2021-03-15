@@ -203,16 +203,16 @@
       "title": "DemoCryptoCurrency"
     },
     "CryptoCurrencyHome": {
-      "title": "CryptoCurrencyHome"
-    },
-    "BTC": {
-      "title": "BTC"
-    },
-    "ETH": {
-      "title": "ETH"
+      "title": "Home",
+      "BTC": "BTC",
+      "ETH": "ETH",
+      "1day": "1day",
+      "1week": "1week",
+      "1month": "1month",
+      "1year": "1year"
     },
     "CryptoCurrencyAlert": {
-      "title": "CryptoCurrencyAlert",
+      "title": "Alert",
       "paramIsPush": "Param isPush: ",
       "scheduleNotification": "Press to schedule a notification",
       "failedToGetToken": "Failed to get push token for push notification!",

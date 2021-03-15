@@ -37,11 +37,10 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
     const {row, col1, col4, colLast} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()
-    const demoCryptoCurrencyState = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
-    const dicGranularity = demoCryptoCurrencyState.dictionaries.granularity;
-    const dicReminderTimes = demoCryptoCurrencyState.dictionaries.times;
-    const dicReminderInterval = demoCryptoCurrencyState.dictionaries.interval;
-    const {currentPrice} = demoCryptoCurrencyState;
+    const {currentPrice,dictionaries} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
+    const dicGranularity = dictionaries.granularity;
+    const dicReminderTimes = dictionaries.times;
+    const dicReminderInterval = dictionaries.interval;
 
     let notificationReceivedListener = {
         remove: () => {

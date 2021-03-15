@@ -21,7 +21,7 @@ type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
 interface Props {
     route: ProfileRouteProp;
     navigation: ProfileNavigationProp;
-};
+}
 
 function ProfileScreen({route, navigation}: Props) {
     const {authResult} = useAuthLabor()

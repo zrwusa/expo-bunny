@@ -59,7 +59,7 @@ module.exports = withPlugins(
             // Note: we provide webpack above so you should not `require` it
             // Perform customizations to webpack config
             config.resolve.alias['react-native-maps'] = 'react-native-web-maps';
-
+            config.resolve.alias['victory-native'] = 'victory';
             return config
         },
     }

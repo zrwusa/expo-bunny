@@ -56,6 +56,11 @@ export const isTypeEqual = <T>(obj: unknown) => {
 
 export const isServerSide = typeof window === "undefined";
 
+export const addDays = (date: Date, days: number): Date => {
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
 export const wait = async (ms: number, resolveValue?: any) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {

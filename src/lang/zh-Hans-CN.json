@@ -203,13 +203,13 @@
       "title": "样例-加密币"
     },
     "CryptoCurrencyHome": {
-      "title": "加密币-首页"
-    },
-    "BTC": {
-      "title": "比特币"
-    },
-    "ETH": {
-      "title": "以太坊"
+      "title": "加密币-首页",
+      "BTC": "比特币",
+      "ETH": "以太坊",
+      "1day": "1天",
+      "1week": "1周",
+      "1month": "1个月",
+      "1year": "1年"
     },
     "CryptoCurrencyAlert": {
       "title": "加密币-闹钟",

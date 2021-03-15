@@ -134,18 +134,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         }
     }
 
-    const topTabBarOptions: BottomTabBarOptions = {
-        tabStyle: {
-            minHeight:0,
-            alignItems: 'center',
-        },
-        labelStyle: {
-            fontSize: ms.fs.s,
-        },
-        style: {
-            // height: wp(40)
-        }
-    }
     const tabBarOptions: BottomTabBarOptions = {
         tabStyle: {
             justifyContent: 'center'
@@ -312,7 +300,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: ModalHomeScreen,
                         name: 'ModalHome',
-                        path: 'modal-home',
+                        path: 'home',
                         navigatorType: 'stack',
                         options: {
                             animationEnabled: true,
@@ -355,7 +343,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: TabHomeScreen,
                         name: 'TabHome',
-                        path: 'tab-home',
+                        path: 'home',
                         navigatorType: 'tab',
                         authRequired: false
                     },
@@ -363,7 +351,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: TabSettingsScreen,
                         name: 'TabSettings',
-                        path: 'tab-settings/:item',
+                        path: 'settings/:item',
                         initialParams: {'item': 'item-001'},
                         parse: {
                             item: (item: string) => `${item}`,
@@ -392,7 +380,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: DrawerHomeScreen,
                         name: 'DrawerHome',
-                        path: 'drawer-home',
+                        path: 'home',
                         navigatorType: 'drawer',
                         authRequired: false
                     },
@@ -400,7 +388,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: DrawerSettingsScreen,
                         name: 'DrawerSettings',
-                        path: 'drawer-settings/:item',
+                        path: 'settings/:item',
                         initialParams: {'item': 'item-001'},
                         parse: {
                             item: (item: string) => `${item}`,
@@ -427,7 +415,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: NestedLv1HomeScreen,
                         name: 'NestedLv1Home',
-                        path: 'nested-home',
+                        path: 'home',
                         navigatorType: 'stack',
                         authRequired: false
                     },
@@ -435,7 +423,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         stack: Stacks.DemoNestedLv2Stack,
                         name: 'NestedLv1Settings',
-                        path: 'nested-settings/:item',
+                        path: 'settings/:item',
                         options: {headerShown: true},
                         screenOptions: optionsHeaderAndAnimation,
                         navigatorType: 'stack',
@@ -446,7 +434,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                 key: uuidV4(),
                                 component: NestedLv2HomeScreen,
                                 name: 'NestedLv2Home',
-                                path: 'nested-lv2-home',
+                                path: 'lv2-home',
                                 navigatorType: 'stack',
                                 authRequired: false,
                             },
@@ -454,7 +442,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                 key: uuidV4(),
                                 component: NestedLv2SettingsScreen,
                                 name: 'NestedLv2Settings',
-                                path: 'nested-lv2-settings/:itemlv2',
+                                path: 'lv2-settings/:itemlv2',
                                 parse: {
                                     itemlv2: (itemlv2: string) => `${itemlv2}`,
                                 },
@@ -479,7 +467,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: RNHome,
                         name: 'RNHome',
-                        path: 'rn-home',
+                        path: 'home',
                         navigatorType: 'tab',
                         authRequired: false,
 
@@ -488,7 +476,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: RNFlatListScreen,
                         name: 'RNFlatList',
-                        path: 'rn-flat-list',
+                        path: 'flat-list',
                         navigatorType: 'tab',
                         authRequired: false,
 
@@ -497,7 +485,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: RNSectionListScreen,
                         name: 'RNSectionList',
-                        path: 'rn-section-list',
+                        path: 'section-list',
                         navigatorType: 'tab',
                         authRequired: false,
                     },
@@ -505,7 +493,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: RNVirtualizedListScreen,
                         name: 'RNVirtualizedList',
-                        path: 'rn-virtualized-list',
+                        path: 'virtualized-list',
                         navigatorType: 'tab',
                         authRequired: false,
                     },
@@ -513,7 +501,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: RNKeyboardAvoidingScreen,
                         name: 'RNNoKeyboard',
-                        path: 'rn-keyboard-avoiding',
+                        path: 'keyboard-avoiding',
                         navigatorType: 'tab',
                         authRequired: false,
                     },
@@ -521,7 +509,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         key: uuidV4(),
                         component: RNSafeAreaScreen,
                         name: 'RNSafeArea',
-                        path: 'rn-safe-area',
+                        path: 'safe-area',
                         navigatorType: 'tab',
                         authRequired: false,
                     }
@@ -531,7 +519,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 key: uuidV4(),
                 name: 'DemoCryptoCurrency',
                 stack: Stacks.DemoCryptoCurrencyStack,
-                path: 'demo-cryptoCurrency',
+                path: 'demo-crypto-currency',
                 screenOptions: screenOptionsTabBarIcon,
                 tabBarOptions: tabBarOptions,
                 navigatorType: 'tab',
@@ -539,36 +527,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 childrenNode: [
                     {
                         key: uuidV4(),
-                        stack: Stacks.DemoCryptoCurrencyHomeTopStack,
+                        component: CryptoCurrencyHomeScreen,
                         name: 'CryptoCurrencyHome',
-                        path: 'cryptoCurrency-home',
-                        navigatorType: 'tab',
+                        path: 'home',
+                        navigatorType: 'top',
                         authRequired: false,
-                        tabBarOptions: topTabBarOptions,
-                        childrenNode: [
-                            {
-                                key: uuidV4(),
-                                component: Platform.OS !== 'web'
-                                    ? CryptoCurrencyHomeScreen
-                                    : () => <NotSupport text="Not supported on web"/>,
-                                name: 'BTC',
-                                path: 'btc',
-                                initialParams: {type: 'BTC'},
-                                navigatorType: 'top',
-                                authRequired: false,
-                            },
-                            {
-                                key: uuidV4(),
-                                component: Platform.OS !== 'web'
-                                    ? CryptoCurrencyHomeScreen
-                                    : () => <NotSupport text="Not supported on web"/>,
-                                name: 'ETH',
-                                path: 'eth',
-                                initialParams: {type: 'ETH'},
-                                navigatorType: 'top',
-                                authRequired: false,
-                            }
-                        ]
                     },
                     {
                         key: uuidV4(),
@@ -576,7 +539,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                             ? CryptoCurrencyAlertScreen
                             : () => <NotSupport text="Not supported on web"/>,
                         name: 'CryptoCurrencyAlert',
-                        path: 'cryptoCurrency-alert/:isPush',
+                        path: 'alert/:isPush',
                         initialParams: {isPush: true},
                         navigatorType: 'tab',
                         authRequired: false,

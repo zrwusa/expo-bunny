@@ -24,8 +24,8 @@ export const getThemeWareHouse = () => {
                 dark: pl.orange800,
             },
             secondary: {
-                light: pl.teal200,
-                dark: pl.orange600
+                light: pl.teal300,
+                dark: pl.orange700
             },
             btnText: {
                 light: pl.white,

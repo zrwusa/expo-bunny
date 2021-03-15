@@ -53,11 +53,6 @@ export type DemoCryptoCurrencyStackParam = {
     CryptoCurrencyAlert: { isPush: boolean };
 };
 
-export type DemoCryptoCurrencyHomeTopStackParam = {
-    BTC: {type:string};
-    ETH: {type:string};
-};
-
 export type DemoTabRNComponentsStackParam = {
     TabRNComponentsHome: undefined;
     TabRNComponentsSettings: undefined;
