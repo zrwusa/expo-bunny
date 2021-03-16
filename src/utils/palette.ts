@@ -311,6 +311,13 @@ export const palette: Palette = {
     yellow780: '#faad14',
     blueGrey320: '#86939e',
     //---end--- react-native-elements
+
+    //---start--- victory
+    grey320: '#dedede',
+    brown220: '#baa59b',
+    brown620: '#6f5b51',
+    black890: '#13100e',
+    //
 }
 
 export const pl = palette

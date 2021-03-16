@@ -38,7 +38,7 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const dispatch = useDispatch();
-    const {colors} = themeLabor.theme;
+    const {colors, victory} = themeLabor.theme;
     const {Screen, Box} = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
     const {} = smartStyles;
@@ -95,7 +95,6 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
         getHistoricalPrices(type, dateRange).then();
         return () => {
             source.cancel('xxx')
-            console.log('---source', source)
         }
     }, [])
 
@@ -134,10 +133,11 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
                 }
             </View>
             <VictoryChart
+                theme={victory}
                 padding={{top: wp(40), left: wp(4), bottom: wp(30), right: wp(20)}}
-                // animate={{
-                //     duration: 1000,
-                // }}
+                animate={{
+                    duration: 1000,
+                }}
                 domainPadding={{y: wp(15)}}
                 containerComponent={
                     <VictoryVoronoiContainer
@@ -147,26 +147,28 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
                             <VictoryTooltip
                                 constrainToVisibleArea
                                 cornerRadius={ms.br.s}
-                                flyoutStyle={{fill: colors.surface}}/>
+                                // flyoutStyle={{
+                                //     fill: colors.surface
+                                // }}
+                            />
                         }
                     />
                 }
                 scale={{x: 'time'}}
             >
                 <VictoryAxis crossAxis style={{
-                    axis: {stroke: colors.accent},
-                    tickLabels: {padding: wp(2), fill: colors.primary}
+                    // axis: {stroke: colors.accent},
+                    // tickLabels: {padding: wp(2), fill: colors.primary}
                 }}/>
                 <VictoryAxis dependentAxis tickFormat={() => ``}
                              style={{
-                                 axis: {stroke: colors.accent},
-
+                                 // axis: {stroke: colors.accent},
                              }}/>
                 <VictoryLine
                     interpolation="natural"
                     style={{
-                        data: {stroke: colors.secondary},
-                        parent: {border: `1px solid ${colors.border}`}
+                        // data: {stroke: colors.secondary},
+                        // parent: {border: `1px solid ${colors.border}`}
                     }}
                     data={btcData}
                 />

@@ -6,6 +6,7 @@ import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
 import {ImageStyle, TextStyle, ViewStyle} from "react-native";
 import {ColorSchemeName} from "react-native-appearance";
+import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
 
 export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 
@@ -151,6 +152,7 @@ export interface Theme {
             fontWeight?: string,
         }
     },
+    victory?: VictoryThemeDefinition,
 }
 
 
@@ -630,6 +632,13 @@ export type Palette = {
     blueGrey320: string,
     //---end--- react-native-elements
 
+    //---start--- victory chart
+    brown220: string,
+    grey320: string,
+    brown620: string,
+    black890: string,
+    //---end--- victory chart
+
 }
 
 export type PaletteWithColors = {
@@ -943,6 +952,14 @@ export type PaletteWithColors = {
     yellow780: '#faad14',
     blueGrey320: '#86939e',
     //---end--- react-native-elements
+
+    //---start--- victory chart
+    brown220: '#baa59b',
+    grey320: '#dedede',
+    brown620: '#6f5b51',
+    black890: '#13100e',
+
+    //---end--- victory chart
 }
 
 

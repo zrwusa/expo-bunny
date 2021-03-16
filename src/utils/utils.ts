@@ -56,6 +56,12 @@ export const isTypeEqual = <T>(obj: unknown) => {
 
 export const isServerSide = typeof window === "undefined";
 
+export function colorReverse(oldColor: string) {
+    let oldColorTemp = '0x' + oldColor.replace(/#/g, '');
+    let str = '000000' + (0xFFFFFF - Number(oldColorTemp)).toString(16);
+    return str.substring(str.length - 6, str.length);
+}
+
 export const addDays = (date: Date, days: number): Date => {
     date.setDate(date.getDate() + days);
     return date;

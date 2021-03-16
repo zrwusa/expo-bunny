@@ -100,8 +100,8 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey800
             },
             accent: {
-                light: pl.green850,
-                dark: pl.tealA700
+                light: pl.purple500,
+                dark: pl.blue600
             },
             accentSecondary: {
                 light: pl.blue300,
@@ -271,6 +271,1154 @@ export const getThemeWareHouse = () => {
                 },
             }
         },
+        victory:
+            {
+                "area": {
+                    "style": {
+                        "data": {
+                            "fill": {
+                                light: pl.grey900,
+                                dark: pl.grey320
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    }, "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "axis": {
+                    "style": {
+                        "axis": {
+                            "fill": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "stroke": {
+                                light: pl.blueGrey300,
+                                dark: pl.brown620
+                            },
+                            "strokeWidth": {
+                                light: 2,
+                                dark: 2
+                            },
+                            "strokeLinecap": {
+                                light: 'round',
+                                dark: 'round'
+                            },
+                            "strokeLinejoin": {
+                                light: 'round',
+                                dark: 'round'
+                            }
+                        },
+                        "axisLabel": {
+                            "textAnchor": {
+                                light: 'middle',
+                                dark: 'middle'
+                            },
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "grid": {
+                            "fill": {
+                                light: 'none',
+                                dark: 'none'
+                            },
+                            "stroke": {
+                                light: pl.blueGrey50,
+                                dark: pl.black890
+                            },
+                            "strokeDasharray": {
+                                light: '10, 5',
+                                dark: '10, 5'
+                            },
+                            "strokeLinecap": {
+                                light: 'round',
+                                dark: 'round'
+                            },
+                            "strokeLinejoin": {
+                                light: 'round',
+                                dark: 'round'
+                            },
+                            "pointerEvents": {
+                                light: 'painted',
+                                dark: 'painted'
+                            }
+                        },
+                        "ticks": {
+                            "fill": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "size": {
+                                light: 5,
+                                dark: 5
+                            },
+                            "stroke": {
+                                light: pl.blueGrey300,
+                                dark: pl.black890
+
+                            },
+                            "strokeWidth": {
+                                light: 1,
+                                dark: 1
+                            },
+                            "strokeLinecap": {
+                                light: 'round',
+                                dark: 'round'
+                            },
+                            "strokeLinejoin": {
+                                light: 'round',
+                                dark: 'round'
+                            }
+                        },
+                        "tickLabels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    }, "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "polarDependentAxis": {
+                    "style": {
+                        "ticks": {
+                            "fill": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "size": {
+                                light: 1,
+                                dark: 1
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            }
+                        }
+                    }
+                },
+                "bar": {
+                    "style": {
+                        "data": {
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    }, "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "boxplot": {
+                    "style": {
+                        "max": {
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            }, "stroke": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            }, "strokeWidth": {
+                                light: 1,
+                                dark: 1
+                            }
+                        },
+                        "maxLabels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 3,
+                                dark: 3
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "median": {
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            }, "stroke": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            }, "strokeWidth": {
+                                light: 1,
+                                dark: 1
+                            }
+                        },
+                        "medianLabels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 3,
+                                dark: 3
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "min": {
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            }, "stroke": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            }, "strokeWidth": {
+                                light: 1,
+                                dark: 1
+                            }
+                        },
+                        "minLabels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 3,
+                                dark: 3
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "q1": {
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            }, "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            }
+                        },
+                        "q1Labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 3,
+                                dark: 3
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "q3": {
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            }, "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            }
+                        },
+                        "q3Labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 3,
+                                dark: 3
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    },
+                    "boxWidth": {
+                        light: 20,
+                        dark: 20
+                    },
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    },
+                    "height": {
+                        light: 350,
+                        dark: 350
+                    },
+                    "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "candlestick": {
+                    "style": {
+                        "data": {
+                            "stroke": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 5,
+                                dark: 5
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    },
+                    "candleColors": {
+                        "positive": {
+                            light: pl.white,
+                            dark: pl.black
+                        },
+                        "negative": {
+                            light: pl.blueGrey700,
+                            dark: pl.brown220
+                        }
+                    },
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    },
+                    "height": {
+                        light: 350,
+                        dark: 350
+                    },
+                    "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "chart": {
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "errorbar": {
+                    "borderWidth": {
+                        light: 8,
+                        dark: 8
+                    },
+                    "style": {
+                        "data": {
+                            "fill": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "opacity": {
+                                light: 1,
+                                dark: 1
+                            },
+                            "stroke": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "strokeWidth": {
+                                light: 2,
+                                dark: 2
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    },
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "group": {
+                    "colorScale": {
+                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
+                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
+                    },
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "histogram": {
+                    "style": {
+                        "data": {
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            }, "stroke": {
+                                light: pl.grey900,
+                                dark: pl.grey320
+                            }, "strokeWidth": {
+                                light: 2,
+                                dark: 2
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    },
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    },
+                    "height": {
+                        light: 350,
+                        dark: 350
+                    },
+                    "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "legend": {
+                    "colorScale": {
+                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
+                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
+                    },
+                    "gutter": {
+                        light: 10,
+                        dark: 10
+                    },
+                    "orientation": {
+                        light: 'vertical',
+                        dark: 'vertical'
+                    },
+                    "titleOrientation": {
+                        light: 'top',
+                        dark: 'top'
+                    },
+                    "style": {
+                        "data": {
+                            "type": {
+                                light: 'circle',
+                                dark: 'circle'
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "title": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 5,
+                                dark: 5
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    }
+                },
+                "line": {
+                    "style": {
+                        "data": {
+                            "fill": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "opacity": {
+                                light: 1,
+                                dark: 1
+                            },
+                            "stroke": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "strokeWidth": {
+                                light: 2,
+                                dark: 2
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    }, "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "pie": {
+                    "colorScale": {
+                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
+                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
+                    },
+                    "style": {
+                        "data": {
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            }, "stroke": {
+                                light: pl.blueGrey50,
+                                dark: pl.brown220
+                            },
+                            "strokeWidth": {
+                                light: 1,
+                                dark: 1
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 20,
+                                dark: 20
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    },
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "scatter": {
+                    "style": {
+                        "data": {
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "opacity": {
+                                light: 1,
+                                dark: 1
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 8,
+                                dark: 8
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        }
+                    }, "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "stack": {
+                    "colorScale": {
+                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
+                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
+                    },
+                    "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                },
+                "tooltip": {
+                    "style": {
+                        "fontFamily": {
+                            light: fontsWarehouse.regular.fontFamily.light,
+                            dark: fontsWarehouse.regular.fontFamily.dark,
+                        },
+                        "fontSize": {
+                            light: 12,
+                            dark: 12
+                        },
+                        "letterSpacing": {
+                            light: 'normal',
+                            dark: 'normal'
+                        },
+                        "padding": {
+                            light: 0,
+                            dark: 0
+                        },
+                        "fill": {
+                            light: pl.blueGrey700,
+                            dark: pl.brown220
+                        },
+                        "stroke": {
+                            light: 'transparent',
+                            dark: 'transparent'
+                        },
+                        "strokeWidth": {
+                            light: 0,
+                            dark: 0
+                        },
+                        "pointerEvents": {
+                            light: 'none',
+                            dark: 'none'
+                        }
+                    },
+                    "flyoutStyle": {
+                        "stroke": {
+                            light: pl.grey900,
+                            dark: pl.grey320
+                        },
+                        "strokeWidth": {
+                            light: 1,
+                            dark: 1
+                        },
+                        "fill": {
+                            light: '#f0f0f0',
+                            dark: '#0f0f0f'
+                        },
+                        "pointerEvents": {
+                            light: 'none',
+                            dark: 'none'
+                        }
+                    },
+                    "flyoutPadding": {
+                        light: 5,
+                        dark: 5
+                    },
+                    "cornerRadius": {
+                        light: 5,
+                        dark: 5
+                    },
+                    "pointerLength": {
+                        light: 10,
+                        dark: 10
+                    }
+                },
+                "voronoi": {
+                    "style": {
+                        "data": {
+                            "fill": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            }
+                        },
+                        "labels": {
+                            "fontFamily": {
+                                light: fontsWarehouse.regular.fontFamily.light,
+                                dark: fontsWarehouse.regular.fontFamily.dark,
+                            },
+                            "fontSize": {
+                                light: 12,
+                                dark: 12
+                            },
+                            "letterSpacing": {
+                                light: 'normal',
+                                dark: 'normal'
+                            },
+                            "padding": {
+                                light: 5,
+                                dark: 5
+                            },
+                            "fill": {
+                                light: pl.blueGrey700,
+                                dark: pl.brown220
+                            },
+                            "stroke": {
+                                light: 'transparent',
+                                dark: 'transparent'
+                            },
+                            "strokeWidth": {
+                                light: 0,
+                                dark: 0
+                            },
+                            "pointerEvents": {
+                                light: 'none',
+                                dark: 'none'
+                            }
+                        },
+                        "flyout": {
+                            "stroke": {
+                                light: pl.grey900,
+                                dark: pl.grey320
+                            },
+                            "strokeWidth": {
+                                light: 1,
+                                dark: 1
+                            },
+                            "fill": {
+                                light: '#f0f0f0',
+                                dark: '#0f0f0f'
+                            },
+                            "pointerEvents": {
+                                light: 'none',
+                                dark: 'none'
+                            }
+                        }
+                    }, "width": {
+                        light: 350,
+                        dark: 350
+                    }, "height": {
+                        light: 350,
+                        dark: 350
+                    }, "padding": {
+                        light: 50,
+                        dark: 50
+                    }
+                }
+            }
+
     }
     return themeWarehouse;
 }
@@ -278,6 +1426,14 @@ export const getThemeWareHouse = () => {
 const isLeafParent = (obj: object) => {
     let isLeaf: boolean = true
     Object.values(obj).forEach(value => {
+        if (typeof value === 'object' && value instanceof Array) {
+            value.forEach(item => {
+                if (typeof item === 'object') {
+                    return false;
+                }
+            })
+            return isLeaf = true
+        }
         if (!['string', 'boolean', 'number', 'undefined', 'function'].includes(typeof value) && (value !== null)) {
             return isLeaf = false
         }
