@@ -117,11 +117,11 @@
     "Auth": {
       "title": "登录",
       "signIn": "登录",
-      "signUp": "Sign Up",
-      "signInDummy": "登录 （Dummy）",
+      "signUp": "注册",
+      "signInDummy": "假登录",
       "signInGoogle": "登录 Google",
-      "goToSignUp": "Go to sign up",
-      "goToSignIn": "Go to sign in",
+      "goToSignUp": "去注册",
+      "goToSignIn": "去登录",
       "username": "用户名",
       "password": "密码"
     },
@@ -206,10 +206,10 @@
       "title": "加密币-首页",
       "BTC": "比特币",
       "ETH": "以太坊",
-      "1day": "1天",
-      "1week": "1周",
-      "1month": "1个月",
-      "1year": "1年"
+      "1d": "1天",
+      "1w": "1周",
+      "1m": "1个月",
+      "1y": "1年"
     },
     "CryptoCurrencyAlert": {
       "title": "加密币-闹钟",

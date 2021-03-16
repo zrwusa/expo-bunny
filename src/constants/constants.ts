@@ -73,6 +73,7 @@ export enum EBLMsg {
     CANCEL_ALL_ALERT_SETTINGS_SUCCESS = "Cancel all alert settings success",
     GET_CURRENT_PRICE_SUCCESS = "Get current price success",
     GET_DEMO_SAGAS_SUCCESS = "Get demo sagas success",
+    CANCELED_REQUEST = "Canceled request",
     // XXX = "Xxx",
     // XXX = "Xxx",
     // XXX = "Xxx",

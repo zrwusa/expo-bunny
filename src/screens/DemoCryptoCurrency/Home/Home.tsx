@@ -9,11 +9,15 @@ import {shortenTFuciontKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip,VictoryVoronoiContainer} from "../../../components/Victory/Victory";
+import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../components/Victory/Victory";
 import nomicsAPI from "../../../helpers/nomics-api";
 import {createStyles} from "./styles";
 import {addDays, createSmartStyles} from "../../../utils";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import axios, {CancelTokenSource} from "axios";
+import {collectBLResult} from "../../../store/actions";
+import {blError} from "../../../helpers";
+import {EBLMsg} from "../../../constants";
 
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
@@ -24,14 +28,16 @@ export interface CryptoCurrencyHomeProps {
     navigation: CryptoCurrencyHomeNavigationProp
 }
 
+let source: CancelTokenSource;
 
 function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) {
     const types = ['BTC', 'ETH'];
-    const dateRanges = ['1day', '1week', '1month', '1year'];
+    const dateRanges = ['1d', '1w', '1m', '1y'];
     const {t} = useTranslation();
     const st = shortenTFuciontKey(t, 'screens.CryptoCurrencyHome');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
+    const dispatch = useDispatch();
     const {colors} = themeLabor.theme;
     const {Screen, Box} = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
@@ -44,43 +50,53 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
     ]);
     const {currentPrice} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
     const [type, setType] = useState('BTC')
-    const [dateRange, setDateRange] = useState('1day')
+    const [dateRange, setDateRange] = useState('1d')
     const getHistoricalPrices = async (type: string, dateRange: string) => {
         let start = '';
         let end = new Date().toISOString();
         switch (dateRange) {
-            case '1day':
+            case '1d':
                 start = addDays(new Date(), -1).toISOString()
                 break;
-            case '1week':
+            case '1w':
                 start = addDays(new Date(), -7).toISOString()
                 break;
-            case '1month':
+            case '1m':
                 start = addDays(new Date(), -30).toISOString()
                 break;
-            case '1year':
+            case '1y':
                 start = addDays(new Date(), -365).toISOString()
                 break;
             default:
                 start = addDays(new Date(), -1).toISOString()
                 break;
         }
-        const res = await nomicsAPI.get('v1/currencies/sparkline', {
-            params: {
-                // key: '9d5780d97bce8d6019393ccbc5f0cd45',
-                ids: type,
-                start,
-                end
-            }
-        })
-        const {timestamps, prices} = res.data[0]
-        const btcDataMapped = timestamps.map((item: string, index: number) => {
-            return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
-        })
-        setBtcData(btcDataMapped)
+        source = axios.CancelToken.source();
+        try {
+            const res = await nomicsAPI.get('v1/currencies/sparkline', {
+                cancelToken: source.token,
+                params: {
+                    ids: type,
+                    start,
+                    end
+                }
+            })
+            const {timestamps, prices} = res.data[0]
+            const btcDataMapped = timestamps.map((item: string, index: number) => {
+                return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
+            })
+            setBtcData(btcDataMapped)
+        } catch (e) {
+            dispatch(collectBLResult(blError(EBLMsg.CANCELED_REQUEST, false)))
+        }
+
     }
     useEffect(() => {
         getHistoricalPrices(type, dateRange).then();
+        return () => {
+            source.cancel('xxx')
+            console.log('---source', source)
+        }
     }, [])
 
     return (
@@ -119,14 +135,14 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
             </View>
             <VictoryChart
                 padding={{top: wp(40), left: wp(4), bottom: wp(30), right: wp(20)}}
-                animate={{
-                    duration: 1000,
-                }}
+                // animate={{
+                //     duration: 1000,
+                // }}
                 domainPadding={{y: wp(15)}}
                 containerComponent={
                     <VictoryVoronoiContainer
                         voronoiDimension="x"
-                        labels={({datum}:{datum :{x:Date,y:number}}) => `x:${datum.x.toLocaleDateString()} \n y: ${datum.y}`}
+                        labels={({datum}: { datum: { x: Date, y: number } }) => `x:${datum.x.toLocaleDateString()} \n y: ${datum.y}`}
                         labelComponent={
                             <VictoryTooltip
                                 constrainToVisibleArea

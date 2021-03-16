@@ -142,7 +142,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             fontSize: ms.fs.xxs,
         },
         style: {
-            height: wp(50) + insets.bottom
+            height: wp(46) + insets.bottom
         }
     }
 

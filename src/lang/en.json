@@ -206,10 +206,10 @@
       "title": "Home",
       "BTC": "BTC",
       "ETH": "ETH",
-      "1day": "1day",
-      "1week": "1week",
-      "1month": "1month",
-      "1year": "1year"
+      "1d": "1day",
+      "1w": "1week",
+      "1m": "1month",
+      "1y": "1year"
     },
     "CryptoCurrencyAlert": {
       "title": "Alert",
