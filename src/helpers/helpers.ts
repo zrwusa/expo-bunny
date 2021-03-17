@@ -8,8 +8,7 @@ import {
     IcoMoonSelectionIcon,
     NavigatorTreeNode,
     RouteIconFontConfig,
-    Traversable,
-    TraversableNested
+    JSONSerializable
 } from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -49,11 +48,11 @@ export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
         gestureHandlerProps, sceneContainerStyle, drawerStyle, drawerContent, drawerContentOptions
     };
 
-    const propsMap: Traversable = {"stack": stackProps, "tab": tabProps, "drawer": drawerProps, "top": tabProps};
+    const propsMap: JSONSerializable = {"stack": stackProps, "tab": tabProps, "drawer": drawerProps, "top": tabProps};
     return propsMap[navigatorType];
 }
 
-export const tabBarIconNameConfig: TraversableNested = {
+export const tabBarIconNameConfig: JSONSerializable = {
     TabHome: {
         default: 'home1',
         focused: 'home1',
@@ -97,8 +96,8 @@ export const tabBarIconNameConfig: TraversableNested = {
 }
 
 const getIconMCCustomMap = (iconConfig: any) => {
-    let map: TraversableNested = {};
-    let glyphMapT: TraversableNested = glyphMaterialCommunityMap;
+    let map: JSONSerializable = {};
+    let glyphMapT: JSONSerializable = glyphMaterialCommunityMap;
     Object.keys(iconConfig).forEach((key) => {
         const defaultKey = iconConfig[key]['default'];
         const focusedKey = iconConfig[key]['focused'];
@@ -111,7 +110,7 @@ const getIconMCCustomMap = (iconConfig: any) => {
 export const glyphMaterialCommunityCustomMap = getIconMCCustomMap(tabBarIconNameConfig)
 
 export const icoMoonSelectionToGlyphMap = (icoMoonSelection: IcoMoonSelection) => {
-    let map: TraversableNested = {};
+    let map: JSONSerializable = {};
     const {icons} = icoMoonSelection;
     for (const i in icons as IcoMoonSelectionIcon[]) {
         const iconProperties = icons[i].properties

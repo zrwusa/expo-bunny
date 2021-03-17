@@ -1,5 +1,5 @@
 import {Platform, PlatformOSType} from "react-native";
-import {FontConfigPlatform, Fonts, FontsWrapped, TraversableNested} from "../../types";
+import {FontConfigPlatform, Fonts, FontsWrapped, JSONSerializable} from "../../types";
 import {EThemes} from "../../constants/constants";
 
 const fontConfig: FontConfigPlatform = {
@@ -60,9 +60,9 @@ const fontConfig: FontConfigPlatform = {
 };
 
 const getFontConfigLeavesWrappedWithThemeNames = () => {
-    let configWithThemeName: TraversableNested = {};
+    let configWithThemeName: JSONSerializable = {};
     // Todo as unknown as is not a safe method
-    let fontConfigAlias = fontConfig as unknown as TraversableNested;
+    let fontConfigAlias = fontConfig as unknown as JSONSerializable;
     Object.keys(fontConfig).forEach(platformName => {
         configWithThemeName[platformName] = {}
         Object.keys(fontConfigAlias[platformName]).forEach(fontName => {

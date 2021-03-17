@@ -1,4 +1,4 @@
-import {SizeLabor, ThemeLabor, TraversableNested} from "../types";
+import {SizeLabor, ThemeLabor, JSONSerializable} from "../types";
 import {StyleSheet} from "react-native";
 
 export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -156,7 +156,7 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
     })
 
     let smartStylesObj: StyleSheet.NamedStyles<any>;
-    const traversableSmartStyles = smartStyles as unknown as TraversableNested
+    const traversableSmartStyles = smartStyles as unknown as JSONSerializable
     smartStylesObj = Object.keys(traversableSmartStyles).reduce((newObject, key) => ({
         ...newObject,
         [key]: StyleSheet.flatten(traversableSmartStyles[key])

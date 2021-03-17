@@ -1,9 +1,9 @@
 import {heightPercentageToDP as hp2dp, widthPercentageToDP as wp2dp} from "./responsiveScreen";
 import bunnyConfig from "../../config.json";
-import {Dimension, Measure, Responsive, TraversableNested} from "../../types";
+import {Dimension, Measure, Responsive, JSONSerializable} from "../../types";
 
 const getSizeLabor = () => {
-    let responsive: TraversableNested = {}
+    let responsive: JSONSerializable = {}
     Object.entries(bunnyConfig.UE.dimensions).forEach((dimension) => {
         responsive[dimension[0]] = {
             wp: (width: number) => {

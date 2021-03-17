@@ -33,7 +33,7 @@ import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
 import {BottomTabBarOptions, BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
 import {StackNavigationOptions} from "@react-navigation/stack";
 import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef, PathConfigMap} from "@react-navigation/native";
-import {LinkingConfig, LinkingConfigTraversable, NavigatorTreeNode, RecursiveNavigatorProps, ThemeName, Traversable} from "../../types";
+import {LinkingConfig, LinkingConfigTraversable, NavigatorTreeNode, RecursiveNavigatorProps, ThemeName, JSONSerializable} from "../../types";
 import {IcoMoon} from "../../components/UI";
 import {getIconNameByRoute, navigatorPropsExtract} from "../../helpers";
 import DemoNotificationScreen from "../../screens/DemoNotification";
@@ -601,7 +601,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     };
 
     const getLinkingConfigScreens = (): PathConfigMap => {
-        const config = recursiveConfig([node]) as Traversable;
+        const config = recursiveConfig([node]) as JSONSerializable;
         return (config[Object.keys(config)[0]] as unknown as LinkingConfig).screens as unknown as PathConfigMap;
     }
 

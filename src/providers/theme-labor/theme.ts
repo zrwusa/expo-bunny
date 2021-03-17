@@ -1,5 +1,5 @@
 import {fontsWarehouse} from "./fonts";
-import {Themes, ThemeWarehouse, TraversableNested} from "../../types";
+import {JSONSerializable, Themes, ThemeWarehouse} from "../../types";
 import color from "color";
 import {EThemes} from "../../constants";
 import {pl} from "../../utils";
@@ -311,13 +311,16 @@ export const getThemeWareHouse = () => {
                                 dark: 0
                             }
                         }
-                    }, "width": {
+                    },
+                    "width": {
                         light: 350,
                         dark: 350
-                    }, "height": {
+                    },
+                    "height": {
                         light: 350,
                         dark: 350
-                    }, "padding": {
+                    },
+                    "padding": {
                         light: 50,
                         dark: 50
                     }
@@ -914,10 +917,13 @@ export const getThemeWareHouse = () => {
                     }
                 },
                 "group": {
-                    "colorScale": {
-                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
-                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
-                    },
+                    "colorScale": [
+                        {light: pl.deepOrange600, dark: "#0baee1"},
+                        {light: pl.yellow200, dark: '#000a62'}, {light: pl.lime300, dark: '#23188a'},
+                        {light: pl.lightGreen500, dark: '#743cb5'},
+                        {light: pl.teal700, dark: '#ff8694'},
+                        {light: pl.cyan900, dark: '#ff9f9b'}
+                    ],
                     "width": {
                         light: 350,
                         dark: 350
@@ -929,69 +935,74 @@ export const getThemeWareHouse = () => {
                         dark: 50
                     }
                 },
-                "histogram": {
-                    "style": {
-                        "data": {
-                            "fill": {
-                                light: pl.blueGrey700,
-                                dark: pl.brown220
-                            }, "stroke": {
-                                light: pl.grey900,
-                                dark: pl.grey320
-                            }, "strokeWidth": {
-                                light: 2,
-                                dark: 2
-                            }
-                        },
-                        "labels": {
-                            "fontFamily": {
-                                light: fontsWarehouse.regular.fontFamily.light,
-                                dark: fontsWarehouse.regular.fontFamily.dark,
-                            },
-                            "fontSize": {
-                                light: 12,
-                                dark: 12
-                            },
-                            "letterSpacing": {
-                                light: 'normal',
-                                dark: 'normal'
-                            },
-                            "padding": {
-                                light: 8,
-                                dark: 8
-                            },
-                            "fill": {
-                                light: pl.blueGrey700,
-                                dark: pl.brown220
-                            },
-                            "stroke": {
-                                light: 'transparent',
-                                dark: 'transparent'
-                            },
-                            "strokeWidth": {
-                                light: 0,
-                                dark: 0
-                            }
-                        }
-                    },
-                    "width": {
-                        light: 350,
-                        dark: 350
-                    },
-                    "height": {
-                        light: 350,
-                        dark: 350
-                    },
-                    "padding": {
-                        light: 50,
-                        dark: 50
-                    }
-                },
+                // "histogram": {
+                //     "style": {
+                //         "data": {
+                //             "fill": {
+                //                 light: pl.blueGrey700,
+                //                 dark: pl.brown220
+                //             },
+                //             "stroke": {
+                //                 light: pl.grey900,
+                //                 dark: pl.grey320
+                //             },
+                //             "strokeWidth": {
+                //                 light: 2,
+                //                 dark: 2
+                //             }
+                //         },
+                //         "labels": {
+                //             "fontFamily": {
+                //                 light: fontsWarehouse.regular.fontFamily.light,
+                //                 dark: fontsWarehouse.regular.fontFamily.dark,
+                //             },
+                //             "fontSize": {
+                //                 light: 12,
+                //                 dark: 12
+                //             },
+                //             "letterSpacing": {
+                //                 light: 'normal',
+                //                 dark: 'normal'
+                //             },
+                //             "padding": {
+                //                 light: 8,
+                //                 dark: 8
+                //             },
+                //             "fill": {
+                //                 light: pl.blueGrey700,
+                //                 dark: pl.brown220
+                //             },
+                //             "stroke": {
+                //                 light: 'transparent',
+                //                 dark: 'transparent'
+                //             },
+                //             "strokeWidth": {
+                //                 light: 0,
+                //                 dark: 0
+                //             }
+                //         }
+                //     },
+                //     "width": {
+                //         light: 350,
+                //         dark: 350
+                //     },
+                //     "height": {
+                //         light: 350,
+                //         dark: 350
+                //     },
+                //     "padding": {
+                //         light: 50,
+                //         dark: 50
+                //     }
+                // },
                 "legend": {
-                    "colorScale": {
-                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
-                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
-                    },
+                    "colorScale": [
+                        {light: pl.deepOrange600, dark: "#0baee1"},
+                        {light: pl.yellow200, dark: '#000a62'}, {light: pl.lime300, dark: '#23188a'},
+                        {light: pl.lightGreen500, dark: '#743cb5'},
+                        {light: pl.teal700, dark: '#ff8694'},
+                        {light: pl.cyan900, dark: '#ff9f9b'}
+                    ],
                     "gutter": {
                         light: 10,
                         dark: 10
@@ -1135,10 +1146,13 @@ export const getThemeWareHouse = () => {
                     }
                 },
                 "pie": {
-                    "colorScale": {
-                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
-                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
-                    },
+                    "colorScale": [
+                        {light: pl.deepOrange600, dark: "#0baee1"},
+                        {light: pl.yellow200, dark: '#000a62'}, {light: pl.lime300, dark: '#23188a'},
+                        {light: pl.lightGreen500, dark: '#743cb5'},
+                        {light: pl.teal700, dark: '#ff8694'},
+                        {light: pl.cyan900, dark: '#ff9f9b'}
+                    ],
                     "style": {
                         "data": {
                             "padding": {
@@ -1257,10 +1271,14 @@ export const getThemeWareHouse = () => {
                     }
                 },
                 "stack": {
-                    "colorScale": {
-                        light: [pl.deepOrange600, pl.yellow200, pl.lime300, pl.lightGreen500, pl.teal700, pl.cyan900],
-                        dark: ["#0baee1", "#000a62", "#23188a", "#743cb5", "#ff8694", "#ff9f9b"]
-                    },
+                    "colorScale": [
+                        {light: pl.deepOrange600, dark: "#0baee1"},
+                        {light: pl.yellow200, dark: '#000a62'},
+                        {light: pl.lime300, dark: '#23188a'},
+                        {light: pl.lightGreen500, dark: '#743cb5'},
+                        {light: pl.teal700, dark: '#ff8694'},
+                        {light: pl.cyan900, dark: '#ff9f9b'}
+                    ],
                     "width": {
                         light: 350,
                         dark: 350
@@ -1406,13 +1424,16 @@ export const getThemeWareHouse = () => {
                                 dark: 'none'
                             }
                         }
-                    }, "width": {
+                    },
+                    "width": {
                         light: 350,
                         dark: 350
-                    }, "height": {
+                    },
+                    "height": {
                         light: 350,
                         dark: 350
-                    }, "padding": {
+                    },
+                    "padding": {
                         light: 50,
                         dark: 50
                     }
@@ -1442,8 +1463,8 @@ const isLeafParent = (obj: object) => {
 }
 
 const isSameStructure = (objA: unknown, objB: unknown) => {
-    let objATraversable = objA as TraversableNested;
-    let objBTraversable = objB as TraversableNested;
+    let objATraversable = objA as JSONSerializable;
+    let objBTraversable = objB as JSONSerializable;
     const objAKeys = Object.keys(objATraversable)
     const objBKeys = Object.keys(objBTraversable)
     let isSame = true
@@ -1460,8 +1481,8 @@ const isSameStructure = (objA: unknown, objB: unknown) => {
 }
 
 const extractThemesFromWarehouse = (arg: unknown, themeName: string) => {
-    let themeWarehouseNode = arg as TraversableNested;
-    let themeNode: TraversableNested = {}
+    let themeWarehouseNode = arg as JSONSerializable;
+    let themeNode: JSONSerializable = {}
     const nodeKeys = Object.keys(themeWarehouseNode)
     nodeKeys.forEach(k => {
         if (!isSameStructure(themeWarehouseNode[k], EThemes)) {
@@ -1476,7 +1497,7 @@ const extractThemesFromWarehouse = (arg: unknown, themeName: string) => {
 }
 
 export const getThemes = () => {
-    let themes: TraversableNested = {};
+    let themes: JSONSerializable = {};
     const themeNames = Object.values(EThemes)
     themeNames.forEach((name: string) => {
         themes[name] = extractThemesFromWarehouse(getThemeWareHouse(), name)

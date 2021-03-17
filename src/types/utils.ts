@@ -48,7 +48,7 @@ export type StackConfig = {
     authRequired: boolean,
 }
 
-export type LinkingConfigTraversable = LinkingConfig & Traversable
+export type LinkingConfigTraversable = LinkingConfig & JSONSerializable
 
 export type Options = BottomTabNavigationOptions | DrawerNavigationOptions | StackNavigationOptions | MaterialTopTabNavigationOptions;
 export type OptionsInner = DefaultNavigatorOptions<Options>;
@@ -72,19 +72,64 @@ export type NavigatorTreeNode =
 
 export type RecursiveNavigatorProps = { node: NavigatorTreeNode }
 
-export type DeepLeavesWrap<T, U> = T extends { [key: string]: any } ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
-    : T extends { [key: string]: any } | undefined ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
-        : T extends boolean ? { [M in keyof U]: boolean }
-            : T extends string ? { [M in keyof U]: string }
-                // Todo : T extends (infer F) ? { [M in keyof U]: F}
-                : { [M in keyof U]: T };
+// export type DeepLeavesWrap<T, U> = T extends { [key: string]: any } ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
+//     : T extends { [key: string]: any } | undefined ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
+//         : T extends boolean ? { [M in keyof U]: boolean }
+//             : T extends string ? { [M in keyof U]: string }
+//                 // Todo : T extends (infer F) ? { [M in keyof U]: F}
+//                 : { [M in keyof U]: T };
+type AnyFunction = (...args: any[]) => any;
+type Primitive =
+    | number
+    | string
+    | boolean
+    | symbol
+    | undefined
+    | null
+    | void
+    | AnyFunction
+    | Date;
 
-export type Traversable = {
+export type Cast<T, TComplex> = { [M in keyof TComplex]: T };
+// export type DeepLeavesWrap<T, TComplex> = {
+//     [K in keyof T]: T[K] extends object ? DeepLeavesWrap<T[K], TComplex>
+//         : { [M in keyof TComplex]: T[K] }
+// };
+
+export type DeepLeavesWrap<T, TComplex> =
+    T extends string ? Cast<string, TComplex>
+        : T extends number ? Cast<number, TComplex>
+        : T extends boolean ? Cast<boolean, TComplex>
+            : T extends undefined ? Cast<undefined, TComplex>
+                : T extends null ? Cast<null, TComplex>
+                    : T extends void ? Cast<void, TComplex>
+                        : T extends symbol ? Cast<symbol, TComplex>
+                            : T extends AnyFunction ? Cast<AnyFunction, TComplex>
+                                : T extends Date ? Cast<Date, TComplex>
+            : {
+                [K in keyof T]:
+                T[K] extends (infer U)[] ? DeepLeavesWrap<U, TComplex>[]
+                    : DeepLeavesWrap<T[K], TComplex>;
+            }
+
+
+// export type JSONSerializable = {
+//     [ket: string]: JSONSerializable | boolean | number | string | Array<JSONSerializable | boolean | number | string>
+// }
+
+type Json = null | string | number | boolean | Json [] | { [name: string]: Json }
+
+export type JSONSerializable = {
     [key: string]: any
 }
 
-export type TraversableNested = {
-    [key: string]: any
+export type JSONValue = string | number | boolean | undefined | JSONObject | JSONArray;
+
+interface JSONObject {
+    [x: string]: JSONValue;
+}
+
+interface JSONArray extends Array<JSONValue> {
 }
 
 export type TypeName<T> = T extends string

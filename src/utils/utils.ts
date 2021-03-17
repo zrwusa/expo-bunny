@@ -1,4 +1,4 @@
-import {TraversableNested} from "../types";
+import {JSONSerializable} from "../types";
 
 export const uuidV4 = function () {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -27,7 +27,7 @@ export const strictObjectIsEqual = (a: any, b: any): boolean => {
     return Object.is(a, b)
 }
 
-export const deepObjectStrictEqual = (object1: TraversableNested, object2: TraversableNested) => {
+export const deepObjectStrictEqual = (object1: JSONSerializable, object2: JSONSerializable) => {
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);
     if (keys1.length !== keys2.length) {
