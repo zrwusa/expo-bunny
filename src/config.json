@@ -13,10 +13,10 @@
         }
       }
     },
-    "isRemoteBackEnd": false,
+    "isRemoteBackEnd": true,
     "isHttps": false,
     "remoteBackEnd": {
-      "domain": "34.126.104.144",
+      "domain": "fatpomelo.fun",
       "port": 80
     },
     "localBackEnd": {
@@ -40,10 +40,10 @@
         }
       }
     },
-    "isRemoteBackEnd": false,
+    "isRemoteBackEnd": true,
     "isHttps": false,
     "remoteBackEnd": {
-      "domain": "34.126.104.144",
+      "domain": "fatpomelo.fun",
       "port": 80
     },
     "localBackEnd": {
@@ -67,10 +67,10 @@
         }
       }
     },
-    "isRemoteBackEnd": false,
+    "isRemoteBackEnd": true,
     "isHttps": false,
     "remoteBackEnd": {
-      "domain": "34.126.104.144",
+      "domain": "fatpomelo.fun",
       "port": 80
     },
     "localBackEnd": {
