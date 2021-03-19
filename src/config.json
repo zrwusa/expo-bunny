@@ -14,7 +14,7 @@
       }
     },
     "isRemoteBackEnd": true,
-    "isHttps": false,
+    "isHttps": true,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
       "port": 80
@@ -41,7 +41,7 @@
       }
     },
     "isRemoteBackEnd": true,
-    "isHttps": false,
+    "isHttps": true,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
       "port": 80
@@ -68,7 +68,7 @@
       }
     },
     "isRemoteBackEnd": true,
-    "isHttps": false,
+    "isHttps": true,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
       "port": 80
