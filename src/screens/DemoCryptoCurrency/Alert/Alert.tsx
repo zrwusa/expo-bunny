@@ -51,7 +51,6 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
         }
     };
 
-
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(defaultNotification);
     const [granularity, setGranularity] = useState(0.05)

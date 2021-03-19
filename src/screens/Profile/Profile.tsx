@@ -5,7 +5,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
-import {Avatar} from "react-native-elements";
+import {Avatar} from "react-native-paper";
 import {ScrollView} from "react-native";
 import {createStyles} from "./styles";
 import ImageProgressive from "../../components/UI/ImageProgressive";
@@ -30,6 +30,7 @@ function ProfileScreen({route, navigation}: Props) {
     const st = shortenTFuciontKey(t, 'screens.Profile');
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
     const sizeLabor = useSizeLabor();
+    const {wp} = sizeLabor.responsive.iphoneX;
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor)
@@ -38,7 +39,7 @@ function ProfileScreen({route, navigation}: Props) {
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, smartStyles.centralized]}>
-                <Avatar source={{uri: avatar_url}}/>
+                <Avatar.Image size={wp(60)} source={{uri: avatar_url}}/>
                 <Text>{st(`profileScreenId`)}{route.params.id}</Text>
                 <Text>{st(`email`)}{user?.email}</Text>
                 <IcoMoon name="profile1"/>

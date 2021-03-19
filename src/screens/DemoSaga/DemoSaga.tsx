@@ -1,5 +1,5 @@
 import React from "react";
-import {ButtonRNE, Text, View} from "../../components/UI";
+import {Button, Text, View} from "../../components/UI";
 import {useDispatch, useSelector} from "react-redux";
 import {getDemoSagas} from "../../store/actions";
 import {RootState} from "../../types";
@@ -11,7 +11,7 @@ function DemoSagaScreen() {
     const {items} = demoSagaState;
     return (
         <View>
-            <ButtonRNE onPress={() => {
+            <Button onPress={() => {
                 dispatch(getDemoSagas({
                     pageNum: 1, pageCount: 10, filter: {
                         text: 'saga1'

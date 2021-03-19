@@ -10,7 +10,6 @@ import {useColorScheme} from "react-native-appearance";
 import {useDispatch} from "react-redux";
 import {Preparing} from "../../components/Preparing";
 import {Provider as PaperProvider} from "react-native-paper";
-import {Theme as ThemeRNE, ThemeProvider as ThemeProviderRNE} from "react-native-elements";
 import {themes} from "./theme";
 
 
@@ -53,10 +52,7 @@ function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
         isReady
             ? <ThemeLaborContext.Provider value={themeLaborMemorized}>
                 <PaperProvider theme={themeLaborMemorized.theme as ReactNativePaper.Theme}>
-                    {/*RNE does not support changing theme in runtime,need to be refreshed or restarted*/}
-                    <ThemeProviderRNE theme={themeLaborMemorized.theme as ThemeRNE}>
-                        {children}
-                    </ThemeProviderRNE>
+                    {children}
                 </PaperProvider>
             </ThemeLaborContext.Provider>
             : <Preparing text="Theme Provider loading"/>

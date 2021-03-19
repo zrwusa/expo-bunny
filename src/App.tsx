@@ -72,8 +72,8 @@ function App() {
                     <SizeLaborProvider>
                         <RequestProvider>
                             <AuthLaborProvider>
-                                <ThemeLaborProvider>
-                                    <SafeAreaProvider>
+                                <SafeAreaProvider>
+                                    <ThemeLaborProvider>
                                         <ThemeLaborContext.Consumer>{({theme}) => {
                                             return <>
                                                 <StatusBar backgroundColor={Platform.OS === 'android' ? theme.colors.background : ''}
@@ -95,8 +95,8 @@ function App() {
                                             </>
                                         }}
                                         </ThemeLaborContext.Consumer>
-                                    </SafeAreaProvider>
-                                </ThemeLaborProvider>
+                                    </ThemeLaborProvider>
+                                </SafeAreaProvider>
                             </AuthLaborProvider>
                         </RequestProvider>
                     </SizeLaborProvider>

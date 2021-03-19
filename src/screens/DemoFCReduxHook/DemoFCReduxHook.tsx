@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {demoHello} from "../../store/actions";
-import {ButtonRNE, Text, View} from "../../components/UI";
+import {Button, Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
@@ -22,8 +22,8 @@ function DemoFCReduxHookScreen() {
         <View style={containerStyles.Screen}>
             <View style={containerStyles.Card}>
                 <Text>{st(`order`)}{demoHelloState.order}</Text>
-                <ButtonRNE title={st(`dispatchSomething`)}
-                           onPress={() => dispatch(demoHello({order: demoHelloState.order + 1}))}/>
+                <Button title={st(`dispatchSomething`)}
+                        onPress={() => dispatch(demoHello({order: demoHelloState.order + 1}))}/>
                 {/*<Text>This demo shows you to dispatch an action to redux reducer with hook method in Function Component(FC)</Text>*/}
             </View>
         </View>

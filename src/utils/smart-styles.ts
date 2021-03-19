@@ -1,4 +1,4 @@
-import {SizeLabor, ThemeLabor, JSONSerializable} from "../types";
+import {JSONSerializable, SizeLabor, ThemeLabor} from "../types";
 import {StyleSheet} from "react-native";
 
 export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {

@@ -17,7 +17,7 @@
     "isHttps": true,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
-      "port": 80
+      "port": 443
     },
     "localBackEnd": {
       "domain": "192.168.50.19",
@@ -44,7 +44,7 @@
     "isHttps": true,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
-      "port": 80
+      "port": 443
     },
     "localBackEnd": {
       "domain": "192.168.50.19",
@@ -71,7 +71,7 @@
     "isHttps": true,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
-      "port": 80
+      "port": 443
     },
     "localBackEnd": {
       "domain": "192.168.50.19",

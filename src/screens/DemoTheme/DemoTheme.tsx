@@ -1,6 +1,6 @@
 import React from "react";
 import {ScrollView} from "react-native";
-import {Button, ButtonRNE, ButtonTO, Text, TextBtn, View} from "../../components/UI";
+import {Button, ButtonTO, Text, TextBtn, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {createStyles} from "./styles";
@@ -34,7 +34,6 @@ const DemoThemeScreen = () => {
                         <TextBtn>{st(`demoButtonDisabled`)}</TextBtn></ButtonTO>
                     <Button title={st(`btnCustom`)} onPress={BunnyConstants.fnNoop}/>
                     <ButtonTO><TextBtn>{st(`btnFromPaper`)}</TextBtn></ButtonTO>
-                    <ButtonRNE title={st(`demoButtonThemedRNE`)}/>
                     <View style={[styles.demoShadow, smartStyles.shadow]}>
                         <Text>{st(`demoShadow`)}</Text>
                     </View>

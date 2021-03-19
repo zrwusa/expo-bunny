@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ButtonRNE, Text, View} from "../../components/UI";
+import {Button, Text, View} from "../../components/UI";
 import {demoThunk} from "../../store/actions";
 import {DemoThunkPayload, DemoThunkState, RootState} from "../../types";
 import {ThunkDispatch} from "redux-thunk";
@@ -47,7 +47,7 @@ class DemoThunkCCScreen extends React.Component<Props> {
                 <View style={containerStyles.Card}>
                     <Text>{st(`text`)}{text}</Text>
                     <Text>{st(`id`)}{id}</Text>
-                    <ButtonRNE onPress={this.handleThunk} title={st(`thunkDispatch`)}/>
+                    <Button onPress={this.handleThunk} title={st(`thunkDispatch`)}/>
                 </View>
             </View>
         );

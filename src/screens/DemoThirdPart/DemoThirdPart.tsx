@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {Avatar, Button, ListItem} from "react-native-elements";
+import {Avatar, Button, List} from "react-native-paper";
 import RNPickerSelect from "react-native-picker-select";
-import {ButtonRNE, IconMC, View} from "../../components/UI";
+import {IconMC, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
@@ -11,7 +11,8 @@ import {useThemeLabor} from "../../providers/theme-labor";
 
 interface Props {
     title?: string
-};
+}
+
 type States = { name: string, pickerValue: string }
 
 function DemoThirdPartScreen(props: Props) {
@@ -21,11 +22,12 @@ function DemoThirdPartScreen(props: Props) {
     })
 
     const sizeLabor = useSizeLabor();
+    const {wp} = sizeLabor.responsive.iphoneX;
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
     const st = shortenTFuciontKey(t, 'screens.DemoThirdPart');
 
-    const list = [
+    const LIST = [
         {
             id: uuidV4(),
             name: "Amy Farha",
@@ -43,22 +45,27 @@ function DemoThirdPartScreen(props: Props) {
 
     return (
         <View style={containerStyles.Screen}>
-            <Button icon={<IconMC name="air-horn"/>}
-                    title={st(`buttonWithIcon`)}/>
+            <Button
+                icon={() => <IconMC name="air-horn"/>}
+                onPress={() => {
+                }}>{st(`buttonWithIcon`)}</Button>
             <View>
-                {list.map((l, i) => (
-                    <ListItem key={l.id} bottomDivider>
-                        <Avatar source={{uri: l.avatar_url}}/>
-                        <ListItem.Content>
-                            <ListItem.Title>{l.name}</ListItem.Title>
-                            <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                ))}
+                <List.Section title="Accordions">
+                    {LIST.map((l, i) => (
+                        <List.Accordion key={l.id}
+                                        title={l.name}
+                                        left={props => <Avatar.Image size={wp(30)} source={{uri: l.avatar_url}}/>}>
+                            <List.Item title="First item"/>
+                            <List.Item title="Second item"/>
+                        </List.Accordion>
+                    ))}
+                </List.Section>
             </View>
             <View>
-                <ButtonRNE icon={<IconMC name="air-horn"/>} title={st(`buttonWithIcon`)}/>
-                <IconMC name="air-horn"/>
+                <Button
+                    icon={() => <IconMC name="air-horn"/>}
+                    onPress={() => {
+                    }}>{st(`buttonWithIcon`)}</Button>
             </View>
             <RNPickerSelect
                 value={state.pickerValue}

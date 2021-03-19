@@ -2,7 +2,7 @@ import {Platform} from "react-native";
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {ButtonRNE, TextInput, View} from "../../components/UI";
+import {Button, TextInput, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers";
 import {createContainerStyles} from "../../containers";
@@ -38,40 +38,40 @@ export const AuthScreen = (props: AuthProps) => {
             {
                 type === 'sign-in'
                     ? <>
-                        <ButtonRNE onPress={async () => {
+                        <Button onPress={async () => {
                             try {
                                 await authFunctions.signIn({email: username, password: password})
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
                         }} title={st(`signIn`)}/>
-                        <ButtonRNE onPress={async () => {
+                        <Button onPress={async () => {
                             try {
                                 await authFunctions.signInDummy()
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
                         }} title={st(`signInDummy`)}/>
-                        <ButtonRNE onPress={() => {
+                        <Button onPress={() => {
                             setType('signUp')
                         }} title={st(`goToSignUp`)}/>
                     </>
                     : <>
-                        <ButtonRNE onPress={async () => {
+                        <Button onPress={async () => {
                             try {
                                 await authFunctions.signUp({email: username, password: password})
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
                         }} title={st(`signUp`)}/>
-                        <ButtonRNE onPress={() => {
+                        <Button onPress={() => {
                             setType('sign-in')
                         }} title={st(`goToSignIn`)}/>
                     </>
             }
             {
                 Platform.OS !== 'web'
-                    ? <ButtonRNE onPress={async () => {
+                    ? <Button onPress={async () => {
                         try {
                             await authFunctions.signInGoogle()
                         } catch (e) {

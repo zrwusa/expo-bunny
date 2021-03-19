@@ -106,11 +106,11 @@ export type DeepLeavesWrap<T, TComplex> =
                         : T extends symbol ? Cast<symbol, TComplex>
                             : T extends AnyFunction ? Cast<AnyFunction, TComplex>
                                 : T extends Date ? Cast<Date, TComplex>
-            : {
-                [K in keyof T]:
-                T[K] extends (infer U)[] ? DeepLeavesWrap<U, TComplex>[]
-                    : DeepLeavesWrap<T[K], TComplex>;
-            }
+                                    : {
+                                        [K in keyof T]:
+                                        T[K] extends (infer U)[] ? DeepLeavesWrap<U, TComplex>[]
+                                            : DeepLeavesWrap<T[K], TComplex>;
+                                    }
 
 
 // export type JSONSerializable = {

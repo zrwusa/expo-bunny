@@ -1,4 +1,4 @@
-import {Button as ButtonElement, ButtonProps as ButtonElementProps, Text as TextElement, TextProps as TextElementProps} from "react-native-elements";
+// import {Button as ButtonElement, ButtonProps as ButtonElementProps, Text as TextElement, TextProps as TextElementProps} from "react-native-elements";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {
     Button as ButtonRN,
@@ -156,35 +156,35 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
         style={mergedStyle}  {...rest} >{children}</ImageRN>);
 }
 
-export const TextRNE: React.FC<TextElementProps> = ({children, style, ...rest}) => {
-    const mergedStyle = [{}, style]
-    return (<TextElement
-        style={mergedStyle}
-        {...rest}>{children}</TextElement>);
-}
+// export const TextRNE: React.FC<TextElementProps> = ({children, style, ...rest}) => {
+//     const mergedStyle = [{}, style]
+//     return (<TextElement
+//         style={mergedStyle}
+//         {...rest}>{children}</TextElement>);
+// }
 
-export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-    const mergedButtonStyle = [{
-        backgroundColor: colors.primary,
-        marginTop: ms.sp.s,
-        borderRadius: ms.br.xs,
-        paddingVertical: ms.sp.m,
-    }, buttonStyle]
-    const mergedTitleStyle = [{
-        color: colors.btnText,
-        fontSize: ms.fs.m,
-    }, titleStyle]
-
-    const mergedContainerStyle = [{
-        width: ms.sz.s12,
-    }, containerStyle]
-    return (<ButtonElement
-        buttonStyle={mergedButtonStyle}
-        titleStyle={mergedTitleStyle}
-        containerStyle={mergedContainerStyle} {...rest}>{children}</ButtonElement>);
-}
+// export const ButtonRNE: React.FC<ButtonElementProps> = ({children, buttonStyle, titleStyle, containerStyle, ...rest}) => {
+//     const {colors} = useThemeLabor().theme;
+//     const {ms} = useSizeLabor();
+//     const mergedButtonStyle = [{
+//         backgroundColor: colors.primary,
+//         marginTop: ms.sp.s,
+//         borderRadius: ms.br.xs,
+//         paddingVertical: ms.sp.m,
+//     }, buttonStyle]
+//     const mergedTitleStyle = [{
+//         color: colors.btnText,
+//         fontSize: ms.fs.m,
+//     }, titleStyle]
+//
+//     const mergedContainerStyle = [{
+//         width: ms.sz.s12,
+//     }, containerStyle]
+//     return (<ButtonElement
+//         buttonStyle={mergedButtonStyle}
+//         titleStyle={mergedTitleStyle}
+//         containerStyle={mergedContainerStyle} {...rest}>{children}</ButtonElement>);
+// }
 
 export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
@@ -223,7 +223,7 @@ export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<
     const {ms} = useSizeLabor();
 
     const mergedStyle = [{
-        color: colors.background,
+        color: colors.primary,
         fontSize: ms.fs.xl,
     }, style]
     return (<MaterialCommunityIcons
@@ -232,7 +232,12 @@ export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<
     />);
 }
 
-export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> = ({children, style, name, size, color, ...rest}) => {
+export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> = (
+    {
+        children,
+        style,
+        name, size, color, ...rest
+    }) => {
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
     const mergedStyle = [{

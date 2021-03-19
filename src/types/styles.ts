@@ -111,24 +111,10 @@ export interface Colors {
     paper: string,
     paperSecondary: string,
 
-    // ---start---  react-native-elements
-    // Not a best practice, for compatibility with react-native-elements.
-    // Obviously, the color variables defined in the react-native-elements theme is not standardized.
     // In the theme, we should care about the role of these color variables rather than the specific values,
     // such as 'primary success', not 'grey0, black'. The specific values should be named in the Palette.
-    white: string,
-    black: string,
-    grey0: string,
-    grey1: string,
-    grey2: string,
-    grey3: string,
-    grey4: string,
-    grey5: string,
-    greyOutline: string,
-    searchBg: string,
     success: string,
     divider: string,
-    // ---end---  react-native-elements
 }
 
 export interface Animation {
@@ -603,6 +589,7 @@ export type Palette = {
     whiteContrast: string,
     transparent: string,
 
+
     //---start--- react-native-paper
     green850: string,
     deepPurple550: string,
@@ -610,7 +597,16 @@ export type Palette = {
     redA800: string,
     //---end--- react-native-paper
 
-    //---start--- react-native-elements
+
+    //---start--- victory chart
+    brown220: string,
+    grey320: string,
+    brown620: string,
+    black890: string,
+    //---end--- victory chart
+
+
+    //---start--- others
     grey290: string,
     grey350: string,
     grey380: string,
@@ -630,15 +626,7 @@ export type Palette = {
     yellow720: string,
     yellow780: string,
     blueGrey320: string,
-    //---end--- react-native-elements
-
-    //---start--- victory chart
-    brown220: string,
-    grey320: string,
-    brown620: string,
-    black890: string,
-    //---end--- victory chart
-
+    //---end--- others
 }
 
 export type PaletteWithColors = {
@@ -924,6 +912,7 @@ export type PaletteWithColors = {
     whiteContrast: '#080808',
     transparent: 'transparent',
 
+
     //---start--- react-native-paper
     green850: '#03dac4',
     deepPurple550: '#6200ee',
@@ -931,7 +920,17 @@ export type PaletteWithColors = {
     redA800: '#B00020',
     //---end--- react-native-paper
 
-    //---start--- react-native-elements
+
+
+    //---start--- victory chart
+    brown220: '#baa59b',
+    grey320: '#dedede',
+    brown620: '#6f5b51',
+    black890: '#13100e',
+    //---end--- victory chart
+
+
+    //---start--- others
     grey290: '#e1e8ee',
     grey350: '#d8d8d8',
     grey380: '#bcbbc1',
@@ -951,15 +950,7 @@ export type PaletteWithColors = {
     yellow720: '#cfbe27',
     yellow780: '#faad14',
     blueGrey320: '#86939e',
-    //---end--- react-native-elements
-
-    //---start--- victory chart
-    brown220: '#baa59b',
-    grey320: '#dedede',
-    brown620: '#6f5b51',
-    black890: '#13100e',
-
-    //---end--- victory chart
+    //---end--- others
 }
 
 

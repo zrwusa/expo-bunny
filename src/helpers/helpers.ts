@@ -6,9 +6,9 @@ import {
     IcoMoonKeys,
     IcoMoonSelection,
     IcoMoonSelectionIcon,
+    JSONSerializable,
     NavigatorTreeNode,
-    RouteIconFontConfig,
-    JSONSerializable
+    RouteIconFontConfig
 } from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -207,7 +207,13 @@ export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
             isRemoteBackEnd, remoteBackEnd, localBackEnd, timeout
         } = apiConfig;
         const httpPrefix = isHttps ? 'https://' : 'http://';
-        const port = isHttps ? 443:isRemoteBackEnd?remoteBackEnd.port:localBackEnd.port
+        const defaultPort = isHttps ? 443 : 80;
+        let port;
+        if (isRemoteBackEnd) {
+            port = remoteBackEnd.port || defaultPort
+        } else {
+            port = localBackEnd.port || defaultPort
+        }
         const devProxyPrefix = isDevServerProxy ? Object.keys(devServerProxy)[0] : '';
         return {
             baseURL: isDevServerProxy

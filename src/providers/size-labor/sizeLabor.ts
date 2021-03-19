@@ -1,6 +1,6 @@
 import {heightPercentageToDP as hp2dp, widthPercentageToDP as wp2dp} from "./responsiveScreen";
 import bunnyConfig from "../../config.json";
-import {Dimension, Measure, Responsive, JSONSerializable} from "../../types";
+import {Dimension, JSONSerializable, Measure, Responsive} from "../../types";
 
 const getSizeLabor = () => {
     let responsive: JSONSerializable = {}
