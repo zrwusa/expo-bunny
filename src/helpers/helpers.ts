@@ -207,13 +207,14 @@ export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
             isRemoteBackEnd, remoteBackEnd, localBackEnd, timeout
         } = apiConfig;
         const httpPrefix = isHttps ? 'https://' : 'http://';
+        const port = isHttps ? 443:isRemoteBackEnd?remoteBackEnd.port:localBackEnd.port
         const devProxyPrefix = isDevServerProxy ? Object.keys(devServerProxy)[0] : '';
         return {
             baseURL: isDevServerProxy
                 ? `${devServer.domain}${devServer.port}${devProxyPrefix}`
                 : isRemoteBackEnd
-                    ? `${httpPrefix}${remoteBackEnd.domain}:${remoteBackEnd.port}`
-                    : `${httpPrefix}${localBackEnd.domain}:${localBackEnd.port}`,
+                    ? `${httpPrefix}${remoteBackEnd.domain}:${port}`
+                    : `${httpPrefix}${localBackEnd.domain}:${port}`,
             timeout
         }
     }
