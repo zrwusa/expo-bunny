@@ -2,9 +2,11 @@ import {fontsWarehouse} from "./fonts";
 import {JSONSerializable, Themes, ThemeWarehouse} from "../../types";
 import color from "color";
 import {EThemes} from "../../constants";
-import {pl, reverseColor} from "../../utils";
+import {isLeafParent, isSameStructure, pl, reverseColor} from "../../utils";
+import getSizeLabor from "../size-labor/sizeLabor";
 
 export const getThemeWareHouse = () => {
+    const {wp} = getSizeLabor().responsive.iphoneX
     const colorScale = [
         {light: pl.deepOrange600, dark: reverseColor(pl.deepOrange600)},
         {light: pl.yellow200, dark: reverseColor(pl.yellow200)},
@@ -15,17 +17,18 @@ export const getThemeWareHouse = () => {
     ]
     const victoryCommon = {
         width: {
-            light: 350,
-            dark: 350
+            light: wp(350),
+            dark:  wp(350),
         },
         height: {
-            light: 350,
-            dark: 350
+            light: wp(350),
+            dark:  wp(350),
         },
         padding: {
-            light: 50,
-            dark: 50
-        }}
+            light: wp(50),
+            dark: wp(50)
+        }
+    }
     const themeWarehouse: ThemeWarehouse = {
         dark: {
             light: false,
@@ -245,40 +248,40 @@ export const getThemeWareHouse = () => {
             }
         },
         victory: {
-            "area": {
-                "style": {
-                    "data": {
-                        "fill": {
+            area: {
+                style: {
+                    data: {
+                        fill: {
                             light: pl.grey900,
                             dark: pl.grey320
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
@@ -286,143 +289,143 @@ export const getThemeWareHouse = () => {
                 },
                 ...victoryCommon
             },
-            "axis": {
-                "style": {
-                    "axis": {
-                        "fill": {
+            axis: {
+                style: {
+                    axis: {
+                        fill: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "stroke": {
+                        stroke: {
                             light: pl.blueGrey300,
                             dark: pl.brown620
                         },
-                        "strokeWidth": {
-                            light: 2,
-                            dark: 2
+                        strokeWidth: {
+                            light: wp(2),
+                            dark: wp(2)
                         },
-                        "strokeLinecap": {
+                        strokeLinecap: {
                             light: 'round',
                             dark: 'round'
                         },
-                        "strokeLinejoin": {
+                        strokeLinejoin: {
                             light: 'round',
                             dark: 'round'
                         }
                     },
-                    "axisLabel": {
-                        "textAnchor": {
+                    axisLabel: {
+                        textAnchor: {
                             light: 'middle',
                             dark: 'middle'
                         },
-                        "fontFamily": {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "grid": {
-                        "fill": {
+                    grid: {
+                        fill: {
                             light: 'none',
                             dark: 'none'
                         },
-                        "stroke": {
+                        stroke: {
                             light: pl.blueGrey50,
                             dark: pl.black890
                         },
-                        "strokeDasharray": {
+                        strokeDasharray: {
                             light: '10, 5',
                             dark: '10, 5'
                         },
-                        "strokeLinecap": {
+                        strokeLinecap: {
                             light: 'round',
                             dark: 'round'
                         },
-                        "strokeLinejoin": {
+                        strokeLinejoin: {
                             light: 'round',
                             dark: 'round'
                         },
-                        "pointerEvents": {
+                        pointerEvents: {
                             light: 'painted',
                             dark: 'painted'
                         }
                     },
-                    "ticks": {
-                        "fill": {
+                    ticks: {
+                        fill: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "size": {
-                            light: 5,
-                            dark: 5
+                        size: {
+                            light: wp(5),
+                            dark: wp(5)
                         },
-                        "stroke": {
+                        stroke: {
                             light: pl.blueGrey300,
                             dark: pl.black890
 
                         },
-                        "strokeWidth": {
-                            light: 1,
-                            dark: 1
+                        strokeWidth: {
+                            light: wp(1),
+                            dark: wp(1)
                         },
-                        "strokeLinecap": {
+                        strokeLinecap: {
                             light: 'round',
                             dark: 'round'
                         },
-                        "strokeLinejoin": {
+                        strokeLinejoin: {
                             light: 'round',
                             dark: 'round'
                         }
                     },
-                    "tickLabels": {
-                        "fontFamily": {
+                    tickLabels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
@@ -430,66 +433,66 @@ export const getThemeWareHouse = () => {
                 },
                 ...victoryCommon
             },
-            "polarDependentAxis": {
-                "style": {
-                    "ticks": {
-                        "fill": {
+            polarDependentAxis: {
+                style: {
+                    ticks: {
+                        fill: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "size": {
-                            light: 1,
-                            dark: 1
+                        size: {
+                            light: wp(1),
+                            dark: wp(1)
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         }
                     }
                 }
             },
-            "bar": {
-                "style": {
-                    "data": {
-                        "fill": {
+            bar: {
+                style: {
+                    data: {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
@@ -497,323 +500,323 @@ export const getThemeWareHouse = () => {
                 },
                 ...victoryCommon
             },
-            "boxplot": {
-                "style": {
-                    "max": {
-                        "padding": {
-                            light: 8,
-                            dark: 8
-                        }, "stroke": {
+            boxplot: {
+                style: {
+                    max: {
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
+                        }, stroke: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
-                        }, "strokeWidth": {
-                            light: 1,
-                            dark: 1
+                        }, strokeWidth: {
+                            light: wp(1),
+                            dark: wp(1)
                         }
                     },
-                    "maxLabels": {
-                        "fontFamily": {
+                    maxLabels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 3,
-                            dark: 3
+                        padding: {
+                            light: wp(3),
+                            dark: wp(3)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "median": {
-                        "padding": {
-                            light: 8,
-                            dark: 8
-                        }, "stroke": {
+                    median: {
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
+                        }, stroke: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
-                        }, "strokeWidth": {
-                            light: 1,
-                            dark: 1
+                        }, strokeWidth: {
+                            light: wp(1),
+                            dark: wp(1)
                         }
                     },
-                    "medianLabels": {
-                        "fontFamily": {
+                    medianLabels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 3,
-                            dark: 3
+                        padding: {
+                            light: wp(3),
+                            dark: wp(3)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "min": {
-                        "padding": {
-                            light: 8,
-                            dark: 8
-                        }, "stroke": {
+                    min: {
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
+                        }, stroke: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
-                        }, "strokeWidth": {
-                            light: 1,
-                            dark: 1
+                        }, strokeWidth: {
+                            light: wp(1),
+                            dark: wp(1)
                         }
                     },
-                    "minLabels": {
-                        "fontFamily": {
+                    minLabels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 3,
-                            dark: 3
+                        padding: {
+                            light: wp(3),
+                            dark: wp(3)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "q1": {
-                        "padding": {
-                            light: 8,
-                            dark: 8
-                        }, "fill": {
+                    q1: {
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
+                        }, fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         }
                     },
-                    "q1Labels": {
-                        "fontFamily": {
+                    q1Labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 3,
-                            dark: 3
+                        padding: {
+                            light: wp(3),
+                            dark: wp(3)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "q3": {
-                        "padding": {
-                            light: 8,
-                            dark: 8
-                        }, "fill": {
+                    q3: {
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
+                        }, fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         }
                     },
-                    "q3Labels": {
-                        "fontFamily": {
+                    q3Labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 3,
-                            dark: 3
+                        padding: {
+                            light: wp(3),
+                            dark: wp(3)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     }
                 },
-                "boxWidth": {
-                    light: 20,
-                    dark: 20
+                boxWidth: {
+                    light: wp(20),
+                    dark: wp(20)
                 },
                 ...victoryCommon
             },
-            "candlestick": {
-                "style": {
-                    "data": {
-                        "stroke": {
+            candlestick: {
+                style: {
+                    data: {
+                        stroke: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 5,
-                            dark: 5
+                        padding: {
+                            light: wp(5),
+                            dark: wp(5)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     }
                 },
-                "candleColors": {
-                    "positive": {
+                candleColors: {
+                    positive: {
                         light: pl.white,
                         dark: pl.black
                     },
-                    "negative": {
+                    negative: {
                         light: pl.blueGrey700,
                         dark: pl.brown220
                     }
                 },
                 ...victoryCommon
             },
-            "chart": {
+            chart: {
                 ...victoryCommon
             },
-            "errorbar": {
-                "borderWidth": {
-                    light: 8,
-                    dark: 8
+            errorbar: {
+                borderWidth: {
+                    light: wp(8),
+                    dark: wp(8)
                 },
-                "style": {
-                    "data": {
-                        "fill": {
+                style: {
+                    data: {
+                        fill: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "opacity": {
+                        opacity: {
                             light: 1,
                             dark: 1
                         },
-                        "stroke": {
+                        stroke: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "strokeWidth": {
-                            light: 2,
-                            dark: 2
+                        strokeWidth: {
+                            light: wp(2),
+                            dark: wp(2)
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
@@ -821,199 +824,201 @@ export const getThemeWareHouse = () => {
                 },
                 ...victoryCommon
             },
-            "group": {
-                "colorScale": colorScale,
+            group: {
+                // Todo different structure
+                // colorScale: {"0": "#f4511e", "1": "#fff59d", "2": "#dce775", "3": "#8bc34a", "4": "#00796b", "5": "#006064"},
+                colorScale: colorScale,
                 ...victoryCommon
             },
-            // "histogram": {
-            //     "style": {
-            //         "data": {
-            //             "fill": {
+            // histogram: {
+            //     style: {
+            //         data: {
+            //             fill: {
             //                 light: pl.blueGrey700,
             //                 dark: pl.brown220
             //             },
-            //             "stroke": {
+            //             stroke: {
             //                 light: pl.grey900,
             //                 dark: pl.grey320
             //             },
-            //             "strokeWidth": {
+            //             strokeWidth: {
             //                 light: 2,
             //                 dark: 2
             //             }
             //         },
-            //         "labels": {
-            //             "fontFamily": {
+            //         labels: {
+            //             fontFamily: {
             //                 light: fontsWarehouse.regular.fontFamily.light,
             //                 dark: fontsWarehouse.regular.fontFamily.dark,
             //             },
-            //             "fontSize": {
+            //             fontSize: {
             //                 light: 12,
             //                 dark: 12
             //             },
-            //             "letterSpacing": {
+            //             letterSpacing: {
             //                 light: 'normal',
             //                 dark: 'normal'
             //             },
-            //             "padding": {
+            //             padding: {
             //                 light: 8,
             //                 dark: 8
             //             },
-            //             "fill": {
+            //             fill: {
             //                 light: pl.blueGrey700,
             //                 dark: pl.brown220
             //             },
-            //             "stroke": {
+            //             stroke: {
             //                 light: 'transparent',
             //                 dark: 'transparent'
             //             },
-            //             "strokeWidth": {
+            //             strokeWidth: {
             //                 light: 0,
             //                 dark: 0
             //             }
             //         }
             //     },
-            //     "width": {
+            //     width: {
             //         light: 350,
             //         dark: 350
             //     },
-            //     "height": {
+            //     height: {
             //         light: 350,
             //         dark: 350
             //     },
-            //     "padding": {
+            //     padding: {
             //         light: 50,
             //         dark: 50
             //     }
             // },
-            "legend": {
-                "colorScale": colorScale,
-                "gutter": {
-                    light: 10,
-                    dark: 10
+            legend: {
+                colorScale: colorScale,
+                gutter: {
+                    light: wp(10),
+                    dark: wp(10)
                 },
-                "orientation": {
+                orientation: {
                     light: 'vertical',
                     dark: 'vertical'
                 },
-                "titleOrientation": {
+                titleOrientation: {
                     light: 'top',
                     dark: 'top'
                 },
-                "style": {
-                    "data": {
-                        "type": {
+                style: {
+                    data: {
+                        type: {
                             light: 'circle',
                             dark: 'circle'
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "title": {
-                        "fontFamily": {
+                    title: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 5,
-                            dark: 5
+                        padding: {
+                            light: wp(5),
+                            dark: wp(5)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     }
                 }
             },
-            "line": {
-                "style": {
-                    "data": {
-                        "fill": {
+            line: {
+                style: {
+                    data: {
+                        fill: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "opacity": {
+                        opacity: {
                             light: 1,
                             dark: 1
                         },
-                        "stroke": {
+                        stroke: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "strokeWidth": {
-                            light: 2,
-                            dark: 2
+                        strokeWidth: {
+                            light: wp(2),
+                            dark: wp(2)
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
@@ -1021,48 +1026,48 @@ export const getThemeWareHouse = () => {
                 },
                 ...victoryCommon
             },
-            "pie": {
-                "colorScale": colorScale,
-                "style": {
-                    "data": {
-                        "padding": {
-                            light: 8,
-                            dark: 8
-                        }, "stroke": {
+            pie: {
+                colorScale: colorScale,
+                style: {
+                    data: {
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
+                        }, stroke: {
                             light: pl.blueGrey50,
                             dark: pl.brown220
                         },
-                        "strokeWidth": {
-                            light: 1,
-                            dark: 1
+                        strokeWidth: {
+                            light: wp(1),
+                            dark: wp(1)
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 20,
-                            dark: 20
+                        padding: {
+                            light: wp(20),
+                            dark: wp(20)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
@@ -1070,52 +1075,52 @@ export const getThemeWareHouse = () => {
                 },
                 ...victoryCommon
             },
-            "scatter": {
-                "style": {
-                    "data": {
-                        "fill": {
+            scatter: {
+                style: {
+                    data: {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "opacity": {
+                        opacity: {
                             light: 1,
                             dark: 1
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 8,
-                            dark: 8
+                        padding: {
+                            light: wp(8),
+                            dark: wp(8)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
@@ -1123,140 +1128,140 @@ export const getThemeWareHouse = () => {
                 },
                 ...victoryCommon
             },
-            "stack": {
-                "colorScale": colorScale,
+            stack: {
+                colorScale: colorScale,
                 ...victoryCommon
             },
-            "tooltip": {
-                "style": {
-                    "fontFamily": {
+            tooltip: {
+                style: {
+                    fontFamily: {
                         light: fontsWarehouse.regular.fontFamily.light,
                         dark: fontsWarehouse.regular.fontFamily.dark,
                     },
-                    "fontSize": {
-                        light: 12,
-                        dark: 12
+                    fontSize: {
+                        light: wp(12),
+                        dark: wp(12)
                     },
-                    "letterSpacing": {
+                    letterSpacing: {
                         light: 'normal',
                         dark: 'normal'
                     },
-                    "padding": {
+                    padding: {
                         light: 0,
                         dark: 0
                     },
-                    "fill": {
+                    fill: {
                         light: pl.blueGrey700,
                         dark: pl.brown220
                     },
-                    "stroke": {
+                    stroke: {
                         light: 'transparent',
                         dark: 'transparent'
                     },
-                    "strokeWidth": {
+                    strokeWidth: {
                         light: 0,
                         dark: 0
                     },
-                    "pointerEvents": {
+                    pointerEvents: {
                         light: 'none',
                         dark: 'none'
                     }
                 },
-                "flyoutStyle": {
-                    "stroke": {
+                flyoutStyle: {
+                    stroke: {
                         light: pl.grey900,
                         dark: pl.grey320
                     },
-                    "strokeWidth": {
-                        light: 1,
-                        dark: 1
+                    strokeWidth: {
+                        light: wp(1),
+                        dark: wp(1)
                     },
-                    "fill": {
+                    fill: {
                         light: '#f0f0f0',
                         dark: '#0f0f0f'
                     },
-                    "pointerEvents": {
+                    pointerEvents: {
                         light: 'none',
                         dark: 'none'
                     }
                 },
-                "flyoutPadding": {
-                    light: 5,
-                    dark: 5
+                flyoutPadding: {
+                    light: wp(5),
+                    dark: wp(5)
                 },
-                "cornerRadius": {
-                    light: 5,
-                    dark: 5
+                cornerRadius: {
+                    light: wp(5),
+                    dark: wp(5)
                 },
-                "pointerLength": {
-                    light: 10,
-                    dark: 10
+                pointerLength: {
+                    light: wp(10),
+                    dark: wp(10)
                 }
             },
-            "voronoi": {
-                "style": {
-                    "data": {
-                        "fill": {
+            voronoi: {
+                style: {
+                    data: {
+                        fill: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         }
                     },
-                    "labels": {
-                        "fontFamily": {
+                    labels: {
+                        fontFamily: {
                             light: fontsWarehouse.regular.fontFamily.light,
                             dark: fontsWarehouse.regular.fontFamily.dark,
                         },
-                        "fontSize": {
-                            light: 12,
-                            dark: 12
+                        fontSize: {
+                            light: wp(12),
+                            dark: wp(12)
                         },
-                        "letterSpacing": {
+                        letterSpacing: {
                             light: 'normal',
                             dark: 'normal'
                         },
-                        "padding": {
-                            light: 5,
-                            dark: 5
+                        padding: {
+                            light: wp(5),
+                            dark: wp(5)
                         },
-                        "fill": {
+                        fill: {
                             light: pl.blueGrey700,
                             dark: pl.brown220
                         },
-                        "stroke": {
+                        stroke: {
                             light: 'transparent',
                             dark: 'transparent'
                         },
-                        "strokeWidth": {
+                        strokeWidth: {
                             light: 0,
                             dark: 0
                         },
-                        "pointerEvents": {
+                        pointerEvents: {
                             light: 'none',
                             dark: 'none'
                         }
                     },
-                    "flyout": {
-                        "stroke": {
+                    flyout: {
+                        stroke: {
                             light: pl.grey900,
                             dark: pl.grey320
                         },
-                        "strokeWidth": {
-                            light: 1,
-                            dark: 1
+                        strokeWidth: {
+                            light: wp(1),
+                            dark: wp(1)
                         },
-                        "fill": {
+                        fill: {
                             light: '#f0f0f0',
                             dark: '#0f0f0f'
                         },
-                        "pointerEvents": {
+                        pointerEvents: {
                             light: 'none',
                             dark: 'none'
                         }
@@ -1265,45 +1270,8 @@ export const getThemeWareHouse = () => {
                 ...victoryCommon
             }
         }
-
     }
     return themeWarehouse;
-}
-
-const isLeafParent = (obj: object) => {
-    let isLeaf: boolean = true
-    Object.values(obj).forEach(value => {
-        if (typeof value === 'object' && value instanceof Array) {
-            value.forEach(item => {
-                if (typeof item === 'object') {
-                    return false;
-                }
-            })
-            return isLeaf = true
-        }
-        if (!['string', 'boolean', 'number', 'undefined', 'function'].includes(typeof value) && (value !== null)) {
-            return isLeaf = false
-        }
-    })
-    return isLeaf;
-}
-
-const isSameStructure = (objA: unknown, objB: unknown) => {
-    let objATraversable = objA as JSONSerializable;
-    let objBTraversable = objB as JSONSerializable;
-    const objAKeys = Object.keys(objATraversable)
-    const objBKeys = Object.keys(objBTraversable)
-    let isSame = true
-    if (objAKeys.length !== objBKeys.length) {
-        return isSame = false
-    } else {
-        objAKeys.forEach((i) => {
-            if (!objBKeys.includes(i)) {
-                return isSame = false
-            }
-        })
-        return isSame;
-    }
 }
 
 const extractThemesFromWarehouse = (arg: unknown, themeName: string) => {

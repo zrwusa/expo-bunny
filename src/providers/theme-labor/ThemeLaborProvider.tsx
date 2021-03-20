@@ -10,16 +10,20 @@ import {useColorScheme} from "react-native-appearance";
 import {useDispatch} from "react-redux";
 import {Preparing} from "../../components/Preparing";
 import {Provider as PaperProvider} from "react-native-paper";
-import {themes} from "./theme";
+import {getThemes} from "./theme";
+import _ from "lodash";
+import {Dimensions} from "react-native";
 
 
 function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
     const {children} = props;
     const sysColorSchemeName = useColorScheme();
+    const [themes,setThemes] = useState(getThemes())
     const [isReady, setIsReady] = useState(false);
-    const [theme, setTheme] = useState(themes[EThemes.light]);
-
+    const [themeName,setThemeName] = useState(EThemes.light)
+    const [theme, setTheme] = useState(themes[themeName]);
     const changeTheme = (themeName: ThemeName) => {
+        setThemeName(themeName);
         setTheme(themes[themeName])
     };
 
@@ -39,11 +43,20 @@ function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
                 dispatch(sysError(err.toString()));
             }
         }
-        bootstrapAsync().then(() => {
-            setIsReady(true)
-        })
-    }, [])
+        bootstrapAsync()
+            .then(() => {
+                setIsReady(true)
+            })
 
+    }, [])
+    useEffect(() => {
+        const onDimensionsChange = _.throttle(() => {
+            setThemes(getThemes())
+            setTheme(themes[themeName])
+        }, BunnyConstants.throttleWait);
+        Dimensions.addEventListener('change', onDimensionsChange);
+        return () => Dimensions.removeEventListener('change', onDimensionsChange);
+    });
     const themeLaborMemorized = useMemo(
         () => ({theme, changeTheme, sysColorSchemeName})
         , [theme, changeTheme, sysColorSchemeName])

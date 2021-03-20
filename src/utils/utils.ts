@@ -54,12 +54,46 @@ export const isTypeEqual = <T>(obj: unknown) => {
     }
 }
 
-export const isServerSide = typeof window === "undefined";
-
 export function reverseColor(oldColor: string) {
     let oldColorTemp = '0x' + oldColor.replace(/#/g, '');
     let str = '000000' + (0xFFFFFF - Number(oldColorTemp)).toString(16);
     return '#'+str.substring(str.length - 6, str.length);
+}
+
+export const isSameStructure = (objA: unknown, objB: unknown) => {
+    let objATraversable = objA as JSONSerializable;
+    let objBTraversable = objB as JSONSerializable;
+    const objAKeys = Object.keys(objATraversable)
+    const objBKeys = Object.keys(objBTraversable)
+    let isSame = true
+    if (objAKeys.length !== objBKeys.length) {
+        return isSame = false
+    } else {
+        objAKeys.forEach((i) => {
+            if (!objBKeys.includes(i)) {
+                return isSame = false
+            }
+        })
+        return isSame;
+    }
+}
+
+export const isLeafParent = (obj: object) => {
+    let isLeaf: boolean = true
+    Object.values(obj).forEach(value => {
+        if (typeof value === 'object' && value instanceof Array) {
+            value.forEach(item => {
+                if (typeof item === 'object') {
+                    return false;
+                }
+            })
+            return isLeaf = true
+        }
+        if (!['string', 'boolean', 'number', 'undefined', 'function'].includes(typeof value) && (value !== null)) {
+            return isLeaf = false
+        }
+    })
+    return isLeaf;
 }
 
 export const addDays = (date: Date, days: number): Date => {

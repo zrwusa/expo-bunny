@@ -85,6 +85,7 @@ const getSizeLabor = () => {
 
     return {
         responsive: _responsive,
+        rs: _responsive,
         measure: _measure,
         ms: _measure,
     }

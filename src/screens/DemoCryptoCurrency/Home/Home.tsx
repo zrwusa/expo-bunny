@@ -18,7 +18,7 @@ import axios, {CancelTokenSource} from "axios";
 import {collectBLResult} from "../../../store/actions";
 import {blError} from "../../../helpers";
 import {EBLMsg} from "../../../constants";
-
+import {ScrollView} from "react-native";
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
 type CryptoCurrencyHomeNavigationProp = BottomTabNavigationProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
@@ -38,13 +38,13 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const dispatch = useDispatch();
-    const {colors, victory} = themeLabor.theme;
+    const {victory} = themeLabor.theme;
     const {Screen, Box} = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
     const {} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
-    const {ms} = sizeLabor;
-    const {wp} = sizeLabor.responsive.iphoneX;
+    const {ms,responsive} = sizeLabor;
+    const {wp} = responsive.iphoneX;
     const [btcData, setBtcData] = useState([
         {x: new Date('1990-01-01'), y: 5}
     ]);
@@ -89,7 +89,6 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
         } catch (e) {
             dispatch(collectBLResult(blError(EBLMsg.CANCELED_REQUEST, false)))
         }
-
     }
     useEffect(() => {
         getHistoricalPrices(type, dateRange).then();
@@ -99,81 +98,83 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
     }, [])
 
     return (
-        <View style={[Screen, Box]}>
-            <Text>{currentPrice}</Text>
-            <View style={styles.tabs}>
-                {
-                    types.map(item => {
-                        const activeWrapStyle = item === type ? styles.active : styles.inActive;
-                        const activeTextStyle = item === type ? styles.tabTextActive : styles.tabText;
-                        return <View style={[styles.tab, activeWrapStyle]}
-                                     key={item}>
-                            <Text style={[styles.tabText, activeTextStyle]} onPress={async () => {
-                                setType(item)
-                                await getHistoricalPrices(item, dateRange);
-                            }}>{st(item)}</Text>
-                        </View>
-                    })
-                }
-            </View>
-            <View style={styles.tabs}>
-                {
-                    dateRanges.map(item => {
-                        const activeWrapStyle = item === dateRange ? styles.active : styles.inActive;
-                        const activeTextStyle = item === dateRange ? styles.tabTextActive : styles.tabText;
-                        return <View style={[activeWrapStyle, styles.tab]}
-                                     key={item}>
-                            <Text style={[styles.tabText, activeTextStyle]}
-                                  onPress={async () => {
-                                      setDateRange(item)
-                                      await getHistoricalPrices(type, item);
-                                  }}>{st(item)}</Text>
-                        </View>
-                    })
-                }
-            </View>
-            <VictoryChart
-                theme={victory}
-                padding={{top: wp(40), left: wp(4), bottom: wp(30), right: wp(20)}}
-                animate={{
-                    duration: 1000,
-                }}
-                domainPadding={{y: wp(15)}}
-                containerComponent={
-                    <VictoryVoronoiContainer
-                        voronoiDimension="x"
-                        labels={({datum}: { datum: { x: Date, y: number } }) => `x:${datum.x.toLocaleDateString()} \n y: ${datum.y}`}
-                        labelComponent={
-                            <VictoryTooltip
-                                constrainToVisibleArea
-                                cornerRadius={ms.br.s}
-                                // flyoutStyle={{
-                                //     fill: colors.surface
-                                // }}
-                            />
-                        }
+        <ScrollView>
+            <View style={[Screen, Box]}>
+                <Text>{currentPrice}</Text>
+                <View style={styles.tabs}>
+                    {
+                        types.map(item => {
+                            const activeWrapStyle = item === type ? styles.active : styles.inActive;
+                            const activeTextStyle = item === type ? styles.tabTextActive : styles.tabText;
+                            return <View style={[styles.tab, activeWrapStyle]}
+                                         key={item}>
+                                <Text style={[styles.tabText, activeTextStyle]} onPress={async () => {
+                                    setType(item)
+                                    await getHistoricalPrices(item, dateRange);
+                                }}>{st(item)}</Text>
+                            </View>
+                        })
+                    }
+                </View>
+                <View style={styles.tabs}>
+                    {
+                        dateRanges.map(item => {
+                            const activeWrapStyle = item === dateRange ? styles.active : styles.inActive;
+                            const activeTextStyle = item === dateRange ? styles.tabTextActive : styles.tabText;
+                            return <View style={[activeWrapStyle, styles.tab]}
+                                         key={item}>
+                                <Text style={[styles.tabText, activeTextStyle]}
+                                      onPress={async () => {
+                                          setDateRange(item)
+                                          await getHistoricalPrices(type, item);
+                                      }}>{st(item)}</Text>
+                            </View>
+                        })
+                    }
+                </View>
+                <VictoryChart
+                    theme={victory}
+                    padding={{top: wp(40), left: wp(4), bottom: wp(30), right: wp(20)}}
+                    // animate={{
+                    //     duration: 1000,
+                    // }}
+                    domainPadding={{y: wp(15)}}
+                    containerComponent={
+                        <VictoryVoronoiContainer
+                            voronoiDimension="x"
+                            labels={({datum}: { datum: { x: Date, y: number } }) => `x:${datum.x.toLocaleDateString()} \n y: ${datum.y}`}
+                            labelComponent={
+                                <VictoryTooltip
+                                    constrainToVisibleArea
+                                    cornerRadius={ms.br.s}
+                                    // flyoutStyle={{
+                                    //     fill: colors.surface
+                                    // }}
+                                />
+                            }
+                        />
+                    }
+                    scale={{x: 'time'}}
+                >
+                    <VictoryAxis crossAxis style={{
+                        // axis: {stroke: colors.accent},
+                        // tickLabels: {padding: wp(2), fill: colors.primary}
+                    }}/>
+                    <VictoryAxis dependentAxis tickFormat={() => ``}
+                                 style={{
+                                     // axis: {stroke: colors.accent},
+                                 }}/>
+                    <VictoryLine
+                        interpolation="natural"
+                        style={{
+                            // data: {stroke: colors.secondary},
+                            // parent: {border: `1px solid ${colors.border}`}
+                        }}
+                        data={btcData}
                     />
-                }
-                scale={{x: 'time'}}
-            >
-                <VictoryAxis crossAxis style={{
-                    // axis: {stroke: colors.accent},
-                    // tickLabels: {padding: wp(2), fill: colors.primary}
-                }}/>
-                <VictoryAxis dependentAxis tickFormat={() => ``}
-                             style={{
-                                 // axis: {stroke: colors.accent},
-                             }}/>
-                <VictoryLine
-                    interpolation="natural"
-                    style={{
-                        // data: {stroke: colors.secondary},
-                        // parent: {border: `1px solid ${colors.border}`}
-                    }}
-                    data={btcData}
-                />
-            </VictoryChart>
-        </View>
+                </VictoryChart>
+            </View>
+        </ScrollView>
     );
 }
 
