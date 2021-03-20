@@ -13,8 +13,8 @@
         }
       }
     },
-    "isRemoteBackEnd": true,
-    "isHttps": true,
+    "isRemoteBackEnd": false,
+    "isHttps": false,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
       "port": 443
@@ -40,8 +40,8 @@
         }
       }
     },
-    "isRemoteBackEnd": true,
-    "isHttps": true,
+    "isRemoteBackEnd": false,
+    "isHttps": false,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
       "port": 443
@@ -67,8 +67,8 @@
         }
       }
     },
-    "isRemoteBackEnd": true,
-    "isHttps": true,
+    "isRemoteBackEnd": false,
+    "isHttps": false,
     "remoteBackEnd": {
       "domain": "fatpomelo.fun",
       "port": 443
