@@ -132,7 +132,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <IcoMoon name="settings" size={wp(22)} {...iconColor}/></Link>
                     <ButtonTO onPress={async () => {
                         try {
-                            await authFunctions.signOut()
+                            await authFunctions.signOut('MANUAL')
                         } catch (e) {
                             dispatch(sysError(e))
                         }

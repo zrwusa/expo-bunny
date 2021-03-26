@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action
 interface Props extends ReturnType<typeof mapStateToProps>
     , ReturnType<typeof mapDispatchToProps>, WithTranslation
     , WithThemeLabor, WithSizeLabor {
-};
+}
 
 class DemoThunkCCScreen extends React.Component<Props> {
     constructor(props: Props) {

@@ -6,7 +6,10 @@
     "mustUsePhysicalDevice": "必须使用真实设备推送通知",
     "I18nProviderLoading": "语言国际化组件加载中",
     "AuthLaborProviderLoading": "用户授权组件加载中",
-    "ThemeProviderLoading": "主题组件加载中"
+    "ThemeProviderLoading": "主题组件加载中",
+    "apiNeedSignIn": "需要登录",
+    "signInSuccess": "登录成功",
+    "signOutSuccess": "已退出登录"
   },
   "screens": {
     "Home": {

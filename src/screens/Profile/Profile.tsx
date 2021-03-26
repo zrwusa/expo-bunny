@@ -35,7 +35,6 @@ function ProfileScreen({route, navigation}: Props) {
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor)
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
-
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, smartStyles.centralized]}>

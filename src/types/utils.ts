@@ -4,7 +4,7 @@ import {StackNavigationOptions} from "@react-navigation/stack";
 import {
     DefaultNavigatorOptions,
     DrawerRouterOptions,
-    EventMapBase,
+    EventMapBase, LinkingOptions,
     RouteConfig,
     StackRouterOptions,
     TabRouterOptions,
@@ -16,61 +16,10 @@ import {BottomTabNavigationConfig} from "react-navigation-bottom-tabs-no-warning
 import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 import {DrawerNavigationConfig} from "react-navigation-drawer-no-warnings/lib/typescript/src/types";
 import {MaterialTopTabNavigationOptions} from "@react-navigation/material-top-tabs";
+import {uuidV4} from "../utils";
 // import {MaterialTopTabNavigationConfig} from "@react-navigation/material-top-tabs/lib/typescript/src/types";
 
-export type NavigatorType = 'stack' | 'tab' | 'drawer' | 'top';
 
-export type LinkingConfig = {
-    path?: string,
-    exact?: boolean,
-    parse?: Record<string, (value: string) => any>,
-    stringify?: Record<string, (value: any) => string>,
-    initialRouteName?: string,
-    name?: string,
-    screens?: NavigatorTreeNode[],
-};
-
-export type StackConfig = {
-    key: string,
-    navigatorType: NavigatorType,
-    component?: ComponentType<any>,
-    stack?:
-        typeof Stacks.RootStack
-        | typeof Stacks.DemoNestedLv1Stack
-        | typeof Stacks.DemoNestedLv2Stack
-        | typeof Stacks.DemoTabStack
-        | typeof Stacks.DemoTabRNComponentsStack
-        | typeof Stacks.DemoCryptoCurrencyStack
-        | typeof Stacks.DemoDrawerStack,
-    // | typeof Stacks.DemoCryptoCurrencyHomeTopStack,
-    authScreen?: ComponentType<any>,
-    childrenNode?: NavigatorTreeNode[],
-    authRequired: boolean,
-}
-
-export type LinkingConfigTraversable = LinkingConfig & JSONSerializable
-
-export type Options = BottomTabNavigationOptions | DrawerNavigationOptions | StackNavigationOptions | MaterialTopTabNavigationOptions;
-export type OptionsInner = DefaultNavigatorOptions<Options>;
-export type NavigatorTreeNode =
-    Partial<OptionsInner>
-    & Partial<TabRouterOptions>
-    & Partial<BottomTabNavigationConfig>
-
-    & Partial<DrawerRouterOptions>
-    & Partial<DrawerNavigationConfig>
-
-    & Partial<StackRouterOptions>
-    & Partial<StackNavigationConfig>
-
-    // & Partial<TabRouterOptions>
-    // & Partial<MaterialTopTabNavigationConfig>
-
-    & Partial<RouteConfig<ParamListBase, any, NavigationState, {}, EventMapBase>>
-    & LinkingConfig
-    & StackConfig;
-
-export type RecursiveNavigatorProps = { node: NavigatorTreeNode }
 
 // export type DeepLeavesWrap<T, U> = T extends { [key: string]: any } ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
 //     : T extends { [key: string]: any } | undefined ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }

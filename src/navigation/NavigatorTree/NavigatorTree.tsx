@@ -55,7 +55,6 @@ import DemoSagaScreen from "../../screens/DemoSaga";
 import {NotSupport} from "../../components/NotSupport";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 
-
 export const basePath = Linking.makeUrl('/');
 
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
@@ -69,7 +68,7 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 // Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, responsive} = useSizeLabor();
-    const {wp, hp} = responsive.iphoneX;
+    const {wp} = responsive.iphoneX;
     const {t} = useTranslation();
     const styles = createStyles();
     const insets = useSafeAreaInsets();
@@ -159,363 +158,363 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         key: uuidV4(),
         stack: Stacks.RootStack,
         name: 'RootStack',
-        authScreen: AuthScreen,
         options: optionsHeaderAndAnimation,
         headerMode: 'float',
         screenOptions: optionsHeaderAndAnimation,
         navigatorType: 'stack',
         authRequired: false,
         childrenNode: [
-            // {
-            //     key: uuidV4(),
-            //     component: HomeScreen,
-            //     name: 'Home',
-            //     path: 'home',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     component: AuthScreen,
-            //     name: 'Auth',
-            //     path: 'auth',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: ProfileScreen,
-            //     name: 'Profile',
-            //     path: 'profile/:id',
-            //     initialParams: {'id': '1'},
-            //     parse: {
-            //         id: (id: string) => `${id}`,
-            //     },
-            //     navigatorType: 'stack',
-            //     authRequired: true
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoFCReduxHookScreen,
-            //     name: 'DemoFCReduxHook',
-            //     path: 'demo-fc-redux-hook',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoCollectionScreen,
-            //     name: 'DemoCollection',
-            //     path: 'demo-collection',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoRouteScreen,
-            //     name: 'DemoRoute',
-            //     path: 'demo-route',
-            //     parse: {
-            //         id: (id: string) => {
-            //             // when passing a param through URL the param value will be parsed
-            //             return id;
-            //         }
-            //     },
-            //     stringify: {
-            //         id: (id: string) => {
-            //             // when passing a param through URL the param key will be stringified
-            //             return id
-            //         }
-            //     },
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoThirdPartScreen,
-            //     name: 'DemoThirdPart',
-            //     path: 'demo-third-part',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoThunkCCScreen,
-            //     name: 'DemoThunkCC',
-            //     path: 'demo-thunk-cc',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoSagaScreen,
-            //     name: 'DemoSaga',
-            //     path: 'demo-saga',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoMapScreen,
-            //     name: 'DemoMap',
-            //     path: 'demo-map',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoChatScreen,
-            //     name: 'DemoChat',
-            //     path: 'demo-chat',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoShareScreen,
-            //     name: 'DemoShare',
-            //     path: 'demo-share',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: Platform.OS !== 'web'
-            //         ? DemoNotificationScreen
-            //         : () => <NotSupport text='Not supported on web'/>,
-            //     name: 'DemoNotification',
-            //     path: 'demo-notification',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
-            // {
-            //     key: uuidV4(),
-            //     name: 'DemoModal',
-            //     stack: Stacks.DemoModalStack,
-            //     path: 'demo-modal',
-            //     navigatorType: 'stack',
-            //     mode: 'modal',
-            //     headerMode: 'none',
-            //     authRequired: false,
-            //     childrenNode: [
-            //         {
-            //             key: uuidV4(),
-            //             component: ModalHomeScreen,
-            //             name: 'ModalHome',
-            //             path: 'home',
-            //             navigatorType: 'stack',
-            //             options: {
-            //                 animationEnabled: true,
-            //                 cardStyle: {backgroundColor: 'transparent'},
-            //                 cardOverlayEnabled: true,
-            //                 cardStyleInterpolator: ({current: {progress}}: any) => {
-            //                     return {
-            //                         cardStyle: {
-            //                             opacity: progress.interpolate({
-            //                                 inputRange: [0, 0.5, 0.9, 1],
-            //                                 outputRange: [0, 0.25, 0.7, 1],
-            //                             }),
-            //                         },
-            //                         overlayStyle: {
-            //                             opacity: progress.interpolate({
-            //                                 inputRange: [0, 1],
-            //                                 outputRange: [0, 0.5],
-            //                                 extrapolate: 'clamp',
-            //                             }),
-            //                         },
-            //                     };
-            //                 },
-            //             },
-            //             authRequired: false
-            //         }
-            //     ]
-            // },
-            // {
-            //     key: uuidV4(),
-            //     name: 'DemoTab',
-            //     stack: Stacks.DemoTabStack,
-            //     path: 'demo-tab',
-            //     options: optionsHeaderAndAnimation,
-            //     tabBarOptions: tabBarOptions,
-            //     screenOptions: screenOptionsTabBarIcon,
-            //     navigatorType: 'tab',
-            //     authRequired: false,
-            //     childrenNode: [
-            //         {
-            //             key: uuidV4(),
-            //             component: TabHomeScreen,
-            //             name: 'TabHome',
-            //             path: 'home',
-            //             navigatorType: 'tab',
-            //             authRequired: false
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             component: TabSettingsScreen,
-            //             name: 'TabSettings',
-            //             path: 'settings/:item',
-            //             initialParams: {'item': 'item-001'},
-            //             parse: {
-            //                 item: (item: string) => `${item}`,
-            //             },
-            //             navigatorType: 'tab',
-            //             authRequired: false
-            //         }
-            //     ]
-            // },
-            // {
-            //     key: uuidV4(),
-            //     name: 'DemoDrawer',
-            //     stack: Stacks.DemoDrawerStack,
-            //     path: 'demo-drawer',
-            //     drawerType: 'front',
-            //     openByDefault: false,
-            //     options: {
-            //         ...optionsHeaderAndAnimation,
-            //         headerShown: true
-            //     },
-            //     screenOptions: optionsDraw,
-            //     navigatorType: 'drawer',
-            //     authRequired: false,
-            //     childrenNode: [
-            //         {
-            //             key: uuidV4(),
-            //             component: DrawerHomeScreen,
-            //             name: 'DrawerHome',
-            //             path: 'home',
-            //             navigatorType: 'drawer',
-            //             authRequired: false
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             component: DrawerSettingsScreen,
-            //             name: 'DrawerSettings',
-            //             path: 'settings/:item',
-            //             initialParams: {'item': 'item-001'},
-            //             parse: {
-            //                 item: (item: string) => `${item}`,
-            //             },
-            //             navigatorType: 'drawer',
-            //             authRequired: false
-            //         }
-            //     ]
-            // },
-            // {
-            //     key: uuidV4(),
-            //     stack: Stacks.DemoNestedLv1Stack,
-            //     name: 'DemoNestedLv0',
-            //     path: 'demo-nested',
-            //     options: {
-            //         ...optionsHeaderAndAnimation,
-            //         headerShown: true
-            //     },
-            //     screenOptions: optionsHeaderAndAnimation,
-            //     navigatorType: 'stack',
-            //     authRequired: false,
-            //     childrenNode: [
-            //         {
-            //             key: uuidV4(),
-            //             component: NestedLv1HomeScreen,
-            //             name: 'NestedLv1Home',
-            //             path: 'home',
-            //             navigatorType: 'stack',
-            //             authRequired: false
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             stack: Stacks.DemoNestedLv2Stack,
-            //             name: 'NestedLv1Settings',
-            //             path: 'settings/:item',
-            //             options: {headerShown: true},
-            //             screenOptions: optionsHeaderAndAnimation,
-            //             navigatorType: 'stack',
-            //             authRequired: false,
-            //             // initialRouteName:'NestedLv2HomeScreen',
-            //             childrenNode: [
-            //                 {
-            //                     key: uuidV4(),
-            //                     component: NestedLv2HomeScreen,
-            //                     name: 'NestedLv2Home',
-            //                     path: 'lv2-home',
-            //                     navigatorType: 'stack',
-            //                     authRequired: false,
-            //                 },
-            //                 {
-            //                     key: uuidV4(),
-            //                     component: NestedLv2SettingsScreen,
-            //                     name: 'NestedLv2Settings',
-            //                     path: 'lv2-settings/:itemlv2',
-            //                     parse: {
-            //                         itemlv2: (itemlv2: string) => `${itemlv2}`,
-            //                     },
-            //                     navigatorType: 'stack',
-            //                     authRequired: false,
-            //                 }
-            //             ]
-            //         }
-            //     ]
-            // },
-            // {
-            //     key: uuidV4(),
-            //     name: 'DemoRNComponents',
-            //     path: 'demo-tab-rn-components',
-            //     stack: Stacks.DemoTabRNComponentsStack,
-            //     screenOptions: screenOptionsTabBarIcon,
-            //     tabBarOptions: tabBarOptions,
-            //     navigatorType: 'tab',
-            //     authRequired: false,
-            //     childrenNode: [
-            //         {
-            //             key: uuidV4(),
-            //             component: RNHome,
-            //             name: 'RNHome',
-            //             path: 'home',
-            //             navigatorType: 'tab',
-            //             authRequired: false,
-            //
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             component: RNFlatListScreen,
-            //             name: 'RNFlatList',
-            //             path: 'flat-list',
-            //             navigatorType: 'tab',
-            //             authRequired: false,
-            //
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             component: RNSectionListScreen,
-            //             name: 'RNSectionList',
-            //             path: 'section-list',
-            //             navigatorType: 'tab',
-            //             authRequired: false,
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             component: RNVirtualizedListScreen,
-            //             name: 'RNVirtualizedList',
-            //             path: 'virtualized-list',
-            //             navigatorType: 'tab',
-            //             authRequired: false,
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             component: RNKeyboardAvoidingScreen,
-            //             name: 'RNNoKeyboard',
-            //             path: 'keyboard-avoiding',
-            //             navigatorType: 'tab',
-            //             authRequired: false,
-            //         },
-            //         {
-            //             key: uuidV4(),
-            //             component: RNSafeAreaScreen,
-            //             name: 'RNSafeArea',
-            //             path: 'safe-area',
-            //             navigatorType: 'tab',
-            //             authRequired: false,
-            //         }
-            //     ]
-            // },
+            {
+                key: uuidV4(),
+                component: HomeScreen,
+                name: 'Home',
+                path: 'home',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: AuthScreen,
+                name: 'Auth',
+                path: 'auth',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: ProfileScreen,
+                name: 'Profile',
+                path: 'profile/:id',
+                initialParams: {'id': '1'},
+                parse: {
+                    id: (id: string) => `${id}`,
+                },
+                navigatorType: 'stack',
+                authRequired: true
+            },
+            {
+                key: uuidV4(),
+                component: DemoFCReduxHookScreen,
+                name: 'DemoFCReduxHook',
+                path: 'demo-fc-redux-hook',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoCollectionScreen,
+                name: 'DemoCollection',
+                path: 'demo-collection',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoRouteScreen,
+                name: 'DemoRoute',
+                path: 'demo-route',
+                parse: {
+                    id: (id: string) => {
+                        // when passing a param through URL the param value will be parsed
+                        return id;
+                    }
+                },
+                stringify: {
+                    id: (id: string) => {
+                        // when passing a param through URL the param key will be stringified
+                        return id
+                    }
+                },
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoThirdPartScreen,
+                name: 'DemoThirdPart',
+                path: 'demo-third-part',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoThunkCCScreen,
+                name: 'DemoThunkCC',
+                path: 'demo-thunk-cc',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoSagaScreen,
+                name: 'DemoSaga',
+                path: 'demo-saga',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoMapScreen,
+                name: 'DemoMap',
+                path: 'demo-map',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoChatScreen,
+                name: 'DemoChat',
+                path: 'demo-chat',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: DemoShareScreen,
+                name: 'DemoShare',
+                path: 'demo-share',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                component: Platform.OS !== 'web'
+                    ? DemoNotificationScreen
+                    : () => <NotSupport text='Not supported on web'/>,
+                name: 'DemoNotification',
+                path: 'demo-notification',
+                navigatorType: 'stack',
+                authRequired: false
+            },
+            {
+                key: uuidV4(),
+                name: 'DemoModal',
+                stack: Stacks.DemoModalStack,
+                path: 'demo-modal',
+                navigatorType: 'stack',
+                mode: 'modal',
+                headerMode: 'none',
+                authRequired: false,
+                childrenNode: [
+                    {
+                        key: uuidV4(),
+                        component: ModalHomeScreen,
+                        name: 'ModalHome',
+                        path: 'home',
+                        navigatorType: 'stack',
+                        options: {
+                            animationEnabled: true,
+                            cardStyle: {backgroundColor: 'transparent'},
+                            cardOverlayEnabled: true,
+                            cardStyleInterpolator: ({current: {progress}}: any) => {
+                                return {
+                                    cardStyle: {
+                                        opacity: progress.interpolate({
+                                            inputRange: [0, 0.5, 0.9, 1],
+                                            outputRange: [0, 0.25, 0.7, 1],
+                                        }),
+                                    },
+                                    overlayStyle: {
+                                        opacity: progress.interpolate({
+                                            inputRange: [0, 1],
+                                            outputRange: [0, 0.5],
+                                            extrapolate: 'clamp',
+                                        }),
+                                    },
+                                };
+                            },
+                        },
+                        authRequired: false
+                    }
+                ]
+            },
+            {
+                key: uuidV4(),
+                name: 'DemoTab',
+                stack: Stacks.DemoTabStack,
+                path: 'demo-tab',
+                options: optionsHeaderAndAnimation,
+                tabBarOptions: tabBarOptions,
+                screenOptions: screenOptionsTabBarIcon,
+                navigatorType: 'tab',
+                authRequired: false,
+                childrenNode: [
+                    {
+                        key: uuidV4(),
+                        component: TabHomeScreen,
+                        name: 'TabHome',
+                        path: 'home',
+                        navigatorType: 'tab',
+                        authRequired: false
+                    },
+                    {
+                        key: uuidV4(),
+                        component: TabSettingsScreen,
+                        name: 'TabSettings',
+                        path: 'settings/:item',
+                        initialParams: {'item': 'item-001'},
+                        parse: {
+                            item: (item: string) => `${item}`,
+                        },
+                        navigatorType: 'tab',
+                        authRequired: false
+                    }
+                ]
+            },
+            {
+                key: uuidV4(),
+                name: 'DemoDrawer',
+                stack: Stacks.DemoDrawerStack,
+                path: 'demo-drawer',
+                drawerType: 'front',
+                openByDefault: false,
+                options: {
+                    ...optionsHeaderAndAnimation,
+                    headerShown: true
+                },
+                screenOptions: optionsDraw,
+                navigatorType: 'drawer',
+                authRequired: false,
+                childrenNode: [
+                    {
+                        key: uuidV4(),
+                        component: DrawerHomeScreen,
+                        name: 'DrawerHome',
+                        path: 'home',
+                        navigatorType: 'drawer',
+                        authRequired: false
+                    },
+                    {
+                        key: uuidV4(),
+                        component: DrawerSettingsScreen,
+                        name: 'DrawerSettings',
+                        path: 'settings/:item',
+                        initialParams: {'item': 'item-001'},
+                        parse: {
+                            item: (item: string) => `${item}`,
+                        },
+                        navigatorType: 'drawer',
+                        authRequired: false
+                    }
+                ]
+            },
+            {
+                key: uuidV4(),
+                stack: Stacks.DemoNestedLv1Stack,
+                name: 'DemoNestedLv0',
+                path: 'demo-nested',
+                options: {
+                    ...optionsHeaderAndAnimation,
+                    headerShown: true
+                },
+                screenOptions: optionsHeaderAndAnimation,
+                navigatorType: 'stack',
+                authRequired: false,
+                childrenNode: [
+                    {
+                        key: uuidV4(),
+                        component: NestedLv1HomeScreen,
+                        name: 'NestedLv1Home',
+                        path: 'home',
+                        navigatorType: 'stack',
+                        authRequired: false
+                    },
+                    {
+                        key: uuidV4(),
+                        stack: Stacks.DemoNestedLv2Stack,
+                        name: 'NestedLv1Settings',
+                        path: 'settings/:item',
+                        options: {headerShown: true},
+                        screenOptions: optionsHeaderAndAnimation,
+                        navigatorType: 'stack',
+                        authRequired: false,
+                        // initialRouteName:'NestedLv2HomeScreen',
+                        childrenNode: [
+                            {
+                                key: uuidV4(),
+                                component: NestedLv2HomeScreen,
+                                name: 'NestedLv2Home',
+                                path: 'lv2-home',
+                                navigatorType: 'stack',
+                                authRequired: false,
+                            },
+                            {
+                                key: uuidV4(),
+                                component: NestedLv2SettingsScreen,
+                                name: 'NestedLv2Settings',
+                                path: 'lv2-settings/:itemlv2',
+                                parse: {
+                                    itemlv2: (itemlv2: string) => `${itemlv2}`,
+                                },
+                                navigatorType: 'stack',
+                                authRequired: false,
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                key: uuidV4(),
+                name: 'DemoRNComponents',
+                path: 'demo-tab-rn-components',
+                stack: Stacks.DemoTabRNComponentsStack,
+                screenOptions: screenOptionsTabBarIcon,
+                tabBarOptions: tabBarOptions,
+                navigatorType: 'tab',
+                authRequired: false,
+                childrenNode: [
+                    {
+                        key: uuidV4(),
+                        component: RNHome,
+                        name: 'RNHome',
+                        path: 'home',
+                        navigatorType: 'tab',
+                        authRequired: false,
+
+                    },
+                    {
+                        key: uuidV4(),
+                        component: RNFlatListScreen,
+                        name: 'RNFlatList',
+                        path: 'flat-list',
+                        navigatorType: 'tab',
+                        authRequired: false,
+
+                    },
+                    {
+                        key: uuidV4(),
+                        component: RNSectionListScreen,
+                        name: 'RNSectionList',
+                        path: 'section-list',
+                        navigatorType: 'tab',
+                        authRequired: false,
+                    },
+                    {
+                        key: uuidV4(),
+                        component: RNVirtualizedListScreen,
+                        name: 'RNVirtualizedList',
+                        path: 'virtualized-list',
+                        navigatorType: 'tab',
+                        authRequired: false,
+                    },
+                    {
+                        key: uuidV4(),
+                        component: RNKeyboardAvoidingScreen,
+                        name: 'RNNoKeyboard',
+                        path: 'keyboard-avoiding',
+                        navigatorType: 'tab',
+                        authRequired: false,
+                    },
+                    {
+                        key: uuidV4(),
+                        component: RNSafeAreaScreen,
+                        name: 'RNSafeArea',
+                        path: 'safe-area',
+                        navigatorType: 'tab',
+                        authRequired: false,
+                    }
+                ]
+            },
             {
                 key: uuidV4(),
                 name: 'DemoCryptoCurrency',
@@ -547,35 +546,35 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     }
                 ]
             },
-            // {
-            //     key: uuidV4(),
-            //     component: SettingsScreen,
-            //     name: 'Settings',
-            //     path: 'settings',
-            //     options: optionsHeaderAndAnimation,
-            //     navigatorType: 'stack',
-            //     authRequired: false,
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoSuspenseScreen,
-            //     name: 'DemoSuspense',
-            //     path: 'demo-suspense',
-            //     options: optionsHeaderAndAnimation,
-            //     navigatorType: 'stack',
-            //     authRequired: false,
-            //
-            // },
-            // {
-            //     key: uuidV4(),
-            //     component: DemoThemeScreen,
-            //     name: 'DemoTheme',
-            //     path: 'demo-theme',
-            //     options: optionsHeaderAndAnimation,
-            //     navigatorType: 'stack',
-            //     authRequired: false,
-            //
-            // },
+            {
+                key: uuidV4(),
+                component: SettingsScreen,
+                name: 'Settings',
+                path: 'settings',
+                options: optionsHeaderAndAnimation,
+                navigatorType: 'stack',
+                authRequired: false,
+            },
+            {
+                key: uuidV4(),
+                component: DemoSuspenseScreen,
+                name: 'DemoSuspense',
+                path: 'demo-suspense',
+                options: optionsHeaderAndAnimation,
+                navigatorType: 'stack',
+                authRequired: false,
+
+            },
+            {
+                key: uuidV4(),
+                component: DemoThemeScreen,
+                name: 'DemoTheme',
+                path: 'demo-theme',
+                options: optionsHeaderAndAnimation,
+                navigatorType: 'stack',
+                authRequired: false,
+
+            },
         ]
     }
 
@@ -614,6 +613,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const navigationRef = React.useRef<NavigationContainerRef>(null);
 
     useReduxDevToolsExtension(navigationRef);
+
     return <NavigationContainer
         documentTitle={{
             formatter: (options, route) => `${options?.title ?? route?.name} - ${t('titleFormat')}`,
@@ -630,32 +630,35 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {stack} = node;
     const Navigator = stack?.Navigator;
     const props = navigatorPropsExtract(node);
-    const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
+    const StackScreen: React.ElementType = (stack && stack.Screen) ? stack?.Screen : View;
     const {authResult} = useAuthLabor()
     return Navigator
         ? <Navigator {...props}>
-            {authResult && !authResult.accessToken
-                ? <ScreenComponent component={AuthScreen} name="Auth" options={{
-                    title: t(`screens.Auth.title`)
-                }}/>
-                : <>
-                    {node.childrenNode && node.childrenNode.map((childScreen) => {
-                        return <ScreenComponent {...childScreen}
-                                                options={{
-                                                    ...childScreen.options,
-                                                    title: t(`screens.${childScreen.name}.title`)
-                                                }} key={childScreen.key}>
-                            {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
-                                ?
-                                (navProps: any) => {
-                                    return <RecursiveNavigator {...navProps} node={childScreen}/>
-                                }
-                                : null
-                            }
-                        </ScreenComponent>
-                    })}
-                </>
-            }
+            {node.childrenNode && node.childrenNode.map((childScreen) => {
+                return <StackScreen {...childScreen}
+                                    listeners={({navigation, route}: any) => {
+                                        return {
+                                            focus: function () {
+                                                if (childScreen.authRequired && !authResult.accessToken) {
+                                                    navigation.navigate('Auth', {reference: JSON.stringify(route)})
+                                                }
+                                                return false
+                                            },
+                                        }
+                                    }}
+                                    options={{
+                                        ...childScreen.options,
+                                        title: t(`screens.${childScreen.name}.title`)
+                                    }} key={childScreen.key}>
+                    {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
+                        ?
+                        (navProps: any) => {
+                            return <RecursiveNavigator {...navProps} node={childScreen}/>
+                        }
+                        : null
+                    }
+                </StackScreen>
+            })}
         </Navigator>
         : null;
 }
