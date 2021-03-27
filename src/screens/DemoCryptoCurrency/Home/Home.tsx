@@ -87,7 +87,7 @@ function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) 
             })
             setBtcData(btcDataMapped)
         } catch (e) {
-            dispatch(collectBLResult(blError(EBLMsg.CANCELED_REQUEST, false)))
+            dispatch(collectBLResult(blError(e.message)))
         }
     }
     useEffect(() => {

@@ -5,6 +5,7 @@ import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";
 import nomicsAPI from "../../helpers/nomics-api";
 import {saveQuickAlertSettings} from "../../store/actions";
+import bunnyAPI from "../../helpers/bunny-api";
 
 interface Props {
     title: string,
@@ -41,7 +42,7 @@ function DemoRequest(props: Props) {
             //     token: "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]"
             // })
             // await saveAlertSetting();
-            await handleSaveQuickAlertSettings();
+            // await handleSaveQuickAlertSettings();
             // await cancelAlertSettings()
             // dispatch(collectBLResult({info: blError('test')}))
             // const {data} = await request.get('/cryptoCurrency-prices')
@@ -49,21 +50,21 @@ function DemoRequest(props: Props) {
             // dispatch(cancelAlertSettings({token: expoPushToken, cancelAll: true}))
             //
             // dispatch(getCurrentPrice())
-            // const res = await request.get(`/employees`);
-            // setEmployees(res.data)
+            const res = await bunnyAPI.get(`/employees`);
+            setEmployees(res.data)
 
-            const res = await nomicsAPI.get('v1/currencies/sparkline', {
-                params: {
-                    ids: 'BTC,ETH,XRP',
-                    start: '2021-03-01T00:00:00Z',
-                    end: '2021-03-03T00:00:00Z'
-                }
-            })
-            const {timestamps, prices} = res.data[0]
-            const btcDataMapped = timestamps.map((item: string, index: number) => {
-                return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
-            })
-            console.log('---btcDataMapped', btcDataMapped)
+            // const res = await nomicsAPI.get('v1/currencies/sparkline', {
+            //     params: {
+            //         ids: 'BTC,ETH,XRP',
+            //         start: '2021-03-01T00:00:00Z',
+            //         end: '2021-03-03T00:00:00Z'
+            //     }
+            // })
+            // const {timestamps, prices} = res.data[0]
+            // const btcDataMapped = timestamps.map((item: string, index: number) => {
+            //     return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
+            // })
+            // console.log('---btcDataMapped', btcDataMapped)
         } catch (err) {
             console.error(err)
         }

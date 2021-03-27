@@ -18,6 +18,7 @@ export interface TabSettingsProps {
 }
 
 function TabSettingsScreen({route, navigation}: TabSettingsProps) {
+    console.log('---TabSettingsScreen',route,navigation)
     const {t} = useTranslation();
     const st = shortenTFuciontKey(t, 'screens.TabSettings');
     const sizeLabor = useSizeLabor();

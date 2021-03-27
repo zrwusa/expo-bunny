@@ -30,7 +30,7 @@ const bunnyAPI = axios.create(getApiInstanceConfig('bunny'));
 
 bunnyAPI.interceptors.request.use(
     async (config) => {
-        const accessToken = await authLaborContext.authFunctions.getAccessToken();
+        const {accessToken} = await authLaborContext.authFunctions.getPersistenceAuthInfo();
         // "Accept": "application/json",
         // "Content-Type": "application/x-www-form-urlencoded"
         config.headers['Content-Type'] = 'application/json'
@@ -61,16 +61,22 @@ bunnyAPI.interceptors.response.use(
                 case 401:
                     const {businessLogic} = data
                     const {errorCode} = businessLogic
-                    if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005'].includes(errorCode)) {
+                    if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005','BL_BUNNY_012'].includes(errorCode)) {
                         const {authFunctions} = authLaborContext;
                         const {refreshAuth, signOut} = authFunctions;
-                        const {success} = await refreshAuth()
-                        if (!success) {
-                            await signOut()
+                        try{
+                            const {success} = await refreshAuth()
+                            if (!success) {
+                                await signOut('API')
+                            }else{
+                                const originalRequest = config;
+                                originalRequest._retry = true;
+                                return bunnyAPI(originalRequest);
+                            }
+                        }catch (e) {
+                            await signOut('API')
+                            throw e
                         }
-                        const originalRequest = config;
-                        originalRequest._retry = true;
-                        return bunnyAPI(originalRequest);
                     }
                     break;
                 default:

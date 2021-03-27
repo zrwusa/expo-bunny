@@ -6,7 +6,10 @@
     "mustUsePhysicalDevice": "Must use physical device for Push Notifications",
     "I18nProviderLoading": "I18n Provider loading",
     "AuthLaborProviderLoading": "AuthLabor Provider loading",
-    "ThemeProviderLoading": "Theme Provider loading"
+    "ThemeProviderLoading": "Theme Provider loading",
+    "apiNeedSignIn": "Need to sign in",
+    "signInSuccess": "Sign in success",
+    "signOutSuccess": "Sign out success"
   },
   "screens": {
     "Home": {

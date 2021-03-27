@@ -55,7 +55,6 @@ import DemoSagaScreen from "../../screens/DemoSaga";
 import {NotSupport} from "../../components/NotSupport";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 
-
 export const basePath = Linking.makeUrl('/');
 
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
@@ -69,7 +68,7 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 // Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, responsive} = useSizeLabor();
-    const {wp, hp} = responsive.iphoneX;
+    const {wp} = responsive.iphoneX;
     const {t} = useTranslation();
     const styles = createStyles();
     const insets = useSafeAreaInsets();
@@ -159,7 +158,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         key: uuidV4(),
         stack: Stacks.RootStack,
         name: 'RootStack',
-        authScreen: AuthScreen,
         options: optionsHeaderAndAnimation,
         headerMode: 'float',
         screenOptions: optionsHeaderAndAnimation,
@@ -174,18 +172,20 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 navigatorType: 'stack',
                 authRequired: false
             },
-            // {
-            //     component: AuthScreen,
-            //     name: 'Auth',
-            //     path: 'auth',
-            //     navigatorType: 'stack',
-            //     authRequired: false
-            // },
+            {
+                key: uuidV4(),
+                component: AuthScreen,
+                name: 'Auth',
+                path: 'auth',
+                navigatorType: 'stack',
+                authRequired: false
+            },
             {
                 key: uuidV4(),
                 component: ProfileScreen,
                 name: 'Profile',
                 path: 'profile/:id',
+                initialParams: {'id': '1'},
                 parse: {
                     id: (id: string) => `${id}`,
                 },
@@ -613,6 +613,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const navigationRef = React.useRef<NavigationContainerRef>(null);
 
     useReduxDevToolsExtension(navigationRef);
+
     return <NavigationContainer
         documentTitle={{
             formatter: (options, route) => `${options?.title ?? route?.name} - ${t('titleFormat')}`,
@@ -629,32 +630,35 @@ const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
     const {stack} = node;
     const Navigator = stack?.Navigator;
     const props = navigatorPropsExtract(node);
-    const ScreenComponent: React.ElementType = (stack && stack.Screen) ? stack.Screen : View;
+    const StackScreen: React.ElementType = (stack && stack.Screen) ? stack?.Screen : View;
     const {authResult} = useAuthLabor()
     return Navigator
         ? <Navigator {...props}>
-            {authResult && !authResult.accessToken
-                ? <ScreenComponent component={AuthScreen} name="Auth" options={{
-                    title: t(`screens.Auth.title`)
-                }}/>
-                : <>
-                    {node.childrenNode && node.childrenNode.map((childScreen) => {
-                        return <ScreenComponent {...childScreen}
-                                                options={{
-                                                    ...childScreen.options,
-                                                    title: t(`screens.${childScreen.name}.title`)
-                                                }} key={childScreen.key}>
-                            {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
-                                ?
-                                (navProps: any) => {
-                                    return <RecursiveNavigator {...navProps} node={childScreen}/>
-                                }
-                                : null
-                            }
-                        </ScreenComponent>
-                    })}
-                </>
-            }
+            {node.childrenNode && node.childrenNode.map((childScreen) => {
+                return <StackScreen {...childScreen}
+                                    listeners={({navigation, route}: any) => {
+                                        return {
+                                            focus: function () {
+                                                if (childScreen.authRequired && !authResult.accessToken) {
+                                                    navigation.navigate('Auth', {reference: JSON.stringify(route)})
+                                                }
+                                                return false
+                                            },
+                                        }
+                                    }}
+                                    options={{
+                                        ...childScreen.options,
+                                        title: t(`screens.${childScreen.name}.title`)
+                                    }} key={childScreen.key}>
+                    {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
+                        ?
+                        (navProps: any) => {
+                            return <RecursiveNavigator {...navProps} node={childScreen}/>
+                        }
+                        : null
+                    }
+                </StackScreen>
+            })}
         </Navigator>
         : null;
 }

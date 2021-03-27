@@ -2,6 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import {authLaborContext} from "../providers/auth-labor";
 import {checkNomicsAPIProtocol, getApiInstanceConfig} from "./index";
 import {NomicsAPIProtocolResponseData} from "../types";
+import bunnyAPI from "./bunny-api";
 
 export const defaultNomicsAPIResponseData = {
     "httpExtra": {
@@ -30,7 +31,7 @@ const nomicsAPI = axios.create(getApiInstanceConfig('nomics'));
 
 nomicsAPI.interceptors.request.use(
     async (config) => {
-        const accessToken = await authLaborContext.authFunctions.getAccessToken();
+        const {accessToken} = await authLaborContext.authFunctions.getPersistenceAuthInfo();
         // "Accept": "application/json",
         // "Content-Type": "application/x-www-form-urlencoded"
         config.headers['Content-Type'] = 'application/json'
@@ -59,19 +60,25 @@ nomicsAPI.interceptors.response.use(
             const {status, data} = response;
             switch (status) {
                 case 401:
-                    // const {businessLogic} = data
-                    // const {errorCode} = businessLogic
-                    // if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005'].includes(errorCode)) {
-                    //     const {authFunctions} = authLaborContext;
-                    //     const {refreshAuth, signOut} = authFunctions;
-                    //     const {success} = await refreshAuth()
-                    //     if (!success) {
-                    //         await signOut()
-                    //     }
-                    //     const originalRequest = config;
-                    //     originalRequest._retry = true;
-                    //     return nomicsAPI(originalRequest);
-                    // }
+                    const {businessLogic} = data
+                    const {errorCode} = businessLogic
+                    if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005','BL_BUNNY_012'].includes(errorCode)) {
+                        const {authFunctions} = authLaborContext;
+                        const {refreshAuth, signOut} = authFunctions;
+                        try{
+                            const {success} = await refreshAuth()
+                            if (!success) {
+                                await signOut('API')
+                            }else{
+                                const originalRequest = config;
+                                originalRequest._retry = true;
+                                return bunnyAPI(originalRequest);
+                            }
+                        }catch (e) {
+                            await signOut('API')
+                            throw e
+                        }
+                    }
                     break;
                 default:
                     break;

@@ -14,7 +14,7 @@ import {RequestProvider} from "./providers/request-labor";
 import {loadAsync} from "expo-font";
 import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
 import {SizeLaborProvider} from "./providers/size-labor";
-import NavigatorTree from "./navigation/NavigatorTree";
+import NavigatorTree from "./navigation/NavigatorTree/Navigator"
 import {AuthLaborProvider} from "./providers/auth-labor";
 import {I18nLaborProvider} from "./providers/i18n-labor";
 import RequestLoading from "./components/RequestLoading";
