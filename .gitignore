@@ -14,7 +14,6 @@ web-build/
 
 .idea/
 .vscode/
-yarn.lock
 note.txt
 backup/
 __tests__/
