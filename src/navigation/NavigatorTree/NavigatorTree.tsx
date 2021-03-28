@@ -1,62 +1,72 @@
-import * as React from "react";
-import * as Stacks from "../stacks";
+import {
+    RootStack,
+    DemoModalStack,
+    DemoTabStack,
+    DemoDrawerStack,
+    DemoCryptoCurrencyStack,
+    DemoNestedLv1Stack,
+    DemoNestedLv2Stack,
+    DemoTabRNComponentsStack
+} from "../stacks";
 import HomeScreen from "../../screens/Home";
+import * as React from "react";
 import {AuthScreen} from "../../screens/Auth";
 import ProfileScreen from "../../screens/Profile";
 import DemoFCReduxHookScreen from "../../screens/DemoFCReduxHook";
 import DemoCollectionScreen from "../../screens/DemoCollection";
 import DemoRouteScreen from "../../screens/DemoRoute";
 import DemoThirdPartScreen from "../../screens/DemoThirdPart";
+import DemoThunkCCScreen from "../../screens/DemoThunkCC/DemoThunkCC";
+import DemoSagaScreen from "../../screens/DemoSaga";
 import DemoMapScreen from "../../screens/DemoMap/DemoMap";
-import DemoThunkCCScreen from "../../screens/DemoThunkCC";
-import TabHomeScreen from "../../screens/DemoTab/Home";
-import TabSettingsScreen from "../../screens/DemoTab/Settings";
-import RNHome from "../../screens/DemoRNComponents/RNHome";
-import RNSectionListScreen from "../../screens/DemoRNComponents/RNSectionList";
-import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
-import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardAvoiding";
-import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea";
-import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
+import DemoChatScreen from "../../screens/DemoChat";
 import DemoShareScreen from "../../screens/DemoShare";
 import {Platform, TouchableOpacity, View} from "react-native";
-import CryptoCurrencyHomeScreen from "../../screens/DemoCryptoCurrency/Home";
-import CryptoCurrencyAlertScreen from "../../screens/DemoCryptoCurrency/Alert";
-import SettingsScreen from "../../screens/Settings";
-import DemoThemeScreen from "../../screens/DemoTheme";
-import BunnyConstants, {EThemes} from "../../constants/constants";
-import SettingsItem from "../../screens/Settings/Item/Item";
-import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
-import {useTranslation} from "react-i18next";
-import DrawerHomeScreen from "../../screens/DemoDrawer/Home/Home";
-import DrawerSettingsScreen from "../../screens/DemoDrawer/Settings/Settings";
-import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
-import {BottomTabBarOptions, BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
-import {StackNavigationOptions} from "@react-navigation/stack";
-import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef, PathConfigMap} from "@react-navigation/native";
-import {JSONSerializable, LinkingConfig, LinkingConfigTraversable, NavigatorTreeNode, RecursiveNavigatorProps, ThemeName} from "../../types";
-import {IcoMoon} from "../../components/UI";
-import {getIconNameByRoute, navigatorPropsExtract} from "../../helpers";
-import DemoNotificationScreen from "../../screens/DemoNotification";
+import DemoNotificationScreen from "../../screens/DemoNotification/DemoNotification";
+import {NotSupport} from "../../components/NotSupport";
+import TabHomeScreen from "../../screens/DemoTab/Home";
+import TabSettingsScreen from "../../screens/DemoTab/Settings";
+import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef, RouteProp} from "@react-navigation/native";
+import * as Linking from "expo-linking";
+import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
+import DrawerHomeScreen from "../../screens/DemoDrawer/Home";
+import DrawerSettingsScreen from "../../screens/DemoDrawer/Settings";
 import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
 import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
 import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Settings";
-import ModalHomeScreen from "../../screens/DemoModal/Home";
-import {useThemeLabor} from "../../providers/theme-labor";
-import DemoChatScreen from "../../screens/DemoChat";
-import {useReduxDevToolsExtension} from "@react-navigation/devtools";
-import * as Linking from "expo-linking";
-import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
+import RNHome from "../../screens/DemoRNComponents/RNHome";
+import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
+import RNSectionListScreen from "../../screens/DemoRNComponents/RNSectionList/SectionList";
+import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
+import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardAvoiding";
+import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea/SafeArea";
+import CryptoCurrencyHomeScreen from "../../screens/DemoCryptoCurrency/Home";
+import CryptoCurrencyAlertScreen from "../../screens/DemoCryptoCurrency/Alert/Alert";
+import SettingsScreen from "../../screens/Settings/Settings";
+import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
+import DemoThemeScreen from "../../screens/DemoTheme";
+import {useTranslation} from "react-i18next";
+import {StackNavigationOptions} from "@react-navigation/stack";
+import {IcoMoon} from "../../components/UI";
 import {useSizeLabor} from "../../providers/size-labor";
 import {createStyles} from "./styles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useAuthLabor} from "../../providers/auth-labor";
-import {uuidV4} from "../../utils";
-import DemoSagaScreen from "../../screens/DemoSaga";
-import {NotSupport} from "../../components/NotSupport";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useThemeLabor} from "../../providers/theme-labor";
+import SettingsItem from "../../screens/Settings/Item/Item";
+import {ThemeName} from "../../types";
+import {EThemes} from "../../constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import BunnyConstants from "../../constants/constants";
+import {BottomTabBarOptions, BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
+import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
+import {blError, blSuccess, getIconNameByRoute} from "../../helpers";
+import {useAuthLabor} from "../../providers/auth-labor";
+import {useEffect} from "react";
+import {collectBLResult} from "../../store/actions";
+import {useDispatch} from "react-redux";
+import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 
 export const basePath = Linking.makeUrl('/');
-
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
     theme?: Theme | undefined;
     linking?: LinkingOptions | undefined;
@@ -68,7 +78,8 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 // Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, responsive} = useSizeLabor();
-    const {wp} = responsive.iphoneX;
+    const dispatch = useDispatch();
+    const {wp, hp} = responsive.iphoneX;
     const {t} = useTranslation();
     const styles = createStyles();
     const insets = useSafeAreaInsets();
@@ -96,26 +107,33 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             fontSize: ms.fs.m
         },
         headerLeftContainerStyle: {},
+        headerBackTitleStyle: {
+            fontSize: ms.fs.l
+        },
         headerBackImage: ({tintColor}) => <IcoMoon
             name="chevron-left1"
             style={{
                 fontSize: ms.fs.xxl,
-                color: tintColor
+                color: tintColor,
             }}/>,
         headerStyle: {
             height: Platform.select({
                 web: wp(50),
+                ios: wp(42) + insets.top
             })
         }
     }
 
-    const optionsDraw = ({navigation}: any) => {
+    const drawerScreenOptions: DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"] = ({navigation}) => {
         return {
             headerStyle: {
                 height: wp(50)
             },
+            headerTitleStyle: {
+                fontSize: ms.fs.m
+            },
             headerShown: true,
-            headerLeft: ({tintColor}: any) => {
+            headerLeft: ({tintColor}) => {
                 const {colors} = useThemeLabor().theme
                 return (<TouchableOpacity onPress={() => {
                     navigation.dispatch(DrawerActions.toggleDrawer())
@@ -125,7 +143,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         style={{
                             paddingLeft: ms.sp.l,
                             fontSize: ms.fs.l,
-                            color: colors.text
+                            color: tintColor
                         }}/>
                 </TouchableOpacity>)
             },
@@ -142,7 +160,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         },
         style: {
             height: wp(46) + insets.bottom
-        }
+        },
+        labelPosition: "below-icon"
     }
 
     const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => {
@@ -154,466 +173,270 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         }
     }
 
-    const node: NavigatorTreeNode = {
-        key: uuidV4(),
-        stack: Stacks.RootStack,
-        name: 'RootStack',
-        options: optionsHeaderAndAnimation,
-        headerMode: 'float',
-        screenOptions: optionsHeaderAndAnimation,
-        navigatorType: 'stack',
-        authRequired: false,
-        childrenNode: [
-            {
-                key: uuidV4(),
-                component: HomeScreen,
-                name: 'Home',
-                path: 'home',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: AuthScreen,
-                name: 'Auth',
-                path: 'auth',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: ProfileScreen,
-                name: 'Profile',
-                path: 'profile/:id',
-                initialParams: {'id': '1'},
-                parse: {
-                    id: (id: string) => `${id}`,
-                },
-                navigatorType: 'stack',
-                authRequired: true
-            },
-            {
-                key: uuidV4(),
-                component: DemoFCReduxHookScreen,
-                name: 'DemoFCReduxHook',
-                path: 'demo-fc-redux-hook',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoCollectionScreen,
-                name: 'DemoCollection',
-                path: 'demo-collection',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoRouteScreen,
-                name: 'DemoRoute',
-                path: 'demo-route',
-                parse: {
-                    id: (id: string) => {
-                        // when passing a param through URL the param value will be parsed
-                        return id;
-                    }
-                },
-                stringify: {
-                    id: (id: string) => {
-                        // when passing a param through URL the param key will be stringified
-                        return id
-                    }
-                },
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoThirdPartScreen,
-                name: 'DemoThirdPart',
-                path: 'demo-third-part',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoThunkCCScreen,
-                name: 'DemoThunkCC',
-                path: 'demo-thunk-cc',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoSagaScreen,
-                name: 'DemoSaga',
-                path: 'demo-saga',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoMapScreen,
-                name: 'DemoMap',
-                path: 'demo-map',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoChatScreen,
-                name: 'DemoChat',
-                path: 'demo-chat',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: DemoShareScreen,
-                name: 'DemoShare',
-                path: 'demo-share',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                component: Platform.OS !== 'web'
-                    ? DemoNotificationScreen
-                    : () => <NotSupport text='Not supported on web'/>,
-                name: 'DemoNotification',
-                path: 'demo-notification',
-                navigatorType: 'stack',
-                authRequired: false
-            },
-            {
-                key: uuidV4(),
-                name: 'DemoModal',
-                stack: Stacks.DemoModalStack,
-                path: 'demo-modal',
-                navigatorType: 'stack',
-                mode: 'modal',
-                headerMode: 'none',
-                authRequired: false,
-                childrenNode: [
-                    {
-                        key: uuidV4(),
-                        component: ModalHomeScreen,
-                        name: 'ModalHome',
-                        path: 'home',
-                        navigatorType: 'stack',
-                        options: {
-                            animationEnabled: true,
-                            cardStyle: {backgroundColor: 'transparent'},
-                            cardOverlayEnabled: true,
-                            cardStyleInterpolator: ({current: {progress}}: any) => {
-                                return {
-                                    cardStyle: {
-                                        opacity: progress.interpolate({
-                                            inputRange: [0, 0.5, 0.9, 1],
-                                            outputRange: [0, 0.25, 0.7, 1],
-                                        }),
-                                    },
-                                    overlayStyle: {
-                                        opacity: progress.interpolate({
-                                            inputRange: [0, 1],
-                                            outputRange: [0, 0.5],
-                                            extrapolate: 'clamp',
-                                        }),
-                                    },
-                                };
-                            },
-                        },
-                        authRequired: false
-                    }
-                ]
-            },
-            {
-                key: uuidV4(),
-                name: 'DemoTab',
-                stack: Stacks.DemoTabStack,
-                path: 'demo-tab',
-                options: optionsHeaderAndAnimation,
-                tabBarOptions: tabBarOptions,
-                screenOptions: screenOptionsTabBarIcon,
-                navigatorType: 'tab',
-                authRequired: false,
-                childrenNode: [
-                    {
-                        key: uuidV4(),
-                        component: TabHomeScreen,
-                        name: 'TabHome',
-                        path: 'home',
-                        navigatorType: 'tab',
-                        authRequired: false
-                    },
-                    {
-                        key: uuidV4(),
-                        component: TabSettingsScreen,
-                        name: 'TabSettings',
-                        path: 'settings/:item',
-                        initialParams: {'item': 'item-001'},
-                        parse: {
-                            item: (item: string) => `${item}`,
-                        },
-                        navigatorType: 'tab',
-                        authRequired: false
-                    }
-                ]
-            },
-            {
-                key: uuidV4(),
-                name: 'DemoDrawer',
-                stack: Stacks.DemoDrawerStack,
-                path: 'demo-drawer',
-                drawerType: 'front',
-                openByDefault: false,
-                options: {
-                    ...optionsHeaderAndAnimation,
-                    headerShown: true
-                },
-                screenOptions: optionsDraw,
-                navigatorType: 'drawer',
-                authRequired: false,
-                childrenNode: [
-                    {
-                        key: uuidV4(),
-                        component: DrawerHomeScreen,
-                        name: 'DrawerHome',
-                        path: 'home',
-                        navigatorType: 'drawer',
-                        authRequired: false
-                    },
-                    {
-                        key: uuidV4(),
-                        component: DrawerSettingsScreen,
-                        name: 'DrawerSettings',
-                        path: 'settings/:item',
-                        initialParams: {'item': 'item-001'},
-                        parse: {
-                            item: (item: string) => `${item}`,
-                        },
-                        navigatorType: 'drawer',
-                        authRequired: false
-                    }
-                ]
-            },
-            {
-                key: uuidV4(),
-                stack: Stacks.DemoNestedLv1Stack,
-                name: 'DemoNestedLv0',
-                path: 'demo-nested',
-                options: {
-                    ...optionsHeaderAndAnimation,
-                    headerShown: true
-                },
-                screenOptions: optionsHeaderAndAnimation,
-                navigatorType: 'stack',
-                authRequired: false,
-                childrenNode: [
-                    {
-                        key: uuidV4(),
-                        component: NestedLv1HomeScreen,
-                        name: 'NestedLv1Home',
-                        path: 'home',
-                        navigatorType: 'stack',
-                        authRequired: false
-                    },
-                    {
-                        key: uuidV4(),
-                        stack: Stacks.DemoNestedLv2Stack,
-                        name: 'NestedLv1Settings',
-                        path: 'settings/:item',
-                        options: {headerShown: true},
-                        screenOptions: optionsHeaderAndAnimation,
-                        navigatorType: 'stack',
-                        authRequired: false,
-                        // initialRouteName:'NestedLv2HomeScreen',
-                        childrenNode: [
-                            {
-                                key: uuidV4(),
-                                component: NestedLv2HomeScreen,
-                                name: 'NestedLv2Home',
-                                path: 'lv2-home',
-                                navigatorType: 'stack',
-                                authRequired: false,
-                            },
-                            {
-                                key: uuidV4(),
-                                component: NestedLv2SettingsScreen,
-                                name: 'NestedLv2Settings',
-                                path: 'lv2-settings/:itemlv2',
-                                parse: {
-                                    itemlv2: (itemlv2: string) => `${itemlv2}`,
-                                },
-                                navigatorType: 'stack',
-                                authRequired: false,
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                key: uuidV4(),
-                name: 'DemoRNComponents',
-                path: 'demo-tab-rn-components',
-                stack: Stacks.DemoTabRNComponentsStack,
-                screenOptions: screenOptionsTabBarIcon,
-                tabBarOptions: tabBarOptions,
-                navigatorType: 'tab',
-                authRequired: false,
-                childrenNode: [
-                    {
-                        key: uuidV4(),
-                        component: RNHome,
-                        name: 'RNHome',
-                        path: 'home',
-                        navigatorType: 'tab',
-                        authRequired: false,
-
-                    },
-                    {
-                        key: uuidV4(),
-                        component: RNFlatListScreen,
-                        name: 'RNFlatList',
-                        path: 'flat-list',
-                        navigatorType: 'tab',
-                        authRequired: false,
-
-                    },
-                    {
-                        key: uuidV4(),
-                        component: RNSectionListScreen,
-                        name: 'RNSectionList',
-                        path: 'section-list',
-                        navigatorType: 'tab',
-                        authRequired: false,
-                    },
-                    {
-                        key: uuidV4(),
-                        component: RNVirtualizedListScreen,
-                        name: 'RNVirtualizedList',
-                        path: 'virtualized-list',
-                        navigatorType: 'tab',
-                        authRequired: false,
-                    },
-                    {
-                        key: uuidV4(),
-                        component: RNKeyboardAvoidingScreen,
-                        name: 'RNNoKeyboard',
-                        path: 'keyboard-avoiding',
-                        navigatorType: 'tab',
-                        authRequired: false,
-                    },
-                    {
-                        key: uuidV4(),
-                        component: RNSafeAreaScreen,
-                        name: 'RNSafeArea',
-                        path: 'safe-area',
-                        navigatorType: 'tab',
-                        authRequired: false,
-                    }
-                ]
-            },
-            {
-                key: uuidV4(),
-                name: 'DemoCryptoCurrency',
-                stack: Stacks.DemoCryptoCurrencyStack,
-                path: 'demo-crypto-currency',
-                screenOptions: screenOptionsTabBarIcon,
-                tabBarOptions: tabBarOptions,
-                navigatorType: 'tab',
-                authRequired: false,
-                childrenNode: [
-                    {
-                        key: uuidV4(),
-                        component: CryptoCurrencyHomeScreen,
-                        name: 'CryptoCurrencyHome',
-                        path: 'home',
-                        navigatorType: 'top',
-                        authRequired: false,
-                    },
-                    {
-                        key: uuidV4(),
-                        component: Platform.OS !== 'web'
-                            ? CryptoCurrencyAlertScreen
-                            : () => <NotSupport text="Not supported on web"/>,
-                        name: 'CryptoCurrencyAlert',
-                        path: 'alert/:isPush',
-                        initialParams: {isPush: true},
-                        navigatorType: 'tab',
-                        authRequired: false,
-                    }
-                ]
-            },
-            {
-                key: uuidV4(),
-                component: SettingsScreen,
-                name: 'Settings',
-                path: 'settings',
-                options: optionsHeaderAndAnimation,
-                navigatorType: 'stack',
-                authRequired: false,
-            },
-            {
-                key: uuidV4(),
-                component: DemoSuspenseScreen,
-                name: 'DemoSuspense',
-                path: 'demo-suspense',
-                options: optionsHeaderAndAnimation,
-                navigatorType: 'stack',
-                authRequired: false,
-
-            },
-            {
-                key: uuidV4(),
-                component: DemoThemeScreen,
-                name: 'DemoTheme',
-                path: 'demo-theme',
-                options: optionsHeaderAndAnimation,
-                navigatorType: 'stack',
-                authRequired: false,
-
-            },
-        ]
-    }
-
-    const recursiveConfig = (childrenNode: NavigatorTreeNode[]): LinkingConfig => {
-        let obj: LinkingConfigTraversable = {};
-        childrenNode.forEach(child => {
-            const name = child.name;
-            if (name) {
-                obj[name] = {
-                    path: child.path,
-                    parse: child.parse,
-                    stringify: child.stringify,
-                    exact: child.exact,
-                    initialRouteName: child.initialParams,
-                    screens: (child.childrenNode && child.childrenNode.length)
-                        ? recursiveConfig(child.childrenNode)
-                        : undefined,
-                }
-            } else {
-                obj = {}
-            }
-        })
-        return obj;
-    };
-
-    const getLinkingConfigScreens = (): PathConfigMap => {
-        const config = recursiveConfig([node]) as JSONSerializable;
-        return (config[Object.keys(config)[0]] as unknown as LinkingConfig).screens as unknown as PathConfigMap;
-    }
-
     const linking = {
         prefixes: [basePath],
-        config: {initialRouteName: 'Home', screens: getLinkingConfigScreens()},
+        config: {
+            initialRouteName: 'Home',
+            screens: {
+                Home: {
+                    name: 'Home',
+                    path: 'home',
+                },
+                Auth: {
+                    name: 'Auth',
+                    path: 'auth',
+                },
+                Profile: {
+                    name: 'Profile',
+                    path: 'profile/:id',
+                    initialParams: {'id': '1'},
+                    parse: {
+                        id: (id: string) => `${id}`,
+                    },
+                },
+                DemoFCReduxHook: {
+                    name: 'DemoFCReduxHook',
+                    path: 'demo-fc-redux-hook',
+                },
+                DemoCollection: {
+                    name: 'DemoCollection',
+                    path: 'demo-collection',
+                },
+                DemoRoute: {
+                    name: 'DemoRoute',
+                    path: 'demo-route',
+                    parse: {
+                        id: (id: string) => {
+                            // when passing a param through URL the param value will be parsed
+                            return id;
+                        }
+                    },
+                    stringify: {
+                        id: (id: string) => {
+                            // when passing a param through URL the param key will be stringified
+                            return id
+                        }
+                    },
+                },
+                DemoThirdPart: {
+                    name: 'DemoThirdPart',
+                    path: 'demo-third-part',
+                },
+                DemoThunkCC: {
+                    name: 'DemoThunkCC',
+                    path: 'demo-thunk-cc',
+                },
+                DemoSaga: {
+                    name: 'DemoSaga',
+                    path: 'demo-saga',
+                },
+                DemoMap: {
+                    name: 'DemoMap',
+                    path: 'demo-map',
+                },
+                DemoChat: {
+                    name: 'DemoChat',
+                    path: 'demo-chat',
+                },
+                DemoShare: {
+                    name: 'DemoShare',
+                    path: 'demo-share',
+                },
+                DemoNotification: {
+                    name: 'DemoNotification',
+                    path: 'demo-notification',
+                },
+                // {
+                //     path: 'demo-modal',
+                //     screens: [
+                //         {
+                //             name: 'ModalHome',
+                //             path: 'home',
+                //         }
+                //     ]
+                // },
+                DemoTab: {
+                    name: 'DemoTab',
+                    path: 'demo-tab',
+                    screens: {
+                        TabHome: {
+                            name: 'TabHome',
+                            path: 'home',
+                        },
+                        TabSettings: {
+                            name: 'TabSettings',
+                            path: 'settings/:item',
+                            parse: {
+                                item: (item: string) => `${item}`,
+                            },
+                        }
+                    }
+                },
+                DemoDrawer: {
+                    name: 'DemoDrawer',
+                    path: 'demo-drawer',
+                    screens: {
+                        DrawerHome: {
+                            name: 'DrawerHome',
+                            path: 'home',
+                        },
+                        DrawerSettings: {
+                            name: 'DrawerSettings',
+                            path: 'settings/:item',
+                            parse: {
+                                item: (item: string) => `${item}`,
+                            },
+                        }
+                    }
+                },
+                DemoNestedLv0: {
+                    name: 'DemoNestedLv0',
+                    path: 'demo-nested',
+                    screens: {
+                        NestedLv1Home: {
+                            name: 'NestedLv1Home',
+                            path: 'home',
+                        },
+                        NestedLv1Settings: {
+                            name: 'NestedLv1Settings',
+                            path: 'settings/:item',
+                            screens: {
+                                NestedLv2Home: {
+                                    name: 'NestedLv2Home',
+                                    path: 'lv2-home',
+                                },
+                                NestedLv2Settings: {
+                                    name: 'NestedLv2Settings',
+                                    path: 'lv2-settings/:itemlv2',
+                                    parse: {
+                                        itemlv2: (itemlv2: string) => `${itemlv2}`,
+                                    },
+                                }
+                            }
+                        }
+                    }
+                },
+                DemoRNComponents: {
+                    name: 'DemoRNComponents',
+                    path: 'demo-tab-rn-components',
+                    screens: {
+                        RNHome: {
+                            name: 'RNHome',
+                            path: 'home',
+                        },
+                        RNFlatList: {
+                            name: 'RNFlatList',
+                            path: 'flat-list',
+                        },
+                        RNSectionList: {
+                            name: 'RNSectionList',
+                            path: 'section-list',
+                        },
+                        RNVirtualizedList: {
+                            name: 'RNVirtualizedList',
+                            path: 'virtualized-list',
+                        },
+                        RNNoKeyboard: {
+                            name: 'RNNoKeyboard',
+                            path: 'keyboard-avoiding',
+                        },
+                        RNSafeArea: {
+                            name: 'RNSafeArea',
+                            path: 'safe-area',
+                        }
+                    }
+                },
+                DemoCryptoCurrency: {
+                    name: 'DemoCryptoCurrency',
+                    path: 'demo-crypto-currency',
+                    screens: {
+                        CryptoCurrencyHome: {
+                            name: 'CryptoCurrencyHome',
+                            path: 'home',
+                        },
+                        CryptoCurrencyAlert: {
+                            name: 'CryptoCurrencyAlert',
+                            path: 'alert/:isPush',
+                        }
+                    }
+                },
+                Settings: {
+                    name: 'Settings',
+                    path: 'settings',
+                },
+                DemoSuspense: {
+                    name: 'DemoSuspense',
+                    path: 'demo-suspense',
+
+                },
+                DemoTheme: {
+                    name: 'DemoTheme',
+                    path: 'demo-theme',
+                },
+            }
+        },
     };
+    const {authResult, authFunctions} = useAuthLabor()
+    const needAuth = {
+        listeners: () => {
+            return {
+                focus: function () {
+                    authFunctions.authTrigger('SCREEN')
+                },
+            }
+        }
+    }
+
+
+    const optionsTitle = {
+        options: function ({route}: any) {
+            return {
+                title: t(`screens.${route.name}.title`)
+            }
+        }
+    }
+
+
+    const navigateToAuth = () => {
+        if (authResult.isSignedIn) {
+            return
+        }
+        if (navigationRef.current) {
+            const curRoute = navigationRef.current.getCurrentRoute()
+            if (!curRoute) {
+                navigationRef.current.navigate('Auth')
+                return
+            }
+            if (curRoute.name !== 'Auth') {
+                navigationRef.current.navigate('Auth', {reference: JSON.stringify(curRoute)})
+            } else {
+                return
+            }
+        }
+    }
+
+    useEffect(() => {
+        switch (authResult.triggerType) {
+            case "API":
+                dispatch(collectBLResult(blError(t('sys.apiNeedSignIn'))))
+                break;
+            case "SCREEN":
+                navigateToAuth()
+                break;
+            case "MANUAL":
+                dispatch(collectBLResult(blSuccess(undefined, t('sys.signOutSuccess'))))
+                navigateToAuth()
+                break;
+            case "AUTO":
+                dispatch(collectBLResult(blSuccess(undefined, t('sys.signOutSuccess'))))
+                break;
+            case "OTHERS":
+                navigateToAuth()
+                break;
+        }
+    }, [authResult.triggerUUID])
 
     const navigationRef = React.useRef<NavigationContainerRef>(null);
-
-    useReduxDevToolsExtension(navigationRef);
-
     return <NavigationContainer
         documentTitle={{
             formatter: (options, route) => `${options?.title ?? route?.name} - ${t('titleFormat')}`,
@@ -621,46 +444,91 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         {...props}
         linking={linking}
         ref={navigationRef}>
-        <RecursiveNavigator node={node}/>
-    </NavigationContainer>
-};
-
-const RecursiveNavigator: React.FC<RecursiveNavigatorProps> = ({node}) => {
-    const {t} = useTranslation();
-    const {stack} = node;
-    const Navigator = stack?.Navigator;
-    const props = navigatorPropsExtract(node);
-    const StackScreen: React.ElementType = (stack && stack.Screen) ? stack?.Screen : View;
-    const {authResult} = useAuthLabor()
-    return Navigator
-        ? <Navigator {...props}>
-            {node.childrenNode && node.childrenNode.map((childScreen) => {
-                return <StackScreen {...childScreen}
-                                    listeners={({navigation, route}: any) => {
-                                        return {
-                                            focus: function () {
-                                                if (childScreen.authRequired && !authResult.accessToken) {
-                                                    navigation.navigate('Auth', {reference: JSON.stringify(route)})
-                                                }
-                                                return false
-                                            },
-                                        }
-                                    }}
-                                    options={{
-                                        ...childScreen.options,
-                                        title: t(`screens.${childScreen.name}.title`)
-                                    }} key={childScreen.key}>
-                    {(childScreen.childrenNode && childScreen.childrenNode.length > 0)
-                        ?
-                        (navProps: any) => {
-                            return <RecursiveNavigator {...navProps} node={childScreen}/>
-                        }
-                        : null
+        <RootStack.Navigator headerMode="float" screenOptions={optionsHeaderAndAnimation}>
+            <RootStack.Screen name="Home" component={HomeScreen} {...optionsTitle}/>
+            <RootStack.Screen name="Auth" component={AuthScreen} {...optionsTitle} options={{headerLeft: () => null}}/>
+            <RootStack.Screen name="Profile" component={ProfileScreen} {...optionsTitle} {...needAuth}/>
+            <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoRoute" component={DemoRouteScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoSaga" component={DemoSagaScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoMap" component={DemoMapScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoChat" component={DemoChatScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoShare" component={DemoShareScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoNotification" component={
+                Platform.OS !== 'web'
+                    ? DemoNotificationScreen
+                    : () => <NotSupport text='Not supported on web'/>} {...optionsTitle}/>
+            <RootStack.Screen name="DemoTab">
+                {
+                    (props) => {
+                        return <DemoTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
+                            <DemoTabStack.Screen name="TabHome" component={TabHomeScreen} {...optionsTitle}/>
+                            <DemoTabStack.Screen name="TabSettings" component={TabSettingsScreen}
+                                                 initialParams={{'item': 'item-001'}} {...optionsTitle}/>
+                        </DemoTabStack.Navigator>
                     }
-                </StackScreen>
-            })}
-        </Navigator>
-        : null;
+                }
+            </RootStack.Screen>
+            <RootStack.Screen name="DemoDrawer">
+                {(props) => {
+                    //todo not sure if the props is passed correctly
+                    return <DemoDrawerStack.Navigator {...props} drawerContentOptions={{labelStyle: {fontSize: ms.fs.l}}}
+                                                      screenOptions={drawerScreenOptions}>
+                        <DemoDrawerStack.Screen name="DrawerHome" component={DrawerHomeScreen} {...optionsTitle}/>
+                        <DemoDrawerStack.Screen name="DrawerSettings" component={DrawerSettingsScreen}
+                                                initialParams={{'item': 'item-001'}} {...optionsTitle}/>
+                    </DemoDrawerStack.Navigator>
+                }}
+            </RootStack.Screen>
+            <RootStack.Screen name="DemoNestedLv0">
+                {(props) => {
+                    return <DemoNestedLv1Stack.Navigator {...props} screenOptions={optionsHeaderAndAnimation}>
+                        <DemoNestedLv1Stack.Screen name="NestedLv1Home" component={NestedLv1HomeScreen} {...optionsTitle}/>
+                        <DemoNestedLv1Stack.Screen name="NestedLv1Settings" {...optionsTitle}>
+                            {(props) => {
+                                return <DemoNestedLv2Stack.Navigator {...props} screenOptions={optionsHeaderAndAnimation}>
+                                    <DemoNestedLv2Stack.Screen name="NestedLv2Home" component={NestedLv2HomeScreen} {...optionsTitle}/>
+                                    <DemoNestedLv2Stack.Screen name="NestedLv2Settings" component={NestedLv2SettingsScreen} {...optionsTitle}/>
+                                </DemoNestedLv2Stack.Navigator>
+                            }}
+                        </DemoNestedLv1Stack.Screen>
+                    </DemoNestedLv1Stack.Navigator>
+                }}
+            </RootStack.Screen>
+            <RootStack.Screen name="DemoRNComponents">
+                {
+                    (props) => {
+                        return <DemoTabRNComponentsStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
+                            <DemoTabRNComponentsStack.Screen name="RNHome" component={RNHome} {...optionsTitle}/>
+                            <DemoTabRNComponentsStack.Screen name="RNFlatList" component={RNFlatListScreen} {...optionsTitle}/>
+                            <DemoTabRNComponentsStack.Screen name="RNSectionList" component={RNSectionListScreen} {...optionsTitle}/>
+                            <DemoTabRNComponentsStack.Screen name="RNVirtualizedList" component={RNVirtualizedListScreen} {...optionsTitle}/>
+                            <DemoTabRNComponentsStack.Screen name="RNNoKeyboard" component={RNKeyboardAvoidingScreen} {...optionsTitle}/>
+                            <DemoTabRNComponentsStack.Screen name="RNSafeArea" component={RNSafeAreaScreen} {...optionsTitle}/>
+                        </DemoTabRNComponentsStack.Navigator>
+                    }
+                }
+            </RootStack.Screen>
+            <RootStack.Screen name="DemoCryptoCurrency">
+                {
+                    (props) => {
+                        return <DemoCryptoCurrencyStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
+                            <DemoCryptoCurrencyStack.Screen name="CryptoCurrencyHome" component={CryptoCurrencyHomeScreen} {...optionsTitle}/>
+                            <DemoCryptoCurrencyStack.Screen name="CryptoCurrencyAlert" component={Platform.OS !== 'web'
+                                ? CryptoCurrencyAlertScreen
+                                : () => <NotSupport text="Not supported on web"/>} initialParams={{isPush: true}} {...optionsTitle}/>
+                        </DemoCryptoCurrencyStack.Navigator>
+                    }
+                }
+            </RootStack.Screen>
+            <RootStack.Screen name="Settings" component={SettingsScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen} {...optionsTitle}/>
+            <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} {...optionsTitle}/>
+        </RootStack.Navigator>
+    </NavigationContainer>
 }
 
-export default NavigatorTree;
+export default NavigatorTree
