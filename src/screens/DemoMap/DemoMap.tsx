@@ -1,13 +1,13 @@
 import React, {Component, createRef} from "react";
 import {Animated} from "react-native";
-import {Image, Text, View} from "../../components/UI";
+import {Image, Text, TouchableOpacity, View} from "../../components/UI";
 import * as Location from 'expo-location';
 import {ThunkDispatch} from "redux-thunk";
 import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState} from "../../types";
 import {Action} from "redux";
 import {getNearbyFilms, restoreRegion, sysError} from "../../store/actions";
 import {connect} from "react-redux";
-import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
+import MapView, {PROVIDER_DEFAULT, PROVIDER_GOOGLE} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
 import createStyles, {getCardSize} from "./styles";
 import {createContainerStyles} from "../../containers";
@@ -179,15 +179,20 @@ class DemoMapScreen extends Component<DemoMapProps> {
                                      style={styles.scrollView}
                                      contentContainerStyle={styles.endPadding}>
                     {this.props.demoNearbyFilms.length > 0 && this.props.demoNearbyFilms.map((marker, index) => (
-                        <View style={styles.card} key={marker.id}>
-                            <Image source={marker.image} style={styles.cardImage} resizeMode="cover"/>
-                            <View style={styles.textContent}>
-                                <Text numberOfLines={1} style={styles.cardTitle}>{marker.title}</Text>
-                                <Text numberOfLines={1} style={styles.cardDescription}>
-                                    {marker.description}
-                                </Text>
+                        <TouchableOpacity  onPress={()=>{
+                            this.onMarkerPress(marker)
+                        }} key={marker.id}>
+                            <View style={styles.card}>
+                                <Image source={marker.image} style={styles.cardImage} resizeMode="cover"/>
+                                <View style={styles.textContent}>
+                                    <Text numberOfLines={1} style={styles.cardTitle}>{marker.title}</Text>
+                                    <Text numberOfLines={1} style={styles.cardDescription}>
+                                        {marker.description}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
+
                     ))}
                 </Animated.ScrollView>
             </View>

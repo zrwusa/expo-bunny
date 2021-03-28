@@ -1,5 +1,5 @@
 import {Platform, StyleSheet} from "react-native";
-import {SizeLabor, ThemeLabor} from "../../../types/styles";
+import {SizeLabor, ThemeLabor} from "../../../types";
 
 export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, responsive} = sizeLabor;

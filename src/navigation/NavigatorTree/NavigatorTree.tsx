@@ -79,7 +79,8 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, responsive} = useSizeLabor();
     const dispatch = useDispatch();
-    const {wp, hp} = responsive.iphoneX;
+    const {wp} = responsive.iphoneX;
+    const {colors} = useThemeLabor().theme;
     const {t} = useTranslation();
     const styles = createStyles();
     const insets = useSafeAreaInsets();
@@ -140,8 +141,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 fontSize: ms.fs.m
             },
             headerShown: true,
-            headerLeft: ({tintColor}) => {
-                const {colors} = useThemeLabor().theme
+            headerLeft: () => {
                 return (<TouchableOpacity onPress={() => {
                     navigation.dispatch(DrawerActions.toggleDrawer())
                 }}>
@@ -150,7 +150,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         style={{
                             paddingLeft: ms.sp.l,
                             fontSize: ms.fs.l,
-                            color: tintColor
+                            color: colors.text
                         }}/>
                 </TouchableOpacity>)
             },
@@ -468,21 +468,21 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 Platform.OS !== 'web'
                     ? DemoNotificationScreen
                     : () => <NotSupport text='Not supported on web'/>} {...optionsTitle}/>
-            <RootStack.Screen name="DemoTab">
+            <RootStack.Screen name="DemoTab" {...optionsTitle}>
                 {
                     (props) => {
                         return <DemoTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
-                            <DemoTabStack.Screen name="TabHome" component={TabHomeScreen} {...optionsTitle}/>
+                            <DemoTabStack.Screen name="TabHome" component={TabHomeScreen}  {...optionsTitle}/>
                             <DemoTabStack.Screen name="TabSettings" component={TabSettingsScreen}
                                                  initialParams={{'item': 'item-001'}} {...optionsTitle}/>
                         </DemoTabStack.Navigator>
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="DemoDrawer">
+            <RootStack.Screen name="DemoDrawer" {...optionsTitle}>
                 {(props) => {
                     //todo not sure if the props is passed correctly
-                    return <DemoDrawerStack.Navigator {...props} drawerContentOptions={{labelStyle: {fontSize: ms.fs.l}}}
+                    return <DemoDrawerStack.Navigator {...props} drawerContentOptions={{labelStyle: {fontSize: ms.fs.m}}}
                                                       screenOptions={drawerScreenOptions}>
                         <DemoDrawerStack.Screen name="DrawerHome" component={DrawerHomeScreen} {...optionsTitle}/>
                         <DemoDrawerStack.Screen name="DrawerSettings" component={DrawerSettingsScreen}
@@ -490,7 +490,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     </DemoDrawerStack.Navigator>
                 }}
             </RootStack.Screen>
-            <RootStack.Screen name="DemoNestedLv0">
+            <RootStack.Screen name="DemoNestedLv0" {...optionsTitle}>
                 {(props) => {
                     return <DemoNestedLv1Stack.Navigator {...props} screenOptions={optionsHeaderAndAnimation}>
                         <DemoNestedLv1Stack.Screen name="NestedLv1Home" component={NestedLv1HomeScreen} {...optionsTitle}/>
@@ -505,7 +505,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     </DemoNestedLv1Stack.Navigator>
                 }}
             </RootStack.Screen>
-            <RootStack.Screen name="DemoRNComponents">
+            <RootStack.Screen name="DemoRNComponents" {...optionsTitle}>
                 {
                     (props) => {
                         return <DemoTabRNComponentsStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
@@ -519,7 +519,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="DemoCryptoCurrency">
+            <RootStack.Screen name="DemoCryptoCurrency" {...optionsTitle}>
                 {
                     (props) => {
                         return <DemoCryptoCurrencyStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>

@@ -2,7 +2,7 @@ import {Platform} from "react-native";
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {Button, TextInput, View} from "../../components/UI";
+import {ButtonTO, TextInput, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFuciontKey} from "../../providers";
 import {createContainerStyles} from "../../containers";
@@ -56,7 +56,7 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
             {
                 type === 'sign-in'
                     ? <>
-                        <Button onPress={async () => {
+                        <ButtonTO onPress={async () => {
                             try {
                                 await authFunctions.signIn({email: username, password: password})
                                 navToReference()
@@ -67,43 +67,43 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
-                        }} title={st(`signIn`)}/>
-                        <Button onPress={async () => {
+                        }} >{st(`signIn`)}</ButtonTO>
+                        <ButtonTO onPress={async () => {
                             try {
                                 await authFunctions.signInDummy()
                                 navToReference()
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
-                        }} title={st(`signInDummy`)}/>
-                        <Button onPress={() => {
+                        }} >{st(`signInDummy`)}</ButtonTO>
+                        <ButtonTO onPress={() => {
                             setType('signUp')
-                        }} title={st(`goToSignUp`)}/>
+                        }}>{st(`goToSignUp`)}</ButtonTO>
                     </>
                     : <>
-                        <Button onPress={async () => {
+                        <ButtonTO onPress={async () => {
                             try {
                                 await authFunctions.signUp({email: username, password: password})
                                 navToReference()
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
-                        }} title={st(`signUp`)}/>
-                        <Button onPress={() => {
+                        }} >{st(`signUp`)}</ButtonTO>
+                        <ButtonTO onPress={() => {
                             setType('sign-in')
-                        }} title={st(`goToSignIn`)}/>
+                        }} >{st(`goToSignIn`)}</ButtonTO>
                     </>
             }
             {
                 Platform.OS !== 'web'
-                    ? <Button onPress={async () => {
+                    ? <ButtonTO onPress={async () => {
                         try {
                             await authFunctions.signInGoogle()
                             navToReference()
                         } catch (e) {
                             dispatch(sysError(e))
                         }
-                    }} title={st(`signInGoogle`)}/>
+                    }} >{st(`signInGoogle`)}</ButtonTO>
                     : <></>
             }
         </View>
