@@ -104,7 +104,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const optionsHeaderAndAnimation: StackNavigationOptions = {
         animationEnabled: true,
         headerRight: headerRight,
-        headerTitleContainerStyle:{
+        headerTitleContainerStyle: {
             // left:Platform.select({
             //     web:wp(40),
             //     android:wp(13)
@@ -113,8 +113,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         headerTitleStyle: {
             fontSize: ms.fs.m
         },
-        headerLeftContainerStyle: {
-        },
+        headerLeftContainerStyle: {},
         headerBackTitleStyle: {
             fontSize: ms.fs.l,
         },
@@ -127,7 +126,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         headerStyle: {
             height: Platform.select({
                 web: wp(50),
-                ios: wp(42) + insets.top
             })
         }
     }
@@ -451,7 +449,14 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         {...props}
         linking={linking}
         ref={navigationRef}>
-        <RootStack.Navigator headerMode="float" screenOptions={optionsHeaderAndAnimation}>
+        <RootStack.Navigator headerMode="float" screenOptions={{
+            ...optionsHeaderAndAnimation, headerStyle: {
+                height: Platform.select({
+                    web: wp(50),
+                    ios: wp(42) + insets.top
+                })
+            }
+        }}>
             <RootStack.Screen name="Home" component={HomeScreen} {...optionsTitle}/>
             <RootStack.Screen name="Auth" component={AuthScreen} {...optionsTitle} options={{headerLeft: () => null}}/>
             <RootStack.Screen name="Profile" component={ProfileScreen} {...optionsTitle} {...needAuth}/>
