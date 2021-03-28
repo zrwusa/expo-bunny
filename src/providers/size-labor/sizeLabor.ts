@@ -6,10 +6,11 @@ const getSizeLabor = () => {
     let responsive: JSONSerializable = {}
     Object.entries(bunnyConfig.UE.dimensions).forEach((dimension) => {
         responsive[dimension[0]] = {
-            wp: (width: number) => {
-                return wp2dp((width / dimension[1]['width']));
-            }, hp: (height: number) => {
-                return hp2dp((height / dimension[1]['height']));
+            wp: (width: number,shouldRound?:boolean) => {
+                return wp2dp((width / dimension[1]['width']),shouldRound);
+            },
+            hp: (height: number,shouldRound?:boolean) => {
+                return hp2dp((height / dimension[1]['height']),shouldRound);
             }
         } as unknown as Dimension;
     })

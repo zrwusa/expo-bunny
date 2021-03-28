@@ -103,12 +103,19 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const optionsHeaderAndAnimation: StackNavigationOptions = {
         animationEnabled: true,
         headerRight: headerRight,
+        headerTitleContainerStyle:{
+            // left:Platform.select({
+            //     web:wp(40),
+            //     android:wp(13)
+            // })
+        },
         headerTitleStyle: {
             fontSize: ms.fs.m
         },
-        headerLeftContainerStyle: {},
+        headerLeftContainerStyle: {
+        },
         headerBackTitleStyle: {
-            fontSize: ms.fs.l
+            fontSize: ms.fs.l,
         },
         headerBackImage: ({tintColor}) => <IcoMoon
             name="chevron-left1"

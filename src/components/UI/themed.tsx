@@ -212,7 +212,7 @@ export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
     const {responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
     const mergedStyle = [{
-        transform: [{scaleX: wp(1)}, {scaleY: wp(1)}],
+        transform: [{scaleX: wp(0.8,false)}, {scaleY: wp(0.8,false)}],
     }, style]
     return (<SwitchPaper color={colors.primary}
                          style={mergedStyle} {...rest}/>);
