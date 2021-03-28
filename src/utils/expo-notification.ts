@@ -2,7 +2,9 @@ import {Platform} from "react-native";
 import * as Notifications from "expo-notifications";
 import {Notification} from "expo-notifications";
 import Constants from "expo-constants";
-
+import {collectBLResult} from "../store/actions";
+import {blSuccess} from "../helpers";
+import store from "../store"
 export type Copywriting = {
     failedToGetToken: string,
     mustUsePhysicalDevice: string
@@ -18,13 +20,13 @@ export const registerForPushNotificationsAsync = async (copywriting: Copywriting
             finalStatus = status;
         }
         if (finalStatus !== 'granted') {
-            alert(copywriting.failedToGetToken);
+            store.dispatch(collectBLResult(blSuccess(undefined,copywriting.failedToGetToken)))
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log(token);
     } else {
-        // alert(copywriting.mustUsePhysicalDevice);
+        store.dispatch(collectBLResult(blSuccess(undefined,copywriting.mustUsePhysicalDevice)))
+        return;
     }
 
     if (Platform.OS === 'android') {

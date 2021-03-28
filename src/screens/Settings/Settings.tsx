@@ -59,11 +59,9 @@ export default function SettingsScreen() {
                 //     I18nManager.forceRTL(!I18nManager.isRTL);
                 //     restartApp()
                 //         .then((res) => {
-                //             console.log('---restartApp res', res)
                 //         })
                 //         .catch((err) => {
                 //             // todo,in case of using .catch expression,this err will not be caught by fastRefresh tool
-                //             console.error('---restartApp res', err)
                 //         });
                 // }}
             />

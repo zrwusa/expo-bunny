@@ -27,7 +27,6 @@ const startWS = async function () {
 //
 //     const compare = (nowPrice: number, alertSetting: AlertSetting): boolean => {
 //         const {price} = alertSetting;
-//         console.log('---nowPrice,price', nowPrice, price)
 //         switch (alertSetting.comparator) {
 //             case "eq":
 //                 return nowPrice === price
@@ -47,20 +46,16 @@ const startWS = async function () {
 //     }
 //
 //     const onWSOpen = (e: Event) => {
-//         console.log('---onWSOpen');
 //         ws.send(JSON.stringify(subscribeMsg));
 //     }
 //     ws.addEventListener('open', onWSOpen)
 //
 //     const onWSMessage = (e: MessageEvent) => {
-//         console.log('---onWSMessage');
 //         const data = JSON.parse(e.data).data;
 //         const nowPrice = data.price;
 //         if (nowPrice) {
 //             for (let i in alertSettings) {
-//                 console.log('---i', i)
 //                 const comparedResult = compare(nowPrice, alertSettings[i]);
-//                 console.log('---comparedResult', comparedResult)
 //                 // todo
 //                 if (comparedResult) {
 //                     // schedulePushNotification(data)
@@ -68,7 +63,6 @@ const startWS = async function () {
 //                     //         _.remove(alertSettings, (item) => {
 //                     //             return item.id === alertSettings[i].id
 //                     //         })
-//                     //         console.log('---alertSettings', alertSettings)
 //                     //     });
 //                 }
 //             }
@@ -78,7 +72,6 @@ const startWS = async function () {
 //     ws.addEventListener('message', onWSMessage)
 //
 //     const onWSError = (e: Event) => {
-//         console.log('---onWSError', e);
 //         if (reconnectTimes < reconnectTimesConfig) {
 //             ws.send(JSON.stringify(reconnectMsg))
 //         }
@@ -87,7 +80,6 @@ const startWS = async function () {
 //     ws.addEventListener('error', onWSError)
 //
 //     const onWSClose = (e: CloseEvent) => {
-//         console.log('---onWSClose', e);
 //     };
 //
 //     ws.addEventListener('close', onWSClose)

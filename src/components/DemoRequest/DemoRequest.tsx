@@ -4,7 +4,7 @@ import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";
 import nomicsAPI from "../../helpers/nomics-api";
-import {saveQuickAlertSettings} from "../../store/actions";
+import {saveQuickAlertSettings, sysError} from "../../store/actions";
 import bunnyAPI from "../../helpers/bunny-api";
 
 interface Props {
@@ -64,9 +64,8 @@ function DemoRequest(props: Props) {
             // const btcDataMapped = timestamps.map((item: string, index: number) => {
             //     return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
             // })
-            // console.log('---btcDataMapped', btcDataMapped)
         } catch (err) {
-            console.error(err)
+            dispatch(sysError(err.toString()));
         }
     }
 

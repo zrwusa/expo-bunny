@@ -74,7 +74,6 @@ export default function DemoNotificationScreen() {
             });
 
         notificationReceivedListener = Notifications.addNotificationReceivedListener(notification => {
-            console.log('---notification', notification);
             setNotification(notification);
         });
 

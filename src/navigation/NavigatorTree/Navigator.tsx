@@ -64,6 +64,7 @@ import {useAuthLabor} from "../../providers/auth-labor";
 import {useEffect} from "react";
 import {collectBLResult} from "../../store/actions";
 import {useDispatch} from "react-redux";
+import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 
 export const basePath = Linking.makeUrl('/');
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
@@ -106,26 +107,33 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             fontSize: ms.fs.m
         },
         headerLeftContainerStyle: {},
+        headerBackTitleStyle: {
+            fontSize: ms.fs.l
+        },
         headerBackImage: ({tintColor}) => <IcoMoon
             name="chevron-left1"
             style={{
                 fontSize: ms.fs.xxl,
-                color: tintColor
+                color: tintColor,
             }}/>,
         headerStyle: {
             height: Platform.select({
                 web: wp(50),
+                ios: wp(42) + insets.top
             })
         }
     }
 
-    const optionsDraw = ({navigation}: any) => {
+    const drawerScreenOptions: DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"] = ({navigation}) => {
         return {
             headerStyle: {
                 height: wp(50)
             },
+            headerTitleStyle: {
+                fontSize: ms.fs.m
+            },
             headerShown: true,
-            headerLeft: ({tintColor}: any) => {
+            headerLeft: ({tintColor}) => {
                 const {colors} = useThemeLabor().theme
                 return (<TouchableOpacity onPress={() => {
                     navigation.dispatch(DrawerActions.toggleDrawer())
@@ -135,7 +143,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         style={{
                             paddingLeft: ms.sp.l,
                             fontSize: ms.fs.l,
-                            color: colors.text
+                            color: tintColor
                         }}/>
                 </TouchableOpacity>)
             },
@@ -152,7 +160,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         },
         style: {
             height: wp(46) + insets.bottom
-        }
+        },
+        labelPosition: "below-icon"
     }
 
     const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => {
@@ -407,7 +416,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     }
 
     useEffect(() => {
-        console.log('---authResult.triggerType',authResult.triggerType)
         switch (authResult.triggerType) {
             case "API":
                 dispatch(collectBLResult(blError(t('sys.apiNeedSignIn'))))
@@ -416,10 +424,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 navigateToAuth()
                 break;
             case "MANUAL":
-                dispatch(collectBLResult(blSuccess(undefined,t('sys.signOutSuccess'))))
+                dispatch(collectBLResult(blSuccess(undefined, t('sys.signOutSuccess'))))
+                navigateToAuth()
                 break;
             case "AUTO":
-                navigateToAuth()
+                dispatch(collectBLResult(blSuccess(undefined, t('sys.signOutSuccess'))))
                 break;
             case "OTHERS":
                 navigateToAuth()
@@ -466,7 +475,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoDrawer">
                 {(props) => {
                     //todo not sure if the props is passed correctly
-                    return <DemoDrawerStack.Navigator {...props} screenOptions={optionsDraw}>
+                    return <DemoDrawerStack.Navigator {...props} drawerContentOptions={{labelStyle: {fontSize: ms.fs.l}}}
+                                                      screenOptions={drawerScreenOptions}>
                         <DemoDrawerStack.Screen name="DrawerHome" component={DrawerHomeScreen} {...optionsTitle}/>
                         <DemoDrawerStack.Screen name="DrawerSettings" component={DrawerSettingsScreen}
                                                 initialParams={{'item': 'item-001'}} {...optionsTitle}/>
