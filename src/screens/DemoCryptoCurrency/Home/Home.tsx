@@ -17,7 +17,6 @@ import {useDispatch, useSelector} from "react-redux";
 import axios, {CancelTokenSource} from "axios";
 import {collectBLResult} from "../../../store/actions";
 import {blError} from "../../../helpers";
-import {EBLMsg} from "../../../constants";
 import {ScrollView} from "react-native";
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
@@ -30,7 +29,7 @@ export interface CryptoCurrencyHomeProps {
 
 let source: CancelTokenSource;
 
-function CryptoCurrencyHomeScreen({route, navigation}: CryptoCurrencyHomeProps) {
+function CryptoCurrencyHomeScreen() {
     const types = ['BTC', 'ETH'];
     const dateRanges = ['1d', '1w', '1m', '1y'];
     const {t} = useTranslation();
