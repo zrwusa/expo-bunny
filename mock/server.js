@@ -4,7 +4,7 @@ const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
 const path = require("path");
 const https = require("https");
-const bunnyConfig = require("../src/config.json")
+const bunnyConfig = require("../src/config.js")
 
 const server = jsonServer.create()
 const router = jsonServer.router(`${__dirname}/database.json`)
@@ -85,8 +85,6 @@ server.post('/auth/register', (req, res) => {
 
 // Login to one of the users from ./users.json
 server.post('/auth/login', (req, res) => {
-    console.log("___login endpoint called; request body:");
-    console.log("___req.body", req.body);
     const {email, password} = req.body;
     if (isAuthenticated({email, password}) === false) {
         const status = 401
@@ -96,10 +94,8 @@ server.post('/auth/login', (req, res) => {
     }
 
     const user = getUser({email, password})
-    console.log('___userInfo', user)
 
     const access_token = createToken({email, password})
-    console.log("___Access Token:" + access_token);
 
     const {nickname} = user;
     res.status(200).json({"access_token": access_token, "user": {email, nickname}})
@@ -132,7 +128,7 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
 
 server.use(router)
 
-const {localBackEnd, isHttps} = bunnyConfig;
+const {port, isHttps} = bunnyConfig.mock;
 
 const keyFile = path.resolve('.expo/web/development/ssl', 'key-localhost.pem');
 const certFile = path.resolve('.expo/web/development/ssl', 'cert-localhost.pem');
@@ -154,12 +150,12 @@ if (isHttps && isExpoSSLFileExist) {
             },
             server
         )
-        .listen(localBackEnd.port, () => {
-            console.log(`https://localhost:${localBackEnd.port}/ Run API Mock Server with expo SSL(Just a Self Signed SSL,only for development)`);
+        .listen(port, () => {
+            console.log(`https://localhost:${port}/ Run API Mock Server with expo SSL(Just a Self Signed SSL,only for development)`);
         });
 } else {
-    server.listen(localBackEnd.port, () => {
-        console.log(`http://localhost:${localBackEnd.port}/ Run API Mock Server`)
+    server.listen(port, () => {
+        console.log(`http://localhost:${port}/ Run API Mock Server`)
     })
 }
 

@@ -429,7 +429,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 navigateToAuth()
                 break;
             case "MANUAL":
-                dispatch(collectBLResult(blSuccess(undefined, t('sys.signOutSuccess'))))
                 navigateToAuth()
                 break;
             case "AUTO":

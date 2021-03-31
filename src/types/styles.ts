@@ -10,29 +10,30 @@ import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
 
 export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 
-export type Responsive = Record<keyof DimensionConfig, ResponsiveInstance>;
-export type ResponsiveInstance = { wp: Function, hp: Function };
+export type DimensionKeys = 'bunnyUI' | 'iphoneX' | 'iPad' | 'pixel2XL' | 'pcBrowser'
+    | 'custom1' | 'custom2' | 'custom3';
+export type DimensionFun = {
+    wp: (width: number, shouldRound?: boolean) => number,
+    hp: (height: number, shouldRound?: boolean) => number
+}
+export type Responsive = {
+    [key in DimensionKeys]: DimensionFun
+}
+
 export type Dimension = { width: number, height: number };
 export type SizeLabor = {
     responsive: Responsive,
     measure: Measure,
     ms: Measure,
 }
-
-export type DimensionConfig = {
-    "bunnyUI": Dimension,
-    "iphoneX": Dimension,
-    "iPad": Dimension,
-    "pixel2XL": Dimension,
-    "pcBrowser": Dimension,
-    "custom1": Dimension,
-    "custom2": Dimension,
-    "custom3": Dimension
+export type Dimensions = {
+    [key in DimensionKeys]: ConfigDimension
 }
 
-export type ResponsiveProviderProps = {
-    children: ReactNode,
-};
+export type ConfigDimension = {
+    width: number,
+    height: number
+}
 
 export type MeasureProviderProps = {
     children: ReactNode,
@@ -919,7 +920,6 @@ export type PaletteWithColors = {
     grey90: '#f6f6f6',
     redA800: '#B00020',
     //---end--- react-native-paper
-
 
 
     //---start--- victory chart

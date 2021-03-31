@@ -1,22 +1,51 @@
 import {heightPercentageToDP as hp2dp, widthPercentageToDP as wp2dp} from "./responsiveScreen";
-import bunnyConfig from "../../config.json";
-import {Dimension, JSONSerializable, Measure, Responsive} from "../../types";
+import bunnyConfig from "../../config";
+import {DimensionKeys, Measure, Responsive} from "../../types";
 
 const getSizeLabor = () => {
-    let responsive: JSONSerializable = {}
-    Object.entries(bunnyConfig.UE.dimensions).forEach((dimension) => {
-        responsive[dimension[0]] = {
-            wp: (width: number,shouldRound?:boolean) => {
-                return wp2dp((width / dimension[1]['width']),shouldRound);
+    const defaultDimensionFun = {
+        wp: (width: number, shouldRound?: boolean) => {
+            return wp2dp((width / 375), shouldRound);
+        },
+        hp: (height: number, shouldRound?: boolean) => {
+            return hp2dp((height / 812), shouldRound);
+        }
+    }
+    let responsive: Responsive = {
+        bunnyUI: defaultDimensionFun,
+        iphoneX: defaultDimensionFun,
+        iPad: defaultDimensionFun,
+        pixel2XL: defaultDimensionFun,
+        pcBrowser: defaultDimensionFun,
+        custom1: defaultDimensionFun,
+        custom2: defaultDimensionFun,
+        custom3: defaultDimensionFun
+    }
+    const dimensions = bunnyConfig.UE.dimensions;
+    // let i: DimensionKeys
+    // for (i in dimensions) {
+    //     responsive[i] = {
+    //         wp: (width: number, shouldRound?: boolean) => {
+    //             return wp2dp((width / dimensions[i]['width']), shouldRound);
+    //         },
+    //         hp: (height: number, shouldRound?: boolean) => {
+    //             return hp2dp((height / dimensions[i]['height']), shouldRound);
+    //         }
+    //     };
+    // }
+    const keys = Object.keys(dimensions) as Array<DimensionKeys>
+    keys.forEach(function (key) {
+        responsive[key] = {
+            wp: (width: number, shouldRound?: boolean) => {
+                return wp2dp((width / dimensions[key]['width']), shouldRound);
             },
-            hp: (height: number,shouldRound?:boolean) => {
-                return hp2dp((height / dimension[1]['height']),shouldRound);
+            hp: (height: number, shouldRound?: boolean) => {
+                return hp2dp((height / dimensions[key]['height']), shouldRound);
             }
-        } as unknown as Dimension;
+        };
     })
-    const _responsive = responsive as Responsive;
+    const _responsive = responsive;
     const {wp} = _responsive.iphoneX;
-
     const measureObj = {
         breakpoints: {
             smallPhone: 0,

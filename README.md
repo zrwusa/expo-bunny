@@ -1,5 +1,5 @@
 # expo-react-bunny
-I know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal!
+We don't want a complicated project, what we want is a collection of samples based on cutting-edge technologies.
 
 # Architecture principles
 ## Type Safety
@@ -15,17 +15,25 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 ## Better Error Handling
 ## Better Response Handling
 ## Better Promise Management
-## Robust Unit Tests
+<!--## Robust Unit Tests-->
 ## Simple Deployability
 
-## SOLID patterns,UML diagram
+<!--## SOLID patterns,UML diagram-->
 
 # Tech Stack
+
 - React Native,
 - Typescript,
 - Redux,
 - Expo,
 - Next.js for deploying
+
+# Principles
+
+1.Don’t repeat yourself (DRY) 
+2.Do one thing (DOT) (from Unix philosophy) 
+3.Separation of concerns 
+4.The principle of the least knowledge (Law of Demeter)
 
 
 <table>
@@ -42,16 +50,13 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 <tr><td>React Navigation (Stack,Tab,Drawer,Nested,Route Params)</td><td>  </td></tr>
 <tr><td>Redux Thunk</td><td>  </td></tr>
 <tr><td>Map</td><td>  </td></tr>
-<tr><td>React Native Components All In One</td><td>  </td></tr>
-<tr><td>Mock Server</td><td>  </td></tr>
-<tr><td>Https localhost Self Signed Certification</td><td>  </td></tr>
+<tr><td>React Native Components All In One</td><td></td></tr>
+<tr><td>Mock RESTFul Server</td><td></td></tr>
+<tr><td>Https localhost Self Signed Certification</td><td></td></tr>
 </tbody>
 </table>
 
-                            1.Don’t repeat yourself (DRY)
-                            2.Do one thing (DOT) (from Unix philosophy)
-                            3.Separation of concerns
-                            4.The principle of least knowledge (Law of Demeter)
+
 
 ## Installation
 ### For Expo
@@ -64,16 +69,67 @@ yarn start
 npm install
 npm start
 ```
+## Development
+
+### Mock server
+```sh
+// with yarn
+yarn mock
+
+// with npm
+npm run mock
+```
+### BackEnd server
+I also provided a complete standard KOA backend,including RESTFul API,push notification feature and MongoDB access
+[react-bunny-server](https://github.com/zrwusa/react-bunny-server)
+
+### Local web server
+```sh
+yarn build:web
+yarn web:serve
+```
+### For responsive development
+
+Just configure the dimensions size used by the designer, "size-labor" provider will automatically be compatible different devices
+
+src/config.json
+
+  "UE": {
+    "dimensions": {
+      "DesignName": {
+        "width": 360,
+        "height": 640
+      }
+      ...
+    }
+  }
+
+in your pages or styles
+
+```javascript
+    const {responsive} = sizeLabor;
+    const {wp} = responsive.iphoneX;
+    <View style={{width:wp(100),height:wp(100)}}></View>
+```
+
+ms: measure util defined sizes for styles(recommend use this to keep consistency)
+
+wp: width to DP based on your designs
+
+hp: height to DP based on your designs
+
+You can define multiple design configurations, because your designs are often not designed by the same designer
+
 
 ### For Next.js
 ```sh
 // with npm
 npm install
-npm next dev
+npm next
 
 // with yarn
 yarn
-yarn next dev
+yarn next
 ```
 
 
@@ -102,70 +158,15 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 ```
 
 
-## Development
-
-### local web server
-```sh
-yarn build:web
-yarn web:server
-```
-### For responsive development
-
-Just configure the dimensions size used by the designer, responsiveFromUE will automatically be compatible different devices
-
-src/config.json
-
-  "UE": {
-    "dimensions": {
-      "DesignName": {
-        "width": 360,
-        "height": 640
-      }
-      ...
-    }
-  }
-
-in your pages or styles
-
-```javascript
-    const {ms, responsive} = useSizer();
-    const {wp} = responsive.iphoneX;
-```
-
-ms: measure util defined sizes for styles(recommend use this to keep consistency)
-
-wp: width to DP based on your designs
-
-hp: height to DP based on your designs
-
-You can define multiple design configurations, because your designs are often not designed by the same designer
-
-### For explicit navigation tree
-
-NavigationTree: Explicitly define a navigation tree, and the navigation of the entire App is clear at a glance. 
-
-Navigator components are automatically generated through configuration, 
-
-and the nesting relationship between Navigators is automatically generated. 
-
-There is no need to define Navigator components separately, 
-
-just care about Screens components.
-
-At the same time,linking configuration is automatically generated. 
-
-No modification of React Navigation, you can use any configuration of React Navigation with confidence.
-
-
 # Theories
-1.Premature optimization is the root of all evil (or at least most of it) in programming.
+1."Premature optimization is the root of all evil (or at least most of it) in programming."--— Donald Knuth, “Computer Programming as an Art” (1974).
+2."The remaining 10 percent of the code accounts for the other 90 percent of the development time."--— Tom Cargill, Bell Labs.
 
-— Donald Knuth, “Computer Programming as an Art” (1974).
-2.“The remaining 10 percent of the code accounts for the other 90 percent of the development time.”
-  — Tom Cargill, Bell Labs
 
-Architecture is needed to save time during the development process, to maintain the system’s testability and extensibility over a long development period.
-## architecture benefits
+## Architecture benefits
+ Architecture is necessary to save time during the development process, to maintain the system’s testability and extensibility over a long development period.
+ 
+ 
  If our project is even 50% cheaper to maintain than it could be without a good architecture — it will save developers’ time and customer’s profit.
  Building a good and clear architecture from the start of the project gives you the following benefits:
  1.costs:cheaper code maintenance (less time is required and cheaper financial costs);

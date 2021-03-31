@@ -14,7 +14,7 @@ import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-nat
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BunnyConstants, {EBLMsg} from "../constants/constants";
 import {AuthAPIError, BunnyAPIError, NomicsAPIError, uuidV4} from "../utils";
-import configORG from "../config.json";
+import configORG from "../config";
 import _ from "lodash";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json"
 
@@ -168,17 +168,28 @@ export const blSuccess = (data: any, message?: string, shouldShow?: boolean): BL
 }
 
 export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
-    const {businessLogic, httpExtra} = data;
-    const dataKeys = Object.keys(data)
+    let dataKeys
+    try {
+        dataKeys = Object.keys(data)
+    } catch (err) {
+        throw new PErrorClass(err.message, err.stack)
+    }
     const isDataKeysEqual = _.isEqual(dataKeys, ["timeSpent", "successData", "httpExtra", "businessLogic"])
-    const {errorCode, errorMessage, errorStack} = businessLogic;
+    if (!isDataKeysEqual) {
+        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_ROOT_STRUCTURE)
+    }
+    const {businessLogic, httpExtra} = data;
     const blKeys = Object.keys(businessLogic);
     const isBLKeysEqual = _.isEqual(blKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
+    if (!isBLKeysEqual) {
+        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE)
+    }
     const httpExtraKeys = Object.keys(httpExtra);
     const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
-    if (!isDataKeysEqual || !isBLKeysEqual || !isHttpExtraKeysEqual) {
-        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_STRUCTURE)
+    if (!isHttpExtraKeysEqual) {
+        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE)
     }
+    const {errorCode, errorMessage, errorStack} = businessLogic;
     if (errorCode) {
         throw new PErrorClass(errorMessage, errorCode, errorStack)
     }
@@ -203,24 +214,34 @@ export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
 
     if (apiConfig) {
         const {
-            isHttps, isDevServerProxy, devServerProxy, devServer,
-            isRemoteBackEnd, remoteBackEnd, localBackEnd, timeout
+            isDevServer, isDevServerProxy, devServerProxy, devServer,
+            timeout
         } = apiConfig;
-        const httpPrefix = isHttps ? 'https://' : 'http://';
-        const defaultPort = isHttps ? 443 : 80;
+
         let port;
-        if (isRemoteBackEnd) {
-            port = remoteBackEnd.port || defaultPort
+        let httpPrefix;
+        let defaultPort;
+
+        let finalBaseUrl = ''
+        if (isDevServer) {
+            const devServerHost = `${devServer.domain}${devServer.port}`;
+            const devProxyPrefix = isDevServerProxy ? Object.keys(devServerProxy)[0] : '';
+            finalBaseUrl = `${devServerHost}${devProxyPrefix}`
         } else {
-            port = localBackEnd.port || defaultPort
+            const env = process.env.NODE_ENV === 'production' ? 'prod' : apiConfig.env;
+            const envObj = apiConfig[env]
+            if (envObj) {
+                httpPrefix = envObj.isHttps ? 'https://' : 'http://';
+                defaultPort = envObj.isHttps ? 443 : 80;
+                port = envObj.port || defaultPort
+                finalBaseUrl = `${httpPrefix}${envObj.domain}:${port}`
+            } else {
+                throw (`${env} config not available,check the config`)
+            }
+
         }
-        const devProxyPrefix = isDevServerProxy ? Object.keys(devServerProxy)[0] : '';
         return {
-            baseURL: isDevServerProxy
-                ? `${devServer.domain}${devServer.port}${devProxyPrefix}`
-                : isRemoteBackEnd
-                    ? `${httpPrefix}${remoteBackEnd.domain}:${port}`
-                    : `${httpPrefix}${localBackEnd.domain}:${port}`,
+            baseURL: finalBaseUrl,
             timeout
         }
     }
