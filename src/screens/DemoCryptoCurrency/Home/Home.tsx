@@ -92,7 +92,7 @@ function CryptoCurrencyHomeScreen() {
     useEffect(() => {
         getHistoricalPrices(type, dateRange).then();
         return () => {
-            source.cancel('canceled request')
+            source.cancel(t('sys.canceledRequest'))
         }
     }, [])
 

@@ -9,7 +9,8 @@
     "ThemeProviderLoading": "Theme Provider loading",
     "apiNeedSignIn": "Need to sign in",
     "signInSuccess": "Sign in success",
-    "signOutSuccess": "Sign out success"
+    "signOutSuccess": "Sign out success",
+    "canceledRequest": "Canceled request"
   },
   "screens": {
     "Home": {

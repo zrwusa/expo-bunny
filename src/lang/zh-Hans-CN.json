@@ -9,7 +9,8 @@
     "ThemeProviderLoading": "主题组件加载中",
     "apiNeedSignIn": "需要登录",
     "signInSuccess": "登录成功",
-    "signOutSuccess": "已退出登录"
+    "signOutSuccess": "已退出登录",
+    "canceledRequest": "请求已取消"
   },
   "screens": {
     "Home": {
