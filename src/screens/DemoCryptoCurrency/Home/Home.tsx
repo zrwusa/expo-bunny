@@ -86,13 +86,13 @@ function CryptoCurrencyHomeScreen() {
             })
             setBtcData(btcDataMapped)
         } catch (e) {
-            dispatch(collectBLResult(blError(e.message)))
+            dispatch(collectBLResult(blError(e.message,false)))
         }
     }
     useEffect(() => {
         getHistoricalPrices(type, dateRange).then();
         return () => {
-            source.cancel('xxx')
+            source.cancel('canceled request')
         }
     }, [])
 
