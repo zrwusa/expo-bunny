@@ -131,9 +131,7 @@ export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
 }
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
     const mergedStyle = [{
-        backgroundColor: colors.background,
     }, style]
     return (<TouchableOpacityRN
         style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);

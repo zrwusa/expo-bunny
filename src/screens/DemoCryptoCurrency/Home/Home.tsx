@@ -15,7 +15,7 @@ import {createStyles} from "./styles";
 import {addDays, createSmartStyles} from "../../../utils";
 import {useDispatch, useSelector} from "react-redux";
 import axios, {CancelTokenSource} from "axios";
-import {collectBLResult} from "../../../store/actions";
+import {collectBLResult, getCurrentPrice, sysError} from "../../../store/actions";
 import {blError} from "../../../helpers";
 import {ScrollView} from "react-native";
 
@@ -90,6 +90,11 @@ function CryptoCurrencyHomeScreen() {
         }
     }
     useEffect(() => {
+        try {
+            dispatch(getCurrentPrice())
+        } catch (e) {
+            dispatch(sysError(e))
+        }
         getHistoricalPrices(type, dateRange).then();
         return () => {
             source.cancel(t('sys.canceledRequest'))

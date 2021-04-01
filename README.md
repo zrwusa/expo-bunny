@@ -10,11 +10,11 @@ Although it can be solved by rigorous unit tests, but let's face it, we can not 
  
 So, it can turn out to be a million-dollar mistake. When I switched to TypeScript from plain Javascript then this problem got resolved.
 
-## Separation of Concern
+<!--## Separation of Concern
 ## Feature Encapsulation
 ## Better Error Handling
 ## Better Response Handling
-## Better Promise Management
+## Better Promise Management-->
 <!--## Robust Unit Tests-->
 ## Simple Deployability
 
@@ -30,10 +30,13 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 
 # Principles
 
-1.Don’t repeat yourself (DRY) 
-2.Do one thing (DOT) (from Unix philosophy) 
-3.Separation of concerns 
-4.The principle of the least knowledge (Law of Demeter)
+###1.Don’t repeat yourself (DRY) 
+
+###2.Do one thing (DOT) (from Unix philosophy) 
+
+###3.Separation of concerns 
+
+###4.The principle of the least knowledge (Law of Demeter)
 
 
 <table>
