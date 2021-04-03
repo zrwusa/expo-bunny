@@ -62,19 +62,19 @@ nomicsAPI.interceptors.response.use(
                 case 401:
                     const {businessLogic} = data
                     const {errorCode} = businessLogic
-                    if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005','BL_BUNNY_012'].includes(errorCode)) {
+                    if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005', 'BL_BUNNY_012'].includes(errorCode)) {
                         const {authFunctions} = authLaborContext;
                         const {refreshAuth, signOut} = authFunctions;
-                        try{
+                        try {
                             const {success} = await refreshAuth()
                             if (!success) {
                                 await signOut('API')
-                            }else{
+                            } else {
                                 const originalRequest = config;
                                 originalRequest._retry = true;
                                 return bunnyAPI(originalRequest);
                             }
-                        }catch (e) {
+                        } catch (e) {
                             await signOut('API')
                             throw e
                         }

@@ -18,9 +18,9 @@ import {Dimensions} from "react-native";
 function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
     const {children} = props;
     const sysColorSchemeName = useColorScheme();
-    const [themes,setThemes] = useState(getThemes())
+    const [themes, setThemes] = useState(getThemes())
     const [isReady, setIsReady] = useState(false);
-    const [themeName,setThemeName] = useState(EThemes.light)
+    const [themeName, setThemeName] = useState(EThemes.light)
     const [theme, setTheme] = useState(themes[themeName]);
     const changeTheme = (themeName: ThemeName) => {
         setThemeName(themeName);

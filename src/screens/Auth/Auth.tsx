@@ -67,7 +67,7 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
-                        }} >{st(`signIn`)}</ButtonTO>
+                        }}>{st(`signIn`)}</ButtonTO>
                         <ButtonTO onPress={async () => {
                             try {
                                 await authFunctions.signInDummy()
@@ -75,7 +75,7 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
-                        }} >{st(`signInDummy`)}</ButtonTO>
+                        }}>{st(`signInDummy`)}</ButtonTO>
                         <ButtonTO onPress={() => {
                             setType('signUp')
                         }}>{st(`goToSignUp`)}</ButtonTO>
@@ -88,10 +88,10 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
-                        }} >{st(`signUp`)}</ButtonTO>
+                        }}>{st(`signUp`)}</ButtonTO>
                         <ButtonTO onPress={() => {
                             setType('sign-in')
-                        }} >{st(`goToSignIn`)}</ButtonTO>
+                        }}>{st(`goToSignIn`)}</ButtonTO>
                     </>
             }
             {
@@ -103,7 +103,7 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                         } catch (e) {
                             dispatch(sysError(e))
                         }
-                    }} >{st(`signInGoogle`)}</ButtonTO>
+                    }}>{st(`signInGoogle`)}</ButtonTO>
                     : <></>
             }
         </View>

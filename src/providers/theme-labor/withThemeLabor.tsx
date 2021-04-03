@@ -1,21 +1,29 @@
 import {useThemeLabor} from "./useThemeLabor";
 import React, {ComponentProps, ComponentType} from "react";
-import {ThemeLabor} from "../../types";
+import {SizeLabor, ThemeLabor} from "../../types";
+import {useSizeLabor} from "../size-labor";
 
 export interface WithThemeLabor {
     themeLabor: ThemeLabor
 }
 
-export const withThemeLabor = (WrappedComponent: ComponentType<any>) => {
-    function WithThemeLabor(props: ComponentProps<any>) {
+export function withThemeLabor<T extends WithThemeLabor = WithThemeLabor>(
+    WrappedComponent: React.ComponentType<T>
+) {
+    // Try to create a nice displayName for React Dev Tools.
+    const displayName =
+        WrappedComponent.displayName || WrappedComponent.name || "Component";
+
+    // Creating the inner component. The calculated Props type here is the where the magic happens.
+    const ComponentWithThemeLabor = (props: Omit<T, keyof WithThemeLabor>) => {
+        // Fetch the props you want to inject. This could be done with context instead.
         const themeLabor = useThemeLabor();
-        return <WrappedComponent themeLabor={themeLabor} {...props} />;
-    }
 
-    const wrappedComponentName = WrappedComponent.displayName
-        || WrappedComponent.name
-        || 'Component';
+        // props comes afterwards so the can override the default ones.
+        return <WrappedComponent {...(props as T)} themeLabor={themeLabor}/>;
+    };
 
-    WithThemeLabor.displayName = `withThemeLabor(${wrappedComponentName})`;
-    return WithThemeLabor;
+    ComponentWithThemeLabor.displayName = `withThemeLabor(${displayName})`;
+
+    return ComponentWithThemeLabor;
 }

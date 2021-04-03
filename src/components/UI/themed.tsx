@@ -131,8 +131,7 @@ export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
 }
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const mergedStyle = [{
-    }, style]
+    const mergedStyle = [{}, style]
     return (<TouchableOpacityRN
         style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
 }
@@ -210,7 +209,7 @@ export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
     const {responsive} = useSizeLabor();
     const {wp} = responsive.iphoneX;
     const mergedStyle = [{
-        transform: [{scaleX: wp(0.8,false)}, {scaleY: wp(0.8,false)}],
+        transform: [{scaleX: wp(0.8, false)}, {scaleY: wp(0.8, false)}],
     }, style]
     return (<SwitchPaper color={colors.primary}
                          style={mergedStyle} {...rest}/>);

@@ -4,6 +4,7 @@ import {
     DemoTabStack,
     DemoDrawerStack,
     DemoCryptoCurrencyStack,
+    DemoIGStack,
     DemoNestedLv1Stack,
     DemoNestedLv2Stack,
     DemoTabRNComponentsStack
@@ -47,7 +48,7 @@ import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 import DemoThemeScreen from "../../screens/DemoTheme";
 import {useTranslation} from "react-i18next";
 import {StackNavigationOptions} from "@react-navigation/stack";
-import {IcoMoon} from "../../components/UI";
+import {IcoMoon, Text} from "../../components/UI";
 import {useSizeLabor} from "../../providers/size-labor";
 import {createStyles} from "./styles";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
@@ -65,6 +66,9 @@ import {useEffect} from "react";
 import {collectBLResult} from "../../store/actions";
 import {useDispatch} from "react-redux";
 import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
+import {IGHomeScreen} from "../../screens/DemoIG/Home";
+import {IGSettingsScreen} from "../../screens/DemoIG/Settings";
+import {IGSearchScreen} from "../../screens/DemoIG/Search";
 
 export const basePath = Linking.makeUrl('/');
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
@@ -130,6 +134,54 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         }
     }
 
+
+    const optionsHeaderAndAnimationIG: StackNavigationOptions = {
+        animationEnabled: true,
+        headerRight: function () {
+            return <View style={{flexDirection: 'row', alignItems: 'center', marginRight: wp(10)}}>
+                <IcoMoon
+                    name="heart"
+                    style={{
+                        color: colors.primary,
+                        fontSize: ms.fs.l,
+                        marginRight: wp(10)
+                    }}/>
+                <IcoMoon
+                    name="star"
+                    style={{
+                        color: colors.primary,
+                        fontSize: ms.fs.l,
+                        marginRight: wp(10)
+                    }}/>
+                <IcoMoon
+                    name="paperplane1"
+                    style={{
+                        color: colors.primary,
+                        fontSize: ms.fs.l,
+                        marginRight: wp(10)
+                    }}/></View>
+        },
+        headerTitleContainerStyle: {},
+        headerTitleStyle: {
+            fontSize: ms.fs.m
+        },
+        headerLeftContainerStyle: {},
+        headerBackTitleStyle: {
+            fontSize: ms.fs.l,
+        },
+        headerBackImage: ({tintColor}) => <IcoMoon
+            name="chevron-left1"
+            style={{
+                fontSize: ms.fs.xxl,
+                color: tintColor,
+            }}/>,
+        headerStyle: {
+            height: Platform.select({
+                web: wp(50),
+            })
+        }
+    }
+
     const drawerScreenOptions: DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"] = ({navigation}) => {
         return {
             headerStyle: {
@@ -166,7 +218,21 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         style: {
             height: wp(46) + insets.bottom
         },
-        labelPosition: "below-icon"
+        labelPosition: 'below-icon'
+    }
+
+    const igTabBarOptions: BottomTabBarOptions = {
+        tabStyle: {
+            justifyContent: 'center'
+        },
+        labelStyle: {
+            fontSize: ms.fs.xxs,
+        },
+        style: {
+            height: wp(46) + insets.bottom
+        },
+        labelPosition: 'below-icon',
+        showLabel: false,
     }
 
     const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => {
@@ -365,6 +431,30 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         }
                     }
                 },
+                DemoIG: {
+                    name: 'DemoIG',
+                    path: 'demo-ig',
+                    screens: {
+                        IGHome: {
+                            name: 'IGHome',
+                            path: 'home',
+                        },
+                        IGSearch: {
+                            name: 'IGSearch',
+                            path: 'search/:keyword',
+                            parse: {
+                                item: (keyword: string) => `${keyword}`,
+                            },
+                        },
+                        IGSettings: {
+                            name: 'IGSettings',
+                            path: 'settings/:item',
+                            parse: {
+                                item: (item: string) => `${item}`,
+                            },
+                        }
+                    }
+                },
                 Settings: {
                     name: 'Settings',
                     path: 'settings',
@@ -532,6 +622,20 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                 ? CryptoCurrencyAlertScreen
                                 : () => <NotSupport text="Not supported on web"/>} initialParams={{isPush: true}} {...optionsTitle}/>
                         </DemoCryptoCurrencyStack.Navigator>
+                    }
+                }
+            </RootStack.Screen>
+            <RootStack.Screen name="DemoIG" {...optionsTitle} options={optionsHeaderAndAnimationIG}>
+                {
+                    (props) => {
+                        return <DemoIGStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                                                      tabBarOptions={igTabBarOptions}>
+                            <DemoIGStack.Screen name="IGHome" component={IGHomeScreen}  {...optionsTitle}/>
+                            <DemoIGStack.Screen name="IGSearch" component={IGSearchScreen}
+                                                initialParams={{'keyword': 'keyword-001'}} {...optionsTitle}/>
+                            <DemoIGStack.Screen name="IGSettings" component={IGSettingsScreen}
+                                                initialParams={{'item': 'item-001'}} {...optionsTitle}/>
+                        </DemoIGStack.Navigator>
                     }
                 }
             </RootStack.Screen>

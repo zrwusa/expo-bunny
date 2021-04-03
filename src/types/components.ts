@@ -10,3 +10,18 @@ export type LinkProps = {
 } & (TextProps & {
     children: React.ReactNode;
 });
+
+
+export type Brick = {
+    id: string,
+    text: string,
+    uri: string
+}
+
+export type MasonryDatum = {
+    id: string,
+    column1: Brick[],
+    column2: Brick[],
+    column3: Brick[],
+}
+

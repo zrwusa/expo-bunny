@@ -62,9 +62,9 @@ const config: APPConfig = {
     "nomics": {
         "env": "dev",
         "dev": {
-            "isHttps": true,
-            "domain": "bunny.dev",
-            "port": 8443
+            "isHttps": false,
+            "domain": "192.168.50.19",
+            "port": 8080
         },
         "prod": {
             "isHttps": true,

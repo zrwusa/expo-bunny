@@ -42,7 +42,7 @@ function CryptoCurrencyHomeScreen() {
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
     const {} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
-    const {ms,responsive} = sizeLabor;
+    const {ms, responsive} = sizeLabor;
     const {wp} = responsive.iphoneX;
     const [btcData, setBtcData] = useState([
         {x: new Date('1990-01-01'), y: 5}
@@ -86,7 +86,7 @@ function CryptoCurrencyHomeScreen() {
             })
             setBtcData(btcDataMapped)
         } catch (e) {
-            dispatch(collectBLResult(blError(e.message,false)))
+            dispatch(collectBLResult(blError(e.message, false)))
         }
     }
     useEffect(() => {

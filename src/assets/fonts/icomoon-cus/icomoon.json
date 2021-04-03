@@ -26,6 +26,7 @@
   "menu5": 59868,
   "minimize": 59667,
   "minimize-2": 59668,
+  "shopping-bag": 59731,
   "type": 59759,
   "times-outline": 59760,
   "plus-outline": 59761,
@@ -80,6 +81,7 @@
   "windows8": 60098,
   "heart": 59679,
   "star": 59680,
+  "tv": 59732,
   "trash": 59704,
   "search": 59681,
   "settings": 59682,
@@ -253,5 +255,6 @@
   "hand-pointer-o": 62042,
   "hand-peace-o": 62043,
   "vcard": 62139,
-  "vcard-o": 62140
+  "vcard-o": 62140,
+  "user-o": 62144
 }

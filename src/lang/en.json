@@ -42,6 +42,7 @@
       "demoTheme": "Demo Theme",
       "demoSuspense": "Demo Suspense",
       "cryptoCurrency": "CryptoCurrency",
+      "ig": "Instagram",
       "settings": "Settings",
       "signOut": "Sign Out"
     },
@@ -214,6 +215,18 @@
       "1w": "1week",
       "1m": "1month",
       "1y": "1year"
+    },
+    "DemoIG": {
+      "title": "DemoIG"
+    },
+    "IGHome": {
+      "title": "IGHome"
+    },
+    "IGSearch": {
+      "title": "IGSearch"
+    },
+    "IGSettings": {
+      "title": "IGSettings"
     },
     "CryptoCurrencyAlert": {
       "title": "Alert",

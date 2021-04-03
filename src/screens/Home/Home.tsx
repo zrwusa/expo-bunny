@@ -125,6 +125,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Link to="/demo-crypto-currency/home">
                         {st(`cryptoCurrency`)}
                         <IcoMoon name="bitcoin" size={wp(24)} {...iconColor}/></Link>
+                    <Link to="/demo-ig/home">
+                        {st(`ig`)}
+                        <IcoMoon name="layout7" {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`system`)}>
                     <Link to="/settings">

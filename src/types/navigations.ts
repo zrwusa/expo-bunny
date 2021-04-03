@@ -41,11 +41,18 @@ export type RootStackParam = {
     DemoTheme: undefined;
     DemoSuspense: undefined;
     DemoCryptoCurrency: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoIG: undefined | { screen: string; params?: { [key: string]: any } };
     Settings: undefined;
 };
 export type DemoTabStackParam = {
     TabHome: undefined;
     TabSettings: { item: string };
+};
+
+export type DemoIGStackParam = {
+    IGHome: undefined;
+    IGSearch: { keyword: string };
+    IGSettings: { item: string };
 };
 
 export type DemoDrawerStackParam = {
@@ -114,8 +121,6 @@ export type LinkingConfig = {
     name?: string,
     screens?: NavigatorTreeNode[],
 };
-type LinkingOptionsConfigXXX = Pick<LinkingOptions, 'config'>
-
 
 export type StackConfig = {
     key: string,
@@ -134,7 +139,6 @@ export type StackConfig = {
     authRequired: boolean,
 }
 
-export type LinkingConfigTraversable = LinkingConfig & JSONSerializable
 
 export type Options = BottomTabNavigationOptions | DrawerNavigationOptions | StackNavigationOptions | MaterialTopTabNavigationOptions;
 export type OptionsInner = DefaultNavigatorOptions<Options>;

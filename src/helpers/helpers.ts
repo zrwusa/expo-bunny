@@ -93,6 +93,27 @@ export const tabBarIconNameConfig: JSONSerializable = {
         default: 'umbrella',
         focused: 'umbrella',
     },
+    IGHome: {
+        default: 'home3',
+        focused: 'home3',
+    },
+    IGSearch: {
+        default: 'search',
+        focused: 'search',
+    },
+    IGMedia: {
+        default: 'tv',
+        focused: 'tv',
+    },
+    IGShopping: {
+        default: 'shopping-bag',
+        focused: 'shopping-bag',
+    },
+    IGSettings: {
+        default: 'tv',
+        focused: 'shopping-bag',
+    },
+
 }
 
 const getIconMCCustomMap = (iconConfig: any) => {
@@ -131,18 +152,6 @@ export const getIconNameByRoute = (routeName: string, focused: boolean): IcoMoon
         iconName = '';
     }
     return iconName as IcoMoonKeys
-}
-export const checkAuthStatus = async () => {
-    try {
-        const accessToken = await AsyncStorage.getItem(BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY);
-        if (accessToken) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (e) {
-        return false;
-    }
 }
 
 export const blError = (blMsg: string, shouldShow?: boolean): BLResult => {

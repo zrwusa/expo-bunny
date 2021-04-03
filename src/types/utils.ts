@@ -1,26 +1,3 @@
-import {ComponentType} from "react";
-import * as Stacks from "../navigation/stacks";
-import {StackNavigationOptions} from "@react-navigation/stack";
-import {
-    DefaultNavigatorOptions,
-    DrawerRouterOptions,
-    EventMapBase, LinkingOptions,
-    RouteConfig,
-    StackRouterOptions,
-    TabRouterOptions,
-} from "@react-navigation/native";
-import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
-import {NavigationState, ParamListBase} from "@react-navigation/routers";
-import {BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings";
-import {BottomTabNavigationConfig} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
-import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
-import {DrawerNavigationConfig} from "react-navigation-drawer-no-warnings/lib/typescript/src/types";
-import {MaterialTopTabNavigationOptions} from "@react-navigation/material-top-tabs";
-import {uuidV4} from "../utils";
-// import {MaterialTopTabNavigationConfig} from "@react-navigation/material-top-tabs/lib/typescript/src/types";
-
-
-
 // export type DeepLeavesWrap<T, U> = T extends { [key: string]: any } ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
 //     : T extends { [key: string]: any } | undefined ? { [P in keyof T]: DeepLeavesWrap<T[P], U> }
 //         : T extends boolean ? { [M in keyof U]: boolean }

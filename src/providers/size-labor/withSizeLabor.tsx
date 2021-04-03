@@ -1,22 +1,27 @@
 import {useSizeLabor} from "./useSizeLabor";
-import React, {ComponentProps, ComponentType} from "react";
+import React, {ComponentProps, ComponentType, useState} from "react";
 import {SizeLabor} from "../../types";
 
 export interface WithSizeLabor {
     sizeLabor: SizeLabor
 }
 
-export const withSizeLabor = (WrappedComponent: ComponentType<any>) => {
+export function withSizeLabor<T extends WithSizeLabor = WithSizeLabor>(
+    WrappedComponent: React.ComponentType<T>
+) {
+    // Try to create a nice displayName for React Dev Tools.
+    const displayName = WrappedComponent.displayName || WrappedComponent.name || "Component";
 
-    function WithSizeLabor(props: ComponentProps<any>) {
+    // Creating the inner component. The calculated Props type here is the where the magic happens.
+    const ComponentWithSizeLabor = (props: Omit<T, keyof WithSizeLabor>) => {
+        // Fetch the props you want to inject. This could be done with context instead.
         const sizeLabor = useSizeLabor();
-        return <WrappedComponent sizeLabor={sizeLabor} {...props}  />;
-    }
 
-    const wrappedComponentName = WrappedComponent.displayName
-        || WrappedComponent.name
-        || 'Component';
+        // props comes afterwards so the can override the default ones.
+        return <WrappedComponent {...(props as T)} sizeLabor={sizeLabor}/>;
+    };
 
-    WithSizeLabor.displayName = `withSizeLabor(${wrappedComponentName})`;
-    return WithSizeLabor;
+    ComponentWithSizeLabor.displayName = `withSizeLabor(${displayName})`;
+
+    return ComponentWithSizeLabor;
 }

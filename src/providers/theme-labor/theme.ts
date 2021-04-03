@@ -18,11 +18,11 @@ export const getThemeWareHouse = () => {
     const victoryCommon = {
         width: {
             light: wp(350),
-            dark:  wp(350),
+            dark: wp(350),
         },
         height: {
             light: wp(350),
-            dark:  wp(350),
+            dark: wp(350),
         },
         padding: {
             light: wp(50),
