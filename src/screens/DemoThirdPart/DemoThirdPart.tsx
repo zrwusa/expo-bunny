@@ -3,7 +3,7 @@ import {Avatar, Button, List} from "react-native-paper";
 import RNPickerSelect from "react-native-picker-select";
 import {IconMC, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {uuidV4} from "../../utils";
@@ -25,7 +25,7 @@ function DemoThirdPartScreen(props: Props) {
     const {wp} = sizeLabor.responsive.iphoneX;
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.DemoThirdPart');
+    const st = shortenTFunctionKey(t, 'screens.DemoThirdPart');
 
     const LIST = [
         {

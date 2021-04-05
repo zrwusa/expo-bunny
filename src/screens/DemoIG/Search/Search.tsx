@@ -4,7 +4,7 @@ import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {Brick, DemoIGStackParam, MasonryDatum} from "../../../types";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
@@ -25,7 +25,7 @@ export interface IGSearchProps {
 
 export function IGSearchScreen({route, navigation}: IGSearchProps) {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.IGSearch');
+    const st = shortenTFunctionKey(t, 'screens.IGSearch');
     const sizeLabor = useSizeLabor();
     const {wp} = sizeLabor.responsive.iphoneX
     const themeLabor = useThemeLabor();
@@ -874,18 +874,24 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
                       initialNumToRender={1}
                       renderItem={({item}) => <Masonry data={item}/>}
                       keyExtractor={item => item.id}
+                      maxToRenderPerBatch={1}
+                      windowSize={3}
+                      updateCellsBatchingPeriod={100}
             />
             : null
+        // isReady ?
         // <VirtualizedList
         //     data={MasonryData}
         //     initialNumToRender={1}
-        //     renderItem={({item}) => <Masonry item={item}/>}
+        //     renderItem={({item}) => <Masonry data={item}/>}
         //     keyExtractor={item => item.id}
         //     getItemCount={getItemCount}
         //     getItem={getItem}
         //     removeClippedSubviews={true}
         //     maxToRenderPerBatch={1}
-        //     updateCellsBatchingPeriod={1}
+        //     windowSize={1}
+        //     updateCellsBatchingPeriod={100}
         // />
+        // :null
     );
 }

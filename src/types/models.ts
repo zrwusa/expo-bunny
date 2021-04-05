@@ -1,5 +1,6 @@
 //Data models, such as database entities, api return value entities
 import {ImageSourcePropType} from "react-native";
+import {AVPlaybackSource} from "expo-av/src/AV";
 
 export type DemoEmployee = {
     _id: number,
@@ -33,3 +34,18 @@ export type DemoSaga = {
     text: string
 }
 
+export type IGHomeCardCommentDatum = {
+    id: string,
+    text: string
+}
+export type IGHomeCardCategory = 'IMAGE'|'VIDEO'
+export type IGHomeCardDatum = {
+    id: string,
+    category:IGHomeCardCategory,
+    user: string,
+    userAvatar: ImageSourcePropType,
+    avSource?: AVPlaybackSource,
+    imageSource?:ImageSourcePropType,
+    likes: number,
+    comments: IGHomeCardCommentDatum[]
+}

@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {demoHello} from "../../store/actions";
 import {Button, Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -11,7 +11,7 @@ import {RootState} from "../../types";
 
 function DemoFCReduxHookScreen() {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.DemoFCReduxHook');
+    const st = shortenTFunctionKey(t, 'screens.DemoFCReduxHook');
     const dispatch = useDispatch();
     const demoHelloState = useSelector((rootState: RootState) => rootState.demoHelloState);
     const sizeLabor = useSizeLabor();

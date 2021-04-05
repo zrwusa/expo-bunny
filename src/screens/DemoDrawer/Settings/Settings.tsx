@@ -4,7 +4,7 @@ import {RouteProp} from "@react-navigation/native";
 import {DrawerNavigationProp} from "react-navigation-drawer-no-warnings";
 import {DemoDrawerStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
@@ -19,7 +19,7 @@ export interface DrawerSettingsProps {
 
 function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.DrawerSettings');
+    const st = shortenTFunctionKey(t, 'screens.DrawerSettings');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);

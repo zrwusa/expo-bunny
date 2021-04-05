@@ -9,7 +9,7 @@ import i18next from "./i18next";
 import {i18n as I18n} from "i18next";
 import {Preparing} from "../../components/Preparing";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "./shorten-t-function-key";
+import {shortenTFunctionKey} from "./shorten-t-function-key";
 
 export interface I18nProviderProps {
     children: ReactNode,
@@ -20,7 +20,7 @@ export interface I18nProviderProps {
 function I18nLaborProvider(props: I18nProviderProps): JSX.Element {
     const [isReady, setIsReady] = useState(false);
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, `sys`)
+    const st = shortenTFunctionKey(t, `sys`)
     const {children, i18n} = props;
     const i18nValue = i18n || i18next;
 

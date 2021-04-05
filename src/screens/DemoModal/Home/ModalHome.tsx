@@ -3,7 +3,7 @@ import {View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types";
 import {createContainerStyles} from "../../../containers";
@@ -21,7 +21,7 @@ export interface ModalHomeProps {
 
 function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.ModalHome');
+    const st = shortenTFunctionKey(t, 'screens.ModalHome');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);

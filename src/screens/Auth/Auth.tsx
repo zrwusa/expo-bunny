@@ -4,7 +4,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {ButtonTO, TextInput, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers";
+import {shortenTFunctionKey} from "../../providers";
 import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -26,7 +26,7 @@ export interface AuthProps {
 export const AuthScreen = ({route, navigation}: AuthProps) => {
     const dispatch = useDispatch();
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.Auth');
+    const st = shortenTFunctionKey(t, 'screens.Auth');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);

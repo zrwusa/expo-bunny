@@ -7,6 +7,39 @@ export const uuidV4 = function () {
     });
 }
 
+export class IncrementId {
+    private _id: string
+    private readonly _prefix: string
+
+    constructor(prefix?: string) {
+        this._prefix = prefix ? prefix : ''
+        this._id = this._prefix + '0'
+    }
+
+    getId() {
+        const {_id, _prefix} = this;
+        if (!_id) {
+            this._id = _prefix + '0'
+        } else {
+            let idNumStr = _id.substr(_prefix.length, _id.length - _prefix.length)
+            let newIdNum = parseInt(idNumStr, 10) + 1
+            this._id = _prefix + newIdNum.toString()
+        }
+        return this._id
+    }
+}
+
+export function incrementId(prefix?: string) {
+    let _prefix = prefix ? prefix : ''
+    let _id = _prefix + '0';
+    return function id() {
+        let idNumStr = _id.substr(_prefix.length, _id.length - _prefix.length)
+        let newIdNum = parseInt(idNumStr, 10) + 1
+        _id = _prefix + newIdNum.toString()
+        return _id
+    }
+}
+
 export const getValue = <T, K extends keyof T>(obj: T, names: K[]): Array<T[K]> => {
     return names.map(i => obj[i])
 }

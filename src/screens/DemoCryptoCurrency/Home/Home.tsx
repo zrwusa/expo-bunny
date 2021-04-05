@@ -5,7 +5,7 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyStackParam, RootState} from "../../../types";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
@@ -33,7 +33,7 @@ function CryptoCurrencyHomeScreen() {
     const types = ['BTC', 'ETH'];
     const dateRanges = ['1d', '1w', '1m', '1y'];
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.CryptoCurrencyHome');
+    const st = shortenTFunctionKey(t, 'screens.CryptoCurrencyHome');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const dispatch = useDispatch();

@@ -5,14 +5,14 @@ import {AuthLaborProviderProps} from "../../types";
 import {AuthLaborContext, authLaborContext} from "./AuthLaborContext";
 import {Preparing} from "../../components/Preparing";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../i18n-labor";
+import {shortenTFunctionKey} from "../i18n-labor";
 import {EventRegister} from "react-native-event-listeners";
 import {uuidV4} from "../../utils";
 
 function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const {children} = props;
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'sys');
+    const st = shortenTFunctionKey(t, 'sys');
     const {authFunctions, authResult} = authLaborContext;
     const [isReady, setIsReady] = useState(false);
     const [isSignedIn, setIsSignedIn] = useState(authResult.isSignedIn)

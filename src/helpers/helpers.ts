@@ -256,3 +256,4 @@ export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
     }
 
 }
+// console.log(JSON.stringify(glyphIcoMoonMap))

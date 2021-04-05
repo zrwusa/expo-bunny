@@ -7,7 +7,7 @@ import {sysError} from "../../store/actions";
 import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -19,7 +19,7 @@ type SelectedImage = {
 
 function DemoShareScreen() {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.DemoShare');
+    const st = shortenTFunctionKey(t, 'screens.DemoShare');
     const dispatch = useDispatch();
     const onShare = async () => {
         try {

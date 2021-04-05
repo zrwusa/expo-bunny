@@ -3,41 +3,47 @@ import {View} from "../UI";
 import {ScaledImage} from "../ScalableImage/ScalableImage";
 import {uuid4} from "@sentry/utils";
 import {MasonryDatum} from "../../types";
+import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
+import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
+import {createStyles} from "./styles";
 
 
-export interface MasonryProps {
+export interface MasonryProps extends WithSizeLabor,WithThemeLabor{
     data: MasonryDatum
 }
 
-export class Masonry extends React.PureComponent<MasonryProps> {
+class MasonryInner extends React.PureComponent<MasonryProps> {
     constructor(props: MasonryProps) {
         super(props);
     }
 
     render(): React.ReactNode {
+        const {sizeLabor,themeLabor} = this.props
+        const {wp} = sizeLabor.responsive.iphoneX
         const {column1, column2, column3} = this.props.data
 
+        const styles = createStyles(sizeLabor,themeLabor)
+
         return (
-            <View style={{flexDirection: 'row'}}>
-                <View style={{marginRight: 1}}>
+            <View style={styles.masonry}>
+                <View style={styles.column}>
                     {column1.map(image => {
-                        // return <Image key={uuid4()} source={{uri: image.uri}} style={{width: 100, height: 100}}/>
-                        return <ScaledImage style={{marginBottom: 1}} key={uuid4()} uri={image.uri} width={375 / 3 - 1}/>
+                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri} width={wp(375 / 3 - 1)}/>
                     })}
                 </View>
-                <View style={{marginRight: 1}}>
+                <View style={styles.column}>
                     {column2.map(image => {
-                        // return <Image key={uuid4()} source={{uri: image.uri}} style={{width: 100, height: 100}}/>
-                        return <ScaledImage style={{marginBottom: 1}} key={uuid4()} uri={image.uri} width={375 / 3 - 1}/>
+                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri} width={wp(375 / 3 - 1)}/>
                     })}
                 </View>
-                <View style={{marginRight: 0}}>
+                <View style={styles.columnLast}>
                     {column3.map(image => {
-                        // return <Image key={uuid4()} source={{uri: image.uri}} style={{width: 100, height: 100}}/>
-                        return <ScaledImage style={{marginBottom: 1}} key={uuid4()} uri={image.uri} width={375 / 3 - 1}/>
+                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri} width={wp(375 / 3 - 1)}/>
                     })}
                 </View>
             </View>
         );
     }
 }
+
+export const Masonry = withSizeLabor(withThemeLabor(MasonryInner))

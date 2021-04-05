@@ -4,7 +4,7 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Avatar} from "react-native-paper";
 import {ScrollView} from "react-native";
 import {createStyles} from "./styles";
@@ -27,7 +27,7 @@ function ProfileScreen({route, navigation}: Props) {
     const {authResult} = useAuthLabor()
     const {user} = authResult;
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.Profile');
+    const st = shortenTFunctionKey(t, 'screens.Profile');
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
     const sizeLabor = useSizeLabor();
     const {wp} = sizeLabor.responsive.iphoneX;

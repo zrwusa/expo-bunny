@@ -5,7 +5,7 @@ import DemoRequest from "../../components/DemoRequest";
 import {TextInput, View} from "../../components/UI";
 import {DemoSvg} from "../../components/DemoSvg";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Button, ScrollView} from "react-native";
 import {createContainerStyles} from "../../containers";
 import {DemoPureComponent, DemoRegularComponent} from "../../components/DemoPureComponent";
@@ -17,7 +17,7 @@ function DemoCollectionScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.DemoCollection');
+    const st = shortenTFunctionKey(t, 'screens.DemoCollection');
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     return (
         <ScrollView>

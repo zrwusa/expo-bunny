@@ -5,7 +5,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
 import {createStyles} from "./styles";
 import {useTranslation} from 'react-i18next';
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -25,7 +25,7 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.DemoRoute');
+    const st = shortenTFunctionKey(t, 'screens.DemoRoute');
     const containerStyles = createContainerStyles(sizeLabor, themeLabor)
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
 

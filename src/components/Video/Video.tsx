@@ -69,7 +69,8 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
                             } else {
                                 // Update your UI for the paused state
                             }
-                            this.setState({isPlaying: playbackStatus.isPlaying})
+                            // todo Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+                            // this.setState({isPlaying: playbackStatus.isPlaying})
                             if (playbackStatus.isBuffering) {
                                 // Update your UI for the buffering state
                             }
@@ -77,7 +78,8 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
                                 // The player has just finished playing and will stop. Maybe you want to play something else?
                             }
                         }
-                        this.setState({playbackStatus: playbackStatus})
+                        // todo Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+                        // this.setState({playbackStatus: playbackStatus})
                     }}
                     {...rest}
                 />

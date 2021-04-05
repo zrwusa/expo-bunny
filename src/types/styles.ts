@@ -54,7 +54,7 @@ export type Mode = 'adaptive' | 'exact';
 
 export type Font = {
     fontFamily: string,
-    fontWeight?: string,
+    fontWeight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900',
 }
 
 export type Fonts = {

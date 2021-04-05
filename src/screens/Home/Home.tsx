@@ -5,7 +5,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
 import {ButtonTO, IcoMoon, Link, TextBtn} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Card, createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -24,7 +24,7 @@ export interface HomeScreenProps {
 function HomeScreen({navigation}: HomeScreenProps) {
     const dispatch = useDispatch();
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.Home');
+    const st = shortenTFunctionKey(t, 'screens.Home');
     const linkTo = useLinkTo();
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();

@@ -6,7 +6,7 @@ import {DemoThunkPayload, DemoThunkState, RootState} from "../../types";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
@@ -39,7 +39,7 @@ class DemoThunkCCScreen extends React.Component<Props> {
     render(): React.ReactNode {
         const {text, id, t, sizeLabor, themeLabor} = this.props;
         const {theme} = themeLabor;
-        const st = shortenTFuciontKey(t, 'screens.DemoThunkCC');
+        const st = shortenTFunctionKey(t, 'screens.DemoThunkCC');
         const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
         return (

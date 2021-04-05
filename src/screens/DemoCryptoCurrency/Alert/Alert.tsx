@@ -6,7 +6,7 @@ import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings"
 import {DemoCryptoCurrencyStackParam, RootState} from "../../../types";
 import {ButtonTO, RNPickerSelect, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../../providers";
+import {shortenTFunctionKey} from "../../../providers";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
@@ -27,9 +27,9 @@ export interface CryptoCurrencyAlertProps {
 
 export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCurrencyAlertProps) {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.CryptoCurrencyAlert');
+    const st = shortenTFunctionKey(t, 'screens.CryptoCurrencyAlert');
     const i18nSysPrefix = 'sys';
-    const stSys = shortenTFuciontKey(t, i18nSysPrefix);
+    const stSys = shortenTFunctionKey(t, i18nSysPrefix);
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);

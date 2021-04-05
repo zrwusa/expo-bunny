@@ -2,7 +2,7 @@ import React from "react";
 import {ScrollView} from "react-native";
 import {Button, ButtonTO, Text, TextBtn, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createStyles} from "./styles";
 import BunnyConstants from "../../constants/constants";
 import {Card, createContainerStyles} from "../../containers";
@@ -12,7 +12,7 @@ import {createSmartStyles} from "../../utils";
 
 const DemoThemeScreen = () => {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.DemoTheme');
+    const st = shortenTFunctionKey(t, 'screens.DemoTheme');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);

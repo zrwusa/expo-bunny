@@ -22,7 +22,7 @@ import DemoSagaScreen from "../../screens/DemoSaga";
 import DemoMapScreen from "../../screens/DemoMap/DemoMap";
 import DemoChatScreen from "../../screens/DemoChat";
 import DemoShareScreen from "../../screens/DemoShare";
-import {Platform, TouchableOpacity, View} from "react-native";
+import {Platform, TouchableOpacity, View,Image} from "react-native";
 import DemoNotificationScreen from "../../screens/DemoNotification/DemoNotification";
 import {NotSupport} from "../../components/NotSupport";
 import TabHomeScreen from "../../screens/DemoTab/Home";
@@ -48,7 +48,7 @@ import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
 import DemoThemeScreen from "../../screens/DemoTheme";
 import {useTranslation} from "react-i18next";
 import {StackNavigationOptions} from "@react-navigation/stack";
-import {IcoMoon, Text} from "../../components/UI";
+import {IcoMoon} from "../../components/UI";
 import {useSizeLabor} from "../../providers/size-labor";
 import {createStyles} from "./styles";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
@@ -137,6 +137,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     const optionsHeaderAndAnimationIG: StackNavigationOptions = {
         animationEnabled: true,
+        headerShown:false,
         headerRight: function () {
             return <View style={{flexDirection: 'row', alignItems: 'center', marginRight: wp(10)}}>
                 <IcoMoon
@@ -162,6 +163,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     }}/></View>
         },
         headerTitleContainerStyle: {},
+        headerTitle:()=><Image style={{width:wp(100),height:wp(30)}}  source={require('../../assets/images/art-font-bunny.png')} />,
         headerTitleStyle: {
             fontSize: ms.fs.m
         },
@@ -490,6 +492,13 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             }
         }
     }
+    const optionsTitleIG = {
+        options: function ({route}: any) {
+            return {
+                title: t(`screens.${route.name}.title`)
+            }
+        }
+    }
 
 
     const navigateToAuth = () => {
@@ -625,7 +634,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="DemoIG" {...optionsTitle} options={optionsHeaderAndAnimationIG}>
+            <RootStack.Screen name="DemoIG" {...optionsTitle} options={optionsHeaderAndAnimationIG} >
                 {
                     (props) => {
                         return <DemoIGStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
@@ -634,7 +643,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                             <DemoIGStack.Screen name="IGSearch" component={IGSearchScreen}
                                                 initialParams={{'keyword': 'keyword-001'}} {...optionsTitle}/>
                             <DemoIGStack.Screen name="IGSettings" component={IGSettingsScreen}
-                                                initialParams={{'item': 'item-001'}} {...optionsTitle}/>
+                                                initialParams={{'item': 'item-001'}}/>
                         </DemoIGStack.Navigator>
                     }
                 }

@@ -28,6 +28,25 @@ export class ScaledImage extends React.PureComponent<ScalableImageProps, Scalabl
         const {uri} = this.props
         const propWidth = this.props.width;
         const propHeight = this.props.height;
+
+        // const ratio = 9 / 16
+        // if (propWidth) {
+        //     this.setState({
+        //         width: propWidth,
+        //         height: propWidth / ratio
+        //     })
+        // } else if (propHeight) {
+        //     this.setState({
+        //         width: propHeight * ratio,
+        //         height: propHeight
+        //     })
+        // } else {
+        //     this.setState({
+        //         width: 100,
+        //         height: 100 / ratio
+        //     })
+        // }
+
         Image.getSize(uri, (width, height) => {
             if (propWidth && !propHeight) {
                 this.setState({width: propWidth, height: height * (propWidth / width)})

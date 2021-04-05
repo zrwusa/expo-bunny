@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import {Button, Pressable, Text, TextInput, TouchableOpacity} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
-import {shortenTFuciontKey} from "../../../providers/i18n-labor";
+import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
@@ -23,7 +23,7 @@ import {createStyles} from "./styles";
 
 function RNHome() {
     const {t} = useTranslation();
-    const st = shortenTFuciontKey(t, 'screens.RNHome');
+    const st = shortenTFunctionKey(t, 'screens.RNHome');
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [modalVisible, setModalVisible] = useState(false);
