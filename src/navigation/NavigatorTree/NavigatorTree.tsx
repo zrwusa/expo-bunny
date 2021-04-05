@@ -137,7 +137,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     const optionsHeaderAndAnimationIG: StackNavigationOptions = {
         animationEnabled: true,
-        headerShown:false,
         headerRight: function () {
             return <View style={{flexDirection: 'row', alignItems: 'center', marginRight: wp(10)}}>
                 <IcoMoon
