@@ -1,7 +1,7 @@
 import * as React from "react";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
-import {DemoIGStackParam, IGHomeBrick, MasonryDatum} from "../../../types";
+import {DemoIGStackParam, IGMediaBrick, MasonryDatum} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";
@@ -39,7 +39,7 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
             column2 = [],
             column3 = [];
 
-        let manyBricks: IGHomeBrick[] = []
+        let manyBricks: IGMediaBrick[] = []
 
         for (let i = 0; i < 1; i++) {
             manyBricks = manyBricks.concat(rawBricks.map(brick => {
@@ -58,7 +58,7 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
                 column3.push(manyBricks[i++]);
             }
         }
-        let newMasonryData: MasonryDatum<IGHomeBrick>[] = []
+        let newMasonryData: MasonryDatum<IGMediaBrick>[] = []
         for (let i = 0; i < 100; i++) {
             newMasonryData.push({id: uuid4(), column1, column2, column3})
         }
@@ -80,19 +80,19 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
         <SafeAreaView style={containerStyles.Screen}>
             <FollowUpSearchBar scrollYValue={scrollYValue}/>
             {isReady ?
-            <Animated.FlatList data={MasonryData}
-                      initialNumToRender={1}
-                      renderItem={({item}) => <Masonry data={item}/>}
-                      keyExtractor={item => item.id}
-                      maxToRenderPerBatch={1}
-                      windowSize={3}
-                      updateCellsBatchingPeriod={100}
-                      onScroll={Animated.event(
-                          [{nativeEvent: {contentOffset: {y: scrollYValue}}}],
-                          {useNativeDriver: true},
-                      )}
-            />
-            : null}
+                <Animated.FlatList data={MasonryData}
+                                   initialNumToRender={1}
+                                   renderItem={({item}) => <Masonry data={item}/>}
+                                   keyExtractor={item => item.id}
+                                   maxToRenderPerBatch={1}
+                                   windowSize={3}
+                                   updateCellsBatchingPeriod={100}
+                                   onScroll={Animated.event(
+                                       [{nativeEvent: {contentOffset: {y: scrollYValue}}}],
+                                       {useNativeDriver: true},
+                                   )}
+                />
+                : null}
         </SafeAreaView>
 
         // isReady ?

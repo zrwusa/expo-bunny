@@ -187,7 +187,7 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
     // todo Typescript check for outline properties bug
-    const webOutline = Platform.OS === 'web' ? { outlineWidth: 0 } : null
+    const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
     const mergedStyle = [{
         color: colors.text,
         paddingHorizontal: ms.sp.l,

@@ -1,4 +1,4 @@
-import {Platform,Keyboard} from "react-native";
+import {Platform, Keyboard} from "react-native";
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
@@ -99,8 +99,8 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                     ? <ButtonTO onPress={async () => {
                         Keyboard.dismiss()
                         try {
-                            const {success} = await  authFunctions.signInGoogle()
-                            if(success)navToReference()
+                            const {success} = await authFunctions.signInGoogle()
+                            if (success) navToReference()
                         } catch (e) {
                             dispatch(sysError(e))
                         }

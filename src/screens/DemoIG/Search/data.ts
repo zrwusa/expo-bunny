@@ -1,7 +1,7 @@
-import {IGHomeBrick, MasonryDatum} from "../../../types";
+import {IGMediaBrick, MasonryDatum} from "../../../types";
 import {uuid4} from "@sentry/utils";
 
-export const defaultMasonryData: MasonryDatum<IGHomeBrick>[] = [
+export const defaultMasonryData: MasonryDatum<IGMediaBrick>[] = [
     {
         "id": "67a1c4d49f8b4080bfe84014db2f9136",
         "column1": [

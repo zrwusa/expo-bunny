@@ -53,6 +53,7 @@ export type DemoTabStackParam = {
 export type DemoIGStackParam = {
     IGHome: undefined;
     IGSearch: { keyword: string };
+    IGMedia: undefined;
     IGSettings: { item: string };
 };
 

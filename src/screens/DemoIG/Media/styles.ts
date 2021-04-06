@@ -3,12 +3,18 @@ import {SizeLabor, ThemeLabor} from "../../../types";
 
 export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX;
+    const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
     return StyleSheet.create({
-        list: {
-            backgroundColor: colors.background,
-            paddingTop: wp(55)
-        }
+        video: {
+            alignSelf: 'center',
+            width: wp(373),
+            height: wp(210),
+        },
+        buttons: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
     });
 }

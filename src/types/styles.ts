@@ -86,7 +86,7 @@ export interface Colors {
     surfaceSecondary: string,
     background: string,
     backgroundSecondary: string,
-    backgroundTertiary:string,
+    backgroundTertiary: string,
     accent: string,
     accentSecondary: string,
 
@@ -105,7 +105,7 @@ export interface Colors {
     onBackgroundSecondary: string,
     disabled: string,
     placeholder: string,
-    placeholderSecondary:string,
+    placeholderSecondary: string,
     backdrop: string,
     backdropSecondary: string,
 
@@ -276,7 +276,7 @@ export type Measure = {
     fontSizes: Size,
     lineHeight: Size,
     borderRadius: Size,
-    zIndex:Size,
+    zIndex: Size,
     bp: {
         smallPhone: number,
         phone: number,

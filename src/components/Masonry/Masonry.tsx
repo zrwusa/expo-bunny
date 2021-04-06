@@ -2,14 +2,14 @@ import * as React from "react";
 import {View} from "../UI";
 import {ScaledImage} from "../ScalableImage/ScalableImage";
 import {uuid4} from "@sentry/utils";
-import {IGHomeBrick, MasonryDatum} from "../../types";
+import {IGMediaBrick, MasonryDatum} from "../../types";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {createStyles} from "./styles";
 
 
-export interface MasonryProps extends WithSizeLabor,WithThemeLabor{
-    data: MasonryDatum<IGHomeBrick>
+export interface MasonryProps extends WithSizeLabor, WithThemeLabor {
+    data: MasonryDatum<IGMediaBrick>
 }
 
 class MasonryInner extends React.PureComponent<MasonryProps> {
@@ -18,11 +18,11 @@ class MasonryInner extends React.PureComponent<MasonryProps> {
     }
 
     render(): React.ReactNode {
-        const {sizeLabor,themeLabor} = this.props
+        const {sizeLabor, themeLabor} = this.props
         const {wp} = sizeLabor.designsBasedOn.iphoneX
         const {column1, column2, column3} = this.props.data
 
-        const styles = createStyles(sizeLabor,themeLabor)
+        const styles = createStyles(sizeLabor, themeLabor)
 
         return (
             <View style={styles.masonry}>

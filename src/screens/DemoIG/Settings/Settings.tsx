@@ -31,9 +31,9 @@ export function IGSettingsScreen({route, navigation}: IGSettingsProps) {
 
     return (
         <SafeAreaView style={containerStyles.Screen}>
-                     <Card title={st(`title`)}>
-                         <Text>{route.params.item}</Text>
-                     </Card>
+            <Card title={st(`title`)}>
+                <Text>{route.params.item}</Text>
+            </Card>
         </SafeAreaView>
     );
 }

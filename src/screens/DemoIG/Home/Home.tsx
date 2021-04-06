@@ -1,22 +1,22 @@
 import * as React from "react";
 import {FlatList, RefreshControl, SafeAreaView} from "react-native";
 import {IncrementId, uuidV4, wait} from "../../../utils";
-import {IGHomeCardDatum} from "../../../types";
-import {IGHomeCard} from "../../../components/IGHomeCard/IGHomeCard";
+import {IGMediaCardDatum} from "../../../types";
+import {IGMediaCard} from "../../../components/IGMediaCard/IGMediaCard";
 import {useEffect, useState} from "react";
 
 export function IGHomeScreen() {
-    const [mannyCardData, setMannyCardData] = useState<IGHomeCardDatum[]>([])
+    const [mannyCardData, setMannyCardData] = useState<IGMediaCardDatum[]>([])
     const [refreshing, setRefreshing] = React.useState(false);
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
     useEffect(() => {
-        const cardData: IGHomeCardDatum[] = [
+        const cardData: IGMediaCardDatum[] = [
             {
                 id: uuidV4(),
-                category:'VIDEO',
+                category: 'VIDEO',
                 user: 'aladdin',
                 userAvatar: {uri: 'https://i.pinimg.com/236x/a6/cd/0a/a6cd0a15d5b2909539dd7944201127d2.jpg'},
                 avSource: {uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'},
@@ -31,7 +31,7 @@ export function IGHomeScreen() {
             },
             {
                 id: uuidV4(),
-                category:'VIDEO',
+                category: 'VIDEO',
                 user: 'Cars with Ivan',
                 userAvatar: {uri: 'https://i.pinimg.com/236x/44/2f/b4/442fb435dfe1ba7ee31c1ee771e5fa01.jpg'},
                 avSource: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/videos/mini-pc.mp4'},
@@ -45,7 +45,7 @@ export function IGHomeScreen() {
             },
             {
                 id: uuidV4(),
-                category:'VIDEO',
+                category: 'VIDEO',
                 user: 'real cop',
                 userAvatar: {uri: 'https://i.pinimg.com/236x/b7/1a/09/b71a09aec5c36e3ac5d4919ca3b34076.jpg'},
                 avSource: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/videos/pickup-truck.mp4'},
@@ -59,7 +59,7 @@ export function IGHomeScreen() {
             },
             {
                 id: uuidV4(),
-                category:'VIDEO',
+                category: 'VIDEO',
                 user: 'tiger finca',
                 userAvatar: {uri: 'https://i.pinimg.com/236x/e4/01/38/e40138e42ba1201b3f73412f526b6cb2.jpg'},
                 avSource: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/videos/big-buck-bunny.mp4'},
@@ -73,7 +73,7 @@ export function IGHomeScreen() {
             },
             {
                 id: uuidV4(),
-                category:'IMAGE',
+                category: 'IMAGE',
                 user: 'McEnany',
                 userAvatar: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany-avatar.jpeg'},
                 imageSource: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany.jpeg'},
@@ -86,14 +86,14 @@ export function IGHomeScreen() {
                 ]
             }
         ]
-        let mannyCardData: IGHomeCardDatum[] = [];
+        let mannyCardData: IGMediaCardDatum[] = [];
 
         const cardIncrementId = new IncrementId('card-')
         const commentIncrementId = new IncrementId('comment-')
 
         for (let i = 0; i < 100; i++) {
             for (let card of cardData) {
-                let newCard: IGHomeCardDatum = {...card, comments: [], id: cardIncrementId.getId()}
+                let newCard: IGMediaCardDatum = {...card, comments: [], id: cardIncrementId.getId()}
                 for (let comment of card.comments) {
                     let newComment = {...comment, id: commentIncrementId.getId()}
                     newCard.comments.push(newComment)
@@ -104,10 +104,10 @@ export function IGHomeScreen() {
         setMannyCardData(mannyCardData)
     }, [])
     return (
-        <SafeAreaView style={{flex:1}}>
+        <SafeAreaView style={{flex: 1}}>
             <FlatList data={mannyCardData}
                       initialNumToRender={1}
-                      renderItem={({item}) => <IGHomeCard card={item}/>}
+                      renderItem={({item}) => <IGMediaCard card={item}/>}
                       keyExtractor={item => item.id}
                       refreshControl={
                           <RefreshControl
@@ -134,26 +134,26 @@ export function IGHomeScreen() {
 // import {AVPlaybackSource} from "expo-av/src/AV";
 // import {ReadMore} from "../../../components/ReadMore/ReadMore";
 //
-// function IGHomeCard() {
+// function IGMediaCard() {
 //     const {theme} = useThemeLabor();
 //     const {ms, designsBasedOn} = useSizeLabor()
 //     const {wp} = designsBasedOn.iphoneX
 //     const {colors, fonts} = theme;
 //     const bottomBarIconColor = colors.text
-//     type IGHomeCardCommentDatum = {
+//     type IGMediaCardCommentDatum = {
 //         id: string,
 //         text: string
 //     }
-//     type IGHomeCardDatum = {
+//     type IGMediaCardDatum = {
 //         id: string,
 //         user: string,
 //         userAvatar:ImageSourcePropType,
 //         avSource?: AVPlaybackSource,
 //         imageSource?: ImageSourcePropType,
 //         likes: number,
-//         comments: IGHomeCardCommentDatum[]
+//         comments: IGMediaCardCommentDatum[]
 //     }
-//     const cardData: IGHomeCardDatum[] = [
+//     const cardData: IGMediaCardDatum[] = [
 //         {
 //             id: uuidV4(),
 //             user: 'aladdin',
@@ -208,7 +208,7 @@ export function IGHomeScreen() {
 //             ]
 //         }
 //     ]
-//     let mannyCardData:IGHomeCardDatum[] = [];
+//     let mannyCardData:IGMediaCardDatum[] = [];
 //     for(let i=0;i<1;i++){
 //         mannyCardData = mannyCardData.concat(cardData.map(card=>{
 //             card.id = uuidV4();
@@ -299,7 +299,7 @@ export function IGHomeScreen() {
 //     return (
 //         <ScrollView>
 //             <View style={[containerStyles.Screen]}>
-//                 <IGHomeCard/>
+//                 <IGMediaCard/>
 //
 //             </View>
 //         </ScrollView>

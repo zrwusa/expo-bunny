@@ -28,7 +28,6 @@ import {NotSupport} from "../../components/NotSupport";
 import TabHomeScreen from "../../screens/DemoTab/Home";
 import TabSettingsScreen from "../../screens/DemoTab/Settings";
 import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef, RouteProp} from "@react-navigation/native";
-import * as Linking from "expo-linking";
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
 import DrawerHomeScreen from "../../screens/DemoDrawer/Home";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/Settings";
@@ -71,6 +70,7 @@ import {IGSettingsScreen} from "../../screens/DemoIG/Settings";
 import {IGSearchScreen} from "../../screens/DemoIG/Search";
 import {DemoSearchScreen} from "../../screens/DemoSearch";
 import {linking} from "./linking";
+import {IGMediaScreen} from "../../screens/DemoIG/Media";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -393,6 +393,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                             <DemoIGStack.Screen name="IGHome" component={IGHomeScreen} options={optionsMergeWithTitle()}/>
                             <DemoIGStack.Screen name="IGSearch" component={IGSearchScreen}
                                                 initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
+                            <DemoIGStack.Screen name="IGMedia" component={IGMediaScreen} options={optionsMergeWithTitle()}/>
                             <DemoIGStack.Screen name="IGSettings" component={IGSettingsScreen}
                                                 initialParams={{'item': 'item-001'}}/>
                         </DemoIGStack.Navigator>

@@ -73,7 +73,7 @@ export class ReadMore extends React.Component<ReadMoreProps> {
                     {this.props.children}
                 </Text>
 
-                <View style={{alignItems:'flex-end'}}>{this._maybeRenderReadMore()}</View>
+                <View style={{alignItems: 'flex-end'}}>{this._maybeRenderReadMore()}</View>
             </View>
         );
     }

@@ -34,23 +34,23 @@ export type DemoSaga = {
     text: string
 }
 
-export type IGHomeCardCommentDatum = {
+export type IGMediaCardCommentDatum = {
     id: string,
     text: string
 }
-export type IGHomeCardCategory = 'IMAGE'|'VIDEO'
-export type IGHomeCardDatum = {
+export type IGMediaCardCategory = 'IMAGE' | 'VIDEO'
+export type IGMediaCardDatum = {
     id: string,
-    category:IGHomeCardCategory,
+    category: IGMediaCardCategory,
     user: string,
     userAvatar: ImageSourcePropType,
     avSource?: AVPlaybackSource,
-    imageSource?:ImageSourcePropType,
+    imageSource?: ImageSourcePropType,
     likes: number,
-    comments: IGHomeCardCommentDatum[]
+    comments: IGMediaCardCommentDatum[]
 }
 
-export type IGHomeBrick = {
+export type IGMediaBrick = {
     id: string,
     text: string,
     uri: string

@@ -110,8 +110,8 @@ export const tabBarIconNameConfig: JSONSerializable = {
         focused: 'shopping-bag',
     },
     IGSettings: {
-        default: 'tv',
-        focused: 'shopping-bag',
+        default: 'settings',
+        focused: 'settings',
     },
 
 }

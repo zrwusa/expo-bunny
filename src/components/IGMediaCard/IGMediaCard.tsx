@@ -6,15 +6,15 @@ import {ReadMore} from "../ReadMore/ReadMore";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import * as React from "react";
-import {IGHomeCardDatum} from "../../types";
+import {IGMediaCardDatum} from "../../types";
 import {createStyles} from "./styles";
 
-interface IGHomeCardProps extends WithSizeLabor, WithThemeLabor {
-    card: IGHomeCardDatum
+interface IGMediaCardProps extends WithSizeLabor, WithThemeLabor {
+    card: IGMediaCardDatum
 }
 
-class IGHomeCardInner extends PureComponent<IGHomeCardProps> {
-    constructor(props: IGHomeCardProps) {
+class IGMediaCardInner extends PureComponent<IGMediaCardProps> {
+    constructor(props: IGMediaCardProps) {
         super(props)
     }
 
@@ -86,4 +86,4 @@ class IGHomeCardInner extends PureComponent<IGHomeCardProps> {
 
 }
 
-export const IGHomeCard = withSizeLabor(withThemeLabor(IGHomeCardInner))
+export const IGMediaCard = withSizeLabor(withThemeLabor(IGMediaCardInner))

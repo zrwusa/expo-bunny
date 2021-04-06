@@ -123,7 +123,7 @@ export const getThemeWareHouse = () => {
                 light: pl.grey200,
                 dark: pl.grey800
             },
-            backgroundTertiary:{
+            backgroundTertiary: {
                 light: pl.white,
                 dark: pl.black
             },

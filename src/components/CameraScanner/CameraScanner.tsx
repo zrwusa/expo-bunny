@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Camera } from 'expo-camera';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Camera} from 'expo-camera';
 
 export function CameraScanner() {
     const [hasPermission, setHasPermission] = useState(false);
@@ -8,13 +8,13 @@ export function CameraScanner() {
 
     useEffect(() => {
         (async () => {
-            const { status } = await Camera.requestPermissionsAsync();
+            const {status} = await Camera.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
     }, []);
 
     if (hasPermission === null) {
-        return <View />;
+        return <View/>;
     }
     if (hasPermission === false) {
         return <Text>No access to camera</Text>;

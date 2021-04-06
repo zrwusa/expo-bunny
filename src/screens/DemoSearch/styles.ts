@@ -6,8 +6,9 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
     return StyleSheet.create({
-        list:{
+        list: {
             backgroundColor: colors.background,
-            paddingTop: wp(55)}
+            paddingTop: wp(55)
+        }
     });
 }

@@ -1,4 +1,5 @@
 import * as Linking from "expo-linking";
+
 export const basePath = Linking.makeUrl('/');
 
 export const linking = {
@@ -202,6 +203,10 @@ export const linking = {
                         parse: {
                             item: (keyword: string) => `${keyword}`,
                         },
+                    },
+                    IGMedia: {
+                        name: 'IGMedia',
+                        path: 'media',
                     },
                     IGSettings: {
                         name: 'IGSettings',
