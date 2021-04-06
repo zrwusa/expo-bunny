@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FlatList,RefreshControl} from "react-native";
+import {FlatList, RefreshControl, SafeAreaView} from "react-native";
 import {IncrementId, uuidV4, wait} from "../../../utils";
 import {IGHomeCardDatum} from "../../../types";
 import {IGHomeCard} from "../../../components/IGHomeCard/IGHomeCard";
@@ -104,17 +104,19 @@ export function IGHomeScreen() {
         setMannyCardData(mannyCardData)
     }, [])
     return (
-        <FlatList data={mannyCardData}
-                  initialNumToRender={1}
-                  renderItem={({item}) => <IGHomeCard card={item}/>}
-                  keyExtractor={item => item.id}
-                  refreshControl={
-                      <RefreshControl
-                          refreshing={refreshing}
-                          onRefresh={onRefresh}
-                      />
-                  }
-        />
+        <SafeAreaView style={{flex:1}}>
+            <FlatList data={mannyCardData}
+                      initialNumToRender={1}
+                      renderItem={({item}) => <IGHomeCard card={item}/>}
+                      keyExtractor={item => item.id}
+                      refreshControl={
+                          <RefreshControl
+                              refreshing={refreshing}
+                              onRefresh={onRefresh}
+                          />
+                      }
+            />
+        </SafeAreaView>
     );
 }
 
@@ -134,8 +136,8 @@ export function IGHomeScreen() {
 //
 // function IGHomeCard() {
 //     const {theme} = useThemeLabor();
-//     const {ms, responsive} = useSizeLabor()
-//     const {wp} = responsive.iphoneX
+//     const {ms, designsBasedOn} = useSizeLabor()
+//     const {wp} = designsBasedOn.iphoneX
 //     const {colors, fonts} = theme;
 //     const bottomBarIconColor = colors.text
 //     type IGHomeCardCommentDatum = {

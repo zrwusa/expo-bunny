@@ -42,8 +42,8 @@ function CryptoCurrencyHomeScreen() {
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
     const {} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
-    const {ms, responsive} = sizeLabor;
-    const {wp} = responsive.iphoneX;
+    const {ms, designsBasedOn} = sizeLabor;
+    const {wp} = designsBasedOn.iphoneX;
     const [btcData, setBtcData] = useState([
         {x: new Date('1990-01-01'), y: 5}
     ]);

@@ -6,7 +6,7 @@ import {isLeafParent, isSameStructure, pl, reverseColor} from "../../utils";
 import getSizeLabor from "../size-labor/sizeLabor";
 
 export const getThemeWareHouse = () => {
-    const {wp} = getSizeLabor().responsive.iphoneX
+    const {wp} = getSizeLabor().designsBasedOn.iphoneX
     const colorScale = [
         {light: pl.deepOrange600, dark: reverseColor(pl.deepOrange600)},
         {light: pl.yellow200, dark: reverseColor(pl.yellow200)},
@@ -123,6 +123,10 @@ export const getThemeWareHouse = () => {
                 light: pl.grey200,
                 dark: pl.grey800
             },
+            backgroundTertiary:{
+                light: pl.white,
+                dark: pl.black
+            },
             accent: {
                 light: pl.purple500,
                 dark: pl.blue600
@@ -190,6 +194,10 @@ export const getThemeWareHouse = () => {
             placeholder: {
                 light: color(pl.black).alpha(0.54).rgb().string(),
                 dark: color(pl.white).alpha(0.54).rgb().string(),
+            },
+            placeholderSecondary: {
+                light: color(pl.black).alpha(0.32).rgb().string(),
+                dark: color(pl.white).alpha(0.32).rgb().string(),
             },
             backdrop: {
                 light: color(pl.black).alpha(0.5).rgb().string(),

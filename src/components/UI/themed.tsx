@@ -4,7 +4,7 @@ import {
     Button as ButtonRN,
     ButtonProps,
     Image as ImageRN,
-    ImageProps,
+    ImageProps, Platform,
     Pressable as PressableRN,
     PressableProps,
     StyleProp,
@@ -186,9 +186,10 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
 export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
+    // todo Typescript check for outline properties bug
+    const webOutline = Platform.OS === 'web' ? { outlineWidth: 0 } : null
     const mergedStyle = [{
         color: colors.text,
-        marginTop: ms.sp.s,
         paddingHorizontal: ms.sp.l,
         paddingVertical: ms.sp.m,
         fontSize: ms.fs.m,
@@ -206,8 +207,8 @@ export type SwitchPaperProps = React.ComponentPropsWithRef<typeof SwitchRN> & {
 };
 export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const {responsive} = useSizeLabor();
-    const {wp} = responsive.iphoneX;
+    const {designsBasedOn} = useSizeLabor();
+    const {wp} = designsBasedOn.iphoneX;
     const mergedStyle = [{
         transform: [{scaleX: wp(0.8, false)}, {scaleY: wp(0.8, false)}],
     }, style]
@@ -249,8 +250,8 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
 
 export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, style, Icon, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    const {ms, responsive} = useSizeLabor();
-    const {wp} = responsive.iphoneX;
+    const {ms, designsBasedOn} = useSizeLabor();
+    const {wp} = designsBasedOn.iphoneX;
     const mergedIconStyle = []
     const IconProp = Icon || (() => <IcoMoon name="chevron-right"
                                              style={{

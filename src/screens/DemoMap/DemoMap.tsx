@@ -62,8 +62,8 @@ class DemoMapScreen extends Component<DemoMapProps> {
 
     async componentDidMount() {
         const {sizeLabor, themeLabor} = this.props;
-        const {responsive} = sizeLabor;
-        const {wp} = responsive.iphoneX;
+        const {designsBasedOn} = sizeLabor;
+        const {wp} = designsBasedOn.iphoneX;
         this.animation.addListener(({value}) => {
             let index = Math.floor(value / getCardSize(sizeLabor, themeLabor).width + wp(0.3)); // animate 30% away from landing on the next item
             if (index >= this.props.demoNearbyFilms.length) {
@@ -109,10 +109,10 @@ class DemoMapScreen extends Component<DemoMapProps> {
     render(): React.ReactNode {
         const {sizeLabor, themeLabor} = this.props;
         const {theme} = themeLabor;
-        const {responsive} = sizeLabor;
+        const {designsBasedOn} = sizeLabor;
         const containerStyles = createContainerStyles(sizeLabor, themeLabor);
         const styles = createStyles(sizeLabor, themeLabor);
-        const {wp} = responsive.iphoneX;
+        const {wp} = designsBasedOn.iphoneX;
         const {width} = getCardSize(sizeLabor, themeLabor);
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {
             const inputRange = [

@@ -19,7 +19,7 @@ class MasonryInner extends React.PureComponent<MasonryProps> {
 
     render(): React.ReactNode {
         const {sizeLabor,themeLabor} = this.props
-        const {wp} = sizeLabor.responsive.iphoneX
+        const {wp} = sizeLabor.designsBasedOn.iphoneX
         const {column1, column2, column3} = this.props.data
 
         const styles = createStyles(sizeLabor,themeLabor)

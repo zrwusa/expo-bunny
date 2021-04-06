@@ -2,8 +2,8 @@ import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../types";
 
 export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {ms, responsive} = sizeLabor;
-    const {wp, hp} = responsive.iphoneX;
+    const {ms, designsBasedOn} = sizeLabor;
+    const {wp, hp} = designsBasedOn.iphoneX;
     return StyleSheet.create({
         imageProgressive: {
             width: wp(370),

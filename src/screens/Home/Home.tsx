@@ -30,7 +30,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
-    const {wp} = sizeLabor.responsive.iphoneX;
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme
     const iconColor = {color: colors.btnText};
     return (

@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {Platform, SafeAreaView, StatusBar, Text} from "react-native";
+import {Platform, StatusBar, Text} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch, useSelector} from "react-redux";
 import {AppearanceProvider} from "react-native-appearance";

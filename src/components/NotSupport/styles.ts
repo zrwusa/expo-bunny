@@ -4,7 +4,7 @@ import {SizeLabor, ThemeLabor} from "../../types";
 export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {theme} = themeLabor;
     const {colors} = theme;
-    const {wp} = sizeLabor.responsive.iphoneX;
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
     return StyleSheet.create({
         container: {
             flex: 1,

@@ -81,9 +81,9 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 
 // Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
-    const {ms, responsive} = useSizeLabor();
+    const {ms, designsBasedOn} = useSizeLabor();
     const dispatch = useDispatch();
-    const {wp} = responsive.iphoneX;
+    const {wp} = designsBasedOn.iphoneX;
     const {colors} = useThemeLabor().theme;
     const {t} = useTranslation();
     const styles = createStyles();
@@ -137,6 +137,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     const optionsHeaderAndAnimationIG: StackNavigationOptions = {
         animationEnabled: true,
+        headerShown:false,
         headerRight: function () {
             return <View style={{flexDirection: 'row', alignItems: 'center', marginRight: wp(10)}}>
                 <IcoMoon

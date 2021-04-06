@@ -1,6 +1,6 @@
 import {heightPercentageToDP as hp2dp, widthPercentageToDP as wp2dp} from "./responsiveScreen";
 import bunnyConfig from "../../config";
-import {DimensionKeys, Measure, Responsive} from "../../types";
+import {DimensionKeys, Measure, DesignsBasedOn} from "../../types";
 
 const getSizeLabor = () => {
     const defaultDimensionFun = {
@@ -11,7 +11,7 @@ const getSizeLabor = () => {
             return hp2dp((height / 812), shouldRound);
         }
     }
-    let responsive: Responsive = {
+    let designsBasedOn: DesignsBasedOn = {
         bunnyUI: defaultDimensionFun,
         iphoneX: defaultDimensionFun,
         iPad: defaultDimensionFun,
@@ -24,7 +24,7 @@ const getSizeLabor = () => {
     const dimensions = bunnyConfig.UE.dimensions;
     // let i: DimensionKeys
     // for (i in dimensions) {
-    //     responsive[i] = {
+    //     designsBasedOn[i] = {
     //         wp: (width: number, shouldRound?: boolean) => {
     //             return wp2dp((width / dimensions[i]['width']), shouldRound);
     //         },
@@ -35,7 +35,7 @@ const getSizeLabor = () => {
     // }
     const keys = Object.keys(dimensions) as Array<DimensionKeys>
     keys.forEach(function (key) {
-        responsive[key] = {
+        designsBasedOn[key] = {
             wp: (width: number, shouldRound?: boolean) => {
                 return wp2dp((width / dimensions[key]['width']), shouldRound);
             },
@@ -44,8 +44,9 @@ const getSizeLabor = () => {
             }
         };
     })
-    const _responsive = responsive;
-    const {wp} = _responsive.iphoneX;
+    const _designsBasedOn = designsBasedOn;
+    const {wp} = _designsBasedOn.iphoneX;
+    // todo need typescript to constrain types
     const measureObj = {
         breakpoints: {
             smallPhone: 0,
@@ -61,7 +62,7 @@ const getSizeLabor = () => {
             xl: wp(32),
             xxl: wp(64),
         },
-        sizes: {
+        percentageSizes: {
             s1: '8.33333%',
             s2: '16.6666%',
             s3: '24.9999%',
@@ -102,20 +103,30 @@ const getSizeLabor = () => {
             xl: wp(64),
             xxl: wp(128),
         },
+        zIndex: {
+            xxs: 10,
+            xs: 100,
+            s: 1000,
+            m: 10000,
+            l: 100000,
+            xl: 1000000,
+            xxl: 10000000
+        },
     };
     const _measure = {
         ...measureObj,
         bp: measureObj.breakpoints,
-        sz: measureObj.sizes,
+        ps: measureObj.percentageSizes,
         sp: measureObj.spacings,
         fs: measureObj.fontSizes,
         lh: measureObj.lineHeight,
-        br: measureObj.borderRadius
+        br: measureObj.borderRadius,
+        zi: measureObj.zIndex
     } as Measure;
 
     return {
-        responsive: _responsive,
-        rs: _responsive,
+        designsBasedOn: _designsBasedOn,
+        dbo: _designsBasedOn,
         measure: _measure,
         ms: _measure,
     }

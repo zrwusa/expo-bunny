@@ -110,8 +110,8 @@ src/config.json
 in your pages or styles
 
 ```javascript
-    const {responsive} = sizeLabor;
-    const {wp} = responsive.iphoneX;
+    const {designsBasedOn} = sizeLabor;
+    const {wp} = designsBasedOn.iphoneX;
     <View style={{width:wp(100),height:wp(100)}}></View>
 ```
 

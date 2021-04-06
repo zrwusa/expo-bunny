@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Text, View} from "../../../components/UI";
+import {AnimatedFlatListMasonryDatum, Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {Brick, DemoIGStackParam, MasonryDatum} from "../../../types";
@@ -9,10 +9,11 @@ import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {createStyles} from "./styles";
-import {FlatList, VirtualizedList} from "react-native";
+import {Animated, SafeAreaView} from "react-native";
 import {uuid4} from "@sentry/utils";
 import {useEffect, useState} from "react";
 import {Masonry} from "../../../components/Masonry/Masonry";
+import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
 
 type IGSearchRouteProp = RouteProp<DemoIGStackParam, 'IGSearch'>;
 type IGSearchNavigationProp = BottomTabNavigationProp<DemoIGStackParam, 'IGSearch'>;
@@ -22,12 +23,11 @@ export interface IGSearchProps {
     navigation: IGSearchNavigationProp
 }
 
-
 export function IGSearchScreen({route, navigation}: IGSearchProps) {
     const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.IGSearch');
     const sizeLabor = useSizeLabor();
-    const {wp} = sizeLabor.responsive.iphoneX
+    const {wp} = sizeLabor.designsBasedOn.iphoneX
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor)
@@ -868,17 +868,26 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
     const getItemCount = function (data: []) {
         return data.length;
     }
+    const [scrollYValue] = useState(new Animated.Value(0));
     return (
-        isReady ?
-            <FlatList data={MasonryData}
+        <SafeAreaView style={containerStyles.Screen}>
+            <FollowUpSearchBar scrollYValue={scrollYValue}/>
+            {isReady ?
+            <AnimatedFlatListMasonryDatum data={MasonryData}
                       initialNumToRender={1}
                       renderItem={({item}) => <Masonry data={item}/>}
                       keyExtractor={item => item.id}
                       maxToRenderPerBatch={1}
                       windowSize={3}
                       updateCellsBatchingPeriod={100}
+                      onScroll={Animated.event(
+                          [{nativeEvent: {contentOffset: {y: scrollYValue}}}],
+                          {useNativeDriver: true},
+                      )}
             />
-            : null
+            : null}
+        </SafeAreaView>
+
         // isReady ?
         // <VirtualizedList
         //     data={MasonryData}

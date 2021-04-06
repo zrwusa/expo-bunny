@@ -22,7 +22,7 @@ function DemoThirdPartScreen(props: Props) {
     })
 
     const sizeLabor = useSizeLabor();
-    const {wp} = sizeLabor.responsive.iphoneX;
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.DemoThirdPart');

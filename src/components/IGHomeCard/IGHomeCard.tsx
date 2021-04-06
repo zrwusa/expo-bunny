@@ -20,9 +20,9 @@ class IGHomeCardInner extends PureComponent<IGHomeCardProps> {
 
     render() {
         const {sizeLabor, themeLabor} = this.props
-        const {responsive} = this.props.sizeLabor
+        const {designsBasedOn} = this.props.sizeLabor
         const {theme} = this.props.themeLabor;
-        const {wp} = responsive.iphoneX
+        const {wp} = designsBasedOn.iphoneX
         const {colors} = theme;
         const bottomBarIconColor = colors.text;
         const styles = createStyles(sizeLabor, themeLabor)

@@ -2,9 +2,9 @@ import {JSONSerializable, SizeLabor, ThemeLabor} from "../types";
 import {StyleSheet} from "react-native";
 
 export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {ms, responsive} = sizeLabor;
+    const {ms, designsBasedOn} = sizeLabor;
     const {colors, fonts} = themeLabor.theme;
-    const {wp} = responsive.iphoneX;
+    const {wp} = designsBasedOn.iphoneX;
     const smartStyles = StyleSheet.create({
         h1: {
             fontSize: ms.fs.xxl,

@@ -30,7 +30,7 @@ function ProfileScreen({route, navigation}: Props) {
     const st = shortenTFunctionKey(t, 'screens.Profile');
     const avatar_url = 'https://raw.githubusercontent.com/zrwusa/assets/master/images/alert-orange-border.png';
     const sizeLabor = useSizeLabor();
-    const {wp} = sizeLabor.responsive.iphoneX;
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const styles = createStyles(sizeLabor, themeLabor)

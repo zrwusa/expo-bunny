@@ -5,13 +5,16 @@ import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings"
 import {DemoIGStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {Card, createContainerStyles} from "../../../containers";
+import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {Animated, Platform, SafeAreaView, StatusBar} from "react-native";
+import {Animated} from "react-native";
 import {useState} from "react";
-import SearchComponent from "./SearchComponent";
 import {uuidV4} from "../../../utils";
+import {SafeAreaView} from "react-native";
+import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
+import {createStyles} from "./styles";
+
 
 type IGSettingsRouteProp = RouteProp<DemoIGStackParam, 'IGSettings'>;
 type IGSettingsNavigationProp = BottomTabNavigationProp<DemoIGStackParam, 'IGSettings'>;
@@ -29,6 +32,8 @@ export function IGSettingsScreen({route, navigation}: IGSettingsProps) {
     const {theme} = themeLabor
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
+    const styles = createStyles(sizeLabor, themeLabor)
+
     // return (
     //     <View style={containerStyles.Screen}>
     //         <Card title={st(`title`)}>
@@ -37,48 +42,35 @@ export function IGSettingsScreen({route, navigation}: IGSettingsProps) {
     //     </View>
     // );
 
-    const [scrollYValue, setScrollYValue] = useState(new Animated.Value(0));
-    const clampedScroll = Animated.diffClamp(
-        Animated.add(
-            scrollYValue.interpolate({
-                inputRange: [0, 10],
-                outputRange: [0, 1],
-                extrapolateLeft: 'clamp',
-            }),
-            new Animated.Value(0),
-        ),
-        0,
-        50,
-    )
-    const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const [scrollYValue] = useState(new Animated.Value(0));
+
+    const array = [];
+    for (let i = 0; i < 1000; i++) {
+        array.push(i)
+    }
     return (
-        <Animated.View style={{flex:1}}>
-            <SafeAreaView style={{flex:1}}>
-                <SearchComponent clampedScroll={clampedScroll} />
+        <SafeAreaView style={containerStyles.Screen}>
+            <Animated.View style={containerStyles.FullFill}>
+                <FollowUpSearchBar scrollYValue={scrollYValue}
+                                   defaultKeywords={['a', 'b']}
+                                   onSearch={() => {
+                                       console.log('---onSearch')
+                                   }}
+                                   onSearchResult={(searchResult) => {
+                                       console.log('---onSearchResult')
+                                   }}
+                />
                 <Animated.ScrollView
                     showsVerticalScrollIndicator={false}
-                    style={{
-                        // height:600,
-                        // flex:1,
-                        // margin: 20,
-                        backgroundColor: 'white',
-                        paddingTop: 55
-                    }}
-                    contentContainerStyle={{
-                        // display: 'flex',
-                        // flexDirection: 'row',
-                        // flexWrap: 'wrap',
-                        // justifyContent: 'space-around'
-                    }}
+                    style={styles.list}
                     onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { y: scrollYValue } } }],
-                        { useNativeDriver: true },
-                        // () => { },          // Optional async listener
+                        [{nativeEvent: {contentOffset: {y: scrollYValue}}}],
+                        {useNativeDriver: true},
                     )}
                     contentInsetAdjustmentBehavior="automatic">
-                    {array.map(item => <View key={uuidV4()} style={{height:100,width:375}}><Text>xxx</Text></View>)}
+                    {array.map(item => <View key={uuidV4()} style={{height: 100, width: 375}}><Text>{item}</Text></View>)}
                 </Animated.ScrollView>
-            </SafeAreaView>
-        </Animated.View>
+            </Animated.View>
+        </SafeAreaView>
     );
 }

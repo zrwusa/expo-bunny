@@ -16,13 +16,13 @@ export type DimensionFun = {
     wp: (width: number, shouldRound?: boolean) => number,
     hp: (height: number, shouldRound?: boolean) => number
 }
-export type Responsive = {
+export type DesignsBasedOn = {
     [key in DimensionKeys]: DimensionFun
 }
 
 export type Dimension = { width: number, height: number };
 export type SizeLabor = {
-    responsive: Responsive,
+    designsBasedOn: DesignsBasedOn,
     measure: Measure,
     ms: Measure,
 }
@@ -86,6 +86,7 @@ export interface Colors {
     surfaceSecondary: string,
     background: string,
     backgroundSecondary: string,
+    backgroundTertiary:string,
     accent: string,
     accentSecondary: string,
 
@@ -104,6 +105,7 @@ export interface Colors {
     onBackgroundSecondary: string,
     disabled: string,
     placeholder: string,
+    placeholderSecondary:string,
     backdrop: string,
     backdropSecondary: string,
 
@@ -257,7 +259,7 @@ export type Measure = {
         tablet: number,
     },
     spacings: Size,
-    sizes: {
+    percentageSizes: {
         s1: string,
         s2: string,
         s3: string,
@@ -274,12 +276,13 @@ export type Measure = {
     fontSizes: Size,
     lineHeight: Size,
     borderRadius: Size,
+    zIndex:Size,
     bp: {
         smallPhone: number,
         phone: number,
         tablet: number,
     },
-    sz: {
+    ps: {
         s1: string,
         s2: string,
         s3: string,
@@ -296,7 +299,8 @@ export type Measure = {
     sp: Size,
     fs: Size,
     lh: Size,
-    br: Size
+    br: Size,
+    zi: Size
 }
 export type Size = {
     xxs: number,

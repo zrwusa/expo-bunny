@@ -4,8 +4,8 @@ import {createSmartStyles} from "../../utils";
 
 
 export const getCardSize = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {responsive} = sizeLabor;
-    const {wp, hp} = responsive.iphoneX;
+    const {designsBasedOn} = sizeLabor;
+    const {wp, hp} = designsBasedOn.iphoneX;
     const {width, height} = Dimensions.get('window');
     const CARD_WIDTH = wp(100);
     const CARD_HEIGHT = 1.4 * CARD_WIDTH;
@@ -15,8 +15,8 @@ export const getCardSize = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     }
 }
 const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {ms, responsive} = sizeLabor;
-    const {wp, hp} = responsive.iphoneX;
+    const {ms, designsBasedOn} = sizeLabor;
+    const {wp, hp} = designsBasedOn.iphoneX;
     const {width, height} = Dimensions.get('window');
     const {colors} = themeLabor.theme
 

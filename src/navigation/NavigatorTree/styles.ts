@@ -2,8 +2,8 @@ import {Platform, StyleSheet} from "react-native";
 import {useSizeLabor} from "../../providers/size-labor";
 
 export const createStyles = () => {
-    const {measure, responsive} = useSizeLabor();
-    const {wp} = responsive.iphoneX;
+    const {measure, designsBasedOn} = useSizeLabor();
+    const {wp} = designsBasedOn.iphoneX;
     return StyleSheet.create({
         headerBackImage: {
             fontSize: measure.fontSizes.xxl,

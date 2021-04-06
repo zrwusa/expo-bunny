@@ -1,4 +1,4 @@
-import {Platform} from "react-native";
+import {Platform,Keyboard} from "react-native";
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
@@ -47,28 +47,26 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
 
     return (
         <View style={containerStyles.Screen}>
-            <TextInput placeholder={st(`username`)} value={username} onChangeText={(value) => {
+            <TextInput placeholder={st(`username`)} textContentType="username" value={username} onChangeText={(value) => {
                 setUsername(value)
             }}/>
-            <TextInput placeholder={st(`password`)} value={password} onChangeText={(value) => {
+            <TextInput placeholder={st(`password`)} textContentType="password" value={password} onChangeText={(value) => {
                 setPassword(value)
             }} secureTextEntry/>
             {
                 type === 'sign-in'
                     ? <>
                         <ButtonTO onPress={async () => {
+                            Keyboard.dismiss()
                             try {
                                 await authFunctions.signIn({email: username, password: password})
                                 navToReference()
-                                // navigation.reset({
-                                //     index: 0,
-                                //     routes: [referenceRoute],
-                                // });
                             } catch (e) {
                                 dispatch(sysError(e))
                             }
                         }}>{st(`signIn`)}</ButtonTO>
                         <ButtonTO onPress={async () => {
+                            Keyboard.dismiss()
                             try {
                                 await authFunctions.signInDummy()
                                 navToReference()
@@ -82,6 +80,7 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                     </>
                     : <>
                         <ButtonTO onPress={async () => {
+                            Keyboard.dismiss()
                             try {
                                 await authFunctions.signUp({email: username, password: password})
                                 navToReference()
@@ -90,6 +89,7 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
                             }
                         }}>{st(`signUp`)}</ButtonTO>
                         <ButtonTO onPress={() => {
+                            Keyboard.dismiss()
                             setType('sign-in')
                         }}>{st(`goToSignIn`)}</ButtonTO>
                     </>
@@ -97,9 +97,10 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
             {
                 Platform.OS !== 'web'
                     ? <ButtonTO onPress={async () => {
+                        Keyboard.dismiss()
                         try {
-                            await authFunctions.signInGoogle()
-                            navToReference()
+                            const {success} = await  authFunctions.signInGoogle()
+                            if(success)navToReference()
                         } catch (e) {
                             dispatch(sysError(e))
                         }
