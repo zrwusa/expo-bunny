@@ -224,6 +224,10 @@ export const linking = {
                     item: (keyword: string) => `${keyword}`,
                 },
             },
+            Playground: {
+                name: 'Playground',
+                path: 'playground',
+            },
             Settings: {
                 name: 'Settings',
                 path: 'settings',

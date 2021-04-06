@@ -229,9 +229,6 @@
     "IGSettings": {
       "title": "IGSettings"
     },
-    "DemoSearch": {
-      "title": "DemoSearch"
-    },
     "CryptoCurrencyAlert": {
       "title": "Alert",
       "paramIsPush": "Param isPush: ",
@@ -245,6 +242,12 @@
       "remindTimesLabel": "Remind times",
       "remindIntervalLabel": "Remind interval",
       "currentPriceLabel": "Current price"
+    },
+    "DemoSearch": {
+      "title": "DemoSearch"
+    },
+    "Playground": {
+      "title": "Playground"
     },
     "Settings": {
       "title": "Settings",

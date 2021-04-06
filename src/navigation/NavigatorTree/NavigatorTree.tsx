@@ -71,6 +71,7 @@ import {IGSearchScreen} from "../../screens/DemoIG/Search";
 import {DemoSearchScreen} from "../../screens/DemoSearch";
 import {linking} from "./linking";
 import {IGMediaScreen} from "../../screens/DemoIG/Media";
+import {PlaygroundScreen} from "../../screens/Playground";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -400,6 +401,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     }
                 }
             </RootStack.Screen>
+            <RootStack.Screen name="Playground" component={PlaygroundScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="Settings" component={SettingsScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} options={optionsMergeWithTitle()}/>

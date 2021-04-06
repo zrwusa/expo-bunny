@@ -43,6 +43,7 @@ export type RootStackParam = {
     DemoCryptoCurrency: undefined | { screen: string; params?: { [key: string]: any } };
     DemoIG: undefined | { screen: string; params?: { [key: string]: any } };
     DemoSearch: undefined | { keyword: string };
+    Playground: undefined;
     Settings: undefined;
 };
 export type DemoTabStackParam = {

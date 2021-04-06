@@ -245,6 +245,9 @@
     "DemoSearch": {
       "title": "示例-搜索"
     },
+    "Playground": {
+      "title": "游乐场"
+    },
     "Settings": {
       "title": "设置",
       "darkTheme": "暗色主题",
