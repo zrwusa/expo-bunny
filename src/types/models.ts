@@ -49,3 +49,12 @@ export type IGHomeCardDatum = {
     likes: number,
     comments: IGHomeCardCommentDatum[]
 }
+
+export type IGHomeBrick = {
+    id: string,
+    text: string,
+    uri: string
+}
+
+export type DemoSearchDummyDatum = { id: number, text: string }
+

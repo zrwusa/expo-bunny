@@ -42,6 +42,7 @@
       "demoTheme": "样例-主题",
       "demoSuspense": "样例-Suspense",
       "cryptoCurrency": "加密币",
+      "demoSearch": "示例-搜索",
       "settings": "设置",
       "signOut": "注销"
     },
@@ -228,6 +229,21 @@
       "remindTimesLabel": "提醒次数",
       "remindIntervalLabel": "提醒周期",
       "currentPriceLabel": "当前价格"
+    },
+    "DemoIG": {
+      "title": "示例-IG"
+    },
+    "IGHome": {
+      "title": "IG-主页"
+    },
+    "IGSearch": {
+      "title": "IG-搜索"
+    },
+    "IGSettings": {
+      "title": "IG-设置"
+    },
+    "DemoSearch": {
+      "title": "示例-搜索"
     },
     "Settings": {
       "title": "设置",

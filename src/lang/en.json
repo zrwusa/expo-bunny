@@ -43,6 +43,7 @@
       "demoSuspense": "Demo Suspense",
       "cryptoCurrency": "CryptoCurrency",
       "ig": "Instagram",
+      "demoSearch": "Demo Search",
       "settings": "Settings",
       "signOut": "Sign Out"
     },
@@ -227,6 +228,9 @@
     },
     "IGSettings": {
       "title": "IGSettings"
+    },
+    "DemoSearch": {
+      "title": "DemoSearch"
     },
     "CryptoCurrencyAlert": {
       "title": "Alert",

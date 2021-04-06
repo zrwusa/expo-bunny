@@ -118,6 +118,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Link to="/demo-theme">
                         {st(`demoTheme`)}
                         <IcoMoon name="bus" {...iconColor}/></Link>
+                    <Link to="/demo-search/k">
+                        {st(`demoSearch`)}
+                        <IcoMoon name="bus" {...iconColor}/></Link>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
                     {/*    <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>*/}
                 </Card>

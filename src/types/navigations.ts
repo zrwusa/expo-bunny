@@ -42,6 +42,7 @@ export type RootStackParam = {
     DemoSuspense: undefined;
     DemoCryptoCurrency: undefined | { screen: string; params?: { [key: string]: any } };
     DemoIG: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoSearch: undefined | { keyword: string };
     Settings: undefined;
 };
 export type DemoTabStackParam = {

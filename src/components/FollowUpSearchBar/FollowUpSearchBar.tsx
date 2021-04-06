@@ -8,14 +8,14 @@ import {View, Text, IcoMoon, TextInput, TouchableOpacity} from "../UI";
 interface SearchComponentProps {
     scrollYValue: Animated.Value,
     defaultKeywords?: string[],
-    onSearch?: () => void,
-    onSearchResult?: (searchResult: any) => void
+    onSearch?: (searchText: string) => void,
 }
 
 export const FollowUpSearchBar = (props: SearchComponentProps) => {
     const {
         scrollYValue,
-        defaultKeywords
+        defaultKeywords,
+        onSearch
     } = props;
 
     const sizeLabor = useSizeLabor()
@@ -55,6 +55,16 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
     const defaultWidth = wp(320)
     const focusWidth = wp(290)
 
+
+    const invokeSearch = async () => {
+        console.log(searchText)
+        // if (searchText.trim() !== '') {
+        if (onSearch) {
+            onSearch(searchText)
+        }
+        // }
+    }
+
     const handleFocus = () => {
         setIsFocus(true)
     }
@@ -67,12 +77,17 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
     }
     const handleKeyPress = ({nativeEvent}: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
         console.log('---nativeEvent', nativeEvent.key)
+        if (nativeEvent.key === 'Enter') {
+            invokeSearch().then()
+        }
     }
     const handleCancel = () => {
         Keyboard.dismiss()
         setSearchText('')
     }
-
+    const handleEndEditing = async () => {
+        invokeSearch().then()
+    }
     const handleCameraIconPress = () => {
 
     }
@@ -128,9 +143,7 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         onKeyPress={handleKeyPress}
-                        onEndEditing={() => {
-                            console.log('---onEndEditing')
-                        }}
+                        onEndEditing={handleEndEditing}
                         returnKeyType="done"
                         // enablesReturnKeyAutomatically={true}
                     />

@@ -12,16 +12,10 @@ export type LinkProps = {
 });
 
 
-export type Brick = {
+export type MasonryDatum<BrickT> = {
     id: string,
-    text: string,
-    uri: string
-}
-
-export type MasonryDatum = {
-    id: string,
-    column1: Brick[],
-    column2: Brick[],
-    column3: Brick[],
+    column1: BrickT[],
+    column2: BrickT[],
+    column3: BrickT[],
 }
 

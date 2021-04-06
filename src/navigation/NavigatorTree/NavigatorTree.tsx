@@ -22,7 +22,7 @@ import DemoSagaScreen from "../../screens/DemoSaga";
 import DemoMapScreen from "../../screens/DemoMap/DemoMap";
 import DemoChatScreen from "../../screens/DemoChat";
 import DemoShareScreen from "../../screens/DemoShare";
-import {Platform, TouchableOpacity, View,Image} from "react-native";
+import {Platform, TouchableOpacity, View, Image} from "react-native";
 import DemoNotificationScreen from "../../screens/DemoNotification/DemoNotification";
 import {NotSupport} from "../../components/NotSupport";
 import TabHomeScreen from "../../screens/DemoTab/Home";
@@ -69,8 +69,12 @@ import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 import {IGHomeScreen} from "../../screens/DemoIG/Home";
 import {IGSettingsScreen} from "../../screens/DemoIG/Settings";
 import {IGSearchScreen} from "../../screens/DemoIG/Search";
+import {DemoSearchScreen} from "../../screens/DemoSearch";
+import {linking} from "./linking";
 
-export const basePath = Linking.makeUrl('/');
+type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
+type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
+
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
     theme?: Theme | undefined;
     linking?: LinkingOptions | undefined;
@@ -82,13 +86,16 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 // Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {ms, designsBasedOn} = useSizeLabor();
+    const {authResult, authFunctions} = useAuthLabor()
     const dispatch = useDispatch();
     const {wp} = designsBasedOn.iphoneX;
     const {colors} = useThemeLabor().theme;
     const {t} = useTranslation();
     const styles = createStyles();
     const insets = useSafeAreaInsets();
-    const headerRight = () => {
+
+    // --- options start ---
+    const screenOptionsStackCommonHeaderRight = () => {
         const {theme, changeTheme} = useThemeLabor();
         return (<View style={styles.settingBox}>
             <SettingsItem
@@ -105,9 +112,9 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         </View>)
     }
 
-    const optionsHeaderAndAnimation: StackNavigationOptions = {
+    const screenOptionsStackCommon: StackNavigationOptions = {
         animationEnabled: true,
-        headerRight: headerRight,
+        headerRight: screenOptionsStackCommonHeaderRight,
         headerTitleContainerStyle: {
             // left:Platform.select({
             //     web:wp(40),
@@ -134,10 +141,20 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         }
     }
 
+    const optionsMergeWithTitle = function (needMerged?: any) {
+        return function ({route}: any) {
+            const finalOptions = {
+                title: t(`screens.${route.name}.title`),
+                ...(needMerged && needMerged)
+            }
+            return finalOptions;
+        }
+    }
 
-    const optionsHeaderAndAnimationIG: StackNavigationOptions = {
-        animationEnabled: true,
-        headerShown:false,
+    const optionsIG: StackNavigationOptions = {
+        ...screenOptionsStackCommon,
+        animationEnabled: false,
+        headerShown: false,
         headerRight: function () {
             return <View style={{flexDirection: 'row', alignItems: 'center', marginRight: wp(10)}}>
                 <IcoMoon
@@ -162,29 +179,19 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         marginRight: wp(10)
                     }}/></View>
         },
-        headerTitleContainerStyle: {},
-        headerTitle:()=><Image style={{width:wp(100),height:wp(30)}}  source={require('../../assets/images/art-font-bunny.png')} />,
-        headerTitleStyle: {
-            fontSize: ms.fs.m
-        },
-        headerLeftContainerStyle: {},
-        headerBackTitleStyle: {
-            fontSize: ms.fs.l,
-        },
-        headerBackImage: ({tintColor}) => <IcoMoon
-            name="chevron-left1"
-            style={{
-                fontSize: ms.fs.xxl,
-                color: tintColor,
-            }}/>,
-        headerStyle: {
-            height: Platform.select({
-                web: wp(50),
-            })
+        headerTitle: () => <Image style={{width: wp(100), height: wp(30)}} source={require('../../assets/images/art-font-bunny.png')}/>,
+    }
+
+    const screenOptionsTabBarIcon: TabBarScreenOptions = ({route}) => {
+        return {
+            tabBarIcon: ({focused, color, size}) => {
+                const name = getIconNameByRoute(route.name, focused)
+                return <IcoMoon name={name} style={{color: color}} size={wp(size / 1.25)}/>;
+            }
         }
     }
 
-    const drawerScreenOptions: DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"] = ({navigation}) => {
+    const screenOptionsDrawer: DrawerScreenOptions = ({navigation}) => {
         return {
             headerStyle: {
                 height: wp(50)
@@ -210,7 +217,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         }
     }
 
-    const tabBarOptions: BottomTabBarOptions = {
+    const tabBarOptionsCommon: BottomTabBarOptions = {
         tabStyle: {
             justifyContent: 'center'
         },
@@ -223,283 +230,19 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         labelPosition: 'below-icon'
     }
 
-    const igTabBarOptions: BottomTabBarOptions = {
-        tabStyle: {
-            justifyContent: 'center'
-        },
-        labelStyle: {
-            fontSize: ms.fs.xxs,
-        },
-        style: {
-            height: wp(46) + insets.bottom
-        },
-        labelPosition: 'below-icon',
+    const tabBarOptionsIG: BottomTabBarOptions = {
+        ...tabBarOptionsCommon,
         showLabel: false,
     }
+    // --- options end ---
 
-    const screenOptionsTabBarIcon: DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"] = ({route}) => {
+    const listenersNeedAuth = () => {
         return {
-            tabBarIcon: ({focused, color, size}) => {
-                const name = getIconNameByRoute(route.name, focused)
-                return <IcoMoon name={name} style={{color: color}} size={wp(size / 1.25)}/>;
-            }
+            focus: function () {
+                authFunctions.authTrigger('SCREEN')
+            },
         }
     }
-
-    const linking = {
-        prefixes: [basePath],
-        config: {
-            initialRouteName: 'Home',
-            screens: {
-                Home: {
-                    name: 'Home',
-                    path: 'home',
-                },
-                Auth: {
-                    name: 'Auth',
-                    path: 'auth',
-                },
-                Profile: {
-                    name: 'Profile',
-                    path: 'profile/:id',
-                    initialParams: {'id': '1'},
-                    parse: {
-                        id: (id: string) => `${id}`,
-                    },
-                },
-                DemoFCReduxHook: {
-                    name: 'DemoFCReduxHook',
-                    path: 'demo-fc-redux-hook',
-                },
-                DemoCollection: {
-                    name: 'DemoCollection',
-                    path: 'demo-collection',
-                },
-                DemoRoute: {
-                    name: 'DemoRoute',
-                    path: 'demo-route',
-                    parse: {
-                        id: (id: string) => {
-                            // when passing a param through URL the param value will be parsed
-                            return id;
-                        }
-                    },
-                    stringify: {
-                        id: (id: string) => {
-                            // when passing a param through URL the param key will be stringified
-                            return id
-                        }
-                    },
-                },
-                DemoThirdPart: {
-                    name: 'DemoThirdPart',
-                    path: 'demo-third-part',
-                },
-                DemoThunkCC: {
-                    name: 'DemoThunkCC',
-                    path: 'demo-thunk-cc',
-                },
-                DemoSaga: {
-                    name: 'DemoSaga',
-                    path: 'demo-saga',
-                },
-                DemoMap: {
-                    name: 'DemoMap',
-                    path: 'demo-map',
-                },
-                DemoChat: {
-                    name: 'DemoChat',
-                    path: 'demo-chat',
-                },
-                DemoShare: {
-                    name: 'DemoShare',
-                    path: 'demo-share',
-                },
-                DemoNotification: {
-                    name: 'DemoNotification',
-                    path: 'demo-notification',
-                },
-                // {
-                //     path: 'demo-modal',
-                //     screens: [
-                //         {
-                //             name: 'ModalHome',
-                //             path: 'home',
-                //         }
-                //     ]
-                // },
-                DemoTab: {
-                    name: 'DemoTab',
-                    path: 'demo-tab',
-                    screens: {
-                        TabHome: {
-                            name: 'TabHome',
-                            path: 'home',
-                        },
-                        TabSettings: {
-                            name: 'TabSettings',
-                            path: 'settings/:item',
-                            parse: {
-                                item: (item: string) => `${item}`,
-                            },
-                        }
-                    }
-                },
-                DemoDrawer: {
-                    name: 'DemoDrawer',
-                    path: 'demo-drawer',
-                    screens: {
-                        DrawerHome: {
-                            name: 'DrawerHome',
-                            path: 'home',
-                        },
-                        DrawerSettings: {
-                            name: 'DrawerSettings',
-                            path: 'settings/:item',
-                            parse: {
-                                item: (item: string) => `${item}`,
-                            },
-                        }
-                    }
-                },
-                DemoNestedLv0: {
-                    name: 'DemoNestedLv0',
-                    path: 'demo-nested',
-                    screens: {
-                        NestedLv1Home: {
-                            name: 'NestedLv1Home',
-                            path: 'home',
-                        },
-                        NestedLv1Settings: {
-                            name: 'NestedLv1Settings',
-                            path: 'settings/:item',
-                            screens: {
-                                NestedLv2Home: {
-                                    name: 'NestedLv2Home',
-                                    path: 'lv2-home',
-                                },
-                                NestedLv2Settings: {
-                                    name: 'NestedLv2Settings',
-                                    path: 'lv2-settings/:itemlv2',
-                                    parse: {
-                                        itemlv2: (itemlv2: string) => `${itemlv2}`,
-                                    },
-                                }
-                            }
-                        }
-                    }
-                },
-                DemoRNComponents: {
-                    name: 'DemoRNComponents',
-                    path: 'demo-tab-rn-components',
-                    screens: {
-                        RNHome: {
-                            name: 'RNHome',
-                            path: 'home',
-                        },
-                        RNFlatList: {
-                            name: 'RNFlatList',
-                            path: 'flat-list',
-                        },
-                        RNSectionList: {
-                            name: 'RNSectionList',
-                            path: 'section-list',
-                        },
-                        RNVirtualizedList: {
-                            name: 'RNVirtualizedList',
-                            path: 'virtualized-list',
-                        },
-                        RNNoKeyboard: {
-                            name: 'RNNoKeyboard',
-                            path: 'keyboard-avoiding',
-                        },
-                        RNSafeArea: {
-                            name: 'RNSafeArea',
-                            path: 'safe-area',
-                        }
-                    }
-                },
-                DemoCryptoCurrency: {
-                    name: 'DemoCryptoCurrency',
-                    path: 'demo-crypto-currency',
-                    screens: {
-                        CryptoCurrencyHome: {
-                            name: 'CryptoCurrencyHome',
-                            path: 'home',
-                        },
-                        CryptoCurrencyAlert: {
-                            name: 'CryptoCurrencyAlert',
-                            path: 'alert/:isPush',
-                        }
-                    }
-                },
-                DemoIG: {
-                    name: 'DemoIG',
-                    path: 'demo-ig',
-                    screens: {
-                        IGHome: {
-                            name: 'IGHome',
-                            path: 'home',
-                        },
-                        IGSearch: {
-                            name: 'IGSearch',
-                            path: 'search/:keyword',
-                            parse: {
-                                item: (keyword: string) => `${keyword}`,
-                            },
-                        },
-                        IGSettings: {
-                            name: 'IGSettings',
-                            path: 'settings/:item',
-                            parse: {
-                                item: (item: string) => `${item}`,
-                            },
-                        }
-                    }
-                },
-                Settings: {
-                    name: 'Settings',
-                    path: 'settings',
-                },
-                DemoSuspense: {
-                    name: 'DemoSuspense',
-                    path: 'demo-suspense',
-
-                },
-                DemoTheme: {
-                    name: 'DemoTheme',
-                    path: 'demo-theme',
-                },
-            }
-        },
-    };
-    const {authResult, authFunctions} = useAuthLabor()
-    const needAuth = {
-        listeners: () => {
-            return {
-                focus: function () {
-                    authFunctions.authTrigger('SCREEN')
-                },
-            }
-        }
-    }
-
-
-    const optionsTitle = {
-        options: function ({route}: any) {
-            return {
-                title: t(`screens.${route.name}.title`)
-            }
-        }
-    }
-    const optionsTitleIG = {
-        options: function ({route}: any) {
-            return {
-                title: t(`screens.${route.name}.title`)
-            }
-        }
-    }
-
 
     const navigateToAuth = () => {
         if (authResult.isSignedIn) {
@@ -548,109 +291,117 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         linking={linking}
         ref={navigationRef}>
         <RootStack.Navigator headerMode="float" screenOptions={{
-            ...optionsHeaderAndAnimation, headerStyle: {
+            ...screenOptionsStackCommon, headerStyle: {
                 height: Platform.select({
                     web: wp(50),
                     ios: wp(42) + insets.top
                 })
             }
         }}>
-            <RootStack.Screen name="Home" component={HomeScreen} {...optionsTitle}/>
-            <RootStack.Screen name="Auth" component={AuthScreen} {...optionsTitle} options={{headerLeft: () => null}}/>
-            <RootStack.Screen name="Profile" component={ProfileScreen} {...optionsTitle} {...needAuth}/>
-            <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoRoute" component={DemoRouteScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoSaga" component={DemoSagaScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoMap" component={DemoMapScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoChat" component={DemoChatScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoShare" component={DemoShareScreen} {...optionsTitle}/>
+            <RootStack.Screen name="Home" component={HomeScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="Auth" component={AuthScreen} options={optionsMergeWithTitle({headerLeft: () => null})}/>
+            <RootStack.Screen name="Profile" component={ProfileScreen} options={optionsMergeWithTitle()} listeners={listenersNeedAuth}/>
+            <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoRoute" component={DemoRouteScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoSaga" component={DemoSagaScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoMap" component={DemoMapScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoChat" component={DemoChatScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoShare" component={DemoShareScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoSearch" component={DemoSearchScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoNotification" component={
                 Platform.OS !== 'web'
                     ? DemoNotificationScreen
-                    : () => <NotSupport text='Not supported on web'/>} {...optionsTitle}/>
-            <RootStack.Screen name="DemoTab" {...optionsTitle}>
+                    : () => <NotSupport text='Not supported on web'/>} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoTab" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
-                            <DemoTabStack.Screen name="TabHome" component={TabHomeScreen}  {...optionsTitle}/>
+                        return <DemoTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptionsCommon}>
+                            <DemoTabStack.Screen name="TabHome" component={TabHomeScreen} options={optionsMergeWithTitle()}/>
                             <DemoTabStack.Screen name="TabSettings" component={TabSettingsScreen}
-                                                 initialParams={{'item': 'item-001'}} {...optionsTitle}/>
+                                                 initialParams={{'item': 'item-001'}} options={optionsMergeWithTitle()}/>
                         </DemoTabStack.Navigator>
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="DemoDrawer" {...optionsTitle}>
+            <RootStack.Screen name="DemoDrawer" options={optionsMergeWithTitle()}>
                 {(props) => {
                     //todo not sure if the props is passed correctly
                     return <DemoDrawerStack.Navigator {...props} drawerContentOptions={{labelStyle: {fontSize: ms.fs.m}}}
-                                                      screenOptions={drawerScreenOptions}>
-                        <DemoDrawerStack.Screen name="DrawerHome" component={DrawerHomeScreen} {...optionsTitle}/>
+                                                      screenOptions={screenOptionsDrawer}>
+                        <DemoDrawerStack.Screen name="DrawerHome" component={DrawerHomeScreen} options={optionsMergeWithTitle()}/>
                         <DemoDrawerStack.Screen name="DrawerSettings" component={DrawerSettingsScreen}
-                                                initialParams={{'item': 'item-001'}} {...optionsTitle}/>
+                                                initialParams={{'item': 'item-001'}} options={optionsMergeWithTitle()}/>
                     </DemoDrawerStack.Navigator>
                 }}
             </RootStack.Screen>
-            <RootStack.Screen name="DemoNestedLv0" {...optionsTitle}>
+            <RootStack.Screen name="DemoNestedLv0" options={optionsMergeWithTitle()}>
                 {(props) => {
-                    return <DemoNestedLv1Stack.Navigator {...props} screenOptions={optionsHeaderAndAnimation}>
-                        <DemoNestedLv1Stack.Screen name="NestedLv1Home" component={NestedLv1HomeScreen} {...optionsTitle}/>
-                        <DemoNestedLv1Stack.Screen name="NestedLv1Settings" {...optionsTitle}>
+                    return <DemoNestedLv1Stack.Navigator {...props} screenOptions={screenOptionsStackCommon}>
+                        <DemoNestedLv1Stack.Screen name="NestedLv1Home" component={NestedLv1HomeScreen} options={optionsMergeWithTitle()}/>
+                        <DemoNestedLv1Stack.Screen name="NestedLv1Settings" options={optionsMergeWithTitle()}>
                             {(props) => {
-                                return <DemoNestedLv2Stack.Navigator {...props} screenOptions={optionsHeaderAndAnimation}>
-                                    <DemoNestedLv2Stack.Screen name="NestedLv2Home" component={NestedLv2HomeScreen} {...optionsTitle}/>
-                                    <DemoNestedLv2Stack.Screen name="NestedLv2Settings" component={NestedLv2SettingsScreen} {...optionsTitle}/>
+                                return <DemoNestedLv2Stack.Navigator {...props} screenOptions={screenOptionsStackCommon}>
+                                    <DemoNestedLv2Stack.Screen name="NestedLv2Home" component={NestedLv2HomeScreen}
+                                                               options={optionsMergeWithTitle()}/>
+                                    <DemoNestedLv2Stack.Screen name="NestedLv2Settings" component={NestedLv2SettingsScreen}
+                                                               options={optionsMergeWithTitle()}/>
                                 </DemoNestedLv2Stack.Navigator>
                             }}
                         </DemoNestedLv1Stack.Screen>
                     </DemoNestedLv1Stack.Navigator>
                 }}
             </RootStack.Screen>
-            <RootStack.Screen name="DemoRNComponents" {...optionsTitle}>
+            <RootStack.Screen name="DemoRNComponents" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoTabRNComponentsStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
-                            <DemoTabRNComponentsStack.Screen name="RNHome" component={RNHome} {...optionsTitle}/>
-                            <DemoTabRNComponentsStack.Screen name="RNFlatList" component={RNFlatListScreen} {...optionsTitle}/>
-                            <DemoTabRNComponentsStack.Screen name="RNSectionList" component={RNSectionListScreen} {...optionsTitle}/>
-                            <DemoTabRNComponentsStack.Screen name="RNVirtualizedList" component={RNVirtualizedListScreen} {...optionsTitle}/>
-                            <DemoTabRNComponentsStack.Screen name="RNNoKeyboard" component={RNKeyboardAvoidingScreen} {...optionsTitle}/>
-                            <DemoTabRNComponentsStack.Screen name="RNSafeArea" component={RNSafeAreaScreen} {...optionsTitle}/>
+                        return <DemoTabRNComponentsStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                                                                   tabBarOptions={tabBarOptionsCommon}>
+                            <DemoTabRNComponentsStack.Screen name="RNHome" component={RNHome} options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNFlatList" component={RNFlatListScreen} options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNSectionList" component={RNSectionListScreen} options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNVirtualizedList" component={RNVirtualizedListScreen}
+                                                             options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNNoKeyboard" component={RNKeyboardAvoidingScreen}
+                                                             options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNSafeArea" component={RNSafeAreaScreen} options={optionsMergeWithTitle()}/>
                         </DemoTabRNComponentsStack.Navigator>
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="DemoCryptoCurrency" {...optionsTitle}>
+            <RootStack.Screen name="DemoCryptoCurrency" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoCryptoCurrencyStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptions}>
-                            <DemoCryptoCurrencyStack.Screen name="CryptoCurrencyHome" component={CryptoCurrencyHomeScreen} {...optionsTitle}/>
+                        return <DemoCryptoCurrencyStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                                                                  tabBarOptions={tabBarOptionsCommon}>
+                            <DemoCryptoCurrencyStack.Screen name="CryptoCurrencyHome" component={CryptoCurrencyHomeScreen}
+                                                            options={optionsMergeWithTitle()}/>
                             <DemoCryptoCurrencyStack.Screen name="CryptoCurrencyAlert" component={Platform.OS !== 'web'
                                 ? CryptoCurrencyAlertScreen
-                                : () => <NotSupport text="Not supported on web"/>} initialParams={{isPush: true}} {...optionsTitle}/>
+                                : () => <NotSupport text="Not supported on web"/>} initialParams={{isPush: true}} options={optionsMergeWithTitle()}/>
                         </DemoCryptoCurrencyStack.Navigator>
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="DemoIG" {...optionsTitle} options={optionsHeaderAndAnimationIG} >
+            <RootStack.Screen name="DemoIG" options={optionsMergeWithTitle(optionsIG)}>
                 {
                     (props) => {
                         return <DemoIGStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
-                                                      tabBarOptions={igTabBarOptions}>
-                            <DemoIGStack.Screen name="IGHome" component={IGHomeScreen}  {...optionsTitle}/>
+                                                      tabBarOptions={tabBarOptionsIG}>
+                            <DemoIGStack.Screen name="IGHome" component={IGHomeScreen} options={optionsMergeWithTitle()}/>
                             <DemoIGStack.Screen name="IGSearch" component={IGSearchScreen}
-                                                initialParams={{'keyword': 'keyword-001'}} {...optionsTitle}/>
+                                                initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
                             <DemoIGStack.Screen name="IGSettings" component={IGSettingsScreen}
                                                 initialParams={{'item': 'item-001'}}/>
                         </DemoIGStack.Navigator>
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="Settings" component={SettingsScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen} {...optionsTitle}/>
-            <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} {...optionsTitle}/>
+            <RootStack.Screen name="Settings" component={SettingsScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} options={optionsMergeWithTitle()}/>
         </RootStack.Navigator>
     </NavigationContainer>
 }
