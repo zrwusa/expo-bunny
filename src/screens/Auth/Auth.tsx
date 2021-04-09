@@ -1,4 +1,4 @@
-import {Platform, Keyboard} from "react-native";
+import {Keyboard, Platform} from "react-native";
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";

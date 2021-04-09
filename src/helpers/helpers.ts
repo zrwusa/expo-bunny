@@ -11,8 +11,7 @@ import {
     RouteIconFontConfig
 } from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants, {EBLMsg} from "../constants/constants";
+import {EBLMsg} from "../constants/constants";
 import {AuthAPIError, BunnyAPIError, NomicsAPIError, uuidV4} from "../utils";
 import configORG from "../config";
 import _ from "lodash";

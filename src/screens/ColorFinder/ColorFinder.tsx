@@ -1,15 +1,8 @@
 import React, {useState} from "react";
-import {ButtonTO, TextInput, View, Text} from "../../components/UI";
+import {ButtonTO, Text, TextInput, View} from "../../components/UI";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {
-    checkColor,
-    deltaEDes,
-    diffColors, colorFaultTolerance
-} from "../../utils/color";
-import {
-    ColorDiffWithThemeColorsItem, ColorInputItem, ColorDiffWithPaletteItem,
-    PaletteKeys, ThemeColorKeys, ThemeName
-} from "../../types";
+import {checkColor, colorFaultTolerance, deltaEDes, diffColors} from "../../utils/color";
+import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem, PaletteKeys, ThemeColorKeys, ThemeName} from "../../types";
 import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from "react-native";
 import {createStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";

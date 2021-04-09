@@ -2,8 +2,8 @@
 import * as Stacks from "../navigation/stacks";
 import {
     DefaultNavigatorOptions,
-    DrawerRouterOptions, EventMapBase,
-    LinkingOptions,
+    DrawerRouterOptions,
+    EventMapBase,
     RouteConfig,
     StackRouterOptions,
     TabRouterOptions
@@ -17,7 +17,6 @@ import {BottomTabNavigationConfig} from "react-navigation-bottom-tabs-no-warning
 import {DrawerNavigationConfig} from "react-navigation-drawer-no-warnings/lib/typescript/src/types";
 import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
 import {NavigationState, ParamListBase, Route} from "@react-navigation/routers";
-import {JSONSerializable} from "./utils";
 
 export type RootStackParam = {
     Home: undefined;

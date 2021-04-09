@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import DemoFCCard from "../../components/DemoFCCard";
 import DemoCCClock from "../../components/DemoCCClock";
 import DemoRequest from "../../components/DemoRequest";
@@ -6,12 +6,11 @@ import {TextInput, View} from "../../components/UI";
 import {DemoSvg} from "../../components/DemoSvg";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {Button, ScrollView} from "react-native";
+import {ScrollView} from "react-native";
 import {createContainerStyles} from "../../containers";
 import {DemoPureComponent, DemoRegularComponent} from "../../components/DemoPureComponent";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {EventRegister} from "react-native-event-listeners";
 
 function DemoCollectionScreen() {
     const sizeLabor = useSizeLabor();

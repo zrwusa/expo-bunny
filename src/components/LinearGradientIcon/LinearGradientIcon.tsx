@@ -5,9 +5,10 @@ import {LinearGradient, LinearGradientProps} from 'expo-linear-gradient';
 import {createStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {IcoMoonProps} from "../UI";
+import {IcoMoonProps} from "../../types";
+import {StyleProp, TextStyle} from "react-native";
 
-export type LinearGradientIconProps = IcoMoonProps & LinearGradientProps
+export type LinearGradientIconProps =IcoMoonProps & { style?: StyleProp<TextStyle> } & LinearGradientProps
 
 export function LinearGradientIcon(props: LinearGradientIconProps) {
     const {name, size, colors, start, end, locations, ...rest} = props;

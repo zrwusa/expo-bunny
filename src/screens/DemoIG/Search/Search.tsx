@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoIGStackParam, IGMediaBrick, MasonryDatum} from "../../../types";
@@ -10,7 +11,6 @@ import {useThemeLabor} from "../../../providers/theme-labor";
 import {createStyles} from "./styles";
 import {Animated, SafeAreaView} from "react-native";
 import {uuid4} from "@sentry/utils";
-import {useEffect, useState} from "react";
 import {Masonry} from "../../../components/Masonry/Masonry";
 import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
 import {defaultMasonryData, rawBricks} from "./data";

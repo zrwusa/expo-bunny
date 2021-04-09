@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Animated, SafeAreaView, Keyboard, TextInputKeyPressEventData, NativeSyntheticEvent} from "react-native";
+import {Animated, Keyboard, NativeSyntheticEvent, SafeAreaView, TextInputKeyPressEventData} from "react-native";
 import {createStyles} from "./styles";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useSizeLabor} from "../../providers/size-labor";
-import {View, Text, IcoMoon, TextInput, TouchableOpacity} from "../UI";
+import {IcoMoon, Text, TextInput, TouchableOpacity, View} from "../UI";
 
 interface SearchComponentProps {
     scrollYValue: Animated.Value,

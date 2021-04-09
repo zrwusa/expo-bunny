@@ -1,9 +1,9 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import {FlatList, RefreshControl, SafeAreaView} from "react-native";
 import {IncrementId, uuidV4, wait} from "../../../utils";
 import {IGMediaCardDatum} from "../../../types";
 import {IGMediaCard} from "../../../components/IGMediaCard/IGMediaCard";
-import {useEffect, useState} from "react";
 
 export function IGMediaScreen() {
     const [mannyCardData, setMannyCardData] = useState<IGMediaCardDatum[]>([])

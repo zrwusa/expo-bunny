@@ -3,7 +3,6 @@ import {ButtonTO, Text, TextBtn, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";
-import nomicsAPI from "../../helpers/nomics-api";
 import {saveQuickAlertSettings, sysError} from "../../store/actions";
 import bunnyAPI from "../../helpers/bunny-api";
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useEffect, useState} from "react";
 import {Text, View} from "../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoSearchDummyDatum, RootStackParam} from "../../types";
@@ -7,10 +8,8 @@ import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {Animated} from "react-native";
-import {useEffect, useState} from "react";
+import {Animated, SafeAreaView} from "react-native";
 import {randomText, wait} from "../../utils";
-import {SafeAreaView} from "react-native";
 import {FollowUpSearchBar} from "../../components/FollowUpSearchBar";
 import {createStyles} from "./styles";
 import {collectBLResult} from "../../store/actions";

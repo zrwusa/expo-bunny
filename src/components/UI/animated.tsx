@@ -1,6 +1,5 @@
 import {Animated, FlatList, FlatListProps} from "react-native";
 import * as React from "react";
-import {DemoSearchDummyDatum, IGMediaBrick, MasonryDatum} from "../../types";
 import {ComponentType} from "react";
 
 export const AnimatedFlatList = <T extends object>() => {

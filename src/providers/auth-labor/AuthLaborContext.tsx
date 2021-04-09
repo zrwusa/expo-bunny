@@ -1,5 +1,5 @@
 import React from "react";
-import {AuthContextConfig, AuthLaborContextType, AuthRes, BLResult, TriggerType, SignInParams, SignUpParams, User,} from "../../types";
+import {AuthContextConfig, AuthLaborContextType, AuthRes, BLResult, SignInParams, SignUpParams, TriggerType, User,} from "../../types";
 import {apiAuth} from "../../helpers/auth-api"
 import BunnyConstants, {EBLMsg} from "../../constants/constants";
 import {AxiosResponse} from "axios";

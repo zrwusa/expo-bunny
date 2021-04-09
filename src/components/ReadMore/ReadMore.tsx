@@ -1,6 +1,5 @@
-import React, {ComponentType, createRef, ReactNode} from "react";
+import React, {ReactNode} from "react";
 import {StyleProp, StyleSheet, Text, TextStyle, View} from "react-native";
-import {width} from "styled-system";
 
 interface ReadMoreProps {
     numberOfLines: number,

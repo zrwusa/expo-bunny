@@ -1,3 +1,4 @@
+import * as React from "react";
 import {PureComponent} from "react";
 import {IcoMoon, View} from "../UI";
 import {Image, Text} from "react-native";
@@ -5,7 +6,6 @@ import {ShowVideo} from "../Video/Video";
 import {ReadMore} from "../ReadMore/ReadMore";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
-import * as React from "react";
 import {IGMediaCardDatum} from "../../types";
 import {createStyles} from "./styles";
 

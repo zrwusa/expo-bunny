@@ -1,16 +1,16 @@
 import {
-    RootStack,
-    DemoModalStack,
-    DemoTabStack,
-    DemoDrawerStack,
     DemoCryptoCurrencyStack,
+    DemoDrawerStack,
     DemoIGStack,
     DemoNestedLv1Stack,
     DemoNestedLv2Stack,
-    DemoTabRNComponentsStack
+    DemoTabRNComponentsStack,
+    DemoTabStack,
+    RootStack
 } from "../stacks";
 import HomeScreen from "../../screens/Home";
 import * as React from "react";
+import {useEffect} from "react";
 import {AuthScreen} from "../../screens/Auth";
 import ProfileScreen from "../../screens/Profile";
 import DemoFCReduxHookScreen from "../../screens/DemoFCReduxHook";
@@ -22,12 +22,12 @@ import DemoSagaScreen from "../../screens/DemoSaga";
 import DemoMapScreen from "../../screens/DemoMap/DemoMap";
 import DemoChatScreen from "../../screens/DemoChat";
 import DemoShareScreen from "../../screens/DemoShare";
-import {Platform, TouchableOpacity, View, Image} from "react-native";
+import {Image, Platform, TouchableOpacity, View} from "react-native";
 import DemoNotificationScreen from "../../screens/DemoNotification/DemoNotification";
 import {NotSupport} from "../../components/NotSupport";
 import TabHomeScreen from "../../screens/DemoTab/Home";
 import TabSettingsScreen from "../../screens/DemoTab/Settings";
-import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef, RouteProp} from "@react-navigation/native";
+import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef} from "@react-navigation/native";
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
 import DrawerHomeScreen from "../../screens/DemoDrawer/Home";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/Settings";
@@ -61,7 +61,6 @@ import {BottomTabBarOptions, BottomTabNavigationOptions} from "react-navigation-
 import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
 import {blError, blSuccess, getIconNameByRoute} from "../../helpers";
 import {useAuthLabor} from "../../providers/auth-labor";
-import {useEffect} from "react";
 import {collectBLResult} from "../../store/actions";
 import {useDispatch} from "react-redux";
 import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";

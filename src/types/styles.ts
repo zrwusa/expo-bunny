@@ -4,10 +4,9 @@ import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-nat
 import {glyphMaterialCommunityCustomMap} from "../helpers";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
-import {ImageStyle, StyleProp, TextStyle, ViewStyle} from "react-native";
+import {ImageStyle, TextStyle, ViewStyle} from "react-native";
 import {ColorSchemeName} from "react-native-appearance";
 import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
-import {IcoMoon} from "../components/UI";
 
 export type CheckColor = 'isColor' | 'isHex' | 'isHexA' | 'isRGB' | 'isRGBA' | 'isHSL' | 'isHSLA' | 'isColorName' | 'isExceptional'
 export type CheckColorResult = {
@@ -179,11 +178,18 @@ export type MaterialCommunityCustomIconsKeys = JsonKeys<typeof glyphMaterialComm
 
 export type IcoMoonKeys = JsonKeys<typeof glyphMapIcoMoon>
 
+export interface MaterialCommunityIconsProps extends IconProps {
+    name: MaterialCommunityIconKeys
+}
 
-// export type IcoMoonProps =  IcoMoonBaseProps & {style?: StyleProp<TextStyle>}
-// export interface Xxx extends IcoMoonBaseProps{
-//     style:string
-// }
+export interface MaterialCommunityCustomIconsProps extends IconProps {
+    name: MaterialCommunityCustomIconsKeys
+}
+
+export interface IcoMoonProps extends IconProps {
+    name: IcoMoonKeys
+}
+
 export type RouteIconFontConfig = {
     default: string,
     focused: string,

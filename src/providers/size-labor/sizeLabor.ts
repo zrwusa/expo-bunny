@@ -1,6 +1,6 @@
 import {heightPercentageToDP as hp2dp, widthPercentageToDP as wp2dp} from "./responsiveScreen";
 import bunnyConfig from "../../config";
-import {DimensionKeys, Measure, DesignsBasedOn} from "../../types";
+import {DesignsBasedOn, DimensionKeys, Measure} from "../../types";
 
 const getSizeLabor = () => {
     const defaultDimensionFun = {

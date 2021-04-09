@@ -7,7 +7,7 @@ import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState} fr
 import {Action} from "redux";
 import {getNearbyFilms, restoreRegion, sysError} from "../../store/actions";
 import {connect} from "react-redux";
-import MapView, {PROVIDER_DEFAULT, PROVIDER_GOOGLE} from "react-native-maps";
+import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
 import createStyles, {getCardSize} from "./styles";
 import {createContainerStyles} from "../../containers";

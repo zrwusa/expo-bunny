@@ -1,5 +1,5 @@
 import {useSizeLabor} from "./useSizeLabor";
-import React, {ComponentProps, ComponentType, useState} from "react";
+import React from "react";
 import {SizeLabor} from "../../types";
 
 export interface WithSizeLabor {

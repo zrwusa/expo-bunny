@@ -1,7 +1,6 @@
 import {useThemeLabor} from "./useThemeLabor";
-import React, {ComponentProps, ComponentType} from "react";
-import {SizeLabor, ThemeLabor} from "../../types";
-import {useSizeLabor} from "../size-labor";
+import React from "react";
+import {ThemeLabor} from "../../types";
 
 export interface WithThemeLabor {
     themeLabor: ThemeLabor
