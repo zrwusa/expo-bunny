@@ -19,6 +19,7 @@
       "redux": "Redux",
       "nativeCapabilities": "Native Capabilities",
       "componentsAndThemes": "Components & Themes",
+      "devTools": "Dev Tools",
       "others": "Others",
       "system": "System",
       "profile": "Profile",
@@ -42,8 +43,10 @@
       "demoTheme": "Demo Theme",
       "demoSuspense": "Demo Suspense",
       "cryptoCurrency": "CryptoCurrency",
-      "ig": "Instagram",
+      "ig": "Social Media",
       "demoSearch": "Demo Search",
+      "colorFinder": "Color Finder",
+      "playground": "Playground",
       "settings": "Settings",
       "signOut": "Sign Out"
     },
@@ -248,6 +251,14 @@
     },
     "Playground": {
       "title": "Playground"
+    },
+    "ColorFinder": {
+      "title": "Color Finder",
+      "colorInput": "Color input",
+      "findSimilarColors": "Find similar colors",
+      "inputAColorString": "Input a color string",
+      "similarColorFromPalette": "Similar color from palette",
+      "similarColorsFromThemes": "Similar color from themes"
     },
     "Settings": {
       "title": "Settings",

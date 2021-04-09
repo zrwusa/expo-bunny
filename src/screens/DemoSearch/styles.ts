@@ -9,6 +9,13 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         list: {
             backgroundColor: colors.background,
             paddingTop: wp(55)
-        }
+        },
+        item: {
+            height: wp(100),
+            width: wp(375),
+            padding: wp(10)
+        },
+        itemBox:{flexDirection: 'row'},
+        itemText:{marginRight: 10}
     });
 }

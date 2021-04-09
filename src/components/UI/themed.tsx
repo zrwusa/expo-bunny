@@ -23,12 +23,18 @@ import {
 import {useLinkProps} from "@react-navigation/native";
 import React from "react";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
-import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from "../../types";
+import {
+    IcoMoonKeys,
+    LinkProps,
+    MaterialCommunityCustomIconsKeys,
+    MaterialCommunityIconKeys,
+} from "../../types";
 import {createSmartStyles, uuidV4} from "../../utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
 import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
 import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from "react-native-picker-select";
+import {IconProps} from "react-native-vector-icons/Icon";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -230,7 +236,19 @@ export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<
     />);
 }
 
-export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> = (
+export interface MaterialCommunityIconsProps extends IconProps {
+    name: MaterialCommunityIconKeys
+}
+
+export interface MaterialCommunityCustomIconsProps extends IconProps {
+    name: MaterialCommunityCustomIconsKeys
+}
+
+export type IcoMoonProps = IconProps & {
+    name: IcoMoonKeys,
+    style?: StyleProp<TextStyle>
+}
+export const IcoMoon: React.FC<IcoMoonProps> = (
     {
         children,
         style,

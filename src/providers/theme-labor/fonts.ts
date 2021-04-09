@@ -1,5 +1,5 @@
 import {Platform, PlatformOSType} from "react-native";
-import {FontConfigPlatform, Fonts, FontsWrapped, JSONSerializable} from "../../types";
+import {FontConfigPlatform, Fonts, FontsWrapped, JSONSerializable, ThemeName} from "../../types";
 import {EThemes} from "../../constants";
 
 const fontConfig: FontConfigPlatform = {
@@ -69,7 +69,8 @@ const getFontConfigLeavesWrappedWithThemeNames = () => {
             configWithThemeName[platformName][fontName] = {}
             Object.keys(fontConfigAlias[platformName][fontName]).forEach(fontProperty => {
                 configWithThemeName[platformName][fontName][fontProperty] = {}
-                Object.keys(EThemes).forEach(themeName => {
+                const themeKeys = Object.keys(EThemes) as Array<ThemeName>
+                themeKeys.forEach((themeName) => {
                     configWithThemeName[platformName][fontName][fontProperty][EThemes[themeName]] = fontConfigAlias[platformName][fontName][fontProperty];
                 })
             })

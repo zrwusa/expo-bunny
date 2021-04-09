@@ -19,6 +19,7 @@
       "redux": "Redux",
       "nativeCapabilities": "原生功能",
       "componentsAndThemes": "组件&主题",
+      "devTools": "开发工具",
       "others": "其他",
       "system": "系统",
       "profile": "我的",
@@ -42,7 +43,10 @@
       "demoTheme": "样例-主题",
       "demoSuspense": "样例-Suspense",
       "cryptoCurrency": "加密币",
+      "ig": "社交媒体",
       "demoSearch": "示例-搜索",
+      "colorFinder": "颜色查找器",
+      "playground": "游乐场",
       "settings": "设置",
       "signOut": "注销"
     },
@@ -247,6 +251,14 @@
     },
     "Playground": {
       "title": "游乐场"
+    },
+    "ColorFinder": {
+      "title": "颜色查找器",
+      "colorInput": "输入颜色",
+      "findSimilarColors": "查找相近颜色",
+      "inputAColorString": "颜色字符串",
+      "similarColorFromPalette": "调色板（palette）中的相近色",
+      "similarColorsFromThemes": "主题（themes）中的相近色"
     },
     "Settings": {
       "title": "设置",

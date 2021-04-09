@@ -44,6 +44,7 @@ export type RootStackParam = {
     DemoIG: undefined | { screen: string; params?: { [key: string]: any } };
     DemoSearch: undefined | { keyword: string };
     Playground: undefined;
+    ColorFinder: undefined;
     Settings: undefined;
 };
 export type DemoTabStackParam = {

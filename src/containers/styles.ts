@@ -9,7 +9,8 @@ export const createContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLab
     return StyleSheet.create({
         Card: {
             margin: ms.sp.m,
-            padding: ms.sp.m,
+            paddingHorizontal:ms.sp.m,
+            paddingBottom:ms.sp.m,
             borderColor: colors.border,
             borderWidth: ms.sp.xxs,
             borderRadius: ms.br.s,
@@ -24,7 +25,8 @@ export const createContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLab
             ...smartStylesObj.evenly
         },
         CardTitle: {
-            ...smartStylesObj.h3
+            ...smartStylesObj.h3,
+            marginVertical:ms.sp.m,
         },
         Screen: {
             flex: 1,

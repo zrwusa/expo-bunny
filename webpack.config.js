@@ -10,6 +10,7 @@ module.exports = async function (env, argv) {
     }
     const config = await createExpoWebpackConfigAsync(envConfig, argv);
     config.resolve.alias['react-native-maps'] = 'react-native-web-maps';
+    config.resolve.alias['react-native-linear-gradient'] = 'react-native-web-linear-gradient';
     // config.resolve.alias['victory-native'] = 'victory';
     // config.resolve.alias['react-native-svg'] = 'svgs';
 

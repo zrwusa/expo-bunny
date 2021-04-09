@@ -228,6 +228,10 @@ export const linking = {
                 name: 'Playground',
                 path: 'playground',
             },
+            ColorFinder: {
+                name: 'ColorFinder',
+                path: 'color-finder',
+            },
             Settings: {
                 name: 'Settings',
                 path: 'settings',

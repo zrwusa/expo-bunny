@@ -72,6 +72,7 @@ import {DemoSearchScreen} from "../../screens/DemoSearch";
 import {linking} from "./linking";
 import {IGMediaScreen} from "../../screens/DemoIG/Media";
 import {PlaygroundScreen} from "../../screens/Playground";
+import {ColorFinderScreen} from "../../screens/ColorFinder";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -154,8 +155,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     const optionsIG: StackNavigationOptions = {
         ...screenOptionsStackCommon,
-        animationEnabled: false,
-        headerShown: false,
+        animationEnabled: true,
+        headerShown: true,
         headerRight: function () {
             return <View style={{flexDirection: 'row', alignItems: 'center', marginRight: wp(10)}}>
                 <IcoMoon
@@ -402,6 +403,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 }
             </RootStack.Screen>
             <RootStack.Screen name="Playground" component={PlaygroundScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="ColorFinder" component={ColorFinderScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="Settings" component={SettingsScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} options={optionsMergeWithTitle()}/>

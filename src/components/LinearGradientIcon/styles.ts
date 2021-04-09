@@ -9,8 +9,15 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
 
     return StyleSheet.create({
-        container:{
-            padding:ms.sp.xxs
+        xxx: {...smartStylesObj.btn},
+        shadow: {
+            shadowColor: 'black',
+            shadowOpacity: 0.5,
+            shadowRadius: 5,
+            shadowOffset: {
+                width: 0,
+                height: 1,
+            },
         },
     });
 }

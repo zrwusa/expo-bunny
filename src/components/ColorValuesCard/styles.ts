@@ -9,8 +9,18 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
 
     return StyleSheet.create({
-        container:{
-            padding:ms.sp.xxs
+        row: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom:ms.sp.l,
+            alignItems:'center'
         },
+        colorPanel: {
+            width: wp(100),
+            height: wp(20),
+            borderColor:colors.background,
+            borderRadius:ms.br.xs,
+            borderWidth:ms.sp.xxs,
+        }
     });
 }

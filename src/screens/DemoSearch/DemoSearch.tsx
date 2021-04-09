@@ -9,7 +9,7 @@ import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {Animated} from "react-native";
 import {useEffect, useState} from "react";
-import {randomText, uuidV4, wait} from "../../utils";
+import {randomText, wait} from "../../utils";
 import {SafeAreaView} from "react-native";
 import {FollowUpSearchBar} from "../../components/FollowUpSearchBar";
 import {createStyles} from "./styles";
@@ -32,18 +32,9 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
     const st = shortenTFunctionKey(t, 'screens.DemoSearch');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const {theme} = themeLabor
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
 
     const styles = createStyles(sizeLabor, themeLabor)
-
-    // return (
-    //     <View style={containerStyles.Screen}>
-    //         <Card title={st(`title`)}>
-    //             <Text>{route.params.item}</Text>
-    //         </Card>
-    //     </View>
-    // );
 
     const [scrollYValue] = useState(new Animated.Value(0));
     const [data, setData] = useState<DemoSearchDummyDatum[]>([])
@@ -68,9 +59,6 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
                 const dummyData = getDummyData()
                 const result = dummyData.filter((item) => {
                     return item.text.includes(keywordText)
-                })
-                const resultMapped = result.map((item) => {
-                    item.text.replace(keywordText, '')
                 })
                 return Math.random() > 0.1 ? resolve(result) : reject(new Error('error when searching'))
             })
@@ -103,9 +91,9 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
                 keyExtractor={item => item.id.toString()}
                 contentInsetAdjustmentBehavior="automatic"
                 renderItem={({item}) => <View
-                    style={{height: 100, width: 375, padding: 10}}>
-                    <View style={{flexDirection: 'row'}}>
-                        <Text style={{marginRight: 10}}>{item.id}</Text>
+                    style={styles.item}>
+                    <View style={styles.itemBox}>
+                        <Text style={styles.itemText}>{item.id}</Text>
                         <Text>{item.text}</Text>
                     </View>
                 </View>}

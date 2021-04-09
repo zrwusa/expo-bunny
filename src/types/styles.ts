@@ -4,10 +4,15 @@ import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-nat
 import {glyphMaterialCommunityCustomMap} from "../helpers";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
-import {ImageStyle, TextStyle, ViewStyle} from "react-native";
+import {ImageStyle, StyleProp, TextStyle, ViewStyle} from "react-native";
 import {ColorSchemeName} from "react-native-appearance";
 import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
-
+import {IcoMoon} from "../components/UI";
+export type CheckColor = 'isColor' | 'isHex' | 'isHexA' | 'isRGB' | 'isRGBA' | 'isHSL' | 'isHSLA' | 'isColorName' | 'isExceptional'
+export type CheckColorResult = {
+    [key in CheckColor]: boolean
+}
+export type CheckResultType = ''|'Hex' | 'HexA' | 'RGB' | 'RGBA' | 'HSL' | 'HSLA' | 'ColorName' | 'Exceptional'
 export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 
 export type DimensionKeys = 'bunnyUI' | 'iphoneX' | 'iPad' | 'pixel2XL' | 'pcBrowser'
@@ -46,6 +51,7 @@ export type ThemeProviderProps = {
 
 export type ThemeLabor = {
     theme: Theme,
+    themes: { [key in ThemeName]:Theme},
     changeTheme: (themeName: ThemeName) => void,
     sysColorSchemeName?: ColorSchemeName
 }
@@ -64,7 +70,7 @@ export type Fonts = {
     thin: Font
 }
 
-export interface Colors {
+export type Colors = {
     primary: string,
     secondary: string,
     btnText: string,
@@ -120,6 +126,8 @@ export interface Colors {
     divider: string,
 }
 
+export type ThemeColorKeys = keyof Colors;
+
 export interface Animation {
     scale: number,
 }
@@ -144,11 +152,9 @@ export interface Theme {
     victory?: VictoryThemeDefinition,
 }
 
-
+export type PlatformType = 'web'|'ios'|'default'
 export type FontConfigPlatform = {
-    web: Fonts,
-    ios: Fonts,
-    default: Fonts
+    [key in PlatformType]:Fonts
 }
 
 // export type Themes = {
@@ -156,10 +162,10 @@ export type FontConfigPlatform = {
 //     dark: string,
 // }
 
-export type ThemeName = 'light' | 'dark';
+export type ThemeName = 'light' | 'dark' | 'gradient';
 export type Themes = { [key in ThemeName]: Theme }
 export type EnumThemeNames = {
-    [key: string]: ThemeName
+    [key in ThemeName]: ThemeName
 }
 
 export type FontsWrapped = DeepLeavesWrap<Fonts, Themes>
@@ -172,18 +178,12 @@ export type MaterialCommunityCustomIconsKeys = JsonKeys<typeof glyphMaterialComm
 
 export type IcoMoonKeys = JsonKeys<typeof glyphMapIcoMoon>
 
-export interface MaterialCommunityIconsProps extends IconProps {
-    name: MaterialCommunityIconKeys
-}
 
-export interface MaterialCommunityCustomIconsProps extends IconProps {
-    name: MaterialCommunityCustomIconsKeys
-}
 
-export interface IcoMoonProps extends IconProps {
-    name: IcoMoonKeys
-}
-
+// export type IcoMoonProps =  IcoMoonBaseProps & {style?: StyleProp<TextStyle>}
+// export interface Xxx extends IcoMoonBaseProps{
+//     style:string
+// }
 export type RouteIconFontConfig = {
     default: string,
     focused: string,
@@ -311,6 +311,7 @@ export type Size = {
     xl: number,
     xxl: number,
 }
+export type PaletteKeys = keyof Palette;
 export type Palette = {
     red50: string,
     red100: string,
