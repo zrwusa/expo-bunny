@@ -12,15 +12,15 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         row: {
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom:ms.sp.l,
-            alignItems:'center'
+            marginBottom: ms.sp.l,
+            alignItems: 'center'
         },
         colorPanel: {
             width: wp(100),
             height: wp(20),
-            borderColor:colors.background,
-            borderRadius:ms.br.xs,
-            borderWidth:ms.sp.xxs,
+            borderColor: colors.background,
+            borderRadius: ms.br.xs,
+            borderWidth: ms.sp.xxs,
         }
     });
 }

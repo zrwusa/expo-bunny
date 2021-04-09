@@ -15,7 +15,7 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             width: wp(375),
             padding: wp(10)
         },
-        itemBox:{flexDirection: 'row'},
-        itemText:{marginRight: 10}
+        itemBox: {flexDirection: 'row'},
+        itemText: {marginRight: 10}
     });
 }

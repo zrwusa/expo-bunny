@@ -10,7 +10,7 @@ export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | Co
     const {item} = props
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = createStyles(sizeLabor,themeLabor)
+    const styles = createStyles(sizeLabor, themeLabor)
     return <View>
         <View style={styles.row}>
             <Text>hex</Text>

@@ -313,7 +313,7 @@ export const STANDARD_COLOR_NAME = {
     "yellowgreen": "#9acd32"
 }
 export const EXCEPTIONAL_COLOR = {
-    "transparent":{
+    "transparent": {
         "hex": "#ffffff",
         "hexA": "#ffffff00",
         "RGB": "rgb(255,255,255)",

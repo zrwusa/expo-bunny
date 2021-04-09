@@ -27,7 +27,7 @@ import {shortenTFunctionKey} from "../../providers/i18n-labor";
 
 export function ColorFinderScreen() {
     const {t} = useTranslation()
-    const st = shortenTFunctionKey(t,'screens.ColorFinder')
+    const st = shortenTFunctionKey(t, 'screens.ColorFinder')
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const dispatch = useDispatch()

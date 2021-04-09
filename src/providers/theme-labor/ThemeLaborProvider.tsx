@@ -58,7 +58,7 @@ function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
         return () => Dimensions.removeEventListener('change', onDimensionsChange);
     });
     const themeLaborMemorized = useMemo(
-        () => ({theme, themes,changeTheme, sysColorSchemeName})
+        () => ({theme, themes, changeTheme, sysColorSchemeName})
         , [theme, changeTheme, sysColorSchemeName])
 
     return (

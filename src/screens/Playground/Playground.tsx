@@ -19,7 +19,6 @@ import {blError} from "../../helpers";
 import {useDispatch} from "react-redux";
 
 
-
 export function PlaygroundScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();

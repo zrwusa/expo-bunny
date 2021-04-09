@@ -31,7 +31,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
                         <IcoMoon
                             name={name}
                             size={size || sizeDefault}
-                            color={colors?colors[0]:colorsDefault[0]}
+                            color={colors ? colors[0] : colorsDefault[0]}
                         />
                     </View>
                 }>

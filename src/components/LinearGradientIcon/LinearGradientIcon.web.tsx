@@ -5,7 +5,7 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {IcoMoon} from "../UI";
 import {LinearGradientIconProps} from "./LinearGradientIcon";
 
-export function LinearGradientIcon(props:LinearGradientIconProps) {
+export function LinearGradientIcon(props: LinearGradientIconProps) {
     const {name, size, colors} = props;
     const sizeDefault = 40, colorsDefault = ['#fff', '#0f0']
 
@@ -16,7 +16,7 @@ export function LinearGradientIcon(props:LinearGradientIconProps) {
         <IcoMoon
             name={name}
             size={size || sizeDefault}
-            color={colors?colors[1]:colorsDefault[1]}
+            color={colors ? colors[1] : colorsDefault[1]}
         />
     )
 }

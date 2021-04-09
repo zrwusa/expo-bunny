@@ -9,8 +9,8 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
 
     return StyleSheet.create({
-        container:{
-            padding:ms.sp.xxs
+        container: {
+            padding: ms.sp.xxs
         },
     });
 }

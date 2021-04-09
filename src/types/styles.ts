@@ -8,11 +8,12 @@ import {ImageStyle, StyleProp, TextStyle, ViewStyle} from "react-native";
 import {ColorSchemeName} from "react-native-appearance";
 import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
 import {IcoMoon} from "../components/UI";
+
 export type CheckColor = 'isColor' | 'isHex' | 'isHexA' | 'isRGB' | 'isRGBA' | 'isHSL' | 'isHSLA' | 'isColorName' | 'isExceptional'
 export type CheckColorResult = {
     [key in CheckColor]: boolean
 }
-export type CheckResultType = ''|'Hex' | 'HexA' | 'RGB' | 'RGBA' | 'HSL' | 'HSLA' | 'ColorName' | 'Exceptional'
+export type CheckResultType = '' | 'Hex' | 'HexA' | 'RGB' | 'RGBA' | 'HSL' | 'HSLA' | 'ColorName' | 'Exceptional'
 export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 
 export type DimensionKeys = 'bunnyUI' | 'iphoneX' | 'iPad' | 'pixel2XL' | 'pcBrowser'
@@ -51,7 +52,7 @@ export type ThemeProviderProps = {
 
 export type ThemeLabor = {
     theme: Theme,
-    themes: { [key in ThemeName]:Theme},
+    themes: { [key in ThemeName]: Theme },
     changeTheme: (themeName: ThemeName) => void,
     sysColorSchemeName?: ColorSchemeName
 }
@@ -152,9 +153,9 @@ export interface Theme {
     victory?: VictoryThemeDefinition,
 }
 
-export type PlatformType = 'web'|'ios'|'default'
+export type PlatformType = 'web' | 'ios' | 'default'
 export type FontConfigPlatform = {
-    [key in PlatformType]:Fonts
+    [key in PlatformType]: Fonts
 }
 
 // export type Themes = {
@@ -177,7 +178,6 @@ export type MaterialCommunityIconKeys = JsonKeys<typeof glyphMaterialCommunityMa
 export type MaterialCommunityCustomIconsKeys = JsonKeys<typeof glyphMaterialCommunityCustomMap>
 
 export type IcoMoonKeys = JsonKeys<typeof glyphMapIcoMoon>
-
 
 
 // export type IcoMoonProps =  IcoMoonBaseProps & {style?: StyleProp<TextStyle>}

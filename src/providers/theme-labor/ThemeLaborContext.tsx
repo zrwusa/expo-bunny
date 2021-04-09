@@ -5,7 +5,7 @@ import {defaultTheme, themes} from "./theme";
 
 const ThemeLaborContext = React.createContext<ThemeLabor>({
     theme: defaultTheme,
-    themes:themes,
+    themes: themes,
     changeTheme: (themeName: ThemeName) => {
     },
     sysColorSchemeName: 'light'

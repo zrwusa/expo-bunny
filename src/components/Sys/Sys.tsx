@@ -28,7 +28,8 @@ const Sys = ({title}: Props) => {
                 {
                     (sysState.errors || sysState.warns) ?
                         <View>
-                            <TextInput style={styles.errorText} multiline editable={false} value={sysState.errors.join('\n').toString() || sysState.warns.toString()}/>
+                            <TextInput style={styles.errorText} multiline editable={false}
+                                       value={sysState.errors.join('\n').toString() || sysState.warns.toString()}/>
                         </View> :
                         <></>
                 }
