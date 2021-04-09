@@ -319,6 +319,7 @@ export const palette: Palette = {
     yellow780: '#faad14',
     blueGrey320: '#86939e',
     //---end--- others
+
 }
 
 export const pl = palette

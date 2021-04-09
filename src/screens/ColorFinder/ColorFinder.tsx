@@ -95,6 +95,11 @@ export function ColorFinderScreen() {
         })
         const similarObjPalette = sortedSimilarIndexedPalette[0];
         _similarColorsFromPalette.push(similarObjPalette);
+        _similarColorsFromPalette.push(sortedSimilarIndexedPalette[1]);
+        _similarColorsFromPalette.push(sortedSimilarIndexedPalette[3]);
+        _similarColorsFromPalette.push(sortedSimilarIndexedPalette[4]);
+        _similarColorsFromPalette.push(sortedSimilarIndexedPalette[5]);
+        _similarColorsFromPalette.push(sortedSimilarIndexedPalette[6]);
         setSimilarColorsFromPalette(_similarColorsFromPalette)
     }
     const handleSimilarColor = () => {
