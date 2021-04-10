@@ -53,10 +53,22 @@ export const getThemeWareHouse = () => {
         gradient: 'transparent',
     }
 
+    const axisStroke = {
+        light: pl.blueGrey300,
+        dark: pl.orange800,
+        gradient: pl.transparent,
+    }
+
     const fillOrStrokeBlueGrey700VC = {
         light: pl.blueGrey700,
-        dark: pl.brown220,
+        dark: pl.orange800,
         gradient: pl.tealA500,
+    }
+
+    const tickLabelsFill = {
+        light: pl.blueGrey700,
+        dark: pl.white,
+        gradient: pl.white,
     }
 
     const testFillOrStrokeRed = {
@@ -171,6 +183,12 @@ export const getThemeWareHouse = () => {
         light: pl.grey900,
         dark: pl.grey320,
         gradient: pl.grey320,
+    }
+
+    const axisGridStroke = {
+        light: pl.blueGrey50,
+        dark: pl.transparent,
+        gradient: pl.transparent,
     }
 
     const themeWarehouse: ThemeWarehouse = {
@@ -502,11 +520,7 @@ export const getThemeWareHouse = () => {
                 style: {
                     axis: {
                         fill: fillOrStrokeTransparentVC,
-                        stroke: {
-                            light: pl.blueGrey300,
-                            dark: pl.brown620,
-                            gradient: pl.brown620,
-                        },
+                        stroke: axisStroke,
                         strokeWidth: strokeWidth2VC,
                         strokeLinecap: strokeLinecapRoundVC,
                         strokeLinejoin: strokeLinejoinRoundVC
@@ -527,11 +541,7 @@ export const getThemeWareHouse = () => {
                     },
                     grid: {
                         fill: fillNoneVC,
-                        stroke: {
-                            light: pl.blueGrey50,
-                            dark: pl.black890,
-                            gradient: pl.black890,
-                        },
+                        stroke: axisGridStroke,
                         strokeDasharray: {
                             light: '10, 5',
                             dark: '10, 5',
@@ -562,7 +572,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBlueGrey700VC,
+                        fill: tickLabelsFill,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
