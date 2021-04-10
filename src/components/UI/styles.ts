@@ -17,6 +17,22 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         container: {
             backgroundColor: colors.backdropSecondary,
         },
+
     });
-    return {ImageProgressive}
+    const PickerSelect = StyleSheet.create({
+        input: {
+            minWidth: wp(100),
+            height: (40),
+            backgroundColor: colors.background,
+            borderWidth: wp(1),
+            borderColor: colors.border,
+            paddingHorizontal: ms.sp.m,
+            color: colors.text,
+            textAlign: 'right',
+            alignItems: 'center',
+            fontSize: ms.fs.m,
+            // paddingRight: ms.sp.xl// to ensure the text is never behind the icon
+        },
+    })
+    return {ImageProgressive, PickerSelect}
 }

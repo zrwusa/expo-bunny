@@ -4,7 +4,7 @@ import {Platform, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoCryptoCurrencyStackParam, RootState} from "../../../types";
-import {ButtonTO, RNPickerSelect, Text, TextBtn} from "../../../components/UI";
+import {ButtonTO, PickerSelectChevronRight, Text, TextBtn} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers";
 import {createContainerStyles} from "../../../containers";
@@ -128,19 +128,19 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
                 <View style={styles.currentPrice.box}>
                     <Text style={styles.currentPrice.text}>{currentPriceLabelPrefix + currentPrice}</Text>
                 </View>
-                <RNPickerSelect
+                <PickerSelectChevronRight
                     value={granularity}
                     placeholder={{label: "Select " + granularityLabelPrefix, value: 0}}
                     items={mappedDicGranularity}
                     onValueChange={(itemValue) => setGranularity(itemValue)}
                 />
-                <RNPickerSelect
+                <PickerSelectChevronRight
                     value={reminder.times}
                     placeholder={{label: "Select " + remindTimesLabelPrefix, value: 0}}
                     items={mappedDicReminderTimes}
                     onValueChange={(itemValue) => setReminder({...reminder, times: itemValue})}
                 />
-                <RNPickerSelect
+                <PickerSelectChevronRight
                     value={reminder.interval}
                     placeholder={{label: "Select " + remindIntervalLabelPrefix, value: ''}}
                     items={mappedDicReminderInterval}

@@ -30,6 +30,7 @@ import selection from "../../assets/fonts/icomoon-cus/selection.json"
 import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
 import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from "react-native-picker-select";
+import {createStyles} from "./styles";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -67,7 +68,7 @@ export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...r
     const {ms} = useSizeLabor();
     const childrenNeedRender = getBtnChildren(children)
     const mergedStyle = [{
-        backgroundColor: colors.primary,
+        backgroundColor: colors.btnBackground,
         marginTop: ms.sp.s,
         borderRadius: ms.br.xs,
         fontSize: ms.fs.m,
@@ -84,7 +85,7 @@ export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}
     const {ms} = sizeLabor;
     const childrenNeedRender = getBtnChildren(children)
     const mergedStyle = [{
-        backgroundColor: colors.primary,
+        backgroundColor: colors.btnBackground,
         marginTop: ms.sp.s,
         borderRadius: ms.br.xs,
         fontSize: ms.fs.m,
@@ -128,7 +129,7 @@ export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
 
 export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
     const {colors} = useThemeLabor().theme;
-    return (<ButtonRN color={color || colors.primary} {...rest} />);
+    return (<ButtonRN color={color || colors.btnBackground} {...rest} />);
 }
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
@@ -148,7 +149,7 @@ export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) 
 export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const mergedStyle = [{
-        backgroundColor: colors.background,
+        backgroundColor: colors.backdropSecondary,
     }, style]
     return (<ImageRN
         style={mergedStyle}  {...rest} >{children}</ImageRN>);
@@ -213,7 +214,7 @@ export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
     const mergedStyle = [{
         transform: [{scaleX: wp(0.8, false)}, {scaleY: wp(0.8, false)}],
     }, style]
-    return (<SwitchPaper color={colors.primary}
+    return (<SwitchPaper color={colors.btnBackground}
                          style={mergedStyle} {...rest}/>);
 }
 
@@ -222,7 +223,7 @@ export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<
     const {ms} = useSizeLabor();
 
     const mergedStyle = [{
-        color: colors.primary,
+        color: colors.text,
         fontSize: ms.fs.xl,
     }, style]
     return (<MaterialCommunityIcons
@@ -240,7 +241,7 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
     const mergedStyle = [{
-        color: color || colors.primary,
+        color: color || colors.text,
         fontSize: size || ms.fs.xl,
     }, style]
     return (<IconFromIcoMoon
@@ -248,8 +249,25 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
         style={mergedStyle}
     />);
 }
-
-export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, style, Icon, ...rest}) => {
+export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, style, Icon, ...rest}) => {
+    const themeLabor = useThemeLabor();
+    const sizeLabor = useSizeLabor();
+    const styles = createStyles(sizeLabor, themeLabor);
+    return (<ReactNativePickerSelect
+        style={{
+            ...style,
+            inputWeb: styles.PickerSelect.input,
+            inputIOS: styles.PickerSelect.input,
+            inputAndroid: styles.PickerSelect.input,
+        }}
+        touchableWrapperProps={{
+            activeOpacity: 0.2,
+        }}
+        children={children}
+        {...rest}
+    />);
+}
+export const PickerSelectChevronRight: React.FC<ReactNativePickerSelectProps> = ({style, Icon, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const {ms, designsBasedOn} = useSizeLabor();
     const {wp} = designsBasedOn.iphoneX;
@@ -258,7 +276,7 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
                                              style={{
                                                  marginTop: ms.sp.m,
                                                  marginRight: ms.sp.m,
-                                                 color: colors.border,
+                                                 color: colors.text,
                                              }}
                                              size={wp(20)}
     />)
@@ -266,6 +284,7 @@ export const RNPickerSelect: React.FC<ReactNativePickerSelectProps> = ({children
     return (<ReactNativePickerSelect
         // style={styles.pickerSelector}
         style={{
+            ...style,
             inputIOS: {
                 fontSize: ms.fs.l,
                 paddingVertical: ms.sp.m,

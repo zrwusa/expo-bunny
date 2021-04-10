@@ -25,7 +25,7 @@ i18n
             }
         },
         lng: "en",
-        fallbackLng: "en",
+        fallbackLng: ["en", "zh", "zh-Hans-CN", "he"],
         interpolation: {
             escapeValue: false
         }

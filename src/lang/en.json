@@ -263,7 +263,9 @@
     "Settings": {
       "title": "Settings",
       "darkTheme": "Dark theme",
+      "changeTheme": "Change theme",
       "language": "Language",
+      "changeLanguage": "Change Language",
       "rightToLeft": "Right to left"
     },
     "DemoSuspense": {

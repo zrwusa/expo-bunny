@@ -52,11 +52,6 @@ import {useSizeLabor} from "../../providers/size-labor";
 import {createStyles} from "./styles";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useThemeLabor} from "../../providers/theme-labor";
-import SettingsItem from "../../screens/Settings/Item/Item";
-import {ThemeName} from "../../types";
-import {EThemes} from "../../constants";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants from "../../constants/constants";
 import {BottomTabBarOptions, BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
 import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
 import {blError, blSuccess, getIconNameByRoute} from "../../helpers";
@@ -72,6 +67,7 @@ import {linking} from "./linking";
 import {IGMediaScreen} from "../../screens/DemoIG/Media";
 import {PlaygroundScreen} from "../../screens/Playground";
 import {ColorFinderScreen} from "../../screens/ColorFinder";
+import {ThemeSwitch} from "../../components/ThemeSwitch";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -97,19 +93,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     // --- options start ---
     const screenOptionsStackCommonHeaderRight = () => {
-        const {theme, changeTheme} = useThemeLabor();
         return (<View style={styles.settingBox}>
-            <SettingsItem
-                label=""
-                value={theme.dark}
-                onValueChange={async (value) => {
-                    const themeName: ThemeName = value ? EThemes.dark : EThemes.light;
-                    await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, themeName)
-                    if (changeTheme) {
-                        changeTheme(themeName);
-                    }
-                }}
-            />
+            <ThemeSwitch/>
         </View>)
     }
 
@@ -124,6 +109,9 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         },
         headerTitleStyle: {
             fontSize: ms.fs.m
+        },
+        headerRightContainerStyle: {
+            // width:wp(100)
         },
         headerLeftContainerStyle: {},
         headerBackTitleStyle: {

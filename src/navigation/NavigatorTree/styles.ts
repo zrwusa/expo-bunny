@@ -21,7 +21,7 @@ export const createStyles = () => {
             fontSize: measure.fontSizes.m
         },
         settingBox: {
-            flexDirection: 'row'
+            marginRight: wp(10)
         }
     });
 }

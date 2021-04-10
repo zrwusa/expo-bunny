@@ -263,7 +263,9 @@
     "Settings": {
       "title": "设置",
       "darkTheme": "暗色主题",
+      "changeTheme": "切换主题",
       "language": "语言",
+      "changeLanguage": "切换语言",
       "rightToLeft": "右至左"
     },
     "DemoSuspense": {

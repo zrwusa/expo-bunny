@@ -53,10 +53,16 @@ export const getThemeWareHouse = () => {
         gradient: 'transparent',
     }
 
-    const fillOrStrokeBuleGrey700VC = {
+    const fillOrStrokeBlueGrey700VC = {
         light: pl.blueGrey700,
         dark: pl.brown220,
-        gradient: pl.brown220,
+        gradient: pl.tealA500,
+    }
+
+    const testFillOrStrokeRed = {
+        light: pl.red900,
+        dark: pl.red900,
+        gradient: pl.red900,
     }
 
     const NavigateBlueGrey700VC = {
@@ -184,35 +190,55 @@ export const getThemeWareHouse = () => {
             gradient: 'exact'
         },
         colors: {
+            // ---start main
             primary: {
                 light: pl.teal400,
                 dark: pl.orange800,
-                gradient: pl.orange800
+                gradient: pl.tealA500
             },
             secondary: {
                 light: pl.teal300,
                 dark: pl.orange700,
-                gradient: pl.orange700,
+                gradient: pl.lightBlue630,
+            },
+            border: {
+                light: pl.grey350,
+                dark: pl.grey850,
+                gradient: pl.blueIndigo900
+            },
+            borderSecondary: {
+                light: pl.grey600,
+                dark: pl.amber500,
+                gradient: pl.amber500
+            },
+            divider: {
+                light: pl.grey390,
+                dark: pl.blueGrey320,
+                gradient: pl.blueGrey320
+            },
+            // ---end main
+
+
+            // ---start text
+            text: {
+                light: pl.black,
+                dark: pl.white,
+                gradient: pl.white
+            },
+            textSecondary: {
+                light: pl.grey800,
+                dark: pl.grey600,
+                gradient: pl.grey600
             },
             btnText: {
                 light: pl.white,
                 dark: pl.orange50,
-                gradient: pl.orange50,
-            },
-            btnActive: {
-                light: pl.lightBlue100,
-                dark: pl.lightBlue100,
-                gradient: pl.lightBlue100
+                gradient: pl.blueIndigoA700,
             },
             btnTextSecondary: {
                 light: pl.red100,
                 dark: pl.indigo100,
                 gradient: pl.indigo100
-            },
-            btnActiveSecondary: {
-                light: pl.lightBlue600,
-                dark: pl.deepPurple700,
-                gradient: pl.deepPurple700
             },
             title: {
                 light: pl.grey800,
@@ -223,16 +249,6 @@ export const getThemeWareHouse = () => {
                 light: pl.grey700,
                 dark: pl.grey300,
                 gradient: pl.grey300
-            },
-            text: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            textSecondary: {
-                light: pl.grey800,
-                dark: pl.grey600,
-                gradient: pl.grey600
             },
             caption: {
                 light: pl.grey900,
@@ -254,40 +270,93 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey400,
                 gradient: pl.grey400
             },
-            border: {
-                light: pl.grey350,
-                dark: pl.grey850,
-                gradient: pl.grey850
+            // ---end text
+
+
+            // ---start background
+            background: {
+                light: pl.grey100,
+                dark: pl.black900,
+                gradient: pl.blueIndigoA400
             },
-            borderSecondary: {
-                light: pl.grey600,
-                dark: pl.amber500,
-                gradient: pl.amber500
+            backgroundSecondary: {
+                light: pl.grey200,
+                dark: pl.grey800,
+                gradient: pl.blueIndigoA700
+            },
+            backgroundTertiary: {
+                light: pl.white,
+                dark: pl.black,
+                gradient: pl.blueIndigoA100
+            },
+            btnActive: {
+                light: pl.lightBlue100,
+                dark: pl.lightBlue100,
+                gradient: pl.lightBlue100
+            },
+            btnActiveSecondary: {
+                light: pl.lightBlue600,
+                dark: pl.deepPurple700,
+                gradient: pl.deepPurple700
+            },
+            btnBackground: {
+                light: pl.teal400,
+                dark: pl.orange800,
+                gradient: pl.tealA500
+            },
+            btnBackgroundSecondary: {
+                light: pl.teal300,
+                dark: pl.orange700,
+                gradient: pl.lightBlue630,
+            },
+            card: {
+                light: pl.white,
+                dark: pl.black900,
+                gradient: pl.blueIndigoA700
             },
             surface: {
                 light: pl.white,
                 dark: pl.black900,
-                gradient: pl.black900
+                gradient: pl.blueGrey870
             },
             surfaceSecondary: {
                 light: pl.grey100,
                 dark: pl.grey900,
                 gradient: pl.grey900
             },
-            background: {
-                light: pl.grey100,
-                dark: pl.black900,
-                gradient: pl.black900
+            paper: {
+                light: pl.yellow50,
+                dark: pl.amber50,
+                gradient: pl.amber50
             },
-            backgroundSecondary: {
-                light: pl.grey200,
-                dark: pl.grey800,
-                gradient: pl.grey800
+            paperSecondary: {
+                light: pl.lightGreen50,
+                dark: pl.green50,
+                gradient: pl.green50,
             },
-            backgroundTertiary: {
-                light: pl.white,
-                dark: pl.black,
-                gradient: pl.black
+            // ---end background
+
+
+            // ---start unknown
+            onBackground: {
+                light: pl.black,
+                dark: pl.white,
+                gradient: pl.white
+            },
+            onBackgroundSecondary: {
+                light: pl.black,
+                dark: pl.white,
+                gradient: pl.white
+            },
+            onSurface: {
+                light: pl.black,
+                dark: pl.white,
+                gradient: pl.white
+            },
+            onSurfaceSecondary: {
+                light: pl.black,
+                dark: pl.white,
+                gradient: pl.white
             },
             accent: {
                 light: pl.purple500,
@@ -299,6 +368,10 @@ export const getThemeWareHouse = () => {
                 dark: pl.teal600,
                 gradient: pl.teal600
             },
+            // ---en unknown
+
+
+            // ---start tip
             success: {
                 light: pl.lightGreenA720,
                 dark: pl.green610,
@@ -344,26 +417,10 @@ export const getThemeWareHouse = () => {
                 dark: pl.blue400,
                 gradient: pl.blue400,
             },
-            onSurface: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            onSurfaceSecondary: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            onBackground: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            onBackgroundSecondary: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
+            // --- end tip
+
+
+            // --- start functional
             disabled: {
                 light: color(pl.black).alpha(0.26).rgb().string(),
                 dark: color(pl.white).alpha(0.38).rgb().string(),
@@ -394,26 +451,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.transparent,
                 gradient: pl.transparent,
             },
-            paper: {
-                light: pl.yellow50,
-                dark: pl.amber50,
-                gradient: pl.amber50
-            },
-            paperSecondary: {
-                light: pl.lightGreen50,
-                dark: pl.green50,
-                gradient: pl.green50,
-            },
-            card: {
-                light: pl.white,
-                dark: pl.black900,
-                gradient: pl.black900
-            },
-            divider: {
-                light: pl.grey390,
-                dark: pl.blueGrey320,
-                gradient: pl.blueGrey320
-            },
+            // --- end functional
         },
         fonts: {
             ...fontsWarehouse,
@@ -453,7 +491,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -483,7 +521,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     },
@@ -524,7 +562,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -547,7 +585,7 @@ export const getThemeWareHouse = () => {
             bar: {
                 style: {
                     data: {
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         padding: padding8VC,
                         strokeWidth: strokeWidth0VC
                     },
@@ -556,7 +594,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -567,7 +605,7 @@ export const getThemeWareHouse = () => {
                 style: {
                     max: {
                         padding: padding8VC,
-                        stroke: fillOrStrokeBuleGrey700VC,
+                        stroke: fillOrStrokeBlueGrey700VC,
                         strokeWidth: strokeWidth1VC
                     },
                     maxLabels: {
@@ -575,13 +613,13 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding3VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     },
                     median: {
                         padding: padding8VC,
-                        stroke: fillOrStrokeBuleGrey700VC,
+                        stroke: fillOrStrokeBlueGrey700VC,
                         strokeWidth: strokeWidth1VC
                     },
                     medianLabels: {
@@ -589,13 +627,13 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding3VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     },
                     min: {
                         padding: padding8VC,
-                        stroke: fillOrStrokeBuleGrey700VC,
+                        stroke: fillOrStrokeBlueGrey700VC,
                         strokeWidth: strokeWidth1VC
                     },
                     minLabels: {
@@ -603,33 +641,33 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding3VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     },
                     q1: {
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC
+                        fill: fillOrStrokeBlueGrey700VC
                     },
                     q1Labels: {
                         fontFamily: fontFamilyVC,
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding3VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     },
                     q3: {
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC
+                        fill: fillOrStrokeBlueGrey700VC
                     },
                     q3Labels: {
                         fontFamily: fontFamilyVC,
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding3VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -644,14 +682,14 @@ export const getThemeWareHouse = () => {
             candlestick: {
                 style: {
                     data: {
-                        stroke: fillOrStrokeBuleGrey700VC
+                        stroke: fillOrStrokeBlueGrey700VC
                     },
                     labels: {
                         fontFamily: fontFamilyVC,
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding5VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -675,7 +713,7 @@ export const getThemeWareHouse = () => {
                     data: {
                         fill: fillOrStrokeTransparentVC,
                         opacity: opacity1VC,
-                        stroke: fillOrStrokeBuleGrey700VC,
+                        stroke: fillOrStrokeBlueGrey700VC,
                         strokeWidth: strokeWidth2VC
                     },
                     labels: {
@@ -683,7 +721,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -786,7 +824,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     },
@@ -795,7 +833,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding5VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -806,7 +844,7 @@ export const getThemeWareHouse = () => {
                     data: {
                         fill: fillOrStrokeTransparentVC,
                         opacity: opacity1VC,
-                        stroke: fillOrStrokeBuleGrey700VC,
+                        stroke: fillOrStrokeBlueGrey700VC,
                         strokeWidth: strokeWidth2VC
                     },
                     labels: {
@@ -814,7 +852,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -842,7 +880,7 @@ export const getThemeWareHouse = () => {
                             dark: wp(20),
                             gradient: wp(20),
                         },
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -852,7 +890,7 @@ export const getThemeWareHouse = () => {
             scatter: {
                 style: {
                     data: {
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         opacity: opacity1VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
@@ -862,7 +900,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     }
@@ -883,7 +921,7 @@ export const getThemeWareHouse = () => {
                         dark: 0,
                         gradient: 0,
                     },
-                    fill: fillOrStrokeBuleGrey700VC,
+                    fill: fillOrStrokeBlueGrey700VC,
                     stroke: fillOrStrokeTransparentVC,
                     strokeWidth: strokeWidth0VC,
                     pointerEvents: pointerEventsNoneVC
@@ -918,7 +956,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding5VC,
-                        fill: fillOrStrokeBuleGrey700VC,
+                        fill: fillOrStrokeBlueGrey700VC,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC,
                         pointerEvents: pointerEventsNoneVC

@@ -51,6 +51,7 @@ export type ThemeProviderProps = {
 
 export type ThemeLabor = {
     theme: Theme,
+    currentThemeName: string,
     themes: { [key in ThemeName]: Theme },
     changeTheme: (themeName: ThemeName) => void,
     sysColorSchemeName?: ColorSchemeName
@@ -71,31 +72,60 @@ export type Fonts = {
 }
 
 export type Colors = {
+    // In the theme, we should care about the role of these color variables rather than the specific values,
+    // such as 'primary success', not 'grey0, black'. The specific values should be named in the Palette.
+
+    // ---start main
     primary: string,
     secondary: string,
-    btnText: string,
-    btnActive: string,
-    btnTextSecondary: string,
-    btnActiveSecondary: string,
+    border: string,
+    borderSecondary: string,
+    divider: string,
+    // ---end main
 
-    title: string,
-    titleSecondary: string,
+
+    // ---start text
     text: string,
     textSecondary: string,
+    btnText: string,
+    btnTextSecondary: string,
+    title: string,
+    titleSecondary: string,
     caption: string,
     captionSecondary: string,
     paragraph: string,
     paragraphSecondary: string,
-    border: string,
-    borderSecondary: string,
-    surface: string,
-    surfaceSecondary: string,
+    // ---end text
+
+
+    // ---start background
     background: string,
     backgroundSecondary: string,
     backgroundTertiary: string,
+    btnActive: string,
+    btnActiveSecondary: string,
+    btnBackground: string,
+    btnBackgroundSecondary: string,
+    card: string,
+    surface: string,
+    surfaceSecondary: string,
+    paper: string,
+    paperSecondary: string,
+    // ---end background
+
+
+    // ---start unknown
+    onBackground: string,
+    onBackgroundSecondary: string,
+    onSurface: string,
+    onSurfaceSecondary: string,
     accent: string,
     accentSecondary: string,
+    // ---en unknown
 
+
+    // ---start tip
+    success: string,
     error: string,
     errorSecondary: string,
     warning: string,
@@ -104,26 +134,18 @@ export type Colors = {
     notificationSecondary: string,
     info: string,
     infoSecondary: string,
+    // --- end tip
 
-    onSurface: string,
-    onSurfaceSecondary: string,
-    onBackground: string,
-    onBackgroundSecondary: string,
+
+    // --- start functional
     disabled: string,
     placeholder: string,
     placeholderSecondary: string,
     backdrop: string,
     backdropSecondary: string,
-
     transparent: string,
-    card: string,
-    paper: string,
-    paperSecondary: string,
+    // --- end functional
 
-    // In the theme, we should care about the role of these color variables rather than the specific values,
-    // such as 'primary success', not 'grey0, black'. The specific values should be named in the Palette.
-    success: string,
-    divider: string,
 }
 
 export type ThemeColorKeys = keyof Colors;
@@ -639,6 +661,17 @@ export type Palette = {
     yellow780: string,
     blueGrey320: string,
     //---end--- others
+
+    //---start--- gradient theme
+    blueIndigo300: string, // inActive text
+    blueIndigo900: string, // border
+    blueIndigoA100: string, // input background
+    blueIndigoA400: string,// background
+    blueIndigoA700: string, // background dark
+    tealA500: string, // button from
+    lightBlue630: string,// button to
+    blueGrey870: string, // label background
+    //---end--- gradient theme
 }
 
 export type PaletteWithColors = {
@@ -962,6 +995,17 @@ export type PaletteWithColors = {
     yellow780: '#faad14',
     blueGrey320: '#86939e',
     //---end--- others
+
+    //---start--- gradient theme
+    blueIndigo300: '#545063', // inActive text
+    blueIndigo900: '#2C2A3D', // border
+    blueIndigoA100: '#2C283B', // input background
+    blueIndigoA400: '#232033',// background
+    blueIndigoA700: '#1B1929', // background dark
+    tealA500: '#37C7B8', // button from
+    lightBlue630: '#2894D1',// button to
+    blueGrey870: '#242E3D', // label background
+    //---end--- gradient theme
 }
 
 
