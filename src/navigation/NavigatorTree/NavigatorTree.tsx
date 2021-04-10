@@ -67,7 +67,7 @@ import {linking} from "./linking";
 import {IGMediaScreen} from "../../screens/DemoIG/Media";
 import {PlaygroundScreen} from "../../screens/Playground";
 import {ColorFinderScreen} from "../../screens/ColorFinder";
-import {ThemeSwitch} from "../../components/ThemeSwitch";
+import {ThemePicker} from "../../components/ThemePicker";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -86,7 +86,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {authResult, authFunctions} = useAuthLabor()
     const dispatch = useDispatch();
     const {wp} = designsBasedOn.iphoneX;
-    const {colors} = useThemeLabor().theme;
+    const {theme} = useThemeLabor();
+    const {colors} = theme;
     const {t} = useTranslation();
     const styles = createStyles();
     const insets = useSafeAreaInsets();
@@ -94,7 +95,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     // --- options start ---
     const screenOptionsStackCommonHeaderRight = () => {
         return (<View style={styles.settingBox}>
-            <ThemeSwitch/>
+            <ThemePicker/>
         </View>)
     }
 
@@ -168,7 +169,10 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         marginRight: wp(10)
                     }}/></View>
         },
-        headerTitle: () => <Image style={{width: wp(100), height: wp(30)}} source={require('../../assets/images/art-font-bunny.png')}/>,
+        headerTitle: () => <Image style={{width: wp(100), height: wp(30)}}
+                                  source={theme.dark
+                                      ? require('../../assets/images/art-font-bunny-white.png')
+                                      : require('../../assets/images/art-font-bunny.png')}/>,
     }
 
     const screenOptionsTabBarIcon: TabBarScreenOptions = ({route}) => {

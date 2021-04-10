@@ -379,7 +379,7 @@ export const getThemeWareHouse = () => {
             accent: {
                 light: pl.purple500,
                 dark: pl.blue600,
-                gradient: pl.blue600
+                gradient: pl.lightBlue630
             },
             accentSecondary: {
                 light: pl.blue300,

@@ -1,29 +1,29 @@
 import {useThemeLabor} from "../../providers/theme-labor";
 import * as React from "react";
-import {useEffect, useState} from "react";
 import {EThemes} from "../../constants";
 import {PickerSelect} from "../UI";
+import {ThemeName} from "../../types";
 
 export function ThemePicker() {
     const themeLabor = useThemeLabor();
     const {changeTheme, currentThemeName} = themeLabor;
-    const [themeName, setThemeName] = useState(currentThemeName)
+
     const themeLabels = Object.keys(EThemes).map((themeName) => {
         return {label: themeName, value: themeName}
     })
-    useEffect(() => {
-        setThemeName(currentThemeName)
-    }, [currentThemeName])
+
+    const handleValueChange = async (itemValue: ThemeName) => {
+        console.log('---4?handleValueChange', itemValue)
+        // todo always be invoked 4 times
+        if (itemValue) {
+            await changeTheme(itemValue);
+        }
+    }
 
     return <PickerSelect
-        value={themeName}
+        value={currentThemeName}
         placeholder={{label: 'Select ', value: ''}}
-        onValueChange={async (itemValue) => {
-            setThemeName(itemValue)
-            if (itemValue) {
-                await changeTheme(itemValue);
-            }
-        }}
+        onValueChange={handleValueChange}
         items={themeLabels}
     />
 }

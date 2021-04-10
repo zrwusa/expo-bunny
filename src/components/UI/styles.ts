@@ -21,11 +21,12 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     });
     const PickerSelect = StyleSheet.create({
         input: {
-            minWidth: wp(100),
-            height: (40),
+            minWidth: wp(80),
+            height: wp(30),
             backgroundColor: colors.background,
             borderWidth: wp(1),
             borderColor: colors.border,
+            borderRadius: ms.br.xs,
             paddingHorizontal: ms.sp.m,
             color: colors.text,
             textAlign: 'right',
