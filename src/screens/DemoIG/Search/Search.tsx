@@ -1,7 +1,6 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {RouteProp} from "@react-navigation/native";
-import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoIGStackParam, IGMediaBrick, MasonryDatum, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";

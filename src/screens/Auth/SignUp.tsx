@@ -118,7 +118,9 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
                     </Col>
                     {
                         Platform.OS !== 'web'
-                            ? <> <Col size={1}/><Col size={6}>
+                            ? <>
+                                <Col size={1}/>
+                                <Col size={6}>
                                 <TextButton style={{justifyContent: 'center'}} onPress={async () => {
                                     Keyboard.dismiss()
                                     try {

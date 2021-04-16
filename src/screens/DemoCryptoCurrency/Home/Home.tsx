@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
-import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {createContainerStyles} from "../../../containers";

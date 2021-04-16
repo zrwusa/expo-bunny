@@ -2,7 +2,6 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {Platform, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
-import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
 import {ButtonTO, PickerSelectChevronRight, Text, InButtonText} from "../../../components/UI";
 import {useTranslation} from "react-i18next";

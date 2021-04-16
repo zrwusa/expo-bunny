@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {DrawerNavigationProp} from "react-navigation-drawer-no-warnings";
 import {DemoDrawerStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";

@@ -121,7 +121,7 @@ function measureHeightAsync(component: Text) {
 }
 
 function nextFrameAsync() {
-    return new Promise(resolve => requestAnimationFrame(() => resolve()));
+    return new Promise(resolve => requestAnimationFrame(() => resolve(true)));
 }
 
 const styles = StyleSheet.create({

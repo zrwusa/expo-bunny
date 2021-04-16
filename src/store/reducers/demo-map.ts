@@ -57,7 +57,7 @@ const initialState = {
 export function demoMapStateReducer(prevState: DemoMapState = initialState, {type, payload}: DemoMapActions): DemoMapState {
     switch (type) {
         case EDemoMap.RESTORE_NEARBY_FILMS: {
-            for (let item of payload) {
+            for (let item of <NearbyFilm[]>payload) {
                 item.id = uuidV4()
             }
             return {

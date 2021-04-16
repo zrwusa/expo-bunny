@@ -1,8 +1,14 @@
 import 'setimmediate'
-import Index from '../src/index'
 import React from 'react'
 import Head from 'next/head'
-
+// import Index from '../src/index'
+import dynamic from "next/dynamic";
+const Index = dynamic(
+    () => {
+        return import("../src/index");
+    },
+    { ssr: false }
+);
 function NextApp() {
     return (
         <>

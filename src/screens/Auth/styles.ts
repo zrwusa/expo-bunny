@@ -15,7 +15,7 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             alignItems:'center',
         },
         content: {
-            // height: hp(400),
+            height: hp(400),
             marginHorizontal: 20,
             borderRadius:wp(10),
             ...shadowAround

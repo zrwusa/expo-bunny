@@ -9,14 +9,14 @@ import {
     TabRouterOptions
 } from "@react-navigation/native";
 import {ComponentType} from "react";
-import {BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings";
-import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 import {StackNavigationOptions} from "@react-navigation/stack";
 import {MaterialTopTabNavigationOptions} from "@react-navigation/material-top-tabs";
-import {BottomTabNavigationConfig} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
-import {DrawerNavigationConfig} from "react-navigation-drawer-no-warnings/lib/typescript/src/types";
 import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
 import {NavigationState, ParamListBase, Route} from "@react-navigation/routers";
+import {BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
+import {DrawerNavigationOptions} from "@react-navigation/drawer";
+import {BottomTabNavigationConfig} from "@react-navigation/bottom-tabs/src/types";
+import {DrawerNavigationConfig} from "@react-navigation/drawer/src/types";
 
 export type RootStackParam = {
     Home: undefined;

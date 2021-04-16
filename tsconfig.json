@@ -33,5 +33,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }

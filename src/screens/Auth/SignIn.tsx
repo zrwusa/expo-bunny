@@ -116,24 +116,27 @@ export function SignInScreen({route, navigation}: SignInProps) {
                         }
                     }}>
                         <IcoMoon name="drink" size={24} style={{marginRight: wp(5)}}/>
-                        <Text>{st(`signInDummy`)}</Text></TextButton>
+                        <Text>{st(`signInDummy`)}</Text>
+                    </TextButton>
                 </Col>
                 {
                     Platform.OS !== 'web'
-                        ? <> <Col size={1}/><Col size={6}>
-                            <TextButton style={{justifyContent: 'center'}} onPress={async () => {
-                                Keyboard.dismiss()
-                                try {
-                                    const {success} = await authFunctions.signInGoogle()
-                                    if (success) navToReference()
-                                } catch (e) {
-                                    dispatch(sysError(e))
-                                }
-                            }}>
-                                <IcoMoon name="google" style={{marginRight: wp(5)}}/>
-                                <Text>{st(`signInGoogle`)}</Text>
-                            </TextButton>
-                        </Col>
+                        ? <>
+                            <Col size={1}/>
+                            <Col size={6}>
+                                <TextButton style={{justifyContent: 'center'}} onPress={async () => {
+                                    Keyboard.dismiss()
+                                    try {
+                                        const {success} = await authFunctions.signInGoogle()
+                                        if (success) navToReference()
+                                    } catch (e) {
+                                        dispatch(sysError(e))
+                                    }
+                                }}>
+                                    <IcoMoon name="google" style={{marginRight: wp(5)}}/>
+                                    <Text>{st(`signInGoogle`)}</Text>
+                                </TextButton>
+                            </Col>
                         </>
                         : <></>
                 }

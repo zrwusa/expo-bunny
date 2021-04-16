@@ -6,7 +6,7 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {createStyles} from "./styles";
 
 export interface RowProps {
-    children: React.ReactNode,
+    children?: React.ReactNode,
     size?: SizeKeys,
     style?: StyleProp<ViewStyle>
 }
@@ -39,6 +39,6 @@ export const Row = function (props: RowProps) {
         style
     ]
     return <View style={mergeStyle}>
-        {children}
+        {children ? children : null}
     </View>
 }

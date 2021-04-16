@@ -52,13 +52,11 @@ import {useSizeLabor} from "../../providers/size-labor";
 import {createStyles} from "./styles";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {BottomTabBarOptions, BottomTabNavigationOptions} from "react-navigation-bottom-tabs-no-warnings/lib/typescript/src/types";
 import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
 import {blError, blSuccess, getIconNameByRoute} from "../../helpers";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {collectBLResult} from "../../store/actions";
 import {useDispatch} from "react-redux";
-import {DrawerNavigationOptions} from "react-navigation-drawer-no-warnings";
 import {IGHomeScreen} from "../../screens/DemoIG/Home";
 import {IGSettingsScreen} from "../../screens/DemoIG/Settings";
 import {IGSearchScreen} from "../../screens/DemoIG/Search";
@@ -72,6 +70,8 @@ import {Auth1Screen} from "../../screens/Auth/Auth1";
 import {HealthHomeScreen} from "../../screens/DemoHealth/Home";
 import {HealthSettingsScreen} from "../../screens/DemoHealth/Settings";
 import {IconToolsScreen} from "../../screens/IconTools";
+import {DrawerNavigationOptions} from "@react-navigation/drawer";
+import {BottomTabBarOptions, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]

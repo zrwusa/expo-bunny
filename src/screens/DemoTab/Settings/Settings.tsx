@@ -1,13 +1,13 @@
 import * as React from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {DemoTabStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {Card, createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
+import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;

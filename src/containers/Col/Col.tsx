@@ -37,6 +37,6 @@ export const Col = function (props: ColProps) {
         style
     ]
     return <View style={mergeStyle}>
-        {children}
+        {children ? children : null}
     </View>
 }
