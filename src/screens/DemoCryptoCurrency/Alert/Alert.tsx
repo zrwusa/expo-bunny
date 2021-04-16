@@ -3,11 +3,11 @@ import {useEffect, useState} from "react";
 import {Platform, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
-import {DemoCryptoCurrencyStackParam, RootState} from "../../../types";
-import {ButtonTO, PickerSelectChevronRight, Text, TextBtn} from "../../../components/UI";
+import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
+import {ButtonTO, PickerSelectChevronRight, Text, InButtonText} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers";
-import {createContainerStyles} from "../../../containers";
+import {Col, createContainerStyles, Row} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import * as Notifications from "expo-notifications";
@@ -16,9 +16,10 @@ import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings, sysError} 
 import {useDispatch, useSelector} from "react-redux";
 import {createStyles} from "./styles";
 import {createSmartStyles} from "../../../utils";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyAlert'>;
-type CryptoCurrencyAlertNavigationProp = BottomTabNavigationProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyAlert'>;
+type CryptoCurrencyAlertNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
 
 export interface CryptoCurrencyAlertProps {
     route?: CryptoCurrencyAlertRouteProp,
@@ -34,7 +35,6 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
     const themeLabor = useThemeLabor();
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
-    const {row, col1, col4, colLast} = smartStyles;
     const styles = createStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()
     const {currentPrice, dictionaries} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
@@ -152,39 +152,39 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
                 {
                     notification
                         ? <View>
-                            <View style={row}>
-                                <View style={col1}>
+                            <Row>
+                                <Col size={1}>
                                     <Text>Title:</Text>
-                                </View>
-                                <View style={col4}>
+                                </Col>
+                                <Col size={4}>
                                     <Text>{notification.request.content.title} </Text>
-                                </View>
+                                </Col>
                                 {/*<Text>Data: {JSON.stringify(notification.request.content.data)}</Text>*/}
-                            </View>
-                            <View style={row}>
-                                <View style={col1}>
+                            </Row>
+                            <Row>
+                                <Col size={1}>
                                     <Text>Body:</Text>
-                                </View>
-                                <View style={col4}>
+                                </Col>
+                                <Col size={4}>
                                     <Text>{notification.request.content.body} </Text>
-                                </View>
-                            </View>
+                                </Col>
+                            </Row>
                         </View>
                         : null
                 }
             </View>
 
             <View style={containerStyles.RowCard}>
-                <View style={col1}>
+                <Col size={1}>
                     <ButtonTO onPress={handleSaveQuickAlertSettings}>
-                        <TextBtn>{st(`saveQuickSettings`)}</TextBtn>
+                        <InButtonText>{st(`saveQuickSettings`)}</InButtonText>
                     </ButtonTO>
-                </View>
-                <View style={[col1, colLast]}>
+                </Col>
+                <Col size={1} style={{marginLeft:6}}>
                     <ButtonTO onPress={handleCancelAllAlertSettings}>
-                        <TextBtn>{st(`cancelAlertSettings`)}</TextBtn>
+                        <InButtonText>{st(`cancelAlertSettings`)}</InButtonText>
                     </ButtonTO>
-                </View>
+                </Col>
             </View>
         </View>
     ) : (<Text>Dummy CryptoCurrencyAlert</Text>)

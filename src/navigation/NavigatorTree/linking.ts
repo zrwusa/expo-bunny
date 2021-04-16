@@ -14,6 +14,16 @@ export const linking = {
             Auth: {
                 name: 'Auth',
                 path: 'auth',
+                screens: {
+                    SignIn: {
+                        name: 'SignIn',
+                        path: 'sign-in',
+                    },
+                    SignUp: {
+                        name: 'SignUp',
+                        path: 'sign-up',
+                    },
+                }
             },
             Profile: {
                 name: 'Profile',
@@ -231,6 +241,24 @@ export const linking = {
             ColorFinder: {
                 name: 'ColorFinder',
                 path: 'color-finder',
+            },
+            IconTools: {
+                name: 'IconTools',
+                path: 'icon-tools',
+            },
+            DemoHealth: {
+                name: 'DemoHealth',
+                path: 'demo-health',
+                screens: {
+                    HealthHome: {
+                        name: 'HealthHome',
+                        path: 'home',
+                    },
+                    HealthSettings: {
+                        name: 'HealthSettings',
+                        path: 'settings',
+                    }
+                }
             },
             Settings: {
                 name: 'Settings',

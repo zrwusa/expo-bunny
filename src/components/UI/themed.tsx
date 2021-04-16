@@ -31,6 +31,8 @@ import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
 import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from "react-native-picker-select";
 import {createStyles} from "./styles";
+import {LinearGradient} from "expo-linear-gradient";
+import {borderRadius} from "styled-system";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -44,7 +46,7 @@ const getBtnChildren = (children: React.ReactNode) => {
         if (children instanceof Array && children.length > 0) {
             const safeChildren = children.map(child => {
                 if (typeof child === 'string') {
-                    return <TextBtn key={uuidV4()}>{child}</TextBtn>
+                    return <InButtonText key={uuidV4()}>{child}</InButtonText>
                 } else {
                     return child
                 }
@@ -52,7 +54,7 @@ const getBtnChildren = (children: React.ReactNode) => {
             childrenNeedRender = <View style={[row, between, vCenter]}>{safeChildren}</View>
         } else {
             if (typeof children === 'string') {
-                childrenNeedRender = <TextBtn>{children}</TextBtn>
+                childrenNeedRender = <InButtonText>{children}</InButtonText>
             } else {
                 childrenNeedRender = children
             }
@@ -64,42 +66,89 @@ const getBtnChildren = (children: React.ReactNode) => {
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
 export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
+    const {colors, borderRadius} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
-    const childrenNeedRender = getBtnChildren(children)
+    // const childrenNeedRender = getBtnChildren(children)
     const mergedStyle = [{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         backgroundColor: colors.btnBackground,
-        marginTop: ms.sp.s,
-        borderRadius: ms.br.xs,
+        borderRadius: borderRadius.button,
         fontSize: ms.fs.m,
         paddingVertical: ms.sp.m,
         paddingHorizontal: ms.sp.m,
+    } as StyleProp<ViewStyle>, style]
+    return (<TouchableOpacityRN style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
+}
+
+export const TextButton: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
+    const {colors, borderRadius} = useThemeLabor().theme;
+    const {ms} = useSizeLabor();
+    const mergedStyle = [{
+        flexDirection: 'row',
+        borderRadius: borderRadius.button,
+        fontSize: ms.fs.m,
+        paddingVertical: ms.sp.m,
+        paddingHorizontal: ms.sp.m,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    } as StyleProp<ViewStyle>, style]
+    return (<TouchableOpacityRN style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
+}
+
+export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
+    const {colors} = useThemeLabor().theme;
+    return (<ButtonRN color={color || colors.btnBackground} {...rest} />);
+}
+
+export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, children, ...rest}) => {
+    const themeLabor = useThemeLabor();
+    const {theme} = themeLabor;
+    const {colors, roundness, borderRadius} = theme;
+    const sizeLabor = useSizeLabor();
+    const {ms} = sizeLabor;
+    const mergedStyle = [{
+        fontSize: ms.fs.l,
+        borderRadius: roundness,
+        width: '100%'
     }, style]
-    return (<TouchableOpacityRN style={mergedStyle} {...rest} >{childrenNeedRender}</TouchableOpacityRN>);
+    return <TouchableOpacity style={mergedStyle} {...rest}>
+        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 0}} style={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingVertical: ms.sp.m,
+            paddingHorizontal: ms.sp.m,
+            borderRadius: borderRadius.button
+        }} colors={[colors.btnBackground, colors.btnBackground2]}>
+            {children}
+        </LinearGradient>
+    </TouchableOpacity>
 }
 
 export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}) => {
     const {onPress, ...props} = useLinkProps({to, action});
-    const {colors} = useThemeLabor().theme;
+    const {colors, borderRadius} = useThemeLabor().theme;
     const sizeLabor = useSizeLabor();
     const {ms} = sizeLabor;
-    const childrenNeedRender = getBtnChildren(children)
+    // const childrenNeedRender = getBtnChildren(children)
     const mergedStyle = [{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         backgroundColor: colors.btnBackground,
-        marginTop: ms.sp.s,
-        borderRadius: ms.br.xs,
+        borderRadius: borderRadius.button,
         fontSize: ms.fs.m,
         paddingVertical: ms.sp.m,
         paddingHorizontal: ms.sp.m,
-    }, style]
+    } as StyleProp<TextStyle>, style]
     return (
         <TouchableOpacityRN style={mergedStyle} onPress={onPress} {...props} {...rest}>
-            {childrenNeedRender}
+            {children}
         </TouchableOpacityRN>
     );
 };
 
-export const TextBtn: React.FC<TextProps> = ({children, style, ...rest}) => {
+export const InButtonText: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
     const mergedStyle = [{
@@ -119,18 +168,13 @@ export const View: React.FC<ViewProps> = ({children, style, ...rest}) => {
 export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {colors, fonts} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
-    const mergedStyle = [{
+    const mergedStyle: StyleProp<TextStyle> = [{
         color: colors.text,
         fontFamily: fonts.regular.fontFamily,
-        fontSize: ms.fs.m,
     }, style]
     return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
 }
 
-export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
-    return (<ButtonRN color={color || colors.btnBackground} {...rest} />);
-}
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const mergedStyle = [{}, style]
@@ -149,7 +193,7 @@ export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) 
 export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
     const mergedStyle = [{
-        backgroundColor: colors.backdropSecondary,
+        backgroundColor: colors.backdrop,
     }, style]
     return (<ImageRN
         style={mergedStyle}  {...rest} >{children}</ImageRN>);
@@ -197,7 +241,44 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
         fontSize: ms.fs.m,
     }, style]
     return (<TextInputRN
+        placeholderTextColor={colors.placeholder}
         style={mergedStyle} {...rest} />);
+}
+
+export interface TextInputIconProps extends TextInputProps {
+    renderIcon?: () => (React.ReactElement<MaterialCommunityIconsProps>),
+}
+
+export const TextInputIcon: React.FC<TextInputIconProps> = ({style, renderIcon, ...rest}) => {
+    const themeLabor = useThemeLabor();
+    const {theme} = themeLabor;
+    const {colors} = theme;
+    const sizeLabor = useSizeLabor();
+    const {ms, designsBasedOn} = sizeLabor;
+    const {wp} = designsBasedOn.iphoneX
+    // todo Typescript check for outline properties bug
+    const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
+    const mergedStyle = [{
+        color: colors.text,
+        paddingHorizontal: ms.sp.l,
+        paddingVertical: ms.sp.m,
+        fontSize: ms.fs.m,
+        flex: 6
+    }, style]
+    return (<View
+        style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderRadius: theme.borderRadius.input,
+            borderWidth: wp(2),
+            borderColor: colors.border,
+            padding: wp(6)
+        }}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>{renderIcon && renderIcon()}</View>
+        <TextInputRN
+            placeholderTextColor={colors.placeholder}
+            style={mergedStyle} {...rest} />
+    </View>);
 }
 export type SwitchPaperProps = React.ComponentPropsWithRef<typeof SwitchRN> & {
     disabled?: boolean;
@@ -242,7 +323,7 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
     const {ms} = useSizeLabor();
     const mergedStyle = [{
         color: color || colors.text,
-        fontSize: size || ms.fs.xl,
+        fontSize: size || ms.fs.l,
     }, style]
     return (<IconFromIcoMoon
         name={name}
@@ -253,16 +334,28 @@ export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, 
     const themeLabor = useThemeLabor();
     const sizeLabor = useSizeLabor();
     const styles = createStyles(sizeLabor, themeLabor);
+    const {designsBasedOn} = sizeLabor
+    const {wp} = designsBasedOn.iphoneX
+    const IconDefault = (Platform.OS !== 'web' ? () => <IcoMoon name="chevron-down1"/> : null)
     return (<ReactNativePickerSelect
         style={{
-            ...style,
+            iconContainer: styles.PickerSelect.iconContainer,
+            viewContainer: styles.PickerSelect.viewContainer,
+            inputIOSContainer: styles.PickerSelect.inputContainer,
+            inputAndroidContainer: styles.PickerSelect.inputContainer,
             inputWeb: styles.PickerSelect.input,
             inputIOS: styles.PickerSelect.input,
             inputAndroid: styles.PickerSelect.input,
+            modalViewTop: styles.PickerSelect.modalViewTop,
+            modalViewMiddle: styles.PickerSelect.modalViewMiddle,
+            modalViewBottom: styles.PickerSelect.modalViewBottom,
+            ...style,
         }}
         touchableWrapperProps={{
             activeOpacity: 0.2,
         }}
+        useNativeAndroidPickerStyle={false}
+        Icon={Icon || IconDefault}
         children={children}
         {...rest}
     />);

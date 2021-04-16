@@ -2,7 +2,7 @@ import * as React from "react";
 import {Text} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
-import {DemoIGStackParam} from "../../../types";
+import {DemoIGStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {Card, createContainerStyles} from "../../../containers";
@@ -10,10 +10,11 @@ import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {SafeAreaView} from "react-native";
 import {createStyles} from "./styles";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 
 type IGSettingsRouteProp = RouteProp<DemoIGStackParam, 'IGSettings'>;
-type IGSettingsNavigationProp = BottomTabNavigationProp<DemoIGStackParam, 'IGSettings'>;
+type IGSettingsNavigationProp = StackNavigationProp<RootStackParam, 'DemoIG'>;
 
 export interface IGSettingsProps {
     route: IGSettingsRouteProp,

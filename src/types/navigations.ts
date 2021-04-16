@@ -20,7 +20,7 @@ import {NavigationState, ParamListBase, Route} from "@react-navigation/routers";
 
 export type RootStackParam = {
     Home: undefined;
-    Auth: undefined | { reference: string };
+    Auth: undefined | { screen: string; params?: { [key: string]: any } };
     Profile: { id: string };
     DemoModal: undefined | { screen: string; params?: { [key: string]: any } };
     DemoFCReduxHook: undefined;
@@ -44,6 +44,8 @@ export type RootStackParam = {
     DemoSearch: undefined | { keyword: string };
     Playground: undefined;
     ColorFinder: undefined;
+    IconTools: undefined;
+    DemoHealth: undefined| { screen: string; params?: { [key: string]: any } };
     Settings: undefined;
 };
 export type DemoTabStackParam = {
@@ -56,6 +58,11 @@ export type DemoIGStackParam = {
     IGSearch: { keyword: string };
     IGMedia: undefined;
     IGSettings: { item: string };
+};
+
+export type AuthTopStackParam = {
+    SignIn: undefined | { reference: string };
+    SignUp: undefined | { reference: string };
 };
 
 export type DemoDrawerStackParam = {
@@ -91,6 +98,11 @@ export type DemoModalStackParam = {
 export type DemoCryptoCurrencyStackParam = {
     CryptoCurrencyHome: undefined;
     CryptoCurrencyAlert: { isPush: boolean };
+};
+
+export type DemoHealthTabStackParam = {
+    HealthHome: undefined;
+    HealthSettings: undefined;
 };
 export type RouteBase = Route<string, object | undefined>
 

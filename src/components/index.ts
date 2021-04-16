@@ -10,4 +10,5 @@ export * from './Sys'
 export * from './NotSupport'
 export * from './RequestLoading'
 export * from './BLToast'
+export * from './Avatar'
 

@@ -25,7 +25,6 @@ function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
     const [themeName, setThemeName] = useState(EThemes.light)
     const [theme, setTheme] = useState(themes[themeName]);
     const changeTheme = async (themeName: ThemeName) => {
-        console.log('---themeName in provider', themeName)
         if (Object.keys(EThemes).includes(themeName)) {
             await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, themeName)
             setThemeName(themeName);
@@ -71,7 +70,6 @@ function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
             return {theme, currentThemeName: themeName, themes, changeTheme, sysColorSchemeName}
         }
         , [theme, changeTheme, themeName, sysColorSchemeName])
-    // const themeLaborMemorized = {theme, currentThemeName: themeName, themes, changeTheme, sysColorSchemeName}
     return (
         isReady
             ? <ThemeLaborContext.Provider value={themeLaborMemorized}>

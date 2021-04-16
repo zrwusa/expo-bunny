@@ -7,16 +7,19 @@ import {LinearGradientIconProps} from "./LinearGradientIcon";
 
 export function LinearGradientIcon(props: LinearGradientIconProps) {
     const {name, size, colors} = props;
-    const sizeDefault = 40, colorsDefault = ['#fff', '#0f0']
-
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
+    const {theme} = themeLabor;
+    const {designsBasedOn} = sizeLabor
+    const {wp} = designsBasedOn.iphoneX
+    const finalSize = size || wp(20),
+        colorsDefault = [theme.colors.btnBackground, theme.colors.btnBackground2];
     const styles = createStyles(sizeLabor, themeLabor)
     return (
         <IcoMoon
             name={name}
-            size={size || sizeDefault}
-            color={colors ? colors[1] : colorsDefault[1]}
+            size={finalSize}
+            color={colors ? colors[0] : colorsDefault[0]}
         />
     )
 }

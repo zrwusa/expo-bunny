@@ -47,6 +47,7 @@
       "demoSearch": "Demo Search",
       "colorFinder": "Color Finder",
       "playground": "Playground",
+      "demoHealth": "Health",
       "settings": "Settings",
       "signOut": "Sign Out"
     },
@@ -127,8 +128,8 @@
       "title": "Auth",
       "signIn": "Sign In",
       "signUp": "Sign Up",
-      "signInDummy": "Sign In(Dummy)",
-      "signInGoogle": "Sign In Google",
+      "signInDummy": "Dummy",
+      "signInGoogle": "Google",
       "goToSignUp": "Go to sign up",
       "goToSignIn": "Go to sign in",
       "username": "username",
@@ -259,6 +260,15 @@
       "inputAColorString": "Input a color string",
       "similarColorFromPalette": "Similar color from palette",
       "similarColorsFromThemes": "Similar color from themes"
+    },
+    "DemoHealth": {
+      "title": "DemoHealth"
+    },
+    "HealthHome": {
+      "title": "HealthHome"
+    },
+    "HealthSettings": {
+      "title": "HealthSettings"
     },
     "Settings": {
       "title": "Settings",

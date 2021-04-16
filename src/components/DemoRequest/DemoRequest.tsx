@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ButtonTO, Text, TextBtn, View} from "../UI";
+import {ButtonTO, Text, InButtonText, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";
@@ -73,7 +73,7 @@ function DemoRequest(props: Props) {
         <Text>{props.title}</Text>
         <ButtonTO onPress={async () => {
             await getEmployees()
-        }}><TextBtn>{buttonTitle}</TextBtn></ButtonTO>
+        }}><InButtonText>{buttonTitle}</InButtonText></ButtonTO>
         <View>
             {employees && employees.length > 0
                 ? employees.map((employee) =>

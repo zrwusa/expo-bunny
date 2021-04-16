@@ -56,7 +56,7 @@ export const getThemeWareHouse = () => {
     const axisStroke = {
         light: pl.blueGrey300,
         dark: pl.orange800,
-        gradient: pl.transparent,
+        gradient: pl.blueIndigo150,
     }
 
     const fillOrStrokeBlueGrey700VC = {
@@ -65,10 +65,22 @@ export const getThemeWareHouse = () => {
         gradient: pl.tealA500,
     }
 
+    const axisLabelFill = {
+        light: pl.blueGrey700,
+        dark: pl.orange800,
+        gradient: pl.blueIndigo150,
+    }
+
     const tickLabelsFill = {
         light: pl.blueGrey700,
-        dark: pl.white,
-        gradient: pl.white,
+        dark: pl.grey400,
+        gradient: pl.blueIndigo150,
+    }
+
+    const axisTicksStroke = {
+        light: pl.blueGrey300,
+        dark: pl.black890,
+        gradient: pl.black890,
     }
 
     const testFillOrStrokeRed = {
@@ -198,9 +210,26 @@ export const getThemeWareHouse = () => {
             gradient: true
         },
         roundness: {
-            light: 4,
-            dark: 4,
-            gradient: 4
+            light: wp(4),
+            dark: wp(4),
+            gradient: wp(10)
+        },
+        borderRadius: {
+            button: {
+                light: wp(4),
+                dark: wp(4),
+                gradient: wp(17)
+            },
+            input: {
+                light: wp(4),
+                dark: wp(4),
+                gradient: wp(100)
+            },
+            surface:{
+                light: wp(10),
+                dark: wp(10),
+                gradient: wp(10)
+            }
         },
         mode: {
             light: 'exact',
@@ -224,15 +253,15 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey850,
                 gradient: pl.blueIndigo900
             },
-            borderSecondary: {
+            border2: {
                 light: pl.grey600,
                 dark: pl.amber500,
                 gradient: pl.amber500
             },
             divider: {
                 light: pl.grey390,
-                dark: pl.blueGrey320,
-                gradient: pl.blueGrey320
+                dark: pl.grey800,
+                gradient: pl.blueIndigo900
             },
             // ---end main
 
@@ -240,40 +269,35 @@ export const getThemeWareHouse = () => {
             // ---start text
             text: {
                 light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
+                dark: pl.grey400,
+                gradient: pl.blueIndigo50
             },
-            textSecondary: {
+            text2: {
                 light: pl.grey800,
                 dark: pl.grey600,
-                gradient: pl.grey600
+                gradient: pl.blueIndigo100
+            },
+            text3:{
+                light: pl.grey800,
+                dark: pl.grey600,
+                gradient: pl.blueIndigo150
             },
             btnText: {
                 light: pl.white,
                 dark: pl.orange50,
                 gradient: pl.blueIndigoA700,
             },
-            btnTextSecondary: {
+            btnText2: {
                 light: pl.red100,
                 dark: pl.indigo100,
                 gradient: pl.indigo100
-            },
-            title: {
-                light: pl.grey800,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            titleSecondary: {
-                light: pl.grey700,
-                dark: pl.grey300,
-                gradient: pl.grey300
             },
             caption: {
                 light: pl.grey900,
                 dark: pl.grey500,
                 gradient: pl.grey500
             },
-            captionSecondary: {
+            caption2: {
                 light: pl.grey800,
                 dark: pl.grey600,
                 gradient: pl.grey600
@@ -283,7 +307,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey200,
                 gradient: pl.grey200
             },
-            paragraphSecondary: {
+            paragraph2: {
                 light: pl.grey700,
                 dark: pl.grey400,
                 gradient: pl.grey400
@@ -297,34 +321,24 @@ export const getThemeWareHouse = () => {
                 dark: pl.black900,
                 gradient: pl.blueIndigoA400
             },
-            backgroundSecondary: {
+            background2: {
                 light: pl.grey200,
                 dark: pl.grey800,
                 gradient: pl.blueIndigoA700
             },
-            backgroundTertiary: {
+            background3: {
                 light: pl.white,
                 dark: pl.black,
                 gradient: pl.blueIndigoA100
-            },
-            btnActive: {
-                light: pl.lightBlue100,
-                dark: pl.lightBlue100,
-                gradient: pl.lightBlue100
-            },
-            btnActiveSecondary: {
-                light: pl.lightBlue600,
-                dark: pl.deepPurple700,
-                gradient: pl.deepPurple700
             },
             btnBackground: {
                 light: pl.teal400,
                 dark: pl.orange800,
                 gradient: pl.tealA500
             },
-            btnBackgroundSecondary: {
+            btnBackground2: {
                 light: pl.teal300,
-                dark: pl.orange700,
+                dark: pl.orange800,
                 gradient: pl.lightBlue630,
             },
             card: {
@@ -337,17 +351,17 @@ export const getThemeWareHouse = () => {
                 dark: pl.black900,
                 gradient: pl.blueGrey870
             },
-            surfaceSecondary: {
+            surface2: {
                 light: pl.grey100,
                 dark: pl.grey900,
-                gradient: pl.grey900
+                gradient: pl.blueIndigo900
             },
             paper: {
                 light: pl.yellow50,
                 dark: pl.amber50,
                 gradient: pl.amber50
             },
-            paperSecondary: {
+            paper2: {
                 light: pl.lightGreen50,
                 dark: pl.green50,
                 gradient: pl.green50,
@@ -361,7 +375,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.white,
                 gradient: pl.white
             },
-            onBackgroundSecondary: {
+            onBackground2: {
                 light: pl.black,
                 dark: pl.white,
                 gradient: pl.white
@@ -371,7 +385,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.white,
                 gradient: pl.white
             },
-            onSurfaceSecondary: {
+            onSurface2: {
                 light: pl.black,
                 dark: pl.white,
                 gradient: pl.white
@@ -381,7 +395,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.blue600,
                 gradient: pl.lightBlue630
             },
-            accentSecondary: {
+            accent2: {
                 light: pl.blue300,
                 dark: pl.teal600,
                 gradient: pl.teal600
@@ -400,40 +414,20 @@ export const getThemeWareHouse = () => {
                 dark: pl.red910,
                 gradient: pl.red910
             },
-            errorSecondary: {
-                light: pl.red500,
-                dark: pl.pink200,
-                gradient: pl.pink200
-            },
             warning: {
                 light: pl.yellow780,
                 dark: pl.yellow720,
                 gradient: pl.yellow720
-            },
-            warningSecondary: {
-                light: pl.yellow600,
-                dark: pl.yellow800,
-                gradient: pl.yellow800
             },
             notification: {
                 light: pl.pinkA400,
                 dark: pl.pinkA100,
                 gradient: pl.pinkA100,
             },
-            notificationSecondary: {
-                light: pl.pinkA200,
-                dark: pl.pinkA400,
-                gradient: pl.pinkA400,
-            },
             info: {
                 light: pl.blue300,
                 dark: pl.blue500,
                 gradient: pl.blue500,
-            },
-            infoSecondary: {
-                light: pl.blue200,
-                dark: pl.blue400,
-                gradient: pl.blue400,
             },
             // --- end tip
 
@@ -447,22 +441,12 @@ export const getThemeWareHouse = () => {
             placeholder: {
                 light: color(pl.black).alpha(0.54).rgb().string(),
                 dark: color(pl.white).alpha(0.54).rgb().string(),
-                gradient: color(pl.white).alpha(0.54).rgb().string(),
-            },
-            placeholderSecondary: {
-                light: color(pl.black).alpha(0.32).rgb().string(),
-                dark: color(pl.white).alpha(0.32).rgb().string(),
-                gradient: color(pl.white).alpha(0.32).rgb().string(),
+                gradient: pl.blueIndigo150,
             },
             backdrop: {
                 light: color(pl.black).alpha(0.5).rgb().string(),
-                dark: color(pl.black).alpha(0.5).rgb().string(),
-                gradient: color(pl.black).alpha(0.5).rgb().string(),
-            },
-            backdropSecondary: {
-                light: color(pl.black).alpha(0.5).rgb().string(),
-                dark: color(pl.black).alpha(0.5).rgb().string(),
-                gradient: color(pl.black).alpha(0.5).rgb().string(),
+                dark: color(pl.black).alpha(0.9).rgb().string(),
+                gradient: color(pl.black).alpha(0.9).rgb().string(),
             },
             transparent: {
                 light: pl.transparent,
@@ -535,7 +519,7 @@ export const getThemeWareHouse = () => {
                         fontSize: fontSize12VC,
                         letterSpacing: letterSpacingNormalVC,
                         padding: padding8VC,
-                        fill: fillOrStrokeBlueGrey700VC,
+                        fill: axisLabelFill,
                         stroke: fillOrStrokeTransparentVC,
                         strokeWidth: strokeWidth0VC
                     },
@@ -558,11 +542,7 @@ export const getThemeWareHouse = () => {
                     ticks: {
                         fill: fillOrStrokeTransparentVC,
                         size: size5VC,
-                        stroke: {
-                            light: pl.blueGrey300,
-                            dark: pl.black890,
-                            gradient: pl.black890,
-                        },
+                        stroke: axisTicksStroke,
                         strokeWidth: strokeWidth1VC,
                         strokeLinecap: strokeLinecapRoundVC,
                         strokeLinejoin: strokeLinejoinRoundVC

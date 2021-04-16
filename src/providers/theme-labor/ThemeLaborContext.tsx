@@ -9,7 +9,6 @@ const ThemeLaborContext = React.createContext<ThemeLabor>({
     currentThemeName: EThemes.light,
     themes: themes,
     changeTheme: (themeName: ThemeName) => {
-        console.log('---themeName in context', themeName)
     },
     sysColorSchemeName: 'light'
 });

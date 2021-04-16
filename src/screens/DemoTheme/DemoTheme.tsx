@@ -1,6 +1,6 @@
 import React from "react";
 import {ScrollView} from "react-native";
-import {Button, ButtonTO, Text, TextBtn, View} from "../../components/UI";
+import {Button, ButtonTO, Text, InButtonText, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createStyles} from "./styles";
@@ -25,15 +25,15 @@ const DemoThemeScreen = () => {
             <View style={[containerStyles.Screen, smartStyles.centralized]}>
                 <Card>
                     <ButtonTO style={smartStyles.btn}>
-                        <TextBtn>{st(`demoButton`)}</TextBtn></ButtonTO>
+                        <InButtonText>{st(`demoButton`)}</InButtonText></ButtonTO>
                     <ButtonTO style={smartStyles.btnSecondary}>
-                        <TextBtn>{st(`demoButtonSec`)}</TextBtn></ButtonTO>
+                        <InButtonText>{st(`demoButtonSec`)}</InButtonText></ButtonTO>
                     <Text style={smartStyles.text}>{st(`demoText`)}</Text>
-                    <Text style={smartStyles.textSecondary}>{st(`demoTextSec`)}</Text>
+                    <Text style={smartStyles.text2}>{st(`demoTextSec`)}</Text>
                     <ButtonTO style={smartStyles.btnDisabled}>
-                        <TextBtn>{st(`demoButtonDisabled`)}</TextBtn></ButtonTO>
+                        <InButtonText>{st(`demoButtonDisabled`)}</InButtonText></ButtonTO>
                     <Button title={st(`btnCustom`)} onPress={BunnyConstants.fnNoop}/>
-                    <ButtonTO><TextBtn>{st(`btnFromPaper`)}</TextBtn></ButtonTO>
+                    <ButtonTO><InButtonText>{st(`btnFromPaper`)}</InButtonText></ButtonTO>
                     <View style={[styles.demoShadow, smartStyles.shadow]}>
                         <Text>{st(`demoShadow`)}</Text>
                     </View>
@@ -44,9 +44,9 @@ const DemoThemeScreen = () => {
                     <Text style={smartStyles.h5}>h5</Text>
                     <Text style={smartStyles.h6}>h6</Text>
                     <Text style={smartStyles.title}>{st(`demoTitle`)}</Text>
-                    <Text style={smartStyles.titleSecondary}>{st(`demoTitleSec`)}</Text>
+                    <Text style={smartStyles.title2}>{st(`demoTitleSec`)}</Text>
                     <Text style={smartStyles.caption}>{st(`demoCaption`)}</Text>
-                    <Text style={smartStyles.captionSecondary}>{st(`demoCaptionSec`)}</Text>
+                    <Text style={smartStyles.caption2}>{st(`demoCaptionSec`)}</Text>
                     <View style={smartStyles.box}>
                         <Text style={smartStyles.h3}>{st(`demoParagraph`)}</Text>
                         <Text style={smartStyles.paragraph}>
@@ -58,7 +58,7 @@ const DemoThemeScreen = () => {
                     </View>
                     <View style={smartStyles.box}>
                         <Text style={smartStyles.h3}>{st(`demoParagraphSec`)}</Text>
-                        <Text style={smartStyles.paragraphSecondary}>
+                        <Text style={smartStyles.paragraph2}>
                             1.Don’t repeat yourself (DRY){'\n'}
                             2.Do one thing (DOT) (from Unix philosophy){'\n'}
                             3.Separation of concerns{'\n'}
@@ -68,7 +68,7 @@ const DemoThemeScreen = () => {
                     <View style={[smartStyles.surface, styles.demoSurface]}>
                         <Text style={smartStyles.h3}>{st(`demoSurface`)}</Text>
                     </View>
-                    <View style={[smartStyles.surfaceSecondary, styles.demoSurface]}>
+                    <View style={[smartStyles.surface2, styles.demoSurface]}>
                         <Text style={smartStyles.h3}>{st(`demoSurfaceSec`)}</Text>
                     </View>
                 </Card>

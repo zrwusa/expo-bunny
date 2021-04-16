@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {DemoCryptoCurrencyStackParam, RootState} from "../../../types";
+import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
 import {BottomTabNavigationProp} from "react-navigation-bottom-tabs-no-warnings";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
@@ -18,9 +18,10 @@ import axios, {CancelTokenSource} from "axios";
 import {collectBLResult, getCurrentPrice, sysError} from "../../../store/actions";
 import {blError} from "../../../helpers";
 import {ScrollView} from "react-native";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
-type CryptoCurrencyHomeNavigationProp = BottomTabNavigationProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
+type CryptoCurrencyHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
 
 export interface CryptoCurrencyHomeProps {
     route: CryptoCurrencyHomeRouteProp,
@@ -81,6 +82,7 @@ function CryptoCurrencyHomeScreen() {
                 }
             })
             const {timestamps, prices} = res.data[0]
+
             const btcDataMapped = timestamps.map((item: string, index: number) => {
                 return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
             })

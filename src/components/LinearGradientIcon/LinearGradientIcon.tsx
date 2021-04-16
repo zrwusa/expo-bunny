@@ -8,20 +8,28 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {IcoMoonProps} from "../../types";
 import {StyleProp, TextStyle} from "react-native";
 
-export type LinearGradientIconProps = IcoMoonProps & { style?: StyleProp<TextStyle> } & LinearGradientProps
+export type LinearGradientIconProps = IcoMoonProps & Omit<LinearGradientProps, 'colors'> & {
+    colors?: string[],
+    style?: StyleProp<TextStyle>
+}
 
 export function LinearGradientIcon(props: LinearGradientIconProps) {
-    const {name, size, colors, start, end, locations, ...rest} = props;
-    const sizeDefault = 40, colorsDefault = ['#fff', '#0f0'],
-        startDefault = {x: 0, y: 0}, endDefault = {x: 0, y: 1};
-
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
+    const {theme} = themeLabor;
+    const {name, size, colors, start, end, locations, ...rest} = props;
+    const {designsBasedOn} = sizeLabor
+    const {wp} = designsBasedOn.iphoneX
+    const finalSize = size||wp(20),
+        colorsDefault = [theme.colors.btnBackground, theme.colors.btnBackground2],
+        startDefault = {x: 0, y: 0},
+        endDefault = {x: 0, y: 1};
+
     const styles = createStyles(sizeLabor, themeLabor)
     return (
-        <View style={{width: size, height: size}} {...rest}>
+        <View style={{width: finalSize, height: finalSize}} {...rest}>
             <MaskedView
-                style={{flex: 1, flexDirection: 'row', height: size}}
+                style={{flex: 1, flexDirection: 'row',width:finalSize, height: finalSize}}
                 maskElement={
                     <View
                         style={{
@@ -31,7 +39,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
                         }}>
                         <IcoMoon
                             name={name}
-                            size={size || sizeDefault}
+                            size={finalSize}
                             color={colors ? colors[0] : colorsDefault[0]}
                         />
                     </View>

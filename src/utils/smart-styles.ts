@@ -8,35 +8,35 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
     const smartStyles = StyleSheet.create({
         h1: {
             fontSize: ms.fs.xxl,
-            color: colors.title,
+            color: colors.text,
         },
         h2: {
             fontSize: ms.fs.xl,
-            color: colors.titleSecondary,
+            color: colors.text2,
         },
         h3: {
             fontSize: ms.fs.l,
-            color: colors.titleSecondary,
+            color: colors.text3,
         },
         h4: {
             fontSize: ms.fs.m,
-            color: colors.titleSecondary,
+            color: colors.text3,
         },
         h5: {
             fontSize: ms.fs.s,
-            color: colors.titleSecondary,
+            color: colors.text3,
         },
         h6: {
             fontSize: ms.fs.xs,
-            color: colors.titleSecondary,
+            color: colors.text3,
         },
         title: {
             fontSize: ms.fs.l,
-            color: colors.title,
+            color: colors.text,
         },
-        titleSecondary: {
+        title2: {
             fontSize: ms.fs.l,
-            color: colors.titleSecondary,
+            color: colors.text2,
         },
         paragraph: {
             fontFamily: fonts.regular.fontFamily,
@@ -45,18 +45,18 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             lineHeight: ms.lh.m,
             color: colors.paragraph
         },
-        paragraphSecondary: {
+        paragraph2: {
             fontFamily: fonts.regular.fontFamily,
             // fontWeight: fonts.regular.fontWeight, //Todo fontWeight is optional,DeepLeavesWrap deals with it incorrectly
             fontSize: ms.fontSizes.m,
             lineHeight: ms.lh.m,
-            color: colors.paragraphSecondary
+            color: colors.paragraph2
         },
         btn: {
-            backgroundColor: colors.primary,
+            backgroundColor: colors.btnBackground,
         },
         btnSecondary: {
-            backgroundColor: colors.secondary,
+            backgroundColor: colors.btnBackground2,
         },
         btnDisabled: {
             backgroundColor: colors.disabled
@@ -64,24 +64,27 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
         text: {
             color: colors.text,
         },
-        textSecondary: {
-            color: colors.textSecondary,
+        label: {
+            color: colors.text,
+        },
+        text2: {
+            color: colors.text2,
         },
         caption: {
             color: colors.caption,
         },
-        captionSecondary: {
-            color: colors.captionSecondary,
+        caption2: {
+            color: colors.text2,
         },
         surface: {
             backgroundColor: colors.surface,
         },
-        surfaceSecondary: {
-            backgroundColor: colors.surfaceSecondary,
+        surface2: {
+            backgroundColor: colors.surface2,
         },
         box: {
             borderWidth: ms.sp.xxs,
-            borderColor: colors.borderSecondary,
+            borderColor: colors.border2,
             padding: ms.sp.s,
             marginVertical: ms.sp.s,
         },
@@ -91,25 +94,6 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
         col: {
             flex: 1,
             marginRight: ms.sp.s
-        },
-        col1: {
-            flex: 1,
-            marginRight: ms.sp.s
-        },
-        col2: {
-            flex: 2,
-            marginRight: ms.sp.s
-        },
-        col3: {
-            flex: 3,
-            marginRight: ms.sp.s
-        },
-        col4: {
-            flex: 4,
-            marginRight: ms.sp.s
-        },
-        colLast: {
-            marginRight: 0
         },
         around: {
             justifyContent: 'space-around'
@@ -132,6 +116,18 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             shadowOpacity: 0.2,
             shadowRadius: wp(14.78),
             elevation: wp(22),
+            backgroundColor:colors.background, // React native bug no background no shadow on iOS
+        },
+        shadowAround:{
+            shadowColor: colors.backdrop,
+            shadowOffset: {
+                width: wp(0),
+                height: wp(0),
+            },
+            shadowOpacity: 0.6,
+            shadowRadius: wp(10),
+            elevation: wp(22),
+            backgroundColor:colors.background, // React native bug no background no shadow on iOS
         },
         screen: {
             flex: 1,

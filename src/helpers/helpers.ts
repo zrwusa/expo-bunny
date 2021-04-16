@@ -112,6 +112,14 @@ export const tabBarIconNameConfig: JSONSerializable = {
         default: 'settings',
         focused: 'settings',
     },
+    HealthHome: {
+        default: 'presentation',
+        focused: 'presentation',
+    },
+    HealthSettings: {
+        default: 'settings',
+        focused: 'settings',
+    },
 
 }
 

@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ButtonTO, Text, TextBtn, View} from "../UI";
+import {ButtonTO, Text, InButtonText, View} from "../UI";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 
 interface Props extends WithSizeLabor {
@@ -47,8 +47,8 @@ class DemoCCClock extends PureComponent<Props, States> {
         return (<View>
             <Text>{this.props.title}</Text>
             <Text>{tipLabel}{this.state.time.toLocaleTimeString()}</Text>
-            <ButtonTO onPress={this.go}><TextBtn>{goButtonTitle}</TextBtn></ButtonTO>
-            <ButtonTO onPress={this.stop}><TextBtn>{stopButtonTitle}</TextBtn></ButtonTO>
+            <ButtonTO onPress={this.go}><InButtonText>{goButtonTitle}</InButtonText></ButtonTO>
+            <ButtonTO onPress={this.stop}><InButtonText>{stopButtonTitle}</InButtonText></ButtonTO>
         </View>);
     }
 

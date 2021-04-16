@@ -321,14 +321,18 @@ export const palette: Palette = {
     //---end--- others
 
     //---start--- gradient theme
+    blueIndigo50:'#DAD4EE', // text
+    blueIndigo100:'#B8B3CE', // text2
+    blueIndigo150:'#A7A2BE', //
     blueIndigo300: '#545063', // inActive text
+
     blueIndigo900: '#2C2A3D', // border
     blueIndigoA100: '#2C283B', // input background secondary
     blueIndigoA400: '#232033',// background
     blueIndigoA700: '#1B1929', // background dark,btn text
     tealA500: '#37C7B8', // button from primary
     lightBlue630: '#2894D1',// button to secondary
-    blueGrey870: '#242E3D', // label background surface
+    blueGrey870: '#242E3D', // label background
     //---end--- gradient theme
 }
 

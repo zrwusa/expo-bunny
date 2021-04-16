@@ -12,7 +12,7 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     return StyleSheet.create({
         errorConsole: {
             ...absoluteBottomLeft,
-            backgroundColor: colors.backgroundSecondary,
+            backgroundColor: colors.background2,
             zIndex: 1000,
             width: wp(375),
             padding: ms.sp.s

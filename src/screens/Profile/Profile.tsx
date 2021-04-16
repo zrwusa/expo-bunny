@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ButtonTO, IcoMoon, Text, TextBtn, View} from "../../components/UI";
+import {ButtonTO, IcoMoon, Text, InButtonText, View} from "../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
@@ -49,7 +49,7 @@ function ProfileScreen({route, navigation}: Props) {
                     resizeMode="cover"
                 />
                 <ButtonTO onPress={() => navigation.navigate('Home')}>
-                    <TextBtn>{st(`goToHomeScreen`)}</TextBtn>
+                    <InButtonText>{st(`goToHomeScreen`)}</InButtonText>
                 </ButtonTO>
                 <View style={styles.tallBlock}/>
             </View>

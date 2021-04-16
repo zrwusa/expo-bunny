@@ -16,20 +16,20 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         header: {flexDirection: 'row', alignItems: 'center'},
         headerLeft: {
             marginRight: wp(5),
-            width: wp(28),
-            height: wp(28),
-            borderRadius: wp(14),
-            borderColor: colors.accent,
-            borderWidth: wp(1)
+            // width: wp(28),
+            // height: wp(28),
+            // borderRadius: wp(14),
+            // borderColor: colors.accent,
+            // borderWidth: wp(1)
         },
-        headerLeftAvatar: {
-            position: 'relative',
-            width: wp(26),
-            height: wp(26),
-            borderRadius: wp(13),
-            borderColor: colors.btnText,
-            borderWidth: wp(1)
-        },
+        // headerLeftAvatar: {
+        //     position: 'relative',
+        //     width: wp(26),
+        //     height: wp(26),
+        //     borderRadius: wp(13),
+        //     borderColor: colors.btnText,
+        //     borderWidth: wp(1)
+        // },
         headerLeftUser: {fontSize: ms.fs.s, lineHeight: ms.fs.s, color: colors.text},
         headerRightText: {fontSize: ms.fs.l, color: colors.text},
         image: {

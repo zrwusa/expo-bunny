@@ -1,6 +1,7 @@
 import * as React from "react";
 import {PureComponent} from "react";
 import {IcoMoon, View} from "../UI";
+import {Avatar} from "../Avatar"
 import {Image, Text} from "react-native";
 import {ShowVideo} from "../Video/Video";
 import {ReadMore} from "../ReadMore/ReadMore";
@@ -32,11 +33,12 @@ class IGMediaCardInner extends PureComponent<IGMediaCardProps> {
                 <View style={styles.header}>
                     <View style={styles.headerLeft}>
                         {/*todo Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.*/}
-                        <Image
-                            style={styles.headerLeftAvatar}
-                            width={wp(26)}
-                            height={wp(26)}
-                            source={userAvatar}/>
+                        <Avatar size="s" source={userAvatar} />
+                        {/*<Image*/}
+                        {/*    style={styles.headerLeftAvatar}*/}
+                        {/*    width={wp(26)}*/}
+                        {/*    height={wp(26)}*/}
+                        {/*    source={userAvatar}/>*/}
                     </View>
                     <Text style={styles.headerLeftUser}>{user}</Text>
                 </View>

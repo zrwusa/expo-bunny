@@ -3,7 +3,7 @@ import {ScrollView, View} from "react-native";
 import {RouteProp, useLinkTo} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
-import {ButtonTO, IcoMoon, Link, TextBtn} from "../../components/UI";
+import {ButtonTO, IcoMoon, Link, InButtonText} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Card, createContainerStyles} from "../../containers";
@@ -38,28 +38,31 @@ function HomeScreen({navigation}: HomeScreenProps) {
             <View style={containerStyles.Screen}>
                 <Card title={st(`navAndRoute`)}>
                     <Link to="/demo-tab/home">
-                        {st(`tab`)}
-                        <IcoMoon name="layout7" {...iconColor}/></Link>
-                    <Link to="/demo-drawer/home">{st(`drawer`)}
-                        <IcoMoon name="layout" {...iconColor}/></Link>
+                        <InButtonText>{st(`tab`)}</InButtonText>
+                        <IcoMoon name="layout7" size={wp(22)} {...iconColor}/></Link>
+                    <Link to="/demo-drawer/home">
+                        <InButtonText>{st(`drawer`)}</InButtonText>
+                        <IcoMoon name="layout"  size={wp(22)} {...iconColor}/></Link>
                     <Link to="/profile/002">
-                        {st(`profile`) + `(Link)`}
-                        <IcoMoon name="profile1" {...iconColor}/></Link>
+                        <InButtonText>{st(`profile`) + `(Link)`}</InButtonText>
+                        <IcoMoon name="profile1" size={wp(22)} {...iconColor}/></Link>
                     <ButtonTO onPress={() => linkTo("/profile/002")}>
-                        <TextBtn>{st(`profile`)}(useLinkTo)</TextBtn>
-                        <IcoMoon name="profile1" {...iconColor}/></ButtonTO>
+                        <InButtonText>{st(`profile`)}(useLinkTo)</InButtonText>
+                        <IcoMoon name="profile1" size={wp(22)} {...iconColor}/></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('Profile', {id: '002'})}>
-                        <TextBtn>{st(`profile`) + '(TouchableOpacity)'}</TextBtn>
-                        <IcoMoon name="profile1" {...iconColor}/></ButtonTO>
+                        <InButtonText>{st(`profile`) + '(TouchableOpacity)'}</InButtonText>
+                        <IcoMoon name="profile1" size={wp(22)} {...iconColor}/></ButtonTO>
                     <ButtonTO onPress={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}>
-                        <TextBtn>{st(`route`) + '(TouchableOpacity)'}</TextBtn>
+                        <InButtonText>{st(`route`) + '(TouchableOpacity)'}</InButtonText>
                         <IcoMoon name="adjustments" size={wp(21)} {...iconColor}/></ButtonTO>
-                    <Link to="/demo-route?id=1&isHuman=false&sort=top">{st(`route`) + `(Link)`}
+                    <Link to="/demo-route?id=1&isHuman=false&sort=top">
+                        <InButtonText>{st(`route`) + `(Link)`}</InButtonText>
                         <IcoMoon name="adjustments" size={wp(21)} {...iconColor}/></Link>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
-                    {/*    <TextBtn>{st(`demoModal`)}</TextBtn></ButtonTO>*/}
+                    {/*    <InButtonText>{st(`demoModal`)}</InButtonText></ButtonTO>*/}
 
-                    <Link to="/demo-nested/home">{st(`nestedNavigation`)}</Link>
+                    <Link to="/demo-nested/home">
+                        <InButtonText>{st(`nestedNavigation`)}</InButtonText></Link>
                     <ButtonTO onPress={() =>
                         navigation.navigate('DemoNestedLv0', {
                             screen: 'NestedLv1Settings',
@@ -71,79 +74,86 @@ function HomeScreen({navigation}: HomeScreenProps) {
                                 },
                             },
                         })}>
-                        {st(`passParamsFromRootToLeaf`) + '(TouchableOpacity)'}
+                        <InButtonText>{st(`passParamsFromRootToLeaf`) + '(TouchableOpacity)'}</InButtonText>
                         <IcoMoon name="leaf" size={wp(21)} {...iconColor}/>
                     </ButtonTO>
                     <Link to="/demo-nested/settings/001/lv2-settings/002">
-                        {st(`passParamsFromRootToLeaf`) + `(Link)`}
+                        <InButtonText>{st(`passParamsFromRootToLeaf`) + `(Link)`}</InButtonText>
                         <IcoMoon name="leaf" size={wp(21)} {...iconColor}/></Link>
                     <Link to="/demo-tab/settings/item-001">
-                        {st(`passParamsFromRootToLeafTab`) + `(Link)`}
+                        <InButtonText>{st(`passParamsFromRootToLeafTab`) + `(Link)`}</InButtonText>
                         <IcoMoon name="leaf" size={wp(21)} {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`redux`)}>
                     <Link to="/demo-fc-redux-hook">
-                        {st(`FCReduxHook`)}
+                        <InButtonText>{st(`FCReduxHook`)}</InButtonText>
                         <IcoMoon name="puzzle" size={wp(21)} {...iconColor}/></Link>
                     <Link to="/demo-thunk-cc">
-                        {st(`thunkCC`)}
+                        <InButtonText>{st(`thunkCC`)}</InButtonText>
                         <IcoMoon name="gears" size={wp(18)} {...iconColor}/></Link>
-                    <Link to="/demo-saga">{st(`saga`)}
+                    <Link to="/demo-saga">
+                        <InButtonText>{st(`saga`)}</InButtonText>
                         <IcoMoon name="tools" size={wp(21)} {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`nativeCapabilities`)}>
                     <Link to="/demo-map">
-                        {st(`map`)}
+                        <InButtonText>{st(`map`)}</InButtonText>
                         <IcoMoon name="map" size={wp(18)} {...iconColor}/></Link>
                     <Link to="/demo-chat">
-                        {st(`chat`)}
+                        <InButtonText>{st(`chat`)}</InButtonText>
                         <IcoMoon name="chat" size={wp(21)} {...iconColor}/></Link>
                     <Link to="/demo-share">
-                        {st(`share`)}
+                        <InButtonText>{st(`share`)}</InButtonText>
                         <IcoMoon name="share" {...iconColor}/></Link>
                     <Link to="/demo-notification">
-                        {st(`notification`)}
-                        <IcoMoon name="bell-o" {...iconColor}/></Link>
+                        <InButtonText>{st(`notification`)}</InButtonText>
+                        <IcoMoon name="bell-o" size={wp(22)} {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`componentsAndThemes`)}>
                     <Link to="/demo-third-part">
-                        {st(`thirdPart`)}
-                        <IcoMoon name="bus" {...iconColor}/></Link>
+                        <InButtonText>{st(`thirdPart`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
                     <Link to="/demo-collection">
-                        {st(`componentCollection`)}
-                        <IcoMoon name="bus" {...iconColor}/></Link>
+                        <InButtonText>{st(`componentCollection`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
                     <Link to="/demo-tab-rn-components/home">
-                        {st(`RNAllInOne`)}
-                        <IcoMoon name="bus" {...iconColor}/></Link>
+                        <InButtonText>{st(`RNAllInOne`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
                     <Link to="/demo-theme">
-                        {st(`demoTheme`)}
-                        <IcoMoon name="bus" {...iconColor}/></Link>
+                        <InButtonText>{st(`demoTheme`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
                     <Link to="/demo-search/k">
-                        {st(`demoSearch`)}
-                        <IcoMoon name="bus" {...iconColor}/></Link>
+                        <InButtonText>{st(`demoSearch`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
 
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
-                    {/*    <TextBtn>{st(`demoSuspense`)}</TextBtn></ButtonTO>*/}
+                    {/*    <InButtonText>{st(`demoSuspense`)}</InButtonText></ButtonTO>*/}
                 </Card>
                 <Card title={st(`devTools`)}>
                     <Link to="/color-finder">
-                        {st(`colorFinder`)}
-                        <IcoMoon name="bus" {...iconColor}/></Link>
+                        <InButtonText>{st(`colorFinder`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
+                    <Link to="/icon-tools">
+                        <InButtonText>{st(`iconTools`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
                     <Link to="/playground">
-                        {st(`playground`)}
-                        <IcoMoon name="bus" {...iconColor}/></Link>
+                        <InButtonText>{st(`playground`)}</InButtonText>
+                        <IcoMoon name="bus" size={wp(22)} {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`others`)}>
                     <Link to="/demo-crypto-currency/home">
-                        {st(`cryptoCurrency`)}
+                        <InButtonText>{st(`cryptoCurrency`)}</InButtonText>
                         <IcoMoon name="bitcoin" size={wp(24)} {...iconColor}/></Link>
                     <Link to="/demo-ig/home">
-                        {st(`ig`)}
-                        <IcoMoon name="layout7" {...iconColor}/></Link>
+                        <InButtonText>{st(`ig`)}</InButtonText>
+                        <IcoMoon name="layout7" size={wp(22)} {...iconColor}/></Link>
+                    <Link to="/demo-health/home">
+                        <InButtonText>{st(`demoHealth`)}</InButtonText>
+                        <IcoMoon name="layout7" size={wp(22)} {...iconColor}/></Link>
                 </Card>
                 <Card title={st(`system`)}>
                     <Link to="/settings">
-                        {st(`settings`)}
+                        <InButtonText>{st(`settings`)}</InButtonText>
                         <IcoMoon name="settings" size={wp(22)} {...iconColor}/></Link>
                     <ButtonTO onPress={async () => {
                         try {
@@ -152,8 +162,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
                             dispatch(sysError(e))
                         }
                     }}>
-                        <TextBtn>{st(`signOut`)}</TextBtn>
-                        <IcoMoon name="exit" size={wp(22)} {...iconColor}/></ButtonTO>
+                        <InButtonText>{st(`signOut`)}</InButtonText>
+                        <IcoMoon name="exit" size={wp(22)} {...iconColor}/>
+                    </ButtonTO>
                 </Card>
             </View>
         </ScrollView>

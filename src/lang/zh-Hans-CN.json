@@ -47,6 +47,7 @@
       "demoSearch": "示例-搜索",
       "colorFinder": "颜色查找器",
       "playground": "游乐场",
+      "demoHealth": "健身",
       "settings": "设置",
       "signOut": "注销"
     },
@@ -259,6 +260,15 @@
       "inputAColorString": "颜色字符串",
       "similarColorFromPalette": "调色板（palette）中的相近色",
       "similarColorsFromThemes": "主题（themes）中的相近色"
+    },
+    "DemoHealth": {
+      "title": "示例-健身"
+    },
+    "HealthHome": {
+      "title": "健身-首页"
+    },
+    "HealthSettings": {
+      "title": "健身-设置"
     },
     "Settings": {
       "title": "设置",

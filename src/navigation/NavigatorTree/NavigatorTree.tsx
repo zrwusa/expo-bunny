@@ -1,6 +1,7 @@
 import {
     DemoCryptoCurrencyStack,
     DemoDrawerStack,
+    DemoHealthTabStack,
     DemoIGStack,
     DemoNestedLv1Stack,
     DemoNestedLv2Stack,
@@ -11,7 +12,6 @@ import {
 import HomeScreen from "../../screens/Home";
 import * as React from "react";
 import {useEffect} from "react";
-import {AuthScreen} from "../../screens/Auth";
 import ProfileScreen from "../../screens/Profile";
 import DemoFCReduxHookScreen from "../../screens/DemoFCReduxHook";
 import DemoCollectionScreen from "../../screens/DemoCollection";
@@ -31,9 +31,9 @@ import {DrawerActions, NavigationContainer, NavigationContainerProps, Navigation
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
 import DrawerHomeScreen from "../../screens/DemoDrawer/Home";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/Settings";
-import NestedLv1HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Home";
-import NestedLv2HomeScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Home";
-import NestedLv2SettingsScreen from "../../screens/DemoLv0Nested/NestedLv1Settings/NestedLv2Settings";
+import NestedLv1HomeScreen from "../../screens/DemoNestedLv0/NestedLv1Home";
+import NestedLv2HomeScreen from "../../screens/DemoNestedLv0/NestedLv1Settings/NestedLv2Home";
+import NestedLv2SettingsScreen from "../../screens/DemoNestedLv0/NestedLv1Settings/NestedLv2Settings";
 import RNHome from "../../screens/DemoRNComponents/RNHome";
 import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
 import RNSectionListScreen from "../../screens/DemoRNComponents/RNSectionList/SectionList";
@@ -68,6 +68,10 @@ import {IGMediaScreen} from "../../screens/DemoIG/Media";
 import {PlaygroundScreen} from "../../screens/Playground";
 import {ColorFinderScreen} from "../../screens/ColorFinder";
 import {ThemePicker} from "../../components/ThemePicker";
+import {Auth1Screen} from "../../screens/Auth/Auth1";
+import {HealthHomeScreen} from "../../screens/DemoHealth/Home";
+import {HealthSettingsScreen} from "../../screens/DemoHealth/Settings";
+import {IconToolsScreen} from "../../screens/IconTools";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -82,14 +86,16 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 
 // Explicitly define a navigation tree, the navigation of the entire App is clear at a glance
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
-    const {ms, designsBasedOn} = useSizeLabor();
+    const sizeLabor = useSizeLabor();
+    const {ms, designsBasedOn} = sizeLabor;
     const {authResult, authFunctions} = useAuthLabor()
     const dispatch = useDispatch();
     const {wp} = designsBasedOn.iphoneX;
-    const {theme} = useThemeLabor();
+    const themeLabor = useThemeLabor();
+    const {theme} = themeLabor;
     const {colors} = theme;
     const {t} = useTranslation();
-    const styles = createStyles();
+    const styles = createStyles(sizeLabor, themeLabor);
     const insets = useSafeAreaInsets();
 
     // --- options start ---
@@ -135,12 +141,17 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         return function ({route}: any) {
             const finalOptions = {
                 title: t(`screens.${route.name}.title`),
-                ...(needMerged && needMerged)
+                ...(needMerged && needMerged),
             }
             return finalOptions;
         }
     }
-
+    const optionsAuth: StackNavigationOptions = {
+        ...screenOptionsStackCommon,
+        animationEnabled: false,
+        headerShown: false,
+        headerLeft: () => null
+    }
     const optionsIG: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: true,
@@ -175,12 +186,18 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                       : require('../../assets/images/art-font-bunny.png')}/>,
     }
 
+    const optionsHealth: StackNavigationOptions = {
+        ...screenOptionsStackCommon,
+        animationEnabled: true,
+        headerShown: false,
+    }
+
     const screenOptionsTabBarIcon: TabBarScreenOptions = ({route}) => {
         return {
             tabBarIcon: ({focused, color, size}) => {
                 const name = getIconNameByRoute(route.name, focused)
                 return <IcoMoon name={name} style={{color: color}} size={wp(size / 1.25)}/>;
-            }
+            },
         }
     }
 
@@ -227,6 +244,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         ...tabBarOptionsCommon,
         showLabel: false,
     }
+
+    const tabBarOptionsHealth: BottomTabBarOptions = {
+        ...tabBarOptionsCommon,
+        showLabel: false,
+    }
     // --- options end ---
 
     const listenersNeedAuth = () => {
@@ -244,11 +266,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         if (navigationRef.current) {
             const curRoute = navigationRef.current.getCurrentRoute()
             if (!curRoute) {
-                navigationRef.current.navigate('Auth')
+                navigationRef.current.navigate('Auth', {screen: 'SignIn'})
                 return
             }
             if (curRoute.name !== 'Auth') {
-                navigationRef.current.navigate('Auth', {reference: JSON.stringify(curRoute)})
+                navigationRef.current.navigate('Auth', {screen: 'SignIn', params: {reference: JSON.stringify(curRoute)}})
             } else {
                 return
             }
@@ -292,7 +314,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             }
         }}>
             <RootStack.Screen name="Home" component={HomeScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="Auth" component={AuthScreen} options={optionsMergeWithTitle({headerLeft: () => null})}/>
+            <RootStack.Screen name="Auth" component={Auth1Screen} options={optionsMergeWithTitle(optionsAuth)}/>
             <RootStack.Screen name="Profile" component={ProfileScreen} options={optionsMergeWithTitle()} listeners={listenersNeedAuth}/>
             <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen} options={optionsMergeWithTitle()}/>
@@ -381,7 +403,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoIG" options={optionsMergeWithTitle(optionsIG)}>
                 {
                     (props) => {
-                        return <DemoIGStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                        return <DemoIGStack.Navigator {...props}
+                                                      screenOptions={screenOptionsTabBarIcon}
                                                       tabBarOptions={tabBarOptionsIG}>
                             <DemoIGStack.Screen name="IGHome" component={IGHomeScreen} options={optionsMergeWithTitle()}/>
                             <DemoIGStack.Screen name="IGSearch" component={IGSearchScreen}
@@ -395,6 +418,23 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             </RootStack.Screen>
             <RootStack.Screen name="Playground" component={PlaygroundScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="ColorFinder" component={ColorFinderScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="IconTools" component={IconToolsScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoHealth" options={optionsMergeWithTitle(optionsHealth)}>
+                {
+                    (props) => {
+                        return <DemoHealthTabStack.Navigator {...props}
+                                                             screenOptions={screenOptionsTabBarIcon}
+                                                             tabBarOptions={tabBarOptionsHealth}>
+                            <DemoHealthTabStack.Screen name="HealthHome"
+                                                       component={HealthHomeScreen}
+                                                       options={optionsMergeWithTitle()}/>
+                            <DemoHealthTabStack.Screen name="HealthSettings"
+                                                       component={HealthSettingsScreen}
+                                                       options={optionsMergeWithTitle()}/>
+                        </DemoHealthTabStack.Navigator>
+                    }
+                }
+            </RootStack.Screen>
             <RootStack.Screen name="Settings" component={SettingsScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} options={optionsMergeWithTitle()}/>

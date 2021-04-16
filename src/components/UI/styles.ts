@@ -15,25 +15,34 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             top: 0,
         },
         container: {
-            backgroundColor: colors.backdropSecondary,
+            backgroundColor: colors.backdrop,
         },
 
     });
     const PickerSelect = StyleSheet.create({
+        viewContainer: {width: '100%'},
+        inputContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'},
+        iconContainer: {
+            position: 'relative',
+        },
         input: {
-            minWidth: wp(80),
             height: wp(30),
             backgroundColor: colors.background,
-            borderWidth: wp(1),
-            borderColor: colors.border,
-            borderRadius: ms.br.xs,
+            borderColor: colors.transparent,
             paddingHorizontal: ms.sp.m,
             color: colors.text,
-            textAlign: 'right',
-            alignItems: 'center',
             fontSize: ms.fs.m,
-            // paddingRight: ms.sp.xl// to ensure the text is never behind the icon
         },
+        modalViewTop:{
+        },
+        modalViewMiddle:{
+            backgroundColor:colors.background2,
+            borderTopColor:colors.border
+        },
+        modalViewBottom:{
+            backgroundColor:colors.background,
+
+        }
     })
     return {ImageProgressive, PickerSelect}
 }

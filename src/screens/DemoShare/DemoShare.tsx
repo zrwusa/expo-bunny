@@ -1,7 +1,7 @@
 import {createStyles} from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
-import {ButtonTO, Image, Text, TextBtn, TouchableOpacity, View} from "../../components/UI";
+import {ButtonTO, Image, Text, InButtonText, TouchableOpacity, View} from "../../components/UI";
 import {useDispatch} from "react-redux";
 import {sysError} from "../../store/actions";
 import * as ImagePicker from "expo-image-picker";
@@ -75,7 +75,7 @@ function DemoShareScreen() {
         <View style={[containerStyles.Screen, smartStyles.centralized]}>
             <View style={{marginTop: 50}}>
                 <ButtonTO onPress={onShare}>
-                    <TextBtn>{st(`shareMessage`)}</TextBtn>
+                    <InButtonText>{st(`shareMessage`)}</InButtonText>
                 </ButtonTO>
             </View>
             {

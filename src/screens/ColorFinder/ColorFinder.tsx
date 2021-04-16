@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ButtonTO, Text, TextInput, View} from "../../components/UI";
+import {ButtonTO, Text, TextInput, View, InButtonText} from "../../components/UI";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {checkColor, colorFaultTolerance, deltaEDes, diffColors} from "../../utils/color";
 import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem, PaletteKeys, ThemeColorKeys, ThemeName} from "../../types";
@@ -143,7 +143,7 @@ export function ColorFinderScreen() {
                                autoCapitalize='none'
                     />
                     <ColorValuesCard item={colorInput}/>
-                    <ButtonTO onPress={handleSimilarColor}>{st('findSimilarColors')}</ButtonTO>
+                    <ButtonTO onPress={handleSimilarColor}><InButtonText>{st('findSimilarColors')}</InButtonText></ButtonTO>
                 </Card>
                 <Card title={st('similarColorFromPalette')}>
                     {
