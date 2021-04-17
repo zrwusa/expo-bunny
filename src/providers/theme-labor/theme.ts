@@ -191,7 +191,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.white,
                 gradient: pl.white
             },
-            onBackground:{
+            onBackground: {
                 light: pl.black,
                 dark: pl.white,
                 gradient: pl.white

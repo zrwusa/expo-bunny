@@ -25,7 +25,7 @@ import {useLinkProps} from "@react-navigation/native";
 import React from "react";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
 import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from "../../types";
-import {createSmartStyles, uuidV4} from "../../utils";
+import {createSmartStyles} from "../../utils";
 import selection from "../../assets/fonts/icomoon-cus/selection.json"
 import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
@@ -35,64 +35,22 @@ import {LinearGradient} from "expo-linear-gradient";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
-const getBtnChildren = (children: React.ReactNode) => {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
-    const {row, between, vCenter} = smartStyles;
-    let childrenNeedRender;
-    if (children) {
-        if (children instanceof Array && children.length > 0) {
-            const safeChildren = children.map(child => {
-                if (typeof child === 'string') {
-                    return <InButtonText key={uuidV4()}>{child}</InButtonText>
-                } else {
-                    return child
-                }
-            })
-            childrenNeedRender = <View style={[row, between, vCenter]}>{safeChildren}</View>
-        } else {
-            if (typeof children === 'string') {
-                childrenNeedRender = <InButtonText>{children}</InButtonText>
-            } else {
-                childrenNeedRender = children
-            }
-        }
-    }
-    return childrenNeedRender
-}
 
 // The theme switch is not supported, but for future scalability,
 // try to use the theme to standardize the definition and use of properties
 export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const {colors, borderRadius} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-    // const childrenNeedRender = getBtnChildren(children)
-    const mergedStyle = [{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: colors.btnBackground,
-        borderRadius: borderRadius.button,
-        fontSize: ms.fs.m,
-        paddingVertical: ms.sp.m,
-        paddingHorizontal: ms.sp.m,
-    } as StyleProp<ViewStyle>, style]
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {smartStyles, smartStylesObj} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle = [smartStyles.ButtonTO, style]
     return (<TouchableOpacityRN style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
 }
 
 export const TextButton: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const {colors, borderRadius} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-    const mergedStyle = [{
-        flexDirection: 'row',
-        borderRadius: borderRadius.button,
-        fontSize: ms.fs.m,
-        paddingVertical: ms.sp.m,
-        paddingHorizontal: ms.sp.m,
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    } as StyleProp<ViewStyle>, style]
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle = [smartStyles.TextButton, style]
     return (<TouchableOpacityRN style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
 }
 
@@ -102,24 +60,16 @@ export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
 }
 
 export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, children, ...rest}) => {
-    const themeLabor = useThemeLabor();
-    const {theme} = themeLabor;
-    const {colors, roundness, borderRadius} = theme;
     const sizeLabor = useSizeLabor();
-    const {ms} = sizeLabor;
-    const mergedStyle = [{
-        fontSize: ms.fs.l,
-        borderRadius: roundness,
-        width: '100%'
-    }, style]
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle = [smartStyles.LinearGradientButton, style];
+    const {theme} = themeLabor;
+    const {colors} = theme;
     return <TouchableOpacity style={mergedStyle} {...rest}>
-        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 0}} style={{
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingVertical: ms.sp.m,
-            paddingHorizontal: ms.sp.m,
-            borderRadius: borderRadius.button
-        }} colors={[colors.btnBackground, colors.btnBackground2]}>
+        <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 0}}
+                        style={smartStyles.LinearGradient}
+                        colors={[colors.btnBackground, colors.btnBackground2]}>
             {children}
         </LinearGradient>
     </TouchableOpacity>
@@ -127,19 +77,10 @@ export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, ch
 
 export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}) => {
     const {onPress, ...props} = useLinkProps({to, action});
-    const {colors, borderRadius} = useThemeLabor().theme;
     const sizeLabor = useSizeLabor();
-    const {ms} = sizeLabor;
-    // const childrenNeedRender = getBtnChildren(children)
-    const mergedStyle = [{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: colors.btnBackground,
-        borderRadius: borderRadius.button,
-        fontSize: ms.fs.m,
-        paddingVertical: ms.sp.m,
-        paddingHorizontal: ms.sp.m,
-    } as StyleProp<TextStyle>, style]
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle = [smartStyles.Link, style]
     return (
         <TouchableOpacityRN style={mergedStyle} onPress={onPress} {...props} {...rest}>
             {children}
@@ -148,14 +89,10 @@ export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}
 };
 
 export const InButtonText: React.FC<TextProps> = ({children, style, ...rest}) => {
-    const {colors, fonts} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-    const mergedStyle = [{
-        color: colors.btnText,
-        fontFamily: fonts.regular.fontFamily,
-        fontSize: ms.fs.m,
-        textAlign: 'center',
-    } as TextStyle, style]
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle = [smartStyles.InputButtonText, style]
     return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
 }
 
@@ -165,12 +102,10 @@ export const View: React.FC<ViewProps> = ({children, style, ...rest}) => {
 }
 
 export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
-    const {colors, fonts} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-    const mergedStyle: StyleProp<TextStyle> = [{
-        color: colors.text,
-        fontFamily: fonts.regular.fontFamily,
-    }, style]
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle: StyleProp<TextStyle> = [smartStyles.Text, style]
     return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
 }
 
@@ -190,10 +125,10 @@ export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) 
 }
 
 export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
-    const mergedStyle = [{
-        backgroundColor: colors.backdrop,
-    }, style]
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle = [smartStyles.Image, style]
     return (<ImageRN
         style={mergedStyle}  {...rest} >{children}</ImageRN>);
 }
@@ -229,16 +164,14 @@ export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
 // }
 
 export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {theme} = themeLabor;
+    const {colors} = theme;
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
     // todo Typescript check for outline properties bug
     const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
-    const mergedStyle = [{
-        color: colors.text,
-        paddingHorizontal: ms.sp.l,
-        paddingVertical: ms.sp.m,
-        fontSize: ms.fs.m,
-    }, style]
+    const mergedStyle = [smartStyles.TextInput, style]
     return (<TextInputRN
         placeholderTextColor={colors.placeholder}
         style={mergedStyle} {...rest} />);
@@ -249,31 +182,17 @@ export interface TextInputIconProps extends TextInputProps {
 }
 
 export const TextInputIcon: React.FC<TextInputIconProps> = ({style, renderIcon, ...rest}) => {
+    const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
     const {colors} = theme;
-    const sizeLabor = useSizeLabor();
-    const {ms, designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
     // todo Typescript check for outline properties bug
     const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
-    const mergedStyle = [{
-        color: colors.text,
-        paddingHorizontal: ms.sp.l,
-        paddingVertical: ms.sp.m,
-        fontSize: ms.fs.m,
-        flex: 6
-    }, style]
+    const mergedStyle = [smartStyles.TextInputIcon, style]
     return (<View
-        style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            borderRadius: theme.borderRadius.input,
-            borderWidth: wp(2),
-            borderColor: colors.border,
-            padding: wp(6)
-        }}>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>{renderIcon && renderIcon()}</View>
+        style={smartStyles.TextInputIconContainer}>
+        <View style={smartStyles.TextInputIconIconContainer}>{renderIcon && renderIcon()}</View>
         <TextInputRN
             placeholderTextColor={colors.placeholder}
             style={mergedStyle} {...rest} />
@@ -299,13 +218,10 @@ export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
 }
 
 export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<TextStyle> }> = ({children, style, name, ...rest}) => {
-    const {colors} = useThemeLabor().theme;
-    const {ms} = useSizeLabor();
-
-    const mergedStyle = [{
-        color: colors.text,
-        fontSize: ms.fs.xl,
-    }, style]
+    const sizeLabor = useSizeLabor();
+    const themeLabor = useThemeLabor();
+    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const mergedStyle = [smartStyles.IconMC, style]
     return (<MaterialCommunityIcons
         name={name}
         style={mergedStyle}
@@ -320,6 +236,7 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
     }) => {
     const {colors} = useThemeLabor().theme;
     const {ms} = useSizeLabor();
+
     const mergedStyle = [{
         color: color || colors.text,
         fontSize: size || ms.fs.l,

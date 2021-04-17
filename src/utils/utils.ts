@@ -108,15 +108,16 @@ export const isSameStructure = (objA: unknown, objB: unknown) => {
     let objBTraversable = objB as JSONSerializable;
     const objAKeys = Object.keys(objATraversable)
     const objBKeys = Object.keys(objBTraversable)
+    let isSame = true
     if (objAKeys.length !== objBKeys.length) {
-        return false
+        return isSame = false
     } else {
         objAKeys.forEach((i) => {
             if (!objBKeys.includes(i)) {
-                return false
+                return isSame = false
             }
         })
-        return true;
+        return isSame;
     }
 }
 

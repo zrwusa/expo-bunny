@@ -3,7 +3,7 @@ import {StyleSheet} from "react-native";
 
 export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
-    const {colors, fonts} = themeLabor.theme;
+    const {colors, borderRadius, roundness, fonts} = themeLabor.theme;
     const {wp} = designsBasedOn.iphoneX;
     const smartStyles = StyleSheet.create({
         text: {
@@ -77,6 +77,91 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             color: colors.paragraph2
         },
 
+        ButtonTO: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: colors.btnBackground,
+            borderRadius: borderRadius.button,
+            fontSize: ms.fs.m,
+            paddingVertical: ms.sp.m,
+            paddingHorizontal: ms.sp.m,
+        },
+        TextButton: {
+            flexDirection: 'row',
+            borderRadius: borderRadius.button,
+            fontSize: ms.fs.m,
+            paddingVertical: ms.sp.m,
+            paddingHorizontal: ms.sp.m,
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        },
+        LinearGradient: {
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingVertical: ms.sp.m,
+            paddingHorizontal: ms.sp.m,
+            borderRadius: borderRadius.button
+        },
+        LinearGradientButton: {
+            fontSize: ms.fs.l,
+            borderRadius: roundness,
+            width: '100%'
+        },
+
+        Link: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            backgroundColor: colors.btnBackground,
+            borderRadius: borderRadius.button,
+            fontSize: ms.fs.m,
+            paddingVertical: ms.sp.m,
+            paddingHorizontal: ms.sp.m,
+        },
+
+        InputButtonText: {
+            color: colors.btnText,
+            fontFamily: fonts.regular.fontFamily,
+            fontSize: ms.fs.m,
+            textAlign: 'center',
+        },
+        Text: {
+            color: colors.text,
+            fontFamily: fonts.regular.fontFamily,
+        },
+        Image: {
+            backgroundColor: colors.backdrop,
+        },
+        TextInput: {
+            color: colors.text,
+            paddingHorizontal: ms.sp.l,
+            paddingVertical: ms.sp.m,
+            fontSize: ms.fs.m,
+        },
+        TextInputIconContainer: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderRadius: borderRadius.input,
+            borderWidth: wp(2),
+            borderColor: colors.border,
+            padding: wp(6)
+        },
+        TextInputIconIconContainer: {
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center'
+        },
+        TextInputIcon: {
+            color: colors.text,
+            paddingHorizontal: ms.sp.l,
+            paddingVertical: ms.sp.m,
+            fontSize: ms.fs.m,
+            flex: 6
+        },
+        IconMC: {
+            color: colors.text,
+            fontSize: ms.fs.xl,
+        },
 
         card: {
             backgroundColor: colors.surface
