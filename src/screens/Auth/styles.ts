@@ -15,13 +15,14 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             alignItems:'center',
         },
         content: {
-            height: hp(400),
+            height: wp(440),
             marginHorizontal: 20,
             borderRadius:wp(10),
             ...shadowAround
         },
         footer: {
-            flex: 1, zIndex: 1
+            flex: 1,
+            zIndex: 1
         },
         footerBtnWrapper: {
             alignItems: 'center'

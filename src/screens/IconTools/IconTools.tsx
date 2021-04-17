@@ -28,7 +28,7 @@ export function IconToolsScreen() {
     return (
         <ScrollView style={{flex: 1}}>
             <View style={styles.container}>
-                <Card title={st('colorInput')}>
+                <Card title={st('generateIcoMoonConfigTitle')}>
                     <TextInput style={{height: Math.max(35, inputHeight)}}
                                multiline
                                editable={false}

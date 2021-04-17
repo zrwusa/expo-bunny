@@ -48,6 +48,7 @@
       "colorFinder": "Color Finder",
       "playground": "Playground",
       "demoHealth": "Health",
+      "iconTools": "Icon Tools",
       "settings": "Settings",
       "signOut": "Sign Out"
     },
@@ -269,6 +270,11 @@
     },
     "HealthSettings": {
       "title": "HealthSettings"
+    },
+    "IconTools": {
+      "title": "Icon Tools",
+      "generateIcoMoonConfigTitle": "Generate IcoMoon Config",
+      "generate": "generate"
     },
     "Settings": {
       "title": "Settings",

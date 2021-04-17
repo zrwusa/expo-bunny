@@ -48,6 +48,7 @@
       "colorFinder": "颜色查找器",
       "playground": "游乐场",
       "demoHealth": "健身",
+      "iconTools": "图标工具",
       "settings": "设置",
       "signOut": "注销"
     },
@@ -269,6 +270,11 @@
     },
     "HealthSettings": {
       "title": "健身-设置"
+    },
+    "IconTools": {
+      "title": "图标工具",
+      "generateIcoMoonConfigTitle": "生成IcoMoon配置",
+      "generate": "生成"
     },
     "Settings": {
       "title": "设置",

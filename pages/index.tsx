@@ -2,6 +2,7 @@ import 'setimmediate'
 import React from 'react'
 import Head from 'next/head'
 // import Index from '../src/index'
+// todo not SSR but get better SEO performance
 import dynamic from "next/dynamic";
 const Index = dynamic(
     () => {

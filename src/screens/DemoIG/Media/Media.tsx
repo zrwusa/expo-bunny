@@ -106,9 +106,12 @@ export function IGMediaScreen() {
     return (
         <SafeAreaView style={{flex: 1}}>
             <FlatList data={mannyCardData}
-                      initialNumToRender={1}
                       renderItem={({item}) => <IGMediaCard card={item}/>}
                       keyExtractor={item => item.id}
+
+                      initialNumToRender={3} // * times viewport,first render,keep in memory
+                      windowSize={5} // * times viewport,keep in memory
+
                       refreshControl={
                           <RefreshControl
                               refreshing={refreshing}

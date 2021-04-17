@@ -8,7 +8,7 @@ import {createContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {createStyles} from "./styles";
-import {Animated, SafeAreaView} from "react-native";
+import {Animated, Platform, SafeAreaView} from "react-native";
 import {uuid4} from "@sentry/utils";
 import {Masonry} from "../../../components/Masonry/Masonry";
 import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
@@ -114,12 +114,15 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
             <FollowUpSearchBar scrollYValue={scrollYValue} onSearch={handleSearch}/>
             {isReady ?
                 <Animated.FlatList data={MasonryData}
-                                   initialNumToRender={1}
                                    renderItem={({item}) => <Masonry data={item}/>}
                                    keyExtractor={item => item.id}
-                                   maxToRenderPerBatch={1}
+                                   debug
+                                   initialNumToRender={1}
                                    windowSize={3}
-                                   updateCellsBatchingPeriod={100}
+                                   removeClippedSubviews={Platform.OS === 'android'}
+                                   maxToRenderPerBatch={10}
+                                   updateCellsBatchingPeriod={50}
+
                                    onScroll={Animated.event(
                                        [{nativeEvent: {contentOffset: {y: scrollYValue}}}],
                                        {useNativeDriver: true},
@@ -127,20 +130,5 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
                 />
                 : null}
         </SafeAreaView>
-
-        // isReady ?
-        // <VirtualizedList
-        //     data={MasonryData}
-        //     initialNumToRender={1}
-        //     renderItem={({item}) => <Masonry data={item}/>}
-        //     keyExtractor={item => item.id}
-        //     getItemCount={getItemCount}
-        //     getItem={getItem}
-        //     removeClippedSubviews={true}
-        //     maxToRenderPerBatch={1}
-        //     windowSize={1}
-        //     updateCellsBatchingPeriod={100}
-        // />
-        // :null
     );
 }

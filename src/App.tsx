@@ -45,9 +45,9 @@ function App() {
                     if (Platform.OS !== 'web') {
                         const savedState = await AsyncStorage.getItem(BunnyConstants.NAV_STATE_PERSISTENCE_KEY);
                         const state = savedState ? JSON.parse(savedState) : undefined;
-                        // if (state !== undefined) {
-                        //     dispatch(restoreNavInitialState({navInitialState: state}));
-                        // }
+                        if (state !== undefined) {
+                            dispatch(restoreNavInitialState({navInitialState: state}));
+                        }
                     }
                 } catch (err) {
                     dispatch(sysError(err.toString()));
