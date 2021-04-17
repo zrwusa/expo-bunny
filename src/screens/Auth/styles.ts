@@ -11,13 +11,13 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     return StyleSheet.create({
         header: {
             flex: 2,
-            justifyContent:'center',
-            alignItems:'center',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         content: {
             height: wp(440),
             marginHorizontal: 20,
-            borderRadius:wp(10),
+            borderRadius: wp(10),
             ...shadowAround
         },
         footer: {

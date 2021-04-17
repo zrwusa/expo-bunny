@@ -33,7 +33,7 @@ class IGMediaCardInner extends PureComponent<IGMediaCardProps> {
                 <View style={styles.header}>
                     <View style={styles.headerLeft}>
                         {/*todo Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.*/}
-                        <Avatar size="s" source={userAvatar} />
+                        <Avatar size="s" source={userAvatar}/>
                         {/*<Image*/}
                         {/*    style={styles.headerLeftAvatar}*/}
                         {/*    width={wp(26)}*/}

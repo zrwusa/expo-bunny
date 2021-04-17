@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, ImageSourcePropType, ImageStyle, StyleProp, ViewStyle} from "react-native";
+import {Image, ImageSourcePropType, ImageStyle, StyleProp} from "react-native";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {createStyles} from "./styles";
@@ -36,8 +36,8 @@ export function Avatar(props: AvatarProps) {
         style={[styles.Avatar, {
             width: sizeAvatarMap[finalSize],
             height: sizeAvatarMap[finalSize],
-            borderRadius: sizeAvatarMap[finalSize]/2,
-        },style]}
+            borderRadius: sizeAvatarMap[finalSize] / 2,
+        }, style]}
         width={sizeAvatarMap[finalSize]}
         height={sizeAvatarMap[finalSize]}
         source={source}/>

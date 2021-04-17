@@ -76,7 +76,7 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
         return data.length;
     }
     const [scrollYValue] = useState(new Animated.Value(0));
-    const handleSearch = (key:string)=>{
+    const handleSearch = (key: string) => {
         console.log(key)
         let column1 = [],
             column2 = [],
@@ -85,7 +85,7 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
         let manyBricks: IGMediaBrick[] = []
 
         for (let i = 0; i < 1; i++) {
-            manyBricks = manyBricks.concat(rawBricks.filter((brick)=>{
+            manyBricks = manyBricks.concat(rawBricks.filter((brick) => {
                 return brick.text.includes(key)
             }).map(brick => {
                 brick.id = uuid4()

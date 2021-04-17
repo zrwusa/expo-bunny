@@ -45,7 +45,7 @@ export type RootStackParam = {
     Playground: undefined;
     ColorFinder: undefined;
     IconTools: undefined;
-    DemoHealth: undefined| { screen: string; params?: { [key: string]: any } };
+    DemoHealth: undefined | { screen: string; params?: { [key: string]: any } };
     Settings: undefined;
 };
 export type DemoTabStackParam = {

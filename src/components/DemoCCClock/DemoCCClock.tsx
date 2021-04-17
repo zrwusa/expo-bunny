@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ButtonTO, Text, InButtonText, View} from "../UI";
+import {ButtonTO, InButtonText, Text, View} from "../UI";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 
 interface Props extends WithSizeLabor {

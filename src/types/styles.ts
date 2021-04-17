@@ -70,7 +70,6 @@ export type Fonts = {
     light: Font,
     thin: Font
 }
-
 export type Colors = {
     // In the theme, we should care about the role of these color variables rather than the specific values,
     // such as 'primary success', not 'grey0, black'. The specific values should be named in the Palette.
@@ -113,7 +112,7 @@ export type Colors = {
 
 
     // ---start unknown
-    // onBackground: string,
+    onBackground: string,
     // onBackground2: string,
     onSurface: string,
     // onSurface2: string,

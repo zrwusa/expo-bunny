@@ -1,15 +1,4 @@
-import {Keyboard, Platform} from "react-native";
 import * as React from "react";
-import {useState} from "react";
-import {useDispatch} from "react-redux";
-import {ButtonTO, TextInput, View} from "../../components/UI";
-import {useTranslation} from "react-i18next";
-import {shortenTFunctionKey} from "../../providers";
-import {createContainerStyles} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
-import {useAuthLabor} from "../../providers/auth-labor";
-import {sysError} from "../../store/actions";
 import {RouteProp} from "@react-navigation/native";
 import {RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";

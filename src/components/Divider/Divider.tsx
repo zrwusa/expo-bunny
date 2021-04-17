@@ -40,6 +40,6 @@ export function Divider(props: DividerProps) {
         style
     ]
     return isVertical
-        ? <View style={[mergeStyleVertical, {height: size?sizeVerticalMap[size]:wp(6)}]}/>
+        ? <View style={[mergeStyleVertical, {height: size ? sizeVerticalMap[size] : wp(6)}]}/>
         : <View style={mergeStyleHorizontal}/>
 }

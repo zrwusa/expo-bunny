@@ -21,7 +21,7 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     });
     const PickerSelect = StyleSheet.create({
         viewContainer: {width: '100%'},
-        inputContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'},
+        inputContainer: {flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'},
         iconContainer: {
             position: 'relative',
         },
@@ -33,14 +33,13 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             color: colors.text,
             fontSize: ms.fs.m,
         },
-        modalViewTop:{
+        modalViewTop: {},
+        modalViewMiddle: {
+            backgroundColor: colors.background2,
+            borderTopColor: colors.border
         },
-        modalViewMiddle:{
-            backgroundColor:colors.background2,
-            borderTopColor:colors.border
-        },
-        modalViewBottom:{
-            backgroundColor:colors.background,
+        modalViewBottom: {
+            backgroundColor: colors.background,
 
         }
     })

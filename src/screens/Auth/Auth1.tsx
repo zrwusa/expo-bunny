@@ -1,5 +1,5 @@
 import * as React from "react";
-import {LinearGradientButton, View} from "../../components/UI";
+import {View} from "../../components/UI";
 import {createContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -40,7 +40,7 @@ export const Auth1Screen = ({route, navigation}: Auth1Props) => {
         <SafeAreaView style={{flex: 1}}>
             <View style={[containerStyles.Screen]}>
                 <View style={styles.header}>
-                    <Image style={{ width: wp(300), height: wp(30)}} source={theme.dark
+                    <Image style={{width: wp(300), height: wp(30)}} source={theme.dark
                         ? require('../../assets/images/dadu-coach-dark.png')
                         : require('../../assets/images/dadu-coach-light.png')
                     }/>

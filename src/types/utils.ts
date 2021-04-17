@@ -96,19 +96,19 @@ export interface DebouncedFunction<F extends Procedure> {
 }
 
 export type MonthKey =
-    'January'|
-    'February'|
-    'March'|
-    'April'|
-    'May'|
-    'June'|
-    'July'|
-    'August'|
-    'September'|
-    'October'|
-    'November'|
+    'January' |
+    'February' |
+    'March' |
+    'April' |
+    'May' |
+    'June' |
+    'July' |
+    'August' |
+    'September' |
+    'October' |
+    'November' |
     'December';
 
-export type Month = {[key in MonthKey]:string}
+export type Month = { [key in MonthKey]: string }
 
 

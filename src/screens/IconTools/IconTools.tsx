@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ButtonTO, TextInput, View, InButtonText} from "../../components/UI";
+import {ButtonTO, InButtonText, TextInput, View} from "../../components/UI";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {ScrollView} from "react-native";
 import {createStyles} from "./styles";
@@ -24,7 +24,7 @@ export function IconToolsScreen() {
     const handleGenerate = () => {
         setGlyph(JSON.stringify(glyphIcoMoonMap))
     }
-    const [inputHeight,setInputHeight] = useState(0)
+    const [inputHeight, setInputHeight] = useState(0)
     return (
         <ScrollView style={{flex: 1}}>
             <View style={styles.container}>

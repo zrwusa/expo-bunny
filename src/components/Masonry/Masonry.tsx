@@ -6,7 +6,6 @@ import {IGMediaBrick, MasonryDatum} from "../../types";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {createStyles} from "./styles";
-import FastImage from "react-native-fast-image";
 
 
 export interface MasonryProps extends WithSizeLabor, WithThemeLabor {

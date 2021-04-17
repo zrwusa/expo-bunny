@@ -321,9 +321,9 @@ export const palette: Palette = {
     //---end--- others
 
     //---start--- gradient theme
-    blueIndigo50:'#DAD4EE', // text
-    blueIndigo100:'#B8B3CE', // text2
-    blueIndigo150:'#A7A2BE', //
+    blueIndigo50: '#DAD4EE', // text
+    blueIndigo100: '#B8B3CE', // text2
+    blueIndigo150: '#A7A2BE', //
     blueIndigo300: '#545063', // inActive text
 
     blueIndigo900: '#2C2A3D', // border

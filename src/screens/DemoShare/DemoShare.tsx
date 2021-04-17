@@ -1,7 +1,7 @@
 import {createStyles} from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
-import {ButtonTO, Image, Text, InButtonText, TouchableOpacity, View} from "../../components/UI";
+import {ButtonTO, Image, InButtonText, Text, TouchableOpacity, View} from "../../components/UI";
 import {useDispatch} from "react-redux";
 import {sysError} from "../../store/actions";
 import * as ImagePicker from "expo-image-picker";

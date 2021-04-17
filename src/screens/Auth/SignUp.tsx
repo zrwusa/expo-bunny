@@ -121,19 +121,19 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
                             ? <>
                                 <Col size={1}/>
                                 <Col size={6}>
-                                <TextButton style={{justifyContent: 'center'}} onPress={async () => {
-                                    Keyboard.dismiss()
-                                    try {
-                                        const {success} = await authFunctions.signInGoogle()
-                                        if (success) navToReference()
-                                    } catch (e) {
-                                        dispatch(sysError(e))
-                                    }
-                                }}>
-                                    <IcoMoon name="google" style={{marginRight: wp(5)}}/>
-                                    <Text>{st(`signInGoogle`)}</Text>
-                                </TextButton>
-                            </Col>
+                                    <TextButton style={{justifyContent: 'center'}} onPress={async () => {
+                                        Keyboard.dismiss()
+                                        try {
+                                            const {success} = await authFunctions.signInGoogle()
+                                            if (success) navToReference()
+                                        } catch (e) {
+                                            dispatch(sysError(e))
+                                        }
+                                    }}>
+                                        <IcoMoon name="google" style={{marginRight: wp(5)}}/>
+                                        <Text>{st(`signInGoogle`)}</Text>
+                                    </TextButton>
+                                </Col>
                             </>
                             : <></>
                     }

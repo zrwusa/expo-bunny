@@ -20,7 +20,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
     const {name, size, colors, start, end, locations, ...rest} = props;
     const {designsBasedOn} = sizeLabor
     const {wp} = designsBasedOn.iphoneX
-    const finalSize = size||wp(20),
+    const finalSize = size || wp(20),
         colorsDefault = [theme.colors.btnBackground, theme.colors.btnBackground2],
         startDefault = {x: 0, y: 0},
         endDefault = {x: 0, y: 1};
@@ -29,7 +29,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
     return (
         <View style={{width: finalSize, height: finalSize}} {...rest}>
             <MaskedView
-                style={{flex: 1, flexDirection: 'row',width:finalSize, height: finalSize}}
+                style={{flex: 1, flexDirection: 'row', width: finalSize, height: finalSize}}
                 maskElement={
                     <View
                         style={{

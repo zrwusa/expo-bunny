@@ -8,13 +8,13 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {theme} = themeLabor;
     const {colors, borderRadius} = theme;
     const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor)
-    const {shadowAround,title} = smartStylesObj;
+    const {shadowAround, title} = smartStylesObj;
     return StyleSheet.create({
         bodyPartCard: {
             ...shadowAround,
             padding: ms.sp.m,
             borderRadius: borderRadius.surface,
-            marginRight:ms.sp.s,
+            marginRight: ms.sp.s,
         },
     });
 }

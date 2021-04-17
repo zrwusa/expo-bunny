@@ -8,18 +8,17 @@ import {Col, Row} from "../../../../containers";
 import {Divider} from "../../../../components/Divider";
 import {MonthKey} from "../../../../types";
 import {VictoryAxis, VictoryChart, VictoryLabel, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../../components/Victory/Victory";
-import {data} from "../data";
 
 export interface BodyPartCardProps {
     title?: string,
     children?: React.ReactNode,
     bodyPart: string,
     month: MonthKey,
-    data:{x:Date,y:number}[]
+    data: { x: Date, y: number }[]
 }
 
 export function BodyPartChartCard(props: BodyPartCardProps) {
-    const {title, children, bodyPart, month,data} = props;
+    const {title, children, bodyPart, month, data} = props;
     const sizeLabor = useSizeLabor();
     const {ms} = sizeLabor
     const {wp} = sizeLabor.designsBasedOn.iphoneX
@@ -61,8 +60,9 @@ export function BodyPartChartCard(props: BodyPartCardProps) {
             >
                 <VictoryAxis crossAxis
                              style={{
-                                 ticks: {stroke: colors.transparent},
-                                 axis: {stroke: colors.transparent},
+                                 grid: {stroke: 'none'},
+                                 ticks: {stroke: 'none'},
+                                 axis: {stroke: 'none'},
                              }}
                              axisLabelComponent={<VictoryLabel dy={wp(22)} dx={wp(0)}/>}
                              label="Time (week)"
@@ -72,8 +72,9 @@ export function BodyPartChartCard(props: BodyPartCardProps) {
                              label="Max Weight (kgs)"
                              tickCount={4}
                              style={{
-                                 ticks: {stroke: colors.transparent},
-                                 axis: {stroke: colors.transparent},
+                                 grid: {stroke: 'none'},
+                                 ticks: {stroke: 'none'},
+                                 axis: {stroke: 'none'},
                              }}/>
                 <VictoryLine
                     interpolation="natural"

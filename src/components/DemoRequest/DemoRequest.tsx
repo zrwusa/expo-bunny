@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ButtonTO, Text, InButtonText, View} from "../UI";
+import {ButtonTO, InButtonText, Text, View} from "../UI";
 import {DemoEmployee} from "../../types";
 import {useRequest} from "../../providers/request-labor";
 import {useDispatch} from "react-redux";

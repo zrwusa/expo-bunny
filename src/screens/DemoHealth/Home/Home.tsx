@@ -23,12 +23,12 @@ export function HealthHomeScreen() {
     const {wp} = designsBasedOn.iphoneX;
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
-    const {colors}= theme;
+    const {colors} = theme;
     const containerStyles = createContainerStyles(sizeLabor, themeLabor);
     const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
     const [selectedMonth, setSelectedMonth] = useState<MonthKey>('January')
     const monthKeys = Object.keys(E_MONTH) as MonthKey[];
-    const monthItems = monthKeys.map(month => ({label: month, value: month, color:colors.text}))
+    const monthItems = monthKeys.map(month => ({label: month, value: month, color: colors.text}))
     const dataMapped = data.map((item: { x: string, y: number }, index: number) => {
         return {x: new Date(item.x), y: parseFloat((item.y / 1000).toFixed(0))}
     })

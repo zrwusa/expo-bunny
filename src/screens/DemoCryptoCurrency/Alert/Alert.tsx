@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {Platform, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
-import {ButtonTO, PickerSelectChevronRight, Text, InButtonText} from "../../../components/UI";
+import {ButtonTO, InButtonText, PickerSelectChevronRight, Text} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers";
 import {Col, createContainerStyles, Row} from "../../../containers";
@@ -179,7 +179,7 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
                         <InButtonText>{st(`saveQuickSettings`)}</InButtonText>
                     </ButtonTO>
                 </Col>
-                <Col size={1} style={{marginLeft:6}}>
+                <Col size={1} style={{marginLeft: 6}}>
                     <ButtonTO onPress={handleCancelAllAlertSettings}>
                         <InButtonText>{st(`cancelAlertSettings`)}</InButtonText>
                     </ButtonTO>

@@ -3,7 +3,8 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {
     AuthTopStackParam,
     DemoCryptoCurrencyStackParam,
-    DemoDrawerStackParam, DemoHealthTabStackParam,
+    DemoDrawerStackParam,
+    DemoHealthTabStackParam,
     DemoIGStackParam,
     DemoNestedLv1StackParam,
     DemoNestedLv2StackParam,

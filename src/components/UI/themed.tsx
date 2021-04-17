@@ -32,7 +32,6 @@ import {Switch as SwitchPaper} from "react-native-paper";
 import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from "react-native-picker-select";
 import {createStyles} from "./styles";
 import {LinearGradient} from "expo-linear-gradient";
-import {borderRadius} from "styled-system";
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 

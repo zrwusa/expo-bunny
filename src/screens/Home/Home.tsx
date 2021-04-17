@@ -3,7 +3,7 @@ import {ScrollView, View} from "react-native";
 import {RouteProp, useLinkTo} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
-import {ButtonTO, IcoMoon, Link, InButtonText} from "../../components/UI";
+import {ButtonTO, IcoMoon, InButtonText, Link} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Card, createContainerStyles} from "../../containers";
@@ -42,7 +42,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         <IcoMoon name="layout7" size={wp(22)} {...iconColor}/></Link>
                     <Link to="/demo-drawer/home">
                         <InButtonText>{st(`drawer`)}</InButtonText>
-                        <IcoMoon name="layout"  size={wp(22)} {...iconColor}/></Link>
+                        <IcoMoon name="layout" size={wp(22)} {...iconColor}/></Link>
                     <Link to="/profile/002">
                         <InButtonText>{st(`profile`) + `(Link)`}</InButtonText>
                         <IcoMoon name="profile1" size={wp(22)} {...iconColor}/></Link>
