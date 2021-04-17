@@ -1,6 +1,6 @@
 import React from "react";
 import {ScrollView} from "react-native";
-import {Button, ButtonTO, Text, InButtonText, View} from "../../components/UI";
+import {Button, ButtonTO, InButtonText, Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {createStyles} from "./styles";
@@ -25,9 +25,11 @@ const DemoThemeScreen = () => {
             <View style={[containerStyles.Screen, smartStyles.centralized]}>
                 <Card>
                     <ButtonTO style={smartStyles.btn}>
-                        <InButtonText>{st(`demoButton`)}</InButtonText></ButtonTO>
-                    <ButtonTO style={smartStyles.btnSecondary}>
-                        <InButtonText>{st(`demoButtonSec`)}</InButtonText></ButtonTO>
+                        <InButtonText style={smartStyles.btnText}>{st(`demoButton`)}</InButtonText>
+                    </ButtonTO>
+                    <ButtonTO style={smartStyles.btn2}>
+                        <InButtonText style={smartStyles.btnText2}>{st(`demoButtonSec`)}</InButtonText>
+                    </ButtonTO>
                     <Text style={smartStyles.text}>{st(`demoText`)}</Text>
                     <Text style={smartStyles.text2}>{st(`demoTextSec`)}</Text>
                     <ButtonTO style={smartStyles.btnDisabled}>
@@ -65,10 +67,10 @@ const DemoThemeScreen = () => {
                             4.The principle of least knowledge (Law of Demeter)
                         </Text>
                     </View>
-                    <View style={[smartStyles.surface, styles.demoSurface]}>
+                    <View style={[smartStyles.card, styles.demoSurface]}>
                         <Text style={smartStyles.h3}>{st(`demoSurface`)}</Text>
                     </View>
-                    <View style={[smartStyles.surface2, styles.demoSurface]}>
+                    <View style={[smartStyles.card2, styles.demoSurface]}>
                         <Text style={smartStyles.h3}>{st(`demoSurfaceSec`)}</Text>
                     </View>
                 </Card>

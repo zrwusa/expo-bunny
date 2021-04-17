@@ -78,6 +78,7 @@ export type Colors = {
     // ---start main
     primary: string,
     secondary: string,
+    accent: string,
     border: string,
     border2: string,
     divider: string,
@@ -112,12 +113,12 @@ export type Colors = {
 
 
     // ---start unknown
-    onBackground: string,
-    onBackground2: string,
+    // onBackground: string,
+    // onBackground2: string,
     onSurface: string,
-    onSurface2: string,
-    accent: string,
-    accent2: string,
+    // onSurface2: string,
+
+    // accent2: string,
     // ---en unknown
 
 

@@ -6,6 +6,29 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
     const {colors, fonts} = themeLabor.theme;
     const {wp} = designsBasedOn.iphoneX;
     const smartStyles = StyleSheet.create({
+        text: {
+            color: colors.text,
+        },
+        text2: {
+            color: colors.text2,
+        },
+        text3: {
+            color: colors.text3,
+        },
+        btnText: {
+            color: colors.btnText,
+        },
+        btnText2: {
+            color: colors.btnText2,
+        },
+        title: {
+            fontSize: ms.fs.l,
+            color: colors.text,
+        },
+        title2: {
+            fontSize: ms.fs.l,
+            color: colors.text2,
+        },
         h1: {
             fontSize: ms.fs.xxl,
             color: colors.text,
@@ -30,13 +53,14 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             fontSize: ms.fs.xs,
             color: colors.text3,
         },
-        title: {
-            fontSize: ms.fs.l,
+        label: {
             color: colors.text,
         },
-        title2: {
-            fontSize: ms.fs.l,
-            color: colors.text2,
+        caption: {
+            color: colors.caption,
+        },
+        caption2: {
+            color: colors.caption2,
         },
         paragraph: {
             fontFamily: fonts.regular.fontFamily,
@@ -52,35 +76,37 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             lineHeight: ms.lh.m,
             color: colors.paragraph2
         },
+
+
+        card: {
+            backgroundColor: colors.surface
+        },
+        card2: {
+            backgroundColor: colors.surface2,
+        },
+        paper: {
+            backgroundColor: colors.paper,
+        },
+        paper2: {
+            backgroundColor: colors.paper2,
+        },
         btn: {
             backgroundColor: colors.btnBackground,
         },
-        btnSecondary: {
+        btn2: {
             backgroundColor: colors.btnBackground2,
         },
         btnDisabled: {
             backgroundColor: colors.disabled
         },
-        text: {
-            color: colors.text,
-        },
-        label: {
-            color: colors.text,
-        },
-        text2: {
-            color: colors.text2,
-        },
-        caption: {
-            color: colors.caption,
-        },
-        caption2: {
-            color: colors.text2,
-        },
-        surface: {
-            backgroundColor: colors.surface,
-        },
-        surface2: {
-            backgroundColor: colors.surface2,
+
+
+        border: {},
+        border2: {},
+        divider: {},
+
+        screen: {
+            flex: 1,
         },
         box: {
             borderWidth: ms.sp.xxs,
@@ -88,6 +114,30 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             padding: ms.sp.s,
             marginVertical: ms.sp.s,
         },
+        shadow: {
+            shadowColor: colors.text,
+            shadowOffset: {
+                width: 0,
+                height: wp(11),
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: wp(14.78),
+            elevation: wp(22),
+            backgroundColor: colors.background, // React native bug no background no shadow on iOS
+        },
+        shadowAround: {
+            shadowColor: colors.backdrop,
+            shadowOffset: {
+                width: wp(0),
+                height: wp(0),
+            },
+            shadowOpacity: 0.6,
+            shadowRadius: wp(10),
+            elevation: wp(22),
+            backgroundColor: colors.background, // React native bug no background no shadow on iOS
+        },
+
+
         row: {
             flexDirection: 'row',
         },
@@ -95,6 +145,8 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             flex: 1,
             marginRight: ms.sp.s
         },
+
+
         around: {
             justifyContent: 'space-around'
         },
@@ -107,31 +159,6 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
         center: {
             justifyContent: 'center',
         },
-        shadow: {
-            shadowColor: colors.text,
-            shadowOffset: {
-                width: 0,
-                height: wp(11),
-            },
-            shadowOpacity: 0.2,
-            shadowRadius: wp(14.78),
-            elevation: wp(22),
-            backgroundColor:colors.background, // React native bug no background no shadow on iOS
-        },
-        shadowAround:{
-            shadowColor: colors.backdrop,
-            shadowOffset: {
-                width: wp(0),
-                height: wp(0),
-            },
-            shadowOpacity: 0.6,
-            shadowRadius: wp(10),
-            elevation: wp(22),
-            backgroundColor:colors.background, // React native bug no background no shadow on iOS
-        },
-        screen: {
-            flex: 1,
-        },
         vCenter: {
             alignItems: 'center'
         },
@@ -139,16 +166,19 @@ export const createSmartStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) 
             justifyContent: 'center',
             alignItems: 'center',
         },
-        section: {},
-        header: {},
-        content: {},
-        article: {},
-        footer: {},
         absoluteBottomLeft: {
             position: 'absolute',
             bottom: 0,
             left: 0,
         },
+
+
+        section: {},
+        header: {},
+        content: {},
+        article: {},
+        footer: {},
+
     })
 
     let smartStylesObj: StyleSheet.NamedStyles<any>;

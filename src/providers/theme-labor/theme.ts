@@ -225,7 +225,7 @@ export const getThemeWareHouse = () => {
                 dark: wp(4),
                 gradient: wp(100)
             },
-            surface:{
+            surface: {
                 light: wp(10),
                 dark: wp(10),
                 gradient: wp(10)
@@ -238,6 +238,8 @@ export const getThemeWareHouse = () => {
         },
         colors: {
             // ---start main
+            // [ReactNativePaper]primary color for your app, usually your brand color.
+            // [ReactNavigation]The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
             primary: {
                 light: pl.teal400,
                 dark: pl.orange800,
@@ -248,6 +250,13 @@ export const getThemeWareHouse = () => {
                 dark: pl.orange700,
                 gradient: pl.lightBlue630,
             },
+            // [ReactNativePaper]secondary color for your app which complements the primary color.
+            accent: {
+                light: pl.purple500,
+                dark: pl.blue600,
+                gradient: pl.lightBlue630
+            },
+            // [ReactNavigation]The color of borders, e.g. header border, tab bar border etc.
             border: {
                 light: pl.grey350,
                 dark: pl.grey850,
@@ -267,6 +276,8 @@ export const getThemeWareHouse = () => {
 
 
             // ---start text
+            // [ReactNativePaper]text color for content.
+            // [ReactNavigation]The text color of various elements.
             text: {
                 light: pl.black,
                 dark: pl.grey400,
@@ -277,7 +288,7 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey600,
                 gradient: pl.blueIndigo100
             },
-            text3:{
+            text3: {
                 light: pl.grey800,
                 dark: pl.grey600,
                 gradient: pl.blueIndigo150
@@ -316,6 +327,8 @@ export const getThemeWareHouse = () => {
 
 
             // ---start background
+            // [ReactNativePaper]background color for pages, such as lists.
+            // [ReactNavigation]The color of various backgrounds, such as background color for the screens.
             background: {
                 light: pl.grey100,
                 dark: pl.black900,
@@ -341,11 +354,13 @@ export const getThemeWareHouse = () => {
                 dark: pl.orange800,
                 gradient: pl.lightBlue630,
             },
+            // [ReactNavigation]The background color of card-like elements, such as headers, tab bars etc.
             card: {
                 light: pl.white,
                 dark: pl.black900,
                 gradient: pl.blueIndigoA700
             },
+            // [ReactNativePaper]background color for elements containing content, such as cards.
             surface: {
                 light: pl.white,
                 dark: pl.black900,
@@ -355,6 +370,12 @@ export const getThemeWareHouse = () => {
                 light: pl.grey100,
                 dark: pl.grey900,
                 gradient: pl.blueIndigo900
+            },
+            // [ReactNativePaper]background color for snackbars
+            onSurface: {
+                light: pl.black,
+                dark: pl.white,
+                gradient: pl.white
             },
             paper: {
                 light: pl.yellow50,
@@ -367,40 +388,6 @@ export const getThemeWareHouse = () => {
                 gradient: pl.green50,
             },
             // ---end background
-
-
-            // ---start unknown
-            onBackground: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            onBackground2: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            onSurface: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            onSurface2: {
-                light: pl.black,
-                dark: pl.white,
-                gradient: pl.white
-            },
-            accent: {
-                light: pl.purple500,
-                dark: pl.blue600,
-                gradient: pl.lightBlue630
-            },
-            accent2: {
-                light: pl.blue300,
-                dark: pl.teal600,
-                gradient: pl.teal600
-            },
-            // ---en unknown
 
 
             // ---start tip
@@ -419,6 +406,8 @@ export const getThemeWareHouse = () => {
                 dark: pl.yellow720,
                 gradient: pl.yellow720
             },
+            // [ReactNativePaper]background color for badges
+            // [ReactNavigation]The color of Tab Navigator badge.
             notification: {
                 light: pl.pinkA400,
                 dark: pl.pinkA100,
@@ -433,16 +422,19 @@ export const getThemeWareHouse = () => {
 
 
             // --- start functional
+            // [ReactNativePaper]color for disabled elements.
             disabled: {
                 light: color(pl.black).alpha(0.26).rgb().string(),
                 dark: color(pl.white).alpha(0.38).rgb().string(),
                 gradient: color(pl.white).alpha(0.38).rgb().string(),
             },
+            // [ReactNativePaper]color for placeholder text, such as input placeholder.
             placeholder: {
                 light: color(pl.black).alpha(0.54).rgb().string(),
                 dark: color(pl.white).alpha(0.54).rgb().string(),
                 gradient: pl.blueIndigo150,
             },
+            // [ReactNativePaper]color for backdrops of various components such as modals.
             backdrop: {
                 light: color(pl.black).alpha(0.5).rgb().string(),
                 dark: color(pl.black).alpha(0.9).rgb().string(),
