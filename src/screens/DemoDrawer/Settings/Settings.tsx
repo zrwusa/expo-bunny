@@ -4,7 +4,7 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoDrawerStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {createContainerStyles} from "../../../containers";
+import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -22,7 +22,7 @@ function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
     const st = shortenTFunctionKey(t, 'screens.DrawerSettings');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     return (
         <View style={containerStyles.Screen}>
             <View style={containerStyles.Card}>

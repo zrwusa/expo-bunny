@@ -1,19 +1,19 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../types";
-import {createSmartStyles} from "../../utils";
+import {getSharedStyles} from "../../utils";
 
-export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
-    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
-    const {absoluteBottomLeft, row, evenly} = smartStylesObj;
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
+    const {absoluteBottomLeft} = sharedStylesFlatten;
     const {colors} = themeLabor.theme;
 
     return StyleSheet.create({
         errorConsole: {
             ...absoluteBottomLeft,
             backgroundColor: colors.background2,
-            zIndex: 1000,
+            zIndex: ms.zi.xxs,
             width: wp(375),
             padding: ms.sp.s
         },
@@ -22,8 +22,7 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: wp(100),
         },
         buttonBox: {
-            ...row,
-            ...evenly
+            justifyContent: "space-evenly"
         }
     });
 }

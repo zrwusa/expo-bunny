@@ -5,7 +5,7 @@ import {uuid4} from "@sentry/utils";
 import {IGMediaBrick, MasonryDatum} from "../../types";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 
 
 export interface MasonryProps extends WithSizeLabor, WithThemeLabor {
@@ -22,7 +22,7 @@ class MasonryInner extends React.PureComponent<MasonryProps> {
         const {wp} = sizeLabor.designsBasedOn.iphoneX
         const {column1, column2, column3} = this.props.data
 
-        const styles = createStyles(sizeLabor, themeLabor)
+        const styles = getStyles(sizeLabor, themeLabor)
 
         return (
             <View style={styles.masonry}>

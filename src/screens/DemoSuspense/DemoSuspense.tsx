@@ -2,10 +2,10 @@ import React from 'react';
 import {Text, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {createContainerStyles} from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {createSmartStyles, wait} from "../../utils";
+import {getSharedStyles, wait} from "../../utils";
 
 const DemoLazy100 = React.lazy(async () => {
         const module = await import('../../components/DemoLazy/DemoLazy')
@@ -26,11 +26,11 @@ export const DemoSuspenseScreen = () => {
     const st = shortenTFunctionKey(t, 'screens.DemoSuspense');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={[containerStyles.Screen, smartStyles.centralized]}>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
             {/*{isServerSide*/}
             {/*    ? <Text>SSR does not support React.lazy</Text> :*/}
             {/*    <>*/}

@@ -18,7 +18,7 @@ export const AuthScreen = ({route, navigation}: AuthProps) => {
     // const st = shortenTFunctionKey(t, 'screens.Auth');
     // const sizeLabor = useSizeLabor();
     // const themeLabor = useThemeLabor();
-    // const containerStyles = createContainerStyles(sizeLabor, themeLabor);
+    // const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     // const [type, setType] = useState('sign-in');
     // const {authFunctions} = useAuthLabor()
     // const [username, setUsername] = useState('')

@@ -5,7 +5,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {DemoNestedLv1StackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {createContainerStyles} from "../../../containers";
+import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 
@@ -22,7 +22,7 @@ function NestedLv1HomeScreen({route, navigation}: NestedLv1HomeProps) {
     const st = shortenTFunctionKey(t, 'screens.NestedLv1Home');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
         <View style={containerStyles.Screen}>

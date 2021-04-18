@@ -1,4 +1,4 @@
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import * as React from "react";
 import {Share} from "react-native";
 import {ButtonTO, Image, InButtonText, Text, TouchableOpacity, View} from "../../components/UI";
@@ -8,10 +8,10 @@ import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {createContainerStyles} from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {createSmartStyles} from "../../utils";
+import {getSharedStyles} from "../../utils";
 
 type SelectedImage = {
     localUri: string
@@ -67,12 +67,12 @@ function DemoShareScreen() {
     };
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const styles = createStyles(sizeLabor, themeLabor);
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={[containerStyles.Screen, smartStyles.centralized]}>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
             <View style={{marginTop: 50}}>
                 <ButtonTO onPress={onShare}>
                     <InButtonText>{st(`shareMessage`)}</InButtonText>
@@ -81,14 +81,14 @@ function DemoShareScreen() {
             {
                 (selectedImage && selectedImage.localUri)
                     ? (
-                        <View style={smartStyles.centralized}>
+                        <View style={sharedStyles.centralized}>
                             <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail}/>
                             <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
                                 <Text style={styles.buttonText}>Share this photo</Text>
                             </TouchableOpacity>
                         </View>
                     )
-                    : <View style={smartStyles.centralized}>
+                    : <View style={sharedStyles.centralized}>
                         <Image source={{uri: 'https://i.imgur.com/TkIrScD.png'}} style={styles.logo}/>
                         <Text style={styles.instructions}>
                             {st(`pressButtonTip`)}

@@ -1,17 +1,15 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../../types";
-import {createSmartStyles} from "../../../utils";
+import {getSharedStyles} from "../../../utils";
 
-export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
-    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
-    const {row, around} = smartStylesObj
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
+    const {} = sharedStylesFlatten
     return StyleSheet.create({
         tabs: {
-            ...row,
-            // ...around,
             borderBottomColor: colors.border,
             borderBottomWidth: wp(1),
         },

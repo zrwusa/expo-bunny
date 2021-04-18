@@ -4,7 +4,7 @@ import RNPickerSelect from "react-native-picker-select";
 import {IconMC, View} from "../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {createContainerStyles} from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {uuidV4} from "../../utils";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -41,7 +41,7 @@ function DemoThirdPartScreen(props: Props) {
             subtitle: "Rios"
         },
     ];
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor)
 
     return (
         <View style={containerStyles.Screen}>

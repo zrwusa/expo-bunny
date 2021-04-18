@@ -3,13 +3,13 @@ import {Text, View} from "../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useTranslation} from 'react-i18next';
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {createContainerStyles} from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {createSmartStyles} from "../../utils";
+import {getSharedStyles} from "../../utils";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
@@ -26,15 +26,15 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const themeLabor = useThemeLabor();
     const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.DemoRoute');
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor)
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor)
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
-    const styles = createStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={[containerStyles.Screen, smartStyles.centralized]}>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
             <View style={styles.wrap}>
-                <Text style={smartStyles.paragraph}>
+                <Text style={sharedStyles.paragraph}>
                     {st(`paramId`)}{id}{'\n'}
                     {st(`typeofId`)}{typeof id}{'\n'}
                     {st(`paramIsHuman`)}{isHuman.toString()}{'\n'}

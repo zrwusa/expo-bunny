@@ -1,5 +1,5 @@
 import React from "react";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {IcoMoon} from "../UI";
@@ -14,7 +14,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
     const {wp} = designsBasedOn.iphoneX
     const finalSize = size || wp(20),
         colorsDefault = [theme.colors.btnBackground, theme.colors.btnBackground2];
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
     return (
         <IcoMoon
             name={name}

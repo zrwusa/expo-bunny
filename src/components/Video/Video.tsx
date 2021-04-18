@@ -4,7 +4,7 @@ import {AVPlaybackStatus, Video, VideoProps} from 'expo-av';
 import {Button, Text, View} from "../UI";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 
 interface ShowVideoState {
     isPlaying: boolean,
@@ -40,7 +40,7 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
     render() {
         const {isPlaying, playbackStatus} = this.state;
         const {sizeLabor, themeLabor, onPlaybackStatusUpdate, shouldShowButton, shouldShowStatus, ...rest} = this.props;
-        const styles = createStyles(sizeLabor, themeLabor);
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View>
                 <Video

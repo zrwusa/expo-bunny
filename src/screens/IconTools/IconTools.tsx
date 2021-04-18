@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {ButtonTO, InButtonText, TextInput, View} from "../../components/UI";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {ScrollView} from "react-native";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {Card} from "../../containers";
 import {useDispatch} from "react-redux";
@@ -18,7 +18,7 @@ export function IconToolsScreen() {
     const themeLabor = useThemeLabor();
     const dispatch = useDispatch()
     const {themes} = themeLabor;
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
 
     const [glyph, setGlyph] = useState('')
     const handleGenerate = () => {

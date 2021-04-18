@@ -118,7 +118,6 @@ export function IGHomeScreen() {
                                         onRefresh={onRefresh}
                                     />
                                 }
-                                debug
                                 initialNumToRender={3} // * times viewport,first render,keep in memory
                                 windowSize={5} // * times viewport,keep in memory
                         // /**

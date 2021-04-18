@@ -2,30 +2,34 @@ import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem} 
 import {Text, View} from "../UI";
 import {CopyableText} from "../CopyableText";
 import React from "react";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
+import {Row} from "../../containers/Row";
+import {Col} from "../../containers/Col";
 
 export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | ColorDiffWithPaletteItem | ColorInputItem }) => {
     const {item} = props
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
     return <View>
-        <View style={styles.row}>
-            <Text>hex</Text>
-            <CopyableText>{item.hex}</CopyableText>
-            <View style={[styles.colorPanel, {backgroundColor: item.hex}]}/>
-        </View>
-        <View style={styles.row}>
-            <Text>RGB</Text>
-            <CopyableText>{item.RGB}</CopyableText>
-            <View style={[styles.colorPanel, {backgroundColor: item.RGB}]}/>
-        </View>
-        <View style={styles.row}>
-            <Text>HSL</Text>
-            <CopyableText>{item.HSL}</CopyableText>
-            <View style={[styles.colorPanel, {backgroundColor: item.HSL}]}/>
-        </View>
+        <Row>
+            <Col size={1}>
+                <Text>hex</Text>
+                <Text>RGB</Text>
+                <Text>HSL</Text>
+            </Col>
+            <Col size={2}>
+                <CopyableText>{item.hex}</CopyableText>
+                <CopyableText>{item.RGB}</CopyableText>
+                <CopyableText>{item.HSL}</CopyableText>
+            </Col>
+            <Col size={1}>
+                <View style={[styles.colorPanel, {backgroundColor: item.hex}]}/>
+                <View style={[styles.colorPanel, {backgroundColor: item.RGB}]}/>
+                <View style={[styles.colorPanel, {backgroundColor: item.HSL}]}/>
+            </Col>
+        </Row>
     </View>
 }

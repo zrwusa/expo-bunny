@@ -3,14 +3,14 @@ import {useState} from "react";
 import {PickerSelect, Text, View} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {Col, createContainerStyles, Row} from "../../../containers";
+import {Col, getContainerStyles, Row} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {Avatar} from "../../../components";
 import {E_MONTH} from "../../../constants";
 import {MonthKey} from "../../../types";
 import {BodyPartCard} from "./BodyPartCard";
-import {createSmartStyles} from "../../../utils";
+import {getSharedStyles} from "../../../utils";
 import {BodyPartChartCard} from "./BodyPartChartCard";
 import {SafeAreaView, ScrollView} from "react-native";
 import {data, data1, data2} from "./data";
@@ -24,8 +24,8 @@ export function HealthHomeScreen() {
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
     const {colors} = theme;
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor)
     const [selectedMonth, setSelectedMonth] = useState<MonthKey>('January')
     const monthKeys = Object.keys(E_MONTH) as MonthKey[];
     const monthItems = monthKeys.map(month => ({label: month, value: month, color: colors.text}))
@@ -46,10 +46,10 @@ export function HealthHomeScreen() {
                         <Row>
                             <Col>
                                 <Row>
-                                    <Text style={smartStyles.title}>Welcome,</Text>
+                                    <Text style={sharedStyles.title}>Welcome,</Text>
                                 </Row>
                                 <Row>
-                                    <Text style={[smartStyles.title, {fontWeight: 'bold'}]}>Jessica</Text>
+                                    <Text style={[sharedStyles.title, {fontWeight: 'bold'}]}>Jessica</Text>
                                 </Row>
                             </Col>
                             <Col style={{alignItems: 'flex-end'}}>

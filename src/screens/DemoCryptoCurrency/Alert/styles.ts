@@ -1,31 +1,20 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../../types";
-import {createSmartStyles} from "../../../utils";
+import {getSharedStyles} from "../../../utils";
 
-export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
-    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
-    const {row, between, vCenter} = smartStylesObj;
-    const currentPrice = StyleSheet.create({
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
+    return StyleSheet.create({
+        container: {flex: 1, justifyContent: 'space-between', padding: ms.sp.m},
         text: {fontSize: ms.fs.l},
         box: {
             padding: ms.sp.m,
-            ...row,
-            ...between,
-            ...vCenter
-        }
+            justifyContent: 'space-between',
+        },
+        label: {fontSize: ms.fs.l},
+        bottomBar: {}
     })
-    const granularity = StyleSheet.create({
-        label: {fontSize: ms.fs.l},
-
-    });
-
-    const reminder = StyleSheet.create({
-        label: {fontSize: ms.fs.l},
-    });
-
-
-    return {currentPrice, granularity, reminder}
 }

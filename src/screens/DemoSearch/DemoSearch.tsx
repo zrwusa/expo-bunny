@@ -5,13 +5,13 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoSearchDummyDatum, RootStackParam} from "../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {createContainerStyles} from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {Animated, SafeAreaView} from "react-native";
 import {randomText, wait} from "../../utils";
 import {FollowUpSearchBar} from "../../components/FollowUpSearchBar";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {collectBLResult} from "../../store/actions";
 import {blError} from "../../helpers";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -31,9 +31,9 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
     const st = shortenTFunctionKey(t, 'screens.DemoSearch');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
 
     const [scrollYValue] = useState(new Animated.Value(0));
     const [data, setData] = useState<DemoSearchDummyDatum[]>([])

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {View} from "../../components/UI";
-import {createContainerStyles} from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {RouteProp} from "@react-navigation/native";
@@ -10,7 +10,7 @@ import {AuthTopTabStack} from "../../navigation/stacks";
 import {Image, SafeAreaView} from "react-native";
 import {SignInScreen} from "./SignIn";
 import {SignUpScreen} from "./SignUp";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Auth'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -30,8 +30,8 @@ export const Auth1Screen = ({route, navigation}: Auth1Props) => {
     }
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const styles = createStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
     const {theme} = themeLabor;
     const {colors} = theme;
     const {designsBasedOn} = sizeLabor;

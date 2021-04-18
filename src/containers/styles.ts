@@ -1,32 +1,28 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../types";
-import {createSmartStyles} from "../utils";
+import {getSharedStyles} from "../utils";
 
-export const createContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
-    const {ms} = sizeLabor;
-    const {colors} = themeLabor.theme;
+export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
+    const {ms, designsBasedOn} = sizeLabor;
+    const {wp} = designsBasedOn.iphoneX;
     return StyleSheet.create({
         Card: {
+            ...sharedStylesFlatten.card,
             margin: ms.sp.m,
             paddingHorizontal: ms.sp.m,
-            paddingBottom: ms.sp.m,
-            borderColor: colors.border,
-            borderWidth: ms.sp.xxs,
-            borderRadius: ms.br.s,
-        },
-        RowCard: {
-            margin: ms.sp.m,
-            padding: ms.sp.m,
-            borderColor: colors.border,
-            borderWidth: ms.sp.xxs,
-            borderRadius: ms.br.s,
-            ...smartStylesObj.row,
-            ...smartStylesObj.evenly
+            paddingVertical: ms.sp.m,
         },
         CardTitle: {
-            ...smartStylesObj.h3,
-            marginVertical: ms.sp.m,
+            ...sharedStylesFlatten.title2,
+            marginBottom: ms.sp.m,
+        },
+        InputCard: {
+            marginTop: wp(20)
+        },
+        InputCardTitle: {
+            ...sharedStylesFlatten.text2,
+            marginBottom: wp(10)
         },
         Screen: {
             flex: 1,

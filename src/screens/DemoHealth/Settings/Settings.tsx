@@ -5,14 +5,14 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoHealthTabStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {createContainerStyles, Row} from "../../../containers";
+import {getContainerStyles, Row} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {SettingCard} from "./SettingCard";
 import {Divider} from "../../../components/Divider";
 import {LinearGradientIcon} from "../../../components/LinearGradientIcon";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {Col} from "../../../containers/Col";
 import {SafeAreaView, ScrollView, TouchableOpacity} from "react-native";
 
@@ -32,9 +32,9 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
     const {theme} = themeLabor;
     const {colors} = theme;
     const {wp} = sizeLabor.designsBasedOn.iphoneX
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
     const [weightUnit, setWeightUnit] = useState('kg')
     const [distanceUnit, setDistanceUnit] = useState('km')
     const [lengthUnit, setLengthUnit] = useState('cm')

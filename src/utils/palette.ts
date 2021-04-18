@@ -329,7 +329,7 @@ export const palette: Palette = {
     blueIndigo900: '#2C2A3D', // border
     blueIndigoA100: '#2C283B', // input background secondary
     blueIndigoA400: '#232033',// background
-    blueIndigoA700: '#1B1929', // background dark,btn text
+    blueIndigoA700: '#1B1929', // background dark,button text
     tealA500: '#37C7B8', // button from primary
     lightBlue630: '#2894D1',// button to secondary
     blueGrey870: '#242E3D', // label background

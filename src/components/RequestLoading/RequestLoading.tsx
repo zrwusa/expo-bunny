@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {ActivityIndicator} from "react-native";
 
 const RequestLoading = () => {
@@ -12,7 +12,7 @@ const RequestLoading = () => {
     const [isShow, setIsShow] = useState(false)
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = createStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     useEffect(() => {
         const loadingRequests = requestStatuses.filter(item => item.status === 'LOADING')

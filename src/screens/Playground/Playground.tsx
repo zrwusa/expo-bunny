@@ -3,14 +3,14 @@ import {View} from "../../components/UI";
 import {LinearGradientIcon} from "../../components/LinearGradientIcon";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {ScrollView} from "react-native";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 
 
 export function PlaygroundScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
 
     return (
         <ScrollView style={{flex: 1}}>

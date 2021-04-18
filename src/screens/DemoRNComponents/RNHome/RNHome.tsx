@@ -16,10 +16,10 @@ import {
 import {Button, Pressable, Text, TextInput, TouchableOpacity} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {createContainerStyles} from "../../../containers";
+import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 
 function RNHome() {
     const {t} = useTranslation();
@@ -54,8 +54,8 @@ function RNHome() {
         touchableOpacityStyles,
         touchableWithoutFeedbackStyles,
         virtualizedListStyles,
-    } = createStyles(sizeLabor, themeLabor)
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
+    } = getStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
 
     const changeVisibilityStatusBar = () => {

@@ -9,8 +9,8 @@ import {getNearbyFilms, restoreRegion, sysError} from "../../store/actions";
 import {connect} from "react-redux";
 import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
-import createStyles, {getCardSize} from "./styles";
-import {createContainerStyles} from "../../containers";
+import getStyles, {getCardSize} from "./styles";
+import {getContainerStyles} from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 
@@ -110,8 +110,8 @@ class DemoMapScreen extends Component<DemoMapProps> {
         const {sizeLabor, themeLabor} = this.props;
         const {theme} = themeLabor;
         const {designsBasedOn} = sizeLabor;
-        const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-        const styles = createStyles(sizeLabor, themeLabor);
+        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+        const styles = getStyles(sizeLabor, themeLabor);
         const {wp} = designsBasedOn.iphoneX;
         const {width} = getCardSize(sizeLabor, themeLabor);
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {

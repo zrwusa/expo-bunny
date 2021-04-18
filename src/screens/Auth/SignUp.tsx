@@ -6,7 +6,7 @@ import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {Col, createContainerStyles, InputCard, Row} from "../../containers";
+import {Col, getContainerStyles, InputCard, Row} from "../../containers";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {RouteProp} from "@react-navigation/native";
 import {AuthTopStackParam, RootStackParam} from "../../types";
@@ -32,7 +32,7 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
     const themeLabor = useThemeLabor();
     const {ms, designsBasedOn} = sizeLabor;
     const {wp} = designsBasedOn.iphoneX;
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')

@@ -49,7 +49,7 @@ import {useTranslation} from "react-i18next";
 import {StackNavigationOptions} from "@react-navigation/stack";
 import {IcoMoon} from "../../components/UI";
 import {useSizeLabor} from "../../providers/size-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
@@ -95,7 +95,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {theme} = themeLabor;
     const {colors} = theme;
     const {t} = useTranslation();
-    const styles = createStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
     const insets = useSafeAreaInsets();
 
     // --- options start ---

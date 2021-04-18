@@ -5,13 +5,13 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {createContainerStyles} from "../../../containers";
+import {getContainerStyles, Row} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../components/Victory/Victory";
 import nomicsAPI from "../../../helpers/nomics-api";
-import {createStyles} from "./styles";
-import {addDays, createSmartStyles} from "../../../utils";
+import {getStyles} from "./styles";
+import {addDays, getSharedStyles} from "../../../utils";
 import {useDispatch, useSelector} from "react-redux";
 import axios, {CancelTokenSource} from "axios";
 import {collectBLResult, getCurrentPrice, sysError} from "../../../store/actions";
@@ -38,10 +38,10 @@ function CryptoCurrencyHomeScreen() {
     const themeLabor = useThemeLabor();
     const dispatch = useDispatch();
     const {victory} = themeLabor.theme;
-    const {Screen, Box} = createContainerStyles(sizeLabor, themeLabor);
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
-    const {} = smartStyles;
-    const styles = createStyles(sizeLabor, themeLabor)
+    const {Screen, Box} = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
+    const {} = sharedStyles;
+    const styles = getStyles(sizeLabor, themeLabor)
     const {ms, designsBasedOn} = sizeLabor;
     const {wp} = designsBasedOn.iphoneX;
     const [btcData, setBtcData] = useState([
@@ -106,7 +106,7 @@ function CryptoCurrencyHomeScreen() {
         <ScrollView>
             <View style={[Screen, Box]}>
                 <Text>{currentPrice}</Text>
-                <View style={styles.tabs}>
+                <Row style={styles.tabs}>
                     {
                         types.map(item => {
                             const activeWrapStyle = item === type ? styles.active : styles.inActive;
@@ -120,8 +120,8 @@ function CryptoCurrencyHomeScreen() {
                             </View>
                         })
                     }
-                </View>
-                <View style={styles.tabs}>
+                </Row>
+                <Row style={styles.tabs}>
                     {
                         dateRanges.map(item => {
                             const activeWrapStyle = item === dateRange ? styles.active : styles.inActive;
@@ -136,7 +136,7 @@ function CryptoCurrencyHomeScreen() {
                             </View>
                         })
                     }
-                </View>
+                </Row>
                 <VictoryChart
                     theme={victory}
                     padding={{top: wp(40), left: wp(4), bottom: wp(30), right: wp(20)}}

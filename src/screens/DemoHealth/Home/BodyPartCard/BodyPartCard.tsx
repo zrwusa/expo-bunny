@@ -2,7 +2,7 @@ import * as React from "react";
 import {View} from "react-native";
 import {useSizeLabor} from "../../../../providers/size-labor";
 import {useThemeLabor} from "../../../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {Text} from "../../../../components/UI"
 import {Col, Row} from "../../../../containers";
 import {LinearGradientIcon} from "../../../../components/LinearGradientIcon";
@@ -21,7 +21,7 @@ export function BodyPartCard(props: BodyPartCardProps) {
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
     const {colors} = theme;
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
     return <View style={styles.bodyPartCard}>
         <Row style={{alignItems: 'flex-start'}}>
             <Col size={3} style={{alignItems: 'flex-end'}}>

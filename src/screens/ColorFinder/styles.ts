@@ -1,22 +1,22 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../types";
-import {createSmartStyles} from "../../utils";
+import {getSharedStyles} from "../../utils";
 
-export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
-    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
 
     return StyleSheet.create({
-        xxx: {...smartStylesObj.btn},
+
         shadow: {
             shadowColor: 'black',
             shadowOpacity: 0.5,
-            shadowRadius: 5,
+            shadowRadius: wp(5),
             shadowOffset: {
                 width: 0,
-                height: 1,
+                height: wp(1),
             },
         },
         input: {
@@ -24,15 +24,12 @@ export const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderWidth: ms.sp.xxs,
             borderColor: colors.border,
         },
+        button: {marginTop: wp(10)},
         container: {
             padding: ms.sp.xxs
         },
-
         row: {
-            flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom: ms.sp.l,
-            alignItems: 'center'
         },
         colorPanel: {
             width: wp(100),

@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../types";
-import {createSmartStyles} from "../../utils";
+import {getSharedStyles} from "../../utils";
 
 
 export const getCardSize = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -14,15 +14,15 @@ export const getCardSize = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         height: CARD_HEIGHT
     }
 }
-const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {width, height} = Dimensions.get('window');
     const {colors} = themeLabor.theme
 
     const cardSize = getCardSize(sizeLabor, themeLabor)
-    const {smartStylesObj} = createSmartStyles(sizeLabor, themeLabor);
-    const {shadow} = smartStylesObj
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
+    const {shadow} = sharedStylesFlatten
     return StyleSheet.create({
         mapView: {
             flex: 1,
@@ -85,4 +85,4 @@ const createStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
     });
 }
-export default createStyles;
+export default getStyles;

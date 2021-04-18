@@ -8,7 +8,7 @@ import {ReadMore} from "../ReadMore/ReadMore";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {IGMediaCardDatum} from "../../types";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 
 interface IGMediaCardProps extends WithSizeLabor, WithThemeLabor {
     card: IGMediaCardDatum
@@ -26,7 +26,7 @@ class IGMediaCardInner extends PureComponent<IGMediaCardProps> {
         const {wp} = designsBasedOn.iphoneX
         const {colors} = theme;
         const bottomBarIconColor = colors.text;
-        const styles = createStyles(sizeLabor, themeLabor)
+        const styles = getStyles(sizeLabor, themeLabor)
         const {category, user, userAvatar, avSource, imageSource, likes, comments} = this.props.card;
         return (<View>
             <View style={styles.card}>

@@ -2,7 +2,7 @@ import React from "react";
 import {StyleProp, View, ViewStyle} from "react-native";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {SizeKeys} from "../../types";
 
 export interface DividerProps {
@@ -19,7 +19,7 @@ export function Divider(props: DividerProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
-    const styles = createStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
     const {isVertical, size, style} = props
     const sizeVerticalMap: SizeVerticalMap = {
         xxs: wp(6),

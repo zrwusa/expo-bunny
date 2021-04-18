@@ -2,7 +2,7 @@ import React from "react";
 import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, View} from "react-native";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 
 export interface ImageProgressiveProps extends WithSizeLabor, WithThemeLabor {
     sourcePH: ImageSourcePropType,
@@ -38,7 +38,7 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
             themeLabor,
             ...rest
         } = this.props;
-        const styles = createStyles(sizeLabor, themeLabor)
+        const styles = getStyles(sizeLabor, themeLabor)
         return (
             <View style={styles.ImageProgressive.container}>
                 <Animated.Image

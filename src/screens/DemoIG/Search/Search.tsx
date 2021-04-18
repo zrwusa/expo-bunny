@@ -4,10 +4,10 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoIGStackParam, IGMediaBrick, MasonryDatum, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {createContainerStyles} from "../../../containers";
+import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {Animated, Platform, SafeAreaView} from "react-native";
 import {uuid4} from "@sentry/utils";
 import {Masonry} from "../../../components/Masonry/Masonry";
@@ -29,8 +29,8 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
     const sizeLabor = useSizeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const styles = createStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor)
     const [MasonryData, setMasonryData] = useState(defaultMasonryData)
     const [isReady, setIsReady] = useState(false)
 
@@ -116,7 +116,7 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
                 <Animated.FlatList data={MasonryData}
                                    renderItem={({item}) => <Masonry data={item}/>}
                                    keyExtractor={item => item.id}
-                                   debug
+
                                    initialNumToRender={1}
                                    windowSize={3}
                                    removeClippedSubviews={Platform.OS === 'android'}

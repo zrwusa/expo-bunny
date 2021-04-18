@@ -60,15 +60,15 @@ export const getThemeWareHouse = () => {
                 gradient: pl.tealA500
             },
             secondary: {
-                light: pl.teal300,
+                light: pl.purple500,
                 dark: pl.orange700,
                 gradient: pl.lightBlue630,
             },
             // [ReactNativePaper]secondary color for your app which complements the primary color.
             accent: {
                 light: pl.purple500,
-                dark: pl.blue600,
-                gradient: pl.lightBlue630
+                dark: pl.orange700,
+                gradient: pl.lightBlue630,
             },
             // [ReactNavigation]The color of borders, e.g. header border, tab bar border etc.
             border: {
@@ -158,6 +158,23 @@ export const getThemeWareHouse = () => {
                 dark: pl.black,
                 gradient: pl.blueIndigoA100
             },
+            // [ReactNativePaper]background color for elements containing content, such as cards.
+            surface: {
+                light: pl.white,
+                dark: pl.black900,
+                gradient: pl.blueIndigoA700
+            },
+            surface2: {
+                light: pl.grey100,
+                dark: pl.grey900,
+                gradient: pl.blueIndigo900
+            },
+            // [ReactNavigation]The background color of card-like elements, such as headers, tab bars etc.
+            card: {
+                light: pl.white,
+                dark: pl.black900,
+                gradient: pl.blueIndigoA700
+            },
             btnBackground: {
                 light: pl.teal400,
                 dark: pl.orange800,
@@ -167,23 +184,6 @@ export const getThemeWareHouse = () => {
                 light: pl.teal300,
                 dark: pl.orange800,
                 gradient: pl.lightBlue630,
-            },
-            // [ReactNavigation]The background color of card-like elements, such as headers, tab bars etc.
-            card: {
-                light: pl.white,
-                dark: pl.black900,
-                gradient: pl.blueIndigoA700
-            },
-            // [ReactNativePaper]background color for elements containing content, such as cards.
-            surface: {
-                light: pl.white,
-                dark: pl.black900,
-                gradient: pl.blueGrey870
-            },
-            surface2: {
-                light: pl.grey100,
-                dark: pl.grey900,
-                gradient: pl.blueIndigo900
             },
             // [ReactNativePaper]background color for snackbars
             onSurface: {

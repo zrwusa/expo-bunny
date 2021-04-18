@@ -6,15 +6,15 @@ import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../
 import {ButtonTO, InButtonText, PickerSelectChevronRight, Text} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers";
-import {Col, createContainerStyles, Row} from "../../../containers";
+import {Col, getContainerStyles, Row} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import * as Notifications from "expo-notifications";
 import {defaultNotification, registerForPushNotificationsAsync} from "../../../utils/expo-notification";
 import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings, sysError} from "../../../store/actions";
 import {useDispatch, useSelector} from "react-redux";
-import {createStyles} from "./styles";
-import {createSmartStyles} from "../../../utils";
+import {getStyles} from "./styles";
+import {getSharedStyles} from "../../../utils";
 import {StackNavigationProp} from "@react-navigation/stack";
 
 type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyAlert'>;
@@ -32,9 +32,9 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
     const stSys = shortenTFunctionKey(t, i18nSysPrefix);
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
-    const styles = createStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor)
     const dispatch = useDispatch()
     const {currentPrice, dictionaries} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
     const dicGranularity = dictionaries.granularity;
@@ -123,67 +123,68 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
 
     return Platform.OS !== 'web' ? (
         <View style={containerStyles.Screen}>
-            <View style={containerStyles.Card}>
-                <View style={styles.currentPrice.box}>
-                    <Text style={styles.currentPrice.text}>{currentPriceLabelPrefix + currentPrice}</Text>
+            <View style={styles.container}>
+                <View>
+                    {/*<Text>Your expo push token: {expoPushToken}</Text>*/}
+                    {
+                        notification
+                            ? <View>
+                                <Row>
+                                    <Col size={1}>
+                                        <Text>Title:</Text>
+                                    </Col>
+                                    <Col size={4}>
+                                        <Text>{notification.request.content.title} </Text>
+                                    </Col>
+                                    {/*<Text>Data: {JSON.stringify(notification.request.content.data)}</Text>*/}
+                                </Row>
+                                <Row>
+                                    <Col size={1}>
+                                        <Text>Body:</Text>
+                                    </Col>
+                                    <Col size={4}>
+                                        <Text>{notification.request.content.body} </Text>
+                                    </Col>
+                                </Row>
+                            </View>
+                            : null
+                    }
                 </View>
-                <PickerSelectChevronRight
-                    value={granularity}
-                    placeholder={{label: "Select " + granularityLabelPrefix, value: 0}}
-                    items={mappedDicGranularity}
-                    onValueChange={(itemValue) => setGranularity(itemValue)}
-                />
-                <PickerSelectChevronRight
-                    value={reminder.times}
-                    placeholder={{label: "Select " + remindTimesLabelPrefix, value: 0}}
-                    items={mappedDicReminderTimes}
-                    onValueChange={(itemValue) => setReminder({...reminder, times: itemValue})}
-                />
-                <PickerSelectChevronRight
-                    value={reminder.interval}
-                    placeholder={{label: "Select " + remindIntervalLabelPrefix, value: ''}}
-                    items={mappedDicReminderInterval}
-                    onValueChange={(itemValue) => setReminder({...reminder, interval: itemValue})}
-                />
-            </View>
-            <View style={containerStyles.Card}>
-                {/*<Text>Your expo push token: {expoPushToken}</Text>*/}
-                {
-                    notification
-                        ? <View>
-                            <Row>
-                                <Col size={1}>
-                                    <Text>Title:</Text>
-                                </Col>
-                                <Col size={4}>
-                                    <Text>{notification.request.content.title} </Text>
-                                </Col>
-                                {/*<Text>Data: {JSON.stringify(notification.request.content.data)}</Text>*/}
-                            </Row>
-                            <Row>
-                                <Col size={1}>
-                                    <Text>Body:</Text>
-                                </Col>
-                                <Col size={4}>
-                                    <Text>{notification.request.content.body} </Text>
-                                </Col>
-                            </Row>
-                        </View>
-                        : null
-                }
-            </View>
-
-            <View style={containerStyles.RowCard}>
-                <Col size={1}>
-                    <ButtonTO onPress={handleSaveQuickAlertSettings}>
-                        <InButtonText>{st(`saveQuickSettings`)}</InButtonText>
-                    </ButtonTO>
-                </Col>
-                <Col size={1} style={{marginLeft: 6}}>
-                    <ButtonTO onPress={handleCancelAllAlertSettings}>
-                        <InButtonText>{st(`cancelAlertSettings`)}</InButtonText>
-                    </ButtonTO>
-                </Col>
+                <View>
+                    <View style={styles.box}>
+                        <Text style={styles.text}>{currentPriceLabelPrefix + currentPrice}</Text>
+                    </View>
+                    <PickerSelectChevronRight
+                        value={granularity}
+                        placeholder={{label: "Select " + granularityLabelPrefix, value: 0}}
+                        items={mappedDicGranularity}
+                        onValueChange={(itemValue) => setGranularity(itemValue)}
+                    />
+                    <PickerSelectChevronRight
+                        value={reminder.times}
+                        placeholder={{label: "Select " + remindTimesLabelPrefix, value: 0}}
+                        items={mappedDicReminderTimes}
+                        onValueChange={(itemValue) => setReminder({...reminder, times: itemValue})}
+                    />
+                    <PickerSelectChevronRight
+                        value={reminder.interval}
+                        placeholder={{label: "Select " + remindIntervalLabelPrefix, value: ''}}
+                        items={mappedDicReminderInterval}
+                        onValueChange={(itemValue) => setReminder({...reminder, interval: itemValue})}
+                    />
+                </View>
+                <Row style={styles.bottomBar}>
+                    <Col size={1}>
+                        <ButtonTO onPress={handleSaveQuickAlertSettings}>
+                            <InButtonText>{st(`saveQuickSettings`)}</InButtonText>
+                        </ButtonTO>
+                    </Col>
+                    <Col size={1} style={{marginLeft: 6}}>
+                        <ButtonTO onPress={handleCancelAllAlertSettings}>
+                            <InButtonText>{st(`cancelAlertSettings`)}</InButtonText>
+                        </ButtonTO>
+                    </Col>
+                </Row>
             </View>
         </View>
     ) : (<Text>Dummy CryptoCurrencyAlert</Text>)

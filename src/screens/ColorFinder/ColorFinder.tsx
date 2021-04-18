@@ -4,10 +4,10 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {checkColor, colorFaultTolerance, deltaEDes, diffColors} from "../../utils/color";
 import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem, PaletteKeys, ThemeColorKeys, ThemeName} from "../../types";
 import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from "react-native";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {palette} from "../../utils";
-import {Card} from "../../containers";
+import {Card, Row} from "../../containers";
 import {collectBLResult} from "../../store/actions";
 import {blError} from "../../helpers";
 import {useDispatch} from "react-redux";
@@ -25,7 +25,7 @@ export function ColorFinderScreen() {
     const themeLabor = useThemeLabor();
     const dispatch = useDispatch()
     const {themes} = themeLabor;
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
     const [inputText, setInputText] = useState('')
     const [colorInput, setColorInput] = useState<ColorInputItem>({text: '', hex: '', RGB: '', HSL: ''})
     const [similarColorsFromTheme, setSimilarColorsFromTheme] = useState<ColorDiffWithThemeColorsItem[]>([])
@@ -133,7 +133,7 @@ export function ColorFinderScreen() {
 
 
     return (
-        <ScrollView style={{flex: 1}}>
+        <ScrollView>
             <View style={styles.container}>
                 <Card title={st('colorInput')}>
                     <TextInput style={styles.input} value={inputText}
@@ -143,23 +143,25 @@ export function ColorFinderScreen() {
                                autoCapitalize='none'
                     />
                     <ColorValuesCard item={colorInput}/>
-                    <ButtonTO onPress={handleSimilarColor}><InButtonText>{st('findSimilarColors')}</InButtonText></ButtonTO>
+                    <ButtonTO style={styles.button} onPress={handleSimilarColor}>
+                        <InButtonText>{st('findSimilarColors')}</InButtonText>
+                    </ButtonTO>
                 </Card>
                 <Card title={st('similarColorFromPalette')}>
                     {
                         similarColorsFromPalette.map(similarColorItem => {
                             return <View key={similarColorItem.keyInPalette}>
-                                <View style={styles.row}>
+                                <Row size="xs" style={styles.row}>
                                     <Text>Diff</Text>
                                     <Text>{similarColorItem.diff.toFixed(2)}</Text>
-                                </View>
-                                <View style={styles.row}>
+                                </Row>
+                                <Row size="xs" style={styles.row}>
                                     <Text>Diff Tip</Text>
                                     <Text>{similarColorItem.diffDes}</Text>
-                                </View>
-                                <View style={styles.row}>
+                                </Row>
+                                <Row size="xs" style={styles.row}>
                                     <Text>Key</Text><CopyableText>{similarColorItem.keyInPalette}</CopyableText>
-                                </View>
+                                </Row>
                                 <ColorValuesCard item={similarColorItem}/>
                             </View>
                         })

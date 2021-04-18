@@ -4,11 +4,11 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoIGStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {Card, createContainerStyles} from "../../../containers";
+import {Card, getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {SafeAreaView} from "react-native";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {StackNavigationProp} from "@react-navigation/stack";
 
 
@@ -26,8 +26,8 @@ export function IGSettingsScreen({route, navigation}: IGSettingsProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const styles = createStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor)
 
     return (
         <SafeAreaView style={containerStyles.Screen}>

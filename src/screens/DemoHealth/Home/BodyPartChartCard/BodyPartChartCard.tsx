@@ -2,7 +2,7 @@ import * as React from "react";
 import {View} from "react-native";
 import {useSizeLabor} from "../../../../providers/size-labor";
 import {useThemeLabor} from "../../../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {Text} from "../../../../components/UI"
 import {Col, Row} from "../../../../containers";
 import {Divider} from "../../../../components/Divider";
@@ -25,7 +25,7 @@ export function BodyPartChartCard(props: BodyPartCardProps) {
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
     const {colors, victory} = theme;
-    const styles = createStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor)
 
 
     return <View style={styles.bodyPartChartCard}>

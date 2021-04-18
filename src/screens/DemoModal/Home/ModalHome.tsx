@@ -6,10 +6,10 @@ import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types";
-import {createContainerStyles} from "../../../containers";
+import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
-import {createSmartStyles} from "../../../utils";
+import {getSharedStyles} from "../../../utils";
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;
@@ -24,12 +24,12 @@ function ModalHomeScreen({route, navigation}: ModalHomeProps) {
     const st = shortenTFunctionKey(t, 'screens.ModalHome');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (
         <ScrollView>
-            <View style={[containerStyles.Screen, smartStyles.centralized]}>
+            <View style={[containerStyles.Screen, sharedStyles.centralized]}>
             </View>
         </ScrollView>
     )

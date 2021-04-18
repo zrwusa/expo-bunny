@@ -7,13 +7,13 @@ import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Avatar} from "react-native-paper";
 import {ScrollView} from "react-native";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import ImageProgressive from "../../components/UI/ImageProgressive";
-import {createContainerStyles} from "../../containers";
+import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useAuthLabor} from "../../providers/auth-labor";
-import {createSmartStyles} from "../../utils";
+import {getSharedStyles} from "../../utils";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
@@ -32,12 +32,12 @@ function ProfileScreen({route, navigation}: Props) {
     const sizeLabor = useSizeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const themeLabor = useThemeLabor();
-    const containerStyles = createContainerStyles(sizeLabor, themeLabor);
-    const styles = createStyles(sizeLabor, themeLabor)
-    const {smartStyles} = createSmartStyles(sizeLabor, themeLabor);
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor)
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     return (
         <ScrollView>
-            <View style={[containerStyles.Screen, smartStyles.centralized]}>
+            <View style={[containerStyles.Screen, sharedStyles.centralized]}>
                 <Avatar.Image size={wp(60)} source={{uri: avatar_url}}/>
                 <Text>{st(`profileScreenId`)}{route.params.id}</Text>
                 <Text>{st(`email`)}{user?.email}</Text>

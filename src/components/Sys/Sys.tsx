@@ -4,8 +4,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {createStyles} from "./styles";
+import {getStyles} from "./styles";
 import {sysClearErrors} from "../../store/actions";
+import {Row} from "../../containers/Row";
 
 interface Props {
     title?: string
@@ -16,7 +17,7 @@ const Sys = ({title}: Props) => {
     const [isShow, setIsShow] = useState(false)
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = createStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     useEffect(() => {
         setIsShow(sysState.errors.length > 0)
@@ -33,14 +34,14 @@ const Sys = ({title}: Props) => {
                         </View> :
                         <></>
                 }
-                <View style={styles.buttonBox}>
+                <Row style={styles.buttonBox}>
                     <Button title="clear" onPress={() => {
                         dispatch(sysClearErrors({all: true}))
                     }}/>
                     <Button title="close" onPress={() => {
                         setIsShow(false)
                     }}/>
-                </View>
+                </Row>
             </View>
             : null
     );
