@@ -4,7 +4,7 @@ import color from "color";
 import {EThemes} from "../../constants";
 import {isLeafParent, isSameStructure, pl} from "../../utils";
 import getSizeLabor from "../size-labor/sizeLabor";
-import {getVictoryTheme} from "./themeVictory";
+import {getVictoryTheme} from "./victoryTheme";
 
 export const getThemeWareHouse = () => {
     const {wp} = getSizeLabor().designsBasedOn.iphoneX
@@ -13,7 +13,7 @@ export const getThemeWareHouse = () => {
     const commonFontFamily = {
         light: fontsWarehouse.regular.fontFamily.light,
         dark: fontsWarehouse.regular.fontFamily.dark,
-        gradient: fontsWarehouse.regular.fontFamily.dark,
+        indigo: fontsWarehouse.regular.fontFamily.dark,
     }
 
 
@@ -21,34 +21,34 @@ export const getThemeWareHouse = () => {
         dark: {
             light: false,
             dark: true,
-            gradient: true
+            indigo: true
         },
         roundness: {
             light: wp(4),
             dark: wp(4),
-            gradient: wp(10)
+            indigo: wp(10)
         },
         borderRadius: {
             button: {
                 light: wp(4),
                 dark: wp(4),
-                gradient: wp(17)
+                indigo: wp(17)
             },
             input: {
                 light: wp(4),
                 dark: wp(4),
-                gradient: wp(100)
+                indigo: wp(100)
             },
             surface: {
                 light: wp(10),
                 dark: wp(10),
-                gradient: wp(10)
+                indigo: wp(10)
             }
         },
         mode: {
             light: 'exact',
             dark: 'adaptive',
-            gradient: 'exact'
+            indigo: 'exact'
         },
         colors: {
             // ---start main
@@ -57,34 +57,34 @@ export const getThemeWareHouse = () => {
             primary: {
                 light: pl.teal400,
                 dark: pl.orange800,
-                gradient: pl.tealA500
+                indigo: pl.tealA500
             },
             secondary: {
                 light: pl.purple500,
-                dark: pl.orange700,
-                gradient: pl.lightBlue630,
+                dark: pl.greenIOS2,
+                indigo: pl.lightBlue630,
             },
             // [ReactNativePaper]secondary color for your app which complements the primary color.
             accent: {
                 light: pl.purple500,
-                dark: pl.orange700,
-                gradient: pl.lightBlue630,
+                dark: pl.greenIOS2,
+                indigo: pl.lightBlue630,
             },
             // [ReactNavigation]The color of borders, e.g. header border, tab bar border etc.
             border: {
-                light: pl.grey350,
+                light: pl.grey300,
                 dark: pl.grey850,
-                gradient: pl.blueIndigo900
+                indigo: pl.blueIndigo900
             },
             border2: {
                 light: pl.grey600,
                 dark: pl.amber500,
-                gradient: pl.amber500
+                indigo: pl.amber500
             },
             divider: {
-                light: pl.grey390,
+                light: pl.grey300,
                 dark: pl.grey800,
-                gradient: pl.blueIndigo900
+                indigo: pl.blueIndigo900
             },
             // ---end main
 
@@ -94,48 +94,48 @@ export const getThemeWareHouse = () => {
             // [ReactNavigation]The text color of various elements.
             text: {
                 light: pl.black,
-                dark: pl.grey400,
-                gradient: pl.blueIndigo50
+                dark: pl.white,
+                indigo: pl.blueIndigo50
             },
             text2: {
                 light: pl.grey800,
-                dark: pl.grey600,
-                gradient: pl.blueIndigo100
+                dark: pl.grey200,
+                indigo: pl.blueIndigo100
             },
             text3: {
                 light: pl.grey800,
-                dark: pl.grey600,
-                gradient: pl.blueIndigo150
+                dark: pl.grey400,
+                indigo: pl.blueIndigo150
             },
-            btnText: {
+            buttonText: {
                 light: pl.white,
                 dark: pl.orange50,
-                gradient: pl.blueIndigoA700,
+                indigo: pl.blueIndigoA700,
             },
-            btnText2: {
+            buttonText2: {
                 light: pl.red100,
-                dark: pl.indigo100,
-                gradient: pl.indigo100
+                dark: pl.white,
+                indigo: pl.indigo100
             },
             caption: {
                 light: pl.grey900,
                 dark: pl.grey500,
-                gradient: pl.grey500
+                indigo: pl.grey500
             },
             caption2: {
                 light: pl.grey800,
                 dark: pl.grey600,
-                gradient: pl.grey600
+                indigo: pl.grey600
             },
             paragraph: {
                 light: pl.grey900,
                 dark: pl.grey200,
-                gradient: pl.grey200
+                indigo: pl.grey200
             },
             paragraph2: {
                 light: pl.grey700,
                 dark: pl.grey400,
-                gradient: pl.grey400
+                indigo: pl.grey400
             },
             // ---end text
 
@@ -144,67 +144,62 @@ export const getThemeWareHouse = () => {
             // [ReactNativePaper]background color for pages, such as lists.
             // [ReactNavigation]The color of various backgrounds, such as background color for the screens.
             background: {
-                light: pl.grey100,
-                dark: pl.black900,
-                gradient: pl.blueIndigoA400
-            },
-            background2: {
-                light: pl.grey200,
-                dark: pl.grey800,
-                gradient: pl.blueIndigoA700
-            },
-            background3: {
                 light: pl.white,
                 dark: pl.black,
-                gradient: pl.blueIndigoA100
+                indigo: pl.blueIndigoA400
             },
             // [ReactNativePaper]background color for elements containing content, such as cards.
             surface: {
-                light: pl.white,
-                dark: pl.black900,
-                gradient: pl.blueIndigoA700
+                light: pl.grey100,
+                dark: pl.black,
+                indigo: pl.blueIndigoA100
             },
             surface2: {
                 light: pl.grey100,
-                dark: pl.grey900,
-                gradient: pl.blueIndigo900
+                dark: pl.grey5IOS3,
+                indigo: pl.blueIndigo300
+            },
+            surface3: {
+                light: pl.grey100,
+                dark: pl.grey4IOS3,
+                indigo: pl.blueGrey870
             },
             // [ReactNavigation]The background color of card-like elements, such as headers, tab bars etc.
             card: {
                 light: pl.white,
-                dark: pl.black900,
-                gradient: pl.blueIndigoA700
+                dark: pl.black,
+                indigo: pl.blueIndigoA700
             },
             btnBackground: {
                 light: pl.teal400,
                 dark: pl.orange800,
-                gradient: pl.tealA500
+                indigo: pl.tealA500
             },
             btnBackground2: {
-                light: pl.teal300,
-                dark: pl.orange800,
-                gradient: pl.lightBlue630,
+                light: pl.purple500,
+                dark: pl.redIOS3,
+                indigo: pl.lightBlue630,
             },
             // [ReactNativePaper]background color for snackbars
             onSurface: {
                 light: pl.black,
                 dark: pl.white,
-                gradient: pl.white
+                indigo: pl.white
             },
             onBackground: {
                 light: pl.black,
                 dark: pl.white,
-                gradient: pl.white
+                indigo: pl.white
             },
             paper: {
                 light: pl.yellow50,
                 dark: pl.amber50,
-                gradient: pl.amber50
+                indigo: pl.amber50
             },
             paper2: {
                 light: pl.lightGreen50,
                 dark: pl.green50,
-                gradient: pl.green50,
+                indigo: pl.green50,
             },
             // ---end background
 
@@ -213,29 +208,29 @@ export const getThemeWareHouse = () => {
             success: {
                 light: pl.lightGreenA720,
                 dark: pl.green610,
-                gradient: pl.green610
+                indigo: pl.green610
             },
             error: {
                 light: pl.redA420,
                 dark: pl.red910,
-                gradient: pl.red910
+                indigo: pl.red910
             },
             warning: {
                 light: pl.yellow780,
                 dark: pl.yellow720,
-                gradient: pl.yellow720
+                indigo: pl.yellow720
             },
             // [ReactNativePaper]background color for badges
             // [ReactNavigation]The color of Tab Navigator badge.
             notification: {
                 light: pl.pinkA400,
                 dark: pl.pinkA100,
-                gradient: pl.pinkA100,
+                indigo: pl.pinkA100,
             },
             info: {
                 light: pl.blue300,
                 dark: pl.blue500,
-                gradient: pl.blue500,
+                indigo: pl.blue500,
             },
             // --- end tip
 
@@ -245,24 +240,24 @@ export const getThemeWareHouse = () => {
             disabled: {
                 light: color(pl.black).alpha(0.26).rgb().string(),
                 dark: color(pl.white).alpha(0.38).rgb().string(),
-                gradient: color(pl.white).alpha(0.38).rgb().string(),
+                indigo: color(pl.white).alpha(0.38).rgb().string(),
             },
             // [ReactNativePaper]color for placeholder text, such as input placeholder.
             placeholder: {
                 light: color(pl.black).alpha(0.54).rgb().string(),
                 dark: color(pl.white).alpha(0.54).rgb().string(),
-                gradient: pl.blueIndigo150,
+                indigo: pl.blueIndigo150,
             },
             // [ReactNativePaper]color for backdrops of various components such as modals.
             backdrop: {
                 light: color(pl.black).alpha(0.5).rgb().string(),
-                dark: color(pl.black).alpha(0.9).rgb().string(),
-                gradient: color(pl.black).alpha(0.9).rgb().string(),
+                dark: color(pl.white).alpha(0.6).rgb().string(),
+                indigo: color(pl.black).alpha(0.9).rgb().string(),
             },
             transparent: {
                 light: pl.transparent,
                 dark: pl.transparent,
-                gradient: pl.transparent,
+                indigo: pl.transparent,
             },
             // --- end functional
         },
@@ -273,7 +268,7 @@ export const getThemeWareHouse = () => {
             scale: {
                 light: 1.0,
                 dark: 1.0,
-                gradient: 1.0
+                indigo: 1.0
             },
         },
         typography: {
@@ -282,7 +277,7 @@ export const getThemeWareHouse = () => {
                 fontWeight: {
                     light: 'bold',
                     dark: 'bold',
-                    gradient: 'bold'
+                    indigo: 'bold'
                 },
             },
             body: {

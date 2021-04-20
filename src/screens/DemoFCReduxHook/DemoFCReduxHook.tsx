@@ -8,6 +8,7 @@ import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {RootState} from "../../types";
+import {getSharedStyles} from "../../helpers/shared-styles";
 
 function DemoFCReduxHookScreen() {
     const {t} = useTranslation();
@@ -17,15 +18,14 @@ function DemoFCReduxHookScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={containerStyles.Screen}>
-            <View style={containerStyles.Card}>
-                <Text>{st(`order`)}{demoHelloState.order}</Text>
-                <Button title={st(`dispatchSomething`)}
-                        onPress={() => dispatch(demoHello({order: demoHelloState.order + 1}))}/>
-                {/*<Text>This demo shows you to dispatch an action to redux reducer with hook method in Function Component(FC)</Text>*/}
-            </View>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
+            <Text>{st(`order`)}{demoHelloState.order}</Text>
+            <Button title={st(`dispatchSomething`)}
+                    onPress={() => dispatch(demoHello({order: demoHelloState.order + 1}))}/>
+            {/*<Text>This demo shows you to dispatch an action to redux reducer with hook method in Function Component(FC)</Text>*/}
         </View>
     );
 }

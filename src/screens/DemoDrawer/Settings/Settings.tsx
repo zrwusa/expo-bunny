@@ -8,6 +8,7 @@ import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {getSharedStyles} from "../../../helpers/shared-styles";
 
 type DrawerSettingsRouteProp = RouteProp<DemoDrawerStackParam, 'DrawerSettings'>;
 type DrawerSettingsNavigationProp = StackNavigationProp<RootStackParam, 'DemoDrawer'>;
@@ -23,12 +24,11 @@ function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     return (
-        <View style={containerStyles.Screen}>
-            <View style={containerStyles.Card}>
-                <Text>{st(`title`)}</Text>
-                <Text>{route.params.item}</Text>
-            </View>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
+            <Text>{st(`title`)}</Text>
+            <Text>{route.params.item}</Text>
         </View>
     );
 }

@@ -6,16 +6,23 @@ export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor)
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     const {ms, designsBasedOn} = sizeLabor;
     const {wp} = designsBasedOn.iphoneX;
+    const {shadowAround, title, title2, card} = sharedStylesFlatten;
+    const {theme} = themeLabor;
     return StyleSheet.create({
         Card: {
-            ...sharedStylesFlatten.card,
-            margin: ms.sp.m,
-            paddingHorizontal: ms.sp.m,
-            paddingVertical: ms.sp.m,
+            ...shadowAround,
+            ...card,
+            marginVertical: ms.sp.m,
+            paddingHorizontal: ms.sp.l,
         },
-        CardTitle: {
-            ...sharedStylesFlatten.title2,
-            marginBottom: ms.sp.m,
+        CardInTitle: {
+            ...title2,
+            marginTop: ms.sp.m,
+        },
+        CardOutTitle: {
+            ...title,
+            marginVertical: ms.sp.m,
+            fontWeight: 'bold',
         },
         InputCard: {
             marginTop: wp(20)

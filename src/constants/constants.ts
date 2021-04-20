@@ -158,7 +158,7 @@ export enum EDemoCryptoCurrency {
 export const EThemes: EnumThemeNames = {
     light: 'light',
     dark: 'dark',
-    gradient: 'gradient'
+    indigo: 'indigo'
 }
 
 export const ELanguage = {

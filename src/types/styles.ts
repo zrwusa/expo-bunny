@@ -88,8 +88,8 @@ export type Colors = {
     text: string,
     text2: string,
     text3: string,
-    btnText: string,
-    btnText2: string,
+    buttonText: string,
+    buttonText2: string,
     caption: string,
     caption2: string,
     paragraph: string,
@@ -99,13 +99,14 @@ export type Colors = {
 
     // ---start background
     background: string,
-    background2: string,
-    background3: string,
+    // background2: string,
+    // background3: string,
     btnBackground: string,
     btnBackground2: string,
     card: string,
     surface: string,
     surface2: string,
+    surface3: string,
     paper: string,
     paper2: string,
     // ---end background
@@ -176,7 +177,7 @@ export type FontConfigPlatform = {
 //     dark: string,
 // }
 
-export type ThemeName = 'light' | 'dark' | 'gradient';
+export type ThemeName = 'light' | 'dark' | 'indigo';
 export type Themes = { [key in ThemeName]: Theme }
 export type EnumThemeNames = {
     [key in ThemeName]: ThemeName
@@ -655,7 +656,7 @@ export type Palette = {
     blueGrey320: string,
     //---end--- others
 
-    //---start--- gradient theme
+    //---start--- indigo theme
     blueIndigo50: string, // text
     blueIndigo100: string, //
     blueIndigo150: string, // placeholder
@@ -667,5 +668,87 @@ export type Palette = {
     tealA500: string, // button from
     lightBlue630: string,// button to
     blueGrey870: string, // label background
-    //---end--- gradient theme
+    //---end--- indigo theme
+
+
+    //---start--- iOS theme
+    // xxxIOS  light default
+    // xxxIOS2 light accessible
+    // xxxIOS3 dark default
+    // xxxIOS4 dark accessible
+    redIOS: string,
+    redIOS2: string,
+    redIOS3: string,
+    redIOS4: string,
+
+    orangeIOS: string,
+    orangeIOS2: string,
+    orangeIOS3: string,
+    orangeIOS4: string,
+
+    yellowIOS: string,
+    yellowIOS2: string,
+    yellowIOS3: string,
+    yellowIOS4: string,
+
+    greenIOS: string,
+    greenIOS2: string,
+    greenIOS3: string,
+    greenIOS4: string,
+
+    tealIOS: string,
+    tealIOS2: string,
+    tealIOS3: string,
+    tealIOS4: string,
+
+    blueIOS: string,
+    blueIOS2: string,
+    blueIOS3: string,
+    blueIOS4: string,
+
+    indigoIOS: string,
+    indigoIOS2: string,
+    indigoIOS3: string,
+    indigoIOS4: string,
+
+    purpleIOS: string,
+    purpleIOS2: string,
+    purpleIOS3: string,
+    purpleIOS4: string,
+
+    pinkIOS: string,
+    pinkIOS2: string,
+    pinkIOS3: string,
+    pinkIOS4: string,
+
+    greyIOS: string,
+    greyIOS2: string,
+    greyIOS3: string,
+    greyIOS4: string,
+
+    grey2IOS: string,
+    grey2IOS2: string,
+    grey2IOS3: string,
+    grey2IOS4: string,
+
+    grey3IOS: string,
+    grey3IOS2: string,
+    grey3IOS3: string,
+    grey3IOS4: string,
+
+    grey4IOS: string,
+    grey4IOS2: string,
+    grey4IOS3: string,
+    grey4IOS4: string,
+
+    grey5IOS: string,
+    grey5IOS2: string,
+    grey5IOS3: string,
+    grey5IOS4: string,
+
+    grey6IOS: string,
+    grey6IOS2: string,
+    grey6IOS3: string,
+    grey6IOS4: string,
+    //---end--- iOS theme
 }

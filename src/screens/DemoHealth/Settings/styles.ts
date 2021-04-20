@@ -12,6 +12,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         label: {
             ...sharedStylesFlatten.label,
             marginLeft: ms.sp.m
+        },
+        rightWrapper: {
+            alignItems: 'flex-end'
         }
     });
 }

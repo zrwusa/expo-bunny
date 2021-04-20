@@ -10,6 +10,7 @@ import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
+import {getSharedStyles} from "../../helpers/shared-styles";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action>) => ({
@@ -41,14 +42,13 @@ class DemoThunkCCScreen extends React.Component<Props> {
         const {theme} = themeLabor;
         const st = shortenTFunctionKey(t, 'screens.DemoThunkCC');
         const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+        const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
         return (
-            <View style={containerStyles.Screen}>
-                <View style={containerStyles.Card}>
-                    <Text>{st(`text`)}{text}</Text>
-                    <Text>{st(`id`)}{id}</Text>
-                    <Button onPress={this.handleThunk} title={st(`thunkDispatch`)}/>
-                </View>
+            <View style={[containerStyles.Screen, sharedStyles.centralized]}>
+                <Text>{st(`text`)}{text}</Text>
+                <Text>{st(`id`)}{id}</Text>
+                <Button onPress={this.handleThunk} title={st(`thunkDispatch`)}/>
             </View>
         );
     }

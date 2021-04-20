@@ -42,18 +42,15 @@ function RNHome() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {
-        activityIndicatorStyles,
-        switchStyles,
+        home,
         imageStyles,
         imageBackgroundStyles,
         modalStyles,
         pressableStyles,
-        sectionListStyles,
         statusBarStyles,
         touchableHighlightStyles,
         touchableOpacityStyles,
         touchableWithoutFeedbackStyles,
-        virtualizedListStyles,
     } = getStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
@@ -84,7 +81,7 @@ function RNHome() {
     };
     return (
         <ScrollView>
-            <View style={containerStyles.Screen}>
+            <View style={[containerStyles.Screen, home.container]}>
                 <View style={containerStyles.Card}>
                     <ActivityIndicator/>
                     <ActivityIndicator size="large"/>

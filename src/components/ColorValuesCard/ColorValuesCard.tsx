@@ -14,20 +14,36 @@ export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | Co
     const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor)
     return <View>
-        <Row>
+        <Row size="m">
             <Col size={1}>
                 <Text>hex</Text>
-                <Text>RGB</Text>
-                <Text>HSL</Text>
             </Col>
             <Col size={2}>
                 <CopyableText>{item.hex}</CopyableText>
-                <CopyableText>{item.RGB}</CopyableText>
-                <CopyableText>{item.HSL}</CopyableText>
             </Col>
             <Col size={1}>
                 <View style={[styles.colorPanel, {backgroundColor: item.hex}]}/>
+            </Col>
+        </Row>
+        <Row size="m">
+            <Col size={1}>
+                <Text>RGB</Text>
+            </Col>
+            <Col size={2}>
+                <CopyableText>{item.RGB}</CopyableText>
+            </Col>
+            <Col size={1}>
                 <View style={[styles.colorPanel, {backgroundColor: item.RGB}]}/>
+            </Col>
+        </Row>
+        <Row size="m">
+            <Col size={1}>
+                <Text>HSL</Text>
+            </Col>
+            <Col size={2}>
+                <CopyableText>{item.HSL}</CopyableText>
+            </Col>
+            <Col size={1}>
                 <View style={[styles.colorPanel, {backgroundColor: item.HSL}]}/>
             </Col>
         </Row>

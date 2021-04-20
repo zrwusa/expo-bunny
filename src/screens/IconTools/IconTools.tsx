@@ -4,7 +4,7 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {ScrollView} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
-import {Card} from "../../containers";
+import {Card, Row} from "../../containers";
 import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
@@ -36,7 +36,9 @@ export function IconToolsScreen() {
                                    setInputHeight(event.nativeEvent.contentSize.height)
                                }}
                                value={glyph}/>
-                    <ButtonTO onPress={handleGenerate}><InButtonText>{st('generate')}</InButtonText></ButtonTO>
+                    <Row size="l">
+                        <ButtonTO onPress={handleGenerate}><InButtonText>{st('generate')}</InButtonText></ButtonTO>
+                    </Row>
                 </Card>
             </View>
         </ScrollView>

@@ -8,6 +8,7 @@ import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
+import {getSharedStyles} from "../../../helpers/shared-styles";
 
 type NestedLv1HomeRouteProp = RouteProp<DemoNestedLv1StackParam, 'NestedLv1Home'>;
 type NestedLv1HomeNavigationProp = StackNavigationProp<DemoNestedLv1StackParam, 'NestedLv1Home'>;
@@ -23,14 +24,13 @@ function NestedLv1HomeScreen({route, navigation}: NestedLv1HomeProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={containerStyles.Screen}>
-            <View style={containerStyles.Card}>
-                <ButtonTO onPress={() => navigation.navigate('NestedLv1Settings', {item: "001"})}>
-                    <InButtonText>{st(`goToNestedLv1Settings`)}</InButtonText>
-                </ButtonTO>
-            </View>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
+            <ButtonTO onPress={() => navigation.navigate('NestedLv1Settings', {item: "001"})}>
+                <InButtonText>{st(`goToNestedLv1Settings`)}</InButtonText>
+            </ButtonTO>
         </View>
     );
 }

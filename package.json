@@ -1,6 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "expo-react-bunny description",
   "scripts": {
     "start": "expo start",

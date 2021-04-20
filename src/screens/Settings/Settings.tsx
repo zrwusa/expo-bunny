@@ -17,6 +17,7 @@ export default function SettingsScreen() {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     return (
         <View style={containerStyles.Screen}>
+
             <SettingsItem
                 label={st(`changeTheme`)}
                 renderPicker={ThemePicker}

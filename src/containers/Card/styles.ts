@@ -5,18 +5,9 @@ import {getSharedStyles} from "../../utils";
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
-    const {colors} = themeLabor.theme;
+    const {theme} = themeLabor;
+    const {colors, borderRadius} = theme;
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
-    return StyleSheet.create({
-        container: {
-            padding: ms.sp.l,
-        },
-        label: {
-            ...sharedStylesFlatten.label,
-            marginLeft: ms.sp.m
-        },
-        rightWrapper: {
-            alignItems: 'flex-end'
-        }
-    });
+    const {shadowAround, title, card} = sharedStylesFlatten;
+    return StyleSheet.create({});
 }

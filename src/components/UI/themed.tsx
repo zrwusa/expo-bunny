@@ -88,6 +88,16 @@ export const LinkButton: React.FC<LinkProps> = ({to, action, style, children, ..
     );
 };
 
+export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}) => {
+    const {onPress, ...props} = useLinkProps({to, action});
+    const mergedStyle = [{}, style]
+    return (
+        <TouchableOpacityRN style={mergedStyle} onPress={onPress} {...props} {...rest}>
+            {children}
+        </TouchableOpacityRN>
+    );
+};
+
 export const InButtonText: React.FC<TextProps> = ({children, style, ...rest}) => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
@@ -216,12 +226,33 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
         style={mergedStyle}
     />);
 }
-export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, style, Icon, ...rest}) => {
+export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, placeholder, items, style, Icon, ...rest}) => {
     const themeLabor = useThemeLabor();
     const sizeLabor = useSizeLabor();
     const styles = getStyles(sizeLabor, themeLabor);
     const {designsBasedOn} = sizeLabor
     const {wp} = designsBasedOn.iphoneX
+    const finalItems = items.map(item => {
+        item.color = Platform.select({
+            android: 'black',
+            ios: item.color,
+            web: item.color,
+        })
+        return item
+    })
+    let finalPlaceholder = placeholder;
+    if (finalPlaceholder) {
+        if (finalPlaceholder.hasOwnProperty('color')) {
+            // @ts-ignore
+            finalPlaceholder.color = Platform.select({
+                android: 'black',
+                // @ts-ignore
+                ios: finalPlaceholder.color,
+                // @ts-ignore
+                web: finalPlaceholder.color,
+            })
+        }
+    }
     const IconDefault = (Platform.OS !== 'web' ? () => <IcoMoon name="chevron-down1"/> : null)
     return (<ReactNativePickerSelect
         style={{
@@ -237,6 +268,8 @@ export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, 
             modalViewBottom: styles.PickerSelect.modalViewBottom,
             ...style,
         }}
+        placeholder={finalPlaceholder}
+        items={finalItems}
         touchableWrapperProps={{
             activeOpacity: 0.2,
         }}
@@ -305,7 +338,7 @@ export const PickerSelectChevronRight: React.FC<ReactNativePickerSelectProps> = 
 // }
 //
 // export const DemoTextCssStyledRN = styled.Text`
-//   color: ${DefaultTheme.colors.btnText};
+//   color: ${DefaultTheme.colors.buttonText};
 //   text-align: center;
 //   font-size: ${ms.fs.m}px;
 // `

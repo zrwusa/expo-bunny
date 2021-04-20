@@ -15,11 +15,11 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
         text3: {
             color: colors.text3,
         },
-        btnText: {
-            color: colors.btnText,
+        buttonText: {
+            color: colors.buttonText,
         },
-        btnText2: {
-            color: colors.btnText2,
+        buttonText2: {
+            color: colors.buttonText2,
         },
         title: {
             fontSize: ms.fs.l,
@@ -54,6 +54,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             color: colors.text3,
         },
         label: {
+            fontSize: ms.fs.s,
             color: colors.text,
         },
         caption: {
@@ -79,8 +80,6 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
 
         card: {
             backgroundColor: colors.surface,
-            borderWidth: ms.sp.xxs,
-            borderColor: colors.border,
             borderRadius: borderRadius.surface,
         },
         card2: {
@@ -104,6 +103,13 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
         },
         button2: {
             backgroundColor: colors.btnBackground2,
+            borderRadius: borderRadius.button,
+            fontSize: ms.fs.m,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: ms.sp.m,
+            paddingHorizontal: ms.sp.m,
         },
         buttonDisabled: {
             backgroundColor: colors.disabled
@@ -127,7 +133,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
                 height: wp(0),
             },
             shadowOpacity: 0.6,
-            shadowRadius: wp(10),
+            shadowRadius: wp(8),
             elevation: wp(22),
             backgroundColor: colors.background, // React native bug no background no shadow on iOS
         },

@@ -4,10 +4,11 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoTabStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {Card, getContainerStyles} from "../../../containers";
+import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
+import {getSharedStyles} from "../../../helpers/shared-styles";
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;
@@ -23,12 +24,11 @@ function TabSettingsScreen({route, navigation}: TabSettingsProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     return (
-        <View style={containerStyles.Screen}>
-            <Card title={st(`title`)}>
-                <Text>{route.params.item}</Text>
-            </Card>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
+            <Text>{st(`title`)}</Text>
+            <Text>{route.params.item}</Text>
         </View>
     );
 }

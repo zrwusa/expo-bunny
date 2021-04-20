@@ -9,7 +9,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
     return StyleSheet.create({
         container: {
-            padding: ms.sp.l,
+            padding: ms.sp.m,
         },
         label: {
             ...sharedStylesFlatten.label,

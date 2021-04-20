@@ -9,7 +9,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
 
     return StyleSheet.create({
-
+        container: {
+            padding: ms.sp.m
+        },
         shadow: {
             shadowColor: 'black',
             shadowOpacity: 0.5,
@@ -25,9 +27,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderColor: colors.border,
         },
         button: {marginTop: wp(10)},
-        container: {
-            padding: ms.sp.xxs
-        },
+
         row: {
             justifyContent: 'space-between',
         },

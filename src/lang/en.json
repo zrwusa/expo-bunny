@@ -12,6 +12,18 @@
     "signOutSuccess": "Sign out success",
     "canceledRequest": "Canceled request"
   },
+  "dictionary": {
+    "BTC": "BTC",
+    "ETH": "ETH",
+    "1d": "1day",
+    "1w": "1week",
+    "1m": "1month",
+    "1y": "1year",
+    "Beautiful": "Beautiful",
+    "RGB": "RGB",
+    "Hex": "Hex",
+    "HSL": "HSL"
+  },
   "screens": {
     "Home": {
       "title": "Home",
@@ -214,13 +226,7 @@
       "title": "DemoCryptoCurrency"
     },
     "CryptoCurrencyHome": {
-      "title": "Home",
-      "BTC": "BTC",
-      "ETH": "ETH",
-      "1d": "1day",
-      "1w": "1week",
-      "1m": "1month",
-      "1y": "1year"
+      "title": "Home"
     },
     "DemoIG": {
       "title": "DemoIG"

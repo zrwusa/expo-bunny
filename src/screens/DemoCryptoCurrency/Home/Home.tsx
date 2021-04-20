@@ -5,7 +5,7 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {getContainerStyles, Row} from "../../../containers";
+import {getContainerStyles} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../components/Victory/Victory";
@@ -18,6 +18,7 @@ import {collectBLResult, getCurrentPrice, sysError} from "../../../store/actions
 import {blError} from "../../../helpers";
 import {ScrollView} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {Tab} from "../../../components";
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
 type CryptoCurrencyHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -106,37 +107,18 @@ function CryptoCurrencyHomeScreen() {
         <ScrollView>
             <View style={[Screen, Box]}>
                 <Text>{currentPrice}</Text>
-                <Row style={styles.tabs}>
-                    {
-                        types.map(item => {
-                            const activeWrapStyle = item === type ? styles.active : styles.inActive;
-                            const activeTextStyle = item === type ? styles.tabTextActive : styles.tabText;
-                            return <View style={[styles.tab, activeWrapStyle]}
-                                         key={item}>
-                                <Text style={[styles.tabText, activeTextStyle]} onPress={async () => {
-                                    setType(item)
-                                    await getHistoricalPrices(item, dateRange);
-                                }}>{st(item)}</Text>
-                            </View>
-                        })
-                    }
-                </Row>
-                <Row style={styles.tabs}>
-                    {
-                        dateRanges.map(item => {
-                            const activeWrapStyle = item === dateRange ? styles.active : styles.inActive;
-                            const activeTextStyle = item === dateRange ? styles.tabTextActive : styles.tabText;
-                            return <View style={[activeWrapStyle, styles.tab]}
-                                         key={item}>
-                                <Text style={[styles.tabText, activeTextStyle]}
-                                      onPress={async () => {
-                                          setDateRange(item)
-                                          await getHistoricalPrices(type, item);
-                                      }}>{st(item)}</Text>
-                            </View>
-                        })
-                    }
-                </Row>
+                <Tab items={types}
+                     placeholder={type}
+                     onChange={async (item) => {
+                         setType(item)
+                         await getHistoricalPrices(item, dateRange);
+                     }}/>
+                <Tab items={dateRanges}
+                     placeholder={dateRange}
+                     onChange={async (item) => {
+                         setDateRange(item)
+                         await getHistoricalPrices(type, item);
+                     }}/>
                 <VictoryChart
                     theme={victory}
                     padding={{top: wp(40), left: wp(4), bottom: wp(30), right: wp(20)}}
@@ -163,11 +145,12 @@ function CryptoCurrencyHomeScreen() {
                 >
                     <VictoryAxis crossAxis style={{
                         // axis: {stroke: colors.accent},
+                        grid: {stroke: 'none'},
                         // tickLabels: {padding: wp(2), fill: colors.primary}
                     }}/>
                     <VictoryAxis dependentAxis tickFormat={() => ``}
                                  style={{
-                                     // axis: {stroke: colors.accent},
+                                     grid: {stroke: 'none'},
                                  }}/>
                     <VictoryLine
                         interpolation="natural"

@@ -51,10 +51,10 @@ export const Auth1Screen = ({route, navigation}: Auth1Props) => {
                                                    style: {
                                                        backgroundColor: colors.background
                                                    },
-                                                   activeTintColor: colors.btnBackground2,
+                                                   activeTintColor: colors.secondary,
                                                    inactiveTintColor: colors.text,
                                                    indicatorStyle: {
-                                                       backgroundColor: colors.btnBackground2,
+                                                       backgroundColor: colors.secondary,
                                                        width: wp(80),
                                                        marginLeft: wp(45),
                                                    },

@@ -5,11 +5,10 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoHealthTabStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {getContainerStyles, Row} from "../../../containers";
+import {Card, getContainerStyles, Row} from "../../../containers";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {SettingCard} from "./SettingCard";
 import {Divider} from "../../../components/Divider";
 import {LinearGradientIcon} from "../../../components/LinearGradientIcon";
 import {getStyles} from "./styles";
@@ -44,7 +43,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
         <SafeAreaView style={{flex: 1}}>
             <ScrollView>
                 <View style={[containerStyles.Screen, styles.container]}>
-                    <SettingCard title="Units">
+                    <Card titleMode="OUT" title="Units">
                         <Row size="xl">
                             <Col size={3}>
                                 <Row>
@@ -120,8 +119,8 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                 </Row>
                             </Col>
                         </Row>
-                    </SettingCard>
-                    <SettingCard title="Preferences">
+                    </Card>
+                    <Card titleMode="OUT" title="Preferences">
                         <Row size="xl">
                             <Col size={3}>
                                 <Row>
@@ -129,7 +128,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                     <Text style={styles.label}>Notifications</Text>
                                 </Row>
                             </Col>
-                            <Col size={1} style={{alignItems: 'flex-end'}}>
+                            <Col size={1} style={styles.rightWrapper}>
                                 <SwitchP value={isNotification}
                                          onValueChange={(value) => {
                                              setIsNotification(value)
@@ -146,7 +145,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                         <Text style={styles.label}>Bar Type</Text>
                                     </Row>
                                 </Col>
-                                <Col size={1} style={{alignItems: 'flex-end'}}>
+                                <Col size={1} style={styles.rightWrapper}>
                                     <IcoMoon name="chevron-right1"/>
                                 </Col>
                             </Row>
@@ -160,13 +159,13 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                         <Text style={styles.label}>Appearance & Display</Text>
                                     </Row>
                                 </Col>
-                                <Col size={1} style={{alignItems: 'flex-end'}}>
+                                <Col size={1} style={styles.rightWrapper}>
                                     <IcoMoon name="chevron-right1"/>
                                 </Col>
                             </Row>
                         </TouchableOpacity>
-                    </SettingCard>
-                    <SettingCard title="Support">
+                    </Card>
+                    <Card titleMode="OUT" title="Support">
                         <TouchableOpacity>
                             <Row size="xl">
                                 <Col size={3}>
@@ -175,7 +174,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                         <Text style={styles.label}>Bug Report</Text>
                                     </Row>
                                 </Col>
-                                <Col size={1} style={{alignItems: 'flex-end'}}>
+                                <Col size={1} style={styles.rightWrapper}>
                                     <IcoMoon name="chevron-right1"/>
                                 </Col>
                             </Row>
@@ -189,7 +188,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                         <Text style={styles.label}>Contact Us</Text>
                                     </Row>
                                 </Col>
-                                <Col size={1} style={{alignItems: 'flex-end'}}>
+                                <Col size={1} style={styles.rightWrapper}>
                                     <IcoMoon name="chevron-right1"/>
                                 </Col>
                             </Row>
@@ -203,12 +202,12 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                         <Text style={styles.label}>Leave Feedback</Text>
                                     </Row>
                                 </Col>
-                                <Col size={1} style={{alignItems: 'flex-end'}}>
+                                <Col size={1} style={styles.rightWrapper}>
                                     <IcoMoon name="chevron-right1"/>
                                 </Col>
                             </Row>
                         </TouchableOpacity>
-                    </SettingCard>
+                    </Card>
                 </View>
             </ScrollView>
         </SafeAreaView>

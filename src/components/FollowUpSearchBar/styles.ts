@@ -12,8 +12,8 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             top: 0,
             width: wp(375),
             left: 0,
-            zIndex: 99,
-            backgroundColor: colors.background3,
+            zIndex: ms.zi.s,
+            backgroundColor: colors.surface2,
             flexDirection: 'row',
             alignItems: 'center',
             padding: ms.sp.m

@@ -12,6 +12,18 @@
     "signOutSuccess": "已退出登录",
     "canceledRequest": "请求已取消"
   },
+  "dictionary": {
+    "BTC": "比特币",
+    "ETH": "以太坊",
+    "1d": "1天",
+    "1w": "1周",
+    "1m": "1个月",
+    "1y": "1年",
+    "Beautiful": "标准",
+    "RGB": "RGB",
+    "Hex": "Hex",
+    "HSL": "HSL"
+  },
   "screens": {
     "Home": {
       "title": "首页",
@@ -214,13 +226,7 @@
       "title": "样例-加密币"
     },
     "CryptoCurrencyHome": {
-      "title": "加密币-首页",
-      "BTC": "比特币",
-      "ETH": "以太坊",
-      "1d": "1天",
-      "1w": "1周",
-      "1m": "1个月",
-      "1y": "1年"
+      "title": "加密币-首页"
     },
     "CryptoCurrencyAlert": {
       "title": "加密币-闹钟",

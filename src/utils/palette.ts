@@ -1,6 +1,7 @@
 import {Palette} from "../types";
 
 export const palette: Palette = {
+    // ---start standard material color
     red50: '#ffebee',
     red100: '#ffcdd2',
     red200: '#ef9a9a',
@@ -278,10 +279,9 @@ export const palette: Palette = {
     black900: '#121212',
 
     black: '#000000',
-    blackContrast: '#f2f2f2',
     white: '#ffffff',
-    whiteContrast: '#080808',
-    transparent: 'transparent',
+    // ---end standard material color
+
 
     //---start--- react-native-paper
     green850: '#03dac4',
@@ -296,9 +296,14 @@ export const palette: Palette = {
     brown220: '#baa59b',
     brown620: '#6f5b51',
     black890: '#13100e',
-    //
+    //---end--- victory
+
 
     //---start--- others
+    blackContrast: '#f2f2f2',
+    whiteContrast: '#080808',
+    transparent: 'transparent',
+
     grey290: '#e1e8ee',
     grey350: '#d8d8d8',
     grey380: '#bcbbc1',
@@ -320,20 +325,104 @@ export const palette: Palette = {
     blueGrey320: '#86939e',
     //---end--- others
 
-    //---start--- gradient theme
-    blueIndigo50: '#DAD4EE', // text
-    blueIndigo100: '#B8B3CE', // text2
-    blueIndigo150: '#A7A2BE', //
-    blueIndigo300: '#545063', // inActive text
 
-    blueIndigo900: '#2C2A3D', // border
-    blueIndigoA100: '#2C283B', // input background secondary
-    blueIndigoA400: '#232033',// background
-    blueIndigoA700: '#1B1929', // background dark,button text
-    tealA500: '#37C7B8', // button from primary
-    lightBlue630: '#2894D1',// button to secondary
-    blueGrey870: '#242E3D', // label background
-    //---end--- gradient theme
+    //---start--- indigo theme
+    blueIndigo50: '#FDFCFD',   // text
+    blueIndigo100: '#A7A2BE',  // text2
+    blueIndigo150: '#5E5D72',  // text3,placeholder,commonFill
+
+    blueIndigo900: '#49465A',  // border divider
+
+    blueGrey870: '#2C3C4C',    // surface3
+    blueIndigo300: '#4B485D',  // surface2
+    blueIndigoA100: '#2B2741', // surface
+    blueIndigoA400: '#29253E', // background
+    blueIndigoA700: '#27233C', // card, buttonText
+    tealA500: '#33D0C3',       // button from, primary,lineStyleDataStroke
+    lightBlue630: '#31A5DD',   // button to, secondary
+    //---end--- indigo theme
+
+
+    //---start--- iOS theme
+    // xxxIOS  light default
+    // xxxIOS2 light accessible
+    // xxxIOS3 dark default
+    // xxxIOS4 dark accessible
+    redIOS: '#FF3C2F',
+    redIOS2: '#D70015',
+    redIOS3: '#FE463A',
+    redIOS4: '#FF6961',
+
+    orangeIOS: '#FF9500',
+    orangeIOS2: '#C93400',
+    orangeIOS3: '#FF9F0B',
+    orangeIOS4: '#FFB33F',
+
+    yellowIOS: '#FFCC01',
+    yellowIOS2: '#A05901',
+    yellowIOS3: '#FED708',
+    yellowIOS4: '#FED525',
+
+    greenIOS: '#35C759',
+    greenIOS2: '#248A3D',
+    greenIOS3: '#31D158',
+    greenIOS4: '#2FDB5B',
+
+    tealIOS: '#5AC9FA',
+    tealIOS2: '#0171A4',
+    tealIOS3: '#64D2FF',
+    tealIOS4: '#6FD8FF',
+
+    blueIOS: '#017AFF',
+    blueIOS2: '#0040DD',
+    blueIOS3: '#0A84FF',
+    blueIOS4: '#419CFF',
+
+    indigoIOS: '#5856D5',
+    indigoIOS2: '#3634A3',
+    indigoIOS3: '#5E5CE6',
+    indigoIOS4: '#7C7AFF',
+
+    purpleIOS: '#AF52DE',
+    purpleIOS2: '#8945AB',
+    purpleIOS3: '#BF5AF2',
+    purpleIOS4: '#DA8EFF',
+
+    pinkIOS: '#FF2C55',
+    pinkIOS2: '#D30E44',
+    pinkIOS3: '#FF375F',
+    pinkIOS4: '#FF6482',
+
+    greyIOS: '#8E8E93',
+    greyIOS2: '#6C6C70',
+    greyIOS3: '#98989D',
+    greyIOS4: '#AEAEB2',
+
+    grey2IOS: '#AEAEB2',
+    grey2IOS2: '#8E8E93',
+    grey2IOS3: '#636366',
+    grey2IOS4: '#7C7C80',
+
+    grey3IOS: '#C7C7CC',
+    grey3IOS2: '#AEAEB2',
+    grey3IOS3: '#48484A',
+    grey3IOS4: '#545456',
+
+    grey4IOS: '#D1D1D6',
+    grey4IOS2: '#BCBCC0',
+    grey4IOS3: '#3A3A3C',
+    grey4IOS4: '#444446',
+
+    grey5IOS: '#E5E5EA',
+    grey5IOS2: '#D8D8DC',
+    grey5IOS3: '#2C2C2E',
+    grey5IOS4: '#363638',
+
+    grey6IOS: '#F2F2F7',
+    grey6IOS2: '#EBEBF0',
+    grey6IOS3: '#1C1C1E',
+    grey6IOS4: '#242426',
+    //---end--- iOS theme
 }
 
 export const pl = palette

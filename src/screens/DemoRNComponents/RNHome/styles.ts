@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from "react-native";
+import {StyleSheet} from "react-native";
 import BunnyConstants from "../../../constants/constants";
 import {SizeLabor, ThemeLabor} from "../../../types/styles";
 
@@ -235,8 +235,13 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: 32,
         },
     })
-
+    const home = StyleSheet.create({
+        container: {
+            padding: ms.sp.m
+        },
+    })
     return {
+        home,
         activityIndicatorStyles,
         switchStyles,
         imageStyles,
@@ -251,7 +256,3 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         virtualizedListStyles,
     }
 }
-
-const window = Dimensions.get("window");
-
-

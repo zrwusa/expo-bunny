@@ -16,7 +16,9 @@ import {CopyableText} from "../../components/CopyableText";
 import {ColorValuesCard} from "../../components/ColorValuesCard";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
+import {Tab} from "../../components";
 
+export type UglyColorType = '' | 'RGB' | 'Hex' | 'HSL';
 
 export function ColorFinderScreen() {
     const {t} = useTranslation()
@@ -31,8 +33,20 @@ export function ColorFinderScreen() {
     const [similarColorsFromTheme, setSimilarColorsFromTheme] = useState<ColorDiffWithThemeColorsItem[]>([])
     const [similarColorsFromPalette, setSimilarColorsFromPalette] = useState<ColorDiffWithPaletteItem[]>([])
 
+    const [uglyType, setUglyType] = useState<UglyColorType>('RGB')
 
+    const formatUglyStringToRGB = (colorString: string) => {
+        if (colorString && colorString.substring(0, 3).toLowerCase() !== 'rgb') {
+            const escaped09 = escape(colorString).replaceAll('%09', ',');
+            const escaped20 = escaped09.replaceAll('%20', ',');
+            const truncated = escaped20.split(',').slice(0, 3).join(',')
+            return `rgb(${truncated})`
+        } else {
+            return colorString
+        }
+    }
     const getSimilarColor = () => {
+
         const inputColorText = colorFaultTolerance(colorInput.text)
         const checkColorResult = checkColor(inputColorText)
         if (!checkColorResult.isColor) {
@@ -107,7 +121,16 @@ export function ColorFinderScreen() {
     }
     const handleChangeTextFrom = (text: string) => {
         setInputText(text)
-        let _text = colorFaultTolerance(text)
+        let beautiful = '';
+        switch (uglyType) {
+            case "RGB":
+                beautiful = formatUglyStringToRGB(text)
+                break;
+            default:
+                beautiful = text
+                break;
+        }
+        let _text = colorFaultTolerance(beautiful)
         if (_text) {
             setColorInput({
                 text: _text,
@@ -135,7 +158,12 @@ export function ColorFinderScreen() {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Card title={st('colorInput')}>
+                <Card titleMode="OUT" title={st('colorInput')}>
+                    <Tab items={['Beautiful', 'RGB', 'Hex', 'HSL']}
+                         placeholder={uglyType}
+                         onChange={(item) => {
+                             setUglyType(item)
+                         }}/>
                     <TextInput style={styles.input} value={inputText}
                                placeholder={st('inputAColorString')}
                                onChangeText={handleChangeTextFrom}
@@ -143,11 +171,13 @@ export function ColorFinderScreen() {
                                autoCapitalize='none'
                     />
                     <ColorValuesCard item={colorInput}/>
-                    <ButtonTO style={styles.button} onPress={handleSimilarColor}>
-                        <InButtonText>{st('findSimilarColors')}</InButtonText>
-                    </ButtonTO>
+                    <Row size="l">
+                        <ButtonTO style={styles.button} onPress={handleSimilarColor}>
+                            <InButtonText>{st('findSimilarColors')}</InButtonText>
+                        </ButtonTO>
+                    </Row>
                 </Card>
-                <Card title={st('similarColorFromPalette')}>
+                <Card titleMode="OUT" title={st('similarColorFromPalette')}>
                     {
                         similarColorsFromPalette.map(similarColorItem => {
                             return <View key={similarColorItem.keyInPalette}>
@@ -167,24 +197,24 @@ export function ColorFinderScreen() {
                         })
                     }
                 </Card>
-                <Card title={st('similarColorsFromThemes')}>
+                <Card titleMode="OUT" title={st('similarColorsFromThemes')}>
                     {
                         similarColorsFromTheme.map(similarColorItem => {
                             return <View key={similarColorItem.themeName}>
-                                <View style={styles.row}>
+                                <Row size="m" style={styles.row}>
                                     <Text>Diff</Text>
                                     <Text>{similarColorItem.diff.toFixed(2)}</Text>
-                                </View>
-                                <View style={styles.row}>
+                                </Row>
+                                <Row size="m" style={styles.row}>
                                     <Text>Diff Tip</Text>
                                     <Text>{similarColorItem.diffDes}</Text>
-                                </View>
-                                <View style={styles.row}>
+                                </Row>
+                                <Row size="m" style={styles.row}>
                                     <Text>Theme</Text><Text>{similarColorItem.themeName}</Text>
-                                </View>
-                                <View style={styles.row}>
+                                </Row>
+                                <Row size="m" style={styles.row}>
                                     <Text>Key</Text><CopyableText>{similarColorItem.keyInThemeColors}</CopyableText>
-                                </View>
+                                </Row>
                                 <ColorValuesCard item={similarColorItem}/>
                             </View>
                         })

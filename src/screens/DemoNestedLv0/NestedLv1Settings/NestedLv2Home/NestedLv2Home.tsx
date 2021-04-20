@@ -8,6 +8,7 @@ import {shortenTFunctionKey} from "../../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../../containers";
 import {useSizeLabor} from "../../../../providers/size-labor";
 import {useThemeLabor} from "../../../../providers/theme-labor";
+import {getSharedStyles} from "../../../../helpers/shared-styles";
 
 type NestedLv2HomeRouteProp = RouteProp<DemoNestedLv2StackParam, 'NestedLv2Home'>;
 type NestedLv2HomeNavigationProp = StackNavigationProp<DemoNestedLv2StackParam, 'NestedLv2Settings'>;
@@ -23,14 +24,13 @@ function NestedLv2HomeScreen({route, navigation}: NestedLv2HomeProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (
-        <View style={containerStyles.Screen}>
-            <View style={containerStyles.Card}>
-                <ButtonTO onPress={() => navigation.navigate('NestedLv2Settings', {itemlv2: "001"})}>
-                    <InButtonText>{st(`goToNestedLv2Settings`)}</InButtonText>
-                </ButtonTO>
-            </View>
+        <View style={[containerStyles.Screen, sharedStyles.centralized]}>
+            <ButtonTO onPress={() => navigation.navigate('NestedLv2Settings', {itemlv2: "001"})}>
+                <InButtonText>{st(`goToNestedLv2Settings`)}</InButtonText>
+            </ButtonTO>
         </View>
     );
 }

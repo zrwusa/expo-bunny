@@ -149,7 +149,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const optionsAuth: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: false,
-        headerShown: false,
+        headerShown: true,
         headerLeft: () => null
     }
     const optionsIG: StackNavigationOptions = {
@@ -189,7 +189,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const optionsHealth: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: true,
-        headerShown: false,
+        headerShown: true,
     }
 
     const screenOptionsTabBarIcon: TabBarScreenOptions = ({route}) => {

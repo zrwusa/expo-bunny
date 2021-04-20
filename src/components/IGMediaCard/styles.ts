@@ -27,7 +27,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         //     width: wp(26),
         //     height: wp(26),
         //     borderRadius: wp(13),
-        //     borderColor: colors.btnText,
+        //     borderColor: colors.buttonText,
         //     borderWidth: wp(1)
         // },
         headerLeftUser: {fontSize: ms.fs.s, lineHeight: ms.fs.s, color: colors.text},

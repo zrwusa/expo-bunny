@@ -7,9 +7,11 @@ import {ThemeName} from "../../types";
 export function ThemePicker() {
     const themeLabor = useThemeLabor();
     const {changeTheme, currentThemeName} = themeLabor;
+    const {theme} = themeLabor;
+    const {colors} = theme;
 
     const themeLabels = Object.keys(EThemes).map((themeName) => {
-        return {label: themeName, value: themeName}
+        return {label: themeName, value: themeName, color: colors.text}
     })
 
     const handleValueChange = async (itemValue: ThemeName) => {
@@ -22,7 +24,7 @@ export function ThemePicker() {
 
     return <PickerSelect
         value={currentThemeName}
-        placeholder={{label: 'Select ', value: ''}}
+        placeholder={{label: 'Select ', value: '', color: colors.text}}
         onValueChange={handleValueChange}
         items={themeLabels}
     />

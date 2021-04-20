@@ -40,12 +40,11 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         modalViewTop: {},
         modalViewMiddle: {
-            backgroundColor: colors.background2,
+            backgroundColor: colors.surface,
             borderTopColor: colors.border
         },
         modalViewBottom: {
-            backgroundColor: colors.background,
-
+            backgroundColor: colors.surface,
         }
     })
 
@@ -91,7 +90,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
 
     const InputButtonText = StyleSheet.create({
         InputButtonText: {
-            color: colors.btnText,
+            color: colors.buttonText,
             fontFamily: fonts.regular.fontFamily,
             fontSize: ms.fs.m,
             textAlign: 'center',

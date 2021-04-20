@@ -11,4 +11,6 @@ export * from './NotSupport'
 export * from './RequestLoading'
 export * from './BLToast'
 export * from './Avatar'
+export * from './Tab'
+export * from './InlineJump'
 

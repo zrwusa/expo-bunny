@@ -6,11 +6,17 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
     return StyleSheet.create({
+        buttonCard: {
+            width: wp(326),
+        },
+        demoCard: {
+            width: wp(350),
+        },
         demoShadow: {
             width: wp(326),
             height: wp(140),
             borderRadius: ms.br.s,
-            backgroundColor: colors.background,
+            backgroundColor: colors.surface2,
             justifyContent: "center",
             alignItems: "center",
         },
