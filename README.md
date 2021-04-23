@@ -44,7 +44,11 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 <tbody>
 <tr><td>Expo</td><td>  </td></tr>
 <tr><td>Next.js Deploying</td><td>  </td></tr>
-<tr><td>Google Auth</td><td>  </td></tr>
+<tr><td>Google Email Auth</td><td>  </td></tr>
+<tr><td>Firebase OTP Auth</td><td>  </td></tr>
+<tr><td>Firebase Auth</td><td>  </td></tr>
+<tr><td>Firebase Google Auth</td><td>  </td></tr>
+<tr><td>Firebase Facebook Auth</td><td>  </td></tr>
 <tr><td>JWT Auth</td><td>  </td></tr>
 <tr><td>I18n</td><td>  </td></tr>
 <tr><td>RTL</td><td>  </td></tr>
@@ -53,6 +57,7 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 <tr><td>React Navigation (Stack,Tab,Drawer,Nested,Route Params)</td><td>  </td></tr>
 <tr><td>Redux Thunk</td><td>  </td></tr>
 <tr><td>Map</td><td>  </td></tr>
+<tr><td>Push Notification</td><td>  </td></tr>
 <tr><td>React Native Components All In One</td><td></td></tr>
 <tr><td>Mock RESTFul Server</td><td></td></tr>
 <tr><td>Https localhost Self Signed Certification</td><td></td></tr>

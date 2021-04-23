@@ -40,7 +40,7 @@ function ProfileScreen({route, navigation}: Props) {
             <View style={[containerStyles.Screen, sharedStyles.centralized]}>
                 <Avatar.Image size={wp(60)} source={{uri: avatar_url}}/>
                 <Text>{st(`profileScreenId`)}{route.params.id}</Text>
-                <Text>{st(`email`)}{user?.email}</Text>
+                {/*<Text>{st(`email`)}{user?.email}</Text>*/}
                 <IcoMoon name="profile1"/>
                 <ImageProgressive
                     sourcePH={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-placeholder.jpg`}}
