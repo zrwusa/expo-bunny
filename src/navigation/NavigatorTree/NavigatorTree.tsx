@@ -66,7 +66,7 @@ import {IGMediaScreen} from "../../screens/DemoIG/Media";
 import {PlaygroundScreen} from "../../screens/Playground";
 import {ColorFinderScreen} from "../../screens/ColorFinder";
 import {ThemePicker} from "../../components/ThemePicker";
-import {Auth1Screen} from "../../screens/Auth/Auth1";
+import {AuthScreen} from "../../screens/Auth/Auth";
 import {HealthHomeScreen} from "../../screens/DemoHealth/Home";
 import {HealthSettingsScreen} from "../../screens/DemoHealth/Settings";
 import {IconToolsScreen} from "../../screens/IconTools";
@@ -314,7 +314,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             }
         }}>
             <RootStack.Screen name="Home" component={HomeScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="Auth" component={Auth1Screen} options={optionsMergeWithTitle(optionsAuth)}/>
+            <RootStack.Screen name="Auth" component={AuthScreen} options={optionsMergeWithTitle(optionsAuth)}/>
             <RootStack.Screen name="Profile" component={ProfileScreen} options={optionsMergeWithTitle()} listeners={listenersNeedAuth}/>
             <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen} options={optionsMergeWithTitle()}/>

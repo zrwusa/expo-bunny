@@ -5,11 +5,17 @@ import BunnyConstants, {EBLMsg} from "../../constants/constants";
 import {AxiosResponse} from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Google from "expo-google-app-auth";
-import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, IOS_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO} from "@env";
+import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, FACEBOOK_APP_ID, IOS_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO} from "@env";
 import _ from "lodash";
 import {blError, blSuccess} from "../../helpers";
 import {EventRegister} from "react-native-event-listeners";
+import * as AppAuth from "expo-app-auth";
+import {firebase} from "../../firebase/firebase";
+import * as Facebook from "expo-facebook";
 
+// When configured correctly, URLSchemes should contain your REVERSED_CLIENT_ID
+const {URLSchemes} = AppAuth;
+console.log('---URLSchemes', URLSchemes)
 
 const config: AuthContextConfig = {
     signInAPIMethod: 'PUT',
@@ -39,8 +45,7 @@ const {
     signInAPIPath, registerAPIPath, accessTokenValuePath, refreshAPIMethod,
     signInAPIMethod, registerAPIMethod, refreshAPIPath, refreshTokenValuePath,
     userValuePath
-} =
-    config;
+} = config;
 
 
 const signInOrSignUp = async (res: any) => {
@@ -61,98 +66,245 @@ const signInOrSignUp = async (res: any) => {
     if (!(accessToken && refreshToken)) {
         await checkIsSignedInAndSyncToProvider()
         return blError(EBLMsg.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED)
-    } else {
-        await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
-        await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken)
-        await AsyncStorage.setItem(accessTokenExpPersistenceKey, accessTokenExp.toString())
-        await AsyncStorage.setItem(refreshTokenExpPersistenceKey, refreshTokenExp.toString())
     }
     if (!user) {
         await checkIsSignedInAndSyncToProvider()
         return blError(EBLMsg.NO_USER_INFO_RESPONDED)
-    } else {
-        await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
     }
-    const result = {accessToken, refreshToken, user, isSignedIn: true}
-    await checkIsSignedInAndSyncToProvider()
+
+    const result = {accessToken, accessTokenExp, refreshToken, refreshTokenExp, user}
+    await triggerLoginSuccess(result)
     return blSuccess(result)
 }
 
 const signIn = async (params: SignInParams) => {
     const res = await apiAuth.request<SignInParams, AxiosResponse<AuthRes>>({method: signInAPIMethod, url: signInAPIPath, data: params})
-    const inOrUpResult = await signInOrSignUp(res);
-    if (inOrUpResult.success) {
-        EventRegister.emit('signInSuccess', inOrUpResult.data)
-    }
-    return inOrUpResult;
+    return await signInOrSignUp(res);
+}
+
+const signUp = async (params: SignUpParams) => {
+    const res = await apiAuth.request({method: registerAPIMethod, url: registerAPIPath, data: params})
+    return await signInOrSignUp(res);
+}
+
+const triggerLoginFailed = async (result: any) => {
+    EventRegister.emit('loginFailed', result)
+    await checkIsSignedInAndSyncToProvider()
+}
+
+const triggerLoginSuccess = async (result: any) => {
+    await persistenceAuth(result)
+    EventRegister.emit('loginSuccess', result)
+    await checkIsSignedInAndSyncToProvider()
 }
 
 const signInDummy = async () => {
     const accessToken = 'access_token_dummy';
     const refreshToken = 'refresh_token_dummy';
     const user = {email: 'dummy@dummy.com', nickname: 'dummy nickname'};
-    await AsyncStorage.setItem(accessTokenPersistenceKey, 'access_token_dummy')
-    await AsyncStorage.setItem(refreshTokenPersistenceKey, 'refresh_token_dummy')
-    await AsyncStorage.setItem(accessTokenExpPersistenceKey, '3043008000000')
-    await AsyncStorage.setItem(refreshTokenExpPersistenceKey, '3043008000000')
-    await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
+    const accessTokenExp = '3043008000000';
+    const refreshTokenExp = '3043008000000';
     const result = {
         accessToken,
+        accessTokenExp,
         refreshToken,
-        user,
-        isSignedIn: true
+        refreshTokenExp,
+        user
     }
-    EventRegister.emit('signInDummySuccess', result)
-    await checkIsSignedInAndSyncToProvider()
+    await triggerLoginSuccess(result)
     return blSuccess(result)
-};
+}
 
-const signInGoogle = async () => {
-    const loginResult = await Google.logInAsync({
+const firebaseResponseDeal = (response: any) => {
+    return JSON.parse(JSON.stringify(response))
+}
+
+const firebaseEmailSignIn = async (email: string, password: string) => {
+    const response = await firebase.auth().signInWithEmailAndPassword(email, password)
+    if (!response || !response.user) {
+        const failedResult = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NO_RESPONSE_OR_USER)
+        await triggerLoginFailed(failedResult)
+        return failedResult
+    }
+    const stringifyRes = firebaseResponseDeal(response)
+
+    const uid = response.user.uid
+    const usersRef = firebase.firestore().collection('users')
+    const firestoreDocument = await usersRef.doc(uid).get()
+    if (!firestoreDocument.exists) {
+        const failedResult = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NOT_EXIST_USER)
+        await triggerLoginFailed(failedResult)
+        return failedResult
+    }
+    const user = firestoreDocument.data();
+    const result = {
+        accessToken: stringifyRes.user.stsTokenManager.accessToken,
+        accessTokenExp: stringifyRes.user.stsTokenManager.expirationTime,
+        refreshToken: stringifyRes.user.stsTokenManager.refreshToken,
+        user
+    }
+    await triggerLoginSuccess(result)
+    return blSuccess(result)
+}
+
+const firebaseEmailSignUp = async (email: string, password: string) => {
+    const response = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+    if (!response || !response.user) {
+        const failedResult = blError(EBLMsg.FIREBASE_EMAIL_SIGN_UP_NO_RESPONSE_OR_USER)
+        await triggerLoginFailed(failedResult)
+        return failedResult
+    }
+    const stringifyRes = firebaseResponseDeal(response)
+    const uid = stringifyRes.user.uid
+    const data = {
+        id: uid,
+        email: email,
+    };
+    const usersRef = firebase.firestore().collection('users')
+    await usersRef
+        .doc(uid)
+        .set(data);
+    const result = {
+        accessToken: stringifyRes.user.stsTokenManager.accessToken,
+        accessTokenExp: stringifyRes.user.stsTokenManager.expirationTime,
+        refreshToken: stringifyRes.user.stsTokenManager.refreshToken,
+        user: stringifyRes.user
+    }
+    await triggerLoginSuccess(result)
+    return blSuccess(result)
+
+}
+
+export type PersistenceLoginParam = Partial<{
+    accessToken: string,
+    accessTokenExp: string,
+    refreshToken: string,
+    refreshTokenExp: string
+    user: any,
+}>
+
+const persistenceAuth = async ({accessToken, refreshToken, user, accessTokenExp, refreshTokenExp}: PersistenceLoginParam) => {
+    accessToken && await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
+    accessTokenExp && await AsyncStorage.setItem(accessTokenExpPersistenceKey, accessTokenExp)
+    refreshTokenExp && await AsyncStorage.setItem(refreshTokenExpPersistenceKey, refreshTokenExp)
+    refreshToken && await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken)
+    user && await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
+}
+
+const signInGoogle = async (isFirebase: boolean) => {
+    const googleResponse = await Google.logInAsync({
         iosClientId: `${IOS_CLIENT_ID_FOR_EXPO}`,
         androidClientId: `${ANDROID_CLIENT_ID_FOR_EXPO}`,
         iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
         androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
     });
-    if (!loginResult) {
-        return blError(EBLMsg.NO_GOOGLE_LOGIN_RESULT)
+    if (!googleResponse) {
+        const failedResult = blError(EBLMsg.NO_GOOGLE_LOGIN_RESULT)
+        await triggerLoginFailed(failedResult)
+        return failedResult
     }
-
-    switch (loginResult.type) {
+    let failedResult;
+    switch (googleResponse.type) {
         case "cancel":
-            await checkIsSignedInAndSyncToProvider()
-            return blError(EBLMsg.GOOGLE_LOGIN_CANCELED)
+            failedResult = blError(EBLMsg.GOOGLE_LOGIN_CANCELED)
+            await triggerLoginFailed(failedResult)
+            return failedResult
         case "success":
-            const {accessToken, refreshToken, user} = loginResult;
+            const {idToken, accessToken, refreshToken, user} = googleResponse;
             if (!accessToken || !refreshToken) {
-                await checkIsSignedInAndSyncToProvider()
-                return blError(EBLMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
+                failedResult = blError(EBLMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
+                await triggerLoginFailed(failedResult)
+                return failedResult
             }
-            await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
-            await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken)
-            await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
-            const result = {
-                accessToken,
-                refreshToken,
-                user,
-                isSignedIn: true
+
+            if (isFirebase) {
+                await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+                const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
+                const firebaseResponse = await firebase.auth().signInWithCredential(credential);
+                const firebaseResponseDealt = firebaseResponseDeal(firebaseResponse)
+                const result = {
+                    accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
+                    refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
+                    accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
+                    user: firebaseResponseDealt.user,
+                }
+                await triggerLoginSuccess(result)
+                return blSuccess(result)
+            } else {
+                const result = {
+                    accessToken,
+                    refreshToken,
+                    user,
+                }
+                await triggerLoginSuccess(result)
+                return blSuccess(result)
             }
-            EventRegister.emit('signInGoogleSuccess', result)
-            await checkIsSignedInAndSyncToProvider()
-            return blSuccess(result)
         default:
-            await checkIsSignedInAndSyncToProvider()
-            return blError(EBLMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
+            failedResult = blError(EBLMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
+            await triggerLoginFailed(failedResult)
+            return failedResult
     }
 };
 
-const signUp = async (params: SignUpParams) => {
-    const res = await apiAuth.request({method: registerAPIMethod, url: registerAPIPath, data: params})
-    const inOrUpResult = await signInOrSignUp(res);
-    if (inOrUpResult.success) {
-        EventRegister.emit('signUpSuccess', inOrUpResult.data)
+
+const signInFacebook = async (isFirebase: boolean) => {
+    let failedResult;
+
+    await Facebook.initializeAsync({
+        appId: FACEBOOK_APP_ID,
+    });
+    const facebookResponse = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ['public_profile', 'email'],
+    });
+    const {type} = facebookResponse;
+    switch (type) {
+        case "cancel":
+            failedResult = blError(EBLMsg.FACEBOOK_LOGIN_CANCELED)
+            await triggerLoginFailed(failedResult)
+            return failedResult
+        case "success":
+            // @ts-ignore
+            const {token} = facebookResponse;
+            if (isFirebase) {
+                const credential = firebase.auth.FacebookAuthProvider.credential(token);
+                const firebaseResponse = await firebase.auth().signInWithCredential(credential)
+                const firebaseResponseDealt = firebaseResponseDeal(firebaseResponse)
+                console.log('facebookResponse,firebaseResponse,firebaseResponseDealt', facebookResponse, firebaseResponse, firebaseResponseDealt)
+
+                const result = {
+                    accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
+                    refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
+                    accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
+                    user: firebaseResponseDealt.user,
+                }
+                await triggerLoginSuccess(result)
+                return blSuccess(result)
+            } else {
+                // todo accessToken refreshToken not correct
+                // Get the user's name using Facebook's Graph API
+                const facebookGetMeResponse = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                const user = await facebookGetMeResponse.json()
+
+                const result = {
+                    accessToken: token,
+                    user,
+                }
+                await triggerLoginSuccess(result)
+                return blSuccess(result)
+            }
+
+        default :
+            failedResult = blError(EBLMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID)
+            await triggerLoginFailed(failedResult)
+            return failedResult
     }
-    return inOrUpResult;
+};
+
+const passwordReset = async (email: string) => {
+    await firebase.auth().sendPasswordResetEmail(email)
+    return blSuccess(true)
 }
 
 const signOut = async (triggerType?: TriggerType) => {
@@ -188,8 +340,7 @@ const refreshAuth = async (): Promise<BLResult> => {
         await checkIsSignedInAndSyncToProvider()
         return blError(EBLMsg.NO_ACCESS_TOKEN_RESPONDED)
     }
-    await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
-    await AsyncStorage.setItem(accessTokenExpPersistenceKey, accessTokenExp)
+    await persistenceAuth({accessToken, accessTokenExp})
     EventRegister.emit('refreshAuthSuccess', accessToken)
     await checkIsSignedInAndSyncToProvider()
     return blSuccess(accessToken)
@@ -202,8 +353,6 @@ const getPersistenceAuthInfo = async () => {
     const accessTokenExp = await AsyncStorage.getItem(accessTokenExpPersistenceKey)
     const refreshTokenExp = await AsyncStorage.getItem(refreshTokenExpPersistenceKey)
     return {accessToken, accessTokenExp, refreshToken, refreshTokenExp, user: user ? JSON.parse(user) as User : null};
-    // EventRegister.emit('getPersistenceAuthInfo', persistenceAuthInfo)
-    // return persistenceAuthInfo
 }
 
 const authTrigger = (triggerType: TriggerType) => {
@@ -234,10 +383,45 @@ const checkIsSignedInAndSyncToProvider = async () => {
     return isSignedIn;
 }
 
+const sendVerificationCode = async (phoneInfoOptions: firebase.auth.PhoneInfoOptions | string,
+                                    applicationVerifier: firebase.auth.ApplicationVerifier) => {
+    const phoneProvider = new firebase.auth.PhoneAuthProvider();
+    const verificationId = await phoneProvider.verifyPhoneNumber(
+        phoneInfoOptions,
+        // @ts-ignore
+        applicationVerifier
+    );
+    return blSuccess({verificationId})
+}
+
+const confirmVerificationCode = async (verificationId: string, verificationCode: string) => {
+    const credential = firebase.auth.PhoneAuthProvider.credential(
+        verificationId,
+        verificationCode
+    );
+    const firebasePhoneResponse = await firebase.auth().signInWithCredential(credential)
+    const firebaseResponseDealt = firebaseResponseDeal(firebasePhoneResponse)
+
+    const result = {
+        accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
+        refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
+        accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
+        user: firebaseResponseDealt.user,
+    }
+    await triggerLoginSuccess(result)
+    return blSuccess(result)
+}
+
 export const authLaborContext: AuthLaborContextType = {
     authFunctions: {
         signIn,
         signInGoogle,
+        signInFacebook,
+        sendVerificationCode,
+        confirmVerificationCode,
+        firebaseEmailSignIn,
+        firebaseEmailSignUp,
+        passwordReset,
         signInDummy,
         signOut,
         signUp,

@@ -15,7 +15,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             alignItems: 'center',
         },
         content: {
-            height: wp(440),
+            height: wp(600),
             marginHorizontal: 20,
             borderRadius: wp(10),
             ...shadowAround
@@ -31,6 +31,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             top: wp(18),
             width: wp(100),
             ...shadowAround
-        }
+        },
+        container: {
+            paddingHorizontal: wp(20),
+        },
     });
 }

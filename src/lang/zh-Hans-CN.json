@@ -22,7 +22,9 @@
     "Beautiful": "标准",
     "RGB": "RGB",
     "Hex": "Hex",
-    "HSL": "HSL"
+    "HSL": "HSL",
+    "email": "邮箱",
+    "phone": "手机"
   },
   "screens": {
     "Home": {
@@ -143,10 +145,18 @@
       "signUp": "注册",
       "signInDummy": "假登录",
       "signInGoogle": "登录 Google",
+      "signInFacebook": "登录 Facebook",
       "goToSignUp": "去注册",
       "goToSignIn": "去登录",
       "username": "用户名",
-      "password": "密码"
+      "password": "密码",
+      "enterPhoneNumber": "输入手机号",
+      "enterVerificationCode": "输入验证码",
+      "resetPassword": "重置密码",
+      "send": "发送",
+      "resend": "重发",
+      "verificationCode": "验证码",
+      "confirmVerificationCode": "验证&登录"
     },
     "DemoTab": {
       "title": "样例-选项卡"

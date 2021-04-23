@@ -4,6 +4,7 @@ import {GoogleUser} from "expo-google-app-auth";
 import {SignInParams, SignUpParams} from "./payloads";
 import {BLResult} from "./bl";
 import {Method} from "axios";
+import {firebase} from "../firebase/firebase";
 
 export type UserRes = {
     email: string,
@@ -18,8 +19,11 @@ export type AuthRes = {
 
 export type TriggerType = 'SCREEN' | 'API' | 'MANUAL' | 'AUTO' | 'OTHERS' | undefined
 export type TriggerReference = string | undefined
-
-export type User = (UserRes | null) | GoogleUser
+export type FacebookUser = {
+    id: string,
+    name: string
+}
+export type User = (UserRes | null) | GoogleUser | FacebookUser
 export type AccessToken = string | null;
 export type RefreshToken = string | null;
 export type TokenExp = string | null;
@@ -44,7 +48,14 @@ export type PersistenceAuthInfo = {
 export type AuthLaborContextTypePartial = Partial<AuthLaborContextType>
 export type AuthFunctions = {
     signIn: (params: SignInParams) => Promise<BLResult>,
-    signInGoogle: () => Promise<BLResult>,
+    signInGoogle: (isFirebase: boolean) => Promise<BLResult>,
+    signInFacebook: (isFirebase: boolean) => Promise<BLResult>,
+    sendVerificationCode: (phoneInfoOptions: firebase.auth.PhoneInfoOptions | string,
+                           applicationVerifier: firebase.auth.ApplicationVerifier) => Promise<BLResult>,
+    confirmVerificationCode: (verificationId: string, verificationCode: string) => Promise<BLResult>,
+    firebaseEmailSignIn: (email: string, password: string) => Promise<BLResult>,
+    firebaseEmailSignUp: (email: string, password: string) => Promise<BLResult>,
+    passwordReset: (email: string) => Promise<BLResult>,
     signInDummy: () => Promise<BLResult>,
     signOut: (triggerType?: TriggerType) => Promise<BLResult>,
     signUp: (params: SignUpParams) => Promise<BLResult>,

@@ -11,11 +11,12 @@ import {getStyles} from "./styles";
 
 export interface TabProps<ItemT> {
     items: ItemT[],
-    placeholder: ItemT,
+    value: ItemT,
+    placeholder?: ItemT,
     onChange: (value: ItemT) => void
 }
 
-export const Tab = ({items, placeholder, onChange}: TabProps<any>) => {
+export const Tab = ({items, placeholder, value, onChange}: TabProps<any>) => {
     const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'dictionary');
     const sizeLabor = useSizeLabor();
@@ -26,8 +27,8 @@ export const Tab = ({items, placeholder, onChange}: TabProps<any>) => {
     return <Row style={styles.tabs}>
         {
             items.map(item => {
-                const activeIndicatorStyle = item === placeholder ? styles.tabIndicatorActive : styles.tabIndicator;
-                const activeTextStyle = item === placeholder ? styles.tabTextActive : styles.tabText;
+                const activeIndicatorStyle = item === value ? styles.tabIndicatorActive : styles.tabIndicator;
+                const activeTextStyle = item === value ? styles.tabTextActive : styles.tabText;
                 return <View style={styles.tab}
                              key={item}>
                     <Text style={[styles.tabText, activeTextStyle]} onPress={() => onChange(item)}>{st(item)}</Text>

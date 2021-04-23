@@ -64,7 +64,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const TextButton = StyleSheet.create({
         TextButton: {
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center',
             fontSize: ms.fs.m,
             paddingVertical: ms.sp.m,
@@ -77,6 +77,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: ms.fs.l,
             borderRadius: borderRadius.button,
             width: '100%'
+        },
+        disabled: {
+            backgroundColor: colors.disabled
         },
         linearGradient: {
             alignItems: 'center',
@@ -131,11 +134,13 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             flexDirection: 'row',
             justifyContent: 'center'
         },
+        editable: {},
+        unEditable: {},
         container: {
             flexDirection: 'row',
             alignItems: 'center',
             borderRadius: borderRadius.input,
-            borderWidth: wp(2),
+            borderWidth: wp(1),
             borderColor: colors.border,
             padding: wp(6)
         },

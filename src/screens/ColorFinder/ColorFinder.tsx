@@ -160,7 +160,7 @@ export function ColorFinderScreen() {
             <View style={styles.container}>
                 <Card titleMode="OUT" title={st('colorInput')}>
                     <Tab items={['Beautiful', 'RGB', 'Hex', 'HSL']}
-                         placeholder={uglyType}
+                         value={uglyType}
                          onChange={(item) => {
                              setUglyType(item)
                          }}/>

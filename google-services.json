@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "885187778268",
+    "firebase_url": "https://expo-react-bunny-default-rtdb.firebaseio.com",
+    "project_id": "expo-react-bunny",
+    "storage_bucket": "expo-react-bunny.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885187778268:android:f91a0bf314835f5d4bc619",
+        "android_client_info": {
+          "package_name": "com.zrwusa.exporeactbunny"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885187778268-a6661le7d4k8f4d4tlhhta5pivubrfq5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zrwusa.exporeactbunny",
+            "certificate_hash": "8652693bd9f7ce1c372ae2a200dfc815e95eb456"
+          }
+        },
+        {
+          "client_id": "885187778268-cr7lkl31ch957il6hsbn39a68tbt5a8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxSpuMGHJp8Nt4qR0KjwWbYrFsb0HEtIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885187778268-cr7lkl31ch957il6hsbn39a68tbt5a8o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "885187778268-gpa16i4lra9rjllqeblif6rq33dut3av.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.zrwusa.expo-react-bunny"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

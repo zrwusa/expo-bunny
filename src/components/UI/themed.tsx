@@ -58,18 +58,19 @@ export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
     return (<ButtonRN color={color || colors.btnBackground} {...rest} />);
 }
 
-export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, children, ...rest}) => {
+export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, children, disabled, ...rest}) => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {LinearGradientButton} = getStyles(sizeLabor, themeLabor)
 
-    const mergedStyle = [LinearGradientButton.container, style];
+    const mergedStyle = [disabled && LinearGradientButton.disabled, LinearGradientButton.container, style];
     const {theme} = themeLabor;
     const {colors} = theme;
-    return <TouchableOpacity style={mergedStyle} {...rest}>
+    const finalColors = disabled ? [colors.disabled, colors.disabled] : [colors.btnBackground, colors.btnBackground2]
+    return <TouchableOpacity style={mergedStyle} disabled={disabled} {...rest}>
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 0}}
                         style={LinearGradientButton.linearGradient}
-                        colors={[colors.btnBackground, colors.btnBackground2]}>
+                        colors={finalColors}>
             {children}
         </LinearGradient>
     </TouchableOpacity>
@@ -161,7 +162,8 @@ export interface TextInputIconProps extends TextInputProps {
     renderIcon?: () => (React.ReactElement<MaterialCommunityIconsProps>),
 }
 
-export const TextInputIcon: React.FC<TextInputIconProps> = ({style, renderIcon, ...rest}) => {
+// ref?: React.RefObject<TextInputRN>;
+export const TextInputIcon = React.forwardRef<TextInputRN, TextInputIconProps>(({style, renderIcon, editable, ...rest}, ref) => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
@@ -169,15 +171,18 @@ export const TextInputIcon: React.FC<TextInputIconProps> = ({style, renderIcon, 
     const {TextInputIcon} = getStyles(sizeLabor, themeLabor)
     // todo Typescript check for outline properties bug
     const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
-    const mergedStyle = [TextInputIcon.input, style]
+    // @ts-ignore
+    const mergedStyle: StyleProp<ViewStyle> = [TextInputIcon.input, webOutline, style]
     return (<View
         style={TextInputIcon.container}>
         <View style={TextInputIcon.iconContainer}>{renderIcon && renderIcon()}</View>
         <TextInputRN
+            ref={ref}
+            editable={editable}
             placeholderTextColor={colors.placeholder}
             style={mergedStyle} {...rest} />
     </View>);
-}
+})
 export type SwitchPaperProps = React.ComponentPropsWithRef<typeof SwitchRN> & {
     disabled?: boolean;
     value?: boolean;

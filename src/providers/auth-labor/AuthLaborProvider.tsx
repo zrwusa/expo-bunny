@@ -45,34 +45,7 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     }, [])
 
     useEffect(() => {
-        const signInSuccessID = EventRegister.on('signInSuccess',
-            (data) => {
-                const {accessToken, refreshToken, user} = data;
-                setAccessToken(accessToken)
-                setRefreshToken(refreshToken)
-                setUser(user)
-                setIsSignedIn(true)
-            })
-
-        const signUpSuccessID = EventRegister.on('signUpSuccess',
-            (data) => {
-                const {accessToken, refreshToken, user} = data;
-                setAccessToken(accessToken)
-                setRefreshToken(refreshToken)
-                setUser(user)
-                setIsSignedIn(true)
-            })
-
-        const signInDummySuccessID = EventRegister.on('signInDummySuccess',
-            (data) => {
-                const {accessToken, refreshToken, user} = data;
-                setAccessToken(accessToken)
-                setRefreshToken(refreshToken)
-                setUser(user)
-                setIsSignedIn(true)
-            })
-
-        const signInGoogleSuccessID = EventRegister.on('signInGoogleSuccess',
+        const loginSuccessID = EventRegister.on('loginSuccess',
             (data) => {
                 const {accessToken, refreshToken, user} = data;
                 setAccessToken(accessToken)
@@ -85,7 +58,7 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
             () => {
                 setAccessToken('')
                 setRefreshToken('')
-                setUser({})
+                setUser(null)
                 setIsSignedIn(false)
             })
 
@@ -106,19 +79,9 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
             })
 
         return () => {
-            if (typeof signInSuccessID === 'string') {
-                EventRegister.rm(signInSuccessID)
+            if (typeof loginSuccessID === 'string') {
+                EventRegister.rm(loginSuccessID)
             }
-            if (typeof signUpSuccessID === 'string') {
-                EventRegister.rm(signUpSuccessID)
-            }
-            if (typeof signInDummySuccessID === 'string') {
-                EventRegister.rm(signInDummySuccessID)
-            }
-            if (typeof signInGoogleSuccessID === 'string') {
-                EventRegister.rm(signInGoogleSuccessID)
-            }
-
             if (typeof signOutSuccessID === 'string') {
                 EventRegister.rm(signOutSuccessID)
             }

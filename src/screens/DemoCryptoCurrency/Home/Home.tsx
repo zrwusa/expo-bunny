@@ -108,13 +108,13 @@ function CryptoCurrencyHomeScreen() {
             <View style={[Screen, Box]}>
                 <Text>{currentPrice}</Text>
                 <Tab items={types}
-                     placeholder={type}
+                     value={type}
                      onChange={async (item) => {
                          setType(item)
                          await getHistoricalPrices(item, dateRange);
                      }}/>
                 <Tab items={dateRanges}
-                     placeholder={dateRange}
+                     value={dateRange}
                      onChange={async (item) => {
                          setDateRange(item)
                          await getHistoricalPrices(type, item);

@@ -22,7 +22,9 @@
     "Beautiful": "Beautiful",
     "RGB": "RGB",
     "Hex": "Hex",
-    "HSL": "HSL"
+    "HSL": "HSL",
+    "email": "Email",
+    "phone": "Phone"
   },
   "screens": {
     "Home": {
@@ -143,10 +145,18 @@
       "signUp": "Sign Up",
       "signInDummy": "Dummy",
       "signInGoogle": "Google",
+      "signInFacebook": "Facebook",
       "goToSignUp": "Go to sign up",
       "goToSignIn": "Go to sign in",
       "username": "username",
-      "password": "password"
+      "password": "password",
+      "enterPhoneNumber": "Enter Phone Number",
+      "enterVerificationCode": "Enter Verification Code",
+      "resetPassword": "Reset Password",
+      "send": "Send",
+      "resend": "Resend",
+      "verificationCode": "Verification Code",
+      "confirmVerificationCode": "Confirm Verification Code"
     },
     "DemoTab": {
       "title": "DemoTab"

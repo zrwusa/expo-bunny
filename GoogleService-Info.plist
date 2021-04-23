@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>885187778268-gpa16i4lra9rjllqeblif6rq33dut3av.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.885187778268-gpa16i4lra9rjllqeblif6rq33dut3av</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>885187778268-a6661le7d4k8f4d4tlhhta5pivubrfq5.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDnmFfyRp0TtWlrWfDfLN-H42ZKOQzdwnQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>885187778268</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.zrwusa.expo-react-bunny</string>
+	<key>PROJECT_ID</key>
+	<string>expo-react-bunny</string>
+	<key>STORAGE_BUCKET</key>
+	<string>expo-react-bunny.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:885187778268:ios:a1272dd7bd356d9a4bc619</string>
+	<key>DATABASE_URL</key>
+	<string>https://expo-react-bunny-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

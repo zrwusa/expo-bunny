@@ -10,6 +10,7 @@ export function blStateReducer(prevState: BLResultState = initialState, {type, p
     switch (type) {
         case EBL.COLLECT_BL_RESULT:
             const collectBLResultsPayload = payload as BLResult
+            console.log('---COLLECT_BL_RESULT', collectBLResultsPayload)
             prevState.blResults.push(collectBLResultsPayload);
             return {
                 ...prevState,

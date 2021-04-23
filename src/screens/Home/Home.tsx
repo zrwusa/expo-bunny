@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useEffect} from "react";
 import {ScrollView, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -14,6 +15,7 @@ import {sysError} from "../../store/actions";
 import {Divider} from "../../components/Divider";
 import {getStyles} from "./styles";
 import {InlineJump} from "../../components/InlineJump";
+import {firebase} from "../../firebase";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -32,7 +34,20 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
-    const {authFunctions} = useAuthLabor()
+    const {authFunctions} = useAuthLabor();
+    useEffect(() => {
+        async function storeHighScore(userId: string, score: number) {
+            await firebase
+                .database()
+                .ref('users/' + userId)
+                .set({
+                    highscore: score,
+                });
+        }
+
+        storeHighScore('001', 100)
+            .then()
+    })
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, styles.container]}>

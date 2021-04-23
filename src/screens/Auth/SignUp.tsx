@@ -1,4 +1,4 @@
-import {IcoMoon, InButtonText, LinearGradientButton, Text, TextButton, TextInputIcon, View} from "../../components/UI";
+import {InButtonText, LinearGradientButton, TextInputIcon, View} from "../../components/UI";
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
@@ -6,15 +6,15 @@ import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {Col, getContainerStyles, InputCard, Row} from "../../containers";
+import {getContainerStyles, InputCard, Row} from "../../containers";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {RouteProp} from "@react-navigation/native";
 import {AuthTopStackParam, RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {LinearGradientIcon} from "../../components/LinearGradientIcon";
-import {Keyboard, Platform} from "react-native";
-import {sysError} from "../../store/actions";
-import {Divider} from "../../components/Divider";
+import {Keyboard} from "react-native";
+import {collectBLResult, sysError} from "../../store/actions";
+import {LoginVector} from "./LoginVector";
 
 type SignUpRouteProp = RouteProp<AuthTopStackParam, 'SignUp'>;
 type SignUpNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -54,6 +54,35 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
             navigation.navigate('Auth', {screen: 'SignIn'})
         }
     }
+
+    const firebaseEmailSignUp = async () => {
+        Keyboard.dismiss()
+        try {
+            const result = await authFunctions.firebaseEmailSignUp(username, password)
+            if (result.success) {
+                navToReference()
+            } else {
+                dispatch(collectBLResult(result))
+            }
+        } catch (e) {
+            dispatch(sysError(e))
+        }
+    }
+
+    const bunnySignUp = async () => {
+        Keyboard.dismiss()
+        try {
+            const result = await authFunctions.signUp({email: username, password: password})
+            if (result.success) {
+                navToReference()
+            } else {
+                dispatch(collectBLResult(result))
+            }
+        } catch (e) {
+            dispatch(sysError(e))
+        }
+    }
+
     return <View style={{flex: 1, zIndex: -1}}>
         <View style={{paddingHorizontal: wp(20)}}>
             <InputCard title={st(`username`)}>
@@ -64,7 +93,7 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
                                    setUsername(value)
                                }}
                                renderIcon={() => {
-                                   return <LinearGradientIcon name="profile-male" size={wp(20)}/>
+                                   return <LinearGradientIcon name="mail" size={wp(20)}/>
                                }}/>
             </InputCard>
             <InputCard title={st(`password`)}>
@@ -81,63 +110,9 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
             </InputCard>
             <>
                 <Row style={{marginTop: ms.sp.l}}>
-                    <LinearGradientButton onPress={async () => {
-                        Keyboard.dismiss()
-                        try {
-                            await authFunctions.signUp({email: username, password: password})
-                            navToReference()
-                        } catch (e) {
-                            dispatch(sysError(e))
-                        }
-                    }}><InButtonText>{st(`signUp`)}</InButtonText></LinearGradientButton>
+                    <LinearGradientButton onPress={firebaseEmailSignUp}><InButtonText>{st(`signUp`)}</InButtonText></LinearGradientButton>
                 </Row>
-                <Row style={{marginTop: ms.sp.l}}>
-                    <Col>
-                        <Divider/>
-                    </Col>
-                    <Col style={{alignItems: 'center'}}>
-                        <Text>Or</Text>
-                    </Col>
-                    <Col>
-                        <Divider/>
-                    </Col>
-                </Row>
-                <Row style={{marginTop: ms.sp.m, marginBottom: ms.sp.xl}}>
-                    <Col size={6}>
-                        <TextButton style={{justifyContent: 'center'}} onPress={async () => {
-                            Keyboard.dismiss()
-                            try {
-                                await authFunctions.signInDummy()
-                                navToReference()
-                            } catch (e) {
-                                dispatch(sysError(e))
-                            }
-                        }}>
-                            <IcoMoon name="drink" size={24} style={{marginRight: wp(5)}}/>
-                            <Text>{st(`signInDummy`)}</Text></TextButton>
-                    </Col>
-                    {
-                        Platform.OS !== 'web'
-                            ? <>
-                                <Col size={1}/>
-                                <Col size={6}>
-                                    <TextButton style={{justifyContent: 'center'}} onPress={async () => {
-                                        Keyboard.dismiss()
-                                        try {
-                                            const {success} = await authFunctions.signInGoogle()
-                                            if (success) navToReference()
-                                        } catch (e) {
-                                            dispatch(sysError(e))
-                                        }
-                                    }}>
-                                        <IcoMoon name="google" style={{marginRight: wp(5)}}/>
-                                        <Text>{st(`signInGoogle`)}</Text>
-                                    </TextButton>
-                                </Col>
-                            </>
-                            : <></>
-                    }
-                </Row>
+                <LoginVector route={route} navigation={navigation}/>
             </>
         </View>
 

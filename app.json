@@ -22,12 +22,16 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.zrwusa.expo-react-bunny",
       "config": {
-        "googleMapsApiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4"
+        "googleMapsApiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4",
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.885187778268-gpa16i4lra9rjllqeblif6rq33dut3av"
+        }
       },
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true
       },
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
@@ -41,7 +45,8 @@
         }
       },
       "userInterfaceStyle": "automatic",
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "googleServicesFile": "./google-services.json"
     },
     "locales": {
       "en": "./src/lang/en.json",

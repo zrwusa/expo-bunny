@@ -148,7 +148,12 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             bottom: 0,
             left: 0,
         },
-
+        error: {
+            color: colors.error,
+        },
+        success: {
+            color: colors.success
+        },
 
         section: {},
         header: {},
