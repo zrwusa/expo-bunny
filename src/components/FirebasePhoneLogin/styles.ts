@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
-import {SizeLabor, ThemeLabor} from "../../../types";
-import {getSharedStyles} from "../../../utils";
+import {SizeLabor, ThemeLabor} from "../../types";
+import {getSharedStyles} from "../../utils";
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
@@ -14,6 +14,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         contentPhone: {
             marginTop: wp(10),
+            marginBottom: ms.sp.m
         },
         recaptchaVerifierModal: {
             justifyContent: 'center'

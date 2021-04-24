@@ -37,7 +37,7 @@ export const getThemeWareHouse = () => {
             input: {
                 light: wp(4),
                 dark: wp(4),
-                indigo: wp(100)
+                indigo: wp(20)
             },
             surface: {
                 light: wp(10),

@@ -14,11 +14,12 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             ...absoluteBottomLeft,
             backgroundColor: colors.surface,
             zIndex: ms.zi.xxl,
-            width: wp(375),
+            width: '100%',
+            // width: wp(375),
             padding: ms.sp.s
         },
         errorText: {
-            width: wp(375),
+            width: '100%',
             height: wp(100),
         },
         buttonBox: {

@@ -7,8 +7,8 @@
     "I18nProviderLoading": "I18n Provider loading",
     "AuthLaborProviderLoading": "AuthLabor Provider loading",
     "ThemeProviderLoading": "Theme Provider loading",
-    "apiNeedSignIn": "Need to sign in",
-    "signInSuccess": "Sign in success",
+    "apiNeedLogin": "Need to sign in",
+    "loginSuccess": "Sign in success",
     "signOutSuccess": "Sign out success",
     "canceledRequest": "Canceled request"
   },
@@ -25,6 +25,12 @@
     "HSL": "HSL",
     "email": "Email",
     "phone": "Phone"
+  },
+  "placeholders": {
+    "email": "abc@gmail.com",
+    "password": "password",
+    "phone": "+1 012 245 6789",
+    "otp": "123456"
   },
   "screens": {
     "Home": {
@@ -47,6 +53,7 @@
       "FCReduxHook": "FC Redux Hook",
       "thunkCC": "Thunk CC",
       "saga": "Redux Saga",
+      "sagaFirebase": "Redux Saga Firebase",
       "map": "Map",
       "chat": "Chat",
       "share": "Share",
@@ -64,7 +71,7 @@
       "demoHealth": "Health",
       "iconTools": "Icon Tools",
       "settings": "Settings",
-      "signOut": "Sign Out"
+      "logOut": "Log Out"
     },
     "Profile": {
       "title": "Profile",
@@ -117,6 +124,10 @@
     "DemoSaga": {
       "title": "DemoSaga"
     },
+    "DemoSagaFirebase": {
+      "title": "DemoSagaFirebase",
+      "saveDemoSagaFirebaseTodo": "Save To Firebase"
+    },
     "DemoMap": {
       "title": "DemoMap"
     },
@@ -141,22 +152,30 @@
     },
     "Auth": {
       "title": "Auth",
-      "signIn": "Sign In",
+      "login": "Sign In",
       "signUp": "Sign Up",
-      "signInDummy": "Dummy",
-      "signInGoogle": "Google",
-      "signInFacebook": "Facebook",
+      "dummyLogin": "Dummy",
+      "googleLogin": "Google",
+      "facebookLogin": "Facebook",
       "goToSignUp": "Go to sign up",
-      "goToSignIn": "Go to sign in",
+      "goToLogin": "Go to sign in",
       "username": "username",
+      "email": "email",
       "password": "password",
       "enterPhoneNumber": "Enter Phone Number",
       "enterVerificationCode": "Enter Verification Code",
-      "resetPassword": "Reset Password",
+      "resetPassword": "Reset",
       "send": "Send",
       "resend": "Resend",
+      "otpSentSuccess": "A verification code has been sent to your phone",
       "verificationCode": "Verification Code",
-      "confirmVerificationCode": "Confirm Verification Code"
+      "firebaseConfirmOTP": "Confirm Verification Code"
+    },
+    "Login": {
+      "title": "Login"
+    },
+    "SignUp": {
+      "title": "Sign Up"
     },
     "DemoTab": {
       "title": "DemoTab"
@@ -273,7 +292,7 @@
     "ColorFinder": {
       "title": "Color Finder",
       "colorInput": "Color input",
-      "findSimilarColors": "Find similar colors",
+      "findSimilarColors": "Search",
       "inputAColorString": "Input a color string",
       "similarColorFromPalette": "Similar color from palette",
       "similarColorsFromThemes": "Similar color from themes"

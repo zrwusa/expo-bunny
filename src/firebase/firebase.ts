@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from "firebase/app";
 import {
     FIREBASE_APP_ID,
     FIREBASE_AUTH_DOMAIN,
@@ -10,11 +10,11 @@ import {
     GOOGLE_API_KEY
 } from "@env";
 // Optionally import the services that you want to use
-//import "firebase/auth";
-//import "firebase/database";
-//import "firebase/firestore";
-//import "firebase/functions";
-//import "firebase/storage";
+import "firebase/auth";
+import "firebase/database";
+import "firebase/firestore";
+// import "firebase/functions";
+// import "firebase/storage";
 
 export const FIREBASE_CONFIG = {
     apiKey: GOOGLE_API_KEY,

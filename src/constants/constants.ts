@@ -159,6 +159,10 @@ export enum EDemoCryptoCurrency {
 
 }
 
+export enum EDemoSagaFirebase {
+    SAVE_DEMO_SAGA_FIREBASE_TODO = 'SAVE_DEMO_SAGA_FIREBASE_TODO',
+}
+
 
 export const EThemes: EnumThemeNames = {
     light: 'light',

@@ -14,7 +14,9 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {LinearGradientIcon} from "../../components/LinearGradientIcon";
 import {Keyboard} from "react-native";
 import {collectBLResult, sysError} from "../../store/actions";
-import {LoginVector} from "./LoginVector";
+import {LoginVector} from "../../components/LoginVector";
+import {getSharedStyles} from "../../helpers/shared-styles";
+import {getStyles} from "./styles";
 
 type SignUpRouteProp = RouteProp<AuthTopStackParam, 'SignUp'>;
 type SignUpNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -33,6 +35,8 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp} = designsBasedOn.iphoneX;
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
+    const styles = getStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -46,12 +50,12 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
             navigation.navigate('Home')
         }
     }
-    const navToSignIn = () => {
+    const navToLogin = () => {
         if (route.params && route.params.reference) {
-            navigation.navigate('Auth', {screen: 'SignIn', params: {reference: route.params.reference}})
+            navigation.navigate('Auth', {screen: 'Login', params: {reference: route.params.reference}})
 
         } else {
-            navigation.navigate('Auth', {screen: 'SignIn'})
+            navigation.navigate('Auth', {screen: 'Login'})
         }
     }
 
@@ -72,7 +76,7 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
     const bunnySignUp = async () => {
         Keyboard.dismiss()
         try {
-            const result = await authFunctions.signUp({email: username, password: password})
+            const result = await authFunctions.bunnySignUp({email: username, password: password})
             if (result.success) {
                 navToReference()
             } else {
@@ -83,11 +87,11 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
         }
     }
 
-    return <View style={{flex: 1, zIndex: -1}}>
-        <View style={{paddingHorizontal: wp(20)}}>
-            <InputCard title={st(`username`)}>
-                <TextInputIcon placeholder={st(`username`)}
-                               textContentType="username"
+    return <View style={containerStyles.Screen}>
+        <View style={styles.loginOrSignUpContainer}>
+            <InputCard title={st(`email`)}>
+                <TextInputIcon placeholder={t('placeholders.email')}
+                               textContentType="emailAddress"
                                value={username}
                                onChangeText={(value) => {
                                    setUsername(value)
@@ -97,7 +101,7 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
                                }}/>
             </InputCard>
             <InputCard title={st(`password`)}>
-                <TextInputIcon placeholder={st(`password`)}
+                <TextInputIcon placeholder={t(`placeholders.password`)}
                                textContentType="password"
                                value={password}
                                onChangeText={(value) => {

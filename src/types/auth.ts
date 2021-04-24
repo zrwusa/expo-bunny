@@ -1,7 +1,7 @@
 // The Auth is brought out to integrate with the passport service in the future
 import {ReactNode} from "react";
 import {GoogleUser} from "expo-google-app-auth";
-import {SignInParams, SignUpParams} from "./payloads";
+import {LoginParams, SignUpParams} from "./payloads";
 import {BLResult} from "./bl";
 import {Method} from "axios";
 import {firebase} from "../firebase/firebase";
@@ -47,20 +47,20 @@ export type PersistenceAuthInfo = {
 
 export type AuthLaborContextTypePartial = Partial<AuthLaborContextType>
 export type AuthFunctions = {
-    signIn: (params: SignInParams) => Promise<BLResult>,
-    signInGoogle: (isFirebase: boolean) => Promise<BLResult>,
-    signInFacebook: (isFirebase: boolean) => Promise<BLResult>,
-    sendVerificationCode: (phoneInfoOptions: firebase.auth.PhoneInfoOptions | string,
-                           applicationVerifier: firebase.auth.ApplicationVerifier) => Promise<BLResult>,
-    confirmVerificationCode: (verificationId: string, verificationCode: string) => Promise<BLResult>,
-    firebaseEmailSignIn: (email: string, password: string) => Promise<BLResult>,
+    bunnyLogin: (params: LoginParams) => Promise<BLResult>,
+    googleLogin: (isFirebase: boolean) => Promise<BLResult>,
+    facebookLogin: (isFirebase: boolean) => Promise<BLResult>,
+    firebaseSendOTP: (phoneInfoOptions: firebase.auth.PhoneInfoOptions | string,
+                      applicationVerifier: firebase.auth.ApplicationVerifier) => Promise<BLResult>,
+    firebaseConfirmOTP: (verificationId: string, verificationCode: string) => Promise<BLResult>,
+    firebaseEmailLogin: (email: string, password: string) => Promise<BLResult>,
     firebaseEmailSignUp: (email: string, password: string) => Promise<BLResult>,
-    passwordReset: (email: string) => Promise<BLResult>,
-    signInDummy: () => Promise<BLResult>,
-    signOut: (triggerType?: TriggerType) => Promise<BLResult>,
-    signUp: (params: SignUpParams) => Promise<BLResult>,
-    getPersistenceAuthInfo: () => Promise<PersistenceAuthInfo>,
-    refreshAuth: () => Promise<BLResult>
+    firebaseResetPassword: (email: string) => Promise<BLResult>,
+    dummyLogin: () => Promise<BLResult>,
+    logOut: (triggerType?: TriggerType) => Promise<BLResult>,
+    bunnySignUp: (params: SignUpParams) => Promise<BLResult>,
+    getPersistenceAuth: () => Promise<PersistenceAuthInfo>,
+    bunnyRefreshAuth: () => Promise<BLResult>
     authTrigger: (triggerType: TriggerType) => void
 }
 export type AuthLaborContextType = {
@@ -73,10 +73,10 @@ export type AuthLaborProviderProps = {
 };
 
 export type AuthContextConfig = {
-    signInAPIMethod: Method,
-    signInAPIPath: string,
-    registerAPIMethod: Method,
-    registerAPIPath: string,
+    loginAPIMethod: Method,
+    loginAPIPath: string,
+    signUpAPIMethod: Method,
+    signUpAPIPath: string,
     refreshAPIMethod: Method,
     refreshAPIPath: string,
     accessTokenValuePath: string,
@@ -91,4 +91,13 @@ export type AuthContextConfig = {
     userPersistenceKey: string,
     storageType?: 'LOCAL_STORAGE' | 'NONE'
 }
+
+
+export type PersistenceAuthParam = Partial<{
+    accessToken: string,
+    accessTokenExp: string,
+    refreshToken: string,
+    refreshTokenExp: string
+    user: any,
+}>
 

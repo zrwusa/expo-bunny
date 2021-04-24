@@ -20,11 +20,11 @@ export default function SettingsScreen() {
 
             <SettingsItem
                 label={st(`changeTheme`)}
-                renderPicker={ThemePicker}
+                renderPicker={() => <ThemePicker/>}
             />
             <SettingsItem
                 label={st(`changeLanguage`)}
-                renderPicker={LanguagePicker}
+                renderPicker={() => <LanguagePicker/>}
             />
             {/*<SettingsItem*/}
             {/*    label={st(`rightToLeft`)}*/}

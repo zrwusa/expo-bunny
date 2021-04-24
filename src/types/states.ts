@@ -4,6 +4,7 @@ import {DemoSaga, NearbyFilm, Region} from "./models";
 import {BLResult} from "./bl";
 import {Notification} from "expo-notifications";
 import {RequestConfig} from "./payloads";
+import {FirebaseReducer} from "react-redux-firebase";
 
 export type RequestStatus = {
 
@@ -77,6 +78,22 @@ export interface DemoCryptoCurrencyState {
     }
 }
 
+interface UserProfile {
+    email: string
+}
+
+export interface SagaTodo {
+    text: string
+    done: boolean
+}
+
+// create schema for the DB
+interface DBSchema {
+    todos: SagaTodo
+
+    [name: string]: any
+}
+
 export interface RootState {
     sysState: SysState,
     blResultState: BLResultState,
@@ -85,5 +102,6 @@ export interface RootState {
     demoThunkState: DemoThunkState,
     demoMapState: DemoMapState,
     demoSagaState: DemoSagaState,
-    demoCryptoCurrencyState: DemoCryptoCurrencyState
+    demoCryptoCurrencyState: DemoCryptoCurrencyState,
+    firebase: FirebaseReducer.Reducer<UserProfile, DBSchema>
 }

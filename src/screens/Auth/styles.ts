@@ -9,31 +9,39 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
     const {shadowAround} = sharedStylesFlatten;
     return StyleSheet.create({
+        authContainer: {
+            flex: 1,
+            marginTop: ms.sp.m
+        },
+        container: {
+            paddingHorizontal: wp(20),
+        },
+        loginOrSignUpContainer: {
+            marginTop: ms.sp.l,
+            paddingHorizontal: wp(20),
+        },
         header: {
             flex: 2,
             justifyContent: 'center',
             alignItems: 'center',
         },
         content: {
-            height: wp(600),
-            marginHorizontal: 20,
+            flex: 10,
+            marginHorizontal: wp(20),
             borderRadius: wp(10),
             ...shadowAround
         },
         footer: {
             flex: 1,
-            zIndex: 1
         },
         footerBtnWrapper: {
             alignItems: 'center'
         },
         footerBtn: {
-            top: wp(18),
+            top: ms.sp.m,
             width: wp(100),
             ...shadowAround
         },
-        container: {
-            paddingHorizontal: wp(20),
-        },
+
     });
 }

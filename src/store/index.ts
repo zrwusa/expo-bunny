@@ -1,10 +1,18 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
-import {blStateReducer, demoHelloStateReducer, demoMapStateReducer, demoSagaReducer, demoThunkStateReducer, sysStateReducer} from "./reducers";
-import {sagaDemoSagas} from "./sagas"
-import {demoCryptoCurrencyReducer} from "./reducers/demo-crypto-currency";
-
+import {
+    blStateReducer,
+    demoCryptoCurrencyReducer,
+    demoHelloStateReducer,
+    demoMapStateReducer,
+    demoSagaReducer,
+    demoThunkStateReducer,
+    sysStateReducer
+} from "./reducers";
+import {sagasGenerator} from "./sagas"
+import {firebase} from "../firebase/firebase";
+import {firebaseReducer} from "react-redux-firebase";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -16,12 +24,27 @@ const rootReducer = combineReducers({
     blResultState: blStateReducer,
     demoSagaState: demoSagaReducer,
     demoCryptoCurrencyState: demoCryptoCurrencyReducer,
+    firebase: firebaseReducer
 });
 
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 // you might choose one redux middleware which you prefer,just delete the demos you not prefer
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMiddleware));
-sagaMiddleware.run(sagaDemoSagas);
+sagaMiddleware.run(sagasGenerator);
 // sagaMiddleware.run(saveQuickAlertSettingsSaga);
+
+// react-redux-firebase config
+const rrfConfig = {
+    userProfile: 'users'
+    // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+}
+
+export const rrfProps = {
+    firebase: firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch
+    // createFirestoreInstance // <- needed if using firestore
+}
+
 export default store;

@@ -1,3 +1,3 @@
 export * from "./Auth";
-export * from "./SignIn";
+export * from "./Login";
 export * from "./SignUp";

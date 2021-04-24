@@ -7,8 +7,8 @@
     "I18nProviderLoading": "语言国际化组件加载中",
     "AuthLaborProviderLoading": "用户授权组件加载中",
     "ThemeProviderLoading": "主题组件加载中",
-    "apiNeedSignIn": "需要登录",
-    "signInSuccess": "登录成功",
+    "apiNeedLogin": "需要登录",
+    "loginSuccess": "登录成功",
     "signOutSuccess": "已退出登录",
     "canceledRequest": "请求已取消"
   },
@@ -25,6 +25,12 @@
     "HSL": "HSL",
     "email": "邮箱",
     "phone": "手机"
+  },
+  "placeholders": {
+    "email": "abc@gmail.com",
+    "password": "password",
+    "phone": "+1 012 245 6789",
+    "otp": "123456"
   },
   "screens": {
     "Home": {
@@ -47,6 +53,7 @@
       "FCReduxHook": "函数组件 Redux Hooks",
       "thunkCC": "类组件 Thunk",
       "saga": "Redux Saga",
+      "sagaFirebase": "Redux Saga Firebase",
       "map": "地图",
       "chat": "聊天",
       "share": "分享",
@@ -64,7 +71,7 @@
       "demoHealth": "健身",
       "iconTools": "图标工具",
       "settings": "设置",
-      "signOut": "注销"
+      "logOut": "注销"
     },
     "Profile": {
       "title": "我的",
@@ -117,6 +124,10 @@
     "DemoSaga": {
       "title": "样例-Saga"
     },
+    "DemoSagaFirebase": {
+      "title": "样例-SagaFirebase",
+      "saveDemoSagaFirebaseTodo": "保存到Firebase"
+    },
     "DemoMap": {
       "title": "样例-地图"
     },
@@ -141,22 +152,30 @@
     },
     "Auth": {
       "title": "登录",
-      "signIn": "登录",
+      "login": "登录",
       "signUp": "注册",
-      "signInDummy": "假登录",
-      "signInGoogle": "登录 Google",
-      "signInFacebook": "登录 Facebook",
+      "dummyLogin": "假登录",
+      "googleLogin": "谷歌登录",
+      "facebookLogin": "脸书登录",
       "goToSignUp": "去注册",
-      "goToSignIn": "去登录",
+      "goToLogin": "去登录",
       "username": "用户名",
+      "email": "邮箱",
       "password": "密码",
       "enterPhoneNumber": "输入手机号",
       "enterVerificationCode": "输入验证码",
       "resetPassword": "重置密码",
       "send": "发送",
       "resend": "重发",
+      "otpSentSuccess": "验证码已发送至您手机",
       "verificationCode": "验证码",
-      "confirmVerificationCode": "验证&登录"
+      "firebaseConfirmOTP": "验证&登录"
+    },
+    "Login": {
+      "title": "登录"
+    },
+    "SignUp": {
+      "title": "注册"
     },
     "DemoTab": {
       "title": "样例-选项卡"

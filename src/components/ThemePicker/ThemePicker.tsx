@@ -3,8 +3,9 @@ import * as React from "react";
 import {EThemes} from "../../constants";
 import {PickerSelect} from "../UI";
 import {ThemeName} from "../../types";
+import {PickerSelectProps} from "react-native-picker-select";
 
-export function ThemePicker() {
+export const ThemePicker: React.FC<Omit<PickerSelectProps, 'onValueChange' | 'items'>> = ({...rest}) => {
     const themeLabor = useThemeLabor();
     const {changeTheme, currentThemeName} = themeLabor;
     const {theme} = themeLabor;
@@ -27,5 +28,6 @@ export function ThemePicker() {
         placeholder={{label: 'Select ', value: '', color: colors.text}}
         onValueChange={handleValueChange}
         items={themeLabels}
+        {...rest}
     />
 }

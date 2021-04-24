@@ -46,6 +46,7 @@ export type RootStackParam = {
     ColorFinder: undefined;
     IconTools: undefined;
     DemoHealth: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoSagaFirebase: undefined;
     Settings: undefined;
 };
 export type DemoTabStackParam = {
@@ -61,7 +62,7 @@ export type DemoIGStackParam = {
 };
 
 export type AuthTopStackParam = {
-    SignIn: undefined | { reference: string };
+    Login: undefined | { reference: string };
     SignUp: undefined | { reference: string };
 };
 

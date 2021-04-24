@@ -15,9 +15,9 @@ export const linking = {
                 name: 'Auth',
                 path: 'auth',
                 screens: {
-                    SignIn: {
-                        name: 'SignIn',
-                        path: 'sign-in',
+                    Login: {
+                        name: 'Login',
+                        path: 'login',
                     },
                     SignUp: {
                         name: 'SignUp',
@@ -259,6 +259,10 @@ export const linking = {
                         path: 'settings',
                     }
                 }
+            },
+            DemoSagaFirebase: {
+                name: 'DemoSagaFirebase',
+                path: 'demo-saga-firebase',
             },
             Settings: {
                 name: 'Settings',

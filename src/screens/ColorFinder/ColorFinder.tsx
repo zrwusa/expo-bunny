@@ -7,7 +7,7 @@ import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from "reac
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {palette} from "../../utils";
-import {Card, Row} from "../../containers";
+import {Card, Col, Row} from "../../containers";
 import {collectBLResult} from "../../store/actions";
 import {blError} from "../../helpers";
 import {useDispatch} from "react-redux";
@@ -18,7 +18,7 @@ import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Tab} from "../../components";
 
-export type UglyColorType = '' | 'RGB' | 'Hex' | 'HSL';
+export type UglyColorType = 'Beautiful' | 'RGB' | 'Hex' | 'HSL';
 
 export function ColorFinderScreen() {
     const {t} = useTranslation()
@@ -33,7 +33,7 @@ export function ColorFinderScreen() {
     const [similarColorsFromTheme, setSimilarColorsFromTheme] = useState<ColorDiffWithThemeColorsItem[]>([])
     const [similarColorsFromPalette, setSimilarColorsFromPalette] = useState<ColorDiffWithPaletteItem[]>([])
 
-    const [uglyType, setUglyType] = useState<UglyColorType>('RGB')
+    const [uglyType, setUglyType] = useState<UglyColorType>('Beautiful')
 
     const formatUglyStringToRGB = (colorString: string) => {
         if (colorString && colorString.substring(0, 3).toLowerCase() !== 'rgb') {
@@ -164,18 +164,24 @@ export function ColorFinderScreen() {
                          onChange={(item) => {
                              setUglyType(item)
                          }}/>
-                    <TextInput style={styles.input} value={inputText}
-                               placeholder={st('inputAColorString')}
-                               onChangeText={handleChangeTextFrom}
-                               onKeyPress={handleKeyPress}
-                               autoCapitalize='none'
-                    />
-                    <ColorValuesCard item={colorInput}/>
                     <Row size="l">
-                        <ButtonTO style={styles.button} onPress={handleSimilarColor}>
-                            <InButtonText>{st('findSimilarColors')}</InButtonText>
-                        </ButtonTO>
+                        <Col size={30}>
+                            <TextInput style={styles.input} value={inputText}
+                                       placeholder={st('inputAColorString')}
+                                       onChangeText={handleChangeTextFrom}
+                                       onKeyPress={handleKeyPress}
+                                       autoCapitalize='none'
+                            />
+                        </Col>
+                        <Col size={2}></Col>
+                        <Col size={20}>
+                            <ButtonTO onPress={handleSimilarColor}>
+                                <InButtonText>{st('findSimilarColors')}</InButtonText>
+                            </ButtonTO>
+                        </Col>
                     </Row>
+                    <ColorValuesCard item={colorInput}/>
+
                 </Card>
                 <Card titleMode="OUT" title={st('similarColorFromPalette')}>
                     {

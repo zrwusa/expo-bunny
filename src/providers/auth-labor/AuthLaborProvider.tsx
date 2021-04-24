@@ -25,7 +25,7 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
 
     useEffect(() => {
         const bootstrapAsync = async () => {
-            const {accessToken, refreshToken, user} = await authFunctions.getPersistenceAuthInfo()
+            const {accessToken, refreshToken, user} = await authFunctions.getPersistenceAuth()
             if (refreshToken) {
                 setAccessToken(accessToken)
                 setRefreshToken(refreshToken)
@@ -47,6 +47,7 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     useEffect(() => {
         const loginSuccessID = EventRegister.on('loginSuccess',
             (data) => {
+                console.log('---loginSuccess', data)
                 const {accessToken, refreshToken, user} = data;
                 setAccessToken(accessToken)
                 setRefreshToken(refreshToken)

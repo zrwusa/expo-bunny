@@ -143,6 +143,14 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             justifyContent: 'center',
             alignItems: 'center',
         },
+        centralizeHorizontal: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+        },
+        centralizedVertical: {
+            flexDirection: 'column',
+            justifyContent: 'center',
+        },
         absoluteBottomLeft: {
             position: 'absolute',
             bottom: 0,

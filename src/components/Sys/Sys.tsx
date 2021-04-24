@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, Text, TextInput, View} from "../UI";
+import {Text, TextButton, TextInput, View} from "../UI";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {useSizeLabor} from "../../providers/size-labor";
@@ -35,12 +35,12 @@ const Sys = ({title}: Props) => {
                         <></>
                 }
                 <Row style={styles.buttonBox}>
-                    <Button title="clear" onPress={() => {
+                    <TextButton onPress={() => {
                         dispatch(sysClearErrors({all: true}))
-                    }}/>
-                    <Button title="close" onPress={() => {
+                    }}><Text>Clear</Text></TextButton>
+                    <TextButton onPress={() => {
                         setIsShow(false)
-                    }}/>
+                    }}><Text>Close</Text></TextButton>
                 </Row>
             </View>
             : null

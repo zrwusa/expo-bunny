@@ -9,8 +9,6 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             width: wp(370),
             height: wp(600)
         },
-        tallBlock: {
-            height: 2000
-        },
+        tallBlock: {},
     });
 }

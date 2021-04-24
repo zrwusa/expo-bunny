@@ -9,8 +9,9 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {AuthTopTabStack} from "../../navigation/stacks";
 import {Image, SafeAreaView} from "react-native";
 import {getStyles} from "./styles";
-import {SignInScreen} from "./SignIn";
+import {LoginScreen} from "./Login";
 import {SignUpScreen} from "./SignUp";
+import {useTranslation} from "react-i18next";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Auth'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -21,11 +22,11 @@ export interface Auth1Props {
 }
 
 export const AuthScreen = ({route, navigation}: Auth1Props) => {
-    let isSignInScreen = true;
+    let isLoginScreen = true;
     if (route) {
         if (route.name && route.params && route.params.screen) {
             //todo tab change without change route.params
-            isSignInScreen = (route.name === 'Auth' && route.params.screen === 'SignIn')
+            isLoginScreen = (route.name === 'Auth' && route.params.screen === 'Login')
         }
     }
     const sizeLabor = useSizeLabor();
@@ -36,8 +37,9 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
     const {colors} = theme;
     const {designsBasedOn} = sizeLabor;
     const {wp} = designsBasedOn.iphoneX;
+    const {t} = useTranslation()
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={[containerStyles.Screen]}>
             <View style={[containerStyles.Screen]}>
                 <View style={styles.header}>
                     <Image style={{width: wp(300), height: wp(30)}} source={theme.dark
@@ -47,7 +49,15 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
                 </View>
                 <View style={[styles.content]}>
                     <AuthTopTabStack.Navigator style={{borderRadius: wp(10)}}
+                                               screenOptions={({route}) => {
+                                                   return {
+                                                       title: t(`screens.${route.name}.title`),
+                                                   }
+                                               }}
                                                tabBarOptions={{
+                                                   labelStyle: {
+                                                       fontSize: wp(15)
+                                                   },
                                                    style: {
                                                        backgroundColor: colors.background
                                                    },
@@ -60,17 +70,11 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
                                                    },
                                                }}
                     >
-                        <AuthTopTabStack.Screen name="SignIn" component={SignInScreen}/>
+                        <AuthTopTabStack.Screen name="Login" component={LoginScreen}/>
                         <AuthTopTabStack.Screen name="SignUp" component={SignUpScreen}/>
                     </AuthTopTabStack.Navigator>
                 </View>
                 <View style={styles.footer}>
-                    {/*<View style={styles.footerBtnWrapper}>*/}
-                    {/*    <LinearGradientButton style={[styles.footerBtn, {width: 200}]} onPress={() => {*/}
-                    {/*        navigation.navigate('DemoHealth',{screen:'HealthHome'})*/}
-                    {/*        // navigation.navigate('Home')*/}
-                    {/*    }}>Sign In</LinearGradientButton>*/}
-                    {/*</View>*/}
                 </View>
             </View>
         </SafeAreaView>

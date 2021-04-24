@@ -10,11 +10,12 @@ import {
     requestReceived,
     sysError
 } from "../actions";
-import {EBLMsg, EDemoCryptoCurrency, EDemoSaga} from "../../constants";
-import {CancelAlertSettingsAction, RequestConfig, SaveQuickAlertSettingsAction,} from "../../types";
+import {EBLMsg, EDemoCryptoCurrency, EDemoSaga, EDemoSagaFirebase} from "../../constants";
+import {CancelAlertSettingsAction, RequestConfig, SaveDemoSagaFirebaseTodoAction, SaveQuickAlertSettingsAction,} from "../../types";
 import {blSuccess} from "../../helpers";
+import {firebase} from "../../firebase";
 
-export const sagaDemoSagas = function* () {
+export const sagasGenerator = function* () {
     yield takeEvery(EDemoSaga.GET_DEMO_SAGAS, function* (action: ReturnType<typeof getDemoSagas>) {
         const {params} = action;
         const url = '/demo-sagas';
@@ -73,6 +74,25 @@ export const sagaDemoSagas = function* () {
             const {data} = yield call(() => bunnyAPI.request(config));
             yield put(receiveGetCurrentPrice({currentPrice: data}))
             yield put(collectBLResult(blSuccess(data, EBLMsg.GET_CURRENT_PRICE_SUCCESS, false)))
+            yield put(requestReceived(config))
+        } catch (e) {
+            yield put(sysError(e));
+            yield put(requestFailed(config))
+        }
+    });
+
+
+    yield takeEvery(EDemoSagaFirebase.SAVE_DEMO_SAGA_FIREBASE_TODO, function* (action: SaveDemoSagaFirebaseTodoAction) {
+        const {payload} = action;
+        const url = '/todos';
+        const method = 'POST';
+        const config: RequestConfig = {url, method, data: payload}
+        try {
+            yield put(requesting(config))
+            const res = yield call(() => {
+                return firebase.database().ref(url).push(payload)
+            });
+            console.log(res)
             yield put(requestReceived(config))
         } catch (e) {
             yield put(sysError(e));

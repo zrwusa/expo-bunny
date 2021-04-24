@@ -1,11 +1,12 @@
 import React from "react";
-import {StyleProp, View, ViewStyle} from "react-native";
+import {FlexAlignType, StyleProp, View, ViewStyle} from "react-native";
 import {SizeKeys} from "../../types";
 
 export interface ColProps {
     children?: React.ReactNode,
     size?: number,
-    style?: StyleProp<ViewStyle>
+    style?: StyleProp<ViewStyle>,
+    align?: FlexAlignType;
 }
 
 export type ColSizeMap = {
@@ -13,11 +14,13 @@ export type ColSizeMap = {
 }
 
 export const Col = function (props: ColProps) {
-    const {children, size, style} = props
+    const {children, size, style, align = 'stretch'} = props
+
     const mergeStyle: StyleProp<ViewStyle> = [
         {
             flexDirection: 'column',
-            flex: size ? size : 1
+            flex: size ? size : 1,
+            alignItems: align
         },
         style
     ]

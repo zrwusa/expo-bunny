@@ -30,7 +30,7 @@ const bunnyAPI = axios.create(getApiInstanceConfig('bunny'));
 
 bunnyAPI.interceptors.request.use(
     async (config) => {
-        const {accessToken} = await authLaborContext.authFunctions.getPersistenceAuthInfo();
+        const {accessToken} = await authLaborContext.authFunctions.getPersistenceAuth();
         // "Accept": "application/json",
         // "Content-Type": "application/x-www-form-urlencoded"
         config.headers['Content-Type'] = 'application/json'
@@ -63,18 +63,18 @@ bunnyAPI.interceptors.response.use(
                     const {errorCode} = businessLogic
                     if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005', 'BL_BUNNY_012'].includes(errorCode)) {
                         const {authFunctions} = authLaborContext;
-                        const {refreshAuth, signOut} = authFunctions;
+                        const {bunnyRefreshAuth, logOut} = authFunctions;
                         try {
-                            const {success} = await refreshAuth()
+                            const {success} = await bunnyRefreshAuth()
                             if (!success) {
-                                await signOut('API')
+                                await logOut('API')
                             } else {
                                 const originalRequest = config;
                                 originalRequest._retry = true;
                                 return bunnyAPI(originalRequest);
                             }
                         } catch (e) {
-                            await signOut('API')
+                            await logOut('API')
                             throw e
                         }
                     }

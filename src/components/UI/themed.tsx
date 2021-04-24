@@ -152,7 +152,8 @@ export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     const {TextInput} = getStyles(sizeLabor, themeLabor)
     // todo Typescript check for outline properties bug
     const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
-    const mergedStyle = [TextInput.TextInput, style]
+    // @ts-ignore
+    const mergedStyle: StyleProp<ViewStyle> = [TextInput.TextInput, webOutline, style]
     return (<TextInputRN
         placeholderTextColor={colors.placeholder}
         style={mergedStyle} {...rest} />);
@@ -163,7 +164,7 @@ export interface TextInputIconProps extends TextInputProps {
 }
 
 // ref?: React.RefObject<TextInputRN>;
-export const TextInputIcon = React.forwardRef<TextInputRN, TextInputIconProps>(({style, renderIcon, editable, ...rest}, ref) => {
+export const TextInputIcon = React.forwardRef<TextInputRN, TextInputIconProps>(({style, renderIcon, editable, autoCapitalize = "none", ...rest}, ref) => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
@@ -177,6 +178,7 @@ export const TextInputIcon = React.forwardRef<TextInputRN, TextInputIconProps>((
         style={TextInputIcon.container}>
         <View style={TextInputIcon.iconContainer}>{renderIcon && renderIcon()}</View>
         <TextInputRN
+            autoCapitalize={autoCapitalize}
             ref={ref}
             editable={editable}
             placeholderTextColor={colors.placeholder}

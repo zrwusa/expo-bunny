@@ -1,5 +1,5 @@
 // Redux actions
-import {EBL, EDemoCryptoCurrency, EDemoHello, EDemoMap, EDemoSaga, EDemoThunk, ESys} from "../constants";
+import {EBL, EDemoCryptoCurrency, EDemoHello, EDemoMap, EDemoSaga, EDemoSagaFirebase, EDemoThunk, ESys} from "../constants";
 import {
     CancelAlertSettingsParams,
     ClearBLResultPayload,
@@ -10,6 +10,7 @@ import {
     RequestConfig,
     RestoreIsReadyPayload,
     RestoreNavInitialStatePayload,
+    SaveDemoSagaFirebaseTodoParams,
     SaveQuickAlertSettingsParams,
     SysClearErrorPayload,
     SysWarnPayload
@@ -110,6 +111,11 @@ export interface ReceiveGetDemoSagasAction {
 export interface SaveQuickAlertSettingsAction {
     type: EDemoCryptoCurrency.SAVE_QUICK_ALERT_SETTINGS,
     payload: SaveQuickAlertSettingsParams
+}
+
+export interface SaveDemoSagaFirebaseTodoAction {
+    type: EDemoSagaFirebase.SAVE_DEMO_SAGA_FIREBASE_TODO,
+    payload: SaveDemoSagaFirebaseTodoParams
 }
 
 export interface CancelAlertSettingsAction {

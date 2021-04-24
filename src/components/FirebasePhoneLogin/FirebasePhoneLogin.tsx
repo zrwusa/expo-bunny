@@ -1,22 +1,24 @@
 import {ActivityIndicator, TextInput, View} from "react-native";
 import * as React from "react";
-import {InputCard} from "../../../containers/InputCard";
-import {InButtonText, LinearGradientButton, Text, TextInputIcon} from "../../../components/UI";
-import {LinearGradientIcon} from "../../../components/LinearGradientIcon";
-import {Row} from "../../../containers/Row";
+import {InputCard} from "../../containers/InputCard";
+import {InButtonText, LinearGradientButton, Text, TextInputIcon} from "../UI";
+import {LinearGradientIcon} from "../LinearGradientIcon";
+import {Row} from "../../containers/Row";
 import * as FirebaseRecaptcha from "expo-firebase-recaptcha";
-import {FIREBASE_CONFIG} from "../../../firebase";
+import {FIREBASE_CONFIG} from "../../firebase";
 import {useTranslation} from "react-i18next";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
-import {useAuthLabor} from "../../../providers/auth-labor";
+import {useAuthLabor} from "../../providers/auth-labor";
 import {RouteProp} from "@react-navigation/native";
-import {AuthTopStackParam, RootStackParam} from "../../../types";
+import {AuthTopStackParam, RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {useDispatch} from "react-redux";
+import {collectBLResult} from "../../store/actions";
 
-type FirebasePhoneLoginRouteProp = RouteProp<AuthTopStackParam, 'SignIn'>;
+type FirebasePhoneLoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type FirebasePhoneLoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
 
 export interface FirebasePhoneLoginProps {
@@ -33,6 +35,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
     const {wp} = designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
+    const dispatch = useDispatch()
 
     const recaptchaVerifier = React.useRef<FirebaseRecaptcha.FirebaseRecaptchaVerifierModal>(null);
     const verificationCodeTextInput = React.useRef<TextInput>(null);
@@ -55,50 +58,55 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
         }
     }
 
-    const sendVerificationCode = async () => {
+    const firebaseSendOTP = async () => {
         setVerifyError('');
         setVerifyInProgress(true);
         setVerificationId('');
         try {
-            const {success, message, data} = await authFunctions.sendVerificationCode(phoneNumber,
+            const result = await authFunctions.firebaseSendOTP(phoneNumber,
                 // @ts-ignore
                 recaptchaVerifier.current)
-            const {verificationId} = data
-            setVerifyInProgress(false);
-            setVerificationId(verificationId);
-            verificationCodeTextInput.current?.focus();
+            if (result.success) {
+                const {verificationId} = result.data
+                setVerifyInProgress(false);
+                setVerificationId(verificationId);
+                verificationCodeTextInput.current?.focus();
+            } else {
+                dispatch(collectBLResult(result))
+            }
         } catch ({message}) {
             setVerifyError(message);
             setVerifyInProgress(false);
         }
     }
-    const confirmVerificationCode = async () => {
+    const firebaseConfirmOTP = async () => {
         setConfirmError('');
         setConfirmInProgress(true);
         try {
-            const result = await authFunctions.confirmVerificationCode(verificationId, verificationCode)
-            setConfirmInProgress(false);
-            setVerificationId('');
-            setVerificationCode('');
-            verificationCodeTextInput.current?.clear();
-            console.info('Phone authentication successful!');
-            console.log(await authFunctions.getPersistenceAuthInfo())
-            navToReference()
+            const result = await authFunctions.firebaseConfirmOTP(verificationId, verificationCode)
+            if (result.success) {
+                setConfirmInProgress(false);
+                setVerificationId('');
+                setVerificationCode('');
+                verificationCodeTextInput.current?.clear();
+                navToReference()
+            } else {
+                dispatch(collectBLResult(result))
+            }
         } catch ({message}) {
-            console.log(await authFunctions.getPersistenceAuthInfo())
             setConfirmError(message);
             setConfirmInProgress(false);
         }
     }
-    return <View style={styles.container}>
+    return <View>
         <View style={styles.contentPhone}>
             <InputCard title={st(`enterPhoneNumber`)}>
                 <TextInputIcon
-                    autoFocus={isConfigValid}
+                    // autoFocus={isConfigValid}
                     autoCompleteType="tel"
                     keyboardType="phone-pad"
                     textContentType="telephoneNumber"
-                    placeholder="+1 012 345 6789"
+                    placeholder={t(`placeholders.phone`)}
                     editable={!verificationId}
                     onChangeText={(phoneNumber: string) => setPhoneNumber(phoneNumber)}
                     renderIcon={() => {
@@ -109,7 +117,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
             <Row size="xxl">
                 <LinearGradientButton
                     disabled={!phoneNumber}
-                    onPress={sendVerificationCode}
+                    onPress={firebaseSendOTP}
                 >
                     <InButtonText>{`${verificationId ? st('resend') : st('send')} ${st('verificationCode')}`}</InButtonText>
                 </LinearGradientButton>
@@ -123,13 +131,13 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
             {verifyError ? <Text style={styles.error}>{`Error: ${verifyError}`}</Text> : null}
             {verifyInProgress && <ActivityIndicator style={styles.loader}/>}
             {verificationId ? (
-                <Text style={styles.success}>A verification code has been sent to your phone</Text>
+                <Text style={styles.success}>{st(`otpSentSuccess`)}</Text>
             ) : null}
             <InputCard title={st(`enterVerificationCode`)}>
                 <TextInputIcon
                     ref={verificationCodeTextInput}
                     editable={!!verificationId}
-                    placeholder="123456"
+                    placeholder={t(`placeholders.otp`)}
                     onChangeText={(verificationCode: string) => setVerificationCode(verificationCode)}
                     renderIcon={() => {
                         return <LinearGradientIcon name="sort-numerically-outline" size={wp(20)}/>
@@ -139,9 +147,9 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
             <Row size="xxl">
                 <LinearGradientButton
                     disabled={!verificationCode}
-                    onPress={confirmVerificationCode}
+                    onPress={firebaseConfirmOTP}
                 >
-                    <InButtonText>{st('confirmVerificationCode')}</InButtonText>
+                    <InButtonText>{st('firebaseConfirmOTP')}</InButtonText>
                 </LinearGradientButton>
             </Row>
             {confirmError ? <Text style={styles.error}>{`Error: ${confirmError}`}</Text> : null}

@@ -27,7 +27,7 @@
       "demoSuspense": "הדגמה Suspense",
       "cryptoCurrency": "ביטקוין",
       "settings": "הגדרות",
-      "signOut": "התנתקות"
+      "logOut": "התנתקות"
     },
     "Profile": {
       "title": "פרופיל",
@@ -85,9 +85,9 @@
     },
     "Auth": {
       "title": "מצת",
-      "signIn": "כניסה ב -",
-      "signInDummy": "התחברות (דמה)",
-      "signInGoogle": "התחברות ב-Google",
+      "login": "כניסה ב -",
+      "dummyLogin": "התחברות (דמה)",
+      "googleLogin": "התחברות ב-Google",
       "username": "שם משתמש",
       "password": "סיסמה"
     },

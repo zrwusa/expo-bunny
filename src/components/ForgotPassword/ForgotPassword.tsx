@@ -1,24 +1,24 @@
-import {InButtonText, LinearGradientButton, Text, TextButton, TextInputIcon, View} from "../../../components/UI";
+import {InButtonText, LinearGradientButton, Text, TextButton, TextInputIcon, View} from "../UI";
 import * as React from "react";
 import {useState} from "react";
-import {Row} from "../../../containers/Row";
-import {collectBLResult, sysError} from "../../../store/actions";
+import {Row} from "../../containers/Row";
+import {collectBLResult, sysError} from "../../store/actions";
 import {useTranslation} from "react-i18next";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
-import {useAuthLabor} from "../../../providers/auth-labor";
+import {useAuthLabor} from "../../providers/auth-labor";
 import {useDispatch} from "react-redux";
 import {RouteProp} from "@react-navigation/native";
-import {AuthTopStackParam, RootStackParam} from "../../../types";
+import {AuthTopStackParam, RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {InputCard} from "../../../containers/InputCard";
-import {LinearGradientIcon} from "../../../components/LinearGradientIcon";
-import {blError} from "../../../helpers";
-import {Col} from "../../../containers/Col";
+import {InputCard} from "../../containers/InputCard";
+import {LinearGradientIcon} from "../LinearGradientIcon";
+import {blError} from "../../helpers";
+import {Col} from "../../containers/Col";
 
-type ForgotPasswordRouteProp = RouteProp<AuthTopStackParam, 'SignIn'> | RouteProp<AuthTopStackParam, 'SignUp'>;
+type ForgotPasswordRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type ForgotPasswordNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
 
 export interface ForgotPasswordProps {
@@ -52,7 +52,7 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
         }
     }
 
-    const navToSignIn = () => {
+    const navToLogin = () => {
         let referenceRoute;
         if (route.params && route.params.reference) {
             referenceRoute = JSON.parse(route.params.reference)
@@ -65,7 +65,7 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
     const forgotPassword = async () => {
         try {
             if (username) {
-                const result = await authFunctions.passwordReset(username)
+                const result = await authFunctions.firebaseResetPassword(username)
                 if (result.success) {
                     setIsSent(true)
                 } else {
@@ -81,9 +81,9 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
 
     }
     return <View style={styles.container}>
-        <InputCard title={st(`username`)}>
-            <TextInputIcon placeholder={st(`username`)}
-                           textContentType="username"
+        <InputCard title={st(`email`)}>
+            <TextInputIcon placeholder={t(`placeholders.email`)}
+                           textContentType="emailAddress"
                            value={username}
                            onChangeText={(value) => {
                                setUsername(value)
@@ -104,7 +104,7 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
                 <TextButton onPress={() => {
                     if (onCancel) onCancel()
                 }}>
-                    <Text>{st(`goToSignIn`)}</Text></TextButton>
+                    <Text>{st(`goToLogin`)}</Text></TextButton>
             </Col>
         </Row>
         {
@@ -116,7 +116,7 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
                     <Row style={styles.row}>
                         <LinearGradientButton onPress={() => {
                             if (onSent) onSent()
-                        }}><InButtonText>{st(`goToSignIn`)}</InButtonText></LinearGradientButton>
+                        }}><InButtonText>{st(`goToLogin`)}</InButtonText></LinearGradientButton>
                     </Row>
 
                 </>

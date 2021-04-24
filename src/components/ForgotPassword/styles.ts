@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
-import {SizeLabor, ThemeLabor} from "../../../types";
-import {getSharedStyles} from "../../../utils";
+import {SizeLabor, ThemeLabor} from "../../types";
+import {getSharedStyles} from "../../utils";
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
@@ -9,19 +9,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
     const {shadowAround} = sharedStylesFlatten;
     return StyleSheet.create({
-        orRow: {
-            marginTop: ms.sp.l
+        container: {
+            paddingHorizontal: wp(20),
         },
-        vectorRow: {
-            marginTop: ms.sp.m,
-            marginBottom: ms.sp.xl
-        },
-        orCol: {
-            alignItems: 'center'
-        },
-        vectorButton: {
-            justifyContent: 'center'
-        },
-        icon: {marginRight: wp(5)}
+        row: {marginTop: wp(10)}
     });
 }

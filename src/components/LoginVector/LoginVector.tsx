@@ -1,22 +1,22 @@
-import {IcoMoon, Text, TextButton, View} from "../../../components/UI";
+import {IcoMoon, Text, TextButton, View} from "../UI";
 import * as React from "react";
-import {Row} from "../../../containers/Row";
-import {Col} from "../../../containers/Col";
-import {Divider} from "../../../components/Divider";
+import {Row} from "../../containers/Row";
+import {Col} from "../../containers/Col";
+import {Divider} from "../Divider";
 import {Keyboard, Platform} from "react-native";
-import {collectBLResult, sysError} from "../../../store/actions";
+import {collectBLResult, sysError} from "../../store/actions";
 import {useTranslation} from "react-i18next";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
+import {shortenTFunctionKey} from "../../providers/i18n-labor";
+import {useSizeLabor} from "../../providers/size-labor";
+import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
-import {useAuthLabor} from "../../../providers/auth-labor";
+import {useAuthLabor} from "../../providers/auth-labor";
 import {useDispatch} from "react-redux";
 import {RouteProp} from "@react-navigation/native";
-import {AuthTopStackParam, RootStackParam} from "../../../types";
+import {AuthTopStackParam, RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
 
-type LoginVectorRouteProp = RouteProp<AuthTopStackParam, 'SignIn'> | RouteProp<AuthTopStackParam, 'SignUp'>;
+type LoginVectorRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type LoginVectorNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
 
 export interface LoginVectorProps {
@@ -64,14 +64,14 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                 <TextButton style={styles.vectorButton} onPress={async () => {
                     Keyboard.dismiss()
                     try {
-                        await authFunctions.signInDummy()
+                        await authFunctions.dummyLogin()
                         navToReference()
                     } catch (e) {
                         dispatch(sysError(e))
                     }
                 }}>
                     <IcoMoon name="drink" size={wp(24)} style={styles.icon}/>
-                    <Text>{st(`signInDummy`)}</Text>
+                    <Text>{st(`dummyLogin`)}</Text>
                 </TextButton>
             </Col>
             {
@@ -81,7 +81,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                             <TextButton style={styles.vectorButton} onPress={async () => {
                                 Keyboard.dismiss()
                                 try {
-                                    const result = await authFunctions.signInFacebook(false)
+                                    const result = await authFunctions.facebookLogin(false)
                                     if (result.success) {
                                         navToReference()
                                     } else {
@@ -92,14 +92,14 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                 }
                             }}>
                                 <IcoMoon name="facebook" style={styles.icon}/>
-                                <Text>{st(`signInFacebook`)}</Text>
+                                <Text>{st(`facebookLogin`)}</Text>
                             </TextButton>
                         </Col>
                         <Col size={6}>
                             <TextButton style={styles.vectorButton} onPress={async () => {
                                 Keyboard.dismiss()
                                 try {
-                                    const result = await authFunctions.signInGoogle(true)
+                                    const result = await authFunctions.googleLogin(true)
                                     if (result.success) {
                                         navToReference()
                                     } else {
@@ -110,7 +110,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                 }
                             }}>
                                 <IcoMoon name="google" style={styles.icon}/>
-                                <Text>{st(`signInGoogle`)}</Text>
+                                <Text>{st(`googleLogin`)}</Text>
                             </TextButton>
                         </Col>
                     </>

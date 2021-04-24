@@ -3,8 +3,9 @@ import {InitialState} from "@react-navigation/native";
 import {BunnyAPIStandardRequestParams} from "./api";
 import {Method} from "axios";
 import {BLResult} from "./bl";
+import {SagaTodo} from "./states";
 
-export interface SignInParams {
+export interface LoginParams {
     email: string;
     password: string;
 }
@@ -105,6 +106,9 @@ export interface GetDemoSagaParams extends BunnyAPIStandardRequestParams {
         id?: number,
         text?: string
     }
+}
+
+export interface SaveDemoSagaFirebaseTodoParams extends SagaTodo {
 }
 
 export interface SaveQuickAlertSettingsParams {

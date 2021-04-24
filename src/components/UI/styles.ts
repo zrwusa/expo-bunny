@@ -52,6 +52,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const ButtonTO = StyleSheet.create({
         ButtonTO: {
             ...sharedStylesFlatten.button,
+            justifyContent: 'center'
         }
     })
 
@@ -118,6 +119,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             paddingHorizontal: ms.sp.l,
             paddingVertical: ms.sp.m,
             fontSize: ms.fs.m,
+            borderRadius: borderRadius.input,
+            borderWidth: wp(1),
+            borderColor: colors.border,
         },
     })
 

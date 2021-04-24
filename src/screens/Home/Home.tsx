@@ -1,5 +1,4 @@
 import * as React from "react";
-import {useEffect} from "react";
 import {ScrollView, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -15,7 +14,6 @@ import {sysError} from "../../store/actions";
 import {Divider} from "../../components/Divider";
 import {getStyles} from "./styles";
 import {InlineJump} from "../../components/InlineJump";
-import {firebase} from "../../firebase";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -35,23 +33,11 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
     const {authFunctions} = useAuthLabor();
-    useEffect(() => {
-        async function storeHighScore(userId: string, score: number) {
-            await firebase
-                .database()
-                .ref('users/' + userId)
-                .set({
-                    highscore: score,
-                });
-        }
 
-        storeHighScore('001', 100)
-            .then()
-    })
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, styles.container]}>
-                <Card title={st(`navAndRoute`)}>
+                <Card titleMode="OUT" title={st(`navAndRoute`)}>
                     <InlineJump type="LINK" iconName="layout7" text={st(`tab`)} to="/demo-tab/home"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="layout" text={st(`drawer`)} to="/demo-drawer/home"/>
@@ -94,14 +80,16 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     <InlineJump type="LINK" iconName="leaf" text={st(`passParamsFromRootToLeafTab`) + `(Link)`} to="/demo-tab/settings/item-001"/>
                 </Card>
-                <Card title={st(`redux`)}>
+                <Card titleMode="OUT" title={st(`redux`)}>
                     <InlineJump type="LINK" iconName="puzzle" text={st(`FCReduxHook`)} to="/demo-fc-redux-hook"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="gears" text={st(`thunkCC`)} to="/demo-thunk-cc"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="tools" text={st(`saga`)} to="/demo-saga"/>
+                    <Divider/>
+                    <InlineJump type="LINK" iconName="tools" text={st(`sagaFirebase`)} to="/demo-saga-firebase"/>
                 </Card>
-                <Card title={st(`nativeCapabilities`)}>
+                <Card titleMode="OUT" title={st(`nativeCapabilities`)}>
 
                     <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map"/>
                     <Divider/>
@@ -111,7 +99,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     <InlineJump type="LINK" iconName="bell-o" text={st(`notification`)} to="/demo-notification"/>
                 </Card>
-                <Card title={st(`componentsAndThemes`)}>
+                <Card titleMode="OUT" title={st(`componentsAndThemes`)}>
 
                     <InlineJump type="LINK" iconName="lab" text={st(`thirdPart`)} to="/demo-third-part"/>
                     <Divider/>
@@ -125,26 +113,26 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
                     {/*    <InButtonText>{st(`demoSuspense`)}</InButtonText></ButtonTO>*/}
                 </Card>
-                <Card title={st(`devTools`)}>
+                <Card titleMode="OUT" title={st(`devTools`)}>
                     <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
                 </Card>
-                <Card title={st(`others`)}>
+                <Card titleMode="OUT" title={st(`others`)}>
                     <InlineJump type="LINK" iconName="bitcoin" text={st(`cryptoCurrency`)} to="/demo-crypto-currency/home"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="layout7" text={st(`ig`)} to="/demo-ig/home"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="layout7" text={st(`demoHealth`)} to="/demo-health/home"/>
                 </Card>
-                <Card title={st(`system`)}>
+                <Card titleMode="OUT" title={st(`system`)}>
                     <InlineJump type="LINK" iconName="settings" text={st(`settings`)} to="/settings"/>
                     <Divider/>
-                    <InlineJump type="NAV" iconName="exit" text={st(`signOut`)} onNav={async () => {
+                    <InlineJump type="NAV" iconName="exit" text={st(`logOut`)} onNav={async () => {
                         try {
-                            await authFunctions.signOut('MANUAL')
+                            await authFunctions.logOut('MANUAL')
                         } catch (e) {
                             dispatch(sysError(e))
                         }

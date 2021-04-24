@@ -65,13 +65,15 @@ import {linking} from "./linking";
 import {IGMediaScreen} from "../../screens/DemoIG/Media";
 import {PlaygroundScreen} from "../../screens/Playground";
 import {ColorFinderScreen} from "../../screens/ColorFinder";
-import {ThemePicker} from "../../components/ThemePicker";
-import {AuthScreen} from "../../screens/Auth/Auth";
+import {AuthScreen} from "../../screens/Auth";
 import {HealthHomeScreen} from "../../screens/DemoHealth/Home";
 import {HealthSettingsScreen} from "../../screens/DemoHealth/Settings";
 import {IconToolsScreen} from "../../screens/IconTools";
 import {DrawerNavigationOptions} from "@react-navigation/drawer";
 import {BottomTabBarOptions, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
+import {DemoSagaFirebaseScreen} from "../../screens/DemoSagaFirebase";
+import {Row} from "../../containers";
+import {ThemePicker} from "../../components/ThemePicker";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -100,9 +102,10 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     // --- options start ---
     const screenOptionsStackCommonHeaderRight = () => {
-        return (<View style={styles.settingBox}>
+        return (<Row style={styles.settingBox}>
             <ThemePicker/>
-        </View>)
+            {/*<LanguagePicker/>*/}
+        </Row>)
     }
 
     const screenOptionsStackCommon: StackNavigationOptions = {
@@ -266,11 +269,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         if (navigationRef.current) {
             const curRoute = navigationRef.current.getCurrentRoute()
             if (!curRoute) {
-                navigationRef.current.navigate('Auth', {screen: 'SignIn'})
+                navigationRef.current.navigate('Auth', {screen: 'Login'})
                 return
             }
             if (curRoute.name !== 'Auth') {
-                navigationRef.current.navigate('Auth', {screen: 'SignIn', params: {reference: JSON.stringify(curRoute)}})
+                navigationRef.current.navigate('Auth', {screen: 'Login', params: {reference: JSON.stringify(curRoute)}})
             } else {
                 return
             }
@@ -280,7 +283,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     useEffect(() => {
         switch (authResult.triggerType) {
             case "API":
-                dispatch(collectBLResult(blError(t('sys.apiNeedSignIn'))))
+                dispatch(collectBLResult(blError(t('sys.apiNeedLogin'))))
                 break;
             case "SCREEN":
                 navigateToAuth()
@@ -322,6 +325,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoSaga" component={DemoSagaScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoSagaFirebase" component={DemoSagaFirebaseScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoMap" component={DemoMapScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoChat" component={DemoChatScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoShare" component={DemoShareScreen} options={optionsMergeWithTitle()}/>
