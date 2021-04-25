@@ -52,9 +52,7 @@ function App() {
                 } catch (err) {
                     dispatch(sysError(err.toString()));
                 } finally {
-                    mockPreparingTimer = setTimeout(() => {
-                        dispatch(restoreIsReady({isReady: true}));
-                    }, 1)
+                    dispatch(restoreIsReady({isReady: true}));
                 }
             }
         };

@@ -19,13 +19,13 @@ import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, FACEBOOK_APP_ID, IOS_CLIE
 import _ from "lodash";
 import {blError, blSuccess} from "../../helpers";
 import {EventRegister} from "react-native-event-listeners";
-import * as AppAuth from "expo-app-auth";
+// import * as AppAuth from "expo-app-auth";
 import {firebase} from "../../firebase/firebase";
 import * as Facebook from "expo-facebook";
 
-// When configured correctly, URLSchemes should contain your REVERSED_CLIENT_ID
-const {URLSchemes} = AppAuth;
-console.log('---URLSchemes', URLSchemes)
+// // When configured correctly, URLSchemes should contain your REVERSED_CLIENT_ID
+// const {URLSchemes} = AppAuth;
+// console.log('---URLSchemes', URLSchemes)
 
 const config: AuthContextConfig = {
     loginAPIMethod: 'PUT',

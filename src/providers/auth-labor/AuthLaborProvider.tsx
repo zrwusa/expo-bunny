@@ -47,7 +47,6 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     useEffect(() => {
         const loginSuccessID = EventRegister.on('loginSuccess',
             (data) => {
-                console.log('---loginSuccess', data)
                 const {accessToken, refreshToken, user} = data;
                 setAccessToken(accessToken)
                 setRefreshToken(refreshToken)

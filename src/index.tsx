@@ -4,6 +4,7 @@ import store, {rrfProps} from "./store";
 import App from "./App";
 import {DemoLazyLoading} from "./components/DemoLazyLoading";
 import {ReactReduxFirebaseProvider} from "react-redux-firebase";
+import "./hacks/long-period-timer"
 
 export default function index() {
     const renderInner = () => <ReduxProvider store={store}>

@@ -1,6 +1,8 @@
 import firebase from "firebase/app";
 import {
-    FIREBASE_APP_ID,
+    FIREBASE_APP_ID_ANDROID,
+    FIREBASE_APP_ID_IOS,
+    FIREBASE_APP_ID_WEB,
     FIREBASE_AUTH_DOMAIN,
     FIREBASE_DATABASE_URL,
     FIREBASE_MEASUREMENT_ID,
@@ -13,6 +15,7 @@ import {
 import "firebase/auth";
 import "firebase/database";
 import "firebase/firestore";
+import {Platform} from "react-native";
 // import "firebase/functions";
 // import "firebase/storage";
 
@@ -23,7 +26,11 @@ export const FIREBASE_CONFIG = {
     projectId: FIREBASE_PROJECT_ID,
     storageBucket: FIREBASE_STORAGE_BUCKET,
     messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
-    appId: FIREBASE_APP_ID,
+    appId: Platform.select({
+        ios: FIREBASE_APP_ID_IOS,
+        android: FIREBASE_APP_ID_ANDROID,
+        web: FIREBASE_APP_ID_WEB
+    }),
     measurementId: FIREBASE_MEASUREMENT_ID,
 };
 
