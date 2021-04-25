@@ -91,6 +91,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const sizeLabor = useSizeLabor();
     const {ms, designsBasedOn} = sizeLabor;
     const {authResult, authFunctions} = useAuthLabor()
+    console.log('---authResult', '\'' + JSON.stringify(authResult) + '\'')
     const dispatch = useDispatch();
     const {wp} = designsBasedOn.iphoneX;
     const themeLabor = useThemeLabor();
@@ -263,7 +264,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     }
 
     const navigateToAuth = () => {
-        if (authResult.isSignedIn) {
+        if (authResult.isLogin) {
             return
         }
         if (navigationRef.current) {
@@ -292,7 +293,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 navigateToAuth()
                 break;
             case "AUTO":
-                dispatch(collectBLResult(blSuccess(undefined, t('sys.signOutSuccess'))))
+                dispatch(collectBLResult(blSuccess(undefined, t('sys.LogOutSuccess'))))
                 break;
             case "OTHERS":
                 navigateToAuth()

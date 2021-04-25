@@ -6,6 +6,7 @@ import {
     BLResult,
     LoginParams,
     PersistenceAuthParam,
+    PersistenceAuthParamKey,
     SignUpParams,
     TriggerType,
     User,
@@ -71,25 +72,27 @@ const persistenceAuth = async ({accessToken, refreshToken, user, accessTokenExp,
     user && await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user))
 }
 
-const triggerLoginFailed = async (result: any) => {
-    EventRegister.emit('loginFailed', result)
-    await checkIsSignedInAndSyncToProvider()
-}
-
-const triggerLoginSuccess = async (result: any) => {
-    await persistenceAuth(result)
-    EventRegister.emit('loginSuccess', result)
-    await checkIsSignedInAndSyncToProvider()
+const triggerLogin = async (result: BLResult) => {
+    const {success, data} = result;
+    if (success) {
+        await persistenceAuth(data)
+    }
+    EventRegister.emit('login', result)
+    await checkIsLogin()
 }
 
 const loginOrSignUp = async (res: any) => {
+    let result: BLResult;
     if (!res) {
-        return blError(EBLMsg.NO_AUTH_API_RESPONDED)
+        result = blError(EBLMsg.NO_AUTH_API_RESPONDED)
+        await triggerLogin(result)
+        return result;
     }
     const {data} = res;
     if (!data) {
-        await checkIsSignedInAndSyncToProvider()
-        return blError(EBLMsg.NO_DATA_RESPONDED)
+        result = blError(EBLMsg.NO_DATA_RESPONDED)
+        await triggerLogin(result)
+        return result;
     }
     const accessToken = _.get(data, accessTokenValuePath);
     const refreshToken = _.get(data, refreshTokenValuePath);
@@ -98,17 +101,19 @@ const loginOrSignUp = async (res: any) => {
 
     const user = _.get(data, userValuePath);
     if (!(accessToken && refreshToken)) {
-        await checkIsSignedInAndSyncToProvider()
-        return blError(EBLMsg.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED)
+        result = blError(EBLMsg.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED)
+        await triggerLogin(result)
+        return result;
     }
     if (!user) {
-        await checkIsSignedInAndSyncToProvider()
-        return blError(EBLMsg.NO_USER_INFO_RESPONDED)
+        result = blError(EBLMsg.NO_USER_INFO_RESPONDED)
+        await triggerLogin(result)
+        return result;
     }
 
-    const result = {accessToken, accessTokenExp, refreshToken, refreshTokenExp, user}
-    await triggerLoginSuccess(result)
-    return blSuccess(result)
+    result = blSuccess({accessToken, accessTokenExp, refreshToken, refreshTokenExp, user})
+    await triggerLogin(result)
+    return result
 }
 
 const bunnyLogin = async (params: LoginParams) => {
@@ -125,57 +130,68 @@ const bunnyRefreshAuth = async (): Promise<BLResult> => {
     const refreshToken = await AsyncStorage.getItem(refreshTokenPersistenceKey);
     apiAuth.defaults.headers.common["Authorization"] = `Bearer ${refreshToken}`;
     const res = await apiAuth.request({method: refreshAPIMethod, url: refreshAPIPath})
+    let result: BLResult;
     if (!res) {
-        await checkIsSignedInAndSyncToProvider()
-        return blError(EBLMsg.NO_AUTH_API_RESPONDED)
+        result = blError(EBLMsg.NO_AUTH_API_RESPONDED)
+        EventRegister.emit('bunnyRefreshAuth', result)
+        return result
     }
     const {data} = res;
     if (!data) {
-        await checkIsSignedInAndSyncToProvider()
-        return blError(EBLMsg.NO_DATA_RESPONDED)
+        result = blError(EBLMsg.NO_DATA_RESPONDED)
+        EventRegister.emit('bunnyRefreshAuth', result)
+        return result
     }
     const accessToken = _.get(data, accessTokenValuePath);
     const accessTokenExp = _.get(data, accessTokenExpValuePath);
     if (!accessToken) {
-        await checkIsSignedInAndSyncToProvider()
-        return blError(EBLMsg.NO_ACCESS_TOKEN_RESPONDED)
+        result = blError(EBLMsg.NO_ACCESS_TOKEN_RESPONDED)
+        EventRegister.emit('bunnyRefreshAuth', result)
+        return result
     }
     await persistenceAuth({accessToken, accessTokenExp})
-    EventRegister.emit('refreshAuthSuccess', accessToken)
-    await checkIsSignedInAndSyncToProvider()
-    return blSuccess(accessToken)
+    result = blSuccess(accessToken)
+    EventRegister.emit('bunnyRefreshAuth', result)
+    return result
 }
 
 const logOut = async (triggerType?: TriggerType) => {
-    await AsyncStorage.removeItem(accessTokenPersistenceKey);
-    await AsyncStorage.removeItem(refreshTokenPersistenceKey);
-    await AsyncStorage.removeItem(userPersistenceKey);
-    await AsyncStorage.removeItem(accessTokenExpPersistenceKey)
-    await AsyncStorage.removeItem(refreshTokenExpPersistenceKey)
-    EventRegister.emit('signOutSuccess', true)
-    await checkIsSignedInAndSyncToProvider()
-    if (triggerType) {
-        await authTrigger(triggerType)
+    const {success, message} = await removePersistenceAuth()
+    let result: BLResult;
+    if (success) {
+        result = blSuccess(true)
+        EventRegister.emit('LogOut', result)
+        await checkIsLogin()
+        if (triggerType) {
+            await authTrigger(triggerType)
+        }
+        return result
+    } else {
+        result = blError(message)
+        EventRegister.emit('LogOut', result)
+        await checkIsLogin()
+        return result
     }
-    return blSuccess(true)
 };
-
 
 const dummyLogin = async () => {
     const accessToken = 'access_token_dummy';
     const refreshToken = 'refresh_token_dummy';
-    const user = {email: 'dummy@dummy.com', nickname: 'dummy nickname'};
+    const user = {
+        email: 'dummy@dummy.com',
+        nickname: 'dummy nickname'
+    };
     const accessTokenExp = '3043008000000';
     const refreshTokenExp = '3043008000000';
-    const result = {
+    const result = blSuccess({
         accessToken,
         accessTokenExp,
         refreshToken,
         refreshTokenExp,
         user
-    }
-    await triggerLoginSuccess(result)
-    return blSuccess(result)
+    })
+    await triggerLogin(result)
+    return result
 }
 
 const googleLogin = async (isFirebase: boolean) => {
@@ -185,23 +201,23 @@ const googleLogin = async (isFirebase: boolean) => {
         iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
         androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
     });
+    let result: BLResult;
     if (!googleResponse) {
-        const failedResult = blError(EBLMsg.NO_GOOGLE_LOGIN_RESULT)
-        await triggerLoginFailed(failedResult)
-        return failedResult
+        const result = blError(EBLMsg.NO_GOOGLE_LOGIN_RESULT)
+        await triggerLogin(result)
+        return result
     }
-    let failedResult;
     switch (googleResponse.type) {
-        case "cancel":
-            failedResult = blError(EBLMsg.GOOGLE_LOGIN_CANCELED)
-            await triggerLoginFailed(failedResult)
-            return failedResult
-        case "success":
+        case 'cancel':
+            result = blError(EBLMsg.GOOGLE_LOGIN_CANCELED)
+            await triggerLogin(result)
+            return result
+        case 'success':
             const {idToken, accessToken, refreshToken, user} = googleResponse;
             if (!accessToken || !refreshToken) {
-                failedResult = blError(EBLMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
-                await triggerLoginFailed(failedResult)
-                return failedResult
+                result = blError(EBLMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
+                await triggerLogin(result)
+                return result
             }
 
             if (isFirebase) {
@@ -209,33 +225,32 @@ const googleLogin = async (isFirebase: boolean) => {
                 const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
                 const firebaseResponse = await firebase.auth().signInWithCredential(credential);
                 const firebaseResponseDealt = firebaseResponseDeal(firebaseResponse)
-                const result = {
+                const result = blSuccess({
                     accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
                     refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
                     accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
                     user: firebaseResponse.user,
-                }
-                await triggerLoginSuccess(result)
-                return blSuccess(result)
+                })
+                await triggerLogin(result)
+                return result
             } else {
-                const result = {
+                const result = blSuccess({
                     accessToken,
                     refreshToken,
                     user,
-                }
-                await triggerLoginSuccess(result)
-                return blSuccess(result)
+                })
+                await triggerLogin(result)
+                return result
             }
         default:
-            failedResult = blError(EBLMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
-            await triggerLoginFailed(failedResult)
-            return failedResult
+            result = blError(EBLMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
+            await triggerLogin(result)
+            return result
     }
 };
 
-
 const facebookLogin = async (isFirebase: boolean) => {
-    let failedResult;
+    let result: BLResult;
 
     await Facebook.initializeAsync({
         appId: FACEBOOK_APP_ID,
@@ -245,54 +260,54 @@ const facebookLogin = async (isFirebase: boolean) => {
     });
     const {type} = facebookResponse;
     switch (type) {
-        case "cancel":
-            failedResult = blError(EBLMsg.FACEBOOK_LOGIN_CANCELED)
-            await triggerLoginFailed(failedResult)
-            return failedResult
-        case "success":
+        case 'cancel':
+            result = blError(EBLMsg.FACEBOOK_LOGIN_CANCELED)
+            await triggerLogin(result)
+            return result
+        case 'success':
             // @ts-ignore
             const {token} = facebookResponse;
             if (isFirebase) {
                 const credential = firebase.auth.FacebookAuthProvider.credential(token);
                 const firebaseResponse = await firebase.auth().signInWithCredential(credential)
                 const firebaseResponseDealt = firebaseResponseDeal(firebaseResponse)
-                console.log('facebookResponse,firebaseResponse,firebaseResponseDealt', facebookResponse, firebaseResponse, firebaseResponseDealt)
 
-                const result = {
+                const result = blSuccess({
                     accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
                     refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
                     accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
                     user: firebaseResponseDealt.user,
-                }
-                await triggerLoginSuccess(result)
-                return blSuccess(result)
+                })
+                await triggerLogin(result)
+                return result
             } else {
                 // todo accessToken refreshToken not correct
                 // Get the user's name using Facebook's Graph API
                 const facebookGetMeResponse = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
                 const user = await facebookGetMeResponse.json()
 
-                const result = {
+                const result = blSuccess({
                     accessToken: token,
                     user,
-                }
-                await triggerLoginSuccess(result)
-                return blSuccess(result)
+                })
+                await triggerLogin(result)
+                return result
             }
 
         default :
-            failedResult = blError(EBLMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID)
-            await triggerLoginFailed(failedResult)
-            return failedResult
+            result = blError(EBLMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID)
+            await triggerLogin(result)
+            return result
     }
 };
 
 const firebaseEmailLogin = async (email: string, password: string) => {
     const response = await firebase.auth().signInWithEmailAndPassword(email, password)
+    let result: BLResult;
     if (!response || !response.user) {
-        const failedResult = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NO_RESPONSE_OR_USER)
-        await triggerLoginFailed(failedResult)
-        return failedResult
+        result = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NO_RESPONSE_OR_USER)
+        await triggerLogin(result)
+        return result
     }
     const stringifyRes = firebaseResponseDeal(response)
 
@@ -300,29 +315,28 @@ const firebaseEmailLogin = async (email: string, password: string) => {
     const usersRef = firebase.firestore().collection('users')
     const firestoreDocument = await usersRef.doc(uid).get()
     if (!firestoreDocument.exists) {
-        const failedResult = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NOT_EXIST_USER)
-        await triggerLoginFailed(failedResult)
-        return failedResult
+        result = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NOT_EXIST_USER)
+        await triggerLogin(result)
+        return result
     }
     const user = firestoreDocument.data();
-    const result = {
+    result = blSuccess({
         accessToken: stringifyRes.user.stsTokenManager.accessToken,
         accessTokenExp: stringifyRes.user.stsTokenManager.expirationTime.toString(),
         refreshToken: stringifyRes.user.stsTokenManager.refreshToken,
         user
-    }
-    await triggerLoginSuccess(result)
-    return blSuccess(result)
+    })
+    await triggerLogin(result)
+    return result
 }
 
 const firebaseEmailSignUp = async (email: string, password: string) => {
-    const response = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
+    const response = await firebase.auth().createUserWithEmailAndPassword(email, password)
+    let result: BLResult;
     if (!response || !response.user) {
-        const failedResult = blError(EBLMsg.FIREBASE_EMAIL_SIGN_UP_NO_RESPONSE_OR_USER)
-        await triggerLoginFailed(failedResult)
-        return failedResult
+        result = blError(EBLMsg.FIREBASE_EMAIL_SIGN_UP_NO_RESPONSE_OR_USER)
+        await triggerLogin(result)
+        return result
     }
     const stringifyRes = firebaseResponseDeal(response)
     const uid = stringifyRes.user.uid
@@ -331,17 +345,15 @@ const firebaseEmailSignUp = async (email: string, password: string) => {
         email: email,
     };
     const usersRef = firebase.firestore().collection('users')
-    await usersRef
-        .doc(uid)
-        .set(data);
-    const result = {
+    await usersRef.doc(uid).set(data);
+    result = blSuccess({
         accessToken: stringifyRes.user.stsTokenManager.accessToken,
         accessTokenExp: stringifyRes.user.stsTokenManager.expirationTime.toString(),
         refreshToken: stringifyRes.user.stsTokenManager.refreshToken,
         user: stringifyRes.user
-    }
-    await triggerLoginSuccess(result)
-    return blSuccess(result)
+    })
+    await triggerLogin(result)
+    return result
 
 }
 
@@ -364,18 +376,35 @@ const firebaseConfirmOTP = async (verificationId: string, verificationCode: stri
     const firebasePhoneResponse = await firebase.auth().signInWithCredential(credential)
     const firebaseResponseDealt = firebaseResponseDeal(firebasePhoneResponse)
 
-    const result = {
+    const result = blSuccess({
         accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
         refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
         accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
         user: firebaseResponseDealt.user,
-    }
-    await triggerLoginSuccess(result)
-    return blSuccess(result)
+    })
+    await triggerLogin(result)
+    return result
 }
 
 const firebaseResetPassword = async (email: string) => {
     await firebase.auth().sendPasswordResetEmail(email)
+    return blSuccess(true)
+}
+
+const removePersistenceAuth = async (authParam?: PersistenceAuthParamKey[]) => {
+    if (authParam && authParam.length > 0) {
+        authParam.includes('accessToken') && await AsyncStorage.removeItem(accessTokenPersistenceKey)
+        authParam.includes('accessTokenExp') && await AsyncStorage.removeItem(accessTokenExpPersistenceKey)
+        authParam.includes('refreshToken') && await AsyncStorage.removeItem(refreshTokenPersistenceKey)
+        authParam.includes('refreshTokenExp') && await AsyncStorage.removeItem(refreshTokenExpPersistenceKey)
+        authParam.includes('user') && await AsyncStorage.removeItem(userPersistenceKey)
+        return blSuccess(true)
+    }
+    await AsyncStorage.removeItem(accessTokenPersistenceKey)
+    await AsyncStorage.removeItem(accessTokenExpPersistenceKey)
+    await AsyncStorage.removeItem(refreshTokenExpPersistenceKey)
+    await AsyncStorage.removeItem(refreshTokenPersistenceKey)
+    await AsyncStorage.removeItem(userPersistenceKey)
     return blSuccess(true)
 }
 
@@ -393,7 +422,6 @@ const authTrigger = (triggerType: TriggerType) => {
     EventRegister.emit('authTrigger', triggerType)
 }
 
-
 const checkTokenExp = () => {
     const itvID = setInterval(async () => {
         const refreshTokenExp = await AsyncStorage.getItem(refreshTokenExpPersistenceKey)
@@ -410,11 +438,11 @@ const checkTokenExp = () => {
 }
 
 
-const checkIsSignedInAndSyncToProvider = async () => {
-    const {refreshToken} = await getPersistenceAuth()
-    let isSignedIn = !!refreshToken;
-    EventRegister.emit('checkIsSignedInAndSyncToProvider', isSignedIn)
-    return isSignedIn;
+const checkIsLogin = async () => {
+    const {accessToken} = await getPersistenceAuth()
+    let isLogin = !!accessToken;
+    EventRegister.emit('checkIsLogin', blSuccess(isLogin))
+    return isLogin;
 }
 
 
@@ -436,7 +464,7 @@ export const authLaborContext: AuthLaborContextType = {
         authTrigger
     },
     authResult: {
-        isSignedIn: false,
+        isLogin: false,
         accessToken: '',
         refreshToken: '',
         user: {},

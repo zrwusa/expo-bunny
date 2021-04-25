@@ -28,7 +28,7 @@ export type AccessToken = string | null;
 export type RefreshToken = string | null;
 export type TokenExp = string | null;
 export type AuthResult = {
-    isSignedIn: boolean,
+    isLogin: boolean,
     accessToken: AccessToken,
     refreshToken: RefreshToken,
     user?: User,
@@ -92,7 +92,7 @@ export type AuthContextConfig = {
     storageType?: 'LOCAL_STORAGE' | 'NONE'
 }
 
-
+export type PersistenceAuthParamKey = 'accessToken' | 'accessTokenExp' | 'refreshToken' | 'refreshTokenExp' | 'user'
 export type PersistenceAuthParam = Partial<{
     accessToken: string,
     accessTokenExp: string,

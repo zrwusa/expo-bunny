@@ -9,7 +9,7 @@
     "ThemeProviderLoading": "主题组件加载中",
     "apiNeedLogin": "需要登录",
     "loginSuccess": "登录成功",
-    "signOutSuccess": "已退出登录",
+    "LogOutSuccess": "已退出登录",
     "canceledRequest": "请求已取消"
   },
   "dictionary": {

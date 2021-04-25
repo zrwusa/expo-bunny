@@ -9,7 +9,7 @@
     "ThemeProviderLoading": "Theme Provider loading",
     "apiNeedLogin": "Need to sign in",
     "loginSuccess": "Sign in success",
-    "signOutSuccess": "Sign out success",
+    "LogOutSuccess": "Sign out success",
     "canceledRequest": "Canceled request"
   },
   "dictionary": {

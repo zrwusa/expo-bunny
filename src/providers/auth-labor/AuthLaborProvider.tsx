@@ -1,7 +1,7 @@
 // todo description this provider
 import * as React from "react";
-import {useEffect, useState} from "react";
-import {AuthLaborProviderProps} from "../../types";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import {AuthLaborProviderProps, AuthResult, BLResult} from "../../types";
 import {AuthLaborContext, authLaborContext} from "./AuthLaborContext";
 import {Preparing} from "../../components/Preparing";
 import {useTranslation} from "react-i18next";
@@ -15,27 +15,100 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const st = shortenTFunctionKey(t, 'sys');
     const {authFunctions, authResult} = authLaborContext;
     const [isReady, setIsReady] = useState(false);
-    const [isSignedIn, setIsSignedIn] = useState(authResult.isSignedIn)
-    const [accessToken, setAccessToken] = useState(authResult.accessToken)
-    const [refreshToken, setRefreshToken] = useState(authResult.refreshToken)
-    const [user, setUser] = useState(authResult.user)
-    const [triggerUUID, setTriggerUUID] = useState(authResult.triggerUUID)
-    const [triggerType, setTriggerType] = useState(authResult.triggerType)
-    const [triggerReference, setTriggerReference] = useState(authResult.triggerReference)
+    const [authResultState, setAuthResultState] = useState<AuthResult>(authResult)
+
+    const memoizedAuthResultState = useMemo(() => {
+        debugger
+        return authResultState;
+    }, [JSON.stringify(authResultState)])
+
+    const handleLogin = useCallback((blResult: BLResult) => {
+            const {success, data} = blResult
+            if (success) {
+                debugger
+                const {accessToken, refreshToken, user} = data;
+                setAuthResultState({
+                    accessToken,
+                    refreshToken,
+                    user,
+                    isLogin: true,
+                    triggerReference: '',
+                    triggerUUID: '',
+                    triggerType: 'OTHERS'
+                })
+            } else {
+                setAuthResultState({
+                    accessToken: '',
+                    refreshToken: '',
+                    user: null,
+                    isLogin: false,
+                    triggerReference: '',
+                    triggerUUID: '',
+                    triggerType: 'OTHERS'
+                })
+            }
+        },
+        [])
+
+    const handleCheckIsLogin = useCallback(({data}: BLResult) => {
+        debugger
+        setAuthResultState((preState) => ({...preState, isLogin: data}))
+    }, [])
+
+    const handleAuthTrigger = useCallback((triggerType) => {
+        debugger
+        setAuthResultState((preState) => ({...preState, triggerType, triggerUUID: uuidV4()}))
+    }, [])
+
+    const handleLogOut = useCallback(({success, message}: BLResult) => {
+        if (success) {
+            setAuthResultState({
+                accessToken: '',
+                refreshToken: '',
+                user: null,
+                isLogin: false,
+                triggerReference: '',
+                triggerUUID: '',
+                triggerType: 'OTHERS'
+            })
+        } else {
+
+        }
+
+    }, [])
+
+    const handleBunnyRefreshAuth = useCallback(({success, data, message}: BLResult) => {
+        if (success) {
+            const {accessToken} = data
+            setAuthResultState((preState) => ({...preState, accessToken}))
+        } else {
+            setAuthResultState((preState) => ({...preState, accessToken: ''}))
+        }
+    }, [])
 
     useEffect(() => {
         const bootstrapAsync = async () => {
             const {accessToken, refreshToken, user} = await authFunctions.getPersistenceAuth()
             if (refreshToken) {
-                setAccessToken(accessToken)
-                setRefreshToken(refreshToken)
-                setUser(user)
-                setIsSignedIn(true)
+                setAuthResultState({
+                    accessToken,
+                    refreshToken,
+                    user,
+                    isLogin: true,
+                    triggerReference: '',
+                    triggerUUID: '',
+                    triggerType: 'OTHERS'
+                })
             } else {
-                setAccessToken('')
-                setRefreshToken('')
-                setUser({})
-                setIsSignedIn(false)
+                setAuthResultState({
+                    accessToken: '',
+                    refreshToken: '',
+                    user: null,
+                    isLogin: false,
+                    triggerReference: '',
+                    triggerUUID: '',
+                    triggerType: 'OTHERS'
+                })
             }
         }
         bootstrapAsync()
@@ -44,49 +117,28 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
             })
     }, [])
 
+
     useEffect(() => {
-        const loginSuccessID = EventRegister.on('loginSuccess',
-            (data) => {
-                const {accessToken, refreshToken, user} = data;
-                setAccessToken(accessToken)
-                setRefreshToken(refreshToken)
-                setUser(user)
-                setIsSignedIn(true)
-            })
+        const loginID = EventRegister.on('login', handleLogin)
 
-        const signOutSuccessID = EventRegister.on('signOutSuccess',
-            () => {
-                setAccessToken('')
-                setRefreshToken('')
-                setUser(null)
-                setIsSignedIn(false)
-            })
+        const LogOutID = EventRegister.on('LogOut', handleLogOut)
 
-        const refreshAuthSuccessID = EventRegister.on('refreshAuthSuccess',
-            (accessToken) => {
-                setAccessToken(accessToken)
-            })
+        const bunnyRefreshAuthID = EventRegister.on('bunnyRefreshAuth', handleBunnyRefreshAuth)
 
-        const authTriggerID = EventRegister.on('authTrigger',
-            (triggerType) => {
-                setTriggerType(triggerType)
-                setTriggerUUID(uuidV4())
-            })
 
-        const checkAuthID = EventRegister.on('checkIsSignedInAndSyncToProvider',
-            (isSignedIn) => {
-                setIsSignedIn(isSignedIn)
-            })
+        const authTriggerID = EventRegister.on('authTrigger', handleAuthTrigger)
+
+        const checkAuthID = EventRegister.on('checkIsLogin', handleCheckIsLogin)
 
         return () => {
-            if (typeof loginSuccessID === 'string') {
-                EventRegister.rm(loginSuccessID)
+            if (typeof loginID === 'string') {
+                EventRegister.rm(loginID)
             }
-            if (typeof signOutSuccessID === 'string') {
-                EventRegister.rm(signOutSuccessID)
+            if (typeof LogOutID === 'string') {
+                EventRegister.rm(LogOutID)
             }
-            if (typeof refreshAuthSuccessID === 'string') {
-                EventRegister.rm(refreshAuthSuccessID)
+            if (typeof bunnyRefreshAuthID === 'string') {
+                EventRegister.rm(bunnyRefreshAuthID)
             }
             if (typeof authTriggerID === 'string') {
                 EventRegister.rm(authTriggerID)
@@ -101,15 +153,7 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
         isReady
             ? <AuthLaborContext.Provider
                 value={{
-                    authResult: {
-                        isSignedIn,
-                        accessToken,
-                        refreshToken,
-                        user,
-                        triggerType,
-                        triggerUUID,
-                        triggerReference
-                    },
+                    authResult: memoizedAuthResultState,
                     authFunctions
                 }}>
                 {children}
