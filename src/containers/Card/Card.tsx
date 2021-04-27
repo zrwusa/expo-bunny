@@ -24,7 +24,7 @@ export function Card(props: OutTitleCardProps) {
     const styles = getStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const mergedStyle = [containerStyles.Card, style]
-    debugger
+
     return finalTitleMode === 'OUT'
         ?
         <View>

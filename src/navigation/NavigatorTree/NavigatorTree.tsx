@@ -133,11 +133,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 fontSize: ms.fs.xxl,
                 color: tintColor,
             }}/>,
-        // headerStyle: {
-        //     height: Platform.select({
-        //         web: wp(50),
-        //     })
-        // }
+        headerStyle: {
+            height: Platform.select({
+                web: wp(50),
+            })
+        }
     }
 
     const optionsMergeWithTitle = function (needMerged?: any) {

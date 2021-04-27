@@ -54,7 +54,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             color: colors.text3,
         },
         label: {
-            fontSize: ms.fs.s,
+            fontSize: ms.fs.m,
             color: colors.text,
         },
         caption: {

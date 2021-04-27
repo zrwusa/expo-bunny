@@ -1,5 +1,4 @@
 import * as React from "react";
-import {useEffect} from "react";
 import {ButtonTO, InButtonText, Text, View} from "../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";

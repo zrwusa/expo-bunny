@@ -46,9 +46,9 @@ function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
                 } else {
                     themeName = EThemes.light
                 }
-                changeTheme(themeName).then()
+                await changeTheme(themeName)
             } catch (err) {
-                dispatch(sysError(err.toString()));
+                dispatch(sysError(err));
             }
         }
         bootstrapAsync()

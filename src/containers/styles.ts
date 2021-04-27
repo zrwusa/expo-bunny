@@ -14,6 +14,7 @@ export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor)
             ...card,
             paddingVertical: ms.sp.m,
             paddingHorizontal: ms.sp.l,
+            flex: 1,
         },
         CardInTitle: {
             ...title2,
