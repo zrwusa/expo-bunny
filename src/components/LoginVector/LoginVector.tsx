@@ -71,7 +71,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                             <TextButton style={styles.vectorButton} onPress={async () => {
                                 Keyboard.dismiss()
                                 try {
-                                    const result = await authFunctions.facebookLogin(false)
+                                    const result = await authFunctions.facebookLogin(true)
                                     if (result.success) {
                                         navToReference(route, navigation)
                                     } else {
