@@ -13,7 +13,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             width: wp(375),
             left: 0,
             zIndex: ms.zi.s,
-            backgroundColor: colors.surface2,
+            backgroundColor: colors.background,
             flexDirection: 'row',
             alignItems: 'center',
             padding: ms.sp.m

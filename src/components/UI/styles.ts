@@ -32,7 +32,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         input: {
             height: wp(30),
-            backgroundColor: colors.background,
+            backgroundColor: colors.transparent,
             borderColor: colors.transparent,
             paddingHorizontal: ms.sp.m,
             color: colors.text,

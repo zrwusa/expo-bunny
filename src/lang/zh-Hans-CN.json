@@ -169,7 +169,8 @@
       "resend": "重发",
       "otpSentSuccess": "验证码已发送至您手机",
       "verificationCode": "验证码",
-      "firebaseConfirmOTP": "验证&登录"
+      "firebaseConfirmOTP": "验证&登录",
+      "checkYourEmail": "重置密码邮件已发送"
     },
     "Login": {
       "title": "登录"

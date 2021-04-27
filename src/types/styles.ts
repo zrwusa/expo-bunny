@@ -103,10 +103,12 @@ export type Colors = {
     // background3: string,
     btnBackground: string,
     btnBackground2: string,
+    linearBtnBackground: string[],
     card: string,
     surface: string,
     surface2: string,
     surface3: string,
+    linearSurface: string[],
     paper: string,
     paper2: string,
     // ---end background
@@ -135,6 +137,8 @@ export type Colors = {
     disabled: string,
     placeholder: string,
     backdrop: string,
+    shadow: string,
+    shadow2: string,
     transparent: string,
     // --- end functional
 
@@ -644,9 +648,12 @@ export type Palette = {
     grey750: string,
     grey790: string,
     grey810: string,
+    grey820: string,
     grey850: string,
+    grey890: string,
 
     blueGrey850: string,
+    blueGrey860: string,
     lightGreenA720: string,
     green610: string,
     redA420: string,

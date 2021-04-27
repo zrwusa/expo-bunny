@@ -49,6 +49,7 @@ export type RootStackParam = {
     DemoSagaFirebase: undefined;
     Settings: undefined;
 };
+
 export type DemoTabStackParam = {
     TabHome: undefined;
     TabSettings: { item: string };
@@ -80,7 +81,6 @@ export type DemoTabRNComponentsStackParam = {
     RNVirtualizedList: undefined;
 };
 
-
 export type DemoNestedLv1StackParam = {
     NestedLv1Home: undefined;
     NestedLv1Settings: { item: string };
@@ -107,7 +107,7 @@ export type DemoHealthTabStackParam = {
 };
 export type RouteBase = Route<string, object | undefined>
 
-export type NavigationStackParams = RootStackParam
+export type NavigationStackParamsUnion = RootStackParam
     | DemoTabStackParam
     | DemoDrawerStackParam
     | DemoTabRNComponentsStackParam
@@ -115,8 +115,23 @@ export type NavigationStackParams = RootStackParam
     | DemoNestedLv2StackParam
     | DemoCryptoCurrencyStackParam
     | DemoModalStackParam
+    | DemoHealthTabStackParam
+    | DemoIGStackParam
+    | AuthTopStackParam
 
-export type NavigationStacks = typeof Stacks.RootStack
+export type NavigationStackParamsIntersection = RootStackParam
+    & DemoTabStackParam
+    & DemoDrawerStackParam
+    & DemoTabRNComponentsStackParam
+    & DemoNestedLv1StackParam
+    & DemoNestedLv2StackParam
+    & DemoCryptoCurrencyStackParam
+    & DemoModalStackParam
+    & DemoHealthTabStackParam
+    & DemoIGStackParam
+    & AuthTopStackParam
+
+export type NavigationStacksUnion = typeof Stacks.RootStack
     | typeof Stacks.DemoNestedLv1Stack
     | typeof Stacks.DemoNestedLv2Stack
     | typeof Stacks.DemoTabStack
@@ -124,6 +139,21 @@ export type NavigationStacks = typeof Stacks.RootStack
     | typeof Stacks.DemoCryptoCurrencyStack
     | typeof Stacks.DemoDrawerStack
     | typeof Stacks.DemoModalStack
+    | typeof Stacks.DemoHealthTabStack
+    | typeof Stacks.DemoIGStack
+    | typeof Stacks.AuthTopTabStack
+
+export type NavigationStacksIntersection = typeof Stacks.RootStack
+    & typeof Stacks.DemoNestedLv1Stack
+    & typeof Stacks.DemoNestedLv2Stack
+    & typeof Stacks.DemoTabStack
+    & typeof Stacks.DemoTabRNComponentsStack
+    & typeof Stacks.DemoCryptoCurrencyStack
+    & typeof Stacks.DemoDrawerStack
+    & typeof Stacks.DemoModalStack
+    & typeof Stacks.DemoHealthTabStack
+    & typeof Stacks.DemoIGStack
+    & typeof Stacks.AuthTopTabStack
 
 
 export type NavigatorType = 'stack' | 'tab' | 'drawer' | 'top';
@@ -142,14 +172,7 @@ export type StackConfig = {
     key: string,
     navigatorType: NavigatorType,
     component?: ComponentType<any>,
-    stack?:
-        typeof Stacks.RootStack
-        | typeof Stacks.DemoNestedLv1Stack
-        | typeof Stacks.DemoNestedLv2Stack
-        | typeof Stacks.DemoTabStack
-        | typeof Stacks.DemoTabRNComponentsStack
-        | typeof Stacks.DemoCryptoCurrencyStack
-        | typeof Stacks.DemoDrawerStack,
+    stack?: NavigationStacksUnion
     authScreen?: ComponentType<any>,
     childrenNode?: NavigatorTreeNode[],
     authRequired: boolean,

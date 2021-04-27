@@ -17,6 +17,7 @@ import {AuthTopStackParam, RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {collectBLResult} from "../../store/actions";
+import {navToReference} from "../../helpers";
 
 type FirebasePhoneLoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type FirebasePhoneLoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -47,16 +48,6 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
     const [confirmError, setConfirmError] = React.useState('');
     const [confirmInProgress, setConfirmInProgress] = React.useState(false);
     const isConfigValid = !!FIREBASE_CONFIG.apiKey;
-
-    const navToReference = () => {
-        let referenceRoute;
-        if (route.params && route.params.reference) {
-            referenceRoute = JSON.parse(route.params.reference)
-            navigation.navigate(referenceRoute)
-        } else {
-            navigation.navigate('Home')
-        }
-    }
 
     const firebaseSendOTP = async () => {
         setVerifyError('');
@@ -89,7 +80,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                 setVerificationId('');
                 setVerificationCode('');
                 verificationCodeTextInput.current?.clear();
-                navToReference()
+                navToReference(route, navigation)
             } else {
                 dispatch(collectBLResult(result))
             }

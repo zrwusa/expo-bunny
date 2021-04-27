@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleProp, View, ViewStyle} from "react-native";
+import {FlexStyle, StyleProp, View, ViewStyle} from "react-native";
 import {SizeKeys} from "../../types";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -7,6 +7,7 @@ import {getStyles} from "./styles";
 
 export interface RowProps {
     children?: React.ReactNode,
+    align?: FlexStyle['justifyContent'];
     size?: SizeKeys,
     style?: StyleProp<ViewStyle>
 }
@@ -16,7 +17,7 @@ export type RowSizeMap = {
 }
 
 export const Row = function (props: RowProps) {
-    const {children, size, style} = props
+    const {children, size, style, align = 'flex-start'} = props
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
@@ -34,6 +35,8 @@ export const Row = function (props: RowProps) {
         {
             flexDirection: 'row',
             alignItems: 'center',
+            width: '100%',
+            justifyContent: align,
             paddingVertical: size ? rowSizeMap[size] : 0
         },
         style

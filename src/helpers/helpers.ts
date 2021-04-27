@@ -1,6 +1,7 @@
 import {
     APIConfigName,
     APPConfig,
+    AuthTopStackParam,
     BLResult,
     ErrorClass,
     IcoMoonKeys,
@@ -8,6 +9,7 @@ import {
     IcoMoonSelectionIcon,
     JSONSerializable,
     NavigatorTreeNode,
+    RootStackParam,
     RouteIconFontConfig
 } from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
@@ -16,6 +18,8 @@ import {AuthAPIError, BunnyAPIError, NomicsAPIError, uuidV4} from "../utils";
 import configORG from "../config";
 import _ from "lodash";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json"
+import {RouteProp} from "@react-navigation/native";
+import {StackNavigationProp} from "@react-navigation/stack";
 
 export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -263,4 +267,35 @@ export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
     }
 
 }
-// console.log(JSON.stringify(glyphIcoMoonMap))
+
+// todo be compatible to all StackParam
+export type NavToRoute = RouteProp<AuthTopStackParam, 'Login' | 'SignUp'> ;
+export type NavToNavigation = StackNavigationProp<RootStackParam, 'Auth'>;
+
+export const navToReference = (route: NavToRoute, navigation: NavToNavigation) => {
+    let referenceRoute;
+    // todo maybe nested reference
+    if (route.params && route.params.reference) {
+        referenceRoute = JSON.parse(route.params.reference)
+        navigation.navigate(referenceRoute)
+    } else {
+        navigation.navigate('Home')
+    }
+}
+
+export const navToLogin = (route: NavToRoute, navigation: NavToNavigation) => {
+    if (route.params && route.params.reference) {
+        navigation.navigate('Auth', {screen: 'Login', params: {reference: route.params.reference}})
+    } else {
+        navigation.navigate('Auth', {screen: 'Login'})
+    }
+}
+
+export const navToSignUp = (route: NavToRoute, navigation: NavToNavigation) => {
+    if (route.params && route.params.reference) {
+        navigation.navigate('Auth', {screen: 'SignUp', params: {reference: route.params.reference}})
+    } else {
+        navigation.navigate('Auth', {screen: 'SignUp'})
+    }
+}
+

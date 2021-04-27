@@ -66,7 +66,7 @@ export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, ch
     const mergedStyle = [disabled && LinearGradientButton.disabled, LinearGradientButton.container, style];
     const {theme} = themeLabor;
     const {colors} = theme;
-    const finalColors = disabled ? [colors.disabled, colors.disabled] : [colors.btnBackground, colors.btnBackground2]
+    const finalColors = disabled ? [colors.disabled, colors.disabled] : colors.linearBtnBackground
     return <TouchableOpacity style={mergedStyle} disabled={disabled} {...rest}>
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 0}}
                         style={LinearGradientButton.linearGradient}

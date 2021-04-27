@@ -6,7 +6,8 @@ import {BLResult} from "./bl";
 import {Method} from "axios";
 import {firebase} from "../firebase/firebase";
 
-export type UserRes = {
+export type FirebaseUser = firebase.User
+export type BunnyUser = {
     email: string,
     nickname: string
 }
@@ -14,31 +15,38 @@ export type UserRes = {
 export type AuthRes = {
     accessToken: string | undefined,
     refreshToken: string | undefined,
-    user?: UserRes | null,
+    user?: BunnyUser | null,
 }
 
-export type TriggerType = 'SCREEN' | 'API' | 'MANUAL' | 'AUTO' | 'OTHERS' | undefined
-export type TriggerReference = string | undefined
+export type TriggerType = 'SCREEN' | 'API' | 'MANUAL' | 'AUTO' | 'OTHERS'
+export type TriggerReference = string
 export type FacebookUser = {
     id: string,
     name: string
 }
-export type User = (UserRes | null) | GoogleUser | FacebookUser
+
+export type User = {
+    firebaseUser?: FirebaseUser,
+    bunnyUser?: BunnyUser,
+    googleUser?: GoogleUser,
+    facebookUser?: FacebookUser
+}
+
 export type AccessToken = string | null;
 export type RefreshToken = string | null;
 export type TokenExp = string | null;
 export type AuthResult = {
     isLogin: boolean,
     accessToken: AccessToken,
-    refreshToken: RefreshToken,
+    refreshToken?: RefreshToken,
     user?: User,
-    triggerUUID: string,
-    triggerType: TriggerType,
-    triggerReference: TriggerReference
+    triggerUUID?: string,
+    triggerType?: TriggerType,
+    triggerReference?: TriggerReference
 }
 
 export type PersistenceAuthInfo = {
-    accessToken: AccessToken,
+    accessToken?: AccessToken,
     refreshToken?: RefreshToken,
     accessTokenExp?: TokenExp,
     refreshTokenExp?: TokenExp,

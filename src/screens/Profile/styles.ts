@@ -10,5 +10,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: wp(600)
         },
         tallBlock: {},
+        user: {
+            marginTop: ms.sp.m,
+            padding: ms.sp.l
+        }
     });
 }

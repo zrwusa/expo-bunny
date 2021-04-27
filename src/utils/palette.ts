@@ -313,9 +313,11 @@ export const palette: Palette = {
     grey750: '#5e6977',
     grey790: '#43484d',
     grey810: '#393e42',
+    grey820: '#3B4046',
     grey850: '#272729',
-
+    grey890: '#20242A',
     blueGrey850: '#303337',
+    blueGrey860: '#2B3038',
     lightGreenA720: '#52c41a',
     green610: '#439946',
     redA420: '#ff190c',

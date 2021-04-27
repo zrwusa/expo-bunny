@@ -65,6 +65,8 @@ export enum EBLMsg {
     NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED = "No access token or refresh token responded",
     FIREBASE_EMAIL_LOGIN_NO_RESPONSE_OR_USER = "Firebase email login no response or user",
     FIREBASE_EMAIL_SIGN_UP_NO_RESPONSE_OR_USER = "Firebase email sign up no response or user",
+    FIREBASE_INVALID_USER_CREDENTIAL = "Firebase invalid user credential",
+    FIREBASE_INVALID_CURRENT_USER = "Firebase invalid current user",
     FIREBASE_EMAIL_LOGIN_NOT_EXIST_USER = "User does not exist anymore",
     GOOGLE_LOGIN_CANCELED = "Google login canceled",
     GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS = "Google access token or refresh token not exists",

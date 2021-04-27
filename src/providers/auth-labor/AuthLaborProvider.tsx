@@ -18,45 +18,35 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const [authResultState, setAuthResultState] = useState<AuthResult>(authResult)
 
     const memoizedAuthResultState = useMemo(() => {
-        debugger
         return authResultState;
     }, [JSON.stringify(authResultState)])
 
     const handleLogin = useCallback((blResult: BLResult) => {
             const {success, data} = blResult
             if (success) {
-                debugger
                 const {accessToken, refreshToken, user} = data;
                 setAuthResultState({
                     accessToken,
                     refreshToken,
                     user,
                     isLogin: true,
-                    triggerReference: '',
-                    triggerUUID: '',
-                    triggerType: 'OTHERS'
                 })
             } else {
                 setAuthResultState({
                     accessToken: '',
                     refreshToken: '',
-                    user: null,
+                    user: undefined,
                     isLogin: false,
-                    triggerReference: '',
-                    triggerUUID: '',
-                    triggerType: 'OTHERS'
                 })
             }
         },
         [])
 
     const handleCheckIsLogin = useCallback(({data}: BLResult) => {
-        debugger
         setAuthResultState((preState) => ({...preState, isLogin: data}))
     }, [])
 
     const handleAuthTrigger = useCallback((triggerType) => {
-        debugger
         setAuthResultState((preState) => ({...preState, triggerType, triggerUUID: uuidV4()}))
     }, [])
 
@@ -65,11 +55,8 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
             setAuthResultState({
                 accessToken: '',
                 refreshToken: '',
-                user: null,
+                user: undefined,
                 isLogin: false,
-                triggerReference: '',
-                triggerUUID: '',
-                triggerType: 'OTHERS'
             })
         } else {
 
@@ -89,25 +76,19 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     useEffect(() => {
         const bootstrapAsync = async () => {
             const {accessToken, refreshToken, user} = await authFunctions.getPersistenceAuth()
-            if (refreshToken) {
+            if (accessToken) {
                 setAuthResultState({
                     accessToken,
                     refreshToken,
                     user,
                     isLogin: true,
-                    triggerReference: '',
-                    triggerUUID: '',
-                    triggerType: 'OTHERS'
                 })
             } else {
                 setAuthResultState({
                     accessToken: '',
                     refreshToken: '',
-                    user: null,
+                    user: undefined,
                     isLogin: false,
-                    triggerReference: '',
-                    triggerUUID: '',
-                    triggerType: 'OTHERS'
                 })
             }
         }
@@ -124,7 +105,6 @@ function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
         const LogOutID = EventRegister.on('LogOut', handleLogOut)
 
         const bunnyRefreshAuthID = EventRegister.on('bunnyRefreshAuth', handleBunnyRefreshAuth)
-
 
         const authTriggerID = EventRegister.on('authTrigger', handleAuthTrigger)
 

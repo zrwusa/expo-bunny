@@ -116,7 +116,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
         },
 
         shadow: {
-            shadowColor: colors.backdrop,
+            shadowColor: colors.shadow,
             shadowOffset: {
                 width: 0,
                 height: wp(2),
@@ -127,7 +127,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             backgroundColor: colors.background, // React native bug no background no shadow on iOS
         },
         shadowAround: {
-            shadowColor: colors.backdrop,
+            shadowColor: colors.shadow,
             shadowOffset: {
                 width: wp(0),
                 height: wp(0),

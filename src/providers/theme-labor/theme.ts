@@ -56,24 +56,24 @@ export const getThemeWareHouse = () => {
             // [ReactNavigation]The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
             primary: {
                 light: pl.teal400,
-                dark: pl.orange800,
+                dark: pl.yellowIOS4,
                 indigo: pl.tealA500
             },
             secondary: {
                 light: pl.purple500,
-                dark: pl.greenIOS2,
+                dark: pl.amberA100,
                 indigo: pl.lightBlue630,
             },
             // [ReactNativePaper]secondary color for your app which complements the primary color.
             accent: {
                 light: pl.purple500,
-                dark: pl.greenIOS2,
+                dark: pl.amberA100,
                 indigo: pl.lightBlue630,
             },
             // [ReactNavigation]The color of borders, e.g. header border, tab bar border etc.
             border: {
                 light: pl.grey300,
-                dark: pl.grey850,
+                dark: pl.grey800,
                 indigo: pl.blueIndigo900
             },
             border2: {
@@ -109,7 +109,7 @@ export const getThemeWareHouse = () => {
             },
             buttonText: {
                 light: pl.white,
-                dark: pl.orange50,
+                dark: pl.black900,
                 indigo: pl.blueIndigoA700,
             },
             buttonText2: {
@@ -145,13 +145,13 @@ export const getThemeWareHouse = () => {
             // [ReactNavigation]The color of various backgrounds, such as background color for the screens.
             background: {
                 light: pl.white,
-                dark: pl.black,
+                dark: pl.grey890,
                 indigo: pl.blueIndigoA400
             },
             // [ReactNativePaper]background color for elements containing content, such as cards.
             surface: {
                 light: pl.grey100,
-                dark: pl.black,
+                dark: pl.blueGrey860,
                 indigo: pl.blueIndigoA100
             },
             surface2: {
@@ -164,22 +164,46 @@ export const getThemeWareHouse = () => {
                 dark: pl.grey4IOS3,
                 indigo: pl.blueGrey870
             },
+            linearSurface: [
+                {
+                    light: pl.grey100,
+                    dark: pl.grey810,
+                    indigo: pl.blueIndigoA100
+                },
+                {
+                    light: pl.grey100,
+                    dark: pl.blueGrey850,
+                    indigo: pl.blueIndigoA100
+                }
+            ],
             // [ReactNavigation]The background color of card-like elements, such as headers, tab bars etc.
             card: {
                 light: pl.white,
-                dark: pl.black,
+                dark: pl.grey890,
                 indigo: pl.blueIndigoA700
             },
             btnBackground: {
                 light: pl.teal400,
-                dark: pl.orange800,
+                dark: pl.yellowIOS4,
                 indigo: pl.tealA500
             },
             btnBackground2: {
                 light: pl.purple500,
-                dark: pl.redIOS3,
+                dark: pl.yellowIOS4,
                 indigo: pl.lightBlue630,
             },
+            linearBtnBackground: [
+                {
+                    light: pl.teal400,
+                    dark: pl.yellowIOS4,
+                    indigo: pl.tealA500
+                },
+                {
+                    light: pl.purple500,
+                    dark: pl.yellowIOS4,
+                    indigo: pl.lightBlue630,
+                }
+            ],
             // [ReactNativePaper]background color for snackbars
             onSurface: {
                 light: pl.black,
@@ -254,6 +278,16 @@ export const getThemeWareHouse = () => {
                 dark: color(pl.white).alpha(0.6).rgb().string(),
                 indigo: color(pl.black).alpha(0.9).rgb().string(),
             },
+            shadow: {
+                light: pl.grey6IOS4,
+                dark: pl.black900,
+                indigo: pl.black900,
+            },
+            shadow2: {
+                light: pl.grey6IOS4,
+                dark: pl.grey6IOS4,
+                indigo: pl.grey6IOS4,
+            },
             transparent: {
                 light: pl.transparent,
                 dark: pl.transparent,
@@ -292,6 +326,9 @@ export const getThemeWareHouse = () => {
 const extractThemesFromWarehouse = (arg: unknown, themeName: string) => {
     let themeWarehouseNode = arg as JSONSerializable;
     let themeNode: JSONSerializable = {}
+    if (themeWarehouseNode instanceof Array) {
+        themeNode = []
+    }
     const nodeKeys = Object.keys(themeWarehouseNode)
     nodeKeys.forEach(k => {
         if (!isSameStructure(themeWarehouseNode[k], EThemes)) {

@@ -37,6 +37,13 @@ function HomeScreen({navigation}: HomeScreenProps) {
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, styles.container]}>
+                <Card titleMode="OUT" title={st(`devTools`)}>
+                    <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"/>
+                    <Divider/>
+                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools"/>
+                    <Divider/>
+                    <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
+                </Card>
                 <Card titleMode="OUT" title={st(`navAndRoute`)}>
                     <InlineJump type="LINK" iconName="layout7" text={st(`tab`)} to="/demo-tab/home"/>
                     <Divider/>
@@ -113,13 +120,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
                     {/*    <InButtonText>{st(`demoSuspense`)}</InButtonText></ButtonTO>*/}
                 </Card>
-                <Card titleMode="OUT" title={st(`devTools`)}>
-                    <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"/>
-                    <Divider/>
-                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools"/>
-                    <Divider/>
-                    <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
-                </Card>
+
                 <Card titleMode="OUT" title={st(`others`)}>
                     <InlineJump type="LINK" iconName="bitcoin" text={st(`cryptoCurrency`)} to="/demo-crypto-currency/home"/>
                     <Divider/>

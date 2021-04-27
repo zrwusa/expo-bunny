@@ -6,7 +6,7 @@ import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem, 
 import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
-import {palette} from "../../utils";
+import {palette, uuidV4} from "../../utils";
 import {Card, Col, Row} from "../../containers";
 import {collectBLResult} from "../../store/actions";
 import {blError} from "../../helpers";
@@ -29,7 +29,7 @@ export function ColorFinderScreen() {
     const {themes} = themeLabor;
     const styles = getStyles(sizeLabor, themeLabor)
     const [inputText, setInputText] = useState('')
-    const [colorInput, setColorInput] = useState<ColorInputItem>({text: '', hex: '', RGB: '', HSL: ''})
+    const [colorInput, setColorInput] = useState<ColorInputItem>({text: '', Hex: '', RGB: '', HSL: ''})
     const [similarColorsFromTheme, setSimilarColorsFromTheme] = useState<ColorDiffWithThemeColorsItem[]>([])
     const [similarColorsFromPalette, setSimilarColorsFromPalette] = useState<ColorDiffWithPaletteItem[]>([])
 
@@ -45,6 +45,24 @@ export function ColorFinderScreen() {
             return colorString
         }
     }
+
+    const getIndexedColor = (themColorValue: string, colorKey: string, inputColorText: string, themeName: ThemeName, similarIndexed: ColorDiffWithThemeColorsItem[]) => {
+        const themeColor = colorFaultTolerance(themColorValue)
+        if (themeColor && inputColorText) {
+            const diff = diffColors(themeColor, inputColorText)
+            const indexedColor = {
+                keyInThemeColors: colorKey,
+                Hex: ColorTranslator.toHEX(themeColor),
+                RGB: ColorTranslator.toRGB(themeColor),
+                HSL: ColorTranslator.toHSL(themeColor),
+                diff: diff,
+                diffDes: deltaEDes(diff),
+                themeName
+            };
+            similarIndexed.push(indexedColor)
+        }
+    }
+
     const getSimilarColor = () => {
 
         const inputColorText = colorFaultTolerance(colorInput.text)
@@ -63,27 +81,25 @@ export function ColorFinderScreen() {
             const similarIndexed: ColorDiffWithThemeColorsItem[] = []
             const colorKeys = Object.keys(colors) as ThemeColorKeys[];
             colorKeys.forEach((colorKey) => {
-                const themeColor = colorFaultTolerance(colors[colorKey])
-                if (themeColor && inputColorText) {
-                    const diff = diffColors(themeColor, inputColorText)
-                    const indexedColor = {
-                        keyInThemeColors: colorKey,
-                        hex: ColorTranslator.toHEX(themeColor),
-                        RGB: ColorTranslator.toRGB(themeColor),
-                        HSL: ColorTranslator.toHSL(themeColor),
-                        diff: diff,
-                        diffDes: deltaEDes(diff),
-                        themeName
-                    };
-                    similarIndexed.push(indexedColor)
+                const themColorValue = colors[colorKey]
+                if (themColorValue instanceof Array) {
+                    // todo
+                    // themColorValue.forEach((value: string,index) => {
+                    //     getIndexedColor(value, colorKey+`[${index}]`, inputColorText, themeName, similarIndexed)
+                    // })
+                } else {
+                    getIndexedColor(themColorValue, colorKey, inputColorText, themeName, similarIndexed)
                 }
+
             })
             const sortedSimilarIndexed = similarIndexed.sort((a, b) => {
                 return a.diff - b.diff
             })
             const similarObj = sortedSimilarIndexed[0];
             _similarColorsFromTheme.push(similarObj);
-
+            // _similarColorsFromTheme.push(sortedSimilarIndexed[1]);
+            // _similarColorsFromTheme.push(sortedSimilarIndexed[2]);
+            // _similarColorsFromTheme.push(sortedSimilarIndexed[3]);
         })
         setSimilarColorsFromTheme(_similarColorsFromTheme)
 
@@ -95,7 +111,7 @@ export function ColorFinderScreen() {
                 const diff = diffColors(paletteColor, inputColorText)
                 const indexedColor = {
                     keyInPalette: colorKey,
-                    hex: ColorTranslator.toHEX(paletteColor),
+                    Hex: ColorTranslator.toHEX(paletteColor),
                     RGB: ColorTranslator.toRGB(paletteColor),
                     HSL: ColorTranslator.toHSL(paletteColor),
                     diff: diff,
@@ -134,14 +150,14 @@ export function ColorFinderScreen() {
         if (_text) {
             setColorInput({
                 text: _text,
-                hex: ColorTranslator.toHEX(_text),
+                Hex: ColorTranslator.toHEX(_text),
                 RGB: ColorTranslator.toRGB(_text),
                 HSL: ColorTranslator.toHSL(_text),
             })
         } else {
             setColorInput({
                 text: '',
-                hex: '',
+                Hex: '',
                 RGB: '',
                 HSL: ''
             })
@@ -173,7 +189,7 @@ export function ColorFinderScreen() {
                                        autoCapitalize='none'
                             />
                         </Col>
-                        <Col size={2}></Col>
+                        <Col size={2}/>
                         <Col size={20}>
                             <ButtonTO onPress={handleSimilarColor}>
                                 <InButtonText>{st('findSimilarColors')}</InButtonText>
@@ -206,7 +222,7 @@ export function ColorFinderScreen() {
                 <Card titleMode="OUT" title={st('similarColorsFromThemes')}>
                     {
                         similarColorsFromTheme.map(similarColorItem => {
-                            return <View key={similarColorItem.themeName}>
+                            return <View key={uuidV4()}>
                                 <Row size="m" style={styles.row}>
                                     <Text>Diff</Text>
                                     <Text>{similarColorItem.diff.toFixed(2)}</Text>

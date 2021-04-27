@@ -28,17 +28,19 @@ export function IconToolsScreen() {
     return (
         <ScrollView style={{flex: 1}}>
             <View style={styles.container}>
+
                 <Card title={st('generateIcoMoonConfigTitle')}>
-                    <TextInput style={{height: Math.max(35, inputHeight)}}
+                    <Row size="l" align="center">
+                        <ButtonTO onPress={handleGenerate}><InButtonText>{st('generate')}</InButtonText></ButtonTO>
+                    </Row>
+                    <TextInput style={{height: Math.max(35, inputHeight), overflow: 'hidden'}}
                                multiline
                                editable={false}
                                onContentSizeChange={(event) => {
                                    setInputHeight(event.nativeEvent.contentSize.height)
                                }}
                                value={glyph}/>
-                    <Row size="l">
-                        <ButtonTO onPress={handleGenerate}><InButtonText>{st('generate')}</InButtonText></ButtonTO>
-                    </Row>
+
                 </Card>
             </View>
         </ScrollView>

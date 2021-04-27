@@ -169,7 +169,8 @@
       "resend": "Resend",
       "otpSentSuccess": "A verification code has been sent to your phone",
       "verificationCode": "Verification Code",
-      "firebaseConfirmOTP": "Confirm Verification Code"
+      "firebaseConfirmOTP": "Confirm Verification Code",
+      "checkYourEmail": "Check your email"
     },
     "Login": {
       "title": "Login"

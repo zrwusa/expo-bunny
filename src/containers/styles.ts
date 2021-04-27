@@ -12,7 +12,7 @@ export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor)
         Card: {
             ...shadowAround,
             ...card,
-            marginVertical: ms.sp.m,
+            paddingVertical: ms.sp.m,
             paddingHorizontal: ms.sp.l,
         },
         CardInTitle: {

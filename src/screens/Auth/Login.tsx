@@ -19,6 +19,7 @@ import {LoginVector} from "../../components/LoginVector";
 import {FirebasePhoneLogin} from "../../components/FirebasePhoneLogin";
 import {Tab} from "../../components/Tab";
 import {ForgotPassword} from "../../components/ForgotPassword";
+import {navToReference} from "../../helpers";
 
 type LoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type LoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -45,32 +46,13 @@ export function LoginScreen({route, navigation}: LoginProps) {
     const [loginMethod, setLoginMethod] = useState('email')
     const [isForgot, setIsForgot] = useState(false)
 
-
-    const navToReference = () => {
-        let referenceRoute;
-        if (route.params && route.params.reference) {
-            referenceRoute = JSON.parse(route.params.reference)
-            navigation.navigate(referenceRoute)
-        } else {
-            navigation.navigate('Home')
-        }
-    }
-    const navToSignUp = () => {
-        if (route.params && route.params.reference) {
-            navigation.navigate('Auth', {screen: 'SignUp', params: {reference: route.params.reference}})
-
-        } else {
-            navigation.navigate('Auth', {screen: 'SignUp'})
-        }
-    }
-
     const firebaseEmailLogin = async () => {
         Keyboard.dismiss()
         // todo can not use await to catch error,wait for Firebase to resolve this bug
         try {
             const result = await authFunctions.firebaseEmailLogin(email, password)
             if (result.success) {
-                navToReference()
+                navToReference(route, navigation)
             } else {
                 dispatch(collectBLResult(result))
             }
@@ -84,7 +66,7 @@ export function LoginScreen({route, navigation}: LoginProps) {
         try {
             const result = await authFunctions.bunnyLogin({email, password})
             if (result.success) {
-                navToReference()
+                navToReference(route, navigation)
             } else {
                 dispatch(collectBLResult(result))
             }

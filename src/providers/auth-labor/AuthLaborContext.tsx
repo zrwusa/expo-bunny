@@ -20,10 +20,10 @@ import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, FACEBOOK_APP_ID, IOS_CLIE
 import _ from "lodash";
 import {blError, blSuccess} from "../../helpers";
 import {EventRegister} from "react-native-event-listeners";
-// import * as AppAuth from "expo-app-auth";
 import {firebase} from "../../firebase/firebase";
 import * as Facebook from "expo-facebook";
 
+// import * as AppAuth from "expo-app-auth";
 // // When configured correctly, URLSchemes should contain your REVERSED_CLIENT_ID
 // const {URLSchemes} = AppAuth;
 // console.log('---URLSchemes', URLSchemes)
@@ -57,12 +57,6 @@ const {
     loginAPIMethod, signUpAPIMethod, refreshAPIPath, refreshTokenValuePath,
     userValuePath
 } = config;
-
-
-const firebaseResponseDeal = (response: any) => {
-    return JSON.parse(JSON.stringify(response))
-}
-
 
 const persistenceAuth = async ({accessToken, refreshToken, user, accessTokenExp, refreshTokenExp}: PersistenceAuthParam) => {
     accessToken && await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken)
@@ -111,7 +105,7 @@ const loginOrSignUp = async (res: any) => {
         return result;
     }
 
-    result = blSuccess({accessToken, accessTokenExp, refreshToken, refreshTokenExp, user})
+    result = blSuccess({accessToken, accessTokenExp, refreshToken, refreshTokenExp, user: {bunnyUser: user}})
     await triggerLogin(result)
     return result
 }
@@ -203,55 +197,61 @@ const googleLogin = async (isFirebase: boolean) => {
     });
     let result: BLResult;
     if (!googleResponse) {
-        const result = blError(EBLMsg.NO_GOOGLE_LOGIN_RESULT)
-        await triggerLogin(result)
-        return result
+        result = blError(EBLMsg.NO_GOOGLE_LOGIN_RESULT)
     }
     switch (googleResponse.type) {
         case 'cancel':
             result = blError(EBLMsg.GOOGLE_LOGIN_CANCELED)
-            await triggerLogin(result)
-            return result
+            break;
         case 'success':
             const {idToken, accessToken, refreshToken, user} = googleResponse;
             if (!accessToken || !refreshToken) {
                 result = blError(EBLMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS)
-                await triggerLogin(result)
-                return result
             }
-
             if (isFirebase) {
                 await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
                 const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
-                const firebaseResponse = await firebase.auth().signInWithCredential(credential);
-                const firebaseResponseDealt = firebaseResponseDeal(firebaseResponse)
-                const result = blSuccess({
-                    accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
-                    refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
-                    accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
-                    user: firebaseResponse.user,
-                })
-                await triggerLogin(result)
-                return result
+                const userCredential = await firebase.auth().signInWithCredential(credential);
+                result = await firebaseLoginResult(userCredential)
             } else {
-                const result = blSuccess({
+                result = blSuccess({
                     accessToken,
                     refreshToken,
-                    user,
+                    user: {googleUser: user},
                 })
-                await triggerLogin(result)
-                return result
             }
+            break;
         default:
             result = blError(EBLMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID)
-            await triggerLogin(result)
-            return result
+            break;
     }
+    await triggerLogin(result)
+    return result
 };
+
+const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential) => {
+    if (!userCredential || !userCredential.user) {
+        return blError(EBLMsg.FIREBASE_INVALID_USER_CREDENTIAL)
+    }
+    let idToken: string, user: firebase.User;
+    const currentUser = firebase.auth().currentUser
+    if (currentUser) {
+        idToken = await currentUser.getIdToken()
+        // todo in web platform firebase return value confused, mess fields need toJSON
+        user = currentUser.toJSON() as firebase.User
+        return blSuccess({
+            accessToken: idToken,
+            refreshToken: user.refreshToken,
+            // accessTokenExp: user.expirationTime.toString(),
+            user: {firebaseUser: user},
+        })
+    } else {
+        return blError(EBLMsg.FIREBASE_INVALID_CURRENT_USER)
+    }
+}
 
 const facebookLogin = async (isFirebase: boolean) => {
     let result: BLResult;
-
     await Facebook.initializeAsync({
         appId: FACEBOOK_APP_ID,
     });
@@ -262,96 +262,70 @@ const facebookLogin = async (isFirebase: boolean) => {
     switch (type) {
         case 'cancel':
             result = blError(EBLMsg.FACEBOOK_LOGIN_CANCELED)
-            await triggerLogin(result)
-            return result
+            break;
         case 'success':
             // @ts-ignore
             const {token} = facebookResponse;
             if (isFirebase) {
                 const credential = firebase.auth.FacebookAuthProvider.credential(token);
-                const firebaseResponse = await firebase.auth().signInWithCredential(credential)
-                const firebaseResponseDealt = firebaseResponseDeal(firebaseResponse)
-
-                const result = blSuccess({
-                    accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
-                    refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
-                    accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
-                    user: firebaseResponseDealt.user,
-                })
-                await triggerLogin(result)
-                return result
+                const userCredential = await firebase.auth().signInWithCredential(credential)
+                result = await firebaseLoginResult(userCredential)
             } else {
                 // todo accessToken refreshToken not correct
                 // Get the user's name using Facebook's Graph API
                 const facebookGetMeResponse = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
                 const user = await facebookGetMeResponse.json()
-
-                const result = blSuccess({
+                result = blSuccess({
                     accessToken: token,
-                    user,
+                    user: {facebookUser: user},
                 })
-                await triggerLogin(result)
-                return result
             }
-
+            break;
         default :
             result = blError(EBLMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID)
-            await triggerLogin(result)
-            return result
+            break;
     }
+    await triggerLogin(result)
+    return result
 };
+// firebase.auth().onAuthStateChanged((authUser) => {
+//     console.log(authUser)
+// });
+
+// firebase.auth().onIdTokenChanged(token => {})
 
 const firebaseEmailLogin = async (email: string, password: string) => {
-    const response = await firebase.auth().signInWithEmailAndPassword(email, password)
-    let result: BLResult;
-    if (!response || !response.user) {
-        result = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NO_RESPONSE_OR_USER)
-        await triggerLogin(result)
-        return result
-    }
-    const stringifyRes = firebaseResponseDeal(response)
+    const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password)
+    const result = await firebaseLoginResult(userCredential)
 
-    const uid = response.user.uid
-    const usersRef = firebase.firestore().collection('users')
-    const firestoreDocument = await usersRef.doc(uid).get()
-    if (!firestoreDocument.exists) {
-        result = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NOT_EXIST_USER)
-        await triggerLogin(result)
-        return result
-    }
-    const user = firestoreDocument.data();
-    result = blSuccess({
-        accessToken: stringifyRes.user.stsTokenManager.accessToken,
-        accessTokenExp: stringifyRes.user.stsTokenManager.expirationTime.toString(),
-        refreshToken: stringifyRes.user.stsTokenManager.refreshToken,
-        user
-    })
+    // const uid = response.user.uid
+    // const usersRef = firebase.firestore().collection('users')
+    //
+    // const firestoreDocument = await usersRef.doc(uid).get()
+    // if (!firestoreDocument.exists) {
+    //     result = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NOT_EXIST_USER)
+    //     await triggerLogin(result)
+    //     return result
+    // }
+    // const user = firestoreDocument.data();
+
+    // const xxx = firebase.auth().currentUser?.toJSON() as firebase.User
+
     await triggerLogin(result)
     return result
 }
 
 const firebaseEmailSignUp = async (email: string, password: string) => {
-    const response = await firebase.auth().createUserWithEmailAndPassword(email, password)
-    let result: BLResult;
-    if (!response || !response.user) {
-        result = blError(EBLMsg.FIREBASE_EMAIL_SIGN_UP_NO_RESPONSE_OR_USER)
-        await triggerLogin(result)
-        return result
-    }
-    const stringifyRes = firebaseResponseDeal(response)
-    const uid = stringifyRes.user.uid
-    const data = {
-        id: uid,
-        email: email,
-    };
-    const usersRef = firebase.firestore().collection('users')
-    await usersRef.doc(uid).set(data);
-    result = blSuccess({
-        accessToken: stringifyRes.user.stsTokenManager.accessToken,
-        accessTokenExp: stringifyRes.user.stsTokenManager.expirationTime.toString(),
-        refreshToken: stringifyRes.user.stsTokenManager.refreshToken,
-        user: stringifyRes.user
-    })
+    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password)
+
+    // const uid = stringifyRes.user.uid
+    // const data = {
+    //     id: uid,
+    //     email: email,
+    // };
+    // const usersRef = firebase.firestore().collection('users')
+    // await usersRef.doc(uid).set(data);
+    const result = await firebaseLoginResult(userCredential)
     await triggerLogin(result)
     return result
 
@@ -373,15 +347,9 @@ const firebaseConfirmOTP = async (verificationId: string, verificationCode: stri
         verificationId,
         verificationCode
     );
-    const firebasePhoneResponse = await firebase.auth().signInWithCredential(credential)
-    const firebaseResponseDealt = firebaseResponseDeal(firebasePhoneResponse)
+    const userCredential = await firebase.auth().signInWithCredential(credential)
 
-    const result = blSuccess({
-        accessToken: firebaseResponseDealt.user.stsTokenManager.accessToken,
-        refreshToken: firebaseResponseDealt.user.stsTokenManager.refreshToken,
-        accessTokenExp: firebaseResponseDealt.user.stsTokenManager.expirationTime.toString(),
-        user: firebaseResponseDealt.user,
-    })
+    const result = await firebaseLoginResult(userCredential)
     await triggerLogin(result)
     return result
 }
@@ -415,7 +383,7 @@ const getPersistenceAuth = async () => {
     const user = await AsyncStorage.getItem(userPersistenceKey)
     const accessTokenExp = await AsyncStorage.getItem(accessTokenExpPersistenceKey)
     const refreshTokenExp = await AsyncStorage.getItem(refreshTokenExpPersistenceKey)
-    return {accessToken, accessTokenExp, refreshToken, refreshTokenExp, user: user ? JSON.parse(user) as User : null};
+    return {accessToken, accessTokenExp, refreshToken, refreshTokenExp, user: user ? JSON.parse(user) as User : undefined};
 }
 
 const authTrigger = (triggerType: TriggerType) => {

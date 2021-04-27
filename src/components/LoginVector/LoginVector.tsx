@@ -15,6 +15,7 @@ import {useDispatch} from "react-redux";
 import {RouteProp} from "@react-navigation/native";
 import {AuthTopStackParam, RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {navToReference} from "../../helpers";
 
 type LoginVectorRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type LoginVectorNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -35,17 +36,6 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
     const {authFunctions} = useAuthLabor()
     const dispatch = useDispatch();
 
-
-    const navToReference = () => {
-        let referenceRoute;
-        if (route.params && route.params.reference) {
-            referenceRoute = JSON.parse(route.params.reference)
-            navigation.navigate(referenceRoute)
-        } else {
-            navigation.navigate('Home')
-        }
-    }
-
     return <View>
         <Row style={styles.orRow}>
             <Col>
@@ -65,7 +55,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                     Keyboard.dismiss()
                     try {
                         await authFunctions.dummyLogin()
-                        navToReference()
+                        navToReference(route, navigation)
                     } catch (e) {
                         dispatch(sysError(e))
                     }
@@ -83,7 +73,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                 try {
                                     const result = await authFunctions.facebookLogin(false)
                                     if (result.success) {
-                                        navToReference()
+                                        navToReference(route, navigation)
                                     } else {
                                         dispatch(collectBLResult(result))
                                     }
@@ -101,7 +91,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                 try {
                                     const result = await authFunctions.googleLogin(true)
                                     if (result.success) {
-                                        navToReference()
+                                        navToReference(route, navigation)
                                     } else {
                                         dispatch(collectBLResult(result))
                                     }

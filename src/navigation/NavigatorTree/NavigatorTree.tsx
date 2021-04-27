@@ -91,7 +91,6 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const sizeLabor = useSizeLabor();
     const {ms, designsBasedOn} = sizeLabor;
     const {authResult, authFunctions} = useAuthLabor()
-    console.log('---authResult', '\'' + JSON.stringify(authResult) + '\'')
     const dispatch = useDispatch();
     const {wp} = designsBasedOn.iphoneX;
     const themeLabor = useThemeLabor();
@@ -134,11 +133,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 fontSize: ms.fs.xxl,
                 color: tintColor,
             }}/>,
-        headerStyle: {
-            height: Platform.select({
-                web: wp(50),
-            })
-        }
+        // headerStyle: {
+        //     height: Platform.select({
+        //         web: wp(50),
+        //     })
+        // }
     }
 
     const optionsMergeWithTitle = function (needMerged?: any) {
@@ -273,7 +272,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 navigationRef.current.navigate('Auth', {screen: 'Login'})
                 return
             }
-            if (curRoute.name !== 'Auth') {
+            if (!['Login', 'SignUp'].includes(curRoute.name)) {
                 navigationRef.current.navigate('Auth', {screen: 'Login', params: {reference: JSON.stringify(curRoute)}})
             } else {
                 return
@@ -293,10 +292,12 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 navigateToAuth()
                 break;
             case "AUTO":
-                dispatch(collectBLResult(blSuccess(undefined, t('sys.LogOutSuccess'))))
+                dispatch(collectBLResult(blSuccess(true, t('sys.LogOutSuccess'))))
                 break;
             case "OTHERS":
                 navigateToAuth()
+                break;
+            default:
                 break;
         }
     }, [authResult.triggerUUID])

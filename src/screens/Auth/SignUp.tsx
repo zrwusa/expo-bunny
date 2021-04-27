@@ -17,6 +17,7 @@ import {collectBLResult, sysError} from "../../store/actions";
 import {LoginVector} from "../../components/LoginVector";
 import {getSharedStyles} from "../../helpers/shared-styles";
 import {getStyles} from "./styles";
+import {navToReference} from "../../helpers";
 
 type SignUpRouteProp = RouteProp<AuthTopStackParam, 'SignUp'>;
 type SignUpNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -41,30 +42,13 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const navToReference = () => {
-        let referenceRoute;
-        if (route.params && route.params.reference) {
-            referenceRoute = JSON.parse(route.params.reference)
-            navigation.navigate(referenceRoute)
-        } else {
-            navigation.navigate('Home')
-        }
-    }
-    const navToLogin = () => {
-        if (route.params && route.params.reference) {
-            navigation.navigate('Auth', {screen: 'Login', params: {reference: route.params.reference}})
-
-        } else {
-            navigation.navigate('Auth', {screen: 'Login'})
-        }
-    }
 
     const firebaseEmailSignUp = async () => {
         Keyboard.dismiss()
         try {
             const result = await authFunctions.firebaseEmailSignUp(username, password)
             if (result.success) {
-                navToReference()
+                navToReference(route, navigation)
             } else {
                 dispatch(collectBLResult(result))
             }
@@ -78,7 +62,7 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
         try {
             const result = await authFunctions.bunnySignUp({email: username, password: password})
             if (result.success) {
-                navToReference()
+                navToReference(route, navigation)
             } else {
                 dispatch(collectBLResult(result))
             }
