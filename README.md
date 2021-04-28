@@ -4,6 +4,8 @@ We don't want a complicated project, what we want is a collection of samples bas
 
 ![Demo](https://raw.githubusercontent.com/zrwusa/assets/master/images/ad.gif)
 
+
+
 # Architecture principles
 ## Type Safety
 
@@ -23,6 +25,9 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 
 <!--## SOLID patterns,UML diagram-->
 
+
+
+
 # Tech Stack
 
 - React Native,
@@ -31,6 +36,9 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 - Expo,
 - Firbase
 - Next.js for deploying
+
+
+
 
 # Principles
 
@@ -69,6 +77,9 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 </tbody>
 </table>
 
+
+
+
 # Preview
 
 ## Online Simples
@@ -93,6 +104,9 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 // start your emulator
 // drag the downloaded apk file to emulator
 ```
+
+
+
 
 # Installation & Dev
 ## Installation
