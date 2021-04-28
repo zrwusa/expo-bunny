@@ -178,9 +178,10 @@ hp: height to DP based on your designs
 You can define multiple design configurations, because your designs are often not designed by the same designer
 
 ### For Firebase & Google API
-Create a .env file
+Create a .env file at project root path
 
 ---.env  start
+
 IOS_CLIENT_ID_FOR_EXPO=111111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
 ANDROID_CLIENT_ID_FOR_EXPO=111111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
 IOS_CLIENT_ID=111111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
@@ -198,6 +199,7 @@ FIREBASE_APP_ID_ANDROID=1:111111111111:android:xxxxxxxxxxxxxxxxxxxxxx
 FIREBASE_STORAGE_BUCKET=xxxxxxxxxxxxxxxx.appspot.com
 FIREBASE_MESSAGING_SENDER_ID=111111111111
 FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
+
 ---.env end
 
 Download your GoogleService-Info.plist for iOS from your Firebase Console to project root path
