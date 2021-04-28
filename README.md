@@ -1,6 +1,15 @@
 # expo-react-bunny
 We don't want a complicated project, what we want is a collection of samples based on cutting-edge technologies.
 
+
+![Demo](https://raw.githubusercontent.com/zrwusa/assets/master/images/ad.gif)
+
+<!-- blank line -->
+<figure class="video_container">
+  <iframe src="https://raw.githubusercontent.com/zrwusa/assets/master/images/perfect-ad.mp4" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
+<!-- blank line -->
+
 # Architecture principles
 ## Type Safety
 
@@ -30,13 +39,13 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 
 # Principles
 
-###1.Don’t repeat yourself (DRY) 
+### 1.Don’t repeat yourself (DRY) 
 
-###2.Do one thing (DOT) (from Unix philosophy) 
+### 2.Do one thing (DOT) (from Unix philosophy) 
 
-###3.Separation of concerns 
+### 3.Separation of concerns 
 
-###4.The principle of the least knowledge (Law of Demeter)
+### 4.The principle of the least knowledge (Law of Demeter)
 
 
 <table>
@@ -189,12 +198,12 @@ yarn next
 ## Online Simples
 [Expo online deployed stable](https://expo.io/@zrwusa/projects/expo-react-bunny)
 
-[Web Next.js online deployed stable](https://expo-react-bunny-r0lgewwmn.vercel.app)
+[Web Next.js online deployed stable](https://expo-react-bunny-akodd3mj6-zrwusa.vercel.app)
 
 [Web Next.js online deployed latest](https://expo-react-bunny.vercel.app)
 
 ## Downloads
-[App iOS for simulator stable](https://expo.io/artifacts/1f58c134-13f1-4021-9a63-b436bfda8a4b)
+[App iOS for simulator stable](https://expo.io/artifacts/6a35db9b-add3-4354-8a8a-aae443c27054)
 
 ```sh
 gunzip -c expo-react-bunny-9ed62349-af09-4cf9-8a33-d52cdd3c01a4-simulator.tar.gz | tar xopf -
@@ -203,7 +212,7 @@ xcrun simctl install booted ./expo-react-bunny.app
 xcrun simctl launch booted com.zrwusa.expo-react-bunny
 ```
 
-[App Android apk stable](https://expo.io/artifacts/28b3cb5d-536d-4ee2-a2f9-6f2a4eaef61a)
+[App Android apk stable](https://expo.io/artifacts/9c50a817-aa38-4dbd-83b3-1fb07073b3b4)
 ```sh
 // start your emulator
 // drag the downloaded apk file to emulator
