@@ -4,12 +4,6 @@ We don't want a complicated project, what we want is a collection of samples bas
 
 ![Demo](https://raw.githubusercontent.com/zrwusa/assets/master/images/ad.gif)
 
-<!-- blank line -->
-<figure class="video_container">
-  <iframe src="https://raw.githubusercontent.com/zrwusa/assets/master/images/perfect-ad.mp4" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
-<!-- blank line -->
-
 # Architecture principles
 ## Type Safety
 
