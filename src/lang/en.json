@@ -309,7 +309,9 @@
     },
     "IconTools": {
       "title": "Icon Tools",
-      "generateIcoMoonConfigTitle": "Generate IcoMoon Config",
+      "generateIcoMoonConfigTitle": "Generate IcoMoon JSON",
+      "icoMoonConfigPath": "src/assets/fonts/icomoon-cus/icomoon.json",
+      "copyTip": "Press text to copy,then paste to file below",
       "generate": "generate"
     },
     "Settings": {

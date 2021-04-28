@@ -94,7 +94,7 @@ function DemoShareScreen() {
                             {st(`pressButtonTip`)}
                         </Text>
                         <ButtonTO onPress={openImagePicker}>
-                            <InButtonText >{st(`pickAPhoto`)}</InButtonText>
+                            <InButtonText>{st(`pickAPhoto`)}</InButtonText>
                         </ButtonTO>
                     </View>
             }

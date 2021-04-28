@@ -310,6 +310,8 @@
     "IconTools": {
       "title": "图标工具",
       "generateIcoMoonConfigTitle": "生成IcoMoon配置",
+      "icoMoonConfigPath": "src/assets/fonts/icomoon-cus/icomoon.json",
+      "copyTip": "点击文本，然后粘贴到如下文件",
       "generate": "生成"
     },
     "Settings": {

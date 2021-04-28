@@ -21,7 +21,7 @@ export interface LineToProps {
 }
 
 export function InlineJump(props: LineToProps) {
-    const {iconName, iconSize, text, to, type, onNav} = props;
+    const {iconName, iconSize = 22, text, to, type, onNav} = props;
     const {t} = useTranslation();
     const linkTo = useLinkTo();
     const sizeLabor = useSizeLabor();
@@ -37,7 +37,7 @@ export function InlineJump(props: LineToProps) {
             <Row size="xl">
                 <Col size={3}>
                     <Row>
-                        <LinearGradientIcon size={iconSize} name={iconName}/>
+                        <LinearGradientIcon size={wp(iconSize)} name={iconName}/>
                         <Text style={styles.label}>{text}</Text>
                     </Row>
                 </Col>

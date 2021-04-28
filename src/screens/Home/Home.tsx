@@ -40,7 +40,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 <Card titleMode="OUT" title={st(`devTools`)}>
                     <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools"/>
+                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools" iconSize={20}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
                 </Card>
@@ -50,24 +50,25 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <InlineJump type="LINK" iconName="layout" text={st(`drawer`)} to="/demo-drawer/home"/>
                     <Divider/>
 
-                    <InlineJump type="LINK" iconName="profile1" text={st(`profile`) + `(LinkButton)`} to="/profile/002"/>
+                    <InlineJump type="LINK" iconName="profile-male" text={st(`profile`) + `(LinkButton)`} to="/profile/001" iconSize={18}/>
                     <Divider/>
-                    <InlineJump type="LINK_TO" iconName="profile1" text={st(`profile`) + '(useLinkTo)'} to="/profile/002"/>
+                    <InlineJump type="LINK_TO" iconName="profile-male" text={st(`profile`) + '(useLinkTo)'} to="/profile/002" iconSize={18}/>
                     <Divider/>
 
-                    <InlineJump type="NAV" onNav={() => navigation.navigate('Profile', {id: '002'})} iconName="profile1"
-                                text={st(`profile`) + '(TouchableOpacity)'}/>
+                    <InlineJump type="NAV" onNav={() => navigation.navigate('Profile', {id: '003'})} iconName="profile-male"
+                                text={st(`profile`) + '(TouchableOpacity)'} iconSize={18}/>
                     <Divider/>
 
                     <InlineJump type="NAV" onNav={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}
                                 iconName="adjustments"
-                                text={st(`route`) + '(TouchableOpacity)'}/>
+                                text={st(`route`) + '(TouchableOpacity)'} iconSize={18}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="adjustments" text={st(`route`) + `(Link)`} to="/demo-route?id=1&isHuman=false&sort=top"/>
+                    <InlineJump type="LINK" iconName="adjustments" text={st(`route`) + `(Link)`} to="/demo-route?id=1&isHuman=false&sort=top"
+                                iconSize={18}/>
                     <Divider/>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
                     {/*    <InButtonText>{st(`demoModal`)}</InButtonText></ButtonTO>*/}
-                    <InlineJump type="LINK" iconName="adjustments" text={st(`nestedNavigation`)} to="/demo-nested/home"/>
+                    <InlineJump type="LINK" iconName="adjustments" text={st(`nestedNavigation`)} to="/demo-nested/home" iconSize={18}/>
                     <Divider/>
 
                     <InlineJump type="NAV" onNav={() =>
@@ -80,17 +81,17 @@ function HomeScreen({navigation}: HomeScreenProps) {
                                     itemlv2: "002"
                                 },
                             },
-                        })} iconName="leaf" text={st(`passParamsFromRootToLeaf`) + '(TouchableOpacity)'}/>
+                        })} iconName="sitemap1" text={st(`passParamsFromRootToLeaf`) + '(TouchableOpacity)'}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="leaf" text={st(`passParamsFromRootToLeaf`) + `(Link)`}
+                    <InlineJump type="LINK" iconName="sitemap1" text={st(`passParamsFromRootToLeaf`) + `(Link)`}
                                 to="/demo-nested/settings/001/lv2-settings/002"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="leaf" text={st(`passParamsFromRootToLeafTab`) + `(Link)`} to="/demo-tab/settings/item-001"/>
+                    <InlineJump type="LINK" iconName="sitemap1" text={st(`passParamsFromRootToLeafTab`) + `(Link)`} to="/demo-tab/settings/item-001"/>
                 </Card>
                 <Card titleMode="OUT" title={st(`redux`)}>
                     <InlineJump type="LINK" iconName="puzzle" text={st(`FCReduxHook`)} to="/demo-fc-redux-hook"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="gears" text={st(`thunkCC`)} to="/demo-thunk-cc"/>
+                    <InlineJump type="LINK" iconName="gears" text={st(`thunkCC`)} to="/demo-thunk-cc" iconSize={18}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="tools" text={st(`saga`)} to="/demo-saga"/>
                     <Divider/>
@@ -98,11 +99,11 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 </Card>
                 <Card titleMode="OUT" title={st(`nativeCapabilities`)}>
 
-                    <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map"/>
+                    <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map" iconSize={18}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="chat" text={st(`chat`)} to="/demo-chat"/>
+                    <InlineJump type="LINK" iconName="chat3" text={st(`chat`)} to="/demo-chat" iconSize={17}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="share" text={st(`share`)} to="/demo-share"/>
+                    <InlineJump type="LINK" iconName="share" text={st(`share`)} to="/demo-share" iconSize={18}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="bell-o" text={st(`notification`)} to="/demo-notification"/>
                 </Card>
@@ -114,7 +115,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     <InlineJump type="LINK" iconName="react" text={st(`RNAllInOne`)} to="/demo-tab-rn-components/home"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="puzzle" text={st(`demoTheme`)} to="/demo-theme"/>
+                    <InlineJump type="LINK" iconName="puzzle" text={st(`demoTheme`)} to="/demo-theme" iconSize={20}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="search" text={st(`demoSearch`)} to="/demo-search/k"/>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
@@ -131,7 +132,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 <Card titleMode="OUT" title={st(`system`)}>
                     <InlineJump type="LINK" iconName="settings" text={st(`settings`)} to="/settings"/>
                     <Divider/>
-                    <InlineJump type="NAV" iconName="exit" text={st(`logOut`)} onNav={async () => {
+                    <InlineJump type="NAV" iconName="log-out" text={st(`logOut`)} onNav={async () => {
                         try {
                             await authFunctions.logOut('MANUAL')
                         } catch (e) {
