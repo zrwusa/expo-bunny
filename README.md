@@ -69,6 +69,30 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 </tbody>
 </table>
 
+# Preview
+
+## Online Simples
+[Expo online deployed stable](https://expo.io/@zrwusa/projects/expo-react-bunny)
+
+[Web Next.js online deployed stable](https://expo-react-bunny-akodd3mj6-zrwusa.vercel.app)
+
+[Web Next.js online deployed latest](https://expo-react-bunny.vercel.app)
+
+## Downloads
+[App iOS for simulator stable](https://expo.io/artifacts/6a35db9b-add3-4354-8a8a-aae443c27054)
+
+```sh
+gunzip -c expo-react-bunny-9ed62349-af09-4cf9-8a33-d52cdd3c01a4-simulator.tar.gz | tar xopf -
+// start your simulator first
+xcrun simctl install booted ./expo-react-bunny.app
+xcrun simctl launch booted com.zrwusa.expo-react-bunny
+```
+
+[App Android apk stable](https://expo.io/artifacts/9c50a817-aa38-4dbd-83b3-1fb07073b3b4)
+```sh
+// start your emulator
+// drag the downloaded apk file to emulator
+```
 
 
 ## Installation
@@ -218,29 +242,6 @@ yarn next
 ```
 
 
-
-## Online Simples
-[Expo online deployed stable](https://expo.io/@zrwusa/projects/expo-react-bunny)
-
-[Web Next.js online deployed stable](https://expo-react-bunny-akodd3mj6-zrwusa.vercel.app)
-
-[Web Next.js online deployed latest](https://expo-react-bunny.vercel.app)
-
-## Downloads
-[App iOS for simulator stable](https://expo.io/artifacts/6a35db9b-add3-4354-8a8a-aae443c27054)
-
-```sh
-gunzip -c expo-react-bunny-9ed62349-af09-4cf9-8a33-d52cdd3c01a4-simulator.tar.gz | tar xopf -
-// start your simulator first
-xcrun simctl install booted ./expo-react-bunny.app
-xcrun simctl launch booted com.zrwusa.expo-react-bunny
-```
-
-[App Android apk stable](https://expo.io/artifacts/9c50a817-aa38-4dbd-83b3-1fb07073b3b4)
-```sh
-// start your emulator
-// drag the downloaded apk file to emulator
-```
 
 
 # Theories
