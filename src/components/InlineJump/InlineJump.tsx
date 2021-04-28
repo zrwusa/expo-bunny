@@ -66,7 +66,7 @@ export function InlineJump(props: LineToProps) {
             <Row size="xl">
                 <Col size={3}>
                     <Row>
-                        <LinearGradientIcon size={iconSize} name={iconName}/>
+                        <LinearGradientIcon size={wp(iconSize)} name={iconName}/>
                         <Text style={styles.label}>{text}</Text>
                     </Row>
                 </Col>
