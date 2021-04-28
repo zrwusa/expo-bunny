@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Text} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {DemoIGStackParam, RootStackParam} from "../../../types";
+import {DemoSocialMediaStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {Card, getContainerStyles} from "../../../containers";
@@ -12,17 +12,17 @@ import {getStyles} from "./styles";
 import {StackNavigationProp} from "@react-navigation/stack";
 
 
-type IGSettingsRouteProp = RouteProp<DemoIGStackParam, 'IGSettings'>;
-type IGSettingsNavigationProp = StackNavigationProp<RootStackParam, 'DemoIG'>;
+type SocialMediaSettingsRouteProp = RouteProp<DemoSocialMediaStackParam, 'SocialMediaSettings'>;
+type SocialMediaSettingsNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
 
-export interface IGSettingsProps {
-    route: IGSettingsRouteProp,
-    navigation: IGSettingsNavigationProp
+export interface SocialMediaSettingsProps {
+    route: SocialMediaSettingsRouteProp,
+    navigation: SocialMediaSettingsNavigationProp
 }
 
-export function IGSettingsScreen({route, navigation}: IGSettingsProps) {
+export function SocialMediaSettingsScreen({route, navigation}: SocialMediaSettingsProps) {
     const {t} = useTranslation();
-    const st = shortenTFunctionKey(t, 'screens.IGSettings');
+    const st = shortenTFunctionKey(t, 'screens.SocialMediaSettings');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor

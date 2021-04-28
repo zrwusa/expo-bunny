@@ -5,9 +5,9 @@ import {
     DemoCryptoCurrencyStackParam,
     DemoDrawerStackParam,
     DemoHealthTabStackParam,
-    DemoIGStackParam,
     DemoNestedLv1StackParam,
     DemoNestedLv2StackParam,
+    DemoSocialMediaStackParam,
     DemoTabRNComponentsStackParam,
     DemoTabStackParam,
     RootStackParam
@@ -31,7 +31,7 @@ export const DemoTabRNComponentsStack = createBottomTabNavigator<DemoTabRNCompon
 
 export const DemoCryptoCurrencyStack = createBottomTabNavigator<DemoCryptoCurrencyStackParam>();
 
-export const DemoIGStack = createBottomTabNavigator<DemoIGStackParam>();
+export const DemoSocialMediaStack = createBottomTabNavigator<DemoSocialMediaStackParam>();
 
 export const AuthTopTabStack = createMaterialTopTabNavigator<AuthTopStackParam>()
 

@@ -13,7 +13,7 @@ import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {getSharedStyles} from "../../utils";
 
-type SelectedImage = {
+export type SelectedImage = {
     localUri: string
 }
 
@@ -42,7 +42,7 @@ function DemoShareScreen() {
 
     const [selectedImage, setSelectedImage] = React.useState<SelectedImage>({localUri: ''});
 
-    const openImagePickerAsync = async () => {
+    const openImagePicker = async () => {
         let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
         if (!permissionResult.granted) {
@@ -83,8 +83,8 @@ function DemoShareScreen() {
                     ? (
                         <View style={sharedStyles.centralized}>
                             <Image source={{uri: selectedImage.localUri}} style={styles.thumbnail}/>
-                            <TouchableOpacity onPress={openShareDialogAsync} style={styles.button}>
-                                <Text style={styles.buttonText}>Share this photo</Text>
+                            <TouchableOpacity onPress={openShareDialogAsync}>
+                                <InButtonText>Share this photo</InButtonText>
                             </TouchableOpacity>
                         </View>
                     )
@@ -93,8 +93,8 @@ function DemoShareScreen() {
                         <Text style={styles.instructions}>
                             {st(`pressButtonTip`)}
                         </Text>
-                        <ButtonTO onPress={openImagePickerAsync} style={styles.button}>
-                            <Text style={styles.buttonText}>{st(`pickAPhoto`)}</Text>
+                        <ButtonTO onPress={openImagePicker}>
+                            <InButtonText >{st(`pickAPhoto`)}</InButtonText>
                         </ButtonTO>
                     </View>
             }

@@ -4,7 +4,7 @@ import {EDemoSaga} from "../../constants";
 export function getDemoSagas(params: GetDemoSagaParams) {
     return {
         type: EDemoSaga.GET_DEMO_SAGAS,
-        params
+        payload: params
     }
 }
 

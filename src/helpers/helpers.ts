@@ -96,23 +96,23 @@ export const tabBarIconNameConfig: JSONSerializable = {
         default: 'umbrella',
         focused: 'umbrella',
     },
-    IGHome: {
+    SocialMediaHome: {
         default: 'home3',
         focused: 'home3',
     },
-    IGSearch: {
+    SocialMediaSearch: {
         default: 'search',
         focused: 'search',
     },
-    IGMedia: {
+    SocialMediaVideo: {
         default: 'tv',
         focused: 'tv',
     },
-    IGShopping: {
+    SocialMediaShopping: {
         default: 'shopping-bag',
         focused: 'shopping-bag',
     },
-    IGSettings: {
+    SocialMediaSettings: {
         default: 'settings',
         focused: 'settings',
     },

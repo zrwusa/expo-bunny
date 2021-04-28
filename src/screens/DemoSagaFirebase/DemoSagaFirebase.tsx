@@ -17,10 +17,10 @@ import {useTranslation} from "react-i18next";
 
 export function DemoSagaFirebaseScreen() {
     const dispatch = useDispatch();
-    useFirebaseConnect([{path: 'todos', queryParams: ['limitToLast=100']}])
+    useFirebaseConnect([{path: 'todoList', queryParams: ['limitToLast=100']}])
+    const todoList = useSelector((rootState: RootState) => rootState.firebaseState.ordered.todoList)
     const {t} = useTranslation()
     const st = shortenTFunctionKey(t, 'screens.DemoSagaFirebase')
-    const todos = useSelector((rootState: RootState) => rootState.firebase.ordered.todos)
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
@@ -30,12 +30,12 @@ export function DemoSagaFirebaseScreen() {
     const [done, setDone] = useState(Math.random() > 0.5);
 
     const memorizedTodo = useMemo(() => {
-        if (todos && todos.length > 0) {
-            return todos.reverse()
+        if (todoList && todoList.length > 0) {
+            return todoList.reverse()
         } else {
             return []
         }
-    }, [todos && todos.length])
+    }, [todoList && todoList.length])
     useEffect(() => {
         // async function storeHighScore(userId: string, score: number) {
         //     await firebase
@@ -89,7 +89,7 @@ export function DemoSagaFirebaseScreen() {
                         memorizedTodo && memorizedTodo.length > 0
                             ? <FlatList
                                 style={styles.flatList}
-                                data={todos}
+                                data={todoList}
                                 renderItem={({item}) => {
 
                                     return <View key={item.key}>

@@ -2,14 +2,14 @@ import * as React from "react";
 import {View} from "../UI";
 import {ScaledImage} from "../ScalableImage/ScalableImage";
 import {uuid4} from "@sentry/utils";
-import {IGMediaBrick, MasonryDatum} from "../../types";
+import {MasonryDatum, SocialMediaImageDatum} from "../../types";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 
 
 export interface MasonryProps extends WithSizeLabor, WithThemeLabor {
-    data: MasonryDatum<IGMediaBrick>
+    data: MasonryDatum<SocialMediaImageDatum>
 }
 
 class MasonryInner extends React.PureComponent<MasonryProps> {

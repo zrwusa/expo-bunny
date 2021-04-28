@@ -199,27 +199,27 @@ export const linking = {
                     }
                 }
             },
-            DemoIG: {
-                name: 'DemoIG',
-                path: 'demo-ig',
+            DemoSocialMedia: {
+                name: 'DemoSocialMedia',
+                path: 'demo-social-media',
                 screens: {
-                    IGHome: {
-                        name: 'IGHome',
+                    SocialMediaHome: {
+                        name: 'SocialMediaHome',
                         path: 'home',
                     },
-                    IGSearch: {
-                        name: 'IGSearch',
+                    SocialMediaSearch: {
+                        name: 'SocialMediaSearch',
                         path: 'search/:keyword',
                         parse: {
                             item: (keyword: string) => `${keyword}`,
                         },
                     },
-                    IGMedia: {
-                        name: 'IGMedia',
+                    SocialMediaVideo: {
+                        name: 'SocialMediaVideo',
                         path: 'media',
                     },
-                    IGSettings: {
-                        name: 'IGSettings',
+                    SocialMediaSettings: {
+                        name: 'SocialMediaSettings',
                         path: 'settings/:item',
                         parse: {
                             item: (item: string) => `${item}`,

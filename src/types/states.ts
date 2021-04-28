@@ -1,13 +1,13 @@
 // Redux store states,different from models entities
 import {InitialState} from "@react-navigation/native";
-import {DemoSaga, NearbyFilm, Region} from "./models";
+import {DBSchema, DemoSaga, NearbyFilm, Region, UserProfile} from "./models";
 import {BLResult} from "./bl";
 import {Notification} from "expo-notifications";
 import {RequestConfig} from "./payloads";
 import {FirebaseReducer} from "react-redux-firebase";
+import {PickerSelectorItem} from "./components";
 
 export type RequestStatus = {
-
     status: 'LOADING' | 'SUCCESS' | 'FAILED';
 } & RequestConfig
 
@@ -30,14 +30,6 @@ export interface DemoHelloState {
     order: number,
 }
 
-export interface DemoHello2State {
-    company: string,
-    companyId: string,
-    job: string,
-    jobId: string,
-    isHighP: boolean,
-}
-
 export type DemoThunkState = {
     id: number,
     text: string,
@@ -48,22 +40,12 @@ export type DemoMapState = {
     region: Region,
 }
 
-
 export interface DemoSagaState {
-    isFetching: boolean,
     items: DemoSaga[]
 }
 
-export type PickerSelectorItem<T> = {
-    label: string;
-    value: T;
-    key?: string | number;
-    color?: string;
-    inputLabel?: string;
-}
-
 export interface DemoCryptoCurrencyState {
-    notification: Notification,
+    notification?: Notification,
     currentPrice: number,
     granularity: number,
     expoPushToken: string,
@@ -78,30 +60,18 @@ export interface DemoCryptoCurrencyState {
     }
 }
 
-interface UserProfile {
-    email: string
-}
-
 export interface SagaTodo {
     text: string
     done: boolean
-}
-
-// create schema for the DB
-interface DBSchema {
-    todos: SagaTodo
-
-    [name: string]: any
 }
 
 export interface RootState {
     sysState: SysState,
     blResultState: BLResultState,
     demoHelloState: DemoHelloState,
-    demoHello2State: DemoHello2State,
     demoThunkState: DemoThunkState,
     demoMapState: DemoMapState,
     demoSagaState: DemoSagaState,
     demoCryptoCurrencyState: DemoCryptoCurrencyState,
-    firebase: FirebaseReducer.Reducer<UserProfile, DBSchema>
+    firebaseState: FirebaseReducer.Reducer<UserProfile, DBSchema>
 }

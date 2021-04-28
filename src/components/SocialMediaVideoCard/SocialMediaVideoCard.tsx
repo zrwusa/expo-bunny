@@ -7,15 +7,15 @@ import {ShowVideo} from "../Video/Video";
 import {ReadMore} from "../ReadMore/ReadMore";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
-import {IGMediaCardDatum} from "../../types";
+import {SocialMediaMainDatum} from "../../types";
 import {getStyles} from "./styles";
 
-interface IGMediaCardProps extends WithSizeLabor, WithThemeLabor {
-    card: IGMediaCardDatum
+interface SocialMediaVideoCardProps extends WithSizeLabor, WithThemeLabor {
+    card: SocialMediaMainDatum
 }
 
-class IGMediaCardInner extends PureComponent<IGMediaCardProps> {
-    constructor(props: IGMediaCardProps) {
+class SocialMediaVideoCardInner extends PureComponent<SocialMediaVideoCardProps> {
+    constructor(props: SocialMediaVideoCardProps) {
         super(props)
     }
 
@@ -88,4 +88,4 @@ class IGMediaCardInner extends PureComponent<IGMediaCardProps> {
 
 }
 
-export const IGMediaCard = withSizeLabor(withThemeLabor(IGMediaCardInner))
+export const SocialMediaVideoCard = withSizeLabor(withThemeLabor(SocialMediaVideoCardInner))

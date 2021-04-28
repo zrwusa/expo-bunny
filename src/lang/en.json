@@ -64,7 +64,7 @@
       "demoTheme": "Demo Theme",
       "demoSuspense": "Demo Suspense",
       "cryptoCurrency": "CryptoCurrency",
-      "ig": "Social Media",
+      "socialMedia": "Social Media",
       "demoSearch": "Demo Search",
       "colorFinder": "Color Finder",
       "playground": "Playground",
@@ -258,17 +258,17 @@
     "CryptoCurrencyHome": {
       "title": "Home"
     },
-    "DemoIG": {
-      "title": "DemoIG"
+    "DemoSocialMedia": {
+      "title": "DemoSocialMedia"
     },
-    "IGHome": {
-      "title": "IGHome"
+    "SocialMediaHome": {
+      "title": "SocialMediaHome"
     },
-    "IGSearch": {
-      "title": "IGSearch"
+    "SocialMediaSearch": {
+      "title": "SocialMediaSearch"
     },
-    "IGSettings": {
-      "title": "IGSettings"
+    "SocialMediaSettings": {
+      "title": "SocialMediaSettings"
     },
     "CryptoCurrencyAlert": {
       "title": "Alert",

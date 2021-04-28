@@ -17,14 +17,6 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginHorizontal: 15,
             marginBottom: 10,
         },
-        button: {
-            padding: 20,
-            borderRadius: 5,
-        },
-        buttonText: {
-            fontSize: 20,
-            color: '#fff',
-        },
         thumbnail: {
             width: 300,
             height: 300,

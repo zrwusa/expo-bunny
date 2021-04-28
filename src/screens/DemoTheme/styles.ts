@@ -1,11 +1,16 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../types/styles";
+import {getSharedStyles} from "../../helpers/shared-styles";
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
     return StyleSheet.create({
+        container: {
+            padding: ms.sp.l
+        },
         buttonCard: {
             width: wp(326),
         },
@@ -13,12 +18,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             width: wp(350),
         },
         demoShadow: {
-            width: wp(326),
-            height: wp(140),
-            borderRadius: ms.br.s,
-            backgroundColor: colors.surface2,
-            justifyContent: "center",
-            alignItems: "center",
+            ...sharedStylesFlatten.shadow
         },
         demoSurface: {
             width: wp(326),

@@ -17,10 +17,10 @@ import {firebase} from "../../firebase";
 
 export const sagasGenerator = function* () {
     yield takeEvery(EDemoSaga.GET_DEMO_SAGAS, function* (action: ReturnType<typeof getDemoSagas>) {
-        const {params} = action;
+        const {payload} = action;
         const url = '/demo-sagas';
         const method = 'GET';
-        const config: RequestConfig = {url, method, params}
+        const config: RequestConfig = {url, method, params: payload}
         try {
             yield put(requesting(config))
             const {data} = yield call(() => bunnyAPI.request(config));
@@ -84,7 +84,7 @@ export const sagasGenerator = function* () {
 
     yield takeEvery(EDemoSagaFirebase.SAVE_DEMO_SAGA_FIREBASE_TODO, function* (action: SaveDemoSagaFirebaseTodoAction) {
         const {payload} = action;
-        const url = '/todos';
+        const url = '/todoList';
         const method = 'POST';
         const config: RequestConfig = {url, method, data: payload}
         try {

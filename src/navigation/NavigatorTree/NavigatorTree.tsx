@@ -2,9 +2,9 @@ import {
     DemoCryptoCurrencyStack,
     DemoDrawerStack,
     DemoHealthTabStack,
-    DemoIGStack,
     DemoNestedLv1Stack,
     DemoNestedLv2Stack,
+    DemoSocialMediaStack,
     DemoTabRNComponentsStack,
     DemoTabStack,
     RootStack
@@ -57,12 +57,12 @@ import {blError, blSuccess, getIconNameByRoute} from "../../helpers";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {collectBLResult} from "../../store/actions";
 import {useDispatch} from "react-redux";
-import {IGHomeScreen} from "../../screens/DemoIG/Home";
-import {IGSettingsScreen} from "../../screens/DemoIG/Settings";
-import {IGSearchScreen} from "../../screens/DemoIG/Search";
+import {SocialMediaHomeScreen} from "../../screens/DemoSocialMedia/Home";
+import {SocialMediaSettingsScreen} from "../../screens/DemoSocialMedia/Settings";
+import {SocialMediaSearchScreen} from "../../screens/DemoSocialMedia/Search";
 import {DemoSearchScreen} from "../../screens/DemoSearch";
 import {linking} from "./linking";
-import {IGMediaScreen} from "../../screens/DemoIG/Media";
+import {SocialMediaVideoScreen} from "../../screens/DemoSocialMedia/Media";
 import {PlaygroundScreen} from "../../screens/Playground";
 import {ColorFinderScreen} from "../../screens/ColorFinder";
 import {AuthScreen} from "../../screens/Auth";
@@ -155,7 +155,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         headerShown: true,
         headerLeft: () => null
     }
-    const optionsIG: StackNavigationOptions = {
+    const optionsSocialMedia: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: true,
         headerShown: true,
@@ -243,7 +243,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         labelPosition: 'below-icon'
     }
 
-    const tabBarOptionsIG: BottomTabBarOptions = {
+    const tabBarOptionsSocialMedia: BottomTabBarOptions = {
         ...tabBarOptionsCommon,
         showLabel: false,
     }
@@ -406,19 +406,20 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="DemoIG" options={optionsMergeWithTitle(optionsIG)}>
+            <RootStack.Screen name="DemoSocialMedia" options={optionsMergeWithTitle(optionsSocialMedia)}>
                 {
                     (props) => {
-                        return <DemoIGStack.Navigator {...props}
-                                                      screenOptions={screenOptionsTabBarIcon}
-                                                      tabBarOptions={tabBarOptionsIG}>
-                            <DemoIGStack.Screen name="IGHome" component={IGHomeScreen} options={optionsMergeWithTitle()}/>
-                            <DemoIGStack.Screen name="IGSearch" component={IGSearchScreen}
-                                                initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
-                            <DemoIGStack.Screen name="IGMedia" component={IGMediaScreen} options={optionsMergeWithTitle()}/>
-                            <DemoIGStack.Screen name="IGSettings" component={IGSettingsScreen}
-                                                initialParams={{'item': 'item-001'}}/>
-                        </DemoIGStack.Navigator>
+                        return <DemoSocialMediaStack.Navigator {...props}
+                                                               screenOptions={screenOptionsTabBarIcon}
+                                                               tabBarOptions={tabBarOptionsSocialMedia}>
+                            <DemoSocialMediaStack.Screen name="SocialMediaHome" component={SocialMediaHomeScreen} options={optionsMergeWithTitle()}/>
+                            <DemoSocialMediaStack.Screen name="SocialMediaSearch" component={SocialMediaSearchScreen}
+                                                         initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
+                            <DemoSocialMediaStack.Screen name="SocialMediaVideo" component={SocialMediaVideoScreen}
+                                                         options={optionsMergeWithTitle()}/>
+                            <DemoSocialMediaStack.Screen name="SocialMediaSettings" component={SocialMediaSettingsScreen}
+                                                         initialParams={{'item': 'item-001'}}/>
+                        </DemoSocialMediaStack.Navigator>
                     }
                 }
             </RootStack.Screen>

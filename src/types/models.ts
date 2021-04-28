@@ -1,6 +1,7 @@
 //Data models, such as database entities, api return value entities
 import {ImageSourcePropType} from "react-native";
 import {AVPlaybackSource} from "expo-av/src/AV";
+import {SagaTodo} from "./states";
 
 export type DemoEmployee = {
     _id: number,
@@ -34,23 +35,23 @@ export type DemoSaga = {
     text: string
 }
 
-export type IGMediaCardCommentDatum = {
+export type SocialMediaVideoCardCommentDatum = {
     id: string,
     text: string
 }
-export type IGMediaCardCategory = 'IMAGE' | 'VIDEO'
-export type IGMediaCardDatum = {
+export type SocialMediaVideoCardCategory = 'IMAGE' | 'VIDEO'
+export type SocialMediaMainDatum = {
     id: string,
-    category: IGMediaCardCategory,
+    category: SocialMediaVideoCardCategory,
     user: string,
     userAvatar: ImageSourcePropType,
     avSource?: AVPlaybackSource,
     imageSource?: ImageSourcePropType,
     likes: number,
-    comments: IGMediaCardCommentDatum[]
+    comments: SocialMediaVideoCardCommentDatum[]
 }
 
-export type IGMediaBrick = {
+export type SocialMediaImageDatum = {
     id: string,
     text: string,
     uri: string
@@ -58,3 +59,27 @@ export type IGMediaBrick = {
 
 export type DemoSearchDummyDatum = { id: number, text: string }
 
+
+export interface DemoNearbyFilms {
+    "coordinate": { "latitude": number, "longitude": number },
+    "image": { "uri": string },
+    "_id": string,
+    "title": string,
+    "description": string,
+    "__v": number
+}
+
+export interface UserProfile {
+    email: string
+}
+
+// create schema for the DB
+export interface DBSchema {
+    todoList: SagaTodo,
+    // demoNearbyFilms: NearbyFilm,
+    // region: Region,
+    socialMediaVideos: SocialMediaMainDatum,
+    socialMediaImages: SocialMediaImageDatum,
+
+    [name: string]: any
+}

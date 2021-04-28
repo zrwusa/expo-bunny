@@ -124,7 +124,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 <Card titleMode="OUT" title={st(`others`)}>
                     <InlineJump type="LINK" iconName="bitcoin" text={st(`cryptoCurrency`)} to="/demo-crypto-currency/home"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="layout7" text={st(`ig`)} to="/demo-ig/home"/>
+                    <InlineJump type="LINK" iconName="layout7" text={st(`socialMedia`)} to="/demo-social-media/home"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="layout7" text={st(`demoHealth`)} to="/demo-health/home"/>
                 </Card>

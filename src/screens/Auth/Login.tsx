@@ -75,6 +75,9 @@ export function LoginScreen({route, navigation}: LoginProps) {
         }
     }
 
+    const handleLogin = async () => {
+        await bunnyLogin()
+    }
     return <View style={[containerStyles.Screen]}>
         <ScrollView style={styles.loginOrSignUpContainer}>
             <Tab items={firebaseLoginMethods} value={loginMethod} onChange={(item) => {
@@ -115,7 +118,9 @@ export function LoginScreen({route, navigation}: LoginProps) {
                         }><Text>Forgot password?</Text></TouchableOpacity>
                     </Row>
                     <Row style={{marginTop: ms.sp.l}}>
-                        <LinearGradientButton onPress={firebaseEmailLogin}><InButtonText>{st(`login`)}</InButtonText></LinearGradientButton>
+                        <LinearGradientButton onPress={handleLogin}>
+                            <InButtonText>{st(`login`)}</InButtonText>
+                        </LinearGradientButton>
                     </Row>
                 </View>
                 : null

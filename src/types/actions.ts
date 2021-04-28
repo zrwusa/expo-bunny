@@ -6,6 +6,7 @@ import {
     DemoHello2Payload,
     DemoHelloPayload,
     DemoThunkSuccessPayload,
+    GetDemoSagaParams,
     ReceiveGetCurrentPricePayload,
     RequestConfig,
     RestoreIsReadyPayload,
@@ -101,6 +102,7 @@ export interface RestoreRegionAction {
 
 export interface RequestGetDemoSagasAction {
     type: EDemoSaga.REQUEST_GET_DEMO_SAGAS,
+    payload: GetDemoSagaParams
 }
 
 export interface ReceiveGetDemoSagasAction {

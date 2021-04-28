@@ -1,7 +1,7 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {RouteProp} from "@react-navigation/native";
-import {DemoIGStackParam, IGMediaBrick, MasonryDatum, RootStackParam} from "../../../types";
+import {DemoSocialMediaStackParam, MasonryDatum, RootStackParam, RootState, SocialMediaImageDatum} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
@@ -12,37 +12,56 @@ import {Animated, Platform, SafeAreaView} from "react-native";
 import {uuid4} from "@sentry/utils";
 import {Masonry} from "../../../components/Masonry/Masonry";
 import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
-import {defaultMasonryData, rawBricks} from "./data";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {useSelector} from "react-redux";
+import {isLoaded, useFirebase} from "react-redux-firebase";
 
-type IGSearchRouteProp = RouteProp<DemoIGStackParam, 'IGSearch'>;
-type IGSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoIG'>;
+type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaStackParam, 'SocialMediaSearch'>;
+type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
 
-export interface IGSearchProps {
-    route: IGSearchRouteProp,
-    navigation: IGSearchNavigationProp
+export interface SocialMediaSearchProps {
+    route: SocialMediaSearchRouteProp,
+    navigation: SocialMediaSearchNavigationProp
 }
 
-export function IGSearchScreen({route, navigation}: IGSearchProps) {
+export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchProps) {
+    const firebase = useFirebase();
+    const getSocialMediaImages = async () => {
+        await firebase.watchEvent('value', 'socialMediaImages', 'socialMediaImages')
+    }
+    const socialMediaImages = useSelector((rootState: RootState) => rootState.firebaseState.ordered.socialMediaImages)
     const {t} = useTranslation();
-    const st = shortenTFunctionKey(t, 'screens.IGSearch');
+    const st = shortenTFunctionKey(t, 'screens.SocialMediaSearch');
     const sizeLabor = useSizeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
-    const [MasonryData, setMasonryData] = useState(defaultMasonryData)
-    const [isReady, setIsReady] = useState(false)
+    const [MasonryData, setMasonryData] = useState<MasonryDatum<SocialMediaImageDatum>[]>([])
+
+    const memoizedSocialMediaImages = useMemo(() => {
+        if (!socialMediaImages) {
+            return []
+        }
+        return socialMediaImages.map(item => item.value)
+    }, [socialMediaImages])
 
     useEffect(() => {
+        getSocialMediaImages().then()
+    }, [])
+
+    useEffect(() => {
+        if (!socialMediaImages) {
+            return
+        }
         let column1 = [],
             column2 = [],
             column3 = [];
 
-        let manyBricks: IGMediaBrick[] = []
+        let manyBricks: SocialMediaImageDatum[] = memoizedSocialMediaImages
 
         for (let i = 0; i < 1; i++) {
-            manyBricks = manyBricks.concat(rawBricks.map(brick => {
+            manyBricks = manyBricks.concat(memoizedSocialMediaImages.map(brick => {
                 brick.id = uuid4()
                 return brick
             }))
@@ -58,13 +77,12 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
                 column3.push(manyBricks[i++]);
             }
         }
-        let newMasonryData: MasonryDatum<IGMediaBrick>[] = []
+        let newMasonryData: MasonryDatum<SocialMediaImageDatum>[] = []
         for (let i = 0; i < 10; i++) {
             newMasonryData.push({id: uuid4(), column1, column2, column3})
         }
         setMasonryData(newMasonryData)
-        setIsReady(true)
-    }, [])
+    }, [socialMediaImages])
 
     const imageWidth = wp(375 / 3 - 1);
 
@@ -77,15 +95,14 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
     }
     const [scrollYValue] = useState(new Animated.Value(0));
     const handleSearch = (key: string) => {
-        console.log(key)
         let column1 = [],
             column2 = [],
             column3 = [];
 
-        let manyBricks: IGMediaBrick[] = []
+        let manyBricks: SocialMediaImageDatum[] = []
 
         for (let i = 0; i < 1; i++) {
-            manyBricks = manyBricks.concat(rawBricks.filter((brick) => {
+            manyBricks = manyBricks.concat(memoizedSocialMediaImages.filter((brick) => {
                 return brick.text.includes(key)
             }).map(brick => {
                 brick.id = uuid4()
@@ -103,7 +120,7 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
                 column3.push(manyBricks[i++]);
             }
         }
-        let newMasonryData: MasonryDatum<IGMediaBrick>[] = []
+        let newMasonryData: MasonryDatum<SocialMediaImageDatum>[] = []
         for (let i = 0; i < 10; i++) {
             newMasonryData.push({id: uuid4(), column1, column2, column3})
         }
@@ -112,7 +129,7 @@ export function IGSearchScreen({route, navigation}: IGSearchProps) {
     return (
         <SafeAreaView style={containerStyles.Screen}>
             <FollowUpSearchBar scrollYValue={scrollYValue} onSearch={handleSearch}/>
-            {isReady ?
+            {isLoaded(socialMediaImages) ?
                 <Animated.FlatList data={MasonryData}
                                    renderItem={({item}) => <Masonry data={item}/>}
                                    keyExtractor={item => item.id}

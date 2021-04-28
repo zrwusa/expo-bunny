@@ -13,10 +13,9 @@ import {
 import {sagasGenerator} from "./sagas"
 import {firebase} from "../firebase/firebase";
 import {firebaseReducer} from "react-redux-firebase";
+import {RootState} from "../types";
 
-const sagaMiddleware = createSagaMiddleware()
-
-const rootReducer = combineReducers({
+const rootReducer = combineReducers<RootState>({
     demoHelloState: demoHelloStateReducer,
     demoThunkState: demoThunkStateReducer,
     demoMapState: demoMapStateReducer,
@@ -24,9 +23,10 @@ const rootReducer = combineReducers({
     blResultState: blStateReducer,
     demoSagaState: demoSagaReducer,
     demoCryptoCurrencyState: demoCryptoCurrencyReducer,
-    firebase: firebaseReducer
+    firebaseState: firebaseReducer
 });
 
+const sagaMiddleware = createSagaMiddleware()
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 // you might choose one redux middleware which you prefer,just delete the demos you not prefer

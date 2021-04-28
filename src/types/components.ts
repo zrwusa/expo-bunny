@@ -19,3 +19,12 @@ export type MasonryDatum<BrickT> = {
     column3: BrickT[],
 }
 
+
+export type PickerSelectorItem<T> = {
+    label: string;
+    value: T;
+    key?: string | number;
+    color?: string;
+    inputLabel?: string;
+}
+

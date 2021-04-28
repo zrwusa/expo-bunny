@@ -40,7 +40,7 @@ export type RootStackParam = {
     DemoTheme: undefined;
     DemoSuspense: undefined;
     DemoCryptoCurrency: undefined | { screen: string; params?: { [key: string]: any } };
-    DemoIG: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoSocialMedia: undefined | { screen: string; params?: { [key: string]: any } };
     DemoSearch: undefined | { keyword: string };
     Playground: undefined;
     ColorFinder: undefined;
@@ -55,11 +55,11 @@ export type DemoTabStackParam = {
     TabSettings: { item: string };
 };
 
-export type DemoIGStackParam = {
-    IGHome: undefined;
-    IGSearch: { keyword: string };
-    IGMedia: undefined;
-    IGSettings: { item: string };
+export type DemoSocialMediaStackParam = {
+    SocialMediaHome: undefined;
+    SocialMediaSearch: { keyword: string };
+    SocialMediaVideo: undefined;
+    SocialMediaSettings: { item: string };
 };
 
 export type AuthTopStackParam = {
@@ -116,7 +116,7 @@ export type NavigationStackParamsUnion = RootStackParam
     | DemoCryptoCurrencyStackParam
     | DemoModalStackParam
     | DemoHealthTabStackParam
-    | DemoIGStackParam
+    | DemoSocialMediaStackParam
     | AuthTopStackParam
 
 export type NavigationStackParamsIntersection = RootStackParam
@@ -128,7 +128,7 @@ export type NavigationStackParamsIntersection = RootStackParam
     & DemoCryptoCurrencyStackParam
     & DemoModalStackParam
     & DemoHealthTabStackParam
-    & DemoIGStackParam
+    & DemoSocialMediaStackParam
     & AuthTopStackParam
 
 export type NavigationStacksUnion = typeof Stacks.RootStack
@@ -140,7 +140,7 @@ export type NavigationStacksUnion = typeof Stacks.RootStack
     | typeof Stacks.DemoDrawerStack
     | typeof Stacks.DemoModalStack
     | typeof Stacks.DemoHealthTabStack
-    | typeof Stacks.DemoIGStack
+    | typeof Stacks.DemoSocialMediaStack
     | typeof Stacks.AuthTopTabStack
 
 export type NavigationStacksIntersection = typeof Stacks.RootStack
@@ -152,7 +152,7 @@ export type NavigationStacksIntersection = typeof Stacks.RootStack
     & typeof Stacks.DemoDrawerStack
     & typeof Stacks.DemoModalStack
     & typeof Stacks.DemoHealthTabStack
-    & typeof Stacks.DemoIGStack
+    & typeof Stacks.DemoSocialMediaStack
     & typeof Stacks.AuthTopTabStack
 
 
