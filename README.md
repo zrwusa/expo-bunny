@@ -94,7 +94,7 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 // drag the downloaded apk file to emulator
 ```
 
-
+# Installation & Dev
 ## Installation
 ### For Expo
 ```sh
