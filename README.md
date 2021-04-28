@@ -29,6 +29,7 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 - Typescript,
 - Redux,
 - Expo,
+- Firbase
 - Next.js for deploying
 
 # Principles
@@ -52,6 +53,7 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 <tr><td>Firebase Auth</td><td>  </td></tr>
 <tr><td>Firebase Google Auth</td><td>  </td></tr>
 <tr><td>Firebase Facebook Auth</td><td>  </td></tr>
+<tr><td>React Redux Firebase</td><td>  </td></tr>
 <tr><td>JWT Auth</td><td>  </td></tr>
 <tr><td>I18n</td><td>  </td></tr>
 <tr><td>RTL</td><td>  </td></tr>
@@ -175,6 +177,31 @@ hp: height to DP based on your designs
 
 You can define multiple design configurations, because your designs are often not designed by the same designer
 
+### For Firebase & Google API
+Create a .env file
+
+IOS_CLIENT_ID_FOR_EXPO=111111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+ANDROID_CLIENT_ID_FOR_EXPO=111111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+IOS_CLIENT_ID=111111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+ANDROID_CLIENT_ID=111111111111-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+                  
+GOOGLE_API_KEY=xxxxxxxxxxxxx_xxxxxxx_xxxxxxxxxxxxxxxxx
+FACEBOOK_APP_ID=1111111111111111
+                
+FIREBASE_PROJECT_ID=xxxxxxxxxxxxxxxx
+FIREBASE_AUTH_DOMAIN=xxxxxxxxxxxxxxxx..firebaseapp.com
+FIREBASE_DATABASE_URL=https://xxxxxxxxxxxxxxxxxxxxxxxx-rtdb.firebaseio.com
+FIREBASE_APP_ID_IOS=1:111111111111:ios:xxxxxxxxxxxxxxxxxxxxxx
+FIREBASE_APP_ID_WEB=1:111111111111:web:xxxxxxxxxxxxxxxxxxxxxx
+FIREBASE_APP_ID_ANDROID=1:111111111111:android:xxxxxxxxxxxxxxxxxxxxxx
+FIREBASE_STORAGE_BUCKET=xxxxxxxxxxxxxxxx.appspot.com
+FIREBASE_MESSAGING_SENDER_ID=111111111111
+FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
+
+
+Download your GoogleService-Info.plist for iOS from your Firebase Console to project root path
+
+Download your google-services.json for Android from your Firebase Console to project root path
 
 ### For Next.js
 ```sh
@@ -215,6 +242,7 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 
 # Theories
 1."Premature optimization is the root of all evil (or at least most of it) in programming."--— Donald Knuth, “Computer Programming as an Art” (1974).
+
 2."The remaining 10 percent of the code accounts for the other 90 percent of the development time."--— Tom Cargill, Bell Labs.
 
 
@@ -224,6 +252,9 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
  
  If our project is even 50% cheaper to maintain than it could be without a good architecture — it will save developers’ time and customer’s profit.
  Building a good and clear architecture from the start of the project gives you the following benefits:
+ 
  1.costs:cheaper code maintenance (less time is required and cheaper financial costs);
+ 
  2.test:simplification of code testing (you will need fewer testers and have fewer missed “production bugs”);
+ 
  3.developer:easier to involve new developers into the project.
