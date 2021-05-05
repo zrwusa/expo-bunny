@@ -1,10 +1,12 @@
 import {
-    DemoCryptoCurrencyStack,
+    DemoChatStack,
+    DemoCryptoCurrencyTabStack,
+    DemoDatingTabStack,
     DemoDrawerStack,
     DemoHealthTabStack,
     DemoNestedLv1Stack,
     DemoNestedLv2Stack,
-    DemoSocialMediaStack,
+    DemoSocialMediaTabStack,
     DemoTabRNComponentsStack,
     DemoTabStack,
     RootStack
@@ -20,7 +22,7 @@ import DemoThirdPartScreen from "../../screens/DemoThirdPart";
 import DemoThunkCCScreen from "../../screens/DemoThunkCC/DemoThunkCC";
 import DemoSagaScreen from "../../screens/DemoSaga";
 import DemoMapScreen from "../../screens/DemoMap/DemoMap";
-import DemoChatScreen from "../../screens/DemoChat";
+import {ChatHomeScreen} from "../../screens/DemoChat/Home";
 import DemoShareScreen from "../../screens/DemoShare";
 import {Image, Platform, TouchableOpacity, View} from "react-native";
 import DemoNotificationScreen from "../../screens/DemoNotification/DemoNotification";
@@ -74,6 +76,9 @@ import {BottomTabBarOptions, BottomTabNavigationOptions} from "@react-navigation
 import {DemoSagaFirebaseScreen} from "../../screens/DemoSagaFirebase";
 import {Row} from "../../containers";
 import {ThemePicker} from "../../components/ThemePicker";
+import {DatingHomeScreen} from "../../screens/DemoDating/Home";
+import DatingSettingsScreen from "../../screens/DemoDating/Settings";
+import {ChatRoomScreen} from "../../screens/DemoChat/ChatRoom";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -153,6 +158,13 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         ...screenOptionsStackCommon,
         animationEnabled: false,
         headerShown: true,
+        headerLeft: () => null
+    }
+
+    const optionsChat: StackNavigationOptions = {
+        ...screenOptionsStackCommon,
+        animationEnabled: false,
+        headerShown: false,
         headerLeft: () => null
     }
     const optionsSocialMedia: StackNavigationOptions = {
@@ -248,6 +260,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         showLabel: false,
     }
 
+    const tabBarOptionsDating: BottomTabBarOptions = {
+        ...tabBarOptionsCommon,
+        showLabel: false,
+    }
+
     const tabBarOptionsHealth: BottomTabBarOptions = {
         ...tabBarOptionsCommon,
         showLabel: false,
@@ -329,7 +346,16 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoSaga" component={DemoSagaScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoSagaFirebase" component={DemoSagaFirebaseScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoMap" component={DemoMapScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="DemoChat" component={DemoChatScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoChat" options={optionsChat}>
+                {
+                    (props) => {
+                        return <DemoChatStack.Navigator {...props}  screenOptions={screenOptionsStackCommon}>
+                            <DemoChatStack.Screen name="ChatHome" component={ChatHomeScreen} options={optionsMergeWithTitle()}/>
+                            <DemoChatStack.Screen name="ChatRoom" component={ChatRoomScreen} options={optionsMergeWithTitle()}/>
+                        </DemoChatStack.Navigator>
+                    }
+                }
+            </RootStack.Screen>
             <RootStack.Screen name="DemoShare" component={DemoShareScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoSearch" component={DemoSearchScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoNotification" component={
@@ -395,31 +421,31 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoCryptoCurrency" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoCryptoCurrencyStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                        return <DemoCryptoCurrencyTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
                                                                   tabBarOptions={tabBarOptionsCommon}>
-                            <DemoCryptoCurrencyStack.Screen name="CryptoCurrencyHome" component={CryptoCurrencyHomeScreen}
+                            <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyHome" component={CryptoCurrencyHomeScreen}
                                                             options={optionsMergeWithTitle()}/>
-                            <DemoCryptoCurrencyStack.Screen name="CryptoCurrencyAlert" component={Platform.OS !== 'web'
+                            <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyAlert" component={Platform.OS !== 'web'
                                 ? CryptoCurrencyAlertScreen
                                 : () => <NotSupport text="Not supported on web"/>} initialParams={{isPush: true}} options={optionsMergeWithTitle()}/>
-                        </DemoCryptoCurrencyStack.Navigator>
+                        </DemoCryptoCurrencyTabStack.Navigator>
                     }
                 }
             </RootStack.Screen>
             <RootStack.Screen name="DemoSocialMedia" options={optionsMergeWithTitle(optionsSocialMedia)}>
                 {
                     (props) => {
-                        return <DemoSocialMediaStack.Navigator {...props}
+                        return <DemoSocialMediaTabStack.Navigator {...props}
                                                                screenOptions={screenOptionsTabBarIcon}
                                                                tabBarOptions={tabBarOptionsSocialMedia}>
-                            <DemoSocialMediaStack.Screen name="SocialMediaHome" component={SocialMediaHomeScreen} options={optionsMergeWithTitle()}/>
-                            <DemoSocialMediaStack.Screen name="SocialMediaSearch" component={SocialMediaSearchScreen}
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaHome" component={SocialMediaHomeScreen} options={optionsMergeWithTitle()}/>
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaSearch" component={SocialMediaSearchScreen}
                                                          initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
-                            <DemoSocialMediaStack.Screen name="SocialMediaVideo" component={SocialMediaVideoScreen}
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaVideo" component={SocialMediaVideoScreen}
                                                          options={optionsMergeWithTitle()}/>
-                            <DemoSocialMediaStack.Screen name="SocialMediaSettings" component={SocialMediaSettingsScreen}
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaSettings" component={SocialMediaSettingsScreen}
                                                          initialParams={{'item': 'item-001'}}/>
-                        </DemoSocialMediaStack.Navigator>
+                        </DemoSocialMediaTabStack.Navigator>
                     }
                 }
             </RootStack.Screen>
@@ -439,6 +465,16 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                                        component={HealthSettingsScreen}
                                                        options={optionsMergeWithTitle()}/>
                         </DemoHealthTabStack.Navigator>
+                    }
+                }
+            </RootStack.Screen>
+            <RootStack.Screen name="DemoDating" options={optionsMergeWithTitle()}>
+                {
+                    (props) => {
+                        return <DemoDatingTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptionsDating}>
+                            <DemoDatingTabStack.Screen name="DatingHome" component={DatingHomeScreen} options={optionsMergeWithTitle()}/>
+                            <DemoDatingTabStack.Screen name="DatingSettings" component={DatingSettingsScreen} options={optionsMergeWithTitle()}/>
+                        </DemoDatingTabStack.Navigator>
                     }
                 }
             </RootStack.Screen>

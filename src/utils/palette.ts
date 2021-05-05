@@ -425,6 +425,12 @@ export const palette: Palette = {
     grey6IOS3: '#1C1C1E',
     grey6IOS4: '#242426',
     //---end--- iOS theme
+
+    //---start--- tinder
+    pinkA150:'#FF68B1',
+    pink80:'#FED1E7',
+    blue70:'#D6E7F4',
+    //---end---
 }
 
 export const pl = palette

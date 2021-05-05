@@ -46,6 +46,7 @@ export type RootStackParam = {
     ColorFinder: undefined;
     IconTools: undefined;
     DemoHealth: undefined | { screen: string; params?: { [key: string]: any } };
+    DemoDating: undefined;
     DemoSagaFirebase: undefined;
     Settings: undefined;
 };
@@ -55,7 +56,7 @@ export type DemoTabStackParam = {
     TabSettings: { item: string };
 };
 
-export type DemoSocialMediaStackParam = {
+export type DemoSocialMediaTabStackParam = {
     SocialMediaHome: undefined;
     SocialMediaSearch: { keyword: string };
     SocialMediaVideo: undefined;
@@ -96,7 +97,7 @@ export type DemoModalStackParam = {
 };
 
 
-export type DemoCryptoCurrencyStackParam = {
+export type DemoCryptoCurrencyTabStackParam = {
     CryptoCurrencyHome: undefined;
     CryptoCurrencyAlert: { isPush: boolean };
 };
@@ -105,6 +106,18 @@ export type DemoHealthTabStackParam = {
     HealthHome: undefined;
     HealthSettings: undefined;
 };
+
+
+export type DemoDatingTabStackParam = {
+    DatingHome: undefined;
+    DatingSettings: undefined;
+};
+
+export type DemoChatStackParam = {
+    ChatHome: undefined;
+    ChatRoom:  { roomKey: string };
+};
+
 export type RouteBase = Route<string, object | undefined>
 
 export type NavigationStackParamsUnion = RootStackParam
@@ -113,11 +126,13 @@ export type NavigationStackParamsUnion = RootStackParam
     | DemoTabRNComponentsStackParam
     | DemoNestedLv1StackParam
     | DemoNestedLv2StackParam
-    | DemoCryptoCurrencyStackParam
+    | DemoCryptoCurrencyTabStackParam
     | DemoModalStackParam
     | DemoHealthTabStackParam
-    | DemoSocialMediaStackParam
+    | DemoSocialMediaTabStackParam
+    | DemoDatingTabStackParam
     | AuthTopStackParam
+    | DemoChatStackParam
 
 export type NavigationStackParamsIntersection = RootStackParam
     & DemoTabStackParam
@@ -125,35 +140,41 @@ export type NavigationStackParamsIntersection = RootStackParam
     & DemoTabRNComponentsStackParam
     & DemoNestedLv1StackParam
     & DemoNestedLv2StackParam
-    & DemoCryptoCurrencyStackParam
+    & DemoCryptoCurrencyTabStackParam
     & DemoModalStackParam
     & DemoHealthTabStackParam
-    & DemoSocialMediaStackParam
+    & DemoDatingTabStackParam
+    & DemoSocialMediaTabStackParam
     & AuthTopStackParam
+    & DemoChatStackParam
 
 export type NavigationStacksUnion = typeof Stacks.RootStack
     | typeof Stacks.DemoNestedLv1Stack
     | typeof Stacks.DemoNestedLv2Stack
     | typeof Stacks.DemoTabStack
     | typeof Stacks.DemoTabRNComponentsStack
-    | typeof Stacks.DemoCryptoCurrencyStack
+    | typeof Stacks.DemoCryptoCurrencyTabStack
     | typeof Stacks.DemoDrawerStack
     | typeof Stacks.DemoModalStack
     | typeof Stacks.DemoHealthTabStack
-    | typeof Stacks.DemoSocialMediaStack
+    | typeof Stacks.DemoDatingTabStack
+    | typeof Stacks.DemoSocialMediaTabStack
     | typeof Stacks.AuthTopTabStack
+    | typeof Stacks.DemoChatStack
 
 export type NavigationStacksIntersection = typeof Stacks.RootStack
     & typeof Stacks.DemoNestedLv1Stack
     & typeof Stacks.DemoNestedLv2Stack
     & typeof Stacks.DemoTabStack
     & typeof Stacks.DemoTabRNComponentsStack
-    & typeof Stacks.DemoCryptoCurrencyStack
+    & typeof Stacks.DemoCryptoCurrencyTabStack
     & typeof Stacks.DemoDrawerStack
     & typeof Stacks.DemoModalStack
     & typeof Stacks.DemoHealthTabStack
-    & typeof Stacks.DemoSocialMediaStack
+    & typeof Stacks.DemoDatingTabStack
+    & typeof Stacks.DemoSocialMediaTabStack
     & typeof Stacks.AuthTopTabStack
+    & typeof Stacks.DemoChatStack
 
 
 export type NavigatorType = 'stack' | 'tab' | 'drawer' | 'top';

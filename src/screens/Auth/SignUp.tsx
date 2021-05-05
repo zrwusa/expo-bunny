@@ -71,6 +71,9 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
         }
     }
 
+    const handleSignUp = async () => {
+        await firebaseEmailSignUp()
+    }
     return <View style={containerStyles.Screen}>
         <View style={styles.loginOrSignUpContainer}>
             <InputCard title={st(`email`)}>
@@ -98,7 +101,7 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
             </InputCard>
             <>
                 <Row style={{marginTop: ms.sp.l}}>
-                    <LinearGradientButton onPress={firebaseEmailSignUp}><InButtonText>{st(`signUp`)}</InButtonText></LinearGradientButton>
+                    <LinearGradientButton onPress={handleSignUp}><InButtonText>{st(`signUp`)}</InButtonText></LinearGradientButton>
                 </Row>
                 <LoginVector route={route} navigation={navigation}/>
             </>

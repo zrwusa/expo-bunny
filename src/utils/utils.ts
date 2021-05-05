@@ -224,3 +224,20 @@ export class NomicsAPIError extends Error {
         }
     }
 }
+
+export function extractValue<Item>(data: { key: string, value: Item }[]) {
+    let result:Item[] = []
+    if(data&&data.length>0){
+        result = data.map(item => item.value)
+    }
+    return result
+}
+
+export function keyValueToArray<Item>(data: { [key: string]: Item }) {
+    const itemArray: Array<Item> = []
+    const keys = Object.keys(data)
+    for (let i of keys) {
+        itemArray.push({...data[i], _id: i})
+    }
+    return itemArray;
+}

@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {Platform, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
-import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
+import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from "../../../types";
 import {ButtonTO, InButtonText, PickerSelectChevronRight, Text} from "../../../components/UI";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers";
@@ -17,7 +17,7 @@ import {getStyles} from "./styles";
 import {getSharedStyles} from "../../../utils";
 import {StackNavigationProp} from "@react-navigation/stack";
 
-type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyAlert'>;
+type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyAlert'>;
 type CryptoCurrencyAlertNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
 
 export interface CryptoCurrencyAlertProps {

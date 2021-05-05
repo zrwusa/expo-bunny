@@ -23,12 +23,6 @@ interface Props {
     navigation: ProfileNavigationProp;
 }
 
-// type A = {a:string,m:string}
-// type B = {b:string,m:string}
-// type C = {c:string,m:string}
-// type M = A | B | C
-// let m:M;
-
 function ProfileScreen({route, navigation}: Props) {
     const {authResult} = useAuthLabor()
     const {user} = authResult;
@@ -68,9 +62,6 @@ function ProfileScreen({route, navigation}: Props) {
                                 : null
                         }
                     </View>
-
-                    {/*<Text>{st(`profileScreenId`)}{route.params.id}</Text>*/}
-                    {/*<Text>{st(`email`)}{user?.email}</Text>*/}
                     <ImageProgressive
                         sourcePH={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-placeholder.jpg`}}
                         source={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg`}}

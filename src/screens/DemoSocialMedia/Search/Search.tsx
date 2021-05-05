@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect, useMemo, useState} from "react";
 import {RouteProp} from "@react-navigation/native";
-import {DemoSocialMediaStackParam, MasonryDatum, RootStackParam, RootState, SocialMediaImageDatum} from "../../../types";
+import {DemoSocialMediaTabStackParam, MasonryDatum, RootStackParam, RootState, SocialMediaImageDatum} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
@@ -16,7 +16,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {useSelector} from "react-redux";
 import {isLoaded, useFirebase} from "react-redux-firebase";
 
-type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaStackParam, 'SocialMediaSearch'>;
+type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSearch'>;
 type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
 
 export interface SocialMediaSearchProps {

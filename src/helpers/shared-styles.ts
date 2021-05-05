@@ -137,6 +137,13 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             elevation: wp(22),
             backgroundColor: colors.background, // React native bug no background no shadow on iOS
         },
+        shadowThin: {
+            shadowColor: colors.shadow,
+            elevation: 1,
+            shadowOpacity: 0.05,
+            shadowRadius: wp(10),
+            shadowOffset: { height: 0, width: 0 },
+        },
 
 
         centralized: {

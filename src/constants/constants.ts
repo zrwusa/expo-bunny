@@ -168,7 +168,8 @@ export enum EDemoSagaFirebase {
 export const EThemes: EnumThemeNames = {
     light: 'light',
     dark: 'dark',
-    indigo: 'indigo'
+    indigo: 'indigo',
+    tinder: 'tinder'
 }
 
 export const ELanguage = {

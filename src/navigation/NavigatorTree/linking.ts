@@ -76,6 +76,19 @@ export const linking = {
             DemoChat: {
                 name: 'DemoChat',
                 path: 'demo-chat',
+                screens:{
+                    ChatHome: {
+                        name: 'ChatHome',
+                        path: 'home',
+                    },
+                    ChatRoom: {
+                        name: 'ChatRoom',
+                        path: 'chat-rooms/:roomKey',
+                        parse: {
+                            roomKey: (roomKey: string) => `${roomKey}`,
+                        },
+                    }
+                }
             },
             DemoShare: {
                 name: 'DemoShare',
@@ -263,6 +276,20 @@ export const linking = {
             DemoSagaFirebase: {
                 name: 'DemoSagaFirebase',
                 path: 'demo-saga-firebase',
+            },
+            DemoDating: {
+                name: 'DemoDating',
+                path: 'demo-dating',
+                screens: {
+                    DatingHome: {
+                        name: 'DatingHome',
+                        path: 'home',
+                    },
+                    DatingSettings: {
+                        name: 'DatingSettings',
+                        path: 'settings',
+                    }
+                }
             },
             Settings: {
                 name: 'Settings',

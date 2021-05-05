@@ -134,6 +134,12 @@
     "DemoChat": {
       "title": "样例-聊天"
     },
+    "ChatHome": {
+      "title": "聊天-首页"
+    },
+    "ChatRoom": {
+      "title": "聊天-聊天室"
+    },
     "TestMap": {
       "title": "测试-地图"
     },
@@ -306,6 +312,15 @@
     },
     "HealthSettings": {
       "title": "健身-设置"
+    },
+    "DemoDating": {
+      "title": "示例-交友"
+    },
+    "DatingHome": {
+      "title": "交友-首页"
+    },
+    "DatingSettings": {
+      "title": "交友-设置"
     },
     "IconTools": {
       "title": "图标工具",

@@ -134,6 +134,12 @@
     "DemoChat": {
       "title": "DemoChat"
     },
+    "ChatHome": {
+      "title": "ChatHome"
+    },
+    "ChatRoom": {
+      "title": "ChatRoom"
+    },
     "TestMap": {
       "title": "TestMap"
     },
@@ -306,6 +312,15 @@
     },
     "HealthSettings": {
       "title": "HealthSettings"
+    },
+    "DemoDating": {
+      "title": "Desi Dating"
+    },
+    "DatingHome": {
+      "title": "Desi Dating"
+    },
+    "DatingSettings": {
+      "title": "Settings"
     },
     "IconTools": {
       "title": "Icon Tools",

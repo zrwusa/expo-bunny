@@ -1,13 +1,13 @@
 import {createStackNavigator} from "@react-navigation/stack";
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {
-    AuthTopStackParam,
-    DemoCryptoCurrencyStackParam,
+    AuthTopStackParam, DemoChatStackParam,
+    DemoCryptoCurrencyTabStackParam, DemoDatingTabStackParam,
     DemoDrawerStackParam,
     DemoHealthTabStackParam,
     DemoNestedLv1StackParam,
     DemoNestedLv2StackParam,
-    DemoSocialMediaStackParam,
+    DemoSocialMediaTabStackParam,
     DemoTabRNComponentsStackParam,
     DemoTabStackParam,
     RootStackParam
@@ -29,10 +29,14 @@ export const DemoDrawerStack = createDrawerNavigator<DemoDrawerStackParam>();
 
 export const DemoTabRNComponentsStack = createBottomTabNavigator<DemoTabRNComponentsStackParam>();
 
-export const DemoCryptoCurrencyStack = createBottomTabNavigator<DemoCryptoCurrencyStackParam>();
+export const DemoCryptoCurrencyTabStack = createBottomTabNavigator<DemoCryptoCurrencyTabStackParam>();
 
-export const DemoSocialMediaStack = createBottomTabNavigator<DemoSocialMediaStackParam>();
+export const DemoSocialMediaTabStack = createBottomTabNavigator<DemoSocialMediaTabStackParam>();
 
 export const AuthTopTabStack = createMaterialTopTabNavigator<AuthTopStackParam>()
 
 export const DemoHealthTabStack = createBottomTabNavigator<DemoHealthTabStackParam>();
+
+export const DemoDatingTabStack = createBottomTabNavigator<DemoDatingTabStackParam>();
+
+export const DemoChatStack = createStackNavigator<DemoChatStackParam>();

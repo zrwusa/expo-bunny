@@ -30,6 +30,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const st = shortenTFunctionKey(t, 'screens.Home');
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
+    const {wp} = sizeLabor.designsBasedOn.iphoneX
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
     const {authFunctions} = useAuthLabor();
@@ -38,9 +39,9 @@ function HomeScreen({navigation}: HomeScreenProps) {
         <ScrollView>
             <View style={[containerStyles.Screen, styles.container]}>
                 <Card titleMode="OUT" title={st(`devTools`)}>
-                    <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"/>
+                    <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder" iconSize={wp(20)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools" iconSize={20}/>
+                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools" iconSize={wp(20)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
                 </Card>
@@ -50,25 +51,25 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <InlineJump type="LINK" iconName="layout" text={st(`drawer`)} to="/demo-drawer/home"/>
                     <Divider/>
 
-                    <InlineJump type="LINK" iconName="profile-male" text={st(`profile`) + `(LinkButton)`} to="/profile/001" iconSize={18}/>
+                    <InlineJump type="LINK" iconName="profile-male" text={st(`profile`) + `(LinkButton)`} to="/profile/001" iconSize={wp(20)}/>
                     <Divider/>
-                    <InlineJump type="LINK_TO" iconName="profile-male" text={st(`profile`) + '(useLinkTo)'} to="/profile/002" iconSize={18}/>
+                    <InlineJump type="LINK_TO" iconName="profile-male" text={st(`profile`) + '(useLinkTo)'} to="/profile/002" iconSize={wp(20)}/>
                     <Divider/>
 
-                    <InlineJump type="NAV" onNav={() => navigation.navigate('Profile', {id: '003'})} iconName="profile-male"
-                                text={st(`profile`) + '(TouchableOpacity)'} iconSize={18}/>
+                    <InlineJump type="NAV" onNav={() => navigation.navigate('Profile', {id: '003'})} iconName="profile-male" iconSize={wp(20)}
+                                text={st(`profile`) + '(TouchableOpacity)'}/>
                     <Divider/>
 
                     <InlineJump type="NAV" onNav={() => navigation.navigate('DemoRoute', {id: '1', isHuman: false, sort: 'top'})}
                                 iconName="adjustments"
-                                text={st(`route`) + '(TouchableOpacity)'} iconSize={18}/>
+                                text={st(`route`) + '(TouchableOpacity)'} iconSize={wp(20)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="adjustments" text={st(`route`) + `(Link)`} to="/demo-route?id=1&isHuman=false&sort=top"
-                                iconSize={18}/>
+                                iconSize={wp(20)}/>
                     <Divider/>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
                     {/*    <InButtonText>{st(`demoModal`)}</InButtonText></ButtonTO>*/}
-                    <InlineJump type="LINK" iconName="adjustments" text={st(`nestedNavigation`)} to="/demo-nested/home" iconSize={18}/>
+                    <InlineJump type="LINK" iconName="adjustments" text={st(`nestedNavigation`)} to="/demo-nested/home"  iconSize={wp(20)}/>
                     <Divider/>
 
                     <InlineJump type="NAV" onNav={() =>
@@ -89,21 +90,21 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <InlineJump type="LINK" iconName="sitemap1" text={st(`passParamsFromRootToLeafTab`) + `(Link)`} to="/demo-tab/settings/item-001"/>
                 </Card>
                 <Card titleMode="OUT" title={st(`redux`)}>
-                    <InlineJump type="LINK" iconName="puzzle" text={st(`FCReduxHook`)} to="/demo-fc-redux-hook"/>
+                    <InlineJump type="LINK" iconName="puzzle" text={st(`FCReduxHook`)} to="/demo-fc-redux-hook" iconSize={wp(18)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="gears" text={st(`thunkCC`)} to="/demo-thunk-cc" iconSize={18}/>
+                    <InlineJump type="LINK" iconName="gears" text={st(`thunkCC`)} to="/demo-thunk-cc"  iconSize={wp(17)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="tools" text={st(`saga`)} to="/demo-saga"/>
+                    <InlineJump type="LINK" iconName="tools" text={st(`saga`)} to="/demo-saga" iconSize={wp(18)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="tools" text={st(`sagaFirebase`)} to="/demo-saga-firebase"/>
+                    <InlineJump type="LINK" iconName="tools" text={st(`sagaFirebase`)} to="/demo-saga-firebase" iconSize={wp(18)}/>
                 </Card>
                 <Card titleMode="OUT" title={st(`nativeCapabilities`)}>
 
-                    <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map" iconSize={18}/>
+                    <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map"  iconSize={wp(18)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="chat3" text={st(`chat`)} to="/demo-chat" iconSize={17}/>
+                    <InlineJump type="LINK" iconName="chat3" text={st(`chat`)} to="/demo-chat"  iconSize={wp(18)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="share" text={st(`share`)} to="/demo-share" iconSize={18}/>
+                    <InlineJump type="LINK" iconName="share" text={st(`share`)} to="/demo-share"  iconSize={wp(18)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="bell-o" text={st(`notification`)} to="/demo-notification"/>
                 </Card>
@@ -111,13 +112,13 @@ function HomeScreen({navigation}: HomeScreenProps) {
 
                     <InlineJump type="LINK" iconName="lab" text={st(`thirdPart`)} to="/demo-third-part"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="heart" text={st(`componentCollection`)} to="/demo-collection"/>
+                    <InlineJump type="LINK" iconName="heart" text={st(`componentCollection`)} to="/demo-collection" iconSize={wp(20)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="react" text={st(`RNAllInOne`)} to="/demo-tab-rn-components/home"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="puzzle" text={st(`demoTheme`)} to="/demo-theme" iconSize={20}/>
+                    <InlineJump type="LINK" iconName="puzzle" text={st(`demoTheme`)} to="/demo-theme"  iconSize={wp(20)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="search" text={st(`demoSearch`)} to="/demo-search/k"/>
+                    <InlineJump type="LINK" iconName="search" text={st(`demoSearch`)} to="/demo-search/k" iconSize={wp(20)}/>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}
                     {/*    <InButtonText>{st(`demoSuspense`)}</InButtonText></ButtonTO>*/}
                 </Card>
@@ -128,9 +129,11 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <InlineJump type="LINK" iconName="layout7" text={st(`socialMedia`)} to="/demo-social-media/home"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="layout7" text={st(`demoHealth`)} to="/demo-health/home"/>
+                    <Divider/>
+                    <InlineJump type="LINK" iconName="layout7" text={st(`demoDating`)} to="/demo-dating/home"/>
                 </Card>
                 <Card titleMode="OUT" title={st(`system`)}>
-                    <InlineJump type="LINK" iconName="settings" text={st(`settings`)} to="/settings"/>
+                    <InlineJump type="LINK" iconName="settings" text={st(`settings`)} to="/settings" iconSize={wp(20)}/>
                     <Divider/>
                     <InlineJump type="NAV" iconName="log-out" text={st(`logOut`)} onNav={async () => {
                         try {
@@ -138,7 +141,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         } catch (e) {
                             dispatch(sysError(e))
                         }
-                    }}/>
+                    }} iconSize={wp(20)}/>
                 </Card>
             </View>
         </ScrollView>

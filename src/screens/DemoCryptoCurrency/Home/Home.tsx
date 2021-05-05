@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {DemoCryptoCurrencyStackParam, RootStackParam, RootState} from "../../../types";
+import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
@@ -20,7 +20,7 @@ import {ScrollView} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {Tab} from "../../../components";
 
-type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyStackParam, 'CryptoCurrencyHome'>;
+type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyHome'>;
 type CryptoCurrencyHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
 
 export interface CryptoCurrencyHomeProps {

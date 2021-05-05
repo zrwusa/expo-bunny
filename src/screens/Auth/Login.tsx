@@ -76,7 +76,7 @@ export function LoginScreen({route, navigation}: LoginProps) {
     }
 
     const handleLogin = async () => {
-        await bunnyLogin()
+        await firebaseEmailLogin()
     }
     return <View style={[containerStyles.Screen]}>
         <ScrollView style={styles.loginOrSignUpContainer}>

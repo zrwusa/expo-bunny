@@ -73,6 +73,23 @@ export interface UserProfile {
     email: string
 }
 
+export interface IMMessage {
+    _id: string,
+    text: string,
+    createdAt: Date,
+    roomKey: string,
+    user: {
+        _id: string,
+        name: string,
+        avatar: string,
+    },
+}
+
+export interface ChatRoom {
+    _id: string,
+    name: string,
+}
+
 // create schema for the DB
 export interface DBSchema {
     todoList: SagaTodo,
@@ -80,6 +97,7 @@ export interface DBSchema {
     // region: Region,
     socialMediaVideos: SocialMediaMainDatum,
     socialMediaImages: SocialMediaImageDatum,
-
+    chatRooms: ChatRoom,
+    chatMessages: IMMessage,
     [name: string]: any
 }

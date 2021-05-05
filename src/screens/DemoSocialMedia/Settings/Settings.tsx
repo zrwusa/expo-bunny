@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Text} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {DemoSocialMediaStackParam, RootStackParam} from "../../../types";
+import {DemoSocialMediaTabStackParam, RootStackParam} from "../../../types";
 import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {Card, getContainerStyles} from "../../../containers";
@@ -12,7 +12,7 @@ import {getStyles} from "./styles";
 import {StackNavigationProp} from "@react-navigation/stack";
 
 
-type SocialMediaSettingsRouteProp = RouteProp<DemoSocialMediaStackParam, 'SocialMediaSettings'>;
+type SocialMediaSettingsRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSettings'>;
 type SocialMediaSettingsNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
 
 export interface SocialMediaSettingsProps {

@@ -181,7 +181,7 @@ export type FontConfigPlatform = {
 //     dark: string,
 // }
 
-export type ThemeName = 'light' | 'dark' | 'indigo';
+export type ThemeName = 'light' | 'dark' | 'indigo' | 'tinder';
 export type Themes = { [key in ThemeName]: Theme }
 export type EnumThemeNames = {
     [key in ThemeName]: ThemeName
@@ -758,4 +758,10 @@ export type Palette = {
     grey6IOS3: string,
     grey6IOS4: string,
     //---end--- iOS theme
+
+    //---start--- tinder
+    pink80:string,
+    pinkA150: string,
+    blue70: string,
+    //---end---
 }

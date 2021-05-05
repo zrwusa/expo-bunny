@@ -5,9 +5,13 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {ScrollView} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
-import {migrateNearbyFilms} from "../../firebase/migrations";
-import {migrateSocialMediaVideos} from "../../firebase/migrations/socialMediaVideo";
-import {migrateSocialMediaImages} from "../../firebase/migrations/socialMediaImage";
+import {
+    migrateChatMessages,
+    migrateChatRooms,
+    migrateNearbyFilms,
+    migrateSocialMediaImages,
+    migrateSocialMediaVideos
+} from "../../firebase/migrations";
 
 
 export function PlaygroundScreen() {
@@ -18,6 +22,8 @@ export function PlaygroundScreen() {
         await migrateNearbyFilms();
         await migrateSocialMediaVideos();
         await migrateSocialMediaImages();
+        await migrateChatRooms();
+        await migrateChatMessages();
     }
     return (
         <ScrollView style={{flex: 1}}>
