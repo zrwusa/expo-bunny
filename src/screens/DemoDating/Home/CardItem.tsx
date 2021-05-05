@@ -46,14 +46,24 @@ const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches
                 <Col size={1}>
                 </Col>
                 <Col size={3} align="center">
-                    <View style={[sharedStyles.centralized,{width: wp(50), height: wp(50), borderRadius: wp(30), backgroundColor: colors.btnBackground2}]}>
-                        <IcoMoon name="cancel" color={colors.primary} />
+                    <View style={[sharedStyles.centralized, {
+                        width: wp(50),
+                        height: wp(50),
+                        borderRadius: wp(30),
+                        backgroundColor: colors.btnBackground2
+                    }]}>
+                        <IcoMoon name="cancel" color={colors.primary}/>
                     </View>
                 </Col>
 
                 <Col size={3} align="center">
-                    <View style={[sharedStyles.centralized,{width: wp(50), height: wp(50), borderRadius: wp(30), backgroundColor: colors.btnBackground}]}>
-                        <IcoMoon name="heart" color={colors.buttonText} />
+                    <View style={[sharedStyles.centralized, {
+                        width: wp(50),
+                        height: wp(50),
+                        borderRadius: wp(30),
+                        backgroundColor: colors.btnBackground
+                    }]}>
+                        <IcoMoon name="heart" color={colors.buttonText}/>
                     </View>
                 </Col>
                 <Col size={1}>

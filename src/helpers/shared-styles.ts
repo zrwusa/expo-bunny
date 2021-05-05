@@ -142,7 +142,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             elevation: 1,
             shadowOpacity: 0.05,
             shadowRadius: wp(10),
-            shadowOffset: { height: 0, width: 0 },
+            shadowOffset: {height: 0, width: 0},
         },
 
 

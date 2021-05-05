@@ -760,7 +760,7 @@ export type Palette = {
     //---end--- iOS theme
 
     //---start--- tinder
-    pink80:string,
+    pink80: string,
     pinkA150: string,
     blue70: string,
     //---end---

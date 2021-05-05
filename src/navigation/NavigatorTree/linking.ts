@@ -76,7 +76,7 @@ export const linking = {
             DemoChat: {
                 name: 'DemoChat',
                 path: 'demo-chat',
-                screens:{
+                screens: {
                     ChatHome: {
                         name: 'ChatHome',
                         path: 'home',

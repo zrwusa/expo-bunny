@@ -7,8 +7,8 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {colors} = themeLabor.theme;
 
     return StyleSheet.create({
-        screen:{
-            flex:1,
+        screen: {
+            flex: 1,
             marginHorizontal: ms.sp.l,
         }
     });

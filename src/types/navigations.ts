@@ -115,7 +115,7 @@ export type DemoDatingTabStackParam = {
 
 export type DemoChatStackParam = {
     ChatHome: undefined;
-    ChatRoom:  { roomKey: string };
+    ChatRoom: { roomKey: string };
 };
 
 export type RouteBase = Route<string, object | undefined>

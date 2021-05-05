@@ -226,8 +226,8 @@ export class NomicsAPIError extends Error {
 }
 
 export function extractValue<Item>(data: { key: string, value: Item }[]) {
-    let result:Item[] = []
-    if(data&&data.length>0){
+    let result: Item[] = []
+    if (data && data.length > 0) {
         result = data.map(item => item.value)
     }
     return result

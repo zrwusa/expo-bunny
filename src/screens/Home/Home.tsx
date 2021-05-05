@@ -69,7 +69,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoModal', {screen: 'ModalHome'})}>*/}
                     {/*    <InButtonText>{st(`demoModal`)}</InButtonText></ButtonTO>*/}
-                    <InlineJump type="LINK" iconName="adjustments" text={st(`nestedNavigation`)} to="/demo-nested/home"  iconSize={wp(20)}/>
+                    <InlineJump type="LINK" iconName="adjustments" text={st(`nestedNavigation`)} to="/demo-nested/home" iconSize={wp(20)}/>
                     <Divider/>
 
                     <InlineJump type="NAV" onNav={() =>
@@ -92,7 +92,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 <Card titleMode="OUT" title={st(`redux`)}>
                     <InlineJump type="LINK" iconName="puzzle" text={st(`FCReduxHook`)} to="/demo-fc-redux-hook" iconSize={wp(18)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="gears" text={st(`thunkCC`)} to="/demo-thunk-cc"  iconSize={wp(17)}/>
+                    <InlineJump type="LINK" iconName="gears" text={st(`thunkCC`)} to="/demo-thunk-cc" iconSize={wp(17)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="tools" text={st(`saga`)} to="/demo-saga" iconSize={wp(18)}/>
                     <Divider/>
@@ -100,11 +100,11 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 </Card>
                 <Card titleMode="OUT" title={st(`nativeCapabilities`)}>
 
-                    <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map"  iconSize={wp(18)}/>
+                    <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map" iconSize={wp(18)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="chat3" text={st(`chat`)} to="/demo-chat"  iconSize={wp(18)}/>
+                    <InlineJump type="LINK" iconName="chat3" text={st(`chat`)} to="/demo-chat" iconSize={wp(18)}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="share" text={st(`share`)} to="/demo-share"  iconSize={wp(18)}/>
+                    <InlineJump type="LINK" iconName="share" text={st(`share`)} to="/demo-share" iconSize={wp(18)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="bell-o" text={st(`notification`)} to="/demo-notification"/>
                 </Card>
@@ -116,7 +116,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     <InlineJump type="LINK" iconName="react" text={st(`RNAllInOne`)} to="/demo-tab-rn-components/home"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="puzzle" text={st(`demoTheme`)} to="/demo-theme"  iconSize={wp(20)}/>
+                    <InlineJump type="LINK" iconName="puzzle" text={st(`demoTheme`)} to="/demo-theme" iconSize={wp(20)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="search" text={st(`demoSearch`)} to="/demo-search/k" iconSize={wp(20)}/>
                     {/*<ButtonTO onPress={() => navigation.navigate('DemoSuspense')}>*/}

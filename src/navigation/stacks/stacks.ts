@@ -1,8 +1,10 @@
 import {createStackNavigator} from "@react-navigation/stack";
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {
-    AuthTopStackParam, DemoChatStackParam,
-    DemoCryptoCurrencyTabStackParam, DemoDatingTabStackParam,
+    AuthTopStackParam,
+    DemoChatStackParam,
+    DemoCryptoCurrencyTabStackParam,
+    DemoDatingTabStackParam,
     DemoDrawerStackParam,
     DemoHealthTabStackParam,
     DemoNestedLv1StackParam,

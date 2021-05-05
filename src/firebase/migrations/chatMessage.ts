@@ -4,7 +4,7 @@ import {uuidV4} from "../../utils";
 const chatMessages = {
     'room_a_msg_a': {
         _id: uuidV4(),
-        roomKey:'room_a',
+        roomKey: 'room_a',
         text: 'Room a msg a text',
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         user: {
@@ -15,7 +15,7 @@ const chatMessages = {
     },
     'room_a_msg_b': {
         _id: uuidV4(),
-        roomKey:'room_a',
+        roomKey: 'room_a',
         text: 'Room a msg b text',
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         user: {

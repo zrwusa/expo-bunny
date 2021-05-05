@@ -349,7 +349,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoChat" options={optionsChat}>
                 {
                     (props) => {
-                        return <DemoChatStack.Navigator {...props}  screenOptions={screenOptionsStackCommon}>
+                        return <DemoChatStack.Navigator {...props} screenOptions={screenOptionsStackCommon}>
                             <DemoChatStack.Screen name="ChatHome" component={ChatHomeScreen} options={optionsMergeWithTitle()}/>
                             <DemoChatStack.Screen name="ChatRoom" component={ChatRoomScreen} options={optionsMergeWithTitle()}/>
                         </DemoChatStack.Navigator>
@@ -422,9 +422,9 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 {
                     (props) => {
                         return <DemoCryptoCurrencyTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
-                                                                  tabBarOptions={tabBarOptionsCommon}>
+                                                                     tabBarOptions={tabBarOptionsCommon}>
                             <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyHome" component={CryptoCurrencyHomeScreen}
-                                                            options={optionsMergeWithTitle()}/>
+                                                               options={optionsMergeWithTitle()}/>
                             <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyAlert" component={Platform.OS !== 'web'
                                 ? CryptoCurrencyAlertScreen
                                 : () => <NotSupport text="Not supported on web"/>} initialParams={{isPush: true}} options={optionsMergeWithTitle()}/>
@@ -436,15 +436,16 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 {
                     (props) => {
                         return <DemoSocialMediaTabStack.Navigator {...props}
-                                                               screenOptions={screenOptionsTabBarIcon}
-                                                               tabBarOptions={tabBarOptionsSocialMedia}>
-                            <DemoSocialMediaTabStack.Screen name="SocialMediaHome" component={SocialMediaHomeScreen} options={optionsMergeWithTitle()}/>
+                                                                  screenOptions={screenOptionsTabBarIcon}
+                                                                  tabBarOptions={tabBarOptionsSocialMedia}>
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaHome" component={SocialMediaHomeScreen}
+                                                            options={optionsMergeWithTitle()}/>
                             <DemoSocialMediaTabStack.Screen name="SocialMediaSearch" component={SocialMediaSearchScreen}
-                                                         initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
+                                                            initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
                             <DemoSocialMediaTabStack.Screen name="SocialMediaVideo" component={SocialMediaVideoScreen}
-                                                         options={optionsMergeWithTitle()}/>
+                                                            options={optionsMergeWithTitle()}/>
                             <DemoSocialMediaTabStack.Screen name="SocialMediaSettings" component={SocialMediaSettingsScreen}
-                                                         initialParams={{'item': 'item-001'}}/>
+                                                            initialParams={{'item': 'item-001'}}/>
                         </DemoSocialMediaTabStack.Navigator>
                     }
                 }

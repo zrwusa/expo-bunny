@@ -99,5 +99,6 @@ export interface DBSchema {
     socialMediaImages: SocialMediaImageDatum,
     chatRooms: ChatRoom,
     chatMessages: IMMessage,
+
     [name: string]: any
 }

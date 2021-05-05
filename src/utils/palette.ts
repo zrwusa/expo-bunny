@@ -427,9 +427,9 @@ export const palette: Palette = {
     //---end--- iOS theme
 
     //---start--- tinder
-    pinkA150:'#FF68B1',
-    pink80:'#FED1E7',
-    blue70:'#D6E7F4',
+    pinkA150: '#FF68B1',
+    pink80: '#FED1E7',
+    blue70: '#D6E7F4',
     //---end---
 }
 
