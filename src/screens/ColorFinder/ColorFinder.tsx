@@ -180,7 +180,7 @@ export function ColorFinderScreen() {
                          onChange={(item) => {
                              setUglyType(item)
                          }}/>
-                    <Row size="l">
+                    <Row paddingVertical="l">
                         <Col size={30}>
                             <TextInput style={styles.input} value={inputText}
                                        placeholder={st('inputAColorString')}
@@ -203,15 +203,15 @@ export function ColorFinderScreen() {
                     {
                         similarColorsFromPalette.map(similarColorItem => {
                             return <View key={similarColorItem.keyInPalette}>
-                                <Row size="xs" style={styles.row}>
+                                <Row paddingVertical="xs" style={styles.row}>
                                     <Text>Diff</Text>
                                     <Text>{similarColorItem.diff.toFixed(2)}</Text>
                                 </Row>
-                                <Row size="xs" style={styles.row}>
+                                <Row paddingVertical="xs" style={styles.row}>
                                     <Text>Diff Tip</Text>
                                     <Text>{similarColorItem.diffDes}</Text>
                                 </Row>
-                                <Row size="xs" style={styles.row}>
+                                <Row paddingVertical="xs" style={styles.row}>
                                     <Text>Key</Text><CopyableText>{similarColorItem.keyInPalette}</CopyableText>
                                 </Row>
                                 <ColorValuesCard item={similarColorItem}/>
@@ -223,18 +223,18 @@ export function ColorFinderScreen() {
                     {
                         similarColorsFromTheme.map(similarColorItem => {
                             return <View key={uuidV4()}>
-                                <Row size="m" style={styles.row}>
+                                <Row paddingVertical="m" style={styles.row}>
                                     <Text>Diff</Text>
                                     <Text>{similarColorItem.diff.toFixed(2)}</Text>
                                 </Row>
-                                <Row size="m" style={styles.row}>
+                                <Row paddingVertical="m" style={styles.row}>
                                     <Text>Diff Tip</Text>
                                     <Text>{similarColorItem.diffDes}</Text>
                                 </Row>
-                                <Row size="m" style={styles.row}>
+                                <Row paddingVertical="m" style={styles.row}>
                                     <Text>Theme</Text><Text>{similarColorItem.themeName}</Text>
                                 </Row>
-                                <Row size="m" style={styles.row}>
+                                <Row paddingVertical="m" style={styles.row}>
                                     <Text>Key</Text><CopyableText>{similarColorItem.keyInThemeColors}</CopyableText>
                                 </Row>
                                 <ColorValuesCard item={similarColorItem}/>

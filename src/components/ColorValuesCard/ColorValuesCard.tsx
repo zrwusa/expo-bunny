@@ -14,7 +14,7 @@ export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | Co
     const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor)
     return <View>
-        <Row size="m">
+        <Row paddingVertical="m">
             <Col size={1}>
                 <Text>Hex</Text>
             </Col>
@@ -25,7 +25,7 @@ export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | Co
                 <View style={[styles.colorPanel, {backgroundColor: item.Hex}]}/>
             </Col>
         </Row>
-        <Row size="m">
+        <Row paddingVertical="m">
             <Col size={1}>
                 <Text>RGB</Text>
             </Col>
@@ -36,7 +36,7 @@ export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | Co
                 <View style={[styles.colorPanel, {backgroundColor: item.RGB}]}/>
             </Col>
         </Row>
-        <Row size="m">
+        <Row paddingVertical="m">
             <Col size={1}>
                 <Text>HSL</Text>
             </Col>

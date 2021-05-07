@@ -68,7 +68,7 @@ function ProfileScreen({route, navigation}: Props) {
                         style={styles.imageProgressive}
                         resizeMode="cover"
                     />
-                    <Row size="l" align="center">
+                    <Row paddingVertical="l" align="center">
                         <ButtonTO onPress={() => navigation.navigate('Home')}>
                             <InButtonText>{st(`goToHomeScreen`)}</InButtonText>
                         </ButtonTO>

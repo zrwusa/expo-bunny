@@ -31,7 +31,7 @@ export function IconToolsScreen() {
             <View style={styles.container}>
 
                 <Card title={st('generateIcoMoonConfigTitle')}>
-                    <Row size="l" align="center">
+                    <Row paddingVertical="l" align="center">
                         <ButtonTO onPress={handleGenerate}><InButtonText>{st('generate')}</InButtonText></ButtonTO>
                     </Row>
                     <Row>

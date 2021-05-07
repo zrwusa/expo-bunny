@@ -37,7 +37,7 @@
 //                     renderItem={({item}) => {
 //
 //                         return <View key={item.key}>
-//                             <Row size="l">
+//                             <Row paddingVertical="l">
 //                                 <Col>
 //                                     <Text>{item.value.text}</Text>
 //                                 </Col>
@@ -103,7 +103,7 @@
 // //
 // //             <View style={[containerStyles.Screen, sharedStyles.centralizeHorizontal]}>
 // //                 <View style={styles.todoContainer}>
-// //                     <Row size="l">
+// //                     <Row paddingVertical="l">
 // //                         <Col>
 // //                             <TextInput value={text} onChangeText={this.handleTextChange}/>
 // //                         </Col>
@@ -124,7 +124,7 @@
 // //                     </LinearGradientButton>
 // //                     <View style={styles.table}>
 // //                         <View>
-// //                             <Row size="l">
+// //                             <Row paddingVertical="l">
 // //                                 <Col>
 // //                                     <Text>Text</Text>
 // //                                 </Col>
@@ -141,7 +141,7 @@
 // //                                     renderItem={({item}) => {
 // //
 // //                                         return <View key={item.key}>
-// //                                             <Row size="l">
+// //                                             <Row paddingVertical="l">
 // //                                                 <Col>
 // //                                                     <Text>{item.value.text}</Text>
 // //                                                 </Col>

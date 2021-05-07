@@ -44,7 +44,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
             <ScrollView>
                 <View style={[containerStyles.Screen, styles.container]}>
                     <Card titleMode="OUT" title="Units">
-                        <Row size="xl">
+                        <Row paddingVertical="xl">
                             <Col size={3}>
                                 <Row>
                                     <LinearGradientIcon name="profile-male"/>
@@ -70,7 +70,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                             </Col>
                         </Row>
                         <Divider/>
-                        <Row size="xl">
+                        <Row paddingVertical="xl">
                             <Col size={3}>
                                 <Row>
                                     <LinearGradientIcon name="car"/>
@@ -95,7 +95,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                             </Col>
                         </Row>
                         <Divider/>
-                        <Row size="xl">
+                        <Row paddingVertical="xl">
                             <Col size={3}>
                                 <Row>
                                     <LinearGradientIcon name="tools"/>
@@ -121,7 +121,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                         </Row>
                     </Card>
                     <Card titleMode="OUT" title="Preferences">
-                        <Row size="xl">
+                        <Row paddingVertical="xl">
                             <Col size={3}>
                                 <Row>
                                     <LinearGradientIcon name="bell-o"/>
@@ -138,7 +138,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                         </Row>
                         <Divider/>
                         <TouchableOpacity>
-                            <Row size="xl">
+                            <Row paddingVertical="xl">
                                 <Col size={3}>
                                     <Row>
                                         <LinearGradientIcon name="hand-rock-o"/>
@@ -152,7 +152,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                         </TouchableOpacity>
                         <Divider/>
                         <TouchableOpacity>
-                            <Row size="xl">
+                            <Row paddingVertical="xl">
                                 <Col size={3}>
                                     <Row>
                                         <LinearGradientIcon name="puzzle"/>
@@ -167,7 +167,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                     </Card>
                     <Card titleMode="OUT" title="Support">
                         <TouchableOpacity>
-                            <Row size="xl">
+                            <Row paddingVertical="xl">
                                 <Col size={3}>
                                     <Row>
                                         <LinearGradientIcon name="lab"/>
@@ -181,7 +181,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                         </TouchableOpacity>
                         <Divider/>
                         <TouchableOpacity>
-                            <Row size="xl">
+                            <Row paddingVertical="xl">
                                 <Col size={3}>
                                     <Row>
                                         <LinearGradientIcon name="mail"/>
@@ -195,7 +195,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                         </TouchableOpacity>
                         <Divider/>
                         <TouchableOpacity>
-                            <Row size="xl">
+                            <Row paddingVertical="xl">
                                 <Col size={3}>
                                     <Row>
                                         <LinearGradientIcon name="thumb-up"/>

@@ -35,7 +35,7 @@ export function InlineJump(props: LineToProps) {
     const iconColor = {color: colors.buttonText};
     return type === 'LINK'
         ? to ? <Link to={to}>
-            <Row size="xl">
+            <Row paddingVertical="xl">
                 <Col size={3}>
                     <Row>
                         <LinearGradientIcon size={iconSize} name={iconName}/>
@@ -64,7 +64,7 @@ export function InlineJump(props: LineToProps) {
         }
 
         }>
-            <Row size="xl">
+            <Row paddingVertical="xl">
                 <Col size={3}>
                     <Row>
                         <LinearGradientIcon size={wp(iconSize)} name={iconName}/>

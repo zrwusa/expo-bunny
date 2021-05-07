@@ -13,4 +13,5 @@ export * from './BLToast'
 export * from './Avatar'
 export * from './Tab'
 export * from './InlineJump'
+export * from './ImageUploader'
 

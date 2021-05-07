@@ -23,12 +23,12 @@ function DemoCollectionScreen() {
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, styles.container]}>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <DemoFCCard title={st(`functionComponent`)}/>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <DemoCCClock title={st(`classComponent`)}
                                      tipLabel={st(`tipLabel`)}
@@ -36,7 +36,7 @@ function DemoCollectionScreen() {
                                      stopButtonTitle={st(`stop`)}/>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <DemoRegularComponent title={st(`iAmRegular`)}
                                               labelBeenRendered={st(`iHaveBeenRendered`)}
@@ -44,7 +44,7 @@ function DemoCollectionScreen() {
                         />
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <DemoPureComponent title={st(`iAmPure`)}
                                            labelBeenRendered={st(`iHaveBeenRendered`)}
@@ -52,17 +52,17 @@ function DemoCollectionScreen() {
                         />
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <DemoRequest title={st(`lbRequest`)} buttonTitle={st(`btnRequest`)}/>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <TextInput placeholder={st(`placeholder`)}/>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <DemoSvg/>
                     </View>

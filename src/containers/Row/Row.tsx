@@ -7,8 +7,9 @@ import {getStyles} from "./styles";
 
 export interface RowProps {
     children?: React.ReactNode,
+    size?: number,
     align?: FlexStyle['justifyContent'];
-    size?: SizeKeys,
+    paddingVertical?: SizeKeys,
     style?: StyleProp<ViewStyle>
 }
 
@@ -17,12 +18,12 @@ export type RowSizeMap = {
 }
 
 export const Row = function (props: RowProps) {
-    const {children, size, style, align = 'flex-start'} = props
+    const {children, size, paddingVertical, style, align = 'flex-start'} = props
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
-    const rowSizeMap: RowSizeMap = {
+    const rowPaddingVertical: RowSizeMap = {
         xxs: wp(2),
         xs: wp(4),
         s: wp(6),
@@ -34,10 +35,12 @@ export const Row = function (props: RowProps) {
     const mergeStyle: StyleProp<ViewStyle> = [
         {
             flexDirection: 'row',
+            alignSelf: 'stretch',
+            // width: '100%',
+            flex: size,
             alignItems: 'center',
-            width: '100%',
             justifyContent: align,
-            paddingVertical: size ? rowSizeMap[size] : 0
+            paddingVertical: paddingVertical ? rowPaddingVertical[paddingVertical] : 0
         },
         style
     ]

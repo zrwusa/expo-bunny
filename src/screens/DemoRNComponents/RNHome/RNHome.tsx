@@ -82,7 +82,7 @@ function RNHome() {
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, home.container]}>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <ActivityIndicator/>
                         <ActivityIndicator size="large"/>
@@ -90,7 +90,7 @@ function RNHome() {
                         <ActivityIndicator size="large" color="#00ff00"/>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <Button
                             onPress={() => null}
@@ -100,7 +100,7 @@ function RNHome() {
                         />
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <Switch
                             trackColor={{false: "#767577", true: "#81b0ff"}}
@@ -111,7 +111,7 @@ function RNHome() {
                         />
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <Image
                             style={imageStyles.tinyLogo}
@@ -128,7 +128,7 @@ function RNHome() {
                         />
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <ImageBackground source={imageBackgroundImage} style={imageBackgroundStyles.image}>
                             <Text style={imageBackgroundStyles.text}>Inside</Text>
@@ -136,7 +136,7 @@ function RNHome() {
                     </View>
                 </Row>
 
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <Pressable
                             onPress={() => {
@@ -161,7 +161,7 @@ function RNHome() {
                         </View>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={modalStyles.centeredView}>
                         <Modal
                             animationType="slide"
@@ -197,12 +197,12 @@ function RNHome() {
                         </TouchableHighlight>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <Text>Picker ???</Text>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
@@ -211,7 +211,7 @@ function RNHome() {
                         />
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <TouchableHighlight onPress={onTouchableHighlightPress}>
                             <View style={touchableHighlightStyles.button}>
@@ -226,7 +226,7 @@ function RNHome() {
 
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <View style={touchableOpacityStyles.countContainer}>
                             <Text>{st(`count`)}{touchableOpacityCount}</Text>
@@ -240,7 +240,7 @@ function RNHome() {
                     </View>
                 </Row>
 
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <View style={touchableWithoutFeedbackStyles.countContainer}>
                             <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
@@ -252,7 +252,7 @@ function RNHome() {
                         </TouchableWithoutFeedback>
                     </View>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <View>
                             <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>

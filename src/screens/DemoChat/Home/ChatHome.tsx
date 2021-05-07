@@ -30,7 +30,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     }
 
     const renderItem = (item: { key: string, value: ChatRoom }) => {
-        return <Row size="m">
+        return <Row paddingVertical="m">
             <TouchableOpacity onPress={() => handleRoomPress(item.key)}>
                 <Text>{item.value.name}</Text>
             </TouchableOpacity>

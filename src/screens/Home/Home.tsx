@@ -82,12 +82,13 @@ function HomeScreen({navigation}: HomeScreenProps) {
                                     itemlv2: "002"
                                 },
                             },
-                        })} iconName="sitemap1" text={st(`passParamsFromRootToLeaf`) + '(TouchableOpacity)'}/>
+                        })} iconName="greenkeeper" text={st(`passParamsFromRootToLeaf`) + '(TouchableOpacity)'}/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="sitemap1" text={st(`passParamsFromRootToLeaf`) + `(Link)`}
+                    <InlineJump type="LINK" iconName="greenkeeper" text={st(`passParamsFromRootToLeaf`) + `(Link)`}
                                 to="/demo-nested/settings/001/lv2-settings/002"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="sitemap1" text={st(`passParamsFromRootToLeafTab`) + `(Link)`} to="/demo-tab/settings/item-001"/>
+                    <InlineJump type="LINK" iconName="greenkeeper" text={st(`passParamsFromRootToLeafTab`) + `(Link)`}
+                                to="/demo-tab/settings/item-001"/>
                 </Card>
                 <Card titleMode="OUT" title={st(`redux`)}>
                     <InlineJump type="LINK" iconName="puzzle" text={st(`FCReduxHook`)} to="/demo-fc-redux-hook" iconSize={wp(18)}/>
@@ -130,7 +131,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     <InlineJump type="LINK" iconName="layout7" text={st(`demoHealth`)} to="/demo-health/home"/>
                     <Divider/>
-                    <InlineJump type="LINK" iconName="layout7" text={st(`demoDating`)} to="/demo-dating/home"/>
+                    <InlineJump type="LINK" iconName="heart" text={st(`demoDating`)} to="/demo-dating/home" iconSize={wp(20)}/>
                 </Card>
                 <Card titleMode="OUT" title={st(`system`)}>
                     <InlineJump type="LINK" iconName="settings" text={st(`settings`)} to="/settings" iconSize={wp(20)}/>

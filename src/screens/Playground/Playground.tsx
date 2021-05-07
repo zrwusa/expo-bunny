@@ -25,6 +25,7 @@ export function PlaygroundScreen() {
         await migrateChatRooms();
         await migrateChatMessages();
     }
+
     return (
         <ScrollView style={{flex: 1}}>
             <View style={styles.container}>
@@ -36,3 +37,6 @@ export function PlaygroundScreen() {
         </ScrollView>
     )
 }
+
+
+

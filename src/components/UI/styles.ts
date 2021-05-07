@@ -68,7 +68,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             justifyContent: 'center',
             alignItems: 'center',
             fontSize: ms.fs.m,
-            paddingVertical: ms.sp.m,
+            paddingVertical: ms.sp.l,
             paddingHorizontal: ms.sp.m,
         },
     })

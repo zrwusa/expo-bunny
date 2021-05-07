@@ -105,7 +105,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                     }}
                 />
             </InputCard>
-            <Row size="xxl">
+            <Row paddingVertical="xxl">
                 <LinearGradientButton
                     disabled={!phoneNumber}
                     onPress={firebaseSendOTP}
@@ -135,7 +135,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                     }}
                 />
             </InputCard>
-            <Row size="xxl">
+            <Row paddingVertical="xxl">
                 <LinearGradientButton
                     disabled={!verificationCode}
                     onPress={firebaseConfirmOTP}

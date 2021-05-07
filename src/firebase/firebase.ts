@@ -11,13 +11,13 @@ import {
     FIREBASE_STORAGE_BUCKET,
     GOOGLE_API_KEY
 } from "@env";
-// Optionally import the services that you want to use
+import {Platform} from "react-native";
 import "firebase/auth";
 import "firebase/database";
 import "firebase/firestore";
-import {Platform} from "react-native";
-// import "firebase/functions";
-// import "firebase/storage";
+import "firebase/functions";
+import "firebase/storage";
+// Optionally import the services that you want to use
 
 export const FIREBASE_CONFIG = {
     apiKey: GOOGLE_API_KEY,

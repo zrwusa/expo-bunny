@@ -20,6 +20,8 @@ import _ from "lodash";
 import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json"
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {firebase} from "../firebase/firebase";
+import * as ImagePicker from "expo-image-picker";
 
 export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -304,6 +306,59 @@ export const navToSignUp = (route: NavToRoute, navigation: NavToNavigation) => {
         navigation.navigate('Auth', {screen: 'SignUp', params: {reference: route.params.reference}})
     } else {
         navigation.navigate('Auth', {screen: 'SignUp'})
+    }
+}
+
+export const uploadImageToFirebase = async function (uri: string) {
+    // Why are we using XMLHttpRequest? See:
+    // https://github.com/expo/expo/issues/2402#issuecomment-443726662
+    const blob = await new Promise<Blob>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            resolve(xhr.response);
+        };
+        xhr.onerror = function (e) {
+            reject(new TypeError('Network request failed'));
+        };
+        xhr.responseType = 'blob';
+        xhr.open('GET', uri, true);
+        xhr.send(null);
+    });
+
+    const ref = firebase
+        .storage()
+        .ref()
+        .child(uuidV4());
+
+    const snapshot = await ref.put(blob);
+
+    // // We're done with the blob, close and release it
+    // blob.close();
+
+    return await snapshot.ref.getDownloadURL();
+}
+
+export const removeImageFromFirebase = async function (uri: string) {
+    return await firebase.storage().refFromURL(uri).delete()
+}
+
+export const Permissions = {
+    mediaLibrary: {
+        get: async () => {
+            // if (Platform.OS !== 'web') {
+            const mediaLibraryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            return mediaLibraryPermission.status === 'granted';
+
+            // }
+        }
+    },
+    camera: {
+        get: async () => {
+            // if (Platform.OS !== 'web') {
+            const cameraPermission = await ImagePicker.requestCameraPermissionsAsync()
+            return cameraPermission.status === 'granted';
+            // }
+        }
     }
 }
 

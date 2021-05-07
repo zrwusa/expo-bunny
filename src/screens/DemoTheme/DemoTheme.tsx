@@ -29,34 +29,34 @@ const DemoThemeScreen = () => {
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, sharedStyles.centralized, styles.container]}>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <Card title="Buttons" style={styles.demoCard}>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <ButtonTO style={sharedStyles.button}>
                                 <InButtonText style={sharedStyles.buttonText}>{st(`demoButton`)}</InButtonText>
                             </ButtonTO>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <ButtonTO style={sharedStyles.button2}>
                                 <InButtonText style={sharedStyles.buttonText2}>{st(`demoButtonSec`)}</InButtonText>
                             </ButtonTO>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <ButtonTO style={sharedStyles.buttonDisabled}>
                                 <InButtonText>{st(`demoButtonDisabled`)}</InButtonText></ButtonTO>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Button title={st(`btnCustom`)} onPress={BunnyConstants.fnNoop}/>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <ButtonTO><InButtonText>{st(`btnFromPaper`)}</InButtonText></ButtonTO>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <LinearGradientButton>
                                 <InButtonText>xxx</InButtonText>
                             </LinearGradientButton>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <View style={{width: 300, height: 150}}>
                                 <Svg height={150} width={300}>
                                     <Defs>
@@ -99,46 +99,46 @@ const DemoThemeScreen = () => {
                         </Row>
                     </Card>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <Card title="Texts" style={styles.demoCard}>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.h1}>H1</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
 
                             <Text style={sharedStyles.h2}>h2</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.h3}>h3</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.h4}>h4</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.h5}>h5</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.h6}>h6</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.text}>{st(`demoText`)}</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.text2}>{st(`demoTextSec`)}</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.title}>{st(`demoTitle`)}</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.title2}>{st(`demoTitleSec`)}</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.caption}>{st(`demoCaption`)}</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.caption2}>{st(`demoCaptionSec`)}</Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.paragraph}>
                                 {st(`demoParagraph`)}{'\n'}
                                 1.Don’t repeat yourself (DRY){'\n'}
@@ -147,7 +147,7 @@ const DemoThemeScreen = () => {
                                 4.The principle of least knowledge (Law of Demeter)
                             </Text>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <Text style={sharedStyles.paragraph2}>
                                 {st(`demoParagraphSec`)}{'\n'}
                                 1.Don’t repeat yourself (DRY){'\n'}
@@ -158,19 +158,19 @@ const DemoThemeScreen = () => {
                         </Row>
                     </Card>
                 </Row>
-                <Row size="l">
+                <Row paddingVertical="l">
                     <Card title="Surfaces" style={styles.demoCard}>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <View style={[styles.demoShadow, sharedStyles.shadow]}>
                                 <Text>{st(`demoShadow`)}</Text>
                             </View>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <View style={[sharedStyles.card, styles.demoSurface]}>
                                 <Text style={sharedStyles.h3}>{st(`demoSurface`)}</Text>
                             </View>
                         </Row>
-                        <Row size="l">
+                        <Row paddingVertical="l">
                             <View style={[sharedStyles.card2, styles.demoSurface]}>
                                 <Text style={sharedStyles.h3}>{st(`demoSurfaceSec`)}</Text>
                             </View>
