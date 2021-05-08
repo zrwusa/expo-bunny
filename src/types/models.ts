@@ -1,5 +1,5 @@
 //Data models, such as database entities, api return value entities
-import {ImageSourcePropType} from "react-native";
+import {ImageSourcePropType, ImageURISource} from "react-native";
 import {AVPlaybackSource} from "expo-av/src/AV";
 import {SagaTodo} from "./states";
 
@@ -90,6 +90,9 @@ export interface ChatRoom {
     name: string,
 }
 
+export interface UserPhoto extends ImageURISource {
+}
+
 // create schema for the DB
 export interface DBSchema {
     todoList: SagaTodo,
@@ -99,6 +102,7 @@ export interface DBSchema {
     socialMediaImages: SocialMediaImageDatum,
     chatRooms: ChatRoom,
     chatMessages: IMMessage,
+    usersWithPhotos: { [key: string]: UserPhoto[] },
 
-    [name: string]: any
+    // [name: string]: any
 }

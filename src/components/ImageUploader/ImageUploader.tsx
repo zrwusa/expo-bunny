@@ -4,9 +4,11 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {
     ActivityIndicator,
     ActivityIndicatorProps,
-    Image, ImageErrorEventData,
+    Image,
+    ImageErrorEventData,
     ImageStyle,
-    ImageURISource, NativeSyntheticEvent,
+    ImageURISource,
+    NativeSyntheticEvent,
     SafeAreaView,
     Share,
     StyleProp,
@@ -34,6 +36,7 @@ export interface ImageUploaderProps {
     source?: ImageURISource,
     isShowUri?: boolean,
     isDeleteFromServerWhenRemove?: boolean,
+    isDeleteFromServerWhenUpload?: boolean,
 
     containerStyle?: StyleProp<ViewStyle>,
     imageContainerStyle?: StyleProp<ViewStyle>,
@@ -69,6 +72,7 @@ export function ImageUploader(props: ImageUploaderProps) {
         isFullFill = false,
         isShowUri = false,
         isDeleteFromServerWhenRemove = true,
+        isDeleteFromServerWhenUpload = true,
 
         containerStyle,
         placeholderContainerStyle,
@@ -109,13 +113,15 @@ export function ImageUploader(props: ImageUploaderProps) {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isUploading, setIsUploading] = useState(false)
     // const screenshotIt = useRef<ViewShot>(null)
-
     useEffect(() => {
         if (source?.uri !== image.uri) {
             onValueChanged && onValueChanged(image)
         }
-    }, [image.uri])
+    }, [image])
 
+    useEffect(() => {
+        setImage(source || {uri: ''})
+    }, [source])
 
     const _takePhoto = async () => {
         const isAllowed = await Permissions.camera.get()
@@ -141,7 +147,7 @@ export function ImageUploader(props: ImageUploaderProps) {
 
     const _imageError = (e: NativeSyntheticEvent<ImageErrorEventData>) => {
         e.nativeEvent.error
-        onError && onError( e.nativeEvent.error)
+        onError && onError(e.nativeEvent.error)
     }
 
     const _handleImagePicked = async (pickerResult: ImagePicker.ImagePickerResult) => {
@@ -150,6 +156,9 @@ export function ImageUploader(props: ImageUploaderProps) {
         setModalVisible(false)
         try {
             if (!pickerResult.cancelled) {
+                if (image.uri && isDeleteFromServerWhenUpload) {
+                    await removeImageFromFirebase(image.uri)
+                }
                 const uploadUrl = await uploadImageToFirebase(pickerResult.uri);
                 onUploaded && onUploaded({uri: uploadUrl});
                 setImage({uri: uploadUrl})

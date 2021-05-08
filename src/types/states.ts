@@ -73,5 +73,5 @@ export interface RootState {
     demoMapState: DemoMapState,
     demoSagaState: DemoSagaState,
     demoCryptoCurrencyState: DemoCryptoCurrencyState,
-    firebaseState: FirebaseReducer.Reducer<UserProfile, DBSchema>
+    firebaseState: FirebaseReducer.Reducer<UserProfile, DBSchema>,
 }
