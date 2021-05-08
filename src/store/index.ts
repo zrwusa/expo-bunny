@@ -13,6 +13,7 @@ import {
 import {sagasGenerator} from "./sagas"
 import {firebase} from "../firebase/firebase";
 import {firebaseReducer} from "react-redux-firebase";
+import {createFirestoreInstance, firestoreReducer} from "redux-firestore"
 import {RootState} from "../types";
 
 const rootReducer = combineReducers<RootState>({
@@ -23,7 +24,8 @@ const rootReducer = combineReducers<RootState>({
     blResultState: blStateReducer,
     demoSagaState: demoSagaReducer,
     demoCryptoCurrencyState: demoCryptoCurrencyReducer,
-    firebaseState: firebaseReducer
+    firebaseState: firebaseReducer,
+    firestoreState: firestoreReducer
 });
 
 const sagaMiddleware = createSagaMiddleware()
@@ -43,8 +45,8 @@ const rrfConfig = {
 export const rrfProps = {
     firebase: firebase,
     config: rrfConfig,
-    dispatch: store.dispatch
-    // createFirestoreInstance // <- needed if using firestore
+    dispatch: store.dispatch,
+    createFirestoreInstance // <- needed if using firestore
 }
 
 export default store;

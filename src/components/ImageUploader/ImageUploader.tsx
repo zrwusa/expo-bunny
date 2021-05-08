@@ -57,7 +57,7 @@ export interface ImageUploaderProps {
     onSelected?: (pickResult: ImagePicker.ImagePickerResult) => void,
     onUploaded?: (uploadedResult: UploadedResult) => void,
     onValueChanged?: (source: ImageURISource) => void,
-    onRemovePhoto?: (source: ImageURISource) => void,
+    onRemovePhoto?: (source?: ImageURISource) => void,
 }
 
 export function ImageUploader(props: ImageUploaderProps) {
@@ -184,6 +184,8 @@ export function ImageUploader(props: ImageUploaderProps) {
             setImage({uri: ''});
             setModalVisible(false);
             onRemovePhoto && onRemovePhoto(needRemovePhoto)
+        } else {
+            onRemovePhoto && onRemovePhoto()
         }
     };
     const _share = async () => {
@@ -274,8 +276,14 @@ export function ImageUploader(props: ImageUploaderProps) {
                         <TextButton onPress={_takePhoto}><Text>Take A Photo</Text></TextButton>
                         {/*<Divider/>*/}
                         {/*<TextButton onPress={_takeScreenshot}><Text>Take a screenshot</Text></TextButton>*/}
-                        <Divider/>
-                        <TextButton onPress={_removePhoto}><Text>Remove Photo</Text></TextButton>
+                        {
+                            image.uri
+                                ? <>
+                                    <Divider/>
+                                    <TextButton onPress={_removePhoto}><Text>Remove Photo</Text></TextButton>
+                                </>
+                                : null
+                        }
                     </View>
                     <View style={[styles.modalPanel2, modalPanel2Style]}>
                         <TextButton onPress={_toggleModal}><Text>Cancel</Text></TextButton>

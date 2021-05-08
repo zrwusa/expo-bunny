@@ -37,6 +37,8 @@ export const FIREBASE_CONFIG = {
 try {
     if (FIREBASE_CONFIG.apiKey) {
         firebase.initializeApp(FIREBASE_CONFIG);
+        // // Initialize Cloud Firestore through Firebase
+        // firebase.firestore();
     }
 } catch (err) {
     console.error(err)

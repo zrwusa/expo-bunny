@@ -12,6 +12,9 @@ import {
     migrateSocialMediaImages,
     migrateSocialMediaVideos
 } from "../../firebase/migrations";
+import {useFirestoreConnect} from "react-redux-firebase";
+import {useSelector} from "react-redux";
+import {RootState} from "../../types";
 
 
 export function PlaygroundScreen() {
@@ -26,6 +29,11 @@ export function PlaygroundScreen() {
         await migrateChatMessages();
     }
 
+    useFirestoreConnect([
+        {collection: 'demoFirestore'} // or 'demoFirestore'
+    ])
+    const demoFirestore = useSelector((state: RootState) => state.firestoreState.ordered.demoFirestore)
+
     return (
         <ScrollView style={{flex: 1}}>
             <View style={styles.container}>
@@ -34,6 +42,18 @@ export function PlaygroundScreen() {
             <TextButton onPress={handleMigrate}>
                 <Text>migrate</Text>
             </TextButton>
+
+            <View>
+                {
+                    demoFirestore && demoFirestore.map(item => {
+                        return <View key={item.id.toString()}>
+                            <Text>{item.id}</Text>
+                            <Text>{item.name}</Text>
+                            <Text>{item.keywords}</Text>
+                        </View>
+                    })
+                }
+            </View>
         </ScrollView>
     )
 }

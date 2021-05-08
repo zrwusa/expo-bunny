@@ -1,10 +1,11 @@
 // Redux store states,different from models entities
 import {InitialState} from "@react-navigation/native";
-import {DBSchema, DemoSaga, NearbyFilm, Region, UserProfile} from "./models";
+import {DemoSaga, NearbyFilm, Region, SchemaFirestore, SchemaRealtimeDB, UserProfile} from "./models";
 import {BLResult} from "./bl";
 import {Notification} from "expo-notifications";
 import {RequestConfig} from "./payloads";
 import {FirebaseReducer} from "react-redux-firebase";
+import {FirestoreReducer} from "redux-firestore";
 import {PickerSelectorItem} from "./components";
 
 export type RequestStatus = {
@@ -73,5 +74,6 @@ export interface RootState {
     demoMapState: DemoMapState,
     demoSagaState: DemoSagaState,
     demoCryptoCurrencyState: DemoCryptoCurrencyState,
-    firebaseState: FirebaseReducer.Reducer<UserProfile, DBSchema>,
+    firebaseState: FirebaseReducer.Reducer<UserProfile, SchemaRealtimeDB>,
+    firestoreState: FirestoreReducer.Reducer<SchemaFirestore>
 }

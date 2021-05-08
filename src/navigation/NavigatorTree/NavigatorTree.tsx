@@ -77,7 +77,7 @@ import {DemoSagaFirebaseScreen} from "../../screens/DemoSagaFirebase";
 import {Row} from "../../containers";
 import {ThemePicker} from "../../components/ThemePicker";
 import {DatingHomeScreen} from "../../screens/DemoDating/Home";
-import DatingSettingsScreen from "../../screens/DemoDating/Settings";
+import {DatingSettingsScreen} from "../../screens/DemoDating/Settings";
 import {ChatRoomScreen} from "../../screens/DemoChat/ChatRoom";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]

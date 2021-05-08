@@ -94,7 +94,7 @@ export interface UserPhoto extends ImageURISource {
 }
 
 // create schema for the DB
-export interface DBSchema {
+export interface SchemaRealtimeDB {
     todoList: SagaTodo,
     // demoNearbyFilms: NearbyFilm,
     // region: Region,
@@ -105,4 +105,14 @@ export interface DBSchema {
     usersWithPhotos: { [key: string]: UserPhoto[] },
 
     // [name: string]: any
+}
+
+export interface DemoFirestore {
+    name: string,
+    keywords: string
+}
+
+export interface SchemaFirestore {
+    demoFirestore: DemoFirestore,
+    usersWithPhotos: { [key: string]: { [key: string]: ImageURISource } }
 }
