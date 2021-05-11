@@ -24,14 +24,14 @@ export const StickerPicker = ({isShow = false, onValueChanged}: StickerPickerPro
             //     stickers.push({id: uuidV4(), url: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany-avatar.jpeg'})
             // }
 
-            // const shaunTheSheepRef = firebase.storage().ref('ShaunTheSheep256/')
-            // const result = await shaunTheSheepRef.listAll()
-            //
-            // for (const imageRef of result.items) {
-            //     const url = await imageRef.getDownloadURL();
-            //     stickers.push({id: imageRef.fullPath, url})
-            // }
-            // setStickers([stickers[0]])
+            const shaunTheSheepRef = firebase.storage().ref('ShaunTheSheep256/')
+            const result = await shaunTheSheepRef.listAll()
+
+            for (const imageRef of result.items) {
+                const url = await imageRef.getDownloadURL();
+                stickers.push({id: imageRef.fullPath, url})
+            }
+            setStickers([stickers[0]])
         })()
     }, [])
 
