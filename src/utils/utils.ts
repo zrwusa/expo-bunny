@@ -241,3 +241,9 @@ export function keyValueToArray<Item>(data: { [key: string]: Item }) {
     }
     return itemArray;
 }
+
+export function minuted(time: number) {
+    const minutes = Math.floor(time / 60000).toString();
+    const seconds = Math.floor((time % 60000) / 1000).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`
+}

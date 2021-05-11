@@ -1,6 +1,6 @@
 //Data models, such as database entities, api return value entities
 import {ImageSourcePropType, ImageURISource} from "react-native";
-import {AVPlaybackSource} from "expo-av/src/AV";
+import {AVPlaybackSource} from "../../pakages/expo-av/src/AV";
 import {SagaTodo} from "./states";
 
 export type DemoEmployee = {
@@ -73,6 +73,8 @@ export interface UserProfile {
     email: string
 }
 
+export type IMMessageType = 'MESSAGE' | 'IMAGE' | 'STICKER_GIF' | 'AUDIO' | 'VIDEO' | ''
+
 export interface IMMessage {
     _id: string,
     text: string,
@@ -83,6 +85,11 @@ export interface IMMessage {
         name: string,
         avatar: string,
     },
+    url: string,
+    type: IMMessageType,
+    received?: boolean,
+    sent?: boolean,
+    pending?: boolean
 }
 
 export interface ChatRoom {

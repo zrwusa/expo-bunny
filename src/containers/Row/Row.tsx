@@ -35,11 +35,11 @@ export const Row = function (props: RowProps) {
     const mergeStyle: StyleProp<ViewStyle> = [
         {
             flexDirection: 'row',
+            flex: size,
             alignSelf: 'stretch',
             // width: '100%',
-            flex: size,
-            alignItems: 'center',
             justifyContent: align,
+            alignItems: 'center',
             paddingVertical: paddingVertical ? rowPaddingVertical[paddingVertical] : 0
         },
         style

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {createRef} from "react";
-import {AVPlaybackStatus, Video, VideoProps} from 'expo-av';
+import {AVPlaybackStatus, Video, VideoProps} from "../../../pakages/expo-av/src";
 import {Button, Text, View} from "../UI";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
@@ -46,9 +46,6 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
                 <Video
                     ref={this.video}
                     style={styles.video}
-                    source={{
-                        uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-                    }}
                     useNativeControls
                     resizeMode="contain"
                     isLooping

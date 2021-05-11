@@ -18,8 +18,8 @@ export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyl
 export type DimensionKeys = 'bunnyUI' | 'iphoneX' | 'iPad' | 'pixel2XL' | 'pcBrowser'
     | 'custom1' | 'custom2' | 'custom3';
 export type DimensionFun = {
-    wp: (width: number, shouldRound?: boolean) => number,
-    hp: (height: number, shouldRound?: boolean) => number
+    wp: (number: number, shouldRound?: boolean) => number,
+    hp: (number: number, shouldRound?: boolean) => number
 }
 export type DesignsBasedOn = {
     [key in DimensionKeys]: DimensionFun

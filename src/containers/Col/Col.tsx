@@ -9,14 +9,14 @@ export interface ColProps {
 }
 
 export const Col = function (props: ColProps) {
-    const {children, size = 1, style, align = 'center'} = props
+    const {children, size = 1, style, align = 'stretch'} = props
 
     const mergeStyle: StyleProp<ViewStyle> = [
         {
             flexDirection: 'column',
             flex: size,
             alignSelf: 'stretch',
-            // height: '100%'
+            // height: '100%',
             alignItems: align,
             justifyContent: 'center',
         },

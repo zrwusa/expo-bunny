@@ -3,7 +3,7 @@ import {AuthLaborContextTypePartial} from "../../types";
 import {useAuthLabor} from "./useAuthLabor";
 
 export interface WithAuthLabor extends AuthLaborContextTypePartial {
-};
+}
 
 export function withAuthLabor<T extends WithAuthLabor = WithAuthLabor>(
     WrappedComponent: React.ComponentType<T>

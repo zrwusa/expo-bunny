@@ -2,7 +2,7 @@ import React from "react";
 import {Text, TextButton, View} from "../../components/UI";
 import {LinearGradientIcon} from "../../components/LinearGradientIcon";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {ScrollView} from "react-native";
+import {ScrollView, TouchableHighlight, TouchableOpacity, Vibration} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {
@@ -15,6 +15,7 @@ import {
 import {useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types";
+import {DraggableView} from "../../containers/DraggableView";
 
 
 export function PlaygroundScreen() {
@@ -54,6 +55,30 @@ export function PlaygroundScreen() {
                     })
                 }
             </View>
+            <DraggableView/>
+            <TouchableOpacity onPress={() => {
+                Vibration.vibrate(10)
+            }}>
+                <Text>Vibration</Text>
+            </TouchableOpacity>
+            <TouchableHighlight
+                // onPress={() => {
+                //     alert('onPress')
+                // }}
+                // onPressOut={() => {
+                //     alert('onPressOut')
+                // }}
+                onLongPress={() => {
+                    alert('onLongPress')
+                }}
+                // onPressIn={()=>{
+                //     alert('onPressIn')
+                // }}
+                underlayColor="red">
+                <View>
+                    <Text>Touchable with Long Press</Text>
+                </View>
+            </TouchableHighlight>
         </ScrollView>
     )
 }

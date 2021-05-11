@@ -9,6 +9,7 @@ import {
     ImageStyle,
     ImageURISource,
     NativeSyntheticEvent,
+    Platform,
     SafeAreaView,
     Share,
     StyleProp,
@@ -21,13 +22,15 @@ import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import * as ImagePicker from 'expo-image-picker';
 import {ImagePickerOptions} from 'expo-image-picker';
-import {Permissions, removeImageFromFirebase, uploadImageToFirebase} from "../../helpers";
-import Modal, {ModalProps} from 'react-native-modal';
+import {Permissions, removeImageFromFirebase, uploadFileToFirebase} from "../../helpers";
+import Modal, {ModalProps} from "react-native-modal";
 import {Divider} from "../Divider";
 import {CopyableText} from "../CopyableText";
 import {IcoMoonKeys} from "../../types";
 // import ViewShot,{captureRef} from "react-native-view-shot";
 export type UploadedResult = { uri: string }
+export type RenderPreview = (props: { imageSource: ImageURISource, toggleModal: () => void }) => React.ReactElement | null;
+export type PickResultType = 'image' | 'video' | undefined;
 
 export interface ImageUploaderProps {
     width?: number,
@@ -53,11 +56,13 @@ export interface ImageUploaderProps {
     modalProps?: ModalProps,
     loadingIndicatorProps?: ActivityIndicatorProps,
 
+    renderPreview?: RenderPreview,
+
     onError?: (error: Error) => void,
     onSelected?: (pickResult: ImagePicker.ImagePickerResult) => void,
-    onUploaded?: (uploadedResult: UploadedResult) => void,
-    onValueChanged?: (source: ImageURISource) => void,
-    onRemovePhoto?: (source?: ImageURISource) => void,
+    onUploaded?: (uploadedResult: UploadedResult, type?: PickResultType) => void,
+    onValueChanged?: (imageSource: ImageURISource) => void,
+    onRemovePhoto?: (imageSource?: ImageURISource) => void,
 }
 
 export function ImageUploader(props: ImageUploaderProps) {
@@ -101,6 +106,8 @@ export function ImageUploader(props: ImageUploaderProps) {
             size: 'large'
         },
 
+        renderPreview,
+
         onError,
         onSelected,
         onUploaded,
@@ -113,11 +120,6 @@ export function ImageUploader(props: ImageUploaderProps) {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isUploading, setIsUploading] = useState(false)
     // const screenshotIt = useRef<ViewShot>(null)
-    useEffect(() => {
-        if (source?.uri !== image.uri) {
-            onValueChanged && onValueChanged(image)
-        }
-    }, [image])
 
     useEffect(() => {
         setImage(source || {uri: ''})
@@ -138,6 +140,43 @@ export function ImageUploader(props: ImageUploaderProps) {
             return
         }
         let pickerResult = await ImagePicker.launchImageLibraryAsync(imagePickerOptions);
+        console.log('---pickerResult', pickerResult)
+        // const iOS = {
+        //     "cancelled": false,
+        //     "duration": 19181.66796875,
+        //     "height": 1792,
+        //     "type": "video",
+        //     "uri": "file:///var/mobile/Containers/Data/Application/A2D459FE-B246-4823-92C0-023BCB216EC3/Library/Caches/ExponentExperienceData/%2540zrwusa%252Fexpo-react-bunny/ImagePicker/EE48EAD8-6717-488D-94D6-2C834E561553.mov",
+        //     "width": 828,
+        // }
+        // const web = {
+        //     cancelled: false,
+        //     height: 0,
+        //     uri: "data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21",
+        //     width: 0
+        // }
+        if (!pickerResult.cancelled) {
+            // fixed expo-image-picker did not give a type on web platform
+            switch (Platform.OS) {
+                case 'web':
+                    const {uri} = pickerResult;
+                    let mimeType = ''
+                    if (uri) {
+                        const matched = uri.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/);
+                        if (matched) {
+                            mimeType = matched[0]
+                        }
+                    }
+                    if (mimeType) {
+                        const type = mimeType.split('/')[0]
+                        pickerResult.type = type as 'image' | 'video' | undefined;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         await _handleImagePicked(pickerResult);
     };
 
@@ -159,9 +198,10 @@ export function ImageUploader(props: ImageUploaderProps) {
                 if (image.uri && isDeleteFromServerWhenUpload) {
                     await removeImageFromFirebase(image.uri)
                 }
-                const uploadUrl = await uploadImageToFirebase(pickerResult.uri);
-                onUploaded && onUploaded({uri: uploadUrl});
+                const uploadUrl = await uploadFileToFirebase(pickerResult.uri);
+                onUploaded && onUploaded({uri: uploadUrl}, pickerResult.type);
                 setImage({uri: uploadUrl})
+                onValueChanged && onValueChanged(image)
             }
         } catch (e) {
             _errorHandle(e)
@@ -255,14 +295,20 @@ export function ImageUploader(props: ImageUploaderProps) {
         );
     }
 
+    const containerStyleJudge: StyleProp<ViewStyle> = renderPreview ? undefined : [styles.container, sizeStyle, containerStyle]
     return (
         <SafeAreaView
             // ref={screenshotIt}
-            style={[styles.container, sizeStyle, containerStyle]}>
-            <TouchableOpacity style={[sizeStyle]} onPress={_toggleModal}>
-                {image.uri ? _renderImage() : _renderPlaceholder()}
-                {_maybeRenderUploadingOverlay()}
-            </TouchableOpacity>
+            style={containerStyleJudge}>
+            {
+                renderPreview
+                    ? renderPreview({imageSource: image, toggleModal: _toggleModal})
+                    : <TouchableOpacity style={[sizeStyle]} onPress={_toggleModal}>
+                        {image.uri ? _renderImage() : _renderPlaceholder()}
+                        {_maybeRenderUploadingOverlay()}
+                    </TouchableOpacity>
+            }
+
             <Modal isVisible={isModalVisible}
                    onSwipeComplete={() => setModalVisible(false)}
                    swipeDirection="down"
@@ -293,6 +339,3 @@ export function ImageUploader(props: ImageUploaderProps) {
         </SafeAreaView>
     )
 }
-
-
-
