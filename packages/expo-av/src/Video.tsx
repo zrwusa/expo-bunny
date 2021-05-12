@@ -2,29 +2,29 @@ import * as React from 'react';
 import {findNodeHandle, Image, NativeMethods, StyleSheet, View} from 'react-native';
 
 import {
-  assertStatusValuesInBounds,
-  AVPlaybackNativeSource,
-  AVPlaybackSource,
-  AVPlaybackStatus,
-  AVPlaybackStatusToSet,
-  getNativeSourceAndFullInitialStatusForLoadAsync,
-  getNativeSourceFromSource,
-  getUnloadedStatus,
-  Playback,
-  PlaybackMixin,
+    assertStatusValuesInBounds,
+    AVPlaybackNativeSource,
+    AVPlaybackSource,
+    AVPlaybackStatus,
+    AVPlaybackStatusToSet,
+    getNativeSourceAndFullInitialStatusForLoadAsync,
+    getNativeSourceFromSource,
+    getUnloadedStatus,
+    Playback,
+    PlaybackMixin,
 } from './AV';
 import ExpoVideoManager from './ExpoVideoManager';
 import ExponentAV from './ExponentAV';
 import ExponentVideo from './ExponentVideo';
 import {
-  ExponentVideoComponent,
-  ResizeMode,
-  VideoFullscreenUpdateEvent,
-  VideoNativeProps,
-  VideoNaturalSize,
-  VideoProps,
-  VideoReadyForDisplayEvent,
-  VideoState,
+    ExponentVideoComponent,
+    ResizeMode,
+    VideoFullscreenUpdateEvent,
+    VideoNativeProps,
+    VideoNaturalSize,
+    VideoProps,
+    VideoReadyForDisplayEvent,
+    VideoState,
 } from './Video.types';
 
 export {

@@ -56,6 +56,14 @@ export interface MessageProps<TMessage extends IMessage> {
     ): boolean
 
     onMessageLayout?(event: LayoutChangeEvent): void
+
+    // onMessageLoad?(currentMessage: TMessage): void
+    //
+    // onMessageLoadStart?(currentMessage: TMessage): void
+    //
+    // onMessageLoadEnd?(currentMessage: TMessage): void
+    //
+    // onMessageLoadError?(e:Error,currentMessage: TMessage): void
 }
 
 export default class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
@@ -74,6 +82,10 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
         inverted: true,
         shouldUpdateMessage: undefined,
         onMessageLayout: undefined,
+        // onMessageLoad: undefined,
+        // onMessageLoadStart: undefined,
+        // onMessageLoadEnd: undefined,
+        // onMessageLoadError: undefined,
     }
 
     static propTypes = {
@@ -94,6 +106,10 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
         }),
         shouldUpdateMessage: PropTypes.func,
         onMessageLayout: PropTypes.func,
+        // onMessageLoad: PropTypes.func,
+        // onMessageLoadStart: PropTypes.func,
+        // onMessageLoadEnd: PropTypes.func,
+        // onMessageLoadError: PropTypes.func
     }
 
     shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
@@ -115,6 +131,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
             next.createdAt !== current.createdAt ||
             next.text !== current.text ||
             next.image !== current.image ||
+            next.sticker !== current.sticker ||
             next.video !== current.video ||
             next.audio !== current.audio ||
             previousMessage !== nextPropsPreviousMessage ||
@@ -125,11 +142,11 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
 
     renderDay() {
         if (this.props.currentMessage && this.props.currentMessage.createdAt) {
-            const {containerStyle, onMessageLayout, ...props} = this.props
+            const {containerStyle, onMessageLayout, ...dayProps} = this.props
             if (this.props.renderDay) {
-                return this.props.renderDay(props)
+                return this.props.renderDay(dayProps)
             }
-            return <Day {...props} />
+            return <Day {...dayProps} />
         }
         return null
     }

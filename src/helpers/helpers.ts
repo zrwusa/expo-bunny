@@ -309,7 +309,7 @@ export const navToSignUp = (route: NavToRoute, navigation: NavToNavigation) => {
     }
 }
 
-export const uploadFileToFirebase = async function (uri: string) {
+export const uploadFileToFirebase = async function (uri: string, path?: string) {
     // Why are we using XMLHttpRequest? See:
     // https://github.com/expo/expo/issues/2402#issuecomment-443726662
     const blob = await new Promise<Blob>((resolve, reject) => {
@@ -327,7 +327,7 @@ export const uploadFileToFirebase = async function (uri: string) {
 
     const ref = firebase
         .storage()
-        .ref()
+        .ref(path)
         .child(uuidV4());
 
     const snapshot = await ref.put(blob);

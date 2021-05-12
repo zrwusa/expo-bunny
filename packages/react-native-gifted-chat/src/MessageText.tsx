@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {Linking, StyleProp, StyleSheet, TextProps, TextStyle, View, ViewStyle,} from 'react-native'
+import {Linking, StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle} from 'react-native'
 // @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
@@ -56,6 +56,18 @@ export interface MessageTextProps<TMessage extends IMessage> {
     customTextStyle?: StyleProp<TextStyle>
 
     parsePatterns?(linkStyle: TextStyle): any
+
+    onMessageLoad?(currentMessage: TMessage): void
+
+    onMessageLoadStart?(currentMessage: TMessage): void
+
+    onMessageLoadEnd?(currentMessage: TMessage): void
+
+    onMessageReadyForDisplay?(currentMessage: TMessage): void
+
+    onMessageLoadError?(e: Error, currentMessage: TMessage): void
+
+    isDebug?: boolean
 }
 
 export default class MessageText<TMessage extends IMessage = IMessage> extends React.Component<MessageTextProps<TMessage>> {
@@ -75,6 +87,12 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
         customTextStyle: {},
         textProps: {},
         parsePatterns: () => [],
+        onMessageLoad: undefined,
+        onMessageLoadStart: undefined,
+        onMessageLoadEnd: undefined,
+        onMessageReadyForDisplay: undefined,
+        onMessageLoadError: undefined,
+        isDebug: false,
     }
 
     static propTypes = {
@@ -96,6 +114,12 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
         parsePatterns: PropTypes.func,
         textProps: PropTypes.object,
         customTextStyle: StylePropType,
+        onMessageLoad: PropTypes.func,
+        onMessageLoadStart: PropTypes.func,
+        onMessageLoadEnd: PropTypes.func,
+        onMessageReadyForDisplay: PropTypes.func,
+        onMessageLoadError: PropTypes.func,
+        isDebug: PropTypes.bool,
     }
 
     shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {
@@ -157,6 +181,7 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
             styles[this.props.position].link,
             this.props.linkStyle && this.props.linkStyle[this.props.position],
         ]
+        const {currentMessage, isDebug} = this.props
         return (
             <View
                 style={[
@@ -164,23 +189,38 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
                     this.props.containerStyle &&
                     this.props.containerStyle[this.props.position],
                 ]}
-            >
-                <ParsedText
-                    style={[
-                        styles[this.props.position].text,
-                        this.props.textStyle && this.props.textStyle[this.props.position],
-                        this.props.customTextStyle,
-                    ]}
-                    parse={[
-                        ...this.props.parsePatterns!(linkStyle as TextStyle),
-                        {type: 'url', style: linkStyle, onPress: this.onUrlPress},
-                        {type: 'phone', style: linkStyle, onPress: this.onPhonePress},
-                        {type: 'email', style: linkStyle, onPress: this.onEmailPress},
-                    ]}
-                    childrenProps={{...this.props.textProps}}
-                >
-                    {this.props.currentMessage!.text}
-                </ParsedText>
+            >{
+                currentMessage ?
+                    currentMessage.text
+                        ? <ParsedText
+                            style={[
+                                styles[this.props.position].text,
+                                this.props.textStyle && this.props.textStyle[this.props.position],
+                                this.props.customTextStyle,
+                            ]}
+                            parse={[
+                                ...this.props.parsePatterns!(linkStyle as TextStyle),
+                                {type: 'url', style: linkStyle, onPress: this.onUrlPress},
+                                {type: 'phone', style: linkStyle, onPress: this.onPhonePress},
+                                {type: 'email', style: linkStyle, onPress: this.onEmailPress},
+                            ]}
+                            childrenProps={{...this.props.textProps}}
+
+                            onLayout={() => {
+                                isDebug && console.log('---MessageText onLayout')
+                                this.props.onMessageLoad?.(currentMessage)
+                                this.props.onMessageLoadStart?.(currentMessage)
+                                this.props.onMessageLoadEnd?.(currentMessage)
+                                isDebug && console.log('---MessageText onMessageReadyForDisplay')
+                                this.props.onMessageReadyForDisplay?.(currentMessage)
+                            }}
+                        >
+                            {this.props.currentMessage!.text}
+                        </ParsedText>
+                        : <Text>{'currentMessage.text is undefined'}</Text>
+                    : <Text>{'currentMessage is undefined'}</Text>
+            }
+
             </View>
         )
     }

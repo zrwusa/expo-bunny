@@ -56,6 +56,7 @@ export interface IMessage {
     createdAt: Date | number
     user: User
     image?: string
+    sticker?: string
     video?: string
     audio?: string
     system?: boolean

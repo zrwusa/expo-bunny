@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {Clipboard, StyleProp, StyleSheet, Text, TextStyle, TouchableWithoutFeedback, View, ViewStyle,} from 'react-native'
+import {ActivityIndicator, Clipboard, StyleProp, StyleSheet, Text, TextStyle, TouchableWithoutFeedback, View, ViewStyle,} from 'react-native'
 
 import QuickReplies from './QuickReplies'
 
@@ -14,6 +14,7 @@ import Color from './Color'
 
 import {isSameDay, isSameUser, StylePropType} from './utils'
 import {IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, Omit, Reply, User,} from './Models'
+import MessageSticker from "./MessageSticker";
 
 const styles = {
     left: StyleSheet.create({
@@ -92,6 +93,10 @@ export type RenderMessageImageProps<TMessage extends IMessage> = Omit<BubbleProp
     'containerStyle' | 'wrapperStyle'> &
     MessageImage['props']
 
+export type RenderMessageStickerProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>,
+    'containerStyle' | 'wrapperStyle'> &
+    MessageSticker['props']
+
 export type RenderMessageVideoProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>,
     'containerStyle' | 'wrapperStyle'> &
     MessageVideoProps<TMessage>
@@ -131,7 +136,18 @@ export interface BubbleProps<TMessage extends IMessage> {
 
     onQuickReply?(replies: Reply[]): void
 
+    // onMessageLoad?(currentMessage: TMessage): void
+    //
+    // onMessageLoadStart?(currentMessage: TMessage): void
+    //
+    // onMessageLoadEnd?(currentMessage: TMessage): void
+    //
+    // onMessageLoadError?(e:Error,currentMessage: TMessage): void
+
+
     renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
+
+    renderMessageSticker?(props: RenderMessageStickerProps<TMessage>): React.ReactNode
 
     renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
 
@@ -162,6 +178,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         onPress: null,
         onLongPress: null,
         renderMessageImage: null,
+        renderMessageSticker: null,
         renderMessageVideo: null,
         renderMessageAudio: null,
         renderMessageText: null,
@@ -171,6 +188,11 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         renderTime: null,
         renderQuickReplies: null,
         onQuickReply: null,
+        // onMessageLoad: null,
+        // onMessageLoadStart:null,
+        // onMessageLoadEnd:null,
+        // onMessageLoadError: null,
+
         position: 'left',
         optionTitles: DEFAULT_OPTION_TITLES,
         currentMessage: {
@@ -194,6 +216,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         touchableProps: PropTypes.object,
         onLongPress: PropTypes.func,
         renderMessageImage: PropTypes.func,
+        renderMessageSticker: PropTypes.func,
         renderMessageVideo: PropTypes.func,
         renderMessageAudio: PropTypes.func,
         renderMessageText: PropTypes.func,
@@ -205,6 +228,10 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         renderTicks: PropTypes.func,
         renderQuickReplies: PropTypes.func,
         onQuickReply: PropTypes.func,
+        // onMessageLoad: PropTypes.func,
+        // onMessageLoadStart: PropTypes.func,
+        // onMessageLoadEnd: PropTypes.func,
+        // onMessageLoadError: PropTypes.func,
         position: PropTypes.oneOf(['left', 'right']),
         optionTitles: PropTypes.arrayOf(PropTypes.string),
         currentMessage: PropTypes.object,
@@ -368,6 +395,18 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         return null
     }
 
+    renderMessageSticker() {
+        if (this.props.currentMessage && this.props.currentMessage.sticker) {
+            // todo extract needed props
+            const {containerStyle, wrapperStyle, ...messageStickerProps} = this.props
+            if (this.props.renderMessageSticker) {
+                return this.props.renderMessageSticker(messageStickerProps)
+            }
+            return <MessageSticker {...messageStickerProps} />
+        }
+        return null
+    }
+
     renderMessageVideo() {
         if (this.props.currentMessage && this.props.currentMessage.video) {
             const {containerStyle, wrapperStyle, ...messageVideoProps} = this.props
@@ -416,7 +455,8 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
                         <Text style={[styles.content.tick, this.props.tickStyle]}>✓</Text>
                     )}
                     {!!currentMessage.pending && (
-                        <Text style={[styles.content.tick, this.props.tickStyle]}>🕓</Text>
+                        // <Text style={[styles.content.tick, this.props.tickStyle]}>🕓</Text>
+                        <ActivityIndicator size="small"/>
                     )}
                 </View>
             )
@@ -472,6 +512,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         return this.props.isCustomViewBottom ? (
             <View>
                 {this.renderMessageImage()}
+                {this.renderMessageSticker()}
                 {this.renderMessageVideo()}
                 {this.renderMessageAudio()}
                 {this.renderMessageText()}
@@ -481,6 +522,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
             <View>
                 {this.renderCustomView()}
                 {this.renderMessageImage()}
+                {this.renderMessageSticker()}
                 {this.renderMessageVideo()}
                 {this.renderMessageAudio()}
                 {this.renderMessageText()}

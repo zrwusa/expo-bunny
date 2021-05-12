@@ -1,14 +1,14 @@
 import {EventEmitter} from '@unimodules/core';
 
 import {
-  assertStatusValuesInBounds,
-  AVPlaybackSource,
-  AVPlaybackStatus,
-  AVPlaybackStatusToSet,
-  getNativeSourceAndFullInitialStatusForLoadAsync,
-  getUnloadedStatus,
-  Playback,
-  PlaybackMixin,
+    assertStatusValuesInBounds,
+    AVPlaybackSource,
+    AVPlaybackStatus,
+    AVPlaybackStatusToSet,
+    getNativeSourceAndFullInitialStatusForLoadAsync,
+    getUnloadedStatus,
+    Playback,
+    PlaybackMixin,
 } from '../AV';
 import {PitchCorrectionQuality} from '../Audio';
 import ExponentAV from '../ExponentAV';

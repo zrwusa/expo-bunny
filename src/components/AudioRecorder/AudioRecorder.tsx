@@ -3,7 +3,7 @@ import {useEffect, useState} from "react"
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {IcoMoon} from "../UI";
 import {TouchableHighlight, Vibration} from "react-native";
-import {Audio} from "../../../pakages/expo-av/src";
+import {Audio} from "../../../packages/expo-av/src";
 import {uploadFileToFirebase} from "../../helpers";
 import {useFirebase} from "react-redux-firebase";
 import {
@@ -11,7 +11,7 @@ import {
     RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
     RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX,
     RecordingOptions
-} from "../../../pakages/expo-av/src/Audio/Recording";
+} from "../../../packages/expo-av/src/Audio/Recording";
 
 export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
     isMeteringEnabled: true,
@@ -38,11 +38,12 @@ export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
 export interface AudioRecorderProps {
     onValueChanged?: (uri: string) => void,
     isUpload?: boolean,
-    onStatusChanged?: (status: AudioRecordingStatus) => void
+    onStatusChanged?: (status: AudioRecordingStatus) => void,
+    uploadPath?: string
 }
 
 export type AudioRecordingStatus = 'GETTING_PERMISSION' | 'STARTING' | 'STARTED' | 'RECORDING' | 'STOPPING' | 'STOPPED' | 'ERROR' | undefined ;
-export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged}: AudioRecorderProps) => {
+export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged, uploadPath = '/'}: AudioRecorderProps) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit()
     const [recording, setRecording] = useState<Audio.Recording>();
     const firebase = useFirebase();
@@ -85,8 +86,7 @@ export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged
             if (uri) {
 
                 if (isUpload) {
-                    const snapshot = await uploadFileToFirebase(uri)
-                    console.log(snapshot)
+                    const snapshot = await uploadFileToFirebase(uri, uploadPath)
                     onValueChanged && onValueChanged(snapshot)
                 } else {
                     onValueChanged && onValueChanged(uri)

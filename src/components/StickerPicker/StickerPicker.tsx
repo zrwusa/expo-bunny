@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {useKeyboardHeight} from "../../hooks/keyboard-height";
 import {Sticker} from "../../screens/DemoChat/ChatRoom";
 import {useFirebase} from "react-redux-firebase";
+import {uuidV4} from "../../utils";
 
 export interface StickerPickerProps {
     isShow: boolean,
@@ -20,18 +21,20 @@ export const StickerPicker = ({isShow = false, onValueChanged}: StickerPickerPro
         (async function f() {
             let stickers = []
 
-            // for (let i = 0; i < 20; i++) {
-            //     stickers.push({id: uuidV4(), url: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany-avatar.jpeg'})
-            // }
-
-            const shaunTheSheepRef = firebase.storage().ref('ShaunTheSheep256/')
-            const result = await shaunTheSheepRef.listAll()
-
-            for (const imageRef of result.items) {
-                const url = await imageRef.getDownloadURL();
-                stickers.push({id: imageRef.fullPath, url})
+            for (let i = 0; i < 20; i++) {
+                stickers.push({id: uuidV4(), url: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany-avatar.jpeg'})
             }
-            setStickers([stickers[0]])
+            setStickers(stickers)
+
+            // const shaunTheSheepRef = firebase.storage().ref('ShaunTheSheep256/')
+            // const result = await shaunTheSheepRef.listAll()
+            //
+            // for (const imageRef of result.items) {
+            //     const url = await imageRef.getDownloadURL();
+            //     stickers.push({id: imageRef.fullPath, url})
+            // }
+            // setStickers([stickers[0]])
+
         })()
     }, [])
 

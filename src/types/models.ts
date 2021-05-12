@@ -1,7 +1,8 @@
 //Data models, such as database entities, api return value entities
 import {ImageSourcePropType, ImageURISource} from "react-native";
-import {AVPlaybackSource} from "../../pakages/expo-av/src/AV";
+import {AVPlaybackSource} from "../../packages/expo-av/src/AV";
 import {SagaTodo} from "./states";
+import {IMessage} from "../../packages/react-native-gifted-chat/src";
 
 export type DemoEmployee = {
     _id: number,
@@ -75,21 +76,10 @@ export interface UserProfile {
 
 export type IMMessageType = 'MESSAGE' | 'IMAGE' | 'STICKER_GIF' | 'AUDIO' | 'VIDEO' | ''
 
-export interface IMMessage {
-    _id: string,
-    text: string,
-    createdAt: Date,
+export interface IMMessage extends IMessage {
     roomKey: string,
-    user: {
-        _id: string,
-        name: string,
-        avatar: string,
-    },
-    url: string,
     type: IMMessageType,
-    received?: boolean,
-    sent?: boolean,
-    pending?: boolean
+    sticker?: string
 }
 
 export interface ChatRoom {

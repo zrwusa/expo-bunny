@@ -90,6 +90,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
             }
         })()
     }, [])
+    const userPhotosPath = `/userPhotos/${userId}`
 
     return (
         <View style={[containerStyles.Screen]}>
@@ -101,6 +102,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                 <Col size={2}>
                                     <ImageUploader
                                         source={sources[0]}
+                                        path={userPhotosPath}
                                         isFullFill
                                         onValueChanged={async (value) => {
                                             await _savePhoto('0', value.uri)
@@ -114,7 +116,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                 <Col size={1} style={{marginLeft: wp(2)}}>
                                     <Row size={1}>
                                         <ImageUploader
-                                            isDeleteFromServerWhenUpload={false}
+                                            path={userPhotosPath}
                                             source={sources[1]}
                                             isFullFill
                                             onValueChanged={async (value) => {
@@ -128,7 +130,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                     </Row>
                                     <Row size={1} style={{marginTop: wp(2)}}>
                                         <ImageUploader
-                                            isDeleteFromServerWhenUpload={false}
+                                            path={userPhotosPath}
                                             source={sources[2]}
                                             isFullFill
                                             onValueChanged={async (value) => {
@@ -145,7 +147,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                             <Row size={1} style={{marginTop: wp(2)}}>
                                 <Col size={1}>
                                     <ImageUploader
-                                        isDeleteFromServerWhenUpload={false}
+                                        path={userPhotosPath}
                                         source={sources[3]}
                                         isFullFill
                                         onValueChanged={async (value) => {
@@ -159,7 +161,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                 </Col>
                                 <Col size={1} style={{marginLeft: wp(2)}}>
                                     <ImageUploader
-                                        isDeleteFromServerWhenUpload={false}
+                                        path={userPhotosPath}
                                         source={sources[4]}
                                         isFullFill
                                         onValueChanged={async (value) => {
@@ -174,6 +176,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                 <Col size={1} style={{marginLeft: wp(2)}}>
                                     <ImageUploader
                                         isDeleteFromServerWhenUpload={false}
+                                        path={userPhotosPath}
                                         source={sources[5]}
                                         isFullFill
                                         onValueChanged={async (value) => {

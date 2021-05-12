@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from "react"
-import {GiftedChat, IMessage} from "../../../../pakages/react-native-gifted-chat/src"
+import {GiftedChat, IMessage} from "../../../../packages/react-native-gifted-chat/src"
 import {RouteProp} from "@react-navigation/native";
 import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from "../../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -7,12 +7,10 @@ import {useSelector} from "react-redux";
 import {useFirebase, useFirebaseConnect} from "react-redux-firebase";
 import {extractValue, uuidV4} from "../../../utils";
 import {useAuthLabor} from "../../../providers/auth-labor";
-import {Image, Keyboard, SafeAreaView, TouchableOpacity, View} from "react-native";
+import {Keyboard, SafeAreaView, TouchableOpacity} from "react-native";
 import {AudioRecorder, ImageUploader, StickerPicker} from "../../../components";
-import {IcoMoon, Text} from "../../../components/UI";
+import {IcoMoon} from "../../../components/UI";
 import {useSizeLabor} from "../../../providers/size-labor";
-import {AudioPlayer} from "../../../components/AudioPlayer";
-import {Video} from "../../../../pakages/expo-av/src";
 
 
 type ChatRoomRouteProp = RouteProp<DemoChatStackParam, 'ChatRoom'>;
@@ -38,6 +36,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
     const {wp} = designsBasedOn.iphoneX
 
     const [messages, setMessages] = useState(initialMessages);
+
     useFirebaseConnect([{type: 'value', path: `chatMessages`, queryParams: ['orderByChild=createdAt', 'limitToLast=1000']}])
 
     const chatMessages = useSelector((rootState: RootState) => rootState.firebaseState.ordered.chatMessages)
@@ -62,16 +61,17 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
             gcMessages = xxx.map((node) => {
                 let message: IMessage = {
                     _id: node._id,
-                    text: node.type === 'MESSAGE' ? node.text : '',
                     createdAt: node.createdAt,
                     user: {
                         _id: node.user._id,
                         name: node.user.name,
                         avatar: node.user.avatar
                     },
-                    image: (node.type === 'IMAGE' || node.type === 'STICKER_GIF') ? node.url : '',
-                    audio: node.type === 'AUDIO' ? node.url : '',
-                    video: node.type === 'VIDEO' ? node.url : '',
+                    text: node.text,
+                    image: node.image,
+                    sticker: node.sticker,
+                    audio: node.audio,
+                    video: node.video,
                     received: node.received,
                     pending: node.pending,
                     sent: node.sent,
@@ -85,7 +85,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
     }, [JSON.stringify(chatMessages)])
 
     const _handleSend = useCallback(async (messages = []) => {
-        const msg = _genMessage('MESSAGE', undefined, messages[0])
+        const msg = _genMessage('MESSAGE', messages[0].text)
         await _sendMsg(msg)
     }, [])
 
@@ -104,24 +104,50 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
         }
     }
 
-    const _genMessage = (type: IMMessageType, url?: string, needMerge?: object) => {
+    const _genMessage = (type: IMMessageType, payload?: string, needMerge?: IMMessage) => {
+        let text = '', image = '', audio = '', video = '', sticker = '';
+        switch (type) {
+            case "IMAGE":
+                image = payload || '';
+                break;
+            case "AUDIO":
+                audio = payload || '';
+                break;
+            case "STICKER_GIF":
+                sticker = payload || '';
+                break;
+            case "MESSAGE":
+                text = payload || '';
+                break;
+            case "VIDEO":
+                video = payload || '';
+                break;
+            default:
+                break
+        }
         return {
-            ...needMerge,
             _id: uuidV4(),
+            createdAt: firebase.database.ServerValue.TIMESTAMP as number,
             roomKey,
-            url: url || '',
             type: type,
             user: memoizedUser,
+            text,
+            image,
+            sticker,
+            audio,
+            video,
             received: false,
             pending: true,
             sent: false,
-            createdAt: firebase.database.ServerValue.TIMESTAMP
+            ...needMerge,
         } as IMMessage
     }
 
 
     const [isShowAudioButton, setIsShowAudioButton] = useState(true)
     const [isShowStickerPicker, setIsShowStickerPicker] = useState(false)
+
+    const chatAssetsPath = `/chatAssets/${memoizedUser?._id}`
     return (
         <SafeAreaView style={{flex: 1}}>
             <GiftedChat
@@ -141,67 +167,119 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                     setIsShowAudioButton(!text)
                 }}
 
-                renderMessageText={(props) => {
-                    const {currentMessage} = props
-                    return <View>
-                        {
-                            currentMessage?.text
-                                ? <Text onLayout={async () => {
-                                    await _receivedMsg(currentMessage)
-                                }}>{currentMessage?.text}</Text>
-                                : null
-                        }
-                    </View>
+
+                // imageStyle={{backgroundColor: 'red'}}
+                // stickerStyle={{margin: 10, backgroundColor: 'green'}}
+                // stickerProps={{
+                //     onLoad: () => {
+                //         console.log('onload here sticker')
+                //     }
+                // }}
+                // videoStyle={{margin: 10, backgroundColor: 'purple'}}
+                // videoProps={{
+                //     onLoad: () => {
+                //         console.log('onload here video')
+                //     }
+                // }}
+                // audioStyle={{margin: 10, backgroundColor: 'blue'}}
+                // audioProps={{
+                //     onLoad: () => {
+                //         console.log('onload here audio')
+                //     }
+                // }}
+                // renderMessageText={(props) => {
+                //     const {currentMessage} = props
+                //     return <View>
+                //         {
+                //             currentMessage?.text
+                //                 ? <Text onLayout={async () => {
+                //                     await _receivedMsg(currentMessage)
+                //                 }}>{currentMessage?.text}</Text>
+                //                 : null
+                //         }
+                //     </View>
+                // }}
+
+                // renderMessageImage={(props) => {
+                //     const {currentMessage} = props
+                //     return <View>
+                //         {
+                //             currentMessage?.image
+                //                 ? <Image onLoad={async () => {
+                //                     await _receivedMsg(currentMessage)
+                //                 }} style={{width: wp(100), height: wp(100)}} source={{uri: currentMessage.image}}/>
+                //                 : null
+                //         }
+                //     </View>
+                // }}
+
+                // renderMessageSticker={(props) => {
+                //     const {currentMessage} = props
+                //     return <View>
+                //         {
+                //             currentMessage?.sticker
+                //                 ? <Image onLoad={async () => {
+                //                     await _receivedMsg(currentMessage)
+                //                 }} onLoadStart={()=>{}}
+                //                          onLoadEnd={()=>{}} style={{width: wp(100), height: wp(100)}} source={{uri: currentMessage.sticker}}/>
+                //                 : null
+                //         }
+                //     </View>
+                // }}
+                onMessageLoad={(currentMessage) => {
+                    // console.log('---onMessageLoad',currentMessage)
                 }}
-                renderMessageImage={(props) => {
-                    const {currentMessage} = props
-                    return <View>
-                        {
-                            currentMessage?.image
-                                ? <Image onLoad={async () => {
-                                    await _receivedMsg(currentMessage)
-                                }} style={{width: wp(100), height: wp(100)}} source={{uri: currentMessage.image}}/>
-                                : null
-                        }
-                    </View>
+                onMessageLoadStart={(currentMessage) => {
+                    // console.log('---onMessageLoadStart',currentMessage)
                 }}
-                renderMessageAudio={(props) => {
-                    const {currentMessage} = props
-                    // const debugSource = {uri: 'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_2MG.mp3'}
-                    return <View>
-                        {
-                            currentMessage?.audio
-                                ? <AudioPlayer
-                                    source={{uri: currentMessage.audio}}
-                                    onLoaded={async () => {
-                                        await _receivedMsg(currentMessage)
-                                    }}
-                                />
-                                : null
-                        }
-                    </View>
+                onMessageLoadEnd={async (currentMessage) => {
+                    // console.log('---onMessageLoadEnd',currentMessage)
                 }}
-                renderMessageVideo={(props) => {
-                    const {currentMessage} = props
-                    // const debugSource = {uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}
-                    return <View>
-                        {
-                            currentMessage && currentMessage.video
-                                ?
-                                <Video
-                                    style={{width: wp(240), height: wp(370)}}
-                                    useNativeControls
-                                    resizeMode="contain"
-                                    onLoad={async () => {
-                                        await _receivedMsg(currentMessage)
-                                    }}
-                                    source={{uri: currentMessage.video}}
-                                    // source={debugSource}
-                                />
-                                : null
-                        }
-                    </View>
+                onMessageReadyForDisplay={async (currentMessage) => {
+                    // console.log('---onMessageReadyForDisplay',currentMessage)
+                    await _receivedMsg(currentMessage)
                 }}
+                onMessageLoadError={(e, currentMessage) => {
+                    // console.log('---onMessageLoadError',currentMessage)
+                }}
+
+                // renderMessageAudio={(props) => {
+                //     const {currentMessage} = props
+                //     // const debugSource = {uri: 'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_2MG.mp3'}
+                //     return <View>
+                //         {
+                //             currentMessage?.audio
+                //                 ? <AudioPlayer
+                //                     source={{uri: currentMessage.audio}}
+                //                     onLoaded={async () => {
+                //                         await _receivedMsg(currentMessage)
+                //                     }}
+                //                 />
+                //                 : null
+                //         }
+                //     </View>
+                // }}
+                // renderMessageVideo={(props) => {
+                //     const {currentMessage} = props
+                //     // const debugSource = {uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}
+                //     return <View>
+                //         {
+                //             currentMessage && currentMessage.video
+                //                 ?
+                //                 <Video
+                //                     style={{width: wp(240), height: wp(370)}}
+                //                     useNativeControls
+                //                     resizeMode="contain"
+                //                     onLoad={async () => {
+                //                         await _receivedMsg(currentMessage)
+                //                     }}
+                //                     source={{uri: currentMessage.video}}
+                //                     // source={debugSource}
+                //                 />
+                //                 : null
+                //         }
+                //     </View>
+                // }}
                 renderActions={() => {
                     return <>
                         <TouchableOpacity onPress={() => {
@@ -212,6 +290,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         </TouchableOpacity>
                         <ImageUploader
                             isDeleteFromServerWhenUpload={false}
+                            path={chatAssetsPath}
                             renderPreview={({toggleModal}) => {
                                 return <TouchableOpacity
                                     onPress={() => {
@@ -240,10 +319,12 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                     const {text, onSend} = props
                     return (<>
                             {isShowAudioButton
-                                ? <AudioRecorder isUpload onValueChanged={async (uri) => {
-                                    const messageNeedSent = _genMessage('AUDIO', uri)
-                                    await _sendMsg(messageNeedSent)
-                                }}/>
+                                ? <AudioRecorder isUpload
+                                                 uploadPath={chatAssetsPath}
+                                                 onValueChanged={async (uri) => {
+                                                     const messageNeedSent = _genMessage('AUDIO', uri)
+                                                     await _sendMsg(messageNeedSent)
+                                                 }}/>
                                 : <TouchableOpacity onPress={() => {
                                     if (text && onSend) {
                                         onSend({text: text, user: memoizedUser, _id: uuidV4()}, true);
@@ -257,10 +338,12 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                     )
                 }}
             />
-            <StickerPicker isShow={isShowStickerPicker} onValueChanged={async (uri) => {
-                const msg = _genMessage('STICKER_GIF', uri)
-                await _sendMsg(msg)
-            }}/>
+            <StickerPicker
+                isShow={isShowStickerPicker}
+                onValueChanged={async (uri) => {
+                    const msg = _genMessage('STICKER_GIF', uri)
+                    await _sendMsg(msg)
+                }}/>
         </SafeAreaView>
     )
 }

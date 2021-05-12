@@ -1,6 +1,6 @@
 import * as React from "react";
 import {createRef} from "react";
-import {AVPlaybackStatus, Video, VideoProps} from "../../../pakages/expo-av/src";
+import {AVPlaybackStatus, Video, VideoProps} from "../../../packages/expo-av/src";
 import {Button, Text, View} from "../UI";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";

@@ -3,22 +3,40 @@
  * element:
  * https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
  */
-const supportsFullscreenAPI = (element: HTMLMediaElement): boolean =>
-    'requestFullscreen' in element;
+const supportsFullscreenAPI = (element: HTMLMediaElement): boolean => {
+    if (element) {
+        return 'requestFullscreen' in element;
+    } else {
+        return false
+    }
+}
+
 
 /**
  * Detect if the browser supports the non-standard webkit fullscreen API on the
  * given element (looking at you, Safari).
  */
-const supportsWebkitFullscreenAPI = (element: HTMLMediaElement): boolean =>
-    'webkitEnterFullScreen' in element;
+const supportsWebkitFullscreenAPI = (element: HTMLMediaElement): boolean => {
+    if (element) {
+        return 'webkitEnterFullScreen' in element;
+    } else {
+        return false
+    }
+}
+
 
 /**
  * Detect if the browser supports the non-standard ms fullscreen API on the
  * given element (looking at you, IE11).
  */
-const supportsMsFullscreenAPI = (element: HTMLMediaElement): boolean =>
-    'msRequestFullscreen' in element;
+const supportsMsFullscreenAPI = (element: HTMLMediaElement): boolean => {
+    if (element) {
+        return 'msRequestFullscreen' in element;
+    } else {
+        return false
+    }
+}
+
 
 /**
  * Detect if the browser supports the `webkitFullscreenChange` event. This is

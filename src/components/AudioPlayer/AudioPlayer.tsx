@@ -1,17 +1,21 @@
 import React, {useEffect, useRef, useState} from "react";
-import {ActivityIndicator, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, StyleProp, TouchableOpacity, View, ViewStyle} from "react-native";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {IcoMoon, Text} from "../UI";
-import {AVPlaybackSource, AVPlaybackStatus} from "../../../pakages/expo-av/src/AV";
-import {Audio} from "../../../pakages/expo-av/src";
+import {AVPlaybackSource, AVPlaybackStatus} from "../../../packages/expo-av/src/AV";
+import {Audio} from "../../../packages/expo-av/src";
 import {ProgressBar} from "react-native-paper";
 import {minuted} from "../../utils";
 
 export interface AudioPlayerProps {
     source: AVPlaybackSource,
-    onLoaded?: () => void
+    style?: StyleProp<ViewStyle>
+    onLoad?: () => void,
+    onLoadStart?: () => void,
+    onLoadEnd?: () => void,
+    onError?: (e: Error) => void,
 }
 
 export function AudioPlayer(props: AudioPlayerProps) {
@@ -19,20 +23,26 @@ export function AudioPlayer(props: AudioPlayerProps) {
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
-    const {source, onLoaded} = props
+    const {source, style, onLoad, onLoadStart, onLoadEnd, onError} = props
     const soundRef = useRef<Audio.Sound>()
     const [status, setStatus] = useState<AVPlaybackStatus>()
 
     useEffect(() => {
         (async () => {
             try {
+                if (!source) {
+                    return
+                }
+                onLoadStart?.()
                 const {sound, status} = await Audio.Sound.createAsync(source);
                 // todo on web platform status.durationMillis is NaN
                 soundRef.current = sound;
                 soundRef.current.setOnPlaybackStatusUpdate(setStatus)
-                onLoaded && onLoaded()
+                onLoad?.()
+                onLoadEnd?.()
             } catch (e) {
-                console.log(e)
+                onError?.(e);
+                onLoadEnd?.();
             }
 
         })();
@@ -69,7 +79,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
         }
     }
 
-    return <View style={styles.container}>
+    return <View style={[styles.container, style]}>
         {
             soundRef.current
                 ? status

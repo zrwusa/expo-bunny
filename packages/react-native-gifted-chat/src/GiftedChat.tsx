@@ -1,6 +1,19 @@
 import PropTypes from 'prop-types'
 import React, {RefObject} from 'react'
-import {Animated, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, StyleProp, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
+import {
+    Animated,
+    FlatList,
+    ImageProps,
+    ImageStyle,
+    KeyboardAvoidingView,
+    Platform,
+    SafeAreaView,
+    StyleProp,
+    StyleSheet,
+    TextStyle,
+    View,
+    ViewStyle,
+} from 'react-native'
 import {ActionSheetOptions, ActionSheetProvider,} from '@expo/react-native-action-sheet'
 import uuid from 'uuid'
 import {getBottomSpace} from 'react-native-iphone-x-helper'
@@ -13,6 +26,7 @@ import Avatar from './Avatar'
 import Bubble from './Bubble'
 import SystemMessage from './SystemMessage'
 import MessageImage from './MessageImage'
+import MessageSticker from './MessageSticker'
 import MessageText from './MessageText'
 import Composer from './Composer'
 import Day from './Day'
@@ -27,6 +41,8 @@ import GiftedAvatar from './GiftedAvatar'
 import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
 import {IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, Reply, User,} from './Models'
 import QuickReplies from './QuickReplies'
+import {VideoProps} from '../../expo-av/src'
+import {AudioPlayerProps} from "../../../src/components/AudioPlayer";
 
 dayjs.extend(localizedFormat)
 
@@ -75,6 +91,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     inverted?: boolean
     /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
     imageProps?: Message<TMessage>['props']
+    stickerProps?: Omit<ImageProps, 'source'>
+    audioProps?: Omit<AudioPlayerProps, 'source'>
+    videoProps?: Omit<VideoProps, 'source'>
     /*Extra props to be passed to the MessageImage's LightBox */
     lightBoxProps?: any
     /*Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar) */
@@ -94,7 +113,11 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     /* Force send button */
     alwaysShowSend?: boolean
     /* Image style */
-    imageStyle?: StyleProp<ViewStyle>
+    imageStyle?: StyleProp<ImageStyle>
+    stickerStyle?: StyleProp<ImageStyle>
+    audioStyle?: StyleProp<ViewStyle>
+    videoStyle?: StyleProp<ViewStyle>
+    isDebug?: boolean
     /* This can be used to pass any data which needs to be re-rendered */
     extraData?: any
     /* composer min Height */
@@ -133,6 +156,16 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     /*Callback when loading earlier messages*/
     onLoadEarlier?(): void
 
+    onMessageLoad?(currentMessage: TMessage): void
+
+    onMessageLoadStart?(currentMessage: TMessage): void
+
+    onMessageLoadEnd?(currentMessage: TMessage): void
+
+    onMessageReadyForDisplay?(currentMessage: TMessage): void
+
+    onMessageLoadError?(e: Error, currentMessage: TMessage): void
+
     /*  Render a loading view when initializing */
     renderLoading?(): React.ReactNode
 
@@ -163,6 +196,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
 
     /* Custom message image */
     renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
+
+    /* Custom message sticker */
+    renderMessageSticker?(props: MessageSticker<TMessage>['props']): React.ReactNode
 
     /* Custom message video */
     renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode
@@ -259,6 +295,16 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<G
         loadEarlier: false,
         onLoadEarlier: () => {
         },
+        onMessageLoadStart: () => {
+        },
+        onMessageLoadEnd: () => {
+        },
+        onMessageReadyForDisplay() {
+        },
+        onMessageLoad() {
+        },
+        onMessageLoadError(e: Error) {
+        },
         isLoadingEarlier: false,
         renderLoading: null,
         renderLoadEarlier: null,
@@ -275,9 +321,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<G
         renderMessage: null,
         renderMessageText: null,
         renderMessageImage: null,
+        renderMessageSticker: null,
         renderMessageVideo: null,
         renderMessageAudio: null,
         imageProps: {},
+        stickerProps: {},
         videoProps: {},
         audioProps: {},
         lightBoxProps: {},
@@ -330,6 +378,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<G
         isKeyboardInternallyHandled: PropTypes.bool,
         loadEarlier: PropTypes.bool,
         onLoadEarlier: PropTypes.func,
+        onMessageLoad: PropTypes.func,
+        onMessageLoadStart: PropTypes.func,
+        onMessageLoadEnd: PropTypes.func,
+        onMessageReadyForDisplay: PropTypes.func,
         isLoadingEarlier: PropTypes.bool,
         renderLoading: PropTypes.func,
         renderLoadEarlier: PropTypes.func,
@@ -347,7 +399,9 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<G
         renderMessage: PropTypes.func,
         renderMessageText: PropTypes.func,
         renderMessageImage: PropTypes.func,
+        renderMessageSticker: PropTypes.func,
         imageProps: PropTypes.object,
+        stickerProps: PropTypes.object,
         videoProps: PropTypes.object,
         audioProps: PropTypes.object,
         lightBoxProps: PropTypes.object,
@@ -933,6 +987,7 @@ export {
     Bubble,
     SystemMessage,
     MessageImage,
+    MessageSticker,
     MessageText,
     Composer,
     Day,

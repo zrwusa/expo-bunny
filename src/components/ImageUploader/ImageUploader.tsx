@@ -37,6 +37,7 @@ export interface ImageUploaderProps {
     height?: number,
     isFullFill?: boolean,
     source?: ImageURISource,
+    path?: string,
     isShowUri?: boolean,
     isDeleteFromServerWhenRemove?: boolean,
     isDeleteFromServerWhenUpload?: boolean,
@@ -74,6 +75,7 @@ export function ImageUploader(props: ImageUploaderProps) {
         width = wp(200),
         height = wp(200),
         source,
+        path,
         isFullFill = false,
         isShowUri = false,
         isDeleteFromServerWhenRemove = true,
@@ -198,10 +200,10 @@ export function ImageUploader(props: ImageUploaderProps) {
                 if (image.uri && isDeleteFromServerWhenUpload) {
                     await removeImageFromFirebase(image.uri)
                 }
-                const uploadUrl = await uploadFileToFirebase(pickerResult.uri);
+                const uploadUrl = await uploadFileToFirebase(pickerResult.uri, path);
                 onUploaded && onUploaded({uri: uploadUrl}, pickerResult.type);
                 setImage({uri: uploadUrl})
-                onValueChanged && onValueChanged(image)
+                onValueChanged && onValueChanged({uri: uploadUrl})
             }
         } catch (e) {
             _errorHandle(e)

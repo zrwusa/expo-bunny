@@ -93,6 +93,14 @@ export interface MessageContainerProps<TMessage extends IMessage> {
 
     onQuickReply?(replies: Reply[]): void
 
+    // onMessageLoad?(currentMessage: TMessage): void
+
+    // onMessageLoadStart?(currentMessage: TMessage): void
+
+    // onMessageLoadEnd?(currentMessage: TMessage): void
+
+    // onMessageLoadError?(e:Error,currentMessage: TMessage): void
+
     infiniteScroll?: boolean
     isLoadingEarlier?: boolean
 }
@@ -114,6 +122,14 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         },
         onQuickReply: () => {
         },
+        // onMessageLoad: () => {
+        // },
+        // onMessageLoadStart: () => {
+        // },
+        // onMessageLoadEnd: ()=> {
+        // },
+        // onMessageLoadError: (e:Error) => {
+        // },
         inverted: true,
         loadEarlier: false,
         listViewProps: {},
@@ -136,6 +152,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         renderMessage: PropTypes.func,
         renderLoadEarlier: PropTypes.func,
         onLoadEarlier: PropTypes.func,
+        onLoadMessageLoad: PropTypes.func,
         listViewProps: PropTypes.object,
         inverted: PropTypes.bool,
         loadEarlier: PropTypes.bool,
