@@ -5,7 +5,6 @@ import {IcoMoon} from "../UI";
 import {Platform, TouchableHighlight, Vibration} from "react-native";
 import {Audio} from "../../../packages/expo-av/src";
 import {uploadFileToFirebase} from "../../helpers";
-import {useFirebase} from "react-redux-firebase";
 import {
     RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
     RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
@@ -33,7 +32,7 @@ export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
         linearPCMIsBigEndian: false,
         linearPCMIsFloat: false,
     },
-    web:{
+    web: {
         mimeType: 'audio/webm;codecs="opus"',
         audioBitsPerSecond: 64000,
         bitsPerSecond: 64000,
@@ -95,14 +94,14 @@ export interface AudioRecorderProps {
     onValueChanged?: (uri: string) => void,
     isUpload?: boolean,
     onStatusChanged?: (status: AudioRecordingStatus) => void,
-    uploadPath?: string
+    uploadPath?: string,
+    isDebug?: boolean
 }
 
 export type AudioRecordingStatus = 'GETTING_PERMISSION' | 'STARTING' | 'STARTED' | 'RECORDING' | 'STOPPING' | 'STOPPED' | 'ERROR' | undefined ;
-export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged, uploadPath = '/'}: AudioRecorderProps) => {
+export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged, uploadPath = '/', isDebug = true}: AudioRecorderProps) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit()
     const [recording, setRecording] = useState<Audio.Recording>();
-    const firebase = useFirebase();
     const [status, setStatus] = useState<AudioRecordingStatus>('STOPPED')
 
     useEffect(() => {
@@ -111,7 +110,7 @@ export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged
 
     async function startRecording() {
         try {
-            console.log('Requesting permissions..');
+            isDebug && console.log('Requesting permissions..');
             setStatus('GETTING_PERMISSION')
             await Audio.requestPermissionsAsync();
             await Audio.setAudioModeAsync({
@@ -119,61 +118,63 @@ export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged
                 playsInSilentModeIOS: true,
             });
             setStatus('STARTING')
-            console.log('Starting recording..');
+            isDebug && console.log('Starting recording..');
             const recording = new Audio.Recording();
             await recording.prepareToRecordAsync(RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
             await recording.startAsync();
             setRecording(recording);
             setStatus('STARTED')
-            console.log('Recording started');
+            isDebug && console.log('Recording started');
         } catch (err) {
             setStatus('ERROR')
-            console.error('Failed to start recording', err);
+            isDebug && console.error('Failed to start recording', err);
         }
     }
 
     async function stopRecording() {
         setStatus('STOPPING')
-        console.log('Stopping recording..');
-        setRecording(undefined);
-        if (recording) {
-            await recording.stopAndUnloadAsync();
-            const uri = recording.getURI();
+        isDebug && console.log('Stopping recording..');
 
-            console.log('---recording,uri',recording,uri)
-            if (uri) {
-
-                if (isUpload) {
-                    const snapshot = await uploadFileToFirebase(uri, uploadPath)
-                    onValueChanged && onValueChanged(snapshot)
-                } else {
-                    onValueChanged && onValueChanged(uri)
-                }
-
-            }
-            setStatus('STARTED')
-            console.log('Recording stopped and stored at', uri);
+        if (!recording) {
+            setStatus('STOPPED')
+            return
         }
-        setStatus('STOPPED')
+        await recording.stopAndUnloadAsync();
+        const localURI = recording.getURI();
+
+        isDebug && console.log('---recording,uri', recording, localURI)
+        if (!localURI) {
+            setStatus('STOPPED')
+            return
+        }
+        if (isUpload) {
+            const remoteURL = await uploadFileToFirebase(localURI, uploadPath)
+            isDebug && console.log('Recording stopped and stored (remotely) at', remoteURL);
+            setStatus('STOPPED')
+            onValueChanged && onValueChanged(remoteURL)
+        } else {
+            setStatus('STOPPED')
+            isDebug && console.log('Recording stopped and stored (locally) at', localURI);
+            onValueChanged && onValueChanged(localURI)
+        }
+        setRecording(undefined);
     }
 
     const _longPress = async () => {
         switch (status) {
             case 'STOPPED':
-
-                Platform.select({
-                    native: Vibration.vibrate(100)
-                })
-
+                Platform.OS !== 'web' && Vibration.vibrate([10, 10])
                 await startRecording()
                 break;
             default:
                 break;
         }
     }
+
     const _pressOut = async () => {
         await stopRecording()
     }
+
     return <TouchableHighlight onLongPress={_longPress} onPressOut={_pressOut} underlayColor="red">
         <IcoMoon name="mic1" style={{paddingBottom: wp(15), paddingHorizontal: wp(10)}}/>
     </TouchableHighlight>
