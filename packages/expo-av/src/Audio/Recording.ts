@@ -31,6 +31,12 @@ export type RecordingOptions = {
         linearPCMIsBigEndian?: boolean;
         linearPCMIsFloat?: boolean;
     };
+    web: {
+        mimeType: string,
+        audioBitsPerSecond: number,
+        bitsPerSecond: number,
+        extension: string,
+    } | undefined
 };
 
 // TODO: consider changing these to enums
@@ -120,6 +126,64 @@ export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
         linearPCMIsBigEndian: false,
         linearPCMIsFloat: false,
     },
+    web: {
+        mimeType: 'audio/webm;codecs="opus"',
+        audioBitsPerSecond: 64000,
+        bitsPerSecond: 64000,
+        extension: '.webm',
+    },
+    // web: Platform.OS === 'web'
+    //     ? (() => {
+    //         const mimes = [
+    //             {
+    //                 mimeType: 'audio/mp4;codecs="mp4a.40.5"', // MPEG-4 HE-AAC v1
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.m4a',
+    //             },
+    //             {
+    //                 mimeType: 'audio/mp4;codecs="mp4a.40.2"', // MPEG-4 AAC LC
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.m4a',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm;codecs="opus"',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm;codecs="vp8"',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/mpeg', // Support depends on polyfill
+    //                 audioBitsPerSecond: 128000,
+    //                 bitsPerSecond: 128000,
+    //                 extension: '.mp3',
+    //             },
+    //         ]
+    //
+    //         for (let index = 0; index < mimes.length; index++) {
+    //             const mime = mimes[index]
+    //
+    //             // @ts-ignore
+    //             if (window.MediaRecorder.isTypeSupported(mime.mimeType)) {
+    //                 return mime
+    //             }
+    //         }
+    //
+    //         return undefined
+    //     })() : undefined,
 };
 
 export const RECORDING_OPTIONS_PRESET_LOW_QUALITY: RecordingOptions = {
@@ -142,6 +206,64 @@ export const RECORDING_OPTIONS_PRESET_LOW_QUALITY: RecordingOptions = {
         linearPCMIsBigEndian: false,
         linearPCMIsFloat: false,
     },
+    web: {
+        mimeType: 'audio/webm;codecs="opus"',
+        audioBitsPerSecond: 64000,
+        bitsPerSecond: 64000,
+        extension: '.webm',
+    },
+    // web: Platform.OS === 'web'
+    //     ? (() => {
+    //         const mimes = [
+    //             {
+    //                 mimeType: 'audio/mp4;codecs="mp4a.40.5"', // MPEG-4 HE-AAC v1
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.m4a',
+    //             },
+    //             {
+    //                 mimeType: 'audio/mp4;codecs="mp4a.40.2"', // MPEG-4 AAC LC
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.m4a',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm;codecs="opus"',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm;codecs="vp8"',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/mpeg', // Support depends on polyfill
+    //                 audioBitsPerSecond: 128000,
+    //                 bitsPerSecond: 128000,
+    //                 extension: '.mp3',
+    //             },
+    //         ]
+    //
+    //         for (let index = 0; index < mimes.length; index++) {
+    //             const mime = mimes[index]
+    //
+    //             // @ts-ignore
+    //             if (window.MediaRecorder.isTypeSupported(mime.mimeType)) {
+    //                 return mime
+    //             }
+    //         }
+    //
+    //         return undefined
+    //     })() : undefined,
 };
 
 // TODO: For consistency with PlaybackStatus, should we include progressUpdateIntervalMillis here as
@@ -384,6 +506,18 @@ export class Recording {
         } catch (err) {
             stopError = err;
         }
+
+        // Web has to return the URI at the end of recording, so needs a little destructuring
+        if (Platform.OS === 'web') {
+            const {uri, status} = (stopResult as unknown) as {
+                uri: string | null;
+                status: RecordingStatus;
+            };
+
+            this._uri = uri;
+            stopResult = status;
+        }
+
 
         // Clean-up and return status
         await ExponentAV.unloadAudioRecorder();

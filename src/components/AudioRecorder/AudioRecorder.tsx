@@ -2,7 +2,7 @@ import * as React from "react"
 import {useEffect, useState} from "react"
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {IcoMoon} from "../UI";
-import {TouchableHighlight, Vibration} from "react-native";
+import {Platform, TouchableHighlight, Vibration} from "react-native";
 import {Audio} from "../../../packages/expo-av/src";
 import {uploadFileToFirebase} from "../../helpers";
 import {useFirebase} from "react-redux-firebase";
@@ -33,6 +33,62 @@ export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
         linearPCMIsBigEndian: false,
         linearPCMIsFloat: false,
     },
+    web:{
+        mimeType: 'audio/webm;codecs="opus"',
+        audioBitsPerSecond: 64000,
+        bitsPerSecond: 64000,
+        extension: '.webm',
+    },
+    // web: Platform.OS === 'web'
+    //     ? (() => {
+    //         const mimes = [
+    //             {
+    //                 mimeType: 'audio/mp4;codecs="mp4a.40.5"', // MPEG-4 HE-AAC v1
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.m4a',
+    //             },
+    //             {
+    //                 mimeType: 'audio/mp4;codecs="mp4a.40.2"', // MPEG-4 AAC LC
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.m4a',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm;codecs="opus"',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm;codecs="vp8"',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/webm',
+    //                 audioBitsPerSecond: 64000,
+    //                 bitsPerSecond: 64000,
+    //                 extension: '.webm',
+    //             },
+    //             {
+    //                 mimeType: 'audio/mpeg', // Support depends on polyfill
+    //                 audioBitsPerSecond: 128000,
+    //                 bitsPerSecond: 128000,
+    //                 extension: '.mp3',
+    //             },
+    //         ]
+    //
+    //         for (let index = 0; index < mimes.length; index++) {
+    //             const mime = mimes[index]
+    //             if ((window as any).MediaRecorder.isTypeSupported(mime.mimeType)) {
+    //                 return mime
+    //             }
+    //         }
+    //
+    //         return undefined
+    //     })() : undefined,
 };
 
 export interface AudioRecorderProps {
@@ -83,6 +139,8 @@ export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged
         if (recording) {
             await recording.stopAndUnloadAsync();
             const uri = recording.getURI();
+
+            console.log('---recording,uri',recording,uri)
             if (uri) {
 
                 if (isUpload) {
@@ -102,7 +160,11 @@ export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged
     const _longPress = async () => {
         switch (status) {
             case 'STOPPED':
-                Vibration.vibrate(100)
+
+                Platform.select({
+                    native: Vibration.vibrate(100)
+                })
+
                 await startRecording()
                 break;
             default:

@@ -26,7 +26,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
     const {source, style, onLoad, onLoadStart, onLoadEnd, onError} = props
     const soundRef = useRef<Audio.Sound>()
     const [status, setStatus] = useState<AVPlaybackStatus>()
-
+    const [error, setError] = useState('')
     useEffect(() => {
         (async () => {
             try {
@@ -41,6 +41,9 @@ export function AudioPlayer(props: AudioPlayerProps) {
                 onLoad?.()
                 onLoadEnd?.()
             } catch (e) {
+
+                console.log(e.toString())
+                setError(e.toString())
                 onError?.(e);
                 onLoadEnd?.();
             }
@@ -81,6 +84,9 @@ export function AudioPlayer(props: AudioPlayerProps) {
 
     return <View style={[styles.container, style]}>
         {
+            <Text>{error}</Text>
+        }
+        {
             soundRef.current
                 ? status
                 ? status.isLoaded
@@ -111,7 +117,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
                     </TouchableOpacity>
                     : <ActivityIndicator/>
                 : <Text>No Status</Text>
-                : <Text>No Sound</Text>
+                : <Text>No Sound May not support this audio type</Text>
         }
     </View>
 }
