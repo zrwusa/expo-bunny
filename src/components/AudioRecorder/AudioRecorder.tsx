@@ -99,7 +99,7 @@ export interface AudioRecorderProps {
 }
 
 export type AudioRecordingStatus = 'GETTING_PERMISSION' | 'STARTING' | 'STARTED' | 'RECORDING' | 'STOPPING' | 'STOPPED' | 'ERROR' | undefined ;
-export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged, uploadPath = '/', isDebug = true}: AudioRecorderProps) => {
+export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged, uploadPath = '/', isDebug = false}: AudioRecorderProps) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit()
     const [recording, setRecording] = useState<Audio.Recording>();
     const [status, setStatus] = useState<AudioRecordingStatus>('STOPPED')
