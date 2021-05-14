@@ -10,7 +10,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             flex: 1
         },
         filter: {
-            height: wp(100)
+            height: wp(60)
         },
         albumContainer: {justifyContent: 'center'},
         album: {width: wp(340)}

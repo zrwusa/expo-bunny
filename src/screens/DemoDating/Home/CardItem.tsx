@@ -52,7 +52,7 @@ const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches
                         borderRadius: wp(30),
                         backgroundColor: colors.btnBackground2
                     }]}>
-                        <IcoMoon name="cancel" color={colors.primary}/>
+                        <IcoMoon name="cancel" color={colors.buttonText}/>
                     </View>
                 </Col>
 
