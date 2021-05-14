@@ -3,9 +3,10 @@ import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, V
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
+import config from "../../config";
 
 export interface ImageProgressiveProps extends WithSizeLabor, WithThemeLabor {
-    sourcePH: ImageSourcePropType,
+    previewSource: ImageSourcePropType,
     source: ImageSourcePropType,
     style: StyleProp<ImageStyle>,
     resizeMode: ImageResizeMode
@@ -17,21 +18,21 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
 
     handleThumbnailLoad = () => {
         Animated.timing(this.thumbnailAnimated, {
-            useNativeDriver: true,
+            useNativeDriver: config.useNativeDriver,
             toValue: 1,
         }).start();
     }
 
     onImageLoad = () => {
         Animated.timing(this.imageAnimated, {
-            useNativeDriver: true,
+            useNativeDriver: config.useNativeDriver,
             toValue: 1,
         }).start();
     }
 
     render() {
         const {
-            sourcePH,
+            previewSource,
             source,
             style,
             sizeLabor,
@@ -43,7 +44,7 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
             <View style={styles.ImageProgressive.container}>
                 <Animated.Image
                     {...rest}
-                    source={sourcePH}
+                    source={previewSource}
                     style={[style, {opacity: this.thumbnailAnimated}]}
                     onLoad={this.handleThumbnailLoad}
                     blurRadius={1}

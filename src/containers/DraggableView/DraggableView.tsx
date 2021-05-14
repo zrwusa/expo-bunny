@@ -1,5 +1,6 @@
 import React, {useRef} from "react";
 import {Animated, PanResponder, StyleSheet} from "react-native";
+import config from "../../config"
 
 export const DraggableView = () => {
     const pan = useRef(new Animated.ValueXY()).current;
@@ -12,11 +13,11 @@ export const DraggableView = () => {
                 dx: pan.x, // x,y are Animated.Value
                 dy: pan.y,
             },
-        ]),
+        ], {useNativeDriver: config.useNativeDriver}),
         onPanResponderRelease: () => {
             Animated.spring(
                 pan, // Auto-multiplexed
-                {toValue: {x: 0, y: 0}, useNativeDriver: true} // Back to zero
+                {toValue: {x: 0, y: 0}, useNativeDriver: config.useNativeDriver} // Back to zero
             ).start();
         },
     });

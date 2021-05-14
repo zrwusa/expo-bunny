@@ -3,6 +3,7 @@ import {Animated, StyleSheet} from 'react-native'
 import {TypingAnimation} from 'react-native-typing-animation'
 import {useUpdateLayoutEffect} from './hooks/useUpdateLayoutEffect'
 import Color from './Color'
+import config from "../../../src/config";
 
 interface Props {
     isTyping?: boolean
@@ -32,17 +33,17 @@ const TypingIndicator = ({isTyping}: Props) => {
         Animated.parallel([
             Animated.spring(yCoords, {
                 toValue: 0,
-                useNativeDriver: false,
+                useNativeDriver: config.useNativeDriver,
             }),
             Animated.timing(heightScale, {
                 toValue: 35,
                 duration: 250,
-                useNativeDriver: false,
+                useNativeDriver: config.useNativeDriver,
             }),
             Animated.timing(marginScale, {
                 toValue: 8,
                 duration: 250,
-                useNativeDriver: false,
+                useNativeDriver: config.useNativeDriver,
             }),
         ]).start()
     }
@@ -52,17 +53,17 @@ const TypingIndicator = ({isTyping}: Props) => {
         Animated.parallel([
             Animated.spring(yCoords, {
                 toValue: 200,
-                useNativeDriver: false,
+                useNativeDriver: config.useNativeDriver,
             }),
             Animated.timing(heightScale, {
                 toValue: 0,
                 duration: 250,
-                useNativeDriver: false,
+                useNativeDriver: config.useNativeDriver,
             }),
             Animated.timing(marginScale, {
                 toValue: 0,
                 duration: 250,
-                useNativeDriver: false,
+                useNativeDriver: config.useNativeDriver,
             }),
         ]).start()
     }

@@ -12,6 +12,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import config from "../../src/config";
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -127,7 +128,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
             onPanResponderMove: Animated.event([
                 null,
                 {dy: this.state.pan}
-            ], {useNativeDriver: false}),
+            ], {useNativeDriver: config.useNativeDriver}),
             onPanResponderTerminationRequest: (evt, gestureState) => true,
             onPanResponderRelease: (evt, gestureState) => {
                 if (Math.abs(gestureState.dy) > DRAG_DISMISS_THRESHOLD) {
@@ -143,7 +144,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
                 } else {
                     Animated.spring(
                         this.state.pan,
-                        {toValue: 0, ...this.props.springConfig, useNativeDriver: false}
+                        {toValue: 0, ...this.props.springConfig, useNativeDriver: config.useNativeDriver}
                     ).start(() => {
                         this.setState({isPanning: false});
                     });
@@ -174,7 +175,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
 
         Animated.spring(
             this.state.openVal,
-            {toValue: 1, ...this.props.springConfig, useNativeDriver: false}
+            {toValue: 1, ...this.props.springConfig, useNativeDriver: config.useNativeDriver}
         ).start(() => {
             this.setState({isAnimating: false});
             this.props.didOpen && this.props.didOpen();
@@ -191,7 +192,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
         },);
         Animated.spring(
             this.state.openVal,
-            {toValue: 0, ...this.props.springConfig, useNativeDriver: false}
+            {toValue: 0, ...this.props.springConfig, useNativeDriver: config.useNativeDriver}
         ).start(() => {
             this.setState({
                 isAnimating: false,

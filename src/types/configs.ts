@@ -9,4 +9,5 @@ export type APPConfig = APIConfigs & {
     UE: {
         dimensions: Dimensions;
     };
+    useNativeDriver: boolean
 };

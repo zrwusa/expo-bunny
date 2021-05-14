@@ -15,6 +15,7 @@ import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useSelector} from "react-redux";
 import {isLoaded, useFirebase} from "react-redux-firebase";
+import config from "../../../config";
 
 type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSearch'>;
 type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
@@ -142,7 +143,7 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
 
                                    onScroll={Animated.event(
                                        [{nativeEvent: {contentOffset: {y: scrollYValue}}}],
-                                       {useNativeDriver: true},
+                                       {useNativeDriver: config.useNativeDriver},
                                    )}
                 />
                 : null}

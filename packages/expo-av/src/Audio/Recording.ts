@@ -111,7 +111,7 @@ const getWebMediaRecorderSupportedMime = (isHighQuality: boolean) => {
     if (Platform.OS !== 'web') {
         return
     }
-    if(!window.MediaRecorder){
+    if (!window.MediaRecorder) {
         return
     }
     // TODO : need test the different situations

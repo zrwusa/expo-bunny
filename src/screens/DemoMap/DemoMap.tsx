@@ -13,6 +13,7 @@ import getStyles, {getCardSize} from "./styles";
 import {getContainerStyles} from "../../containers";
 import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
 import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
+import config from "../../config";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -174,7 +175,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
                                                  },
                                              }
                                          }],
-                                         {useNativeDriver: true}
+                                         {useNativeDriver: config.useNativeDriver}
                                      )}
                                      style={styles.scrollView}
                                      contentContainerStyle={styles.endPadding}>

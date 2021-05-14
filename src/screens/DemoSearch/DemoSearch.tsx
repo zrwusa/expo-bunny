@@ -15,6 +15,7 @@ import {getStyles} from "./styles";
 import {collectBLResult} from "../../store/actions";
 import {blError} from "../../helpers";
 import {StackNavigationProp} from "@react-navigation/stack";
+import config from "../../config";
 
 
 type DemoSearchRouteProp = RouteProp<RootStackParam, 'DemoSearch'>;
@@ -85,7 +86,7 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
                 style={styles.list}
                 onScroll={Animated.event(
                     [{nativeEvent: {contentOffset: {y: scrollYValue}}}],
-                    {useNativeDriver: true},
+                    {useNativeDriver: config.useNativeDriver},
                 )}
                 keyExtractor={item => item.id.toString()}
                 contentInsetAdjustmentBehavior="automatic"

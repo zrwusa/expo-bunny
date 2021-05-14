@@ -2,7 +2,7 @@ import React from "react";
 import {Text, TextButton, View} from "../../components/UI";
 import {LinearGradientIcon} from "../../components/LinearGradientIcon";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {ScrollView, TouchableHighlight, TouchableOpacity, Vibration} from "react-native";
+import {FlatList, Image, TouchableHighlight, TouchableOpacity, Vibration} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {
@@ -16,6 +16,7 @@ import {useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {DraggableView} from "../../containers/DraggableView";
+import {uuidV4} from "../../utils";
 
 
 export function PlaygroundScreen() {
@@ -35,8 +36,12 @@ export function PlaygroundScreen() {
     ])
     const demoFirestore = useSelector((state: RootState) => state.firestoreState.ordered.demoFirestore)
 
+    let testData = [];
+    for (let i = 0; i < 1000; i++) {
+        testData.push({id: uuidV4()})
+    }
     return (
-        <ScrollView style={{flex: 1}}>
+        <View style={{flex: 1}}>
             <View style={styles.container}>
                 <LinearGradientIcon name="leaf" colors={['#fff', '#0f0']} size={40}/>
             </View>
@@ -79,7 +84,11 @@ export function PlaygroundScreen() {
                     <Text>Touchable with Long Press</Text>
                 </View>
             </TouchableHighlight>
-        </ScrollView>
+            <FlatList data={testData}
+                      keyExtractor={item => item.id}
+                      renderItem={() => <Image style={{width: 300, height: 300}}
+                                               source={{uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}}/>}/>
+        </View>
     )
 }
 

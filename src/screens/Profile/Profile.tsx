@@ -63,7 +63,7 @@ function ProfileScreen({route, navigation}: Props) {
                         }
                     </View>
                     <ImageProgressive
-                        sourcePH={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-placeholder.jpg`}}
+                        previewSource={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-placeholder.jpg`}}
                         source={{uri: `https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg`}}
                         style={styles.imageProgressive}
                         resizeMode="cover"

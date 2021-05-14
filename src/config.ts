@@ -127,7 +127,8 @@ const config: APPConfig = {
                 "height": 800
             }
         }
-    }
+    },
+    "useNativeDriver": true
 }
 
 export default config
