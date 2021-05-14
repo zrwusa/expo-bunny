@@ -32,6 +32,7 @@ const styles = {
 }
 
 export interface MessageProps<TMessage extends IMessage> {
+    messages: TMessage[],
     key: any
     showUserAvatar?: boolean
     position: 'left' | 'right'
@@ -68,6 +69,7 @@ export interface MessageProps<TMessage extends IMessage> {
 
 export default class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
     static defaultProps = {
+        messages: [],
         renderAvatar: undefined,
         renderBubble: null,
         renderDay: null,
@@ -89,6 +91,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
     }
 
     static propTypes = {
+        messages: PropTypes.array,
         renderAvatar: PropTypes.func,
         showUserAvatar: PropTypes.bool,
         renderBubble: PropTypes.func,

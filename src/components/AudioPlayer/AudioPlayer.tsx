@@ -16,6 +16,7 @@ export interface AudioPlayerProps {
     onLoadStart?: () => void,
     onLoadEnd?: () => void,
     onError?: (e: Error) => void,
+    isDebug?: boolean
 }
 
 export function AudioPlayer(props: AudioPlayerProps) {
@@ -23,9 +24,9 @@ export function AudioPlayer(props: AudioPlayerProps) {
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
-    const {source, style, onLoad, onLoadStart, onLoadEnd, onError} = props
+    const {source, style, onLoad, onLoadStart, onLoadEnd, onError, isDebug = false} = props
     const soundRef = useRef<Audio.Sound>()
-    const [status, setStatus] = useState<AVPlaybackStatus>()
+    const [status, setStatus] = useState<AVPlaybackStatus>({isLoaded: false})
     const [error, setError] = useState('')
     useEffect(() => {
         (async () => {
@@ -34,15 +35,16 @@ export function AudioPlayer(props: AudioPlayerProps) {
                     return
                 }
                 onLoadStart?.()
-                const {sound, status} = await Audio.Sound.createAsync(source);
+                const {sound} = await Audio.Sound.createAsync(source);
+                if (status?.isLoaded) {
+                    onLoad?.()
+                }
                 // todo on web platform status.durationMillis is NaN
                 soundRef.current = sound;
                 soundRef.current.setOnPlaybackStatusUpdate(setStatus)
-                onLoad?.()
                 onLoadEnd?.()
             } catch (e) {
-
-                console.log(e.toString())
+                isDebug && console.log(e.toString())
                 setError(e.toString())
                 onError?.(e);
                 onLoadEnd?.();
@@ -55,7 +57,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
                 const curSoundRef = soundRef.current
                 if (curSoundRef) {
                     curSoundRef.setOnPlaybackStatusUpdate(null)
-                    await curSoundRef.stopAsync();
+                    // await curSoundRef.stopAsync();
                     await curSoundRef.unloadAsync();
                 }
             })();
@@ -83,8 +85,12 @@ export function AudioPlayer(props: AudioPlayerProps) {
     }
 
     return <View style={[styles.container, style]}>
-        {
-            <Text>{error}</Text>
+        {isDebug
+            ? <>
+                <Text>error:{error}</Text>
+                <Text>status:{JSON.stringify(status)}</Text>
+            </>
+            : null
         }
         {
             soundRef.current
@@ -117,7 +123,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
                     </TouchableOpacity>
                     : <ActivityIndicator/>
                 : <Text>No Status</Text>
-                : <Text>No Sound May not support this audio type</Text>
+                : <Text>No Sound,may not support this audio type</Text>
         }
     </View>
 }

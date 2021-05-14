@@ -3,66 +3,9 @@ import {PermissionResponse, PermissionStatus} from 'unimodules-permissions-inter
 import {AVPlaybackNativeSource, AVPlaybackStatus, AVPlaybackStatusToSet} from './AV';
 import {RECORDING_OPTIONS_PRESET_HIGH_QUALITY, RecordingOptions} from './Audio/Recording';
 
-
-export interface MediaRecorderErrorEvent extends Event {
-    name: string;
-}
-
 export interface MediaRecorderDataAvailableEvent extends Event {
     data: any;
 }
-
-export interface MediaRecorderEventMap {
-    'dataavailable': MediaRecorderDataAvailableEvent;
-    'error': MediaRecorderErrorEvent;
-    'pause': Event;
-    'resume': Event;
-    'start': Event;
-    'stop': Event;
-    'warning': MediaRecorderErrorEvent;
-}
-
-
-// declare class MediaRecorderType extends EventTarget {
-//
-//     readonly mimeType: string;
-//     readonly state: 'inactive' | 'recording' | 'paused';
-//     readonly stream: MediaStream;
-//     ignoreMutedMedia: boolean;
-//     videoBitsPerSecond: number;
-//     audioBitsPerSecond: number;
-//
-//     ondataavailable: (event : MediaRecorderDataAvailableEvent) => void;
-//     onerror: (event: MediaRecorderErrorEvent) => void;
-//     onpause: () => void;
-//     onresume: () => void;
-//     onstart: () => void;
-//     onstop: () => void;
-//
-//     constructor(stream: MediaStream);
-//
-//     start();
-//
-//     stop();
-//
-//     resume();
-//
-//     pause();
-//
-//     isTypeSupported(type: string): boolean;
-//
-//     requestData();
-//
-//
-//     addEventListener<K extends keyof MediaRecorderEventMap>(type: K, listener: (this: MediaStream, ev: MediaRecorderEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-//
-//     addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-//
-//     removeEventListener<K extends keyof MediaRecorderEventMap>(type: K, listener: (this: MediaStream, ev: MediaRecorderEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-//
-//     removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-//
-// }
 
 
 /**
@@ -92,25 +35,8 @@ function getStatusFromMedia(media?: HTMLMediaElement): AVPlaybackStatus {
             error: undefined,
         };
     }
-    let mediaRecorder: null | any /*MediaRecorder*/ = null;
-    let mediaRecorderUptimeOfLastStartResume: number = 0;
-    let mediaRecorderDurationAlreadyRecorded: number = 0;
-    let mediaRecorderIsRecording: boolean = false;
 
-    function getAudioRecorderDurationMillis() {
-        let duration = mediaRecorderDurationAlreadyRecorded;
-        if (mediaRecorderIsRecording && mediaRecorderUptimeOfLastStartResume > 0) {
-            duration += Date.now() - mediaRecorderUptimeOfLastStartResume;
-        }
-        return duration;
-    }
-
-    const isPlaying = !!(
-        media.currentTime > 0 &&
-        !media.paused &&
-        !media.ended &&
-        media.readyState > 2
-    );
+    const isPlaying = (media.currentTime > 0 && !media.paused && !media.ended && media.readyState > 2);
 
     const status: AVPlaybackStatus = {
         isLoaded: true,

@@ -110,6 +110,7 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<BubbleProps
     MessageText['props']
 
 export interface BubbleProps<TMessage extends IMessage> {
+    messages: TMessage[],
     user?: User
     touchableProps?: object
     renderUsernameOnMessage?: boolean
@@ -174,6 +175,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
     }
 
     static defaultProps = {
+        messages: [],
         touchableProps: {},
         onPress: null,
         onLongPress: null,

@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
 })
 
 export interface MessageImageProps<TMessage extends IMessage> {
+    messages: TMessage[],
     currentMessage?: TMessage
     containerStyle?: StyleProp<ViewStyle>
     imageStyle?: StyleProp<ImageStyle>
@@ -43,6 +44,7 @@ export interface MessageImageProps<TMessage extends IMessage> {
 
 export default class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage>> {
     static defaultProps = {
+        messages: [],
         currentMessage: {
             image: null,
         },
@@ -59,6 +61,7 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
     }
 
     static propTypes = {
+        messages: PropTypes.array,
         currentMessage: PropTypes.object,
         containerStyle: StylePropType,
         imageStyle: StylePropType,
@@ -80,7 +83,9 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
             imageStyle,
             currentMessage,
             isDebug,
+            messages,
         } = this.props
+        console.log(messages)
         return (
             <View style={[styles.container, containerStyle]}>
                 <LightBox

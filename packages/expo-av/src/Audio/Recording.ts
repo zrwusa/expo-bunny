@@ -106,6 +106,110 @@ export const RECORDING_OPTION_IOS_BIT_RATE_STRATEGY_VARIABLE = 3;
 
 // TODO : maybe make presets for music and speech, or lossy / lossless.
 
+export type Qualities = 'highQuality' | 'lowQuality'
+const getWebMediaRecorderSupportedMime = (isHighQuality: boolean) => {
+    if (Platform.OS !== 'web') {
+        return
+    }
+    // TODO : need test the different situations
+    const mimes: { [key in Qualities]: RecordingOptions['web'] }[] = [
+        {
+            highQuality: {
+                mimeType: 'audio/mp4;codecs="mp4a.40.5"', // MPEG-4 HE-AAC v1
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.m4a',
+            },
+            lowQuality: {
+                mimeType: 'audio/mp4;codecs="mp4a.40.5"', // MPEG-4 HE-AAC v1
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.m4a',
+            }
+        },
+        {
+            highQuality: {
+                mimeType: 'audio/mp4;codecs="mp4a.40.2"', // MPEG-4 AAC LC
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.m4a',
+            },
+            lowQuality: {
+                mimeType: 'audio/mp4;codecs="mp4a.40.2"', // MPEG-4 AAC LC
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.m4a',
+            }
+        },
+        {
+            highQuality: {
+                mimeType: 'audio/mpeg', // Support depends on polyfill
+                audioBitsPerSecond: 128000,
+                bitsPerSecond: 128000,
+                extension: '.mp3',
+            }, lowQuality: {
+                mimeType: 'audio/mpeg', // Support depends on polyfill
+                audioBitsPerSecond: 128000,
+                bitsPerSecond: 128000,
+                extension: '.mp3',
+            }
+        },
+        {
+            highQuality: {
+                mimeType: 'audio/webm;codecs="opus"',
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.webm',
+            },
+            lowQuality: {
+                mimeType: 'audio/webm;codecs="opus"',
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.webm',
+            }
+        },
+        {
+            highQuality: {
+                mimeType: 'audio/webm;codecs="vp8"',
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.webm',
+            },
+            lowQuality: {
+                mimeType: 'audio/webm;codecs="vp8"',
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.webm',
+            }
+        },
+        {
+            highQuality: {
+                mimeType: 'audio/webm',
+                audioBitsPerSecond: 1000,
+                bitsPerSecond: 1000,
+                extension: '.webm',
+            },
+            lowQuality: {
+                mimeType: 'audio/webm',
+                audioBitsPerSecond: 64000,
+                bitsPerSecond: 64000,
+                extension: '.webm',
+            }
+        },
+
+    ]
+
+    for (let index = 0; index < mimes.length; index++) {
+        const mime = mimes[index]
+        const quality: Qualities = isHighQuality ? 'highQuality' : 'lowQuality';
+        const curMime = mime[quality]
+        if (curMime) {
+            if (window.MediaRecorder.isTypeSupported(curMime.mimeType)) {
+                return curMime
+            }
+        }
+    }
+}
 export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
     isMeteringEnabled: true,
     android: {
@@ -117,7 +221,7 @@ export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
         bitRate: 128000,
     },
     ios: {
-        extension: '.caf',
+        extension: '.wav',
         audioQuality: RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX,
         sampleRate: 44100,
         numberOfChannels: 2,
@@ -126,64 +230,7 @@ export const RECORDING_OPTIONS_PRESET_HIGH_QUALITY: RecordingOptions = {
         linearPCMIsBigEndian: false,
         linearPCMIsFloat: false,
     },
-    web: {
-        mimeType: 'audio/webm;codecs="opus"',
-        audioBitsPerSecond: 64000,
-        bitsPerSecond: 64000,
-        extension: '.webm',
-    },
-    // web: Platform.OS === 'web'
-    //     ? (() => {
-    //         const mimes = [
-    //             {
-    //                 mimeType: 'audio/mp4;codecs="mp4a.40.5"', // MPEG-4 HE-AAC v1
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.m4a',
-    //             },
-    //             {
-    //                 mimeType: 'audio/mp4;codecs="mp4a.40.2"', // MPEG-4 AAC LC
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.m4a',
-    //             },
-    //             {
-    //                 mimeType: 'audio/webm;codecs="opus"',
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.webm',
-    //             },
-    //             {
-    //                 mimeType: 'audio/webm;codecs="vp8"',
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.webm',
-    //             },
-    //             {
-    //                 mimeType: 'audio/webm',
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.webm',
-    //             },
-    //             {
-    //                 mimeType: 'audio/mpeg', // Support depends on polyfill
-    //                 audioBitsPerSecond: 128000,
-    //                 bitsPerSecond: 128000,
-    //                 extension: '.mp3',
-    //             },
-    //         ]
-    //
-    //         for (let index = 0; index < mimes.length; index++) {
-    //             const mime = mimes[index]
-    //
-    //             // @ts-ignore
-    //             if (window.MediaRecorder.isTypeSupported(mime.mimeType)) {
-    //                 return mime
-    //             }
-    //         }
-    //
-    //         return undefined
-    //     })() : undefined,
+    web: getWebMediaRecorderSupportedMime(true),
 };
 
 export const RECORDING_OPTIONS_PRESET_LOW_QUALITY: RecordingOptions = {
@@ -197,7 +244,7 @@ export const RECORDING_OPTIONS_PRESET_LOW_QUALITY: RecordingOptions = {
         bitRate: 128000,
     },
     ios: {
-        extension: '.caf',
+        extension: '.wav',
         audioQuality: RECORDING_OPTION_IOS_AUDIO_QUALITY_MIN,
         sampleRate: 44100,
         numberOfChannels: 2,
@@ -206,64 +253,7 @@ export const RECORDING_OPTIONS_PRESET_LOW_QUALITY: RecordingOptions = {
         linearPCMIsBigEndian: false,
         linearPCMIsFloat: false,
     },
-    web: {
-        mimeType: 'audio/webm;codecs="opus"',
-        audioBitsPerSecond: 64000,
-        bitsPerSecond: 64000,
-        extension: '.webm',
-    },
-    // web: Platform.OS === 'web'
-    //     ? (() => {
-    //         const mimes = [
-    //             {
-    //                 mimeType: 'audio/mp4;codecs="mp4a.40.5"', // MPEG-4 HE-AAC v1
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.m4a',
-    //             },
-    //             {
-    //                 mimeType: 'audio/mp4;codecs="mp4a.40.2"', // MPEG-4 AAC LC
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.m4a',
-    //             },
-    //             {
-    //                 mimeType: 'audio/webm;codecs="opus"',
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.webm',
-    //             },
-    //             {
-    //                 mimeType: 'audio/webm;codecs="vp8"',
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.webm',
-    //             },
-    //             {
-    //                 mimeType: 'audio/webm',
-    //                 audioBitsPerSecond: 64000,
-    //                 bitsPerSecond: 64000,
-    //                 extension: '.webm',
-    //             },
-    //             {
-    //                 mimeType: 'audio/mpeg', // Support depends on polyfill
-    //                 audioBitsPerSecond: 128000,
-    //                 bitsPerSecond: 128000,
-    //                 extension: '.mp3',
-    //             },
-    //         ]
-    //
-    //         for (let index = 0; index < mimes.length; index++) {
-    //             const mime = mimes[index]
-    //
-    //             // @ts-ignore
-    //             if (window.MediaRecorder.isTypeSupported(mime.mimeType)) {
-    //                 return mime
-    //             }
-    //         }
-    //
-    //         return undefined
-    //     })() : undefined,
+    web: getWebMediaRecorderSupportedMime(false),
 };
 
 // TODO: For consistency with PlaybackStatus, should we include progressUpdateIntervalMillis here as

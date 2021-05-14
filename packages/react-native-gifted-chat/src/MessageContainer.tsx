@@ -270,6 +270,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
                 inverted,
                 nextMessage,
                 position: item.user._id === user._id ? 'right' : 'left',
+                messages,
             }
 
             if (this.props.renderMessage) {
