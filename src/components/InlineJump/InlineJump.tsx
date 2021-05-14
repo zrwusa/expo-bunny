@@ -30,7 +30,6 @@ export function InlineJump(props: LineToProps) {
     const {authFunctions} = useAuthLabor()
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {iconName, iconSize = wp(22), text, to, type, onNav} = props;
-
     const {colors} = themeLabor.theme
     const iconColor = {color: colors.buttonText};
     return type === 'LINK'
@@ -67,7 +66,7 @@ export function InlineJump(props: LineToProps) {
             <Row paddingVertical="xl">
                 <Col size={3}>
                     <Row>
-                        <LinearGradientIcon size={wp(iconSize)} name={iconName}/>
+                        <LinearGradientIcon size={iconSize} name={iconName}/>
                         <Text style={styles.label}>{text}</Text>
                     </Row>
                 </Col>
