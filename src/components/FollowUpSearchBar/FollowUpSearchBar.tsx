@@ -4,7 +4,6 @@ import {getStyles} from "./styles";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useSizeLabor} from "../../providers/size-labor";
 import {IcoMoon, Text, TextInput, TouchableOpacity, View} from "../UI";
-import config from "../../config";
 
 interface SearchComponentProps {
     scrollYValue: Animated.Value,
@@ -103,7 +102,7 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
         const timingAnimConfig: Animated.TimingAnimationConfig = {
             toValue: toWidth,
             duration: 300,
-            useNativeDriver: config.useNativeDriver
+            useNativeDriver: false // the width property can only use js animation
         }
         Animated.timing(
             widthAnim,
