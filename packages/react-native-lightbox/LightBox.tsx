@@ -83,7 +83,7 @@ export default class LightBox extends Component<LightBoxProps> {
             this.props.onOpen && this.props.onOpen();
 
             this.setState({
-                isOpen: (this.props.navigator ? true : false),
+                isOpen: (!!this.props.navigator),
                 isAnimating: true,
                 origin: {
                     width,
@@ -92,7 +92,7 @@ export default class LightBox extends Component<LightBoxProps> {
                     y: py,
                 },
             }, () => {
-                this.props.didOpen && this.props.didOpen();
+                this.props.didOpen?.();
                 if (this.props.navigator) {
                     const route = {
                         component: LightBoxOverlay,
