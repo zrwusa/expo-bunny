@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage} from './Models'
-import {StylePropType} from './utils'
 import {Video, VideoProps} from "../../expo-av/src";
 
 const styles = StyleSheet.create({
@@ -51,19 +49,6 @@ export default class MessageVideo<TMessage extends IMessage = IMessage> extends 
         onMessageLoadError: undefined,
 
         isDebug: false,
-    }
-
-    static propTypes = {
-        currentMessage: PropTypes.object,
-        containerStyle: StylePropType,
-        videoStyle: StylePropType,
-        videoProps: PropTypes.object,
-        onMessageLoad: PropTypes.func,
-        onMessageLoadStart: PropTypes.func,
-        onMessageLoadEnd: PropTypes.func,
-        onReadyForDisplay: PropTypes.func,
-        onMessageLoadError: PropTypes.func,
-        isDebug: PropTypes.bool
     }
 
     render() {

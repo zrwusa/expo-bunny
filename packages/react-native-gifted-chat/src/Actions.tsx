@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types'
 import React, {ReactNode} from 'react'
 import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native'
 import Color from './Color'
-import {StylePropType} from './utils'
 
 export interface ActionsProps {
     options?: { [key: string]: any }
@@ -25,18 +23,10 @@ export default class Actions extends React.Component<ActionsProps> {
         wrapperStyle: {},
     }
 
-    static propTypes = {
-        onSend: PropTypes.func,
-        options: PropTypes.object,
-        optionTintColor: PropTypes.string,
-        icon: PropTypes.func,
-        onPressActionButton: PropTypes.func,
-        wrapperStyle: StylePropType,
-        containerStyle: StylePropType,
-    }
-
     static contextTypes = {
-        actionSheet: PropTypes.func,
+        actionSheet: function () {
+
+        },
     }
 
     onActionsPress = () => {

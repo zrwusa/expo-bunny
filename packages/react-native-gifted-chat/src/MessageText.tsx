@@ -1,11 +1,9 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {Linking, StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle} from 'react-native'
 // @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
 import {IMessage, LeftRightStyle} from './Models'
-import {StylePropType} from './utils'
 
 const WWW_URL_PATTERN = /^www\./i
 
@@ -72,7 +70,9 @@ export interface MessageTextProps<TMessage extends IMessage> {
 
 export default class MessageText<TMessage extends IMessage = IMessage> extends React.Component<MessageTextProps<TMessage>> {
     static contextTypes = {
-        actionSheet: PropTypes.func,
+        actionSheet: function () {
+
+        },
     }
 
     static defaultProps = {
@@ -93,33 +93,6 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
         onMessageReadyForDisplay: undefined,
         onMessageLoadError: undefined,
         isDebug: false,
-    }
-
-    static propTypes = {
-        position: PropTypes.oneOf(['left', 'right']),
-        optionTitles: PropTypes.arrayOf(PropTypes.string),
-        currentMessage: PropTypes.object,
-        containerStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        textStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        linkStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        parsePatterns: PropTypes.func,
-        textProps: PropTypes.object,
-        customTextStyle: StylePropType,
-        onMessageLoad: PropTypes.func,
-        onMessageLoadStart: PropTypes.func,
-        onMessageLoadEnd: PropTypes.func,
-        onMessageReadyForDisplay: PropTypes.func,
-        onMessageLoadError: PropTypes.func,
-        isDebug: PropTypes.bool,
     }
 
     shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {
@@ -147,12 +120,14 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
     }
 
     onPhonePress = (phone: string) => {
+        debugger
         const {optionTitles} = this.props
         const options =
             optionTitles && optionTitles.length > 0
                 ? optionTitles.slice(0, 3)
                 : DEFAULT_OPTION_TITLES
         const cancelButtonIndex = options.length - 1
+        console.log(this.context)
         this.context.actionSheet().showActionSheetWithOptions(
             {
                 options,

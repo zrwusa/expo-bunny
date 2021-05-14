@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native'
 import dayjs from 'dayjs'
@@ -6,7 +5,6 @@ import dayjs from 'dayjs'
 import Color from './Color'
 import {TIME_FORMAT} from './Constant'
 import {IMessage, LeftRightStyle} from './Models'
-import {StylePropType} from './utils'
 
 const containerStyle = {
     marginLeft: 10,
@@ -51,7 +49,9 @@ export interface TimeProps<TMessage extends IMessage> {
 
 export default class Time<TMessage extends IMessage = IMessage> extends Component<TimeProps<TMessage>> {
     static contextTypes = {
-        getLocale: PropTypes.func,
+        getLocale: function () {
+
+        },
     }
 
     static defaultProps = {
@@ -62,20 +62,6 @@ export default class Time<TMessage extends IMessage = IMessage> extends Componen
         containerStyle: {},
         timeFormat: TIME_FORMAT,
         timeTextStyle: {},
-    }
-
-    static propTypes = {
-        position: PropTypes.oneOf(['left', 'right']),
-        currentMessage: PropTypes.object,
-        containerStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        timeFormat: PropTypes.string,
-        timeTextStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
     }
 
     render() {

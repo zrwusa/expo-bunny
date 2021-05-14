@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle,} from 'react-native'
 import Color from './Color'
 import {IMessage} from './Models'
-import {StylePropType} from './utils'
 
 const styles = StyleSheet.create({
     container: {
@@ -49,18 +47,6 @@ export default class Send<TMessage extends IMessage = IMessage> extends Componen
         alwaysShowSend: false,
         disabled: false,
         sendButtonProps: null,
-    }
-
-    static propTypes = {
-        text: PropTypes.string,
-        onSend: PropTypes.func,
-        label: PropTypes.string,
-        containerStyle: StylePropType,
-        textStyle: StylePropType,
-        children: PropTypes.element,
-        alwaysShowSend: PropTypes.bool,
-        disabled: PropTypes.bool,
-        sendButtonProps: PropTypes.object,
     }
 
     handleOnPress = () => {

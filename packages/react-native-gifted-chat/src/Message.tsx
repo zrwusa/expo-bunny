@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {LayoutChangeEvent, StyleSheet, View, ViewStyle} from 'react-native'
 
@@ -7,7 +6,7 @@ import Bubble from './Bubble'
 import SystemMessage from './SystemMessage'
 import Day from './Day'
 
-import {isSameUser, StylePropType} from './utils'
+import {isSameUser} from './utils'
 import {IMessage, LeftRightStyle, User} from './Models'
 
 const styles = {
@@ -88,31 +87,6 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
         // onMessageLoadStart: undefined,
         // onMessageLoadEnd: undefined,
         // onMessageLoadError: undefined,
-    }
-
-    static propTypes = {
-        messages: PropTypes.array,
-        renderAvatar: PropTypes.func,
-        showUserAvatar: PropTypes.bool,
-        renderBubble: PropTypes.func,
-        renderDay: PropTypes.func,
-        renderSystemMessage: PropTypes.func,
-        position: PropTypes.oneOf(['left', 'right']),
-        currentMessage: PropTypes.object,
-        nextMessage: PropTypes.object,
-        previousMessage: PropTypes.object,
-        user: PropTypes.object,
-        inverted: PropTypes.bool,
-        containerStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        shouldUpdateMessage: PropTypes.func,
-        onMessageLayout: PropTypes.func,
-        // onMessageLoad: PropTypes.func,
-        // onMessageLoadStart: PropTypes.func,
-        // onMessageLoadEnd: PropTypes.func,
-        // onMessageLoadError: PropTypes.func
     }
 
     shouldComponentUpdate(nextProps: MessageProps<TMessage>) {

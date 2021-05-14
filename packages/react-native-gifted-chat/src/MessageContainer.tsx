@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, {RefObject} from 'react'
 
 import {
@@ -20,7 +19,7 @@ import LoadEarlier from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
 import {IMessage, Reply, User} from './Models'
-import {StylePropType, warning} from './utils'
+import {warning} from './utils'
 import TypingIndicator from './TypingIndicator'
 
 const styles = StyleSheet.create({
@@ -141,29 +140,6 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         scrollToBottomStyle: {},
         infiniteScroll: false,
         isLoadingEarlier: false,
-    }
-
-    static propTypes = {
-        messages: PropTypes.arrayOf(PropTypes.object),
-        isTyping: PropTypes.bool,
-        user: PropTypes.object,
-        renderChatEmpty: PropTypes.func,
-        renderFooter: PropTypes.func,
-        renderMessage: PropTypes.func,
-        renderLoadEarlier: PropTypes.func,
-        onLoadEarlier: PropTypes.func,
-        onLoadMessageLoad: PropTypes.func,
-        listViewProps: PropTypes.object,
-        inverted: PropTypes.bool,
-        loadEarlier: PropTypes.bool,
-        invertibleScrollViewProps: PropTypes.object,
-        extraData: PropTypes.object,
-        scrollToBottom: PropTypes.bool,
-        scrollToBottomOffset: PropTypes.number,
-        scrollToBottomComponent: PropTypes.func,
-        alignTop: PropTypes.bool,
-        scrollToBottomStyle: StylePropType,
-        infiniteScroll: PropTypes.bool,
     }
 
     state = {

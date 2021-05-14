@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, {RefObject} from 'react'
 import {
     Animated,
@@ -275,8 +274,10 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
 class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<GiftedChatProps<TMessage>,
     GiftedChatState> {
     static childContextTypes = {
-        actionSheet: PropTypes.func,
-        getLocale: PropTypes.func,
+        actionSheet: function () {
+        },
+        getLocale: function () {
+        },
     }
 
     static defaultProps = {
@@ -362,76 +363,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<G
         wrapInSafeArea: true,
     }
 
-    static propTypes = {
-        messages: PropTypes.arrayOf(PropTypes.object),
-        messagesContainerStyle: utils.StylePropType,
-        text: PropTypes.string,
-        initialText: PropTypes.string,
-        placeholder: PropTypes.string,
-        disableComposer: PropTypes.bool,
-        messageIdGenerator: PropTypes.func,
-        user: PropTypes.object,
-        onSend: PropTypes.func,
-        locale: PropTypes.string,
-        timeFormat: PropTypes.string,
-        dateFormat: PropTypes.string,
-        isKeyboardInternallyHandled: PropTypes.bool,
-        loadEarlier: PropTypes.bool,
-        onLoadEarlier: PropTypes.func,
-        onMessageLoad: PropTypes.func,
-        onMessageLoadStart: PropTypes.func,
-        onMessageLoadEnd: PropTypes.func,
-        onMessageReadyForDisplay: PropTypes.func,
-        isLoadingEarlier: PropTypes.bool,
-        renderLoading: PropTypes.func,
-        renderLoadEarlier: PropTypes.func,
-        renderAvatar: PropTypes.func,
-        showUserAvatar: PropTypes.bool,
-        actionSheet: PropTypes.func,
-        onPressAvatar: PropTypes.func,
-        onLongPressAvatar: PropTypes.func,
-        renderUsernameOnMessage: PropTypes.bool,
-        renderAvatarOnTop: PropTypes.bool,
-        isCustomViewBottom: PropTypes.bool,
-        renderBubble: PropTypes.func,
-        renderSystemMessage: PropTypes.func,
-        onLongPress: PropTypes.func,
-        renderMessage: PropTypes.func,
-        renderMessageText: PropTypes.func,
-        renderMessageImage: PropTypes.func,
-        renderMessageSticker: PropTypes.func,
-        imageProps: PropTypes.object,
-        stickerProps: PropTypes.object,
-        videoProps: PropTypes.object,
-        audioProps: PropTypes.object,
-        lightBoxProps: PropTypes.object,
-        renderCustomView: PropTypes.func,
-        renderDay: PropTypes.func,
-        renderTime: PropTypes.func,
-        renderFooter: PropTypes.func,
-        renderChatEmpty: PropTypes.func,
-        renderChatFooter: PropTypes.func,
-        renderInputToolbar: PropTypes.func,
-        renderComposer: PropTypes.func,
-        renderActions: PropTypes.func,
-        renderSend: PropTypes.func,
-        renderAccessory: PropTypes.func,
-        onPressActionButton: PropTypes.func,
-        bottomOffset: PropTypes.number,
-        minInputToolbarHeight: PropTypes.number,
-        listViewProps: PropTypes.object,
-        keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
-        onInputTextChanged: PropTypes.func,
-        maxInputLength: PropTypes.number,
-        forceGetKeyboardHeight: PropTypes.bool,
-        inverted: PropTypes.bool,
-        textInputProps: PropTypes.object,
-        extraData: PropTypes.object,
-        minComposerHeight: PropTypes.number,
-        maxComposerHeight: PropTypes.number,
-        alignTop: PropTypes.bool,
-        wrapInSafeArea: PropTypes.bool,
-    }
 
     static append<TMessage extends IMessage>(
         currentMessages: TMessage[] = [],

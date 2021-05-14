@@ -1,5 +1,4 @@
 import React, {Children, cloneElement, Component, createRef} from 'react';
-import PropTypes from 'prop-types';
 import {Animated, StyleProp, TouchableHighlight, TouchableWithoutFeedbackProps, View, ViewStyle} from 'react-native';
 import {LightBoxOverlay} from "./LightBoxOverlay";
 
@@ -25,22 +24,6 @@ export interface LightBoxProps {
 }
 
 export default class LightBox extends Component<LightBoxProps> {
-    static propTypes = {
-        activeProps: PropTypes.object,
-        renderHeader: PropTypes.func,
-        renderContent: PropTypes.func,
-        underlayColor: PropTypes.string,
-        backgroundColor: PropTypes.string,
-        didOpen: PropTypes.func,
-        onOpen: PropTypes.func,
-        willClose: PropTypes.func,
-        onClose: PropTypes.func,
-        springConfig: PropTypes.shape({
-            tension: PropTypes.number,
-            friction: PropTypes.number,
-        }),
-        swipeToDismiss: PropTypes.bool,
-    };
 
     static defaultProps = {
         swipeToDismiss: true,

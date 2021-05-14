@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {ActivityIndicator, Clipboard, StyleProp, StyleSheet, Text, TextStyle, TouchableWithoutFeedback, View, ViewStyle,} from 'react-native'
 
@@ -12,7 +11,7 @@ import MessageAudio from './MessageAudio'
 import Time from './Time'
 import Color from './Color'
 
-import {isSameDay, isSameUser, StylePropType} from './utils'
+import {isSameDay, isSameUser} from './utils'
 import {IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, Omit, Reply, User,} from './Models'
 import MessageSticker from "./MessageSticker";
 
@@ -171,7 +170,9 @@ export interface BubbleProps<TMessage extends IMessage> {
 
 export default class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage>> {
     static contextTypes = {
-        actionSheet: PropTypes.func,
+        actionSheet: function () {
+
+        },
     }
 
     static defaultProps = {
@@ -213,55 +214,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         containerToPreviousStyle: {},
     }
 
-    static propTypes = {
-        user: PropTypes.object.isRequired,
-        touchableProps: PropTypes.object,
-        onLongPress: PropTypes.func,
-        renderMessageImage: PropTypes.func,
-        renderMessageSticker: PropTypes.func,
-        renderMessageVideo: PropTypes.func,
-        renderMessageAudio: PropTypes.func,
-        renderMessageText: PropTypes.func,
-        renderCustomView: PropTypes.func,
-        isCustomViewBottom: PropTypes.bool,
-        renderUsernameOnMessage: PropTypes.bool,
-        renderUsername: PropTypes.func,
-        renderTime: PropTypes.func,
-        renderTicks: PropTypes.func,
-        renderQuickReplies: PropTypes.func,
-        onQuickReply: PropTypes.func,
-        // onMessageLoad: PropTypes.func,
-        // onMessageLoadStart: PropTypes.func,
-        // onMessageLoadEnd: PropTypes.func,
-        // onMessageLoadError: PropTypes.func,
-        position: PropTypes.oneOf(['left', 'right']),
-        optionTitles: PropTypes.arrayOf(PropTypes.string),
-        currentMessage: PropTypes.object,
-        nextMessage: PropTypes.object,
-        previousMessage: PropTypes.object,
-        containerStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        wrapperStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        bottomContainerStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        tickStyle: StylePropType,
-        usernameStyle: StylePropType,
-        containerToNextStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        containerToPreviousStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-    }
 
     onPress = () => {
         if (this.props.onPress) {

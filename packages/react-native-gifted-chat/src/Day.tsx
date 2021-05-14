@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types'
 import React, {PureComponent} from 'react'
 import {StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle,} from 'react-native'
 import dayjs from 'dayjs'
 
 import Color from './Color'
 
-import {isSameDay, StylePropType} from './utils'
+import {isSameDay} from './utils'
 import {DATE_FORMAT} from './Constant'
 import {IMessage} from './Models'
 
@@ -38,7 +37,9 @@ export interface DayProps<TMessage extends IMessage> {
 
 export default class Day<TMessage extends IMessage = IMessage> extends PureComponent<DayProps<TMessage>> {
     static contextTypes = {
-        getLocale: PropTypes.func,
+        getLocale: function () {
+
+        },
     }
 
     static defaultProps = {
@@ -54,17 +55,6 @@ export default class Day<TMessage extends IMessage = IMessage> extends PureCompo
         dateFormat: DATE_FORMAT,
     }
 
-    static propTypes = {
-        currentMessage: PropTypes.object,
-        previousMessage: PropTypes.object,
-        nextMessage: PropTypes.object,
-        inverted: PropTypes.bool,
-        containerStyle: StylePropType,
-        wrapperStyle: StylePropType,
-        textStyle: StylePropType,
-        textProps: PropTypes.object,
-        dateFormat: PropTypes.string,
-    }
 
     render() {
         const {

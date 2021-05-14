@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types'
 import React, {ReactNode} from 'react'
 import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
 import GiftedAvatar from './GiftedAvatar'
-import {isSameDay, isSameUser, StylePropType} from './utils'
+import {isSameDay, isSameUser} from './utils'
 import {IMessage, LeftRightStyle, Omit, User} from './Models'
 
 const styles = {
@@ -72,25 +71,6 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
         },
     }
 
-    static propTypes = {
-        renderAvatarOnTop: PropTypes.bool,
-        showAvatarForEveryMessage: PropTypes.bool,
-        position: PropTypes.oneOf(['left', 'right']),
-        currentMessage: PropTypes.object,
-        previousMessage: PropTypes.object,
-        nextMessage: PropTypes.object,
-        onPressAvatar: PropTypes.func,
-        onLongPressAvatar: PropTypes.func,
-        renderAvatar: PropTypes.func,
-        containerStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-        imageStyle: PropTypes.shape({
-            left: StylePropType,
-            right: StylePropType,
-        }),
-    }
 
     renderAvatar() {
         if (this.props.renderAvatar) {

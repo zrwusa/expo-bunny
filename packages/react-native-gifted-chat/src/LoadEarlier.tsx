@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {ActivityIndicator, Platform, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native'
 import Color from './Color'
-import {StylePropType} from './utils'
 
 const styles = StyleSheet.create({
     container: {
@@ -58,18 +56,6 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
         activityIndicatorStyle: {},
         activityIndicatorColor: 'white',
         activityIndicatorSize: 'small',
-    }
-
-    static propTypes = {
-        onLoadEarlier: PropTypes.func,
-        isLoadingEarlier: PropTypes.bool,
-        label: PropTypes.string,
-        containerStyle: StylePropType,
-        wrapperStyle: StylePropType,
-        textStyle: StylePropType,
-        activityIndicatorStyle: StylePropType,
-        activityIndicatorColor: PropTypes.string,
-        activityIndicatorSize: PropTypes.string,
     }
 
     renderLoading() {

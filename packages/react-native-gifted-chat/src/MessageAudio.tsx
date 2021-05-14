@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage} from './Models'
-import {StylePropType} from './utils'
 import {AudioPlayer, AudioPlayerProps} from "../../../src/components/AudioPlayer";
 
 const styles = StyleSheet.create({
@@ -44,19 +42,6 @@ export default class MessageAudio<TMessage extends IMessage = IMessage> extends 
         onMessageReadyForDisplay: undefined,
         onMessageLoadError: undefined,
         isDebug: false,
-    }
-
-    static propTypes = {
-        currentMessage: PropTypes.object,
-        containerStyle: StylePropType,
-        audioStyle: StylePropType,
-        audioProps: PropTypes.object,
-        onMessageLoad: PropTypes.func,
-        onMessageLoadStart: PropTypes.func,
-        onMessageLoadEnd: PropTypes.func,
-        onMessageReadyForDisplay: PropTypes.func,
-        onMessageLoadError: PropTypes.func,
-        isDebug: PropTypes.bool
     }
 
     render() {

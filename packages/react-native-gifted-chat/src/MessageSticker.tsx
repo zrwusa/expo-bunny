@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage} from './Models'
-import {StylePropType} from './utils'
 
 const styles = StyleSheet.create({
     container: {},
@@ -49,19 +47,6 @@ export default class MessageSticker<TMessage extends IMessage = IMessage> extend
         onMessageReadyForDisplay: undefined,
         onMessageLoadError: undefined,
         isDebug: false,
-    }
-
-    static propTypes = {
-        currentMessage: PropTypes.object,
-        containerStyle: StylePropType,
-        stickerStyle: StylePropType,
-        stickerProps: PropTypes.object,
-        onMessageLoad: PropTypes.func,
-        onMessageLoadStart: PropTypes.func,
-        onMessageLoadEnd: PropTypes.func,
-        onMessageReadyForDisplay: PropTypes.func,
-        onMessageLoadError: PropTypes.func,
-        isDebug: PropTypes.bool,
     }
 
     render() {

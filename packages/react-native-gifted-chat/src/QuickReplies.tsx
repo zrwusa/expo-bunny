@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle,} from 'react-native'
 import {IMessage, Reply} from './Models'
 import Color from './Color'
-import {StylePropType, warning} from './utils'
+import {warning} from './utils'
 
 const styles = StyleSheet.create({
     container: {
@@ -70,16 +69,6 @@ export default class QuickReplies extends Component<QuickRepliesProps,
         keepReplies: false,
         renderQuickReplySend: undefined,
         quickReplyStyle: undefined,
-    }
-
-    static propTypes = {
-        currentMessage: PropTypes.object.isRequired,
-        onQuickReply: PropTypes.func,
-        color: PropTypes.string,
-        sendText: PropTypes.string,
-        keepReplies: PropTypes.bool,
-        renderQuickReplySend: PropTypes.func,
-        quickReplyStyle: StylePropType,
     }
 
     state = {

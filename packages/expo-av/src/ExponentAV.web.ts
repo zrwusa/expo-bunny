@@ -1,3 +1,4 @@
+// TODO phone webkit browsers do not support MediaRecorder
 import {SyntheticPlatformEmitter} from '@unimodules/core';
 import {PermissionResponse, PermissionStatus} from 'unimodules-permissions-interface';
 import {AVPlaybackNativeSource, AVPlaybackStatus, AVPlaybackStatusToSet} from './AV';
