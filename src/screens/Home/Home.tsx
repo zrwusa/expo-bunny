@@ -50,6 +50,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     <InlineJump type="LINK" iconName="heart" text={st(`demoDating`)} to="/demo-dating/home" iconSize={wp(20)}/>
                     <Divider/>
+                    <InlineJump type="LINK" iconName="chat3" text={st(`chat`)} to="/demo-chat" iconSize={wp(18)}/>
+                    <Divider/>
                     <InlineJump type="LINK" iconName="layout7" text={st(`demoHealth`)} to="/demo-health/home"/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="bitcoin" text={st(`cryptoCurrency`)} to="/demo-crypto-currency/home"/>
@@ -129,8 +131,6 @@ function HomeScreen({navigation}: HomeScreenProps) {
                 </Card>
 
                 <Card titleMode="OUT" title={st(`others`)}>
-                    <InlineJump type="LINK" iconName="chat3" text={st(`chat`)} to="/demo-chat" iconSize={wp(18)}/>
-                    <Divider/>
                     <InlineJump type="LINK" iconName="map" text={st(`map`)} to="/demo-map" iconSize={wp(18)}/>
                 </Card>
                 <Card titleMode="OUT" title={st(`system`)}>

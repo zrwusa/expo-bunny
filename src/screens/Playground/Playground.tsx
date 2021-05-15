@@ -42,6 +42,9 @@ export function PlaygroundScreen() {
     }
     return (
         <View style={{flex: 1}}>
+            <View>
+                <View style={{width:100,height:100,backgroundColor:'blue',flexDirection:'row'}}></View>
+            </View>
             <View style={styles.container}>
                 <LinearGradientIcon name="leaf" colors={['#fff', '#0f0']} size={40}/>
             </View>

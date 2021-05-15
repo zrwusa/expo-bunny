@@ -10,6 +10,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         screen: {
             flex: 1,
             marginHorizontal: ms.sp.l,
+            marginVertical: ms.sp.m,
         }
     });
 }

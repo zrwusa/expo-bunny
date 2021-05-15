@@ -10,6 +10,9 @@ import {Row} from "../../../containers/Row";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../../providers/size-labor";
 import {useThemeLabor} from "../../../providers/theme-labor";
+import {Col} from "../../../containers";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
+import {Divider} from "../../../components/Divider";
 
 type ChatHomeRouteProp = RouteProp<DemoChatStackParam, 'ChatHome'>;
 type ChatHomeNavigationProp = StackNavigationProp<DemoChatStackParam, 'ChatHome'>;
@@ -21,6 +24,7 @@ export interface ChatHomeProps {
 
 export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     useFirebaseConnect([{path: 'chatRooms', queryParams: []}])
+    const {wp} = useBunnyKit()
     const chatRooms = useSelector((rootState: RootState) => rootState.firebaseState.ordered.chatRooms)
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
@@ -30,11 +34,18 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     }
 
     const renderItem = (item: { key: string, value: ChatRoom }) => {
-        return <Row paddingVertical="m">
+        return (
             <TouchableOpacity onPress={() => handleRoomPress(item.key)}>
-                <Text>{item.value.name}</Text>
+                <Row paddingVertical="xxl">
+                    <Col size={1}>
+                        <Text>{item.value.name}</Text>
+                    </Col>
+                    <Col size={3} style={{alignItems:'center'}}>
+                        <Text>{item.value.name}</Text>
+                    </Col>
+                </Row>
             </TouchableOpacity>
-        </Row>
+        )
     }
 
     return (
@@ -43,6 +54,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
                 data={chatRooms}
                 renderItem={({item}) => renderItem(item)}
                 keyExtractor={(item) => item.key}
+                ItemSeparatorComponent={()=><Divider/>}
             />
         </View>
     )

@@ -32,12 +32,33 @@ export const Row = function (props: RowProps) {
         xl: wp(12),
         xxl: wp(16)
     }
+
+    // const styleOBJ = StyleSheet.flatten<ViewStyle>(style)
+
+    // let flexGrow: FlexStyle['flexGrow'] = size;
+    // let flexShrink: FlexStyle['flexShrink'] = size;
+    // let flexBasis: FlexStyle['flexBasis'] = Platform.select<FlexStyle['flexBasis']>({
+    //     web:'auto',
+    //     ios:'auto',
+    //     android:'auto'
+    // });
+    //
+    // // Let the width take precedence over the flex layout
+    // if (styleOBJ && styleOBJ.height) {
+    //     flexBasis = 'auto'
+    //     flexGrow = 0
+    //     flexShrink = 0
+    // }
+    //
+    // flexGrow: flexGrow,
+    //     flexShrink: flexShrink,
+    //     flexBasis: flexBasis,
+
     const mergeStyle: StyleProp<ViewStyle> = [
         {
             flexDirection: 'row',
             flex: size,
             alignSelf: 'stretch',
-            // width: '100%',
             justifyContent: align,
             alignItems: 'center',
             paddingVertical: paddingVertical ? rowPaddingVertical[paddingVertical] : 0
