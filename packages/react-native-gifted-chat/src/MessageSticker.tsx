@@ -6,8 +6,8 @@ import {IMessage} from './Models'
 const styles = StyleSheet.create({
     container: {},
     sticker: {
-        width: 150,
-        height: 100,
+        width: 120,
+        height: 120,
         borderRadius: 13,
         margin: 3,
         resizeMode: 'cover',

@@ -83,9 +83,9 @@ export const linking = {
                     },
                     ChatRoom: {
                         name: 'ChatRoom',
-                        path: 'chat-rooms/:roomKey',
+                        path: 'chat-rooms/:conversationId',
                         parse: {
-                            roomKey: (roomKey: string) => `${roomKey}`,
+                            conversationId: (conversationId: string) => `${conversationId}`,
                         },
                     }
                 }

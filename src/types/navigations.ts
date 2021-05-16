@@ -17,6 +17,7 @@ import {BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
 import {DrawerNavigationOptions} from "@react-navigation/drawer";
 import {BottomTabNavigationConfig} from "@react-navigation/bottom-tabs/src/types";
 import {DrawerNavigationConfig} from "@react-navigation/drawer/src/types";
+import {UnionToIntersection} from "./utils";
 
 export type RootStackParam = {
     Home: undefined;
@@ -115,7 +116,7 @@ export type DemoDatingTabStackParam = {
 
 export type DemoChatStackParam = {
     ChatHome: undefined;
-    ChatRoom: { roomKey: string };
+    ChatRoom: { conversationId: string };
 };
 
 export type RouteBase = Route<string, object | undefined>
@@ -134,19 +135,7 @@ export type NavigationStackParamsUnion = RootStackParam
     | AuthTopStackParam
     | DemoChatStackParam
 
-export type NavigationStackParamsIntersection = RootStackParam
-    & DemoTabStackParam
-    & DemoDrawerStackParam
-    & DemoTabRNComponentsStackParam
-    & DemoNestedLv1StackParam
-    & DemoNestedLv2StackParam
-    & DemoCryptoCurrencyTabStackParam
-    & DemoModalStackParam
-    & DemoHealthTabStackParam
-    & DemoDatingTabStackParam
-    & DemoSocialMediaTabStackParam
-    & AuthTopStackParam
-    & DemoChatStackParam
+export type NavigationStackParamsIntersection = UnionToIntersection<NavigationStackParamsUnion>
 
 export type NavigationStacksUnion = typeof Stacks.RootStack
     | typeof Stacks.DemoNestedLv1Stack
@@ -162,19 +151,7 @@ export type NavigationStacksUnion = typeof Stacks.RootStack
     | typeof Stacks.AuthTopTabStack
     | typeof Stacks.DemoChatStack
 
-export type NavigationStacksIntersection = typeof Stacks.RootStack
-    & typeof Stacks.DemoNestedLv1Stack
-    & typeof Stacks.DemoNestedLv2Stack
-    & typeof Stacks.DemoTabStack
-    & typeof Stacks.DemoTabRNComponentsStack
-    & typeof Stacks.DemoCryptoCurrencyTabStack
-    & typeof Stacks.DemoDrawerStack
-    & typeof Stacks.DemoModalStack
-    & typeof Stacks.DemoHealthTabStack
-    & typeof Stacks.DemoDatingTabStack
-    & typeof Stacks.DemoSocialMediaTabStack
-    & typeof Stacks.AuthTopTabStack
-    & typeof Stacks.DemoChatStack
+export type NavigationStacksIntersection = UnionToIntersection<NavigationStacksUnion>
 
 
 export type NavigatorType = 'stack' | 'tab' | 'drawer' | 'top';

@@ -2,291 +2,141 @@ import {firebase} from "../firebase";
 
 const demoVideo = "https://raw.githubusercontent.com/zrwusa/assets/master/videos/big-buck-bunny.mp4";
 const demoAudio = "https://www.kozco.com/tech/LRMonoPhase4.wav";
-
-const chatMessagesDev = {
-    "78437f40-bbca-48a8-8fbd-e30a660bec65": {
-        "_id": "78437f40-bbca-48a8-8fbd-e30a660bec65",
-        "audio": demoAudio,
-        "createdAt": 1620726541122,
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "user": {
-            "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2",
-            "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
-            "name": "Pablo Rios"
-        }
-    },
-    "86fbff89-ee32-41cf-8133-a28c1131d1f8": {
-        "_id": "86fbff89-ee32-41cf-8133-a28c1131d1f8",
-        "createdAt": 1620727083967,
-        "image": "https://asset.kompas.com/crops/Y51dQ3fy_sACbi7JJnAj5KOkQfc=/0x0:960x640/750x500/data/photo/2021/01/10/5ffb167d0af9b.jpg",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "user": {
-            "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2",
-            "avatar": "",
-            "name": "defaultName"
-        }
-    },
-    "9211b9a5-9c7e-472b-b27a-049358c65852": {
-        "_id": "9211b9a5-9c7e-472b-b27a-049358c65852",
-        "createdAt": 1620726660536,
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "text": "This is a text",
-        "user": {
-            "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2",
-            "avatar": "",
-            "name": "defaultName"
-        }
-    },
-    "9e100c14-f821-47aa-b040-52c500790297": {
-        "_id": "9e100c14-f821-47aa-b040-52c500790297",
-        "audio": "",
-        "createdAt": 1620812496797,
-        "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "",
-        "type": "VIDEO",
-        "user": {
-            "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2",
-            "avatar": "",
-            "name": "defaultName"
-        },
-        "video": demoVideo
-    },
-    "e8d2ad0d-d823-4ef2-a651-675833d76f21": {
-        "_id": "e8d2ad0d-d823-4ef2-a651-675833d76f21",
-        "audio": demoAudio,
-        "createdAt": 1620813062008,
-        "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "",
-        "type": "AUDIO",
-        "user": {
-            "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2",
-            "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
-            "name": "Pablo Rios"
-        },
-        "video": ""
-    },
-    "f8952842-f38d-42f1-8e26-4285adccb3d5": {
-        "_id": "f8952842-f38d-42f1-8e26-4285adccb3d5",
-        "audio": demoAudio,
-        "createdAt": 1620813106371,
-        "image": "",
-        "pending": false,
-        "received": false,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "",
-        "type": "AUDIO",
-        "user": {
-            "_id": "tBINx8zZrcPrJnCP4sQV95pbFU73",
-            "avatar": "",
-            "name": "defaultName"
-        },
-        "video": ""
-    }
+const fromDate = (date: number | string | Date) => {
+    return firebase.firestore.Timestamp.fromDate(new Date(date))
 }
 
-
-const chatMessagesTest = {
-    "29f3d16e-0687-4cb4-9af6-6814a45accd7": {
-        "_id": "29f3d16e-0687-4cb4-9af6-6814a45accd7",
-        "audio": "",
-        "createdAt": 1620818998723,
+const chatMessagesDev = []
+const chatMessagesTest = [{
+    "_id": "chat-message-007",
+    "pending": false,
+    "text": "This is a e-mail test@gmail.com",
+    "sent": true,
+    "audio": "",
+    "video": "",
+    "createdAt": fromDate("2021-05-14T00:09:10.000Z"),
+    "image": "",
+    "user": {"name": "defaultName", "_id": "G39wPYnspoRacDCXXGcptuEJHky2", "avatar": ""},
+    "sticker": "",
+    "received": false,
+    "type": "MESSAGE",
+    "conversationId": "conversation-002"
+}, {
+    "_id": "chat-message-008",
+    "video": "",
+    "image": "",
+    "received": false,
+    "pending": false,
+    "audio": "",
+    "user": {"name": "defaultName", "_id": "G39wPYnspoRacDCXXGcptuEJHky2", "avatar": ""},
+    "sticker": "",
+    "text": "This is a phone +601162366666",
+    "type": "MESSAGE",
+    "createdAt": fromDate("2021-05-14T00:09:20.000Z"),
+    "sent": true,
+    "conversationId": "conversation-002"
+}, {
+    "_id": "chat-message-001",
+    "user": {
+        "name": "Pablo Rios",
+        "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
+        "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2"
+    },
+    "pending": false,
+    "createdAt": fromDate("2021-05-15T05:22:31.000Z"),
+    "audio": demoAudio,
+    "conversationId": "conversation-002",
+    "received": true,
+    "sent": true
+}, {
+    "_id": "chat-message-002",
+    "user": {"name": "defaultName", "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2", "avatar": ""},
+    "sent": true,
+    "image": "https://asset.kompas.com/crops/Y51dQ3fy_sACbi7JJnAj5KOkQfc=/0x0:960x640/750x500/data/photo/2021/01/10/5ffb167d0af9b.jpg",
+    "received": true,
+    "pending": false,
+    "createdAt": fromDate("2021-05-15T04:10:23.000Z"),
+    "conversationId": "conversation-002"
+}, {
+    "_id": "chat-message-005",
+    "text": "",
+    "audio": demoAudio,
+    "createdAt": fromDate("2021-05-15T01:09:09.000Z"),
+    "received": true,
+    "user": {
+        "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2",
+        "name": "Pablo Rios",
+        "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c"
+    },
+    "sticker": "",
+    "video": "",
+    "pending": false,
+    "type": "AUDIO",
+    "conversationId": "conversation-002",
+    "image": "",
+    "sent": true
+}, {
+    "_id": "chat-message-003",
+    "received": true,
+    "createdAt": fromDate("2021-05-15T00:56:09.000Z"),
+    "sent": true,
+    "pending": false,
+    "conversationId": "conversation-002",
+    "user": {"avatar": "", "name": "defaultName", "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2"},
+    "text": "This is a text"
+}, {
+    "_id": "chat-message-006",
+    "video": "",
+    "sticker": "",
+    "type": "AUDIO",
+    "createdAt": fromDate("2021-05-14T10:55:08.000Z"),
+    "image": "",
+    "conversationId": "conversation-002",
+    "audio": demoAudio,
+    "user": {"avatar": "", "name": "defaultName", "_id": "tBINx8zZrcPrJnCP4sQV95pbFU73"},
+    "pending": false,
+    "text": "",
+    "sent": true,
+    "received": false
+}, {
+    "_id": "chat-message-004",
+    "pending": false,
+    "sent": true,
+    "text": "",
+    "audio": "",
+    "image": "",
+    "user": {"avatar": "", "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2", "name": "defaultName"},
+    "createdAt": fromDate("2021-05-15T10:54:08.000Z"),
+    "conversationId": "conversation-002",
+    "sticker": "",
+    "video": demoVideo,
+    "type": "VIDEO",
+    "received": true
+},
+    {
+        "_id": "chat-message-009",
+        "user": {"name": "defaultName", "avatar": "", "_id": "G39wPYnspoRacDCXXGcptuEJHky2"},
+        "pending": false,
         "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "How about this afternoon",
-        "type": "MESSAGE",
-        "user": {
-            "_id": "tBINx8zZrcPrJnCP4sQV95pbFU73",
-            "avatar": "",
-            "name": "defaultName"
-        },
-        "video": ""
-    },
-    "66b49ff5-5134-426d-9d38-0bf22d7a0b58": {
-        "_id": "66b49ff5-5134-426d-9d38-0bf22d7a0b58",
-        "audio": "",
-        "createdAt": 1620819022563,
-        "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "How about this afternoon 👌",
-        "type": "MESSAGE",
-        "user": {
-            "_id": "tBINx8zZrcPrJnCP4sQV95pbFU73",
-            "avatar": "",
-            "name": "defaultName"
-        },
-        "video": ""
-    },
-    "70316c15-a5d8-4e38-bb0b-5f4a852bb101": {
-        "_id": "70316c15-a5d8-4e38-bb0b-5f4a852bb101",
-        "audio": "",
-        "createdAt": 1620819322586,
-        "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "I will go there tomorrow😀",
-        "type": "MESSAGE",
-        "user": {
-            "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2",
-            "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
-            "name": "Ruiwen Zeng"
-        },
-        "video": ""
-    },
-    "78437f40-bbca-48a8-8fbd-e30a660bec65": {
-        "_id": "78437f40-bbca-48a8-8fbd-e30a660bec65",
-        "audio": "https://www.kozco.com/tech/LRMonoPhase4.wav",
-        "createdAt": 1620726541122,
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "user": {
-            "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2",
-            "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
-            "name": "Pablo Rios"
-        }
-    },
-    "86fbff89-ee32-41cf-8133-a28c1131d1f8": {
-        "_id": "86fbff89-ee32-41cf-8133-a28c1131d1f8",
-        "createdAt": 1620727083967,
-        "image": "https://asset.kompas.com/crops/Y51dQ3fy_sACbi7JJnAj5KOkQfc=/0x0:960x640/750x500/data/photo/2021/01/10/5ffb167d0af9b.jpg",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "user": {
-            "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2",
-            "avatar": "",
-            "name": "defaultName"
-        }
-    },
-    "9211b9a5-9c7e-472b-b27a-049358c65852": {
-        "_id": "9211b9a5-9c7e-472b-b27a-049358c65852",
-        "createdAt": 1620726660536,
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "text": "This is a text",
-        "user": {
-            "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2",
-            "avatar": "",
-            "name": "defaultName"
-        }
-    },
-    "9e100c14-f821-47aa-b040-52c500790297": {
-        "_id": "9e100c14-f821-47aa-b040-52c500790297",
-        "audio": "",
-        "createdAt": 1620812496797,
-        "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "",
-        "type": "VIDEO",
-        "user": {
-            "_id": "64qQ5XaPLZeTsRqPdDAkjsWc9Hx2",
-            "avatar": "",
-            "name": "defaultName"
-        },
-        "video": "https://raw.githubusercontent.com/zrwusa/assets/master/videos/big-buck-bunny.mp4"
-    },
-    "e5f1fcad-739a-4060-ae1a-28c6a255d821": {
-        "_id": "e5f1fcad-739a-4060-ae1a-28c6a255d821",
-        "audio": "",
-        "createdAt": 1620819298786,
-        "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "Today I will be busy",
-        "type": "MESSAGE",
-        "user": {
-            "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2",
-            "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
-            "name": "Ruiwen Zeng"
-        },
-        "video": ""
-    },
-    "e8d2ad0d-d823-4ef2-a651-675833d76f21": {
-        "_id": "e8d2ad0d-d823-4ef2-a651-675833d76f21",
-        "audio": "https://www.kozco.com/tech/LRMonoPhase4.wav",
-        "createdAt": 1620813062008,
-        "image": "",
-        "pending": false,
-        "received": true,
-        "roomKey": "room_b",
-        "sent": true,
-        "sticker": "",
-        "text": "",
-        "user": {
-            "_id": "pnaJWwEpZLf0IlMZbScjh0wfDKP2",
-            "avatar": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
-            "name": "Ruiwen Zeng"
-        },
-        "video": ""
-    },
-    "f8952842-f38d-42f1-8e26-4285adccb3d5": {
-        "_id": "f8952842-f38d-42f1-8e26-4285adccb3d5",
-        "audio": "https://www.kozco.com/tech/LRMonoPhase4.wav",
-        "createdAt": 1620813106371,
-        "image": "",
-        "pending": true,
         "received": false,
-        "roomKey": "room_b",
-        "sent": false,
-        "sticker": "",
+        "audio": "",
+        "video": "",
         "text": "",
-        "type": "AUDIO",
-        "user": {
-            "_id": "tBINx8zZrcPrJnCP4sQV95pbFU73",
-            "avatar": "",
-            "name": "defaultName"
-        },
-        "video": ""
-    }
-}
+        "type": "STICKER_GIF",
+        "sent": true,
+        "conversationId": "conversation-002",
+        "sticker": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/ShaunTheSheep256%2FShaunTheSheep-256px-19.gif?alt=media&token=35de2bb7-d3f3-4e6e-b41f-c2d29409ff1c",
+        "createdAt": fromDate("2021-05-15T10:53:29.000Z"),
+    }]
 
 
 export const migrateChatMessages = async () => {
-    await firebase
-        .database()
-        .ref('chatMessages')
-        .set(chatMessagesDev);
+    for (const chatMessage of chatMessagesTest) {
+        await firebase
+            .firestore()
+            .collection('chatMessages')
+            .doc(chatMessage._id)
+            .set(chatMessage);
+    }
+
 }

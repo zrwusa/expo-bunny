@@ -5,18 +5,18 @@ import {useThemeLabor} from "../../providers/theme-labor";
 import {FlatList, Image, TouchableHighlight, TouchableOpacity, Vibration} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
-import {
-    migrateChatMessages,
-    migrateChatRooms,
-    migrateNearbyFilms,
-    migrateSocialMediaImages,
-    migrateSocialMediaVideos
-} from "../../firebase/migrations";
 import {useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {DraggableView} from "../../containers/DraggableView";
 import {uuidV4} from "../../utils";
+import {
+    migrateChatMessages,
+    migrateConversations,
+    migrateNearbyFilms,
+    migrateSocialMediaImages,
+    migrateSocialMediaVideos
+} from "../../firebase/migrations";
 
 
 export function PlaygroundScreen() {
@@ -27,8 +27,8 @@ export function PlaygroundScreen() {
         await migrateNearbyFilms();
         await migrateSocialMediaVideos();
         await migrateSocialMediaImages();
-        await migrateChatRooms();
         await migrateChatMessages();
+        await migrateConversations()
     }
 
     useFirestoreConnect([
@@ -43,7 +43,7 @@ export function PlaygroundScreen() {
     return (
         <View style={{flex: 1}}>
             <View>
-                <View style={{width:100,height:100,backgroundColor:'blue',flexDirection:'row'}}></View>
+                <View style={{width: 100, height: 100, backgroundColor: 'blue', flexDirection: 'row'}}></View>
             </View>
             <View style={styles.container}>
                 <LinearGradientIcon name="leaf" colors={['#fff', '#0f0']} size={40}/>

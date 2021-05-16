@@ -10,7 +10,8 @@
     "apiNeedLogin": "需要登录",
     "loginSuccess": "登录成功",
     "LogOutSuccess": "已退出登录",
-    "canceledRequest": "请求已取消"
+    "canceledRequest": "请求已取消",
+    "loadingData": "数据加载中..."
   },
   "dictionary": {
     "BTC": "比特币",

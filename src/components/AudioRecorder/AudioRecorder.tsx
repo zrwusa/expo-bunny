@@ -6,6 +6,7 @@ import {Platform, TouchableHighlight, Vibration} from "react-native";
 import {Audio} from "../../../packages/expo-av/src";
 import {uploadFileToFirebase} from "../../helpers";
 import {RECORDING_OPTIONS_PRESET_HIGH_QUALITY} from "../../../packages/expo-av/src/Audio/Recording";
+import {getStyles} from "./styles";
 
 export interface AudioRecorderProps {
     onValueChanged?: (uri: string) => void,
@@ -17,10 +18,11 @@ export interface AudioRecorderProps {
 
 export type AudioRecordingStatus = 'GETTING_PERMISSION' | 'STARTING' | 'STARTED' | 'RECORDING' | 'STOPPING' | 'STOPPED' | 'ERROR' | undefined ;
 export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged, uploadPath = '/', isDebug = false}: AudioRecorderProps) => {
-    const {sizeLabor, themeLabor, wp} = useBunnyKit()
+    const {sizeLabor, themeLabor, colors} = useBunnyKit()
     const [recording, setRecording] = useState<Audio.Recording>();
     const [status, setStatus] = useState<AudioRecordingStatus>('STOPPED')
 
+    const styles = getStyles(sizeLabor, themeLabor)
     useEffect(() => {
         onStatusChanged && onStatusChanged(status)
     }, [status])
@@ -87,12 +89,21 @@ export const AudioRecorder = ({onValueChanged, isUpload = false, onStatusChanged
                 break;
         }
     }
-
+    const [pressIn, setPressIn] = useState(false)
+    const _pressIn = async () => {
+        setPressIn(true)
+    }
     const _pressOut = async () => {
+        setPressIn(false)
         await stopRecording()
     }
 
-    return <TouchableHighlight onLongPress={_longPress} onPressOut={_pressOut} underlayColor="red">
-        <IcoMoon name="mic1" style={{paddingBottom: wp(15), paddingHorizontal: wp(10)}}/>
+    return <TouchableHighlight
+        onPressIn={_pressIn}
+        onLongPress={_longPress}
+        onPressOut={_pressOut}
+        underlayColor={colors.transparent}
+    >
+        <IcoMoon name="mic1" style={[styles.micIcon, pressIn && styles.active]}/>
     </TouchableHighlight>
 }

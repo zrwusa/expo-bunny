@@ -14,8 +14,9 @@ import {Masonry} from "../../../components/Masonry/Masonry";
 import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useSelector} from "react-redux";
-import {isLoaded, useFirebase} from "react-redux-firebase";
+import {isLoaded, useFirebase, useFirestoreConnect} from "react-redux-firebase";
 import config from "../../../config";
+import {Preparing} from "../../../components/Preparing";
 
 type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSearch'>;
 type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
@@ -30,21 +31,25 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
     const getSocialMediaImages = async () => {
         await firebase.watchEvent('value', 'socialMediaImages', 'socialMediaImages')
     }
-    const socialMediaImages = useSelector((rootState: RootState) => rootState.firebaseState.ordered.socialMediaImages)
+    useFirestoreConnect([
+        {collection: 'socialMediaImages'}
+    ])
+    const socialMediaImages = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaImages)
+
     const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.SocialMediaSearch');
     const sizeLabor = useSizeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     const [MasonryData, setMasonryData] = useState<MasonryDatum<SocialMediaImageDatum>[]>([])
 
     const memoizedSocialMediaImages = useMemo(() => {
         if (!socialMediaImages) {
             return []
         }
-        return socialMediaImages.map(item => item.value)
+        return socialMediaImages.map(item => item)
     }, [socialMediaImages])
 
     useEffect(() => {
@@ -62,10 +67,7 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
         let manyBricks: SocialMediaImageDatum[] = memoizedSocialMediaImages
 
         for (let i = 0; i < 1; i++) {
-            manyBricks = manyBricks.concat(memoizedSocialMediaImages.map(brick => {
-                brick.id = uuid4()
-                return brick
-            }))
+            manyBricks = manyBricks.concat(memoizedSocialMediaImages)
         }
 
         let i = 0;
@@ -105,9 +107,6 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
         for (let i = 0; i < 1; i++) {
             manyBricks = manyBricks.concat(memoizedSocialMediaImages.filter((brick) => {
                 return brick.text.includes(key)
-            }).map(brick => {
-                brick.id = uuid4()
-                return brick
             }))
         }
 
@@ -146,7 +145,7 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
                                        {useNativeDriver: config.useNativeDriver},
                                    )}
                 />
-                : null}
+                : <Preparing/>}
         </SafeAreaView>
     );
 }

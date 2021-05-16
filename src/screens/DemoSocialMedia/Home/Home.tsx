@@ -4,38 +4,40 @@ import {FlatList, Platform, RefreshControl, SafeAreaView} from "react-native";
 import {IncrementId} from "../../../utils";
 import {RootState, SocialMediaMainDatum} from "../../../types";
 import {SocialMediaVideoCard} from "../../../components/SocialMediaVideoCard";
-import {isLoaded, useFirebase} from "react-redux-firebase";
+import {isLoaded, useFirebase, useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
 import {Preparing} from "../../../components/Preparing";
 
 export function SocialMediaHomeScreen() {
-    // useFirebaseConnect([{path: 'socialMediaVideos'}])
     const firebase = useFirebase()
-    const socialMediaVideos = useSelector((rootState: RootState) => rootState.firebaseState.ordered.socialMediaVideos)
+    useFirestoreConnect([
+        {collection: 'socialMediaVideos'}
+    ])
+    const socialMediaVideos = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaVideos)
     const [mannyCardData, setMannyCardData] = useState<SocialMediaMainDatum[]>([])
     const [refreshing, setRefreshing] = useState(false);
 
-    const getSocialMediaVideos = async () => {
-        await firebase.watchEvent('value', 'socialMediaVideos', 'socialMediaVideos')
-    }
+    // const getSocialMediaVideos = async () => {
+    //     await firebase.watchEvent('value', 'socialMediaVideos', 'socialMediaVideos')
+    // }
 
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
-        await getSocialMediaVideos()
+        // await getSocialMediaVideos()
         return setRefreshing(false)
     }, []);
 
     const memoizedSocialMediaVideos = useMemo(() => {
         if (socialMediaVideos && socialMediaVideos.length > 0) {
             return socialMediaVideos.map((item) => {
-                return item.value
+                return item
             })
         }
         return []
     }, [socialMediaVideos])
 
     useEffect(() => {
-        getSocialMediaVideos().then()
+        // getSocialMediaVideos().then()
     }, [])
 
     useEffect(() => {
@@ -87,7 +89,7 @@ export function SocialMediaHomeScreen() {
                                     console.log('onEndReached')
                                 }}
                     />
-                    : <Preparing text="Loading Social Media Data"/>
+                    : <Preparing/>
             }
         </SafeAreaView>
     );

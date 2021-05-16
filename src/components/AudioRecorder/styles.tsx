@@ -10,5 +10,15 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {shadow} = sharedStylesFlatten;
     const {theme} = themeLabor
     const {colors} = theme
-    return StyleSheet.create({});
+    return StyleSheet.create({
+        micIcon: {
+            paddingTop: wp(10),
+            paddingBottom: wp(15),
+            paddingHorizontal: wp(15),
+            borderRadius: ms.br.m
+        },
+        active: {
+            backgroundColor: colors.accent
+        }
+    });
 }

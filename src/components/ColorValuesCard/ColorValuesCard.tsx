@@ -19,7 +19,14 @@ export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | Co
                 <Text>Hex</Text>
             </Col>
             <Col size={2}>
-                <CopyableText>{item.Hex}</CopyableText>
+                <Row>
+                    <Col>
+                        <CopyableText>{item.Hex}</CopyableText>
+                    </Col>
+                    <Col>
+                        <CopyableText>{item.Hex.toLowerCase()}</CopyableText>
+                    </Col>
+                </Row>
             </Col>
             <Col size={1}>
                 <View style={[styles.colorPanel, {backgroundColor: item.Hex}]}/>

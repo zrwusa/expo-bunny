@@ -68,7 +68,6 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
             isDebug,
             messages,
         } = this.props
-        console.log(messages)
         return (
             <View style={[styles.container, containerStyle]}>
                 <LightBox

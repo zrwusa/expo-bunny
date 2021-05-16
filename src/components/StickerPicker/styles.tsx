@@ -10,5 +10,15 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {shadow} = sharedStylesFlatten;
     const {theme} = themeLabor
     const {colors} = theme
-    return StyleSheet.create({});
+    return StyleSheet.create({
+        panel: {
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+        },
+        stickerImage: {
+            width: wp(60),
+            margin: wp(7),
+            height: wp(60)
+        }
+    });
 }

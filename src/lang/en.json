@@ -10,7 +10,8 @@
     "apiNeedLogin": "Need to sign in",
     "loginSuccess": "Sign in success",
     "LogOutSuccess": "Sign out success",
-    "canceledRequest": "Canceled request"
+    "canceledRequest": "Canceled request",
+    "loadingData": "Loading Data"
   },
   "dictionary": {
     "BTC": "BTC",

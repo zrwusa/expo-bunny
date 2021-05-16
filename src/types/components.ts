@@ -64,3 +64,8 @@ export interface BunnyChatMessage {
     quickReplies?: QuickReplies;
 }
 
+export type Sticker = {
+    url: string,
+    id: string
+}
+

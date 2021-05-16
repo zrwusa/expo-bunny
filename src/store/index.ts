@@ -13,8 +13,8 @@ import {
 import {sagasGenerator} from "./sagas"
 import {firebase} from "../firebase/firebase";
 import {firebaseReducer} from "react-redux-firebase";
-import {createFirestoreInstance, firestoreReducer} from "redux-firestore"
 import {RootState} from "../types";
+import {createFirestoreInstance, firestoreReducer} from "redux-firestore";
 
 const rootReducer = combineReducers<RootState>({
     demoHelloState: demoHelloStateReducer,
@@ -29,9 +29,12 @@ const rootReducer = combineReducers<RootState>({
 });
 
 const sagaMiddleware = createSagaMiddleware()
+
+
+// you might choose one redux middleware which you prefer,
+// just delete the demos you not prefer,or just use them all
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-// you might choose one redux middleware which you prefer,just delete the demos you not prefer
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMiddleware));
 sagaMiddleware.run(sagasGenerator);
 // sagaMiddleware.run(saveQuickAlertSettingsSaga);

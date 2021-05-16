@@ -77,9 +77,8 @@ export interface UserProfile {
 export type IMMessageType = 'MESSAGE' | 'IMAGE' | 'STICKER_GIF' | 'AUDIO' | 'VIDEO' | ''
 
 export interface IMMessage extends IMessage {
-    roomKey: string,
+    conversationId: string,
     type: IMMessageType,
-    sticker?: string
 }
 
 export interface ChatRoom {
@@ -93,12 +92,10 @@ export interface UserPhoto extends ImageURISource {
 // create schema for the DB
 export interface SchemaRealtimeDB {
     todoList: SagaTodo,
-    // demoNearbyFilms: NearbyFilm,
     // region: Region,
-    socialMediaVideos: SocialMediaMainDatum,
-    socialMediaImages: SocialMediaImageDatum,
-    chatRooms: ChatRoom,
-    chatMessages: IMMessage,
+
+    // chatRooms: ChatRoom,
+    // chatMessages: IMMessage,
     usersWithPhotos: { [key: string]: UserPhoto[] },
 
     // [name: string]: any
@@ -109,7 +106,48 @@ export interface DemoFirestore {
     keywords: string
 }
 
+export interface Conversation {
+    _id?: string,
+    icon: string,
+    name: string,
+    creatorId: string,
+    users: string[],
+    channelId: string,
+    createdAt: number,
+    updatedAt: number,
+    deletedAt?: number
+}
+
+export interface StoredUser {
+    phone: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    middleName: string,
+    isActive: boolean,
+    isReported: boolean,
+    isBlocked: boolean,
+    preferences: string,
+    createdAt: number,
+    updatedAt: number
+}
+
+export interface UserContact {
+    contactId: string,
+    firstName: string,
+    lastName: string,
+    createdAt: number,
+    updatedAt: number
+}
+
 export interface SchemaFirestore {
     demoFirestore: DemoFirestore,
+    chatMessages: IMMessage,
+    conversations: Conversation,
+    storedUsers: StoredUser,
+    userContacts: UserContact,
+    demoNearbyFilms: NearbyFilm,
+    socialMediaVideos: SocialMediaMainDatum,
+    socialMediaImages: SocialMediaImageDatum,
     usersWithPhotos: { [key: string]: { [key: string]: ImageURISource } }
 }

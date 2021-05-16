@@ -18,9 +18,15 @@
     "resolveJsonModule": true,
     "strict": true,
     "typeRoots": [
-      "src/_types",
+      "src/types/patches",
       "node_modules/@types"
     ],
+    "baseUrl": "./",
+    "paths": {
+      "redux-firestore": [
+        "src/types/overrides/redux-firestore"
+      ]
+    },
     "target": "es5",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
