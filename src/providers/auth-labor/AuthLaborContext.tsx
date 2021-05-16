@@ -188,7 +188,7 @@ const dummyLogin = async () => {
     return result
 }
 
-const googleLogin = async (isFirebase: boolean) => {
+const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => {
     const googleResponse = await Google.logInAsync({
         iosClientId: `${IOS_CLIENT_ID_FOR_EXPO}`,
         androidClientId: `${ANDROID_CLIENT_ID_FOR_EXPO}`,
@@ -212,6 +212,9 @@ const googleLogin = async (isFirebase: boolean) => {
                 await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
                 const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
                 const userCredential = await firebase.auth().signInWithCredential(credential);
+                if (userCredential && isStoreUser) {
+                    await storeUserInfo(userCredential)
+                }
                 result = await firebaseLoginResult(userCredential)
             } else {
                 result = blSuccess({
@@ -250,7 +253,7 @@ const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential)
     }
 }
 
-const facebookLogin = async (isFirebase: boolean) => {
+const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => {
     let result: BLResult;
     await Facebook.initializeAsync({
         appId: FACEBOOK_APP_ID,
@@ -268,7 +271,11 @@ const facebookLogin = async (isFirebase: boolean) => {
             const {token} = facebookResponse;
             if (isFirebase) {
                 const credential = firebase.auth.FacebookAuthProvider.credential(token);
+
                 const userCredential = await firebase.auth().signInWithCredential(credential)
+                if (userCredential && isStoreUser) {
+                    await storeUserInfo(userCredential)
+                }
                 result = await firebaseLoginResult(userCredential)
             } else {
                 // todo accessToken refreshToken not correct
@@ -294,41 +301,51 @@ const facebookLogin = async (isFirebase: boolean) => {
 
 // firebase.auth().onIdTokenChanged(token => {})
 
-const firebaseEmailLogin = async (email: string, password: string) => {
+const firebaseEmailLogin = async (email: string, password: string, isStoreUser: boolean = true) => {
     const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password)
+    if (userCredential && isStoreUser) {
+        await storeUserInfo(userCredential)
+    }
     const result = await firebaseLoginResult(userCredential)
-
-    // const uid = response.user.uid
-    // const usersRef = firebase.firestore().collection('users')
-    //
-    // const firestoreDocument = await usersRef.doc(uid).get()
-    // if (!firestoreDocument.exists) {
-    //     result = blError(EBLMsg.FIREBASE_EMAIL_LOGIN_NOT_EXIST_USER)
-    //     await triggerLogin(result)
-    //     return result
-    // }
-    // const user = firestoreDocument.data();
-
-    // const xxx = firebase.auth().currentUser?.toJSON() as firebase.User
 
     await triggerLogin(result)
     return result
 }
+const storeUserInfo = async (userCredential: firebase.auth.UserCredential) => {
+    const user = userCredential.user?.toJSON() as firebase.UserInfo
+    if (user) {
+        const {
+            displayName,
+            email,
+            phoneNumber,
+            photoURL,
+            providerId,
+            uid
+        } = user
+        const data = {
+            displayName: displayName || '',
+            email: email || '',
+            phoneNumber: phoneNumber || '',
+            photoURL: photoURL || '',
+            providerId: providerId || '',
+            uid: uid || ''
+        };
+        const usersRef = firebase.firestore().collection('users')
+        await usersRef.doc(uid).set(data);
+    } else {
 
-const firebaseEmailSignUp = async (email: string, password: string) => {
+    }
+}
+const firebaseEmailSignUp = async (email: string, password: string, isStoreUser: boolean = true) => {
     const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password)
 
-    // const uid = stringifyRes.user.uid
-    // const data = {
-    //     id: uid,
-    //     email: email,
-    // };
-    // const usersRef = firebase.firestore().collection('users')
-    // await usersRef.doc(uid).set(data);
+    if (userCredential && isStoreUser) {
+        await storeUserInfo(userCredential)
+    }
+
     const result = await firebaseLoginResult(userCredential)
     await triggerLogin(result)
     return result
-
 }
 
 const firebaseSendOTP = async (phoneInfoOptions: firebase.auth.PhoneInfoOptions | string,
@@ -342,13 +359,15 @@ const firebaseSendOTP = async (phoneInfoOptions: firebase.auth.PhoneInfoOptions 
     return blSuccess({verificationId})
 }
 
-const firebaseConfirmOTP = async (verificationId: string, verificationCode: string) => {
+const firebaseConfirmOTP = async (verificationId: string, verificationCode: string, isStoreUser: boolean = true) => {
     const credential = firebase.auth.PhoneAuthProvider.credential(
         verificationId,
         verificationCode
     );
     const userCredential = await firebase.auth().signInWithCredential(credential)
-
+    if (userCredential && isStoreUser) {
+        await storeUserInfo(userCredential)
+    }
     const result = await firebaseLoginResult(userCredential)
     await triggerLogin(result)
     return result
@@ -375,7 +394,6 @@ const removePersistenceAuth = async (authParam?: PersistenceAuthParamKey[]) => {
     await AsyncStorage.removeItem(userPersistenceKey)
     return blSuccess(true)
 }
-
 
 const getPersistenceAuth = async () => {
     const accessToken = await AsyncStorage.getItem(accessTokenPersistenceKey)
@@ -405,14 +423,12 @@ const checkTokenExp = () => {
     }, 1000)
 }
 
-
 const checkIsLogin = async () => {
     const {accessToken} = await getPersistenceAuth()
     let isLogin = !!accessToken;
     EventRegister.emit('checkIsLogin', blSuccess(isLogin))
     return isLogin;
 }
-
 
 export const authLaborContext: AuthLaborContextType = {
     authFunctions: {

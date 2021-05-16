@@ -71,7 +71,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                             <TextButton style={styles.vectorButton} onPress={async () => {
                                 Keyboard.dismiss()
                                 try {
-                                    const result = await authFunctions.facebookLogin(true)
+                                    const result = await authFunctions.facebookLogin(true, true)
                                     if (result.success) {
                                         navToReference(route, navigation)
                                     } else {
@@ -89,7 +89,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                             <TextButton style={styles.vectorButton} onPress={async () => {
                                 Keyboard.dismiss()
                                 try {
-                                    const result = await authFunctions.googleLogin(true)
+                                    const result = await authFunctions.googleLogin(true, true)
                                     if (result.success) {
                                         navToReference(route, navigation)
                                     } else {

@@ -46,7 +46,7 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
     const firebaseEmailSignUp = async () => {
         Keyboard.dismiss()
         try {
-            const result = await authFunctions.firebaseEmailSignUp(username, password)
+            const result = await authFunctions.firebaseEmailSignUp(username, password, true)
             if (result.success) {
                 navToReference(route, navigation)
             } else {

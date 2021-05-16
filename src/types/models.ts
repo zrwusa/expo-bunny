@@ -3,6 +3,7 @@ import {ImageSourcePropType, ImageURISource} from "react-native";
 import {AVPlaybackSource} from "../../packages/expo-av/src/AV";
 import {SagaTodo} from "./states";
 import {IMessage} from "../../packages/react-native-gifted-chat/src";
+import firebase from "firebase";
 
 export type DemoEmployee = {
     _id: number,
@@ -93,11 +94,9 @@ export interface UserPhoto extends ImageURISource {
 export interface SchemaRealtimeDB {
     todoList: SagaTodo,
     // region: Region,
-
     // chatRooms: ChatRoom,
     // chatMessages: IMMessage,
-    usersWithPhotos: { [key: string]: UserPhoto[] },
-
+    // usersWithPhotos: { [key: string]: UserPhoto[] },
     // [name: string]: any
 }
 
@@ -143,11 +142,13 @@ export interface UserContact {
 export interface SchemaFirestore {
     demoFirestore: DemoFirestore,
     chatMessages: IMMessage,
+    currentUserConversationsMessages: IMMessage,
     conversations: Conversation,
     storedUsers: StoredUser,
     userContacts: UserContact,
     demoNearbyFilms: NearbyFilm,
     socialMediaVideos: SocialMediaMainDatum,
     socialMediaImages: SocialMediaImageDatum,
+    users: firebase.UserInfo,
     usersWithPhotos: { [key: string]: { [key: string]: ImageURISource } }
 }

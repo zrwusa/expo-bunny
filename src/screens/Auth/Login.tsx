@@ -50,7 +50,7 @@ export function LoginScreen({route, navigation}: LoginProps) {
         Keyboard.dismiss()
         // todo can not use await to catch error,wait for Firebase to resolve this bug
         try {
-            const result = await authFunctions.firebaseEmailLogin(email, password)
+            const result = await authFunctions.firebaseEmailLogin(email, password, true)
             if (result.success) {
                 navToReference(route, navigation)
             } else {

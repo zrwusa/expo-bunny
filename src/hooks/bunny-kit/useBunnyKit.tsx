@@ -11,10 +11,11 @@ export const useBunnyKit = () => {
     const themeLabor = useThemeLabor();
     const authLabor = useAuthLabor();
     const {wp, hp} = sizeLabor.designsBasedOn.iphoneX;
+    const {ms} = sizeLabor
     const {t} = useTranslation();
     const {theme} = themeLabor;
     const {colors} = theme;
     const {authResult, authFunctions} = authLabor;
     const {user} = authResult;
-    return {sizeLabor, themeLabor, authLabor, wp, hp, t, colors, user, authFunctions}
+    return {sizeLabor, themeLabor, authLabor, wp, hp, ms, t, colors, user, authFunctions}
 };

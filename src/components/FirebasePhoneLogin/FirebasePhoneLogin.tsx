@@ -74,7 +74,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
         setConfirmError('');
         setConfirmInProgress(true);
         try {
-            const result = await authFunctions.firebaseConfirmOTP(verificationId, verificationCode)
+            const result = await authFunctions.firebaseConfirmOTP(verificationId, verificationCode, true)
             if (result.success) {
                 setConfirmInProgress(false);
                 setVerificationId('');
