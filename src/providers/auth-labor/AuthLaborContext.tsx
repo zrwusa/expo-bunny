@@ -8,6 +8,7 @@ import {
     PersistenceAuthParam,
     PersistenceAuthParamKey,
     SignUpParams,
+    StoredUser,
     TriggerType,
     User,
 } from "../../types";
@@ -17,7 +18,7 @@ import {AxiosResponse} from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Google from "expo-google-app-auth";
 import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, FACEBOOK_APP_ID, IOS_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO} from "@env";
-import _ from "lodash";
+import _, {identity, pickBy} from "lodash";
 import {blError, blSuccess} from "../../helpers";
 import {EventRegister} from "react-native-event-listeners";
 import {firebase} from "../../firebase/firebase";
@@ -212,10 +213,7 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
                 await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
                 const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
                 const userCredential = await firebase.auth().signInWithCredential(credential);
-                if (userCredential && isStoreUser) {
-                    await storeUserInfo(userCredential)
-                }
-                result = await firebaseLoginResult(userCredential)
+                result = await firebaseLoginResult(userCredential, isStoreUser)
             } else {
                 result = blSuccess({
                     accessToken,
@@ -232,7 +230,7 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
     return result
 };
 
-const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential) => {
+const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential, isStoreUser: boolean = true) => {
     if (!userCredential || !userCredential.user) {
         return blError(EBLMsg.FIREBASE_INVALID_USER_CREDENTIAL)
     }
@@ -242,11 +240,17 @@ const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential)
         idToken = await currentUser.getIdToken()
         // todo in web platform firebase return value confused, mess fields need toJSON
         user = currentUser.toJSON() as firebase.User
+
+        let storedUser: StoredUser | undefined
+        if (isStoreUser) {
+            storedUser = await storeUserInfo(userCredential)
+        }
+
         return blSuccess({
             accessToken: idToken,
             refreshToken: user.refreshToken,
             // accessTokenExp: user.expirationTime.toString(),
-            user: {firebaseUser: user},
+            user: {firebaseUser: user, storedUser},
         })
     } else {
         return blError(EBLMsg.FIREBASE_INVALID_CURRENT_USER)
@@ -273,10 +277,7 @@ const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) =
                 const credential = firebase.auth.FacebookAuthProvider.credential(token);
 
                 const userCredential = await firebase.auth().signInWithCredential(credential)
-                if (userCredential && isStoreUser) {
-                    await storeUserInfo(userCredential)
-                }
-                result = await firebaseLoginResult(userCredential)
+                result = await firebaseLoginResult(userCredential, isStoreUser)
             } else {
                 // todo accessToken refreshToken not correct
                 // Get the user's name using Facebook's Graph API
@@ -303,14 +304,12 @@ const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) =
 
 const firebaseEmailLogin = async (email: string, password: string, isStoreUser: boolean = true) => {
     const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password)
-    if (userCredential && isStoreUser) {
-        await storeUserInfo(userCredential)
-    }
-    const result = await firebaseLoginResult(userCredential)
+    const result = await firebaseLoginResult(userCredential, isStoreUser)
 
     await triggerLogin(result)
     return result
 }
+
 const storeUserInfo = async (userCredential: firebase.auth.UserCredential) => {
     const user = userCredential.user?.toJSON() as firebase.UserInfo
     if (user) {
@@ -322,28 +321,29 @@ const storeUserInfo = async (userCredential: firebase.auth.UserCredential) => {
             providerId,
             uid
         } = user
-        const data = {
-            displayName: displayName || '',
-            email: email || '',
-            phoneNumber: phoneNumber || '',
-            photoURL: photoURL || '',
-            providerId: providerId || '',
-            uid: uid || ''
-        };
-        const usersRef = firebase.firestore().collection('users')
-        await usersRef.doc(uid).set(data);
-    } else {
 
+        const extractedUser = {
+            displayName,
+            email,
+            phoneNumber,
+            photoURL,
+            providerId,
+            uid
+        };
+
+        const cleanedExtractedUser = pickBy(extractedUser, identity)
+
+        const usersRef = firebase.firestore().collection('users')
+        await usersRef.doc(uid).set(cleanedExtractedUser, {merge: true});
+        const userInfoSnapshot = await usersRef.doc(uid).get({source: 'server'})
+        return userInfoSnapshot.data() as StoredUser
+    } else {
+        return
     }
 }
 const firebaseEmailSignUp = async (email: string, password: string, isStoreUser: boolean = true) => {
     const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password)
-
-    if (userCredential && isStoreUser) {
-        await storeUserInfo(userCredential)
-    }
-
-    const result = await firebaseLoginResult(userCredential)
+    const result = await firebaseLoginResult(userCredential, isStoreUser)
     await triggerLogin(result)
     return result
 }
@@ -365,10 +365,7 @@ const firebaseConfirmOTP = async (verificationId: string, verificationCode: stri
         verificationCode
     );
     const userCredential = await firebase.auth().signInWithCredential(credential)
-    if (userCredential && isStoreUser) {
-        await storeUserInfo(userCredential)
-    }
-    const result = await firebaseLoginResult(userCredential)
+    const result = await firebaseLoginResult(userCredential, isStoreUser)
     await triggerLogin(result)
     return result
 }

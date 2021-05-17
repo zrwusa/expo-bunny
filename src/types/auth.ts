@@ -25,11 +25,24 @@ export type FacebookUser = {
     name: string
 }
 
+export interface StoredUser extends firebase.UserInfo {
+    firstName: string,
+    lastName: string,
+    middleName: string,
+    isActive: boolean,
+    isReported: boolean,
+    isBlocked: boolean,
+    preferences: string,
+    createdAt: number,
+    updatedAt: number
+}
+
 export type User = {
     firebaseUser?: FirebaseUser,
     bunnyUser?: BunnyUser,
     googleUser?: GoogleUser,
-    facebookUser?: FacebookUser
+    facebookUser?: FacebookUser,
+    storedUser?: StoredUser
 }
 
 export type AccessToken = string | null;

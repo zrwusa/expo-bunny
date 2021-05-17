@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Text, TextButton, View} from "../../components/UI";
 import {LinearGradientIcon} from "../../components/LinearGradientIcon";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -15,20 +15,31 @@ import {
     migrateConversations,
     migrateNearbyFilms,
     migrateSocialMediaImages,
-    migrateSocialMediaVideos
+    migrateSocialMediaVideos,
+    migrateUsers
 } from "../../firebase/migrations";
+import {ProgressBar} from "react-native-paper";
 
 
 export function PlaygroundScreen() {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
+    const [progress, setProgress] = useState(0);
     const handleMigrate = async () => {
+        setProgress(0);
+        await migrateUsers();
+        setProgress(0.1);
         await migrateNearbyFilms();
+        setProgress(0.2);
         await migrateSocialMediaVideos();
+        setProgress(0.3);
         await migrateSocialMediaImages();
+        setProgress(0.4);
         await migrateChatMessages();
+        setProgress(0.6);
         await migrateConversations()
+        setProgress(1);
     }
 
     useFirestoreConnect([
@@ -43,7 +54,7 @@ export function PlaygroundScreen() {
     return (
         <View style={{flex: 1}}>
             <View>
-                <View style={{width: 100, height: 100, backgroundColor: 'blue', flexDirection: 'row'}}></View>
+                <View style={{width: 100, height: 100, backgroundColor: 'blue', flexDirection: 'row'}}/>
             </View>
             <View style={styles.container}>
                 <LinearGradientIcon name="leaf" colors={['#fff', '#0f0']} size={40}/>
@@ -51,6 +62,7 @@ export function PlaygroundScreen() {
             <TextButton onPress={handleMigrate}>
                 <Text>migrate</Text>
             </TextButton>
+            <ProgressBar progress={progress}/>
 
             <View>
                 {

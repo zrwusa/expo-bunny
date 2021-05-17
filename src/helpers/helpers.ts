@@ -17,7 +17,7 @@ import {EBLMsg} from "../constants";
 import {AuthAPIError, BunnyAPIError, NomicsAPIError, uuidV4} from "../utils";
 import configORG from "../config";
 import _ from "lodash";
-import icoMoonSelection from "../assets/fonts/icomoon-cus/selection.json"
+import icoMoonSelection from "../assets/fonts/icomoon/selection.json"
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {firebase} from "../firebase/firebase";
@@ -186,7 +186,7 @@ export const blError = (blMsg: string, shouldShow?: boolean): BLResult => {
     }
 }
 
-export const blSuccess = (data: any, message?: string, shouldShow?: boolean): BLResult => {
+export const blSuccess = <TData extends any>(data: TData, message?: string, shouldShow?: boolean): BLResult => {
     const shouldShowParam = shouldShow !== undefined ? shouldShow : true
     return {
         id: uuidV4(),
@@ -338,8 +338,17 @@ export const uploadFileToFirebase = async function (uri: string, path?: string) 
     return await snapshot.ref.getDownloadURL();
 }
 
-export const removeImageFromFirebase = async function (uri: string) {
-    return await firebase.storage().refFromURL(uri).delete()
+export const removeFileFromFirebaseByURL = async function (uri: string) {
+    try {
+        const imageRef = firebase.storage().refFromURL(uri);
+        return await imageRef.delete()
+    } catch (e) {
+        if (['storage/invalid-argument', 'storage/object-not-found'].includes(e.code)) {
+            return
+        } else {
+            throw e
+        }
+    }
 }
 
 export const Permissions = {

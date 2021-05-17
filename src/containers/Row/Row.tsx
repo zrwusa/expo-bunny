@@ -61,6 +61,7 @@ export const Row = function (props: RowProps) {
             alignSelf: 'stretch',
             justifyContent: align,
             alignItems: 'center',
+            // width:'100%',
             paddingVertical: paddingVertical ? rowPaddingVertical[paddingVertical] : 0
         },
         style

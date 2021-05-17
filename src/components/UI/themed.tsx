@@ -25,7 +25,7 @@ import {useLinkProps} from "@react-navigation/native";
 import React from "react";
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
 import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from "../../types";
-import selection from "../../assets/fonts/icomoon-cus/selection.json"
+import selection from "../../assets/fonts/icomoon/selection.json"
 import {useSizeLabor} from "../../providers/size-labor";
 import {Switch as SwitchPaper} from "react-native-paper";
 import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from "react-native-picker-select";

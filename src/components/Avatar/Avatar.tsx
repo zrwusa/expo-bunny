@@ -1,14 +1,17 @@
 import React from "react";
-import {Image, ImageSourcePropType, ImageStyle, StyleProp} from "react-native";
+import {Image, ImageSourcePropType, ImageStyle, ImageURISource, StyleProp} from "react-native";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {SizeKeys} from "../../types";
+import {ImageUploader, ImageUploaderProps} from "../ImageUploader";
 
 export interface AvatarProps {
     source: ImageSourcePropType,
     size?: SizeKeys,
     style?: StyleProp<ImageStyle>,
+    shouldUpload?: boolean,
+    uploaderProps?: ImageUploaderProps
 }
 
 export type SizeAvatarMap = {
@@ -20,7 +23,7 @@ export function Avatar(props: AvatarProps) {
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
-    const {size, source, style} = props
+    const {size, source, style, shouldUpload = false, uploaderProps} = props
     const finalSize: SizeKeys = size || 'm';
     const sizeAvatarMap: SizeAvatarMap = {
         xxs: wp(16),
@@ -32,13 +35,31 @@ export function Avatar(props: AvatarProps) {
         xxl: wp(78)
     }
 
-    return <Image
-        style={[styles.Avatar, {
-            width: sizeAvatarMap[finalSize],
-            height: sizeAvatarMap[finalSize],
-            borderRadius: sizeAvatarMap[finalSize] / 2,
-        }, style]}
-        width={sizeAvatarMap[finalSize]}
-        height={sizeAvatarMap[finalSize]}
-        source={source}/>
+    return shouldUpload
+        ?
+        <ImageUploader
+            style={[styles.Avatar, {
+                width: sizeAvatarMap[finalSize],
+                height: sizeAvatarMap[finalSize],
+                borderRadius: sizeAvatarMap[finalSize] / 2,
+            }]}
+            imageStyle={[{
+                width: sizeAvatarMap[finalSize] - wp(2),
+                height: sizeAvatarMap[finalSize] - wp(2),
+                borderRadius: sizeAvatarMap[finalSize] / 2,
+            }, style]}
+            width={sizeAvatarMap[finalSize] - wp(2)}
+            height={sizeAvatarMap[finalSize] - wp(2)}
+            source={source as ImageURISource}
+            {...uploaderProps}
+        />
+        : <Image
+            style={[styles.Avatar, {
+                width: sizeAvatarMap[finalSize],
+                height: sizeAvatarMap[finalSize],
+                borderRadius: sizeAvatarMap[finalSize] / 2,
+            }, style]}
+            width={sizeAvatarMap[finalSize]}
+            height={sizeAvatarMap[finalSize]}
+            source={source}/>
 }

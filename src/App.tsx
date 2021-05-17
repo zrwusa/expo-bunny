@@ -12,7 +12,7 @@ import {Preparing} from "./components/Preparing";
 import {useTranslation} from "react-i18next";
 import {RequestProvider} from "./providers/request-labor";
 import {loadAsync} from "expo-font";
-import icoMoonFont from "./assets/fonts/icomoon-cus/icomoon.ttf"
+import icoMoonFont from "./assets/fonts/icomoon/fonts/icomoon.ttf"
 import {SizeLaborProvider} from "./providers/size-labor";
 import NavigatorTree from "./navigation/NavigatorTree"
 import {AuthLaborProvider} from "./providers/auth-labor";

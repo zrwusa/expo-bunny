@@ -4,6 +4,7 @@ import {AVPlaybackSource} from "../../packages/expo-av/src/AV";
 import {SagaTodo} from "./states";
 import {IMessage} from "../../packages/react-native-gifted-chat/src";
 import firebase from "firebase";
+import {StoredUser} from "./auth";
 
 export type DemoEmployee = {
     _id: number,
@@ -106,8 +107,8 @@ export interface DemoFirestore {
 }
 
 export interface Conversation {
-    _id?: string,
-    icon: string,
+    _id: string,
+    avatar: string,
     name: string,
     creatorId: string,
     users: string[],
@@ -117,19 +118,6 @@ export interface Conversation {
     deletedAt?: number
 }
 
-export interface StoredUser {
-    phone: string,
-    email: string,
-    firstName: string,
-    lastName: string,
-    middleName: string,
-    isActive: boolean,
-    isReported: boolean,
-    isBlocked: boolean,
-    preferences: string,
-    createdAt: number,
-    updatedAt: number
-}
 
 export interface UserContact {
     contactId: string,
@@ -145,6 +133,7 @@ export interface SchemaFirestore {
     currentUserConversationsMessages: IMMessage,
     conversations: Conversation,
     storedUsers: StoredUser,
+    storedUser: StoredUser,
     userContacts: UserContact,
     demoNearbyFilms: NearbyFilm,
     socialMediaVideos: SocialMediaMainDatum,

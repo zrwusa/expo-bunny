@@ -1,3 +1,4 @@
+// TODO support ImageSourcePropType
 import React, {useEffect, useState} from "react";
 import {IcoMoon, Text, TextButton} from "../UI";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -22,7 +23,7 @@ import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import * as ImagePicker from 'expo-image-picker';
 import {ImagePickerOptions} from 'expo-image-picker';
-import {Permissions, removeImageFromFirebase, uploadFileToFirebase} from "../../helpers";
+import {Permissions, removeFileFromFirebaseByURL, uploadFileToFirebase} from "../../helpers";
 import Modal, {ModalProps} from "react-native-modal";
 import {Divider} from "../Divider";
 import {CopyableText} from "../CopyableText";
@@ -42,7 +43,7 @@ export interface ImageUploaderProps {
     isDeleteFromServerWhenRemove?: boolean,
     isDeleteFromServerWhenUpload?: boolean,
 
-    containerStyle?: StyleProp<ViewStyle>,
+    style?: StyleProp<ViewStyle>,
     imageContainerStyle?: StyleProp<ViewStyle>,
     placeholderContainerStyle?: StyleProp<ViewStyle>,
     modalPanelContainerStyle?: StyleProp<ViewStyle>,
@@ -81,7 +82,7 @@ export function ImageUploader(props: ImageUploaderProps) {
         isDeleteFromServerWhenRemove = true,
         isDeleteFromServerWhenUpload = true,
 
-        containerStyle,
+        style,
         placeholderContainerStyle,
         imageContainerStyle,
         loadingOverlayStyle,
@@ -198,7 +199,7 @@ export function ImageUploader(props: ImageUploaderProps) {
         try {
             if (!pickerResult.cancelled) {
                 if (image.uri && isDeleteFromServerWhenUpload) {
-                    await removeImageFromFirebase(image.uri)
+                    await removeFileFromFirebaseByURL(image.uri)
                 }
                 const uploadUrl = await uploadFileToFirebase(pickerResult.uri, path);
                 onUploaded && onUploaded({uri: uploadUrl}, pickerResult.type);
@@ -219,7 +220,7 @@ export function ImageUploader(props: ImageUploaderProps) {
     const _removePhoto = async () => {
         if (image.uri) {
             if (isDeleteFromServerWhenRemove) {
-                const removeResult = await removeImageFromFirebase(image.uri)
+                const removeResult = await removeFileFromFirebaseByURL(image.uri)
                 console.log('---removeResult', removeResult)
             }
             const needRemovePhoto = {...image}
@@ -297,11 +298,11 @@ export function ImageUploader(props: ImageUploaderProps) {
         );
     }
 
-    const containerStyleJudge: StyleProp<ViewStyle> = renderPreview ? undefined : [styles.container, sizeStyle, containerStyle]
+    const styleJudge: StyleProp<ViewStyle> = renderPreview ? undefined : [styles.container, sizeStyle, style]
     return (
         <SafeAreaView
             // ref={screenshotIt}
-            style={containerStyleJudge}>
+            style={styleJudge}>
             {
                 renderPreview
                     ? renderPreview({imageSource: image, toggleModal: _toggleModal})

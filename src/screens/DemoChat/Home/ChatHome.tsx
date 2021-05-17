@@ -83,14 +83,15 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
         navigation.navigate('ChatRoom', {conversationId: key})
     }
 
-    const renderAvatar = (usersInConversation: string[]) => {
-        const userInfos = users?.filter((user) => {
-            return usersInConversation.includes(user.uid)
-        })
+    const renderAvatar = (conversation: Conversation) => {
 
-        return (userInfos && userInfos[0] && userInfos[0].photoURL)
-            ? <Avatar size="l" source={{uri: userInfos[0].photoURL}}/>
-            : null
+        return <Avatar size="l" source={{uri: conversation.avatar}}/>
+        // const otherUsersInConversation = users?.filter((user) => {
+        //     return conversation.users.includes(user.uid) && user.uid !== userId
+        // })
+        // return (otherUsersInConversation && otherUsersInConversation[0] && otherUsersInConversation[0].photoURL)
+        //     ? <Avatar size="l" source={{uri: otherUsersInConversation[0].photoURL}}/>
+        //     : null
     }
 
     const renderLatestMessage = (conversation: FirestoreReducer.EntityWithId<Conversation>) => {
@@ -108,7 +109,6 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
             switch (latestMessage.type) {
                 case 'MESSAGE':
                     showText = latestMessage.text;
-
                     break;
                 case 'IMAGE':
                     showText = 'Image Message'
@@ -146,7 +146,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
                 <Row paddingVertical="m">
                     <Col size={1}>
                         {
-                            renderAvatar(conversation.users)
+                            renderAvatar(conversation)
                         }
                     </Col>
                     <Col size={5} style={{alignItems: 'flex-start', justifyContent: 'flex-start'}}>

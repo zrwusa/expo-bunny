@@ -3,7 +3,7 @@ import {IconProps} from "react-native-vector-icons/Icon";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import {glyphMaterialCommunityCustomMap} from "../helpers";
 import {ReactNode} from "react";
-import glyphMapIcoMoon from "../assets/fonts/icomoon-cus/icomoon.json"
+import glyphMapIcoMoon from "../assets/fonts/icomoon/icomoon.json"
 import {ImageStyle, TextStyle, ViewStyle} from "react-native";
 import {ColorSchemeName} from "react-native-appearance";
 import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
