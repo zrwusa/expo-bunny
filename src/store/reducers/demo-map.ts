@@ -14,7 +14,7 @@ const initialState = {
             },
             "title": "initialed title",
             "description": "This is the best place in Portland",
-            "image": require('../../assets/images/bunny1.jpg')
+            "image": {uri: "https://raw.githubusercontent.com/zrwusa/assets/master/images/bunny1.jpg"}
         },
         {
             "id": uuidV4(),
@@ -34,7 +34,7 @@ const initialState = {
             },
             "title": "Second Best Place",
             "description": "This is the second best place in Portland",
-            "image": require('../../assets/images/bunny3.jpg')
+            "image": {uri: "https://raw.githubusercontent.com/zrwusa/assets/master/images/bunny3.jpg"}
         },
         {
             "id": uuidV4(),
@@ -44,7 +44,7 @@ const initialState = {
             },
             "title": "Third Best Place",
             "description": "This is the third best place in Portland",
-            "image": require('../../assets/images/bunny4.jpg')
+            "image": {uri: "https://raw.githubusercontent.com/zrwusa/assets/master/images/bunny4.jpg"}
         }
     ],
     region: {

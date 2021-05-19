@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle,} from 'react-native'
-// TODO: support web
 import {IMessage} from './Models'
 import LightBox from "../../react-native-lightbox";
 

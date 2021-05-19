@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Text, TextButton, View} from "../../components/UI";
 import {LinearGradientIcon} from "../../components/LinearGradientIcon";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {FlatList, Image, TouchableHighlight, TouchableOpacity, Vibration} from "react-native";
+import {TouchableHighlight, TouchableOpacity, Vibration} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useFirestoreConnect} from "react-redux-firebase";
@@ -19,7 +19,6 @@ import {
     migrateUsers
 } from "../../firebase/migrations";
 import {ProgressBar} from "react-native-paper";
-
 
 export function PlaygroundScreen() {
     const sizeLabor = useSizeLabor();
@@ -51,6 +50,7 @@ export function PlaygroundScreen() {
     for (let i = 0; i < 1000; i++) {
         testData.push({id: uuidV4()})
     }
+
     return (
         <View style={{flex: 1}}>
             <View>
@@ -99,10 +99,17 @@ export function PlaygroundScreen() {
                     <Text>Touchable with Long Press</Text>
                 </View>
             </TouchableHighlight>
-            <FlatList data={testData}
-                      keyExtractor={item => item.id}
-                      renderItem={() => <Image style={{width: 300, height: 300}}
-                                               source={{uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}}/>}/>
+            {/*<FlatList data={testData}*/}
+            {/*          keyExtractor={item => item.id}*/}
+            {/*          renderItem={() =>*/}
+
+            {/*              <Image style={{width: 300, height: 300}}*/}
+            {/*                                   preview={{uri:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='}}*/}
+            {/*                                   uri={'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}/>*/}
+            {/*              // <ImageRN style={{width: 300, height: 300}} source={require('../../assets/images/pexels-5451714-medium.jpg')} />*/}
+            {/*              // <CachedImage style={{width: 300, height: 300}} source={{ uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg' }}/>*/}
+            {/*          }*/}
+            {/*/>*/}
         </View>
     )
 }
