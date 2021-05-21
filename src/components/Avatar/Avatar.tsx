@@ -11,7 +11,8 @@ export interface AvatarProps {
     size?: SizeKeys,
     style?: StyleProp<ImageStyle>,
     shouldUpload?: boolean,
-    uploaderProps?: ImageUploaderProps
+    uploaderProps?: ImageUploaderProps,
+    isBorder?: boolean
 }
 
 export type SizeAvatarMap = {
@@ -23,7 +24,7 @@ export function Avatar(props: AvatarProps) {
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
-    const {size, source, style, shouldUpload = false, uploaderProps} = props
+    const {size, source, style, shouldUpload = false, uploaderProps, isBorder = true} = props
     const finalSize: SizeKeys = size || 'm';
     const sizeAvatarMap: SizeAvatarMap = {
         xxs: wp(16),
@@ -34,27 +35,31 @@ export function Avatar(props: AvatarProps) {
         xl: wp(56),
         xxl: wp(78)
     }
+    const borderDiff: number = isBorder ? wp(2) : 0
+    const borderWidth: number = isBorder ? wp(1) : 0
 
     return shouldUpload
         ?
         <ImageUploader
             style={[styles.Avatar, {
+                borderWidth,
                 width: sizeAvatarMap[finalSize],
                 height: sizeAvatarMap[finalSize],
                 borderRadius: sizeAvatarMap[finalSize] / 2,
             }]}
             imageStyle={[{
-                width: sizeAvatarMap[finalSize] - wp(2),
-                height: sizeAvatarMap[finalSize] - wp(2),
+                width: sizeAvatarMap[finalSize] - borderDiff,
+                height: sizeAvatarMap[finalSize] - borderDiff,
                 borderRadius: sizeAvatarMap[finalSize] / 2,
             }, style]}
-            width={sizeAvatarMap[finalSize] - wp(2)}
-            height={sizeAvatarMap[finalSize] - wp(2)}
+            width={sizeAvatarMap[finalSize] - borderDiff}
+            height={sizeAvatarMap[finalSize] - borderDiff}
             source={source as ImageURISource}
             {...uploaderProps}
         />
         : <Image
             style={[styles.Avatar, {
+                borderWidth,
                 width: sizeAvatarMap[finalSize],
                 height: sizeAvatarMap[finalSize],
                 borderRadius: sizeAvatarMap[finalSize] / 2,

@@ -63,15 +63,6 @@ export type SocialMediaImageDatum = {
 export type DemoSearchDummyDatum = { id: number, text: string }
 
 
-export interface DemoNearbyFilms {
-    "coordinate": { "latitude": number, "longitude": number },
-    "image": { "uri": string },
-    "_id": string,
-    "title": string,
-    "description": string,
-    "__v": number
-}
-
 export interface UserProfile {
     email: string
 }
@@ -88,26 +79,20 @@ export interface ChatRoom {
     name: string,
 }
 
-export interface UserPhoto extends ImageURISource {
-}
-
 // create schema for the DB
 export interface SchemaRealtimeDB {
     todoList: SagaTodo,
-    // region: Region,
-    // chatRooms: ChatRoom,
-    // chatMessages: IMMessage,
-    // usersWithPhotos: { [key: string]: UserPhoto[] },
     // [name: string]: any
 }
 
 export interface DemoFirestore {
     name: string,
-    keywords: string
+    keywords: string[]
 }
 
 export interface Conversation {
     _id: string,
+    type: string,
     avatar: string,
     name: string,
     creatorId: string,
@@ -117,7 +102,6 @@ export interface Conversation {
     updatedAt: number,
     deletedAt?: number
 }
-
 
 export interface UserContact {
     contactId: string,

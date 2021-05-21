@@ -1,5 +1,5 @@
 import * as FileSystem from "expo-file-system";
-import {DownloadProgressData, DownloadResumable, DownloadOptions} from "expo-file-system";
+import {DownloadOptions, DownloadProgressData, DownloadResumable} from "expo-file-system";
 import SHA1 from "crypto-js/sha1";
 import {DownloadProgressCallback} from "expo-file-system/src/FileSystem.types";
 import {uuidV4} from "../../utils";

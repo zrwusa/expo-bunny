@@ -10,7 +10,10 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
 
     return StyleSheet.create({
         container: {
-            padding: ms.sp.xxs
+            padding: ms.sp.m
+        },
+        card: {
+            padding: ms.sp.s
         },
     });
 }

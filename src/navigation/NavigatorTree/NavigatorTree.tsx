@@ -154,6 +154,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             return finalOptions;
         }
     }
+
     const optionsAuth: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: false,

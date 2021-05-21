@@ -7,10 +7,13 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {colors} = themeLabor.theme;
 
     return StyleSheet.create({
-        screen: {
-            flex: 1,
-            marginHorizontal: ms.sp.l,
-            marginVertical: ms.sp.m,
-        }
+        conversation: {
+            marginHorizontal: wp(10)
+        },
+        latestMessage: {alignItems: 'flex-start', justifyContent: 'flex-start'},
+        timePanel: {justifyContent: 'space-between'},
+        time: {color: colors.text3, fontSize: ms.fs.xs},
+        tipPanel: {paddingTop: wp(6)},
+        tip: {color: colors.text3, fontSize: ms.fs.xs}
     });
 }

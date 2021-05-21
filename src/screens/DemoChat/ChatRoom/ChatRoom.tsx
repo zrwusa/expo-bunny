@@ -10,7 +10,6 @@ import {Keyboard, SafeAreaView, TouchableOpacity} from "react-native";
 import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from "../../../components";
 import {IcoMoon} from "../../../components/UI";
 import {FirestoreReducer} from "redux-firestore";
-import firebase from "firebase";
 import {getStyles} from "./styles";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 
@@ -42,13 +41,27 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
     ])
     const chatMessages = useSelector((state: RootState) => state.firestoreState.ordered.chatMessages)
 
-    const chatMessagesAdapted = chatMessages?.map((item) => {
-        const createdAtTimestamp = item.createdAt as unknown as firebase.firestore.Timestamp
-
-        // firebase timestamp need to waited to be available
-        return {...item, createdAt: createdAtTimestamp?.toDate()}
-        // return {...item, createdAt: new Date(createdAtTimestamp.seconds*1000)}
-    })
+    // const chatMessagesAdapted = chatMessages?.map((item) => {
+    //     const createdAtTimestamp = item.createdAt
+    //     // let createdAt:Date;
+    //     // switch (typeof createdAtTimestamp) {
+    //     //     case "number":
+    //     //
+    //     //         break;
+    //     //     case "object":
+    //     //         if(createdAtTimestamp.seconds){
+    //     //
+    //     //         }
+    //     //         createdAt = createdAtTimestamp.toDate?createdAtTimestamp.toDate():createdAtTimestamp
+    //     //         break;
+    //     //     case "bigint":
+    //     //
+    //     // }
+    //
+    //     // firebase timestamp need to waited to be available
+    //     return {...item, createdAt: createdAtTimestamp}
+    //     // return {...item, createdAt: new Date(createdAtTimestamp.seconds*1000)}
+    // })
 
     const memoizedUser = useMemo(() => {
         if (!user) {
@@ -132,7 +145,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         alwaysShowSend
                         showUserAvatar
                         showAvatarForEveryMessage
-                        messages={chatMessagesAdapted}
+                        messages={chatMessages}
                         onSend={messages => handleSend(messages)}
                         user={memoizedUser}
 

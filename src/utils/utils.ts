@@ -247,3 +247,13 @@ export function minuted(time: number) {
     const seconds = Math.floor((time % 60000) / 1000).toString().padStart(2, '0');
     return `${minutes}:${seconds}`
 }
+
+export function randomDate(start?: Date, end?: Date) {
+    if (!start) {
+        start = new Date('1970-1-1')
+    }
+    if (!end) {
+        end = new Date()
+    }
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}

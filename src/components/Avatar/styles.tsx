@@ -14,7 +14,6 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         Avatar: {
             position: 'relative',
             borderColor: colors.text,
-            borderWidth: wp(1)
         },
     });
 }

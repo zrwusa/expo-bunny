@@ -66,13 +66,14 @@ export default class Day<TMessage extends IMessage = IMessage> extends PureCompo
             textStyle,
             textProps,
         } = this.props
-
         if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
+            const {createdAt} = currentMessage;
+
             return (
                 <View style={[styles.container, containerStyle]}>
                     <View style={wrapperStyle}>
                         <Text style={[styles.text, textStyle]} {...textProps}>
-                            {dayjs(currentMessage.createdAt)
+                            {dayjs(createdAt)
                                 .locale(this.context.getLocale())
                                 .format(dateFormat)}
                         </Text>

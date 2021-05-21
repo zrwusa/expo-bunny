@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
-import {Text, View} from "../../../components/UI";
-import {FlatList, TouchableOpacity} from "react-native";
+import {Text} from "../../../components/UI";
+import {Dimensions, FlatList, SafeAreaView, TouchableOpacity, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {ChatRoom, Conversation, DemoChatStackParam, RootState} from "../../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -9,13 +9,16 @@ import {Row} from "../../../containers/Row";
 import {getStyles} from "./styles";
 import {Col} from "../../../containers";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
-import {Divider} from "../../../components/Divider";
 import {isLoaded, useFirebaseConnect, useFirestore, useFirestoreConnect} from "react-redux-firebase";
 import {FirestoreReducer} from "redux-firestore";
-import {Preparing} from "../../../components/Preparing";
 import {Avatar} from "../../../components/Avatar";
-import firebase from "firebase";
-import dayjs from "dayjs"
+import dayJS from "dayjs"
+import isToday from "dayjs/plugin/isToday";
+import {Divider} from "../../../components";
+import {Preparing} from "../../../components/Preparing";
+import {useSafeAreaInsets} from "react-native-safe-area-context";
+
+dayJS.extend(isToday)
 
 type ChatHomeRouteProp = RouteProp<DemoChatStackParam, 'ChatHome'>;
 type ChatHomeNavigationProp = StackNavigationProp<DemoChatStackParam, 'ChatHome'>;
@@ -30,6 +33,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     const styles = getStyles(sizeLabor, themeLabor)
 
     const firebaseUser = user?.firebaseUser;
+
     let userId = ''
     if (firebaseUser) {
         userId = firebaseUser.uid;
@@ -37,20 +41,13 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
 
     useFirebaseConnect([{path: 'chatRooms', queryParams: []}])
 
-    useFirestoreConnect([
-        {
-            collection: 'conversations',
-            where: [
-                ['users', 'array-contains', userId],
-            ],
-        }
-    ])
+    useFirestoreConnect([{
+        collection: 'conversations', where: [
+            ['users', 'array-contains', userId],
+        ],
+    }])
 
-    useFirestoreConnect([
-        {
-            collection: 'users',
-        }
-    ])
+    useFirestoreConnect([{collection: 'users',}])
 
     const conversations = useSelector((state: RootState) => state.firestoreState.ordered.conversations)
     const firestore = useFirestore()
@@ -62,19 +59,21 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     const getCurrentUserConversationsMessages = async () => {
         if (conversations && (conversations.length > 0)) {
             const whereConversationIds = conversations.map(item => item.id)
+            // TODO Invalid Query. 'in' filters support a maximum of 10 elements in the value array.
             await firestore.get(
                 {
                     collection: 'chatMessages',
                     orderBy: ['createdAt', 'desc'],
-                    where: [
-                        ['conversationId', 'in', whereConversationIds],
-                    ],
+                    // where: [
+                    //     ['conversationId', 'in', whereConversationIds],
+                    // ],
                     storeAs: 'currentUserConversationsMessages'
                 }
             )
         }
     }
 
+    const insets = useSafeAreaInsets();
 
     const users = useSelector((state: RootState) => state.firestoreState.ordered.users)
     const currentUserConversationsMessages = useSelector((state: RootState) => state.firestoreState.ordered.currentUserConversationsMessages)
@@ -84,94 +83,109 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     }
 
     const renderAvatar = (conversation: Conversation) => {
+        switch (conversation.type) {
+            case 'GROUP':
+                return <Avatar size="l" isBorder={false} source={{uri: conversation.avatar}}/>
+            case 'COUPLE':
+                const otherUsersInConversation = users?.filter((user) => {
+                    return conversation.users.includes(user.uid) && user.uid !== userId
+                })
+                return (otherUsersInConversation && otherUsersInConversation[0] && otherUsersInConversation[0].photoURL)
+                    ? <Avatar size="l" isBorder={false} source={{uri: otherUsersInConversation[0].photoURL}}/>
+                    : null
 
-        return <Avatar size="l" source={{uri: conversation.avatar}}/>
-        // const otherUsersInConversation = users?.filter((user) => {
-        //     return conversation.users.includes(user.uid) && user.uid !== userId
-        // })
-        // return (otherUsersInConversation && otherUsersInConversation[0] && otherUsersInConversation[0].photoURL)
-        //     ? <Avatar size="l" source={{uri: otherUsersInConversation[0].photoURL}}/>
-        //     : null
+        }
     }
 
     const renderLatestMessage = (conversation: FirestoreReducer.EntityWithId<Conversation>) => {
-        const xxx = currentUserConversationsMessages?.filter((item) => {
+        const latestMessages = currentUserConversationsMessages?.filter((item) => {
             return (item.conversationId === conversation.id)
         })
-        const latestMessage = xxx?.[0]
-        let showText = ''
-        let showTime = ''
+        const latestMessage = latestMessages?.[0]
+        let tipText = ''
+        let tipTime = ''
 
         if (latestMessage) {
-            const createdAtTimestamp = latestMessage.createdAt as unknown as firebase.firestore.Timestamp
-            showTime = dayjs(createdAtTimestamp?.toDate())
-                .format('LT')
+            const createdAtTimestamp = latestMessage.createdAt
+            const date = dayJS(createdAtTimestamp)
+            const now = new Date();
+            const isToday = date.isToday();
+            const isSameWeek = date.isSame(now, 'week')
+            tipTime = isToday ? date.format('LT') : isSameWeek ? date.format('ddd').toString() : date.format('MM/DD/YY')
             switch (latestMessage.type) {
                 case 'MESSAGE':
-                    showText = latestMessage.text;
+                    tipText = latestMessage.text;
                     break;
                 case 'IMAGE':
-                    showText = 'Image Message'
+                    tipText = 'Image Message'
                     break;
                 case 'STICKER_GIF':
-                    showText = 'Sticker Message'
+                    tipText = 'Sticker Message'
                     break;
                 case 'AUDIO':
-                    showText = 'Voice Message'
+                    tipText = 'Voice Message'
                     break;
                 case 'VIDEO':
-                    showText = 'Video Message'
+                    tipText = 'Video Message'
                     break;
                 default:
 
                     break;
-
             }
         }
 
         return <>
-            <Row style={{justifyContent: 'space-between'}}>
+            <Row style={styles.timePanel}>
                 <Text>{conversation.name}</Text>
-                <Text>{showTime}</Text>
+                <Text style={styles.time}>{tipTime}</Text>
             </Row>
-            <Row style={{paddingTop: wp(6)}}>
-                <Text style={{color: colors.text3, fontSize: ms.fs.xs}}>{showText}</Text>
+            <Row style={styles.tipPanel}>
+                <Text style={styles.tip}>{tipText}</Text>
             </Row>
         </>
     }
 
     const renderItem = (conversation: FirestoreReducer.EntityWithId<Conversation>) => {
         return (
-            <TouchableOpacity onPress={() => handleRoomPress(conversation.id)}>
-                <Row paddingVertical="m">
-                    <Col size={1}>
-                        {
-                            renderAvatar(conversation)
-                        }
-                    </Col>
-                    <Col size={5} style={{alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                        {
-                            renderLatestMessage(conversation)
-                        }
+            <View style={styles.conversation}>
+                <TouchableOpacity onPress={() => handleRoomPress(conversation.id)}>
+                    <Row paddingVertical="m">
+                        <Col size={1}>
+                            {
+                                renderAvatar(conversation)
+                            }
+                        </Col>
+                        <Col size={5} style={styles.latestMessage}>
+                            {
+                                renderLatestMessage(conversation)
+                            }
+                        </Col>
+                    </Row>
+                </TouchableOpacity>
+                <Divider/>
+            </View>
 
-                    </Col>
-                </Row>
-            </TouchableOpacity>
         )
     }
 
+    // React Navigation bug,when nested navigators and headerShown = false,
+    // the FlatList height not limited,as such the scrolling does't work
+    const webFlatListHeight = Dimensions.get('window').height - insets.top - insets.bottom - wp(46)
+
     return (
-        isLoaded(conversations)
-            ? <View style={styles.screen}>
-                <FlatList
-                    data={conversations}
-                    renderItem={({item}) => {
-                        return renderItem(item)
-                    }}
-                    keyExtractor={(item) => item.id as any}
-                    ItemSeparatorComponent={() => <Divider/>}
-                />
-            </View>
-            : <Preparing/>
+        <SafeAreaView style={{flex: 1}}>
+            {
+                isLoaded(conversations)
+                    ? <FlatList
+                        style={{height: webFlatListHeight}}
+                        data={conversations}
+                        renderItem={({item}) => {
+                            return renderItem(item)
+                        }}
+                        keyExtractor={(item) => item.id as any}
+                    />
+                    : <Preparing/>
+            }
+        </SafeAreaView>
     )
 }

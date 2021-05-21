@@ -48,7 +48,7 @@ export const getThemeWareHouse = () => {
                 light: wp(10),
                 dark: wp(10),
                 indigo: wp(10),
-                tinder: wp(4),
+                tinder: wp(10),
             }
         },
         mode: {
