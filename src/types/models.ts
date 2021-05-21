@@ -98,9 +98,9 @@ export interface Conversation {
     creatorId: string,
     users: string[],
     channelId: string,
-    createdAt: number,
-    updatedAt: number,
-    deletedAt?: number
+    createdAt: Date | number,
+    updatedAt: Date | number,
+    deletedAt?: Date | number,
 }
 
 export interface UserContact {

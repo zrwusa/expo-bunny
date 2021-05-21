@@ -3,15 +3,17 @@ import {GiftedChat} from "../../../../packages/react-native-gifted-chat/src"
 import {RouteProp} from "@react-navigation/native";
 import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from "../../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {isLoaded, useFirestore, useFirestoreConnect} from "react-redux-firebase";
-import {uuidV4} from "../../../utils";
+import {firestoreTimestampToDate, uuidV4} from "../../../utils";
 import {Keyboard, SafeAreaView, TouchableOpacity} from "react-native";
 import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from "../../../components";
 import {IcoMoon} from "../../../components/UI";
 import {FirestoreReducer} from "redux-firestore";
 import {getStyles} from "./styles";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
+import {firebase} from "../../../firebase/firebase";
+import {sysError} from "../../../store/actions";
 
 type ChatRoomRouteProp = RouteProp<DemoChatStackParam, 'ChatRoom'>;
 type ChatRoomNavigationProp = StackNavigationProp<DemoChatStackParam, 'ChatRoom'>;
@@ -24,9 +26,10 @@ export interface ChatRoomProps {
 export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
     const {conversationId} = route.params
     const firestore = useFirestore();
-    const {sizeLabor, themeLabor, authLabor} = useBunnyKit();
+    const {sizeLabor, themeLabor, authLabor, wp} = useBunnyKit();
     const {authResult} = authLabor;
-    const {user} = authResult
+    const {user} = authResult;
+    const dispatch = useDispatch()
 
     const styles = getStyles(sizeLabor, themeLabor);
 
@@ -41,27 +44,9 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
     ])
     const chatMessages = useSelector((state: RootState) => state.firestoreState.ordered.chatMessages)
 
-    // const chatMessagesAdapted = chatMessages?.map((item) => {
-    //     const createdAtTimestamp = item.createdAt
-    //     // let createdAt:Date;
-    //     // switch (typeof createdAtTimestamp) {
-    //     //     case "number":
-    //     //
-    //     //         break;
-    //     //     case "object":
-    //     //         if(createdAtTimestamp.seconds){
-    //     //
-    //     //         }
-    //     //         createdAt = createdAtTimestamp.toDate?createdAtTimestamp.toDate():createdAtTimestamp
-    //     //         break;
-    //     //     case "bigint":
-    //     //
-    //     // }
-    //
-    //     // firebase timestamp need to waited to be available
-    //     return {...item, createdAt: createdAtTimestamp}
-    //     // return {...item, createdAt: new Date(createdAtTimestamp.seconds*1000)}
-    // })
+    const chatMessagesAdapted = chatMessages?.map((serverItem) => {
+        return {...serverItem, createdAt: firestoreTimestampToDate(serverItem.createdAt)}
+    })
 
     const memoizedUser = useMemo(() => {
         if (!user) {
@@ -143,9 +128,11 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                 ? <>
                     <GiftedChat
                         alwaysShowSend
-                        showUserAvatar
-                        showAvatarForEveryMessage
-                        messages={chatMessages}
+                        // TODO Suspected to be a react-native-gifted-chat bug,default value is true.
+                        inverted={true}
+                        // showUserAvatar
+                        // showAvatarForEveryMessage
+                        messages={chatMessagesAdapted}
                         onSend={messages => handleSend(messages)}
                         user={memoizedUser}
 
@@ -160,11 +147,11 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         }}
 
                         onMessageReadyForDisplay={async (currentMessage) => {
-                            // console.log('---onMessageReadyForDisplay',currentMessage)
                             await setReceived(currentMessage)
                         }}
+
                         onMessageLoadError={(e, currentMessage) => {
-                            // console.log('---onMessageLoadError',currentMessage)
+                            dispatch(sysError(e));
                         }}
 
                         renderActions={() => {
@@ -183,16 +170,16 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                                             onPress={() => {
                                                 toggleModal()
                                             }}>
-                                            <IcoMoon name="attachment" style={styles.mediaLibraryPickerIcon}/>
+                                            <IcoMoon name="paperclip" size={wp(16)} style={styles.mediaLibraryPickerIcon}/>
                                         </TouchableOpacity>
                                     }}
                                     onUploaded={async (imageSource, type) => {
                                         let mediaType: IMMessageType = ''
                                         switch (type) {
-                                            case "image":
+                                            case 'image':
                                                 mediaType = 'IMAGE'
                                                 break;
-                                            case "video":
+                                            case 'video':
                                                 mediaType = 'VIDEO'
                                                 break;
                                         }

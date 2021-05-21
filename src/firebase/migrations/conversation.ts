@@ -1,6 +1,7 @@
 import {firebase} from "../firebase";
 import {Conversation} from "../../types";
-
+import {randomDate} from "../../utils";
+const demoCreatedAt = randomDate(new Date('2020-1-1'), new Date())
 export const conversations: Conversation[] = [
     {
         _id: "conversation-001",
@@ -10,7 +11,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -22,7 +23,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -34,7 +35,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -46,7 +47,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -58,7 +59,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -70,7 +71,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -82,7 +83,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -94,7 +95,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -106,7 +107,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -118,7 +119,7 @@ export const conversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["BzoqTn3KZCXDWScp0fhKr8xGp2u2", "YtyPwHQsErYX6KH6DYLmQn7OQgn1", "gEQMxRMVfjRLUngNJHKcIj1Impu1", "hovkAoBO4SfArjeT0A9ydAEtfnF3", "iXtCc0Ad4KYxSv4eat3EdRLGCmC3", "vr9SRkq7ofOYiOQao6aTRkkMUEp1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     }
@@ -134,7 +135,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "q8my5u5kq3d1vDvYu1dNVjpPKiK2"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -146,7 +147,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "jOFfjkUgKURpW2IOpED64LzC5B23"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -158,7 +159,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "qcIR4FfL1AfFGP2SHtVODQ4iLLw1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -170,7 +171,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "vg9cb0vsbSUDtgfXyPySHX747wQ2"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -182,7 +183,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "cttSShc6sLc6ilC3z08BKaFhykx2"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -194,7 +195,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "ofjK67aCefXFNBc8DDV7WmKZAQW2"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -206,7 +207,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "ZSELWYRetZSbHNFQTjVxX9aXybk1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -218,7 +219,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "d73w1kbo7TVoN7ME0uiAEPmd7er1"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -230,7 +231,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "SGGbJPMgHsZElaOnBCIdJvxLtlm2"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     },
@@ -242,7 +243,7 @@ export const datingConversations: Conversation[] = [
         creatorId: 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
         users: ["gEQMxRMVfjRLUngNJHKcIj1Impu1", "FiwAbC0GmEggjBjhYXT6KYWy5MQ2"],
         channelId: '',
-        createdAt: 1620982332610,
+        createdAt: demoCreatedAt,
         updatedAt: 1620982332610,
         // deletedAt: undefined
     }

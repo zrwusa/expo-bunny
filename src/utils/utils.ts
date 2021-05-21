@@ -1,4 +1,5 @@
 import {JSONSerializable} from "../types";
+import {firebase} from "../firebase/firebase";
 
 export function randomText(length: number) {
     let result = '';
@@ -256,4 +257,26 @@ export function randomDate(start?: Date, end?: Date) {
         end = new Date()
     }
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
+export function firestoreTimestampToDate(timeStamp: Date | number | firebase.firestore.Timestamp) {
+    let date: Date  = new Date('1970-01-01');
+    switch (typeof timeStamp) {
+        case 'number':
+            date = new Date(timeStamp)
+            break;
+        case 'object':
+            if(timeStamp instanceof Date){
+                date = timeStamp;
+            }else {
+                const dateStamp = timeStamp as unknown as firebase.firestore.Timestamp
+                date = dateStamp.toDate();
+            }
+            break;
+        default:
+
+            break;
+
+    }
+    return date
 }

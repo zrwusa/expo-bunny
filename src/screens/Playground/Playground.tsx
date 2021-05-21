@@ -11,6 +11,7 @@ import {DraggableView} from "../../containers/DraggableView";
 import {uuidV4, wait} from "../../utils";
 import {ProgressBar} from "react-native-paper";
 import {Card} from "../../containers/Card";
+import {migrateConversations} from "../../firebase/migrations";
 
 export function PlaygroundScreen() {
     const sizeLabor = useSizeLabor();
@@ -30,7 +31,7 @@ export function PlaygroundScreen() {
         // setProgress(0.4);
         // await migrateChatMessages();
         // setProgress(0.6);
-        // await migrateConversations()
+        await migrateConversations()
         setProgress(1);
     }
 

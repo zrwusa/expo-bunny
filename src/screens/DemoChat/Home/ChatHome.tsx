@@ -17,6 +17,7 @@ import isToday from "dayjs/plugin/isToday";
 import {Divider} from "../../../components";
 import {Preparing} from "../../../components/Preparing";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {firestoreTimestampToDate} from "../../../utils";
 
 dayJS.extend(isToday)
 
@@ -106,7 +107,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
         let tipTime = ''
 
         if (latestMessage) {
-            const createdAtTimestamp = latestMessage.createdAt
+            const createdAtTimestamp =  firestoreTimestampToDate(latestMessage.createdAt)
             const date = dayJS(createdAtTimestamp)
             const now = new Date();
             const isToday = date.isToday();
