@@ -249,28 +249,39 @@ export function minuted(time: number) {
     return `${minutes}:${seconds}`
 }
 
-export function randomDate(start?: Date, end?: Date) {
-    if (!start) {
-        start = new Date('1970-1-1')
+export function randomDate(start?: Date, end?: Date, specificProbabilityStart?: Date, specificProbability?: number) {
+    if (!start) start = new Date('1970-1-1')
+    if (!end) end = new Date()
+
+    if (specificProbabilityStart) {
+        if (!specificProbability) specificProbability = 0.5;
+        if (Math.random() <= specificProbability) {
+            return new Date(specificProbabilityStart.getTime() + Math.random() * (end.getTime() - specificProbabilityStart.getTime()));
+        }
     }
-    if (!end) {
-        end = new Date()
-    }
+
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
 export function firestoreTimestampToDate(timeStamp: Date | number | firebase.firestore.Timestamp) {
-    let date: Date  = new Date('1970-01-01');
+    let date: Date = new Date('1970-01-01');
     switch (typeof timeStamp) {
         case 'number':
             date = new Date(timeStamp)
             break;
         case 'object':
-            if(timeStamp instanceof Date){
+            if (timeStamp instanceof Date) {
                 date = timeStamp;
-            }else {
-                const dateStamp = timeStamp as unknown as firebase.firestore.Timestamp
-                date = dateStamp.toDate();
+            } else {
+                if (!timeStamp) {
+                    // When use firestore.FieldValue.serverTimestamp(),
+                    // the redux-firestore will not wait for addOnCompleteListener,
+                    // just update data immediately,the timestamp will be null
+                    date = new Date();
+                } else {
+                    const dateStamp = timeStamp as unknown as firebase.firestore.Timestamp
+                    date = dateStamp.toDate();
+                }
             }
             break;
         default:

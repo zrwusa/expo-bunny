@@ -5,7 +5,7 @@ import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from "../../../
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch, useSelector} from "react-redux";
 import {isLoaded, useFirestore, useFirestoreConnect} from "react-redux-firebase";
-import {firestoreTimestampToDate, uuidV4} from "../../../utils";
+import {firestoreTimestampToDate, randomDate, uuidV4} from "../../../utils";
 import {Keyboard, SafeAreaView, TouchableOpacity} from "react-native";
 import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from "../../../components";
 import {IcoMoon} from "../../../components/UI";
@@ -29,7 +29,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
     const {sizeLabor, themeLabor, authLabor, wp} = useBunnyKit();
     const {authResult} = authLabor;
     const {user} = authResult;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const styles = getStyles(sizeLabor, themeLabor);
 
@@ -61,6 +61,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
 
     const [isShowAudioButton, setIsShowAudioButton] = useState(true)
     const [isShowStickerPicker, setIsShowStickerPicker] = useState(false)
+
     const chatAssetsPath = `/chatAssets/${memoizedUser?._id}`
 
     const generateMessage = (type: IMMessageType, payload?: string, needMerge?: IMMessage) => {
@@ -216,7 +217,8 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         isShow={isShowStickerPicker}
                         onValueChanged={async (uri) => {
                             const msg = generateMessage('STICKER_GIF', uri)
-                            await sendMessage(msg)
+                            await sendMessage(msg);
+                            // setIsShowStickerPicker(false);
                         }}/>
                 </>
                 : <Preparing/>

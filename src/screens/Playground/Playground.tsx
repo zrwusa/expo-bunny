@@ -1,17 +1,18 @@
 import React, {useState} from "react";
 import {Text, TextButton, View} from "../../components/UI";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {TouchableOpacity, Vibration} from "react-native";
+import {Button, FlatList, TouchableOpacity, Vibration} from "react-native";
 import {getStyles} from "./styles";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {DraggableView} from "../../containers/DraggableView";
-import {uuidV4, wait} from "../../utils";
+import {randomDate, uuidV4, wait} from "../../utils";
 import {ProgressBar} from "react-native-paper";
 import {Card} from "../../containers/Card";
-import {migrateConversations} from "../../firebase/migrations";
+import {migrateChatMessages, migrateConversations} from "../../firebase/migrations";
+import {CachedImage} from "../../components/CachedImage";
 
 export function PlaygroundScreen() {
     const sizeLabor = useSizeLabor();
@@ -28,10 +29,10 @@ export function PlaygroundScreen() {
         // await migrateSocialMediaVideos();
         // setProgress(0.3);
         // await migrateSocialMediaImages();
-        // setProgress(0.4);
+        setProgress(0.4);
         // await migrateChatMessages();
-        // setProgress(0.6);
-        await migrateConversations()
+        setProgress(0.6);
+        // await migrateConversations()
         setProgress(1);
     }
 
@@ -80,17 +81,20 @@ export function PlaygroundScreen() {
                         }
                     </View>
                 </Card>
-                {/*<FlatList data={testData}*/}
-                {/*          keyExtractor={item => item.id}*/}
-                {/*          renderItem={() =>*/}
+                <Button title="random date" onPress={()=>{
+                    console.log(randomDate(new Date('2020-01-01'),new Date(),new Date('2021-3-1'),0.5))
+                }} />
+                <FlatList data={testData}
+                          keyExtractor={item => item.id}
+                          renderItem={() =>
 
-                {/*              <Image style={{width: 300, height: 300}}*/}
-                {/*                                   preview={{uri:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='}}*/}
-                {/*                                   uri={'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}/>*/}
-                {/*              // <ImageRN style={{width: 300, height: 300}} source={require('../../assets/images/pexels-5451714-medium.jpg')} />*/}
-                {/*              // <CachedImage style={{width: 300, height: 300}} source={{ uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg' }}/>*/}
-                {/*          }*/}
-                {/*/>*/}
+                              // <Image style={{width: 300, height: 300}}
+                              //                      preview={{uri:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='}}
+                              //                      uri={'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}/>
+                              // <ImageRN style={{width: 300, height: 300}} source={require('../../assets/images/pexels-5451714-medium.jpg')} />
+                              <CachedImage style={{width: 300, height: 300}}  source={{ uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg' }}/>
+                          }
+                />
             </View>
 
         </View>

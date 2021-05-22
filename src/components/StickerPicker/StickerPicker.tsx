@@ -1,24 +1,37 @@
+// TODO crash when large gif images loaded
 import {useBunnyKit} from "../../hooks/bunny-kit";
-import {Image, ScrollView, TouchableOpacity, View} from "react-native";
+import {ScrollView, TouchableOpacity, View} from "react-native";
 import React, {useEffect, useRef, useState} from "react";
 import {useKeyboardHeight} from "../../hooks/keyboard-height";
 import {useFirebase} from "react-redux-firebase";
 import {Sticker} from "../../types";
 import {getStyles} from "./styles";
+import {CachedImage} from "../CachedImage";
+
+export type Quality = 'LOW' | 'MEDIUM' | 'HIGH'
 
 export interface StickerPickerProps {
     isShow: boolean,
-    onValueChanged: (uri: string) => void
+    onValueChanged: (uri: string) => void,
+    quality?: Quality
 }
 
-export const StickerPicker = ({isShow = false, onValueChanged}: StickerPickerProps) => {
+export const StickerPicker = ({isShow = false, onValueChanged, quality = 'MEDIUM'}: StickerPickerProps) => {
     const {sizeLabor, themeLabor} = useBunnyKit()
     const {currentHeight} = useKeyboardHeight()
     const [stickers, setStickers] = useState<Sticker[]>([])
     const firebase = useFirebase();
     const styles = getStyles(sizeLabor, themeLabor)
     const isMounted = useRef(false)
-    const shaunTheSheepRef = firebase.storage().ref('ShaunTheSheep256/')
+
+    const qualityMap: { [key in Quality]: string } = {
+        LOW: 'ShaunTheSheep128/',
+        MEDIUM: 'ShaunTheSheep256/',
+        HIGH: 'ShaunTheSheep/'
+    }
+
+    const shaunTheSheepRef = firebase.storage().ref(qualityMap[quality])
+
     useEffect(() => {
         isMounted.current = true;
         (async () => {
@@ -35,12 +48,6 @@ export const StickerPicker = ({isShow = false, onValueChanged}: StickerPickerPro
                 return {id: stickerRef.fullPath, url}
             }))
 
-
-            // let stickers = []
-            // for (const imageRef of result.items) {
-            //     const url = await imageRef.getDownloadURL();
-            //     stickers.push({id: imageRef.fullPath, url})
-            // }
             isMounted.current && setStickers(stickers)
         })();
 
@@ -58,7 +65,8 @@ export const StickerPicker = ({isShow = false, onValueChanged}: StickerPickerPro
                             <TouchableOpacity onPress={async () => {
                                 onValueChanged && onValueChanged(sticker.url)
                             }}>
-                                <Image style={styles.stickerImage} source={{uri: sticker.url}}/>
+                                {/*<Image style={styles.stickerImage} source={{uri: sticker.url}}/>*/}
+                                <CachedImage style={styles.stickerImage} source={{uri: sticker.url}}/>
                             </TouchableOpacity>
                         </View>
                     }))
