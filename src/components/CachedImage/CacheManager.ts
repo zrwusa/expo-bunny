@@ -9,7 +9,7 @@ const BASE_DIR = `${FileSystem.cacheDirectory}expo-image-cache/`;
 async function ensureCacheDirExists() {
     const dirInfo = await FileSystem.getInfoAsync(BASE_DIR);
     if (!dirInfo.exists) {
-        console.log("Gif directory doesn't exist, creating...");
+        console.log(`${BASE_DIR} directory doesn't exist, creating...`);
         await FileSystem.makeDirectoryAsync(BASE_DIR, {intermediates: true});
     }
 }

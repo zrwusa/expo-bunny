@@ -1,9 +1,9 @@
 import * as React from "react";
-import {Image as RNImage, ImageProps,ImageURISource} from "react-native";
+import {Image as RNImage, ImageProps, ImageURISource} from "react-native";
 import imageCacheManager from "./CacheManager";
 
 
-export interface CashedImageProps extends ImageProps{
+export interface CashedImageProps extends ImageProps {
     source: ImageURISource;
 }
 
@@ -14,9 +14,7 @@ interface CashedImageState {
 export class CachedImage extends React.Component<CashedImageProps, CashedImageState> {
     private mounted = false;
 
-    static defaultProps = {
-
-    };
+    static defaultProps = {};
 
     state = {
         sourceState: {uri: ''}
@@ -43,7 +41,7 @@ export class CachedImage extends React.Component<CashedImageProps, CashedImageSt
     }
 
     async load() {
-        const {source,onError} = this.props;
+        const {source, onError} = this.props;
         if (source?.uri) {
             try {
                 const cacheLabor = imageCacheManager.getCacheLabor(source.uri);
@@ -63,7 +61,7 @@ export class CachedImage extends React.Component<CashedImageProps, CashedImageSt
     }
 
     render() {
-        const {source,...rest} = this.props;
+        const {source, ...rest} = this.props;
         const {sourceState} = this.state;
         const isImageReady = sourceState && sourceState?.uri;
         return isImageReady
