@@ -5,14 +5,13 @@ import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from "../../../
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch, useSelector} from "react-redux";
 import {isLoaded, useFirestore, useFirestoreConnect} from "react-redux-firebase";
-import {firestoreTimestampToDate, randomDate, uuidV4} from "../../../utils";
+import {firestoreTimestampToDate, uuidV4} from "../../../utils";
 import {Keyboard, SafeAreaView, TouchableOpacity} from "react-native";
 import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from "../../../components";
 import {IcoMoon} from "../../../components/UI";
 import {FirestoreReducer} from "redux-firestore";
 import {getStyles} from "./styles";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
-import {firebase} from "../../../firebase/firebase";
 import {sysError} from "../../../store/actions";
 
 type ChatRoomRouteProp = RouteProp<DemoChatStackParam, 'ChatRoom'>;

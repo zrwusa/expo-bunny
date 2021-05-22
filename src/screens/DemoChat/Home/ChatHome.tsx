@@ -107,7 +107,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
         let tipTime = ''
 
         if (latestMessage) {
-            const createdAtTimestamp =  firestoreTimestampToDate(latestMessage.createdAt)
+            const createdAtTimestamp = firestoreTimestampToDate(latestMessage.createdAt)
             const date = dayJS(createdAtTimestamp)
             const now = new Date();
             const isToday = date.isToday();

@@ -1,10 +1,10 @@
-import {firebase} from "../firebase";
 import {conversations, datingConversations} from "./conversation";
 import {datingUsers} from "./user";
 import {IMMessage} from "../../types";
 import {randomDate} from "../../utils";
 import dayJS from "dayjs";
 import weekday from "dayjs/plugin/weekday"
+
 dayJS.extend(weekday)
 
 const demoVideo = "https://raw.githubusercontent.com/zrwusa/assets/master/videos/big-buck-bunny.mp4";
@@ -16,12 +16,12 @@ const demoAudio = "https://www.kozco.com/tech/LRMonoPhase4.wav";
 
 const lastWeek = dayJS().weekday(-7).toDate()
 
-const randomNeededDate = () => randomDate(new Date('2019-01-01'),new Date(),lastWeek,0.5)
+const randomNeededDate = () => randomDate(new Date('2019-01-01'), new Date(), lastWeek, 0.5)
 
 const groupChatMessagesTestBase: IMMessage[] = [
     {
         "_id": "chat-message-001",
-        "text":'',
+        "text": '',
         "user": {
             "name": "Pablo Rios",
             "avatar": 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fi.jpg?alt=media&token=e51deb19-6fa4-451a-b2fc-9e92f52db343',
@@ -37,7 +37,7 @@ const groupChatMessagesTestBase: IMMessage[] = [
     },
     {
         "_id": "chat-message-002",
-        "text":'',
+        "text": '',
         "user": {
             "name": "defaultName",
             "avatar": 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fj.jpg?alt=media&token=3b210a82-0e08-4080-a518-f3d7c25368a2',
