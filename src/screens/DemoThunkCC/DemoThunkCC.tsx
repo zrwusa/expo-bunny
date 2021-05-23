@@ -5,12 +5,10 @@ import {demoThunk} from "../../store/actions";
 import {DemoThunkPayload, DemoThunkState, RootState} from "../../types";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
-import {WithTranslation, withTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
-import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
-import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {getSharedStyles} from "../../helpers/shared-styles";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action>) => ({
@@ -18,8 +16,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action
 });
 
 interface Props extends ReturnType<typeof mapStateToProps>
-    , ReturnType<typeof mapDispatchToProps>, WithTranslation
-    , WithThemeLabor, WithSizeLabor {
+    , ReturnType<typeof mapDispatchToProps>, WithBunnyKit {
 }
 
 class DemoThunkCCScreen extends React.Component<Props> {
@@ -38,8 +35,8 @@ class DemoThunkCCScreen extends React.Component<Props> {
     }
 
     render(): React.ReactNode {
-        const {text, id, t, sizeLabor, themeLabor} = this.props;
-        const {theme} = themeLabor;
+        const {text, id, bunnyKit} = this.props;
+        const {sizeLabor, themeLabor, t} = bunnyKit;
         const st = shortenTFunctionKey(t, 'screens.DemoThunkCC');
         const containerStyles = getContainerStyles(sizeLabor, themeLabor);
         const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
@@ -54,4 +51,4 @@ class DemoThunkCCScreen extends React.Component<Props> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withThemeLabor(withSizeLabor(DemoThunkCCScreen))));
+export default connect(mapStateToProps, mapDispatchToProps)(withBunnyKit(DemoThunkCCScreen));

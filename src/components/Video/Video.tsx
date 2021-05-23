@@ -2,16 +2,15 @@ import * as React from "react";
 import {createRef} from "react";
 import {AVPlaybackStatus, Video, VideoProps} from "../../../packages/expo-av/src";
 import {Button, Text, View} from "../UI";
-import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
-import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 interface ShowVideoState {
     isPlaying: boolean,
     playbackStatus?: AVPlaybackStatus
 }
 
-export interface ShowVideoProps extends VideoProps, WithSizeLabor, WithThemeLabor {
+export interface ShowVideoProps extends VideoProps, WithBunnyKit {
     shouldShowStatus?: boolean,
     shouldShowButton?: boolean
 }
@@ -39,7 +38,8 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
 
     render() {
         const {isPlaying, playbackStatus} = this.state;
-        const {sizeLabor, themeLabor, onPlaybackStatusUpdate, shouldShowButton, shouldShowStatus, ...rest} = this.props;
+        const {bunnyKit, onPlaybackStatusUpdate, shouldShowButton, shouldShowStatus, ...rest} = this.props;
+        const {sizeLabor, themeLabor} = bunnyKit;
         const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View>
@@ -101,5 +101,5 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
     }
 }
 
-export const ShowVideo = withSizeLabor(withThemeLabor(ShowVideoInner));
+export const ShowVideo = withBunnyKit(ShowVideoInner);
 

@@ -11,9 +11,8 @@ import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
 import BunnyConstants from "../../constants/constants";
 import getStyles, {getCardSize} from "./styles";
 import {getContainerStyles} from "../../containers";
-import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
-import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import config from "../../config";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -27,7 +26,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMapState, void, Action>)
 
 export interface DemoMapProps extends ReturnType<typeof mapDispatchToProps>,
     ReturnType<typeof mapStateToProps>,
-    BareProps, WithSizeLabor, WithThemeLabor {
+    BareProps, WithBunnyKit {
 }
 
 class DemoMapScreen extends Component<DemoMapProps> {
@@ -62,9 +61,8 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 
     async componentDidMount() {
-        const {sizeLabor, themeLabor} = this.props;
-        const {designsBasedOn} = sizeLabor;
-        const {wp} = designsBasedOn.iphoneX;
+        const {bunnyKit} = this.props;
+        const {sizeLabor, themeLabor, wp} = bunnyKit;
         this.animation.addListener(({value}) => {
             let index = Math.floor(value / getCardSize(sizeLabor, themeLabor).width + wp(0.3)); // animate 30% away from landing on the next item
             if (index >= this.props.demoNearbyFilms.length) {
@@ -108,12 +106,10 @@ class DemoMapScreen extends Component<DemoMapProps> {
 
 
     render(): React.ReactNode {
-        const {sizeLabor, themeLabor} = this.props;
-        const {theme} = themeLabor;
-        const {designsBasedOn} = sizeLabor;
+        const {bunnyKit} = this.props;
+        const {sizeLabor, themeLabor, wp} = bunnyKit;
         const containerStyles = getContainerStyles(sizeLabor, themeLabor);
         const styles = getStyles(sizeLabor, themeLabor);
-        const {wp} = designsBasedOn.iphoneX;
         const {width} = getCardSize(sizeLabor, themeLabor);
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {
             const inputRange = [
@@ -193,7 +189,6 @@ class DemoMapScreen extends Component<DemoMapProps> {
                                 </View>
                             </View>
                         </TouchableOpacity>
-
                     ))}
                 </Animated.ScrollView>
             </View>
@@ -201,4 +196,4 @@ class DemoMapScreen extends Component<DemoMapProps> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withSizeLabor(withThemeLabor(DemoMapScreen)));
+export default connect(mapStateToProps, mapDispatchToProps)(withBunnyKit(DemoMapScreen));

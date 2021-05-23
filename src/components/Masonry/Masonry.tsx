@@ -3,12 +3,11 @@ import {View} from "../UI";
 import {ScaledImage} from "../ScalableImage/ScalableImage";
 import {uuid4} from "@sentry/utils";
 import {MasonryDatum, SocialMediaImageDatum} from "../../types";
-import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
-import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 
-export interface MasonryProps extends WithSizeLabor, WithThemeLabor {
+export interface MasonryProps extends WithBunnyKit {
     data: MasonryDatum<SocialMediaImageDatum>
 }
 
@@ -18,7 +17,8 @@ class MasonryInner extends React.PureComponent<MasonryProps> {
     }
 
     render(): React.ReactNode {
-        const {sizeLabor, themeLabor} = this.props
+        const {bunnyKit} = this.props
+        const {sizeLabor, themeLabor} = bunnyKit;
         const {wp} = sizeLabor.designsBasedOn.iphoneX
         const {column1, column2, column3} = this.props.data
 
@@ -46,4 +46,4 @@ class MasonryInner extends React.PureComponent<MasonryProps> {
     }
 }
 
-export const Masonry = withSizeLabor(withThemeLabor(MasonryInner))
+export const Masonry = withBunnyKit(MasonryInner)

@@ -1,11 +1,10 @@
 import React from "react";
 import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, View} from "react-native";
-import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
-import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import config from "../../config";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
-export interface ImageProgressiveProps extends WithSizeLabor, WithThemeLabor {
+export interface ImageProgressiveProps extends WithBunnyKit {
     previewSource: ImageSourcePropType,
     source: ImageSourcePropType,
     style: StyleProp<ImageStyle>,
@@ -35,10 +34,10 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
             previewSource,
             source,
             style,
-            sizeLabor,
-            themeLabor,
+            bunnyKit,
             ...rest
         } = this.props;
+        const {sizeLabor, themeLabor} = bunnyKit;
         const styles = getStyles(sizeLabor, themeLabor)
         return (
             <View style={styles.ImageProgressive.container}>
@@ -60,4 +59,4 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
     }
 }
 
-export default withSizeLabor(withThemeLabor(ImageProgressive));
+export default withBunnyKit(ImageProgressive);

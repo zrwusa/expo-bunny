@@ -120,7 +120,7 @@
     },
     "DemoThunkCC": {
       "title": "样例-Thunk & 类组件",
-      "thunkDispatch": "Thunk Dispatch",
+      "thunkDispatch": "Thunk 发送",
       "text": "text: ",
       "id": "id: "
     },

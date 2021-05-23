@@ -5,12 +5,11 @@ import {Avatar} from "../Avatar"
 import {Image, Text} from "react-native";
 import {ShowVideo} from "../Video/Video";
 import {ReadMore} from "../ReadMore/ReadMore";
-import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
-import {WithThemeLabor, withThemeLabor} from "../../providers/theme-labor";
 import {SocialMediaMainDatum} from "../../types";
 import {getStyles} from "./styles";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
-interface SocialMediaVideoCardProps extends WithSizeLabor, WithThemeLabor {
+interface SocialMediaVideoCardProps extends WithBunnyKit {
     card: SocialMediaMainDatum
 }
 
@@ -20,11 +19,8 @@ class SocialMediaVideoCardInner extends PureComponent<SocialMediaVideoCardProps>
     }
 
     render() {
-        const {sizeLabor, themeLabor} = this.props
-        const {designsBasedOn} = this.props.sizeLabor
-        const {theme} = this.props.themeLabor;
-        const {wp} = designsBasedOn.iphoneX
-        const {colors} = theme;
+        const {bunnyKit} = this.props
+        const {sizeLabor, themeLabor, wp, colors} = bunnyKit;
         const bottomBarIconColor = colors.text;
         const styles = getStyles(sizeLabor, themeLabor)
         const {category, user, userAvatar, avSource, imageSource, likes, comments} = this.props.card;
@@ -88,4 +84,4 @@ class SocialMediaVideoCardInner extends PureComponent<SocialMediaVideoCardProps>
 
 }
 
-export const SocialMediaVideoCard = withSizeLabor(withThemeLabor(SocialMediaVideoCardInner))
+export const SocialMediaVideoCard = withBunnyKit(SocialMediaVideoCardInner)

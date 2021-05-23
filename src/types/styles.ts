@@ -17,6 +17,8 @@ export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyl
 
 export type DimensionKeys = 'bunnyUI' | 'iphoneX' | 'iPad' | 'pixel2XL' | 'pcBrowser'
     | 'custom1' | 'custom2' | 'custom3';
+
+export type WPOrHP = (number: number, shouldRound?: boolean) => number;
 export type DimensionFun = {
     wp: (number: number, shouldRound?: boolean) => number,
     hp: (number: number, shouldRound?: boolean) => number
