@@ -30,7 +30,7 @@ export interface ChatHomeProps {
 }
 
 export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
-    const {sizeLabor, themeLabor, user, colors, wp, ms} = useBunnyKit()
+    const {sizeLabor, themeLabor, user, wp} = useBunnyKit()
     const styles = getStyles(sizeLabor, themeLabor)
 
     const firebaseUser = user?.firebaseUser;

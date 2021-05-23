@@ -1,13 +1,12 @@
 import * as React from "react";
 import {View} from "react-native";
-import {useSizeLabor} from "../../../../providers/size-labor";
-import {useThemeLabor} from "../../../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {Text} from "../../../../components/UI"
 import {Col, Row} from "../../../../containers";
 import {Divider} from "../../../../components/Divider";
 import {MonthKey} from "../../../../types";
 import {VictoryAxis, VictoryChart, VictoryLabel, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../../components/Victory/Victory";
+import {useBunnyKit} from "../../../../hooks/bunny-kit";
 
 export interface BodyPartCardProps {
     title?: string,
@@ -18,12 +17,8 @@ export interface BodyPartCardProps {
 }
 
 export function BodyPartChartCard(props: BodyPartCardProps) {
+    const {sizeLabor, themeLabor, theme, wp, ms} = useBunnyKit();
     const {title, children, bodyPart, month, data} = props;
-    const sizeLabor = useSizeLabor();
-    const {ms} = sizeLabor
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
-    const themeLabor = useThemeLabor();
-    const {theme} = themeLabor;
     const {colors, victory} = theme;
     const styles = getStyles(sizeLabor, themeLabor)
 

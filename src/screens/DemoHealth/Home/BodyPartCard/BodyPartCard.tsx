@@ -1,11 +1,10 @@
 import * as React from "react";
 import {View} from "react-native";
-import {useSizeLabor} from "../../../../providers/size-labor";
-import {useThemeLabor} from "../../../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {Text} from "../../../../components/UI"
 import {Col, Row} from "../../../../containers";
 import {LinearGradientIcon} from "../../../../components/LinearGradientIcon";
+import {useBunnyKit} from "../../../../hooks/bunny-kit";
 
 export interface BodyPartCardProps {
     title?: string,
@@ -15,12 +14,8 @@ export interface BodyPartCardProps {
 }
 
 export function BodyPartCard(props: BodyPartCardProps) {
+    const {sizeLabor, themeLabor, colors, ms} = useBunnyKit();
     const {title, children, bodyPart, date} = props;
-    const sizeLabor = useSizeLabor();
-    const {ms} = sizeLabor
-    const themeLabor = useThemeLabor();
-    const {theme} = themeLabor;
-    const {colors} = theme;
     const styles = getStyles(sizeLabor, themeLabor)
     return <View style={styles.bodyPartCard}>
         <Row style={{alignItems: 'flex-start'}}>

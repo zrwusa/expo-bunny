@@ -2,13 +2,11 @@ import React, {useState} from "react";
 import {Avatar, Button, List} from "react-native-paper";
 import RNPickerSelect from "react-native-picker-select";
 import {IconMC, View} from "../../components/UI";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Card, getContainerStyles, Row} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
 import {uuidV4} from "../../utils";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 interface Props {
     title?: string
@@ -17,15 +15,12 @@ interface Props {
 type States = { name: string, pickerValue: string }
 
 function DemoThirdPartScreen(props: Props) {
+    const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const [state, setState] = useState<States>({
         name: 'DemoThirdPart',
         pickerValue: 'football'
     })
 
-    const sizeLabor = useSizeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX;
-    const themeLabor = useThemeLabor();
-    const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.DemoThirdPart');
     const styles = getStyles(sizeLabor, themeLabor)
 

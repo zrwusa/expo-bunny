@@ -4,11 +4,8 @@ import {Platform, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from "../../../types";
 import {ButtonTO, InButtonText, PickerSelectChevronRight, Text} from "../../../components/UI";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers";
 import {Col, getContainerStyles, Row} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import * as Notifications from "expo-notifications";
 import {defaultNotification, registerForPushNotificationsAsync} from "../../../utils/expo-notification";
 import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings, sysError} from "../../../store/actions";
@@ -16,6 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getStyles} from "./styles";
 import {getSharedStyles} from "../../../utils";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyAlert'>;
 type CryptoCurrencyAlertNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -26,12 +24,10 @@ export interface CryptoCurrencyAlertProps {
 }
 
 export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCurrencyAlertProps) {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.CryptoCurrencyAlert');
     const i18nSysPrefix = 'sys';
     const stSys = shortenTFunctionKey(t, i18nSysPrefix);
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)

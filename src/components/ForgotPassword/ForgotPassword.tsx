@@ -3,10 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import {Row} from "../../containers/Row";
 import {collectBLResult, sysError} from "../../store/actions";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {useDispatch} from "react-redux";
@@ -17,6 +14,7 @@ import {InputCard} from "../../containers/InputCard";
 import {LinearGradientIcon} from "../LinearGradientIcon";
 import {blError} from "../../helpers";
 import {Col} from "../../containers/Col";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 type ForgotPasswordRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type ForgotPasswordNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -30,12 +28,8 @@ export interface ForgotPasswordProps {
 }
 
 export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: ForgotPasswordProps) => {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
     const dispatch = useDispatch();

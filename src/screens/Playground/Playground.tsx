@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 import {Text, TextButton, View} from "../../components/UI";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {Button, FlatList, TouchableOpacity, Vibration} from "react-native";
 import {getStyles} from "./styles";
-import {useSizeLabor} from "../../providers/size-labor";
 import {useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types";
@@ -12,10 +10,10 @@ import {randomDate, uuidV4, wait} from "../../utils";
 import {ProgressBar} from "react-native-paper";
 import {Card} from "../../containers/Card";
 import {CachedImage} from "../../components/CachedImage";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export function PlaygroundScreen() {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
+    const {sizeLabor, themeLabor} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
     const [progress, setProgress] = useState(0);
     const handleMigrate = async () => {

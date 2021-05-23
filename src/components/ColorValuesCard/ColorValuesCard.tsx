@@ -3,15 +3,13 @@ import {Text, View} from "../UI";
 import {CopyableText} from "../CopyableText";
 import React from "react";
 import {getStyles} from "./styles";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | ColorDiffWithPaletteItem | ColorInputItem }) => {
+    const {sizeLabor, themeLabor} = useBunnyKit();
     const {item} = props
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor)
     return <View>
         <Row paddingVertical="m">

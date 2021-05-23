@@ -6,19 +6,19 @@ import {useDispatch} from "react-redux";
 import {sysError} from "../../store/actions";
 import * as ImagePicker from "expo-image-picker";
 import * as Sharing from "expo-sharing";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {getSharedStyles} from "../../utils";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export type SelectedImage = {
     localUri: string
 }
 
 function DemoShareScreen() {
-    const {t} = useTranslation();
+    const {t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DemoShare');
     const dispatch = useDispatch();
     const onShare = async () => {

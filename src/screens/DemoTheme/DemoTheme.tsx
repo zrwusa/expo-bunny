@@ -1,22 +1,18 @@
 import React from "react";
 import {ScrollView} from "react-native";
 import {Button, ButtonTO, InButtonText, LinearGradientButton, Text, View} from "../../components/UI";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getStyles} from "./styles";
 import BunnyConstants from "../../constants/constants";
 import {Card, getContainerStyles, Row} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getSharedStyles} from "../../utils";
 // import {LinearGradient} from "expo-linear-gradient";
 import Svg, {Defs, Ellipse, RadialGradient, Rect, Stop,} from 'react-native-svg';
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 const DemoThemeScreen = () => {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DemoTheme');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);

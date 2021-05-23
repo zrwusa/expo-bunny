@@ -6,10 +6,7 @@ import {LinearGradientIcon} from "../LinearGradientIcon";
 import {Row} from "../../containers/Row";
 import * as FirebaseRecaptcha from "expo-firebase-recaptcha";
 import {FIREBASE_CONFIG} from "../../firebase";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {RouteProp} from "@react-navigation/native";
@@ -18,6 +15,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {useDispatch} from "react-redux";
 import {collectBLResult} from "../../store/actions";
 import {navToReference} from "../../helpers";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 type FirebasePhoneLoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type FirebasePhoneLoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -28,12 +26,8 @@ export interface FirebasePhoneLoginProps {
 }
 
 export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps) => {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {ms, designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX
     const styles = getStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()
     const dispatch = useDispatch()

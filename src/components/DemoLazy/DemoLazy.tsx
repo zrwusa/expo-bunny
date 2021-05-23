@@ -1,16 +1,14 @@
 import React from "react";
 import {Text, View} from "../UI"
 import {getStyles} from "./styles";
-import {useThemeLabor} from "../../providers/theme-labor";
-import {useSizeLabor} from "../../providers/size-labor";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 interface Props {
     title: string
 }
 
 export const DemoLazy = (props: Props) => {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
+    const {sizeLabor, themeLabor} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
     return (
         <View>

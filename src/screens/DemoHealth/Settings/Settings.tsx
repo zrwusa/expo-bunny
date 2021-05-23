@@ -3,17 +3,15 @@ import {useState} from "react";
 import {IcoMoon, PickerSelect, SwitchP, Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoHealthTabStackParam, RootStackParam} from "../../../types";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {Card, getContainerStyles, Row} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {Divider} from "../../../components/Divider";
 import {LinearGradientIcon} from "../../../components/LinearGradientIcon";
 import {getStyles} from "./styles";
 import {Col} from "../../../containers/Col";
 import {SafeAreaView, ScrollView, TouchableOpacity} from "react-native";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type HealthSettingsRouteProp = RouteProp<DemoHealthTabStackParam, 'HealthSettings'>;
 type HealthSettingsNavigationProp = StackNavigationProp<RootStackParam, 'DemoHealth'>;
@@ -24,13 +22,8 @@ export interface HealthSettingsProps {
 }
 
 export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, colors, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.HealthSettings');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {theme} = themeLabor;
-    const {colors} = theme;
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     const styles = getStyles(sizeLabor, themeLabor)

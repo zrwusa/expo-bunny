@@ -2,10 +2,7 @@ import {InButtonText, LinearGradientButton, TextInputIcon, View} from "../../com
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getContainerStyles, InputCard, Row} from "../../containers";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {RouteProp} from "@react-navigation/native";
@@ -18,6 +15,7 @@ import {LoginVector} from "../../components/LoginVector";
 import {getSharedStyles} from "../../helpers/shared-styles";
 import {getStyles} from "./styles";
 import {navToReference} from "../../helpers";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 type SignUpRouteProp = RouteProp<AuthTopStackParam, 'SignUp'>;
 type SignUpNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -28,13 +26,9 @@ export interface SignUpProps {
 }
 
 export function SignUpScreen({route, navigation}: SignUpProps) {
+    const {sizeLabor, themeLabor, colors, wp, theme, t, ms} = useBunnyKit();
     const dispatch = useDispatch();
-    const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {ms, designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX;
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);

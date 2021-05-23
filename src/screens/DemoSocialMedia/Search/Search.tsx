@@ -2,11 +2,8 @@ import * as React from "react";
 import {useEffect, useMemo, useState} from "react";
 import {RouteProp} from "@react-navigation/native";
 import {DemoSocialMediaTabStackParam, MasonryDatum, RootStackParam, RootState, SocialMediaImageDatum} from "../../../types";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {Animated, Platform, SafeAreaView} from "react-native";
 import {uuid4} from "@sentry/utils";
@@ -17,6 +14,7 @@ import {useSelector} from "react-redux";
 import {isLoaded, useFirebase, useFirestoreConnect} from "react-redux-firebase";
 import config from "../../../config";
 import {Preparing} from "../../../components/Preparing";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSearch'>;
 type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
@@ -27,6 +25,7 @@ export interface SocialMediaSearchProps {
 }
 
 export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchProps) {
+    const {sizeLabor, themeLabor, wp, t} = useBunnyKit();
     const firebase = useFirebase();
     const getSocialMediaImages = async () => {
         await firebase.watchEvent('value', 'socialMediaImages', 'socialMediaImages')
@@ -36,11 +35,7 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
     ])
     const socialMediaImages = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaImages)
 
-    const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.SocialMediaSearch');
-    const sizeLabor = useSizeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
     const [MasonryData, setMasonryData] = useState<MasonryDatum<SocialMediaImageDatum>[]>([])

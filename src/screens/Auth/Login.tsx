@@ -2,10 +2,7 @@ import {InButtonText, LinearGradientButton, Text, TextInputIcon, View} from "../
 import * as React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getContainerStyles, InputCard, Row} from "../../containers";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {RouteProp} from "@react-navigation/native";
@@ -20,6 +17,7 @@ import {FirebasePhoneLogin} from "../../components/FirebasePhoneLogin";
 import {Tab} from "../../components/Tab";
 import {ForgotPassword} from "../../components/ForgotPassword";
 import {navToReference} from "../../helpers";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 type LoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type LoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -30,12 +28,8 @@ export interface LoginProps {
 }
 
 export function LoginScreen({route, navigation}: LoginProps) {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, wp, t, ms} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {ms, designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor()

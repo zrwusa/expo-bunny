@@ -3,11 +3,8 @@ import {useEffect, useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from "../../../types";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../components/Victory/Victory";
 import nomicsAPI from "../../../helpers/nomics-api";
 import {getStyles} from "./styles";
@@ -19,6 +16,7 @@ import {blError} from "../../../helpers";
 import {ScrollView} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {Tab} from "../../../components";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyHome'>;
 type CryptoCurrencyHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -31,20 +29,16 @@ export interface CryptoCurrencyHomeProps {
 let source: CancelTokenSource;
 
 function CryptoCurrencyHomeScreen() {
+    const {sizeLabor, themeLabor, wp, t, ms} = useBunnyKit();
     const types = ['BTC', 'ETH'];
     const dateRanges = ['1d', '1w', '1m', '1y'];
-    const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.CryptoCurrencyHome');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const dispatch = useDispatch();
     const {victory} = themeLabor.theme;
     const {Screen, Box} = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const {} = sharedStyles;
     const styles = getStyles(sizeLabor, themeLabor)
-    const {ms, designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX;
     const [btcData, setBtcData] = useState([
         {x: new Date('1990-01-01'), y: 5}
     ]);

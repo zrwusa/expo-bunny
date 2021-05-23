@@ -1,9 +1,8 @@
 import React from "react";
 import {StyleProp, View, ViewStyle} from "react-native";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {SizeKeys} from "../../types";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export interface DividerProps {
     isVertical?: boolean,
@@ -16,9 +15,7 @@ export type SizeVerticalMap = {
 }
 
 export function Divider(props: DividerProps) {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
     const {isVertical, size, style} = props
     const sizeVerticalMap: SizeVerticalMap = {

@@ -3,17 +3,15 @@ import {ScrollView, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParam} from "../../types";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Card, getContainerStyles} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {useAuthLabor} from "../../providers/auth-labor";
 import {useDispatch} from "react-redux";
 import {sysError} from "../../store/actions";
 import {Divider} from "../../components/Divider";
 import {getStyles} from "./styles";
 import {InlineJump} from "../../components/InlineJump";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -25,12 +23,9 @@ export interface HomeScreenProps {
 
 
 function HomeScreen({navigation}: HomeScreenProps) {
+    const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const dispatch = useDispatch();
-    const {t} = useTranslation();
     const st = shortenTFunctionKey(t, 'screens.Home');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
     const {authFunctions} = useAuthLabor();

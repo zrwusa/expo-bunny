@@ -3,12 +3,10 @@ import {Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View
 import {Button, Text, TextInput} from "../../../components/UI";
 import {getStyles} from "./styles";
 import {getContainerStyles} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 function RNKeyboardAvoidingScreen() {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
+    const {sizeLabor, themeLabor} = useBunnyKit();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
 

@@ -4,11 +4,11 @@ import {Button, Text, View} from "../../components/UI";
 import {Platform} from 'react-native';
 import {defaultNotification, registerForPushNotificationsAsync, schedulePushNotification} from "../../utils/expo-notification";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {useTranslation} from "react-i18next";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 
 export default function DemoNotificationScreen() {
-
+    const {t} = useBunnyKit();
     let notificationReceivedListener = {
         remove: () => {
         }
@@ -22,7 +22,6 @@ export default function DemoNotificationScreen() {
     // const notificationListener = useRef();
     // const responseListener = useRef();
 
-    const {t} = useTranslation()
     const i18nSysPrefix = 'sys';
     const stSys = shortenTFunctionKey(t, i18nSysPrefix);
 

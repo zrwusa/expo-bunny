@@ -2,21 +2,17 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {demoHello} from "../../store/actions";
 import {Button, Text, View} from "../../components/UI";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {RootState} from "../../types";
 import {getSharedStyles} from "../../helpers/shared-styles";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 function DemoFCReduxHookScreen() {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DemoFCReduxHook');
     const dispatch = useDispatch();
     const demoHelloState = useSelector((rootState: RootState) => rootState.demoHelloState);
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 

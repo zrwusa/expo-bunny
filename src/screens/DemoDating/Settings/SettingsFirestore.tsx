@@ -3,11 +3,8 @@ import {useEffect, useState} from "react";
 import {View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoDatingTabStackParam, RootState} from "../../../types";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {Col, getContainerStyles, Row} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {getSharedStyles} from "../../../helpers/shared-styles";
 import {ImageUploader} from "../../../components/ImageUploader";
@@ -17,6 +14,7 @@ import {useFirestore, useFirestoreConnect} from "react-redux-firebase";
 import {useDispatch, useSelector} from "react-redux";
 import {useAuthLabor} from "../../../providers/auth-labor";
 import {sysError} from "../../../store/actions";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
 type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;
@@ -27,11 +25,8 @@ export interface DatingSettingsProps {
 }
 
 export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, wp, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DatingSettings');
-    const sizeLabor = useSizeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);

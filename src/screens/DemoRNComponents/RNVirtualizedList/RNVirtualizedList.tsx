@@ -4,7 +4,7 @@ import {Text} from "../../../components/UI"
 import {getStyles} from "./styles";
 import {useThemeLabor} from "../../../providers/theme-labor";
 import {getContainerStyles} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type VirtualizedListItem = {
     id: string;
@@ -12,8 +12,7 @@ type VirtualizedListItem = {
 }
 
 function RNVirtualizedListScreen() {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
+    const {sizeLabor, themeLabor} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 

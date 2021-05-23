@@ -1,14 +1,12 @@
 import React from "react";
 import {SafeAreaView, SectionList, View} from "react-native";
 import {Text} from "../../../components/UI";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {getContainerStyles} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 function SectionListScreen() {
-    const themeLabor = useThemeLabor()
-    const {colors} = themeLabor.theme;
+    const {sizeLabor, themeLabor, colors} = useBunnyKit();
     const SECTION_LIST_DATA = [
         {
             title: "Main dishes",
@@ -41,7 +39,6 @@ function SectionListScreen() {
             <Text style={{fontSize: 24}}>{title}</Text>
         </View>
     );
-    const sizeLabor = useSizeLabor();
     const styles = getStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 

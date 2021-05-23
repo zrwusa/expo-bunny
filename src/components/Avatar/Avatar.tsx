@@ -1,10 +1,9 @@
 import React from "react";
 import {Image, ImageSourcePropType, ImageStyle, ImageURISource, StyleProp} from "react-native";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {SizeKeys} from "../../types";
 import {ImageUploader, ImageUploaderProps} from "../ImageUploader";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export interface AvatarProps {
     source: ImageSourcePropType,
@@ -20,9 +19,7 @@ export type SizeAvatarMap = {
 }
 
 export function Avatar(props: AvatarProps) {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
     const {size, source, style, shouldUpload = false, uploaderProps, isBorder = true} = props
     const finalSize: SizeKeys = size || 'm';

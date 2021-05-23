@@ -14,15 +14,13 @@ import {
     View
 } from "react-native";
 import {Button, Pressable, Text, TextInput, TouchableOpacity} from "../../../components/UI";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles, Row} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {getStyles} from "./styles";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 function RNHome() {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.RNHome');
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
@@ -39,8 +37,6 @@ function RNHome() {
     const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const {
         home,
         imageStyles,

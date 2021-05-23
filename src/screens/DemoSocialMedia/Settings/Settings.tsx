@@ -2,14 +2,12 @@ import * as React from "react";
 import {Text} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoSocialMediaTabStackParam, RootStackParam} from "../../../types";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {Card, getContainerStyles} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {SafeAreaView} from "react-native";
 import {getStyles} from "./styles";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 
 type SocialMediaSettingsRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSettings'>;
@@ -21,11 +19,8 @@ export interface SocialMediaSettingsProps {
 }
 
 export function SocialMediaSettingsScreen({route, navigation}: SocialMediaSettingsProps) {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.SocialMediaSettings');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {theme} = themeLabor
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
 

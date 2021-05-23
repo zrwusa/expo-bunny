@@ -1,8 +1,6 @@
 import * as React from "react";
 import {View} from "../../components/UI";
 import {getContainerStyles} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {RouteProp} from "@react-navigation/native";
 import {RootStackParam} from "../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -12,6 +10,7 @@ import {getStyles} from "./styles";
 import {LoginScreen} from "./Login";
 import {SignUpScreen} from "./SignUp";
 import {useTranslation} from "react-i18next";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Auth'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -29,14 +28,9 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
             isLoginScreen = (route.name === 'Auth' && route.params.screen === 'Login')
         }
     }
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
+    const {sizeLabor, themeLabor, colors, wp, theme} = useBunnyKit();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
-    const {theme} = themeLabor;
-    const {colors} = theme;
-    const {designsBasedOn} = sizeLabor;
-    const {wp} = designsBasedOn.iphoneX;
     const {t} = useTranslation()
     return (
         <SafeAreaView style={[containerStyles.Screen]}>

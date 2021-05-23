@@ -3,10 +3,9 @@ import {IcoMoon, View} from "../UI";
 import MaskedView from '@react-native-community/masked-view'
 import {LinearGradient, LinearGradientProps} from 'expo-linear-gradient';
 import {getStyles} from "./styles";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {IcoMoonProps} from "../../types";
 import {StyleProp, TextStyle} from "react-native";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export type LinearGradientIconProps = IcoMoonProps & Omit<LinearGradientProps, 'colors'> & {
     colors?: string[],
@@ -14,12 +13,10 @@ export type LinearGradientIconProps = IcoMoonProps & Omit<LinearGradientProps, '
 }
 
 export function LinearGradientIcon(props: LinearGradientIconProps) {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
+    const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const {theme} = themeLabor;
     const {name, size, colors, start, end, locations, ...rest} = props;
     const {designsBasedOn} = sizeLabor
-    const {wp} = designsBasedOn.iphoneX
     const finalSize = size || wp(20),
         colorsDefault = [theme.colors.btnBackground, theme.colors.btnBackground2],
         startDefault = {x: 0, y: 0},

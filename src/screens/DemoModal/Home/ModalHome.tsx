@@ -2,14 +2,12 @@ import * as React from "react";
 import {View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types";
 import {getContainerStyles} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {getSharedStyles} from "../../../utils";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;
@@ -20,10 +18,8 @@ export interface ModalHomeProps {
 }
 
 function ModalHomeScreen({route, navigation}: ModalHomeProps) {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.ModalHome');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 

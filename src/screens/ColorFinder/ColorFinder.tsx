@@ -1,11 +1,9 @@
 import React, {useState} from "react";
 import {ButtonTO, InButtonText, Text, TextInput, View} from "../../components/UI";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {checkColor, colorFaultTolerance, deltaEDes, diffColors} from "../../utils/color";
 import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem, PaletteKeys, ThemeColorKeys, ThemeName} from "../../types";
 import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from "react-native";
 import {getStyles} from "./styles";
-import {useSizeLabor} from "../../providers/size-labor";
 import {palette, uuidV4} from "../../utils";
 import {Card, Col, Row} from "../../containers";
 import {collectBLResult} from "../../store/actions";
@@ -14,17 +12,15 @@ import {useDispatch} from "react-redux";
 import {ColorTranslator} from "colortranslator";
 import {CopyableText} from "../../components/CopyableText";
 import {ColorValuesCard} from "../../components/ColorValuesCard";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {Tab} from "../../components";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export type UglyColorType = 'Beautiful' | 'RGB' | 'Hex' | 'HSL';
 
 export function ColorFinderScreen() {
-    const {t} = useTranslation()
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.ColorFinder')
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const dispatch = useDispatch()
     const {themes} = themeLabor;
     const styles = getStyles(sizeLabor, themeLabor)

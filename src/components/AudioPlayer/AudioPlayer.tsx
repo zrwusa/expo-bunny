@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import {ActivityIndicator, StyleProp, TouchableOpacity, View, ViewStyle} from "react-native";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getStyles} from "./styles";
 import {IcoMoon, Text} from "../UI";
 import {AVPlaybackSource, AVPlaybackStatus} from "../../../packages/expo-av/src/AV";
 import {Audio} from "../../../packages/expo-av/src";
 import {ProgressBar} from "react-native-paper";
 import {minuted} from "../../utils";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export interface AudioPlayerProps {
     source: AVPlaybackSource,
@@ -20,9 +19,7 @@ export interface AudioPlayerProps {
 }
 
 export function AudioPlayer(props: AudioPlayerProps) {
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {sizeLabor, themeLabor} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
     const {source, style, onLoad, onLoadStart, onLoadEnd, onError, isDebug = false} = props
     const soundRef = useRef<Audio.Sound>()

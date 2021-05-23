@@ -5,16 +5,14 @@ import {getDemoSagas} from "../../store/actions";
 import {RootState} from "../../types";
 import {getSharedStyles} from "../../helpers/shared-styles";
 import {getContainerStyles} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 
 function DemoSagaScreen() {
+    const {sizeLabor, themeLabor} = useBunnyKit();
     const dispatch = useDispatch();
     const demoSagaState = useSelector((rootState: RootState) => rootState.demoSagaState);
     const {items} = demoSagaState;
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 

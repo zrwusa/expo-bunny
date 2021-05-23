@@ -5,24 +5,20 @@ import {saveDemoSagaFirebaseTodo} from "../../store/actions";
 import {RootState} from "../../types";
 import {getSharedStyles} from "../../helpers/shared-styles";
 import {Col, getContainerStyles, Row} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {useFirebaseConnect} from "react-redux-firebase";
 import {getStyles} from "./styles";
 import {randomText} from "../../utils";
 import {FlatList} from "react-native";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {useTranslation} from "react-i18next";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 
 export function DemoSagaFirebaseScreen() {
+    const {sizeLabor, themeLabor, t} = useBunnyKit();
     const dispatch = useDispatch();
     useFirebaseConnect([{path: 'todoList', queryParams: ['limitToLast=100']}])
     const todoList = useSelector((rootState: RootState) => rootState.firebaseState.ordered.todoList)
-    const {t} = useTranslation()
     const st = shortenTFunctionKey(t, 'screens.DemoSagaFirebase')
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);

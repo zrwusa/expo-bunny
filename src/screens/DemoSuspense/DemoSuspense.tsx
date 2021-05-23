@@ -1,11 +1,9 @@
 import React from 'react';
 import {Text, View} from "../../components/UI";
-import {useTranslation} from "react-i18next";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
 import {getSharedStyles, wait} from "../../utils";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
 const DemoLazy100 = React.lazy(async () => {
         const module = await import('../../components/DemoLazy/DemoLazy')
@@ -22,10 +20,8 @@ const DemoLazy2000 = React.lazy(async () => {
 );
 
 export const DemoSuspenseScreen = () => {
-    const {t} = useTranslation();
+    const {sizeLabor, themeLabor, theme, colors, wp, t, ms} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DemoSuspense');
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 

@@ -1,10 +1,9 @@
 import React from "react";
 import {Image, View} from "react-native";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
 import {Col, getContainerStyles, Row} from "../../../containers";
 import {getSharedStyles} from "../../../helpers/shared-styles";
 import {IcoMoon} from "../../../components/UI";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 export interface CardItemProps {
     description?: string;
@@ -17,11 +16,7 @@ export interface CardItemProps {
 }
 
 const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches, name,}: CardItemProps) => {
-
-    const sizeLabor = useSizeLabor();
-    const themeLabor = useThemeLabor();
-    const {colors} = themeLabor.theme;
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {sizeLabor, themeLabor, colors, wp} = useBunnyKit();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles, sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     const imageStyle = [

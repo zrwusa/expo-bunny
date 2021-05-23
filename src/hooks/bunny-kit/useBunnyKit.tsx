@@ -17,5 +17,5 @@ export const useBunnyKit = () => {
     const {colors} = theme;
     const {authResult, authFunctions} = authLabor;
     const {user} = authResult;
-    return {sizeLabor, themeLabor, authLabor, wp, hp, ms, t, colors, user, authFunctions}
+    return {sizeLabor, themeLabor, authLabor, theme, wp, hp, ms, t, colors, user, authFunctions}
 };
