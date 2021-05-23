@@ -15,8 +15,8 @@ import {
     ViewStyle,
 } from 'react-native'
 
-import LoadEarlier from './LoadEarlier'
-import Message from './Message'
+import LoadEarlier, {LoadEarlierProps} from './LoadEarlier'
+import Message, {MessageProps} from './Message'
 import Color from './Color'
 import {IMessage, Reply, User} from './Models'
 import {warning} from './utils'
@@ -63,32 +63,65 @@ const styles = StyleSheet.create({
     },
 })
 
-export interface MessageContainerProps<TMessage extends IMessage> {
-    messages?: TMessage[]
+
+export interface MessageContainerProps<TMessage extends IMessage> extends Omit<MessageProps<TMessage>, 'key' | 'position' | 'currentMessage'>, LoadEarlierProps {
+
+    forwardRef?: RefObject<FlatList<IMessage>>
     isTyping?: boolean
-    user?: User
-    listViewProps: Partial<ListViewProps>
     inverted?: boolean
+    scrollToBottomOffset?: number
+    messages?: TMessage[]
+
+
+    scrollToBottomStyle?: StyleProp<ViewStyle>
+    user?: User
+    infiniteScroll?: boolean
+    isLoadingEarlier?: boolean
     loadEarlier?: boolean
+
+    onLoadEarlier?(): void
+
     alignTop?: boolean
     scrollToBottom?: boolean
-    scrollToBottomStyle?: StyleProp<ViewStyle>
-    invertibleScrollViewProps?: any
     extraData?: any
-    scrollToBottomOffset?: number
-    forwardRef?: RefObject<FlatList<IMessage>>
-
-    renderChatEmpty?(): React.ReactNode
+    invertibleScrollViewProps?: any
+    listViewProps: Partial<ListViewProps>
 
     renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
 
-    renderMessage?(props: Message['props']): React.ReactNode
+    renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
 
-    renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
+    renderMessage?(props: MessageProps<TMessage>): React.ReactNode
 
-    scrollToBottomComponent?(): React.ReactNode
+    renderChatEmpty?(): React.ReactNode
 
-    onLoadEarlier?(): void
+    renderScrollToBottom?(): React.ReactNode
+
+    // messages?: TMessage[]
+    // isTyping?: boolean
+    // user?: User
+    // listViewProps: Partial<ListViewProps>
+    // inverted?: boolean
+    // loadEarlier?: boolean
+    // alignTop?: boolean
+    // scrollToBottom?: boolean
+    // scrollToBottomStyle?: StyleProp<ViewStyle>
+    // invertibleScrollViewProps?: any
+    // extraData?: any
+    // scrollToBottomOffset?: number
+    // forwardRef?: RefObject<FlatList<IMessage>>
+
+    // renderChatEmpty?(): React.ReactNode
+
+    // renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
+
+    // renderMessage?(props: Message['props']): React.ReactNode
+
+    // renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
+
+    // renderScrollToBottom?(): React.ReactNode
+
+    // onLoadEarlier?(): void
 
     onQuickReply?(replies: Reply[]): void
 
@@ -100,8 +133,8 @@ export interface MessageContainerProps<TMessage extends IMessage> {
 
     // onMessageLoadError?(e:Error,currentMessage: TMessage): void
 
-    infiniteScroll?: boolean
-    isLoadingEarlier?: boolean
+    // infiniteScroll?: boolean
+    // isLoadingEarlier?: boolean
 }
 
 interface State {
@@ -121,14 +154,6 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         },
         onQuickReply: () => {
         },
-        // onMessageLoad: () => {
-        // },
-        // onMessageLoadStart: () => {
-        // },
-        // onMessageLoadEnd: ()=> {
-        // },
-        // onMessageLoadError: (e:Error) => {
-        // },
         inverted: true,
         loadEarlier: false,
         listViewProps: {},
@@ -164,9 +189,34 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
 
     renderLoadEarlier = () => {
         if (this.props.loadEarlier === true) {
+            // const loadEarlierProps = {
+            //     ...this.props,
+            // }
+            const {
+                onLoadEarlier,
+                isLoadingEarlier,
+                loadEarlierLabel,
+                loadEarlierContainerStyle,
+                loadEarlierWrapperStyle,
+                loadEarlierTextStyle,
+                activityIndicatorStyle,
+                activityIndicatorColor,
+                activityIndicatorSize,
+                isDebug
+            } = this.props
             const loadEarlierProps = {
-                ...this.props,
+                onLoadEarlier,
+                isLoadingEarlier,
+                loadEarlierLabel,
+                loadEarlierContainerStyle,
+                loadEarlierWrapperStyle,
+                loadEarlierTextStyle,
+                activityIndicatorStyle,
+                activityIndicatorColor,
+                activityIndicatorSize
             }
+
+            isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level2]MessageContainer loadEarlierProps', loadEarlierProps)
             if (this.props.renderLoadEarlier) {
                 return this.props.renderLoadEarlier(loadEarlierProps)
             }
@@ -230,25 +280,184 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
             }
             item.user = {_id: 0}
         }
-        const {messages, user, inverted, ...restProps} = this.props
+        const {messages, user, inverted} = this.props
         if (messages && user) {
             const previousMessage =
                 (inverted ? messages[index + 1] : messages[index - 1]) || {}
             const nextMessage =
                 (inverted ? messages[index - 1] : messages[index + 1]) || {}
+            const {
+                audioContainerStyle,
+                audioStyle,
+                audioProps,
+                avatarContainerStyle,
+                avatarImageStyle,
+                avatarTextStyle,
+                bubbleWrapperStyle,
+                bubbleContainerStyle,
+                bottomContainerStyle,
+                customTextStyle,
+                containerToPreviousStyle,
+                containerToNextStyle,
+                quickRepliesColor,
+                dateFormat,
+                dayContainerStyle,
+                dayTextProps,
+                dayTextStyle,
+                dayWrapperStyle,
+                isCustomViewBottom,
+                imageStyle,
+                imageProps,
+                imageContainerStyle,
+                isDebug,
+                keepReplies,
+                lightBoxProps,
+                linkStyle,
+                messageContainerStyle,
+                optionTitles,
+                onLongPress,
+                onMessageLoad,
+                onMessageLoadEnd,
+                onMessageLoadError,
+                onMessageLoadStart,
+                onMessageReadyForDisplay,
+                onPress,
+                onQuickReply,
+                onLongPressAvatar,
+                onMessageLayout,
+                onPressAvatar,
+                parsePatterns,
+                quickReplyStyle,
+                renderCustomView,
+                renderMessageAudio,
+                renderMessageImage,
+                renderMessageSticker,
+                renderMessageText,
+                renderMessageVideo,
+                renderQuickReplies,
+                renderQuickReplySend,
+                renderTicks,
+                renderTime,
+                renderUsernameOnMessage,
+                renderAvatar,
+                renderAvatarOnTop,
+                renderBubble,
+                renderDay,
+                renderSystemMessage,
+                stickerProps,
+                stickerContainerStyle,
+                sendText,
+                stickerStyle,
+                shouldUpdateMessage,
+                showAvatarForEveryMessage,
+                showUserAvatar,
+                systemMessageContainerStyle,
+                systemMessageWrapperStyle,
+                systemTextStyle,
+                touchableProps,
+                timeTextStyle,
+                timeFormat,
+                timeContainerStyle,
+                tickStyle,
+                textStyle,
+                textProps,
+                textContainerStyle,
+                usernameStyle,
+                videoContainerStyle,
+                videoStyle,
+                videoProps
+            } = this.props
 
-            const messageProps: Message['props'] = {
-                ...restProps,
+            const messageProps: MessageProps<TMessage> = {
+                audioContainerStyle,
+                audioStyle,
+                audioProps,
+                avatarContainerStyle,
+                avatarImageStyle,
+                avatarTextStyle,
+                bubbleWrapperStyle,
+                bubbleContainerStyle,
+                bottomContainerStyle,
+                customTextStyle,
+                containerToPreviousStyle,
+                containerToNextStyle,
+                quickRepliesColor,
+                dateFormat,
+                dayContainerStyle,
+                dayTextProps,
+                dayTextStyle,
+                dayWrapperStyle,
+                isCustomViewBottom,
+                imageStyle,
+                imageProps,
+                imageContainerStyle,
+                isDebug,
+                keepReplies,
+                lightBoxProps,
+                linkStyle,
+                messageContainerStyle,
+                nextMessage,
+                optionTitles,
+                onLongPress,
+                onMessageLoad,
+                onMessageLoadEnd,
+                onMessageLoadError,
+                onMessageLoadStart,
+                onMessageReadyForDisplay,
+                onPress,
+                onQuickReply,
+                onLongPressAvatar,
+                onMessageLayout,
+                onPressAvatar,
+                parsePatterns,
+                previousMessage,
+                quickReplyStyle,
+                renderCustomView,
+                renderMessageAudio,
+                renderMessageImage,
+                renderMessageSticker,
+                renderMessageText,
+                renderMessageVideo,
+                renderQuickReplies,
+                renderQuickReplySend,
+                renderTicks,
+                renderTime,
+                renderUsernameOnMessage,
+                renderAvatar,
+                renderAvatarOnTop,
+                renderBubble,
+                renderDay,
+                renderSystemMessage,
+                stickerProps,
+                stickerContainerStyle,
+                sendText,
+                stickerStyle,
+                shouldUpdateMessage,
+                showAvatarForEveryMessage,
+                showUserAvatar,
+                systemMessageContainerStyle,
+                systemMessageWrapperStyle,
+                systemTextStyle,
+                touchableProps,
+                timeTextStyle,
+                timeFormat,
+                timeContainerStyle,
+                tickStyle,
+                textStyle,
+                textProps,
+                textContainerStyle,
+                usernameStyle,
                 user,
+                videoContainerStyle,
+                videoStyle,
+                videoProps,
+
+                inverted,
                 key: item._id,
                 currentMessage: item,
-                previousMessage,
-                inverted,
-                nextMessage,
                 position: item.user._id === user._id ? 'right' : 'left',
-                messages,
             }
-
+            isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level2]MessageContainer messageProps', messageProps)
             if (this.props.renderMessage) {
                 return this.props.renderMessage(messageProps)
             }
@@ -275,10 +484,10 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
     )
 
     renderScrollBottomComponent() {
-        const {scrollToBottomComponent} = this.props
+        const {renderScrollToBottom} = this.props
 
-        if (scrollToBottomComponent) {
-            return scrollToBottomComponent()
+        if (renderScrollToBottom) {
+            return renderScrollToBottom()
         }
 
         return <Text>V</Text>

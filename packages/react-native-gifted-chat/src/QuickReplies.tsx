@@ -34,11 +34,12 @@ const styles = StyleSheet.create({
     },
 })
 
-export interface QuickRepliesProps {
-    nextMessage?: IMessage
-    currentMessage?: IMessage
-    color?: string
+export interface QuickRepliesProps<TMessage extends IMessage> {
+    nextMessage?: TMessage
+    currentMessage?: TMessage
+    quickRepliesColor?: string
     sendText?: string
+    keepReplies?: boolean
     quickReplyStyle?: StyleProp<ViewStyle>
 
     onQuickReply?(reply: Reply[]): void
@@ -56,15 +57,16 @@ const sameReply = (currentReply: Reply) => (reply: Reply) =>
 const diffReply = (currentReply: Reply) => (reply: Reply) =>
     currentReply.value !== reply.value
 
-export default class QuickReplies extends Component<QuickRepliesProps,
+export default class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProps<TMessage>,
     QuickRepliesState> {
     static defaultProps = {
         currentMessage: {
             quickReplies: [],
         },
+        nextMessage: undefined,
         onQuickReply: () => {
         },
-        color: Color.peterRiver,
+        quickRepliesColor: Color.peterRiver,
         sendText: 'Send',
         keepReplies: false,
         renderQuickReplySend: undefined,
@@ -151,7 +153,7 @@ export default class QuickReplies extends Component<QuickRepliesProps,
     }
 
     render() {
-        const {currentMessage, color, quickReplyStyle} = this.props
+        const {currentMessage, quickRepliesColor, quickReplyStyle} = this.props
         const {replies} = this.state
 
         if (!this.shouldComponentDisplay()) {
@@ -172,8 +174,8 @@ export default class QuickReplies extends Component<QuickRepliesProps,
                                 style={[
                                     styles.quickReply,
                                     quickReplyStyle,
-                                    {borderColor: color},
-                                    selected && {backgroundColor: color},
+                                    {borderColor: quickRepliesColor},
+                                    selected && {backgroundColor: quickRepliesColor},
                                 ]}
                                 key={`${reply.value}-${index}`}
                             >
@@ -182,7 +184,7 @@ export default class QuickReplies extends Component<QuickRepliesProps,
                                     ellipsizeMode={'tail'}
                                     style={[
                                         styles.quickReplyText,
-                                        {color: selected ? Color.white : color},
+                                        {color: selected ? Color.white : quickRepliesColor},
                                     ]}
                                 >
                                     {reply.title}

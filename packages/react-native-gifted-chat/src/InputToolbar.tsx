@@ -1,10 +1,11 @@
 import React from 'react'
 import {EmitterSubscription, Keyboard, StyleProp, StyleSheet, View, ViewStyle,} from 'react-native'
 
-import Composer from './Composer'
-import Send from './Send'
-import Actions from './Actions'
+import Composer, {ComposerProps} from './Composer'
+import Send, {SendProps} from './Send'
+import Actions, {ActionsProps} from './Actions'
 import Color from './Color'
+import {IMessage} from "./Models";
 
 const styles = StyleSheet.create({
     container: {
@@ -24,32 +25,48 @@ const styles = StyleSheet.create({
     },
 })
 
-export interface InputToolbarProps {
-    options?: { [key: string]: any }
-    optionTintColor?: string
-    containerStyle?: StyleProp<ViewStyle>
-    primaryStyle?: StyleProp<ViewStyle>
-    accessoryStyle?: StyleProp<ViewStyle>
 
-    renderAccessory?(props: InputToolbarProps): React.ReactNode
+export interface InputToolbarProps<TMessage extends IMessage> extends ActionsProps,
+    SendProps<TMessage>,
+    ComposerProps {
+    inputToolbarContainerStyle?: StyleProp<ViewStyle>,
 
-    renderActions?(props: Actions['props']): React.ReactNode
+    renderActions?(props: ActionsProps): React.ReactNode,
 
-    renderSend?(props: Send['props']): React.ReactNode
+    renderSend?(props: SendProps<TMessage>): React.ReactNode,
 
-    renderComposer?(props: Composer['props']): React.ReactNode
+    renderComposer?(props: ComposerProps): React.ReactNode,
+
+    renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode,
+
+    accessoryStyle?: StyleProp<ViewStyle>,
+    primaryStyle?: StyleProp<ViewStyle>,
+
+    // options?: { [key: string]: any }
+    // optionTintColor?: string
+    // inputToolbarContainerStyle?: StyleProp<ViewStyle>
+    // primaryStyle?: StyleProp<ViewStyle>
+    // accessoryStyle?: StyleProp<ViewStyle>
+    //
+    // renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
+    //
+    // renderActions?(props: ActionsProps): React.ReactNode
+    //
+    // renderSend?(props: SendProps<TMessage>): React.ReactNode
+    //
+    // renderComposer?(props: ComposerProps): React.ReactNode
 
     onPressActionButton?(): void
 }
 
-export default class InputToolbar extends React.Component<InputToolbarProps,
+export default class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolbarProps<TMessage>,
     { position: string }> {
     static defaultProps = {
         renderAccessory: null,
         renderActions: null,
         renderSend: null,
         renderComposer: null,
-        containerStyle: {},
+        inputToolbarContainerStyle: {},
         primaryStyle: {},
         accessoryStyle: {},
         onPressActionButton: () => {
@@ -101,28 +118,94 @@ export default class InputToolbar extends React.Component<InputToolbarProps,
     }
 
     renderActions() {
-        const {containerStyle, ...props} = this.props
+        // const {inputToolbarContainerStyle, ...props} = this.props
+        const {
+            showActionSheetWithOptions,
+            actionOptionTintColor,
+            renderActionIcon,
+            actionContainerStyle,
+            actionIconTextStyle,
+            actionWrapperStyle,
+        } = this.props;
+        const actionsProps = {
+            showActionSheetWithOptions,
+            actionOptionTintColor,
+            renderActionIcon,
+            actionContainerStyle,
+            actionIconTextStyle,
+            actionWrapperStyle,
+        }
         if (this.props.renderActions) {
-            return this.props.renderActions(props)
+            return this.props.renderActions(actionsProps)
         } else if (this.props.onPressActionButton) {
-            return <Actions {...props} />
+            return <Actions {...actionsProps} />
         }
         return null
     }
 
     renderSend() {
-        if (this.props.renderSend) {
-            return this.props.renderSend(this.props)
+        const {
+            text,
+            onSend,
+            sendLabel,
+            sendContainerStyle,
+            sendTextStyle,
+            children,
+            alwaysShowSend,
+            disabled,
+            sendButtonProps
+        } = this.props;
+        const sendProps = {
+            text,
+            onSend,
+            sendLabel,
+            sendContainerStyle,
+            sendTextStyle,
+            children,
+            alwaysShowSend,
+            disabled,
+            sendButtonProps
         }
-        return <Send {...this.props} />
+        if (this.props.renderSend) {
+            return this.props.renderSend(sendProps)
+        }
+        return <Send {...sendProps} />
     }
 
     renderComposer() {
+        const {
+            composerHeight,
+            text,
+            placeholderTextColor,
+            placeholder,
+            textInputProps,
+            multiline,
+            disableComposer,
+            textInputStyle,
+            textInputAutoFocus,
+            keyboardAppearance,
+            onTextChanged,
+            onInputSizeChanged
+        } = this.props;
+        const composerProps = {
+            composerHeight,
+            text,
+            placeholderTextColor,
+            placeholder,
+            textInputProps,
+            multiline,
+            disableComposer,
+            textInputStyle,
+            textInputAutoFocus,
+            keyboardAppearance,
+            onTextChanged,
+            onInputSizeChanged
+        }
         if (this.props.renderComposer) {
-            return this.props.renderComposer(this.props)
+            return this.props.renderComposer(composerProps)
         }
 
-        return <Composer {...this.props} />
+        return <Composer {...composerProps} />
     }
 
     renderAccessory() {
@@ -143,7 +226,7 @@ export default class InputToolbar extends React.Component<InputToolbarProps,
                     [
                         styles.container,
                         {position: this.state.position},
-                        this.props.containerStyle,
+                        this.props.inputToolbarContainerStyle,
                     ] as ViewStyle
                 }
             >

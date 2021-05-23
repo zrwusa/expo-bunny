@@ -57,7 +57,6 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
 
 
     const invokeSearch = async () => {
-        console.log(searchText)
         // if (searchText.trim() !== '') {
         if (onSearch) {
             onSearch(searchText)
@@ -76,7 +75,6 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
         setSearchText(value)
     }
     const handleKeyPress = ({nativeEvent}: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-        console.log('---nativeEvent', nativeEvent.key)
         if (nativeEvent.key === 'Enter') {
             invokeSearch().then()
         }

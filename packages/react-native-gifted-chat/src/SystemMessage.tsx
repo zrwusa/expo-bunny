@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
 
 export interface SystemMessageProps<TMessage extends IMessage> {
     currentMessage?: TMessage
-    containerStyle?: StyleProp<ViewStyle>
-    wrapperStyle?: StyleProp<ViewStyle>
-    textStyle?: StyleProp<TextStyle>
+    systemMessageContainerStyle?: StyleProp<ViewStyle>
+    systemMessageWrapperStyle?: StyleProp<ViewStyle>
+    systemTextStyle?: StyleProp<TextStyle>
 }
 
 export default class SystemMessage<TMessage extends IMessage = IMessage> extends Component<SystemMessageProps<TMessage>> {
@@ -31,23 +31,23 @@ export default class SystemMessage<TMessage extends IMessage = IMessage> extends
         currentMessage: {
             system: false,
         },
-        containerStyle: {},
-        wrapperStyle: {},
-        textStyle: {},
+        systemMessageContainerStyle: {},
+        systemMessageWrapperStyle: {},
+        systemTextStyle: {},
     }
 
     render() {
         const {
             currentMessage,
-            containerStyle,
-            wrapperStyle,
-            textStyle,
+            systemMessageContainerStyle,
+            systemMessageWrapperStyle,
+            systemTextStyle,
         } = this.props
         if (currentMessage) {
             return (
-                <View style={[styles.container, containerStyle]}>
-                    <View style={wrapperStyle}>
-                        <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+                <View style={[styles.container, systemMessageContainerStyle]}>
+                    <View style={systemMessageWrapperStyle}>
+                        <Text style={[styles.text, systemTextStyle]}>{currentMessage.text}</Text>
                     </View>
                 </View>
             )

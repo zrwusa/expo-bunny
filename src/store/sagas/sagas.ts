@@ -92,7 +92,6 @@ export const sagasGenerator = function* () {
             const res = yield call(() => {
                 return firebase.database().ref(url).push(payload)
             });
-            console.log(res)
             yield put(requestReceived(config))
         } catch (e) {
             yield put(sysError(e));

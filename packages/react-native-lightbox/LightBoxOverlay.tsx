@@ -179,7 +179,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
 
         Animated.spring(
             this.state.openVal,
-            {toValue: 1, ...this.props.springConfig, useNativeDriver: config.useNativeDriver}
+            {toValue: 1, ...this.props.springConfig, useNativeDriver: false}
         ).start(() => {
             this.setState({isAnimating: false});
             this.props.didOpen && this.props.didOpen();
@@ -196,7 +196,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
         },);
         Animated.spring(
             this.state.openVal,
-            {toValue: 0, ...this.props.springConfig, useNativeDriver: config.useNativeDriver}
+            {toValue: 0, ...this.props.springConfig, useNativeDriver: false}
         ).start(() => {
             this.setState({
                 isAnimating: false,

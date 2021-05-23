@@ -3,24 +3,24 @@ import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyl
 import Color from './Color'
 
 export interface ActionsProps {
-    options?: { [key: string]: any }
-    optionTintColor?: string
-    icon?: () => ReactNode
-    wrapperStyle?: StyleProp<ViewStyle>
-    iconTextStyle?: StyleProp<TextStyle>
-    containerStyle?: StyleProp<ViewStyle>
+    showActionSheetWithOptions?: { [key: string]: any }
+    actionOptionTintColor?: string
+    renderActionIcon?: () => ReactNode
+    actionWrapperStyle?: StyleProp<ViewStyle>
+    actionIconTextStyle?: StyleProp<TextStyle>
+    actionContainerStyle?: StyleProp<ViewStyle>
 
     onPressActionButton?(): void
 }
 
 export default class Actions extends React.Component<ActionsProps> {
     static defaultProps: ActionsProps = {
-        options: {},
-        optionTintColor: Color.optionTintColor,
-        icon: undefined,
-        containerStyle: {},
-        iconTextStyle: {},
-        wrapperStyle: {},
+        showActionSheetWithOptions: {},
+        actionOptionTintColor: Color.optionTintColor,
+        renderActionIcon: undefined,
+        actionContainerStyle: {},
+        actionIconTextStyle: {},
+        actionWrapperStyle: {},
     }
 
     static contextTypes = {
@@ -30,31 +30,31 @@ export default class Actions extends React.Component<ActionsProps> {
     }
 
     onActionsPress = () => {
-        const {options} = this.props
-        const optionKeys = Object.keys(options!)
+        const {showActionSheetWithOptions} = this.props
+        const optionKeys = Object.keys(showActionSheetWithOptions!)
         const cancelButtonIndex = optionKeys.indexOf('Cancel')
         this.context.actionSheet().showActionSheetWithOptions(
             {
                 options: optionKeys,
                 cancelButtonIndex,
-                tintColor: this.props.optionTintColor,
+                tintColor: this.props.actionOptionTintColor,
             },
             (buttonIndex: number) => {
                 const key = optionKeys[buttonIndex]
                 if (key) {
-                    options![key](this.props)
+                    showActionSheetWithOptions![key](this.props)
                 }
             },
         )
     }
 
     renderIcon() {
-        if (this.props.icon) {
-            return this.props.icon()
+        if (this.props.renderActionIcon) {
+            return this.props.renderActionIcon()
         }
         return (
-            <View style={[styles.wrapper, this.props.wrapperStyle]}>
-                <Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text>
+            <View style={[styles.wrapper, this.props.actionWrapperStyle]}>
+                <Text style={[styles.iconText, this.props.actionIconTextStyle]}>+</Text>
             </View>
         )
     }
@@ -62,7 +62,7 @@ export default class Actions extends React.Component<ActionsProps> {
     render() {
         return (
             <TouchableOpacity
-                style={[styles.container, this.props.containerStyle]}
+                style={[styles.container, this.props.actionContainerStyle]}
                 onPress={this.props.onPressActionButton || this.onActionsPress}
             >
                 {this.renderIcon()}

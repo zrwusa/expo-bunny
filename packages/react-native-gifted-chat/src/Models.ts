@@ -4,10 +4,6 @@ export type {ActionsProps} from './Actions'
 export type {AvatarProps} from './Avatar'
 export type {
     BubbleProps,
-    RenderMessageImageProps,
-    RenderMessageVideoProps,
-    RenderMessageAudioProps,
-    RenderMessageTextProps,
 } from './Bubble'
 export type {ComposerProps} from './Composer'
 export type {DayProps} from './Day'
@@ -22,8 +18,6 @@ export type {QuickRepliesProps} from './QuickReplies'
 export type {SendProps} from './Send'
 export type {SystemMessageProps} from './SystemMessage'
 export type {TimeProps} from './Time'
-
-export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 export interface LeftRightStyle<T> {
     left?: StyleProp<T>
@@ -66,11 +60,9 @@ export interface IMessage {
     quickReplies?: QuickReplies
 }
 
-export type IChatMessage = IMessage
-
 export interface MessageVideoProps<TMessage extends IMessage> {
     currentMessage?: TMessage
-    containerStyle?: StyleProp<ViewStyle>
+    videoContainerStyle?: StyleProp<ViewStyle>
     videoStyle?: StyleProp<ViewStyle>
     videoProps?: object
     // TODO: should be LightBox properties
@@ -79,7 +71,7 @@ export interface MessageVideoProps<TMessage extends IMessage> {
 
 export interface MessageAudioProps<TMessage extends IMessage> {
     currentMessage?: TMessage
-    containerStyle?: StyleProp<ViewStyle>
+    audioContainerStyle?: StyleProp<ViewStyle>
     audioStyle?: StyleProp<ViewStyle>
     audioProps?: object
 }

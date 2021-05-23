@@ -27,12 +27,11 @@ export interface DayProps<TMessage extends IMessage> {
     currentMessage?: TMessage
     nextMessage?: TMessage
     previousMessage?: TMessage
-    containerStyle?: StyleProp<ViewStyle>
-    wrapperStyle?: StyleProp<ViewStyle>
-    textStyle?: StyleProp<TextStyle>
-    textProps?: TextProps
+    dayContainerStyle?: StyleProp<ViewStyle>
+    dayWrapperStyle?: StyleProp<ViewStyle>
+    dayTextStyle?: StyleProp<TextStyle>
+    dayTextProps?: TextProps
     dateFormat?: string
-    inverted?: boolean
 }
 
 export default class Day<TMessage extends IMessage = IMessage> extends PureComponent<DayProps<TMessage>> {
@@ -48,10 +47,10 @@ export default class Day<TMessage extends IMessage = IMessage> extends PureCompo
         },
         previousMessage: {},
         nextMessage: {},
-        containerStyle: {},
-        wrapperStyle: {},
-        textStyle: {},
-        textProps: {},
+        dayContainerStyle: {},
+        dayWrapperStyle: {},
+        dayTextStyle: {},
+        dayTextProps: {},
         dateFormat: DATE_FORMAT,
     }
 
@@ -61,18 +60,18 @@ export default class Day<TMessage extends IMessage = IMessage> extends PureCompo
             dateFormat,
             currentMessage,
             previousMessage,
-            containerStyle,
-            wrapperStyle,
-            textStyle,
-            textProps,
+            dayContainerStyle,
+            dayWrapperStyle,
+            dayTextStyle,
+            dayTextProps,
         } = this.props
         if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
             const {createdAt} = currentMessage;
 
             return (
-                <View style={[styles.container, containerStyle]}>
-                    <View style={wrapperStyle}>
-                        <Text style={[styles.text, textStyle]} {...textProps}>
+                <View style={[styles.container, dayContainerStyle]}>
+                    <View style={dayWrapperStyle}>
+                        <Text style={[styles.text, dayTextStyle]} {...dayTextProps}>
                             {dayjs(createdAt)
                                 .locale(this.context.getLocale())
                                 .format(dateFormat)}

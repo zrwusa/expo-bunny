@@ -1,19 +1,19 @@
 import React from 'react'
 import {ActivityIndicator, Clipboard, StyleProp, StyleSheet, Text, TextStyle, TouchableWithoutFeedback, View, ViewStyle,} from 'react-native'
 
-import QuickReplies from './QuickReplies'
+import QuickReplies, {QuickRepliesProps} from './QuickReplies'
 
-import MessageText from './MessageText'
-import MessageImage from './MessageImage'
+import MessageText, {MessageTextProps} from './MessageText'
+import MessageImage, {MessageImageProps} from './MessageImage'
 import MessageVideo from './MessageVideo'
 import MessageAudio from './MessageAudio'
 
-import Time from './Time'
+import Time, {TimeProps} from './Time'
 import Color from './Color'
 
 import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, Omit, Reply, User,} from './Models'
-import MessageSticker from "./MessageSticker";
+import {IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, User,} from './Models'
+import MessageSticker, {MessageStickerProps} from "./MessageSticker";
 
 const styles = {
     left: StyleSheet.create({
@@ -88,84 +88,106 @@ const styles = {
 
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
 
-export type RenderMessageImageProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>,
-    'containerStyle' | 'wrapperStyle'> &
-    MessageImage['props']
 
-export type RenderMessageStickerProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>,
-    'containerStyle' | 'wrapperStyle'> &
-    MessageSticker['props']
+export interface BubbleProps<TMessage extends IMessage> extends MessageImageProps<TMessage>,
+    MessageStickerProps<TMessage>,
+    MessageVideoProps<TMessage>,
+    MessageAudioProps<TMessage>,
+    MessageTextProps<TMessage>,
+    QuickRepliesProps<TMessage>,
+    TimeProps<TMessage> {
 
-export type RenderMessageVideoProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>,
-    'containerStyle' | 'wrapperStyle'> &
-    MessageVideoProps<TMessage>
 
-export type RenderMessageAudioProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>,
-    'containerStyle' | 'wrapperStyle'> &
-    MessageAudioProps<TMessage>
-
-export type RenderMessageTextProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>,
-    'containerStyle' | 'wrapperStyle'> &
-    MessageText['props']
-
-export interface BubbleProps<TMessage extends IMessage> {
-    messages: TMessage[],
-    user?: User
-    touchableProps?: object
-    renderUsernameOnMessage?: boolean
-    isCustomViewBottom?: boolean
-    inverted?: boolean
-    position: 'left' | 'right'
-    currentMessage?: TMessage
-    nextMessage?: TMessage
-    previousMessage?: TMessage
-    optionTitles?: string[]
-    containerStyle?: LeftRightStyle<ViewStyle>
-    wrapperStyle?: LeftRightStyle<ViewStyle>
-    textStyle?: LeftRightStyle<TextStyle>
+    // position: 'left' | 'right'
+    bubbleContainerStyle?: LeftRightStyle<ViewStyle>
+    bubbleWrapperStyle?: LeftRightStyle<ViewStyle>
     bottomContainerStyle?: LeftRightStyle<ViewStyle>
-    tickStyle?: StyleProp<TextStyle>
     containerToNextStyle?: LeftRightStyle<ViewStyle>
     containerToPreviousStyle?: LeftRightStyle<ViewStyle>
-    usernameStyle?: TextStyle
-    quickReplyStyle?: StyleProp<ViewStyle>
+    tickStyle?: StyleProp<TextStyle>
+    previousMessage?: TMessage,
 
     onPress?(context?: any, message?: any): void
 
     onLongPress?(context?: any, message?: any): void
 
-    onQuickReply?(replies: Reply[]): void
+    renderMessageImage?(props: MessageImageProps<TMessage>): React.ReactNode
 
-    // onMessageLoad?(currentMessage: TMessage): void
-    //
-    // onMessageLoadStart?(currentMessage: TMessage): void
-    //
-    // onMessageLoadEnd?(currentMessage: TMessage): void
-    //
-    // onMessageLoadError?(e:Error,currentMessage: TMessage): void
+    renderMessageSticker?(props: MessageStickerProps<TMessage>): React.ReactNode
 
+    renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode
 
-    renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
+    renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode
 
-    renderMessageSticker?(props: RenderMessageStickerProps<TMessage>): React.ReactNode
-
-    renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
-
-    renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
-
-    renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
+    renderMessageText?(props: MessageTextProps<TMessage>): React.ReactNode
 
     renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
 
-    renderTime?(timeProps: Time['props']): React.ReactNode
+    renderTime?(timeProps: TimeProps<TMessage>): React.ReactNode
 
     renderTicks?(currentMessage: TMessage): React.ReactNode
 
-    renderUsername?(): React.ReactNode
+    // TODO not implement
+    // renderUsername?(): React.ReactNode
 
-    renderQuickReplySend?(): React.ReactNode
+    // renderQuickReplySend?(): React.ReactNode
 
-    renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+    renderQuickReplies?(quickReplies: QuickRepliesProps<TMessage>): React.ReactNode
+
+    user?: User
+    renderUsernameOnMessage?: boolean
+    isCustomViewBottom?: boolean
+    usernameStyle?: TextStyle
+    touchableProps?: object
+
+
+    // messages: TMessage[],
+    // user?: User
+    // touchableProps?: object
+    // renderUsernameOnMessage?: boolean
+    // isCustomViewBottom?: boolean
+    // inverted?: boolean
+    // currentMessage?: TMessage
+    // nextMessage?: TMessage
+    // previousMessage?: TMessage
+    // optionTitles?: string[]
+    //
+    //
+    // textStyle?: LeftRightStyle<TextStyle>
+    //
+    // tickStyle?: StyleProp<TextStyle>
+    // containerToNextStyle?: LeftRightStyle<ViewStyle>
+    // containerToPreviousStyle?: LeftRightStyle<ViewStyle>
+    // usernameStyle?: TextStyle
+    // quickReplyStyle?: StyleProp<ViewStyle>
+    //
+    // onPress?(context?: any, message?: any): void
+    //
+    // onLongPress?(context?: any, message?: any): void
+    //
+    // onQuickReply?(replies: Reply[]): void
+    //
+    // renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
+    //
+    // renderMessageSticker?(props: RenderMessageStickerProps<TMessage>): React.ReactNode
+    //
+    // renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
+    //
+    // renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
+    //
+    // renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
+    //
+    // renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
+    //
+    // renderTime?(timeProps: Time['props']): React.ReactNode
+    //
+    // renderTicks?(currentMessage: TMessage): React.ReactNode
+    //
+    // renderUsername?(): React.ReactNode
+    //
+    // renderQuickReplySend?(): React.ReactNode
+    //
+    // renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
 }
 
 export default class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage>> {
@@ -191,10 +213,10 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         renderTime: null,
         renderQuickReplies: null,
         onQuickReply: null,
-        // onMessageLoad: null,
-        // onMessageLoadStart:null,
-        // onMessageLoadEnd:null,
-        // onMessageLoadError: null,
+        onMessageLoad: null,
+        onMessageLoadStart: null,
+        onMessageLoadEnd: null,
+        onMessageLoadError: null,
 
         position: 'left',
         optionTitles: DEFAULT_OPTION_TITLES,
@@ -205,8 +227,8 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         },
         nextMessage: {},
         previousMessage: {},
-        containerStyle: {},
-        wrapperStyle: {},
+        bubbleContainerStyle: {},
+        bubbleWrapperStyle: {},
         bottomContainerStyle: {},
         tickStyle: {},
         usernameStyle: {},
@@ -297,26 +319,34 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
     renderQuickReplies() {
         const {
             currentMessage,
-            onQuickReply,
             nextMessage,
-            renderQuickReplySend,
-            quickReplyStyle,
         } = this.props
         if (currentMessage && currentMessage.quickReplies) {
-            const {containerStyle, wrapperStyle, ...quickReplyProps} = this.props
+            // const {bubbleContainerStyle, bubbleWrapperStyle, ...quickReplyProps} = this.props
+            const {
+                onQuickReply,
+                quickRepliesColor,
+                sendText,
+                keepReplies,
+                renderQuickReplySend,
+                quickReplyStyle
+            } = this.props
+
+            const quickRepliesProps = {
+                currentMessage,
+                nextMessage,
+                onQuickReply,
+                quickRepliesColor,
+                sendText,
+                keepReplies,
+                renderQuickReplySend,
+                quickReplyStyle
+            }
             if (this.props.renderQuickReplies) {
-                return this.props.renderQuickReplies(quickReplyProps)
+                return this.props.renderQuickReplies(quickRepliesProps)
             }
             return (
-                <QuickReplies
-                    {...{
-                        currentMessage,
-                        onQuickReply,
-                        nextMessage,
-                        renderQuickReplySend,
-                        quickReplyStyle,
-                    }}
-                />
+                <QuickReplies {...quickRepliesProps} />
             )
         }
         return null
@@ -325,11 +355,39 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
     renderMessageText() {
         if (this.props.currentMessage && this.props.currentMessage.text) {
             const {
-                containerStyle,
-                wrapperStyle,
+                position,
                 optionTitles,
-                ...messageTextProps
-            } = this.props
+                currentMessage,
+                textContainerStyle,
+                textStyle,
+                linkStyle,
+                customTextStyle,
+                textProps,
+                parsePatterns,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug,
+            } = this.props;
+            const messageTextProps = {
+                position,
+                optionTitles,
+                currentMessage,
+                textContainerStyle,
+                textStyle,
+                linkStyle,
+                customTextStyle,
+                textProps,
+                parsePatterns,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug,
+            }
             if (this.props.renderMessageText) {
                 return this.props.renderMessageText(messageTextProps)
             }
@@ -340,7 +398,35 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderMessageImage() {
         if (this.props.currentMessage && this.props.currentMessage.image) {
-            const {containerStyle, wrapperStyle, ...messageImageProps} = this.props
+            // const {bubbleContainerStyle, bubbleWrapperStyle, ...messageImageProps} = this.props
+            const {
+                messages,
+                currentMessage,
+                imageContainerStyle,
+                imageStyle,
+                imageProps,
+                lightBoxProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            } = this.props
+            const messageImageProps = {
+                messages,
+                currentMessage,
+                imageContainerStyle,
+                imageStyle,
+                imageProps,
+                lightBoxProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            }
             if (this.props.renderMessageImage) {
                 return this.props.renderMessageImage(messageImageProps)
             }
@@ -352,7 +438,31 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
     renderMessageSticker() {
         if (this.props.currentMessage && this.props.currentMessage.sticker) {
             // todo extract needed props
-            const {containerStyle, wrapperStyle, ...messageStickerProps} = this.props
+            // const {bubbleContainerStyle, bubbleWrapperStyle, ...messageStickerProps} = this.props
+            const {
+                currentMessage,
+                stickerContainerStyle,
+                stickerStyle,
+                stickerProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            } = this.props
+            const messageStickerProps = {
+                currentMessage,
+                stickerContainerStyle,
+                stickerStyle,
+                stickerProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            }
             if (this.props.renderMessageSticker) {
                 return this.props.renderMessageSticker(messageStickerProps)
             }
@@ -363,7 +473,31 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderMessageVideo() {
         if (this.props.currentMessage && this.props.currentMessage.video) {
-            const {containerStyle, wrapperStyle, ...messageVideoProps} = this.props
+            // const {bubbleContainerStyle, bubbleWrapperStyle, ...messageVideoProps} = this.props
+            const {
+                currentMessage,
+                videoContainerStyle,
+                videoStyle,
+                videoProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            } = this.props;
+            const messageVideoProps = {
+                currentMessage,
+                videoContainerStyle,
+                videoStyle,
+                videoProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            }
             if (this.props.renderMessageVideo) {
                 return this.props.renderMessageVideo(messageVideoProps)
             }
@@ -374,7 +508,31 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderMessageAudio() {
         if (this.props.currentMessage && this.props.currentMessage.audio) {
-            const {containerStyle, wrapperStyle, ...messageAudioProps} = this.props
+            // const {bubbleContainerStyle, bubbleWrapperStyle, ...messageAudioProps} = this.props
+            const {
+                currentMessage,
+                audioContainerStyle,
+                audioStyle,
+                audioProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            } = this.props;
+            const messageAudioProps = {
+                currentMessage,
+                audioContainerStyle,
+                audioStyle,
+                audioProps,
+                onMessageLoad,
+                onMessageLoadStart,
+                onMessageLoadEnd,
+                onMessageReadyForDisplay,
+                onMessageLoadError,
+                isDebug
+            }
             if (this.props.renderMessageAudio) {
                 return this.props.renderMessageAudio(messageAudioProps)
             }
@@ -420,12 +578,26 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderTime() {
         if (this.props.currentMessage && this.props.currentMessage.createdAt) {
+            // const {
+            //     bubbleContainerStyle,
+            //     bubbleWrapperStyle,
+            //     textStyle,
+            //     ...timeProps
+            // } = this.props
             const {
-                containerStyle,
-                wrapperStyle,
-                textStyle,
-                ...timeProps
+                position,
+                currentMessage,
+                timeContainerStyle,
+                timeFormat,
+                timeTextStyle
             } = this.props
+            const timeProps = {
+                position,
+                currentMessage,
+                timeContainerStyle,
+                timeFormat,
+                timeTextStyle
+            }
             if (this.props.renderTime) {
                 return this.props.renderTime(timeProps)
             }
@@ -487,15 +659,15 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
     render() {
         const {
             position,
-            containerStyle,
-            wrapperStyle,
+            bubbleContainerStyle,
+            bubbleWrapperStyle,
             bottomContainerStyle,
         } = this.props
         return (
             <View
                 style={[
                     styles[position].container,
-                    containerStyle && containerStyle[position],
+                    bubbleContainerStyle && bubbleContainerStyle[position],
                 ]}
             >
                 <View
@@ -503,7 +675,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
                         styles[position].wrapper,
                         this.styledBubbleToNext(),
                         this.styledBubbleToPrevious(),
-                        wrapperStyle && wrapperStyle[position],
+                        bubbleWrapperStyle && bubbleWrapperStyle[position],
                     ]}
                 >
                     <TouchableWithoutFeedback

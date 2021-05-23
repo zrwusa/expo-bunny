@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 export interface MessageVideoProps<TMessage extends IMessage> {
     currentMessage?: TMessage
-    containerStyle?: StyleProp<ViewStyle>
+    videoContainerStyle?: StyleProp<ViewStyle>
     videoStyle?: StyleProp<ViewStyle>
     videoProps?: VideoProps
 
@@ -39,7 +39,7 @@ export default class MessageVideo<TMessage extends IMessage = IMessage> extends 
         currentMessage: {
             video: null,
         },
-        containerStyle: {},
+        videoContainerStyle: {},
         videoStyle: {},
         videoProps: {},
         onMessageLoad: undefined,
@@ -53,14 +53,15 @@ export default class MessageVideo<TMessage extends IMessage = IMessage> extends 
 
     render() {
         const {
-            containerStyle,
+            videoContainerStyle,
             videoProps,
             videoStyle,
             currentMessage,
             isDebug,
         } = this.props
+        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level4]MessageVideo props', this.props)
         return (
-            <View style={[styles.container, containerStyle]}>
+            <View style={[styles.container, videoContainerStyle]}>
                 {
                     currentMessage ?
                         currentMessage.video
@@ -70,21 +71,21 @@ export default class MessageVideo<TMessage extends IMessage = IMessage> extends 
                                 resizeMode="contain"
                                 source={{uri: currentMessage.video}}
                                 onLoad={() => {
-                                    isDebug && console.log('---MessageVideo onLoad')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageVideo onLoad')
                                     this.props.onMessageLoad?.(currentMessage)
                                 }}
                                 onLoadStart={() => {
-                                    isDebug && console.log('---MessageVideo onLoadStart')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageVideo onLoadStart')
                                     this.props.onMessageLoadStart?.(currentMessage)
                                 }}
                                 onReadyForDisplay={() => {
-                                    isDebug && console.log('---MessageVideo onReadyForDisplay')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageVideo onReadyForDisplay')
                                     this.props.onMessageLoadEnd?.(currentMessage)
-                                    isDebug && console.log('---MessageVideo onMessageReadyForDisplay')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageVideo onMessageReadyForDisplay')
                                     this.props.onMessageReadyForDisplay?.(currentMessage)
                                 }}
                                 onError={(e) => {
-                                    isDebug && console.log('---MessageVideo onError', e)
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageVideo onError', e)
                                     this.props.onMessageLoadError?.(new Error(e), currentMessage)
                                 }}
                                 {...videoProps}

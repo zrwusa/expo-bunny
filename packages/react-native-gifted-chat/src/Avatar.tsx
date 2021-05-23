@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react'
 import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
 import GiftedAvatar from './GiftedAvatar'
 import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, Omit, User} from './Models'
+import {IMessage, LeftRightStyle, User} from './Models'
 
 const styles = {
     left: StyleSheet.create({
@@ -42,9 +42,9 @@ export interface AvatarProps<TMessage extends IMessage> {
     position: 'left' | 'right'
     renderAvatarOnTop?: boolean
     showAvatarForEveryMessage?: boolean
-    imageStyle?: LeftRightStyle<ImageStyle>
-    containerStyle?: LeftRightStyle<ViewStyle>
-    textStyle?: TextStyle
+    avatarImageStyle?: LeftRightStyle<ImageStyle>
+    avatarContainerStyle?: LeftRightStyle<ViewStyle>
+    avatarTextStyle?: TextStyle
 
     renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
 
@@ -63,8 +63,8 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
         },
         previousMessage: {},
         nextMessage: {},
-        containerStyle: {},
-        imageStyle: {},
+        avatarContainerStyle: {},
+        avatarImageStyle: {},
         onPressAvatar: () => {
         },
         onLongPressAvatar: () => {
@@ -83,11 +83,11 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
                     avatarStyle={
                         [
                             styles[this.props.position].image,
-                            this.props.imageStyle &&
-                            this.props.imageStyle[this.props.position],
+                            this.props.avatarImageStyle &&
+                            this.props.avatarImageStyle[this.props.position],
                         ] as ImageStyle
                     }
-                    textStyle={this.props.textStyle ? this.props.textStyle : {}}
+                    textStyle={this.props.avatarTextStyle ? this.props.avatarTextStyle : {}}
                     user={this.props.currentMessage.user}
                     onPress={() =>
                         this.props.onPressAvatar &&
@@ -107,13 +107,13 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
         const {
             renderAvatarOnTop,
             showAvatarForEveryMessage,
-            containerStyle,
+            avatarContainerStyle,
             position,
             currentMessage,
             renderAvatar,
             previousMessage,
             nextMessage,
-            imageStyle,
+            avatarImageStyle,
         } = this.props
         const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
         const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom'
@@ -133,14 +133,14 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
                 <View
                     style={[
                         styles[position].container,
-                        containerStyle && containerStyle[position],
+                        avatarContainerStyle && avatarContainerStyle[position],
                     ]}
                 >
                     <GiftedAvatar
                         avatarStyle={
                             [
                                 styles[position].image,
-                                imageStyle && imageStyle[position],
+                                avatarImageStyle && avatarImageStyle[position],
                             ] as ImageStyle
                         }
                     />
@@ -153,7 +153,7 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
                 style={[
                     styles[position].container,
                     styles[position][computedStyle],
-                    containerStyle && containerStyle[position],
+                    avatarContainerStyle && avatarContainerStyle[position],
                 ]}
             >
                 {this.renderAvatar()}

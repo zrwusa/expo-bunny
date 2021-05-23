@@ -143,7 +143,6 @@ export function ImageUploader(props: ImageUploaderProps) {
             return
         }
         let pickerResult = await ImagePicker.launchImageLibraryAsync(imagePickerOptions);
-        console.log('---pickerResult', pickerResult)
         // const iOS = {
         //     "cancelled": false,
         //     "duration": 19181.66796875,
@@ -221,7 +220,6 @@ export function ImageUploader(props: ImageUploaderProps) {
         if (image.uri) {
             if (isDeleteFromServerWhenRemove) {
                 const removeResult = await removeFileFromFirebaseByURL(image.uri)
-                console.log('---removeResult', removeResult)
             }
             const needRemovePhoto = {...image}
             setImage({uri: ''});

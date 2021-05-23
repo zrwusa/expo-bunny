@@ -1,4 +1,5 @@
-import {themes}  from "../../../src/providers/theme-labor/theme"
+import {themes} from "../../../src/providers/theme-labor/theme"
+
 const {colors} = themes['light']
 export default {
     // Action wrapper border,Action icon text,Composer placeholderTextColor

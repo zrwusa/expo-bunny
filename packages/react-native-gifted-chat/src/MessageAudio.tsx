@@ -5,15 +5,17 @@ import {IMessage} from './Models'
 import {AudioPlayer, AudioPlayerProps} from "../../../src/components/AudioPlayer";
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        height: 46
+    },
     audio: {}
 })
 
 export interface MessageAudioProps<TMessage extends IMessage> {
     currentMessage?: TMessage
-    containerStyle?: StyleProp<ViewStyle>
+    audioContainerStyle?: StyleProp<ViewStyle>
     audioStyle?: StyleProp<ViewStyle>
-    audioProps?: AudioPlayerProps
+    audioProps?: Omit<AudioPlayerProps, 'source'>
 
     onMessageLoad?(currentMessage: TMessage): void
 
@@ -33,7 +35,7 @@ export default class MessageAudio<TMessage extends IMessage = IMessage> extends 
         currentMessage: {
             audio: null,
         },
-        containerStyle: {},
+        audioContainerStyle: {},
         audioStyle: {},
         audioProps: {},
         onMessageLoad: undefined,
@@ -46,14 +48,15 @@ export default class MessageAudio<TMessage extends IMessage = IMessage> extends 
 
     render() {
         const {
-            containerStyle,
+            audioContainerStyle,
             audioProps,
             audioStyle,
             currentMessage,
             isDebug,
         } = this.props
+        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level4]MessageAudio props', this.props)
         return (
-            <View style={[styles.container, containerStyle]}>
+            <View style={[styles.container, audioContainerStyle]}>
                 {
                     currentMessage
                         ? currentMessage.audio
@@ -61,21 +64,21 @@ export default class MessageAudio<TMessage extends IMessage = IMessage> extends 
                             style={[styles.audio, audioStyle]}
                             source={{uri: currentMessage.audio}}
                             onLoad={() => {
-                                isDebug && console.log('---MessageAudio onLoad')
+                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageAudio onLoad')
                                 this.props.onMessageLoad?.(currentMessage)
-                                isDebug && console.log('---MessageAudio onMessageReadyForDisplay')
+                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageAudio onMessageReadyForDisplay')
                                 this.props.onMessageReadyForDisplay?.(currentMessage)
                             }}
                             onLoadStart={() => {
-                                isDebug && console.log('---MessageAudio onLoadStart')
+                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageAudio onLoadStart')
                                 this.props.onMessageLoadStart?.(currentMessage)
                             }}
                             onLoadEnd={() => {
-                                isDebug && console.log('---MessageAudio onLoadEnd')
+                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageAudio onLoadEnd')
                                 this.props.onMessageLoadEnd?.(currentMessage)
                             }}
                             onError={(e) => {
-                                isDebug && console.log('---MessageAudio onError')
+                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageAudio onError')
                                 this.props.onMessageLoadError?.(e, currentMessage)
                             }}
                             {...audioProps}

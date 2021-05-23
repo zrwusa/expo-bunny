@@ -21,16 +21,16 @@ const styles = StyleSheet.create({
 
 export interface SendProps<TMessage extends IMessage> {
     text?: string
-    label?: string
-    containerStyle?: StyleProp<ViewStyle>
-    textStyle?: StyleProp<TextStyle>
+    sendLabel?: string
+    sendContainerStyle?: StyleProp<ViewStyle>
+    sendTextStyle?: StyleProp<TextStyle>
     children?: React.ReactNode
     alwaysShowSend?: boolean
     disabled?: boolean
     sendButtonProps?: Partial<TouchableOpacityProps>
 
     onSend?(
-        messages: Partial<TMessage> | Partial<TMessage>[],
+        messages: TMessage | TMessage[],
         shouldResetInputToolbar: boolean,
     ): void
 }
@@ -40,9 +40,9 @@ export default class Send<TMessage extends IMessage = IMessage> extends Componen
         text: '',
         onSend: () => {
         },
-        label: 'Send',
-        containerStyle: {},
-        textStyle: {},
+        sendLabel: 'Send',
+        sendContainerStyle: {},
+        sendTextStyle: {},
         children: null,
         alwaysShowSend: false,
         disabled: false,
@@ -52,17 +52,17 @@ export default class Send<TMessage extends IMessage = IMessage> extends Componen
     handleOnPress = () => {
         const {text, onSend} = this.props
         if (text && onSend) {
-            onSend({text: text.trim()} as Partial<TMessage>, true)
+            onSend({text: text.trim()} as TMessage, true)
         }
     }
 
     render() {
         const {
             text,
-            containerStyle,
+            sendContainerStyle,
             children,
-            textStyle,
-            label,
+            sendTextStyle,
+            sendLabel,
             alwaysShowSend,
             disabled,
             sendButtonProps,
@@ -73,7 +73,7 @@ export default class Send<TMessage extends IMessage = IMessage> extends Componen
                     testID='send'
                     accessible
                     accessibilityLabel='send'
-                    style={[styles.container, containerStyle]}
+                    style={[styles.container, sendContainerStyle]}
                     onPress={this.handleOnPress}
                     // @ts-ignore
                     accessibilityTraits='button'
@@ -81,7 +81,7 @@ export default class Send<TMessage extends IMessage = IMessage> extends Componen
                     {...sendButtonProps}
                 >
                     <View>
-                        {children || <Text style={[styles.text, textStyle]}>{label}</Text>}
+                        {children || <Text style={[styles.text, sendTextStyle]}>{sendLabel}</Text>}
                     </View>
                 </TouchableOpacity>
             )

@@ -1,6 +1,5 @@
 import React from 'react'
 import {Linking, StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle} from 'react-native'
-// @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
 import {IMessage, LeftRightStyle} from './Models'
@@ -47,7 +46,7 @@ export interface MessageTextProps<TMessage extends IMessage> {
     position: 'left' | 'right'
     optionTitles?: string[]
     currentMessage?: TMessage
-    containerStyle?: LeftRightStyle<ViewStyle>
+    textContainerStyle?: LeftRightStyle<ViewStyle>
     textStyle?: LeftRightStyle<TextStyle>
     linkStyle?: LeftRightStyle<TextStyle>
     textProps?: TextProps
@@ -81,7 +80,7 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
         currentMessage: {
             text: '',
         },
-        containerStyle: {},
+        textContainerStyle: {},
         textStyle: {},
         linkStyle: {},
         customTextStyle: {},
@@ -120,7 +119,6 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
     }
 
     onPhonePress = (phone: string) => {
-        debugger
         const {optionTitles} = this.props
         const options =
             optionTitles && optionTitles.length > 0
@@ -157,12 +155,13 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
             this.props.linkStyle && this.props.linkStyle[this.props.position],
         ]
         const {currentMessage, isDebug} = this.props
+        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level4]MessageText props', this.props)
         return (
             <View
                 style={[
                     styles[this.props.position].container,
-                    this.props.containerStyle &&
-                    this.props.containerStyle[this.props.position],
+                    this.props.textContainerStyle &&
+                    this.props.textContainerStyle[this.props.position],
                 ]}
             >{
                 currentMessage ?
@@ -182,11 +181,11 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
                             childrenProps={{...this.props.textProps}}
 
                             onLayout={() => {
-                                isDebug && console.log('---MessageText onLayout')
+                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageText onLayout')
                                 this.props.onMessageLoad?.(currentMessage)
                                 this.props.onMessageLoadStart?.(currentMessage)
                                 this.props.onMessageLoadEnd?.(currentMessage)
-                                isDebug && console.log('---MessageText onMessageReadyForDisplay')
+                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageText onMessageReadyForDisplay')
                                 this.props.onMessageReadyForDisplay?.(currentMessage)
                             }}
                         >

@@ -42,7 +42,7 @@ const styles = {
 export interface TimeProps<TMessage extends IMessage> {
     position: 'left' | 'right'
     currentMessage?: TMessage
-    containerStyle?: LeftRightStyle<ViewStyle>
+    timeContainerStyle?: LeftRightStyle<ViewStyle>
     timeTextStyle?: LeftRightStyle<TextStyle>
     timeFormat?: string
 }
@@ -59,7 +59,7 @@ export default class Time<TMessage extends IMessage = IMessage> extends Componen
         currentMessage: {
             createdAt: null,
         },
-        containerStyle: {},
+        timeContainerStyle: {},
         timeFormat: TIME_FORMAT,
         timeTextStyle: {},
     }
@@ -67,7 +67,7 @@ export default class Time<TMessage extends IMessage = IMessage> extends Componen
     render() {
         const {
             position,
-            containerStyle,
+            timeContainerStyle,
             currentMessage,
             timeFormat,
             timeTextStyle,
@@ -78,7 +78,7 @@ export default class Time<TMessage extends IMessage = IMessage> extends Componen
                 <View
                     style={[
                         styles[position].container,
-                        containerStyle && containerStyle[position],
+                        timeContainerStyle && timeContainerStyle[position],
                     ]}
                 >
                     <Text

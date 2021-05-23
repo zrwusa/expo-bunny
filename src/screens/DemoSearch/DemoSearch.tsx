@@ -69,13 +69,10 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
             <FollowUpSearchBar scrollYValue={scrollYValue}
                                defaultKeywords={[]}
                                onSearch={async (searchText) => {
-                                   console.log('---onSearch,searchText', searchText)
                                    try {
                                        const searchResult = await mockSearch(searchText)
                                        setData(searchResult)
-                                       console.log(searchResult)
                                    } catch (e) {
-                                       console.error(e)
                                        collectBLResult(blError(e))
                                    }
                                }}

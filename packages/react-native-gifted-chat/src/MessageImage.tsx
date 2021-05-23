@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
 })
 
 export interface MessageImageProps<TMessage extends IMessage> {
-    messages: TMessage[],
+    messages?: TMessage[],
     currentMessage?: TMessage
-    containerStyle?: StyleProp<ViewStyle>
+    imageContainerStyle?: StyleProp<ViewStyle>
     imageStyle?: StyleProp<ImageStyle>
     imageProps?: Partial<ImageProps>
     lightBoxProps?: object,
@@ -45,7 +45,7 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
         currentMessage: {
             image: null,
         },
-        containerStyle: {},
+        imageContainerStyle: {},
         imageStyle: {},
         imageProps: {},
         lightBoxProps: {},
@@ -59,7 +59,7 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
 
     render() {
         const {
-            containerStyle,
+            imageContainerStyle,
             lightBoxProps,
             imageProps,
             imageStyle,
@@ -67,8 +67,9 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
             isDebug,
             messages,
         } = this.props
+        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level4]MessageImage props', this.props)
         return (
-            <View style={[styles.container, containerStyle]}>
+            <View style={[styles.container, imageContainerStyle]}>
                 <LightBox
                     activeProps={{
                         style: styles.imageActive,
@@ -81,21 +82,21 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
                             ? <Image
                                 style={[styles.image, imageStyle]}
                                 onLoad={() => {
-                                    isDebug && console.log('---MessageImage onLoad')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageImage onLoad')
                                     this.props.onMessageLoad?.(currentMessage)
-                                    isDebug && console.log('---MessageImage onMessageReadyForDisplay')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageImage onMessageReadyForDisplay')
                                     this.props.onMessageReadyForDisplay?.(currentMessage)
                                 }}
                                 onLoadStart={() => {
-                                    isDebug && console.log('---MessageImage onLoadStart')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageImage onLoadStart')
                                     this.props.onMessageLoadStart?.(currentMessage)
                                 }}
                                 onLoadEnd={() => {
-                                    isDebug && console.log('---MessageImage onLoadEnd')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageImage onLoadEnd')
                                     this.props.onMessageLoadEnd?.(currentMessage)
                                 }}
                                 onError={(e) => {
-                                    isDebug && console.log('---MessageImage onError')
+                                    isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageImage onError')
                                     this.props.onMessageLoadError?.(e.nativeEvent.error, currentMessage)
                                 }}
 

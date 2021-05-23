@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from "react"
+import React, {useCallback, useEffect, useMemo, useState} from "react"
 import {GiftedChat} from "../../../../packages/react-native-gifted-chat/src"
 import {RouteProp} from "@react-navigation/native";
 import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from "../../../types";
@@ -9,7 +9,6 @@ import {firestoreTimestampToDate, uuidV4} from "../../../utils";
 import {Keyboard, SafeAreaView, TouchableOpacity} from "react-native";
 import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from "../../../components";
 import {IcoMoon} from "../../../components/UI";
-import {FirestoreReducer} from "redux-firestore";
 import {getStyles} from "./styles";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 import {sysError} from "../../../store/actions";
@@ -41,9 +40,29 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
             ],
         }
     ])
+
     const chatMessages = useSelector((state: RootState) => state.firestoreState.ordered.chatMessages)
 
-    const chatMessagesAdapted = chatMessages?.map((serverItem) => {
+    // const [chatMessagesAdapted,setChatMessagesAdapted] = useState<IMMessage[]>([])
+    //
+    // useEffect(() => {
+    //     const xxx = chatMessages?.map((serverItem) => {
+    //         return {...serverItem, createdAt: firestoreTimestampToDate(serverItem.createdAt)}
+    //     })
+    //     setChatMessagesAdapted(xxx)
+    // }, [chatMessages])
+
+    useEffect(() => {
+        return () => {
+            firestore.get({
+                collection: 'chatMessages',
+                limit: 0,
+            }).then()
+            // dispatch({ type: actionTypes.CLEAR_DATA, meta: { collection: 'chatMessages' } })
+        }
+    }, [])
+
+    let chatMessagesAdapted = chatMessages?.map((serverItem) => {
         return {...serverItem, createdAt: firestoreTimestampToDate(serverItem.createdAt)}
     })
 
@@ -63,7 +82,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
 
     const chatAssetsPath = `/chatAssets/${memoizedUser?._id}`
 
-    const generateMessage = (type: IMMessageType, payload?: string, needMerge?: IMMessage) => {
+    const generateMessage = (type: IMMessageType, payload?: string, needMerge?: Partial<IMMessage>) => {
         let text = '', image = '', audio = '', video = '', sticker = '';
         switch (type) {
             case 'IMAGE':
@@ -104,10 +123,10 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
 
     const handleSend = useCallback(async (messages = []) => {
         const msg = generateMessage('MESSAGE', messages[0].text)
-        await sendMessage(msg)
+        await storeMessage(msg)
     }, [])
 
-    const sendMessage = async (msg: IMMessage) => {
+    const storeMessage = async (msg: IMMessage) => {
         await firestore.set(`chatMessages/${msg._id}`, msg)
         await setSent(msg)
     }
@@ -116,7 +135,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
         await firestore.update(`chatMessages/${msg._id}`, {sent: true, pending: false})
     }
 
-    const setReceived = async (msg: FirestoreReducer.EntityWithId<IMMessage>) => {
+    const setReceived = async (msg: IMMessage) => {
         if ((memoizedUser && memoizedUser._id) !== msg?.user._id) {
             await firestore.update(`chatMessages/${msg._id}`, {received: true})
         }
@@ -124,9 +143,12 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
 
     return (
         <SafeAreaView style={{flex: 1}}>
-            {isLoaded()
+            {isLoaded(chatMessages)
                 ? <>
-                    <GiftedChat
+                    <GiftedChat<IMMessage>
+                        // minComposerHeight={100}
+                        // keyboardShouldPersistTaps
+                        isDebug={false}
                         alwaysShowSend
                         // TODO Suspected to be a react-native-gifted-chat bug,default value is true.
                         inverted={true}
@@ -184,7 +206,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                                                 break;
                                         }
                                         const msg = generateMessage(mediaType, imageSource.uri)
-                                        await sendMessage(msg)
+                                        await storeMessage(msg)
                                     }}
                                 />
                             </>
@@ -197,11 +219,12 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                                                          uploadPath={chatAssetsPath}
                                                          onValueChanged={async (uri) => {
                                                              const messageNeedSent = generateMessage('AUDIO', uri)
-                                                             await sendMessage(messageNeedSent)
+                                                             await storeMessage(messageNeedSent)
                                                          }}/>
                                         : <TouchableOpacity onPress={() => {
-                                            if (text && onSend) {
-                                                onSend({text: text, user: memoizedUser, _id: uuidV4()}, true);
+                                            if (text && onSend && memoizedUser) {
+                                                onSend(generateMessage('MESSAGE',
+                                                    text), true);
                                             }
                                         }}>
                                             <IcoMoon name="paperplane1" style={styles.sendIcon}/>
@@ -216,7 +239,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         isShow={isShowStickerPicker}
                         onValueChanged={async (uri) => {
                             const msg = generateMessage('STICKER_GIF', uri)
-                            await sendMessage(msg);
+                            await storeMessage(msg);
                             // setIsShowStickerPicker(false);
                         }}/>
                 </>

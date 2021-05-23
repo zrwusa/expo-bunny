@@ -35,10 +35,8 @@ export function DatingHomeScreen() {
                            renderNoMoreCards={() => null}
                            ref={swipper}
                            onSwipedLeft={() => {
-                               console.log('---left')
                            }}
                            onSwipedRight={() => {
-                               console.log('---right')
                            }}
                 >
                     {data.map((item) => (
