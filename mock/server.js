@@ -4,7 +4,9 @@ const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
 const path = require("path");
 const https = require("https");
-const bunnyConfig = require("../src/config.js")
+const {bunnyConfig} = require("./config")
+
+console.log(bunnyConfig)
 
 const server = jsonServer.create()
 const router = jsonServer.router(`${__dirname}/database.json`)
