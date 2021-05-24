@@ -1,4 +1,4 @@
-import {themes} from "../../../src/providers/theme-labor/theme"
+import {themes} from "../../providers/theme-labor/theme"
 
 const {colors} = themes['light']
 export default {
@@ -11,7 +11,7 @@ export default {
     // Bubble left background,TypingIndicator backgroundColor
     leftBubbleBackground: '#f0f0f0',
     black: '#000',
-    // Ticks,InputToolbar background,Avatar text,LoadEarlier text,
+    // Ticks,InputToolbar background,ChatAvatar text,LoadEarlier text,
     // MessageContainer background,Quick Reply text,Time right text
     white: '#fff',
     carrot: '#e67e22',

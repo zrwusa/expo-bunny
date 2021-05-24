@@ -1,7 +1,7 @@
 import React from 'react'
 import {LayoutChangeEvent, StyleSheet, View, ViewStyle} from 'react-native'
 
-import Avatar, {AvatarProps} from './Avatar'
+import ChatAvatar, {ChatAvatarProps} from './ChatAvatar'
 import Bubble, {BubbleProps} from './Bubble'
 import SystemMessage, {SystemMessageProps} from './SystemMessage'
 import Day, {DayProps} from './Day'
@@ -32,12 +32,10 @@ const styles = {
 
 export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMessage>,
     DayProps<TMessage>,
-    AvatarProps<TMessage>,
+    ChatAvatarProps<TMessage>,
     SystemMessageProps<TMessage> {
     currentMessage?: TMessage
-
-    onMessageLayout?(event: LayoutChangeEvent): void
-
+    previousMessage?: TMessage
     nextMessage?: TMessage
     position: 'left' | 'right'
     messageContainerStyle?: LeftRightStyle<ViewStyle>
@@ -47,7 +45,7 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
         nextProps: MessageProps<IMessage>,
     ): boolean
 
-    previousMessage?: TMessage
+    onMessageLayout?(event: LayoutChangeEvent): void
 
     renderDay?(props: DayProps<TMessage>): React.ReactNode
 
@@ -75,20 +73,12 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
     // renderBubble?(props: Bubble['props']): React.ReactNode
     // renderDay?(props: Day['props']): React.ReactNode
     // renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
-    // renderAvatar?(props: Avatar['props']): React.ReactNode
+    // renderAvatar?(props: ChatAvatar['props']): React.ReactNode
     // shouldUpdateMessage?(
     //     props: MessageProps<IMessage>,
     //     nextProps: MessageProps<IMessage>,
     // ): boolean
     // onMessageLayout?(event: LayoutChangeEvent): void
-    //
-    // // onMessageLoad?(currentMessage: TMessage): void
-    // //
-    // // onMessageLoadStart?(currentMessage: TMessage): void
-    // //
-    // // onMessageLoadEnd?(currentMessage: TMessage): void
-    // //
-    // // onMessageLoadError?(e:Error,currentMessage: TMessage): void
 }
 
 export default class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
@@ -380,7 +370,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
             onLongPressAvatar
         }
         isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level3]Message avatarProps', avatarProps)
-        return <Avatar {...avatarProps} />
+        return <ChatAvatar {...avatarProps} />
     }
 
     render() {

@@ -51,6 +51,7 @@ export interface MessageTextProps<TMessage extends IMessage> {
     linkStyle?: LeftRightStyle<TextStyle>
     textProps?: TextProps
     customTextStyle?: StyleProp<TextStyle>
+    isDebug?: boolean
 
     parsePatterns?(linkStyle: TextStyle): any
 
@@ -63,8 +64,6 @@ export interface MessageTextProps<TMessage extends IMessage> {
     onMessageReadyForDisplay?(currentMessage: TMessage): void
 
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
-
-    isDebug?: boolean
 }
 
 export default class MessageText<TMessage extends IMessage = IMessage> extends React.Component<MessageTextProps<TMessage>> {

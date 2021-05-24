@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react'
 import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
-import GiftedAvatar from './GiftedAvatar'
+import BunnyAvatar from './BunnyAvatar'
 import {isSameDay, isSameUser} from './utils'
 import {IMessage, LeftRightStyle, User} from './Models'
 
@@ -35,7 +35,7 @@ const styles = {
     }),
 }
 
-export interface AvatarProps<TMessage extends IMessage> {
+export interface ChatAvatarProps<TMessage extends IMessage> {
     currentMessage?: TMessage
     previousMessage?: TMessage
     nextMessage?: TMessage
@@ -46,14 +46,14 @@ export interface AvatarProps<TMessage extends IMessage> {
     avatarContainerStyle?: LeftRightStyle<ViewStyle>
     avatarTextStyle?: TextStyle
 
-    renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
+    renderAvatar?(props: Omit<ChatAvatarProps<TMessage>, 'renderAvatar'>): ReactNode
 
     onPressAvatar?(user: User): void
 
     onLongPressAvatar?(user: User): void
 }
 
-export default class Avatar<TMessage extends IMessage = IMessage> extends React.Component<AvatarProps<TMessage>> {
+export default class ChatAvatar<TMessage extends IMessage = IMessage> extends React.Component<ChatAvatarProps<TMessage>> {
     static defaultProps = {
         renderAvatarOnTop: false,
         showAvatarForEveryMessage: false,
@@ -79,7 +79,7 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
         }
         if (this.props.currentMessage) {
             return (
-                <GiftedAvatar
+                <BunnyAvatar
                     avatarStyle={
                         [
                             styles[this.props.position].image,
@@ -136,7 +136,7 @@ export default class Avatar<TMessage extends IMessage = IMessage> extends React.
                         avatarContainerStyle && avatarContainerStyle[position],
                     ]}
                 >
-                    <GiftedAvatar
+                    <BunnyAvatar
                         avatarStyle={
                             [
                                 styles[position].image,

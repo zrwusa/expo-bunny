@@ -71,16 +71,11 @@ export interface MessageContainerProps<TMessage extends IMessage> extends Omit<M
     inverted?: boolean
     scrollToBottomOffset?: number
     messages?: TMessage[]
-
-
     scrollToBottomStyle?: StyleProp<ViewStyle>
     user?: User
     infiniteScroll?: boolean
     isLoadingEarlier?: boolean
     loadEarlier?: boolean
-
-    onLoadEarlier?(): void
-
     alignTop?: boolean
     scrollToBottom?: boolean
     extraData?: any
@@ -96,6 +91,10 @@ export interface MessageContainerProps<TMessage extends IMessage> extends Omit<M
     renderChatEmpty?(): React.ReactNode
 
     renderScrollToBottom?(): React.ReactNode
+
+    onLoadEarlier?(): void
+
+    onQuickReply?(replies: Reply[]): void
 
     // messages?: TMessage[]
     // isTyping?: boolean
@@ -123,7 +122,6 @@ export interface MessageContainerProps<TMessage extends IMessage> extends Omit<M
 
     // onLoadEarlier?(): void
 
-    onQuickReply?(replies: Reply[]): void
 
     // onMessageLoad?(currentMessage: TMessage): void
 
@@ -269,12 +267,12 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
 
     renderRow = ({item, index}: ListRenderItemInfo<TMessage>) => {
         if (!item._id && item._id !== 0) {
-            warning('GiftedChat: `_id` is missing for message', JSON.stringify(item))
+            warning('BunnyChat: `_id` is missing for message', JSON.stringify(item))
         }
         if (!item.user) {
             if (!item.system) {
                 warning(
-                    'GiftedChat: `user` is missing for message',
+                    'BunnyChat: `user` is missing for message',
                     JSON.stringify(item),
                 )
             }

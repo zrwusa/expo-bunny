@@ -19,4 +19,5 @@ export * from "./StickerPicker"
 export * from "./AudioRecorder"
 export * from "./CachedImage"
 export * from "./Divider"
+export * from "./BunnyChat"
 

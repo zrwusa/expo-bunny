@@ -42,7 +42,7 @@ export interface GiftedAvatarProps {
     onLongPress?(props: any): void
 }
 
-export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
+export default class BunnyAvatar extends React.Component<GiftedAvatarProps> {
     static defaultProps = {
         user: {
             name: null,

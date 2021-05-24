@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle,} from 'react-native'
 import {IMessage} from './Models'
-import LightBox from "../../react-native-lightbox";
+import LightBox from "../../../packages/react-native-lightbox";
 
 const styles = StyleSheet.create({
     container: {},
@@ -25,6 +25,7 @@ export interface MessageImageProps<TMessage extends IMessage> {
     imageStyle?: StyleProp<ImageStyle>
     imageProps?: Partial<ImageProps>
     lightBoxProps?: object,
+    isDebug?: boolean
 
     onMessageLoad?(currentMessage: TMessage): void
 
@@ -35,8 +36,6 @@ export interface MessageImageProps<TMessage extends IMessage> {
     onMessageReadyForDisplay?(currentMessage: TMessage): void
 
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
-
-    isDebug?: boolean
 }
 
 export default class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage>> {

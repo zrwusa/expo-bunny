@@ -1,13 +1,13 @@
 import {StyleProp, ViewStyle} from 'react-native'
 
 export type {ActionsProps} from './Actions'
-export type {AvatarProps} from './Avatar'
+export type {ChatAvatarProps} from './ChatAvatar'
 export type {
     BubbleProps,
 } from './Bubble'
 export type {ComposerProps} from './Composer'
 export type {DayProps} from './Day'
-export type {GiftedAvatarProps} from './GiftedAvatar'
+export type {GiftedAvatarProps} from './BunnyAvatar'
 export type {InputToolbarProps} from './InputToolbar'
 export type {LoadEarlierProps} from './LoadEarlier'
 export type {MessageProps} from './Message'

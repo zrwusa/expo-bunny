@@ -2,7 +2,7 @@
 import {ImageSourcePropType, ImageURISource} from "react-native";
 import {AVPlaybackSource} from "../../packages/expo-av/src/AV";
 import {SagaTodo} from "./states";
-import {IMessage} from "../../packages/react-native-gifted-chat/src";
+import {IMessage} from "../components/BunnyChat";
 import firebase from "firebase";
 import {StoredUser} from "./auth";
 

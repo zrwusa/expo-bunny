@@ -19,6 +19,7 @@ export interface MessageStickerProps<TMessage extends IMessage> {
     stickerContainerStyle?: StyleProp<ViewStyle>
     stickerStyle?: StyleProp<ImageStyle>
     stickerProps?: Partial<ImageProps>
+    isDebug?: boolean
 
     onMessageLoad?(currentMessage: TMessage): void
 
@@ -29,8 +30,6 @@ export interface MessageStickerProps<TMessage extends IMessage> {
     onMessageReadyForDisplay?(currentMessage: TMessage): void
 
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
-
-    isDebug?: boolean
 }
 
 export default class MessageSticker<TMessage extends IMessage = IMessage> extends Component<MessageStickerProps<TMessage>> {

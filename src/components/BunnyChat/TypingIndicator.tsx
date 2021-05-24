@@ -3,7 +3,7 @@ import {Animated, StyleSheet} from 'react-native'
 import {TypingAnimation} from 'react-native-typing-animation'
 import {useUpdateLayoutEffect} from './hooks/useUpdateLayoutEffect'
 import Color from './Color'
-import config from "../../../src/config";
+import config from "../../config";
 
 interface Props {
     isTyping?: boolean

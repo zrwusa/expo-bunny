@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage} from './Models'
-import {AudioPlayer, AudioPlayerProps} from "../../../src/components/AudioPlayer";
+import {AudioPlayer, AudioPlayerProps} from "../AudioPlayer";
 
 const styles = StyleSheet.create({
     container: {
@@ -16,6 +16,7 @@ export interface MessageAudioProps<TMessage extends IMessage> {
     audioContainerStyle?: StyleProp<ViewStyle>
     audioStyle?: StyleProp<ViewStyle>
     audioProps?: Omit<AudioPlayerProps, 'source'>
+    isDebug?: boolean
 
     onMessageLoad?(currentMessage: TMessage): void
 
@@ -26,8 +27,6 @@ export interface MessageAudioProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 
     onMessageReadyForDisplay?(currentMessage: TMessage): void
-
-    isDebug?: boolean
 }
 
 export default class MessageAudio<TMessage extends IMessage = IMessage> extends Component<MessageAudioProps<TMessage>> {

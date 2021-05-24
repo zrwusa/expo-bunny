@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from "react"
-import {GiftedChat} from "../../../../packages/react-native-gifted-chat/src"
+import {BunnyChat} from "../../../components/BunnyChat"
 import {RouteProp} from "@react-navigation/native";
 import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from "../../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
@@ -145,7 +145,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
         <SafeAreaView style={{flex: 1}}>
             {isLoaded(chatMessages)
                 ? <>
-                    <GiftedChat<IMMessage>
+                    <BunnyChat<IMMessage>
                         // minComposerHeight={100}
                         // keyboardShouldPersistTaps
                         isDebug={false}

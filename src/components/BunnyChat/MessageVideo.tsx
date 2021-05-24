@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage} from './Models'
-import {Video, VideoProps} from "../../expo-av/src";
+import {Video, VideoProps} from "../../../packages/expo-av/src";
 
 const styles = StyleSheet.create({
     container: {},
@@ -20,6 +20,7 @@ export interface MessageVideoProps<TMessage extends IMessage> {
     videoContainerStyle?: StyleProp<ViewStyle>
     videoStyle?: StyleProp<ViewStyle>
     videoProps?: VideoProps
+    isDebug?: boolean
 
     onMessageLoad?(currentMessage: TMessage): void
 
@@ -30,8 +31,6 @@ export interface MessageVideoProps<TMessage extends IMessage> {
     onMessageReadyForDisplay?(currentMessage: TMessage): void
 
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
-
-    isDebug?: boolean
 }
 
 export default class MessageVideo<TMessage extends IMessage = IMessage> extends Component<MessageVideoProps<TMessage>> {

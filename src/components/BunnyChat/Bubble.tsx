@@ -151,42 +151,25 @@ export interface BubbleProps<TMessage extends IMessage> extends MessageImageProp
     // nextMessage?: TMessage
     // previousMessage?: TMessage
     // optionTitles?: string[]
-    //
-    //
     // textStyle?: LeftRightStyle<TextStyle>
-    //
     // tickStyle?: StyleProp<TextStyle>
     // containerToNextStyle?: LeftRightStyle<ViewStyle>
     // containerToPreviousStyle?: LeftRightStyle<ViewStyle>
     // usernameStyle?: TextStyle
     // quickReplyStyle?: StyleProp<ViewStyle>
-    //
     // onPress?(context?: any, message?: any): void
-    //
     // onLongPress?(context?: any, message?: any): void
-    //
     // onQuickReply?(replies: Reply[]): void
-    //
     // renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
-    //
     // renderMessageSticker?(props: RenderMessageStickerProps<TMessage>): React.ReactNode
-    //
     // renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
-    //
     // renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
-    //
     // renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
-    //
     // renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
-    //
     // renderTime?(timeProps: Time['props']): React.ReactNode
-    //
     // renderTicks?(currentMessage: TMessage): React.ReactNode
-    //
     // renderUsername?(): React.ReactNode
-    //
     // renderQuickReplySend?(): React.ReactNode
-    //
     // renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
 }
 

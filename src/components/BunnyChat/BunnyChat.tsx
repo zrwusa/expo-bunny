@@ -8,7 +8,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import * as utils from './utils'
 import Actions from './Actions'
-import Avatar from './Avatar'
+import ChatAvatar from './ChatAvatar'
 import Bubble from './Bubble'
 import SystemMessage from './SystemMessage'
 import MessageImage from './MessageImage'
@@ -22,7 +22,7 @@ import Message from './Message'
 import MessageContainer, {MessageContainerProps} from './MessageContainer'
 import Send from './Send'
 import Time from './Time'
-import GiftedAvatar from './GiftedAvatar'
+import BunnyAvatar from './BunnyAvatar'
 
 import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
 import {IMessage,} from './Models'
@@ -44,7 +44,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends M
         ) => void
     },
 
-    /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
+    /* Input text; default is undefined, but if specified, it will override BunnyChat's internal state */
     text?: string,
     /*  Locale to localize the dates */
     locale?: string,
@@ -90,7 +90,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends M
     // isTyping?: boolean
     // /* Messages container style */
     // messagesContainerStyle?: StyleProp<ViewStyle>
-    // /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
+    // /* Input text; default is undefined, but if specified, it will override BunnyChat's internal state */
     // text?: string
     // /* Controls whether or not the message bubbles appear at the top of the chat */
     // alignTop?: boolean
@@ -220,7 +220,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends M
     // renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
     //
     // /* Custom message avatar; set to null to not render any avatar for the message */
-    // renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode | null
+    // renderAvatar?(props: ChatAvatar<TMessage>['props']): React.ReactNode | null
     //
     // /* Custom message bubble */
     // renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
@@ -319,7 +319,7 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
     messages?: TMessage[]
 }
 
-class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<GiftedChatProps<TMessage>,
+class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<GiftedChatProps<TMessage>,
     GiftedChatState> {
     static childContextTypes = {
         actionSheet: function () {
@@ -1129,9 +1129,9 @@ const styles = StyleSheet.create({
 export * from './Models'
 
 export {
-    GiftedChat,
+    BunnyChat,
     Actions,
-    Avatar,
+    ChatAvatar,
     Bubble,
     SystemMessage,
     MessageImage,
@@ -1145,6 +1145,6 @@ export {
     MessageContainer,
     Send,
     Time,
-    GiftedAvatar,
+    BunnyAvatar,
     utils,
 }
