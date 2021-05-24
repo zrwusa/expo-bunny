@@ -132,7 +132,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
             onPanResponderMove: Animated.event([
                 null,
                 {dy: this.state.pan}
-            ], {useNativeDriver: config.useNativeDriver}),
+            ], {useNativeDriver: false}),
             onPanResponderTerminationRequest: (evt, gestureState) => true,
             onPanResponderRelease: (evt, gestureState) => {
                 if (Math.abs(gestureState.dy) > DRAG_DISMISS_THRESHOLD) {
@@ -148,7 +148,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
                 } else {
                     Animated.spring(
                         this.state.pan,
-                        {toValue: 0, ...this.props.springConfig, useNativeDriver: config.useNativeDriver}
+                        {toValue: 0, ...this.props.springConfig, useNativeDriver: false}
                     ).start(() => {
                         this.setState({isPanning: false});
                     });
