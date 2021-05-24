@@ -2,7 +2,9 @@ import React from 'react'
 import {Linking, StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle} from 'react-native'
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
-import {IMessage, LeftRightStyle} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight} from './Models'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {ActionSheetProps, connectActionSheet} from "../../../packages/react-native-action-sheet/src";
 
 const WWW_URL_PATTERN = /^www\./i
 
@@ -43,8 +45,8 @@ const styles = {
 const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
 
 export interface MessageTextProps<TMessage extends IMessage> {
-    position: 'left' | 'right'
-    optionTitles?: string[]
+    position: PositionLeftOrRight
+    phoneNumberOptionTitles?: string[]
     currentMessage?: TMessage
     textContainerStyle?: LeftRightStyle<ViewStyle>
     textStyle?: LeftRightStyle<TextStyle>
@@ -66,19 +68,12 @@ export interface MessageTextProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 }
 
-export default class MessageText<TMessage extends IMessage = IMessage> extends React.Component<MessageTextProps<TMessage>> {
-    static contextTypes = {
-        actionSheet: function () {
-
-        },
-    }
+class MessageText<TMessage extends IMessage = IMessage> extends React.Component<MessageTextProps<TMessage> & WithBunnyKit & ActionSheetProps> {
 
     static defaultProps = {
-        position: 'left',
-        optionTitles: DEFAULT_OPTION_TITLES,
-        currentMessage: {
-            text: '',
-        },
+        position: 'left' as PositionLeftOrRight,
+        phoneNumberOptionTitles: DEFAULT_OPTION_TITLES,
+        currentMessage: undefined,
         textContainerStyle: {},
         textStyle: {},
         linkStyle: {},
@@ -118,14 +113,14 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
     }
 
     onPhonePress = (phone: string) => {
-        const {optionTitles} = this.props
+        const {phoneNumberOptionTitles} = this.props
+        // TODO confusing
         const options =
-            optionTitles && optionTitles.length > 0
-                ? optionTitles.slice(0, 3)
+            phoneNumberOptionTitles && phoneNumberOptionTitles.length > 0
+                ? phoneNumberOptionTitles.slice(0, 3)
                 : DEFAULT_OPTION_TITLES
         const cancelButtonIndex = options.length - 1
-        console.log(this.context)
-        this.context.actionSheet().showActionSheetWithOptions(
+        this.props.showActionSheetWithOptions(
             {
                 options,
                 cancelButtonIndex,
@@ -154,7 +149,7 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
             this.props.linkStyle && this.props.linkStyle[this.props.position],
         ]
         const {currentMessage, isDebug} = this.props
-        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level4]MessageText props', this.props)
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageText props', this.props)
         return (
             <View
                 style={[
@@ -180,11 +175,11 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
                             childrenProps={{...this.props.textProps}}
 
                             onLayout={() => {
-                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageText onLayout')
+                                isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageText onLayout')
                                 this.props.onMessageLoad?.(currentMessage)
                                 this.props.onMessageLoadStart?.(currentMessage)
                                 this.props.onMessageLoadEnd?.(currentMessage)
-                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageText onMessageReadyForDisplay')
+                                isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageText onMessageReadyForDisplay')
                                 this.props.onMessageReadyForDisplay?.(currentMessage)
                             }}
                         >
@@ -198,3 +193,5 @@ export default class MessageText<TMessage extends IMessage = IMessage> extends R
         )
     }
 }
+
+export default withBunnyKit(connectActionSheet(MessageText))

@@ -146,6 +146,14 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
             {isLoaded(chatMessages)
                 ? <>
                     <BunnyChat<IMMessage>
+                        // actionsConfig={{
+                        //     'PickImage': function () {
+                        //         console.log(arguments)
+                        //     },
+                        //     'Cancel': function () {
+                        //         console.log(arguments)
+                        //     }
+                        // }}
                         // minComposerHeight={100}
                         // keyboardShouldPersistTaps
                         isDebug={false}
@@ -155,7 +163,12 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         // showUserAvatar
                         // showAvatarForEveryMessage
                         messages={chatMessagesAdapted}
-                        onSend={messages => handleSend(messages)}
+                        onSend={async (messages) => {
+                            console.log('onSend',messages)
+                            await handleSend(messages)
+                        }}
+
+                        text={"xxx"}
                         user={memoizedUser}
 
                         textInputProps={{
@@ -175,7 +188,14 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         onMessageLoadError={(e, currentMessage) => {
                             dispatch(sysError(e));
                         }}
-
+                        // actionSheet={() => {
+                        //     return {
+                        //         showActionSheetWithOptions: (options, callback) => {
+                        //             console.log(options, callback)
+                        //             callback(0)
+                        //         }
+                        //     }
+                        // }}
                         renderActions={() => {
                             return <>
                                 <TouchableOpacity onPress={() => {

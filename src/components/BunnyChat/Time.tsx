@@ -4,7 +4,8 @@ import dayjs from 'dayjs'
 
 import Color from './Color'
 import {TIME_FORMAT} from './Constant'
-import {IMessage, LeftRightStyle} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight} from './Models'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 const containerStyle = {
     marginLeft: 10,
@@ -40,25 +41,18 @@ const styles = {
 }
 
 export interface TimeProps<TMessage extends IMessage> {
-    position: 'left' | 'right'
+    position: PositionLeftOrRight
     currentMessage?: TMessage
     timeContainerStyle?: LeftRightStyle<ViewStyle>
     timeTextStyle?: LeftRightStyle<TextStyle>
     timeFormat?: string
 }
 
-export default class Time<TMessage extends IMessage = IMessage> extends Component<TimeProps<TMessage>> {
-    static contextTypes = {
-        getLocale: function () {
-
-        },
-    }
+class Time<TMessage extends IMessage = IMessage> extends Component<TimeProps<TMessage> & WithBunnyKit> {
 
     static defaultProps = {
-        position: 'left',
-        currentMessage: {
-            createdAt: null,
-        },
+        position: 'left' as PositionLeftOrRight,
+        currentMessage: undefined,
         timeContainerStyle: {},
         timeFormat: TIME_FORMAT,
         timeTextStyle: {},
@@ -71,7 +65,10 @@ export default class Time<TMessage extends IMessage = IMessage> extends Componen
             currentMessage,
             timeFormat,
             timeTextStyle,
+            bunnyKit
         } = this.props
+
+        const {language} = bunnyKit;
 
         if (!!currentMessage) {
             return (
@@ -90,7 +87,7 @@ export default class Time<TMessage extends IMessage = IMessage> extends Componen
                         }
                     >
                         {dayjs(currentMessage.createdAt)
-                            .locale(this.context.getLocale())
+                            .locale(language)
                             .format(timeFormat)}
                     </Text>
                 </View>
@@ -99,3 +96,5 @@ export default class Time<TMessage extends IMessage = IMessage> extends Componen
         return null
     }
 }
+
+export default withBunnyKit(Time)

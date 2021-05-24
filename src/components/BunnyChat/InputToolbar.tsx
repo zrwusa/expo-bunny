@@ -120,7 +120,7 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
     renderActions() {
         // const {inputToolbarContainerStyle, ...props} = this.props
         const {
-            showActionSheetWithOptions,
+            actionsConfig,
             actionOptionTintColor,
             renderActionIcon,
             actionContainerStyle,
@@ -128,7 +128,7 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
             actionWrapperStyle,
         } = this.props;
         const actionsProps = {
-            showActionSheetWithOptions,
+            actionsConfig,
             actionOptionTintColor,
             renderActionIcon,
             actionContainerStyle,
@@ -137,7 +137,9 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
         }
         if (this.props.renderActions) {
             return this.props.renderActions(actionsProps)
-        } else if (this.props.onPressActionButton) {
+            // } else {
+        } else if (actionsConfig) {
+            // TODO why need onPressActionButton to render Actions
             return <Actions {...actionsProps} />
         }
         return null

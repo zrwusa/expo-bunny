@@ -12,7 +12,6 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import config from "../../src/config";
 
 const DRAG_DISMISS_THRESHOLD = 150;
 const STATUS_BAR_OFFSET = (Platform.OS === 'android' ? -25 : 0);

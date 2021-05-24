@@ -5,15 +5,17 @@ import QuickReplies, {QuickRepliesProps} from './QuickReplies'
 
 import MessageText, {MessageTextProps} from './MessageText'
 import MessageImage, {MessageImageProps} from './MessageImage'
-import MessageVideo from './MessageVideo'
-import MessageAudio from './MessageAudio'
+import MessageVideo, {MessageVideoProps} from './MessageVideo'
+import MessageAudio, {MessageAudioProps} from './MessageAudio'
 
 import Time, {TimeProps} from './Time'
 import Color from './Color'
 
 import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, User,} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User,} from './Models'
 import MessageSticker, {MessageStickerProps} from "./MessageSticker";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {ActionSheetProps, connectActionSheet} from "../../../packages/react-native-action-sheet/src";
 
 const styles = {
     left: StyleSheet.create({
@@ -140,6 +142,7 @@ export interface BubbleProps<TMessage extends IMessage> extends MessageImageProp
     usernameStyle?: TextStyle
     touchableProps?: object
 
+    textLongPressOptionTitles?: string[]
 
     // messages: TMessage[],
     // user?: User
@@ -150,7 +153,7 @@ export interface BubbleProps<TMessage extends IMessage> extends MessageImageProp
     // currentMessage?: TMessage
     // nextMessage?: TMessage
     // previousMessage?: TMessage
-    // optionTitles?: string[]
+    // textLongPressOptionTitles?: string[]
     // textStyle?: LeftRightStyle<TextStyle>
     // tickStyle?: StyleProp<TextStyle>
     // containerToNextStyle?: LeftRightStyle<ViewStyle>
@@ -173,43 +176,34 @@ export interface BubbleProps<TMessage extends IMessage> extends MessageImageProp
     // renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
 }
 
-export default class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage>> {
-    static contextTypes = {
-        actionSheet: function () {
-
-        },
-    }
+class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage> & ActionSheetProps & WithBunnyKit> {
 
     static defaultProps = {
         messages: [],
         touchableProps: {},
-        onPress: null,
-        onLongPress: null,
-        renderMessageImage: null,
-        renderMessageSticker: null,
-        renderMessageVideo: null,
-        renderMessageAudio: null,
-        renderMessageText: null,
-        renderCustomView: null,
-        renderUsername: null,
-        renderTicks: null,
-        renderTime: null,
-        renderQuickReplies: null,
-        onQuickReply: null,
-        onMessageLoad: null,
-        onMessageLoadStart: null,
-        onMessageLoadEnd: null,
-        onMessageLoadError: null,
+        onPress: undefined,
+        onLongPress: undefined,
+        renderMessageImage: undefined,
+        renderMessageSticker: undefined,
+        renderMessageVideo: undefined,
+        renderMessageAudio: undefined,
+        renderMessageText: undefined,
+        renderCustomView: undefined,
+        renderUsername: undefined,
+        renderTicks: undefined,
+        renderTime: undefined,
+        renderQuickReplies: undefined,
+        onQuickReply: undefined,
+        onMessageLoad: undefined,
+        onMessageLoadStart: undefined,
+        onMessageLoadEnd: undefined,
+        onMessageLoadError: undefined,
 
-        position: 'left',
-        optionTitles: DEFAULT_OPTION_TITLES,
-        currentMessage: {
-            text: null,
-            createdAt: null,
-            image: null,
-        },
-        nextMessage: {},
-        previousMessage: {},
+        position: 'left' as PositionLeftOrRight,
+        textLongPressOptionTitles: DEFAULT_OPTION_TITLES,
+        currentMessage: undefined,
+        nextMessage: undefined,
+        previousMessage: undefined,
         bubbleContainerStyle: {},
         bubbleWrapperStyle: {},
         bottomContainerStyle: {},
@@ -231,13 +225,13 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         if (this.props.onLongPress) {
             this.props.onLongPress(this.context, this.props.currentMessage)
         } else if (currentMessage && currentMessage.text) {
-            const {optionTitles} = this.props
+            const {textLongPressOptionTitles} = this.props
             const options =
-                optionTitles && optionTitles.length > 0
-                    ? optionTitles.slice(0, 2)
+                textLongPressOptionTitles && textLongPressOptionTitles.length > 0
+                    ? textLongPressOptionTitles.slice(0, 2)
                     : DEFAULT_OPTION_TITLES
             const cancelButtonIndex = options.length - 1
-            this.context.actionSheet().showActionSheetWithOptions(
+            this.props.showActionSheetWithOptions(
                 {
                     options,
                     cancelButtonIndex,
@@ -305,7 +299,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
             nextMessage,
         } = this.props
         if (currentMessage && currentMessage.quickReplies) {
-            // const {bubbleContainerStyle, bubbleWrapperStyle, ...quickReplyProps} = this.props
             const {
                 onQuickReply,
                 quickRepliesColor,
@@ -339,7 +332,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         if (this.props.currentMessage && this.props.currentMessage.text) {
             const {
                 position,
-                optionTitles,
+                phoneNumberOptionTitles,
                 currentMessage,
                 textContainerStyle,
                 textStyle,
@@ -356,7 +349,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
             } = this.props;
             const messageTextProps = {
                 position,
-                optionTitles,
+                phoneNumberOptionTitles,
                 currentMessage,
                 textContainerStyle,
                 textStyle,
@@ -381,7 +374,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderMessageImage() {
         if (this.props.currentMessage && this.props.currentMessage.image) {
-            // const {bubbleContainerStyle, bubbleWrapperStyle, ...messageImageProps} = this.props
             const {
                 messages,
                 currentMessage,
@@ -420,8 +412,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderMessageSticker() {
         if (this.props.currentMessage && this.props.currentMessage.sticker) {
-            // todo extract needed props
-            // const {bubbleContainerStyle, bubbleWrapperStyle, ...messageStickerProps} = this.props
             const {
                 currentMessage,
                 stickerContainerStyle,
@@ -491,7 +481,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderMessageAudio() {
         if (this.props.currentMessage && this.props.currentMessage.audio) {
-            // const {bubbleContainerStyle, bubbleWrapperStyle, ...messageAudioProps} = this.props
             const {
                 currentMessage,
                 audioContainerStyle,
@@ -561,12 +550,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
 
     renderTime() {
         if (this.props.currentMessage && this.props.currentMessage.createdAt) {
-            // const {
-            //     bubbleContainerStyle,
-            //     bubbleWrapperStyle,
-            //     textStyle,
-            //     ...timeProps
-            // } = this.props
             const {
                 position,
                 currentMessage,
@@ -688,3 +671,5 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         )
     }
 }
+
+export default withBunnyKit(connectActionSheet(Bubble))

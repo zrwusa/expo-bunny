@@ -56,7 +56,7 @@ export default class MessageSticker<TMessage extends IMessage = IMessage> extend
             currentMessage,
             isDebug,
         } = this.props
-        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level4]MessageSticker props', this.props)
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageSticker props', this.props)
         return (
             <View style={[styles.container, stickerContainerStyle]}>
                 {currentMessage
@@ -64,21 +64,21 @@ export default class MessageSticker<TMessage extends IMessage = IMessage> extend
                         ? <Image
                             style={[styles.sticker, stickerStyle]}
                             onLoad={() => {
-                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageSticker onLoad')
+                                isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageSticker onLoad')
                                 this.props.onMessageLoad?.(currentMessage)
-                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageSticker onMessageReadyForDisplay')
+                                isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageSticker onMessageReadyForDisplay')
                                 this.props.onMessageReadyForDisplay?.(currentMessage)
                             }}
                             onLoadStart={() => {
-                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageSticker onLoadStart')
+                                isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageSticker onLoadStart')
                                 this.props.onMessageLoadStart?.(currentMessage)
                             }}
                             onLoadEnd={() => {
-                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageSticker onLoadEnd')
+                                isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageSticker onLoadEnd')
                                 this.props.onMessageLoadEnd?.(currentMessage)
                             }}
                             onError={(e) => {
-                                isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', 'MessageSticker onError')
+                                isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageSticker onError')
                                 this.props.onMessageLoadError?.(e.nativeEvent.error, currentMessage)
                             }}
                             source={{uri: currentMessage.sticker}}

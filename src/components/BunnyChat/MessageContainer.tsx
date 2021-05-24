@@ -18,7 +18,7 @@ import {
 import LoadEarlier, {LoadEarlierProps} from './LoadEarlier'
 import Message, {MessageProps} from './Message'
 import Color from './Color'
-import {IMessage, Reply, User} from './Models'
+import {IMessage, PositionLeftOrRight, Reply, User} from './Models'
 import {warning} from './utils'
 import TypingIndicator from './TypingIndicator'
 
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 })
 
 
-export interface MessageContainerProps<TMessage extends IMessage> extends Omit<MessageProps<TMessage>, 'key' | 'position' | 'currentMessage'>, LoadEarlierProps {
+export interface MessageContainerProps<TMessage extends IMessage> extends Omit<MessageProps<TMessage>, 'key' | 'position' | 'currentMessage' | 'showActionSheetWithOptions'>, LoadEarlierProps {
 
     forwardRef?: RefObject<FlatList<IMessage>>
     isTyping?: boolean
@@ -214,7 +214,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
                 activityIndicatorSize
             }
 
-            isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level2]MessageContainer loadEarlierProps', loadEarlierProps)
+            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level2]MessageContainer loadEarlierProps', loadEarlierProps)
             if (this.props.renderLoadEarlier) {
                 return this.props.renderLoadEarlier(loadEarlierProps)
             }
@@ -312,7 +312,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
                 lightBoxProps,
                 linkStyle,
                 messageContainerStyle,
-                optionTitles,
+                phoneNumberOptionTitles,
                 onLongPress,
                 onMessageLoad,
                 onMessageLoadEnd,
@@ -363,10 +363,10 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
                 usernameStyle,
                 videoContainerStyle,
                 videoStyle,
-                videoProps
+                videoProps,
             } = this.props
 
-            const messageProps: MessageProps<TMessage> = {
+            const messageProps = {
                 audioContainerStyle,
                 audioStyle,
                 audioProps,
@@ -395,7 +395,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
                 linkStyle,
                 messageContainerStyle,
                 nextMessage,
-                optionTitles,
+                phoneNumberOptionTitles,
                 onLongPress,
                 onMessageLoad,
                 onMessageLoadEnd,
@@ -453,9 +453,9 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
                 inverted,
                 key: item._id,
                 currentMessage: item,
-                position: item.user._id === user._id ? 'right' : 'left',
+                position: item.user._id === user._id ? 'right' : 'left' as PositionLeftOrRight,
             }
-            isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level2]MessageContainer messageProps', messageProps)
+            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level2]MessageContainer messageProps', messageProps)
             if (this.props.renderMessage) {
                 return this.props.renderMessage(messageProps)
             }

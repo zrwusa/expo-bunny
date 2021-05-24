@@ -7,6 +7,7 @@ import Color from './Color'
 import {isSameDay} from './utils'
 import {DATE_FORMAT} from './Constant'
 import {IMessage} from './Models'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 const styles = StyleSheet.create({
     container: {
@@ -34,19 +35,12 @@ export interface DayProps<TMessage extends IMessage> {
     dateFormat?: string
 }
 
-export default class Day<TMessage extends IMessage = IMessage> extends PureComponent<DayProps<TMessage>> {
-    static contextTypes = {
-        getLocale: function () {
-
-        },
-    }
+class Day<TMessage extends IMessage = IMessage> extends PureComponent<DayProps<TMessage> & WithBunnyKit> {
 
     static defaultProps = {
-        currentMessage: {
-            createdAt: null,
-        },
-        previousMessage: {},
-        nextMessage: {},
+        currentMessage: undefined,
+        previousMessage: undefined,
+        nextMessage: undefined,
         dayContainerStyle: {},
         dayWrapperStyle: {},
         dayTextStyle: {},
@@ -64,7 +58,9 @@ export default class Day<TMessage extends IMessage = IMessage> extends PureCompo
             dayWrapperStyle,
             dayTextStyle,
             dayTextProps,
+            bunnyKit,
         } = this.props
+        const {language} = bunnyKit;
         if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
             const {createdAt} = currentMessage;
 
@@ -73,7 +69,7 @@ export default class Day<TMessage extends IMessage = IMessage> extends PureCompo
                     <View style={dayWrapperStyle}>
                         <Text style={[styles.text, dayTextStyle]} {...dayTextProps}>
                             {dayjs(createdAt)
-                                .locale(this.context.getLocale())
+                                .locale(language)
                                 .format(dateFormat)}
                         </Text>
                     </View>
@@ -83,3 +79,5 @@ export default class Day<TMessage extends IMessage = IMessage> extends PureCompo
         return null
     }
 }
+
+export default withBunnyKit(Day)

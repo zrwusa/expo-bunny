@@ -1,4 +1,4 @@
-import {StyleProp, ViewStyle} from 'react-native'
+import {StyleProp} from 'react-native'
 
 export type {ActionsProps} from './Actions'
 export type {ChatAvatarProps} from './ChatAvatar'
@@ -60,18 +60,4 @@ export interface IMessage {
     quickReplies?: QuickReplies
 }
 
-export interface MessageVideoProps<TMessage extends IMessage> {
-    currentMessage?: TMessage
-    videoContainerStyle?: StyleProp<ViewStyle>
-    videoStyle?: StyleProp<ViewStyle>
-    videoProps?: object
-    // TODO: should be LightBox properties
-    lightBoxProps?: object
-}
-
-export interface MessageAudioProps<TMessage extends IMessage> {
-    currentMessage?: TMessage
-    audioContainerStyle?: StyleProp<ViewStyle>
-    audioStyle?: StyleProp<ViewStyle>
-    audioProps?: object
-}
+export type PositionLeftOrRight = 'left' | 'right'

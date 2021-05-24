@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react'
 import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
 import BunnyAvatar from './BunnyAvatar'
 import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, User} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './Models'
 
 const styles = {
     left: StyleSheet.create({
@@ -39,7 +39,7 @@ export interface ChatAvatarProps<TMessage extends IMessage> {
     currentMessage?: TMessage
     previousMessage?: TMessage
     nextMessage?: TMessage
-    position: 'left' | 'right'
+    position: PositionLeftOrRight
     renderAvatarOnTop?: boolean
     showAvatarForEveryMessage?: boolean
     avatarImageStyle?: LeftRightStyle<ImageStyle>

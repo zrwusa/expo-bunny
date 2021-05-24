@@ -1,6 +1,6 @@
 import React, {RefObject} from 'react'
 import {Animated, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, StyleProp, StyleSheet, View, ViewStyle,} from 'react-native'
-import {ActionSheetOptions, ActionSheetProvider,} from '@expo/react-native-action-sheet'
+import {ActionSheetOptions, ActionSheetProvider,} from '../../../packages/react-native-action-sheet/src'
 import uuid from 'uuid'
 import {getBottomSpace} from 'react-native-iphone-x-helper'
 import dayjs from 'dayjs'
@@ -321,12 +321,12 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
 
 class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<GiftedChatProps<TMessage>,
     GiftedChatState> {
-    static childContextTypes = {
-        actionSheet: function () {
-        },
-        getLocale: function () {
-        },
-    }
+    // static childContextTypes = {
+    //     actionSheet: function () {
+    //     },
+    //     getLocale: function () {
+    //     },
+    // }
 
     static defaultProps = {
         messages: [],
@@ -356,7 +356,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         },
         isLoadingEarlier: false,
         renderLoading: null,
-        renderLoadEarlier: null,
+        renderLoadEarlier: undefined,
         renderAvatar: undefined,
         showUserAvatar: false,
         actionSheet: null,
@@ -364,15 +364,15 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         onLongPressAvatar: null,
         renderUsernameOnMessage: false,
         renderAvatarOnTop: false,
-        renderBubble: null,
-        renderSystemMessage: null,
+        renderBubble: undefined,
+        renderSystemMessage: undefined,
         onLongPress: null,
-        renderMessage: null,
-        renderMessageText: null,
-        renderMessageImage: null,
-        renderMessageSticker: null,
-        renderMessageVideo: null,
-        renderMessageAudio: null,
+        renderMessage: undefined,
+        renderMessageText: undefined,
+        renderMessageImage: undefined,
+        renderMessageSticker: undefined,
+        renderMessageVideo: undefined,
+        renderMessageAudio: undefined,
         imageProps: {},
         stickerProps: {},
         videoProps: {},
@@ -382,7 +382,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         listViewProps: {},
         renderCustomView: null,
         isCustomViewBottom: false,
-        renderDay: null,
+        renderDay: undefined,
         renderTime: null,
         renderFooter: null,
         renderChatEmpty: null,
@@ -473,18 +473,18 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         }
     }
 
-    getChildContext() {
-        return {
-            actionSheet:
-                this.props.actionSheet || (() => this._actionSheetRef.getContext()),
-            getLocale: this.getLocale,
-        }
-    }
+    // getChildContext() {
+    //     return {
+    //         actionSheet:
+    //             this.props.actionSheet || (() => this._actionSheetRef.getContext()),
+    //         getLocale: this.getLocale,
+    //     }
+    // }
 
     componentDidMount() {
         const {messages, text} = this.props
         this.setIsMounted(true)
-        this.initLocale()
+        // this.initLocale()
         this.setMessages(messages || [])
         this.setTextFromProp(text)
     }
@@ -514,19 +514,19 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         }
     }
 
-    initLocale() {
-        if (this.props.locale === null) {
-            this.setLocale('en')
-        } else {
-            this.setLocale(this.props.locale || 'en')
-        }
-    }
+    // initLocale() {
+    //     if (this.props.locale === null) {
+    //         this.setLocale('en')
+    //     } else {
+    //         this.setLocale(this.props.locale || 'en')
+    //     }
+    // }
 
-    setLocale(locale: string) {
-        this._locale = locale
-    }
-
-    getLocale = () => this._locale
+    // setLocale(locale: string) {
+    //     this._locale = locale
+    // }
+    //
+    // getLocale = () => this._locale
 
     setTextFromProp(textProp?: string) {
         // Text prop takes precedence over state.
@@ -915,6 +915,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         // } = this.props;
 
         const {
+            actionsConfig,
             actionSheet,
             alwaysShowSend,
             audioProps,
@@ -990,6 +991,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
             wrapInSafeArea
         } = this.props;
         const inputToolbarProps = {
+            actionsConfig,
             actionSheet,
             alwaysShowSend,
             audioProps,

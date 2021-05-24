@@ -7,7 +7,8 @@ import SystemMessage, {SystemMessageProps} from './SystemMessage'
 import Day, {DayProps} from './Day'
 
 import {isSameUser} from './utils'
-import {IMessage, LeftRightStyle, User} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './Models'
+import {withBunnyKit} from "../../hooks/bunny-kit";
 
 const styles = {
     left: StyleSheet.create({
@@ -37,7 +38,7 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
     currentMessage?: TMessage
     previousMessage?: TMessage
     nextMessage?: TMessage
-    position: 'left' | 'right'
+    position: PositionLeftOrRight
     messageContainerStyle?: LeftRightStyle<ViewStyle>
 
     shouldUpdateMessage?(
@@ -81,18 +82,18 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
     // onMessageLayout?(event: LayoutChangeEvent): void
 }
 
-export default class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
+class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
     static defaultProps = {
         messages: [],
         renderAvatar: undefined,
-        renderBubble: null,
-        renderDay: null,
-        renderSystemMessage: null,
-        position: 'left',
-        currentMessage: {},
-        nextMessage: {},
-        previousMessage: {},
-        user: {},
+        renderBubble: undefined,
+        renderDay: undefined,
+        renderSystemMessage: undefined,
+        position: 'left' as PositionLeftOrRight,
+        currentMessage: undefined,
+        nextMessage: undefined,
+        previousMessage: undefined,
+        user: undefined,
         messageContainerStyle: {},
         showUserAvatar: false,
         inverted: true,
@@ -153,7 +154,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
                 dateFormat
             }
 
-            isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level3]Message dayProps', dayProps)
+            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message dayProps', dayProps)
             if (this.props.renderDay) {
                 return this.props.renderDay(dayProps)
             }
@@ -194,7 +195,8 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
             onMessageReadyForDisplay,
             onPress,
             onQuickReply,
-            optionTitles,
+            textLongPressOptionTitles,
+            phoneNumberOptionTitles,
             parsePatterns,
             position,
             previousMessage,
@@ -258,7 +260,8 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
             onMessageReadyForDisplay,
             onPress,
             onQuickReply,
-            optionTitles,
+            textLongPressOptionTitles,
+            phoneNumberOptionTitles,
             parsePatterns,
             position,
             previousMessage,
@@ -292,7 +295,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
             videoContainerStyle,
             videoStyle
         }
-        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level3]Message bubbleProps', bubbleProps)
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message bubbleProps', bubbleProps)
 
         if (this.props.renderBubble) {
             return this.props.renderBubble(bubbleProps)
@@ -315,7 +318,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
             systemMessageWrapperStyle,
             systemTextStyle
         }
-        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level3]Message systemMessageProps', systemMessageProps)
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message systemMessageProps', systemMessageProps)
         if (this.props.renderSystemMessage) {
             return this.props.renderSystemMessage(systemMessageProps)
         }
@@ -369,7 +372,7 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
             onPressAvatar,
             onLongPressAvatar
         }
-        isDebug && console.log('%c [ chat ] ', 'background: #555; color: #bada55', '[level3]Message avatarProps', avatarProps)
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message avatarProps', avatarProps)
         return <ChatAvatar {...avatarProps} />
     }
 
@@ -408,3 +411,5 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
         return null
     }
 }
+
+export default withBunnyKit(Message)
