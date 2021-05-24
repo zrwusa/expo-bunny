@@ -72,7 +72,7 @@ export type Fonts = {
     light: Font,
     thin: Font
 }
-export type Colors = {
+export type ThemeColors = {
     // In the theme, we should care about the role of these color variables rather than the specific values,
     // such as 'primary success', not 'grey0, black'. The specific values should be named in the Palette.
 
@@ -92,6 +92,9 @@ export type Colors = {
     text3: string,
     buttonText: string,
     buttonText2: string,
+    surfaceText: string,
+    surface2Text: string,
+    surface3Text: string,
     caption: string,
     caption2: string,
     paragraph: string,
@@ -120,7 +123,8 @@ export type Colors = {
     onBackground: string,
     // onBackground2: string,
     onSurface: string,
-    // onSurface2: string,
+    onSurface2: string,
+    onSurface3: string,
 
     // accent2: string,
     // ---en unknown
@@ -146,7 +150,7 @@ export type Colors = {
 
 }
 
-export type ThemeColorKeys = keyof Colors;
+export type ThemeColorKeys = keyof ThemeColors;
 
 export interface Animation {
     scale: number,
@@ -155,7 +159,7 @@ export interface Animation {
 export interface Theme {
     dark: boolean,
     mode?: Mode,
-    colors: Colors,
+    colors: ThemeColors,
     fonts: Fonts,
     roundness: number,
     borderRadius: { button: number, input: number, surface: number },

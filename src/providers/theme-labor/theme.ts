@@ -135,6 +135,24 @@ export const getThemeWareHouse = () => {
                 indigo: pl.indigo100,
                 tinder: pl.red100,
             },
+            surfaceText: {
+                light: pl.grey800,
+                dark: pl.grey400,
+                indigo: pl.blueIndigo150,
+                tinder: pl.grey800,
+            },
+            surface2Text: {
+                light: pl.grey800,
+                dark: pl.grey400,
+                indigo: pl.blueIndigo150,
+                tinder: pl.grey800,
+            },
+            surface3Text: {
+                light: pl.grey800,
+                dark: pl.grey400,
+                indigo: pl.blueIndigo150,
+                tinder: pl.grey800,
+            },
             caption: {
                 light: pl.grey900,
                 dark: pl.grey500,
@@ -239,6 +257,18 @@ export const getThemeWareHouse = () => {
             ],
             // [ReactNativePaper]background color for snackbars
             onSurface: {
+                light: pl.black,
+                dark: pl.white,
+                indigo: pl.white,
+                tinder: pl.black,
+            },
+            onSurface2: {
+                light: pl.black,
+                dark: pl.white,
+                indigo: pl.white,
+                tinder: pl.black,
+            },
+            onSurface3: {
                 light: pl.black,
                 dark: pl.white,
                 indigo: pl.white,

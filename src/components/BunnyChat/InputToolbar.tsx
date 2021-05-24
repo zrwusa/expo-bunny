@@ -73,7 +73,7 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
         },
     }
 
-
+    // TODO constructor
     state = {
         position: 'absolute',
     }
