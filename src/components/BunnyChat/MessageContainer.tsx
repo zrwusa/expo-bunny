@@ -18,55 +18,60 @@ import {
 import LoadEarlier, {LoadEarlierProps} from './LoadEarlier'
 import Message, {MessageProps} from './Message'
 import Color from './Color'
-import {IMessage, PositionLeftOrRight, Reply, User} from './Models'
+import {IMessage, PositionLeftOrRight, Reply, User} from './types'
 import {warning} from './utils'
 import TypingIndicator from './TypingIndicator'
+import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    containerAlignTop: {
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-    },
-    contentContainerStyle: {
-        flexGrow: 1,
-        justifyContent: 'flex-start',
-    },
-    emptyChatContainer: {
-        flex: 1,
-        transform: [{scaleY: -1}],
-    },
-    headerWrapper: {
-        flex: 1,
-    },
-    listStyle: {
-        flex: 1,
-    },
-    scrollToBottomStyle: {
-        opacity: 0.8,
-        position: 'absolute',
-        right: 10,
-        bottom: 30,
-        zIndex: 999,
-        height: 40,
-        width: 40,
-        borderRadius: 20,
-        backgroundColor: Color.white,
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowColor: Color.black,
-        shadowOpacity: 0.5,
-        shadowOffset: {width: 0, height: 0},
-        shadowRadius: 1,
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            flex: 1,
+        },
+        containerAlignTop: {
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+        },
+        contentContainerStyle: {
+            flexGrow: 1,
+            justifyContent: 'flex-start',
+        },
+        emptyChatContainer: {
+            flex: 1,
+            transform: [{scaleY: -1}],
+        },
+        headerWrapper: {
+            flex: 1,
+        },
+        listStyle: {
+            flex: 1,
+        },
+        scrollToBottomStyle: {
+            opacity: 0.8,
+            position: 'absolute',
+            right: wp(10),
+            bottom: wp(30),
+            zIndex: 999,
+            height: wp(40),
+            width: wp(40),
+            borderRadius: wp(20),
+            backgroundColor: Color.white,
+            alignItems: 'center',
+            justifyContent: 'center',
+            shadowColor: Color.black,
+            shadowOpacity: 0.5,
+            shadowOffset: {width: 0, height: 0},
+            shadowRadius: wp(1),
+        },
+    })
+}
 
 
 export interface MessageContainerProps<TMessage extends IMessage> extends Omit<MessageProps<TMessage>, 'key' | 'position' | 'currentMessage' | 'showActionSheetWithOptions'>, LoadEarlierProps {
 
-    forwardRef?: RefObject<FlatList<IMessage>>
+    forwardRef?: RefObject<FlatList<TMessage>>
     isTyping?: boolean
     inverted?: boolean
     scrollToBottomOffset?: number
@@ -97,25 +102,26 @@ export interface MessageContainerProps<TMessage extends IMessage> extends Omit<M
     onQuickReply?(replies: Reply[]): void
 }
 
-interface State {
+interface MessageContainerState {
     showScrollBottom: boolean,
     hasScrolled: boolean
 }
 
-export default class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureComponent<MessageContainerProps<TMessage>, State> {
+class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureComponent<MessageContainerProps<TMessage> & WithBunnyKit, MessageContainerState> {
     static defaultProps = {
         messages: [],
-        user: {},
+        user: undefined,
         isTyping: false,
-        renderChatEmpty: null,
-        renderFooter: null,
-        renderMessage: null,
+        renderChatEmpty: undefined,
+        renderFooter: undefined,
+        renderMessage: undefined,
         onLoadEarlier: () => {
         },
         onQuickReply: () => {
         },
         inverted: true,
         loadEarlier: false,
+        // TODO if({}) return true,this may cause issues
         listViewProps: {},
         invertibleScrollViewProps: {},
         extraData: null,
@@ -130,6 +136,10 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
     state = {
         showScrollBottom: false,
         hasScrolled: false,
+    }
+
+    constructor(props: MessageContainerProps<TMessage> & WithBunnyKit) {
+        super(props);
     }
 
     renderTypingIndicator = () => {
@@ -421,12 +431,14 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
             if (this.props.renderMessage) {
                 return this.props.renderMessage(messageProps)
             }
-            return <Message {...messageProps} />
+            return <Message<TMessage> {...messageProps} />
         }
         return null
     }
 
     renderChatEmpty = () => {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         if (this.props.renderChatEmpty) {
             return this.props.inverted ? (
                 this.props.renderChatEmpty()
@@ -439,9 +451,13 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         return <View style={styles.container}/>
     }
 
-    renderHeaderWrapper = () => (
-        <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>
-    )
+    renderHeaderWrapper = () => {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
+        return (
+            <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>
+        )
+    }
 
     renderScrollBottomComponent() {
         const {renderScrollToBottom} = this.props
@@ -455,6 +471,8 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
 
     renderScrollToBottomWrapper() {
         const propsStyle = this.props.scrollToBottomStyle || {}
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={[styles.scrollToBottomStyle, propsStyle]}>
                 <TouchableOpacity
@@ -503,7 +521,8 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
     keyExtractor = (item: TMessage) => `${item._id}`
 
     render() {
-        const {inverted} = this.props
+        const {inverted, bunnyKit: {sizeLabor, themeLabor}} = this.props
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View
                 style={
@@ -513,7 +532,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
                 {this.state.showScrollBottom && this.props.scrollToBottom
                     ? this.renderScrollToBottomWrapper()
                     : null}
-                <FlatList
+                <FlatList<TMessage>
                     ref={this.props.forwardRef}
                     extraData={[this.props.extraData, this.props.isTyping]}
                     keyExtractor={this.keyExtractor}
@@ -543,3 +562,5 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         )
     }
 }
+
+export default withBunnyKit(MessageContainer)

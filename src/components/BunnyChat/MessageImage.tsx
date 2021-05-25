@@ -1,22 +1,27 @@
 import React, {Component} from 'react'
 import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle,} from 'react-native'
-import {IMessage} from './Models'
+import {IMessage} from './types'
 import LightBox from "../../../packages/react-native-lightbox";
+import {SizeLabor, ThemeLabor} from "../../types";
+import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
-const styles = StyleSheet.create({
-    container: {},
-    image: {
-        width: 150,
-        height: 100,
-        borderRadius: 13,
-        margin: 3,
-        resizeMode: 'cover',
-    },
-    imageActive: {
-        flex: 1,
-        resizeMode: 'contain',
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {},
+        image: {
+            width: wp(150),
+            height: wp(100),
+            borderRadius: wp(13),
+            margin: wp(3),
+            resizeMode: 'cover',
+        },
+        imageActive: {
+            flex: 1,
+            resizeMode: 'contain',
+        },
+    })
+}
 
 export interface MessageImageProps<TMessage extends IMessage> {
     messages?: TMessage[],
@@ -38,12 +43,10 @@ export interface MessageImageProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 }
 
-export default class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage>> {
+class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         messages: [],
-        currentMessage: {
-            image: null,
-        },
+        currentMessage: undefined,
         imageContainerStyle: {},
         imageStyle: {},
         imageProps: {},
@@ -66,7 +69,9 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
             isDebug,
             messages,
         } = this.props
-        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageImage props', this.props)
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageImage props', this.props);
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={[styles.container, imageContainerStyle]}>
                 <LightBox
@@ -110,3 +115,5 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
         )
     }
 }
+
+export default withBunnyKit(MessageImage)

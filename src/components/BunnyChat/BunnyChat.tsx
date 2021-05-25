@@ -25,7 +25,7 @@ import Time from './Time'
 import BunnyAvatar from './BunnyAvatar'
 
 import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
-import {IMessage,} from './Models'
+import {IMessage,} from './types'
 
 dayjs.extend(localizedFormat)
 
@@ -441,7 +441,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
     _locale: string = 'en'
     invertibleScrollViewProps: any = undefined
     _actionSheetRef: any = undefined
-    _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
+    _messageContainerRef?: RefObject<FlatList<TMessage>> = React.createRef<FlatList<TMessage>>()
     _isTextInputWasFocused: boolean = false
     textInput?: any
 
@@ -719,6 +719,8 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
                     {...messagesContainerProps}
                     invertibleScrollViewProps={this.invertibleScrollViewProps}
                     messages={this.getMessages()}
+                    // TODO type check error
+                    // @ts-ignore
                     forwardRef={this._messageContainerRef}
                     isTyping={this.props.isTyping}
                 />
@@ -1022,6 +1024,8 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         if (this.props.renderInputToolbar) {
             return this.props.renderInputToolbar(inputToolbarProps)
         }
+        // TODO type check error
+        // @ts-ignore
         return <InputToolbar<TMessage> {...inputToolbarProps} />
     }
 
@@ -1065,6 +1069,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
     }
 }
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -1074,7 +1079,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export * from './Models'
+export * from './types'
 
 export {
     BunnyChat,

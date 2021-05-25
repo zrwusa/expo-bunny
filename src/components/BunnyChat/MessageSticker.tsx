@@ -1,18 +1,23 @@
 import React, {Component} from 'react'
 import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
-import {IMessage} from './Models'
+import {IMessage} from './types'
+import {SizeLabor, ThemeLabor} from "../../types";
+import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
-const styles = StyleSheet.create({
-    container: {},
-    sticker: {
-        width: 120,
-        height: 120,
-        borderRadius: 13,
-        margin: 3,
-        resizeMode: 'cover',
-    }
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {},
+        sticker: {
+            width: wp(120),
+            height: wp(120),
+            borderRadius: wp(13),
+            margin: wp(3),
+            resizeMode: 'cover',
+        }
+    })
+}
 
 export interface MessageStickerProps<TMessage extends IMessage> {
     currentMessage?: TMessage
@@ -32,11 +37,9 @@ export interface MessageStickerProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 }
 
-export default class MessageSticker<TMessage extends IMessage = IMessage> extends Component<MessageStickerProps<TMessage>> {
+class MessageSticker<TMessage extends IMessage = IMessage> extends Component<MessageStickerProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
-        currentMessage: {
-            sticker: null,
-        },
+        currentMessage: undefined,
         stickerContainerStyle: {},
         stickerStyle: {},
         stickerProps: {},
@@ -56,7 +59,9 @@ export default class MessageSticker<TMessage extends IMessage = IMessage> extend
             currentMessage,
             isDebug,
         } = this.props
-        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageSticker props', this.props)
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageSticker props', this.props);
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={[styles.container, stickerContainerStyle]}>
                 {currentMessage
@@ -92,3 +97,5 @@ export default class MessageSticker<TMessage extends IMessage = IMessage> extend
         )
     }
 }
+
+export default withBunnyKit(MessageSticker)

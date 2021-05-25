@@ -1,10 +1,10 @@
 import dayjs from 'dayjs'
 
-import {IMessage} from './Models'
+import {IMessage} from './types'
 
-export function isSameDay(
-    currentMessage: IMessage,
-    diffMessage: IMessage | null | undefined,
+export function isSameDay<TMessage extends IMessage>(
+    currentMessage: TMessage,
+    diffMessage: TMessage | null | undefined,
 ) {
     if (!diffMessage || !diffMessage.createdAt) {
         return false

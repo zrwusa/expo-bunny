@@ -5,25 +5,30 @@ import Composer, {ComposerProps} from './Composer'
 import Send, {SendProps} from './Send'
 import Actions, {ActionsProps} from './Actions'
 import Color from './Color'
-import {IMessage} from "./Models";
+import {IMessage} from "./types";
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = StyleSheet.create({
-    container: {
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderTopColor: Color.defaultColor,
-        backgroundColor: Color.white,
-        bottom: 0,
-        left: 0,
-        right: 0,
-    },
-    primary: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-    },
-    accessory: {
-        height: 44,
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderTopColor: Color.defaultColor,
+            backgroundColor: Color.white,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+        primary: {
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+        },
+        accessory: {
+            height: wp(44),
+        },
+    })
+}
 
 
 export interface InputToolbarProps<TMessage extends IMessage> extends ActionsProps,
@@ -45,13 +50,17 @@ export interface InputToolbarProps<TMessage extends IMessage> extends ActionsPro
     onPressActionButton?(): void
 }
 
-export default class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolbarProps<TMessage>,
-    { position: string }> {
+export interface InputToolbarState {
+    position: string
+}
+
+class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolbarProps<TMessage> & WithBunnyKit,
+    InputToolbarState> {
     static defaultProps = {
-        renderAccessory: null,
-        renderActions: null,
-        renderSend: null,
-        renderComposer: null,
+        renderAccessory: undefined,
+        renderActions: undefined,
+        renderSend: undefined,
+        renderComposer: undefined,
         inputToolbarContainerStyle: {},
         primaryStyle: {},
         accessoryStyle: {},
@@ -157,7 +166,7 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
         if (this.props.renderSend) {
             return this.props.renderSend(sendProps)
         }
-        return <Send {...sendProps} />
+        return <Send<TMessage> {...sendProps} />
     }
 
     renderComposer() {
@@ -198,6 +207,8 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
 
     renderAccessory() {
         if (this.props.renderAccessory) {
+            const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+            const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <View style={[styles.accessory, this.props.accessoryStyle]}>
                     {this.props.renderAccessory(this.props)}
@@ -208,6 +219,8 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
     }
 
     render() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View
                 style={
@@ -228,3 +241,5 @@ export default class InputToolbar<TMessage extends IMessage> extends React.Compo
         )
     }
 }
+
+export default withBunnyKit(InputToolbar)

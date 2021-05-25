@@ -4,15 +4,31 @@ import {TypingAnimation} from 'react-native-typing-animation'
 import {useUpdateLayoutEffect} from './hooks/useUpdateLayoutEffect'
 import Color from './Color'
 import config from "../../config";
+import {SizeLabor, ThemeLabor} from "../../types";
+import {useBunnyKit} from "../../hooks/bunny-kit";
 
-interface Props {
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            marginLeft: wp(8),
+            width: wp(45),
+            borderRadius: wp(15),
+            backgroundColor: Color.leftBubbleBackground,
+        },
+    })
+}
+
+export interface TypingIndicatorProps {
     isTyping?: boolean
 }
 
-const TypingIndicator = ({isTyping}: Props) => {
+const TypingIndicator = ({isTyping}: TypingIndicatorProps) => {
+    const {sizeLabor, themeLabor, wp} = useBunnyKit()
+    const styles = getStyles(sizeLabor, themeLabor);
     const {yCoords, heightScale, marginScale} = React.useMemo(
         () => ({
-            yCoords: new Animated.Value(200),
+            yCoords: new Animated.Value(wp(200)),
             heightScale: new Animated.Value(0),
             marginScale: new Animated.Value(0),
         }),
@@ -36,12 +52,12 @@ const TypingIndicator = ({isTyping}: Props) => {
                 useNativeDriver: config.useNativeDriver,
             }),
             Animated.timing(heightScale, {
-                toValue: 35,
+                toValue: wp(35),
                 duration: 250,
                 useNativeDriver: config.useNativeDriver,
             }),
             Animated.timing(marginScale, {
-                toValue: 8,
+                toValue: wp(8),
                 duration: 250,
                 useNativeDriver: config.useNativeDriver,
             }),
@@ -52,7 +68,7 @@ const TypingIndicator = ({isTyping}: Props) => {
     const slideOut = () => {
         Animated.parallel([
             Animated.spring(yCoords, {
-                toValue: 200,
+                toValue: wp(200),
                 useNativeDriver: config.useNativeDriver,
             }),
             Animated.timing(heightScale, {
@@ -84,9 +100,9 @@ const TypingIndicator = ({isTyping}: Props) => {
         >
             {isTyping ? (
                 <TypingAnimation
-                    style={{marginLeft: 6, marginTop: 7.2}}
-                    dotRadius={4}
-                    dotMargin={5.5}
+                    style={{marginLeft: wp(6), marginTop: wp(7.2, false)}}
+                    dotRadius={wp(4)}
+                    dotMargin={wp(5.5, false)}
                     dotColor={'rgba(0, 0, 0, 0.38)'}
                 />
             ) : null}
@@ -94,13 +110,5 @@ const TypingIndicator = ({isTyping}: Props) => {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        marginLeft: 8,
-        width: 45,
-        borderRadius: 15,
-        backgroundColor: Color.leftBubbleBackground,
-    },
-})
 
 export default TypingIndicator

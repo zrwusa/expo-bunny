@@ -61,3 +61,5 @@ export interface IMessage {
 }
 
 export type PositionLeftOrRight = 'left' | 'right'
+
+export type ActivityIndicatorSize = number | 'small' | 'large'

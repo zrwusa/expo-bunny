@@ -12,81 +12,86 @@ import Time, {TimeProps} from './Time'
 import Color from './Color'
 
 import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, PositionLeftOrRight, User,} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User,} from './types'
 import MessageSticker, {MessageStickerProps} from "./MessageSticker";
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {ActionSheetProps, connectActionSheet} from "../../../packages/react-native-action-sheet/src";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = {
-    left: StyleSheet.create({
-        container: {
-            flex: 1,
-            alignItems: 'flex-start',
-        },
-        wrapper: {
-            borderRadius: 15,
-            backgroundColor: Color.leftBubbleBackground,
-            marginRight: 60,
-            minHeight: 20,
-            justifyContent: 'flex-end',
-        },
-        containerToNext: {
-            borderBottomLeftRadius: 3,
-        },
-        containerToPrevious: {
-            borderTopLeftRadius: 3,
-        },
-        bottom: {
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-        },
-    }),
-    right: StyleSheet.create({
-        container: {
-            flex: 1,
-            alignItems: 'flex-end',
-        },
-        wrapper: {
-            borderRadius: 15,
-            backgroundColor: Color.defaultBlue,
-            marginLeft: 60,
-            minHeight: 20,
-            justifyContent: 'flex-end',
-        },
-        containerToNext: {
-            borderBottomRightRadius: 3,
-        },
-        containerToPrevious: {
-            borderTopRightRadius: 3,
-        },
-        bottom: {
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-        },
-    }),
-    content: StyleSheet.create({
-        tick: {
-            fontSize: 10,
-            backgroundColor: Color.backgroundTransparent,
-            color: Color.white,
-        },
-        tickView: {
-            flexDirection: 'row',
-            marginRight: 10,
-        },
-        username: {
-            top: -3,
-            left: 0,
-            fontSize: 12,
-            backgroundColor: 'transparent',
-            color: '#aaa',
-        },
-        usernameView: {
-            flexDirection: 'row',
-            marginHorizontal: 10,
-        },
-    }),
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return {
+        left: StyleSheet.create({
+            container: {
+                flex: 1,
+                alignItems: 'flex-start',
+            },
+            wrapper: {
+                borderRadius: wp(15),
+                backgroundColor: Color.leftBubbleBackground,
+                marginRight: wp(60),
+                minHeight: wp(20),
+                justifyContent: 'flex-end',
+            },
+            containerToNext: {
+                borderBottomLeftRadius: wp(3),
+            },
+            containerToPrevious: {
+                borderTopLeftRadius: wp(3),
+            },
+            bottom: {
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+            },
+        }),
+        right: StyleSheet.create({
+            container: {
+                flex: 1,
+                alignItems: 'flex-end',
+            },
+            wrapper: {
+                borderRadius: wp(15),
+                backgroundColor: Color.defaultBlue,
+                marginLeft: wp(60),
+                minHeight: wp(20),
+                justifyContent: 'flex-end',
+            },
+            containerToNext: {
+                borderBottomRightRadius: wp(3),
+            },
+            containerToPrevious: {
+                borderTopRightRadius: wp(3),
+            },
+            bottom: {
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+            },
+        }),
+        content: StyleSheet.create({
+            tick: {
+                fontSize: wp(10),
+                backgroundColor: Color.backgroundTransparent,
+                color: Color.white,
+            },
+            tickView: {
+                flexDirection: 'row',
+                marginRight: wp(10),
+            },
+            username: {
+                top: wp(-3),
+                left: 0,
+                fontSize: wp(12),
+                backgroundColor: 'transparent',
+                color: '#aaa',
+            },
+            usernameView: {
+                flexDirection: 'row',
+                marginHorizontal: wp(10),
+            },
+        }),
+    }
 }
+
 // TODO need i18n
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
 
@@ -224,7 +229,9 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             nextMessage,
             position,
             containerToNextStyle,
+            bunnyKit,
         } = this.props
+
         if (
             currentMessage &&
             nextMessage &&
@@ -232,6 +239,8 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             isSameUser(currentMessage, nextMessage) &&
             isSameDay(currentMessage, nextMessage)
         ) {
+            const {sizeLabor, themeLabor} = bunnyKit;
+            const styles = getStyles(sizeLabor, themeLabor);
             return [
                 styles[position].containerToNext,
                 containerToNextStyle && containerToNextStyle[position],
@@ -246,6 +255,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             previousMessage,
             position,
             containerToPreviousStyle,
+            bunnyKit
         } = this.props
         if (
             currentMessage &&
@@ -254,6 +264,8 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             isSameUser(currentMessage, previousMessage) &&
             isSameDay(currentMessage, previousMessage)
         ) {
+            const {sizeLabor, themeLabor} = bunnyKit;
+            const styles = getStyles(sizeLabor, themeLabor);
             return [
                 styles[position].containerToPrevious,
                 containerToPreviousStyle && containerToPreviousStyle[position],
@@ -291,7 +303,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                 return this.props.renderQuickReplies(quickRepliesProps)
             }
             return (
-                <QuickReplies {...quickRepliesProps} />
+                <QuickReplies<TMessage> {...quickRepliesProps} />
             )
         }
         return null
@@ -336,7 +348,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             if (this.props.renderMessageText) {
                 return this.props.renderMessageText(messageTextProps)
             }
-            return <MessageText {...messageTextProps} />
+            return <MessageText<TMessage> {...messageTextProps} />
         }
         return null
     }
@@ -374,7 +386,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             if (this.props.renderMessageImage) {
                 return this.props.renderMessageImage(messageImageProps)
             }
-            return <MessageImage {...messageImageProps} />
+            return <MessageImage<TMessage> {...messageImageProps} />
         }
         return null
     }
@@ -408,7 +420,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             if (this.props.renderMessageSticker) {
                 return this.props.renderMessageSticker(messageStickerProps)
             }
-            return <MessageSticker {...messageStickerProps} />
+            return <MessageSticker<TMessage> {...messageStickerProps} />
         }
         return null
     }
@@ -443,7 +455,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             if (this.props.renderMessageVideo) {
                 return this.props.renderMessageVideo(messageVideoProps)
             }
-            return <MessageVideo {...messageVideoProps} />
+            return <MessageVideo<TMessage> {...messageVideoProps} />
         }
         return null
     }
@@ -477,13 +489,13 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             if (this.props.renderMessageAudio) {
                 return this.props.renderMessageAudio(messageAudioProps)
             }
-            return <MessageAudio {...messageAudioProps} />
+            return <MessageAudio<TMessage> {...messageAudioProps} />
         }
         return null
     }
 
     renderTicks() {
-        const {currentMessage, renderTicks, user} = this.props
+        const {currentMessage, renderTicks, user, bunnyKit} = this.props
         if (renderTicks && currentMessage) {
             return renderTicks(currentMessage)
         }
@@ -499,6 +511,9 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             currentMessage &&
             (currentMessage.sent || currentMessage.received || currentMessage.pending)
         ) {
+            const {sizeLabor, themeLabor} = bunnyKit;
+            const styles = getStyles(sizeLabor, themeLabor);
+            const {wp} = sizeLabor.designsBasedOn.iphoneX;
             return (
                 <View style={styles.content.tickView}>
                     {!!currentMessage.sent && (
@@ -509,7 +524,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                     )}
                     {!!currentMessage.pending && (
                         // <Text style={[styles.content.tick, this.props.tickStyle]}>🕓</Text>
-                        <ActivityIndicator size="small"/>
+                        <ActivityIndicator color={'white'} size={wp(10)}/>
                     )}
                 </View>
             )
@@ -536,17 +551,19 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             if (this.props.renderTime) {
                 return this.props.renderTime(timeProps)
             }
-            return <Time {...timeProps} />
+            return <Time<TMessage> {...timeProps} />
         }
         return null
     }
 
     renderUsername() {
-        const {currentMessage, user} = this.props
+        const {currentMessage, user, bunnyKit} = this.props
         if (this.props.renderUsernameOnMessage && currentMessage) {
             if (user && currentMessage.user._id === user._id) {
                 return null
             }
+            const {sizeLabor, themeLabor} = bunnyKit;
+            const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <View style={styles.content.usernameView}>
                     <Text
@@ -597,7 +614,10 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             bubbleContainerStyle,
             bubbleWrapperStyle,
             bottomContainerStyle,
+            bunnyKit
         } = this.props
+        const {sizeLabor, themeLabor} = bunnyKit;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View
                 style={[

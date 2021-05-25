@@ -6,23 +6,28 @@ import Color from './Color'
 
 import {isSameDay} from './utils'
 import {DATE_FORMAT} from './Constant'
-import {IMessage} from './Models'
+import {IMessage} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 5,
-        marginBottom: 10,
-    },
-    text: {
-        backgroundColor: Color.backgroundTransparent,
-        color: Color.defaultColor,
-        fontSize: 12,
-        fontWeight: '600',
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: wp(5),
+            marginBottom: wp(10),
+        },
+        text: {
+            backgroundColor: Color.backgroundTransparent,
+            color: Color.defaultColor,
+            fontSize: wp(12),
+            fontWeight: '600',
+        },
+    })
+
+}
 
 export interface DayProps<TMessage extends IMessage> {
     currentMessage?: TMessage
@@ -63,7 +68,8 @@ class Day<TMessage extends IMessage = IMessage> extends PureComponent<DayProps<T
         const {language} = bunnyKit;
         if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
             const {createdAt} = currentMessage;
-
+            const {sizeLabor, themeLabor} = bunnyKit;
+            const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <View style={[styles.container, dayContainerStyle]}>
                     <View style={dayWrapperStyle}>

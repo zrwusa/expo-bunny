@@ -1,7 +1,8 @@
 import React from 'react'
 import {Image, ImageStyle, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View,} from 'react-native'
 import Color from './Color'
-import {User} from './Models'
+import {User} from './types'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 const {
     carrot,
@@ -42,12 +43,9 @@ export interface GiftedAvatarProps {
     onLongPress?(props: any): void
 }
 
-export default class BunnyAvatar extends React.Component<GiftedAvatarProps> {
+class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
     static defaultProps = {
-        user: {
-            name: null,
-            avatar: null,
-        },
+        user: undefined,
         onPress: undefined,
         onLongPress: undefined,
         avatarStyle: {},
@@ -184,3 +182,5 @@ export default class BunnyAvatar extends React.Component<GiftedAvatarProps> {
         )
     }
 }
+
+export default withBunnyKit(BunnyAvatar)

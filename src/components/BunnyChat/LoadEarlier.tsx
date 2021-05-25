@@ -1,35 +1,41 @@
 import React from 'react'
 import {ActivityIndicator, Platform, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native'
 import Color from './Color'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {ActivityIndicatorSize} from "./types";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        marginTop: 5,
-        marginBottom: 10,
-    },
-    wrapper: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: Color.defaultColor,
-        borderRadius: 15,
-        height: 30,
-        paddingLeft: 10,
-        paddingRight: 10,
-    },
-    text: {
-        backgroundColor: Color.backgroundTransparent,
-        color: Color.white,
-        fontSize: 12,
-    },
-    activityIndicator: {
-        marginTop: Platform.select({
-            ios: -14,
-            android: -16,
-            default: -15,
-        }),
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            alignItems: 'center',
+            marginTop: wp(5),
+            marginBottom: wp(10),
+        },
+        wrapper: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: Color.defaultColor,
+            borderRadius: wp(15),
+            height: wp(30),
+            paddingLeft: wp(10),
+            paddingRight: wp(10),
+        },
+        text: {
+            backgroundColor: Color.backgroundTransparent,
+            color: Color.white,
+            fontSize: wp(12),
+        },
+        activityIndicator: {
+            marginTop: Platform.select({
+                ios: wp(-14),
+                android: wp(-16),
+                default: wp(-15),
+            }),
+        },
+    })
+}
 
 export interface LoadEarlierProps {
     isLoadingEarlier?: boolean
@@ -39,12 +45,12 @@ export interface LoadEarlierProps {
     loadEarlierTextStyle?: StyleProp<TextStyle>
     activityIndicatorStyle?: StyleProp<ViewStyle>
     activityIndicatorColor?: string
-    activityIndicatorSize?: number | 'small' | 'large'
+    activityIndicatorSize?: ActivityIndicatorSize
 
     onLoadEarlier?(): void
 }
 
-export default class LoadEarlier extends React.Component<LoadEarlierProps> {
+class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
     static defaultProps = {
         onLoadEarlier: () => {
         },
@@ -55,10 +61,12 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
         loadEarlierTextStyle: {},
         activityIndicatorStyle: {},
         activityIndicatorColor: 'white',
-        activityIndicatorSize: 'small',
+        activityIndicatorSize: 'small' as ActivityIndicatorSize,
     }
 
     renderLoading() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         if (this.props.isLoadingEarlier === false) {
             return (
                 <Text style={[styles.text, this.props.loadEarlierTextStyle]}>
@@ -81,6 +89,8 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
     }
 
     render() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <TouchableOpacity
                 style={[styles.container, this.props.loadEarlierContainerStyle]}
@@ -100,3 +110,5 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
         )
     }
 }
+
+export default withBunnyKit(LoadEarlier)

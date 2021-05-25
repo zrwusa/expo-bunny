@@ -1,38 +1,43 @@
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle,} from 'react-native'
-import {IMessage, Reply} from './Models'
+import {IMessage, Reply} from './types'
 import Color from './Color'
 import {warning} from './utils'
+import {SizeLabor, ThemeLabor} from "../../types";
+import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        maxWidth: 300,
-    },
-    quickReply: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        maxWidth: 200,
-        paddingVertical: 7,
-        paddingHorizontal: 12,
-        minHeight: 50,
-        borderRadius: 13,
-        margin: 3,
-    },
-    quickReplyText: {
-        overflow: 'visible',
-    },
-    sendLink: {
-        borderWidth: 0,
-    },
-    sendLinkText: {
-        color: Color.defaultBlue,
-        fontWeight: '600',
-        fontSize: 17,
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            maxWidth: wp(300),
+        },
+        quickReply: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: wp(1),
+            maxWidth: wp(200),
+            paddingVertical: wp(7),
+            paddingHorizontal: wp(12),
+            minHeight: wp(50),
+            borderRadius: wp(13),
+            margin: wp(3),
+        },
+        quickReplyText: {
+            overflow: 'visible',
+        },
+        sendLink: {
+            borderWidth: 0,
+        },
+        sendLinkText: {
+            color: Color.defaultBlue,
+            fontWeight: '600',
+            fontSize: wp(17),
+        },
+    })
+}
 
 export interface QuickRepliesProps<TMessage extends IMessage> {
     nextMessage?: TMessage
@@ -57,12 +62,10 @@ const sameReply = (currentReply: Reply) => (reply: Reply) =>
 const diffReply = (currentReply: Reply) => (reply: Reply) =>
     currentReply.value !== reply.value
 
-export default class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProps<TMessage>,
+class QuickReplies<TMessage extends IMessage = IMessage> extends Component<QuickRepliesProps<TMessage> & WithBunnyKit,
     QuickRepliesState> {
     static defaultProps = {
-        currentMessage: {
-            quickReplies: [],
-        },
+        currentMessage: undefined,
         nextMessage: undefined,
         onQuickReply: () => {
         },
@@ -137,7 +140,8 @@ export default class QuickReplies<TMessage extends IMessage> extends Component<Q
     renderQuickReplySend = () => {
         const {replies} = this.state
         const {sendText, renderQuickReplySend: customSend} = this.props
-
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <TouchableOpacity
                 style={[styles.quickReply, styles.sendLink]}
@@ -161,7 +165,8 @@ export default class QuickReplies<TMessage extends IMessage> extends Component<Q
         }
 
         const {type} = currentMessage!.quickReplies!
-
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={styles.container}>
                 {currentMessage!.quickReplies!.values.map(
@@ -198,3 +203,5 @@ export default class QuickReplies<TMessage extends IMessage> extends Component<Q
         )
     }
 }
+
+export default withBunnyKit(QuickReplies)

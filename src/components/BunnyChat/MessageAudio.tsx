@@ -1,15 +1,20 @@
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
-import {IMessage} from './Models'
+import {IMessage} from './types'
 import {AudioPlayer, AudioPlayerProps} from "../AudioPlayer";
+import {SizeLabor, ThemeLabor} from "../../types";
+import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
-const styles = StyleSheet.create({
-    container: {
-        height: 46
-    },
-    audio: {}
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            height: wp(46)
+        },
+        audio: {}
+    })
+}
 
 export interface MessageAudioProps<TMessage extends IMessage> {
     currentMessage?: TMessage
@@ -29,7 +34,7 @@ export interface MessageAudioProps<TMessage extends IMessage> {
     onMessageReadyForDisplay?(currentMessage: TMessage): void
 }
 
-export default class MessageAudio<TMessage extends IMessage = IMessage> extends Component<MessageAudioProps<TMessage>> {
+class MessageAudio<TMessage extends IMessage = IMessage> extends Component<MessageAudioProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         currentMessage: undefined,
         audioContainerStyle: {},
@@ -52,6 +57,8 @@ export default class MessageAudio<TMessage extends IMessage = IMessage> extends 
             isDebug,
         } = this.props
         isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageAudio props', this.props)
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={[styles.container, audioContainerStyle]}>
                 {
@@ -88,3 +95,5 @@ export default class MessageAudio<TMessage extends IMessage = IMessage> extends 
         )
     }
 }
+
+export default withBunnyKit(MessageAudio)

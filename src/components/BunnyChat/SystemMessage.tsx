@@ -1,23 +1,28 @@
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle,} from 'react-native'
 import Color from './Color'
-import {IMessage} from './Models'
+import {IMessage} from './types'
+import {SizeLabor, ThemeLabor} from "../../types";
+import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1,
-        marginTop: 5,
-        marginBottom: 10,
-    },
-    text: {
-        backgroundColor: Color.backgroundTransparent,
-        color: Color.defaultColor,
-        fontSize: 12,
-        fontWeight: '300',
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return StyleSheet.create({
+        container: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+            marginTop: wp(5),
+            marginBottom: wp(10),
+        },
+        text: {
+            backgroundColor: Color.backgroundTransparent,
+            color: Color.defaultColor,
+            fontSize: wp(12),
+            fontWeight: '300',
+        },
+    })
+}
 
 export interface SystemMessageProps<TMessage extends IMessage> {
     currentMessage?: TMessage
@@ -26,11 +31,9 @@ export interface SystemMessageProps<TMessage extends IMessage> {
     systemTextStyle?: StyleProp<TextStyle>
 }
 
-export default class SystemMessage<TMessage extends IMessage = IMessage> extends Component<SystemMessageProps<TMessage>> {
+class SystemMessage<TMessage extends IMessage = IMessage> extends Component<SystemMessageProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
-        currentMessage: {
-            system: false,
-        },
+        currentMessage: undefined,
         systemMessageContainerStyle: {},
         systemMessageWrapperStyle: {},
         systemTextStyle: {},
@@ -44,6 +47,8 @@ export default class SystemMessage<TMessage extends IMessage = IMessage> extends
             systemTextStyle,
         } = this.props
         if (currentMessage) {
+            const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+            const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <View style={[styles.container, systemMessageContainerStyle]}>
                     <View style={systemMessageWrapperStyle}>
@@ -55,3 +60,5 @@ export default class SystemMessage<TMessage extends IMessage = IMessage> extends
         return null
     }
 }
+
+export default withBunnyKit(SystemMessage)

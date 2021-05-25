@@ -164,11 +164,10 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         // showAvatarForEveryMessage
                         messages={chatMessagesAdapted}
                         onSend={async (messages) => {
-                            console.log('onSend',messages)
+                            console.log('onSend', messages)
                             await handleSend(messages)
                         }}
 
-                        text={"xxx"}
                         user={memoizedUser}
 
                         textInputProps={{

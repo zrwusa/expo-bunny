@@ -4,40 +4,44 @@ import dayjs from 'dayjs'
 
 import Color from './Color'
 import {TIME_FORMAT} from './Constant'
-import {IMessage, LeftRightStyle, PositionLeftOrRight} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const containerStyle = {
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 5,
-}
 
-const textStyle = {
-    fontSize: 10,
-    backgroundColor: 'transparent',
-    textAlign: 'right',
-}
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const containerStyle = {
+        marginLeft: wp(10),
+        marginRight: wp(10),
+        marginBottom: wp(5),
+    }
 
-const styles = {
-    left: StyleSheet.create({
-        container: {
-            ...containerStyle,
-        },
-        text: {
-            color: Color.timeTextColor,
-            ...textStyle,
-        },
-    }),
-    right: StyleSheet.create({
-        container: {
-            ...containerStyle,
-        },
-        text: {
-            color: Color.white,
-            ...textStyle,
-        },
-    }),
+    const textStyle = {
+        fontSize: wp(10),
+        backgroundColor: 'transparent',
+        textAlign: 'right',
+    }
+    return {
+        left: StyleSheet.create({
+            container: {
+                ...containerStyle,
+            },
+            text: {
+                color: Color.timeTextColor,
+                ...textStyle,
+            },
+        }),
+        right: StyleSheet.create({
+            container: {
+                ...containerStyle,
+            },
+            text: {
+                color: Color.white,
+                ...textStyle,
+            },
+        }),
+    }
 }
 
 export interface TimeProps<TMessage extends IMessage> {
@@ -71,6 +75,8 @@ class Time<TMessage extends IMessage = IMessage> extends Component<TimeProps<TMe
         const {language} = bunnyKit;
 
         if (!!currentMessage) {
+            const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+            const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <View
                     style={[

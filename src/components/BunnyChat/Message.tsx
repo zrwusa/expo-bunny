@@ -7,28 +7,32 @@ import SystemMessage, {SystemMessageProps} from './SystemMessage'
 import Day, {DayProps} from './Day'
 
 import {isSameUser} from './utils'
-import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './Models'
-import {withBunnyKit} from "../../hooks/bunny-kit";
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = {
-    left: StyleSheet.create({
-        container: {
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            justifyContent: 'flex-start',
-            marginLeft: 8,
-            marginRight: 0,
-        },
-    }),
-    right: StyleSheet.create({
-        container: {
-            flexDirection: 'row',
-            alignItems: 'flex-end',
-            justifyContent: 'flex-end',
-            marginLeft: 0,
-            marginRight: 8,
-        },
-    }),
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return {
+        left: StyleSheet.create({
+            container: {
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                justifyContent: 'flex-start',
+                marginLeft: wp(8),
+                marginRight: 0,
+            },
+        }),
+        right: StyleSheet.create({
+            container: {
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                justifyContent: 'flex-end',
+                marginLeft: 0,
+                marginRight: wp(8),
+            },
+        }),
+    }
 }
 
 export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMessage>,
@@ -42,8 +46,8 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
     messageContainerStyle?: LeftRightStyle<ViewStyle>
 
     shouldUpdateMessage?(
-        props: MessageProps<IMessage>,
-        nextProps: MessageProps<IMessage>,
+        props: MessageProps<TMessage>,
+        nextProps: MessageProps<TMessage>,
     ): boolean
 
     onMessageLayout?(event: LayoutChangeEvent): void
@@ -61,7 +65,7 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
     key: any
 }
 
-class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
+class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         messages: [],
         renderAvatar: undefined,
@@ -137,7 +141,7 @@ class Message<TMessage extends IMessage = IMessage> extends React.Component<Mess
             if (this.props.renderDay) {
                 return this.props.renderDay(dayProps)
             }
-            return <Day {...dayProps} />
+            return <Day<TMessage> {...dayProps} />
         }
         return null
     }
@@ -279,7 +283,7 @@ class Message<TMessage extends IMessage = IMessage> extends React.Component<Mess
         if (this.props.renderBubble) {
             return this.props.renderBubble(bubbleProps)
         }
-        return <Bubble {...bubbleProps} />
+        return <Bubble<TMessage> {...bubbleProps} />
     }
 
     renderSystemMessage() {
@@ -301,7 +305,7 @@ class Message<TMessage extends IMessage = IMessage> extends React.Component<Mess
         if (this.props.renderSystemMessage) {
             return this.props.renderSystemMessage(systemMessageProps)
         }
-        return <SystemMessage {...systemMessageProps} />
+        return <SystemMessage<TMessage> {...systemMessageProps} />
     }
 
     renderAvatar() {
@@ -365,6 +369,8 @@ class Message<TMessage extends IMessage = IMessage> extends React.Component<Mess
         } = this.props
         if (currentMessage) {
             const sameUser = isSameUser(currentMessage, nextMessage!)
+            const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+            const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <View onLayout={onMessageLayout}>
                     {this.renderDay()}

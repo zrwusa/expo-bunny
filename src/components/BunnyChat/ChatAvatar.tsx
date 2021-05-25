@@ -2,38 +2,44 @@ import React, {ReactNode} from 'react'
 import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
 import BunnyAvatar from './BunnyAvatar'
 import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = {
-    left: StyleSheet.create({
-        container: {
-            marginRight: 8,
-        },
-        onTop: {
-            alignSelf: 'flex-start',
-        },
-        onBottom: {},
-        image: {
-            height: 36,
-            width: 36,
-            borderRadius: 18,
-        },
-    }),
-    right: StyleSheet.create({
-        container: {
-            marginLeft: 8,
-        },
-        onTop: {
-            alignSelf: 'flex-start',
-        },
-        onBottom: {},
-        image: {
-            height: 36,
-            width: 36,
-            borderRadius: 18,
-        },
-    }),
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    return {
+        left: StyleSheet.create({
+            container: {
+                marginRight: wp(8),
+            },
+            onTop: {
+                alignSelf: 'flex-start',
+            },
+            onBottom: {},
+            image: {
+                height: wp(36),
+                width: wp(36),
+                borderRadius: wp(18),
+            },
+        }),
+        right: StyleSheet.create({
+            container: {
+                marginLeft: wp(8),
+            },
+            onTop: {
+                alignSelf: 'flex-start',
+            },
+            onBottom: {},
+            image: {
+                height: wp(36),
+                width: wp(36),
+                borderRadius: wp(18),
+            },
+        }),
+    }
 }
+
 
 export interface ChatAvatarProps<TMessage extends IMessage> {
     currentMessage?: TMessage
@@ -53,16 +59,14 @@ export interface ChatAvatarProps<TMessage extends IMessage> {
     onLongPressAvatar?(user: User): void
 }
 
-export default class ChatAvatar<TMessage extends IMessage = IMessage> extends React.Component<ChatAvatarProps<TMessage>> {
+class ChatAvatar<TMessage extends IMessage = IMessage> extends React.Component<ChatAvatarProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         renderAvatarOnTop: false,
         showAvatarForEveryMessage: false,
-        position: 'left',
-        currentMessage: {
-            user: null,
-        },
-        previousMessage: {},
-        nextMessage: {},
+        position: 'left' as PositionLeftOrRight,
+        currentMessage: undefined,
+        previousMessage: undefined,
+        nextMessage: undefined,
         avatarContainerStyle: {},
         avatarImageStyle: {},
         onPressAvatar: () => {
@@ -78,6 +82,8 @@ export default class ChatAvatar<TMessage extends IMessage = IMessage> extends Re
             return this.props.renderAvatar(avatarProps)
         }
         if (this.props.currentMessage) {
+            const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+            const styles = getStyles(sizeLabor, themeLabor)
             return (
                 <BunnyAvatar
                     avatarStyle={
@@ -121,6 +127,8 @@ export default class ChatAvatar<TMessage extends IMessage = IMessage> extends Re
         if (renderAvatar === null) {
             return null
         }
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor)
 
         if (
             !showAvatarForEveryMessage &&
@@ -129,6 +137,7 @@ export default class ChatAvatar<TMessage extends IMessage = IMessage> extends Re
             isSameUser(currentMessage, messageToCompare) &&
             isSameDay(currentMessage, messageToCompare)
         ) {
+
             return (
                 <View
                     style={[
@@ -161,3 +170,5 @@ export default class ChatAvatar<TMessage extends IMessage = IMessage> extends Re
         )
     }
 }
+
+export default withBunnyKit(ChatAvatar)

@@ -2,44 +2,50 @@ import React from 'react'
 import {Linking, StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle} from 'react-native'
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
-import {IMessage, LeftRightStyle, PositionLeftOrRight} from './Models'
+import {IMessage, LeftRightStyle, PositionLeftOrRight} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {ActionSheetProps, connectActionSheet} from "../../../packages/react-native-action-sheet/src";
+import {SizeLabor, ThemeLabor} from "../../types";
 
 const WWW_URL_PATTERN = /^www\./i
 
-const textStyle = {
-    fontSize: 16,
-    lineHeight: 20,
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
-}
 
-const styles = {
-    left: StyleSheet.create({
-        container: {},
-        text: {
-            color: 'black',
-            ...textStyle,
-        },
-        link: {
-            color: 'black',
-            textDecorationLine: 'underline',
-        },
-    }),
-    right: StyleSheet.create({
-        container: {},
-        text: {
-            color: 'white',
-            ...textStyle,
-        },
-        link: {
-            color: 'white',
-            textDecorationLine: 'underline',
-        },
-    }),
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    // TODO not responsive
+    const textStyle = {
+        fontSize: wp(16),
+        lineHeight: wp(20),
+        marginTop: wp(5),
+        marginBottom: wp(5),
+        marginLeft: wp(10),
+        marginRight: wp(10),
+    }
+
+    return {
+        left: StyleSheet.create({
+            container: {},
+            text: {
+                color: 'black',
+                ...textStyle,
+            },
+            link: {
+                color: 'black',
+                textDecorationLine: 'underline',
+            },
+        }),
+        right: StyleSheet.create({
+            container: {},
+            text: {
+                color: 'white',
+                ...textStyle,
+            },
+            link: {
+                color: 'white',
+                textDecorationLine: 'underline',
+            },
+        }),
+    }
 }
 
 const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
@@ -144,6 +150,8 @@ class MessageText<TMessage extends IMessage = IMessage> extends React.Component<
         Communications.email([email], null, null, null, null)
 
     render() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         const linkStyle = [
             styles[this.props.position].link,
             this.props.linkStyle && this.props.linkStyle[this.props.position],
