@@ -42,20 +42,6 @@ export interface InputToolbarProps<TMessage extends IMessage> extends ActionsPro
     accessoryStyle?: StyleProp<ViewStyle>,
     primaryStyle?: StyleProp<ViewStyle>,
 
-    // options?: { [key: string]: any }
-    // optionTintColor?: string
-    // inputToolbarContainerStyle?: StyleProp<ViewStyle>
-    // primaryStyle?: StyleProp<ViewStyle>
-    // accessoryStyle?: StyleProp<ViewStyle>
-    //
-    // renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
-    //
-    // renderActions?(props: ActionsProps): React.ReactNode
-    //
-    // renderSend?(props: SendProps<TMessage>): React.ReactNode
-    //
-    // renderComposer?(props: ComposerProps): React.ReactNode
-
     onPressActionButton?(): void
 }
 

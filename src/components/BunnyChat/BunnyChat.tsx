@@ -321,12 +321,6 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
 
 class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<GiftedChatProps<TMessage>,
     GiftedChatState> {
-    // static childContextTypes = {
-    //     actionSheet: function () {
-    //     },
-    //     getLocale: function () {
-    //     },
-    // }
 
     static defaultProps = {
         messages: [],
@@ -473,14 +467,6 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         }
     }
 
-    // getChildContext() {
-    //     return {
-    //         actionSheet:
-    //             this.props.actionSheet || (() => this._actionSheetRef.getContext()),
-    //         getLocale: this.getLocale,
-    //     }
-    // }
-
     componentDidMount() {
         const {messages, text} = this.props
         this.setIsMounted(true)
@@ -513,20 +499,6 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
             this.setTextFromProp(text)
         }
     }
-
-    // initLocale() {
-    //     if (this.props.locale === null) {
-    //         this.setLocale('en')
-    //     } else {
-    //         this.setLocale(this.props.locale || 'en')
-    //     }
-    // }
-
-    // setLocale(locale: string) {
-    //     this._locale = locale
-    // }
-    //
-    // getLocale = () => this._locale
 
     setTextFromProp(textProp?: string) {
         // Text prop takes precedence over state.
@@ -887,32 +859,6 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
     }
 
     renderInputToolbar() {
-        // const inputToolbarProps = {
-        //     ...this.props,
-        //     text: this.getTextFromProp(this.state.text!),
-        //     composerHeight: Math.max(
-        //         this.props.minComposerHeight!,
-        //         this.state.composerHeight!,
-        //     ),
-        //     onSend: this.onSend,
-        //     onInputSizeChanged: this.onInputSizeChanged,
-        //     onTextChanged: this.onInputTextChanged,
-        //     textInputProps: {
-        //         ...this.props.textInputProps,
-        //         ref: (textInput: any) => (this.textInput = textInput),
-        //         maxLength: this.getIsTypingDisabled() ? 0 : this.props.maxInputLength,
-        //     },
-        // }
-        //     const {
-        //         renderAccessory,
-        //         renderActions,
-        //         renderSend,
-        //         renderComposer,
-        //         inputToolbarContainerStyle,
-        //         primaryStyle,
-        //         accessoryStyle,
-        //         onPressActionButton
-        // } = this.props;
 
         const {
             actionsConfig,

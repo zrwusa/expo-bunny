@@ -95,44 +95,6 @@ export interface MessageContainerProps<TMessage extends IMessage> extends Omit<M
     onLoadEarlier?(): void
 
     onQuickReply?(replies: Reply[]): void
-
-    // messages?: TMessage[]
-    // isTyping?: boolean
-    // user?: User
-    // listViewProps: Partial<ListViewProps>
-    // inverted?: boolean
-    // loadEarlier?: boolean
-    // alignTop?: boolean
-    // scrollToBottom?: boolean
-    // scrollToBottomStyle?: StyleProp<ViewStyle>
-    // invertibleScrollViewProps?: any
-    // extraData?: any
-    // scrollToBottomOffset?: number
-    // forwardRef?: RefObject<FlatList<IMessage>>
-
-    // renderChatEmpty?(): React.ReactNode
-
-    // renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
-
-    // renderMessage?(props: Message['props']): React.ReactNode
-
-    // renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
-
-    // renderScrollToBottom?(): React.ReactNode
-
-    // onLoadEarlier?(): void
-
-
-    // onMessageLoad?(currentMessage: TMessage): void
-
-    // onMessageLoadStart?(currentMessage: TMessage): void
-
-    // onMessageLoadEnd?(currentMessage: TMessage): void
-
-    // onMessageLoadError?(e:Error,currentMessage: TMessage): void
-
-    // infiniteScroll?: boolean
-    // isLoadingEarlier?: boolean
 }
 
 interface State {

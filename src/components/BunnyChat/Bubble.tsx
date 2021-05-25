@@ -87,7 +87,7 @@ const styles = {
         },
     }),
 }
-
+// TODO need i18n
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
 
 
@@ -143,37 +143,6 @@ export interface BubbleProps<TMessage extends IMessage> extends MessageImageProp
     touchableProps?: object
 
     textLongPressOptionTitles?: string[]
-
-    // messages: TMessage[],
-    // user?: User
-    // touchableProps?: object
-    // renderUsernameOnMessage?: boolean
-    // isCustomViewBottom?: boolean
-    // inverted?: boolean
-    // currentMessage?: TMessage
-    // nextMessage?: TMessage
-    // previousMessage?: TMessage
-    // textLongPressOptionTitles?: string[]
-    // textStyle?: LeftRightStyle<TextStyle>
-    // tickStyle?: StyleProp<TextStyle>
-    // containerToNextStyle?: LeftRightStyle<ViewStyle>
-    // containerToPreviousStyle?: LeftRightStyle<ViewStyle>
-    // usernameStyle?: TextStyle
-    // quickReplyStyle?: StyleProp<ViewStyle>
-    // onPress?(context?: any, message?: any): void
-    // onLongPress?(context?: any, message?: any): void
-    // onQuickReply?(replies: Reply[]): void
-    // renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
-    // renderMessageSticker?(props: RenderMessageStickerProps<TMessage>): React.ReactNode
-    // renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
-    // renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
-    // renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
-    // renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
-    // renderTime?(timeProps: Time['props']): React.ReactNode
-    // renderTicks?(currentMessage: TMessage): React.ReactNode
-    // renderUsername?(): React.ReactNode
-    // renderQuickReplySend?(): React.ReactNode
-    // renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
 }
 
 class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage> & ActionSheetProps & WithBunnyKit> {

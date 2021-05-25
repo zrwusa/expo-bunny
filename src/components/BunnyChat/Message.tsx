@@ -57,29 +57,8 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
     user?: User
     showUserAvatar?: boolean
     inverted?: boolean
+    // TODO
     key: any
-
-
-    // messages: TMessage[],
-    // key: any
-    // showUserAvatar?: boolean
-    // position: 'left' | 'right'
-    // currentMessage?: TMessage
-    // nextMessage?: TMessage
-    // previousMessage?: TMessage
-    // user: User
-    // inverted?: boolean
-    // messageContainerStyle?: LeftRightStyle<ViewStyle>
-    //
-    // renderBubble?(props: Bubble['props']): React.ReactNode
-    // renderDay?(props: Day['props']): React.ReactNode
-    // renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
-    // renderAvatar?(props: ChatAvatar['props']): React.ReactNode
-    // shouldUpdateMessage?(
-    //     props: MessageProps<IMessage>,
-    //     nextProps: MessageProps<IMessage>,
-    // ): boolean
-    // onMessageLayout?(event: LayoutChangeEvent): void
 }
 
 class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
