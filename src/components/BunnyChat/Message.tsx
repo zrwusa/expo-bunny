@@ -65,7 +65,7 @@ export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMe
     key: any
 }
 
-class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage> & WithBunnyKit> {
+class Message<TMessage extends IMessage> extends React.Component<MessageProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         messages: [],
         renderAvatar: undefined,
@@ -142,6 +142,7 @@ class Message<TMessage extends IMessage = IMessage> extends React.Component<Mess
                 return this.props.renderDay(dayProps)
             }
             return <Day<TMessage> {...dayProps} />
+            // return <Day {...dayProps} />
         }
         return null
     }
@@ -284,6 +285,7 @@ class Message<TMessage extends IMessage = IMessage> extends React.Component<Mess
             return this.props.renderBubble(bubbleProps)
         }
         return <Bubble<TMessage> {...bubbleProps} />
+        // return <Bubble {...bubbleProps} />
     }
 
     renderSystemMessage() {
@@ -306,6 +308,7 @@ class Message<TMessage extends IMessage = IMessage> extends React.Component<Mess
             return this.props.renderSystemMessage(systemMessageProps)
         }
         return <SystemMessage<TMessage> {...systemMessageProps} />
+        // return <SystemMessage {...systemMessageProps} />
     }
 
     renderAvatar() {

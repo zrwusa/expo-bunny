@@ -43,7 +43,7 @@ export interface MessageImageProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 }
 
-class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage> & WithBunnyKit> {
+class MessageImage<TMessage extends IMessage> extends Component<MessageImageProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         messages: [],
         currentMessage: undefined,

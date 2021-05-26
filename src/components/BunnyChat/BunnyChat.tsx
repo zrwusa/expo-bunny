@@ -26,10 +26,11 @@ import BunnyAvatar from './BunnyAvatar'
 
 import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
 import {IMessage,} from './types'
+import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 dayjs.extend(localizedFormat)
 
-export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends MessageContainerProps<TMessage>,
+export interface GiftedChatProps<TMessage extends IMessage> extends MessageContainerProps<TMessage>,
     InputToolbarProps<TMessage> {
     /* composer min Height */
     minComposerHeight?: number,
@@ -310,7 +311,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends M
     // ): boolean
 }
 
-export interface GiftedChatState<TMessage extends IMessage = IMessage> {
+export interface GiftedChatState<TMessage extends IMessage> {
     isInitialized: boolean
     composerHeight?: number
     messagesContainerHeight?: number | Animated.Value
@@ -319,8 +320,8 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
     messages?: TMessage[]
 }
 
-class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<GiftedChatProps<TMessage>,
-    GiftedChatState> {
+class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedChatProps<TMessage> & WithBunnyKit,
+    GiftedChatState<TMessage>> {
 
     static defaultProps = {
         messages: [],
@@ -329,10 +330,10 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         placeholder: DEFAULT_PLACEHOLDER,
         disableComposer: false,
         messageIdGenerator: () => uuid.v4(),
-        user: {},
+        user: undefined,
         onSend: () => {
         },
-        locale: null,
+        locale: '',
         timeFormat: TIME_FORMAT,
         dateFormat: DATE_FORMAT,
         loadEarlier: false,
@@ -349,18 +350,18 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         onMessageLoadError(e: Error) {
         },
         isLoadingEarlier: false,
-        renderLoading: null,
+        renderLoading: undefined,
         renderLoadEarlier: undefined,
         renderAvatar: undefined,
         showUserAvatar: false,
-        actionSheet: null,
-        onPressAvatar: null,
-        onLongPressAvatar: null,
+        actionSheet: undefined,
+        onPressAvatar: undefined,
+        onLongPressAvatar: undefined,
         renderUsernameOnMessage: false,
         renderAvatarOnTop: false,
         renderBubble: undefined,
         renderSystemMessage: undefined,
-        onLongPress: null,
+        onLongPress: undefined,
         renderMessage: undefined,
         renderMessageText: undefined,
         renderMessageImage: undefined,
@@ -374,32 +375,32 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         lightBoxProps: {},
         textInputProps: {},
         listViewProps: {},
-        renderCustomView: null,
+        renderCustomView: undefined,
         isCustomViewBottom: false,
         renderDay: undefined,
-        renderTime: null,
-        renderFooter: null,
-        renderChatEmpty: null,
-        renderChatFooter: null,
-        renderInputToolbar: null,
-        renderComposer: null,
-        renderActions: null,
-        renderSend: null,
-        renderAccessory: null,
+        renderTime: undefined,
+        renderFooter: undefined,
+        renderChatEmpty: undefined,
+        renderChatFooter: undefined,
+        renderInputToolbar: undefined,
+        renderComposer: undefined,
+        renderActions: undefined,
+        renderSend: undefined,
+        renderAccessory: undefined,
         isKeyboardInternallyHandled: true,
-        onPressActionButton: null,
-        bottomOffset: null,
+        onPressActionButton: undefined,
+        bottomOffset: undefined,
         minInputToolbarHeight: 44,
         keyboardShouldPersistTaps: Platform.select({
             ios: 'never',
             android: 'always',
             default: 'never',
         }),
-        onInputTextChanged: null,
-        maxInputLength: null,
+        onInputTextChanged: undefined,
+        maxInputLength: undefined,
         forceGetKeyboardHeight: false,
         inverted: true,
-        extraData: null,
+        extraData: undefined,
         minComposerHeight: MIN_COMPOSER_HEIGHT,
         maxComposerHeight: MAX_COMPOSER_HEIGHT,
         wrapInSafeArea: true,
@@ -454,7 +455,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         messages: undefined,
     }
 
-    constructor(props: GiftedChatProps<TMessage>) {
+    constructor(props: GiftedChatProps<TMessage> & WithBunnyKit) {
         super(props)
 
         this.invertibleScrollViewProps = {
@@ -705,7 +706,230 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
     }
 
     renderMessages() {
-        const {messagesContainerStyle, ...messagesContainerProps} = this.props
+        const {
+            audioProps,
+            alignTop,
+            activityIndicatorSize,
+            activityIndicatorStyle,
+            audioContainerStyle,
+            audioStyle,
+            avatarContainerStyle,
+            avatarImageStyle,
+            avatarTextStyle,
+            activityIndicatorColor,
+            bottomContainerStyle,
+            bubbleContainerStyle,
+            bubbleWrapperStyle,
+            customTextStyle,
+            containerToPreviousStyle,
+            containerToNextStyle,
+            dayWrapperStyle,
+            dayTextStyle,
+            dayTextProps,
+            dayContainerStyle,
+            dateFormat,
+            extraData,
+            forwardRef,
+            renderFooter,
+            isDebug,
+            isTyping,
+            isLoadingEarlier,
+            isCustomViewBottom,
+            invertibleScrollViewProps,
+            inverted,
+            infiniteScroll,
+            imageStyle,
+            imageProps,
+            imageContainerStyle,
+            keepReplies,
+            loadEarlierWrapperStyle,
+            loadEarlierTextStyle,
+            loadEarlierContainerStyle,
+            loadEarlier,
+            listViewProps,
+            linkStyle,
+            lightBoxProps,
+            loadEarlierLabel,
+            messages,
+            messagesContainerStyle,
+            nextMessage,
+            onMessageReadyForDisplay,
+            onQuickReply,
+            onPressAvatar,
+            onPress,
+            onMessageLayout,
+            onLongPressAvatar,
+            onLongPress,
+            onLoadEarlier,
+            onMessageLoad,
+            onMessageLoadError,
+            onMessageLoadStart,
+            onMessageLoadEnd,
+            phoneNumberOptionTitles,
+            previousMessage,
+            parsePatterns,
+            quickReplyStyle,
+            quickRepliesColor,
+            renderTicks,
+            renderSystemMessage,
+            renderScrollToBottom,
+            renderQuickReplySend,
+            renderQuickReplies,
+            renderMessageVideo,
+            renderMessageText,
+            renderMessageSticker,
+            renderMessageImage,
+            renderMessageAudio,
+            renderMessage,
+            renderLoadEarlier,
+            renderDay,
+            renderCustomView,
+            renderChatEmpty,
+            renderBubble,
+            renderAvatarOnTop,
+            renderAvatar,
+            renderTime,
+            renderUsernameOnMessage,
+            sendText,
+            stickerStyle,
+            stickerProps,
+            scrollToBottom,
+            scrollToBottomOffset,
+            scrollToBottomStyle,
+            shouldUpdateMessage,
+            showAvatarForEveryMessage,
+            showUserAvatar,
+            stickerContainerStyle,
+            systemMessageContainerStyle,
+            systemMessageWrapperStyle,
+            systemTextStyle,
+            textStyle,
+            textLongPressOptionTitles,
+            timeContainerStyle,
+            textContainerStyle,
+            textProps,
+            tickStyle,
+            timeFormat,
+            timeTextStyle,
+            touchableProps,
+            user,
+            usernameStyle,
+            videoContainerStyle,
+            videoProps,
+            videoStyle
+        } = this.props;
+
+        const messageContainerProps = {
+            audioProps,
+            alignTop,
+            activityIndicatorSize,
+            activityIndicatorStyle,
+            audioContainerStyle,
+            audioStyle,
+            avatarContainerStyle,
+            avatarImageStyle,
+            avatarTextStyle,
+            activityIndicatorColor,
+            bottomContainerStyle,
+            bubbleContainerStyle,
+            bubbleWrapperStyle,
+            customTextStyle,
+            containerToPreviousStyle,
+            containerToNextStyle,
+            dayWrapperStyle,
+            dayTextStyle,
+            dayTextProps,
+            dayContainerStyle,
+            dateFormat,
+            extraData,
+            forwardRef,
+            renderFooter,
+            isDebug,
+            isTyping,
+            isLoadingEarlier,
+            isCustomViewBottom,
+            invertibleScrollViewProps,
+            inverted,
+            infiniteScroll,
+            imageStyle,
+            imageProps,
+            imageContainerStyle,
+            keepReplies,
+            loadEarlierWrapperStyle,
+            loadEarlierTextStyle,
+            loadEarlierContainerStyle,
+            loadEarlier,
+            listViewProps,
+            linkStyle,
+            lightBoxProps,
+            loadEarlierLabel,
+            messages,
+            nextMessage,
+            onMessageReadyForDisplay,
+            onQuickReply,
+            onPressAvatar,
+            onPress,
+            onMessageLayout,
+            onLongPressAvatar,
+            onLongPress,
+            onLoadEarlier,
+            onMessageLoad,
+            onMessageLoadError,
+            onMessageLoadStart,
+            onMessageLoadEnd,
+            phoneNumberOptionTitles,
+            previousMessage,
+            parsePatterns,
+            quickReplyStyle,
+            quickRepliesColor,
+            renderTicks,
+            renderSystemMessage,
+            renderScrollToBottom,
+            renderQuickReplySend,
+            renderQuickReplies,
+            renderMessageVideo,
+            renderMessageText,
+            renderMessageSticker,
+            renderMessageImage,
+            renderMessageAudio,
+            renderMessage,
+            renderLoadEarlier,
+            renderDay,
+            renderCustomView,
+            renderChatEmpty,
+            renderBubble,
+            renderAvatarOnTop,
+            renderAvatar,
+            renderTime,
+            renderUsernameOnMessage,
+            sendText,
+            stickerStyle,
+            stickerProps,
+            scrollToBottom,
+            scrollToBottomOffset,
+            scrollToBottomStyle,
+            shouldUpdateMessage,
+            showAvatarForEveryMessage,
+            showUserAvatar,
+            stickerContainerStyle,
+            systemMessageContainerStyle,
+            systemMessageWrapperStyle,
+            systemTextStyle,
+            textStyle,
+            textLongPressOptionTitles,
+            timeContainerStyle,
+            textContainerStyle,
+            textProps,
+            tickStyle,
+            timeFormat,
+            timeTextStyle,
+            touchableProps,
+            user,
+            usernameStyle,
+            videoContainerStyle,
+            videoProps,
+            videoStyle
+        }
         const fragment = (
             <View
                 style={[
@@ -716,7 +940,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
                 ]}
             >
                 <MessageContainer<TMessage>
-                    {...messagesContainerProps}
+                    {...messageContainerProps}
                     invertibleScrollViewProps={this.invertibleScrollViewProps}
                     messages={this.getMessages()}
                     // TODO type check error
@@ -748,7 +972,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
             }
         })
 
-        if (shouldResetInputToolbar === true) {
+        if (shouldResetInputToolbar) {
             this.setIsTypingDisabled(true)
             this.resetInputToolbar()
         }
@@ -756,9 +980,9 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
             this.props.onSend(newMessages, shouldResetInputToolbar)
         }
 
-        if (shouldResetInputToolbar === true) {
+        if (shouldResetInputToolbar) {
             setTimeout(() => {
-                if (this.getIsMounted() === true) {
+                if (this.getIsMounted()) {
                     this.setIsTypingDisabled(false)
                 }
             }, 100)
@@ -770,7 +994,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
             this.textInput.clear()
         }
         this.notifyInputTextReset()
-        const newComposerHeight = this.props.minComposerHeight
+        const newComposerHeight = this.props.minComposerHeight;
         const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
             newComposerHeight,
         )
@@ -788,6 +1012,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
     }
 
     onInputSizeChanged = (size: { height: number }) => {
+        const {bunnyKit: {wp}} = this.props;
         const newComposerHeight = Math.max(
             this.props.minComposerHeight!,
             Math.min(this.props.maxComposerHeight!, size.height),
@@ -988,7 +1213,6 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
             renderCustomView,
             renderDay,
             renderFooter,
-            renderInputToolbar,
             renderLoadEarlier,
             renderLoading,
             renderMessage,
@@ -1027,6 +1251,7 @@ class BunnyChat<TMessage extends IMessage = IMessage> extends React.Component<Gi
         // TODO type check error
         // @ts-ignore
         return <InputToolbar<TMessage> {...inputToolbarProps} />
+        // return <InputToolbar {...inputToolbarProps} />
     }
 
     renderChatFooter() {
@@ -1080,7 +1305,7 @@ const styles = StyleSheet.create({
 })
 
 export * from './types'
-
+const BunnyChat = withBunnyKit(BunnyChatInner)
 export {
     BunnyChat,
     Actions,

@@ -40,7 +40,7 @@ export interface DayProps<TMessage extends IMessage> {
     dateFormat?: string
 }
 
-class Day<TMessage extends IMessage = IMessage> extends PureComponent<DayProps<TMessage> & WithBunnyKit> {
+class Day<TMessage extends IMessage> extends PureComponent<DayProps<TMessage> & WithBunnyKit> {
 
     static defaultProps = {
         currentMessage: undefined,

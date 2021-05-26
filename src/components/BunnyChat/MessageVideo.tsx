@@ -38,7 +38,7 @@ export interface MessageVideoProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 }
 
-class MessageVideo<TMessage extends IMessage = IMessage> extends Component<MessageVideoProps<TMessage> & WithBunnyKit> {
+class MessageVideo<TMessage extends IMessage> extends Component<MessageVideoProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         currentMessage: undefined,
         videoContainerStyle: {},

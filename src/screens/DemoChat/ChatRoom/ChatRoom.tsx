@@ -176,11 +176,11 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                             }
                         }}
 
-                        onInputTextChanged={(text: string) => {
+                        onInputTextChanged={(text) => {
                             setIsShowAudioButton(!text)
                         }}
 
-                        onMessageReadyForDisplay={async (currentMessage) => {
+                        onMessageReadyForDisplay={async (currentMessage:IMMessage) => {
                             await setReceived(currentMessage)
                         }}
 

@@ -74,7 +74,7 @@ export interface MessageTextProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 }
 
-class MessageText<TMessage extends IMessage = IMessage> extends React.Component<MessageTextProps<TMessage> & WithBunnyKit & ActionSheetProps> {
+class MessageText<TMessage extends IMessage> extends React.Component<MessageTextProps<TMessage> & WithBunnyKit & ActionSheetProps> {
 
     static defaultProps = {
         position: 'left' as PositionLeftOrRight,

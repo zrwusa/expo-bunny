@@ -52,7 +52,7 @@ export interface TimeProps<TMessage extends IMessage> {
     timeFormat?: string
 }
 
-class Time<TMessage extends IMessage = IMessage> extends Component<TimeProps<TMessage> & WithBunnyKit> {
+class Time<TMessage extends IMessage> extends Component<TimeProps<TMessage> & WithBunnyKit> {
 
     static defaultProps = {
         position: 'left' as PositionLeftOrRight,

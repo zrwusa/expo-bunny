@@ -85,7 +85,7 @@ export interface MessageContainerProps<TMessage extends IMessage> extends Omit<M
     scrollToBottom?: boolean
     extraData?: any
     invertibleScrollViewProps?: any
-    listViewProps: Partial<ListViewProps>
+    listViewProps?: Partial<ListViewProps>
 
     renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
 
@@ -432,6 +432,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 return this.props.renderMessage(messageProps)
             }
             return <Message<TMessage> {...messageProps} />
+            // return <Message {...messageProps} />
         }
         return null
     }
@@ -532,7 +533,8 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 {this.state.showScrollBottom && this.props.scrollToBottom
                     ? this.renderScrollToBottomWrapper()
                     : null}
-                <FlatList<TMessage>
+                {/*<FlatList<TMessage>*/}
+                <FlatList
                     ref={this.props.forwardRef}
                     extraData={[this.props.extraData, this.props.isTyping]}
                     keyExtractor={this.keyExtractor}

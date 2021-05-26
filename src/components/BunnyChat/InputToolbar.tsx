@@ -113,7 +113,6 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
     }
 
     renderActions() {
-        // const {inputToolbarContainerStyle, ...props} = this.props
         const {
             actionsConfig,
             actionOptionTintColor,
@@ -167,6 +166,7 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
             return this.props.renderSend(sendProps)
         }
         return <Send<TMessage> {...sendProps} />
+        // return <Send {...sendProps} />
     }
 
     renderComposer() {
@@ -241,5 +241,5 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
         )
     }
 }
-
+const toolbar = withBunnyKit(InputToolbar)
 export default withBunnyKit(InputToolbar)

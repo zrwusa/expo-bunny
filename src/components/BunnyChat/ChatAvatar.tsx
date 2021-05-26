@@ -59,7 +59,7 @@ export interface ChatAvatarProps<TMessage extends IMessage> {
     onLongPressAvatar?(user: User): void
 }
 
-class ChatAvatar<TMessage extends IMessage = IMessage> extends React.Component<ChatAvatarProps<TMessage> & WithBunnyKit> {
+class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         renderAvatarOnTop: false,
         showAvatarForEveryMessage: false,

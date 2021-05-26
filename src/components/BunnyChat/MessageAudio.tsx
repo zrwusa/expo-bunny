@@ -34,7 +34,7 @@ export interface MessageAudioProps<TMessage extends IMessage> {
     onMessageReadyForDisplay?(currentMessage: TMessage): void
 }
 
-class MessageAudio<TMessage extends IMessage = IMessage> extends Component<MessageAudioProps<TMessage> & WithBunnyKit> {
+class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         currentMessage: undefined,
         audioContainerStyle: {},

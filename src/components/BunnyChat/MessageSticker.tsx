@@ -37,7 +37,7 @@ export interface MessageStickerProps<TMessage extends IMessage> {
     onMessageLoadError?(e: Error, currentMessage: TMessage): void
 }
 
-class MessageSticker<TMessage extends IMessage = IMessage> extends Component<MessageStickerProps<TMessage> & WithBunnyKit> {
+class MessageSticker<TMessage extends IMessage> extends Component<MessageStickerProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         currentMessage: undefined,
         stickerContainerStyle: {},

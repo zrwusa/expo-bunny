@@ -62,7 +62,7 @@ const sameReply = (currentReply: Reply) => (reply: Reply) =>
 const diffReply = (currentReply: Reply) => (reply: Reply) =>
     currentReply.value !== reply.value
 
-class QuickReplies<TMessage extends IMessage = IMessage> extends Component<QuickRepliesProps<TMessage> & WithBunnyKit,
+class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProps<TMessage> & WithBunnyKit,
     QuickRepliesState> {
     static defaultProps = {
         currentMessage: undefined,

@@ -150,7 +150,7 @@ export interface BubbleProps<TMessage extends IMessage> extends MessageImageProp
     textLongPressOptionTitles?: string[]
 }
 
-class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage> & ActionSheetProps & WithBunnyKit> {
+class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMessage> & ActionSheetProps & WithBunnyKit> {
 
     static defaultProps = {
         messages: [],
@@ -304,6 +304,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
             }
             return (
                 <QuickReplies<TMessage> {...quickRepliesProps} />
+            // <QuickReplies {...quickRepliesProps} />
             )
         }
         return null
@@ -349,6 +350,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                 return this.props.renderMessageText(messageTextProps)
             }
             return <MessageText<TMessage> {...messageTextProps} />
+            // return <MessageText {...messageTextProps} />
         }
         return null
     }
@@ -387,6 +389,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                 return this.props.renderMessageImage(messageImageProps)
             }
             return <MessageImage<TMessage> {...messageImageProps} />
+            // return <MessageImage {...messageImageProps} />
         }
         return null
     }
@@ -421,6 +424,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                 return this.props.renderMessageSticker(messageStickerProps)
             }
             return <MessageSticker<TMessage> {...messageStickerProps} />
+            // return <MessageSticker {...messageStickerProps} />
         }
         return null
     }
@@ -456,6 +460,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                 return this.props.renderMessageVideo(messageVideoProps)
             }
             return <MessageVideo<TMessage> {...messageVideoProps} />
+            // return <MessageVideo {...messageVideoProps} />
         }
         return null
     }
@@ -490,6 +495,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                 return this.props.renderMessageAudio(messageAudioProps)
             }
             return <MessageAudio<TMessage> {...messageAudioProps} />
+            // return <MessageAudio {...messageAudioProps} />
         }
         return null
     }
@@ -552,6 +558,7 @@ class Bubble<TMessage extends IMessage = IMessage> extends React.Component<Bubbl
                 return this.props.renderTime(timeProps)
             }
             return <Time<TMessage> {...timeProps} />
+            // return <Time {...timeProps} />
         }
         return null
     }

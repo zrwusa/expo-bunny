@@ -31,7 +31,7 @@ export interface SystemMessageProps<TMessage extends IMessage> {
     systemTextStyle?: StyleProp<TextStyle>
 }
 
-class SystemMessage<TMessage extends IMessage = IMessage> extends Component<SystemMessageProps<TMessage> & WithBunnyKit> {
+class SystemMessage<TMessage extends IMessage> extends Component<SystemMessageProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         currentMessage: undefined,
         systemMessageContainerStyle: {},

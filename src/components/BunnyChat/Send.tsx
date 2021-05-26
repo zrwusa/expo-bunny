@@ -40,7 +40,7 @@ export interface SendProps<TMessage extends IMessage> {
     ): void
 }
 
-class Send<TMessage extends IMessage = IMessage> extends Component<SendProps<TMessage> & WithBunnyKit> {
+class Send<TMessage extends IMessage> extends Component<SendProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
         text: '',
         onSend: () => {
