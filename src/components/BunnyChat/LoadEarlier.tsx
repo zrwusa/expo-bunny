@@ -1,12 +1,12 @@
 import React from 'react'
 import {ActivityIndicator, Platform, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native'
-import Color from './Color'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {ActivityIndicatorSize} from "./types";
 import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             alignItems: 'center',
@@ -16,15 +16,15 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         wrapper: {
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: Color.defaultColor,
+            backgroundColor: colors.background,
             borderRadius: wp(15),
             height: wp(30),
             paddingLeft: wp(10),
             paddingRight: wp(10),
         },
         text: {
-            backgroundColor: Color.backgroundTransparent,
-            color: Color.white,
+            backgroundColor: colors.transparent,
+            color: colors.text3,
             fontSize: wp(12),
         },
         activityIndicator: {

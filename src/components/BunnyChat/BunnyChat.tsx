@@ -817,7 +817,10 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             usernameStyle,
             videoContainerStyle,
             videoProps,
-            videoStyle
+            videoStyle,
+            audioProgressStyle,
+            audioPlayButtonStyle,
+            audioProgressColor,
         } = this.props;
 
         const messageContainerProps = {
@@ -929,7 +932,10 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             usernameStyle,
             videoContainerStyle,
             videoProps,
-            videoStyle
+            videoStyle,
+            audioProgressStyle,
+            audioPlayButtonStyle,
+            audioProgressColor,
         }
         const fragment = (
             <View
@@ -1028,6 +1034,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
     }
 
     onInputTextChanged = (text: string) => {
+        // TODO consider to move this to Composer
         if (this.getIsTypingDisabled()) {
             return
         }

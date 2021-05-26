@@ -1,18 +1,19 @@
 import React from 'react'
 import {Platform, StyleSheet, TextInput, TextInputProps} from 'react-native'
 import {DEFAULT_PLACEHOLDER, MIN_COMPOSER_HEIGHT} from './Constant'
-import Color from './Color'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         textInput: {
             flex: 1,
             marginLeft: wp(10),
             fontSize: wp(16),
             lineHeight: wp(16),
+            color: colors.text,
             ...Platform.select({
                 web: {
                     paddingTop: wp(6),
@@ -54,7 +55,8 @@ class Composer extends React.Component<ComposerProps & WithBunnyKit> {
     static defaultProps = {
         composerHeight: MIN_COMPOSER_HEIGHT,
         text: '',
-        placeholderTextColor: Color.defaultColor,
+        // TODO defaultProps can't use bunnyKit props
+        placeholderTextColor: '#b2b2b2',
         placeholder: DEFAULT_PLACEHOLDER,
         textInputProps: undefined,
         multiline: true,
@@ -91,19 +93,21 @@ class Composer extends React.Component<ComposerProps & WithBunnyKit> {
     }
 
     onChangeText = (text: string) => {
+        // TODO when this happens the MessageText rerenders,not sure is this necessary
         this.props.onTextChanged!(text)
     }
 
     render() {
-        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
+        const {placeholderTextColor = colors.placeholder} = this.props
         return (
             <TextInput
                 testID={this.props.placeholder}
                 accessible
                 accessibilityLabel={this.props.placeholder}
                 placeholder={this.props.placeholder}
-                placeholderTextColor={this.props.placeholderTextColor}
+                placeholderTextColor={placeholderTextColor}
                 multiline={this.props.multiline}
                 editable={!this.props.disableComposer}
                 onLayout={this.onLayout}

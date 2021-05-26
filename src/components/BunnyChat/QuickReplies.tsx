@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle,} from 'react-native'
 import {IMessage, Reply} from './types'
-import Color from './Color'
 import {warning} from './utils'
 import {SizeLabor, ThemeLabor} from "../../types";
 import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             flexDirection: 'row',
@@ -32,7 +32,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderWidth: 0,
         },
         sendLinkText: {
-            color: Color.defaultBlue,
+            color: colors.accent,
             fontWeight: '600',
             fontSize: wp(17),
         },
@@ -69,7 +69,7 @@ class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProp
         nextMessage: undefined,
         onQuickReply: () => {
         },
-        quickRepliesColor: Color.peterRiver,
+        quickRepliesColor: '#3498db',
         sendText: 'Send',
         keepReplies: false,
         renderQuickReplySend: undefined,
@@ -165,7 +165,7 @@ class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProp
         }
 
         const {type} = currentMessage!.quickReplies!
-        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={styles.container}>
@@ -189,7 +189,7 @@ class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProp
                                     ellipsizeMode={'tail'}
                                     style={[
                                         styles.quickReplyText,
-                                        {color: selected ? Color.white : quickRepliesColor},
+                                        {color: selected ? colors.text : quickRepliesColor},
                                     ]}
                                 >
                                     {reply.title}

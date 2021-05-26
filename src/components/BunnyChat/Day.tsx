@@ -2,8 +2,6 @@ import React, {PureComponent} from 'react'
 import {StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle,} from 'react-native'
 import dayjs from 'dayjs'
 
-import Color from './Color'
-
 import {isSameDay} from './utils'
 import {DATE_FORMAT} from './Constant'
 import {IMessage} from './types'
@@ -12,6 +10,7 @@ import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             alignItems: 'center',
@@ -20,8 +19,8 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginBottom: wp(10),
         },
         text: {
-            backgroundColor: Color.backgroundTransparent,
-            color: Color.defaultColor,
+            backgroundColor: colors.transparent,
+            color: colors.text3,
             fontSize: wp(12),
             fontWeight: '600',
         },

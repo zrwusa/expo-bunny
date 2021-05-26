@@ -1,25 +1,50 @@
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
-import {IMessage} from './types'
+import {IMessage, PositionLeftOrRight} from './types'
 import {AudioPlayer, AudioPlayerProps} from "../AudioPlayer";
 import {SizeLabor, ThemeLabor} from "../../types";
 import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
-    return StyleSheet.create({
-        container: {
-            height: wp(46)
-        },
-        audio: {}
-    })
+    const {theme: {colors}} = themeLabor;
+    return {
+        left: StyleSheet.create({
+            container: {
+                height: wp(46)
+            },
+            audio: {},
+            audioProgress: {
+                backgroundColor: colors.onSurface2
+            },
+            audioPlayButton: {
+                // backgroundColor: colors.onSurface2,
+            }
+        }),
+        right: StyleSheet.create({
+            container: {
+                height: wp(46)
+            },
+            audio: {},
+            audioProgress: {
+                backgroundColor: colors.onSurface3
+            },
+            audioPlayButton: {
+                // backgroundColor: colors.onSurface3,
+            }
+        }),
+    }
 }
 
 export interface MessageAudioProps<TMessage extends IMessage> {
+    position: PositionLeftOrRight
     currentMessage?: TMessage
     audioContainerStyle?: StyleProp<ViewStyle>
     audioStyle?: StyleProp<ViewStyle>
+    audioProgressColor?: string
+    audioProgressStyle?: StyleProp<ViewStyle>
+    audioPlayButtonStyle?: StyleProp<ViewStyle>
     audioProps?: Omit<AudioPlayerProps, 'source'>
     isDebug?: boolean
 
@@ -36,9 +61,13 @@ export interface MessageAudioProps<TMessage extends IMessage> {
 
 class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProps<TMessage> & WithBunnyKit> {
     static defaultProps = {
+        position: 'left' as PositionLeftOrRight,
         currentMessage: undefined,
         audioContainerStyle: {},
         audioStyle: {},
+        audioProgressStyle: {},
+        audioProgressColor: '',
+        audioPlayButtonStyle: {},
         audioProps: {},
         onMessageLoad: undefined,
         onMessageLoadStart: undefined,
@@ -53,19 +82,27 @@ class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProp
             audioContainerStyle,
             audioProps,
             audioStyle,
+            audioProgressStyle,
+            audioPlayButtonStyle,
             currentMessage,
             isDebug,
+            position,
+            audioProgressColor,
         } = this.props
         isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageAudio props', this.props)
-        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
+        const stylesEnsurePosition = styles[position];
         return (
-            <View style={[styles.container, audioContainerStyle]}>
+            <View style={[stylesEnsurePosition.container, audioContainerStyle]}>
                 {
                     currentMessage
                         ? currentMessage.audio
                         ? <AudioPlayer
-                            style={[styles.audio, audioStyle]}
+                            style={[stylesEnsurePosition.audio, audioStyle]}
+                            progressStyle={[stylesEnsurePosition.audioProgress, audioProgressStyle]}
+                            progressColor={colors.primary || audioProgressColor}
+                            playButtonStyle={[stylesEnsurePosition.audioPlayButton, audioPlayButtonStyle]}
                             source={{uri: currentMessage.audio}}
                             onLoad={() => {
                                 isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageAudio onLoad')

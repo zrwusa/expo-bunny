@@ -17,7 +17,6 @@ import {
 
 import LoadEarlier, {LoadEarlierProps} from './LoadEarlier'
 import Message, {MessageProps} from './Message'
-import Color from './Color'
 import {IMessage, PositionLeftOrRight, Reply, User} from './types'
 import {warning} from './utils'
 import TypingIndicator from './TypingIndicator'
@@ -26,6 +25,7 @@ import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             flex: 1,
@@ -57,10 +57,10 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: wp(40),
             width: wp(40),
             borderRadius: wp(20),
-            backgroundColor: Color.white,
+            backgroundColor: colors.background,
             alignItems: 'center',
             justifyContent: 'center',
-            shadowColor: Color.black,
+            shadowColor: colors.shadow,
             shadowOpacity: 0.5,
             shadowOffset: {width: 0, height: 0},
             shadowRadius: wp(1),
@@ -336,6 +336,9 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 videoContainerStyle,
                 videoStyle,
                 videoProps,
+                audioProgressStyle,
+                audioPlayButtonStyle,
+                audioProgressColor,
             } = this.props
 
             const messageProps = {
@@ -421,6 +424,9 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 videoContainerStyle,
                 videoStyle,
                 videoProps,
+                audioProgressStyle,
+                audioPlayButtonStyle,
+                audioProgressColor,
 
                 inverted,
                 key: item._id,
@@ -461,13 +467,13 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
     }
 
     renderScrollBottomComponent() {
-        const {renderScrollToBottom} = this.props
+        const {renderScrollToBottom, bunnyKit: {ms}} = this.props
 
         if (renderScrollToBottom) {
             return renderScrollToBottom()
         }
 
-        return <Text>V</Text>
+        return <Text style={{fontSize: ms.fs.m}}>v</Text>
     }
 
     renderScrollToBottomWrapper() {

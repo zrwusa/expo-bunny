@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native'
 import dayjs from 'dayjs'
-
-import Color from './Color'
 import {TIME_FORMAT} from './Constant'
 import {IMessage, LeftRightStyle, PositionLeftOrRight} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
@@ -11,6 +9,7 @@ import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     const containerStyle = {
         marginLeft: wp(10),
         marginRight: wp(10),
@@ -28,7 +27,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 ...containerStyle,
             },
             text: {
-                color: Color.timeTextColor,
+                color: colors.surface2Text,
                 ...textStyle,
             },
         }),
@@ -37,7 +36,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 ...containerStyle,
             },
             text: {
-                color: Color.white,
+                color: colors.surface3Text,
                 ...textStyle,
             },
         }),

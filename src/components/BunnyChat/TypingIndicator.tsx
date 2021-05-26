@@ -2,19 +2,19 @@ import * as React from 'react'
 import {Animated, StyleSheet} from 'react-native'
 import {TypingAnimation} from 'react-native-typing-animation'
 import {useUpdateLayoutEffect} from './hooks/useUpdateLayoutEffect'
-import Color from './Color'
 import config from "../../config";
 import {SizeLabor, ThemeLabor} from "../../types";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             marginLeft: wp(8),
             width: wp(45),
             borderRadius: wp(15),
-            backgroundColor: Color.leftBubbleBackground,
+            backgroundColor: colors.surface2,
         },
     })
 }

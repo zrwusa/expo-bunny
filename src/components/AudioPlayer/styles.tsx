@@ -21,15 +21,16 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         remainTime: {
             marginTop: ms.sp.s,
             fontSize: wp(9),
-            color: colors.text3
+            color: colors.text3,
+            height:wp(9)
         },
         progress: {
-            marginLeft: wp(2),
+            marginLeft: wp(5),
             width: wp(120),
             height: wp(30),
             justifyContent: 'flex-end'
         },
-        buttonWrap: {
+        playButton: {
             backgroundColor: colors.background,
             width: wp(36),
             height: wp(36),

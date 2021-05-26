@@ -4,18 +4,18 @@ import {EmitterSubscription, Keyboard, StyleProp, StyleSheet, View, ViewStyle,} 
 import Composer, {ComposerProps} from './Composer'
 import Send, {SendProps} from './Send'
 import Actions, {ActionsProps} from './Actions'
-import Color from './Color'
 import {IMessage} from "./types";
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
-            borderTopWidth: StyleSheet.hairlineWidth,
-            borderTopColor: Color.defaultColor,
-            backgroundColor: Color.white,
+            borderTopWidth: StyleSheet.hairlineWidth, // TODO use bunnyKit measure
+            borderTopColor: colors.border,
+            backgroundColor: colors.background,
             bottom: 0,
             left: 0,
             right: 0,
@@ -241,4 +241,5 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
         )
     }
 }
+
 export default withBunnyKit(InputToolbar)

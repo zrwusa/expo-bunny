@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle,} from 'react-native'
-import Color from './Color'
 import {IMessage} from './types'
 import {SizeLabor, ThemeLabor} from "../../types";
 import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             alignItems: 'center',
@@ -16,8 +16,8 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginBottom: wp(10),
         },
         text: {
-            backgroundColor: Color.backgroundTransparent,
-            color: Color.defaultColor,
+            backgroundColor: colors.transparent,
+            color: colors.text3,
             fontSize: wp(12),
             fontWeight: '300',
         },

@@ -71,7 +71,7 @@ export const getThemeWareHouse = () => {
                 light: pl.purple500,
                 dark: pl.amberA100,
                 indigo: pl.lightBlue630,
-                tinder: pl.purple500,
+                tinder: pl.pink100,
             },
             // [ReactNativePaper]secondary color for your app which complements the primary color.
             accent: {
@@ -142,16 +142,16 @@ export const getThemeWareHouse = () => {
                 tinder: pl.grey800,
             },
             surface2Text: {
-                light: pl.grey800,
-                dark: pl.grey400,
-                indigo: pl.blueIndigo150,
-                tinder: pl.grey800,
+                light: pl.grey6IOS3,
+                dark: pl.grey50,
+                indigo: pl.white,
+                tinder: pl.black,
             },
             surface3Text: {
-                light: pl.grey800,
-                dark: pl.grey400,
-                indigo: pl.blueIndigo150,
-                tinder: pl.grey800,
+                light: pl.grey50,
+                dark: pl.grey100,
+                indigo: pl.white,
+                tinder: pl.white,
             },
             caption: {
                 light: pl.grey900,
@@ -198,15 +198,15 @@ export const getThemeWareHouse = () => {
             },
             surface2: {
                 light: pl.grey100,
-                dark: pl.grey5IOS3,
+                dark: pl.blueGrey860,
                 indigo: pl.blueIndigo300,
                 tinder: pl.grey100,
             },
             surface3: {
-                light: pl.grey100,
-                dark: pl.grey4IOS3,
+                light: pl.blueIOS3,
+                dark: pl.teal700,
                 indigo: pl.blueGrey870,
-                tinder: pl.grey100,
+                tinder: pl.pink100,
             },
             linearSurface: [
                 {
@@ -263,16 +263,16 @@ export const getThemeWareHouse = () => {
                 tinder: pl.black,
             },
             onSurface2: {
-                light: pl.black,
+                light: pl.grey600,
                 dark: pl.white,
                 indigo: pl.white,
-                tinder: pl.black,
+                tinder: pl.pink100,
             },
             onSurface3: {
-                light: pl.black,
+                light: pl.grey300,
                 dark: pl.white,
                 indigo: pl.white,
-                tinder: pl.black,
+                tinder: pl.white,
             },
             onBackground: {
                 light: pl.black,

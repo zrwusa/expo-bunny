@@ -199,6 +199,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                             return <>
                                 <TouchableOpacity onPress={() => {
                                     Keyboard.dismiss()
+                                    // TODO issue when this triggered firebase writes channel and rerenders all
                                     setIsShowStickerPicker(!isShowStickerPicker)
                                 }}>
                                     <IcoMoon name="chat4" style={styles.stickerPickerIcon}/>

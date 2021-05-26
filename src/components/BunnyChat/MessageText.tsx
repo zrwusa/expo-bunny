@@ -12,6 +12,7 @@ const WWW_URL_PATTERN = /^www\./i
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     // TODO not responsive
     const textStyle = {
         fontSize: wp(16),
@@ -26,22 +27,22 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         left: StyleSheet.create({
             container: {},
             text: {
-                color: 'black',
+                color: colors.surface2Text,
                 ...textStyle,
             },
             link: {
-                color: 'black',
+                color: colors.surface2Text,
                 textDecorationLine: 'underline',
             },
         }),
         right: StyleSheet.create({
             container: {},
             text: {
-                color: 'white',
+                color: colors.surface3Text,
                 ...textStyle,
             },
             link: {
-                color: 'white',
+                color: colors.surface3Text,
                 textDecorationLine: 'underline',
             },
         }),
@@ -94,13 +95,14 @@ class MessageText<TMessage extends IMessage> extends React.Component<MessageText
         isDebug: false,
     }
 
-    shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {
-        return (
-            !!this.props.currentMessage &&
-            !!nextProps.currentMessage &&
-            this.props.currentMessage.text !== nextProps.currentMessage.text
-        )
-    }
+    // TODO is this necessary
+    // shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {
+    //     return (
+    //         !!this.props.currentMessage &&
+    //         !!nextProps.currentMessage &&
+    //         this.props.currentMessage.text !== nextProps.currentMessage.text
+    //     )
+    // }
 
     onUrlPress = (url: string) => {
         // When someone sends a message that includes a website address beginning with "www." (omitting the scheme),

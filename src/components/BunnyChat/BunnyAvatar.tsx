@@ -1,22 +1,13 @@
 import React from 'react'
 import {Image, ImageStyle, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View,} from 'react-native'
-import Color from './Color'
 import {User} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {SizeLabor, ThemeLabor} from "../../types";
 
-const {
-    carrot,
-    emerald,
-    peterRiver,
-    wisteria,
-    alizarin,
-    turquoise,
-    midnightBlue,
-} = Color
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         avatarStyle: {
             justifyContent: 'center',
@@ -26,12 +17,12 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderRadius: wp(20),
         },
         avatarTransparent: {
-            backgroundColor: Color.backgroundTransparent,
+            backgroundColor: colors.transparent,
         },
         textStyle: {
-            color: Color.white,
+            color: colors.text,
             fontSize: wp(16),
-            backgroundColor: Color.backgroundTransparent,
+            backgroundColor: colors.transparent,
             fontWeight: '100',
         },
     })
@@ -79,13 +70,13 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
         // inspired by https://github.com/wbinnssmith/react-user-avatar
         // colors from https://flatuicolors.com/
         const colors = [
-            carrot,
-            emerald,
-            peterRiver,
-            wisteria,
-            alizarin,
-            turquoise,
-            midnightBlue,
+            '#e67e22',
+            '#2ecc71',
+            '#3498db',
+            '#8e44ad',
+            '#e74c3c',
+            '#1abc9c',
+            '#2c3e50',
         ]
 
         this.avatarColor = colors[sumChars % colors.length]

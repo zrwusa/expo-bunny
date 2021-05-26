@@ -9,7 +9,6 @@ import MessageVideo, {MessageVideoProps} from './MessageVideo'
 import MessageAudio, {MessageAudioProps} from './MessageAudio'
 
 import Time, {TimeProps} from './Time'
-import Color from './Color'
 
 import {isSameDay, isSameUser} from './utils'
 import {IMessage, LeftRightStyle, PositionLeftOrRight, User,} from './types'
@@ -20,6 +19,7 @@ import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return {
         left: StyleSheet.create({
             container: {
@@ -28,7 +28,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             },
             wrapper: {
                 borderRadius: wp(15),
-                backgroundColor: Color.leftBubbleBackground,
+                backgroundColor: colors.surface2,
                 marginRight: wp(60),
                 minHeight: wp(20),
                 justifyContent: 'flex-end',
@@ -51,7 +51,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             },
             wrapper: {
                 borderRadius: wp(15),
-                backgroundColor: Color.defaultBlue,
+                backgroundColor: colors.surface3,
                 marginLeft: wp(60),
                 minHeight: wp(20),
                 justifyContent: 'flex-end',
@@ -70,8 +70,8 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         content: StyleSheet.create({
             tick: {
                 fontSize: wp(10),
-                backgroundColor: Color.backgroundTransparent,
-                color: Color.white,
+                backgroundColor: colors.transparent,
+                color: colors.surface3Text,
             },
             tickView: {
                 flexDirection: 'row',
@@ -304,7 +304,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             }
             return (
                 <QuickReplies<TMessage> {...quickRepliesProps} />
-            // <QuickReplies {...quickRepliesProps} />
+                // <QuickReplies {...quickRepliesProps} />
             )
         }
         return null
@@ -477,7 +477,11 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageLoadEnd,
                 onMessageReadyForDisplay,
                 onMessageLoadError,
-                isDebug
+                isDebug,
+                position,
+                audioProgressStyle,
+                audioPlayButtonStyle,
+                audioProgressColor,
             } = this.props;
             const messageAudioProps = {
                 currentMessage,
@@ -489,7 +493,11 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageLoadEnd,
                 onMessageReadyForDisplay,
                 onMessageLoadError,
-                isDebug
+                isDebug,
+                position,
+                audioProgressStyle,
+                audioPlayButtonStyle,
+                audioProgressColor,
             }
             if (this.props.renderMessageAudio) {
                 return this.props.renderMessageAudio(messageAudioProps)

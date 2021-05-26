@@ -1,12 +1,12 @@
 import React, {ReactNode} from 'react'
 import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native'
-import Color from './Color'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {ActionSheetProps, connectActionSheet} from "../../../packages/react-native-action-sheet/src";
 import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             width: wp(26),
@@ -16,15 +16,15 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         wrapper: {
             borderRadius: wp(13),
-            borderColor: Color.defaultColor,
+            borderColor: colors.border,
             borderWidth: wp(2),
             flex: 1,
         },
         iconText: {
-            color: Color.defaultColor,
+            color: colors.text3,
             fontWeight: 'bold',
             fontSize: wp(16),
-            backgroundColor: Color.backgroundTransparent,
+            backgroundColor: colors.transparent,
             textAlign: 'center',
         },
     })
@@ -44,7 +44,7 @@ export interface ActionsProps {
 class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunnyKit> {
     static defaultProps: ActionsProps = {
         actionsConfig: {},
-        actionOptionTintColor: Color.optionTintColor,
+        actionOptionTintColor: '#007AFF',
         renderActionIcon: undefined,
         actionContainerStyle: {},
         actionIconTextStyle: {},

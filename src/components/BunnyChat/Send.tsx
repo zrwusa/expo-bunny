@@ -1,22 +1,22 @@
 import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle,} from 'react-native'
-import Color from './Color'
 import {IMessage} from './types'
 import {SizeLabor, ThemeLabor} from "../../types";
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
+    const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
         container: {
             height: wp(44),
             justifyContent: 'flex-end',
         },
         text: {
-            color: Color.defaultBlue,
+            color: colors.accent,
             fontWeight: '600',
             fontSize: wp(17),
-            backgroundColor: Color.backgroundTransparent,
+            backgroundColor: colors.transparent,
             marginBottom: wp(12),
             marginLeft: wp(10),
             marginRight: wp(10),
