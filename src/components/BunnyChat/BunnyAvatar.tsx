@@ -3,6 +3,7 @@ import {Image, ImageStyle, StyleProp, StyleSheet, Text, TextStyle, TouchableOpac
 import Color from './Color'
 import {User} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
 const {
     carrot,
@@ -14,24 +15,27 @@ const {
     midnightBlue,
 } = Color
 
-const styles = StyleSheet.create({
-    avatarStyle: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-    },
-    avatarTransparent: {
-        backgroundColor: Color.backgroundTransparent,
-    },
-    textStyle: {
-        color: Color.white,
-        fontSize: 16,
-        backgroundColor: Color.backgroundTransparent,
-        fontWeight: '100',
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    return StyleSheet.create({
+        avatarStyle: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: wp(40),
+            height: wp(40),
+            borderRadius: wp(20),
+        },
+        avatarTransparent: {
+            backgroundColor: Color.backgroundTransparent,
+        },
+        textStyle: {
+            color: Color.white,
+            fontSize: wp(16),
+            backgroundColor: Color.backgroundTransparent,
+            fontWeight: '100',
+        },
+    })
+}
 
 export interface GiftedAvatarProps {
     user?: User
@@ -90,6 +94,8 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
     renderAvatar() {
         const {user} = this.props
         if (user) {
+            const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+            const styles = getStyles(sizeLabor, themeLabor);
             if (typeof user.avatar === 'function') {
                 return user.avatar([styles.avatarStyle, this.props.avatarStyle])
             } else if (typeof user.avatar === 'string') {
@@ -112,6 +118,8 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
     }
 
     renderInitials() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <Text style={[styles.textStyle, this.props.textStyle]}>
                 {this.avatarName}
@@ -130,6 +138,8 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
     }
 
     render() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         if (
             !this.props.user ||
             (!this.props.user.name && !this.props.user.avatar)

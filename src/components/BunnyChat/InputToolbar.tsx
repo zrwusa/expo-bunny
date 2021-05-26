@@ -241,5 +241,4 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
         )
     }
 }
-const toolbar = withBunnyKit(InputToolbar)
 export default withBunnyKit(InputToolbar)

@@ -27,6 +27,7 @@ import BunnyAvatar from './BunnyAvatar'
 import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
 import {IMessage,} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from "../../types";
 
 dayjs.extend(localizedFormat)
 
@@ -1269,6 +1270,8 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
     }
 
     render() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         if (this.state.isInitialized === true) {
             const {wrapInSafeArea} = this.props
             const Wrapper = wrapInSafeArea ? SafeAreaView : View
@@ -1295,14 +1298,17 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
 }
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    safeArea: {
-        flex: 1,
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    return StyleSheet.create({
+        container: {
+            flex: 1,
+        },
+        safeArea: {
+            flex: 1,
+        },
+    })
+}
 
 export * from './types'
 const BunnyChat = withBunnyKit(BunnyChatInner)

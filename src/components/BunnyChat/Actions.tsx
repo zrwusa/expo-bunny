@@ -3,28 +3,32 @@ import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyl
 import Color from './Color'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {ActionSheetProps, connectActionSheet} from "../../../packages/react-native-action-sheet/src";
+import {SizeLabor, ThemeLabor} from "../../types";
 
-const styles = StyleSheet.create({
-    container: {
-        width: 26,
-        height: 26,
-        marginLeft: 10,
-        marginBottom: 10,
-    },
-    wrapper: {
-        borderRadius: 13,
-        borderColor: Color.defaultColor,
-        borderWidth: 2,
-        flex: 1,
-    },
-    iconText: {
-        color: Color.defaultColor,
-        fontWeight: 'bold',
-        fontSize: 16,
-        backgroundColor: Color.backgroundTransparent,
-        textAlign: 'center',
-    },
-})
+const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    return StyleSheet.create({
+        container: {
+            width: wp(26),
+            height: wp(26),
+            marginLeft: wp(10),
+            marginBottom: wp(10),
+        },
+        wrapper: {
+            borderRadius: wp(13),
+            borderColor: Color.defaultColor,
+            borderWidth: wp(2),
+            flex: 1,
+        },
+        iconText: {
+            color: Color.defaultColor,
+            fontWeight: 'bold',
+            fontSize: wp(16),
+            backgroundColor: Color.backgroundTransparent,
+            textAlign: 'center',
+        },
+    })
+}
 
 export interface ActionsProps {
     actionsConfig?: { [key: string]: (props: ActionsProps & ActionSheetProps & WithBunnyKit) => void }
@@ -71,6 +75,8 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
         if (this.props.renderActionIcon) {
             return this.props.renderActionIcon()
         }
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         // TODO support multi actions
         return (
             <View style={[styles.wrapper, this.props.actionWrapperStyle]}>
@@ -80,6 +86,8 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
     }
 
     render() {
+        const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <TouchableOpacity
                 style={[styles.container, this.props.actionContainerStyle]}
