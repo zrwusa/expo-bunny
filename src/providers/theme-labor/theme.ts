@@ -115,13 +115,13 @@ export const getThemeWareHouse = () => {
                 light: pl.grey800,
                 dark: pl.grey200,
                 indigo: pl.blueIndigo100,
-                tinder: pl.grey800,
+                tinder: pl.grey600,
             },
             text3: {
-                light: pl.grey800,
+                light: pl.grey500,
                 dark: pl.grey400,
-                indigo: pl.blueIndigo150,
-                tinder: pl.grey800,
+                indigo: pl.grey500,
+                tinder: pl.grey500,
             },
             buttonText: {
                 light: pl.white,
@@ -205,7 +205,7 @@ export const getThemeWareHouse = () => {
             surface3: {
                 light: pl.blueIOS3,
                 dark: pl.teal700,
-                indigo: pl.blueGrey870,
+                indigo: pl.purple800,
                 tinder: pl.pink100,
             },
             linearSurface: [

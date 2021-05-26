@@ -27,7 +27,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 ...containerStyle,
             },
             text: {
-                color: colors.surface2Text,
+                color: colors.text3,
                 ...textStyle,
             },
         }),

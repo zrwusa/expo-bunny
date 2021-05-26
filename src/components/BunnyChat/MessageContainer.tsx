@@ -68,7 +68,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         scrollToBottomButton:{
             fontSize: ms.fs.m,
-            color: colors.text
+            color: colors.text3
         }
     })
 }
