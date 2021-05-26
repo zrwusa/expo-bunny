@@ -10,36 +10,45 @@ import {getStyles} from "./styles";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export interface LineToProps {
-    iconName: IcoMoonKeys,
+    iconName?: IcoMoonKeys,
     iconSize?: number,
-    text: string,
+    text?: string,
     to?: string,
     type: 'LINK' | 'LINK_TO' | 'NAV',
     onNav?: () => void
 }
 
-export function InlineJump(props: LineToProps) {
+export const InlineJump: React.FC<LineToProps> = (props) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const linkTo = useLinkTo();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor)
     const {authFunctions} = useAuthLabor()
-    const {iconName, iconSize = wp(22), text, to, type, onNav} = props;
+    const {iconName, iconSize = wp(22), text, to, type, onNav, children} = props;
     const {colors} = themeLabor.theme
     const iconColor = {color: colors.buttonText};
     return type === 'LINK'
-        ? to ? <Link to={to}>
-            <Row paddingVertical="xl">
-                <Col size={3}>
-                    <Row>
-                        <LinearGradientIcon size={iconSize} name={iconName}/>
-                        <Text style={styles.label}>{text}</Text>
+        ?
+        to ? <Link to={to}>
+            {
+                children
+                    ? children
+                    : <Row paddingVertical="xl">
+                        <Col size={3}>
+                            <Row>
+                                {
+                                    iconName
+                                        ? <LinearGradientIcon size={iconSize} name={iconName}/>
+                                        : null
+                                }
+                                <Text style={styles.label}>{text}</Text>
+                            </Row>
+                        </Col>
+                        <Col size={1} style={styles.rightWrapper}>
+                            <IcoMoon name="chevron-right1"/>
+                        </Col>
                     </Row>
-                </Col>
-                <Col size={1} style={styles.rightWrapper}>
-                    <IcoMoon name="chevron-right1"/>
-                </Col>
-            </Row>
+            }
         </Link> : null
         : <TouchableOpacity onPress={() => {
             switch (type) {
@@ -47,7 +56,6 @@ export function InlineJump(props: LineToProps) {
                     if (to) {
                         linkTo(to)
                     }
-
                     break;
                 case "NAV":
                     if (onNav) {
@@ -56,12 +64,15 @@ export function InlineJump(props: LineToProps) {
                     break;
             }
         }
-
         }>
             <Row paddingVertical="xl">
                 <Col size={3}>
                     <Row>
-                        <LinearGradientIcon size={iconSize} name={iconName}/>
+                        {
+                            iconName
+                                ? <LinearGradientIcon size={iconSize} name={iconName}/>
+                                : null
+                        }
                         <Text style={styles.label}>{text}</Text>
                     </Row>
                 </Col>

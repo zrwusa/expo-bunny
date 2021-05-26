@@ -285,6 +285,10 @@ export const linking = {
                         name: 'DatingHome',
                         path: 'home',
                     },
+                    DatingChat: {
+                        name: 'DatingChat',
+                        path: 'chat',
+                    },
                     DatingSettings: {
                         name: 'DatingSettings',
                         path: 'settings',

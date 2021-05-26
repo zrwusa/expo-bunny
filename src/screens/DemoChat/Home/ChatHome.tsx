@@ -1,8 +1,8 @@
 import React, {useEffect} from "react"
 import {Text} from "../../../components/UI";
-import {Dimensions, FlatList, SafeAreaView, TouchableOpacity, View} from "react-native";
+import {Dimensions, FlatList, SafeAreaView, View} from "react-native";
 import {RouteProp} from "@react-navigation/native";
-import {ChatRoom, Conversation, DemoChatStackParam, RootState} from "../../../types";
+import {Conversation, DemoChatStackParam, RootStackParam, RootState} from "../../../types";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useSelector} from "react-redux";
 import {Row} from "../../../containers/Row";
@@ -14,7 +14,7 @@ import {FirestoreReducer} from "redux-firestore";
 import {Avatar} from "../../../components/Avatar";
 import dayJS from "dayjs"
 import isToday from "dayjs/plugin/isToday";
-import {Divider} from "../../../components";
+import {Divider, InlineJump} from "../../../components";
 import {Preparing} from "../../../components/Preparing";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {firestoreTimestampToDate} from "../../../utils";
@@ -22,7 +22,7 @@ import {firestoreTimestampToDate} from "../../../utils";
 dayJS.extend(isToday)
 
 type ChatHomeRouteProp = RouteProp<DemoChatStackParam, 'ChatHome'>;
-type ChatHomeNavigationProp = StackNavigationProp<DemoChatStackParam, 'ChatHome'>;
+type ChatHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoChat'>;
 
 export interface ChatHomeProps {
     route: ChatHomeRouteProp,
@@ -80,7 +80,13 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     const currentUserConversationsMessages = useSelector((state: RootState) => state.firestoreState.ordered.currentUserConversationsMessages)
 
     const handleRoomPress = (key: string) => {
-        navigation.navigate('ChatRoom', {conversationId: key})
+        // navigation.navigate('DemoChat', {
+        //     screen: 'ChatRoom',
+        //     params: {
+        //         conversationId: key,
+        //     },
+        // })
+        // navigation.navigate('ChatRoom', {conversationId: key})
     }
 
     const renderAvatar = (conversation: Conversation) => {
@@ -149,7 +155,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     const renderItem = (conversation: FirestoreReducer.EntityWithId<Conversation>) => {
         return (
             <View style={styles.conversation}>
-                <TouchableOpacity onPress={() => handleRoomPress(conversation.id)}>
+                <InlineJump type="LINK" to={`/demo-chat/chat-rooms/${conversation.id}`}>
                     <Row paddingVertical="m">
                         <Col size={1}>
                             {
@@ -162,7 +168,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
                             }
                         </Col>
                     </Row>
-                </TouchableOpacity>
+                </InlineJump>
                 <Divider/>
             </View>
 

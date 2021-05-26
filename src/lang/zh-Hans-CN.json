@@ -322,6 +322,9 @@
     "DatingHome": {
       "title": "交友-首页"
     },
+    "DatingChat": {
+      "title": "交友-聊天"
+    },
     "DatingSettings": {
       "title": "交友-设置"
     },

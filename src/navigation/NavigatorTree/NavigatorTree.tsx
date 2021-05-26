@@ -164,7 +164,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     const optionsChat: StackNavigationOptions = {
         ...screenOptionsStackCommon,
-        animationEnabled: false,
+        animationEnabled: true,
         headerShown: false,
         headerLeft: () => null
     }
@@ -475,6 +475,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                     (props) => {
                         return <DemoDatingTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptionsDating}>
                             <DemoDatingTabStack.Screen name="DatingHome" component={DatingHomeScreen} options={optionsMergeWithTitle()}/>
+                            <DemoDatingTabStack.Screen name="DatingChat" component={ChatHomeScreen} options={optionsMergeWithTitle()}/>
                             <DemoDatingTabStack.Screen name="DatingSettings" component={DatingSettingsScreen} options={optionsMergeWithTitle()}/>
                         </DemoDatingTabStack.Navigator>
                     }

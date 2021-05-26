@@ -111,6 +111,7 @@ export type DemoHealthTabStackParam = {
 
 export type DemoDatingTabStackParam = {
     DatingHome: undefined;
+    DatingChat: undefined;
     DatingSettings: undefined;
 };
 

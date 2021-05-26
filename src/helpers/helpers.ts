@@ -127,8 +127,12 @@ export const tabBarIconNameConfig: JSONSerializable = {
         focused: 'settings',
     },
     DatingHome: {
-        default: 'home3',
-        focused: 'home3',
+        default: 'heart',
+        focused: 'heart',
+    },
+    DatingChat:{
+        default: 'chat3',
+        focused: 'chat3',
     },
     DatingSettings: {
         default: 'user-o',
