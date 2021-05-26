@@ -24,6 +24,7 @@ import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
 import {SizeLabor, ThemeLabor} from "../../types";
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+    const {ms} = sizeLabor;
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -57,7 +58,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: wp(40),
             width: wp(40),
             borderRadius: wp(20),
-            backgroundColor: colors.background,
+            backgroundColor: colors.backdrop,
             alignItems: 'center',
             justifyContent: 'center',
             shadowColor: colors.shadow,
@@ -65,6 +66,10 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             shadowOffset: {width: 0, height: 0},
             shadowRadius: wp(1),
         },
+        scrollToBottomButton:{
+            fontSize: ms.fs.m,
+            color: colors.text
+        }
     })
 }
 
@@ -467,13 +472,13 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
     }
 
     renderScrollBottomComponent() {
-        const {renderScrollToBottom, bunnyKit: {ms}} = this.props
-
+        const {renderScrollToBottom, bunnyKit: {sizeLabor, themeLabor}} = this.props
+        const styles = getStyles(sizeLabor, themeLabor)
         if (renderScrollToBottom) {
             return renderScrollToBottom()
         }
 
-        return <Text style={{fontSize: ms.fs.m}}>v</Text>
+        return <Text style={styles.scrollToBottomButton}>v</Text>
     }
 
     renderScrollToBottomWrapper() {
