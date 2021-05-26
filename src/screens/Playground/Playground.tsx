@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Text, TextButton, View} from "../../components/UI";
-import {Button, FlatList, TouchableOpacity, Vibration} from "react-native";
+import {Button, TouchableOpacity, Vibration} from "react-native";
 import {getStyles} from "./styles";
 import {useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
@@ -9,7 +9,6 @@ import {DraggableView} from "../../containers/DraggableView";
 import {randomDate, uuidV4, wait} from "../../utils";
 import {ProgressBar} from "react-native-paper";
 import {Card} from "../../containers/Card";
-import {CachedImage} from "../../components/CachedImage";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export function PlaygroundScreen() {
@@ -27,8 +26,10 @@ export function PlaygroundScreen() {
         // setProgress(0.3);
         // await migrateSocialMediaImages();
         setProgress(0.4);
-        // await migrateChatMessages();
+        // await migrateDatingChatMessages();
         setProgress(0.6);
+        // await migrateGroupChatMessages();
+        setProgress(0.7);
         // await migrateConversations()
         setProgress(1);
     }
@@ -81,18 +82,18 @@ export function PlaygroundScreen() {
                 <Button title="random date" onPress={() => {
                     console.log(randomDate(new Date('2020-01-01'), new Date(), new Date('2021-3-1'), 0.5))
                 }}/>
-                <FlatList data={testData}
-                          keyExtractor={item => item.id}
-                          renderItem={() =>
+                {/*<FlatList data={testData}*/}
+                {/*          keyExtractor={item => item.id}*/}
+                {/*          renderItem={() =>*/}
 
-                              // <Image style={{width: 300, height: 300}}
-                              //                      preview={{uri:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='}}
-                              //                      uri={'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}/>
-                              // <ImageRN style={{width: 300, height: 300}} source={require('../../assets/images/pexels-5451714-medium.jpg')} />
-                              <CachedImage style={{width: 300, height: 300}}
-                                           source={{uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}}/>
-                          }
-                />
+                {/*              // <Image style={{width: 300, height: 300}}*/}
+                {/*              //                      preview={{uri:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='}}*/}
+                {/*              //                      uri={'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}/>*/}
+                {/*              // <ImageRN style={{width: 300, height: 300}} source={require('../../assets/images/pexels-5451714-medium.jpg')} />*/}
+                {/*              <CachedImage style={{width: 300, height: 300}}*/}
+                {/*                           source={{uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/pexels-5451714-medium.jpg'}}/>*/}
+                {/*          }*/}
+                {/*/>*/}
             </View>
 
         </View>

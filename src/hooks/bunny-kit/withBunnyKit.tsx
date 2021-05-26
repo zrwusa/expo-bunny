@@ -13,7 +13,7 @@ export function withBunnyKit<T>(
         Component.displayName || Component.name || 'Component';
 
     // TODO not very well for supporting generic components
-    const GenericComponent = Component  as <ArgumentT extends object>(props: T) => JSX.Element;
+    const GenericComponent = Component as <ArgumentT extends object>(props: T) => JSX.Element;
     // Creating the inner component. The calculated Props type here is the where the magic happens.
     const ComponentWithBunnyKit = function <ArgumentT extends object>(props: Omit<T, keyof WithBunnyKit>) {
         // Fetch the props you want to inject. This could be done with context instead.

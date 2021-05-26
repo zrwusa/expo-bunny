@@ -22,7 +22,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginTop: ms.sp.s,
             fontSize: wp(9),
             color: colors.text3,
-            height:wp(9)
+            height: wp(9)
         },
         progress: {
             marginLeft: wp(5),

@@ -4,6 +4,7 @@ import {IMMessage} from "../../types";
 import {randomDate} from "../../utils";
 import dayJS from "dayjs";
 import weekday from "dayjs/plugin/weekday"
+import {firebase} from "../firebase";
 
 dayJS.extend(weekday)
 
@@ -349,8 +350,7 @@ const datingChatMessagesBase: IMMessage[] = [
 
 let datingChatMessages: IMMessage[] = []
 
-const generateMoreData = () => {
-
+const generateMoreGroupChatMessages = () => {
     for (let conversation of conversations) {
         for (let chatMessage of groupChatMessagesTestBase) {
             let newMessage = {
@@ -362,6 +362,9 @@ const generateMoreData = () => {
             groupChatMessagesTest.push(newMessage)
         }
     }
+
+}
+const generateMoreDatingChatMessages = () => {
 
     for (let conversation of datingConversations) {
         for (let user of datingUsers) {
@@ -391,26 +394,27 @@ const generateMoreData = () => {
     }
 }
 
-export const migrateChatMessages = async () => {
+export const migrateGroupChatMessages = async () => {
+    generateMoreGroupChatMessages();
 
-    generateMoreData();
-
-    // console.log('---datingChatMessages',datingChatMessages)
-    // console.log('---groupChatMessagesTest',groupChatMessagesTest)
-
-    // for (const message of datingChatMessages) {
-    //     await firebase
-    //         .firestore()
-    //         .collection('chatMessages')
-    //         .doc(message._id as string)
-    //         .set(message);
-    // }
-    //
-    // for (const message of groupChatMessagesTest) {
-    //     await firebase
-    //         .firestore()
-    //         .collection('chatMessages')
-    //         .doc(message._id as string)
-    //         .set(message);
-    // }
+    for (const message of groupChatMessagesTest) {
+        await firebase
+            .firestore()
+            .collection('chatMessages')
+            .doc(message._id as string)
+            .set(message);
+    }
 }
+
+export const migrateDatingChatMessages = async () => {
+    generateMoreDatingChatMessages();
+
+    for (const message of datingChatMessages) {
+        await firebase
+            .firestore()
+            .collection('chatMessages')
+            .doc(message._id as string)
+            .set(message);
+    }
+}
+

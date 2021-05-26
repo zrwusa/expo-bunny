@@ -24,7 +24,7 @@ export interface AudioPlayerProps {
 export function AudioPlayer(props: AudioPlayerProps) {
     const {sizeLabor, themeLabor, colors} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
-    const {source, style, onLoad, onLoadStart, onLoadEnd, onError, isDebug = false, progressStyle,progressColor,playButtonStyle} = props
+    const {source, style, onLoad, onLoadStart, onLoadEnd, onError, isDebug = false, progressStyle, progressColor, playButtonStyle} = props
     const soundRef = useRef<Audio.Sound>()
     const [status, setStatus] = useState<AVPlaybackStatus>({isLoaded: false})
     const [error, setError] = useState('')
@@ -100,7 +100,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
                         await togglePlayOrPause()
                     }}>
                         <View style={styles.control}>
-                            <View style={[styles.playButton,playButtonStyle]}>
+                            <View style={[styles.playButton, playButtonStyle]}>
                                 {
                                     status.isPlaying
                                         ? <IcoMoon name="pause"/>
@@ -111,12 +111,13 @@ export function AudioPlayer(props: AudioPlayerProps) {
                                 {
                                     status.durationMillis
                                         ? <>
-                                            <ProgressBar style={progressStyle} color={progressColor} progress={(status.positionMillis | 0) / status.durationMillis}/>
+                                            <ProgressBar style={progressStyle} color={progressColor}
+                                                         progress={(status.positionMillis | 0) / status.durationMillis}/>
                                             <Text style={styles.remainTime}>
                                                 {minuted(status.durationMillis - status.positionMillis)}</Text>
                                         </>
                                         : <>
-                                        <ProgressBar progress={0} color={progressColor} style={progressStyle}/>
+                                            <ProgressBar progress={0} color={progressColor} style={progressStyle}/>
                                             <Text style={styles.remainTime}></Text>
                                         </>
                                 }

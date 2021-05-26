@@ -66,7 +66,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             shadowOffset: {width: 0, height: 0},
             shadowRadius: wp(1),
         },
-        scrollToBottomButton:{
+        scrollToBottomButton: {
             fontSize: ms.fs.m,
             color: colors.text3
         }
