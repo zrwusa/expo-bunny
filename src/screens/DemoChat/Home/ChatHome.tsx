@@ -79,6 +79,7 @@ export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     const users = useSelector((state: RootState) => state.firestoreState.ordered.users)
     const currentUserConversationsMessages = useSelector((state: RootState) => state.firestoreState.ordered.currentUserConversationsMessages)
 
+    // TODO On web platform, when jumping from one sub-navigation to another sub-navigation, the back button does not work
     const handleRoomPress = (key: string) => {
         // navigation.navigate('DemoChat', {
         //     screen: 'ChatRoom',
