@@ -344,6 +344,8 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 audioProgressStyle,
                 audioPlayButtonStyle,
                 audioProgressColor,
+                audioRemainTimeStyle,
+                audioPlayButtonIconStyle,
             } = this.props
 
             const messageProps = {
@@ -432,6 +434,8 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 audioProgressStyle,
                 audioPlayButtonStyle,
                 audioProgressColor,
+                audioRemainTimeStyle,
+                audioPlayButtonIconStyle,
 
                 inverted,
                 key: item._id,

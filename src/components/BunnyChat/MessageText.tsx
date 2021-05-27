@@ -27,22 +27,22 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         left: StyleSheet.create({
             container: {},
             text: {
-                color: colors.surface2Text,
+                color: colors.textA,
                 ...textStyle,
             },
             link: {
-                color: colors.surface2Text,
+                color: colors.textA,
                 textDecorationLine: 'underline',
             },
         }),
         right: StyleSheet.create({
             container: {},
             text: {
-                color: colors.surface3Text,
+                color: colors.textB,
                 ...textStyle,
             },
             link: {
-                color: colors.surface3Text,
+                color: colors.textB,
                 textDecorationLine: 'underline',
             },
         }),

@@ -10,7 +10,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
     const {theme} = themeLabor;
     const {designsBasedOn} = sizeLabor
     const finalSize = size || wp(20),
-        colorsDefault = [theme.colors.btnBackground, theme.colors.btnBackground2];
+        colorsDefault = [theme.colors.backgroundBtn, theme.colors.backgroundBtn2];
     const styles = getStyles(sizeLabor, themeLabor)
     return (
         <IcoMoon

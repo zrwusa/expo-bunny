@@ -21,7 +21,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         remainTime: {
             marginTop: ms.sp.s,
             fontSize: wp(9),
-            color: colors.text3,
+            color: colors.text,
             height: wp(9)
         },
         progress: {
@@ -40,7 +40,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             justifyContent: 'center',
             alignItems: 'center'
         },
-        playIcon: {
+        playButtonIcon: {
             marginLeft: wp(2)
         }
     });

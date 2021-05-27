@@ -20,12 +20,12 @@ export function BodyPartCard(props: BodyPartCardProps) {
     return <View style={styles.bodyPartCard}>
         <Row style={{alignItems: 'flex-start'}}>
             <Col size={3} style={{alignItems: 'flex-end'}}>
-                <View style={{backgroundColor: colors.surface2, padding: 10, borderRadius: 100}}>
+                <View style={{backgroundColor: colors.backgroundA, padding: 10, borderRadius: 100}}>
                     <LinearGradientIcon size={30} name="puzzle"/>
                 </View>
             </Col>
             <Col size={1} style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}>
-                <Text style={{color: colors.btnBackground, fontWeight: 'bold', fontSize: ms.fs.l, lineHeight: 10}}>...</Text>
+                <Text style={{color: colors.backgroundBtn, fontWeight: 'bold', fontSize: ms.fs.l, lineHeight: 10}}>...</Text>
             </Col>
         </Row>
         <Row style={{justifyContent: 'center', marginTop: 10}}>

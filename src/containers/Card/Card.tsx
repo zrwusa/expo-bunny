@@ -31,7 +31,7 @@ export function Card(props: OutTitleCardProps) {
             <Text style={containerStyles.CardOutTitle}>{title}</Text>
             {
                 isLinear
-                    ? <LinearGradient style={mergedStyle} colors={colors.linearSurface}>
+                    ? <LinearGradient style={mergedStyle} colors={colors.backgroundLinear2}>
                         {children}
                     </LinearGradient>
                     : <View style={mergedStyle}>
@@ -40,7 +40,7 @@ export function Card(props: OutTitleCardProps) {
             }
         </View>
         : isLinear
-            ? <LinearGradient style={mergedStyle} colors={colors.linearSurface}>
+            ? <LinearGradient style={mergedStyle} colors={colors.backgroundLinear2}>
                 <Text style={containerStyles.CardInTitle}>{title}</Text>
                 {children}
             </LinearGradient>

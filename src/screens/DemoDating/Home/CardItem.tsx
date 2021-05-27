@@ -45,7 +45,7 @@ const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches
                         width: wp(50),
                         height: wp(50),
                         borderRadius: wp(30),
-                        backgroundColor: colors.btnBackground2
+                        backgroundColor: colors.backgroundBtn2
                     }]}>
                         <IcoMoon name="cancel" color={colors.buttonText}/>
                     </View>
@@ -56,7 +56,7 @@ const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches
                         width: wp(50),
                         height: wp(50),
                         borderRadius: wp(30),
-                        backgroundColor: colors.btnBackground
+                        backgroundColor: colors.backgroundBtn
                     }]}>
                         <IcoMoon name="heart" color={colors.buttonText}/>
                     </View>

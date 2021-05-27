@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {ActivityIndicator, StyleProp, TouchableOpacity, View, ViewStyle} from "react-native";
+import {ActivityIndicator, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle} from "react-native";
 import {getStyles} from "./styles";
 import {IcoMoon, Text} from "../UI";
 import {AVPlaybackSource, AVPlaybackStatus} from "../../../packages/expo-av/src/AV";
@@ -12,7 +12,9 @@ export interface AudioPlayerProps {
     source: AVPlaybackSource,
     style?: StyleProp<ViewStyle>,
     playButtonStyle?: StyleProp<ViewStyle>,
+    playButtonIconStyle?: StyleProp<TextStyle>,
     progressStyle?: StyleProp<ViewStyle>,
+    remainTimeStyle?: StyleProp<TextStyle>,
     progressColor?: string,
     onLoad?: () => void,
     onLoadStart?: () => void,
@@ -24,7 +26,7 @@ export interface AudioPlayerProps {
 export function AudioPlayer(props: AudioPlayerProps) {
     const {sizeLabor, themeLabor, colors} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
-    const {source, style, onLoad, onLoadStart, onLoadEnd, onError, isDebug = false, progressStyle, progressColor, playButtonStyle} = props
+    const {source, style, onLoad, onLoadStart, onLoadEnd, onError, isDebug = false, progressStyle, progressColor, playButtonStyle, remainTimeStyle, playButtonIconStyle} = props
     const soundRef = useRef<Audio.Sound>()
     const [status, setStatus] = useState<AVPlaybackStatus>({isLoaded: false})
     const [error, setError] = useState('')
@@ -103,8 +105,8 @@ export function AudioPlayer(props: AudioPlayerProps) {
                             <View style={[styles.playButton, playButtonStyle]}>
                                 {
                                     status.isPlaying
-                                        ? <IcoMoon name="pause"/>
-                                        : <IcoMoon name="play" style={styles.playIcon}/>
+                                        ? <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="pause"/>
+                                        : <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="play"/>
                                 }
                             </View>
                             <View style={styles.progress}>
@@ -113,12 +115,12 @@ export function AudioPlayer(props: AudioPlayerProps) {
                                         ? <>
                                             <ProgressBar style={progressStyle} color={progressColor}
                                                          progress={(status.positionMillis | 0) / status.durationMillis}/>
-                                            <Text style={styles.remainTime}>
+                                            <Text style={[styles.remainTime, remainTimeStyle]}>
                                                 {minuted(status.durationMillis - status.positionMillis)}</Text>
                                         </>
                                         : <>
                                             <ProgressBar progress={0} color={progressColor} style={progressStyle}/>
-                                            <Text style={styles.remainTime}></Text>
+                                            <Text style={[styles.remainTime, remainTimeStyle]}> </Text>
                                         </>
                                 }
 

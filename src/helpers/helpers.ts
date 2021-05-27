@@ -130,7 +130,7 @@ export const tabBarIconNameConfig: JSONSerializable = {
         default: 'heart',
         focused: 'heart',
     },
-    DatingChat:{
+    DatingChat: {
         default: 'chat3',
         focused: 'chat3',
     },

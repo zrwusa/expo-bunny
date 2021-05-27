@@ -216,6 +216,8 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             audioProgressStyle,
             audioPlayButtonStyle,
             audioProgressColor,
+            audioRemainTimeStyle,
+            audioPlayButtonIconStyle,
         } = this.props;
         const bubbleProps = {
             audioProps,
@@ -284,6 +286,8 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             audioProgressStyle,
             audioPlayButtonStyle,
             audioProgressColor,
+            audioRemainTimeStyle,
+            audioPlayButtonIconStyle,
         }
         isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message bubbleProps', bubbleProps)
 

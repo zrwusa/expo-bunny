@@ -71,7 +71,7 @@ export const getThemeWareHouse = () => {
                 light: pl.purple500,
                 dark: pl.amberA100,
                 indigo: pl.lightBlue630,
-                tinder: pl.pink100,
+                tinder: pl.pinkIOS4,
             },
             // [ReactNativePaper]secondary color for your app which complements the primary color.
             accent: {
@@ -141,13 +141,25 @@ export const getThemeWareHouse = () => {
                 indigo: pl.blueIndigo150,
                 tinder: pl.grey800,
             },
-            surface2Text: {
+            textA: {
                 light: pl.grey6IOS3,
                 dark: pl.grey50,
                 indigo: pl.white,
                 tinder: pl.black,
             },
-            surface3Text: {
+            textAC: {
+                light: pl.grey600,
+                dark: pl.grey50,
+                indigo: pl.white,
+                tinder: pl.grey500,
+            },
+            textB: {
+                light: pl.grey50,
+                dark: pl.grey100,
+                indigo: pl.white,
+                tinder: pl.white,
+            },
+            textBC: {
                 light: pl.grey50,
                 dark: pl.grey100,
                 indigo: pl.white,
@@ -189,59 +201,67 @@ export const getThemeWareHouse = () => {
                 indigo: pl.blueIndigoA400,
                 tinder: pl.blueIndigo50,
             },
-            // [ReactNativePaper]background color for elements containing content, such as cards.
-            surface: {
-                light: pl.grey100,
-                dark: pl.blueGrey860,
-                indigo: pl.blueIndigoA100,
-                tinder: pl.grey100,
-            },
-            surface2: {
+            backgroundA: {
                 light: pl.grey100,
                 dark: pl.blueGrey860,
                 indigo: pl.blueIndigo300,
                 tinder: pl.grey100,
             },
-            surface3: {
-                light: pl.blueIOS3,
+            backgroundAA: {
+                light: pl.lightBlueA810,
+                dark: pl.white,
+                indigo: pl.white,
+                tinder: pl.white,
+            },
+            backgroundAAA: {
+                light: pl.white,
                 dark: pl.teal700,
                 indigo: pl.purple800,
-                tinder: pl.pink100,
-            },
-            linearSurface: [
-                {
-                    light: pl.grey100,
-                    dark: pl.grey810,
-                    indigo: pl.blueIndigoA100,
-                    tinder: pl.grey100,
-                },
-                {
-                    light: pl.grey100,
-                    dark: pl.blueGrey850,
-                    indigo: pl.blueIndigoA100,
-                    tinder: pl.grey100,
-                }
-            ],
-            // [ReactNavigation]The background color of card-like elements, such as headers, tab bars etc.
-            card: {
-                light: pl.white,
-                dark: pl.grey890,
-                indigo: pl.blueIndigoA700,
-                tinder: pl.blueIndigo50,
-            },
-            btnBackground: {
-                light: pl.teal400,
-                dark: pl.yellowIOS4,
-                indigo: pl.tealA500,
                 tinder: pl.pinkA150,
             },
-            btnBackground2: {
-                light: pl.purple500,
-                dark: pl.yellowIOS4,
-                indigo: pl.lightBlue630,
-                tinder: pl.pink80,
+            backgroundAB: {
+                light: pl.grey300,
+                dark: pl.white,
+                indigo: pl.white,
+                tinder: pl.white,
             },
-            linearBtnBackground: [
+            backgroundABA: {
+                light: pl.lightBlueA810,
+                dark: pl.teal700,
+                indigo: pl.purple800,
+                tinder: pl.pinkA150,
+            },
+            backgroundB: {
+                light: pl.lightBlueA810,
+                dark: pl.teal700,
+                indigo: pl.purple800,
+                tinder: pl.pinkA150,
+            },
+            backgroundBA: {
+                light: pl.white,
+                dark: pl.white,
+                indigo: pl.white,
+                tinder: pl.white,
+            },
+            backgroundBAA: {
+                light: pl.lightBlueA810,
+                dark: pl.teal700,
+                indigo: pl.purple800,
+                tinder: pl.pinkA150,
+            },
+            backgroundBB: {
+                light: pl.grey300,
+                dark: pl.grey300,
+                indigo: pl.grey300,
+                tinder: pl.grey300,
+            },
+            backgroundBBA: {
+                light: pl.white,
+                dark: pl.white,
+                indigo: pl.white,
+                tinder: pl.white,
+            },
+            backgroundLinear: [
                 {
                     light: pl.teal400,
                     dark: pl.yellowIOS4,
@@ -255,26 +275,51 @@ export const getThemeWareHouse = () => {
                     tinder: pl.purple500,
                 }
             ],
+            backgroundLinear2: [
+                {
+                    light: pl.grey100,
+                    dark: pl.grey810,
+                    indigo: pl.blueIndigoA100,
+                    tinder: pl.grey100,
+                },
+                {
+                    light: pl.grey100,
+                    dark: pl.blueGrey850,
+                    indigo: pl.blueIndigoA100,
+                    tinder: pl.grey100,
+                }
+            ],
+            backgroundBtn: {
+                light: pl.teal400,
+                dark: pl.yellowIOS4,
+                indigo: pl.tealA500,
+                tinder: pl.pinkA150,
+            },
+            backgroundBtn2: {
+                light: pl.purple500,
+                dark: pl.yellowIOS4,
+                indigo: pl.lightBlue630,
+                tinder: pl.pink80,
+            },
+            // [ReactNativePaper]background color for elements containing content, such as cards.
+            surface: {
+                light: pl.grey100,
+                dark: pl.blueGrey860,
+                indigo: pl.blueIndigoA100,
+                tinder: pl.grey100,
+            },
+
+            // [ReactNavigation]The background color of card-like elements, such as headers, tab bars etc.
+            card: {
+                light: pl.white,
+                dark: pl.grey890,
+                indigo: pl.blueIndigoA700,
+                tinder: pl.blueIndigo50,
+            },
+
+
             // [ReactNativePaper]background color for snackbars
             onSurface: {
-                light: pl.black,
-                dark: pl.white,
-                indigo: pl.white,
-                tinder: pl.black,
-            },
-            onSurface2: {
-                light: pl.grey600,
-                dark: pl.white,
-                indigo: pl.white,
-                tinder: pl.pink100,
-            },
-            onSurface3: {
-                light: pl.grey300,
-                dark: pl.white,
-                indigo: pl.white,
-                tinder: pl.white,
-            },
-            onBackground: {
                 light: pl.black,
                 dark: pl.white,
                 indigo: pl.white,

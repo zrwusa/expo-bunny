@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
+import {StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage, PositionLeftOrRight} from './types'
 import {AudioPlayer, AudioPlayerProps} from "../AudioPlayer";
@@ -15,11 +15,17 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 height: wp(46)
             },
             audio: {},
-            audioProgress: {
-                backgroundColor: colors.onSurface2
+            playButton: {
+                backgroundColor: colors.backgroundAA,
             },
-            audioPlayButton: {
-                // backgroundColor: colors.onSurface2,
+            playButtonIcon: {
+                color: colors.backgroundAAA
+            },
+            progress: {
+                backgroundColor: colors.backgroundAB
+            },
+            remainTime: {
+                color: colors.textAC
             }
         }),
         right: StyleSheet.create({
@@ -27,11 +33,17 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 height: wp(46)
             },
             audio: {},
-            audioProgress: {
-                backgroundColor: colors.onSurface3
+            playButton: {
+                backgroundColor: colors.backgroundBA,
             },
-            audioPlayButton: {
-                // backgroundColor: colors.onSurface3,
+            playButtonIcon: {
+                color: colors.backgroundBAA
+            },
+            progress: {
+                backgroundColor: colors.backgroundBB
+            },
+            remainTime: {
+                color: colors.textBC
             }
         }),
     }
@@ -42,9 +54,11 @@ export interface MessageAudioProps<TMessage extends IMessage> {
     currentMessage?: TMessage
     audioContainerStyle?: StyleProp<ViewStyle>
     audioStyle?: StyleProp<ViewStyle>
-    audioProgressColor?: string
+    audioProgressColor?: { left: string, right: string }
     audioProgressStyle?: StyleProp<ViewStyle>
     audioPlayButtonStyle?: StyleProp<ViewStyle>
+    audioRemainTimeStyle?: StyleProp<TextStyle>
+    audioPlayButtonIconStyle?: StyleProp<TextStyle>
     audioProps?: Omit<AudioPlayerProps, 'source'>
     isDebug?: boolean
 
@@ -66,8 +80,9 @@ class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProp
         audioContainerStyle: {},
         audioStyle: {},
         audioProgressStyle: {},
-        audioProgressColor: '',
+        audioProgressColor: undefined,
         audioPlayButtonStyle: {},
+        audioPlayButtonIconStyle: {},
         audioProps: {},
         onMessageLoad: undefined,
         onMessageLoadStart: undefined,
@@ -88,6 +103,8 @@ class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProp
             isDebug,
             position,
             audioProgressColor,
+            audioRemainTimeStyle,
+            audioPlayButtonIconStyle,
         } = this.props
         isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageAudio props', this.props)
         const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
@@ -100,9 +117,11 @@ class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProp
                         ? currentMessage.audio
                         ? <AudioPlayer
                             style={[stylesEnsurePosition.audio, audioStyle]}
-                            progressStyle={[stylesEnsurePosition.audioProgress, audioProgressStyle]}
-                            progressColor={colors.primary || audioProgressColor}
-                            playButtonStyle={[stylesEnsurePosition.audioPlayButton, audioPlayButtonStyle]}
+                            progressStyle={[stylesEnsurePosition.progress, audioProgressStyle]}
+                            progressColor={position === 'left' ? colors.backgroundABA || audioProgressColor?.left : colors.backgroundBBA || audioProgressColor?.right}
+                            playButtonStyle={[stylesEnsurePosition.playButton, audioPlayButtonStyle]}
+                            remainTimeStyle={[stylesEnsurePosition.remainTime, audioRemainTimeStyle]}
+                            playButtonIconStyle={[stylesEnsurePosition.playButtonIcon, audioPlayButtonIconStyle]}
                             source={{uri: currentMessage.audio}}
                             onLoad={() => {
                                 isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageAudio onLoad')

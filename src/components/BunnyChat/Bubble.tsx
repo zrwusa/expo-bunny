@@ -28,7 +28,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             },
             wrapper: {
                 borderRadius: wp(15),
-                backgroundColor: colors.surface2,
+                backgroundColor: colors.backgroundA,
                 marginRight: wp(60),
                 minHeight: wp(20),
                 justifyContent: 'flex-end',
@@ -51,7 +51,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             },
             wrapper: {
                 borderRadius: wp(15),
-                backgroundColor: colors.surface3,
+                backgroundColor: colors.backgroundB,
                 marginLeft: wp(60),
                 minHeight: wp(20),
                 justifyContent: 'flex-end',
@@ -71,7 +71,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             tick: {
                 fontSize: wp(10),
                 backgroundColor: colors.transparent,
-                color: colors.surface3Text,
+                color: colors.textB,
             },
             tickView: {
                 flexDirection: 'row',
@@ -482,6 +482,8 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 audioProgressStyle,
                 audioPlayButtonStyle,
                 audioProgressColor,
+                audioRemainTimeStyle,
+                audioPlayButtonIconStyle,
             } = this.props;
             const messageAudioProps = {
                 currentMessage,
@@ -498,6 +500,8 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 audioProgressStyle,
                 audioPlayButtonStyle,
                 audioProgressColor,
+                audioRemainTimeStyle,
+                audioPlayButtonIconStyle,
             }
             if (this.props.renderMessageAudio) {
                 return this.props.renderMessageAudio(messageAudioProps)

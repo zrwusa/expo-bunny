@@ -14,7 +14,7 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginLeft: wp(8),
             width: wp(45),
             borderRadius: wp(15),
-            backgroundColor: colors.surface2,
+            backgroundColor: colors.backgroundA,
         },
     })
 }

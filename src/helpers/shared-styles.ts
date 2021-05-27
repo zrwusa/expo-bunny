@@ -83,7 +83,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             borderRadius: borderRadius.surface,
         },
         card2: {
-            backgroundColor: colors.surface2,
+            backgroundColor: colors.backgroundA,
         },
         paper: {
             backgroundColor: colors.paper,
@@ -92,7 +92,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             backgroundColor: colors.paper2,
         },
         button: {
-            backgroundColor: colors.btnBackground,
+            backgroundColor: colors.backgroundBtn,
             borderRadius: borderRadius.button,
             fontSize: ms.fs.m,
             flexDirection: 'row',
@@ -102,7 +102,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
             paddingHorizontal: ms.sp.m,
         },
         button2: {
-            backgroundColor: colors.btnBackground2,
+            backgroundColor: colors.backgroundBtn2,
             borderRadius: borderRadius.button,
             fontSize: ms.fs.m,
             flexDirection: 'row',

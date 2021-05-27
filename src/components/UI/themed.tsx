@@ -54,7 +54,7 @@ export const TextButton: React.FC<TouchableOpacityProps> = ({children, style, ..
 
 export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
     const {colors} = useBunnyKit();
-    return (<ButtonRN color={color || colors.btnBackground} {...rest} />);
+    return (<ButtonRN color={color || colors.backgroundBtn} {...rest} />);
 }
 
 export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, children, disabled, ...rest}) => {
@@ -65,7 +65,7 @@ export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, ch
     const mergedStyle = [disabled && LinearGradientButton.disabled, LinearGradientButton.container, style];
     const {theme} = themeLabor;
     const {colors} = theme;
-    const finalColors = disabled ? [colors.disabled, colors.disabled] : colors.linearBtnBackground
+    const finalColors = disabled ? [colors.disabled, colors.disabled] : colors.backgroundLinear
     return <TouchableOpacity style={mergedStyle} disabled={disabled} {...rest}>
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 0}}
                         style={LinearGradientButton.linearGradient}
@@ -190,7 +190,7 @@ export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
     const mergedStyle = [{
         transform: [{scaleX: wp(0.8, false)}, {scaleY: wp(0.8, false)}],
     }, style]
-    return (<SwitchPaper color={colors.btnBackground}
+    return (<SwitchPaper color={colors.backgroundBtn}
                          style={mergedStyle} {...rest}/>);
 }
 

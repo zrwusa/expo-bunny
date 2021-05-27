@@ -325,6 +325,7 @@ export const palette: Palette = {
     yellow720: '#cfbe27',
     yellow780: '#faad14',
     blueGrey320: '#86939e',
+    lightBlueA810: '#007ee5',
     //---end--- others
 
 
@@ -335,8 +336,8 @@ export const palette: Palette = {
 
     blueIndigo900: '#49465A',  // border divider
 
-    blueGrey870: '#2C3C4C',    // surface3
-    blueIndigo300: '#4B485D',  // surface2
+    blueGrey870: '#2C3C4C',    // backgroundB
+    blueIndigo300: '#4B485D',  // backgroundA
     blueIndigoA100: '#2B2741', // surface
     blueIndigoA400: '#29253E', // background
     blueIndigoA700: '#27233C', // card, buttonText

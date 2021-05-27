@@ -821,6 +821,8 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             audioProgressStyle,
             audioPlayButtonStyle,
             audioProgressColor,
+            audioRemainTimeStyle,
+            audioPlayButtonIconStyle,
         } = this.props;
 
         const messageContainerProps = {
@@ -936,6 +938,8 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             audioProgressStyle,
             audioPlayButtonStyle,
             audioProgressColor,
+            audioRemainTimeStyle,
+            audioPlayButtonIconStyle,
         }
         const fragment = (
             <View

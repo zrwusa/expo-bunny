@@ -93,8 +93,10 @@ export type ThemeColors = {
     buttonText: string,
     buttonText2: string,
     surfaceText: string,
-    surface2Text: string,
-    surface3Text: string,
+    textA: string,
+    textAC: string,
+    textB: string,
+    textBC: string,
     caption: string,
     caption2: string,
     paragraph: string,
@@ -106,26 +108,30 @@ export type ThemeColors = {
     background: string,
     // background2: string,
     // background3: string,
-    btnBackground: string,
-    btnBackground2: string,
-    linearBtnBackground: string[],
+    backgroundBtn: string,
+    backgroundBtn2: string,
+    backgroundLinear: string[],
     card: string,
     surface: string,
-    surface2: string,
-    surface3: string,
-    linearSurface: string[],
+    backgroundA: string,
+    backgroundB: string,
+    backgroundLinear2: string[],
     paper: string,
     paper2: string,
     // ---end background
 
 
     // ---start unknown
-    onBackground: string,
     // onBackground2: string,
     onSurface: string,
-    onSurface2: string,
-    onSurface3: string,
-
+    backgroundAA: string,
+    backgroundAAA: string,
+    backgroundAB: string,
+    backgroundABA: string,
+    backgroundBA: string,
+    backgroundBAA: string,
+    backgroundBB: string,
+    backgroundBBA: string,
     // accent2: string,
     // ---en unknown
 
@@ -681,6 +687,7 @@ export type Palette = {
     tealA500: string, // button from
     lightBlue630: string,// button to
     blueGrey870: string, // label background
+    lightBlueA810: string,
     //---end--- indigo theme
 
 
