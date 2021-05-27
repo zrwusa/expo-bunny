@@ -6,7 +6,8 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
     return StyleSheet.create({
-        container: {
+        albumContainer: {
+            height: wp(375)
             // padding: ms.sp.m
         }
     });

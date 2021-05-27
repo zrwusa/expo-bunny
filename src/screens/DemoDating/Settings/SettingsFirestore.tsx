@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {View} from "../../../components/UI";
+import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoDatingTabStackParam, RootState} from "../../../types";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
@@ -9,12 +9,16 @@ import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {getSharedStyles} from "../../../helpers/shared-styles";
 import {ImageUploader} from "../../../components/ImageUploader";
 import {getStyles} from "./styles";
-import {ImageURISource} from "react-native";
+import {ImageURISource, ScrollView} from "react-native";
 import {useFirestore, useFirestoreConnect} from "react-redux-firebase";
 import {useDispatch, useSelector} from "react-redux";
 import {useAuthLabor} from "../../../providers/auth-labor";
 import {sysError} from "../../../store/actions";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
+// import Slider from "@react-native-community/slider";
+import RangeSlider, {Slider} from "../../../../packages/react-native-range-slider-expo/src"
+import {Divider} from "../../../components/Divider";
+import {RadioButton} from "react-native-paper";
 
 type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
 type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;
@@ -25,7 +29,7 @@ export interface DatingSettingsProps {
 }
 
 export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
-    const {sizeLabor, themeLabor, wp, t} = useBunnyKit();
+    const {sizeLabor, themeLabor, wp, t, colors} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DatingSettings');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
@@ -87,9 +91,14 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
     }, [])
     const userPhotosPath = `/userPhotos/${userId}`
 
+    const [fromHeight, setFromHeight] = useState(0)
+    const [toHeight, setToHeight] = useState(100)
+    const [age, setAge] = useState(18)
+    const [distance, setDistance] = useState(10)
+    const [interestedIn, setInterestedIn] = useState('swimming')
     return (
-        <View style={[containerStyles.Screen]}>
-            <View style={styles.container}>
+        <ScrollView style={[containerStyles.Screen]}>
+            <View style={styles.albumContainer}>
                 {
                     sources
                         ? <View style={{height: wp(375), width: wp(375)}}>
@@ -187,9 +196,95 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                         </View>
                         : null
                 }
+            </View>
+            <View style={{paddingLeft: wp(20), paddingRight: wp(10)}}>
+                <View style={{paddingVertical: wp(10)}}>
+                    <Row>
+                        <Col><Text style={sharedStyles.title2}>Distance</Text></Col>
+                        <Col align="flex-end"><Text style={sharedStyles.text2}>{'0-' + distance.toString() + 'mi'}</Text></Col>
+                    </Row>
+                    <Slider min={0}
+                            max={100}
+                            step={1}
+                            valueOnChange={value => console.log('---valueOnChanged', setDistance(value))}
+                            initialValue={10}
+                            styleSize={24}
+                            showRangeLabels={false}
+                            showValueLabels={false}
+                            valueLabelsUnit="mi"
+                    />
+                </View>
+
+                <Divider/>
+                <View style={{paddingVertical: wp(10)}}>
+                    <Text style={sharedStyles.title2}>Interested in</Text>
+                    <Row>
+                        <RadioButton
+                            color={colors.primary}
+                            value="first"
+                            status={interestedIn === 'swimming' ? 'checked' : 'unchecked'}
+                            onPress={() => setInterestedIn('swimming')}/>
+                        <Text style={sharedStyles.text2}>Swimming</Text>
+
+                        <RadioButton
+                            color={colors.primary}
+                            value="first"
+                            status={interestedIn === 'hiking' ? 'checked' : 'unchecked'}
+                            onPress={() => setInterestedIn('hiking')}/>
+                        <Text style={sharedStyles.text2}>Hiking</Text>
+
+                        <RadioButton
+                            color={colors.primary}
+                            value="first"
+                            status={interestedIn === 'yoga' ? 'checked' : 'unchecked'}
+                            onPress={() => setInterestedIn('yoga')}/>
+                        <Text style={sharedStyles.text2}>Yoga</Text>
+
+                    </Row>
+                </View>
+
+                <Divider/>
+                <View style={{paddingVertical: wp(10)}}>
+                    <Row>
+                        <Col><Text style={sharedStyles.title2}>Age</Text></Col>
+                        <Col align="flex-end"><Text style={sharedStyles.text2}>{'18-' + age.toString()}</Text></Col>
+                    </Row>
+                    <Slider min={18}
+                            max={50}
+                            step={1}
+                            valueOnChange={value => console.log('---valueOnChanged', setAge(value))}
+                            initialValue={26}
+                            styleSize={24}
+                            showRangeLabels={false}
+                            showValueLabels={false}
+                    />
+                </View>
+
+                <Divider/>
+                <View style={{paddingVertical: wp(10)}}>
+                    <Text style={sharedStyles.title2}>Height</Text>
+                    <RangeSlider min={140}
+                                 max={200}
+                                 step={1}
+                                 fromValueOnChange={value => {
+                                     setFromHeight(value)
+                                 }
+                                 }
+                                 toValueOnChange={value => {
+                                     setToHeight(value)
+                                 }
+                                 }
+                                 initialFromValue={155}
+                                 initialToValue={180}
+                                 styleSize={24}
+                                 showRangeLabels={false}
+                                 valueLabelsUnit="cm"
+                    />
+                </View>
+
 
             </View>
-        </View>
+        </ScrollView>
     );
 }
 

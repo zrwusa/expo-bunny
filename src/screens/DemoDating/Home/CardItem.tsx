@@ -31,7 +31,7 @@ const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches
     return (
         <View style={{
             ...sharedStylesFlatten.shadowThin,
-            backgroundColor: "#ffffff",
+            backgroundColor: '#ffffff',
             borderRadius: wp(16),
             alignItems: "center",
             margin: wp(10),
