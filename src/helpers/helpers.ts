@@ -22,6 +22,7 @@ import {RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {firebase} from "../firebase/firebase";
 import * as ImagePicker from "expo-image-picker";
+import {PanResponder} from "react-native";
 
 export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -374,4 +375,13 @@ export const Permissions = {
         }
     }
 }
+
+const _panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: (evt, gestureState) => true,
+    onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+    onMoveShouldSetPanResponder: (evt, gestureState) => true,
+    onMoveShouldSetPanResponderCapture: (evt, gestureState) => true
+});
+
+export const panHandlersBlock = _panResponder.panHandlers
 
