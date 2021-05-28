@@ -27,11 +27,20 @@ function NextApp() {
                     type="text/javascript"/>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `document.addEventListener('touchmove',
-                                     function (e) {
+                        __html: `// Prevent Document from sliding left and right, only keep upside down. 
+                                 // Do not include the touchpad on the Mac to slide
+                                 let startX, startY;
+                                 document.addEventListener('touchstart', function (e) {
+                                     startX = e.touches[0].pageX;
+                                     startY = e.touches[0].pageY;
+                                 });
+                                 document.addEventListener('touchmove', function (e) {
+                                     let moveX = e.touches[0].pageX;
+                                     let moveY = e.touches[0].pageY;
+                                     if (Math.abs(moveX - startX) > Math.abs(moveY - startY)) {
                                          e.preventDefault();
-                                     },
-                                     {passive: false});`
+                                     }
+                                 }, {passive: false});`
                     }}
                     type="text/javascript"/>
             </Head>
