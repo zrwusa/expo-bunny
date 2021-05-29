@@ -32,6 +32,8 @@ interface SliderProps {
     showBubbles?: boolean,
     showValueLabelsOnlyWhenDrag?: boolean,
     valueLabelsUnit?: string,
+    fromValueOnIndicated?: (value: number) => void,
+    toValueOnIndicated?: (value: number) => void,
 }
 
 export default (props: SliderProps) => {
@@ -55,6 +57,8 @@ export default (props: SliderProps) => {
         showBubbles = false,
         showValueLabelsOnlyWhenDrag = false,
         valueLabelsUnit = '',
+        fromValueOnIndicated,
+        toValueOnIndicated,
     } = props;
 
     // settings
@@ -125,8 +129,11 @@ export default (props: SliderProps) => {
     }, [styleSize]);
 
     // initializing settings helpers
+    const calculateFromValue = (newOffset: number, knobSize: number, stepInPixels: number) => {
+        return Math.floor((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
+    }
     const setFromValueStatic = (newOffset: number, knobSize: number, stepInPixels: number) => {
-        newOffset = Math.floor((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
+        newOffset = calculateFromValue(newOffset, knobSize, stepInPixels);
         setFromValue(newOffset);
         setFromValueOffset(newOffset);
         fromValueOnChange(Math.floor(((newOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min);
@@ -135,8 +142,11 @@ export default (props: SliderProps) => {
         translateXFromValue.setValue(newOffset);
         leftBarScaleX.setValue((newOffset + (knobSize / 2)) / sliderWidth + 0.01);
     }
+    const calculateToValue = (newOffset: number, knobSize: number, stepInPixels: number) => {
+        return Math.ceil((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
+    }
     const setToValueStatic = (newOffset: number, knobSize: number, stepInPixels: number) => {
-        newOffset = Math.ceil((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
+        newOffset = calculateToValue(newOffset, knobSize, stepInPixels);
         setToValue(newOffset);
         setToValueOffset(newOffset);
         toValueOnChange(Math.ceil(((newOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min);
@@ -151,12 +161,14 @@ export default (props: SliderProps) => {
         setStepInPixels(stepSize);
         return stepSize;
     }
-    const setValueText = (totalOffset: number, from = true) => {
-        if (from && fromValueTextRef != null) {
+    const setValueText = (totalOffset: number, isFrom = true) => {
+        if (isFrom && fromValueTextRef != null) {
             const numericValue: number = Math.floor(((totalOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min;
+            fromValueOnIndicated?.(numericValue);
             fromValueTextRef.current?.setNativeProps({text: numericValue.toString() + valueLabelsUnit});
-        } else if (!from && toValueTextRef != null) {
+        } else if (!isFrom && toValueTextRef != null) {
             const numericValue: number = Math.ceil(((totalOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min;
+            toValueOnIndicated?.(numericValue);
             toValueTextRef.current?.setNativeProps({text: numericValue.toString() + valueLabelsUnit});
         }
     }
@@ -178,7 +190,7 @@ export default (props: SliderProps) => {
         }
         if (event.nativeEvent.state === State.END) {
             let newOffset = event.nativeEvent.translationX + fromValueOffset;
-            newOffset = Math.floor((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
+            newOffset = calculateFromValue(newOffset, knobSize, stepInPixels);
             if (newOffset < -knobSize / 2) {
                 newOffset = -knobSize / 2;
             } else if (newOffset >= toValueOffset) {
@@ -206,7 +218,7 @@ export default (props: SliderProps) => {
         }
         if (event.nativeEvent.state === State.END) {
             let newOffset = event.nativeEvent.translationX + toValueOffset;
-            newOffset = Math.ceil((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
+            newOffset = calculateToValue(newOffset, knobSize, stepInPixels);
             if (newOffset > sliderWidth - knobSize / 2) {
                 newOffset = sliderWidth - knobSize / 2;
             } else if (newOffset <= fromValueOffset) {
@@ -433,11 +445,12 @@ export default (props: SliderProps) => {
                     : null
             }
             {
-                showRangeLabels &&
-                <View style={{width: '100%', flexDirection, justifyContent: 'space-between'}}>
-                    <Text style={{color: rangeLabelsTextColor, fontWeight: "bold", fontSize}}>{min}</Text>
-                    <Text style={{color: rangeLabelsTextColor, fontWeight: "bold", fontSize}}>{max}</Text>
-                </View>
+                showRangeLabels
+                    ? <View style={{width: '100%', flexDirection, justifyContent: 'space-between'}}>
+                        <Text style={{color: rangeLabelsTextColor, fontWeight: "bold", fontSize}}>{min}</Text>
+                        <Text style={{color: rangeLabelsTextColor, fontWeight: "bold", fontSize}}>{max}</Text>
+                    </View>
+                    : null
             }
         </Animated.View>
     );

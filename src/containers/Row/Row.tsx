@@ -1,5 +1,5 @@
 import React from "react";
-import {FlexStyle, StyleProp, View, ViewStyle} from "react-native";
+import {FlexStyle, StyleProp, StyleSheet, View, ViewStyle} from "react-native";
 import {SizeKeys} from "../../types";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
@@ -33,7 +33,7 @@ export const Row = function (props: RowProps) {
         xxl: wp(16)
     }
 
-    // const styleOBJ = StyleSheet.flatten<ViewStyle>(style)
+    const styleOBJ = StyleSheet.flatten<ViewStyle>(style)
 
     // let flexGrow: FlexStyle['flexGrow'] = size;
     // let flexShrink: FlexStyle['flexShrink'] = size;
@@ -54,6 +54,9 @@ export const Row = function (props: RowProps) {
     //     flexShrink: flexShrink,
     //     flexBasis: flexBasis,
 
+    const isPaddingTop = styleOBJ ? (styleOBJ.padding || styleOBJ.paddingVertical || styleOBJ.paddingTop) : 0;
+    const isPaddingBottom = styleOBJ ? (styleOBJ.padding || styleOBJ.paddingVertical || styleOBJ.paddingBottom) : 0;
+    const paddingVerticalValue = paddingVertical ? rowPaddingVertical[paddingVertical] : 0
     const mergeStyle: StyleProp<ViewStyle> = [
         {
             flexDirection: 'row',
@@ -62,7 +65,8 @@ export const Row = function (props: RowProps) {
             justifyContent: align,
             alignItems: 'center',
             // width:'100%',
-            paddingVertical: paddingVertical ? rowPaddingVertical[paddingVertical] : 0
+            paddingTop: isPaddingTop || paddingVerticalValue,
+            paddingBottom: isPaddingBottom || paddingVerticalValue,
         },
         style
     ]

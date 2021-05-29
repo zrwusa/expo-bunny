@@ -291,3 +291,11 @@ export function firestoreTimestampToDate(timeStamp: Date | number | firebase.fir
     }
     return date
 }
+
+export const capitalizeWords = (str: string) => {
+    return str.replace(/(?:^|\s)\S/g, (a: string) => a.toUpperCase());
+}
+
+export const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

@@ -30,6 +30,7 @@ interface SliderProps {
     showValueLabelsOnlyWhenDrag?: boolean,
     valueLabelsUnit?: string,
     invert?: boolean,
+    valueOnIndicated?: (value: number) => void,
 }
 
 export const Slider = (props: SliderProps) => {
@@ -51,7 +52,8 @@ export const Slider = (props: SliderProps) => {
         showBubbles = false,
         showValueLabelsOnlyWhenDrag = false,
         valueLabelsUnit = '',
-        invert = true,
+        invert = false,
+        valueOnIndicated,
     } = props;
     // settings
     const [stepInPixels, setStepInPixels] = useState(0);
@@ -128,7 +130,9 @@ export const Slider = (props: SliderProps) => {
         if (totalOffset >= -knobSize / 2 && totalOffset <= sliderWidth - knobSize / 2) {
             translateX.setValue(totalOffset);
             if (valueTextRef != null) {
-                valueTextRef.current?.setNativeProps({text: (Math.round(((totalOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min).toString() + valueLabelsUnit});
+                const value = (Math.round(((totalOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min)
+                valueTextRef.current?.setNativeProps({text: value.toString() + valueLabelsUnit});
+                valueOnIndicated?.(value)
             }
             inRangeScaleX.setValue((totalOffset + (knobSize / 2)) / sliderWidth + 0.01);
         }
@@ -228,16 +232,16 @@ export const Slider = (props: SliderProps) => {
             }
             <View style={{width: '100%', height: knobSize, marginVertical: 4, position: 'relative', flexDirection, alignItems: 'center'}}>
                 <View style={[styles.bar, {
-                    backgroundColor: !invert ? inRangeBarColor : outOfRangeBarColor,
+                    backgroundColor: invert ? inRangeBarColor : outOfRangeBarColor,
                 }]} onLayout={onLayout}/>
                 <Animated.View style={{
                     width: sliderWidth,
                     height: knobSize / 3,
-                    backgroundColor: !invert ? outOfRangeBarColor : inRangeBarColor,
+                    backgroundColor: invert ? outOfRangeBarColor : inRangeBarColor,
                     transform: [{translateX: -sliderWidth / 2}, {scaleX: inRangeScaleX}, {translateX: sliderWidth / 2}]
                 }}/>
                 <Animated.View style={[styles.outOfRangeBar, {
-                    backgroundColor: !invert ? outOfRangeBarColor : inRangeBarColor
+                    backgroundColor: invert ? outOfRangeBarColor : inRangeBarColor
                 }]}/>
                 <PanGestureHandler {...{onGestureEvent, onHandlerStateChange}}>
                     <Animated.View style={[styles.knob1, {
