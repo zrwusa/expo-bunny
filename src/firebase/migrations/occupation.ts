@@ -8202,13 +8202,23 @@ export const occupations = [
         "code": "7199"
     }
 ]
-export const occupationTreeData = [{
+type TreeNode = {
+    name: string,
+    code: string,
+    type?: string,
+    sort?: number | null,
+    displayLevel?: number,
+    category?: string,
+    children?: TreeNode[]
+}
+
+
+export const occupationTreeData: TreeNode[] = [{
     "name": "Total, all occupations",
     "type": "Summary",
     "sort": null,
     "displayLevel": 0,
     "code": "00",
-    "children": []
 }, {
     "name": "Management occupations",
     "type": "Summary",

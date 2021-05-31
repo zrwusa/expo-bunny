@@ -3,7 +3,7 @@ import {useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
 import {DemoDatingTabStackParam} from "../../../types";
-import {ModalFromRight, getContainerStyles} from "../../../containers";
+import {getContainerStyles, ModalFromRight} from "../../../containers";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {getSharedStyles} from "../../../helpers/shared-styles";
 import {ScrollView} from "react-native";
@@ -16,15 +16,13 @@ import {
     InlineSelector,
     InterestPicker,
     Occupation,
-    OccupationPicker,
     ReligionPicker,
     SpousePicker,
-    SpousePickerResult, TreeNodePicker,
+    SpousePickerResult,
+    TreeNodePicker,
     UserAlbumEditor
 } from "../../../components";
 import {Religion} from "../../../components/ReligionPicker";
-import {occupationTreeData} from "../../../firebase/migrations/occupation";
-
 
 type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
 type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;
@@ -165,15 +163,25 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                             onVisibleChanged={isVisible => {
                                 setIsShowOccupationModal(isVisible)
                             }}>
-                <TreeNodePicker title={['Category', 'Occupation', 'Test']}
-                                data={occupationTreeData}
-                                onDone={(result) => {
-                                    setOccupation(result);
-                                    setIsShowOccupationModal(false);
-                                }}
-                                onCancel={() => {
-                                    setIsShowOccupationModal(false);
-                                }}
+                <TreeNodePicker
+                    titles={['Category', 'Occupation', 'Test']}
+
+                    dataMode="firestore"
+                    leafLevel={1}
+                    collectionPaths={['occupationCategories', 'occupations']}
+                    conditions={[['', '==', ''], ['category', '==', '$code']]}
+
+                    // dataMode="local"
+                    // data={occupationTreeData}
+                    // childrenKeys={['children', 'children']}
+
+                    onDone={(result) => {
+                        setOccupation(result);
+                        setIsShowOccupationModal(false);
+                    }}
+                    onCancel={() => {
+                        setIsShowOccupationModal(false);
+                    }}
                 />
                 {/*<OccupationPicker*/}
                 {/*    title={occupationTitle}*/}

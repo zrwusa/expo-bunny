@@ -10,8 +10,8 @@ import {randomDate, uuidV4, wait} from "../../utils";
 import {ProgressBar} from "react-native-paper";
 import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
-import {migrateOccupationCategories, occupationCategories} from "../../firebase/migrations/occupationCategory";
-import {migrateOccupations, occupations} from "../../firebase/migrations/occupation";
+import {occupationCategories} from "../../firebase/migrations/occupationCategory";
+import {occupations} from "../../firebase/migrations/occupation";
 import {migrateCountriesStatesCities} from "../../firebase/migrations/migrateCountriesStatesCities";
 
 export function PlaygroundScreen() {
