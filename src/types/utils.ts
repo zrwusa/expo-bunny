@@ -49,13 +49,13 @@ export type JSONSerializable = {
     [key: string]: any
 }
 
-export type JSONValue = string | number | boolean | undefined | JSONObject | JSONArray;
+export type JSONValue = string | number | boolean | undefined | JSONObject ;
 
-interface JSONObject {
-    [x: string]: JSONValue;
+export interface JSONObject {
+    [key: string]: JSONValue;
 }
 
-interface JSONArray extends Array<JSONValue> {
+export interface JSONArray extends Array<JSONValue> {
 }
 
 export type TypeName<T> = T extends string

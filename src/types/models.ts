@@ -111,6 +111,23 @@ export interface UserContact {
     updatedAt: number
 }
 
+export interface Occupation {
+    name: string,
+    type: string,
+    sort: number,
+    displayLevel: number,
+    category: string,
+    code: string
+}
+
+export interface OccupationCategory {
+    name: string,
+    type: string,
+    sort: number,
+    displayLevel: number,
+    code: string,
+}
+
 export interface SchemaFirestore {
     demoFirestore: DemoFirestore,
     chatMessages: IMMessage,
@@ -123,5 +140,8 @@ export interface SchemaFirestore {
     socialMediaVideos: SocialMediaMainDatum,
     socialMediaImages: SocialMediaImageDatum,
     users: firebase.UserInfo,
-    usersWithPhotos: { [key: string]: { [key: string]: ImageURISource } }
+    usersWithPhotos: { [key: string]: { [key: string]: ImageURISource } },
+    occupations: Occupation,
+    occupationCategories: OccupationCategory,
 }
+

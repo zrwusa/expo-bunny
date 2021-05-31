@@ -28,4 +28,5 @@ export * from "./UserAlbumEditor"
 export * from "./GraduatePicker"
 export * from "./HeightPicker"
 export * from "./ReligionPicker"
+export * from "./TreeNodePicker"
 

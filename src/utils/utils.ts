@@ -1,5 +1,6 @@
-import {JSONSerializable} from "../types";
+import {JSONObject, JSONSerializable} from "../types";
 import {firebase} from "../firebase/firebase";
+import _ from "lodash";
 
 export function randomText(length: number) {
     let result = '';
@@ -298,4 +299,99 @@ export const capitalizeWords = (str: string) => {
 
 export const capitalizeFirstLetter = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export const comparerArray = <T extends any>(otherArray: T[], limitKeys?: string[]) => {
+    return function (current: T) {
+        return otherArray.filter(function (other: T) {
+            if (!limitKeys) {
+                return _.isEqual(current, other)
+            } else {
+                // TODO
+            }
+        }).length == 0;
+    }
+}
+
+export const onlyInA = <T extends any>(a: T[], b: T[]) => {
+    return a.filter(comparerArray(b));
+}
+
+export const onlyInB = <T extends any>(a: T[], b: T[]) => {
+    return b.filter(comparerArray(a));
+}
+
+export const diffAB = <T extends any>(a: T[], b: T[]) => {
+    return onlyInA(a, b).concat(onlyInB(a, b));
+}
+
+export const deepKeysConvert = (obj: JSONSerializable[] | JSONSerializable, toType?: 'camel' | 'snake'): JSONSerializable[] | JSONSerializable => {
+    const _toType = toType || 'snake';
+    if (Array.isArray(obj)) {
+        return obj.map(v => deepKeysConvert(v, _toType));
+    } else if (obj != null && obj.constructor === Object) {
+        return Object.keys(obj).reduce(
+            (result, key) => {
+                const newKey = _toType === 'camel' ? _.camelCase(key) : _.snakeCase(key)
+                return {
+                    ...result,
+                    [newKey]: deepKeysConvert(obj[key], _toType),
+                }
+            },
+            {},
+        );
+    }
+    return obj;
+}
+
+
+export const deepRemoveByKey = (obj: JSONSerializable, keysToBeRemoved: string[]) => {
+    return _.transform(obj, function (result: JSONSerializable, value, key) {
+        if (_.isObject(value)) {
+            value = deepRemoveByKey(value, keysToBeRemoved);
+        }
+        if (!keysToBeRemoved.includes(key)) {
+            _.isArray(obj) ? result.push(value) : result[key] = value;
+        }
+    });
+}
+
+export const deepRenameKeys = (obj: JSONSerializable, keysMap: { [key in string]: string }) => {
+    return _.transform(obj, function (result: JSONSerializable, value, key) {
+        let currentKey = keysMap[key] || key;
+        result[currentKey] = _.isObject(value) ? deepRenameKeys(value, keysMap) : value;
+    });
+}
+
+export const deepReplaceValues = (obj: JSONSerializable, keyReducerMap: { [key in string]: (item: JSONSerializable) => any }) => {
+    const newObject = _.clone(obj) as JSONSerializable;
+    _.each(obj, (val, key) => {
+        for (const item in keyReducerMap) {
+            if (key === item) {
+                newObject[key] = keyReducerMap[item](newObject);
+            } else if (typeof (val) === 'object' || val instanceof Array) {
+                newObject[key] = deepReplaceValues(val, keyReducerMap);
+            }
+        }
+    });
+    return newObject;
+}
+
+export const deepAdd = (obj: JSONSerializable, keyReducerMap: { [key in string]: (item: JSONSerializable) => any }) => {
+    const newObject = _.clone(obj) as JSONObject | [];
+    if (_.isObject(newObject) && !_.isArray(newObject)) {
+        for (const item in keyReducerMap) {
+            newObject[item] = keyReducerMap[item](newObject);
+        }
+    }
+    _.each(obj, (val, key) => {
+        if (_.isObject(val) && !_.isArray(val)) {
+            for (const item in keyReducerMap) {
+                // @ts-ignore
+                newObject[key] = deepAdd(val, keyReducerMap);
+            }
+        }
+    });
+
+    return newObject;
 }

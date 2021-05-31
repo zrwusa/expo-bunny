@@ -1,182 +1,237 @@
-// import * as React from "react";
-// import {useEffect, useState} from "react";
-// import {View} from "../../../components/UI";
-// import {RouteProp} from "@react-navigation/native";
-// import {DemoDatingTabStackParam, RootState, UserPhoto} from "../../../types";
-// import {useTranslation} from "react-i18next";
-// import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-// import {Col, getContainerStyles, Row} from "../../../containers";
-// import {useSizeLabor} from "../../../providers/size-labor";
-// import {useThemeLabor} from "../../../providers/theme-labor";
-// import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
-// import {getSharedStyles} from "../../../helpers/shared-styles";
-// import {ImageUploader} from "../../../components/ImageUploader";
-// import {getStyles} from "./styles";
-// import {ImageURISource} from "react-native";
-// import {useFirebase, useFirebaseConnect} from "react-redux-firebase";
-// import {useDispatch, useSelector} from "react-redux";
-// import {useAuthLabor} from "../../../providers/auth-labor";
-// import {sysError} from "../../../store/actions";
-//
-// type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
-// type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;
-//
-// export interface DatingSettingsProps {
-//     route: DatingSettingsRouteProp,
-//     navigation: DatingSettingsNavigationProp
-// }
-//
-// export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
-//     const firebase = useFirebase();
-//     const {t} = useTranslation();
-//     const st = shortenTFunctionKey(t, 'screens.DatingSettings');
-//     const sizeLabor = useSizeLabor();
-//     const {wp} = sizeLabor.designsBasedOn.iphoneX
-//     const themeLabor = useThemeLabor();
-//     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-//     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-//     const styles = getStyles(sizeLabor, themeLabor);
-//     const dispatch = useDispatch()
-//     const {user} = useAuthLabor().authResult
-//     const firebaseUser = user?.firebaseUser;
-//     let userId = ''
-//     if (firebaseUser) {
-//         userId = firebaseUser.uid;
-//     }
-//     // useFirebaseConnect([{path: 'usersWithPhotos', queryParams: ['orderByChild=userId', `equalTo=${userId}`]}])
-//     useFirebaseConnect([{path: `usersWithPhotos/${userId}`}])
-//
-//     const userPhotos = useSelector(({firebaseState: {ordered: {usersWithPhotos}}}: RootState) => {
-//         if (usersWithPhotos) {
-//             // @ts-ignore todo react-redux-firebase type bug
-//             return usersWithPhotos[userId] as { key: string, value: UserPhoto }[]
-//         } else {
-//             return []
-//         }
-//     })
-//
-//     const _imageUploaderError = (e: Error) => {
-//         dispatch(sysError(e))
-//     }
-//
-//     const _removePhoto = (position: string, source?: ImageURISource) => {
-//         firebase.database().ref(`usersWithPhotos/${userId}/${position}`).remove()
-//     }
-//
-//     const _savePhoto = (position: string, photoUrl?: string) => {
-//         if (!photoUrl) {
-//             return;
-//         }
-//         firebase.database().ref(`usersWithPhotos/${userId}/${position}`).set({uri: photoUrl})
-//     }
-//
-//     const [sources, setSources] = useState<ImageURISource[]>([])
-//
-//     useEffect(() => {
-//         if (userPhotos && userPhotos.length > 0) {
-//             let sourcesResult = []
-//             for (let i = 0; i < 6; i++) {
-//                 const filteredByKey = userPhotos.filter(item => item.key === i.toString())
-//                 sourcesResult[i] = filteredByKey && filteredByKey.length > 0 ? filteredByKey[0].value : {uri: ''}
-//             }
-//             setSources(sourcesResult)
-//         }
-//     }, [userPhotos])
-//
-//
-//     return (
-//         <View style={[containerStyles.Screen]}>
-//             <View style={styles.container}>
-//                 <View style={{height: wp(375), width: wp(375)}}>
-//                     <Row size={2}>
-//                         <Col size={2}>
-//                             <ImageUploader
-//                                 source={sources[0]}
-//                                 isFullFill
-//                                 onValueChanged={(value) => {
-//                                     _savePhoto('0', value.uri)
-//                                 }}
-//                                 onRemovePhoto={(needRemove) => {
-//                                     _removePhoto('0', needRemove)
-//                                 }}
-//                                 onError={_imageUploaderError}
-//                             />
-//                         </Col>
-//                         <Col size={1} style={{marginLeft: wp(2)}}>
-//                             <Row size={1}>
-//                                 <ImageUploader
-//                                     source={sources[1]}
-//                                     isFullFill
-//                                     onValueChanged={(value) => {
-//                                         _savePhoto('1', value.uri)
-//                                     }}
-//                                     onRemovePhoto={(needRemove) => {
-//                                         _removePhoto('1', needRemove)
-//                                     }}
-//                                     onError={_imageUploaderError}
-//                                 />
-//                             </Row>
-//                             <Row size={1} style={{marginTop: wp(2)}}>
-//                                 <ImageUploader
-//                                     source={sources[2]}
-//                                     isFullFill
-//                                     onValueChanged={(value) => {
-//                                         _savePhoto('2', value.uri)
-//                                     }}
-//                                     onRemovePhoto={(needRemove) => {
-//                                         _removePhoto('2', needRemove)
-//                                     }}
-//                                     onError={_imageUploaderError}
-//                                 />
-//                             </Row>
-//                         </Col>
-//                     </Row>
-//                     <Row size={1} style={{marginTop: wp(2)}}>
-//                         <Col size={1}>
-//                             <ImageUploader
-//                                 source={sources[3]}
-//                                 isFullFill
-//                                 onValueChanged={(value) => {
-//                                     _savePhoto('3', value.uri)
-//                                 }}
-//                                 onRemovePhoto={(needRemove) => {
-//                                     _removePhoto('3', needRemove)
-//                                 }}
-//                                 onError={_imageUploaderError}
-//                             />
-//                         </Col>
-//                         <Col size={1} style={{marginLeft: wp(2)}}>
-//                             <ImageUploader
-//                                 source={sources[4]}
-//                                 isFullFill
-//                                 onValueChanged={(value) => {
-//                                     _savePhoto('4', value.uri)
-//                                 }}
-//                                 onRemovePhoto={(needRemove) => {
-//                                     _removePhoto('4', needRemove)
-//                                 }}
-//                                 onError={_imageUploaderError}
-//                             />
-//                         </Col>
-//                         <Col size={1} style={{marginLeft: wp(2)}}>
-//                             <ImageUploader
-//                                 source={sources[5]}
-//                                 isFullFill
-//                                 onValueChanged={(value) => {
-//                                     _savePhoto('5', value.uri)
-//                                 }}
-//                                 onRemovePhoto={(needRemove) => {
-//                                     _removePhoto('5', needRemove)
-//                                 }}
-//                                 onError={_imageUploaderError}
-//                             />
-//                         </Col>
-//                     </Row>
-//                 </View>
-//             </View>
-//         </View>
-//     );
-// }
-//
+import * as React from "react";
+import {useState} from "react";
+import {Text, View} from "../../../components/UI";
+import {RouteProp} from "@react-navigation/native";
+import {DemoDatingTabStackParam} from "../../../types";
+import {ModalFromRight, getContainerStyles} from "../../../containers";
+import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
+import {getSharedStyles} from "../../../helpers/shared-styles";
+import {ScrollView} from "react-native";
+import {useBunnyKit} from "../../../hooks/bunny-kit";
+import {
+    Divider,
+    Graduate,
+    GraduatePicker,
+    HeightPicker,
+    InlineSelector,
+    InterestPicker,
+    Occupation,
+    OccupationPicker,
+    ReligionPicker,
+    SpousePicker,
+    SpousePickerResult, TreeNodePicker,
+    UserAlbumEditor
+} from "../../../components";
+import {Religion} from "../../../components/ReligionPicker";
+import {occupationTreeData} from "../../../firebase/migrations/occupation";
 
-export {}
+
+type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
+type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;
+
+export interface DatingSettingsProps {
+    route: DatingSettingsRouteProp,
+    navigation: DatingSettingsNavigationProp
+}
+
+
+export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
+    const {sizeLabor, themeLabor, wp, t, colors, user} = useBunnyKit();
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
+
+
+    const idealSpouseTitle = 'Ideal Spouse';
+    const [isShowSpouseModal, setIsShowSpouseModal] = useState(false);
+    const _toggleSpouseModal = () => {
+        setIsShowSpouseModal(!isShowSpouseModal)
+    }
+
+    const [idealSpouse, setIdealSpouse] = useState<SpousePickerResult>({distance: 10, age: 24, fromHeight: 163, toHeight: 180})
+
+
+    const occupationTitle = 'Occupation';
+    const [isShowOccupationModal, setIsShowOccupationModal] = useState(false);
+    const _toggleOccupationModal = () => {
+        setIsShowOccupationModal(!isShowOccupationModal)
+    }
+    const [occupation, setOccupation] = useState<Occupation | undefined>({name: 'Occupation-001', code: 'Test-0001'})
+
+
+    const graduateTitle = 'Graduate';
+    const [isShowGraduateModal, setIsShowGraduateModal] = useState(false);
+    const _toggleGraduateModal = () => {
+        setIsShowGraduateModal(!isShowGraduateModal)
+    }
+    const [graduate, setGraduate] = useState<Graduate | undefined>({name: 'Graduate-001', code: 'Test-0001'})
+
+
+    const heightTitle = 'Height';
+    const [isShowHeightModal, setIsShowHeightModal] = useState(false);
+    const _toggleHeightModal = () => {
+        setIsShowHeightModal(!isShowHeightModal)
+    }
+    const [height, setHeight] = useState<number | undefined>(0)
+
+    const religionTitle = 'Religion';
+    const [isShowReligionModal, setIsShowReligionModal] = useState(false);
+    const _toggleReligionModal = () => {
+        setIsShowReligionModal(!isShowReligionModal)
+    }
+    const [religion, setReligion] = useState<Religion | undefined>({name: 'Religion-001', code: 'Test-001'})
+    return (
+        <ScrollView style={[containerStyles.Screen]}>
+            <UserAlbumEditor/>
+            <View style={{padding: wp(10)}}>
+                <Text style={sharedStyles.text2}>{user?.storedUser?.displayName}</Text>
+            </View>
+            <Divider/>
+            <Text style={[sharedStyles.title2,
+                {
+                    marginLeft: wp(10),
+                    marginTop: wp(20),
+                    marginBottom: wp(1)
+                }]}>Personal Info</Text>
+            <View style={{paddingHorizontal: wp(10)}}>
+                <InlineSelector title={idealSpouseTitle}
+                                onPress={() => {
+                                    _toggleSpouseModal()
+                                }}
+                                renderText={() => {
+                                    return idealSpouse.distance + 'mi,' +
+                                        idealSpouse.age + 'years old,' +
+                                        idealSpouse.toHeight + 'cm'
+                                }}/>
+                <Divider/>
+                <InlineSelector title={occupationTitle}
+                                onPress={() => {
+                                    _toggleOccupationModal()
+                                }}
+                                renderText={() => {
+                                    return occupation?.name || ''
+                                }}/>
+                <Divider/>
+                <InlineSelector title={graduateTitle}
+                                onPress={() => {
+                                    _toggleGraduateModal()
+                                }}
+                                renderText={() => {
+                                    return graduate?.name || ''
+                                }}/>
+                <Divider/>
+                <InlineSelector title={heightTitle}
+                                onPress={() => {
+                                    _toggleHeightModal()
+                                }}
+                                renderText={() => {
+                                    return height?.toString() || ''
+                                }}/>
+                <Divider/>
+                <InlineSelector title={religionTitle}
+                                onPress={() => {
+                                    _toggleReligionModal()
+                                }}
+                                renderText={() => {
+                                    return religion?.name || ''
+                                }}/>
+            </View>
+            <Divider/>
+            <Text style={[sharedStyles.title2,
+                {
+                    marginLeft: wp(10),
+                    marginTop: wp(20),
+                    marginBottom: wp(1)
+                }]}>Interests</Text>
+            <InterestPicker type="edit" onDone={(result) => {
+                console.log(result)
+            }}/>
+
+            <ModalFromRight isVisible={isShowSpouseModal}
+                            onVisibleChanged={isVisible => {
+                                setIsShowSpouseModal(isVisible)
+                            }}>
+                <SpousePicker
+                    title={idealSpouseTitle}
+                    onDone={(result) => {
+                        setIdealSpouse(result);
+                        setIsShowSpouseModal(false);
+                    }}
+                    onCancel={() => {
+                        setIsShowSpouseModal(false);
+                    }}
+                />
+            </ModalFromRight>
+            <ModalFromRight isVisible={isShowOccupationModal}
+                            onVisibleChanged={isVisible => {
+                                setIsShowOccupationModal(isVisible)
+                            }}>
+                <TreeNodePicker title={['Category', 'Occupation', 'Test']}
+                                data={occupationTreeData}
+                                onDone={(result) => {
+                                    setOccupation(result);
+                                    setIsShowOccupationModal(false);
+                                }}
+                                onCancel={() => {
+                                    setIsShowOccupationModal(false);
+                                }}
+                />
+                {/*<OccupationPicker*/}
+                {/*    title={occupationTitle}*/}
+                {/*    onDone={(result) => {*/}
+                {/*        setOccupation(result);*/}
+                {/*        setIsShowOccupationModal(false);*/}
+                {/*    }}*/}
+                {/*    onCancel={() => {*/}
+                {/*        setIsShowOccupationModal(false);*/}
+                {/*    }}*/}
+                {/*/>*/}
+            </ModalFromRight>
+            <ModalFromRight isVisible={isShowGraduateModal}
+                            onVisibleChanged={isVisible => {
+                                setIsShowGraduateModal(isVisible)
+                            }}>
+                <GraduatePicker
+                    title={graduateTitle}
+                    onDone={(result) => {
+                        setGraduate(result);
+                        setIsShowGraduateModal(false);
+                    }}
+                    onCancel={() => {
+                        setIsShowGraduateModal(false);
+                    }}
+                />
+            </ModalFromRight>
+            <ModalFromRight isVisible={isShowHeightModal}
+                            onVisibleChanged={isVisible => {
+                                setIsShowHeightModal(isVisible)
+                            }}>
+                <HeightPicker
+                    title={heightTitle}
+                    onDone={(result) => {
+                        setHeight(result);
+                        setIsShowHeightModal(false);
+                    }}
+                    onCancel={() => {
+                        setIsShowHeightModal(false);
+                    }}
+                />
+            </ModalFromRight>
+            <ModalFromRight isVisible={isShowReligionModal}
+                            onVisibleChanged={isVisible => {
+                                setIsShowReligionModal(isVisible)
+                            }}>
+                <ReligionPicker
+                    title={religionTitle}
+                    onDone={(result) => {
+                        setReligion(result);
+                        setIsShowReligionModal(false);
+                    }}
+                    onCancel={() => {
+                        setIsShowReligionModal(false);
+                    }}
+                />
+            </ModalFromRight>
+        </ScrollView>
+    );
+}
+

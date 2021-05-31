@@ -10,6 +10,9 @@ import {randomDate, uuidV4, wait} from "../../utils";
 import {ProgressBar} from "react-native-paper";
 import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
+import {migrateOccupationCategories, occupationCategories} from "../../firebase/migrations/occupationCategory";
+import {migrateOccupations, occupations} from "../../firebase/migrations/occupation";
+import {migrateCountriesStatesCities} from "../../firebase/migrations/migrateCountriesStatesCities";
 
 export function PlaygroundScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -27,10 +30,15 @@ export function PlaygroundScreen() {
         // await migrateSocialMediaImages();
         setProgress(0.4);
         // await migrateDatingChatMessages();
-        setProgress(0.6);
+        setProgress(0.5);
         // await migrateGroupChatMessages();
-        setProgress(0.7);
+        setProgress(0.6);
         // await migrateConversations()
+        setProgress(0.7);
+        // await migrateOccupationCategories();
+        setProgress(0.8);
+        // await migrateOccupations()
+        await migrateCountriesStatesCities()
         setProgress(1);
     }
 
@@ -47,6 +55,19 @@ export function PlaygroundScreen() {
 
     return (
         <View style={{flex: 1}}>
+            <Button onPress={() => {
+                for (let cate of occupationCategories) {
+                    let children = []
+                    for (const occ of occupations) {
+                        if (occ.category === cate.code) {
+                            children.push(occ)
+                        }
+                    }
+                    // @ts-ignore
+                    cate['children'] = children
+                }
+                console.log('occupationCategories', JSON.stringify(occupationCategories))
+            }} title="generateTree"/>
             <View style={styles.container}>
                 <Card title="database migration" titleMode="OUT">
                     <TextButton onPress={handleMigrate}>

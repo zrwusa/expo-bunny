@@ -14,7 +14,7 @@ import {
 } from "../types";
 import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import {EBLMsg} from "../constants";
-import {AuthAPIError, BunnyAPIError, NomicsAPIError, uuidV4} from "../utils";
+import {AuthAPIError, BunnyAPIError, deepAdd, deepKeysConvert, deepRemoveByKey, deepRenameKeys, NomicsAPIError, uuidV4} from "../utils";
 import configORG from "../config";
 import _ from "lodash";
 import icoMoonSelection from "../assets/fonts/icomoon/selection.json"
@@ -384,4 +384,77 @@ const _panResponder = PanResponder.create({
 });
 
 export const panHandlersBlock = _panResponder.panHandlers
+
+
+export const occupationDataFormat = (data: any) => {
+    const isDebug = false;
+    const dataCamelKeys = deepKeysConvert(data, 'camel')
+    isDebug && console.log('dataCamel', dataCamelKeys)
+
+    const dataPropertiesRenamed = deepRenameKeys(dataCamelKeys,
+        {
+            occupationTitle: 'name',
+            occupationSort: 'sort',
+            occupationType: 'type'
+        })
+    isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed)
+    const dataAddedProperties = deepAdd(dataPropertiesRenamed, {
+        'category': (item) => {
+            return item["occupationCode"]?.substr(0, 2) || '';
+        },
+        'code': (item) => {
+            return item["occupationCode"]?.substr(3, 20) || '';
+        }
+    })
+
+    isDebug && console.log('dataAddedProperties', dataAddedProperties)
+    const dataPropertiesRemoved = deepRemoveByKey(dataAddedProperties, [
+        '2019PercentOfIndustry',
+        '2019Employment',
+        '2019PercentOfOccupation',
+        'employmentChange20192029',
+        'employmentPercentChange20192029',
+        'projected2029Employment',
+        'projected2029PercentOfIndustry',
+        'projected2029PercentOfOccupation',
+        'occupationCode'])
+
+    isDebug && console.log('dataPropertiesRemoved', dataPropertiesRemoved)
+    return dataPropertiesRemoved;
+}
+
+
+export const occupationCategoriesFormat = (data: any) => {
+    const isDebug = false;
+    const dataCamelKeys = deepKeysConvert(data, 'camel')
+    isDebug && console.log('dataCamel', dataCamelKeys)
+
+    const dataPropertiesRenamed = deepRenameKeys(dataCamelKeys,
+        {
+            occupationTitle: 'name',
+            occupationSort: 'sort',
+            occupationType: 'type'
+        })
+    isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed)
+    const dataAddedProperties = deepAdd(dataPropertiesRenamed, {
+        'code': (item) => {
+            return item["occupationCode"]?.substr(0, 2) || '';
+        }
+    })
+
+    isDebug && console.log('dataAddedProperties', dataAddedProperties)
+    const dataPropertiesRemoved = deepRemoveByKey(dataAddedProperties, [
+        '2019PercentOfIndustry',
+        '2019Employment',
+        '2019PercentOfOccupation',
+        'employmentChange20192029',
+        'employmentPercentChange20192029',
+        'projected2029Employment',
+        'projected2029PercentOfIndustry',
+        'projected2029PercentOfOccupation',
+        'occupationCode'])
+
+    isDebug && console.log('dataPropertiesRemoved', dataPropertiesRemoved)
+    return dataPropertiesRemoved;
+}
 

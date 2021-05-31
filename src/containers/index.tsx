@@ -4,5 +4,5 @@ export * from "./Row"
 export * from "./InputCard"
 export * from "./Col"
 export * from "./DraggableView"
-export * from "./BottomModal"
+export * from "./ModalFromRight"
 
