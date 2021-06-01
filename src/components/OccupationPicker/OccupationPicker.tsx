@@ -14,8 +14,12 @@ import {ModalFromRight} from "../../containers/ModalFromRight";
 
 
 export interface Occupation {
+    category: string,
     name: string,
     code: string,
+    displayLevel: number,
+    sort: number,
+    type: string,
 }
 
 export interface OccupationPickerProps {

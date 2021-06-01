@@ -5,6 +5,7 @@ import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {IcoMoon, Text} from "../UI";
 import * as React from "react";
+import {pure} from "recompose";
 
 export interface InlineProps {
     title?: string,
@@ -17,7 +18,12 @@ export interface InlineProps {
     textAlign?: FlexAlignType,
 }
 
-export const InlineSelector = (props: InlineProps) => {
+let count = 0;
+const counter = () => {
+    return count++;
+}
+export const InlineSelector = pure((props: InlineProps) => {
+    // console.log('InlineSelector',counter())
     const {title, renderText, onPress, columns = [4, 8, 1], isShowChevron = true, titleStyle, textStyle, textAlign = 'flex-end'} = props;
     const {sizeLabor, themeLabor, wp, t, colors, user} = useBunnyKit();
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
@@ -46,4 +52,4 @@ export const InlineSelector = (props: InlineProps) => {
             </Col>
         </Row>
     </TouchableOpacity>
-}
+})

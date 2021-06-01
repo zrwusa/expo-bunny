@@ -2,7 +2,7 @@ import * as React from "react";
 import {useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {DemoDatingTabStackParam} from "../../../types";
+import {City, Country, DemoDatingTabStackParam, OccupationCategory, State, University} from "../../../types";
 import {getContainerStyles, ModalFromRight} from "../../../containers";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {getSharedStyles} from "../../../helpers/shared-styles";
@@ -11,10 +11,10 @@ import {useBunnyKit} from "../../../hooks/bunny-kit";
 import {
     Divider,
     Graduate,
-    GraduatePicker,
     HeightPicker,
     InlineSelector,
     InterestPicker,
+    LiveIn,
     Occupation,
     ReligionPicker,
     SpousePicker,
@@ -23,6 +23,7 @@ import {
     UserAlbumEditor
 } from "../../../components";
 import {Religion} from "../../../components/ReligionPicker";
+import {defaultValues} from "../../../constants";
 
 type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
 type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;
@@ -31,6 +32,10 @@ export interface DatingSettingsProps {
     route: DatingSettingsRouteProp,
     navigation: DatingSettingsNavigationProp
 }
+
+export type OccupationSelected = [OccupationCategory, Occupation] | undefined;
+export type LiveInSelected = [Country, State, City] | undefined;
+export type UniversitySelected = [University] | undefined;
 
 
 export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
@@ -53,7 +58,8 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
     const _toggleOccupationModal = () => {
         setIsShowOccupationModal(!isShowOccupationModal)
     }
-    const [occupation, setOccupation] = useState<Occupation | undefined>({name: 'Occupation-001', code: 'Test-0001'})
+    const [occupation, setOccupation] = useState<OccupationSelected>([
+        defaultValues.occupationCategory, defaultValues.occupation])
 
 
     const graduateTitle = 'Graduate';
@@ -61,7 +67,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
     const _toggleGraduateModal = () => {
         setIsShowGraduateModal(!isShowGraduateModal)
     }
-    const [graduate, setGraduate] = useState<Graduate | undefined>({name: 'Graduate-001', code: 'Test-0001'})
+    const [graduate, setGraduate] = useState<UniversitySelected | undefined>([defaultValues.university])
 
 
     const heightTitle = 'Height';
@@ -77,6 +83,13 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
         setIsShowReligionModal(!isShowReligionModal)
     }
     const [religion, setReligion] = useState<Religion | undefined>({name: 'Religion-001', code: 'Test-001'})
+
+    const liveInTitle = 'LiveIn';
+    const [isShowLiveInModal, setIsShowLiveInModal] = useState(false);
+    const _toggleLiveInModal = () => {
+        setIsShowLiveInModal(!isShowLiveInModal)
+    }
+    const [liveIn, setLiveIn] = useState<LiveInSelected>([defaultValues.country, defaultValues.state, defaultValues.city])
     return (
         <ScrollView style={[containerStyles.Screen]}>
             <UserAlbumEditor/>
@@ -106,7 +119,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                     _toggleOccupationModal()
                                 }}
                                 renderText={() => {
-                                    return occupation?.name || ''
+                                    return occupation?.[1]?.name || ''
                                 }}/>
                 <Divider/>
                 <InlineSelector title={graduateTitle}
@@ -114,7 +127,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                     _toggleGraduateModal()
                                 }}
                                 renderText={() => {
-                                    return graduate?.name || ''
+                                    return graduate?.[0].name || ''
                                 }}/>
                 <Divider/>
                 <InlineSelector title={heightTitle}
@@ -131,6 +144,14 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                 }}
                                 renderText={() => {
                                     return religion?.name || ''
+                                }}/>
+                <Divider/>
+                <InlineSelector title={liveInTitle}
+                                onPress={() => {
+                                    _toggleLiveInModal()
+                                }}
+                                renderText={() => {
+                                    return liveIn?.[2]?.name || ''
                                 }}/>
             </View>
             <Divider/>
@@ -165,7 +186,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                             }}>
                 <TreeNodePicker
                     titles={['Category', 'Occupation', 'Test']}
-
+                    keyExtractors={['code', 'code', 'code']}
                     dataMode="firestore"
                     leafLevel={1}
                     collectionPaths={['occupationCategories', 'occupations']}
@@ -174,9 +195,10 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                     // dataMode="local"
                     // data={occupationTreeData}
                     // childrenKeys={['children', 'children']}
-
                     onDone={(result) => {
-                        setOccupation(result);
+                        console.log(result)
+
+                        setOccupation(result as unknown as OccupationSelected);
                         setIsShowOccupationModal(false);
                     }}
                     onCancel={() => {
@@ -198,12 +220,23 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                             onVisibleChanged={isVisible => {
                                 setIsShowGraduateModal(isVisible)
                             }}>
-                <GraduatePicker
-                    title={graduateTitle}
+                <TreeNodePicker
+                    titles={['University']}
+
+                    dataMode="firestore"
+                    leafLevel={0}
+                    collectionPaths={['universities']}
+                    conditions={[['', '==', '']]}
+                    keyExtractors={['id']}
+                    // dataMode="local"
+                    // data={occupationTreeData}
+                    // childrenKeys={['children', 'children']}
+
                     onDone={(result) => {
-                        setGraduate(result);
+                        setGraduate(result as unknown as UniversitySelected);
                         setIsShowGraduateModal(false);
                     }}
+
                     onCancel={() => {
                         setIsShowGraduateModal(false);
                     }}
@@ -236,6 +269,32 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                     }}
                     onCancel={() => {
                         setIsShowReligionModal(false);
+                    }}
+                />
+            </ModalFromRight>
+            <ModalFromRight isVisible={isShowLiveInModal}
+                            onVisibleChanged={isVisible => {
+                                setIsShowLiveInModal(isVisible)
+                            }}>
+                <TreeNodePicker
+                    titles={['Country', 'State', 'City']}
+
+                    dataMode="firestore"
+                    leafLevel={2}
+                    collectionPaths={['countries', 'states', 'cities']}
+                    conditions={[['', '==', ''], ['countryId', '==', '$id'], ['stateId', '==', '$id']]}
+                    keyExtractors={['id', 'id', 'id']}
+                    // dataMode="local"
+                    // data={occupationTreeData}
+                    // childrenKeys={['children', 'children']}
+
+                    onDone={(result) => {
+                        setLiveIn(result as unknown as LiveInSelected);
+                        setIsShowLiveInModal(false);
+                    }}
+
+                    onCancel={() => {
+                        setIsShowLiveInModal(false);
                     }}
                 />
             </ModalFromRight>

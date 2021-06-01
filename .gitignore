@@ -30,3 +30,4 @@ yarn-error.log
 .vercel/
 src/google/
 src/assets/videos/
+src/firebase/migrations/raw-data/

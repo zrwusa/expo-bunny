@@ -12,7 +12,7 @@ import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {occupationCategories} from "../../firebase/migrations/occupationCategory";
 import {occupations} from "../../firebase/migrations/occupation";
-import {migrateCountriesStatesCities} from "../../firebase/migrations/migrateCountriesStatesCities";
+import {migrateUniversities} from "../../firebase/migrations/university";
 
 export function PlaygroundScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -22,11 +22,11 @@ export function PlaygroundScreen() {
         setProgress(0);
         await wait(1000);
         // await migrateUsers();
-        // setProgress(0.1);
+        setProgress(0.1);
         // await migrateNearbyFilms();
-        // setProgress(0.2);
+        setProgress(0.2);
         // await migrateSocialMediaVideos();
-        // setProgress(0.3);
+        setProgress(0.3);
         // await migrateSocialMediaImages();
         setProgress(0.4);
         // await migrateDatingChatMessages();
@@ -38,7 +38,11 @@ export function PlaygroundScreen() {
         // await migrateOccupationCategories();
         setProgress(0.8);
         // await migrateOccupations()
-        await migrateCountriesStatesCities()
+        // await migrateCountriesStatesCities()
+
+        // await migrateCountries()
+
+        await migrateUniversities()
         setProgress(1);
     }
 

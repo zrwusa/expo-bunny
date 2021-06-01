@@ -13,6 +13,11 @@ export interface Religion {
     code: string,
 }
 
+export interface LiveIn {
+    name: string,
+    code: string,
+}
+
 export interface ReligionPickerProps {
     onDone?: (result?: Religion) => void,
     onCancel?: () => void,

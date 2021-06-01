@@ -120,12 +120,75 @@ export interface Occupation {
     code: string
 }
 
+export interface University {
+    "alphaTwoCode": string,
+    "domains": string[],
+    "webPages": string[],
+    "stateProvince": string | null,
+    "country": string,
+    "name": string
+}
+
 export interface OccupationCategory {
     name: string,
     type: string,
     sort: number,
     displayLevel: number,
     code: string,
+}
+
+export interface Translation {
+    [key: string]: string
+}
+
+export interface Timezone {
+    abbreviation: string,
+    gmtOffset: number,
+    gmtOffsetName: string,
+    tzName: string,
+    zoneName: string,
+}
+
+export interface Country {
+    emoji: string,
+    emojiU: string,
+    capital: string,
+    currency_symbol: string,
+    currency: string,
+    id: number,
+    iso2: string,
+    iso3: string,
+    latitude: string,
+    longitude: string,
+    name: string,
+    native: string,
+    phone_code: string,
+    region: string,
+    subregion: string,
+    tld: string,
+    timezones: Timezone[],
+    translations: Translation,
+}
+
+export interface State {
+    _id: string,
+    id: number,
+    countryId: number,
+    name: string,
+    phoneCode: string,
+    stateCode: string,
+}
+
+export interface City {
+    _id: string,
+    id: number,
+    countryId: number,
+    stateId: number,
+    name: string,
+    phoneCode: string,
+    stateCode: string,
+    latitude: string,
+    longitude: string,
 }
 
 export interface SchemaFirestore {

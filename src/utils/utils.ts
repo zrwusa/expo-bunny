@@ -325,7 +325,7 @@ export const diffAB = <T extends any>(a: T[], b: T[]) => {
     return onlyInA(a, b).concat(onlyInB(a, b));
 }
 
-export const deepKeysConvert = (obj: JSONSerializable[] | JSONSerializable, toType?: 'camel' | 'snake'): JSONSerializable[] | JSONSerializable => {
+export const deepKeysConvert = (obj: any, toType?: 'camel' | 'snake'): any => {
     const _toType = toType || 'snake';
     if (Array.isArray(obj)) {
         return obj.map(v => deepKeysConvert(v, _toType));
@@ -345,8 +345,8 @@ export const deepKeysConvert = (obj: JSONSerializable[] | JSONSerializable, toTy
 }
 
 
-export const deepRemoveByKey = (obj: JSONSerializable, keysToBeRemoved: string[]) => {
-    return _.transform(obj, function (result: JSONSerializable, value, key) {
+export const deepRemoveByKey = (obj: any, keysToBeRemoved: string[]) => {
+    const result = _.transform(obj, function (result: JSONSerializable, value, key: string) {
         if (_.isObject(value)) {
             value = deepRemoveByKey(value, keysToBeRemoved);
         }
@@ -354,6 +354,7 @@ export const deepRemoveByKey = (obj: JSONSerializable, keysToBeRemoved: string[]
             _.isArray(obj) ? result.push(value) : result[key] = value;
         }
     });
+    return result as typeof obj
 }
 
 export const deepRenameKeys = (obj: JSONSerializable, keysMap: { [key in string]: string }) => {
@@ -377,7 +378,15 @@ export const deepReplaceValues = (obj: JSONSerializable, keyReducerMap: { [key i
     return newObject;
 }
 
-export const deepAdd = (obj: JSONSerializable, keyReducerMap: { [key in string]: (item: JSONSerializable) => any }) => {
+// function getCallStackSize() {
+//     let count = 0, fn = arguments.callee;
+//     while ( (fn = fn.caller) ) {
+//         count++;
+//     }
+//     return count;
+// }
+// TODO determine depth and pass root node as a param through callback
+export const deepAdd = (obj: JSONSerializable, keyReducerMap: { [key in string]: (item: JSONSerializable) => any }, isItemRootParent?: boolean) => {
     const newObject = _.clone(obj) as JSONObject | [];
     if (_.isObject(newObject) && !_.isArray(newObject)) {
         for (const item in keyReducerMap) {
@@ -385,13 +394,12 @@ export const deepAdd = (obj: JSONSerializable, keyReducerMap: { [key in string]:
         }
     }
     _.each(obj, (val, key) => {
-        if (_.isObject(val) && !_.isArray(val)) {
+        if (_.isObject(val)) {
             for (const item in keyReducerMap) {
                 // @ts-ignore
-                newObject[key] = deepAdd(val, keyReducerMap);
+                newObject[key] = deepAdd(val, keyReducerMap, isItemRootParent);
             }
         }
     });
-
     return newObject;
 }

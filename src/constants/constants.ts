@@ -1,4 +1,4 @@
-import {EnumThemeNames, Month} from "../types";
+import {City, Country, EnumThemeNames, Month, Occupation, OccupationCategory, State, University} from "../types";
 
 const BunnyConstants = {
     latLngDeltaGrace: {
@@ -20,6 +20,63 @@ const BunnyConstants = {
     fnNoop: () => undefined,
     fooInterval: setInterval((): void => undefined, 0),
     fooTimeout: setTimeout((): void => undefined, 0),
+}
+
+export const defaultValues = {
+    country: {
+        emoji: '',
+        emojiU: '',
+        iso3: '',
+        name: '',
+        id: 0,
+        subregion: '',
+        longitude: '',
+        latitude: '',
+        capital: '',
+        currency_symbol: '',
+        iso2: '',
+        timezones: [
+            {
+                tzName: '',
+                gmtOffsetName: '',
+                zoneName: '',
+                abbreviation: '',
+                gmtOffset: 0
+            }
+        ],
+        tld: '',
+        region: '',
+        native: '',
+        translations: {
+            br: '',
+            de: '',
+            pt: '',
+            it: '',
+            nl: '',
+            ja: '',
+            es: '',
+            fa: '',
+            fr: '',
+            hr: ''
+        },
+        phone_code: '',
+        currency: ''
+    } as Country,
+    state: {_id: '', phoneCode: '', id: 0, name: '', stateCode: '', countryId: 0} as State,
+    city: {
+        longitude: '',
+        latitude: '',
+        countryId: 0,
+        _id: '',
+        stateCode: '',
+        name: '',
+        phoneCode: '',
+        id: 0,
+        stateId: 0
+    } as City,
+    occupationCategory: {code: '', displayLevel: 0, name: '', sort: 0, type: ''} as OccupationCategory,
+    occupation: {category: '', name: '', code: '', displayLevel: 0, sort: 0, type: ''} as Occupation,
+    university: {alphaTwoCode: '', domains: [''], webPages: [''], stateProvince: null, country: '', name: ''} as University,
 }
 
 
