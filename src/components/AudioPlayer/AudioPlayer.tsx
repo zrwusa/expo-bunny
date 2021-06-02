@@ -95,41 +95,41 @@ export function AudioPlayer(props: AudioPlayerProps) {
             : null
         }
         {
-            soundRef.current
-                ? status
-                ? status.isLoaded
-                    ? <TouchableOpacity onPress={async () => {
-                        await togglePlayOrPause()
-                    }}>
-                        <View style={styles.control}>
-                            <View style={[styles.playButton, playButtonStyle]}>
-                                {
-                                    status.isPlaying
-                                        ? <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="pause"/>
-                                        : <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="play"/>
-                                }
-                            </View>
-                            <View style={styles.progress}>
-                                {
-                                    status.durationMillis
-                                        ? <>
-                                            <ProgressBar style={progressStyle} color={progressColor}
-                                                         progress={(status.positionMillis | 0) / status.durationMillis}/>
-                                            <Text style={[styles.remainTime, remainTimeStyle]}>
-                                                {minuted(status.durationMillis - status.positionMillis)}</Text>
-                                        </>
-                                        : <>
-                                            <ProgressBar progress={0} color={progressColor} style={progressStyle}/>
-                                            <Text style={[styles.remainTime, remainTimeStyle]}> </Text>
-                                        </>
-                                }
+            <TouchableOpacity onPress={async () => {
+                await togglePlayOrPause()
+            }}>
+                <View style={styles.control}>
+                    <View style={[styles.playButton, playButtonStyle]}>
+                        {
+                            status?.isLoaded
+                                ?
+                                status.isPlaying
+                                    ? <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="pause"/>
+                                    : <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="play"/>
+                                : <ActivityIndicator/>
+                        }
+                    </View>
+                    <View style={styles.progress}>
+                        {
+                            status?.isLoaded
+                                ?
+                                status.durationMillis
+                                    ? <>
+                                        <ProgressBar style={progressStyle} color={progressColor}
+                                                     progress={(status.positionMillis | 0) / status.durationMillis}/>
+                                        <Text style={[styles.remainTime, remainTimeStyle]}>
+                                            {minuted(status.durationMillis - status.positionMillis)}</Text>
+                                    </>
+                                    : <>
+                                        <ProgressBar progress={0} color={progressColor} style={progressStyle}/>
+                                        <Text style={[styles.remainTime, remainTimeStyle]}> </Text>
+                                    </>
+                                : <ActivityIndicator color={progressColor}/>
+                        }
 
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                    : <ActivityIndicator/>
-                : <Text>No Status</Text>
-                : <Text>No Sound,may not support this audio type</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
         }
     </View>
 }

@@ -14,13 +14,10 @@ import {firebase} from "../../firebase/firebase";
 import {FieldPath, WhereFilterOp} from '@firebase/firestore-types';
 import {useIsMounted} from "../../hooks/is-mounted";
 import {uuidV4} from "../../utils";
+import {TreeNode} from "../../types";
 
 declare const ChildrenKey: unique symbol
-// TODO key not in Omit
-export type TreeNode = {
-    name: string,
-    code: string,
-} & { [key in string]?: TreeNode[] }
+
 
 export type WhereArguments = [string | FieldPath, WhereFilterOp, any];
 

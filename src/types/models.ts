@@ -177,6 +177,23 @@ export interface Country {
     translations: Translation,
 }
 
+
+export type OccupationTreeNode = {
+    name: string,
+    code: string,
+    type?: string,
+    sort?: number | null,
+    displayLevel?: number,
+    category?: string,
+    children?: OccupationTreeNode[]
+}
+
+// TODO key not in Omit
+export type TreeNode = {
+    name: string,
+    code: string,
+} & { [key in string]?: TreeNode[] }
+
 export interface State {
     _id: string,
     id: number,

@@ -5,7 +5,6 @@ import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {IcoMoon, Text} from "../UI";
 import * as React from "react";
-import {pure} from "recompose";
 
 export interface InlineProps {
     title?: string,
@@ -23,7 +22,9 @@ let count = 0;
 const counter = () => {
     return count++;
 }
-export const InlineSelector = pure((props: InlineProps) => {
+
+// Use React.memo as PureComponent instead of recompose.pure
+export const InlineSelector = React.memo((props: InlineProps) => {
     // console.log('InlineSelector',counter())
     const {title, renderText, onPress, columns = [4, 8, 1], isShowChevron = true, titleStyle, textStyle, textAlign = 'flex-end', renderColumn2} = props;
     const {sizeLabor, themeLabor, wp, t, colors, user} = useBunnyKit();

@@ -6,12 +6,10 @@ import {useFirestoreConnect} from "react-redux-firebase";
 import {useSelector} from "react-redux";
 import {RootState} from "../../types";
 import {DraggableView} from "../../containers/DraggableView";
-import {randomDate, uuidV4, wait} from "../../utils";
+import {randomDate, uuidV4} from "../../utils";
 import {ProgressBar} from "react-native-paper";
 import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
-import {occupationCategories} from "../../firebase/migrations/occupationCategory";
-import {occupations} from "../../firebase/migrations/occupation";
 
 export function PlaygroundScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -19,7 +17,6 @@ export function PlaygroundScreen() {
     const [progress, setProgress] = useState(0);
     const handleMigrate = async () => {
         setProgress(0);
-        await wait(1000);
         // await migrateUsers();
         setProgress(0.1);
         // await migrateNearbyFilms();
@@ -59,19 +56,6 @@ export function PlaygroundScreen() {
 
     return (
         <View style={{flex: 1}}>
-            <Button onPress={() => {
-                for (let cate of occupationCategories) {
-                    let children = []
-                    for (const occ of occupations) {
-                        if (occ.category === cate.code) {
-                            children.push(occ)
-                        }
-                    }
-                    // @ts-ignore
-                    cate['children'] = children
-                }
-                console.log('occupationCategories', JSON.stringify(occupationCategories))
-            }} title="generateTree"/>
             <View style={styles.container}>
                 <Card title="database migration" titleMode="OUT">
                     <TextButton onPress={handleMigrate}>

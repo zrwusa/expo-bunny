@@ -143,8 +143,8 @@ class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProp
                             }}
                             {...audioProps}
                         />
-                        : <Text>{'currentMessage.audio is undefined'}</Text>
-                        : <Text>{'currentMessage is undefined'}</Text>
+                        : isDebug ? <Text>{'currentMessage.audio is undefined'}</Text> : null
+                        : isDebug ? <Text>{'currentMessage is undefined'}</Text> : null
                 }
 
             </View>
