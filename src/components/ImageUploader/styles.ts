@@ -38,5 +38,11 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginTop: ms.sp.m,
             borderRadius: ms.br.s
         },
+        button: {
+            alignItems: 'center'
+        },
+        buttonText: {
+            padding: ms.sp.s,
+        }
     });
 }

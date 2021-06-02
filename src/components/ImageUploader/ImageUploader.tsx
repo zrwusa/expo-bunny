@@ -13,6 +13,7 @@ import {
     SafeAreaView,
     Share,
     StyleProp,
+    TextStyle,
     TouchableOpacity,
     View,
     ViewStyle
@@ -50,6 +51,8 @@ export interface ImageUploaderProps {
     modalPanel2Style?: StyleProp<ViewStyle>,
     imageStyle?: StyleProp<ImageStyle>,
     loadingOverlayStyle?: StyleProp<ViewStyle>,
+    buttonStyle?: StyleProp<ViewStyle>,
+    buttonTextStyle?: StyleProp<TextStyle>,
 
     placeholderIconName?: IcoMoonKeys,
     imagePickerOptions?: ImagePickerOptions,
@@ -87,6 +90,8 @@ export function ImageUploader(props: ImageUploaderProps) {
         modalPanelStyle,
         modalPanel2Style,
         imageStyle,
+        buttonStyle,
+        buttonTextStyle,
 
         placeholderIconName = 'plus',
         modalProps,
@@ -315,9 +320,11 @@ export function ImageUploader(props: ImageUploaderProps) {
                    {...modalProps}>
                 <View style={[styles.modalPanelContainer, modalPanelContainerStyle]}>
                     <View style={[styles.modalPanel, modalPanelStyle]}>
-                        <TextButton onPress={_pickImage}><Text>Open Gallery</Text></TextButton>
+                        <TextButton style={[styles.button, buttonStyle]} onPress={_pickImage}><Text style={[styles.buttonText, buttonTextStyle]}>Open
+                            Gallery</Text></TextButton>
                         <Divider/>
-                        <TextButton onPress={_takePhoto}><Text>Take A Photo</Text></TextButton>
+                        <TextButton style={[styles.button, buttonStyle]} onPress={_takePhoto}><Text style={[styles.buttonText, buttonTextStyle]}>Take
+                            A Photo</Text></TextButton>
                         {/*<Divider/>*/}
                         {/*<TextButton onPress={_takeScreenshot}><Text>Take a screenshot</Text></TextButton>*/}
                         {
@@ -330,7 +337,8 @@ export function ImageUploader(props: ImageUploaderProps) {
                         }
                     </View>
                     <View style={[styles.modalPanel2, modalPanel2Style]}>
-                        <TextButton onPress={_toggleModal}><Text>Cancel</Text></TextButton>
+                        <TextButton style={[styles.button, buttonStyle]} onPress={_toggleModal}><Text
+                            style={[styles.buttonText, buttonTextStyle]}>Cancel</Text></TextButton>
                     </View>
                 </View>
             </Modal>
