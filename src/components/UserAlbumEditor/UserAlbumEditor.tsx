@@ -87,6 +87,8 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                     source={sources[0]}
                                     path={userPhotosPath}
                                     isFullFill
+                                    isDeleteFromServerWhenRemove
+                                    isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
                                         await _savePhoto('0', value.uri)
                                     }}
@@ -102,6 +104,8 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                         path={userPhotosPath}
                                         source={sources[1]}
                                         isFullFill
+                                        isDeleteFromServerWhenRemove
+                                        isDeleteFromServerWhenUpload
                                         onValueChanged={async (value) => {
                                             await _savePhoto('1', value.uri)
                                         }}
@@ -116,6 +120,8 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                         path={userPhotosPath}
                                         source={sources[2]}
                                         isFullFill
+                                        isDeleteFromServerWhenRemove
+                                        isDeleteFromServerWhenUpload
                                         onValueChanged={async (value) => {
                                             await _savePhoto('2', value.uri)
                                         }}
@@ -133,6 +139,8 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                     path={userPhotosPath}
                                     source={sources[3]}
                                     isFullFill
+                                    isDeleteFromServerWhenRemove
+                                    isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
                                         await _savePhoto('3', value.uri)
                                     }}
@@ -147,6 +155,8 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                     path={userPhotosPath}
                                     source={sources[4]}
                                     isFullFill
+                                    isDeleteFromServerWhenRemove
+                                    isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
                                         await _savePhoto('4', value.uri)
                                     }}
@@ -158,10 +168,11 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                             </Col>
                             <Col size={1} style={{marginLeft: wp(2)}}>
                                 <ImageUploader
-                                    isDeleteFromServerWhenUpload={false}
                                     path={userPhotosPath}
                                     source={sources[5]}
                                     isFullFill
+                                    isDeleteFromServerWhenRemove
+                                    isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
                                         await _savePhoto('5', value.uri)
                                     }}

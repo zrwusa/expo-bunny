@@ -99,12 +99,14 @@ export function ImageUploader(props: ImageUploaderProps) {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1,
-        },
+            quality: 0.2,
+        } as ImagePickerOptions,
         cameraPickerOptions = {
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-        },
+            quality: 0.2,
+        } as ImagePickerOptions,
         loadingIndicatorProps = {
             color: colors.text,
             animating: true,
@@ -331,7 +333,7 @@ export function ImageUploader(props: ImageUploaderProps) {
                             image.uri
                                 ? <>
                                     <Divider/>
-                                    <TextButton onPress={_removePhoto}><Text>Remove Photo</Text></TextButton>
+                                    <TextButton onPress={_removePhoto} style={[styles.button, buttonStyle]}><Text style={[styles.buttonText, buttonTextStyle]}>Remove Photo</Text></TextButton>
                                 </>
                                 : null
                         }
