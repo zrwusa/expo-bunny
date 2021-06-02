@@ -23,9 +23,10 @@ export function DatingHomeScreen() {
             <Row style={styles.albumContainer}>
                 <CardStack style={styles.album}
                            loop
-                           verticalSwipe={false}
+                           verticalSwipe={true}
                            renderNoMoreCards={() => null}
                            ref={swipper}
+                           horizontalThreshold={60}
                            onSwipedLeft={() => {
                            }}
                            onSwipedRight={() => {

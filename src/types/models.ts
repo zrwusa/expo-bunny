@@ -121,12 +121,19 @@ export interface Occupation {
 }
 
 export interface University {
-    "alphaTwoCode": string,
-    "domains": string[],
-    "webPages": string[],
-    "stateProvince": string | null,
-    "country": string,
-    "name": string
+    alphaTwoCode: string,
+    domains: string[],
+    webPages: string[],
+    stateProvince: string | null,
+    country: string,
+    name: string
+}
+
+export interface Religion {
+    display: string,
+    code: string,
+    definition: string,
+    id: string,
 }
 
 export interface OccupationCategory {

@@ -12,7 +12,6 @@ import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {occupationCategories} from "../../firebase/migrations/occupationCategory";
 import {occupations} from "../../firebase/migrations/occupation";
-import {migrateUniversities} from "../../firebase/migrations/university";
 
 export function PlaygroundScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -42,7 +41,8 @@ export function PlaygroundScreen() {
 
         // await migrateCountries()
 
-        await migrateUniversities()
+        // await migrateUniversities()
+        // await migrateReligions()
         setProgress(1);
     }
 

@@ -16,14 +16,14 @@ export interface CardItemProps {
 }
 
 const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches, name,}: CardItemProps) => {
-    const {sizeLabor, themeLabor, colors, wp} = useBunnyKit();
+    const {sizeLabor, themeLabor, colors, wp, hp} = useBunnyKit();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles, sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     const imageStyle = [
         {
             borderRadius: wp(22),
-            width: hasVariant ? wp(375 / 2 - 30) : wp(375 - 80),
-            height: hasVariant ? wp(170) : wp(350),
+            width: hasVariant ? wp(375 / 2 - 30) : wp(375 - 45),
+            height: hasVariant ? hp(170) : hp(470),
             margin: hasVariant ? 0 : wp(10),
         },
     ];

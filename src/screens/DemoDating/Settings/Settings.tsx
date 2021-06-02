@@ -2,8 +2,8 @@ import * as React from "react";
 import {useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {City, Country, DemoDatingTabStackParam, OccupationCategory, State, University} from "../../../types";
-import {getContainerStyles, ModalFromRight} from "../../../containers";
+import {City, Country, DemoDatingTabStackParam, Occupation, OccupationCategory, Religion, State, University} from "../../../types";
+import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from "../../../containers";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {getSharedStyles} from "../../../helpers/shared-styles";
 import {ScrollView} from "react-native";
@@ -14,16 +14,13 @@ import {
     HeightPicker,
     InlineSelector,
     InterestPicker,
-    LiveIn,
-    Occupation,
-    ReligionPicker,
     SpousePicker,
     SpousePickerResult,
     TreeNodePicker,
     UserAlbumEditor
 } from "../../../components";
-import {Religion} from "../../../components/ReligionPicker";
 import {defaultValues} from "../../../constants";
+import {Slider} from "../../../../packages/react-native-range-slider-expo/src";
 
 type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
 type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;
@@ -36,6 +33,7 @@ export interface DatingSettingsProps {
 export type OccupationSelected = [OccupationCategory, Occupation] | undefined;
 export type LiveInSelected = [Country, State, City] | undefined;
 export type UniversitySelected = [University] | undefined;
+export type ReligionSelected = [Religion] | undefined;
 
 
 export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
@@ -82,7 +80,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
     const _toggleReligionModal = () => {
         setIsShowReligionModal(!isShowReligionModal)
     }
-    const [religion, setReligion] = useState<Religion | undefined>({name: 'Religion-001', code: 'Test-001'})
+    const [religion, setReligion] = useState<ReligionSelected>([defaultValues.religion])
 
     const liveInTitle = 'LiveIn';
     const [isShowLiveInModal, setIsShowLiveInModal] = useState(false);
@@ -114,6 +112,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                         idealSpouse.toHeight + 'cm'
                                 }}/>
                 <Divider/>
+
                 <InlineSelector title={occupationTitle}
                                 onPress={() => {
                                     _toggleOccupationModal()
@@ -130,20 +129,12 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                     return graduate?.[0].name || ''
                                 }}/>
                 <Divider/>
-                <InlineSelector title={heightTitle}
-                                onPress={() => {
-                                    _toggleHeightModal()
-                                }}
-                                renderText={() => {
-                                    return height?.toString() || ''
-                                }}/>
-                <Divider/>
                 <InlineSelector title={religionTitle}
                                 onPress={() => {
                                     _toggleReligionModal()
                                 }}
                                 renderText={() => {
-                                    return religion?.name || ''
+                                    return religion?.[0].display || ''
                                 }}/>
                 <Divider/>
                 <InlineSelector title={liveInTitle}
@@ -153,6 +144,30 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                                 renderText={() => {
                                     return liveIn?.[2]?.name || ''
                                 }}/>
+                <Divider/>
+                <Row style={{paddingHorizontal: wp(10), paddingVertical: wp(3)}}>
+                    <Col size={2}>
+                        <Text style={[sharedStyles.text]}>{heightTitle}</Text>
+                    </Col>
+                    <Col size={10}>
+                        <Slider min={50}
+                                max={240}
+                                step={1}
+                                valueOnChange={value => setHeight(value)}
+                                valueOnIndicated={(value) => setHeight(value)}
+                                initialValue={180}
+                                invert={false}
+                                styleSize={24}
+                                showRangeLabels={false}
+                                showValueLabels={false}
+                        />
+                    </Col>
+                    <Col size={2} align="flex-end" style={{paddingRight: wp(10)}}>
+                        <Text numberOfLines={1} style={[sharedStyles.text2]}>
+                            {height + 'cm'}
+                        </Text>
+                    </Col>
+                </Row>
             </View>
             <Divider/>
             <Text style={[sharedStyles.title2,
@@ -165,10 +180,10 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                 console.log(result)
             }}/>
 
-            <ModalFromRight isVisible={isShowSpouseModal}
-                            onVisibleChanged={isVisible => {
-                                setIsShowSpouseModal(isVisible)
-                            }}>
+            <ModalFromBottom isVisible={isShowSpouseModal}
+                             onVisibleChanged={isVisible => {
+                                 setIsShowSpouseModal(isVisible)
+                             }}>
                 <SpousePicker
                     title={idealSpouseTitle}
                     onDone={(result) => {
@@ -179,7 +194,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                         setIsShowSpouseModal(false);
                     }}
                 />
-            </ModalFromRight>
+            </ModalFromBottom>
             <ModalFromRight isVisible={isShowOccupationModal}
                             onVisibleChanged={isVisible => {
                                 setIsShowOccupationModal(isVisible)
@@ -191,6 +206,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                     leafLevel={1}
                     collectionPaths={['occupationCategories', 'occupations']}
                     conditions={[['', '==', ''], ['category', '==', '$code']]}
+                    displayFields={['name', 'name']}
 
                     // dataMode="local"
                     // data={occupationTreeData}
@@ -228,6 +244,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                     collectionPaths={['universities']}
                     conditions={[['', '==', '']]}
                     keyExtractors={['id']}
+                    displayFields={['name']}
                     // dataMode="local"
                     // data={occupationTreeData}
                     // childrenKeys={['children', 'children']}
@@ -261,12 +278,24 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                             onVisibleChanged={isVisible => {
                                 setIsShowReligionModal(isVisible)
                             }}>
-                <ReligionPicker
-                    title={religionTitle}
+                <TreeNodePicker
+                    titles={['Religion']}
+
+                    dataMode="firestore"
+                    leafLevel={0}
+                    collectionPaths={['religions']}
+                    conditions={[['', '==', '']]}
+                    keyExtractors={['id']}
+                    displayFields={['display']}
+                    // dataMode="local"
+                    // data={occupationTreeData}
+                    // childrenKeys={['children', 'children']}
+
                     onDone={(result) => {
-                        setReligion(result);
+                        setReligion(result as unknown as ReligionSelected);
                         setIsShowReligionModal(false);
                     }}
+
                     onCancel={() => {
                         setIsShowReligionModal(false);
                     }}
@@ -284,6 +313,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                     collectionPaths={['countries', 'states', 'cities']}
                     conditions={[['', '==', ''], ['countryId', '==', '$id'], ['stateId', '==', '$id']]}
                     keyExtractors={['id', 'id', 'id']}
+                    displayFields={['name', 'name', 'name']}
                     // dataMode="local"
                     // data={occupationTreeData}
                     // childrenKeys={['children', 'children']}

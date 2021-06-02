@@ -16,6 +16,7 @@ export interface InlineProps {
     titleStyle?: StyleProp<TextStyle>,
     textStyle?: StyleProp<TextStyle>,
     textAlign?: FlexAlignType,
+    renderColumn2?: () => React.ReactNode
 }
 
 let count = 0;
@@ -24,7 +25,7 @@ const counter = () => {
 }
 export const InlineSelector = pure((props: InlineProps) => {
     // console.log('InlineSelector',counter())
-    const {title, renderText, onPress, columns = [4, 8, 1], isShowChevron = true, titleStyle, textStyle, textAlign = 'flex-end'} = props;
+    const {title, renderText, onPress, columns = [4, 8, 1], isShowChevron = true, titleStyle, textStyle, textAlign = 'flex-end', renderColumn2} = props;
     const {sizeLabor, themeLabor, wp, t, colors, user} = useBunnyKit();
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     return <TouchableOpacity onPress={(e) => {
@@ -39,9 +40,14 @@ export const InlineSelector = pure((props: InlineProps) => {
                 }
             </Col>
             <Col size={columns[1]} align={textAlign}>
-                <Text numberOfLines={1} style={[sharedStyles.text2, textStyle]}>
-                    {renderText?.()}
-                </Text>
+                {
+                    renderColumn2
+                        ? renderColumn2()
+                        : <Text numberOfLines={1} style={[sharedStyles.text2, textStyle]}>
+                            {renderText?.()}
+                        </Text>
+                }
+
             </Col>
             <Col size={columns[2]} align="flex-end">
                 {

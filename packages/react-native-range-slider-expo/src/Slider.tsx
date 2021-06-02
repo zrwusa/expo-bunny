@@ -224,7 +224,7 @@ export const Slider = (props: SliderProps) => {
         'large': 7
     }
     return (
-        <Animated.View style={[styles.container, {opacity, padding: typeof styleSize === "number" ? styleSize / 2 : paddingSizeMap[styleSize]}]}>
+        <Animated.View style={[styles.container, {opacity, paddingHorizontal: typeof styleSize === "number" ? styleSize / 2 : paddingSizeMap[styleSize]}]}>
             {
                 valueLabelsPosition === 'up'
                     ? renderValueLabels()
@@ -272,7 +272,7 @@ const getStyles = (knobSize: number) => {
     return StyleSheet.create({
         container: {
             // height: 100,
-            // width: '100%'
+            width: '100%'
         },
         knob: {
             position: 'absolute',

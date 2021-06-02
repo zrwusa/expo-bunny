@@ -39,6 +39,7 @@ export type TreeNodePickerProps = {
     leafLevel?: number,
     keyExtractors: string[],
     currentNodes?: TreeNode[],
+    displayFields?: string[],
 }
 export const TreeNodePicker = (props: TreeNodePickerProps) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
@@ -59,7 +60,8 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
         condition = dataMode === 'local' ? undefined : ['', '==', ''],
         leafLevel = 1,
         keyExtractors = ['id', 'id', 'id'],
-        currentNodes
+        currentNodes,
+        displayFields = ['name', 'name', 'name']
     } = props;
 
 
@@ -77,6 +79,7 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
     const childrenKey = childrenKeys[level]
     const collectionPath = collectionPaths[level]
     const keyExtractor = keyExtractors[level]
+    const displayField = displayFields[level]
     const [childrenCondition, setChildrenCondition] = useState<WhereArguments>()
     useEffect(() => {
         (async () => {
@@ -196,7 +199,7 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
                                 onPress={async () => {
                                     await treeNodePress(item)
                                 }}
-                                renderText={() => item.name}
+                                renderText={() => item?.[displayField]?.toString() || ''}
                                 isShowChevron={dataMode === 'local' ? !!item.children : level !== leafLevel}
                             />
                         }}
@@ -233,6 +236,7 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
                                 conditions={conditions}
                                 keyExtractors={keyExtractors}
                                 initialTreeNode={initialTreeNode}
+                                displayFields={displayFields}
                             />
                         </ModalFromRight>
                         : null
