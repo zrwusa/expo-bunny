@@ -70,9 +70,9 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
         if (!user) {
             return {_id: 'defaultId', avatar: '', name: 'defaultName'}
         }
-        const {firebaseUser} = user
+        const {firebaseUser,storedUser} = user
         if (firebaseUser) {
-            return {_id: firebaseUser.uid || 'defaultId', avatar: firebaseUser.photoURL || '', name: firebaseUser.displayName || 'defaultName'}
+            return {_id: firebaseUser.uid || 'defaultId', avatar: storedUser?.photoURL || '', name: firebaseUser.displayName || 'defaultName'}
         }
     }, [user])
 
