@@ -42,7 +42,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
 
-    const idealSpouseTitle = 'Ideal Spouse';
+    const idealSpouseTitle = 'Ideal Girl';
     const [isShowSpouseModal, setIsShowSpouseModal] = useState(false);
     const _toggleSpouseModal = () => {
         setIsShowSpouseModal(!isShowSpouseModal)

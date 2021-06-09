@@ -7,7 +7,7 @@ const socialMediaVideos = [
         category: 'VIDEO',
         user: 'aladdin',
         userAvatar: {uri: 'https://i.pinimg.com/236x/a6/cd/0a/a6cd0a15d5b2909539dd7944201127d2.jpg'},
-        avSource: {uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'},
+        avSource: {uri: 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/videos%2Fbig-buck-bunny.mp4?alt=media&token=58adc0e9-afec-4557-854e-8700ebeff527'},
         likes: 6218,
         comments: [
             {
@@ -22,7 +22,7 @@ const socialMediaVideos = [
         category: 'VIDEO',
         user: 'Cars with Ivan',
         userAvatar: {uri: 'https://i.pinimg.com/236x/44/2f/b4/442fb435dfe1ba7ee31c1ee771e5fa01.jpg'},
-        avSource: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/videos/mini-pc.mp4'},
+        avSource: {uri: 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/videos%2Fmini-pc.mp4?alt=media&token=a0b80bbd-e7fe-4373-ab79-8ffc7deb3fe8'},
         likes: 87356,
         comments: [
             {
@@ -36,7 +36,7 @@ const socialMediaVideos = [
         category: 'VIDEO',
         user: 'real cop',
         userAvatar: {uri: 'https://i.pinimg.com/236x/b7/1a/09/b71a09aec5c36e3ac5d4919ca3b34076.jpg'},
-        avSource: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/videos/pickup-truck.mp4'},
+        avSource: {uri: 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/videos%2Fbig-buck-bunny.mp4?alt=media&token=58adc0e9-afec-4557-854e-8700ebeff527'},
         likes: 987642,
         comments: [
             {
@@ -50,7 +50,7 @@ const socialMediaVideos = [
         category: 'VIDEO',
         user: 'tiger finca',
         userAvatar: {uri: 'https://i.pinimg.com/236x/e4/01/38/e40138e42ba1201b3f73412f526b6cb2.jpg'},
-        avSource: {uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/videos/big-buck-bunny.mp4'},
+        avSource: {uri: 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/videos%2Fpickup-truck.mp4?alt=media&token=5a5fb04a-0c09-4b4e-996d-a34ea56c1a2b'},
         likes: 69,
         comments: [
             {
