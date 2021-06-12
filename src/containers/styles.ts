@@ -14,11 +14,12 @@ export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor)
             ...card,
             paddingVertical: ms.sp.m,
             paddingHorizontal: ms.sp.l,
-            flex: 1,
+            width: '100%',
+            // flex:1, //TODO width 100% different from flex on native devices
         },
         CardInTitle: {
             ...title2,
-            marginTop: ms.sp.m,
+            marginBottom: ms.sp.m,
         },
         CardOutTitle: {
             ...title,

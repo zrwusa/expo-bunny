@@ -39,6 +39,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools" iconSize={wp(20)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
+                    <InlineJump type="LINK" iconName="car" text={st(`algorithm`)} to="/algorithm"/>
                 </Card>
                 <Card titleMode="OUT" title={st(`apps`)}>
                     <InlineJump type="LINK" iconName="layout7" text={st(`socialMedia`)} to="/demo-social-media/home"/>

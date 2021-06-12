@@ -27,4 +27,5 @@ export * from "./UserAlbumEditor"
 export * from "./GraduatePicker"
 export * from "./HeightPicker"
 export * from "./TreeNodePicker"
+export * from "./VividAlgorithm"
 

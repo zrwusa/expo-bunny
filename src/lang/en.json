@@ -70,6 +70,7 @@
       "demoSearch": "Demo Search",
       "colorFinder": "Color Finder",
       "playground": "Playground",
+      "algorithm": "Algorithm",
       "demoHealth": "Health",
       "iconTools": "Icon Tools",
       "demoDating": "Dating",
@@ -298,6 +299,9 @@
     },
     "Playground": {
       "title": "Playground"
+    },
+    "Algorithm": {
+      "title": "Algorithm"
     },
     "ColorFinder": {
       "title": "Color Finder",

@@ -114,3 +114,23 @@ export type Month = { [key in MonthKey]: string }
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
 
 
+export type TreeNode = {
+    id: string,
+    name?: string,
+    value?: number,
+    children?: TreeNode[]
+}
+
+export type OrderType = 'InOrder' | 'PreOrder' | 'PostOrder'
+
+
+export interface IStack<T> {
+    push(item: T): void;
+
+    pop(): T | undefined;
+
+    peek(): T | undefined;
+
+    size(): number;
+}
+

@@ -333,7 +333,8 @@ export function ImageUploader(props: ImageUploaderProps) {
                             image.uri
                                 ? <>
                                     <Divider/>
-                                    <TextButton onPress={_removePhoto} style={[styles.button, buttonStyle]}><Text style={[styles.buttonText, buttonTextStyle]}>Remove Photo</Text></TextButton>
+                                    <TextButton onPress={_removePhoto} style={[styles.button, buttonStyle]}><Text
+                                        style={[styles.buttonText, buttonTextStyle]}>Remove Photo</Text></TextButton>
                                 </>
                                 : null
                         }

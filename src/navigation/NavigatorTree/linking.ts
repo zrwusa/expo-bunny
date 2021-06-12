@@ -251,6 +251,10 @@ export const linking = {
                 name: 'Playground',
                 path: 'playground',
             },
+            Algorithm: {
+                name: 'Algorithm',
+                path: 'algorithm',
+            },
             ColorFinder: {
                 name: 'ColorFinder',
                 path: 'color-finder',

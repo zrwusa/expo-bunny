@@ -24,10 +24,11 @@ export function Card(props: OutTitleCardProps) {
     const styles = getStyles(sizeLabor, themeLabor)
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const mergedStyle = [containerStyles.Card, style]
-
+    // return <View>
+    //     {children}
+    // </View>
     return finalTitleMode === 'OUT'
-        ?
-        <View>
+        ? <View>
             <Text style={containerStyles.CardOutTitle}>{title}</Text>
             {
                 isLinear
@@ -48,6 +49,4 @@ export function Card(props: OutTitleCardProps) {
                 <Text style={containerStyles.CardInTitle}>{title}</Text>
                 {children}
             </View>
-
-
 }

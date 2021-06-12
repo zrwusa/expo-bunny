@@ -70,6 +70,7 @@
       "demoSearch": "示例-搜索",
       "colorFinder": "颜色查找器",
       "playground": "游乐场",
+      "algorithm": "算法",
       "demoHealth": "健身",
       "iconTools": "图标工具",
       "demoDating": "交友",
@@ -298,6 +299,9 @@
     },
     "Playground": {
       "title": "游乐场"
+    },
+    "Algorithm": {
+      "title": "算法"
     },
     "ColorFinder": {
       "title": "颜色查找器",

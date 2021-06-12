@@ -79,6 +79,7 @@ import {ThemePicker} from "../../components/ThemePicker";
 import {DatingHomeScreen} from "../../screens/DemoDating/Home";
 import {DatingSettingsScreen} from "../../screens/DemoDating/Settings";
 import {ChatRoomScreen} from "../../screens/DemoChat/ChatRoom";
+import {AlgorithmScreen} from "../../screens/Algorithm";
 
 type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
 type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
@@ -452,6 +453,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 }
             </RootStack.Screen>
             <RootStack.Screen name="Playground" component={PlaygroundScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="Algorithm" component={AlgorithmScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="ColorFinder" component={ColorFinderScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="IconTools" component={IconToolsScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoHealth" options={optionsMergeWithTitle(optionsHealth)}>

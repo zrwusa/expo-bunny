@@ -44,6 +44,7 @@ export type RootStackParam = {
     DemoSocialMedia: undefined | { screen: string; params?: { [key: string]: any } };
     DemoSearch: undefined | { keyword: string };
     Playground: undefined;
+    Algorithm: undefined;
     ColorFinder: undefined;
     IconTools: undefined;
     DemoHealth: undefined | { screen: string; params?: { [key: string]: any } };

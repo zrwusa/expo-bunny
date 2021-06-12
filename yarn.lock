@@ -2202,6 +2202,13 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@qiwi/deep-proxy@^1.8.2":
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@qiwi/deep-proxy/-/deep-proxy-1.8.2.tgz#53a94ac63a98d61a872e7247320dfa3cbe9f783f"
+  integrity sha512-yMVzGtIbYabOYrl3KKOWgF40M3BsO/MdKgSpdd5fLupgT0kY2rzDrHRx6vjgQCyZkyCccmdFn1QHiW5tug5gzw==
+  dependencies:
+    tslib "^2.2.0"
+
 "@react-native-async-storage/async-storage@^1.15.2":
   version "1.15.4"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.4.tgz#cdba464ca3bb9f10ec538342cbf2520c06f453ab"
@@ -12703,7 +12710,7 @@ tslib@^1.11.1, tslib@^1.9.0, tslib@^1.9.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3:
+tslib@^2.0.3, tslib@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
