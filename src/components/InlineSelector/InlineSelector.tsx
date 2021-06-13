@@ -1,6 +1,6 @@
 import {FlexAlignType, GestureResponderEvent, StyleProp, TextStyle, TouchableOpacity} from "react-native";
 import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getSharedStyles} from "../../helpers/shared-styles";
+import {getSharedStyles} from "../../helpers";
 import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {IcoMoon, Text} from "../UI";

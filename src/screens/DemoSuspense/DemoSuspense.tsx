@@ -2,8 +2,9 @@ import React from 'react';
 import {Text, View} from "../../components/UI";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
-import {getSharedStyles, wait} from "../../utils";
+import {getSharedStyles} from "../../helpers";
 import {useBunnyKit} from "../../hooks/bunny-kit";
+import {wait} from "../../utils";
 
 const DemoLazy100 = React.lazy(async () => {
         const module = await import('../../components/DemoLazy/DemoLazy')

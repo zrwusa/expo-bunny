@@ -4,7 +4,7 @@ import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
-import {Stack, uuidV4} from "../../utils";
+import {SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
 import {Card} from "../../containers/Card";
 
 export interface VividAlgorithmProps<T> {
@@ -58,29 +58,39 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
     const renderObject = (obj: { [key in string]: any }) => {
         return (
             <Row>
-                <Col size={6}>
-                    <Row>
-                        {
-                            Object.keys(obj).map(key => {
-                                return <View style={styles.arrayItem} key={key}>
-                                    <Text>{key}</Text>
-                                    <Text>{obj[key]}</Text>
-                                </View>
-                            })
-                        }
-                    </Row>
-                </Col>
+                {
+                    Object.keys(obj).map(key => {
+                        return <View style={styles.arrayItem} key={key}>
+                            <Text>{key}</Text>
+                            <Text>{obj[key]}</Text>
+                        </View>
+                    })
+                }
+            </Row>
+        )
+    }
 
+    const renderLinkedListNode = (linkedListNode: SinglyLinkedListNode) => {
+        return (
+            <Row>
+
+                <View style={styles.arrayItem} key={linkedListNode.index}>
+                    <Text>{linkedListNode.index}</Text>
+                    <Text>{linkedListNode.value}</Text>
+                </View>
             </Row>
         )
     }
 
     const renderVariable = (item: any) => {
+        if (!item) return null
         switch (typeof item) {
             case 'number':
                 return renderNumber(item)
             case 'object':
-                if (item instanceof Map) {
+                if (item instanceof SinglyLinkedListNode) {
+                    return renderLinkedListNode(item)
+                } else if (item instanceof Map) {
                     return renderArray(Array.from(item))
                 } else if (item instanceof Array) {
                     return renderArray(item)
@@ -92,16 +102,19 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         }
     }
 
+    console.log('data', data)
     return <View>
         {
-            Object.keys(data).map(datumKey => {
-                const item = data[datumKey];
-                return <Card title={datumKey} key={datumKey}>
-                    {
-                        renderVariable(item)
-                    }
-                </Card>
-            })
+            data
+                ? Object.keys(data).map(datumKey => {
+                    const item = data[datumKey];
+                    return <Card title={datumKey} key={datumKey}>
+                        {
+                            renderVariable(item)
+                        }
+                    </Card>
+                })
+                : null
         }
     </View>
 }

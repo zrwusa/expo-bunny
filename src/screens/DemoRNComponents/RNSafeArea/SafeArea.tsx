@@ -2,7 +2,7 @@ import React from "react";
 import {SafeAreaView} from "react-native";
 import {Text} from "../../../components/UI";
 import {getContainerStyles} from "../../../containers";
-import {getSharedStyles} from "../../../utils";
+import {getSharedStyles} from "../../../helpers";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 function RNFlatListScreen() {

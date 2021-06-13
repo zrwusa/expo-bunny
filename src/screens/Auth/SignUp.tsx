@@ -12,9 +12,8 @@ import {LinearGradientIcon} from "../../components/LinearGradientIcon";
 import {Keyboard} from "react-native";
 import {collectBLResult, sysError} from "../../store/actions";
 import {LoginVector} from "../../components/LoginVector";
-import {getSharedStyles} from "../../helpers/shared-styles";
+import {getSharedStyles, navToReference} from "../../helpers";
 import {getStyles} from "./styles";
-import {navToReference} from "../../helpers";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 
 type SignUpRouteProp = RouteProp<AuthTopStackParam, 'SignUp'>;

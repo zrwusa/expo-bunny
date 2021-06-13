@@ -5,7 +5,7 @@ import {Button, Text, View} from "../../components/UI";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
 import {RootState} from "../../types";
-import {getSharedStyles} from "../../helpers/shared-styles";
+import {getSharedStyles} from "../../helpers";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 
 function DemoFCReduxHookScreen() {

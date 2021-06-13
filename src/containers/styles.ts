@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../types";
-import {getSharedStyles} from "../utils";
+import {getSharedStyles} from "../helpers";
 
 export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);

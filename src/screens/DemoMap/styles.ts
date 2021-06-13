@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet} from "react-native";
 import {SizeLabor, ThemeLabor} from "../../types";
-import {getSharedStyles} from "../../utils";
+import {getSharedStyles} from "../../helpers";
 
 
 export const getCardSize = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {

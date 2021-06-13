@@ -2,7 +2,7 @@ import {Row} from "../../containers/Row";
 import {Text, View} from "../UI";
 import * as React from "react";
 import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {getSharedStyles} from "../../helpers/shared-styles";
+import {getSharedStyles} from "../../helpers";
 import {getStyles} from "./styles";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 

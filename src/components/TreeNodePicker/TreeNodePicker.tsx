@@ -4,7 +4,7 @@ import {Col} from "../../containers/Col";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getSharedStyles} from "../../helpers/shared-styles";
+import {getSharedStyles} from "../../helpers";
 import {getStyles} from "./styles";
 import {FlatList, KeyboardAvoidingView, SafeAreaView} from "react-native";
 import {ModalFromRight} from "../../containers/ModalFromRight";

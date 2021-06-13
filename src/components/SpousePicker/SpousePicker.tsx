@@ -10,7 +10,7 @@ import {useState} from "react";
 import _ from "lodash";
 import BunnyConstants from "../../constants/constants";
 import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getSharedStyles} from "../../helpers/shared-styles";
+import {getSharedStyles} from "../../helpers";
 import {getStyles} from "./styles";
 
 export interface SpousePickerResult {

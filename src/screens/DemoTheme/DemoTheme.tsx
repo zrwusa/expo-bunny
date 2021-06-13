@@ -5,7 +5,7 @@ import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getStyles} from "./styles";
 import BunnyConstants from "../../constants/constants";
 import {Card, getContainerStyles, Row} from "../../containers";
-import {getSharedStyles} from "../../utils";
+import {getSharedStyles} from "../../helpers";
 // import {LinearGradient} from "expo-linear-gradient";
 import Svg, {Defs, Ellipse, RadialGradient, Rect, Stop,} from 'react-native-svg';
 import {useBunnyKit} from "../../hooks/bunny-kit";

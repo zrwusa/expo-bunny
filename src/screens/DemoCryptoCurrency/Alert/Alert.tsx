@@ -11,7 +11,7 @@ import {defaultNotification, registerForPushNotificationsAsync} from "../../../u
 import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings, sysError} from "../../../store/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {getStyles} from "./styles";
-import {getSharedStyles} from "../../../utils";
+import {getSharedStyles} from "../../../helpers";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 

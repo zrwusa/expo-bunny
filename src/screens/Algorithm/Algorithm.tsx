@@ -4,8 +4,9 @@ import {getStyles} from "./styles";
 import {OrderType} from "../../types";
 import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
-import {BFS, DFS, isValidParenthesis, lengthOfLongestSubstring, treeData, treeMaxDepth} from "../../utils/algorithms";
+import {BFS, DFS, isValidParenthesis, lengthOfLongestSubstring, reverseLinkedList, treeData, treeMaxDepth} from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
+import {SinglyLinkedList} from "../../utils/data-structures";
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -23,7 +24,8 @@ export function AlgorithmScreen() {
     const [parenthesisVariables, setParenthesisVariables] = useState<{ [key in string]: unknown }>()
     const _parenthesisInput = async () => {
         const result = await isValidParenthesis(parenthesisInput, ({trapName, value, key, DEFAULT}) => {
-            setParenthesisVariables(prevState => ({...prevState, [key!.toString()]: value}))
+            console.log(key, value);
+            setParenthesisVariables(prevState => ({...prevState, [key!.toString()]: value}));
             return DEFAULT
         });
         console.log(result);
@@ -33,11 +35,23 @@ export function AlgorithmScreen() {
     const [lengthOfLongestSubstringVariables, setLengthOfLongestSubstringVariables] = useState<{ [key in string]: unknown }>()
     const _lengthOfLongestSubstring = async () => {
         const result = await lengthOfLongestSubstring(lengthOfLongestSubstringValue, ({value, key, DEFAULT}) => {
-            console.log(value)
-            setLengthOfLongestSubstringVariables(prevState => ({...prevState, [key!.toString()]: value}))
+            console.log(key, value);
+            setLengthOfLongestSubstringVariables(prevState => ({...prevState, [key!.toString()]: value}));
             return DEFAULT
         });
         console.log(result);
+    }
+
+    const linkedList = SinglyLinkedList.from([1, 2, 3, 4, 5, 6]);
+    const [reverseLinkedListVariables, setReverseLinkedListVariables] = useState<{ [key in string]: unknown }>()
+
+    const _reverseLinkedList = async () => {
+        const result = await reverseLinkedList(linkedList.head, ({value, key, DEFAULT}) => {
+            console.log(key, value);
+            setReverseLinkedListVariables(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT
+        });
+        console.log(result)
     }
 
     return (
@@ -64,6 +78,11 @@ export function AlgorithmScreen() {
                     <TextButton onPress={_lengthOfLongestSubstring}>
                         <Text>Length Of Longest Substring</Text>
                     </TextButton>
+                    <TextButton onPress={_reverseLinkedList}>
+                        <Text>Reverse Linked List</Text>
+                    </TextButton>
+
+
                     <TextButton onPress={() => {
                         console.log(treeMaxDepth(treeData))
                     }}>
@@ -78,6 +97,11 @@ export function AlgorithmScreen() {
                 {
                     parenthesisVariables
                         ? <VividAlgorithm data={parenthesisVariables}/>
+                        : null
+                }
+                {
+                    reverseLinkedListVariables
+                        ? <VividAlgorithm data={reverseLinkedListVariables}/>
                         : null
                 }
             </View>

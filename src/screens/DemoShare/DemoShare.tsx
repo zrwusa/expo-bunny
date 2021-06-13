@@ -10,7 +10,7 @@ import {shortenTFunctionKey} from "../../providers/i18n-labor";
 import {getContainerStyles} from "../../containers";
 import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
-import {getSharedStyles} from "../../utils";
+import {getSharedStyles} from "../../helpers";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 
 export type SelectedImage = {

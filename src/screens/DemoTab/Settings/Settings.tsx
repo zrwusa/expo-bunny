@@ -5,7 +5,7 @@ import {DemoTabStackParam} from "../../../types";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
-import {getSharedStyles} from "../../../helpers/shared-styles";
+import {getSharedStyles} from "../../../helpers";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;

@@ -1,4 +1,4 @@
-import {IStack, JSONObject, JSONSerializable} from "../types";
+import {JSONObject, JSONSerializable} from "../types";
 import {firebase} from "../firebase/firebase";
 import _ from "lodash";
 
@@ -404,67 +404,5 @@ export const deepAdd = (obj: JSONSerializable, keyReducerMap: { [key in string]:
     return newObject;
 }
 
-/*
-A queue that can be of type T
-Generics are great in any language
-*/
-export class Queue<T> {
-    private items: T[] = [];
 
-    /* Add and pop do the same thing
-    One has the fat arrow syntax
-    */
-    constructor(items?: T[]) {
-        if (items) {
-            this.items = items
-        }
-    }
 
-    public add = (item: T) => this.items.push(item);
-
-    public pop(): T | undefined {
-        if (this.isEmpty()) {
-            return;
-        } else {
-            return this.items.shift() as T;
-        }
-    }
-
-    public isEmpty(): boolean {
-        return this.items.length === 0;
-    }
-}
-
-export class Stack<T> implements IStack<T> {
-    public items: T[] = [];
-    private readonly capacity: number = Infinity;
-
-    constructor(capacity?: number) {
-        if (capacity) {
-            this.capacity = capacity;
-        }
-    }
-
-    public push(item: T): void {
-        if (this.size() === this.capacity) {
-            throw Error("Stack has reached max capacity, you cannot add more items");
-        }
-        this.items.push(item);
-    }
-
-    public pop(): T | undefined {
-        return this.items.pop();
-    }
-
-    public peek(): T | undefined {
-        return this.items[this.size() - 1];
-    }
-
-    public size(): number {
-        return this.items.length;
-    }
-
-    public getItems(): T[] {
-        return this.items;
-    }
-}

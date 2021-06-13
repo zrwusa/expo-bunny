@@ -6,7 +6,7 @@ import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {ScrollView} from "react-native";
 import {DemoModalStackParam} from "../../../types";
 import {getContainerStyles} from "../../../containers";
-import {getSharedStyles} from "../../../utils";
+import {getSharedStyles} from "../../../helpers";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;

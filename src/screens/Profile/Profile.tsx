@@ -9,7 +9,7 @@ import {ImageURISource, SafeAreaView, ScrollView} from "react-native";
 import {getStyles} from "./styles";
 import ImageProgressive from "../../components/UI/ImageProgressive";
 import {Col, getContainerStyles, Row} from "../../containers";
-import {getSharedStyles} from "../../utils";
+import {getSharedStyles} from "../../helpers";
 import {Avatar} from "../../components/Avatar";
 import {useFirestore} from "react-redux-firebase";
 import {useSelector} from "react-redux";

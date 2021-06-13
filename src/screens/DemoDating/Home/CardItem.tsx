@@ -1,7 +1,7 @@
 import React from "react";
 import {Image, View} from "react-native";
 import {Col, getContainerStyles, Row} from "../../../containers";
-import {getSharedStyles} from "../../../helpers/shared-styles";
+import {getSharedStyles} from "../../../helpers";
 import {IcoMoon} from "../../../components/UI";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 

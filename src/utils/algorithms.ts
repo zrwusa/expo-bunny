@@ -1,7 +1,8 @@
-import {Queue, Stack, wait} from "./utils";
+import {wait} from "./utils";
 import {OrderType, TreeNode} from "../types";
 import {DeepProxy} from '@qiwi/deep-proxy'
 import {TProxyHandler} from "@qiwi/deep-proxy/typings/interface";
+import {Queue, SinglyLinkedListNode, Stack} from "./data-structures";
 
 export const treeData: TreeNode = {
     id: '1',
@@ -173,7 +174,6 @@ export const isValidParenthesis = async function (input: string, proxyHandler: T
     };
 
     let variablesProxy = new DeepProxy<IsValidParenthesisVariables>(variables, proxyHandler)
-    // let variablesProxy = new Proxy<IsValidParenthesisVariables>(variables, proxyHandler);
 
     const hash: { [key in HashKey]: string } = {
         '(': ')',
@@ -181,11 +181,8 @@ export const isValidParenthesis = async function (input: string, proxyHandler: T
         '[': ']',
     };
 
-    // const stack = new Stack<HashKey>();
-
     for (const char of onlyHashKey) {
         await wait(500)
-        // variablesProxy.char = char
         if (char in hash) {
             variablesProxy.stack.push(char as HashKey);
         } else {
@@ -199,13 +196,13 @@ export const isValidParenthesis = async function (input: string, proxyHandler: T
     return !variablesProxy.stack.size();
 };
 
-// Using Hash Tables
-// 3. Longest Substring Without Repeating Characters
 export type LengthOfLongestSubstringVariables = {
     maxLen: number,
     curr: number,
     map: Map<string, number>
 }
+// Using Hash Tables TODO
+// 3. Longest Substring Without Repeating Characters
 export const lengthOfLongestSubstring = async function (input: string, proxyHandler: TProxyHandler) {
 
     let variables: LengthOfLongestSubstringVariables = {
@@ -213,10 +210,11 @@ export const lengthOfLongestSubstring = async function (input: string, proxyHand
         curr: 0,
         map: new Map<string, number>(),
     }
+    let variablesProxy = new DeepProxy<LengthOfLongestSubstringVariables>(variables, proxyHandler);
+
     if (input.length < 2) {
         return input.length;
     }
-    let variablesProxy = new DeepProxy<LengthOfLongestSubstringVariables>(variables, proxyHandler)
 
     for (let i = 0; i < input.length; i++) {
         variablesProxy.curr = i;
@@ -233,6 +231,27 @@ export const lengthOfLongestSubstring = async function (input: string, proxyHand
 
     return variablesProxy.maxLen;
 };
+
+//206. Reverse Linked List
+export type ReverseLinkedListVariables = {
+    pre: SinglyLinkedListNode | null
+}
+
+export async function reverseLinkedList(head: SinglyLinkedListNode | null, proxyHandler: TProxyHandler): Promise<SinglyLinkedListNode | null> {
+    let pre = null
+    let variables: ReverseLinkedListVariables = {
+        pre: null
+    }
+    let variablesProxy = new DeepProxy<ReverseLinkedListVariables>(variables, proxyHandler);
+    while (head) {
+        await wait(500)
+        const next = head.next
+        head.next = variablesProxy.pre
+        variablesProxy.pre = head
+        head = next
+    }
+    return pre
+}
 
 
 

@@ -5,7 +5,7 @@ import {RouteProp} from "@react-navigation/native";
 import {City, Country, DemoDatingTabStackParam, Occupation, OccupationCategory, Religion, State, University} from "../../../types";
 import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from "../../../containers";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
-import {getSharedStyles} from "../../../helpers/shared-styles";
+import {getSharedStyles} from "../../../helpers";
 import {ScrollView} from "react-native";
 import {useBunnyKit} from "../../../hooks/bunny-kit";
 import {

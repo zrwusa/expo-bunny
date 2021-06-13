@@ -3,7 +3,7 @@ import {InButtonText, LinearGradientButton, SwitchP, Text, TextInput, View} from
 import {useDispatch, useSelector} from "react-redux";
 import {saveDemoSagaFirebaseTodo} from "../../store/actions";
 import {RootState} from "../../types";
-import {getSharedStyles} from "../../helpers/shared-styles";
+import {getSharedStyles} from "../../helpers";
 import {Col, getContainerStyles, Row} from "../../containers";
 import {useFirebaseConnect} from "react-redux-firebase";
 import {getStyles} from "./styles";

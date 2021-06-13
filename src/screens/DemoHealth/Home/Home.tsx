@@ -10,7 +10,7 @@ import {Avatar} from "../../../components";
 import {E_MONTH} from "../../../constants";
 import {MonthKey} from "../../../types";
 import {BodyPartCard} from "./BodyPartCard";
-import {getSharedStyles} from "../../../utils";
+import {getSharedStyles} from "../../../helpers";
 import {BodyPartChartCard} from "./BodyPartChartCard";
 import {SafeAreaView, ScrollView} from "react-native";
 import {data, data1, data2} from "./data";
