@@ -114,11 +114,26 @@ export type Month = { [key in MonthKey]: string }
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
 
 
-export type TreeNode = {
-    id: string,
-    name?: string,
-    value?: number,
-    children?: TreeNode[]
+// export type TreeNode = {
+//     id: string,
+//     name?: string,
+//     value?: number,
+//     children?: TreeNode[]
+// }
+
+export class TreeNode {
+    id: string;
+    name?: string | undefined;
+    value?: number | undefined;
+    children?: TreeNode[] | undefined;
+
+    constructor(id: string, name?: string, value?: number, children?: TreeNode[]) {
+        this.id = id;
+        this.name = name || '';
+        this.value = value || 0;
+        this.children = children || [];
+    }
+
 }
 
 export type OrderType = 'InOrder' | 'PreOrder' | 'PostOrder'

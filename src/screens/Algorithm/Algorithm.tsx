@@ -1,23 +1,34 @@
 import React, {useState} from "react";
 import {Text, TextButton, TextInput, View} from "../../components/UI";
 import {getStyles} from "./styles";
-import {OrderType} from "../../types";
+import {OrderType, TreeNode} from "../../types";
 import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {BFS, DFS, isValidParenthesis, lengthOfLongestSubstring, reverseLinkedList, treeData, treeMaxDepth} from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
 import {SinglyLinkedList} from "../../utils/data-structures";
+import {ScrollView} from "react-native";
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
 
-    const handleDFS = (type: OrderType) => {
-        DFS(treeData, type)
-    }
+    const [DFSVariables, setDFSVariables] = useState<{ [key in string]: TreeNode }>()
 
-    const handleBFS = () => {
-        console.log(BFS(treeData))
+    const handleDFS = async (type: OrderType) => {
+        await DFS(treeData, type, ({value, key, DEFAULT}) => {
+            // console.log(key, value);
+            setDFSVariables(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT
+        })
+    }
+    const [BFSVariables, setBFSVariables] = useState<{ [key in string]: TreeNode }>()
+    const handleBFS = async () => {
+        console.log(await BFS(treeData, ({value, key, DEFAULT}) => {
+            console.log(key, value);
+            setBFSVariables(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT
+        }))
     }
 
     const [parenthesisInput, setParenthesisInput] = useState('')
@@ -28,7 +39,7 @@ export function AlgorithmScreen() {
             setParenthesisVariables(prevState => ({...prevState, [key!.toString()]: value}));
             return DEFAULT
         });
-        console.log(result);
+        console.log('result', result);
     }
 
     const [lengthOfLongestSubstringValue, setLengthOfLongestSubstringValue] = useState('')
@@ -39,7 +50,7 @@ export function AlgorithmScreen() {
             setLengthOfLongestSubstringVariables(prevState => ({...prevState, [key!.toString()]: value}));
             return DEFAULT
         });
-        console.log(result);
+        console.log('result', result);
     }
 
     const linkedList = SinglyLinkedList.from([1, 2, 3, 4, 5, 6]);
@@ -55,58 +66,71 @@ export function AlgorithmScreen() {
     }
 
     return (
-        <View style={{flex: 1}}>
-            <View style={styles.container}>
-                <Card title="Algorithms" titleMode="OUT">
-                    <TextButton onPress={() => handleDFS('PreOrder')}>
-                        <Text>DFS PreOrder</Text>
-                    </TextButton>
-                    <TextButton onPress={() => handleDFS('InOrder')}>
-                        <Text>DFS InOrder</Text>
-                    </TextButton>
-                    <TextButton onPress={() => handleDFS('PostOrder')}>
-                        <Text>DFS PostOrder</Text>
-                    </TextButton>
-                    <TextButton onPress={() => handleBFS()}>
-                        <Text>BFS</Text>
-                    </TextButton>
-                    <TextInput value={parenthesisInput} onChangeText={setParenthesisInput}/>
-                    <TextButton onPress={_parenthesisInput}>
-                        <Text>Parenthesis Check</Text>
-                    </TextButton>
-                    <TextInput value={lengthOfLongestSubstringValue} onChangeText={setLengthOfLongestSubstringValue}/>
-                    <TextButton onPress={_lengthOfLongestSubstring}>
-                        <Text>Length Of Longest Substring</Text>
-                    </TextButton>
-                    <TextButton onPress={_reverseLinkedList}>
-                        <Text>Reverse Linked List</Text>
-                    </TextButton>
+        <ScrollView>
+            <View style={{flex: 1}}>
+                <View style={styles.container}>
+                    <Card title="Algorithms" titleMode="OUT">
+                        <TextButton onPress={() => handleDFS('PreOrder')}>
+                            <Text>DFS PreOrder</Text>
+                        </TextButton>
+                        <TextButton onPress={() => handleDFS('InOrder')}>
+                            <Text>DFS InOrder</Text>
+                        </TextButton>
+                        <TextButton onPress={() => handleDFS('PostOrder')}>
+                            <Text>DFS PostOrder</Text>
+                        </TextButton>
+                        <TextButton onPress={() => handleBFS()}>
+                            <Text>BFS</Text>
+                        </TextButton>
+                        <TextInput value={parenthesisInput} onChangeText={setParenthesisInput}/>
+                        <TextButton onPress={_parenthesisInput}>
+                            <Text>Parenthesis Check</Text>
+                        </TextButton>
+                        <TextInput value={lengthOfLongestSubstringValue} onChangeText={setLengthOfLongestSubstringValue}/>
+                        <TextButton onPress={_lengthOfLongestSubstring}>
+                            <Text>Length Of Longest Substring</Text>
+                        </TextButton>
+                        <TextButton onPress={_reverseLinkedList}>
+                            <Text>Reverse Linked List</Text>
+                        </TextButton>
 
 
-                    <TextButton onPress={() => {
-                        console.log(treeMaxDepth(treeData))
-                    }}>
-                        <Text>Max depth</Text>
-                    </TextButton>
-                </Card>
-                {
-                    lengthOfLongestSubstringVariables
-                        ? <VividAlgorithm data={lengthOfLongestSubstringVariables}/>
-                        : null
-                }
-                {
-                    parenthesisVariables
-                        ? <VividAlgorithm data={parenthesisVariables}/>
-                        : null
-                }
-                {
-                    reverseLinkedListVariables
-                        ? <VividAlgorithm data={reverseLinkedListVariables}/>
-                        : null
-                }
+                        <TextButton onPress={() => {
+                            console.log(treeMaxDepth(treeData))
+                        }}>
+                            <Text>Max depth</Text>
+                        </TextButton>
+                    </Card>
+                    {
+                        DFSVariables
+                            ? <VividAlgorithm data={DFSVariables} referenceData={treeData} relatedKey="nodeNeedPrint"/>
+                            : null
+                    }
+                    {
+                        BFSVariables
+                            ? <VividAlgorithm data={BFSVariables} referenceData={treeData} relatedKey="node"/>
+                            : null
+                    }
+                    {
+                        lengthOfLongestSubstringVariables
+                            ? <VividAlgorithm data={lengthOfLongestSubstringVariables}/>
+                            : null
+                    }
+                    {
+                        parenthesisVariables
+                            ? <VividAlgorithm data={parenthesisVariables}/>
+                            : null
+                    }
+                    {
+                        reverseLinkedListVariables
+                            ? <VividAlgorithm data={reverseLinkedListVariables}/>
+                            : null
+                    }
+                </View>
+
             </View>
 
-        </View>
+        </ScrollView>
     )
 }
 
