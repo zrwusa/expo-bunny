@@ -14,7 +14,7 @@ import {firebase} from "../../firebase/firebase";
 import {FieldPath, WhereFilterOp} from '@firebase/firestore-types';
 import {useIsMounted} from "../../hooks/is-mounted";
 import {uuidV4} from "../../utils";
-import {TreeNode} from "../../types";
+import {TreeNodePickerNode} from "../../types";
 
 declare const ChildrenKey: unique symbol
 
@@ -23,19 +23,19 @@ export type WhereArguments = [string | FieldPath, WhereFilterOp, any];
 
 export type TreeNodePickerProps = {
     dataMode: 'local' | 'firestore',
-    onDone?: (result?: TreeNode[]) => void,
+    onDone?: (result?: TreeNodePickerNode[]) => void,
     onCancel?: () => void,
-    initialTreeNode?: TreeNode,
+    initialTreeNode?: TreeNodePickerNode,
     titles: string[],
     childrenKeys?: string[],
-    data?: TreeNode[],
+    data?: TreeNodePickerNode[],
     level?: number,
     collectionPaths?: string[],
     conditions?: WhereArguments [],
     condition?: WhereArguments,
     leafLevel?: number,
     keyExtractors: string[],
-    currentNodes?: TreeNode[],
+    currentNodes?: TreeNodePickerNode[],
     displayFields?: string[],
 }
 export const TreeNodePicker = (props: TreeNodePickerProps) => {
@@ -49,7 +49,7 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
         onCancel,
         titles = ['title0', 'title1', 'title2'],
         initialTreeNode,
-        data = dataMode === 'local' ? [] as TreeNode[] : undefined,
+        data = dataMode === 'local' ? [] as TreeNodePickerNode[] : undefined,
         level = 0,
         childrenKeys = ['children', 'children', 'children'],
         collectionPaths = ['collection0', 'collection1', 'collection1'],
@@ -62,10 +62,10 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
     } = props;
 
 
-    const [currentNodesState, setCurrentNodesState] = useState<TreeNode[]>(level !== 0 ? currentNodes as TreeNode[] : new Array<TreeNode>(leafLevel))
+    const [currentNodesState, setCurrentNodesState] = useState<TreeNodePickerNode[]>(level !== 0 ? currentNodes as TreeNodePickerNode[] : new Array<TreeNodePickerNode>(leafLevel))
     const [orgData, setOrgData] = useState(data)
     const [filterData, setFilterData] = useState(orgData)
-    const [children, setChildren] = useState<TreeNode[] | undefined>(undefined)
+    const [children, setChildren] = useState<TreeNodePickerNode[] | undefined>(undefined)
     const childrenLevel = level + 1
 
     const _reset = () => {
@@ -93,9 +93,9 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
                     snapshot = await collectionRef
                         .get();
                 }
-                let data: TreeNode[] = []
+                let data: TreeNodePickerNode[] = []
                 snapshot.forEach((doc) => {
-                    data.push(doc.data() as TreeNode)
+                    data.push(doc.data() as TreeNodePickerNode)
                 });
                 setOrgData(data);
                 setFilterData(data)
@@ -104,9 +104,9 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
 
     }, [])
 
-    const treeNodePress = async (treeNode: TreeNode) => {
+    const treeNodePress = async (treeNode: TreeNodePickerNode) => {
         // TODO when child selected,this should not be called
-        const newState: TreeNode[] = [...currentNodesState]
+        const newState: TreeNodePickerNode[] = [...currentNodesState]
         newState[level] = treeNode;
         switch (dataMode) {
             case 'local':

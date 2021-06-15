@@ -189,10 +189,10 @@ export type OccupationTreeNode = {
 }
 
 // TODO key not in Omit
-export type TreeNode = {
+export type TreeNodePickerNode = {
     name: string,
     code: string,
-} & { [key in string]?: TreeNode[] }
+} & { [key in string]?: TreeNodePickerNode[] }
 
 export interface State {
     _id: string,
