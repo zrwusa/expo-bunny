@@ -40,6 +40,47 @@ export const treeData: TreeNode = new TreeNode('1', '1', 0, [
 /* --- start tree --- */
 
 // 94 Binary Tree Inorder Traversal	★ 144 145 429 589 590 987 1302 traversal
+
+export class BinaryTreeNode {
+    val: number
+    left: BinaryTreeNode | null
+    right: BinaryTreeNode | null
+
+    constructor(val?: number, left?: BinaryTreeNode | null, right?: BinaryTreeNode | null) {
+        this.val = (val === undefined ? 0 : val)
+        this.left = (left === undefined ? null : left)
+        this.right = (right === undefined ? null : right)
+    }
+}
+
+
+export async function binaryTreeInorderTraversal(root: BinaryTreeNode | null, proxyHandler: TProxyHandler): Promise<number[]> {
+    type Variables = {
+        node: BinaryTreeNode | null
+    }
+    let proxyVariables = new DeepProxy<Variables>({node: null}, proxyHandler)
+    if (!root) {
+        return []
+    }
+
+    let values: number[] = [];
+
+    const leftResult = await binaryTreeInorderTraversal(root.left, proxyHandler);
+    proxyVariables.node = root.left;
+    values = values.concat(leftResult);
+
+    values.push(root.val);
+
+    proxyVariables.node = root;
+    const rightResult = await binaryTreeInorderTraversal(root.right, proxyHandler);
+    values = values.concat(rightResult);
+    proxyVariables.node = root.right;
+
+    await wait(500);
+
+    return values;
+}
+
 export const DFS = async (node: TreeNode, type: OrderType, proxyHandler: TProxyHandler) => {
     type Variables = { current: TreeNode, nodeNeedPrint: TreeNode | undefined }
 
