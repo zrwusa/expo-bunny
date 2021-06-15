@@ -58,27 +58,29 @@ export async function binaryTreeInorderTraversal(root: BinaryTreeNode | null, pr
     type Variables = {
         node: BinaryTreeNode | null
     }
-    let proxyVariables = new DeepProxy<Variables>({node: null}, proxyHandler)
+
+    let proxyVariables = new DeepProxy<Variables>({node: null}, proxyHandler);
+
     if (!root) {
         return []
     }
 
-    let values: number[] = [];
-
     const leftResult = await binaryTreeInorderTraversal(root.left, proxyHandler);
-    proxyVariables.node = root.left;
-    values = values.concat(leftResult);
 
-    values.push(root.val);
+    proxyVariables.node = root.left;
 
     proxyVariables.node = root;
+
     const rightResult = await binaryTreeInorderTraversal(root.right, proxyHandler);
-    values = values.concat(rightResult);
     proxyVariables.node = root.right;
 
     await wait(500);
 
-    return values;
+    return [
+        ...leftResult,
+        root.val,
+        ...rightResult
+    ]
 }
 
 export const DFS = async (node: TreeNode, type: OrderType, proxyHandler: TProxyHandler) => {

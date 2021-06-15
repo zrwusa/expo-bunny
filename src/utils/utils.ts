@@ -404,5 +404,23 @@ export const deepAdd = (obj: JSONSerializable, keyReducerMap: { [key in string]:
     return newObject;
 }
 
+const styleString = (color: string) => `color: ${color}; font-weight: bold`
+
+
+const styleHeader = (header: string) => `%c[${header}]`;
+
+export const bunnyConsole = {
+    log: (headerLog: string = 'bunny', ...args: any[]) => {
+        return console.log(styleHeader(headerLog), styleString('black'), ...args)
+    },
+    warn: (headerLog: string = 'bunny', ...args: any[]) => {
+        return console.warn(styleHeader(headerLog), styleString('orange'), ...args)
+    },
+    error: (headerLog: string = 'bunny',...args: any[]) => {
+        return console.error(styleHeader(headerLog), styleString('red'), ...args)
+    }
+}
+
+
 
 

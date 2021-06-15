@@ -4,7 +4,7 @@ import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
-import {SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
+import {bunnyConsole, SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
 import {Card} from "../../containers/Card";
 import {TreeNode} from "../../types";
 import Svg, {Circle, G, Line, Text as SVGText} from "react-native-svg";
@@ -13,11 +13,12 @@ import {BinaryTreeNode} from "../../utils/algorithms";
 export interface VividAlgorithmProps<T> {
     data: T,
     referenceData?: any,
-    relatedKey?: string
+    relatedKey?: string,
+    isDebug?: boolean
 }
 
 export function VividAlgorithm<T extends { [key in string]: any }>(props: VividAlgorithmProps<T>) {
-    const {data, referenceData, relatedKey} = props;
+    const {data, referenceData, relatedKey, isDebug = false } = props;
     const {sizeLabor, themeLabor, wp, colors} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
 
@@ -208,6 +209,8 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
 
 
     const renderObject = (obj: { [key in string]: any }) => {
+        console.log('---obj', obj);
+
         return (
             <Row>
                 {
@@ -273,7 +276,8 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
                 } else if (item instanceof Stack) {
                     return renderArray(item.items)
                 } else {
-                    return renderObject(item)
+                    console.log('---item.constructor', item.constructor);
+                    return renderObject(item);
                 }
         }
     }
