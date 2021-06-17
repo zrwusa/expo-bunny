@@ -1,16 +1,17 @@
 import React, {useState} from "react";
 import {Text, TextButton, TextInput, View} from "../../components/UI";
 import {getStyles} from "./styles";
-import {OrderType, TreeNode} from "../../types";
+import {BinaryTreeNode, OrderType, TreeNode} from "../../types";
 import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {
     BFS,
     binaryTreeInorderTraversal,
-    BinaryTreeNode,
     DFS,
     isValidParenthesis,
+    ladderLength,
     lengthOfLongestSubstring,
+    letterCombinations,
     reverseLinkedList,
     treeData,
     treeMaxDepth
@@ -34,7 +35,7 @@ export function AlgorithmScreen() {
         })
     }
 
-    const [DFSVariables, setDFSVariables] = useState<{ [key in string]: TreeNode }>()
+    const [DFSVariables, setDFSVariables] = useState<{ [key in string]: TreeNode<number> }>()
 
     const handleDFS = async (type: OrderType) => {
         await DFS(treeData, type, ({value, key, DEFAULT}) => {
@@ -44,7 +45,7 @@ export function AlgorithmScreen() {
         })
     }
 
-    const [BFSVariables, setBFSVariables] = useState<{ [key in string]: TreeNode }>()
+    const [BFSVariables, setBFSVariables] = useState<{ [key in string]: TreeNode<number> }>()
     const handleBFS = async () => {
         console.log(await BFS(treeData, ({value, key, DEFAULT}) => {
             console.log(key, value);
@@ -52,6 +53,16 @@ export function AlgorithmScreen() {
             return DEFAULT
         }))
     }
+
+    const [letterCombinationsVariables, setLetterCombinationsVariables] = useState<{ [key in string]: string }>()
+    const _letterCombinations = async () => {
+        console.log(await letterCombinations('29', ({value, key, DEFAULT}) => {
+            console.log(key, value);
+            setLetterCombinationsVariables(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT
+        }))
+    }
+
 
     const [parenthesisInput, setParenthesisInput] = useState('')
     const [parenthesisVariables, setParenthesisVariables] = useState<{ [key in string]: unknown }>()
@@ -87,6 +98,23 @@ export function AlgorithmScreen() {
         console.log(result)
     }
 
+
+    const [ladderLengthVariables, setLadderLengthVariables] = useState<{ [key in string]: unknown }>()
+
+
+    const _ladderLength = async () => {
+        // const result = await ladderLength("hit","cog",["hot","dot","dog","lot","log","cog"],
+        // const result = await ladderLength("leet","code",["lest","leet","lose","code","lode","robe","lost"],
+        const result = await ladderLength("ab", "lm", ["bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm"],
+            // const result = await ladderLength("qa","sq",["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","he","lr","sq","ye"],
+            ({value, key, DEFAULT}) => {
+                console.log(key, value);
+                setLadderLengthVariables(prevState => ({...prevState, [key!.toString()]: value}));
+                return DEFAULT
+            });
+        console.log(result)
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -108,6 +136,9 @@ export function AlgorithmScreen() {
                         <TextButton onPress={() => handleBFS()}>
                             <Text>BFS</Text>
                         </TextButton>
+                        <TextButton onPress={() => _letterCombinations()}>
+                            <Text>Letter Combinations</Text>
+                        </TextButton>
                         <TextInput value={parenthesisInput} onChangeText={setParenthesisInput}/>
                         <TextButton onPress={_parenthesisInput}>
                             <Text>Parenthesis Check</Text>
@@ -119,7 +150,9 @@ export function AlgorithmScreen() {
                         <TextButton onPress={_reverseLinkedList}>
                             <Text>Reverse Linked List</Text>
                         </TextButton>
-
+                        <TextButton onPress={_ladderLength}>
+                            <Text>Ladder Length</Text>
+                        </TextButton>
 
                         <TextButton onPress={() => {
                             console.log(treeMaxDepth(treeData))
@@ -135,6 +168,11 @@ export function AlgorithmScreen() {
                     {
                         DFSVariables
                             ? <VividAlgorithm data={DFSVariables} referenceData={treeData} relatedKey="nodeNeedPrint"/>
+                            : null
+                    }
+                    {
+                        letterCombinationsVariables
+                            ? <VividAlgorithm data={letterCombinationsVariables}/>
                             : null
                     }
                     {
@@ -155,6 +193,11 @@ export function AlgorithmScreen() {
                     {
                         reverseLinkedListVariables
                             ? <VividAlgorithm data={reverseLinkedListVariables}/>
+                            : null
+                    }
+                    {
+                        ladderLengthVariables
+                            ? <VividAlgorithm data={ladderLengthVariables}/>
                             : null
                     }
                 </View>

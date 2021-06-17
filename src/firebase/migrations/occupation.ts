@@ -1,4 +1,4 @@
-import {firebase} from "../firebase";
+// import {firebase} from "../firebase";
 // import {occupations} from "./raw-data/occupations";
 
 export const migrateOccupations = async () => {

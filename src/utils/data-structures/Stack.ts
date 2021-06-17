@@ -4,7 +4,10 @@ export class Stack<T> implements IStack<T> {
     public items: T[] = [];
     private readonly capacity: number = Infinity;
 
-    constructor(capacity?: number) {
+    constructor(items?: T[], capacity?: number) {
+        if (items && items.length > 0) {
+            this.items = items;
+        }
         if (capacity) {
             this.capacity = capacity;
         }
@@ -29,7 +32,7 @@ export class Stack<T> implements IStack<T> {
         return this.items.length;
     }
 
-    public getItems(): T[] {
+    public toArray(): T[] {
         return this.items;
     }
 }

@@ -6,9 +6,8 @@ import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
 import {bunnyConsole, SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
 import {Card} from "../../containers/Card";
-import {TreeNode} from "../../types";
+import {BinaryTreeNode, TreeNode} from "../../types";
 import Svg, {Circle, G, Line, Text as SVGText} from "react-native-svg";
-import {BinaryTreeNode} from "../../utils/algorithms";
 
 export interface VividAlgorithmProps<T> {
     data: T,
@@ -18,11 +17,19 @@ export interface VividAlgorithmProps<T> {
 }
 
 export function VividAlgorithm<T extends { [key in string]: any }>(props: VividAlgorithmProps<T>) {
-    const {data, referenceData, relatedKey, isDebug = false } = props;
+    const {data, referenceData, relatedKey, isDebug = false} = props;
     const {sizeLabor, themeLabor, wp, colors} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
 
     const renderNumber = (num: number) => {
+        return (
+            <Row>
+                <Col size={6}><Text>{num.toString()}</Text></Col>
+            </Row>
+        )
+    }
+
+    const renderString = (num: string) => {
         return (
             <Row>
                 <Col size={6}><Text>{num}</Text></Col>
@@ -43,17 +50,19 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         }
     }
 
-    const renderTree = (node: TreeNode) => {
-        return <Svg
-            width={wp(375)}
-            height={wp(375)}
-        >
-            <G fill={colors.background} strokeWidth={strokeWidth} stroke={colors.border}>
-                {
-                    renderRecursive(node, 1, 0, 1)
-                }
-            </G>
-        </Svg>
+    const renderTree = (node: TreeNode<any>) => {
+        return <View style={{overflow: "scroll", width: wp(375), height: wp(1000)}}>
+            <Svg
+                width={wp(2000)}
+                height={wp(2000)}
+            >
+                <G fill={colors.background} strokeWidth={strokeWidth} stroke={colors.border}>
+                    {
+                        renderRecursive(node, 1, 0, 1, 0, 0, node.getMaxDepth())
+                    }
+                </G>
+            </Svg>
+        </View>
     }
 
     const renderBinaryTree = (node: BinaryTreeNode) => {
@@ -71,26 +80,26 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         )
     }
     const strokeWidth = wp(2);
-    const screenWidth = wp(375);
+    const screenWidth = wp(2000);
     const levelOffset = wp(60);
-    const circleR = wp(18);
-    const nodeSpace = wp(700);
+    const circleR = wp(20);
+    const nodeSpace = wp(40);
     const fontSize = wp(12);
     const fontOffsetY = fontSize / 3;
-    let relatedNode: TreeNode | undefined = undefined;
+    let relatedNode: TreeNode<any> | undefined = undefined;
     let relatedBinaryNode: BinaryTreeNode | undefined = undefined;
     if (relatedKey) {
-        relatedNode = data[relatedKey] as TreeNode | undefined;
+        relatedNode = data[relatedKey] as TreeNode<any> | undefined;
         relatedBinaryNode = data[relatedKey] as BinaryTreeNode | undefined;
     }
-    const renderRecursive = (node: TreeNode, level: number = 1, index: number = 0, familyLength: number = 1, parentX?: number, parentY?: number): React.ReactNode => {
+    const renderRecursive = (node: TreeNode<any>, level: number = 1, index: number = 0, familyLength: number = 1, parentX?: number, parentY?: number, maxDepth?: number): React.ReactNode => {
         if (!node) {
             return null;
         }
         let space = 0;
         let offsetX = 0;
         let offsetY = 0;
-        let levelNodeSpace = nodeSpace / level / level
+        let levelNodeSpace = nodeSpace * Math.pow(2, (maxDepth || 5) - level);
         if (level === 1) {
             space = screenWidth / 2
             offsetX = space - circleR;
@@ -109,15 +118,16 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
                         : null
                 }
                 {node.children
-                    ? node.children.map((child, index, family) => renderRecursive(child, level + 1, index, family.length, offsetX, offsetY))
+                    ? node.children.map((child, index, family) => renderRecursive(child, level + 1, index, family.length, offsetX, offsetY, maxDepth))
                     : null
                 }
                 <Circle r={circleR} cx={offsetX} cy={offsetY} fill={isActive ? colors.primary : colors.background}/>
                 <SVGText
-                    fill="none"
+                    strokeWidth={wp(1)}
+                    fill={isActive ? colors.buttonText : colors.text}
                     stroke={isActive ? colors.buttonText : colors.text}
                     fontSize={fontSize}
-                    fontWeight={1}
+                    fontWeight={100}
                     x={offsetX}
                     y={offsetY + fontOffsetY}
                     textAnchor="middle"
@@ -125,6 +135,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
             </G>
         )
     }
+
     const renderBinaryRecursive = (node: BinaryTreeNode, level: number = 1, index: number = 0, familyLength: number = 1, parentX?: number, parentY?: number): React.ReactNode => {
         if (!node) {
             return null;
@@ -209,8 +220,6 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
 
 
     const renderObject = (obj: { [key in string]: any }) => {
-        console.log('---obj', obj);
-
         return (
             <Row>
                 {
@@ -236,7 +245,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         )
     }
 
-    const renderTreeNode = (node: TreeNode) => {
+    const renderTreeVariable = (node: TreeNode<any>) => {
         return (
             <Row>
                 <View style={styles.arrayItem} key={node.id}>
@@ -258,13 +267,16 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
     }
 
     const renderVariable = (item: any) => {
+        bunnyConsole.log('item', item);
         if (!item) return null
         switch (typeof item) {
             case 'number':
-                return renderNumber(item)
+                return renderNumber(item);
+            case 'string':
+                return renderString(item);
             case 'object':
                 if (item instanceof TreeNode) {
-                    return renderTreeNode(item);
+                    return renderTree(item);
                 } else if (item instanceof BinaryTreeNode) {
                     return renderBinaryTreeNode(item);
                 } else if (item instanceof SinglyLinkedListNode) {

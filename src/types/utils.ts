@@ -121,19 +121,71 @@ export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) ex
 //     children?: TreeNode[]
 // }
 
-export class TreeNode {
+export class TreeNode<T> {
     id: string;
     name?: string | undefined;
-    value?: number | undefined;
-    children?: TreeNode[] | undefined;
+    value?: T | undefined;
+    children?: TreeNode<T>[] | undefined;
 
-    constructor(id: string, name?: string, value?: number, children?: TreeNode[]) {
+    constructor(id: string, name?: string, value?: T, children?: TreeNode<T>[]) {
         this.id = id;
         this.name = name || '';
-        this.value = value || 0;
+        this.value = value || undefined;
         this.children = children || [];
     }
 
+    // TODO get set
+    // get name (): string | undefined {
+    //     return this.name;
+    // }
+    //
+    // set name (name: string | undefined) {
+    //     this.name = name;
+    // }
+
+    addChildren = (children: TreeNode<T> | TreeNode<T> []) => {
+        if (!this.children) {
+            this.children = [];
+        }
+        if (children instanceof Array) {
+            this.children = this.children.concat(children);
+        } else {
+            this.children.push(children)
+        }
+    }
+
+    getMaxDepth = () => {
+        const beginRoot = this;
+        let maxDepth = 1;
+        if (beginRoot) {
+            const bfs = (node: TreeNode<T>, level: number) => {
+                if (level > maxDepth) {
+                    maxDepth = level;
+                }
+                const {children} = node;
+                if (children) {
+                    for (let i = 0, len = children.length; i < len; i++) {
+                        bfs(children[i], level + 1);
+                    }
+                }
+            }
+            bfs(beginRoot, 1);
+        }
+        return maxDepth;
+    }
+
+}
+
+export class BinaryTreeNode {
+    val: number
+    left: BinaryTreeNode | null
+    right: BinaryTreeNode | null
+
+    constructor(val?: number, left?: BinaryTreeNode | null, right?: BinaryTreeNode | null) {
+        this.val = (val === undefined ? 0 : val)
+        this.left = (left === undefined ? null : left)
+        this.right = (right === undefined ? null : right)
+    }
 }
 
 export type OrderType = 'InOrder' | 'PreOrder' | 'PostOrder'

@@ -416,7 +416,7 @@ export const bunnyConsole = {
     warn: (headerLog: string = 'bunny', ...args: any[]) => {
         return console.warn(styleHeader(headerLog), styleString('orange'), ...args)
     },
-    error: (headerLog: string = 'bunny',...args: any[]) => {
+    error: (headerLog: string = 'bunny', ...args: any[]) => {
         return console.error(styleHeader(headerLog), styleString('red'), ...args)
     }
 }

@@ -1,10 +1,17 @@
-import {wait} from "./utils";
-import {OrderType, TreeNode} from "../types";
+import {bunnyConsole, wait} from "./utils";
+import {BinaryTreeNode, OrderType, TreeNode} from "../types";
 import {DeepProxy} from '@qiwi/deep-proxy'
 import {TProxyHandler} from "@qiwi/deep-proxy/typings/interface";
 import {Queue, SinglyLinkedListNode, Stack} from "./data-structures";
 
-export const treeData: TreeNode = new TreeNode('1', '1', 0, [
+export const runAlgorithm = async (algorithm: Function, ...args: any) => {
+    const startTime = new Date().getTime();
+    const result = await algorithm(...args);
+    const timeSpent = new Date().getTime() - startTime;
+    bunnyConsole.log(algorithm.name, 'result -> ', result, 'time spent -> ', timeSpent + 'ms');
+}
+
+export const treeData: TreeNode<number> = new TreeNode('1', '1', 0, [
     new TreeNode('1-1', '2', 0, [
             new TreeNode('1-1-1', '3', 0, [
                     new TreeNode('1-1-1-1', '4'),
@@ -39,21 +46,8 @@ export const treeData: TreeNode = new TreeNode('1', '1', 0, [
 
 /* --- start tree --- */
 
+
 // 94 Binary Tree Inorder Traversal	★ 144 145 429 589 590 987 1302 traversal
-
-export class BinaryTreeNode {
-    val: number
-    left: BinaryTreeNode | null
-    right: BinaryTreeNode | null
-
-    constructor(val?: number, left?: BinaryTreeNode | null, right?: BinaryTreeNode | null) {
-        this.val = (val === undefined ? 0 : val)
-        this.left = (left === undefined ? null : left)
-        this.right = (right === undefined ? null : right)
-    }
-}
-
-
 export async function binaryTreeInorderTraversal(root: BinaryTreeNode | null, proxyHandler: TProxyHandler): Promise<number[]> {
     type Variables = {
         node: BinaryTreeNode | null
@@ -83,8 +77,8 @@ export async function binaryTreeInorderTraversal(root: BinaryTreeNode | null, pr
     ]
 }
 
-export const DFS = async (node: TreeNode, type: OrderType, proxyHandler: TProxyHandler) => {
-    type Variables = { current: TreeNode, nodeNeedPrint: TreeNode | undefined }
+export const DFS = async (node: TreeNode<number>, type: OrderType, proxyHandler: TProxyHandler) => {
+    type Variables = { current: TreeNode<number>, nodeNeedPrint: TreeNode<number> | undefined }
 
     let variablesProxy = new DeepProxy<Variables>({
         current: node,
@@ -129,18 +123,18 @@ export const DFS = async (node: TreeNode, type: OrderType, proxyHandler: TProxyH
 }
 
 // 102	Binary Tree Level Order Traversal	★★	107	429	872			collecting nodes
-export const BFS = async (node: TreeNode, proxyHandler: TProxyHandler) => {
-    type Variables = { node: TreeNode }
+export const BFS = async (node: TreeNode<number>, proxyHandler: TProxyHandler) => {
+    type Variables = { node: TreeNode<number> }
 
-    let nodes: TreeNode[] = [];
+    let nodes: TreeNode<number>[] = [];
 
     let variablesProxy = new DeepProxy<Variables>({node: node,}, proxyHandler);
 
     if (node) {
-        let queue = new Queue<TreeNode>();
+        let queue = new Queue<TreeNode<number>>();
         queue.add(node);
         while (!queue.isEmpty()) {
-            let item = queue.pop() as TreeNode;
+            let item = queue.pop() as TreeNode<number>;
             nodes.push(item);
             variablesProxy.node = item;
             await wait(500);
@@ -156,13 +150,301 @@ export const BFS = async (node: TreeNode, proxyHandler: TProxyHandler) => {
 }
 
 /* --- start Search (BFS/DFS) ---*/
+
 // 17	Letter Combinations of a Phone Number	★★	39	40	77	78	90	216
-// Combination
+export async function letterCombinations(digits: string, proxyHandler: TProxyHandler): Promise<string[]> {
+    // corner case
+    if (digits.length === 0) return [];
+
+    type PhoneKeys = '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+
+    let proxyVariables = new DeepProxy<{ accumulated: string, result: string[] }>({accumulated: '', result: []}, proxyHandler)
+
+    const digitsMap: { [key in PhoneKeys]: string } = {
+        '2': 'abc',
+        '3': 'def',
+        '4': 'ghi',
+        '5': 'jkl',
+        '6': 'mno',
+        '7': 'pqrs',
+        '8': 'tuv',
+        '9': 'wxyz'
+    };
+
+    const dfs = async (level: number, accumulated: Stack<string>) => {
+        // base case
+        if (digits.length === level) {
+            proxyVariables.result.push(accumulated.toArray().join('').toString());
+            return;
+        }
+
+        for (const char of digitsMap[digits[level] as PhoneKeys]) {
+            // recursive rule
+            accumulated.push(char);
+            await dfs(level + 1, accumulated);
+            await wait(500);
+            accumulated.pop();
+        }
+    }
+
+    await dfs(0, new Stack<string>());
+
+    return proxyVariables.result;
+}
+
+
 // 46	Permutations	★★	47	784	943	996				Permutation
+const permute = function <T>(nums: T[]) {
+    if (nums.length === 1) {
+        return [nums];
+    }
+
+    let result: T[][] = [];
+
+    const dfs = (accumulated: T[], rest: T[]) => {
+        if (accumulated.length === nums.length) {
+            result.push([...accumulated]);
+            return;
+        }
+
+        for (let i = 0, len = rest.length; i < len; i++) {
+            accumulated.push(rest[i]);
+            const restBacktrack = [...rest];
+            rest.splice(i, 1); // delete ith element to generate rest,then pass in next recursion
+            dfs(accumulated, rest);
+            rest = restBacktrack;
+            accumulated.pop();
+        }
+    }
+
+    dfs([], [...nums]);
+
+    return result;
+};
+
+const permuteMN = function <T>(nums: T[], n: number, excludeSelf: boolean = true) {
+    if (n > nums.length) {
+        return [];
+    }
+    if (nums.length === 1 && n === 1) {
+        return [nums];
+    }
+
+    let result: T[][] = [];
+
+    const dfs = (accumulated: T[], rest: T[], level: number) => {
+        if (level === n) {
+            result.push([...accumulated]);
+            return;
+        }
+
+        for (let i = 0, len = rest.length; i < len; i++) {
+            accumulated.push(rest[i]);
+
+            let restBackTrack: T[] = [];
+            if (excludeSelf) {
+                restBackTrack = [...rest];
+                rest.splice(i, 1);
+            }
+
+            dfs(accumulated, rest, level + 1);
+
+            accumulated.pop();
+            if (excludeSelf) {
+                rest = restBackTrack;
+            }
+        }
+    }
+    dfs([], nums, 0);
+    return result;
+};
+
+
+// Combination
+const combineMN = function <T>(nums: T[], n: number, excludeSelf: boolean = true) {
+    if (n > nums.length) {
+        return [];
+    }
+    if (nums.length === 1 && n === 1) {
+        return [nums];
+    }
+
+    let result: T[][] = [];
+    let hash: { [key in string]: 'exist' } = {};
+    const dfs = (accumulated: T[], rest: T[], level: number) => {
+        if (level === n) {
+            const key = [...accumulated].sort().join('');
+            if (!hash[key]) {
+                hash[key] = 'exist';
+                result.push([...accumulated]);
+            }
+            return;
+        }
+
+        for (let i = 0, len = rest.length; i < len; i++) {
+            accumulated.push(rest[i]);
+
+            let restBackTrack: T[] = [];
+            if (excludeSelf) {
+                restBackTrack = [...rest];
+                rest.splice(i, 1);
+            }
+
+            dfs(accumulated, rest, level + 1);
+            accumulated.pop();
+
+            if (excludeSelf) {
+                rest = restBackTrack;
+            }
+        }
+    }
+    dfs([], nums, 0);
+    return result;
+};
+
+// console.log(combineMN(['(','(',')',')'], 4, false))
+
 // 22	Generate Parentheses	★★★	301							DFS
+function generateParenthesis(n: number): string[] {
+    // corner case
+    if (n === 1) {
+        return ['()']
+    }
+
+    let result: string[] = [];
+
+    let openCount = 0, closeCount = 0;
+
+    const dfs = (accumulated: string, level: number) => {
+        // base case
+        if (level === 2 * n) {
+            result.push(accumulated);
+            return;
+        }
+
+        // recursion rule
+        if (openCount < n) {
+            accumulated += '(';
+            openCount++;
+            dfs(accumulated, level + 1);
+            openCount--;
+            accumulated = accumulated.substr(0, accumulated.length - 1);
+        }
+
+        if (level != 0) {
+            if (openCount > closeCount) {
+                accumulated += ')';
+                closeCount++;
+                dfs(accumulated, level + 1);
+                closeCount--;
+                accumulated = accumulated.substr(0, accumulated.length - 1);
+            }
+        }
+    }
+
+    dfs('', 0);
+
+    return result;
+}
+
 // 37	Sudoku Solver	★★★	51	52						DFS
 // 79	Word Search	★★★	212							DFS
 // 127	Word Ladder	★★★★	126	752	818					BFS
+export function ladderLength(beginWord: string, endWord: string, wordList: string[], proxyHandler: TProxyHandler): number {
+
+    let proxyVariables = new DeepProxy<{ tree: TreeNode<string> }>({tree: new TreeNode(beginWord, beginWord, beginWord)}, proxyHandler)
+
+    const wordListLength = wordList.length;
+    // corner case
+    if (wordListLength < 1) {
+        return 0;
+    }
+    if (!wordList.includes(endWord)) {
+        return 0;
+    }
+
+    // assume all words are the same length
+    // const isDiffMoreThanOne = (wordA: string, wordB: string) => {
+    //     let diffCount = 0;
+    //     for (let i = 0, len = wordA.length; i < len; i++) {
+    //         if (wordA[i] !== wordB[i]) {
+    //             diffCount++;
+    //             if (diffCount > 1) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    // Wrong Answer
+    // "leet"
+    // "code"
+    // ["lest","leet","lose","code","lode","robe","lost"]
+    let isFriendWords = (word1: string, word2: string) => {
+        let diffCount = 0;
+        for (let c1 of word1) {
+            if (!word2.includes(c1)) {
+                diffCount++;
+                if (diffCount > 1) {
+                    return false;
+                }
+            }
+        }
+        diffCount = 0;
+        for (let c2 of word2) {
+            if (!word1.includes(c2)) {
+                diffCount++;
+                if (diffCount > 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    let shortest = 0;
+
+    const dfs = (accumulated: string[], rest: string[], level: number, parentNode: TreeNode<string>) => {
+        // base case
+        if (accumulated[accumulated.length - 1] === endWord) {
+            if (shortest === 0 || accumulated.length < shortest) {
+                shortest = accumulated.length;
+            }
+            return;
+        }
+
+        if (level === wordListLength) {
+            return;
+        }
+
+        if (level === 0) {
+            accumulated.push(beginWord);
+        }
+
+        for (let i = 0, len = rest.length; i < len; i++) {
+            if (isFriendWords(rest[i], accumulated[accumulated.length - 1])) {
+                accumulated.push(rest[i]);
+                let newNode = new TreeNode(accumulated.join(), accumulated.join(), accumulated.join());
+                parentNode.addChildren(newNode);
+                const backTrackRest = [...rest];
+                rest.splice(i, 1);
+                dfs(accumulated, rest, level + 1, newNode);
+                accumulated.pop();
+                rest = backTrackRest;
+            }
+        }
+    }
+
+    dfs([], wordList, 0, proxyVariables.tree);
+
+    return shortest;
+}
+
+
+// runAlgorithm(ladderLength, "qa","sq",["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","he","lr","sq","ye"]).then()
+runAlgorithm(ladderLength, "hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]).then()
+
 // 542	01 Matrix	★★★	675	934						BFS
 // 698	Partition to K Equal Sum Subsets	★★★	93	131	241	282	842			Partition
 /* --- end Search (BFS/DFS) ---*/
@@ -178,7 +460,7 @@ export const BFS = async (node: TreeNode, proxyHandler: TProxyHandler) => {
 // 968	Binary Tree Cameras	★★★★	337	979
 
 
-export const treeMaxDepth = (node: TreeNode): number => {
+export const treeMaxDepth = (node: TreeNode<number>): number => {
     if (!node) {
         return 0;
     }
