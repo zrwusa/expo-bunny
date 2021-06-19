@@ -8,6 +8,7 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
     const sharedStyles = StyleSheet.create({
         text: {
             color: colors.text,
+            fontSize: ms.fs.s,
         },
         text2: {
             color: colors.text2,

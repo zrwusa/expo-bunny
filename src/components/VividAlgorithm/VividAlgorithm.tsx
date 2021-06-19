@@ -8,6 +8,8 @@ import {bunnyConsole, SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
 import {Card} from "../../containers/Card";
 import {BinaryTreeNode, TreeNode} from "../../types";
 import Svg, {Circle, G, Line, Text as SVGText} from "react-native-svg";
+import {ScrollView} from "react-native";
+import {useEffect, useRef} from "react";
 
 export interface VividAlgorithmProps<T> {
     data: T,
@@ -20,7 +22,8 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
     const {data, referenceData, relatedKey, isDebug = false} = props;
     const {sizeLabor, themeLabor, wp, colors} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
-
+    const treePanelWidth = wp(2000);
+    const treePanelHeight = wp(2000);
     const renderNumber = (num: number) => {
         return (
             <Row>
@@ -50,37 +53,49 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         }
     }
 
+    const TreeContainer: React.FC = ({children}) => {
+        const horizontalScrollView =  useRef<ScrollView>(null)
+        useEffect(() => {
+            horizontalScrollView?.current?.scrollTo({x:(treePanelWidth - wp(375))/2,y:0,animated:false})
+
+        }, [])
+        return <ScrollView nestedScrollEnabled style={{height: wp(375)}}>
+            <ScrollView style={{width: wp(375)}}
+                        horizontal ref={horizontalScrollView}>
+                <Svg
+                    width={treePanelWidth}
+                    height={treePanelHeight}
+                >
+                    <G fill={colors.background} strokeWidth={strokeWidth} stroke={colors.border}>
+                        {
+                            children
+                        }
+                    </G>
+                </Svg>
+            </ScrollView>
+        </ScrollView>
+    }
+
     const renderTree = (node: TreeNode<any>) => {
-        return <View style={{overflow: "scroll", width: wp(375), height: wp(1000)}}>
-            <Svg
-                width={wp(2000)}
-                height={wp(2000)}
-            >
-                <G fill={colors.background} strokeWidth={strokeWidth} stroke={colors.border}>
-                    {
-                        renderRecursive(node, 1, 0, 1, 0, 0, node.getMaxDepth())
-                    }
-                </G>
-            </Svg>
-        </View>
+        return (
+            <TreeContainer>
+                {
+                    renderRecursive(node, 1, 0, 1, 0, 0, node.getMaxDepth())
+                }
+            </TreeContainer>
+        )
     }
 
     const renderBinaryTree = (node: BinaryTreeNode) => {
         return (
-            <Svg
-                width={wp(375)}
-                height={wp(375)}
-            >
-                <G fill={colors.background} strokeWidth={strokeWidth} stroke={colors.border}>
-                    {
-                        renderBinaryRecursive(node, 1, 0, 1)
-                    }
-                </G>
-            </Svg>
+            <TreeContainer>
+                {
+                    renderBinaryRecursive(node, 1, 0, 1)
+                }
+            </TreeContainer>
         )
     }
     const strokeWidth = wp(2);
-    const screenWidth = wp(2000);
     const levelOffset = wp(60);
     const circleR = wp(20);
     const nodeSpace = wp(40);
@@ -101,7 +116,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         let offsetY = 0;
         let levelNodeSpace = nodeSpace * Math.pow(2, (maxDepth || 5) - level);
         if (level === 1) {
-            space = screenWidth / 2
+            space = treePanelWidth / 2
             offsetX = space - circleR;
             offsetY = (level - 1) * levelOffset + circleR + strokeWidth;
         } else {
@@ -145,7 +160,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         let offsetY;
         let levelNodeSpace = nodeSpace / 7
         if (level === 1) {
-            space = screenWidth / 2
+            space = treePanelWidth / 2
             offsetX = space - circleR;
             offsetY = (level - 1) * levelOffset + circleR + strokeWidth;
         } else {
@@ -286,7 +301,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
                 } else if (item instanceof Array) {
                     return renderArray(item)
                 } else if (item instanceof Stack) {
-                    return renderArray(item.items)
+                    return renderArray(item.toArray())
                 } else {
                     console.log('---item.constructor', item.constructor);
                     return renderObject(item);

@@ -34,7 +34,7 @@ export class BinarySearchTreeNode<T> {
     }
 }
 
-class BinarySearchTree<T> {
+export class BinarySearchTree<T> {
     private _root: BinarySearchTreeNode<T> | undefined;
     public get root(): BinarySearchTreeNode<T> | undefined {
         return this._root;

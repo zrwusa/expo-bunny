@@ -9,7 +9,7 @@ import {
     binaryTreeInorderTraversal,
     DFS,
     isValidParenthesis,
-    ladderLength,
+    ladderLengthPlagiarized,
     lengthOfLongestSubstring,
     letterCombinations,
     reverseLinkedList,
@@ -105,8 +105,10 @@ export function AlgorithmScreen() {
     const _ladderLength = async () => {
         // const result = await ladderLength("hit","cog",["hot","dot","dog","lot","log","cog"],
         // const result = await ladderLength("leet","code",["lest","leet","lose","code","lode","robe","lost"],
-        const result = await ladderLength("ab", "lm", ["bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm"],
-            // const result = await ladderLength("qa","sq",["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","he","lr","sq","ye"],
+        // const result = await ladderLength("ab", "lm", ["bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm"],
+        const result = await ladderLengthPlagiarized("qa", "sq", ["si", "go", "se", "cm", "so", "ph", "mt", "db", "mb", "sb", "kr", "ln", "tm", "le", "ti", "ba", "to", "ra", "fa", "yo", "ow", "sn", "ya", "cr", "po", "he", "lr", "sq", "ye"],
+            // const result = await ladderLengthPlagiarized("qa","sq",["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","sn","ya","cr","po","he","lr","sq","ye"],
+
             ({value, key, DEFAULT}) => {
                 console.log(key, value);
                 setLadderLengthVariables(prevState => ({...prevState, [key!.toString()]: value}));
@@ -120,7 +122,6 @@ export function AlgorithmScreen() {
             <View style={{flex: 1}}>
                 <View style={styles.container}>
                     <Card title="Algorithms" titleMode="OUT">
-
                         <TextButton onPress={() => _binaryTreeInorderTraversal()}>
                             <Text>Binary Tree Inorder Traversal</Text>
                         </TextButton>
@@ -153,7 +154,6 @@ export function AlgorithmScreen() {
                         <TextButton onPress={_ladderLength}>
                             <Text>Ladder Length</Text>
                         </TextButton>
-
                         <TextButton onPress={() => {
                             console.log(treeMaxDepth(treeData))
                         }}>
