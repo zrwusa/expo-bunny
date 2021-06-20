@@ -1,15 +1,15 @@
 import * as React from "react";
+import {useEffect, useMemo, useRef} from "react";
 import {Text, View} from "../UI";
 import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
-import {bunnyConsole, SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
+import {SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
 import {Card} from "../../containers/Card";
 import {BinaryTreeNode, TreeNode} from "../../types";
 import Svg, {Circle, G, Line, Text as SVGText} from "react-native-svg";
 import {ScrollView} from "react-native";
-import {useEffect, useRef} from "react";
 
 export interface VividAlgorithmProps<T> {
     data: T,
@@ -18,7 +18,7 @@ export interface VividAlgorithmProps<T> {
     isDebug?: boolean
 }
 
-export function VividAlgorithm<T extends { [key in string]: any }>(props: VividAlgorithmProps<T>) {
+export const VividAlgorithm = function <T extends { [key in string]: any }>(props: VividAlgorithmProps<T>) {
     const {data, referenceData, relatedKey, isDebug = false} = props;
     const {sizeLabor, themeLabor, wp, colors} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
@@ -47,6 +47,8 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
                     return renderTree(data);
                 } else if (data instanceof BinaryTreeNode) {
                     return renderBinaryTree(data);
+                } else {
+                    return null;
                 }
             default:
                 return null;
@@ -54,11 +56,12 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
     }
 
     const TreeContainer: React.FC = ({children}) => {
-        const horizontalScrollView =  useRef<ScrollView>(null)
+        const horizontalScrollView = useRef<ScrollView>(null)
         useEffect(() => {
-            horizontalScrollView?.current?.scrollTo({x:(treePanelWidth - wp(375))/2,y:0,animated:false})
-
+            horizontalScrollView?.current?.scrollTo({x: (treePanelWidth - wp(375)) / 2, y: 0, animated: false})
+            console.log('---useEffect')
         }, [])
+
         return <ScrollView nestedScrollEnabled style={{height: wp(375)}}>
             <ScrollView style={{width: wp(375)}}
                         horizontal ref={horizontalScrollView}>
@@ -79,9 +82,10 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
     const renderTree = (node: TreeNode<any>) => {
         return (
             <TreeContainer>
-                {
-                    renderRecursive(node, 1, 0, 1, 0, 0, node.getMaxDepth())
-                }
+                {/*{*/}
+                    <RenderRecursive node={node} level={1} index={0} familyLength={1} parentX={0}  parentY={0}  maxDepth={node.getMaxDepth()} />
+                    // renderRecursive(node, 1, 0, 1, 0, 0, node.getMaxDepth())
+                 {/*}*/}
             </TreeContainer>
         )
     }
@@ -95,6 +99,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
             </TreeContainer>
         )
     }
+
     const strokeWidth = wp(2);
     const levelOffset = wp(60);
     const circleR = wp(20);
@@ -107,10 +112,15 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         relatedNode = data[relatedKey] as TreeNode<any> | undefined;
         relatedBinaryNode = data[relatedKey] as BinaryTreeNode | undefined;
     }
-    const renderRecursive = (node: TreeNode<any>, level: number = 1, index: number = 0, familyLength: number = 1, parentX?: number, parentY?: number, maxDepth?: number): React.ReactNode => {
+
+    const RenderRecursive: React.FC<{node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number}> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
         if (!node) {
             return null;
         }
+        // const firstRender = useMemo(
+        //     () =>console.log('!!!first Render'),
+        //     []
+        // );
         let space = 0;
         let offsetX = 0;
         let offsetY = 0;
@@ -133,7 +143,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
                         : null
                 }
                 {node.children
-                    ? node.children.map((child, index, family) => renderRecursive(child, level + 1, index, family.length, offsetX, offsetY, maxDepth))
+                    ? node.children.map((child, index, family) => <RenderRecursive key={child.id} node={child} level={level + 1} index={index} familyLength={family.length} parentX={offsetX}  parentY={offsetY}  maxDepth={maxDepth} />)
                     : null
                 }
                 <Circle r={circleR} cx={offsetX} cy={offsetY} fill={isActive ? colors.primary : colors.background}/>
@@ -233,7 +243,6 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         )
     }
 
-
     const renderObject = (obj: { [key in string]: any }) => {
         return (
             <Row>
@@ -260,17 +269,6 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
         )
     }
 
-    const renderTreeVariable = (node: TreeNode<any>) => {
-        return (
-            <Row>
-                <View style={styles.arrayItem} key={node.id}>
-                    <Text>{node.id}</Text>
-                    <Text>{node.value}</Text>
-                </View>
-            </Row>
-        )
-    }
-
     const renderBinaryTreeNode = (node: BinaryTreeNode) => {
         return (
             <Row>
@@ -282,7 +280,8 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
     }
 
     const renderVariable = (item: any) => {
-        bunnyConsole.log('item', item);
+
+        // bunnyConsole.log('item', item);
         if (!item) return null
         switch (typeof item) {
             case 'number':
@@ -303,7 +302,7 @@ export function VividAlgorithm<T extends { [key in string]: any }>(props: VividA
                 } else if (item instanceof Stack) {
                     return renderArray(item.toArray())
                 } else {
-                    console.log('---item.constructor', item.constructor);
+                    // console.log('---item.constructor', item.constructor);
                     return renderObject(item);
                 }
         }
