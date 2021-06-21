@@ -1,4 +1,3 @@
-
 export interface HeapNode<T extends number | string, U> {
     key: T;
     value: U;

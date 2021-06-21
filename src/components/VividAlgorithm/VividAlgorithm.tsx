@@ -1,18 +1,18 @@
 import * as React from "react";
-import {useEffect, useMemo, useRef} from "react";
+import {useEffect, useRef} from "react";
 import {Text, View} from "../UI";
 import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
-import {SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
+import {Matrix, SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
 import {Card} from "../../containers/Card";
 import {BinaryTreeNode, TreeNode} from "../../types";
 import Svg, {Circle, G, Line, Text as SVGText} from "react-native-svg";
 import {ScrollView} from "react-native";
 
 export interface VividAlgorithmProps<T> {
-    data: T,
+    data?: T,
     referenceData?: any,
     relatedKey?: string,
     isDebug?: boolean
@@ -47,6 +47,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     return renderTree(data);
                 } else if (data instanceof BinaryTreeNode) {
                     return renderBinaryTree(data);
+                } else if (data instanceof Matrix) {
+                    return renderMatrix(data);
                 } else {
                     return null;
                 }
@@ -83,9 +85,9 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         return (
             <TreeContainer>
                 {/*{*/}
-                    <RenderRecursive node={node} level={1} index={0} familyLength={1} parentX={0}  parentY={0}  maxDepth={node.getMaxDepth()} />
-                    // renderRecursive(node, 1, 0, 1, 0, 0, node.getMaxDepth())
-                 {/*}*/}
+                <RenderRecursive node={node} level={1} index={0} familyLength={1} parentX={0} parentY={0} maxDepth={node.getMaxDepth()}/>
+                // renderRecursive(node, 1, 0, 1, 0, 0, node.getMaxDepth())
+                {/*}*/}
             </TreeContainer>
         )
     }
@@ -100,6 +102,31 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
+    const renderMatrix = (node: Matrix<any>) => {
+        const elements = node.toArray();
+        return (
+            <View style={{borderLeftWidth: wp(1), borderTopWidth: wp(1), borderColor: colors.border}}>
+                {
+                    elements.map((row, i) => {
+                        const rowKey = i.toString();
+                        return (
+                            <Row style={{height: wp(360 / row.length)}} key={rowKey}>
+                                {
+                                    row.map((item, j) => {
+                                        const colKey = i + '-' + j.toString();
+                                        return <Col style={{borderRightWidth: wp(1), borderBottomWidth: wp(1), borderColor: colors.border}}
+                                                    key={colKey}><Text style={{textAlign: 'center'}}>{item.toString()}</Text></Col>
+                                    })
+                                }
+
+                            </Row>
+                        )
+                    })
+                }
+            </View>
+        )
+    }
+
     const strokeWidth = wp(2);
     const levelOffset = wp(60);
     const circleR = wp(20);
@@ -109,11 +136,11 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     let relatedNode: TreeNode<any> | undefined = undefined;
     let relatedBinaryNode: BinaryTreeNode | undefined = undefined;
     if (relatedKey) {
-        relatedNode = data[relatedKey] as TreeNode<any> | undefined;
-        relatedBinaryNode = data[relatedKey] as BinaryTreeNode | undefined;
+        relatedNode = data?.[relatedKey] as TreeNode<any> | undefined;
+        relatedBinaryNode = data?.[relatedKey] as BinaryTreeNode | undefined;
     }
 
-    const RenderRecursive: React.FC<{node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number}> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
+    const RenderRecursive: React.FC<{ node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
         if (!node) {
             return null;
         }
@@ -143,7 +170,9 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         : null
                 }
                 {node.children
-                    ? node.children.map((child, index, family) => <RenderRecursive key={child.id} node={child} level={level + 1} index={index} familyLength={family.length} parentX={offsetX}  parentY={offsetY}  maxDepth={maxDepth} />)
+                    ? node.children.map((child, index, family) => <RenderRecursive key={child.id} node={child} level={level + 1} index={index}
+                                                                                   familyLength={family.length} parentX={offsetX} parentY={offsetY}
+                                                                                   maxDepth={maxDepth}/>)
                     : null
                 }
                 <Circle r={circleR} cx={offsetX} cy={offsetY} fill={isActive ? colors.primary : colors.background}/>
@@ -289,7 +318,9 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             case 'string':
                 return renderString(item);
             case 'object':
-                if (item instanceof TreeNode) {
+                if (data instanceof Matrix) {
+                    return renderMatrix(data);
+                } else if (item instanceof TreeNode) {
                     return renderTree(item);
                 } else if (item instanceof BinaryTreeNode) {
                     return renderBinaryTreeNode(item);
@@ -297,10 +328,10 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     return renderLinkedListNode(item)
                 } else if (item instanceof Map) {
                     return renderArray(Array.from(item))
-                } else if (item instanceof Array) {
-                    return renderArray(item)
                 } else if (item instanceof Stack) {
                     return renderArray(item.toArray())
+                } else if (item instanceof Array) {
+                    return renderArray(item)
                 } else {
                     // console.log('---item.constructor', item.constructor);
                     return renderObject(item);

@@ -12,7 +12,7 @@ export class PriorityQueue {
      * @params {object} [options]
      */
     constructor(options = {}) {
-        const { priority } = options;
+        const {priority} = options;
         if (priority !== undefined && typeof priority !== 'function') {
             throw new Error('.constructor expects a valid priority function');
         }

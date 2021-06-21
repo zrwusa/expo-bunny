@@ -4,7 +4,6 @@
  */
 
 
-
 import {PriorityQueue} from "./priority-queue";
 import {MinHeap} from "../heap/min-heap";
 
@@ -13,8 +12,8 @@ import {MinHeap} from "../heap/min-heap";
  * @extends PriorityQueue
  */
 class MinPriorityQueue extends PriorityQueue {
-  constructor(options) {
-    super(options);
-    this._heap = new MinHeap();
-  }
+    constructor(options) {
+        super(options);
+        this._heap = new MinHeap();
+    }
 }

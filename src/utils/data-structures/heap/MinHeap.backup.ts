@@ -10,7 +10,7 @@ import {Heap, HeapNode} from "./Heap.backup";
  * @class MinHeap
  * @extends Heap
  */
-export class MinHeap<T extends number|string, U = undefined> extends Heap<T, U> {
+export class MinHeap<T extends number | string, U = undefined> extends Heap<T, U> {
     /**
      * Checks two nodes are in relatively valid position
      * @private
@@ -56,7 +56,7 @@ export class MinHeap<T extends number|string, U = undefined> extends Heap<T, U> 
      * @param {array} list
      * @returns {MinHeap}
      */
-    static heapify<T extends number|string, U = undefined>(list: (HeapNode<T, U> | T)[]): MinHeap<T, U> {
+    static heapify<T extends number | string, U = undefined>(list: (HeapNode<T, U> | T)[]): MinHeap<T, U> {
         return super._heapify(list, MinHeap);
     }
 
@@ -67,7 +67,7 @@ export class MinHeap<T extends number|string, U = undefined> extends Heap<T, U> 
      * @param {array} list
      * @returns {boolean}
      */
-    static isHeapified<T extends number|string, U = undefined>(list: (HeapNode<T, U> | T)[]): boolean  {
+    static isHeapified<T extends number | string, U = undefined>(list: (HeapNode<T, U> | T)[]): boolean {
         return super._isHeapified(list, MinHeap);
     }
 }

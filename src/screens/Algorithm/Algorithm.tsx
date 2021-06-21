@@ -17,7 +17,7 @@ import {
     treeMaxDepth
 } from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
-import {SinglyLinkedList} from "../../utils/data-structures";
+import {Matrix, SinglyLinkedList} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
 
 export function AlgorithmScreen() {
@@ -200,6 +200,8 @@ export function AlgorithmScreen() {
                             ? <VividAlgorithm data={ladderLengthVariables}/>
                             : null
                     }
+                    <VividAlgorithm
+                        referenceData={new Matrix([[1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 1, 1, 0, 1, 0, 1, 0, 1, 1], [0, 0, 1, 0, 1, 0, 0, 1, 0, 0], [1, 0, 1, 0, 1, 1, 1, 1, 1, 1], [0, 1, 0, 1, 1, 0, 0, 0, 0, 1], [0, 0, 1, 0, 1, 1, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 0, 1, 1, 1, 1, 0, 1], [1, 1, 1, 1, 1, 1, 1, 0, 1, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 1]])}/>
                 </View>
 
             </View>

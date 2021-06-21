@@ -1,4 +1,5 @@
 import {PriorityQueue} from "./priority-queue";
 
 
-export class MaxPriorityQueue<T> extends PriorityQueue<T> {}
+export class MaxPriorityQueue<T> extends PriorityQueue<T> {
+}

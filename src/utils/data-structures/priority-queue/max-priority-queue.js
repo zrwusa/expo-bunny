@@ -5,7 +5,7 @@
 
 import {MaxHeap} from "../heap/max-heap";
 
-const { PriorityQueue } = require('./priority-queue');
+const {PriorityQueue} = require('./priority-queue');
 
 /**
  * @class MaxPriorityQueue
