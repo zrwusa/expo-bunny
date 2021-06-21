@@ -1,5 +1,4 @@
 import {bunnyConsole} from "../utils";
-import {TreeNode} from "../../types";
 
 export const runAlgorithm = async (algorithm: Function, isStringify: boolean = false, ...args: any) => {
     const startTime = new Date().getTime();
@@ -84,40 +83,6 @@ export const isOneDiff = (word1: string, word2: string) => {
     }
     return true;
 }
-
-
-export const treeData: TreeNode<number> = new TreeNode('1', '1', 0, [
-    new TreeNode('1-1', '2', 0, [
-            new TreeNode('1-1-1', '3', 0, [
-                    new TreeNode('1-1-1-1', '4'),
-                    new TreeNode('1-1-1-2', '5', 0, []
-                    )
-                ]
-            ),
-            new TreeNode('1-1-2', '4', 0, [
-                    new TreeNode('1-1-2-1', '6'),
-                    new TreeNode('1-1-2-2', '7')
-                ]
-            )
-        ]
-    ),
-    new TreeNode('1-2', '8', 0, [
-            new TreeNode('1-2-1', '9', 0, [
-                    new TreeNode('1-2-1-1', '10'),
-                    new TreeNode('1-2-1-2', '11')
-                ]
-            ),
-            new TreeNode('1-2-2', '12', 0, [
-                    new TreeNode('1-2-2-1', '13'),
-                    new TreeNode('1-2-2-2', '14', 0, [
-                            new TreeNode('1-2-2-2-1', '15')
-                        ]
-                    )
-                ]
-            )
-        ]
-    )
-])
 
 
 const searchInSortedArray = function (nums: number[], target: number) {
