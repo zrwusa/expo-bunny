@@ -7,7 +7,36 @@ import {TProxyHandler} from "@qiwi/deep-proxy/typings/interface";
 import {DeepProxy} from "@qiwi/deep-proxy";
 import {wait} from "../../utils";
 import {Queue, Stack} from "../../data-structures";
-import {isOneDiffOrdered, isOneDiffOrderedPieced} from "../helpers";
+import {
+    Coordinate,
+    Direction,
+    fourthQuadrantMove,
+    fourthQuadrantMoveByIndex,
+    isOneDiffOrdered,
+    isOneDiffOrderedPieced,
+    MatrixCell,
+    runAlgorithm
+} from "../helpers";
+import {
+    cutOffTreeCase1,
+    cutOffTreeCase2,
+    cutOffTreeCase3,
+    cutOffTreeCase4,
+    cutOffTreeCase5,
+    cutOffTreeCase6,
+    cutOffTreeCase7,
+    ladderLengthCase1,
+    ladderLengthCase2,
+    ladderLengthCase3,
+    ladderLengthCase4,
+    ladderLengthCase5,
+    ladderLengthCase6,
+    ladderLengthCase7,
+    updateMatrixCase1,
+    updateMatrixCase2,
+    updateMatrixCase3,
+    updateMatrixCase4
+} from "./cases";
 
 export async function binaryTreeInorderTraversal(root: BinaryTreeNode | null, proxyHandler: TProxyHandler): Promise<number[]> {
     type Variables = {
@@ -483,51 +512,19 @@ export const ladderLengthTwoWayBFS = function (beginWord: string, endWord: strin
     }
     return 0;
 }
-// runAlgorithm(ladderLengthTwoWayBFS, false , ...ladderLengthCase1).then()
-// runAlgorithm(ladderLengthTwoWayBFS, false , ...ladderLengthCase2).then()
-// runAlgorithm(ladderLengthTwoWayBFS, false , ...ladderLengthCase3).then()
-// runAlgorithm(ladderLengthTwoWayBFS, false , ...ladderLengthCase4).then()
-// runAlgorithm(ladderLengthTwoWayBFS, false , ...ladderLengthCase5).then()
-// runAlgorithm(ladderLengthTwoWayBFS, false , ...ladderLengthCase6).then()
+
+const runAllLadderLength = async () => {
+    await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase1);
+    await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase2);
+    await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase3);
+    await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase4);
+    await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase5);
+    await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase6);
+    await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase7);
+}
+// runAllLadderLength().then()
 
 // 542	01 Matrix	★★★	675	934						BFS
-
-// 675. Cut Off Trees for Golf Event
-
-
-export type Direction = 'up' | 'down' | 'left' | 'right';
-export type Coordinate = { y: number, x: number };
-const fourthQuadrantMove = (departure: Coordinate, direction: Direction, limit?: { rowCount: number, colCount: number }, deadCells?: Coordinate[]) => {
-    const {x, y} = departure;
-    let destinationX: number, destinationY: number;
-    switch (direction) {
-        case 'up':
-            destinationX = x;
-            destinationY = y - 1;
-            break;
-        case 'down':
-            destinationX = x;
-            destinationY = y + 1;
-            break;
-        case 'left':
-            destinationX = x - 1;
-            destinationY = y;
-            break;
-        case 'right':
-            destinationX = x + 1;
-            destinationY = y;
-            break;
-    }
-    const destination = {x: destinationX, y: destinationY};
-
-    if (limit?.rowCount && limit.colCount) {
-        const {rowCount, colCount} = limit;
-        return (destinationY < 0 || destinationY > rowCount - 1 || destinationX < 0 || destinationX > colCount - 1) ? undefined : destination;
-    }
-
-    return destination;
-}
-
 export const updateMatrix = (mat: number[][]): number[][] => {
     const rowCount = mat.length, colCount = mat[0].length;
 
@@ -554,12 +551,11 @@ export const updateMatrix = (mat: number[][]): number[][] => {
 
         let directions: Direction[] = ['up', 'down', 'left', 'right'];
         for (let direction of directions) {
-            const destination = fourthQuadrantMove({y: top!.y, x: top!.x}, direction, {rowCount, colCount});
+            const destination = fourthQuadrantMove(top!, direction, mat);
             if (destination) {
-                const {y, x} = destination;
-                if (costMat[y][x] === Infinity) {
-                    costMat[y][x] = cost + 1;
-                    tempQueue.push({y, x});
+                if (costMat[destination.y][destination.x] === Infinity) {
+                    costMat[destination.y][destination.x] = cost + 1;
+                    tempQueue.push(destination);
                 }
             }
         }
@@ -572,10 +568,242 @@ export const updateMatrix = (mat: number[][]): number[][] => {
     }
     return costMat;
 }
-// runAlgorithm(updateMatrixCase, false,...updateMatrixCase1).then()
-// runAlgorithm(updateMatrixCase, false,...updateMatrixCase2).then()
-// runAlgorithm(updateMatrixCase, false,...updateMatrixCase3).then()
-// runAlgorithm(updateMatrixCase, false,...updateMatrixCase4).then()
+
+export const updateMatrixByIndex = (mat: number[][]): number[][] => {
+    const rowCount = mat.length, colCount = mat[0].length;
+
+    let departureQueue: MatrixCell[] = [];
+    let costMat: number[][] = [];
+
+    for (let y = 0; y < rowCount; y++) {
+        let costMatRow = new Array(colCount);
+        costMatRow.fill(Infinity);
+        costMat.push(costMatRow);
+        for (let x = 0; x < colCount; x++) {
+            if (mat[y][x] === 0) {
+                costMat[y][x] = 0;
+                departureQueue.push([y, x]);
+            }
+        }
+    }
+
+    let cost = 0;
+    let tempQueue: MatrixCell[] = [];
+
+    while (departureQueue.length > 0) {
+        let top = departureQueue.shift();
+
+        let directions: Direction[] = ['up', 'down', 'left', 'right'];
+        for (let direction of directions) {
+            const destination = fourthQuadrantMoveByIndex(top!, direction, mat);
+            if (destination) {
+                if (costMat[destination[0]][destination[1]] === Infinity) {
+                    costMat[destination[0]][destination[1]] = cost + 1;
+                    tempQueue.push(destination);
+                }
+            }
+        }
+
+        if (departureQueue.length === 0) {
+            cost++;
+            departureQueue = tempQueue;
+            tempQueue = [];
+        }
+    }
+    return costMat;
+}
+
+const runAllUpdateMatrix = async () => {
+    await runAlgorithm(updateMatrix, false, ...updateMatrixCase1);
+    await runAlgorithm(updateMatrixByIndex, false, ...updateMatrixCase1);
+    await runAlgorithm(updateMatrix, false, ...updateMatrixCase2);
+    await runAlgorithm(updateMatrixByIndex, false, ...updateMatrixCase2);
+    await runAlgorithm(updateMatrix, false, ...updateMatrixCase3);
+    await runAlgorithm(updateMatrixByIndex, false, ...updateMatrixCase3);
+    await runAlgorithm(updateMatrix, false, ...updateMatrixCase4);
+    await runAlgorithm(updateMatrixByIndex, false, ...updateMatrixCase4);
+}
+// runAllUpdateMatrix().then()
+
+
+// 675. Cut Off Trees for Golf Event                BFS
+function cutOffTree(forest: number[][]): number {
+    const rowCount = forest.length;
+    if (rowCount < 1) return -1;
+
+    const colCount = forest[0].length;
+    if (colCount < 1) return -1;
+
+    const treeCoordinates: Array<Coordinate> = [];
+    const blockCoordinates: Array<Coordinate> = [];
+    for (let rowIndex = 0; rowIndex < forest.length; rowIndex++) {
+        for (let colIndex = 0; colIndex < forest[rowIndex].length; colIndex++) {
+            if (forest[rowIndex][colIndex] > 1) {
+                treeCoordinates.push({y: rowIndex, x: colIndex})
+            } else if (forest[rowIndex][colIndex] === 0) {
+                blockCoordinates.push({y: rowIndex, x: colIndex})
+            }
+        }
+    }
+
+    if (treeCoordinates.length < 1) return -1;
+
+    const sortedTreeCoordinates: Coordinate[] = treeCoordinates.sort((a, b) => forest[a.y][a.x] - forest[b.y][b.x]);
+
+    let cost = 0;
+    let directions: Direction[] = ['up', 'down', 'left', 'right'];
+
+    const bfs = (from: Coordinate, to: Coordinate): number => {
+        let queue: Coordinate[] = [from];
+        let level = 0;
+        let tempQueue: Coordinate[] = [];
+        let visited: { [key in string]: boolean } = {};
+        while (queue.length > 0) {
+            const front = queue.shift();
+            visited[front!.y.toString() + ',' + front!.x.toString()] = true;
+
+            for (let direction of directions) {
+                const destination = fourthQuadrantMove(front!, direction, forest, blockCoordinates);
+                if (destination && !visited[destination.y.toString() + ',' + destination.x.toString()]) {
+                    if (forest[destination.y][destination.x] === forest[to.y][to.x]) {
+                        return level + 1;
+                    } else {
+                        tempQueue.push(destination);
+                    }
+                }
+            }
+
+            if (queue.length === 0) {
+                queue = tempQueue;
+                tempQueue = [];
+                level++
+            }
+        }
+        return -1;
+    }
+
+    let begin: Coordinate = {y: 0, x: 0};
+
+    if (!(sortedTreeCoordinates[0].y === 0 && sortedTreeCoordinates[0].x === 0)) {
+        sortedTreeCoordinates.unshift(begin);
+    }
+
+    while (sortedTreeCoordinates.length > 0) {
+        const front = sortedTreeCoordinates.shift();
+        const second = sortedTreeCoordinates[0];
+        if (front && second) {
+            if (bfs(front, second) === -1) {
+                return -1;
+            }
+            cost += bfs(front, second);
+        }
+        if (sortedTreeCoordinates.length === 0) {
+            return cost;
+        }
+    }
+    return -1;
+}
+
+function cutOffTreeByIndex(forest: number[][]): number {
+    const rowCount = forest.length;
+    if (rowCount < 1) return -1;
+
+    const colCount = forest[0].length;
+    if (colCount < 1) return -1;
+
+    const treeCoordinates: Array<MatrixCell> = [];
+    const blockCoordinates: Array<MatrixCell> = [];
+    for (let rowIndex = 0; rowIndex < forest.length; rowIndex++) {
+        for (let colIndex = 0; colIndex < forest[rowIndex].length; colIndex++) {
+            if (forest[rowIndex][colIndex] > 1) {
+                treeCoordinates.push([rowIndex, colIndex])
+            } else if (forest[rowIndex][colIndex] === 0) {
+                blockCoordinates.push([rowIndex, colIndex])
+            }
+        }
+    }
+
+    if (treeCoordinates.length < 1) return -1;
+
+    const sortedTreeCoordinates: MatrixCell[] = treeCoordinates.sort((a, b) => forest[a[0]][a[1]] - forest[b[0]][b[1]]);
+
+    let cost = 0;
+    let directions: Direction[] = ['up', 'down', 'left', 'right'];
+
+    const bfs = (from: MatrixCell, to: MatrixCell): number => {
+        let queue: MatrixCell[] = [from];
+        let level = 0;
+        let tempQueue: MatrixCell[] = [];
+        let visited: { [key in string]: boolean } = {};
+        while (queue.length > 0) {
+            const front = queue.shift();
+            visited[front![0].toString() + ',' + front![1].toString()] = true;
+            for (let direction of directions) {
+                const destination = fourthQuadrantMoveByIndex(front!, direction, forest, blockCoordinates);
+                if (destination && !visited[destination[0].toString() + ',' + destination[1].toString()]) {
+                    if (forest[destination[0]][destination[1]] === forest[to[0]][to[1]]) {
+                        return level + 1;
+                    } else {
+                        tempQueue.push(destination);
+                    }
+                }
+            }
+
+            if (queue.length === 0) {
+                queue = tempQueue;
+                tempQueue = [];
+                level++
+            }
+        }
+        return -1;
+    }
+
+    let begin: MatrixCell = [0, 0];
+
+    if (!(sortedTreeCoordinates[0][0] === 0 && sortedTreeCoordinates[0][1] === 0)) {
+        sortedTreeCoordinates.unshift(begin);
+    }
+
+    while (sortedTreeCoordinates.length > 0) {
+        const front = sortedTreeCoordinates.shift();
+        const second = sortedTreeCoordinates[0];
+        if (front && second) {
+            if (bfs(front, second) === -1) {
+                return -1;
+            }
+            cost += bfs(front, second);
+        }
+        if (sortedTreeCoordinates.length === 0) {
+            return cost;
+        }
+    }
+    return -1;
+}
+
+const runAllCutOffTree = async () => {
+    await runAlgorithm(cutOffTree, false, ...cutOffTreeCase1);
+    await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase1);
+
+    await runAlgorithm(cutOffTree, false, ...cutOffTreeCase2);
+    await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase2);
+
+    await runAlgorithm(cutOffTree, false, ...cutOffTreeCase3);
+    await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase3);
+
+    await runAlgorithm(cutOffTree, false, ...cutOffTreeCase4);
+    await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase4);
+
+    await runAlgorithm(cutOffTree, false, ...cutOffTreeCase5);
+    await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase5);
+
+    await runAlgorithm(cutOffTree, false, ...cutOffTreeCase6);
+    await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase6);
+
+    await runAlgorithm(cutOffTree, false, ...cutOffTreeCase7);
+    await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase7);
+}
+// runAllCutOffTree().then()
+
 
 // 698	Partition to K Equal Sum Subsets	★★★	93	131	241	282	842			Partition
 /* --- end Search (BFS/DFS) ---*/

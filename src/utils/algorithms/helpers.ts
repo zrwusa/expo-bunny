@@ -105,19 +105,83 @@ const searchInSortedArray = function (nums: number[], target: number) {
 }
 
 
+export type Direction = 'up' | 'down' | 'left' | 'right';
+export type Coordinate = { y: number, x: number };
+export type MatrixCell = number[]
+export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, matrix: number[][], deadCellsOrDeadCallback?: Coordinate[] | ((destination: Coordinate) => boolean)) => {
+    let destinationX: number = departure.x, destinationY: number = departure.y;
+    switch (direction) {
+        case "up":
+            destinationY = departure.y + 1;
+            break;
+        case "right":
+            destinationX = departure.x + 1;
+            break;
+        case "down":
+            destinationY = departure.y - 1;
+            break;
+        case "left":
+            destinationX = departure.x - 1;
+            break;
+    }
+    const destination = {y: destinationY, x: destinationX};
+
+    if (matrix) {
+        if (destinationY < 0 || destinationY > matrix.length - 1 || destinationX < 0 || destinationX > matrix[destinationY].length - 1) {
+            return undefined
+        }
+    }
+
+    if (deadCellsOrDeadCallback) {
+        if (deadCellsOrDeadCallback instanceof Function) {
+            if (deadCellsOrDeadCallback(destination)) {
+                return undefined;
+            }
+        } else {
+            for (let deadCell of deadCellsOrDeadCallback) {
+                if (destination.x === deadCell.x && destination.y === deadCell.y) {
+                    return undefined
+                }
+            }
+        }
+    }
+
+    return destination;
+}
+
+// export type MatrixCell = [number, number]
+export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Direction, matrix?: Array<Array<number>>, deadCellsOrDeadCallback?: Array<MatrixCell> | ((destination: MatrixCell) => boolean)) => {
+    const directions = {
+        up: [-1, 0],
+        right: [0, 1],
+        down: [1, 0],
+        left: [0, -1]
+    }
+
+    let newRow = departure[0] + directions[direction][0]
+    let newCol = departure[1] + directions[direction][1]
+    const destination: MatrixCell = [newRow, newCol];
+
+    if (matrix) {
+        if (newRow < 0 || newRow > matrix.length - 1 || newCol < 0 || newCol > matrix[newRow].length - 1) {
+            return undefined
+        }
+    }
 
 
+    if (deadCellsOrDeadCallback) {
+        if (deadCellsOrDeadCallback instanceof Function) {
+            if (deadCellsOrDeadCallback(destination)) {
+                return undefined;
+            }
+        } else {
+            for (let deadCell of deadCellsOrDeadCallback) {
+                if (newRow === deadCell[0] && newCol === deadCell[1]) {
+                    return undefined
+                }
+            }
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return destination;
+}
