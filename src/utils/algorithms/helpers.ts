@@ -108,7 +108,7 @@ const searchInSortedArray = function (nums: number[], target: number) {
 export type Direction = 'up' | 'down' | 'left' | 'right';
 export type Coordinate = { y: number, x: number };
 export type MatrixCell = number[]
-export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, matrix: number[][], deadCellsOrDeadCallback?: Coordinate[] | ((destination: Coordinate) => boolean)) => {
+export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, matrix: number[][], judgeDeadOrDeadCells?: ((destination: Coordinate) => boolean) | Coordinate[]) => {
     let destinationX: number = departure.x, destinationY: number = departure.y;
     switch (direction) {
         case "up":
@@ -132,13 +132,13 @@ export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, 
         }
     }
 
-    if (deadCellsOrDeadCallback) {
-        if (deadCellsOrDeadCallback instanceof Function) {
-            if (deadCellsOrDeadCallback(destination)) {
+    if (judgeDeadOrDeadCells) {
+        if (judgeDeadOrDeadCells instanceof Function) {
+            if (judgeDeadOrDeadCells(destination)) {
                 return undefined;
             }
         } else {
-            for (let deadCell of deadCellsOrDeadCallback) {
+            for (let deadCell of judgeDeadOrDeadCells) {
                 if (destination.x === deadCell.x && destination.y === deadCell.y) {
                     return undefined
                 }
@@ -150,7 +150,7 @@ export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, 
 }
 
 // export type MatrixCell = [number, number]
-export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Direction, matrix?: Array<Array<number>>, deadCellsOrDeadCallback?: Array<MatrixCell> | ((destination: MatrixCell) => boolean)) => {
+export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Direction, matrix?: Array<Array<number>>, judgeDeadOrDeadCells?: ((destination: MatrixCell) => boolean) | Array<MatrixCell>) => {
     const directions = {
         up: [-1, 0],
         right: [0, 1],
@@ -169,13 +169,13 @@ export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Dire
     }
 
 
-    if (deadCellsOrDeadCallback) {
-        if (deadCellsOrDeadCallback instanceof Function) {
-            if (deadCellsOrDeadCallback(destination)) {
+    if (judgeDeadOrDeadCells) {
+        if (judgeDeadOrDeadCells instanceof Function) {
+            if (judgeDeadOrDeadCells(destination)) {
                 return undefined;
             }
         } else {
-            for (let deadCell of deadCellsOrDeadCallback) {
+            for (let deadCell of judgeDeadOrDeadCells) {
                 if (newRow === deadCell[0] && newCol === deadCell[1]) {
                     return undefined
                 }

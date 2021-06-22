@@ -626,46 +626,73 @@ const runAllUpdateMatrix = async () => {
 // runAllUpdateMatrix().then()
 
 
-// 675. Cut Off Trees for Golf Event                BFS
-function cutOffTree(forest: number[][]): number {
-    const rowCount = forest.length;
+// 675. Cut Off Trees for Golf Event                BFS  ,A star is a kind of advanced BFS
+export function cutOffTree(forest: number[][], proxyHandler: TProxyHandler): number {
+    let proxyVariables = new DeepProxy<{ forest: number[][] }>({forest}, proxyHandler)
+    proxyVariables.forest = forest
+    const rowCount = proxyVariables.forest.length;
     if (rowCount < 1) return -1;
 
-    const colCount = forest[0].length;
+    const colCount = proxyVariables.forest[0].length;
     if (colCount < 1) return -1;
 
     const treeCoordinates: Array<Coordinate> = [];
-    const blockCoordinates: Array<Coordinate> = [];
-    for (let rowIndex = 0; rowIndex < forest.length; rowIndex++) {
-        for (let colIndex = 0; colIndex < forest[rowIndex].length; colIndex++) {
-            if (forest[rowIndex][colIndex] > 1) {
+    for (let rowIndex = 0; rowIndex < proxyVariables.forest.length; rowIndex++) {
+        for (let colIndex = 0; colIndex < proxyVariables.forest[rowIndex].length; colIndex++) {
+            if (proxyVariables.forest[rowIndex][colIndex] > 1) {
                 treeCoordinates.push({y: rowIndex, x: colIndex})
-            } else if (forest[rowIndex][colIndex] === 0) {
-                blockCoordinates.push({y: rowIndex, x: colIndex})
             }
         }
     }
 
     if (treeCoordinates.length < 1) return -1;
 
-    const sortedTreeCoordinates: Coordinate[] = treeCoordinates.sort((a, b) => forest[a.y][a.x] - forest[b.y][b.x]);
+    const sortedTreeCoordinates: Coordinate[] = treeCoordinates.sort((a, b) => proxyVariables.forest[a.y][a.x] - proxyVariables.forest[b.y][b.x]);
 
     let cost = 0;
     let directions: Direction[] = ['up', 'down', 'left', 'right'];
+
+    const hashFunction = (cell: Coordinate) => cell.y + ',' + cell.x;
+
+    const isChildrenHash = false;
+    const cellWithChildrenHash: { [key in string]: Coordinate | undefined } = {};
+    const cellWithChildrenHashFunction = (cell: Coordinate, direction: Direction) => cell.y + ',' + cell.x + '-' + direction;
 
     const bfs = (from: Coordinate, to: Coordinate): number => {
         let queue: Coordinate[] = [from];
         let level = 0;
         let tempQueue: Coordinate[] = [];
         let visited: { [key in string]: boolean } = {};
+
         while (queue.length > 0) {
             const front = queue.shift();
-            visited[front!.y.toString() + ',' + front!.x.toString()] = true;
+            visited[hashFunction(front!)] = true;
 
             for (let direction of directions) {
-                const destination = fourthQuadrantMove(front!, direction, forest, blockCoordinates);
-                if (destination && !visited[destination.y.toString() + ',' + destination.x.toString()]) {
-                    if (forest[destination.y][destination.x] === forest[to.y][to.x]) {
+                let destination;
+
+                if (isChildrenHash) {
+                    const hashedChild = cellWithChildrenHash[cellWithChildrenHashFunction(front!, direction)];
+                    if (hashedChild) {
+                        destination = hashedChild
+                    } else {
+                        destination = fourthQuadrantMove(front!, direction, proxyVariables.forest, (d) => {
+                            return proxyVariables.forest[d.y][d.x] === 0;
+                        });
+                        cellWithChildrenHash[cellWithChildrenHashFunction(front!, direction)] = destination;
+                    }
+                } else {
+                    destination = fourthQuadrantMove(front!, direction, proxyVariables.forest, (d) => {
+                        return proxyVariables.forest[d.y][d.x] === 0;
+                    });
+                }
+
+                if (!destination) {
+                    continue;
+                }
+
+                if (!visited[hashFunction(destination)]) {
+                    if (proxyVariables.forest[destination.y][destination.x] === proxyVariables.forest[to.y][to.x]) {
                         return level + 1;
                     } else {
                         tempQueue.push(destination);
@@ -712,13 +739,10 @@ function cutOffTreeByIndex(forest: number[][]): number {
     if (colCount < 1) return -1;
 
     const treeCoordinates: Array<MatrixCell> = [];
-    const blockCoordinates: Array<MatrixCell> = [];
     for (let rowIndex = 0; rowIndex < forest.length; rowIndex++) {
         for (let colIndex = 0; colIndex < forest[rowIndex].length; colIndex++) {
             if (forest[rowIndex][colIndex] > 1) {
                 treeCoordinates.push([rowIndex, colIndex])
-            } else if (forest[rowIndex][colIndex] === 0) {
-                blockCoordinates.push([rowIndex, colIndex])
             }
         }
     }
@@ -739,7 +763,9 @@ function cutOffTreeByIndex(forest: number[][]): number {
             const front = queue.shift();
             visited[front![0].toString() + ',' + front![1].toString()] = true;
             for (let direction of directions) {
-                const destination = fourthQuadrantMoveByIndex(front!, direction, forest, blockCoordinates);
+                const destination = fourthQuadrantMoveByIndex(front!, direction, forest, (d) => {
+                    return forest[d[0]][d[1]] === 0;
+                });
                 if (destination && !visited[destination[0].toString() + ',' + destination[1].toString()]) {
                     if (forest[destination[0]][destination[1]] === forest[to[0]][to[1]]) {
                         return level + 1;

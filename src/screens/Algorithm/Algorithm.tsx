@@ -7,6 +7,8 @@ import {useBunnyKit} from "../../hooks/bunny-kit";
 import {
     BFS,
     binaryTreeInorderTraversal,
+    cutOffTree,
+    cutOffTreeCase1,
     DFS,
     isValidParenthesis,
     ladderLengthCase1,
@@ -15,11 +17,10 @@ import {
     letterCombinations,
     reverseLinkedList,
     treeData,
-    treeMaxDepth,
-    updateMatrixCase4
+    treeMaxDepth
 } from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
-import {Matrix, SinglyLinkedList} from "../../utils/data-structures";
+import {SinglyLinkedList} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
 
 export function AlgorithmScreen() {
@@ -105,15 +106,21 @@ export function AlgorithmScreen() {
 
 
     const _ladderLength = async () => {
-        // const result = await ladderLength("hit","cog",["hot","dot","dog","lot","log","cog"],
         const result = await ladderLengthDFS(...ladderLengthCase1,
-            // const result = await ladderLength("ab", "lm", ["bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm"],
-            // const result = await ladderLengthPlagiarized("qa", "sq", ["si", "go", "se", "cm", "so", "ph", "mt", "db", "mb", "sb", "kr", "ln", "tm", "le", "ti", "ba", "to", "ra", "fa", "yo", "ow", "sn", "ya", "cr", "po", "he", "lr", "sq", "ye"],
-            // const result = await ladderLengthPlagiarized("qa","sq",["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","sn","ya","cr","po","he","lr","sq","ye"],
-
             ({value, key, DEFAULT}) => {
                 console.log(key, value);
                 setLadderLengthVariables(prevState => ({...prevState, [key!.toString()]: value}));
+                return DEFAULT
+            });
+        console.log(result)
+    }
+
+    const [cutOffTreeVariables, setCutOffTreeVariables] = useState<{ [key in string]: unknown }>()
+    const _cutOffTree = async () => {
+        const result = await cutOffTree(...cutOffTreeCase1,
+            ({value, key, DEFAULT}) => {
+                console.log(key, value);
+                setCutOffTreeVariables(prevState => ({...prevState, [key!.toString()]: value}));
                 return DEFAULT
             });
         console.log(result)
@@ -159,7 +166,10 @@ export function AlgorithmScreen() {
                         <TextButton onPress={() => {
                             console.log(treeMaxDepth(treeData))
                         }}>
-                            <Text>Max depth</Text>
+                            <Text>Max Depth</Text>
+                        </TextButton>
+                        <TextButton onPress={_cutOffTree}>
+                            <Text>Cut Off Tree For Golf Event</Text>
                         </TextButton>
                     </Card>
                     {
@@ -202,8 +212,11 @@ export function AlgorithmScreen() {
                             ? <VividAlgorithm data={ladderLengthVariables}/>
                             : null
                     }
-                    <VividAlgorithm
-                        referenceData={new Matrix(...updateMatrixCase4)}/>
+                    {
+                        cutOffTreeVariables
+                            ? <VividAlgorithm referenceData={cutOffTreeVariables.forest}/>
+                            : null
+                    }
                 </View>
 
             </View>
