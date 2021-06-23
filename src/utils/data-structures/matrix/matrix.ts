@@ -1,3 +1,4 @@
+// TODO Consider whether to discard
 export class Matrix<T> {
     private readonly _elements: T[][]
 

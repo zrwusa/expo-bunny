@@ -33,6 +33,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         relatedMatrixCell = data?.[relatedNodeKey] as Coordinate | undefined;
     }
 
+    // TODO render bug needs to be fixed
     let relatedMatrixRoutes: Coordinate[][] | undefined;
     if (relatedRouteKey) {
         relatedMatrixRoutes = data?.[relatedRouteKey] as Coordinate[][] | undefined;
