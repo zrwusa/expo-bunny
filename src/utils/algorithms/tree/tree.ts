@@ -12,6 +12,7 @@ import {
     Direction,
     fourthQuadrantMove,
     fourthQuadrantMoveByIndex,
+    getRouteByParentsHash,
     isOneDiffOrdered,
     isOneDiffOrderedPieced,
     MatrixCell,
@@ -627,19 +628,23 @@ const runAllUpdateMatrix = async () => {
 
 
 // 675. Cut Off Trees for Golf Event                BFS  ,A star is a kind of advanced BFS
-export function cutOffTree(forest: number[][], proxyHandler: TProxyHandler): number {
-    let proxyVariables = new DeepProxy<{ forest: number[][] }>({forest}, proxyHandler)
-    proxyVariables.forest = forest
-    const rowCount = proxyVariables.forest.length;
+export async function cutOffTree(forest: number[][], proxyHandler?: TProxyHandler): Promise<number> {
+    let proxyVariables = proxyHandler ? new DeepProxy<{ forest: number[][], cur: Coordinate, route: Coordinate[][] }>({
+        forest,
+        cur: {y: 0, x: 0},
+        route: []
+    }, proxyHandler) : undefined;
+
+    const rowCount = forest.length;
     if (rowCount < 1) return -1;
 
-    const colCount = proxyVariables.forest[0].length;
+    const colCount = forest[0].length;
     if (colCount < 1) return -1;
 
     const treeCoordinates: Array<Coordinate> = [];
-    for (let rowIndex = 0; rowIndex < proxyVariables.forest.length; rowIndex++) {
-        for (let colIndex = 0; colIndex < proxyVariables.forest[rowIndex].length; colIndex++) {
-            if (proxyVariables.forest[rowIndex][colIndex] > 1) {
+    for (let rowIndex = 0; rowIndex < forest.length; rowIndex++) {
+        for (let colIndex = 0; colIndex < forest[rowIndex].length; colIndex++) {
+            if (forest[rowIndex][colIndex] > 1) {
                 treeCoordinates.push({y: rowIndex, x: colIndex})
             }
         }
@@ -647,52 +652,47 @@ export function cutOffTree(forest: number[][], proxyHandler: TProxyHandler): num
 
     if (treeCoordinates.length < 1) return -1;
 
-    const sortedTreeCoordinates: Coordinate[] = treeCoordinates.sort((a, b) => proxyVariables.forest[a.y][a.x] - proxyVariables.forest[b.y][b.x]);
+    const sortedTreeCoordinates: Coordinate[] = treeCoordinates.sort((a, b) => forest[a.y][a.x] - forest[b.y][b.x]);
 
     let cost = 0;
     let directions: Direction[] = ['up', 'down', 'left', 'right'];
 
     const hashFunction = (cell: Coordinate) => cell.y + ',' + cell.x;
 
-    const isChildrenHash = false;
-    const cellWithChildrenHash: { [key in string]: Coordinate | undefined } = {};
-    const cellWithChildrenHashFunction = (cell: Coordinate, direction: Direction) => cell.y + ',' + cell.x + '-' + direction;
+    // const isChildrenHash = false;
+    // const cellWithChildrenHash: { [key in string]: Coordinate | undefined } = {};
+    // const cellWithChildrenHashFunction = (cell: Coordinate, direction: Direction) => cell.y + ',' + cell.x + '-' + direction;
 
-    const bfs = (from: Coordinate, to: Coordinate): number => {
+    const bfs = async (from: Coordinate, to: Coordinate): Promise<number> => {
         let queue: Coordinate[] = [from];
         let level = 0;
         let tempQueue: Coordinate[] = [];
         let visited: { [key in string]: boolean } = {};
+        visited[hashFunction(from!)] = true;
+        let parents: { [key in string]: Coordinate } = {};
 
         while (queue.length > 0) {
             const front = queue.shift();
-            visited[hashFunction(front!)] = true;
+            // if (proxyVariables) proxyVariables.cur = front!;
+
 
             for (let direction of directions) {
                 let destination;
 
-                if (isChildrenHash) {
-                    const hashedChild = cellWithChildrenHash[cellWithChildrenHashFunction(front!, direction)];
-                    if (hashedChild) {
-                        destination = hashedChild
-                    } else {
-                        destination = fourthQuadrantMove(front!, direction, proxyVariables.forest, (d) => {
-                            return proxyVariables.forest[d.y][d.x] === 0;
-                        });
-                        cellWithChildrenHash[cellWithChildrenHashFunction(front!, direction)] = destination;
-                    }
-                } else {
-                    destination = fourthQuadrantMove(front!, direction, proxyVariables.forest, (d) => {
-                        return proxyVariables.forest[d.y][d.x] === 0;
-                    });
-                }
+                destination = fourthQuadrantMove(front!, direction, forest, (d) => {
+                    return forest[d.y][d.x] === 0;
+                });
 
-                if (!destination) {
-                    continue;
-                }
+                if (destination && !visited[hashFunction(destination)]) {
+                    visited[hashFunction(destination!)] = true;
+                    parents[hashFunction(destination)] = front!;
+                    if (destination.y === to.y && destination.x === to.x) {
+                        if (proxyVariables) proxyVariables.cur = destination;
+                        await wait(100);
 
-                if (!visited[hashFunction(destination)]) {
-                    if (proxyVariables.forest[destination.y][destination.x] === proxyVariables.forest[to.y][to.x]) {
+                        const route = getRouteByParentsHash(parents, to, hashFunction);
+                        proxyVariables!.route.push(route);
+
                         return level + 1;
                     } else {
                         tempQueue.push(destination);
@@ -719,10 +719,12 @@ export function cutOffTree(forest: number[][], proxyHandler: TProxyHandler): num
         const front = sortedTreeCoordinates.shift();
         const second = sortedTreeCoordinates[0];
         if (front && second) {
-            if (bfs(front, second) === -1) {
+            const bfsResult = await bfs(front, second);
+            if (bfsResult === -1) {
                 return -1;
+            } else {
+                cost += bfsResult;
             }
-            cost += bfs(front, second);
         }
         if (sortedTreeCoordinates.length === 0) {
             return cost;
@@ -753,15 +755,16 @@ function cutOffTreeByIndex(forest: number[][]): number {
 
     let cost = 0;
     let directions: Direction[] = ['up', 'down', 'left', 'right'];
+    const hashFunction = (cell: MatrixCell) => cell[0] + ',' + cell[1];
 
     const bfs = (from: MatrixCell, to: MatrixCell): number => {
         let queue: MatrixCell[] = [from];
         let level = 0;
         let tempQueue: MatrixCell[] = [];
         let visited: { [key in string]: boolean } = {};
+        visited[hashFunction(from)] = true;
         while (queue.length > 0) {
             const front = queue.shift();
-            visited[front![0].toString() + ',' + front![1].toString()] = true;
             for (let direction of directions) {
                 const destination = fourthQuadrantMoveByIndex(front!, direction, forest, (d) => {
                     return forest[d[0]][d[1]] === 0;
@@ -770,6 +773,7 @@ function cutOffTreeByIndex(forest: number[][]): number {
                     if (forest[destination[0]][destination[1]] === forest[to[0]][to[1]]) {
                         return level + 1;
                     } else {
+                        visited[destination[0].toString() + ',' + destination[1].toString()] = true;
                         tempQueue.push(destination);
                     }
                 }
@@ -794,10 +798,11 @@ function cutOffTreeByIndex(forest: number[][]): number {
         const front = sortedTreeCoordinates.shift();
         const second = sortedTreeCoordinates[0];
         if (front && second) {
-            if (bfs(front, second) === -1) {
+            const bfsResult = bfs(front, second);
+            if (bfsResult === -1) {
                 return -1;
             }
-            cost += bfs(front, second);
+            cost += bfsResult;
         }
         if (sortedTreeCoordinates.length === 0) {
             return cost;

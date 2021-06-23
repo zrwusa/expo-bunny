@@ -8,7 +8,7 @@ import {
     BFS,
     binaryTreeInorderTraversal,
     cutOffTree,
-    cutOffTreeCase1,
+    cutOffTreeCase8,
     DFS,
     isValidParenthesis,
     ladderLengthCase1,
@@ -117,7 +117,7 @@ export function AlgorithmScreen() {
 
     const [cutOffTreeVariables, setCutOffTreeVariables] = useState<{ [key in string]: unknown }>()
     const _cutOffTree = async () => {
-        const result = await cutOffTree(...cutOffTreeCase1,
+        const result = await cutOffTree(...cutOffTreeCase8,
             ({value, key, DEFAULT}) => {
                 console.log(key, value);
                 setCutOffTreeVariables(prevState => ({...prevState, [key!.toString()]: value}));
@@ -174,12 +174,12 @@ export function AlgorithmScreen() {
                     </Card>
                     {
                         binaryTreeInorderTraversalVariables
-                            ? <VividAlgorithm data={binaryTreeInorderTraversalVariables} referenceData={binaryTree} relatedKey="node"/>
+                            ? <VividAlgorithm data={binaryTreeInorderTraversalVariables} referenceData={binaryTree} relatedNodeKey="node"/>
                             : null
                     }
                     {
                         DFSVariables
-                            ? <VividAlgorithm data={DFSVariables} referenceData={treeData} relatedKey="nodeNeedPrint"/>
+                            ? <VividAlgorithm data={DFSVariables} referenceData={treeData} relatedNodeKey="nodeNeedPrint"/>
                             : null
                     }
                     {
@@ -189,7 +189,7 @@ export function AlgorithmScreen() {
                     }
                     {
                         BFSVariables
-                            ? <VividAlgorithm data={BFSVariables} referenceData={treeData} relatedKey="node"/>
+                            ? <VividAlgorithm data={BFSVariables} referenceData={treeData} relatedNodeKey="node"/>
                             : null
                     }
                     {
@@ -214,13 +214,12 @@ export function AlgorithmScreen() {
                     }
                     {
                         cutOffTreeVariables
-                            ? <VividAlgorithm referenceData={cutOffTreeVariables.forest}/>
+                            ? <VividAlgorithm data={cutOffTreeVariables} relatedNodeKey="cur" referenceData={cutOffTreeCase8[0]}
+                                              relatedRouteKey="route"/>
                             : null
                     }
                 </View>
-
             </View>
-
         </ScrollView>
     )
 }

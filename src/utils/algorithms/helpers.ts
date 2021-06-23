@@ -107,7 +107,6 @@ const searchInSortedArray = function (nums: number[], target: number) {
 
 export type Direction = 'up' | 'down' | 'left' | 'right';
 export type Coordinate = { y: number, x: number };
-export type MatrixCell = number[]
 export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, matrix: number[][], judgeDeadOrDeadCells?: ((destination: Coordinate) => boolean) | Coordinate[]) => {
     let destinationX: number = departure.x, destinationY: number = departure.y;
     switch (direction) {
@@ -149,7 +148,7 @@ export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, 
     return destination;
 }
 
-// export type MatrixCell = [number, number]
+export type MatrixCell = [number, number]
 export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Direction, matrix?: Array<Array<number>>, judgeDeadOrDeadCells?: ((destination: MatrixCell) => boolean) | Array<MatrixCell>) => {
     const directions = {
         up: [-1, 0],
@@ -184,4 +183,38 @@ export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Dire
     }
 
     return destination;
+}
+
+
+export const getRouteByParentsHash = (parents: { [key in string]: Coordinate }, leaf: Coordinate, hashFunction: (cell: Coordinate) => string) => {
+    const route: Coordinate[] = [leaf];
+    const value: Coordinate[] = [leaf];
+    while (value.length > 0) {
+        const cur = value.shift();
+        const curParent = parents[hashFunction(cur!)];
+        if (curParent) {
+            value.push(curParent);
+            route.push(curParent)
+        }
+    }
+    return route.reverse();
+}
+
+export type HorizontalDirection = -1 | 1 | 0;
+export type VerticalDirection = 1 | -1 | 0;
+export const getDirectionVector = (from?: Coordinate, to?: Coordinate): { x: HorizontalDirection, y: VerticalDirection } => {
+    if (!from || !to) {
+        return {x: 0, y: 0}
+    }
+    let horizontal: HorizontalDirection;
+    let vertical: VerticalDirection;
+    horizontal = to.x > from.x ? 1 : -1;
+    vertical = to.y > from.y ? 1 : -1;
+    if (to.x === from.x) {
+        horizontal = 0;
+    }
+    if (to.y === from.y) {
+        vertical = 0;
+    }
+    return {x: horizontal, y: vertical}
 }

@@ -5,23 +5,38 @@ import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
-import {SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
+import {Coordinate, getDirectionVector, SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
 import {Card} from "../../containers/Card";
 import {BinaryTreeNode, TreeNode} from "../../types";
-import Svg, {Circle, G, Line, Text as SVGText} from "react-native-svg";
+import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText} from "react-native-svg";
 import {ScrollView} from "react-native";
 
 export interface VividAlgorithmProps<T> {
     data?: T,
     referenceData?: any,
-    relatedKey?: string,
+    relatedNodeKey?: string,
+    relatedRouteKey?: string,
     isDebug?: boolean
 }
 
 export const VividAlgorithm = function <T extends { [key in string]: any }>(props: VividAlgorithmProps<T>) {
-    const {data, referenceData, relatedKey, isDebug = false} = props;
-    const {sizeLabor, themeLabor, wp, colors} = useBunnyKit();
+    const {data, referenceData, relatedNodeKey, relatedRouteKey, isDebug = false} = props;
+    const {sizeLabor, themeLabor, wp, colors, ms} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
+
+    let relatedNode: TreeNode<any> | undefined;
+    let relatedBinaryNode: BinaryTreeNode | undefined;
+    let relatedMatrixCell: Coordinate | undefined;
+    if (relatedNodeKey) {
+        relatedNode = data?.[relatedNodeKey] as TreeNode<any> | undefined;
+        relatedBinaryNode = data?.[relatedNodeKey] as BinaryTreeNode | undefined;
+        relatedMatrixCell = data?.[relatedNodeKey] as Coordinate | undefined;
+    }
+
+    let relatedMatrixRoutes: Coordinate[][] | undefined;
+    if (relatedRouteKey) {
+        relatedMatrixRoutes = data?.[relatedRouteKey] as Coordinate[][] | undefined;
+    }
 
     const VividNumber: React.FC<{ data: number }> = ({data}) => {
         return (
@@ -81,28 +96,100 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             </VividTreeContainer>
         )
     }
+    const matrixPanelWidth = wp(360, false);
+    const matrixRectStrokeWidth = wp(1, false);
+    const arrowCut = 0.3;
+    const arrowColor = colors.warning
 
     const VividMatrix: React.FC<{ data: Array<Array<any>> }> = ({data}) => {
-        return (
-            <View style={{borderLeftWidth: wp(1), borderTopWidth: wp(1), borderColor: colors.border}}>
-                {
-                    data.map((row, i) => {
-                        const rowKey = i.toString();
-                        return (
-                            <Row style={{height: wp(360 / row.length)}} key={rowKey}>
-                                {
-                                    row.map((item, j) => {
-                                        const colKey = i + '-' + j.toString();
-                                        return <Col style={{borderRightWidth: wp(1), borderBottomWidth: wp(1), borderColor: colors.border}}
-                                                    key={colKey}><Text style={{textAlign: 'center'}}>{item.toString()}</Text></Col>
-                                    })
-                                }
+        const rowCount = data?.length;
+        const colCount = data?.[0]?.length;
+        if (colCount < 1) {
+            return null
+        }
+        const rectSize = (matrixPanelWidth - (colCount + 1) * matrixRectStrokeWidth) / colCount;
+        const matrixHeight = rectSize * rowCount;
 
-                            </Row>
-                        )
-                    })
-                }
-            </View>
+        return (
+            <Svg
+                width={matrixPanelWidth}
+                height={matrixHeight}
+            >
+                <G>
+                    {data.map((row, i) => {
+                        return row.map((col, j) => {
+                            const colKey = i + '-' + j.toString();
+                            const isActive = (relatedMatrixCell?.y === i && relatedMatrixCell?.x === j);
+                            return <Rect
+                                key={colKey}
+                                x={j * rectSize}
+                                y={i * rectSize}
+                                width={rectSize}
+                                height={rectSize}
+                                stroke={colors.border}
+                                strokeDasharray={`${rectSize},${rectSize * 2},${rectSize}`}
+                                strokeWidth={matrixRectStrokeWidth}
+                                fill={isActive ? colors.primary : colors.backgroundA}
+                            />
+                        })
+                    })}
+                    {data.map((row, i) => {
+                        const rowKey = i.toString();
+
+                        return row.map((col, j) => {
+                            const colKey = 'text-' + i + '-' + j.toString();
+                            const isActive = (relatedMatrixCell?.y === i && relatedMatrixCell?.x === j);
+                            return <SVGText
+                                key={colKey}
+                                strokeWidth={wp(1)}
+                                fontSize={ms.fs.m}
+                                fill={isActive ? colors.buttonText : colors.text}
+                                fontWeight={100}
+                                x={(j + 0.5) * rectSize}
+                                y={(i + 0.5) * rectSize}
+                                textAnchor="middle"
+                            >{data[i][j].toString()}</SVGText>
+                        })
+                    })}
+                    {
+                        relatedMatrixRoutes
+                            ? relatedMatrixRoutes.map((route, routeIndex) => {
+                                return route.map((cell, cellIndex) => {
+                                    const from = cell;
+                                    const to = relatedMatrixRoutes?.[routeIndex]?.[cellIndex + 1];
+                                    const deviationVector = getDirectionVector(from, to);
+
+                                    return from && to ?
+                                        <G key={from.y + ',' + from.x + to.y + to.x}>
+                                            <Defs>
+                                                <Marker
+                                                    id="Triangle"
+                                                    viewBox="0 0 10 10"
+                                                    refX="0"
+                                                    refY="5"
+                                                    markerWidth="4"
+                                                    markerHeight="3"
+                                                    orient="auto"
+                                                >
+                                                    <Path d="M 0 0 L 10 5 L 0 10 z" fill={arrowColor}/>
+                                                </Marker>
+                                            </Defs>
+                                            <Path
+                                                d={`M ${(from.x + 0.5 + deviationVector.x * arrowCut) * rectSize} ${(from.y + 0.5 + deviationVector.y * arrowCut) * rectSize} L ${(to.x + 0.5 - deviationVector.x * arrowCut) * rectSize} ${(to.y + 0.5 - deviationVector.y * arrowCut) * rectSize}`}
+                                                fill="none"
+                                                stroke={arrowColor}
+                                                strokeWidth="2"
+                                                markerEnd="url(#Triangle)"
+                                            />
+                                        </G>
+                                        : null
+                                })
+                            })
+                            : null
+                    }
+                </G>
+            </Svg>
+
         )
     }
 
@@ -114,12 +201,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const nodeSpace = wp(40);
     const fontSize = wp(12);
     const fontOffsetY = fontSize / 3;
-    let relatedNode: TreeNode<any> | undefined = undefined;
-    let relatedBinaryNode: BinaryTreeNode | undefined = undefined;
-    if (relatedKey) {
-        relatedNode = data?.[relatedKey] as TreeNode<any> | undefined;
-        relatedBinaryNode = data?.[relatedKey] as BinaryTreeNode | undefined;
-    }
+
 
     const VividTreeRecursive: React.FC<{ node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
         if (!node) {
@@ -225,23 +307,21 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const VividArray: React.FC<{ data: any[] }> = ({data}) => {
         return (
             <View>
-                <Row>
-                    {
-                        data[0] instanceof Array
-                            ? <VividMatrix data={data}/>
-                            : data.map(item => {
-                                switch (typeof item) {
-                                    case 'number':
-                                        return <View style={styles.arrayItem} key={uuidV4()}><Text>{item}</Text></View>;
-                                    case 'string':
-                                        return <View style={styles.arrayItem} key={uuidV4()}><Text>{item}</Text></View>;
-                                    default:
-                                        return <View style={styles.arrayItem} key={uuidV4()}><Text>{JSON.stringify(item)}</Text></View>;
-                                }
-                            })
+                {
+                    data[0] instanceof Array
+                        ? <VividMatrix data={data}/>
+                        : data.map(item => {
+                            switch (typeof item) {
+                                case 'number':
+                                    return <View style={styles.arrayItem} key={uuidV4()}><Text>{item}</Text></View>;
+                                case 'string':
+                                    return <View style={styles.arrayItem} key={uuidV4()}><Text>{item}</Text></View>;
+                                default:
+                                    return <View style={styles.arrayItem} key={uuidV4()}><Text>{JSON.stringify(item)}</Text></View>;
+                            }
+                        })
 
-                    }
-                </Row>
+                }
             </View>
         )
     }
@@ -284,7 +364,6 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     }
 
     const renderVariable = (item: any) => {
-        // bunnyConsole.log('item', item);
         if (!item) return null
         switch (typeof item) {
             case 'number':
@@ -320,11 +399,15 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             data
                 ? Object.keys(data).map(datumKey => {
                     const item = data[datumKey];
-                    return <Card title={datumKey} key={datumKey}>
-                        {
-                            renderVariable(item)
-                        }
-                    </Card>
+                    return (datumKey !== relatedRouteKey && datumKey !== relatedNodeKey)
+                        ?
+                        <Card title={datumKey} key={datumKey}>
+                            {
+                                renderVariable(item)
+                            }
+                        </Card>
+                        : null
+
                 })
                 : null
         }
