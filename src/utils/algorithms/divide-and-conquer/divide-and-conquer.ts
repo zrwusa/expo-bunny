@@ -1,6 +1,10 @@
 /* --- start Divide and conquer ---*/
 // Binary Search
 // 33 Search in Rotated Sorted Array
+import {runAlgorithm} from "../helpers";
+import {countSmallerCase1} from "./cases";
+import {BinaryIndexedTree} from "../../data-structures/binary-tree";
+
 export const searchInRotatedSortedArray = function (nums: number[], target: number) {
     if (nums.length === 0) return -1; // check empty
 
@@ -37,9 +41,146 @@ export const searchInRotatedSortedArray = function (nums: number[], target: numb
 };
 
 // 169	Majority Element	★★
+let majorityElement = function (nums: number[]) {
+    let majority = nums[0];
+    let count = 0;
+    for (let num of nums) {
+        if (num === majority) {
+            count++;
+        } else if (--count === 0) {
+            count = 1;
+            majority = num;
+        }
+    }
+    return majority;
+}
 // 153	Find Minimum in Rotated Sorted Array	★★	154
-// 912	Sort and Array	★★★						merge sort
+const findMin = function (nums: number[]): number {
+    const n = nums.length;
+    const first = nums[0];
+    if (n === 1) {
+        return first;
+    }
+
+    const last = nums[nums.length - 1];
+    if (first < last) {
+        return first;
+    }
+
+    const left = nums.splice(0, Math.floor(nums.length / 2));
+    if (left[0] > left[left.length - 1]) {
+        return findMin(left);
+    } else {
+        return findMin(nums);
+    }
+}
+// 912	Sort an Array	★★★						merge sort
+// 307
+class NumArray {
+    private _tree: BinaryIndexedTree;
+    private readonly _nums: number[];
+
+    constructor(nums: number[]) {
+        this._nums = nums;
+        this._tree = new BinaryIndexedTree(nums.length);
+        for (let i = 0; i < nums.length; i++) {
+            this._tree.update(i + 1, nums[i]);
+        }
+    }
+
+    update(index: number, val: number): void {
+        this._tree.update(index + 1, val - this._nums[index]);
+        this._nums[index] = val;
+    }
+
+    sumRange(left: number, right: number): number {
+        return this._tree.getPrefixSum(right + 1) - this._tree.getPrefixSum(left);
+    }
+}
+
 // 315	Count of Smaller Numbers After Self	★★★★						merge sort / BIT
+const countSmallerMustReverse = function (nums: number[]): number[] {
+    let org = [...nums];
+    let org1 = [...nums];
+    let sorted = org.sort((a, b) => a - b);
+    let sortedUnique = [...new Set(sorted)];
+    let reversed = org1.reverse();
+    let ranks: number[] = [];
+
+    for (let i = 0; i < reversed.length; i++) {
+        ranks.push(sortedUnique.indexOf(reversed[i]) + 1)
+    }
+
+    let freqs = new Array(sortedUnique.length + 1).fill(0);
+    let sumPre = (num: number) => {
+        let sum = 0;
+        for (let i = 0; i < num; i++) {
+            sum += freqs[i];
+        }
+        return sum;
+    }
+
+    let ans = [];
+    for (let i = 0; i < reversed.length; i++) {
+        freqs[ranks[i]]++;
+        ans.push(sumPre(ranks[i]));
+    }
+
+    return ans.reverse();
+}
+
+
+const countSmaller = function (nums: number[]): number[] {
+    let uniqueSorted = [...new Set(nums)].sort((a, b) => b - a);
+    let freqs = new Array(uniqueSorted.length).fill(0);
+    let positions: number[] = [];
+
+    for (let i = nums.length - 1; i > -1; i--) {
+        positions.unshift(uniqueSorted.indexOf(nums[i]))
+    }
+
+    const sumRight = (pos: number) => {
+        let sum = 0;
+        for (let i = freqs.length - 1; i > pos; i--) {
+            sum += freqs[i];
+        }
+        return sum;
+    }
+
+    let ans: number[] = [];
+    for (let i = nums.length - 1; i > -1; i--) {
+        freqs[positions[i]]++;
+        ans.unshift(sumRight(positions[i]));
+    }
+
+    return ans;
+}
+
+
+const countSmallerReverseBIT = function (nums: number[]): number[] {
+    let uniqueSorted = [...new Set(nums)].sort((a, b) => a - b);
+    let positions: number[] = [];
+    let reversed = nums.reverse();
+
+    for (let i = 0; i < reversed.length; i++) {
+        positions.push(uniqueSorted.indexOf(nums[i]))
+    }
+
+    let ans: number[] = [];
+    let tree = new BinaryIndexedTree(positions.length);
+    for (let i = 0; i < reversed.length; i++) {
+        ans.push(tree.getPrefixSum(positions[i]));
+        tree.update(positions[i], 1);
+    }
+
+    return ans.reverse();
+}
+
+
+const runAllCountSmaller = async () => {
+    await runAlgorithm(countSmallerReverseBIT, false, ...countSmallerCase1);
+}
+runAllCountSmaller().then()
 // Binary Search
 // 69 「sqrt(x)」
 
