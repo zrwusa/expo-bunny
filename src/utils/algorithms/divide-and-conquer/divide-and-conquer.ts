@@ -2,7 +2,7 @@
 // Binary Search
 // 33 Search in Rotated Sorted Array
 import {runAlgorithm} from "../helpers";
-import {countSmallerCase1} from "./cases";
+import {countSmallerCase1, countSmallerCase2, countSmallerCase3, countSmallerCase4, countSmallerCase5, countSmallerCase7} from "./cases";
 import {BinaryIndexedTree} from "../../data-structures/binary-tree";
 
 export const searchInRotatedSortedArray = function (nums: number[], target: number) {
@@ -99,38 +99,7 @@ class NumArray {
 }
 
 // 315	Count of Smaller Numbers After Self	★★★★						merge sort / BIT
-const countSmallerMustReverse = function (nums: number[]): number[] {
-    let org = [...nums];
-    let org1 = [...nums];
-    let sorted = org.sort((a, b) => a - b);
-    let sortedUnique = [...new Set(sorted)];
-    let reversed = org1.reverse();
-    let ranks: number[] = [];
-
-    for (let i = 0; i < reversed.length; i++) {
-        ranks.push(sortedUnique.indexOf(reversed[i]) + 1)
-    }
-
-    let freqs = new Array(sortedUnique.length + 1).fill(0);
-    let sumPre = (num: number) => {
-        let sum = 0;
-        for (let i = 0; i < num; i++) {
-            sum += freqs[i];
-        }
-        return sum;
-    }
-
-    let ans = [];
-    for (let i = 0; i < reversed.length; i++) {
-        freqs[ranks[i]]++;
-        ans.push(sumPre(ranks[i]));
-    }
-
-    return ans.reverse();
-}
-
-
-const countSmaller = function (nums: number[]): number[] {
+const countSmallerNoReverse = function (nums: number[]): number[] {
     let uniqueSorted = [...new Set(nums)].sort((a, b) => b - a);
     let freqs = new Array(uniqueSorted.length).fill(0);
     let positions: number[] = [];
@@ -139,6 +108,7 @@ const countSmaller = function (nums: number[]): number[] {
         positions.unshift(uniqueSorted.indexOf(nums[i]))
     }
 
+    // O(n)
     const sumRight = (pos: number) => {
         let sum = 0;
         for (let i = freqs.length - 1; i > pos; i--) {
@@ -156,31 +126,54 @@ const countSmaller = function (nums: number[]): number[] {
     return ans;
 }
 
+const countSmallerBITPlagiarized = (nums: number[]): number[] => {
+    const ranks = new Map<number, number>();
+    const sortedNums = [...nums].sort((a, b) => a - b);
+    sortedNums.forEach((num, i) => ranks.set(num, i + 1));
 
-const countSmallerReverseBIT = function (nums: number[]): number[] {
-    let uniqueSorted = [...new Set(nums)].sort((a, b) => a - b);
-    let positions: number[] = [];
-    let reversed = nums.reverse();
+    const ans: number[] = [];
+    // O(log(n))
+    const bit = new BinaryIndexedTree(nums.length);
+    nums.reverse().forEach((num) => {
+        ans.push(bit.getPrefixSum(ranks.get(num)! - 1));
+        bit.update(ranks.get(num)!, 1);
+    });
 
-    for (let i = 0; i < reversed.length; i++) {
-        positions.push(uniqueSorted.indexOf(nums[i]))
+    return ans.reverse();
+};
+
+const countSmallerBIT = function (nums: number[]): number[] {
+    const orgNums = [...nums];
+    const sortedUniqueNums = [...new Set(nums)].sort((a, b) => a - b);
+    const ranks: Map<number, number> = new Map();
+
+    for (let i = 0; i < sortedUniqueNums.length; i++) {
+        ranks.set(sortedUniqueNums[i], i + 1);
     }
 
-    let ans: number[] = [];
-    let tree = new BinaryIndexedTree(positions.length);
+    const ans: number[] = [];
+
+    // O(log(n))
+    const tree = new BinaryIndexedTree(ranks.size);
+    const reversed = orgNums.reverse();
+
     for (let i = 0; i < reversed.length; i++) {
-        ans.push(tree.getPrefixSum(positions[i]));
-        tree.update(positions[i], 1);
+        const numRank = ranks.get(reversed[i]);
+        ans.push(tree.getPrefixSum(numRank! - 1));
+        tree.update(numRank!, 1);
     }
 
     return ans.reverse();
 }
-
-
 const runAllCountSmaller = async () => {
-    await runAlgorithm(countSmallerReverseBIT, false, ...countSmallerCase1);
+    await runAlgorithm(countSmallerBIT, false, ...countSmallerCase1);
+    await runAlgorithm(countSmallerBIT, false, ...countSmallerCase2);
+    await runAlgorithm(countSmallerBIT, false, ...countSmallerCase3);
+    await runAlgorithm(countSmallerBIT, false, ...countSmallerCase4);
+    await runAlgorithm(countSmallerBIT, false, ...countSmallerCase5);
+    await runAlgorithm(countSmallerBIT, false, ...countSmallerCase7);
 }
-runAllCountSmaller().then()
+// runAllCountSmaller().then()
 // Binary Search
 // 69 「sqrt(x)」
 

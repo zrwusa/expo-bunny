@@ -422,5 +422,13 @@ export const bunnyConsole = {
 }
 
 
+export const timeStart = () => {
+    return new Date().getTime();
+}
+
+export const timeEnd = (startTime: number, headerLog?: string) => {
+    bunnyConsole.log(headerLog ? headerLog : 'time spent', new Date().getTime() - startTime);
+}
+
 
 

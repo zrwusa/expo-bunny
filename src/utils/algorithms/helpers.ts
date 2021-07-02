@@ -1,5 +1,30 @@
 import {bunnyConsole} from "../utils";
 
+// 1e+7
+// [for loop]      130
+// [sort]          207
+// [reverse]       8
+// [indexOf last]  16
+// let arr = [];
+//
+// const time1 = timeStart();
+// for (let i = 0; i < 10000000; i++) {
+//     arr.push(i);
+// }
+// timeEnd(time1,'for loop');
+//
+// const time2 = timeStart();
+// arr.sort((a, b) => a - b);
+// timeEnd(time2,'sort');
+//
+// const time3 = timeStart();
+// arr.reverse();
+// timeEnd(time3,'reverse');
+//
+// const time4 = timeStart();
+// arr.indexOf(0);
+// timeEnd(time4,'indexOf');
+
 export const runAlgorithm = async (algorithm: Function, isStringify: boolean = false, ...args: any) => {
     const startTime = new Date().getTime();
     const result = await algorithm(...args);
