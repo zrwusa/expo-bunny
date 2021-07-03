@@ -239,7 +239,8 @@ function RNHome() {
                 <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <View style={touchableWithoutFeedbackStyles.countContainer}>
-                            <Text style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
+                            <Text
+                                style={touchableWithoutFeedbackStyles.countText}>Count: {touchableWithoutFeedbackCount}</Text>
                         </View>
                         <TouchableWithoutFeedback onPress={onTouchableWithoutFeedbackPress}>
                             <View style={touchableWithoutFeedbackStyles.button}>
@@ -252,17 +253,20 @@ function RNHome() {
                     <View style={containerStyles.Card}>
                         <View>
                             <Text style={statusBarStyles.textStyle}>StatusBar Style: {styleStatusBar}</Text>
-                            <Text style={statusBarStyles.textStyle}>StatusBar Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>
+                            <Text style={statusBarStyles.textStyle}>StatusBar
+                                Visibility: {!visibleStatusBar ? 'Visible' : 'Hidden'}</Text>
                         </View>
                         <StatusBar backgroundColor="blue" barStyle={styleStatusBar}/>
                         <View>
                             <StatusBar hidden={visibleStatusBar}/>
                         </View>
                         <View style={statusBarStyles.buttonContainer}>
-                            <Button title={st(`toggleStatusBar`)} onPress={() => changeVisibilityStatusBar()}/>
+                            <Button title={st(`toggleStatusBar`)}
+                                    onPress={() => changeVisibilityStatusBar()}/>
                         </View>
                         <View style={statusBarStyles.buttonContainer}>
-                            <Button title={st(`changeStatusBarStyle`)} onPress={() => changeStyleStatusBar()}/>
+                            <Button title={st(`changeStatusBarStyle`)}
+                                    onPress={() => changeStyleStatusBar()}/>
                         </View>
                     </View>
                 </Row>

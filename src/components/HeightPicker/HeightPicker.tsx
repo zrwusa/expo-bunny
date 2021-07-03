@@ -38,7 +38,8 @@ export const HeightPicker = (props: HeightPickerProps) => {
                     onCancel?.()
                 }}><IcoMoon name="x"/></TextButton></Col>
                 <Col align="center"><Text>{title}</Text></Col>
-                <Col align="flex-end"><TextButton onPress={_reset}><Text style={sharedStyles.text2}>Reset</Text></TextButton></Col>
+                <Col align="flex-end"><TextButton onPress={_reset}><Text
+                    style={sharedStyles.text2}>Reset</Text></TextButton></Col>
             </Row>
         </View>
         <View style={styles.content}>

@@ -2,11 +2,11 @@
 
 
 // 94 Binary Tree Inorder Traversal	★ 144 145 429 589 590 987 1302 traversal
-import {BinaryTreeNode, OrderType, TreeNode} from "../../../types";
+import {OrderType, TreeNode} from "../../../types";
 import {TProxyHandler} from "@qiwi/deep-proxy/typings/interface";
 import {DeepProxy} from "@qiwi/deep-proxy";
 import {wait} from "../../utils";
-import {Queue, Stack} from "../../data-structures";
+import {BinaryTreeNode, Queue, Stack} from "../../data-structures";
 import {
     Coordinate,
     Direction,
@@ -39,12 +39,12 @@ import {
     updateMatrixCase4
 } from "./cases";
 
-export async function binaryTreeInorderTraversal(root: BinaryTreeNode | null, proxyHandler: TProxyHandler): Promise<number[]> {
+export async function binaryTreeInorderTraversal(root: BinaryTreeNode<number> | undefined, proxyHandler: TProxyHandler): Promise<number[]> {
     type Variables = {
-        node: BinaryTreeNode | null
+        node: BinaryTreeNode<number> | undefined
     }
 
-    let proxyVariables = new DeepProxy<Variables>({node: null}, proxyHandler);
+    let proxyVariables = new DeepProxy<Variables>({node: undefined}, proxyHandler);
 
     if (!root) {
         return []
@@ -63,7 +63,7 @@ export async function binaryTreeInorderTraversal(root: BinaryTreeNode | null, pr
 
     return [
         ...leftResult,
-        root.val,
+        root.value!,
         ...rightResult
     ]
 }
@@ -149,7 +149,10 @@ export async function letterCombinations(digits: string, proxyHandler: TProxyHan
 
     type PhoneKeys = '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
-    let proxyVariables = new DeepProxy<{ accumulated: string, result: string[] }>({accumulated: '', result: []}, proxyHandler)
+    let proxyVariables = new DeepProxy<{ accumulated: string, result: string[] }>({
+        accumulated: '',
+        result: []
+    }, proxyHandler)
 
     const digitsMap: { [key in PhoneKeys]: string } = {
         '2': 'abc',

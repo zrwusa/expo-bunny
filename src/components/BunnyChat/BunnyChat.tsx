@@ -1,5 +1,15 @@
 import React, {RefObject} from 'react'
-import {Animated, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, StyleProp, StyleSheet, View, ViewStyle,} from 'react-native'
+import {
+    Animated,
+    FlatList,
+    KeyboardAvoidingView,
+    Platform,
+    SafeAreaView,
+    StyleProp,
+    StyleSheet,
+    View,
+    ViewStyle,
+} from 'react-native'
 import {ActionSheetOptions, ActionSheetProvider,} from '../../../packages/react-native-action-sheet/src'
 import uuid from 'uuid'
 import {getBottomSpace} from 'react-native-iphone-x-helper'
@@ -24,7 +34,13 @@ import Send from './Send'
 import Time from './Time'
 import BunnyAvatar from './BunnyAvatar'
 
-import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
+import {
+    DATE_FORMAT,
+    DEFAULT_PLACEHOLDER,
+    MAX_COMPOSER_HEIGHT,
+    MIN_COMPOSER_HEIGHT,
+    TIME_FORMAT,
+} from './Constant'
 import {IMessage,} from './types'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {SizeLabor, ThemeLabor} from "../../types";

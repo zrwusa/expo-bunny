@@ -5,7 +5,14 @@ import {Text} from "../../../../components/UI"
 import {Col, Row} from "../../../../containers";
 import {Divider} from "../../../../components/Divider";
 import {MonthKey} from "../../../../types";
-import {VictoryAxis, VictoryChart, VictoryLabel, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../../components/Victory/Victory";
+import {
+    VictoryAxis,
+    VictoryChart,
+    VictoryLabel,
+    VictoryLine,
+    VictoryTooltip,
+    VictoryVoronoiContainer
+} from "../../../../components/Victory/Victory";
 import {useBunnyKit} from "../../../../hooks/bunny-kit";
 
 export interface BodyPartCardProps {

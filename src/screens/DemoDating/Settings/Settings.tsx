@@ -2,7 +2,16 @@ import * as React from "react";
 import {useState} from "react";
 import {Text, View} from "../../../components/UI";
 import {RouteProp} from "@react-navigation/native";
-import {City, Country, DemoDatingTabStackParam, Occupation, OccupationCategory, Religion, State, University} from "../../../types";
+import {
+    City,
+    Country,
+    DemoDatingTabStackParam,
+    Occupation,
+    OccupationCategory,
+    Religion,
+    State,
+    University
+} from "../../../types";
 import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from "../../../containers";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {getSharedStyles} from "../../../helpers";
@@ -48,7 +57,12 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
         setIsShowSpouseModal(!isShowSpouseModal)
     }
 
-    const [idealSpouse, setIdealSpouse] = useState<SpousePickerResult>({distance: 10, age: 24, fromHeight: 163, toHeight: 180})
+    const [idealSpouse, setIdealSpouse] = useState<SpousePickerResult>({
+        distance: 10,
+        age: 24,
+        fromHeight: 163,
+        toHeight: 180
+    })
 
 
     const occupationTitle = 'Occupation';

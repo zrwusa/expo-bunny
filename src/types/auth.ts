@@ -113,7 +113,12 @@ export type AuthContextConfig = {
     storageType?: 'LOCAL_STORAGE' | 'NONE'
 }
 
-export type PersistenceAuthParamKey = 'accessToken' | 'accessTokenExp' | 'refreshToken' | 'refreshTokenExp' | 'user'
+export type PersistenceAuthParamKey =
+    'accessToken'
+    | 'accessTokenExp'
+    | 'refreshToken'
+    | 'refreshTokenExp'
+    | 'user'
 export type PersistenceAuthParam = Partial<{
     accessToken: string,
     accessTokenExp: string,

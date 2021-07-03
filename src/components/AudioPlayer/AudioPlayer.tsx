@@ -104,8 +104,10 @@ export function AudioPlayer(props: AudioPlayerProps) {
                             status?.isLoaded
                                 ?
                                 status.isPlaying
-                                    ? <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="pause"/>
-                                    : <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]} name="play"/>
+                                    ? <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]}
+                                               name="pause"/>
+                                    : <IcoMoon style={[styles.playButtonIcon, playButtonIconStyle]}
+                                               name="play"/>
                                 : <ActivityIndicator/>
                         }
                     </View>

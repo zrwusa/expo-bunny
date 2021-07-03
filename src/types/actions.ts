@@ -1,5 +1,14 @@
 // Redux actions
-import {EBL, EDemoCryptoCurrency, EDemoHello, EDemoMap, EDemoSaga, EDemoSagaFirebase, EDemoThunk, ESys} from "../constants";
+import {
+    EBL,
+    EDemoCryptoCurrency,
+    EDemoHello,
+    EDemoMap,
+    EDemoSaga,
+    EDemoSagaFirebase,
+    EDemoThunk,
+    ESys
+} from "../constants";
 import {
     CancelAlertSettingsParams,
     ClearBLResultPayload,

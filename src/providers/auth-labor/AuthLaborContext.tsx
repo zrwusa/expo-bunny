@@ -17,7 +17,13 @@ import BunnyConstants, {EBLMsg} from "../../constants/constants";
 import {AxiosResponse} from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Google from "expo-google-app-auth";
-import {ANDROID_CLIENT_ID, ANDROID_CLIENT_ID_FOR_EXPO, FACEBOOK_APP_ID, IOS_CLIENT_ID, IOS_CLIENT_ID_FOR_EXPO} from "@env";
+import {
+    ANDROID_CLIENT_ID,
+    ANDROID_CLIENT_ID_FOR_EXPO,
+    FACEBOOK_APP_ID,
+    IOS_CLIENT_ID,
+    IOS_CLIENT_ID_FOR_EXPO
+} from "@env";
 import _, {identity, pickBy} from "lodash";
 import {blError, blSuccess} from "../../helpers";
 import {EventRegister} from "react-native-event-listeners";
@@ -112,7 +118,11 @@ const loginOrSignUp = async (res: any) => {
 }
 
 const bunnyLogin = async (params: LoginParams) => {
-    const res = await apiAuth.request<LoginParams, AxiosResponse<AuthRes>>({method: loginAPIMethod, url: loginAPIPath, data: params})
+    const res = await apiAuth.request<LoginParams, AxiosResponse<AuthRes>>({
+        method: loginAPIMethod,
+        url: loginAPIPath,
+        data: params
+    })
     return await loginOrSignUp(res);
 }
 
@@ -398,7 +408,13 @@ const getPersistenceAuth = async () => {
     const user = await AsyncStorage.getItem(userPersistenceKey)
     const accessTokenExp = await AsyncStorage.getItem(accessTokenExpPersistenceKey)
     const refreshTokenExp = await AsyncStorage.getItem(refreshTokenExpPersistenceKey)
-    return {accessToken, accessTokenExp, refreshToken, refreshTokenExp, user: user ? JSON.parse(user) as User : undefined};
+    return {
+        accessToken,
+        accessTokenExp,
+        refreshToken,
+        refreshTokenExp,
+        user: user ? JSON.parse(user) as User : undefined
+    };
 }
 
 const authTrigger = (triggerType: TriggerType) => {

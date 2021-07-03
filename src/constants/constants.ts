@@ -1,4 +1,14 @@
-import {City, Country, EnumThemeNames, Month, Occupation, OccupationCategory, Religion, State, University} from "../types";
+import {
+    City,
+    Country,
+    EnumThemeNames,
+    Month,
+    Occupation,
+    OccupationCategory,
+    Religion,
+    State,
+    University
+} from "../types";
 
 const BunnyConstants = {
     latLngDeltaGrace: {
@@ -76,7 +86,14 @@ export const defaultValues = {
     } as City,
     occupationCategory: {code: '', displayLevel: 0, name: '', sort: 0, type: ''} as OccupationCategory,
     occupation: {category: '', name: '', code: '', displayLevel: 0, sort: 0, type: ''} as Occupation,
-    university: {alphaTwoCode: '', domains: [''], webPages: [''], stateProvince: null, country: '', name: ''} as University,
+    university: {
+        alphaTwoCode: '',
+        domains: [''],
+        webPages: [''],
+        stateProvince: null,
+        country: '',
+        name: ''
+    } as University,
     religion: {
         display: '',
         code: '',

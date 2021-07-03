@@ -177,7 +177,10 @@ export const religions = [{
                 "department": "Religion",
                 "area_of_research": "African American Religious History",
                 "language": "en",
-                "web_sites": [{"pk": 175, "url": "https://religion.princeton.edu/people/students/graduate-students/melena-laudig/"}]
+                "web_sites": [{
+                    "pk": 175,
+                    "url": "https://religion.princeton.edu/people/students/graduate-students/melena-laudig/"
+                }]
             },
             "email": "melenas@princeton.edu"
         },
@@ -265,7 +268,14 @@ export const religions = [{
     "ancestry": ["Religious Group"],
     "language": "en"
 }, {
-    "pk": 1017, "parent_tag": 8, "name": "Aladura", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 1017,
+    "parent_tag": 8,
+    "name": "Aladura",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 810, "user": {
             "pk": 935,
             "username": "Naomi_Richman_1596449524",
@@ -290,7 +300,10 @@ export const religions = [{
             },
             "email": "n.richman@bbk.ac.uk"
         }, "approved": true, "contributed_entries": [935], "editor": {"pk": 40, "type": "regionaleditor"}
-    }, "created": "2020-08-03T14:12:05.450387Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-08-03T14:12:05.450387Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 868,
     "parent_tag": 856,
@@ -672,7 +685,14 @@ export const religions = [{
     "ancestry": ["Polity"],
     "language": "en"
 }, {
-    "pk": 981, "parent_tag": 8, "name": "Asia Minor", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 981,
+    "parent_tag": 8,
+    "name": "Asia Minor",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -694,7 +714,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:41:19.186856Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:41:19.186856Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 950,
     "parent_tag": 8,
@@ -1189,7 +1212,14 @@ export const religions = [{
     "ancestry": ["Religious Group"],
     "language": "en"
 }, {
-    "pk": 976, "parent_tag": 8, "name": "Carthage", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 976,
+    "parent_tag": 8,
+    "name": "Carthage",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -1211,7 +1241,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:40:38.604523Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:40:38.604523Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 1115,
     "parent_tag": 1069,
@@ -1259,7 +1292,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -1279,7 +1313,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T17:01:53.865683Z",
     "ancestry": ["Religious Group"],
@@ -1293,7 +1330,8 @@ export const religions = [{
     "children_count": 1,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -1313,7 +1351,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T17:02:10.389384Z",
     "ancestry": ["Religious Group"],
@@ -1952,7 +1993,10 @@ export const religions = [{
                 "department": "Religious Studies",
                 "area_of_research": "Neo-Confucianism",
                 "language": "en",
-                "web_sites": [{"pk": 198, "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"}]
+                "web_sites": [{
+                    "pk": 198,
+                    "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"
+                }]
             },
             "email": "adlerj@kenyon.edu"
         },
@@ -2028,7 +2072,10 @@ export const religions = [{
                 "department": "Religious Studies",
                 "area_of_research": "Neo-Confucianism",
                 "language": "en",
-                "web_sites": [{"pk": 198, "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"}]
+                "web_sites": [{
+                    "pk": 198,
+                    "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"
+                }]
             },
             "email": "adlerj@kenyon.edu"
         },
@@ -2066,7 +2113,10 @@ export const religions = [{
                 "department": "Religious Studies",
                 "area_of_research": "Neo-Confucianism",
                 "language": "en",
-                "web_sites": [{"pk": 198, "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"}]
+                "web_sites": [{
+                    "pk": 198,
+                    "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"
+                }]
             },
             "email": "adlerj@kenyon.edu"
         },
@@ -2609,7 +2659,14 @@ export const religions = [{
     "ancestry": ["Religious Group"],
     "language": "en"
 }, {
-    "pk": 884, "parent_tag": 856, "name": "Forum", "approved": true, "entry_tag_group": 2, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 884,
+    "parent_tag": 856,
+    "name": "Forum",
+    "approved": true,
+    "entry_tag_group": 2,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 635,
         "user": {
             "pk": 756,
@@ -2635,9 +2692,19 @@ export const religions = [{
         "approved": true,
         "contributed_entries": [670, 687],
         "editor": {"pk": 41, "type": "regionaleditor"}
-    }, "created": "2019-07-21T20:37:36.642426Z", "ancestry": ["Religious Place"], "language": "en"
+    },
+    "created": "2019-07-21T20:37:36.642426Z",
+    "ancestry": ["Religious Place"],
+    "language": "en"
 }, {
-    "pk": 975, "parent_tag": 8, "name": "Gaul", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 975,
+    "parent_tag": 8,
+    "name": "Gaul",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -2659,7 +2726,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:40:33.013405Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:40:33.013405Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 21,
     "parent_tag": 8,
@@ -2973,7 +3043,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -2993,7 +3064,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T15:55:00.992667Z",
     "ancestry": ["Religious Group"],
@@ -3007,7 +3081,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -3027,7 +3102,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T17:01:35.982089Z",
     "ancestry": ["Religious Group"],
@@ -3041,7 +3119,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -3061,7 +3140,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T17:02:24.391980Z",
     "ancestry": ["Religious Group"],
@@ -3075,7 +3157,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -3095,7 +3178,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T17:02:36.820731Z",
     "ancestry": ["Religious Group"],
@@ -4203,7 +4289,14 @@ export const religions = [{
     "ancestry": ["Religious Group"],
     "language": "en"
 }, {
-    "pk": 972, "parent_tag": 8, "name": "Montanism", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 972,
+    "parent_tag": 8,
+    "name": "Montanism",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -4225,7 +4318,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:40:20.742259Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:40:20.742259Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 857,
     "parent_tag": 856,
@@ -4595,7 +4691,10 @@ export const religions = [{
                 "department": "Religious Studies",
                 "area_of_research": "Neo-Confucianism",
                 "language": "en",
-                "web_sites": [{"pk": 198, "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"}]
+                "web_sites": [{
+                    "pk": 198,
+                    "url": "https://www2.kenyon.edu/Depts/Religion/Fac/Adler/adler.htm"
+                }]
             },
             "email": "adlerj@kenyon.edu"
         },
@@ -4763,7 +4862,8 @@ export const religions = [{
     "children_count": 3,
     "level": 2,
     "created_by_expert": {
-        "pk": 576, "user": {
+        "pk": 576,
+        "user": {
             "pk": 696,
             "username": "Steven_Johnson_1524814413",
             "first_name": "Stephen",
@@ -4783,7 +4883,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "editor.DRH@gmail.com"
-        }, "approved": true, "contributed_entries": [563, 564, 566, 567, 570, 615], "editor": {"pk": 37, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [563, 564, 566, 567, 570, 615],
+        "editor": {"pk": 37, "type": "regionaleditor"}
     },
     "created": "2018-05-13T11:59:21.437957Z",
     "ancestry": ["Religious Group"],
@@ -4873,7 +4976,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -4893,7 +4997,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T18:12:31.187628Z",
     "ancestry": ["Religious Group"],
@@ -4907,7 +5014,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -4927,7 +5035,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T18:12:47.556891Z",
     "ancestry": ["Religious Group"],
@@ -5097,7 +5208,14 @@ export const religions = [{
     "ancestry": ["Religious Group"],
     "language": "en"
 }, {
-    "pk": 978, "parent_tag": 8, "name": "Phrygia", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 978,
+    "parent_tag": 8,
+    "name": "Phrygia",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -5119,7 +5237,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:40:52.614023Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:40:52.614023Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 964,
     "parent_tag": 8,
@@ -5129,7 +5250,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 739, "user": {
+        "pk": 739,
+        "user": {
             "pk": 864,
             "username": "Sharon_MacLeod_1595086033",
             "first_name": "Sharon",
@@ -5149,7 +5271,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "macleod_eolas@yahoo.com"
-        }, "approved": true, "contributed_entries": [850, 852, 853], "editor": {"pk": 40, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [850, 852, 853],
+        "editor": {"pk": 40, "type": "regionaleditor"}
     },
     "created": "2020-07-18T18:13:03.246099Z",
     "ancestry": ["Religious Group"],
@@ -5345,7 +5470,14 @@ export const religions = [{
     "ancestry": ["Religious Group"],
     "language": "en"
 }, {
-    "pk": 979, "parent_tag": 8, "name": "Prophecy", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 979,
+    "parent_tag": 8,
+    "name": "Prophecy",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -5367,7 +5499,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:40:57.209231Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:40:57.209231Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 1032,
     "parent_tag": 8,
@@ -5395,7 +5530,10 @@ export const religions = [{
                 "department": "Religion",
                 "area_of_research": "African American Religious History",
                 "language": "en",
-                "web_sites": [{"pk": 175, "url": "https://religion.princeton.edu/people/students/graduate-students/melena-laudig/"}]
+                "web_sites": [{
+                    "pk": 175,
+                    "url": "https://religion.princeton.edu/people/students/graduate-students/melena-laudig/"
+                }]
             },
             "email": "melenas@princeton.edu"
         },
@@ -5673,7 +5811,14 @@ export const religions = [{
     "ancestry": ["Religious Group"],
     "language": "en"
 }, {
-    "pk": 974, "parent_tag": 8, "name": "Rome", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 974,
+    "parent_tag": 8,
+    "name": "Rome",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -5695,7 +5840,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:40:29.820333Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:40:29.820333Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 932,
     "parent_tag": 856,
@@ -5963,8 +6111,16 @@ export const religions = [{
     "ancestry": ["Religious Place"],
     "language": "en"
 }, {
-    "pk": 934, "parent_tag": 856, "name": "shrines", "approved": true, "entry_tag_group": 2, "children_count": 0, "level": 2, "created_by_expert": {
-        "pk": 661, "user": {
+    "pk": 934,
+    "parent_tag": 856,
+    "name": "shrines",
+    "approved": true,
+    "entry_tag_group": 2,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
+        "pk": 661,
+        "user": {
             "pk": 786,
             "username": "James_Sellmann_1570590107",
             "first_name": "James",
@@ -5987,8 +6143,14 @@ export const religions = [{
                 }, {"pk": 154, "url": "https://www.researchgate.net/profile/James_Sellmann"}]
             },
             "email": "jsellmann@triton.uog.edu"
-        }, "approved": true, "contributed_entries": [720, 795, 800], "editor": {"pk": 15, "type": "regionaleditor"}
-    }, "created": "2020-04-21T08:26:27.877905Z", "ancestry": ["Religious Place"], "language": "en"
+        },
+        "approved": true,
+        "contributed_entries": [720, 795, 800],
+        "editor": {"pk": 15, "type": "regionaleditor"}
+    },
+    "created": "2020-04-21T08:26:27.877905Z",
+    "ancestry": ["Religious Place"],
+    "language": "en"
 }, {
     "pk": 44,
     "parent_tag": 8,
@@ -6188,7 +6350,8 @@ export const religions = [{
     "children_count": 2,
     "level": 2,
     "created_by_expert": {
-        "pk": 520, "user": {
+        "pk": 520,
+        "user": {
             "pk": 640,
             "username": "William_Noseworthy_1511922268",
             "first_name": "William",
@@ -6208,7 +6371,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "wnoseworthy@mcneese.edu"
-        }, "approved": true, "contributed_entries": [476, 520, 535, 683, 1025, 1043], "editor": {"pk": 37, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [476, 520, 535, 683, 1025, 1043],
+        "editor": {"pk": 37, "type": "regionaleditor"}
     },
     "created": "2017-11-29T02:38:06.262272Z",
     "ancestry": ["Religious Group"],
@@ -6450,7 +6616,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 520, "user": {
+        "pk": 520,
+        "user": {
             "pk": 640,
             "username": "William_Noseworthy_1511922268",
             "first_name": "William",
@@ -6470,7 +6637,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "wnoseworthy@mcneese.edu"
-        }, "approved": true, "contributed_entries": [476, 520, 535, 683, 1025, 1043], "editor": {"pk": 37, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [476, 520, 535, 683, 1025, 1043],
+        "editor": {"pk": 37, "type": "regionaleditor"}
     },
     "created": "2017-11-29T02:37:47.132828Z",
     "ancestry": ["Religious Group"],
@@ -6612,7 +6782,10 @@ export const religions = [{
                 "department": "marketing",
                 "area_of_research": "technology",
                 "language": "en",
-                "web_sites": [{"pk": 158, "url": "https://www.fieldengineer.com/skills/service-desk-technician"}]
+                "web_sites": [{
+                    "pk": 158,
+                    "url": "https://www.fieldengineer.com/skills/service-desk-technician"
+                }]
             },
             "email": "tekyworld@gmail.com"
         },
@@ -6700,7 +6873,14 @@ export const religions = [{
     "ancestry": ["Religious Place"],
     "language": "en"
 }, {
-    "pk": 977, "parent_tag": 8, "name": "Tertullian", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 977,
+    "parent_tag": 8,
+    "name": "Tertullian",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 753, "user": {
             "pk": 878,
             "username": "Camille_Angelo_1595260097",
@@ -6722,7 +6902,10 @@ export const religions = [{
             },
             "email": "camille.angelo@yale.edu"
         }, "approved": true, "contributed_entries": [858], "editor": {"pk": 44, "type": "regionaleditor"}
-    }, "created": "2020-07-20T16:40:42.487579Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2020-07-20T16:40:42.487579Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 1069,
     "parent_tag": null,
@@ -6842,7 +7025,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 576, "user": {
+        "pk": 576,
+        "user": {
             "pk": 696,
             "username": "Steven_Johnson_1524814413",
             "first_name": "Stephen",
@@ -6862,7 +7046,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "editor.DRH@gmail.com"
-        }, "approved": true, "contributed_entries": [563, 564, 566, 567, 570, 615], "editor": {"pk": 37, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [563, 564, 566, 567, 570, 615],
+        "editor": {"pk": 37, "type": "regionaleditor"}
     },
     "created": "2018-05-13T11:27:57.643059Z",
     "ancestry": ["Religious Group"],
@@ -7206,7 +7393,14 @@ export const religions = [{
     "ancestry": ["Text"],
     "language": "en"
 }, {
-    "pk": 901, "parent_tag": 8, "name": "Vietnam", "approved": true, "entry_tag_group": 3, "children_count": 0, "level": 2, "created_by_expert": {
+    "pk": 901,
+    "parent_tag": 8,
+    "name": "Vietnam",
+    "approved": true,
+    "entry_tag_group": 3,
+    "children_count": 0,
+    "level": 2,
+    "created_by_expert": {
         "pk": 664, "user": {
             "pk": 789,
             "username": "isvan_quang_1572942105",
@@ -7228,7 +7422,10 @@ export const religions = [{
             },
             "email": "isvanchampa2010@gmail.com"
         }, "approved": true, "contributed_entries": [727, 752], "editor": {"pk": 37, "type": "regionaleditor"}
-    }, "created": "2019-12-14T02:11:37.994545Z", "ancestry": ["Religious Group"], "language": "en"
+    },
+    "created": "2019-12-14T02:11:37.994545Z",
+    "ancestry": ["Religious Group"],
+    "language": "en"
 }, {
     "pk": 807,
     "parent_tag": 8,
@@ -7238,7 +7435,8 @@ export const religions = [{
     "children_count": 0,
     "level": 2,
     "created_by_expert": {
-        "pk": 520, "user": {
+        "pk": 520,
+        "user": {
             "pk": 640,
             "username": "William_Noseworthy_1511922268",
             "first_name": "William",
@@ -7258,7 +7456,10 @@ export const religions = [{
                 "web_sites": []
             },
             "email": "wnoseworthy@mcneese.edu"
-        }, "approved": true, "contributed_entries": [476, 520, 535, 683, 1025, 1043], "editor": {"pk": 37, "type": "regionaleditor"}
+        },
+        "approved": true,
+        "contributed_entries": [476, 520, 535, 683, 1025, 1043],
+        "editor": {"pk": 37, "type": "regionaleditor"}
     },
     "created": "2017-11-29T02:37:58.867334Z",
     "ancestry": ["Religious Group"],
@@ -7782,7 +7983,11 @@ export const religionsXXX = [{
     "pk": 1095,
     "name": {"name": "Punjabi (West)"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1237, "name": "Mohla Village, Gujrat District, Pakistan ca. 1950", "tags": [515]},
+    "default_gis_region": {
+        "pk": 1237,
+        "name": "Mohla Village, Gujrat District, Pakistan ca. 1950",
+        "tags": [515]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [8, 24],
@@ -7877,7 +8082,11 @@ export const religionsXXX = [{
     "pk": 1079,
     "name": {"name": "Tongshu 通書"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1216, "name": "Area of Circulation for the Taijitu Shuo and Tongshu (East Asia)", "tags": [600]},
+    "default_gis_region": {
+        "pk": 1216,
+        "name": "Area of Circulation for the Taijitu Shuo and Tongshu (East Asia)",
+        "tags": [600]
+    },
     "created_by_expert": 902,
     "published_contributors": [902],
     "tags": [1069, 123, 8, 133, 131, 1105],
@@ -8086,7 +8295,11 @@ export const religionsXXX = [{
     "pk": 1055,
     "name": {"name": "Taijitu shuo 太極圖說"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1216, "name": "Area of Circulation for the Taijitu Shuo and Tongshu (East Asia)", "tags": [600]},
+    "default_gis_region": {
+        "pk": 1216,
+        "name": "Area of Circulation for the Taijitu Shuo and Tongshu (East Asia)",
+        "tags": [600]
+    },
     "created_by_expert": 902,
     "published_contributors": [902],
     "tags": [1106, 1069, 8, 1085, 1108, 1107, 1105],
@@ -8257,7 +8470,11 @@ export const religionsXXX = [{
     "pk": 1031,
     "name": {"name": "Eastern Roman Manichaeism"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1177, "name": "Eastern Roman Empire (300-600)", "tags": [72, 447, 406, 500, 434, 432, 557, 461, 5]},
+    "default_gis_region": {
+        "pk": 1177,
+        "name": "Eastern Roman Empire (300-600)",
+        "tags": [72, 447, 406, 500, 434, 432, 557, 461, 5]
+    },
     "created_by_expert": 865,
     "published_contributors": [865],
     "tags": [30, 855, 854, 41, 8, 1063, 774],
@@ -8523,7 +8740,11 @@ export const religionsXXX = [{
     "pk": 995,
     "name": {"name": "Tamil Neo-Saivism"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1151, "name": "Tamil South India and Tamil Sri Lanka", "tags": [463, 510, 365, 555, 509, 1]},
+    "default_gis_region": {
+        "pk": 1151,
+        "name": "Tamil South India and Tamil Sri Lanka",
+        "tags": [463, 510, 365, 555, 509, 1]
+    },
     "created_by_expert": 822,
     "published_contributors": [822],
     "tags": [510, 1037, 1036, 8, 1059, 866],
@@ -8626,7 +8847,11 @@ export const religionsXXX = [{
     "pk": 988,
     "name": {"name": "Churches of Christ- United States"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1146, "name": "Churches of Christ in the United States", "tags": [366, 61, 538, 537, 185]},
+    "default_gis_region": {
+        "pk": 1146,
+        "name": "Churches of Christ in the United States",
+        "tags": [366, 61, 538, 537, 185]
+    },
     "created_by_expert": 821,
     "published_contributors": [821],
     "tags": [1030, 182, 18, 8],
@@ -8767,7 +8992,11 @@ export const religionsXXX = [{
     "pk": 980,
     "name": {"name": "Pure Land Buddhist Schools in Early Medieval Japan"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1141, "name": "Japan - Early Medieval (from the 10th to 14th century)", "tags": [397, 1, 520]},
+    "default_gis_region": {
+        "pk": 1141,
+        "name": "Japan - Early Medieval (from the 10th to 14th century)",
+        "tags": [397, 1, 520]
+    },
     "created_by_expert": 826,
     "published_contributors": [826],
     "tags": [14, 26, 8],
@@ -8805,7 +9034,11 @@ export const religionsXXX = [{
     "pk": 977,
     "name": {"name": "Chishti Sufis"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1127, "name": "Chishti Order", "tags": [509, 498, 463, 365, 517, 516, 515, 1]},
+    "default_gis_region": {
+        "pk": 1127,
+        "name": "Chishti Order",
+        "tags": [509, 498, 463, 365, 517, 516, 515, 1]
+    },
     "created_by_expert": 815,
     "published_contributors": [815],
     "tags": [510, 1037, 24, 8, 997],
@@ -8900,7 +9133,11 @@ export const religionsXXX = [{
     "pk": 972,
     "name": {"name": "Nestorian Christianity"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1121, "name": "Nestorian Christianity", "tags": [380, 504, 406, 434, 498, 463, 365, 428, 1]},
+    "default_gis_region": {
+        "pk": 1121,
+        "name": "Nestorian Christianity",
+        "tags": [380, 504, 406, 434, 498, 463, 365, 428, 1]
+    },
     "created_by_expert": 770,
     "published_contributors": [770],
     "tags": [39, 243, 8],
@@ -8919,7 +9156,11 @@ export const religionsXXX = [{
     "pk": 971,
     "name": {"name": "Gāṇapatya"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1135, "name": "Important centers of Ganapatya worship", "tags": [463, 498, 512]},
+    "default_gis_region": {
+        "pk": 1135,
+        "name": "Important centers of Ganapatya worship",
+        "tags": [463, 498, 512]
+    },
     "created_by_expert": 795,
     "published_contributors": [795],
     "tags": [510, 566, 8, 647, 646],
@@ -9269,7 +9510,11 @@ export const religionsXXX = [{
     "pk": 950,
     "name": {"name": "The Religious Society of Friends (Quakers)"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1125, "name": "The Religious Society of Friends (Quakers)", "tags": [399, 366, 63, 90, 14, 496]},
+    "default_gis_region": {
+        "pk": 1125,
+        "name": "The Religious Society of Friends (Quakers)",
+        "tags": [399, 366, 63, 90, 14, 496]
+    },
     "created_by_expert": 803,
     "published_contributors": [803],
     "tags": [8, 1030, 1029, 1028, 18],
@@ -9349,7 +9594,11 @@ export const religionsXXX = [{
     "pk": 945,
     "name": {"name": "Vasco-Aquitanian Religion"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1106, "name": "The Roman Vasco-Aquitanian Pyrenees and Vasconic Hinterland", "tags": [493]},
+    "default_gis_region": {
+        "pk": 1106,
+        "name": "The Roman Vasco-Aquitanian Pyrenees and Vasconic Hinterland",
+        "tags": [493]
+    },
     "created_by_expert": 746,
     "published_contributors": [746],
     "tags": [900, 1034, 1033, 1022, 8],
@@ -9467,7 +9716,11 @@ export const religionsXXX = [{
     "pk": 939,
     "name": {"name": "Goodenough and Fergusson Islanders"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1085, "name": "Goodenough Island - Northern D'Entrecasteaux", "tags": [311, 13, 76]},
+    "default_gis_region": {
+        "pk": 1085,
+        "name": "Goodenough Island - Northern D'Entrecasteaux",
+        "tags": [311, 13, 76]
+    },
     "created_by_expert": 589,
     "published_contributors": [589],
     "tags": [311, 798, 40, 8],
@@ -9562,7 +9815,11 @@ export const religionsXXX = [{
     "pk": 933,
     "name": {"name": "Marcionites"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1080, "name": "Mediterranean and Mesopotamia", "tags": [447, 374, 406, 373, 434, 433, 431, 296, 5, 3]},
+    "default_gis_region": {
+        "pk": 1080,
+        "name": "Mediterranean and Mesopotamia",
+        "tags": [447, 374, 406, 373, 434, 433, 431, 296, 5, 3]
+    },
     "created_by_expert": 754,
     "published_contributors": [754],
     "tags": [8, 984, 774, 981, 18, 930],
@@ -9813,7 +10070,11 @@ export const religionsXXX = [{
     "pk": 916,
     "name": {"name": "Italy: Roman Catholic Christianity II"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -9889,7 +10150,11 @@ export const religionsXXX = [{
     "pk": 911,
     "name": {"name": "Italy: Roman Catholic Christianity"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -9927,7 +10192,11 @@ export const religionsXXX = [{
     "pk": 908,
     "name": {"name": "Sino-Christian Theology"},
     "alt_names": [{"name": "Chinese Cultural Christianity"}],
-    "default_gis_region": {"pk": 1119, "name": "Metropolitan China, Hong Kong S.A.R., and Taiwan", "tags": [206, 205, 37, 355, 1]},
+    "default_gis_region": {
+        "pk": 1119,
+        "name": "Metropolitan China, Hong Kong S.A.R., and Taiwan",
+        "tags": [206, 205, 37, 355, 1]
+    },
     "created_by_expert": 794,
     "published_contributors": [794],
     "tags": [237, 123, 8, 18],
@@ -10311,7 +10580,11 @@ export const religionsXXX = [{
     "pk": 882,
     "name": {"name": "Orphism"},
     "alt_names": [{"name": "Orphic Cult"}],
-    "default_gis_region": {"pk": 1040, "name": "Greece, Magna Graecia", "tags": [286, 73, 376, 370, 288, 3, 72]},
+    "default_gis_region": {
+        "pk": 1040,
+        "name": "Greece, Magna Graecia",
+        "tags": [286, 73, 376, 370, 288, 3, 72]
+    },
     "created_by_expert": 760,
     "published_contributors": [760],
     "tags": [22, 741, 745, 8],
@@ -10585,7 +10858,11 @@ export const religionsXXX = [{
     "pk": 857,
     "name": {"name": "Wesleyanism"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1097, "name": "Worldwide Wesleyan/Methodist Populations", "tags": [61, 399, 366, 14, 13, 332, 421, 3, 419, 1]},
+    "default_gis_region": {
+        "pk": 1097,
+        "name": "Worldwide Wesleyan/Methodist Populations",
+        "tags": [61, 399, 366, 14, 13, 332, 421, 3, 419, 1]
+    },
     "created_by_expert": 750,
     "published_contributors": [750],
     "tags": [971, 970, 8],
@@ -10642,7 +10919,11 @@ export const religionsXXX = [{
     "pk": 853,
     "name": {"name": "Pre-Christian Religion / Paganism in Northern Britain (Pictland / Scotland)"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1020, "name": "Northern Britain / Scotland", "tags": [427, 426, 425, 424, 423, 422, 421, 3]},
+    "default_gis_region": {
+        "pk": 1020,
+        "name": "Northern Britain / Scotland",
+        "tags": [427, 426, 425, 424, 423, 422, 421, 3]
+    },
     "created_by_expert": 739,
     "published_contributors": [739],
     "tags": [959, 958, 956, 16, 8, 964, 963, 962],
@@ -10756,7 +11037,11 @@ export const religionsXXX = [{
     "pk": 846,
     "name": {"name": "Xuanzang's Yogācāra Tradition"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1015, "name": "Major Yogācāra-driven monasteries during the early Tang period", "tags": [205, 418, 37, 1]},
+    "default_gis_region": {
+        "pk": 1015,
+        "name": "Major Yogācāra-driven monasteries during the early Tang period",
+        "tags": [205, 418, 37, 1]
+    },
     "created_by_expert": 727,
     "published_contributors": [727],
     "tags": [14, 8, 951, 952, 65],
@@ -10946,7 +11231,11 @@ export const religionsXXX = [{
     "pk": 832,
     "name": {"name": "Temple of Prey Angkor Knung"},
     "alt_names": [],
-    "default_gis_region": {"pk": 1001, "name": "Tboung Khmum or Tbong Khmum Province", "tags": [380, 222, 69, 412, 1]},
+    "default_gis_region": {
+        "pk": 1001,
+        "name": "Tboung Khmum or Tbong Khmum Province",
+        "tags": [380, 222, 69, 412, 1]
+    },
     "created_by_expert": 711,
     "published_contributors": [711],
     "tags": [14, 8, 856, 947, 865, 944],
@@ -10984,7 +11273,11 @@ export const religionsXXX = [{
     "pk": 829,
     "name": {"name": "Italy: The Jesuit Order"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -11003,7 +11296,11 @@ export const religionsXXX = [{
     "pk": 828,
     "name": {"name": "Italy: The Franciscan Order"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -11288,7 +11585,11 @@ export const religionsXXX = [{
     "pk": 813,
     "name": {"name": "Đồng Dương Temple"},
     "alt_names": [],
-    "default_gis_region": {"pk": 995, "name": "Đồng Dương, present-day Bình Định, Vietnam", "tags": [391, 357, 380]},
+    "default_gis_region": {
+        "pk": 995,
+        "name": "Đồng Dương, present-day Bình Định, Vietnam",
+        "tags": [391, 357, 380]
+    },
     "created_by_expert": 715,
     "published_contributors": [715],
     "tags": [510, 857, 856, 14, 808, 8, 868, 865],
@@ -11402,7 +11703,11 @@ export const religionsXXX = [{
     "pk": 806,
     "name": {"name": "Italy: The Catholic Church"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -11421,7 +11726,11 @@ export const religionsXXX = [{
     "pk": 805,
     "name": {"name": "Italy: The Catholic Church"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -11440,7 +11749,11 @@ export const religionsXXX = [{
     "pk": 804,
     "name": {"name": "Italy: The Catholic Church"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -11459,7 +11772,11 @@ export const religionsXXX = [{
     "pk": 803,
     "name": {"name": "Italy: The Catholic Church"},
     "alt_names": [],
-    "default_gis_region": {"pk": 991, "name": "Italy and the Catholic Church", "tags": [287, 73, 376, 3, 370, 288]},
+    "default_gis_region": {
+        "pk": 991,
+        "name": "Italy and the Catholic Church",
+        "tags": [287, 73, 376, 3, 370, 288]
+    },
     "created_by_expert": 618,
     "published_contributors": [618],
     "tags": [156, 18, 153, 8],
@@ -11497,7 +11814,11 @@ export const religionsXXX = [{
     "pk": 801,
     "name": {"name": "Wat Preah Vihear Sour: A Popular Pilgrimage Site outside Phnom Penh, Cambodia"},
     "alt_names": [],
-    "default_gis_region": {"pk": 990, "name": "Vihear Sour commune, Khsach Kandal district, Kandal province", "tags": [222, 69, 1]},
+    "default_gis_region": {
+        "pk": 990,
+        "name": "Vihear Sour commune, Khsach Kandal district, Kandal province",
+        "tags": [222, 69, 1]
+    },
     "created_by_expert": 711,
     "published_contributors": [711],
     "tags": [943, 14, 8, 856, 865, 944],
@@ -11535,7 +11856,11 @@ export const religionsXXX = [{
     "pk": 795,
     "name": {"name": "Micronesia, Guam, Commonwealth of the Northern Mariana Islands; the Fed. States of Micronesia (Yap, Chuuk, Pohnpei, Kosrae); Palau, Marshals"},
     "alt_names": [],
-    "default_gis_region": {"pk": 570, "name": "Melanesia, Micronesia, and Polynesia", "tags": [76, 77, 78, 13]},
+    "default_gis_region": {
+        "pk": 570,
+        "name": "Melanesia, Micronesia, and Polynesia",
+        "tags": [76, 77, 78, 13]
+    },
     "created_by_expert": 661,
     "published_contributors": [661],
     "tags": [858, 314, 856, 40, 8, 934, 933, 836],
@@ -11995,7 +12320,11 @@ export const religionsXXX = [{
     "pk": 766,
     "name": {"name": "Garo"},
     "alt_names": [],
-    "default_gis_region": {"pk": 971, "name": "Rengsanggri, Meghalaya State, India ca. 1955", "tags": [215, 362, 1, 40]},
+    "default_gis_region": {
+        "pk": 971,
+        "name": "Rengsanggri, Meghalaya State, India ca. 1955",
+        "tags": [215, 362, 1, 40]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [510, 8],
@@ -12128,7 +12457,11 @@ export const religionsXXX = [{
     "pk": 759,
     "name": {"name": "Comanche"},
     "alt_names": [],
-    "default_gis_region": {"pk": 964, "name": "Comanche-occupied southern Great Plains ca. 1870", "tags": [61, 185]},
+    "default_gis_region": {
+        "pk": 964,
+        "name": "Comanche-occupied southern Great Plains ca. 1870",
+        "tags": [61, 185]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [38, 8],
@@ -12318,7 +12651,11 @@ export const religionsXXX = [{
     "pk": 744,
     "name": {"name": "Rwala Bedouin"},
     "alt_names": [],
-    "default_gis_region": {"pk": 949, "name": "Bedouin grazing territory, Saudi Arabia", "tags": [245, 1, 232]},
+    "default_gis_region": {
+        "pk": 949,
+        "name": "Bedouin grazing territory, Saudi Arabia",
+        "tags": [245, 1, 232]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [284, 8, 24],
@@ -12394,7 +12731,11 @@ export const religionsXXX = [{
     "pk": 738,
     "name": {"name": "Ancient Egyptian"},
     "alt_names": [],
-    "default_gis_region": {"pk": 944, "name": "Egypt, sometimes Nubia (Sudan) and the Levant", "tags": [14, 64]},
+    "default_gis_region": {
+        "pk": 944,
+        "name": "Egypt, sometimes Nubia (Sudan) and the Levant",
+        "tags": [14, 64]
+    },
     "created_by_expert": 665,
     "published_contributors": [665],
     "tags": [20, 9, 8],
@@ -12489,7 +12830,11 @@ export const religionsXXX = [{
     "pk": 729,
     "name": {"name": "Kikuyu"},
     "alt_names": [{"name": "Gikuyu"}],
-    "default_gis_region": {"pk": 937, "name": "Fort Hall or Metume District, Kenya, ca. 1920", "tags": [63, 14, 90]},
+    "default_gis_region": {
+        "pk": 937,
+        "name": "Fort Hall or Metume District, Kenya, ca. 1920",
+        "tags": [63, 14, 90]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [9, 8],
@@ -12546,7 +12891,11 @@ export const religionsXXX = [{
     "pk": 724,
     "name": {"name": "Aweikoma"},
     "alt_names": [{"name": "Xokleng"}, {"name": "Kaingáng"}, {"name": "Caingang"}],
-    "default_gis_region": {"pk": 932, "name": "Duque de Caxias Reservation, state of Santa Catarina, Brazil ca. 1932", "tags": [79, 188]},
+    "default_gis_region": {
+        "pk": 932,
+        "name": "Duque de Caxias Reservation, state of Santa Catarina, Brazil ca. 1932",
+        "tags": [79, 188]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [508, 8],
@@ -12565,7 +12914,11 @@ export const religionsXXX = [{
     "pk": 723,
     "name": {"name": "Trumai"},
     "alt_names": [],
-    "default_gis_region": {"pk": 931, "name": "Trumai village of Vanivani, central Mato Grosso State, Brazil", "tags": [79, 188]},
+    "default_gis_region": {
+        "pk": 931,
+        "name": "Trumai village of Vanivani, central Mato Grosso State, Brazil",
+        "tags": [79, 188]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [508, 8],
@@ -12584,7 +12937,11 @@ export const religionsXXX = [{
     "pk": 722,
     "name": {"name": "Gros Ventre"},
     "alt_names": [{"name": "Atsina"}, {"name": "A'ani"}],
-    "default_gis_region": {"pk": 930, "name": "Fort Belknap Reservation and Gros Ventre lands", "tags": [61, 185]},
+    "default_gis_region": {
+        "pk": 930,
+        "name": "Fort Belknap Reservation and Gros Ventre lands",
+        "tags": [61, 185]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [38, 8],
@@ -12603,7 +12960,11 @@ export const religionsXXX = [{
     "pk": 721,
     "name": {"name": "Semang"},
     "alt_names": [],
-    "default_gis_region": {"pk": 929, "name": "Jahai subtribe of northeastern Perak and northwestern Kelantan, Malaysia", "tags": [1, 69, 225]},
+    "default_gis_region": {
+        "pk": 929,
+        "name": "Jahai subtribe of northeastern Perak and northwestern Kelantan, Malaysia",
+        "tags": [1, 69, 225]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [8, 808],
@@ -12641,7 +13002,11 @@ export const religionsXXX = [{
     "pk": 717,
     "name": {"name": "Igbo"},
     "alt_names": [{"name": "Ibo"}],
-    "default_gis_region": {"pk": 927, "name": "Isu-Ana division, Owerri or Southern Ibo, Nigeria", "tags": [14, 381, 65]},
+    "default_gis_region": {
+        "pk": 927,
+        "name": "Isu-Ana division, Owerri or Southern Ibo, Nigeria",
+        "tags": [14, 381, 65]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [806, 9, 8],
@@ -12698,7 +13063,11 @@ export const religionsXXX = [{
     "pk": 712,
     "name": {"name": "Huichol"},
     "alt_names": [],
-    "default_gis_region": {"pk": 925, "name": "Huichol Territory, Nayarit and Jalisco, Mexico", "tags": [172, 59, 178]},
+    "default_gis_region": {
+        "pk": 925,
+        "name": "Huichol Territory, Nayarit and Jalisco, Mexico",
+        "tags": [172, 59, 178]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [33, 8],
@@ -12717,7 +13086,11 @@ export const religionsXXX = [{
     "pk": 711,
     "name": {"name": "Kwoma"},
     "alt_names": [],
-    "default_gis_region": {"pk": 924, "name": "Ambunti Sub-Province, Sepik River region, Papua New Guinea", "tags": [311, 13, 76]},
+    "default_gis_region": {
+        "pk": 924,
+        "name": "Ambunti Sub-Province, Sepik River region, Papua New Guinea",
+        "tags": [311, 13, 76]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [311, 806, 8, 40],
@@ -12945,7 +13318,11 @@ export const religionsXXX = [{
     "pk": 682,
     "name": {"name": "Lakher"},
     "alt_names": [{"name": "Maras"}],
-    "default_gis_region": {"pk": 910, "name": "Lushai Hills, Chin Hills, Arakan Hill Tracts", "tags": [40, 215, 213, 69, 226, 1]},
+    "default_gis_region": {
+        "pk": 910,
+        "name": "Lushai Hills, Chin Hills, Arakan Hill Tracts",
+        "tags": [40, 215, 213, 69, 226, 1]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [510, 8],
@@ -13002,7 +13379,11 @@ export const religionsXXX = [{
     "pk": 679,
     "name": {"name": "Santal"},
     "alt_names": [],
-    "default_gis_region": {"pk": 903, "name": "Bankura and Birbhum disctricts of Bengal", "tags": [215, 341, 1, 40]},
+    "default_gis_region": {
+        "pk": 903,
+        "name": "Bankura and Birbhum disctricts of Bengal",
+        "tags": [215, 341, 1, 40]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [510, 8],
@@ -13021,7 +13402,11 @@ export const religionsXXX = [{
     "pk": 677,
     "name": {"name": "Yapese"},
     "alt_names": [],
-    "default_gis_region": {"pk": 901, "name": "Yap Island, Federated States of Micronesia", "tags": [13, 77, 317]},
+    "default_gis_region": {
+        "pk": 901,
+        "name": "Yap Island, Federated States of Micronesia",
+        "tags": [13, 77, 317]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [314, 8, 40],
@@ -13059,7 +13444,11 @@ export const religionsXXX = [{
     "pk": 675,
     "name": {"name": "Chukchee"},
     "alt_names": [],
-    "default_gis_region": {"pk": 899, "name": "Reindeer division of the Chukchee, Northeastern Russia", "tags": [251, 260, 3]},
+    "default_gis_region": {
+        "pk": 899,
+        "name": "Reindeer division of the Chukchee, Northeastern Russia",
+        "tags": [251, 260, 3]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [765, 8],
@@ -13230,7 +13619,11 @@ export const religionsXXX = [{
     "pk": 663,
     "name": {"name": "Temples of Mater Matuta and Fortuna at Sant'Omobono"},
     "alt_names": [{"name": "Temple of Mater Matuta"}, {"name": "Temple of Fortuna"}, {"name": "Aedis Fortunae et Matris Matutae"}, {"name": "Area Sacra di Sant'Omobono"}],
-    "default_gis_region": {"pk": 889, "name": "Temples of Fortuna and Mater Matuta", "tags": [376, 3, 73, 288]},
+    "default_gis_region": {
+        "pk": 889,
+        "name": "Temples of Fortuna and Mater Matuta",
+        "tags": [376, 3, 73, 288]
+    },
     "created_by_expert": 638,
     "published_contributors": [638],
     "tags": [857, 868, 865, 856],
@@ -13439,7 +13832,11 @@ export const religionsXXX = [{
     "pk": 651,
     "name": {"name": "Kapauku"},
     "alt_names": [],
-    "default_gis_region": {"pk": 879, "name": "Central Highlands of Irian Jaya, Indonesia", "tags": [223, 69, 1]},
+    "default_gis_region": {
+        "pk": 879,
+        "name": "Central Highlands of Irian Jaya, Indonesia",
+        "tags": [223, 69, 1]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [8, 808],
@@ -13458,7 +13855,11 @@ export const religionsXXX = [{
     "pk": 650,
     "name": {"name": "Manus"},
     "alt_names": [],
-    "default_gis_region": {"pk": 878, "name": "Village of Peri, Manus Province, Papua New Guinea", "tags": [311, 13, 76]},
+    "default_gis_region": {
+        "pk": 878,
+        "name": "Village of Peri, Manus Province, Papua New Guinea",
+        "tags": [311, 13, 76]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [8, 40],
@@ -13553,7 +13954,11 @@ export const religionsXXX = [{
     "pk": 645,
     "name": {"name": "Meo Muslim, Mev, Mewati Muslim"},
     "alt_names": [],
-    "default_gis_region": {"pk": 873, "name": "Haryana, Rajasthan, and Eastern Uttar Pradesh, North India", "tags": [215, 351, 1, 40]},
+    "default_gis_region": {
+        "pk": 873,
+        "name": "Haryana, Rajasthan, and Eastern Uttar Pradesh, North India",
+        "tags": [215, 351, 1, 40]
+    },
     "created_by_expert": 627,
     "published_contributors": [627],
     "tags": [510, 862, 861, 8, 24],
@@ -13838,7 +14243,11 @@ export const religionsXXX = [{
     "pk": 625,
     "name": {"name": "Copper Inuit"},
     "alt_names": [{"name": "Copper Eskimo"}],
-    "default_gis_region": {"pk": 858, "name": "Coronation Gulf Region of Nunavut, Canada", "tags": [182, 61, 74]},
+    "default_gis_region": {
+        "pk": 858,
+        "name": "Coronation Gulf Region of Nunavut, Canada",
+        "tags": [182, 61, 74]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [765, 766, 38, 8],
@@ -13933,7 +14342,11 @@ export const religionsXXX = [{
     "pk": 620,
     "name": {"name": "Papago"},
     "alt_names": [{"name": "O'odham"}],
-    "default_gis_region": {"pk": 853, "name": "Tohono O'odham Nation Reservation", "tags": [61, 172, 178, 185]},
+    "default_gis_region": {
+        "pk": 853,
+        "name": "Tohono O'odham Nation Reservation",
+        "tags": [61, 172, 178, 185]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [38, 806, 8],
@@ -14161,7 +14574,11 @@ export const religionsXXX = [{
     "pk": 605,
     "name": {"name": "Burmese"},
     "alt_names": [{"name": "Burmans"}, {"name": "Myanmarese"}],
-    "default_gis_region": {"pk": 839, "name": "Village of Nondwin, Sagaing Region, Burma", "tags": [69, 226, 1]},
+    "default_gis_region": {
+        "pk": 839,
+        "name": "Village of Nondwin, Sagaing Region, Burma",
+        "tags": [69, 226, 1]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [14, 8],
@@ -14332,7 +14749,11 @@ export const religionsXXX = [{
     "pk": 592,
     "name": {"name": "Veerashaivas"},
     "alt_names": [],
-    "default_gis_region": {"pk": 826, "name": "Karnataka, India, Andhra Pradesh, India", "tags": [375, 40, 1]},
+    "default_gis_region": {
+        "pk": 826,
+        "name": "Karnataka, India, Andhra Pradesh, India",
+        "tags": [375, 40, 1]
+    },
     "created_by_expert": 558,
     "published_contributors": [558],
     "tags": [566, 510, 512, 8],
@@ -14370,7 +14791,11 @@ export const religionsXXX = [{
     "pk": 590,
     "name": {"name": "Huayan School (Early Tang)"},
     "alt_names": [{"name": "Flower Garland School"}, {"name": "Huayan School"}],
-    "default_gis_region": {"pk": 824, "name": "Chang´an-Mount Zhongnan-Luoyang-Caozhou", "tags": [37, 205, 1]},
+    "default_gis_region": {
+        "pk": 824,
+        "name": "Chang´an-Mount Zhongnan-Luoyang-Caozhou",
+        "tags": [37, 205, 1]
+    },
     "created_by_expert": 582,
     "published_contributors": [582],
     "tags": [383, 388, 123, 841, 8],
@@ -14408,7 +14833,11 @@ export const religionsXXX = [{
     "pk": 588,
     "name": {"name": "Nyakyusa"},
     "alt_names": [{"name": "Sokile"}, {"name": "Konde"}, {"name": "Nkonde"}, {"name": "Wangonde"}, {"name": "Ngonde"}, {"name": "Niakiusa"}, {"name": "Nyakusa"}, {"name": "Sochile"}],
-    "default_gis_region": {"pk": 822, "name": "Northern Coastal Plain of Lake Malawi", "tags": [103, 102, 14, 92, 63]},
+    "default_gis_region": {
+        "pk": 822,
+        "name": "Northern Coastal Plain of Lake Malawi",
+        "tags": [103, 102, 14, 92, 63]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [50, 9, 8],
@@ -14446,7 +14875,11 @@ export const religionsXXX = [{
     "pk": 582,
     "name": {"name": "Siamese (Central Thai)"},
     "alt_names": [{"name": "Thai"}, {"name": "Siamese Tai"}, {"name": "Syam"}, {"name": "Tai"}, {"name": "T'ai"}],
-    "default_gis_region": {"pk": 819, "name": "Chao Phraya (Menam) River Alluvial Plain", "tags": [69, 229, 1]},
+    "default_gis_region": {
+        "pk": 819,
+        "name": "Chao Phraya (Menam) River Alluvial Plain",
+        "tags": [69, 229, 1]
+    },
     "created_by_expert": 577,
     "published_contributors": [577],
     "tags": [510, 808, 14, 8, 513, 518, 514, 545],
@@ -14484,7 +14917,11 @@ export const religionsXXX = [{
     "pk": 580,
     "name": {"name": "Nāth Sampradāya"},
     "alt_names": [{"name": "Nāth Yogīs"}, {"name": "Gorakhnāthī Yogīs"}],
-    "default_gis_region": {"pk": 817, "name": "Regions of nowadays India, Pakistan, and Nepal", "tags": [365, 40]},
+    "default_gis_region": {
+        "pk": 817,
+        "name": "Regions of nowadays India, Pakistan, and Nepal",
+        "tags": [365, 40]
+    },
     "created_by_expert": 580,
     "published_contributors": [580],
     "tags": [510, 8],
@@ -14541,7 +14978,11 @@ export const religionsXXX = [{
     "pk": 576,
     "name": {"name": "Kuy traditional religions"},
     "alt_names": [{"name": "Khamen-Boran, Kui, Kuy, Kuay, Kuoy, Soai, Soei, Suay, Suei, Sui, and Suoi"}],
-    "default_gis_region": {"pk": 811, "name": "Kuy-language speakers in mainland Southeast Asia", "tags": [356, 1]},
+    "default_gis_region": {
+        "pk": 811,
+        "name": "Kuy-language speakers in mainland Southeast Asia",
+        "tags": [356, 1]
+    },
     "created_by_expert": 554,
     "published_contributors": [554],
     "tags": [806, 14, 836, 808, 8],
@@ -14701,7 +15142,11 @@ export const religionsXXX = [{
     "pk": 563,
     "name": {"name": "Gaddi, a Hindu community of the Western Himalayas"},
     "alt_names": [],
-    "default_gis_region": {"pk": 797, "name": "Gaddis of the Western Himalayas -- Modern Period", "tags": [351, 215, 341, 40, 361, 360, 1]},
+    "default_gis_region": {
+        "pk": 797,
+        "name": "Gaddis of the Western Himalayas -- Modern Period",
+        "tags": [351, 215, 341, 40, 361, 360, 1]
+    },
     "created_by_expert": 576,
     "published_contributors": [576],
     "tags": [510, 564, 822, 821, 820, 621, 8, 646, 566, 704],
@@ -14777,7 +15222,11 @@ export const religionsXXX = [{
     "pk": 526,
     "name": {"name": "Hmong Christianity"},
     "alt_names": [],
-    "default_gis_region": {"pk": 766, "name": "Hmong-Miao speakers in Southern China, Southeast Asia and the US and French diasporas", "tags": [356]},
+    "default_gis_region": {
+        "pk": 766,
+        "name": "Hmong-Miao speakers in Southern China, Southeast Asia and the US and French diasporas",
+        "tags": [356]
+    },
     "created_by_expert": 568,
     "published_contributors": [568],
     "tags": [18, 808, 8],
@@ -15081,7 +15530,11 @@ export const religionsXXX = [{
     "pk": 485,
     "name": {"name": "Sámi pre-Christian religion"},
     "alt_names": [],
-    "default_gis_region": {"pk": 730, "name": "Sápmi (The Sámi Land)", "tags": [251, 279, 276, 269, 263, 260, 3]},
+    "default_gis_region": {
+        "pk": 730,
+        "name": "Sápmi (The Sámi Land)",
+        "tags": [251, 279, 276, 269, 263, 260, 3]
+    },
     "created_by_expert": 461,
     "published_contributors": [461],
     "tags": [767, 765, 8],
@@ -15708,7 +16161,11 @@ export const religionsXXX = [{
     "pk": 442,
     "name": {"name": "Donatism"},
     "alt_names": [],
-    "default_gis_region": {"pk": 691, "name": "North Africa/Africa Proconsularis", "tags": [14, 117, 115, 120, 64]},
+    "default_gis_region": {
+        "pk": 691,
+        "name": "North Africa/Africa Proconsularis",
+        "tags": [14, 117, 115, 120, 64]
+    },
     "created_by_expert": 468,
     "published_contributors": [468],
     "tags": [742, 18, 8],
@@ -15765,7 +16222,11 @@ export const religionsXXX = [{
     "pk": 439,
     "name": {"name": "Śaiva Magic"},
     "alt_names": [],
-    "default_gis_region": {"pk": 689, "name": "South Asia (India, Sri Lanka, Pakistan, Bangladesh, and Nepal)", "tags": [1, 40]},
+    "default_gis_region": {
+        "pk": 689,
+        "name": "South Asia (India, Sri Lanka, Pakistan, Bangladesh, and Nepal)",
+        "tags": [1, 40]
+    },
     "created_by_expert": 464,
     "published_contributors": [464],
     "tags": [510, 566, 690, 513, 8],
@@ -15898,7 +16359,11 @@ export const religionsXXX = [{
     "pk": 424,
     "name": {"name": "Achaemenid Religion"},
     "alt_names": [],
-    "default_gis_region": {"pk": 548, "name": "Achaemenid Empire", "tags": [58, 216, 116, 344, 14, 232, 5, 1, 64]},
+    "default_gis_region": {
+        "pk": 548,
+        "name": "Achaemenid Empire",
+        "tags": [58, 216, 116, 344, 14, 232, 5, 1, 64]
+    },
     "created_by_expert": 386,
     "published_contributors": [386],
     "tags": [34, 49, 8],
@@ -16358,7 +16823,11 @@ export const religionsXXX = [{
     "pk": 348,
     "name": {"name": "Yanshi Shangcheng"},
     "alt_names": [],
-    "default_gis_region": {"pk": 613, "name": "Luo River, Yellow River Valley, Henan Province", "tags": [1, 205, 37]},
+    "default_gis_region": {
+        "pk": 613,
+        "name": "Luo River, Yellow River Valley, Henan Province",
+        "tags": [1, 205, 37]
+    },
     "created_by_expert": 307,
     "published_contributors": [307],
     "tags": [8, 129, 128, 123],
@@ -16377,7 +16846,11 @@ export const religionsXXX = [{
     "pk": 341,
     "name": {"name": "Pauline Christianity"},
     "alt_names": [],
-    "default_gis_region": {"pk": 479, "name": "Pauline Christianity (Undisputed Letters) - Final", "tags": [248, 73, 3, 286]},
+    "default_gis_region": {
+        "pk": 479,
+        "name": "Pauline Christianity (Undisputed Letters) - Final",
+        "tags": [248, 73, 3, 286]
+    },
     "created_by_expert": 335,
     "published_contributors": [335],
     "tags": [8, 18],
@@ -16947,7 +17420,11 @@ export const religionsXXX = [{
     "pk": 231,
     "name": {"name": "Roman private religion"},
     "alt_names": [{"name": "Pre-Punic Wars Roman private religion"}],
-    "default_gis_region": {"pk": 540, "name": "Roman Republic, pre-Punic Wars (i.e. Sicily, Sardinia, and Corsica excluded)", "tags": [3, 296]},
+    "default_gis_region": {
+        "pk": 540,
+        "name": "Roman Republic, pre-Punic Wars (i.e. Sicily, Sardinia, and Corsica excluded)",
+        "tags": [3, 296]
+    },
     "created_by_expert": 157,
     "published_contributors": [157],
     "tags": [8, 736, 42],
@@ -17365,7 +17842,11 @@ export const religionsXXX = [{
     "pk": 196,
     "name": {"name": "Pauline Christianity (ca. 45-60 CE)"},
     "alt_names": [],
-    "default_gis_region": {"pk": 479, "name": "Pauline Christianity (Undisputed Letters) - Final", "tags": [248, 73, 3, 286]},
+    "default_gis_region": {
+        "pk": 479,
+        "name": "Pauline Christianity (Undisputed Letters) - Final",
+        "tags": [248, 73, 3, 286]
+    },
     "created_by_expert": 4,
     "published_contributors": [4],
     "tags": [8, 42, 18, 22, 730],

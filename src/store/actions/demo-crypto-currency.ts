@@ -36,4 +36,7 @@ export function receiveGetCurrentPrice(payload: ReceiveGetCurrentPricePayload): 
     }
 }
 
-export type DemoCryptoCurrencyActions = SaveQuickAlertSettingsAction | RequestGetCurrentPriceAction | ReceiveGetCurrentPriceAction;
+export type DemoCryptoCurrencyActions =
+    SaveQuickAlertSettingsAction
+    | RequestGetCurrentPriceAction
+    | ReceiveGetCurrentPriceAction;

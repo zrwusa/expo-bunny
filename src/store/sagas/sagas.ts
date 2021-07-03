@@ -11,7 +11,12 @@ import {
     sysError
 } from "../actions";
 import {EBLMsg, EDemoCryptoCurrency, EDemoSaga, EDemoSagaFirebase} from "../../constants";
-import {CancelAlertSettingsAction, RequestConfig, SaveDemoSagaFirebaseTodoAction, SaveQuickAlertSettingsAction,} from "../../types";
+import {
+    CancelAlertSettingsAction,
+    RequestConfig,
+    SaveDemoSagaFirebaseTodoAction,
+    SaveQuickAlertSettingsAction,
+} from "../../types";
 import {blSuccess} from "../../helpers";
 import {firebase} from "../../firebase";
 

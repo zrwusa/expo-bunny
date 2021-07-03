@@ -1,6 +1,7 @@
 import {DeepLeavesWrap, JsonKeys} from "./utils";
 import {IconProps} from "react-native-vector-icons/Icon";
-import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
+import glyphMaterialCommunityMap
+    from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import {glyphMaterialCommunityCustomMap} from "../helpers";
 import {ReactNode} from "react";
 import glyphMapIcoMoon from "../assets/fonts/icomoon/icomoon.json"
@@ -8,11 +9,29 @@ import {ImageStyle, TextStyle, ViewStyle} from "react-native";
 import {ColorSchemeName} from "react-native-appearance";
 import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
 
-export type CheckColor = 'isColor' | 'isHex' | 'isHexA' | 'isRGB' | 'isRGBA' | 'isHSL' | 'isHSLA' | 'isColorName' | 'isExceptional'
+export type CheckColor =
+    'isColor'
+    | 'isHex'
+    | 'isHexA'
+    | 'isRGB'
+    | 'isRGBA'
+    | 'isHSL'
+    | 'isHSLA'
+    | 'isColorName'
+    | 'isExceptional'
 export type CheckColorResult = {
     [key in CheckColor]: boolean
 }
-export type CheckResultType = '' | 'Hex' | 'HexA' | 'RGB' | 'RGBA' | 'HSL' | 'HSLA' | 'ColorName' | 'Exceptional'
+export type CheckResultType =
+    ''
+    | 'Hex'
+    | 'HexA'
+    | 'RGB'
+    | 'RGBA'
+    | 'HSL'
+    | 'HSLA'
+    | 'ColorName'
+    | 'Exceptional'
 export type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle }
 
 export type DimensionKeys = 'bunnyUI' | 'iphoneX' | 'iPad' | 'pixel2XL' | 'pcBrowser'

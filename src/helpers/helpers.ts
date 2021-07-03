@@ -12,9 +12,19 @@ import {
     RootStackParam,
     RouteIconFontConfig
 } from "../types";
-import glyphMaterialCommunityMap from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
+import glyphMaterialCommunityMap
+    from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 import {EBLMsg} from "../constants";
-import {AuthAPIError, BunnyAPIError, deepAdd, deepKeysConvert, deepRemoveByKey, deepRenameKeys, NomicsAPIError, uuidV4} from "../utils";
+import {
+    AuthAPIError,
+    BunnyAPIError,
+    deepAdd,
+    deepKeysConvert,
+    deepRemoveByKey,
+    deepRenameKeys,
+    NomicsAPIError,
+    uuidV4
+} from "../utils";
 import configORG from "../config";
 import _ from "lodash";
 import icoMoonSelection from "../assets/fonts/icomoon/selection.json"
@@ -54,7 +64,12 @@ export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
         gestureHandlerProps, sceneContainerStyle, drawerStyle, drawerContent, drawerContentOptions
     };
 
-    const propsMap: JSONSerializable = {"stack": stackProps, "tab": tabProps, "drawer": drawerProps, "top": tabProps};
+    const propsMap: JSONSerializable = {
+        "stack": stackProps,
+        "tab": tabProps,
+        "drawer": drawerProps,
+        "top": tabProps
+    };
     return propsMap[navigatorType];
 }
 

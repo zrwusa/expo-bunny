@@ -25,6 +25,43 @@ import {bunnyConsole} from "../utils";
 // arr.indexOf(0);
 // timeEnd(time4,'indexOf');
 
+// Stack Exceed Size
+// Internet Explorer
+// IE6: 1130
+// IE7: 2553
+// IE8: 1475
+// IE9: 20678
+// IE10: 20677
+// Mozilla Firefox
+// 3.6: 3000
+// 4.0: 9015
+// 5.0: 9015
+// 6.0: 9015
+// 7.0: 65533
+// 8b3: 63485
+// 17: 50762
+// 18: 52596
+// 19: 52458
+// 42: 281810
+// Google Chrome
+// 14: 26177
+// 15: 26168
+// 16: 26166
+// 25: 25090
+// 47: 20878
+// 51: 41753
+// Safari
+// 4: 52426
+// 5: 65534
+// 9: 63444
+// Opera
+// 10.10: 9999
+// 10.62: 32631
+// 11: 32631
+// 12: 32631
+// Edge
+// 87: 13970
+
 export const runAlgorithm = async (algorithm: Function, isStringify: boolean = false, ...args: any) => {
     const startTime = new Date().getTime();
     const result = await algorithm(...args);

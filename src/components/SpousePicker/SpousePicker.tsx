@@ -83,14 +83,16 @@ export const SpousePicker = (props: SpousePickerProps) => {
                     onCancel?.()
                 }}><IcoMoon name="x"/></TextButton></Col>
                 <Col align="center"><Text>{title}</Text></Col>
-                <Col align="flex-end"><TextButton onPress={_reset}><Text style={sharedStyles.text2}>Reset</Text></TextButton></Col>
+                <Col align="flex-end"><TextButton onPress={_reset}><Text
+                    style={sharedStyles.text2}>Reset</Text></TextButton></Col>
             </Row>
         </View>
         <View style={styles.content}>
             <View style={{paddingVertical: wp(10)}}>
                 <Row>
                     <Col><Text style={sharedStyles.title2}>Distance</Text></Col>
-                    <Col align="flex-end"><Text style={sharedStyles.text2}>{`${minDistance}-` + distance.toString() + 'mi'}</Text></Col>
+                    <Col align="flex-end"><Text
+                        style={sharedStyles.text2}>{`${minDistance}-` + distance.toString() + 'mi'}</Text></Col>
                 </Row>
                 <Slider min={minDistance}
                         max={maxDistance}
@@ -111,14 +113,17 @@ export const SpousePicker = (props: SpousePickerProps) => {
                 <RadioButton.Group onValueChange={value => setInterestedIn(value)} value={interestedIn}>
                     <Row>
                         <Col size={1.3}>
-                            <RadioButton.Item color={colors.primary} labelStyle={{color: colors.text2}} label="Swimming"
+                            <RadioButton.Item color={colors.primary} labelStyle={{color: colors.text2}}
+                                              label="Swimming"
                                               value="swimming"/>
                         </Col>
                         <Col>
-                            <RadioButton.Item color={colors.primary} labelStyle={{color: colors.text2}} label="Hiking" value="hiking"/>
+                            <RadioButton.Item color={colors.primary} labelStyle={{color: colors.text2}}
+                                              label="Hiking" value="hiking"/>
                         </Col>
                         <Col>
-                            <RadioButton.Item color={colors.primary} labelStyle={{color: colors.text2}} label="Yoga" value="yoga"/>
+                            <RadioButton.Item color={colors.primary} labelStyle={{color: colors.text2}}
+                                              label="Yoga" value="yoga"/>
                         </Col>
                     </Row>
                 </RadioButton.Group>
@@ -127,7 +132,8 @@ export const SpousePicker = (props: SpousePickerProps) => {
             <View style={{paddingVertical: wp(10)}}>
                 <Row>
                     <Col><Text style={sharedStyles.title2}>Age</Text></Col>
-                    <Col align="flex-end"><Text style={sharedStyles.text2}>{`${minAge}-` + age.toString()}</Text></Col>
+                    <Col align="flex-end"><Text
+                        style={sharedStyles.text2}>{`${minAge}-` + age.toString()}</Text></Col>
                 </Row>
                 <Slider min={minAge}
                         max={maxAge}

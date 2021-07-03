@@ -53,7 +53,8 @@ function DemoThirdPartScreen(props: Props) {
                             {LIST.map((l, i) => (
                                 <List.Accordion key={l.id}
                                                 title={l.name}
-                                                left={props => <Avatar.Image size={wp(30)} source={{uri: l.avatar_url}}/>}>
+                                                left={props => <Avatar.Image size={wp(30)}
+                                                                             source={{uri: l.avatar_url}}/>}>
                                     <List.Item title="First item"/>
                                     <List.Item title="Second item"/>
                                 </List.Accordion>

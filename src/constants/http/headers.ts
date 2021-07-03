@@ -347,15 +347,30 @@ export const headers = {
         "spec_title": "CSP",
         "spec_href": "https://www.w3.org/TR/CSP/#content-security-policy-report-only-header-field"
     },
-    "Cookie": {"header": "Cookie", "description": "\"standard\"", "spec_title": "RFC6265", "spec_href": "https://tools.ietf.org/html/rfc6265"},
-    "Forwarded": {"header": "Forwarded", "description": "\"standard\"", "spec_title": "RFC7239", "spec_href": "https://tools.ietf.org/html/rfc7239"},
+    "Cookie": {
+        "header": "Cookie",
+        "description": "\"standard\"",
+        "spec_title": "RFC6265",
+        "spec_href": "https://tools.ietf.org/html/rfc6265"
+    },
+    "Forwarded": {
+        "header": "Forwarded",
+        "description": "\"standard\"",
+        "spec_title": "RFC7239",
+        "spec_href": "https://tools.ietf.org/html/rfc7239"
+    },
     "Link": {
         "header": "Link",
         "description": "\"provides a means for serialising one or more links in HTTP headers.\"",
         "spec_title": "RFC5988#5",
         "spec_href": "https://tools.ietf.org/html/rfc5988#section-5"
     },
-    "Origin": {"header": "Origin", "description": "\"standard\"", "spec_title": "RFC6454", "spec_href": "https://tools.ietf.org/html/rfc6454"},
+    "Origin": {
+        "header": "Origin",
+        "description": "\"standard\"",
+        "spec_title": "RFC6454",
+        "spec_href": "https://tools.ietf.org/html/rfc6454"
+    },
     "Prefer": {
         "header": "Prefer",
         "description": "\"is used to indicate that particular server behaviors are preferred by the client, but not required for successful completion of the request.\"",
@@ -380,7 +395,12 @@ export const headers = {
         "spec_title": "RFC6797",
         "spec_href": "https://tools.ietf.org/html/rfc6797"
     },
-    "Via": {"header": "Via", "description": "\"\"", "spec_title": "RFC7230#5.7.1", "spec_href": "https://tools.ietf.org/html/rfc7230#section-5.7.1"},
+    "Via": {
+        "header": "Via",
+        "description": "\"\"",
+        "spec_title": "RFC7230#5.7.1",
+        "spec_href": "https://tools.ietf.org/html/rfc7230#section-5.7.1"
+    },
     "A-IM": {
         "header": "A-IM",
         "description": "\"\"",
@@ -441,16 +461,36 @@ export const headers = {
         "spec_title": "draft-grigorik-http-client-hints",
         "spec_href": "https://tools.ietf.org/html/draft-grigorik-http-client-hints"
     },
-    "Cookie2": {"header": "Cookie2", "description": "\"obsoleted\"", "spec_title": "RFC2965", "spec_href": "https://tools.ietf.org/html/rfc2965"},
-    "DASL": {"header": "DASL", "description": "\"standard\"", "spec_title": "RFC5323", "spec_href": "https://tools.ietf.org/html/rfc5323"},
-    "DAV": {"header": "DAV", "description": "\"standard\"", "spec_title": "RFC4918", "spec_href": "https://tools.ietf.org/html/rfc4918"},
+    "Cookie2": {
+        "header": "Cookie2",
+        "description": "\"obsoleted\"",
+        "spec_title": "RFC2965",
+        "spec_href": "https://tools.ietf.org/html/rfc2965"
+    },
+    "DASL": {
+        "header": "DASL",
+        "description": "\"standard\"",
+        "spec_title": "RFC5323",
+        "spec_href": "https://tools.ietf.org/html/rfc5323"
+    },
+    "DAV": {
+        "header": "DAV",
+        "description": "\"standard\"",
+        "spec_title": "RFC4918",
+        "spec_href": "https://tools.ietf.org/html/rfc4918"
+    },
     "Delta-Base": {
         "header": "Delta-Base",
         "description": "\"\"",
         "spec_title": "RFC3229#10.5.1",
         "spec_href": "https://tools.ietf.org/html/rfc3229#section-10.5.1"
     },
-    "Depth": {"header": "Depth", "description": "\"standard\"", "spec_title": "RFC4918", "spec_href": "https://tools.ietf.org/html/rfc4918"},
+    "Depth": {
+        "header": "Depth",
+        "description": "\"standard\"",
+        "spec_title": "RFC4918",
+        "spec_href": "https://tools.ietf.org/html/rfc4918"
+    },
     "Destination": {
         "header": "Destination",
         "description": "\"standard\"",
@@ -475,8 +515,18 @@ export const headers = {
         "spec_title": "draft-thomson-http-encryption",
         "spec_href": "https://tools.ietf.org/html/draft-thomson-http-encryption#section-4"
     },
-    "IM": {"header": "IM", "description": "\"\"", "spec_title": "RFC3229#10.5.2", "spec_href": "https://tools.ietf.org/html/rfc3229#section-10.5.2"},
-    "If": {"header": "If", "description": "\"standard\"", "spec_title": "RFC4918", "spec_href": "https://tools.ietf.org/html/rfc4918"},
+    "IM": {
+        "header": "IM",
+        "description": "\"\"",
+        "spec_title": "RFC3229#10.5.2",
+        "spec_href": "https://tools.ietf.org/html/rfc3229#section-10.5.2"
+    },
+    "If": {
+        "header": "If",
+        "description": "\"standard\"",
+        "spec_title": "RFC4918",
+        "spec_href": "https://tools.ietf.org/html/rfc4918"
+    },
     "If-Schedule-Tag-Match": {
         "header": "If-Schedule-Tag-Match",
         "description": "\"standard\"",
@@ -525,7 +575,12 @@ export const headers = {
         "spec_title": "draft-thomson-http-nice",
         "spec_href": "https://tools.ietf.org/html/draft-thomson-http-nice"
     },
-    "Overwrite": {"header": "Overwrite", "description": "\"standard\"", "spec_title": "RFC4918", "spec_href": "https://tools.ietf.org/html/rfc4918"},
+    "Overwrite": {
+        "header": "Overwrite",
+        "description": "\"standard\"",
+        "spec_title": "RFC4918",
+        "spec_href": "https://tools.ietf.org/html/rfc4918"
+    },
     "POE": {
         "header": "POE",
         "description": "\"The POE HTTP header is a request-header field whose field-value indicates the version of POE that a client supports.\"",
@@ -538,7 +593,12 @@ export const headers = {
         "spec_title": "draft-nottingham-http-poe",
         "spec_href": "https://tools.ietf.org/html/draft-nottingham-http-poe"
     },
-    "Redirect-Ref": {"header": "Redirect-Ref", "description": "\"\"", "spec_title": "RFC4437", "spec_href": "https://tools.ietf.org/html/rfc4437"},
+    "Redirect-Ref": {
+        "header": "Redirect-Ref",
+        "description": "\"\"",
+        "spec_title": "RFC4437",
+        "spec_href": "https://tools.ietf.org/html/rfc4437"
+    },
     "RW": {
         "header": "RW",
         "description": "\"is a number that, in requests, indicates the Resource Width (RW) in CSS px, which is either the display width of the requested resource (e.g. display width of an image), or the layout viewport width if the resource does not have a display width (e.g. a non-image asset).\"",
@@ -593,7 +653,12 @@ export const headers = {
         "spec_title": "RFC2965",
         "spec_href": "https://tools.ietf.org/html/rfc2965"
     },
-    "SLUG": {"header": "SLUG", "description": "\"standard\"", "spec_title": "RFC5023", "spec_href": "https://tools.ietf.org/html/rfc5023"},
+    "SLUG": {
+        "header": "SLUG",
+        "description": "\"standard\"",
+        "spec_title": "RFC5023",
+        "spec_href": "https://tools.ietf.org/html/rfc5023"
+    },
     "Status-URI": {
         "header": "Status-URI",
         "description": "\"\"",
@@ -624,7 +689,12 @@ export const headers = {
         "spec_title": "RFC2295#8.5",
         "spec_href": "https://tools.ietf.org/html/rfc2295#section-8.5"
     },
-    "Timeout": {"header": "Timeout", "description": "\"standard\"", "spec_title": "RFC4918", "spec_href": "https://tools.ietf.org/html/rfc4918"},
+    "Timeout": {
+        "header": "Timeout",
+        "description": "\"standard\"",
+        "spec_title": "RFC4918",
+        "spec_href": "https://tools.ietf.org/html/rfc4918"
+    },
     "Variant-Vary": {
         "header": "Variant-Vary",
         "description": "\"can be used in a choice response to record any vary information which applies to the variant data (the entity body combined with some of the entity headers) contained in the response, rather than to the response as a whole.\"",

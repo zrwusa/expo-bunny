@@ -5,10 +5,19 @@ import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
-import {Coordinate, getDirectionVector, SinglyLinkedListNode, Stack, uuidV4} from "../../utils";
+import {
+    BinarySearchTree,
+    BinarySearchTreeNode,
+    BinaryTreeNode,
+    Coordinate,
+    getDirectionVector,
+    SinglyLinkedListNode,
+    Stack,
+    uuidV4
+} from "../../utils";
 import {Card} from "../../containers/Card";
-import {BinaryTreeNode, TreeNode} from "../../types";
-import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText} from "react-native-svg";
+import {TreeNode} from "../../types";
+import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText, TSpan} from "react-native-svg";
 import {ScrollView} from "react-native";
 
 export interface VividAlgorithmProps<T> {
@@ -25,11 +34,11 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const styles = getStyles(sizeLabor, themeLabor);
 
     let relatedNode: TreeNode<any> | undefined;
-    let relatedBinaryNode: BinaryTreeNode | undefined;
+    let relatedBinaryNode: BinaryTreeNode<any> | undefined;
     let relatedMatrixCell: Coordinate | undefined;
     if (relatedNodeKey) {
         relatedNode = data?.[relatedNodeKey] as TreeNode<any> | undefined;
-        relatedBinaryNode = data?.[relatedNodeKey] as BinaryTreeNode | undefined;
+        relatedBinaryNode = data?.[relatedNodeKey] as BinaryTreeNode<any> | undefined;
         relatedMatrixCell = data?.[relatedNodeKey] as Coordinate | undefined;
     }
 
@@ -59,8 +68,11 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const VividTreeContainer: React.FC = ({children}) => {
         const horizontalScrollView = useRef<ScrollView>(null)
         useEffect(() => {
-            horizontalScrollView?.current?.scrollTo({x: (treePanelWidth - wp(375)) / 2, y: 0, animated: false})
-            console.log('---useEffect')
+            horizontalScrollView?.current?.scrollTo({
+                x: (treePanelWidth - wp(375)) / 2,
+                y: 0,
+                animated: false
+            })
         }, [])
 
         return <ScrollView nestedScrollEnabled style={{height: wp(375)}}>
@@ -83,20 +95,25 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const VividTree: React.FC<{ data: TreeNode<any> }> = ({data}) => {
         return (
             <VividTreeContainer>
-                <VividTreeRecursive node={data} level={1} index={0} familyLength={1} parentX={0} parentY={0} maxDepth={data.getMaxDepth()}/>
+                <VividTreeRecursive node={data} level={1} index={0} familyLength={1} parentX={0} parentY={0}
+                                    maxDepth={data.getMaxDepth()}/>
             </VividTreeContainer>
         )
     }
 
-    const VividBinaryTree = (node: BinaryTreeNode) => {
+    const VividBinaryTree: React.FC<{ node?: BinaryTreeNode<any> | BinarySearchTreeNode<any>, maxDepth?: number }> = ({node, maxDepth}) => {
         return (
             <VividTreeContainer>
                 {
-                    <VividBinaryTreeRecursive node={node} level={1} index={0} familyLength={1}/>
+                    node
+                        ? <VividBinaryTreeRecursive node={node} level={1} index={0} familyLength={1}
+                                                    maxDepth={maxDepth}/>
+                        : null
                 }
             </VividTreeContainer>
         )
     }
+
     const matrixPanelWidth = wp(360, false);
     const matrixRectStrokeWidth = wp(1, false);
     const arrowCut = 0.3;
@@ -194,8 +211,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const treePanelWidth = wp(2000);
-    const treePanelHeight = wp(2000);
+    const treePanelWidth = wp(20000);
+    const treePanelHeight = wp(20000);
     const strokeWidth = wp(2);
     const levelOffset = wp(60);
     const circleR = wp(20);
@@ -215,7 +232,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         let space = 0;
         let offsetX = 0;
         let offsetY = 0;
-        let levelNodeSpace = nodeSpace * Math.pow(2, (maxDepth || 5) - level);
+        let levelNodeSpace = nodeSpace * Math.pow(2, (maxDepth || 5) - 1 - level)
         if (level === 1) {
             space = treePanelWidth / 2
             offsetX = space - circleR;
@@ -234,12 +251,18 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         : null
                 }
                 {node.children
-                    ? node.children.map((child, index, family) => <VividTreeRecursive key={child.id} node={child} level={level + 1} index={index}
-                                                                                      familyLength={family.length} parentX={offsetX} parentY={offsetY}
+                    ? node.children.map((child, index, family) => <VividTreeRecursive key={child.id}
+                                                                                      node={child}
+                                                                                      level={level + 1}
+                                                                                      index={index}
+                                                                                      familyLength={family.length}
+                                                                                      parentX={offsetX}
+                                                                                      parentY={offsetY}
                                                                                       maxDepth={maxDepth}/>)
                     : null
                 }
-                <Circle r={circleR} cx={offsetX} cy={offsetY} fill={isActive ? colors.primary : colors.background}/>
+                <Circle r={circleR} cx={offsetX} cy={offsetY}
+                        fill={isActive ? colors.primary : colors.background}/>
                 <SVGText
                     strokeWidth={wp(1)}
                     fill={isActive ? colors.buttonText : colors.text}
@@ -254,14 +277,14 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode, level: number, index: number, familyLength: number, parentX?: number, parentY?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY}) => {
+    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any> | BinarySearchTreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
         if (!node) {
             return null;
         }
         let space = 0;
         let offsetX;
         let offsetY;
-        let levelNodeSpace = nodeSpace / 7
+        let levelNodeSpace = nodeSpace * Math.pow(1.3, (maxDepth || 5) - 1 - level)
         if (level === 1) {
             space = treePanelWidth / 2
             offsetX = space - circleR;
@@ -271,9 +294,9 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             offsetY = (level - 1) * levelOffset + circleR + strokeWidth;
         }
 
-        const isActive = node.val === relatedBinaryNode?.val;
+        const isActive = node.value === relatedBinaryNode?.value;
         return (
-            <G key={node.val}>
+            <G key={node.value}>
                 {
                     level > 1
                         ? <Line x1={parentX} y1={parentY} x2={offsetX} y2={offsetY}/>
@@ -282,16 +305,21 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 {
                     node.left
                         ?
-                        <VividBinaryTreeRecursive node={node.left} level={level + 1} index={0} familyLength={2} parentX={offsetX} parentY={offsetY}/>
+                        <VividBinaryTreeRecursive node={node.left} level={level + 1} index={0}
+                                                  familyLength={2} parentX={offsetX} parentY={offsetY}
+                                                  maxDepth={maxDepth}/>
                         : null
                 }
                 {
                     node.right
                         ?
-                        <VividBinaryTreeRecursive node={node.right} level={level + 1} index={1} familyLength={2} parentX={offsetX} parentY={offsetY}/>
+                        <VividBinaryTreeRecursive node={node.right} level={level + 1} index={1}
+                                                  familyLength={2} parentX={offsetX} parentY={offsetY}
+                                                  maxDepth={maxDepth}/>
                         : null
                 }
-                <Circle r={circleR} cx={offsetX} cy={offsetY} fill={isActive ? colors.primary : colors.background}/>
+                <Circle r={circleR} cx={offsetX} cy={offsetY}
+                        fill={isActive ? colors.primary : colors.background}/>
                 <SVGText
                     fill="none"
                     stroke={isActive ? colors.buttonText : colors.text}
@@ -300,7 +328,10 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     x={offsetX}
                     y={offsetY + fontOffsetY}
                     textAnchor="middle"
-                >{node.val}</SVGText>
+                >
+                    <TSpan x={offsetX} y={offsetY + fontOffsetY}>{node.value}</TSpan>
+                    <TSpan x={offsetX} y={offsetY + fontOffsetY + fontSize + wp(2)}>{node.count}</TSpan>
+                </SVGText>
             </G>
         )
     }
@@ -314,11 +345,14 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         : data.map(item => {
                             switch (typeof item) {
                                 case 'number':
-                                    return <View style={styles.arrayItem} key={uuidV4()}><Text>{item}</Text></View>;
+                                    return <View style={styles.arrayItem}
+                                                 key={uuidV4()}><Text>{item}</Text></View>;
                                 case 'string':
-                                    return <View style={styles.arrayItem} key={uuidV4()}><Text>{item}</Text></View>;
+                                    return <View style={styles.arrayItem}
+                                                 key={uuidV4()}><Text>{item}</Text></View>;
                                 default:
-                                    return <View style={styles.arrayItem} key={uuidV4()}><Text>{JSON.stringify(item)}</Text></View>;
+                                    return <View style={styles.arrayItem}
+                                                 key={uuidV4()}><Text>{JSON.stringify(item)}</Text></View>;
                             }
                         })
 
@@ -354,11 +388,21 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     }
 
     // TODO
-    const VividBinaryTreeNode: React.FC<{ data: BinaryTreeNode }> = ({data}) => {
+    const VividBinaryTreeNode: React.FC<{ data: BinaryTreeNode<any> }> = ({data}) => {
         return (
             <Row>
-                <View style={styles.arrayItem} key={data.val}>
-                    <Text>{data.val}</Text>
+                <View style={styles.arrayItem} key={data.value}>
+                    <Text>{data.value}</Text>
+                </View>
+            </Row>
+        )
+    }
+
+    const VividBinarySearchTreeNode: React.FC<{ data: BinarySearchTreeNode<any> }> = ({data}) => {
+        return (
+            <Row>
+                <View style={styles.arrayItem} key={data.value}>
+                    <Text>{data.value}</Text>
                 </View>
             </Row>
         )
@@ -376,6 +420,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     return <VividTree data={item}/>
                 } else if (item instanceof BinaryTreeNode) {
                     return <VividBinaryTreeNode data={item}/>;
+                } else if (item instanceof BinarySearchTree) {
+                    return <VividBinaryTree node={item.root} maxDepth={item.getMaxDepth()}/>;
                 } else if (item instanceof SinglyLinkedListNode) {
                     return <VividLinkedListNode data={item}/>
                 } else if (item instanceof Map) {

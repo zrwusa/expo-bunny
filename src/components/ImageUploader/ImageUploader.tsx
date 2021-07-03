@@ -322,10 +322,12 @@ export function ImageUploader(props: ImageUploaderProps) {
                    {...modalProps}>
                 <View style={[styles.modalPanelContainer, modalPanelContainerStyle]}>
                     <View style={[styles.modalPanel, modalPanelStyle]}>
-                        <TextButton style={[styles.button, buttonStyle]} onPress={_pickImage}><Text style={[styles.buttonText, buttonTextStyle]}>Open
+                        <TextButton style={[styles.button, buttonStyle]} onPress={_pickImage}><Text
+                            style={[styles.buttonText, buttonTextStyle]}>Open
                             Gallery</Text></TextButton>
                         <Divider/>
-                        <TextButton style={[styles.button, buttonStyle]} onPress={_takePhoto}><Text style={[styles.buttonText, buttonTextStyle]}>Take
+                        <TextButton style={[styles.button, buttonStyle]} onPress={_takePhoto}><Text
+                            style={[styles.buttonText, buttonTextStyle]}>Take
                             A Photo</Text></TextButton>
                         {/*<Divider/>*/}
                         {/*<TextButton onPress={_takeScreenshot}><Text>Take a screenshot</Text></TextButton>*/}
@@ -334,7 +336,8 @@ export function ImageUploader(props: ImageUploaderProps) {
                                 ? <>
                                     <Divider/>
                                     <TextButton onPress={_removePhoto} style={[styles.button, buttonStyle]}><Text
-                                        style={[styles.buttonText, buttonTextStyle]}>Remove Photo</Text></TextButton>
+                                        style={[styles.buttonText, buttonTextStyle]}>Remove
+                                        Photo</Text></TextButton>
                                 </>
                                 : null
                         }

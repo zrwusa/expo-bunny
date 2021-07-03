@@ -25,7 +25,12 @@ export function BodyPartCard(props: BodyPartCardProps) {
                 </View>
             </Col>
             <Col size={1} style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}>
-                <Text style={{color: colors.backgroundBtn, fontWeight: 'bold', fontSize: ms.fs.l, lineHeight: 10}}>...</Text>
+                <Text style={{
+                    color: colors.backgroundBtn,
+                    fontWeight: 'bold',
+                    fontSize: ms.fs.l,
+                    lineHeight: 10
+                }}>...</Text>
             </Col>
         </Row>
         <Row style={{justifyContent: 'center', marginTop: 10}}>

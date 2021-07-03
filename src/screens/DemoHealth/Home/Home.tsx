@@ -53,7 +53,8 @@ export function HealthHomeScreen() {
                                 </Row>
                             </Col>
                             <Col style={{alignItems: 'flex-end'}}>
-                                <Avatar source={{uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany.jpeg'}}/>
+                                <Avatar
+                                    source={{uri: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany.jpeg'}}/>
                             </Col>
                         </Row>
                         <Row>

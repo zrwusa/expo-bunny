@@ -27,7 +27,8 @@ export const Tab = ({items, placeholder, value, onChange}: TabProps<any>) => {
                 const activeTextStyle = item === value ? styles.tabTextActive : styles.tabText;
                 return <View style={styles.tab}
                              key={item}>
-                    <Text style={[styles.tabText, activeTextStyle]} onPress={() => onChange(item)}>{st(item)}</Text>
+                    <Text style={[styles.tabText, activeTextStyle]}
+                          onPress={() => onChange(item)}>{st(item)}</Text>
                     <View style={[styles.tabIndicator, activeIndicatorStyle]}/>
                 </View>
             })

@@ -28,17 +28,20 @@ class MasonryInner extends React.PureComponent<MasonryProps> {
             <View style={styles.masonry}>
                 <View style={styles.column}>
                     {column1.map(image => {
-                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri} width={wp(375 / 3 - 1)}/>
+                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri}
+                                            width={wp(375 / 3 - 1)}/>
                     })}
                 </View>
                 <View style={styles.column}>
                     {column2.map(image => {
-                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri} width={wp(375 / 3 - 1)}/>
+                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri}
+                                            width={wp(375 / 3 - 1)}/>
                     })}
                 </View>
                 <View style={styles.columnLast}>
                     {column3.map(image => {
-                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri} width={wp(375 / 3 - 1)}/>
+                        return <ScaledImage style={styles.item} key={uuid4()} uri={image.uri}
+                                            width={wp(375 / 3 - 1)}/>
                     })}
                 </View>
             </View>

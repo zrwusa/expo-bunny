@@ -29,7 +29,12 @@ import DemoNotificationScreen from "../../screens/DemoNotification/DemoNotificat
 import {NotSupport} from "../../components/NotSupport";
 import TabHomeScreen from "../../screens/DemoTab/Home";
 import TabSettingsScreen from "../../screens/DemoTab/Settings";
-import {DrawerActions, NavigationContainer, NavigationContainerProps, NavigationContainerRef} from "@react-navigation/native";
+import {
+    DrawerActions,
+    NavigationContainer,
+    NavigationContainerProps,
+    NavigationContainerRef
+} from "@react-navigation/native";
 import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
 import DrawerHomeScreen from "../../screens/DemoDrawer/Home";
 import DrawerSettingsScreen from "../../screens/DemoDrawer/Settings";
@@ -292,7 +297,10 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 return
             }
             if (!['Login', 'SignUp'].includes(curRoute.name)) {
-                navigationRef.current.navigate('Auth', {screen: 'Login', params: {reference: JSON.stringify(curRoute)}})
+                navigationRef.current.navigate('Auth', {
+                    screen: 'Login',
+                    params: {reference: JSON.stringify(curRoute)}
+                })
             } else {
                 return
             }
@@ -338,28 +346,38 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             }
         }}>
             <RootStack.Screen name="Home" component={HomeScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="Auth" component={AuthScreen} options={optionsMergeWithTitle(optionsAuth)}/>
-            <RootStack.Screen name="Profile" component={ProfileScreen} options={optionsMergeWithTitle()} listeners={listenersNeedAuth}/>
-            <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="Auth" component={AuthScreen}
+                              options={optionsMergeWithTitle(optionsAuth)}/>
+            <RootStack.Screen name="Profile" component={ProfileScreen} options={optionsMergeWithTitle()}
+                              listeners={listenersNeedAuth}/>
+            <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen}
+                              options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen}
+                              options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoRoute" component={DemoRouteScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen}
+                              options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen}
+                              options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoSaga" component={DemoSagaScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="DemoSagaFirebase" component={DemoSagaFirebaseScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoSagaFirebase" component={DemoSagaFirebaseScreen}
+                              options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoMap" component={DemoMapScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoChat" options={optionsChat}>
                 {
                     (props) => {
                         return <DemoChatStack.Navigator {...props} screenOptions={screenOptionsStackCommon}>
-                            <DemoChatStack.Screen name="ChatHome" component={ChatHomeScreen} options={optionsMergeWithTitle()}/>
-                            <DemoChatStack.Screen name="ChatRoom" component={ChatRoomScreen} options={optionsMergeWithTitle()}/>
+                            <DemoChatStack.Screen name="ChatHome" component={ChatHomeScreen}
+                                                  options={optionsMergeWithTitle()}/>
+                            <DemoChatStack.Screen name="ChatRoom" component={ChatRoomScreen}
+                                                  options={optionsMergeWithTitle()}/>
                         </DemoChatStack.Navigator>
                     }
                 }
             </RootStack.Screen>
             <RootStack.Screen name="DemoShare" component={DemoShareScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="DemoSearch" component={DemoSearchScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoSearch" component={DemoSearchScreen}
+                              options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoNotification" component={
                 Platform.OS !== 'web'
                     ? DemoNotificationScreen
@@ -367,10 +385,13 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoTab" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptionsCommon}>
-                            <DemoTabStack.Screen name="TabHome" component={TabHomeScreen} options={optionsMergeWithTitle()}/>
+                        return <DemoTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                                                       tabBarOptions={tabBarOptionsCommon}>
+                            <DemoTabStack.Screen name="TabHome" component={TabHomeScreen}
+                                                 options={optionsMergeWithTitle()}/>
                             <DemoTabStack.Screen name="TabSettings" component={TabSettingsScreen}
-                                                 initialParams={{'item': 'item-001'}} options={optionsMergeWithTitle()}/>
+                                                 initialParams={{'item': 'item-001'}}
+                                                 options={optionsMergeWithTitle()}/>
                         </DemoTabStack.Navigator>
                     }
                 }
@@ -378,24 +399,31 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoDrawer" options={optionsMergeWithTitle()}>
                 {(props) => {
                     //todo not sure if the props is passed correctly
-                    return <DemoDrawerStack.Navigator {...props} drawerContentOptions={{labelStyle: {fontSize: ms.fs.m}}}
+                    return <DemoDrawerStack.Navigator {...props}
+                                                      drawerContentOptions={{labelStyle: {fontSize: ms.fs.m}}}
                                                       screenOptions={screenOptionsDrawer}>
-                        <DemoDrawerStack.Screen name="DrawerHome" component={DrawerHomeScreen} options={optionsMergeWithTitle()}/>
+                        <DemoDrawerStack.Screen name="DrawerHome" component={DrawerHomeScreen}
+                                                options={optionsMergeWithTitle()}/>
                         <DemoDrawerStack.Screen name="DrawerSettings" component={DrawerSettingsScreen}
-                                                initialParams={{'item': 'item-001'}} options={optionsMergeWithTitle()}/>
+                                                initialParams={{'item': 'item-001'}}
+                                                options={optionsMergeWithTitle()}/>
                     </DemoDrawerStack.Navigator>
                 }}
             </RootStack.Screen>
             <RootStack.Screen name="DemoNestedLv0" options={optionsMergeWithTitle()}>
                 {(props) => {
                     return <DemoNestedLv1Stack.Navigator {...props} screenOptions={screenOptionsStackCommon}>
-                        <DemoNestedLv1Stack.Screen name="NestedLv1Home" component={NestedLv1HomeScreen} options={optionsMergeWithTitle()}/>
+                        <DemoNestedLv1Stack.Screen name="NestedLv1Home" component={NestedLv1HomeScreen}
+                                                   options={optionsMergeWithTitle()}/>
                         <DemoNestedLv1Stack.Screen name="NestedLv1Settings" options={optionsMergeWithTitle()}>
                             {(props) => {
-                                return <DemoNestedLv2Stack.Navigator {...props} screenOptions={screenOptionsStackCommon}>
-                                    <DemoNestedLv2Stack.Screen name="NestedLv2Home" component={NestedLv2HomeScreen}
+                                return <DemoNestedLv2Stack.Navigator {...props}
+                                                                     screenOptions={screenOptionsStackCommon}>
+                                    <DemoNestedLv2Stack.Screen name="NestedLv2Home"
+                                                               component={NestedLv2HomeScreen}
                                                                options={optionsMergeWithTitle()}/>
-                                    <DemoNestedLv2Stack.Screen name="NestedLv2Settings" component={NestedLv2SettingsScreen}
+                                    <DemoNestedLv2Stack.Screen name="NestedLv2Settings"
+                                                               component={NestedLv2SettingsScreen}
                                                                options={optionsMergeWithTitle()}/>
                                 </DemoNestedLv2Stack.Navigator>
                             }}
@@ -406,16 +434,24 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoRNComponents" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoTabRNComponentsStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                        return <DemoTabRNComponentsStack.Navigator {...props}
+                                                                   screenOptions={screenOptionsTabBarIcon}
                                                                    tabBarOptions={tabBarOptionsCommon}>
-                            <DemoTabRNComponentsStack.Screen name="RNHome" component={RNHome} options={optionsMergeWithTitle()}/>
-                            <DemoTabRNComponentsStack.Screen name="RNFlatList" component={RNFlatListScreen} options={optionsMergeWithTitle()}/>
-                            <DemoTabRNComponentsStack.Screen name="RNSectionList" component={RNSectionListScreen} options={optionsMergeWithTitle()}/>
-                            <DemoTabRNComponentsStack.Screen name="RNVirtualizedList" component={RNVirtualizedListScreen}
+                            <DemoTabRNComponentsStack.Screen name="RNHome" component={RNHome}
                                                              options={optionsMergeWithTitle()}/>
-                            <DemoTabRNComponentsStack.Screen name="RNNoKeyboard" component={RNKeyboardAvoidingScreen}
+                            <DemoTabRNComponentsStack.Screen name="RNFlatList" component={RNFlatListScreen}
                                                              options={optionsMergeWithTitle()}/>
-                            <DemoTabRNComponentsStack.Screen name="RNSafeArea" component={RNSafeAreaScreen} options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNSectionList"
+                                                             component={RNSectionListScreen}
+                                                             options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNVirtualizedList"
+                                                             component={RNVirtualizedListScreen}
+                                                             options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNNoKeyboard"
+                                                             component={RNKeyboardAvoidingScreen}
+                                                             options={optionsMergeWithTitle()}/>
+                            <DemoTabRNComponentsStack.Screen name="RNSafeArea" component={RNSafeAreaScreen}
+                                                             options={optionsMergeWithTitle()}/>
                         </DemoTabRNComponentsStack.Navigator>
                     }
                 }
@@ -423,13 +459,19 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoCryptoCurrency" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoCryptoCurrencyTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon}
+                        return <DemoCryptoCurrencyTabStack.Navigator {...props}
+                                                                     screenOptions={screenOptionsTabBarIcon}
                                                                      tabBarOptions={tabBarOptionsCommon}>
-                            <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyHome" component={CryptoCurrencyHomeScreen}
+                            <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyHome"
+                                                               component={CryptoCurrencyHomeScreen}
                                                                options={optionsMergeWithTitle()}/>
-                            <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyAlert" component={Platform.OS !== 'web'
-                                ? CryptoCurrencyAlertScreen
-                                : () => <NotSupport text="Not supported on web"/>} initialParams={{isPush: true}} options={optionsMergeWithTitle()}/>
+                            <DemoCryptoCurrencyTabStack.Screen name="CryptoCurrencyAlert"
+                                                               component={Platform.OS !== 'web'
+                                                                   ? CryptoCurrencyAlertScreen
+                                                                   : () => <NotSupport
+                                                                       text="Not supported on web"/>}
+                                                               initialParams={{isPush: true}}
+                                                               options={optionsMergeWithTitle()}/>
                         </DemoCryptoCurrencyTabStack.Navigator>
                     }
                 }
@@ -440,21 +482,28 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         return <DemoSocialMediaTabStack.Navigator {...props}
                                                                   screenOptions={screenOptionsTabBarIcon}
                                                                   tabBarOptions={tabBarOptionsSocialMedia}>
-                            <DemoSocialMediaTabStack.Screen name="SocialMediaHome" component={SocialMediaHomeScreen}
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaHome"
+                                                            component={SocialMediaHomeScreen}
                                                             options={optionsMergeWithTitle()}/>
-                            <DemoSocialMediaTabStack.Screen name="SocialMediaSearch" component={SocialMediaSearchScreen}
-                                                            initialParams={{'keyword': 'keyword-001'}} options={optionsMergeWithTitle()}/>
-                            <DemoSocialMediaTabStack.Screen name="SocialMediaVideo" component={SocialMediaVideoScreen}
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaSearch"
+                                                            component={SocialMediaSearchScreen}
+                                                            initialParams={{'keyword': 'keyword-001'}}
                                                             options={optionsMergeWithTitle()}/>
-                            <DemoSocialMediaTabStack.Screen name="SocialMediaSettings" component={SocialMediaSettingsScreen}
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaVideo"
+                                                            component={SocialMediaVideoScreen}
+                                                            options={optionsMergeWithTitle()}/>
+                            <DemoSocialMediaTabStack.Screen name="SocialMediaSettings"
+                                                            component={SocialMediaSettingsScreen}
                                                             initialParams={{'item': 'item-001'}}/>
                         </DemoSocialMediaTabStack.Navigator>
                     }
                 }
             </RootStack.Screen>
-            <RootStack.Screen name="Playground" component={PlaygroundScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="Playground" component={PlaygroundScreen}
+                              options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="Algorithm" component={AlgorithmScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="ColorFinder" component={ColorFinderScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="ColorFinder" component={ColorFinderScreen}
+                              options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="IconTools" component={IconToolsScreen} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoHealth" options={optionsMergeWithTitle(optionsHealth)}>
                 {
@@ -475,16 +524,22 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoDating" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
-                        return <DemoDatingTabStack.Navigator {...props} screenOptions={screenOptionsTabBarIcon} tabBarOptions={tabBarOptionsDating}>
-                            <DemoDatingTabStack.Screen name="DatingHome" component={DatingHomeScreen} options={optionsMergeWithTitle()}/>
-                            <DemoDatingTabStack.Screen name="DatingChat" component={ChatHomeScreen} options={optionsMergeWithTitle()}/>
-                            <DemoDatingTabStack.Screen name="DatingSettings" component={DatingSettingsScreen} options={optionsMergeWithTitle()}/>
+                        return <DemoDatingTabStack.Navigator {...props}
+                                                             screenOptions={screenOptionsTabBarIcon}
+                                                             tabBarOptions={tabBarOptionsDating}>
+                            <DemoDatingTabStack.Screen name="DatingHome" component={DatingHomeScreen}
+                                                       options={optionsMergeWithTitle()}/>
+                            <DemoDatingTabStack.Screen name="DatingChat" component={ChatHomeScreen}
+                                                       options={optionsMergeWithTitle()}/>
+                            <DemoDatingTabStack.Screen name="DatingSettings" component={DatingSettingsScreen}
+                                                       options={optionsMergeWithTitle()}/>
                         </DemoDatingTabStack.Navigator>
                     }
                 }
             </RootStack.Screen>
             <RootStack.Screen name="Settings" component={SettingsScreen} options={optionsMergeWithTitle()}/>
-            <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen} options={optionsMergeWithTitle()}/>
+            <RootStack.Screen name="DemoSuspense" component={DemoSuspenseScreen}
+                              options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} options={optionsMergeWithTitle()}/>
         </RootStack.Navigator>
     </NavigationContainer>

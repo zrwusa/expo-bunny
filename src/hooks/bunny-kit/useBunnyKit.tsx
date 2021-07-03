@@ -2,7 +2,17 @@ import {useSizeLabor} from "../../providers/size-labor";
 import {useThemeLabor} from "../../providers/theme-labor";
 import {useTranslation} from "react-i18next";
 import {useAuthLabor} from "../../providers/auth-labor";
-import {AuthFunctions, AuthLaborContextType, Measure, SizeLabor, Theme, ThemeColors, ThemeLabor, User, WPOrHP} from "../../types";
+import {
+    AuthFunctions,
+    AuthLaborContextType,
+    Measure,
+    SizeLabor,
+    Theme,
+    ThemeColors,
+    ThemeLabor,
+    User,
+    WPOrHP
+} from "../../types";
 import {i18n, TFunction} from "i18next";
 
 export interface BunnyKit {
@@ -33,5 +43,19 @@ export const useBunnyKit = () => {
     const {colors} = theme;
     const {authResult, authFunctions} = authLabor;
     const {user} = authResult;
-    return {sizeLabor, themeLabor, authLabor, theme, wp, hp, ms, t, language, i18n, colors, user, authFunctions} as BunnyKit
+    return {
+        sizeLabor,
+        themeLabor,
+        authLabor,
+        theme,
+        wp,
+        hp,
+        ms,
+        t,
+        language,
+        i18n,
+        colors,
+        user,
+        authFunctions
+    } as BunnyKit
 };

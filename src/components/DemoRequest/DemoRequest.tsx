@@ -25,7 +25,11 @@ function DemoRequest(props: Props) {
     }
 
     const handleSaveQuickAlertSettings = async function () {
-        dispatch(saveQuickAlertSettings({token: expoPushToken, granularity, reminder: {times: 3, interval: '1s'}}))
+        dispatch(saveQuickAlertSettings({
+            token: expoPushToken,
+            granularity,
+            reminder: {times: 3, interval: '1s'}
+        }))
     }
 
     // const cancelAlertSettings = async function () {

@@ -1,5 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Animated, Keyboard, NativeSyntheticEvent, SafeAreaView, TextInputKeyPressEventData} from "react-native";
+import {
+    Animated,
+    Keyboard,
+    NativeSyntheticEvent,
+    SafeAreaView,
+    TextInputKeyPressEventData
+} from "react-native";
 import {getStyles} from "./styles";
 import {IcoMoon, Text, TextInput, TouchableOpacity, View} from "../UI";
 import {useBunnyKit} from "../../hooks/bunny-kit";
@@ -147,7 +153,8 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
                     {
                         isFocus
                             ? <TouchableOpacity onPress={handleCancel}><Text>Cancel</Text></TouchableOpacity>
-                            : <IcoMoon name="image" size={20} color={colors.text} onPress={handleCameraIconPress}/>
+                            : <IcoMoon name="image" size={20} color={colors.text}
+                                       onPress={handleCameraIconPress}/>
                     }
 
                 </View>

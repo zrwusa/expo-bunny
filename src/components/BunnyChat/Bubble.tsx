@@ -1,5 +1,15 @@
 import React from 'react'
-import {ActivityIndicator, Clipboard, StyleProp, StyleSheet, Text, TextStyle, TouchableWithoutFeedback, View, ViewStyle,} from 'react-native'
+import {
+    ActivityIndicator,
+    Clipboard,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextStyle,
+    TouchableWithoutFeedback,
+    View,
+    ViewStyle,
+} from 'react-native'
 
 import QuickReplies, {QuickRepliesProps} from './QuickReplies'
 

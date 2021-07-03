@@ -5,7 +5,13 @@ import {RouteProp} from "@react-navigation/native";
 import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from "../../../types";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
-import {VictoryAxis, VictoryChart, VictoryLine, VictoryTooltip, VictoryVoronoiContainer} from "../../../components/Victory/Victory";
+import {
+    VictoryAxis,
+    VictoryChart,
+    VictoryLine,
+    VictoryTooltip,
+    VictoryVoronoiContainer
+} from "../../../components/Victory/Victory";
 import nomicsAPI from "../../../helpers/nomics-api";
 import {getStyles} from "./styles";
 import {addDays} from "../../../utils";

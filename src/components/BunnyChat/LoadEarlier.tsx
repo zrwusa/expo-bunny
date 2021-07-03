@@ -1,5 +1,15 @@
 import React from 'react'
-import {ActivityIndicator, Platform, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native'
+import {
+    ActivityIndicator,
+    Platform,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextStyle,
+    TouchableOpacity,
+    View,
+    ViewStyle,
+} from 'react-native'
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
 import {ActivityIndicatorSize} from "./types";
 import {SizeLabor, ThemeLabor} from "../../types";

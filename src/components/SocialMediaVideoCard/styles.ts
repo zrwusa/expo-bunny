@@ -37,7 +37,12 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             width: wp(373),
             height: wp(210),
         },
-        bottomBar: {flexDirection: 'row', paddingHorizontal: wp(16), paddingVertical: wp(10), justifyContent: 'space-between'},
+        bottomBar: {
+            flexDirection: 'row',
+            paddingHorizontal: wp(16),
+            paddingVertical: wp(10),
+            justifyContent: 'space-between'
+        },
         bottomBarLeft: {flexDirection: 'row', width: wp(80), justifyContent: 'space-between'},
         comments: {paddingHorizontal: wp(16)},
         commentsLikes: {fontSize: ms.fs.xs, fontWeight: 'bold', color: colors.text},

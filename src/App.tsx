@@ -74,8 +74,9 @@ function App() {
                                     <ThemeLaborProvider>
                                         <ThemeLaborContext.Consumer>{({theme}) => {
                                             return <>
-                                                <StatusBar backgroundColor={Platform.OS === 'android' ? theme.colors.background : ''}
-                                                           barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
+                                                <StatusBar
+                                                    backgroundColor={Platform.OS === 'android' ? theme.colors.background : ''}
+                                                    barStyle={theme.dark ? 'light-content' : 'dark-content'}/>
                                                 <NavigatorTree
                                                     theme={theme as ThemeNavigation}
                                                     fallback={<Text>{t(`sys.navigationFallback`)}</Text>}

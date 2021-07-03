@@ -179,7 +179,11 @@ export type StackConfig = {
 }
 
 
-export type Options = BottomTabNavigationOptions | DrawerNavigationOptions | StackNavigationOptions | MaterialTopTabNavigationOptions;
+export type Options =
+    BottomTabNavigationOptions
+    | DrawerNavigationOptions
+    | StackNavigationOptions
+    | MaterialTopTabNavigationOptions;
 export type OptionsInner = DefaultNavigatorOptions<Options>;
 export type NavigatorTreeNode =
     Partial<OptionsInner>

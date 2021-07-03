@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import {Text, TextButton, TextInput, View} from "../../components/UI";
 import {getStyles} from "./styles";
-import {BinaryTreeNode, OrderType, TreeNode} from "../../types";
+import {OrderType, TreeNode} from "../../types";
 import {Card} from "../../containers/Card";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {
     BFS,
     binaryTreeInorderTraversal,
+    countSmallerBST,
+    countSmallerCase8,
     cutOffTree,
     cutOffTreeCase8,
     DFS,
@@ -20,15 +22,15 @@ import {
     treeMaxDepth
 } from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
-import {SinglyLinkedList} from "../../utils/data-structures";
+import {BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
 
-    const [binaryTreeInorderTraversalVariables, setBinaryTreeInorderTraversalVariables] = useState<{ [key in string]: BinaryTreeNode }>()
-    const binaryTree: BinaryTreeNode = new BinaryTreeNode(1, null,
+    const [binaryTreeInorderTraversalVariables, setBinaryTreeInorderTraversalVariables] = useState<{ [key in string]: BinaryTreeNode<any> }>()
+    const binaryTree: BinaryTreeNode<any> = new BinaryTreeNode(1, undefined,
         new BinaryTreeNode(2, new BinaryTreeNode(3)));
     const _binaryTreeInorderTraversal = async () => {
         await binaryTreeInorderTraversal(binaryTree, ({value, key, DEFAULT}) => {
@@ -126,6 +128,17 @@ export function AlgorithmScreen() {
         console.log(result)
     }
 
+    const [countSmallerVariables, setCountSmallerVariables] = useState<{ [key in string]: unknown }>()
+    const _countSmallerBST = async () => {
+        const result = await countSmallerBST(...countSmallerCase8,
+            ({value, key, DEFAULT}) => {
+                // console.log(key, value);
+                setCountSmallerVariables(prevState => ({...prevState, [key!.toString()]: value}));
+                return DEFAULT
+            }
+        )
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -153,7 +166,8 @@ export function AlgorithmScreen() {
                         <TextButton onPress={_parenthesisInput}>
                             <Text>Parenthesis Check</Text>
                         </TextButton>
-                        <TextInput value={lengthOfLongestSubstringValue} onChangeText={setLengthOfLongestSubstringValue}/>
+                        <TextInput value={lengthOfLongestSubstringValue}
+                                   onChangeText={setLengthOfLongestSubstringValue}/>
                         <TextButton onPress={_lengthOfLongestSubstring}>
                             <Text>Length Of Longest Substring</Text>
                         </TextButton>
@@ -171,15 +185,20 @@ export function AlgorithmScreen() {
                         <TextButton onPress={_cutOffTree}>
                             <Text>Cut Off Tree For Golf Event</Text>
                         </TextButton>
+                        <TextButton onPress={_countSmallerBST}>
+                            <Text>Count Smaller BST</Text>
+                        </TextButton>
                     </Card>
                     {
                         binaryTreeInorderTraversalVariables
-                            ? <VividAlgorithm data={binaryTreeInorderTraversalVariables} referenceData={binaryTree} relatedNodeKey="node"/>
+                            ? <VividAlgorithm data={binaryTreeInorderTraversalVariables}
+                                              referenceData={binaryTree} relatedNodeKey="node"/>
                             : null
                     }
                     {
                         DFSVariables
-                            ? <VividAlgorithm data={DFSVariables} referenceData={treeData} relatedNodeKey="nodeNeedPrint"/>
+                            ? <VividAlgorithm data={DFSVariables} referenceData={treeData}
+                                              relatedNodeKey="nodeNeedPrint"/>
                             : null
                     }
                     {
@@ -189,7 +208,8 @@ export function AlgorithmScreen() {
                     }
                     {
                         BFSVariables
-                            ? <VividAlgorithm data={BFSVariables} referenceData={treeData} relatedNodeKey="node"/>
+                            ? <VividAlgorithm data={BFSVariables} referenceData={treeData}
+                                              relatedNodeKey="node"/>
                             : null
                     }
                     {
@@ -214,8 +234,14 @@ export function AlgorithmScreen() {
                     }
                     {
                         cutOffTreeVariables
-                            ? <VividAlgorithm data={cutOffTreeVariables} relatedNodeKey="cur" referenceData={cutOffTreeCase8[0]}
+                            ? <VividAlgorithm data={cutOffTreeVariables} relatedNodeKey="cur"
+                                              referenceData={cutOffTreeCase8[0]}
                                               relatedRouteKey="route"/>
+                            : null
+                    }
+                    {
+                        countSmallerVariables
+                            ? <VividAlgorithm data={countSmallerVariables}/>
                             : null
                     }
                 </View>

@@ -29,12 +29,14 @@ const DemoThemeScreen = () => {
                     <Card title="Buttons" style={styles.demoCard}>
                         <Row paddingVertical="l">
                             <ButtonTO style={sharedStyles.button}>
-                                <InButtonText style={sharedStyles.buttonText}>{st(`demoButton`)}</InButtonText>
+                                <InButtonText
+                                    style={sharedStyles.buttonText}>{st(`demoButton`)}</InButtonText>
                             </ButtonTO>
                         </Row>
                         <Row paddingVertical="l">
                             <ButtonTO style={sharedStyles.button2}>
-                                <InButtonText style={sharedStyles.buttonText2}>{st(`demoButtonSec`)}</InButtonText>
+                                <InButtonText
+                                    style={sharedStyles.buttonText2}>{st(`demoButtonSec`)}</InButtonText>
                             </ButtonTO>
                         </Row>
                         <Row paddingVertical="l">

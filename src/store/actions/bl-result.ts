@@ -1,4 +1,10 @@
-import {BLResult, ClearBLResultAction, ClearBLResultPayload, CollectBLResultAction, SetBLResultAction,} from "../../types";
+import {
+    BLResult,
+    ClearBLResultAction,
+    ClearBLResultPayload,
+    CollectBLResultAction,
+    SetBLResultAction,
+} from "../../types";
 import {EBL} from "../../constants";
 
 export const collectBLResult: (payload: BLResult) => CollectBLResultAction = (payload) => {

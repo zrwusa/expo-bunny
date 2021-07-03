@@ -21,15 +21,19 @@ export const DemoSvg = () => {
             {Platform.OS === 'web'
                 ? <Svg height="100" width="100" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="0" fill="none" stroke="#e90c59">
-                        <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1"
+                        <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40"
+                                 keyTimes="0;1" keySplines="0 0.2 0.8 1"
                                  calcMode="spline" begin="-0.5s"/>
-                        <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1"
+                        <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0"
+                                 keyTimes="0;1" keySplines="0.2 0 0.8 1"
                                  calcMode="spline" begin="-0.5s"/>
                     </circle>
                     <circle cx="50" cy="50" r="0" fill="none" stroke="#46dff0">
-                        <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1"
+                        <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40"
+                                 keyTimes="0;1" keySplines="0 0.2 0.8 1"
                                  calcMode="spline"/>
-                        <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1"
+                        <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0"
+                                 keyTimes="0;1" keySplines="0.2 0 0.8 1"
                                  calcMode="spline"/>
                     </circle>
                 </Svg>

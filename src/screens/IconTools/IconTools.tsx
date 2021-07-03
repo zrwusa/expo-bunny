@@ -28,7 +28,8 @@ export function IconToolsScreen() {
 
                 <Card title={st('generateIcoMoonConfigTitle')}>
                     <Row paddingVertical="l" align="center">
-                        <ButtonTO onPress={handleGenerate}><InButtonText>{st('generate')}</InButtonText></ButtonTO>
+                        <ButtonTO
+                            onPress={handleGenerate}><InButtonText>{st('generate')}</InButtonText></ButtonTO>
                     </Row>
                     <Row>
                         <Text>{st(`copyTip`)}</Text>

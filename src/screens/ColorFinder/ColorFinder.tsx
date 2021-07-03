@@ -1,7 +1,14 @@
 import React, {useState} from "react";
 import {ButtonTO, InButtonText, Text, TextInput, View} from "../../components/UI";
 import {checkColor, colorFaultTolerance, deltaEDes, diffColors} from "../../utils/color";
-import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem, PaletteKeys, ThemeColorKeys, ThemeName} from "../../types";
+import {
+    ColorDiffWithPaletteItem,
+    ColorDiffWithThemeColorsItem,
+    ColorInputItem,
+    PaletteKeys,
+    ThemeColorKeys,
+    ThemeName
+} from "../../types";
 import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from "react-native";
 import {getStyles} from "./styles";
 import {palette, uuidV4} from "../../utils";

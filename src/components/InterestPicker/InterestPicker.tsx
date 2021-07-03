@@ -148,9 +148,13 @@ export const InterestPicker = (props: InterestPickerProps) => {
                             <Col><TextButton onPress={() => {
                                 setShowModal(false)
                             }}><IcoMoon name="x"/></TextButton></Col>
-                            <Col align="center"><Text style={sharedStyles.title}>{capitalizeWords(modalType)}</Text></Col>
+                            <Col align="center"><Text
+                                style={sharedStyles.title}>{capitalizeWords(modalType)}</Text></Col>
                             <Col align="flex-end"><TextButton onPress={_reset}><Text
-                                style={[sharedStyles.text2, {paddingVertical: wp(10), paddingHorizontal: wp(5)}]}>Reset</Text></TextButton></Col>
+                                style={[sharedStyles.text2, {
+                                    paddingVertical: wp(10),
+                                    paddingHorizontal: wp(5)
+                                }]}>Reset</Text></TextButton></Col>
                         </Row>
                     </View>
                     <Divider/>
@@ -160,7 +164,8 @@ export const InterestPicker = (props: InterestPickerProps) => {
                             data={dictionaries[modalType]}
                             keyExtractor={item => item.code}
                             renderItem={({item}) => {
-                                return <Checkbox.Item labelStyle={sharedStyles.text2} label={item.name} color={colors.primary}
+                                return <Checkbox.Item labelStyle={sharedStyles.text2} label={item.name}
+                                                      color={colors.primary}
                                                       status={checkState[item.code]} onPress={() => {
                                     let newStatus: CheckboxStatus = "unchecked";
                                     switch (checkState[item.code]) {

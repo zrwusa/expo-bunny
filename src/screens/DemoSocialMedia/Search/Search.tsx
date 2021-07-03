@@ -1,7 +1,13 @@
 import * as React from "react";
 import {useEffect, useMemo, useState} from "react";
 import {RouteProp} from "@react-navigation/native";
-import {DemoSocialMediaTabStackParam, MasonryDatum, RootStackParam, RootState, SocialMediaImageDatum} from "../../../types";
+import {
+    DemoSocialMediaTabStackParam,
+    MasonryDatum,
+    RootStackParam,
+    RootState,
+    SocialMediaImageDatum
+} from "../../../types";
 import {shortenTFunctionKey} from "../../../providers/i18n-labor";
 import {getContainerStyles} from "../../../containers";
 import {getStyles} from "./styles";

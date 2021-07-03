@@ -72,7 +72,11 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
         }
         const {firebaseUser, storedUser} = user
         if (firebaseUser) {
-            return {_id: firebaseUser.uid || 'defaultId', avatar: storedUser?.photoURL || '', name: firebaseUser.displayName || 'defaultName'}
+            return {
+                _id: firebaseUser.uid || 'defaultId',
+                avatar: storedUser?.photoURL || '',
+                name: firebaseUser.displayName || 'defaultName'
+            }
         }
     }, [user])
 
@@ -212,7 +216,8 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                                             onPress={() => {
                                                 toggleModal()
                                             }}>
-                                            <IcoMoon name="paperclip" size={wp(16)} style={styles.mediaLibraryPickerIcon}/>
+                                            <IcoMoon name="paperclip" size={wp(16)}
+                                                     style={styles.mediaLibraryPickerIcon}/>
                                         </TouchableOpacity>
                                     }}
                                     onUploaded={async (imageSource, type) => {

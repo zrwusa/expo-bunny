@@ -1,5 +1,14 @@
 import React, {Component} from 'react'
-import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle,} from 'react-native'
+import {
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextStyle,
+    TouchableOpacity,
+    TouchableOpacityProps,
+    View,
+    ViewStyle,
+} from 'react-native'
 import {IMessage} from './types'
 import {SizeLabor, ThemeLabor} from "../../types";
 import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
