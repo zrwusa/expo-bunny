@@ -1,29 +1,67 @@
-import {bunnyConsole} from "../utils";
+import {bunnyConsole, timeEnd, timeStart} from "../utils";
 
 // 1e+7
-// [for loop]      130
-// [sort]          207
-// [reverse]       8
-// [indexOf last]  16
-// let arr = [];
-//
-// const time1 = timeStart();
-// for (let i = 0; i < 10000000; i++) {
+// for loop map.set(j, true) 2456
+// arr = [];arr[i] = 0       611
+// obj = {};obj[i] = 0       607
+// [...nums]                 448
+// sort                      185
+// for loop push             124
+// for loop =                38
+// arr[i] = 0                15
+// obj[i] = 0                15
+// reverse                   12
+// indexOf last              11
+
+
+// const arr = [];
+// const obj: {[key in number]: number} = {};
+// let x;
+// const map = new Map<number,boolean>()
+// const time0 = timeStart();
+// for (let i = 1e+7; i > 0; i--) {
 //     arr.push(i);
 // }
-// timeEnd(time1,'for loop');
+// timeEnd(time0, 'for loop push');
 //
+// const time1 = timeStart();
+// x = [...arr]
+// timeEnd(time1, '[...nums]');
+
 // const time2 = timeStart();
-// arr.sort((a, b) => a - b);
-// timeEnd(time2,'sort');
-//
+// const sorted = arr.sort((a, b) => b - a);
+// timeEnd(time2, 'sorted')
+
 // const time3 = timeStart();
-// arr.reverse();
-// timeEnd(time3,'reverse');
-//
+// const reversed = arr.reverse();
+// timeEnd(time3, 'reverse')
+
 // const time4 = timeStart();
-// arr.indexOf(0);
-// timeEnd(time4,'indexOf');
+// const indexOfHalf = arr.indexOf(5e+6);
+// timeEnd(time4, 'indexOf half')
+//
+// const time5 = timeStart();
+// for (let i = 1e+7; i > 0; i--) {
+//     map.set(i, false);
+// }
+// timeEnd(time5, 'map.set(i, true)')
+//
+// const time6 = timeStart();
+// for (let i = 1e+7; i > 0; i--) {
+//     arr[i] = 0;
+// }
+// timeEnd(time6, 'arr[i] = 0')
+//
+// const time7 = timeStart();
+// for (let i = 1e+7; i > 0; i--) {
+//     obj[i] = 0;
+// }
+// timeEnd(time7, 'obj[i] = 0')
+//
+// const time8 = timeStart();
+// x = [...arr];
+// timeEnd(time8, '[...arr] ')
+
 
 // Stack Exceed Size
 // Internet Explorer

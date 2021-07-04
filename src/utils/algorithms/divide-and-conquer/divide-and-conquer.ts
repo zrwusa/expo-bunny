@@ -12,7 +12,8 @@ import {
     countSmallerCase8
 } from "./cases";
 import {BinaryIndexedTree, BinarySearchTree} from "../../data-structures/binary-tree";
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
+import {TProxyHandler} from "@qiwi/deep-proxy";
+import {timeEnd, timeStart} from "../../utils";
 
 export const searchInRotatedSortedArray = function (nums: number[], target: number) {
     if (nums.length === 0) return -1; // check empty
@@ -178,13 +179,17 @@ const countSmallerBIT = function (nums: number[]): number[] {
 // TODO
 export const countSmallerBST = async (nums: number[], proxyHandler: TProxyHandler) => {
     const rootIndex = nums.length - 1;
-    let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex])}, proxyHandler);
+    // let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex])}, proxyHandler);
+    const bst: BinarySearchTree<number> = new BinarySearchTree<number>(nums[rootIndex]);
     let outputArr = new Array(nums.length).fill(0);
+
     for (let j = nums.length - 1; j > -1; j--) {
         if (j !== rootIndex) {
-            proxyVariables.bst.insert(nums[j]);
+            // proxyVariables.bst.insert(nums[j]);
+            bst.insert(nums[j]);
         }
-        outputArr[j] = proxyVariables.bst.getLessSum(nums[j], true);
+        // outputArr[j] = proxyVariables.bst.getLessSum(nums[j], true);
+        outputArr[j] = bst.prefixSum(nums[j], true);
     }
     return outputArr;
 };
@@ -199,6 +204,7 @@ const runAllCountSmaller = async () => {
 }
 // runAllCountSmaller().then()
 // runAlgorithm(countSmallerBST, false, ...countSmallerCase8).then();
+// runAlgorithm(countSmallerBIT, false, ...countSmallerCase8).then();
 // Binary Search
 // 69 「sqrt(x)」
 

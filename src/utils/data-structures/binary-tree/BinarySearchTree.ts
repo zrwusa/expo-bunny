@@ -14,8 +14,8 @@ export class BinarySearchTreeNode<T> {
         return this._left;
     }
 
-    public set left(node: BinarySearchTreeNode<T> | undefined) {
-        this._left = node;
+    public set left(v: BinarySearchTreeNode<T> | undefined) {
+        this._left = v;
     }
 
     private _right: BinarySearchTreeNode<T> | undefined;
@@ -32,8 +32,8 @@ export class BinarySearchTreeNode<T> {
         return this._count;
     }
 
-    public set count(count: number) {
-        this._count = count;
+    public set count(v: number) {
+        this._count = v;
     }
 
     constructor(value: T) {
@@ -74,41 +74,42 @@ export class BinarySearchTree<T> {
      */
     insert(value: T): BinarySearchTreeNode<T> | undefined {
         const newNode = new BinarySearchTreeNode<T>(value);
-        if (this._root == undefined) {
+        const newValue = newNode.value;
+        if (this._root === undefined) {
             this._root = newNode;
-            return newNode;
+            return this._root;
         } else {
-            let currentNode = this._root;
+            let cur = this._root;
             let traversing = true;
             while (traversing) {
-                if (currentNode.value == newNode.value) {
+                if (cur.value === newValue) {
                     //Duplicates are not accepted.
                     traversing = false;
-                    currentNode.count++;
-                    return currentNode;
-                } else if (newNode.value < currentNode.value) {
+                    cur.count++;
+                    return cur;
+                } else if (newValue < cur.value) {
                     // Traverse left of the node
-                    if (currentNode.left == undefined) {
+                    if (cur.left === undefined) {
                         //Add to the left of the current node
-                        currentNode.left = newNode;
+                        cur.left = newNode;
                         traversing = false;
-                        newNode.count++;
-                        return newNode;
+                        cur.left.count++;
+                        return cur.left;
                     } else {
                         //Traverse the left of the current node
-                        currentNode = currentNode.left;
+                        cur = cur.left;
                     }
-                } else if (newNode.value > currentNode.value) {
+                } else if (newValue > cur.value) {
                     // Traverse right of the node
-                    if (currentNode.right == undefined) {
+                    if (cur.right === undefined) {
                         //Add to the right of the current node
-                        currentNode.right = newNode;
+                        cur.right = newNode;
                         traversing = false;
-                        newNode.count++;
-                        return newNode;
+                        cur.right.count++;
+                        return cur.right;
                     } else {
                         //Traverse the left of the current node
-                        currentNode = currentNode.right;
+                        cur = cur.right;
                     }
                 }
             }
@@ -200,7 +201,7 @@ export class BinarySearchTree<T> {
         return _root ? _traverse(_root) : undefined;
     }
 
-    getLeftSum(node: BinarySearchTreeNode<T>, isSumCount?: boolean): number {
+    leftSum(node: BinarySearchTreeNode<T>, isSumCount?: boolean): number {
         let sum = 0;
 
         function _traverse(cur: BinarySearchTreeNode<T>): void {
@@ -215,19 +216,19 @@ export class BinarySearchTree<T> {
         return sum;
     }
 
-    getLessSum(target: number, isSumCount?: boolean): number {
+    prefixSum(target: number, isSumCount?: boolean): number {
         let sum = 0;
         const _traverse = (cur: BinarySearchTreeNode<T>): void => {
             const needSum: number = isSumCount ? cur.count : cur.value as unknown as number;
             const curValue = cur.value as unknown as number;
 
             if (target === curValue) {
-                sum += this.getLeftSum(cur, isSumCount);
+                sum += this.leftSum(cur, isSumCount);
                 return;
             }
 
             if (target > curValue) {
-                sum += this.getLeftSum(cur, isSumCount);
+                sum += this.leftSum(cur, isSumCount);
                 sum += needSum;
                 if (cur.right) {
                     _traverse(cur.right);
