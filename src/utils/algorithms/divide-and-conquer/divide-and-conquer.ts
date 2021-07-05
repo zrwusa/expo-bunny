@@ -176,7 +176,8 @@ const countSmallerBIT = function (nums: number[]): number[] {
     return ans.reverse();
 }
 
-// TODO
+// TODO ,so far LeetCode gives cases that be sorted.The sorted cases cannot be solved by BST, because in
+//  sorted case BST will give a time complexity O(n^2)
 export const countSmallerBST = async (nums: number[], proxyHandler: TProxyHandler) => {
     const rootIndex = nums.length - 1;
     // let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex])}, proxyHandler);
@@ -203,8 +204,6 @@ const runAllCountSmaller = async () => {
     await runAlgorithm(countSmallerBIT, false, ...countSmallerCase7);
 }
 // runAllCountSmaller().then()
-// runAlgorithm(countSmallerBST, false, ...countSmallerCase8).then();
-// runAlgorithm(countSmallerBIT, false, ...countSmallerCase8).then();
 // Binary Search
 // 69 「sqrt(x)」
 

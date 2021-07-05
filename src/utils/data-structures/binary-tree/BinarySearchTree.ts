@@ -120,13 +120,43 @@ export class BinarySearchTree<T> {
     /**
      * Traverse the tree in Breath-First-Search pattern and returns th array of values in BFS order
      */
-    BFS(): T[] {
+    BFS(valueType?: 'value' | 'node' | 'count'): T[] | BinarySearchTreeNode<T>[] | number[] {
+        if (valueType === undefined) {
+            valueType = 'value';
+        }
+        let visited;
+        switch (valueType) {
+            case 'value':
+                visited = new Array<T>();
+                break;
+            case 'node':
+                visited = new Array<BinarySearchTreeNode<T>>();
+                break;
+            case 'count':
+                visited = new Array<number>();
+                break;
+        }
+
+        function pushByValueType(node: BinarySearchTreeNode<T>) {
+            switch (valueType) {
+                case 'value':
+                    visited.push(node.value);
+                    break;
+                case 'node':
+                    visited.push(node);
+                    break;
+                case 'count':
+                    visited.push(node.count);
+                    break;
+            }
+        }
+
         let queue = new Array<BinarySearchTreeNode<T> | undefined>();
-        let visited = new Array<T>();
         queue.push(this.root);
         while (queue.length !== 0) {
             let current = queue.shift();
-            current && visited.push(current.value);
+
+            current && pushByValueType(current);
             if (current?.left !== undefined) queue.push(current.left);
             if (current?.right !== undefined) queue.push(current.right);
         }
@@ -134,71 +164,106 @@ export class BinarySearchTree<T> {
     }
 
     /**
-     * Traverse the tree in Depth-First-Search PreOrder pattern and returns th array of values in the same order
+     * Traverse the tree in Depth-First-Search InOrder or PreOrder or PostOrder pattern and returns th
+     * array of values in the same order
      */
-    DFSPreOrder(): T[] {
-        let visited = new Array<T>();
-        let current = this._root;
-
-        function _traverse(node: BinarySearchTreeNode<T>) {
-            visited.push(node.value);
-            if (node.left) _traverse(node.left);
-            if (node.right) _traverse(node.right);
+    DFS(pattern?: 'in' | 'pre' | 'post', valueType?: 'value' | 'node' | 'count'): T[] | BinarySearchTreeNode<T>[] | number[] {
+        if (pattern === undefined) {
+            pattern = 'in';
+        }
+        if (valueType === undefined) {
+            valueType = 'value';
+        }
+        let visited;
+        switch (valueType) {
+            case 'value':
+                visited = new Array<T>();
+                break;
+            case 'node':
+                visited = new Array<BinarySearchTreeNode<T>>();
+                break;
+            case 'count':
+                visited = new Array<number>();
+                break;
         }
 
-        current && _traverse(current);
+        function pushByValueType(node: BinarySearchTreeNode<T>) {
+            switch (valueType) {
+                case 'value':
+                    visited.push(node.value);
+                    break;
+                case 'node':
+                    visited.push(node);
+                    break;
+                case 'count':
+                    visited.push(node.count);
+                    break;
+            }
+        }
+
+        function _traverse(node: BinarySearchTreeNode<T>) {
+            switch (pattern) {
+                case 'in':
+                    if (node.left) _traverse(node.left);
+                    pushByValueType(node);
+                    if (node.right) _traverse(node.right);
+                    break;
+                case 'pre':
+                    pushByValueType(node);
+                    if (node.left) _traverse(node.left);
+                    if (node.right) _traverse(node.right);
+                    break;
+                case 'post':
+                    if (node.left) _traverse(node.left);
+                    if (node.right) _traverse(node.right);
+                    pushByValueType(node);
+                    break;
+            }
+
+        }
+
+        this._root && _traverse(this._root);
         return visited;
     }
 
-    /**
-     * Traverse the tree in Depth-First-Search PostOrder pattern and returns th array of values in the same order
-     */
-    DFSPostOrder(): T[] {
-        let visited = new Array<T>();
-        let current = this._root;
-
-        function _traverse(node: BinarySearchTreeNode<T>) {
-            if (node.left) _traverse(node.left);
-            if (node.right) _traverse(node.right);
-            visited.push(node.value);
+    getNode(value: T | number, valueType?: 'value' | 'count', onlyOne?: boolean): BinarySearchTreeNode<T> | BinarySearchTreeNode<T>[] | undefined {
+        if (valueType === undefined) {
+            valueType = 'value';
         }
 
-        current && _traverse(current);
-        return visited;
-    }
-
-    /**
-     * Traverse the tree in Depth-First-Search InOrder pattern and returns th array of values in the same order
-     */
-    DFSInOrder(): T[] {
-        let visited = new Array<T>();
-        let current = this._root;
-
-        function _traverse(node: BinarySearchTreeNode<T>) {
-            if (node.left) _traverse(node.left);
-            visited.push(node.value);
-            if (node.right) _traverse(node.right);
+        if (onlyOne === undefined) {
+            onlyOne = true;
         }
 
-        current && _traverse(current);
-        return visited;
-    }
+        const result:BinarySearchTreeNode<T>[] = [];
 
-    getNodeByValue(value: T): BinarySearchTreeNode<T> | undefined {
-        let _root = this._root;
+        function _traverse(cur: BinarySearchTreeNode<T>) {
+            switch (valueType) {
+                case 'value':
+                    if (cur.value === value) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                case 'count':
+                    if (cur.count === value) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+            }
 
-        function _traverse(cur: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
-            if (cur.value === value) return cur;
             if (!cur.left && !cur.right) return undefined;
             if (value < cur.value) {
-                return cur.left ? _traverse(cur.left) : undefined;
+                 cur.left ? _traverse(cur.left) : undefined;
             }
             if (value > cur.value) {
-                return cur.right ? _traverse(cur.right) : undefined;
+                 cur.right ? _traverse(cur.right) : undefined;
             }
         }
 
-        return _root ? _traverse(_root) : undefined;
+        this._root && _traverse(this._root);
+        return onlyOne ? result[0] : result;
     }
 
     leftSum(node: BinarySearchTreeNode<T>, isSumCount?: boolean): number {
