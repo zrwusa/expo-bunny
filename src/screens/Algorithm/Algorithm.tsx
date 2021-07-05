@@ -130,7 +130,7 @@ export function AlgorithmScreen() {
 
     const [countSmallerVariables, setCountSmallerVariables] = useState<{ [key in string]: unknown }>()
     const _countSmallerBST = async () => {
-        const result = await countSmallerBST(...countSmallerCase6,
+        const result = await countSmallerBST(...countSmallerCase1,
             ({value, key, DEFAULT}) => {
                 // console.log(key, value);
                 setCountSmallerVariables(prevState => ({...prevState, [key!.toString()]: value}));
