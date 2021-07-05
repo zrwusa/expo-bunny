@@ -284,7 +284,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         let space = 0;
         let offsetX;
         let offsetY;
-        let levelNodeSpace = nodeSpace * Math.pow(1.3, (maxDepth || 5) - 1 - level)
+        let levelNodeSpace = nodeSpace * Math.pow(2, (maxDepth || 5) - 1 - level)
         if (level === 1) {
             space = treePanelWidth / 2
             offsetX = space - circleR;

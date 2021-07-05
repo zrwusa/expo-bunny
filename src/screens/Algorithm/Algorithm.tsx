@@ -10,8 +10,8 @@ import {
     countSmallerBST, countSmallerCase1, countSmallerCase6,
     countSmallerCase8,
     cutOffTree,
-    cutOffTreeCase8,
-    DFS,
+    cutOffTreeCase8, deleteNodeGenTree,
+    DFS, genBST,
     isValidParenthesis,
     ladderLengthCase1,
     ladderLengthDFS,
@@ -139,6 +139,17 @@ export function AlgorithmScreen() {
         )
     }
 
+    const [genBSTVariables, setGenBSTVariables] = useState<{ [key in string]: unknown }>()
+    const _genBST = async () => {
+        const result = await genBST(deleteNodeGenTree,
+            ({value, key, DEFAULT}) => {
+                // console.log(key, value);
+                setGenBSTVariables(prevState => ({...prevState, [key!.toString()]: value}));
+                return DEFAULT
+            }
+        )
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -187,6 +198,9 @@ export function AlgorithmScreen() {
                         </TextButton>
                         <TextButton onPress={_countSmallerBST}>
                             <Text>Count Smaller BST</Text>
+                        </TextButton>
+                        <TextButton onPress={_genBST}>
+                            <Text>Gen BST</Text>
                         </TextButton>
                     </Card>
                     {
@@ -243,6 +257,11 @@ export function AlgorithmScreen() {
                         countSmallerVariables
                             ? <VividAlgorithm data={countSmallerVariables}/>
                             : null
+                    }
+                    {
+                        genBSTVariables
+                        ? <VividAlgorithm data={genBSTVariables} />
+                        : null
                     }
                 </View>
             </View>

@@ -141,6 +141,10 @@ export class BinarySearchTree<T> {
         return undefined
     }
 
+    deleteNode(root: BinarySearchTreeNode<T> | null, key: number) {
+
+    }
+
     /**
      * Traverse the tree in Breath-First-Search pattern and returns th array of values in BFS order
      */
