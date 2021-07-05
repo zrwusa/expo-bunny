@@ -331,6 +331,12 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 >
                     <TSpan x={offsetX} y={offsetY + fontOffsetY}>{node.value}</TSpan>
                     <TSpan x={offsetX} y={offsetY + fontOffsetY + fontSize + wp(2)}>{node.count}</TSpan>
+                    {
+                        node instanceof BinarySearchTreeNode
+                            ? <TSpan x={offsetX}
+                                     y={offsetY + fontOffsetY + 2 * fontSize + wp(4)}>{node.leftSum}</TSpan>
+                            : null
+                    }
                 </SVGText>
             </G>
         )

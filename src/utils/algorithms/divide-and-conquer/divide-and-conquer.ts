@@ -8,12 +8,12 @@ import {
     countSmallerCase3,
     countSmallerCase4,
     countSmallerCase5,
-    countSmallerCase7,
-    countSmallerCase8
+    countSmallerCase6,
+    countSmallerCase7
 } from "./cases";
 import {BinaryIndexedTree, BinarySearchTree} from "../../data-structures/binary-tree";
-import {TProxyHandler} from "@qiwi/deep-proxy";
-import {timeEnd, timeStart} from "../../utils";
+import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
+import {wait} from "../../utils";
 
 export const searchInRotatedSortedArray = function (nums: number[], target: number) {
     if (nums.length === 0) return -1; // check empty
@@ -180,17 +180,19 @@ const countSmallerBIT = function (nums: number[]): number[] {
 //  sorted case BST will give a time complexity O(n^2)
 export const countSmallerBST = async (nums: number[], proxyHandler: TProxyHandler) => {
     const rootIndex = nums.length - 1;
-    // let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex])}, proxyHandler);
-    const bst: BinarySearchTree<number> = new BinarySearchTree<number>(nums[rootIndex]);
+    let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex])}, proxyHandler);
+    // const bst: BinarySearchTree<number> = new BinarySearchTree<number>(nums[rootIndex]);
     let outputArr = new Array(nums.length).fill(0);
 
     for (let j = nums.length - 1; j > -1; j--) {
         if (j !== rootIndex) {
-            // proxyVariables.bst.insert(nums[j]);
-            bst.insert(nums[j]);
+            const node = proxyVariables.bst.insert(nums[j], true);
+            // const node = bst.insert(nums[j]);
+            outputArr[j] = node?.leftSum;
         }
+
         // outputArr[j] = proxyVariables.bst.getLessSum(nums[j], true);
-        outputArr[j] = bst.prefixSum(nums[j], true);
+        // outputArr[j] = bst.prefixSum(nums[j], 'count');
     }
     return outputArr;
 };
@@ -204,6 +206,10 @@ const runAllCountSmaller = async () => {
     await runAlgorithm(countSmallerBIT, false, ...countSmallerCase7);
 }
 // runAllCountSmaller().then()
+(async () => {
+    // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase3);
+    // await runAlgorithm(countSmallerBST, false, ...countSmallerCase3);
+})()
 // Binary Search
 // 69 「sqrt(x)」
 

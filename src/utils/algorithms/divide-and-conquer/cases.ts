@@ -1,4 +1,4 @@
-export const countSmallerCase1: [number[]] = [[5, 2, 6, 1]];
+export const countSmallerCase1: [number[]] = [[5, 2, 6, 1, 3]];
 export const countSmallerCase2: [number[]] = [[-1, -1]];
 export const countSmallerCase3: [number[]] = [[-1, 0]];
 export const countSmallerCase4: [number[]] = [[10, 20]];

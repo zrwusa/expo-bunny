@@ -7,7 +7,7 @@ import {useBunnyKit} from "../../hooks/bunny-kit";
 import {
     BFS,
     binaryTreeInorderTraversal,
-    countSmallerBST,
+    countSmallerBST, countSmallerCase1, countSmallerCase6,
     countSmallerCase8,
     cutOffTree,
     cutOffTreeCase8,
@@ -130,7 +130,7 @@ export function AlgorithmScreen() {
 
     const [countSmallerVariables, setCountSmallerVariables] = useState<{ [key in string]: unknown }>()
     const _countSmallerBST = async () => {
-        const result = await countSmallerBST(...countSmallerCase8,
+        const result = await countSmallerBST(...countSmallerCase6,
             ({value, key, DEFAULT}) => {
                 // console.log(key, value);
                 setCountSmallerVariables(prevState => ({...prevState, [key!.toString()]: value}));
