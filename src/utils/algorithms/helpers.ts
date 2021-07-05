@@ -12,6 +12,8 @@ import {bunnyConsole, timeEnd, timeStart} from "../utils";
 // obj[i] = 0                15
 // reverse                   12
 // indexOf last              11
+// arr.toString()            1765
+// JSON.stringify(arr)       316
 
 
 // const arr = [];

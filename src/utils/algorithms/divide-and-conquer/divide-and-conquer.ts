@@ -207,8 +207,8 @@ const runAllCountSmaller = async () => {
 }
 // runAllCountSmaller().then()
 (async () => {
-    // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase7);
-    // await runAlgorithm(countSmallerBST, false, ...countSmallerCase7);
+    // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase6);
+    // await runAlgorithm(countSmallerBST, false, ...countSmallerCase6);
 })()
 // Binary Search
 // 69 「sqrt(x)」

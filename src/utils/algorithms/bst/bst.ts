@@ -21,6 +21,7 @@ export async function genBST(arr: number[], proxyHandler: TProxyHandler) {
     for (let i of rest) {
         proxyVariables.bst.insert(i)
     }
+    proxyVariables.bst.deleteNode(proxyVariables.bst.root!, 2);
     return null;
 }
 

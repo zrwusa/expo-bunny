@@ -48,12 +48,22 @@ export class BinarySearchTreeNode<T> {
         this._leftSum = v;
     }
 
+    private _parent: BinarySearchTreeNode<T> | undefined;
+    public get parent(): BinarySearchTreeNode<T> | undefined {
+        return this._parent;
+    }
+
+    public set parent(v: BinarySearchTreeNode<T> | undefined) {
+        this._parent = v;
+    }
+
     constructor(value: T) {
         this._value = value;
         this._left = undefined;
         this._right = undefined;
         this._count = 0;
         this._leftSum = 0;
+        this._parent = undefined;
     }
 }
 
@@ -142,7 +152,8 @@ export class BinarySearchTree<T> {
     }
 
     deleteNode(root: BinarySearchTreeNode<T> | null, key: number) {
-
+        const needDelNode = this.getNode(key);
+        debugger
     }
 
     /**
@@ -275,7 +286,7 @@ export class BinarySearchTree<T> {
             onlyOne = true;
         }
 
-        const result:BinarySearchTreeNode<T>[] = [];
+        const result: BinarySearchTreeNode<T>[] = [];
 
         function _traverse(cur: BinarySearchTreeNode<T>) {
             switch (valueType) {
@@ -301,10 +312,10 @@ export class BinarySearchTree<T> {
 
             if (!cur.left && !cur.right) return undefined;
             if (value < cur.value) {
-                 cur.left ? _traverse(cur.left) : undefined;
+                cur.left ? _traverse(cur.left) : undefined;
             }
             if (value > cur.value) {
-                 cur.right ? _traverse(cur.right) : undefined;
+                cur.right ? _traverse(cur.right) : undefined;
             }
         }
 
@@ -408,10 +419,11 @@ export class BinarySearchTree<T> {
         return sum;
     }
 
-    allRightNodesAdd(node:BinarySearchTreeNode<T>, delta: number, resultType?: ResultTypeOmitNode): boolean {
+    allRightNodesAdd(node: BinarySearchTreeNode<T>, delta: number, resultType?: ResultTypeOmitNode): boolean {
         if (resultType === undefined) {
             resultType = 'value';
         }
+
         function _traverse(cur: BinarySearchTreeNode<T>) {
             switch (resultType) {
                 case 'value':
@@ -433,6 +445,7 @@ export class BinarySearchTree<T> {
             cur.left && _traverse(cur.left);
             cur.right && _traverse(cur.right);
         }
+
         node.right && _traverse(node.right);
         return true
     }
