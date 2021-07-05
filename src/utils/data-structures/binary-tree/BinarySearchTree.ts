@@ -154,7 +154,18 @@ export class BinarySearchTree<T> {
 
     deleteNode(root: BinarySearchTreeNode<T> | null, key: number) {
         const needDelNode = this.getNode(key);
-        debugger
+    }
+
+    getMin(node?: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
+        if (!node) {
+            node = this._root;
+        }
+        function _traverse(cur: BinarySearchTreeNode<T>) {
+            if (!cur.left) return cur;
+            _traverse(cur.left);
+        }
+
+        return node ? _traverse(node) : undefined;
     }
 
     /**
