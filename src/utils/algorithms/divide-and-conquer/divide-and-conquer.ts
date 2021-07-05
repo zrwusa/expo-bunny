@@ -180,13 +180,13 @@ const countSmallerBIT = function (nums: number[]): number[] {
 //  sorted case BST will give a time complexity O(n^2)
 export const countSmallerBST = async (nums: number[], proxyHandler: TProxyHandler) => {
     const rootIndex = nums.length - 1;
-    let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex])}, proxyHandler);
+    let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex], true)}, proxyHandler);
     // const bst: BinarySearchTree<number> = new BinarySearchTree<number>(nums[rootIndex]);
     let outputArr = new Array(nums.length).fill(0);
 
     for (let j = nums.length - 1; j > -1; j--) {
         if (j !== rootIndex) {
-            const node = proxyVariables.bst.insert(nums[j], true);
+            const node = proxyVariables.bst.insert(nums[j]);
             // const node = bst.insert(nums[j]);
             outputArr[j] = node?.leftSum;
         }
@@ -207,8 +207,8 @@ const runAllCountSmaller = async () => {
 }
 // runAllCountSmaller().then()
 (async () => {
-    // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase3);
-    // await runAlgorithm(countSmallerBST, false, ...countSmallerCase3);
+    // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase7);
+    // await runAlgorithm(countSmallerBST, false, ...countSmallerCase7);
 })()
 // Binary Search
 // 69 「sqrt(x)」

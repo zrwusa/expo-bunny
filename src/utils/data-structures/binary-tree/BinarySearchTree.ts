@@ -67,9 +67,14 @@ export class BinarySearchTree<T> {
         this._root = v;
     }
 
-    constructor(root?: BinarySearchTreeNode<T> | T) {
+    private readonly _autoPrefixSum: boolean = false;
+
+    constructor(root?: BinarySearchTreeNode<T> | T, autoPrefixSum?: boolean) {
         if (!root) {
             this._root = undefined;
+        }
+        if (autoPrefixSum) {
+            this._autoPrefixSum = true;
         }
         if (root instanceof BinarySearchTreeNode) {
             root.count = 1;
@@ -84,12 +89,8 @@ export class BinarySearchTree<T> {
     /**
      * Adds a new BinarySearchTreeNode to BST.
      * @param value Value of the Tree node to be added to BST
-     * @param isLeftSum Calculate the left subtree sum when inserting a node
      */
-    insert(value: T, isLeftSum?: boolean): BinarySearchTreeNode<T> | undefined {
-        if (isLeftSum === undefined) {
-            isLeftSum = false;
-        }
+    insert(value: T): BinarySearchTreeNode<T> | undefined {
         const newNode = new BinarySearchTreeNode<T>(value);
         const newValue = newNode.value;
         if (this._root === undefined) {
@@ -100,17 +101,17 @@ export class BinarySearchTree<T> {
             let traversing = true;
             while (traversing) {
                 if (cur.value === newValue) {
-                    isLeftSum && this.allRightNodesAdd(cur, 1, 'leftSum');
+                    this._autoPrefixSum && this.allRightNodesAdd(cur, 1, 'leftSum');
                     cur.count++;
                     //Duplicates are not accepted.
                     traversing = false;
                     return cur;
                 } else if (newValue < cur.value) {
-                    isLeftSum && this.allRightNodesAdd(cur, 1, 'leftSum');
-                    isLeftSum && cur.leftSum++;
+                    this._autoPrefixSum && this.allRightNodesAdd(cur, 1, 'leftSum');
+                    this._autoPrefixSum && cur.leftSum++;
                     // Traverse left of the node
                     if (cur.left === undefined) {
-                        if (isLeftSum) newNode.leftSum = cur.leftSum - 1;
+                        if (this._autoPrefixSum) newNode.leftSum = cur.leftSum - 1;
                         newNode.count++;
                         //Add to the left of the current node
                         cur.left = newNode;
@@ -123,7 +124,7 @@ export class BinarySearchTree<T> {
                 } else if (newValue > cur.value) {
                     // Traverse right of the node
                     if (cur.right === undefined) {
-                        if (isLeftSum) newNode.leftSum = cur.leftSum + cur.count;
+                        if (this._autoPrefixSum) newNode.leftSum = cur.leftSum + cur.count;
                         newNode.count++;
 
                         //Add to the right of the current node
