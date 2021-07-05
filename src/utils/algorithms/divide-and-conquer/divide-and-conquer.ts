@@ -9,7 +9,7 @@ import {
     countSmallerCase4,
     countSmallerCase5,
     countSmallerCase6,
-    countSmallerCase7
+    countSmallerCase7, countSmallerCase8
 } from "./cases";
 import {BinaryIndexedTree, BinarySearchTree} from "../../data-structures/binary-tree";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
@@ -207,8 +207,8 @@ const runAllCountSmaller = async () => {
 }
 // runAllCountSmaller().then()
 (async () => {
-    // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase6);
-    // await runAlgorithm(countSmallerBST, false, ...countSmallerCase6);
+    // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase8);
+    // await runAlgorithm(countSmallerBST, false, ...countSmallerCase8);
 })()
 // Binary Search
 // 69 「sqrt(x)」

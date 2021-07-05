@@ -123,6 +123,7 @@ export class BinarySearchTree<T> {
                     if (cur.left === undefined) {
                         if (this._autoPrefixSum) newNode.leftSum = cur.leftSum - 1;
                         newNode.count++;
+                        newNode.parent = cur;
                         //Add to the left of the current node
                         cur.left = newNode;
                         traversing = false;
@@ -136,7 +137,7 @@ export class BinarySearchTree<T> {
                     if (cur.right === undefined) {
                         if (this._autoPrefixSum) newNode.leftSum = cur.leftSum + cur.count;
                         newNode.count++;
-
+                        newNode.parent = cur;
                         //Add to the right of the current node
                         cur.right = newNode;
                         traversing = false;
@@ -475,23 +476,3 @@ export class BinarySearchTree<T> {
         return maxDepth;
     }
 }
-
-// /**
-//  *                   10
-//  *           6               15
-//  *      3        8      11       20
-//  *   0
-//  */
-// let myBST = new BinarySearchTree<number>();
-// myBST.insert(10);
-// myBST.insert(6);
-// myBST.insert(15);
-// myBST.insert(3);
-// myBST.insert(8);
-// myBST.insert(11);
-// myBST.insert(20);
-// myBST.insert(0);
-// console.log("BFS: " + myBST.BFS());
-// console.log("DFS-PreOrder: " + myBST.DFSPreOrder());
-// console.log("DFS-PostOrder: " + myBST.DFSPostOrder());
-// console.log("DFS-InOrder: " + myBST.DFSInOrder());
