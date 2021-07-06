@@ -1,11 +1,11 @@
 export class BinaryTreeNode<T> {
-    private _value: T | undefined;
-    public get value(): T | undefined {
-        return this._value;
+    private _id: number;
+    public get id(): number {
+        return this._id;
     }
 
-    public set value(v: T | undefined) {
-        this._value = v;
+    public set id(v: number) {
+        this._id = v;
     }
 
     private _count: number;
@@ -35,8 +35,8 @@ export class BinaryTreeNode<T> {
         this._right = v;
     }
 
-    constructor(value?: T, left?: BinaryTreeNode<T> | undefined, right?: BinaryTreeNode<T> | undefined) {
-        this._value = (value === undefined ? undefined : value)
+    constructor(id?: number, left?: BinaryTreeNode<T> | undefined, right?: BinaryTreeNode<T> | undefined) {
+        this._id = (id === undefined ? -Infinity : id)
         this._left = (left === undefined ? undefined : left)
         this._right = (right === undefined ? undefined : right)
         this._count = 0;

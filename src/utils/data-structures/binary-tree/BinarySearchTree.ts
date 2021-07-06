@@ -1,15 +1,24 @@
-type ResultType = 'node' | 'value' | 'count' | 'leftSum';
-type ResultTypeOmitNode = 'value' | 'count' | 'leftSum';
+type PropertyType = 'id' | 'val' | 'count' | 'leftSum';
+type NodeOrPropertyType = 'node' | PropertyType;
 
 // Node for class for BinaryTree
 export class BinarySearchTreeNode<T> {
-    private _value: T;
-    public get value(): T {
-        return this._value;
+    private _id: number;
+    public get id(): number {
+        return this._id;
     }
 
-    public set value(v: T) {
-        this._value = v;
+    public set id(v: number) {
+        this._id = v;
+    }
+
+    private _val: T | undefined;
+    public get val(): T | undefined {
+        return this._val;
+    }
+
+    public set val(v: T | undefined) {
+        this._val = v;
     }
 
     private _left: BinarySearchTreeNode<T> | undefined;
@@ -66,8 +75,9 @@ export class BinarySearchTreeNode<T> {
         this._isLeftChild = v;
     }
 
-    constructor(value: T) {
-        this._value = value;
+    constructor(id: number, val?: T) {
+        this._id = id;
+        this._val = val;
         this._left = undefined;
         this._right = undefined;
         this._count = 0;
@@ -89,7 +99,7 @@ export class BinarySearchTree<T> {
 
     private readonly _autoPrefixSum: boolean = false;
 
-    constructor(root?: BinarySearchTreeNode<T> | T, autoPrefixSum?: boolean) {
+    constructor(root?: BinarySearchTreeNode<T> | number, autoPrefixSum?: boolean) {
         if (!root) {
             this._root = undefined;
         }
@@ -108,11 +118,12 @@ export class BinarySearchTree<T> {
 
     /**
      * Adds a new BinarySearchTreeNode to BST.
-     * @param value Value of the Tree node to be added to BST
+     * @param id Id of the Tree node to be added to BST
+     * @param val Value
      */
-    insert(value: T): BinarySearchTreeNode<T> | undefined {
-        const newNode = new BinarySearchTreeNode<T>(value);
-        const newValue = newNode.value;
+    insert(id: number, val?: T): BinarySearchTreeNode<T> | undefined {
+        const newNode = new BinarySearchTreeNode<T>(id, val);
+        const newValue = newNode.id;
         if (this._root === undefined) {
             this._root = newNode;
             return this._root;
@@ -120,14 +131,14 @@ export class BinarySearchTree<T> {
             let cur = this._root;
             let traversing = true;
             while (traversing) {
-                if (cur.value === newValue) {
-                    this._autoPrefixSum && this.allRightChildrenAdd(cur, 1, 'leftSum');
+                if (cur.id === newValue) {
+                    this._autoPrefixSum && cur.right && this.subTreeAdd(cur.right, 1, 'leftSum');
                     cur.count++;
                     //Duplicates are not accepted.
                     traversing = false;
                     return cur;
-                } else if (newValue < cur.value) {
-                    this._autoPrefixSum && this.allRightChildrenAdd(cur, 1, 'leftSum');
+                } else if (newValue < cur.id) {
+                    this._autoPrefixSum && cur.right && this.subTreeAdd(cur.right, 1, 'leftSum');
                     this._autoPrefixSum && cur.leftSum++;
                     // Traverse left of the node
                     if (cur.left === undefined) {
@@ -143,7 +154,7 @@ export class BinarySearchTree<T> {
                         //Traverse the left of the current node
                         cur = cur.left;
                     }
-                } else if (newValue > cur.value) {
+                } else if (newValue > cur.id) {
                     // Traverse right of the node
                     if (cur.right === undefined) {
                         if (this._autoPrefixSum) newNode.leftSum = cur.leftSum + cur.count;
@@ -164,11 +175,11 @@ export class BinarySearchTree<T> {
         return undefined
     }
 
-    deleteNode(root: BinarySearchTreeNode<T> | null, key: number, isUpdateAllLeftSum?: boolean): BinarySearchTreeNode<T> | null {
+    deleteNode(key: number, isUpdateAllLeftSum?: boolean): BinarySearchTreeNode<T> | null {
         if (isUpdateAllLeftSum === undefined) {
             isUpdateAllLeftSum = true;
         }
-        let cur: BinarySearchTreeNode<T> | undefined = this.getNode(key, 'value', true) as BinarySearchTreeNode<T>;
+        let cur: BinarySearchTreeNode<T> | undefined = this.getNode(key, 'id', true) as BinarySearchTreeNode<T>;
         if (!cur) return null;
         this._autoPrefixSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(cur, -cur.count, 'leftSum');
         if (!cur.left && !cur.right) {
@@ -226,7 +237,7 @@ export class BinarySearchTree<T> {
             }
         } else if (cur.left && cur.right) {
             const minNode = this.getMinNode(cur.right);
-            this.deleteNode(cur, minNode!.value, false);
+            this.deleteNode(minNode!.id, false);
             if (cur.left) {
                 minNode!.left = cur.left;
                 cur.left.parent = minNode;
@@ -253,7 +264,7 @@ export class BinarySearchTree<T> {
             } else {
                 minNode!.isLeftChild = undefined;
                 minNode!.parent = undefined;
-                this.root = minNode;
+                this._root = minNode;
                 return null;
             }
 
@@ -262,7 +273,7 @@ export class BinarySearchTree<T> {
         return null;
     }
 
-    getMinNode(node ?: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
+    getMinNode(node?: BinarySearchTreeNode<T>): BinarySearchTreeNode<T> | undefined {
         if (!node) {
             node = this._root;
         }
@@ -278,39 +289,35 @@ export class BinarySearchTree<T> {
     /**
      * Traverse the tree in Breath-First-Search pattern and returns th array of values in BFS order
      */
-    BFS(resultType ?: ResultType): T[] | BinarySearchTreeNode<T> [] | number[] {
-        if (resultType === undefined) {
-            resultType = 'value';
+    BFS(nodeOrPropertyType ?: NodeOrPropertyType): Array<T | undefined> | BinarySearchTreeNode<T> [] | number[] {
+        if (nodeOrPropertyType === undefined) {
+            nodeOrPropertyType = 'id';
         }
-        let visited;
-        switch (resultType) {
-            case 'value':
-                visited = new Array<T>();
-                break;
-            case 'node':
-                visited = new Array<BinarySearchTreeNode<T>>();
-                break;
-            case 'count':
-                visited = new Array<number>();
-                break;
-            case 'leftSum':
-                visited = new Array<number>();
-                break;
-        }
+        let visitedId: number[] = [],
+            visitedVal: Array<T | undefined> = [],
+            visitedNode: BinarySearchTreeNode<T>[] = [],
+            visitedCount: number[] = [],
+            visitedLeftSum: number[] = [];
 
         function pushByValueType(node: BinarySearchTreeNode<T>) {
-            switch (resultType) {
-                case 'value':
-                    visited.push(node.value);
+            switch (nodeOrPropertyType) {
+                case 'id':
+                    visitedId.push(node.id);
+                    break;
+                case 'val':
+                    visitedVal.push(node.val);
                     break;
                 case 'node':
-                    visited.push(node);
+                    visitedNode.push(node);
                     break;
                 case 'count':
-                    visited.push(node.count);
+                    visitedCount.push(node.count);
                     break;
                 case 'leftSum':
-                    visited.push(node.leftSum);
+                    visitedLeftSum.push(node.leftSum);
+                    break;
+                default:
+                    visitedId.push(node.id);
                     break;
             }
         }
@@ -323,49 +330,58 @@ export class BinarySearchTree<T> {
             if (current?.left !== undefined) queue.push(current.left);
             if (current?.right !== undefined) queue.push(current.right);
         }
-        return visited;
+        switch (nodeOrPropertyType) {
+            case 'id':
+                return visitedId;
+            case 'val':
+                return visitedVal;
+            case 'node':
+                return visitedNode;
+            case 'count':
+                return visitedCount;
+            case 'leftSum':
+                return visitedLeftSum;
+            default:
+                return visitedId;
+        }
     }
 
     /**
      * Traverse the tree in Depth-First-Search InOrder or PreOrder or PostOrder pattern and returns th
      * array of values in the same order
      */
-    DFS(pattern ?: 'in' | 'pre' | 'post', resultType ?: ResultType): T[] | BinarySearchTreeNode<T> [] | number[] {
+    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyType ?: NodeOrPropertyType): Array<T | undefined> | BinarySearchTreeNode<T> [] | number[] {
         if (pattern === undefined) {
             pattern = 'in';
         }
-        if (resultType === undefined) {
-            resultType = 'value';
+        if (nodeOrPropertyType === undefined) {
+            nodeOrPropertyType = 'id';
         }
-        let visited;
-        switch (resultType) {
-            case 'value':
-                visited = new Array<T>();
-                break;
-            case 'node':
-                visited = new Array<BinarySearchTreeNode<T>>();
-                break;
-            case 'count':
-                visited = new Array<number>();
-                break;
-            case 'leftSum':
-                visited = new Array<number>();
-                break;
-        }
+        let visitedId: number[] = [],
+            visitedVal: Array<T | undefined> = [],
+            visitedNode: BinarySearchTreeNode<T>[] = [],
+            visitedCount: number[] = [],
+            visitedLeftSum: number[] = [];
 
         function pushByValueType(node: BinarySearchTreeNode<T>) {
-            switch (resultType) {
-                case 'value':
-                    visited.push(node.value);
+            switch (nodeOrPropertyType) {
+                case 'id':
+                    visitedId.push(node.id);
+                    break;
+                case 'val':
+                    visitedVal.push(node.val);
                     break;
                 case 'node':
-                    visited.push(node);
+                    visitedNode.push(node);
                     break;
                 case 'count':
-                    visited.push(node.count);
+                    visitedCount.push(node.count);
                     break;
                 case 'leftSum':
-                    visited.push(node.leftSum);
+                    visitedLeftSum.push(node.leftSum);
+                    break;
+                default:
+                    visitedId.push(node.id);
                     break;
             }
         }
@@ -392,12 +408,25 @@ export class BinarySearchTree<T> {
         }
 
         this._root && _traverse(this._root);
-        return visited;
+        switch (nodeOrPropertyType) {
+            case 'id':
+                return visitedId;
+            case 'val':
+                return visitedVal;
+            case 'node':
+                return visitedNode;
+            case 'count':
+                return visitedCount;
+            case 'leftSum':
+                return visitedLeftSum;
+            default:
+                return visitedId;
+        }
     }
 
-    getNode(value: T | number, valueType ?: ResultTypeOmitNode, onlyOne ?: boolean): BinarySearchTreeNode<T> | BinarySearchTreeNode<T> [] | undefined {
-        if (valueType === undefined) {
-            valueType = 'value';
+    getNode(nodeProperty: T | number, propertyType ?: PropertyType, onlyOne ?: boolean): BinarySearchTreeNode<T> | BinarySearchTreeNode<T> [] | undefined {
+        if (propertyType === undefined) {
+            propertyType = 'id';
         }
 
         if (onlyOne === undefined) {
@@ -407,21 +436,27 @@ export class BinarySearchTree<T> {
         const result: BinarySearchTreeNode<T>[] = [];
 
         function _traverse(cur: BinarySearchTreeNode<T>) {
-            switch (valueType) {
-                case 'value':
-                    if (cur.value === value) {
+            switch (propertyType) {
+                case 'id':
+                    if (cur.id === nodeProperty) {
                         result.push(cur);
                         if (onlyOne) return;
                     }
                     break;
                 case 'count':
-                    if (cur.count === value) {
+                    if (cur.count === nodeProperty) {
                         result.push(cur);
                         if (onlyOne) return;
                     }
                     break;
                 case 'leftSum':
-                    if (cur.leftSum === value) {
+                    if (cur.leftSum === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                default:
+                    if (cur.id === nodeProperty) {
                         result.push(cur);
                         if (onlyOne) return;
                     }
@@ -429,32 +464,35 @@ export class BinarySearchTree<T> {
             }
 
             if (!cur.left && !cur.right) return undefined;
-            if (value < cur.value) {
+            if (propertyType === 'id') {
+                if (nodeProperty < cur.id) {
+                    cur.left ? _traverse(cur.left) : undefined;
+                }
+                if (nodeProperty > cur.id) {
+                    cur.right ? _traverse(cur.right) : undefined;
+                }
+            } else {
                 cur.left ? _traverse(cur.left) : undefined;
-            }
-            if (value > cur.value) {
                 cur.right ? _traverse(cur.right) : undefined;
             }
+
         }
 
         this._root && _traverse(this._root);
         return onlyOne ? result[0] : result;
     }
 
-    sumLeftOrRight(node: BinarySearchTreeNode<T>, leftOrRight ?: 'left' | 'right', resultType ?: ResultTypeOmitNode): number {
-        if (leftOrRight === undefined) {
-            leftOrRight = 'left';
-        }
-        if (resultType === undefined) {
-            resultType = 'value'
+    subTreeSum(subTreeRoot: BinarySearchTreeNode<T>, propertyType ?: PropertyType): number {
+        if (propertyType === undefined) {
+            propertyType = 'id'
         }
         let sum = 0;
 
         function _traverse(cur: BinarySearchTreeNode<T>): void {
             let needSum: number;
-            switch (resultType) {
-                case 'value':
-                    needSum = cur.value as unknown as number;
+            switch (propertyType) {
+                case 'id':
+                    needSum = cur.id;
                     break;
                 case 'count':
                     needSum = cur.count;
@@ -463,39 +501,30 @@ export class BinarySearchTree<T> {
                     needSum = cur.leftSum;
                     break;
                 default:
-                    needSum = cur.value as unknown as number;
+                    needSum = cur.id;
                     break;
             }
             sum += needSum;
-            if (!cur.left && !cur.right) return
+            if (!cur.left && !cur.right) return;
             cur.left && _traverse(cur.left);
             cur.right && _traverse(cur.right);
         }
 
-        if (node) {
-            switch (leftOrRight) {
-                case 'left':
-                    node.left && _traverse(node.left);
-                    break;
-                case 'right':
-                    node.right && _traverse(node.right);
-                    break;
-            }
-        }
+        subTreeRoot && _traverse(subTreeRoot);
 
         return sum;
     }
 
-    prefixSum(target: number, resultType ?: ResultTypeOmitNode): number {
-        if (resultType === undefined) {
-            resultType = 'value'
+    prefixSum(id: number, propertyType ?: PropertyType): number {
+        if (propertyType === undefined) {
+            propertyType = 'id'
         }
         let sum = 0;
         const _traverse = (cur: BinarySearchTreeNode<T>): void => {
             let needSum: number;
-            switch (resultType) {
-                case 'value':
-                    needSum = cur.value as unknown as number;
+            switch (propertyType) {
+                case 'id':
+                    needSum = cur.id;
                     break;
                 case 'count':
                     needSum = cur.count;
@@ -504,18 +533,22 @@ export class BinarySearchTree<T> {
                     needSum = cur.leftSum;
                     break;
                 default:
-                    needSum = cur.value as unknown as number;
+                    needSum = cur.id;
                     break;
             }
-            const curValue = cur.value as unknown as number;
+            const curId = cur.id;
 
-            if (target === curValue) {
-                sum += this.sumLeftOrRight(cur, 'left', resultType);
+            if (id === curId) {
+                if (cur.right) {
+                    sum += this.subTreeSum(cur.right, propertyType);
+                }
                 return;
             }
 
-            if (target > curValue) {
-                sum += this.sumLeftOrRight(cur, 'left', resultType);
+            if (id > curId) {
+                if (cur.left) {
+                    sum += this.subTreeSum(cur.left, propertyType);
+                }
                 sum += needSum;
                 if (cur.right) {
                     _traverse(cur.right);
@@ -524,7 +557,7 @@ export class BinarySearchTree<T> {
                 }
             }
 
-            if (target < curValue) {
+            if (id < curId) {
                 if (cur.left) {
                     _traverse(cur.left);
                 } else {
@@ -537,16 +570,15 @@ export class BinarySearchTree<T> {
         return sum;
     }
 
-    allRightChildrenAdd(node: BinarySearchTreeNode<T>, delta: number, resultType ?: ResultTypeOmitNode): boolean {
-        if (resultType === undefined) {
-            resultType = 'value';
+    subTreeAdd(subTreeRoot: BinarySearchTreeNode<T>, delta: number, propertyType ?: PropertyType): boolean {
+        if (propertyType === undefined) {
+            propertyType = 'id';
         }
 
         function _traverse(cur: BinarySearchTreeNode<T>) {
-            switch (resultType) {
-                case 'value':
-                    // @ts-ignore
-                    cur.value += delta;
+            switch (propertyType) {
+                case 'id':
+                    cur.id += delta;
                     break;
                 case 'count':
                     cur.count += delta;
@@ -555,8 +587,7 @@ export class BinarySearchTree<T> {
                     cur.leftSum += delta;
                     break;
                 default:
-                    // @ts-ignore
-                    cur.value += delta;
+                    cur.id += delta;
                     break;
             }
             if (!cur.left && !cur.right) return;
@@ -564,24 +595,23 @@ export class BinarySearchTree<T> {
             cur.right && _traverse(cur.right);
         }
 
-        if (node.right) {
-            _traverse(node.right);
+        if (subTreeRoot) {
+            _traverse(subTreeRoot);
             return true;
         }
         return false
     }
 
-    allGreaterNodesAdd(node: BinarySearchTreeNode<T>, delta: number, resultType ?: ResultTypeOmitNode): boolean {
-        if (resultType === undefined) {
-            resultType = 'value';
+    allGreaterNodesAdd(node: BinarySearchTreeNode<T>, delta: number, propertyType ?: PropertyType): boolean {
+        if (propertyType === undefined) {
+            propertyType = 'id';
         }
 
         const _traverse = (cur: BinarySearchTreeNode<T>) => {
-            if (cur.value > node.value) {
-                switch (resultType) {
-                    case 'value':
-                        // @ts-ignore
-                        cur.value += delta;
+            if (cur.id > node.id) {
+                switch (propertyType) {
+                    case 'id':
+                        cur.id += delta;
                         break;
                     case 'count':
                         cur.count += delta;
@@ -591,14 +621,13 @@ export class BinarySearchTree<T> {
                         cur.leftSum += delta;
                         break;
                     default:
-                        // @ts-ignore
-                        cur.value += delta;
+                        cur.id += delta;
                         break;
                 }
             }
 
             if (!cur.left && !cur.right) return;
-            (cur.left && cur.value > node.value ) && _traverse(cur.left);
+            (cur.left && cur.id > node.id) && _traverse(cur.left);
             cur.right && _traverse(cur.right);
         }
 

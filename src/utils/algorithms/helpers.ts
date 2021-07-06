@@ -107,6 +107,7 @@ export const runAlgorithm = async (algorithm: Function, isStringify: boolean = f
     const result = await algorithm(...args);
     const timeSpent = new Date().getTime() - startTime;
     bunnyConsole.log(algorithm.name, 'result -> ', isStringify ? JSON.stringify(result) : result, 'time spent -> ', timeSpent + 'ms');
+    return result;
 }
 
 export const isOneDiffOrdered = (wordA: string, wordB: string) => {

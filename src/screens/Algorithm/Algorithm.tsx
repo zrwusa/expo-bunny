@@ -141,7 +141,7 @@ export function AlgorithmScreen() {
 
     const [genBSTVariables, setGenBSTVariables] = useState<{ [key in string]: unknown }>()
     const _genBST = async () => {
-        const result = await genBST(deleteNodeGenTree,
+        const result = await genBST(...deleteNodeGenTree,
             ({value, key, DEFAULT}) => {
                 // console.log(key, value);
                 setGenBSTVariables(prevState => ({...prevState, [key!.toString()]: value}));

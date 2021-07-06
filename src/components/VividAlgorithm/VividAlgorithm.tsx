@@ -294,9 +294,9 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             offsetY = (level - 1) * levelOffset + circleR + strokeWidth;
         }
 
-        const isActive = node.value === relatedBinaryNode?.value;
+        const isActive = node.id === relatedBinaryNode?.id;
         return (
-            <G key={node.value}>
+            <G key={node.id}>
                 {
                     level > 1
                         ? <Line x1={parentX} y1={parentY} x2={offsetX} y2={offsetY}/>
@@ -329,7 +329,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     y={offsetY + fontOffsetY}
                     textAnchor="middle"
                 >
-                    <TSpan x={offsetX} y={offsetY + fontOffsetY}>{node.value}</TSpan>
+                    <TSpan x={offsetX} y={offsetY + fontOffsetY}>{node.id}</TSpan>
                     <TSpan x={offsetX} y={offsetY + fontOffsetY + fontSize + wp(2)}>{node.count}</TSpan>
                     {
                         node instanceof BinarySearchTreeNode
@@ -397,8 +397,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const VividBinaryTreeNode: React.FC<{ data: BinaryTreeNode<any> }> = ({data}) => {
         return (
             <Row>
-                <View style={styles.arrayItem} key={data.value}>
-                    <Text>{data.value}</Text>
+                <View style={styles.arrayItem} key={data.id}>
+                    <Text>{data.id}</Text>
                 </View>
             </Row>
         )
@@ -407,8 +407,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const VividBinarySearchTreeNode: React.FC<{ data: BinarySearchTreeNode<any> }> = ({data}) => {
         return (
             <Row>
-                <View style={styles.arrayItem} key={data.value}>
-                    <Text>{data.value}</Text>
+                <View style={styles.arrayItem} key={data.id}>
+                    <Text>{data.id}</Text>
                 </View>
             </Row>
         )
