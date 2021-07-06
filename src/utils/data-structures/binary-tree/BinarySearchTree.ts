@@ -121,13 +121,13 @@ export class BinarySearchTree<T> {
             let traversing = true;
             while (traversing) {
                 if (cur.value === newValue) {
-                    this._autoPrefixSum && this.allRightNodesAdd(cur, 1, 'leftSum');
+                    this._autoPrefixSum && this.allRightChildrenAdd(cur, 1, 'leftSum');
                     cur.count++;
                     //Duplicates are not accepted.
                     traversing = false;
                     return cur;
                 } else if (newValue < cur.value) {
-                    this._autoPrefixSum && this.allRightNodesAdd(cur, 1, 'leftSum');
+                    this._autoPrefixSum && this.allRightChildrenAdd(cur, 1, 'leftSum');
                     this._autoPrefixSum && cur.leftSum++;
                     // Traverse left of the node
                     if (cur.left === undefined) {
@@ -164,9 +164,13 @@ export class BinarySearchTree<T> {
         return undefined
     }
 
-    deleteNode(root: BinarySearchTreeNode<T> | null, key: number): BinarySearchTreeNode<T> | null {
+    deleteNode(root: BinarySearchTreeNode<T> | null, key: number, isUpdateAllLeftSum?: boolean): BinarySearchTreeNode<T> | null {
+        if (isUpdateAllLeftSum === undefined) {
+            isUpdateAllLeftSum = true;
+        }
         let cur: BinarySearchTreeNode<T> | undefined = this.getNode(key, 'value', true) as BinarySearchTreeNode<T>;
         if (!cur) return null;
+        this._autoPrefixSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(cur, -cur.count, 'leftSum');
         if (!cur.left && !cur.right) {
             if (cur.parent) {
                 if (cur.isLeftChild === true) {
@@ -222,7 +226,7 @@ export class BinarySearchTree<T> {
             }
         } else if (cur.left && cur.right) {
             const minNode = this.getMinNode(cur.right);
-            this.deleteNode(cur, minNode!.value);
+            this.deleteNode(cur, minNode!.value, false);
             if (cur.left) {
                 minNode!.left = cur.left;
                 cur.left.parent = minNode;
@@ -533,7 +537,7 @@ export class BinarySearchTree<T> {
         return sum;
     }
 
-    allRightNodesAdd(node: BinarySearchTreeNode<T>, delta: number, resultType ?: ResultTypeOmitNode): boolean {
+    allRightChildrenAdd(node: BinarySearchTreeNode<T>, delta: number, resultType ?: ResultTypeOmitNode): boolean {
         if (resultType === undefined) {
             resultType = 'value';
         }
@@ -560,8 +564,49 @@ export class BinarySearchTree<T> {
             cur.right && _traverse(cur.right);
         }
 
-        node.right && _traverse(node.right);
-        return true
+        if (node.right) {
+            _traverse(node.right);
+            return true;
+        }
+        return false
+    }
+
+    allGreaterNodesAdd(node: BinarySearchTreeNode<T>, delta: number, resultType ?: ResultTypeOmitNode): boolean {
+        if (resultType === undefined) {
+            resultType = 'value';
+        }
+
+        const _traverse = (cur: BinarySearchTreeNode<T>) => {
+            if (cur.value > node.value) {
+                switch (resultType) {
+                    case 'value':
+                        // @ts-ignore
+                        cur.value += delta;
+                        break;
+                    case 'count':
+                        cur.count += delta;
+                        this._autoPrefixSum && this.allGreaterNodesAdd(cur, delta, 'leftSum');
+                        break;
+                    case 'leftSum':
+                        cur.leftSum += delta;
+                        break;
+                    default:
+                        // @ts-ignore
+                        cur.value += delta;
+                        break;
+                }
+            }
+
+            if (!cur.left && !cur.right) return;
+            (cur.left && cur.value > node.value ) && _traverse(cur.left);
+            cur.right && _traverse(cur.right);
+        }
+
+        if (this._root) {
+            _traverse(this._root);
+            return true;
+        }
+        return false
     }
 
     // TODO need to be optimized, it is O(n)
