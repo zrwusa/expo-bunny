@@ -1,7 +1,6 @@
 type PropertyType = 'id' | 'val' | 'count' | 'allLesserSum';
 type NodeOrPropertyType = 'node' | PropertyType;
 
-// Node for class for BinaryTree
 export class BinarySearchTreeNode<T> {
     private _id: number;
     public get id(): number {
@@ -101,6 +100,56 @@ export class BinarySearchTree<T> {
 
     private readonly _autoAllLesserSum: boolean = false;
 
+    private _replaceWithASubTree(node1: BinarySearchTreeNode<T>, node2: BinarySearchTreeNode<T> | null) {
+        if (node1 && !node2) {
+            if (node1.parent) {
+                if (node1.isLeftChild === true) {
+                    node1.parent.left = null;
+                    return null;
+                } else if (node1.isLeftChild === false) {
+                    node1.parent.right = null;
+                    return null;
+                }
+            } else {
+                this._root = null
+                return null;
+            }
+        } else if (node1 && node2) {
+            if (node1.parent) {
+                const _isLeftChild = node1.isLeftChild;
+                if (_isLeftChild === true) {
+                    node2.isLeftChild = _isLeftChild;
+                    node2.parent = node1.parent;
+                    node1.parent.left = node2;
+                    return null;
+                } else if (_isLeftChild === false) {
+                    node2.isLeftChild = _isLeftChild;
+                    node2.parent = node1.parent;
+                    node1.parent.right = node2;
+                    return null;
+                }
+            } else {
+                node2.isLeftChild = null;
+                node2.parent = null;
+                this._root = node2;
+                return null;
+            }
+        }
+    }
+
+    private _swap(node1: BinarySearchTreeNode<T>, node2: BinarySearchTreeNode<T>) {
+        if (node1.left) {
+            node2.left = node1.left;
+            node1.left.parent = node2;
+        }
+
+        if (node1.right) {
+            node2.right = node1.right;
+            node1.right.parent = node2;
+        }
+        this._replaceWithASubTree(node1, node2);
+    }
+
     constructor(root?: BinarySearchTreeNode<T> | number, val?: T, autoPrefixSum?: boolean) {
         if (!root) {
             this._root = null;
@@ -119,11 +168,6 @@ export class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Adds a new BinarySearchTreeNode to BST.
-     * @param id Id of the Tree node to be added to BST
-     * @param val Value
-     */
     insertNode(id: number, val?: T): BinarySearchTreeNode<T> | null {
         const newNode = new BinarySearchTreeNode<T>(id, val);
         const newValue = newNode.id;
@@ -178,56 +222,6 @@ export class BinarySearchTree<T> {
         return null
     }
 
-    replace(node1: BinarySearchTreeNode<T>, node2: BinarySearchTreeNode<T> | null) {
-        if (node1 && !node2) {
-            if (node1.parent) {
-                if (node1.isLeftChild === true) {
-                    node1.parent.left = null;
-                    return null;
-                } else if (node1.isLeftChild === false) {
-                    node1.parent.right = null;
-                    return null;
-                }
-            } else {
-                this._root = null
-                return null;
-            }
-        } else if (node1 && node2) {
-            if (node1.parent) {
-                const _isLeftChild = node1.isLeftChild;
-                if (_isLeftChild === true) {
-                    node2.isLeftChild = _isLeftChild;
-                    node2.parent = node1.parent;
-                    node1.parent.left = node2;
-                    return null;
-                } else if (_isLeftChild === false) {
-                    node2.isLeftChild = _isLeftChild;
-                    node2.parent = node1.parent;
-                    node1.parent.right = node2;
-                    return null;
-                }
-            } else {
-                node2.isLeftChild = null;
-                node2.parent = null;
-                this._root = node2;
-                return null;
-            }
-        }
-    }
-
-    swap(node1: BinarySearchTreeNode<T>, node2: BinarySearchTreeNode<T>) {
-        if (node1.left) {
-            node2.left = node1.left;
-            node1.left.parent = node2;
-        }
-
-        if (node1.right) {
-            node2.right = node1.right;
-            node1.right.parent = node2;
-        }
-        this.replace(node1, node2);
-    }
-
     deleteNode(key: number, isUpdateAllLeftSum?: boolean): BinarySearchTreeNode<T> | null {
         if (isUpdateAllLeftSum === undefined) {
             isUpdateAllLeftSum = true;
@@ -239,24 +233,16 @@ export class BinarySearchTree<T> {
         this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(cur, -cur.count, 'allLesserSum');
 
         if (!cur.left && !cur.right) {
-            // cur.replace(null);
-            this.replace(cur, null);
-            // if (!cur.parent) this._root = null;
+            this._replaceWithASubTree(cur, null);
         } else if (cur.left && !cur.right) {
-            // cur.replace(cur.left);
-            this.replace(cur, cur.left)
-            // if (!cur.parent) this._root = cur.left;
-        } else if (cur.right && !cur.left) {
-            // cur.replace(cur.right);
-            this.replace(cur, cur.right);
-            // if (!cur.parent) this._root = cur.right;
+            this._replaceWithASubTree(cur, cur.left)
+        } else if (!cur.left && cur.right) {
+            this._replaceWithASubTree(cur, cur.right);
         } else if (cur.left && cur.right) {
             const minNode = this.getMinNode(cur.right);
             if (minNode) {
                 this.deleteNode(minNode.id, false);
-                // cur.swap(minNode);
-                this.swap(cur, minNode);
-                // if (!cur.parent) this._root = minNode;
+                this._swap(cur, minNode);
             }
         }
 
@@ -276,9 +262,6 @@ export class BinarySearchTree<T> {
         return node ? _traverse(node) : null;
     }
 
-    /**
-     * Traverse the tree in Breath-First-Search pattern and returns th array of values in BFS order
-     */
     BFS(nodeOrPropertyType ?: NodeOrPropertyType): Array<T | null> | BinarySearchTreeNode<T> [] | number[] {
         if (nodeOrPropertyType === undefined) {
             nodeOrPropertyType = 'id';
@@ -338,10 +321,6 @@ export class BinarySearchTree<T> {
         }
     }
 
-    /**
-     * Traverse the tree in Depth-First-Search InOrder or PreOrder or PostOrder pattern and returns th
-     * array of values in the same order
-     */
     DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyType ?: NodeOrPropertyType): Array<T | null> | BinarySearchTreeNode<T> [] | number[] {
         if (pattern === undefined) {
             pattern = 'in';
