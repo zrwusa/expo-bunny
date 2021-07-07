@@ -1,17 +1,66 @@
-import {BinarySearchTree} from "../../data-structures/binary-tree";
+import {BinarySearchTree, BinarySearchTreeNode} from "../../data-structures/binary-tree";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 import {testBSTCase1} from "./cases";
 import {runAlgorithm} from "../helpers";
 import {wait} from "../../utils";
 /* --- start BST --- */
-//98	Validate Binary Search Tree	★★	530					inorder
-// 700	Search in a Binary Search Tree	★★	701					binary search
-// 230	Kth Smallest Element in a BST	★★★						inorder
+//98	Validate Binary Search Tree	★★	530					DFS/inorder
+// 700	Search in a Binary Search Tree	★★	701				binary search
+// 230	Kth Smallest Element in a BST	★★★					inorder
+function kthSmallest(root: BinarySearchTreeNode<number> | null, k: number): number {
+    let rank = 0, target = 0;
+    const dfsInOrder = (cur: BinarySearchTreeNode<number>) => {
+        cur.left && dfsInOrder(cur.left);
+        if (++rank === k) {
+            target = cur.id;
+            return;
+        }
+        cur.right && dfsInOrder(cur.right);
+        if (!cur.left && !cur.right) return;
+    }
+    root && dfsInOrder(root);
+    return target;
+}
 // 99	Recover Binary Search Tree	★★★						inorder
-// 108
-// Convert Sorted Array to Binary Search Tree
-// ★★★						build BST
+// 108  Convert Sorted Array to Binary Search Tree ★★★				build BST
+function sortedArrayToBST(nums: number[]): BinarySearchTreeNode<number> | null {
+    const buildTree = (l: number, r: number) => {
+        if (l > r) return null;
+        const m = l + Math.floor((r - l) / 2);
+        const root = new BinarySearchTreeNode<number>(nums[m]);
+        const left = buildTree(l, m - 1);
+        const right = buildTree(m + 1, r);
+        root.left = left;
+        root.right = right;
+        return root;
+    }
+
+    return buildTree(0, nums.length - 1);
+}
 // 501	Find Mode in Binary Search Tree	★★★						inorder
+function findMode(root: BinarySearchTreeNode<number> | null): number[] {
+    if (!root) return [];
+    const map: {[key in string]: number} = {};
+    let max: number = 0;
+    const dfsInOrder = (cur:  BinarySearchTreeNode<number>) => {
+        cur.left && dfsInOrder(cur.left);
+
+        map[cur.id] ? map[cur.id]++ : map[cur.id] = 1;
+
+        max = Math.max(max, map[cur.id]);
+
+        cur.right && dfsInOrder(cur.right);
+        if (!cur.left && !cur.right) return;
+    }
+    root && dfsInOrder(root);
+    const ans: number[] = [];
+    for (let i in map) {
+        if (map[i] === max) {
+            ans.push(Number.parseInt(i, 10));
+        }
+    }
+    return ans;
+}
 // 450	Delete Node in a BST	★★★★						binary search
 
 
@@ -19,7 +68,7 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     const arrCopy = [...arr];
     const rest = arrCopy.splice(1);
     const waitingMS = 300;
-    const proxyVariables: { bst: BinarySearchTree<number> } = new DeepProxy({bst: new BinarySearchTree<number>(arrCopy[0], arrCopy[0],true)}, proxyHandler);
+    const proxyVariables: { bst: BinarySearchTree<number> } = new DeepProxy({bst: new BinarySearchTree<number>(arrCopy[0], arrCopy[0], true)}, proxyHandler);
     for (let i of rest) {
         proxyVariables.bst.insertNode(i, i);
         await wait(waitingMS);
