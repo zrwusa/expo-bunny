@@ -1,3 +1,8 @@
+import {BinarySearchTree} from "../../data-structures/binary-tree";
+import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
+import {testBSTCase1} from "./cases";
+import {runAlgorithm} from "../helpers";
+import {wait} from "../../utils";
 /* --- start BST --- */
 //98	Validate Binary Search Tree	★★	530					inorder
 // 700	Search in a Binary Search Tree	★★	701					binary search
@@ -8,16 +13,12 @@
 // ★★★						build BST
 // 501	Find Mode in Binary Search Tree	★★★						inorder
 // 450	Delete Node in a BST	★★★★						binary search
-import {BinarySearchTree, BinarySearchTreeNode} from "../../data-structures/binary-tree";
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
-import {testBSTCase1} from "./cases";
-import {runAlgorithm} from "../helpers";
-import {wait} from "../../utils";
+
 
 export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     const arrCopy = [...arr];
     const rest = arrCopy.splice(1);
-    const waitingMS = 100;
+    const waitingMS = 300;
     const proxyVariables: { bst: BinarySearchTree<number> } = new DeepProxy({bst: new BinarySearchTree<number>(arrCopy[0], arrCopy[0],true)}, proxyHandler);
     for (let i of rest) {
         proxyVariables.bst.insertNode(i, i);
@@ -85,14 +86,13 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     proxyVariables.bst.deleteNode(9);
     await wait(waitingMS);
     proxyVariables.bst.deleteNode(14);
-
+    await wait(waitingMS);
 
     await wait(waitingMS);
     console.log(proxyVariables.bst.BFS());
 
     await wait(waitingMS);
     console.log(proxyVariables.bst.BFS('count'));
-
 
     return proxyVariables.bst;
 }

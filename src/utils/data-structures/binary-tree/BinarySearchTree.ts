@@ -168,6 +168,18 @@ export class BinarySearchTree<T> {
         }
     }
 
+    isValid(): boolean {
+        if (!this._root) return true;
+
+        function dfs(cur: BinarySearchTreeNode<T> | null, min: number, max: number): boolean {
+            if (!cur) return true;
+            if ((cur.id <= min) || (cur.id >= max)) return false;
+            return dfs(cur.left, min, cur.id) && dfs(cur.right, cur.id, max);
+        }
+
+        return dfs(this._root!, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+    }
+
     insertNode(id: number, val?: T): BinarySearchTreeNode<T> | null {
         const newNode = new BinarySearchTreeNode<T>(id, val);
         const newValue = newNode.id;
