@@ -14,10 +14,6 @@ import {testBSTCase1} from "./cases";
 import {runAlgorithm} from "../helpers";
 import {wait} from "../../utils";
 
-function deleteNode(root: BinarySearchTreeNode<number> | null, key: number): BinarySearchTreeNode<number> | null {
-    return null;
-}
-
 export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     const arrCopy = [...arr];
     const rest = arrCopy.splice(1);
@@ -64,7 +60,7 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     console.log('allGreaterNodesAdd', allGreaterNodesAdd);
 
     await wait(waitingMS);
-    proxyVariables.bst.deleteNode(5);
+    proxyVariables.bst.deleteNode(11);
     await wait(waitingMS);
     proxyVariables.bst.deleteNode(1);
     await wait(waitingMS);
@@ -74,7 +70,7 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     await wait(waitingMS);
     proxyVariables.bst.deleteNode(15);
     await wait(waitingMS);
-    proxyVariables.bst.deleteNode(11);
+    proxyVariables.bst.deleteNode(5);
     await wait(waitingMS);
     proxyVariables.bst.deleteNode(13);
     await wait(waitingMS);
@@ -90,11 +86,14 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     await wait(waitingMS);
     proxyVariables.bst.deleteNode(14);
 
+
     await wait(waitingMS);
     console.log(proxyVariables.bst.BFS());
 
     await wait(waitingMS);
     console.log(proxyVariables.bst.BFS('count'));
+
+
     return proxyVariables.bst;
 }
 

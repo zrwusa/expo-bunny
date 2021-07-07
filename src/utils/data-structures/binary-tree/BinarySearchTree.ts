@@ -85,6 +85,8 @@ export class BinarySearchTreeNode<T> {
         this._parent = null;
         this._isLeftChild = null;
     }
+
+
 }
 
 export class BinarySearchTree<T> {
@@ -176,99 +178,86 @@ export class BinarySearchTree<T> {
         return null
     }
 
+    replace(node1: BinarySearchTreeNode<T>, node2: BinarySearchTreeNode<T> | null) {
+        if (node1 && !node2) {
+            if (node1.parent) {
+                if (node1.isLeftChild === true) {
+                    node1.parent.left = null;
+                    return null;
+                } else if (node1.isLeftChild === false) {
+                    node1.parent.right = null;
+                    return null;
+                }
+            } else {
+                this._root = null
+                return null;
+            }
+        } else if (node1 && node2) {
+            if (node1.parent) {
+                const _isLeftChild = node1.isLeftChild;
+                if (_isLeftChild === true) {
+                    node2.isLeftChild = _isLeftChild;
+                    node2.parent = node1.parent;
+                    node1.parent.left = node2;
+                    return null;
+                } else if (_isLeftChild === false) {
+                    node2.isLeftChild = _isLeftChild;
+                    node2.parent = node1.parent;
+                    node1.parent.right = node2;
+                    return null;
+                }
+            } else {
+                node2.isLeftChild = null;
+                node2.parent = null;
+                this._root = node2;
+                return null;
+            }
+        }
+    }
+
+    swap(node1: BinarySearchTreeNode<T>, node2: BinarySearchTreeNode<T>) {
+        if (node1.left) {
+            node2.left = node1.left;
+            node1.left.parent = node2;
+        }
+
+        if (node1.right) {
+            node2.right = node1.right;
+            node1.right.parent = node2;
+        }
+        this.replace(node1, node2);
+    }
+
     deleteNode(key: number, isUpdateAllLeftSum?: boolean): BinarySearchTreeNode<T> | null {
         if (isUpdateAllLeftSum === undefined) {
             isUpdateAllLeftSum = true;
         }
         let cur: BinarySearchTreeNode<T> | null = this.getNode(key, 'id');
+
         if (!cur) return null;
+
         this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(cur, -cur.count, 'allLesserSum');
+
         if (!cur.left && !cur.right) {
-            if (cur.parent) {
-                if (cur.isLeftChild === true) {
-                    cur.parent.left = null;
-                    return null;
-                } else if (cur.isLeftChild === false) {
-                    cur.parent.right = null;
-                    return null;
-                }
-            } else {
-                this._root = null;
-                return null;
-            }
+            // cur.replace(null);
+            this.replace(cur, null);
+            // if (!cur.parent) this._root = null;
         } else if (cur.left && !cur.right) {
-            if (cur.parent) {
-                const _isLeftChild = cur.isLeftChild;
-                if (_isLeftChild === true) {
-                    cur.left.isLeftChild = _isLeftChild;
-                    cur.left.parent = cur.parent;
-                    cur.parent.left = cur.left;
-                    return null;
-                } else if (cur.isLeftChild === false) {
-                    cur.left.isLeftChild = _isLeftChild;
-                    cur.left.parent = cur.parent;
-                    cur.parent.right = cur.left;
-                    return null;
-                }
-            } else {
-                cur.left.isLeftChild = null;
-                cur.left.parent = null;
-                this._root = cur.left;
-                return null;
-            }
+            // cur.replace(cur.left);
+            this.replace(cur, cur.left)
+            // if (!cur.parent) this._root = cur.left;
         } else if (cur.right && !cur.left) {
-            if (cur.parent) {
-                const _isLeftChild = cur.isLeftChild;
-                if (cur.isLeftChild === true) {
-                    cur.right.isLeftChild = _isLeftChild;
-                    cur.right.parent = cur.parent;
-                    cur.parent.left = cur.right;
-                    return null;
-                } else if (cur.isLeftChild === false) {
-                    cur.right.isLeftChild = _isLeftChild;
-                    cur.right.parent = cur.parent;
-                    cur.parent.right = cur.right;
-                    return null;
-                }
-            } else {
-                cur.right.isLeftChild = null;
-                cur.right.parent = null;
-                this._root = cur.right;
-                return null;
-            }
+            // cur.replace(cur.right);
+            this.replace(cur, cur.right);
+            // if (!cur.parent) this._root = cur.right;
         } else if (cur.left && cur.right) {
             const minNode = this.getMinNode(cur.right);
-            this.deleteNode(minNode!.id, false);
-            if (cur.left) {
-                minNode!.left = cur.left;
-                cur.left.parent = minNode;
+            if (minNode) {
+                this.deleteNode(minNode.id, false);
+                // cur.swap(minNode);
+                this.swap(cur, minNode);
+                // if (!cur.parent) this._root = minNode;
             }
-
-            if (cur.right) {
-                minNode!.right = cur.right;
-                cur.right.parent = minNode;
-            }
-
-            if (cur.parent) {
-                const _isLeftChild = cur.isLeftChild;
-                if (cur.isLeftChild === true) {
-                    minNode!.isLeftChild = _isLeftChild;
-                    minNode!.parent = cur.parent;
-                    cur.parent!.left = minNode;
-                    return null;
-                } else if (cur.isLeftChild === false) {
-                    minNode!.isLeftChild = _isLeftChild;
-                    minNode!.parent = cur.parent;
-                    cur.parent!.right = minNode;
-                    return null;
-                }
-            } else {
-                minNode!.isLeftChild = null;
-                minNode!.parent = null;
-                this._root = minNode;
-                return null;
-            }
-
         }
 
         return null;
