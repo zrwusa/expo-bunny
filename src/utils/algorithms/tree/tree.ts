@@ -63,7 +63,7 @@ export async function binaryTreeInorderTraversal(root: BinaryTreeNode<number> | 
 
     return [
         ...leftResult,
-        root.value!,
+        root.id!,
         ...rightResult
     ]
 }

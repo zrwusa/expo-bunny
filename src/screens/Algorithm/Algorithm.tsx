@@ -10,8 +10,8 @@ import {
     countSmallerBST, countSmallerCase1, countSmallerCase6,
     countSmallerCase8,
     cutOffTree,
-    cutOffTreeCase8, deleteNodeGenTree,
-    DFS, genBST,
+    cutOffTreeCase8, testBSTCase1,
+    DFS, testBST,
     isValidParenthesis,
     ladderLengthCase1,
     ladderLengthDFS,
@@ -139,9 +139,9 @@ export function AlgorithmScreen() {
         )
     }
 
-    const [genBSTVariables, setGenBSTVariables] = useState<{ [key in string]: unknown }>()
-    const _genBST = async () => {
-        const result = await genBST(...deleteNodeGenTree,
+    const [testBSTVariables, setGenBSTVariables] = useState<{ [key in string]: unknown }>()
+    const _testBST = async () => {
+        const result = await testBST(...testBSTCase1,
             ({value, key, DEFAULT}) => {
                 // console.log(key, value);
                 setGenBSTVariables(prevState => ({...prevState, [key!.toString()]: value}));
@@ -199,8 +199,8 @@ export function AlgorithmScreen() {
                         <TextButton onPress={_countSmallerBST}>
                             <Text>Count Smaller BST</Text>
                         </TextButton>
-                        <TextButton onPress={_genBST}>
-                            <Text>Gen BST</Text>
+                        <TextButton onPress={_testBST}>
+                            <Text>Test BST</Text>
                         </TextButton>
                     </Card>
                     {
@@ -259,8 +259,8 @@ export function AlgorithmScreen() {
                             : null
                     }
                     {
-                        genBSTVariables
-                        ? <VividAlgorithm data={genBSTVariables} />
+                        testBSTVariables
+                        ? <VividAlgorithm data={testBSTVariables} />
                         : null
                     }
                 </View>

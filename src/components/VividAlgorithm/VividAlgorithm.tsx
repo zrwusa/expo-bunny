@@ -101,7 +101,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTree: React.FC<{ node?: BinaryTreeNode<any> | BinarySearchTreeNode<any>, maxDepth?: number }> = ({node, maxDepth}) => {
+    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | BinarySearchTreeNode<any> | null, maxDepth?: number }> = ({node, maxDepth}) => {
         return (
             <VividTreeContainer>
                 {
@@ -334,7 +334,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     {
                         node instanceof BinarySearchTreeNode
                             ? <TSpan x={offsetX}
-                                     y={offsetY + fontOffsetY + 2 * fontSize + wp(4)}>{node.leftSum}</TSpan>
+                                     y={offsetY + fontOffsetY + 2 * fontSize + wp(4)}>{node.allLesserSum}</TSpan>
                             : null
                     }
                 </SVGText>

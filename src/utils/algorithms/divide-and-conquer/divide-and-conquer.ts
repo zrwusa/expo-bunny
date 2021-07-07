@@ -180,19 +180,19 @@ const countSmallerBIT = function (nums: number[]): number[] {
 //  sorted case BST will give a time complexity O(n^2)
 export const countSmallerBST = async (nums: number[], proxyHandler: TProxyHandler) => {
     const rootIndex = nums.length - 1;
-    let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex], true)}, proxyHandler);
+    let proxyVariables = new DeepProxy<{ bst: BinarySearchTree<number> }>({bst: new BinarySearchTree<number>(nums[rootIndex], undefined,true)}, proxyHandler);
     // const bst: BinarySearchTree<number> = new BinarySearchTree<number>(nums[rootIndex]);
     let outputArr = new Array(nums.length).fill(0);
 
     for (let j = nums.length - 1; j > -1; j--) {
         if (j !== rootIndex) {
-            const node = proxyVariables.bst.insert(nums[j]);
+            const node = proxyVariables.bst.insertNode(nums[j]);
             // const node = bst.insert(nums[j]);
-            outputArr[j] = node?.leftSum;
+            outputArr[j] = node?.allLesserSum;
         }
 
         // outputArr[j] = proxyVariables.bst.getLessSum(nums[j], true);
-        // outputArr[j] = bst.prefixSum(nums[j], 'count');
+        // outputArr[j] = bst.lesserSum(nums[j], 'count');
     }
     return outputArr;
 };
