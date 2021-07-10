@@ -6,6 +6,21 @@ import {wait} from "../../utils";
 /* --- start BST --- */
 //98	Validate Binary Search Tree	★★	530					DFS/inorder
 // 700	Search in a Binary Search Tree	★★	701				binary search
+function searchBST(root: BinarySearchTreeNode<number> | null, id: number): BinarySearchTreeNode<number> | null {
+    let ans = null;
+    if (root === null) return ans;
+    const dfs = (cur: BinarySearchTreeNode<number>) => {
+        if (cur.id === id) {
+            ans = cur;
+        }
+        if (!cur.left && !cur.right) return;
+        if ((id < cur.id) && cur.left) dfs(cur.left);
+        if ((id > cur.id) && cur.right) dfs(cur.right);
+    }
+
+    dfs(root);
+    return ans;
+}
 // 230	Kth Smallest Element in a BST	★★★					inorder
 function kthSmallest(root: BinarySearchTreeNode<number> | null, k: number): number {
     let rank = 0, target = 0;
@@ -150,8 +165,6 @@ const runTestBST = async () => {
     await runAlgorithm(testBST, false, ...testBSTCase1);
 }
 
-runTestBST().then()
+// runTestBST().then()
 
 /* --- end BST --- */
-
-export {}

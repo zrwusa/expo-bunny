@@ -168,6 +168,7 @@ export class BinarySearchTree<T> {
         }
     }
 
+    // --- start base functions
     isValid(): boolean {
         if (!this._root) return true;
 
@@ -261,6 +262,9 @@ export class BinarySearchTree<T> {
         return null;
     }
 
+    // --- end base functions
+
+    // --- start additional functions
     getMinNode(node?: BinarySearchTreeNode<T> | null): BinarySearchTreeNode<T> | null {
         if (!node) {
             node = this._root;
@@ -649,4 +653,5 @@ export class BinarySearchTree<T> {
         bfs(beginRoot, 1);
         return maxDepth;
     }
+    // --- end additional functions
 }
