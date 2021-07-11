@@ -1,11 +1,12 @@
 import {runAlgorithm} from "../../algorithms";
 
-export class HeapBunnyNode<T extends string | number, U> {
-    private _id: T;
-    get id(): T {
+export class HeapBunnyNode<U> {
+    private _id: number;
+    get id(): number {
         return this._id
     }
-    set id(v: T) {
+
+    set id(v: number) {
         this._id = v;
     }
 
@@ -13,18 +14,19 @@ export class HeapBunnyNode<T extends string | number, U> {
     get val(): U | null {
         return this._val
     }
+
     set val(v: U | null) {
         this._val = v;
     }
 
-    constructor(id: T, val?: U) {
+    constructor(id: number, val?: U) {
         this._id = id;
         this._val = val || null;
     }
 }
 
-export abstract class HeapBunny<A extends number | string,B,C extends HeapBunnyNode<A, B>> {
-    protected readonly _nodes: (C | number)[];
+export abstract class HeapBunny<T extends number | HeapBunnyNode<U>, U> {
+    protected readonly _nodes: T[];
 
     abstract compare(parentIndex: number, childIndex: number): boolean;
 
@@ -74,7 +76,7 @@ export abstract class HeapBunny<A extends number | string,B,C extends HeapBunnyN
             : rightChildIndex;
     }
 
-    protected constructor(nodes?: HeapBunnyNode<A, B>[] | number[]) {
+    protected constructor(nodes?: T[]) {
         this._nodes = Array.isArray(nodes) ? nodes : [];
     }
 
@@ -127,18 +129,18 @@ export abstract class HeapBunny<A extends number | string,B,C extends HeapBunnyN
         }
     }
 
-    root(): HeapBunnyNode<A, B> | number | null {
+    root(): T | null {
         return this._nodes[0] || null;
     }
 
-    extractRoot(): HeapBunnyNode<A, B> | number | null {
+    extractRoot(): T | HeapBunnyNode<U> | null {
         this._swap(0, this._nodes.length - 1);
         const result = this._nodes.pop();
         this.heapifyDown(0);
         return result || null;
     }
 
-    push(node: HeapBunnyNode<A, B> | number): void {
+    push(node: T): void {
         this._nodes.push(node);
         this.heapifyUp(this._nodes.length - 1);
     }
@@ -156,8 +158,8 @@ export abstract class HeapBunny<A extends number | string,B,C extends HeapBunnyN
     }
 }
 
-export class MinHeapBunny<A extends number | string, B> extends HeapBunny<A,B,HeapBunnyNode<A,B>> {
-    constructor(nodes?: HeapBunnyNode<A, B>[] | number[]) {
+export class MinHeapBunny<T extends number | HeapBunnyNode<U>, U> extends HeapBunny<T, U> {
+    constructor(nodes?: T[]) {
         super(nodes);
     }
 
@@ -172,24 +174,8 @@ export class MinHeapBunny<A extends number | string, B> extends HeapBunny<A,B,He
     }
 }
 
-export class MaxHeapBunny<A extends number | string, B> extends HeapBunny<A,B,HeapBunnyNode<A,B>> {
-    constructor(nodes?: HeapBunnyNode<A, B>[] | number[]) {
-        super(nodes);
-    }
-
-    compare(parentIndex: number, childIndex: number): boolean {
-        const parentNode = this._nodes[parentIndex];
-        const childNode = this._nodes[childIndex];
-        if (typeof parentNode === 'number' || typeof childNode === 'number') {
-            return parentNode > childNode;
-        } else {
-            return parentNode.id > childNode.id;
-        }
-    }
-}
-
 const testHeap = () => {
-    const minHeap = new MinHeapBunny([5, 2, 3, 4, 6, 1]);
+    const minHeap = new MinHeapBunny<number, number>([5, 2, 3, 4, 6, 1]);
     minHeap.test();
     minHeap.fix();
     minHeap.test();
@@ -201,15 +187,31 @@ const testHeap = () => {
     minHeap.test();
 
 
-    const maxHeap = new MaxHeapBunny([5, 2, 3, 4, 6, 1]);
-    maxHeap.test();
-    maxHeap.fix();
-    maxHeap.test();
-    console.log(maxHeap.root());
-    maxHeap.extractRoot();
-    maxHeap.extractRoot();
-    maxHeap.extractRoot();
-    maxHeap.test();
+    // const maxHeap = new MaxHeapBunny([5, 2, 3, 4, 6, 1]);
+    // maxHeap.test();
+    // maxHeap.fix();
+    // maxHeap.test();
+    // console.log(maxHeap.root());
+    // maxHeap.extractRoot();
+    // maxHeap.extractRoot();
+    // maxHeap.extractRoot();
+    // maxHeap.test();
 }
+// export class MaxHeapBunny<T extends (number | HeapBunnyNode<T>)> extends HeapBunny<T> {
+//     constructor(nodes?: T[]) {
+//         super(nodes);
+//     }
+//
+//     compare(parentIndex: number, childIndex: number): boolean {
+//         const parentNode = this._nodes[parentIndex];
+//         const childNode = this._nodes[childIndex];
+//         if (typeof parentNode === 'number' || typeof childNode === 'number') {
+//             return parentNode > childNode;
+//         } else {
+//             return parentNode.id > childNode.id;
+//         }
+//     }
+// }
+
 
 runAlgorithm(testHeap, false).then()
