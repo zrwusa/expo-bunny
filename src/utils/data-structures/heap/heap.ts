@@ -21,7 +21,10 @@ export class HeapNode<U> {
         this._val = v;
     }
 
-    constructor(id: number | string, val?: U) {
+    constructor(id: number | string, val?: U | null) {
+        if (val === undefined) {
+            val = null
+        }
         this._id = id;
         this._val = val || null;
     }

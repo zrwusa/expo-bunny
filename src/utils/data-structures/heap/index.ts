@@ -1,1 +1,1 @@
-export * from "./heap-bunny"
+export * from "./heap"

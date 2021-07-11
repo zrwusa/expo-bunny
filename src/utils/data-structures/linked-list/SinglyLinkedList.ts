@@ -250,7 +250,7 @@ export class SinglyLinkedList<NodeData = any> {
      * ```ts
      * new LinkedList(1).append(2).append(3, 4); // 1 <=> 2 <=> 3 <=> 4
      * ```
-     * @param data Data to be stored in the node, takes any number of arguments
+     * @param args Data to be stored in the node, takes any number of arguments
      */
     public append(...args: NodeData[]): SinglyLinkedList<NodeData> {
         for (const data of args) {
@@ -272,7 +272,7 @@ export class SinglyLinkedList<NodeData = any> {
      * ```ts
      * new LinkedList(1).push(2).push(3, 4); // 1 <=> 2 <=> 3 <=> 4
      * ```
-     * @param data Data to be stored, takes any number of arguments
+     * @param args Data to be stored, takes any number of arguments
      */
     public push(...args: NodeData[]): number {
         this.append(...args);
@@ -285,7 +285,7 @@ export class SinglyLinkedList<NodeData = any> {
      * ```javascript
      * new LinkedList(3, 4).prepend(0, 1, 2); // [0, 1, 2, 3, 4]
      * ```
-     * @param data Data to be stored in the node, accepts any number of arguments
+     * @param args Data to be stored in the node, accepts any number of arguments
      */
     public prepend(...args: NodeData[]): SinglyLinkedList<NodeData> {
         const reverseArgs = Array.from(args).reverse();
