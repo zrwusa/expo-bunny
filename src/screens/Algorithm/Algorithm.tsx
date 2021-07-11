@@ -24,6 +24,7 @@ import {
 import {VividAlgorithm} from "../../components/VividAlgorithm";
 import {BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
+import {MinHeapBunny} from "../../utils/data-structures/heap/heap-bunny";
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -149,6 +150,8 @@ export function AlgorithmScreen() {
             }
         )
     }
+
+    const xxx = new MinHeapBunny([])
 
     return (
         <ScrollView>
