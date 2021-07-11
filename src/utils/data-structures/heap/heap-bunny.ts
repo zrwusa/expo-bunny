@@ -1,3 +1,5 @@
+// Online Algorithms use Heap (e.g. Top K problems)
+// Offline Algorithms use sort
 import {runAlgorithm} from "../../algorithms";
 
 export class HeapBunnyNode<U> {
@@ -27,6 +29,11 @@ export class HeapBunnyNode<U> {
 
 export abstract class HeapBunny<T extends number | HeapBunnyNode<any>> {
     protected readonly _nodes: T[];
+
+    protected constructor(nodes?: T[]) {
+        // TODO support distinct
+        this._nodes = Array.isArray(nodes) ? nodes : [];
+    }
 
     abstract compare(parentIndex: number, childIndex: number): boolean;
 
@@ -76,8 +83,38 @@ export abstract class HeapBunny<T extends number | HeapBunnyNode<any>> {
             : rightChildIndex;
     }
 
-    protected constructor(nodes?: T[]) {
-        this._nodes = Array.isArray(nodes) ? nodes : [];
+    heapifyUp(startingIndex: number): number {
+        let childIndex = startingIndex;
+        let parentIndex = Math.floor((childIndex - 1) / 2);
+        while (this._shouldSwap(parentIndex, childIndex)) {
+            this._swap(parentIndex, childIndex);
+            childIndex = parentIndex;
+            parentIndex = Math.floor((childIndex - 1) / 2);
+        }
+        return childIndex;
+    }
+
+    heapifyDown(startingIndex: number): number {
+        let parentIndex = startingIndex;
+        let childIndex = this._compareChildrenOf(parentIndex);
+        while (this._shouldSwap(parentIndex, childIndex)) {
+            this._swap(parentIndex, childIndex);
+            parentIndex = childIndex;
+            childIndex = this._compareChildrenOf(parentIndex);
+        }
+        return parentIndex;
+    }
+
+    poll(): T | null {
+        this._swap(0, this._nodes.length - 1);
+        const result = this._nodes.pop();
+        this.heapifyDown(0);
+        return result || null;
+    }
+
+    add(node: T): void {
+        this._nodes.push(node);
+        this.heapifyUp(this._nodes.length - 1);
     }
 
     isValid(): boolean {
@@ -104,47 +141,22 @@ export abstract class HeapBunny<T extends number | HeapBunnyNode<any>> {
     }
 
     fix() {
-        for (let i = this.size() / 2; i > -1; i--) {
+        for (let i = Math.floor(this.size() / 2); i > -1; i--) {
             this.heapifyDown(i);
         }
+        return this;
     }
 
-    heapifyUp(startingIndex: number): number {
-        let childIndex = startingIndex;
-        let parentIndex = Math.floor((childIndex - 1) / 2);
-        while (this._shouldSwap(parentIndex, childIndex)) {
-            this._swap(parentIndex, childIndex);
-            childIndex = parentIndex;
-            parentIndex = Math.floor((childIndex - 1) / 2);
-        }
-        return childIndex;
+    toArray(): T[] {
+        return this._nodes;
     }
 
-    heapifyDown(startingIndex: number): number {
-        let parentIndex = startingIndex;
-        let childIndex = this._compareChildrenOf(parentIndex);
-        while (this._shouldSwap(parentIndex, childIndex)) {
-            this._swap(parentIndex, childIndex);
-            parentIndex = childIndex;
-            childIndex = this._compareChildrenOf(parentIndex);
-        }
-        return parentIndex;
-    }
-
-    root(): T | null {
+    peek(): T | null {
         return this._nodes[0] || null;
     }
 
-    extractRoot(): T | null {
-        this._swap(0, this._nodes.length - 1);
-        const result = this._nodes.pop();
-        this.heapifyDown(0);
-        return result || null;
-    }
-
-    push(node: T): void {
-        this._nodes.push(node);
-        this.heapifyUp(this._nodes.length - 1);
+    leaf(): T | null {
+        return this._nodes[this.size() - 1] || null;
     }
 
     size(): number {
@@ -153,10 +165,6 @@ export abstract class HeapBunny<T extends number | HeapBunnyNode<any>> {
 
     isEmpty() {
         return this.size() === 0;
-    }
-
-    nodes(): T[] {
-        return this._nodes;
     }
 }
 
@@ -173,6 +181,11 @@ export class MinHeapBunny<T extends number | HeapBunnyNode<any>> extends HeapBun
         } else {
             return parentNode.id < childNode.id;
         }
+
+    }
+
+    static heapify<T extends number | HeapBunnyNode<any>>(nodes: T[]) {
+        return new MinHeapBunny(nodes).fix();
     }
 }
 
@@ -190,30 +203,35 @@ export class MaxHeapBunny<T extends number | HeapBunnyNode<any>> extends HeapBun
             return parentNode.id > childNode.id;
         }
     }
+
+    static heapify<T extends number | HeapBunnyNode<any>>(nodes: T[]) {
+        return new MaxHeapBunny(nodes).fix();
+    }
 }
 
 const testHeap = () => {
     const minHeap = new MinHeapBunny<number>([5, 2, 3, 4, 6, 1]);
-    console.log(minHeap.nodes());
+    console.log(minHeap.toArray());
     minHeap.fix();
-    console.log(minHeap.nodes());
-    console.log(minHeap.root());
-    minHeap.extractRoot();
-    minHeap.extractRoot();
-    minHeap.extractRoot();
-    console.log(minHeap.nodes());
+    console.log(minHeap.toArray());
+    console.log(minHeap.peek());
+    minHeap.poll();
+    minHeap.poll();
+    minHeap.poll();
+    console.log(minHeap.toArray());
+    console.log(MinHeapBunny.heapify([3,2,1,5,6,7,8,9,10]).toArray())
 
     // const maxHeap = new MaxHeapBunny<number>([5, 2, 3, 4, 6, 1]);
     const maxHeap = new MaxHeapBunny<HeapBunnyNode<number>>([new HeapBunnyNode(5,5), new HeapBunnyNode(2), new HeapBunnyNode(3), new HeapBunnyNode(4), new HeapBunnyNode('6', 6), new HeapBunnyNode(1)]);
-    console.log(maxHeap.nodes());
+    console.log(maxHeap.toArray());
     maxHeap.fix();
-    console.log(maxHeap.nodes());
-    console.log(maxHeap.root());
-    maxHeap.extractRoot();
-    maxHeap.extractRoot();
-    maxHeap.extractRoot();
-    console.log(maxHeap.nodes());
+    console.log(maxHeap.toArray());
+    console.log(maxHeap.peek());
+    maxHeap.poll();
+    maxHeap.poll();
+    maxHeap.poll();
+    console.log(maxHeap.toArray());
 }
 
 
-runAlgorithm(testHeap, false).then()
+// runAlgorithm(testHeap, false).then()
