@@ -5,7 +5,7 @@
 
 
 import {PriorityQueue} from "./priority-queue";
-import {MinHeap} from "../heap/min-heap";
+import {MinHeap} from "../heap";
 
 /**
  * @class MinPriorityQueue

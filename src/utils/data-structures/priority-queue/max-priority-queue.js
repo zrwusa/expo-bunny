@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-import {MaxHeap} from "../heap/max-heap";
+import {MaxHeap} from "../heap";
 
 const {PriorityQueue} = require('./priority-queue');
 

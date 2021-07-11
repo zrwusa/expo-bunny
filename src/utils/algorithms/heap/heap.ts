@@ -1,12 +1,12 @@
 /* --- start heap --- */
 // 215. Kth Largest Element in an Array ★★★★
 // O(nlogk)
+import {MinHeap} from "../../data-structures/heap";
 import {runAlgorithm} from "../helpers";
 import {findKthLargestCase1, findKthLargestCase2, findKthLargestCase3, findKthLargestCase9} from "./cases";
-import {MinHeapBunny} from "../../data-structures/heap";
 
 export function findKthLargestMinHeap(nums: number[], k: number): number {
-    const heap = new MinHeapBunny<number>([]);
+    const heap = new MinHeap<number>([]);
     for (let i of nums) {
         // if (heap.size() === k) {
         //     if (i > heap.peek()!) {
@@ -16,7 +16,6 @@ export function findKthLargestMinHeap(nums: number[], k: number): number {
         // } else {
         //     heap.add(i);
         // }
-        console.log(heap.toArray())
         if (heap.size() < k || i >= heap.peek()!) {
             heap.add(i);
         }
@@ -27,6 +26,18 @@ export function findKthLargestMinHeap(nums: number[], k: number): number {
     return heap!.peek()!;
 }
 
-runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase2).then();
+const runAllFindKthLargest = async () => {
+    await runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase1);
+    await runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase2);
+    await runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase3);
+    await runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase9);
+}
+
+// runAllFindKthLargest().then();
+
+
+
+//23. Merge k Sorted Lists
+
 
 /* --- end heap --- */

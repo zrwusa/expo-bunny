@@ -2,7 +2,7 @@
 // Offline Algorithms use sort
 import {runAlgorithm} from "../../algorithms";
 
-export class HeapBunnyNode<U> {
+export class HeapNode<U> {
     private _id: number | string;
     get id(): number | string {
         return this._id
@@ -27,7 +27,7 @@ export class HeapBunnyNode<U> {
     }
 }
 
-export abstract class HeapBunny<T extends number | HeapBunnyNode<any>> {
+export abstract class Heap<T extends number | HeapNode<any>> {
     protected readonly _nodes: T[];
 
     protected constructor(nodes?: T[]) {
@@ -168,7 +168,7 @@ export abstract class HeapBunny<T extends number | HeapBunnyNode<any>> {
     }
 }
 
-export class MinHeapBunny<T extends number | HeapBunnyNode<any>> extends HeapBunny<T> {
+export class MinHeap<T extends number | HeapNode<any>> extends Heap<T> {
     constructor(nodes?: T[]) {
         super(nodes);
     }
@@ -184,12 +184,12 @@ export class MinHeapBunny<T extends number | HeapBunnyNode<any>> extends HeapBun
 
     }
 
-    static heapify<T extends number | HeapBunnyNode<any>>(nodes: T[]) {
-        return new MinHeapBunny(nodes).fix();
+    static heapify<T extends number | HeapNode<any>>(nodes: T[]) {
+        return new MinHeap(nodes).fix();
     }
 }
 
-export class MaxHeapBunny<T extends number | HeapBunnyNode<any>> extends HeapBunny<T> {
+export class MaxHeap<T extends number | HeapNode<any>> extends Heap<T> {
     constructor(nodes?: T[]) {
         super(nodes);
     }
@@ -204,13 +204,13 @@ export class MaxHeapBunny<T extends number | HeapBunnyNode<any>> extends HeapBun
         }
     }
 
-    static heapify<T extends number | HeapBunnyNode<any>>(nodes: T[]) {
-        return new MaxHeapBunny(nodes).fix();
+    static heapify<T extends number | HeapNode<any>>(nodes: T[]) {
+        return new MaxHeap(nodes).fix();
     }
 }
 
 const testHeap = () => {
-    const minHeap = new MinHeapBunny<number>([5, 2, 3, 4, 6, 1]);
+    const minHeap = new MinHeap<number>([5, 2, 3, 4, 6, 1]);
     console.log(minHeap.toArray());
     minHeap.fix();
     console.log(minHeap.toArray());
@@ -219,10 +219,10 @@ const testHeap = () => {
     minHeap.poll();
     minHeap.poll();
     console.log(minHeap.toArray());
-    console.log(MinHeapBunny.heapify([3,2,1,5,6,7,8,9,10]).toArray())
+    console.log(MinHeap.heapify([3,2,1,5,6,7,8,9,10]).toArray())
 
-    // const maxHeap = new MaxHeapBunny<number>([5, 2, 3, 4, 6, 1]);
-    const maxHeap = new MaxHeapBunny<HeapBunnyNode<number>>([new HeapBunnyNode(5,5), new HeapBunnyNode(2), new HeapBunnyNode(3), new HeapBunnyNode(4), new HeapBunnyNode('6', 6), new HeapBunnyNode(1)]);
+    // const maxHeap = new MaxHeap<number>([5, 2, 3, 4, 6, 1]);
+    const maxHeap = new MaxHeap<HeapNode<number>>([new HeapNode(5,5), new HeapNode(2), new HeapNode(3), new HeapNode(4), new HeapNode('6', 6), new HeapNode(1)]);
     console.log(maxHeap.toArray());
     maxHeap.fix();
     console.log(maxHeap.toArray());
@@ -231,6 +231,7 @@ const testHeap = () => {
     maxHeap.poll();
     maxHeap.poll();
     console.log(maxHeap.toArray());
+    console.log(MaxHeap.heapify([3,2,1,5,6,7,8,9,10]).toArray())
 }
 
 
