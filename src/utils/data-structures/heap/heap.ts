@@ -1,6 +1,5 @@
 // Online Algorithms use Heap (e.g. Top K problems)
 // Offline Algorithms use sort
-import {runAlgorithm} from "../../algorithms";
 
 export class HeapNode<U> {
     private _id: number | string;
@@ -109,10 +108,20 @@ export abstract class Heap<T extends number | HeapNode<any>> {
     }
 
     poll(): T | null {
-        this._swap(0, this._nodes.length - 1);
-        const result = this._nodes.pop();
-        this.heapifyDown(0);
-        return result || null;
+        let res;
+        if (this.size() > 1) {
+            this._swap(0, this._nodes.length - 1);
+            res = this._nodes.pop()!;
+            this.heapifyDown(0);
+        } else {
+            if (this.size() === 1) {
+                res = this._nodes.pop()!;
+            } else {
+                res = null;
+            }
+        }
+
+        return res;
     }
 
     add(node: T): void {
@@ -222,10 +231,10 @@ const testHeap = () => {
     minHeap.poll();
     minHeap.poll();
     console.log(minHeap.toArray());
-    console.log(MinHeap.heapify([3,2,1,5,6,7,8,9,10]).toArray())
+    console.log(MinHeap.heapify([3, 2, 1, 5, 6, 7, 8, 9, 10]).toArray())
 
     // const maxHeap = new MaxHeap<number>([5, 2, 3, 4, 6, 1]);
-    const maxHeap = new MaxHeap<HeapNode<number>>([new HeapNode(5,5), new HeapNode(2), new HeapNode(3), new HeapNode(4), new HeapNode('6', 6), new HeapNode(1)]);
+    const maxHeap = new MaxHeap<HeapNode<number>>([new HeapNode(5, 5), new HeapNode(2), new HeapNode(3), new HeapNode(4), new HeapNode('6', 6), new HeapNode(1)]);
     console.log(maxHeap.toArray());
     maxHeap.fix();
     console.log(maxHeap.toArray());
@@ -234,7 +243,7 @@ const testHeap = () => {
     maxHeap.poll();
     maxHeap.poll();
     console.log(maxHeap.toArray());
-    console.log(MaxHeap.heapify([3,2,1,5,6,7,8,9,10]).toArray())
+    console.log(MaxHeap.heapify([3, 2, 1, 5, 6, 7, 8, 9, 10]).toArray())
 }
 
 

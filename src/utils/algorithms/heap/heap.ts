@@ -42,9 +42,9 @@ const runAllFindKthLargest = async () => {
 
 // runAllFindKthLargest().then();
 
-
 //23. Merge k Sorted Lists
 function mergeKLists(lists: SinglyLinkedListNode[]): SinglyLinkedListNode | null {
+    // TODO dev tools was disconnected issue
     const heap = new MinHeap<HeapNode<SinglyLinkedListNode>>();
     for (let l of lists) {
         if (l) {
@@ -55,17 +55,17 @@ function mergeKLists(lists: SinglyLinkedListNode[]): SinglyLinkedListNode | null
         return null;
     }
 
-    let prev: SinglyLinkedListNode = heap.peek()!.val!;
-    const ans: SinglyLinkedListNode | null = prev;
-    let isFirst = true;
-    while (heap.size() > 0) {
+    const ans: SinglyLinkedListNode | null = heap.poll()!.val!;
+    ans.prev = null;
+    if (ans.next) {
+        heap.add(new HeapNode(ans.next.value, ans.next));
+    }
+    let prev: SinglyLinkedListNode = ans;
+    while (!heap.isEmpty()) {
         const cur = heap.poll()!.val!;
-        if (isFirst) {
-            isFirst = false;
-        } else {
-            prev.next = cur;
-        }
-        prev = cur;
+        cur.prev = prev;
+        prev.next = cur;
+        prev = prev.next;
         if (cur.next) {
             heap.add(new HeapNode(cur.next.value, cur.next));
         }
@@ -79,5 +79,5 @@ const runAllMergeKLists = async () => {
     await runAlgorithm(mergeKLists, false, ...mergeKListsCase2);
 }
 
-runAllMergeKLists().then();
+// runAllMergeKLists().then();
 /* --- end heap --- */
