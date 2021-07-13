@@ -7,17 +7,19 @@ import {useBunnyKit} from "../../hooks/bunny-kit";
 import {
     BFS,
     binaryTreeInorderTraversal,
-    countSmallerBST, countSmallerCase1, countSmallerCase6,
-    countSmallerCase8,
+    countSmallerBST,
+    countSmallerCase1,
     cutOffTree,
-    cutOffTreeCase8, testBSTCase1,
-    DFS, testBST,
+    cutOffTreeCase8,
+    DFS,
     isValidParenthesis,
     ladderLengthCase1,
     ladderLengthDFS,
     lengthOfLongestSubstring,
     letterCombinations,
     reverseLinkedList,
+    testBST,
+    testBSTCase1,
     treeData,
     treeMaxDepth
 } from "../../utils/algorithms";
@@ -260,8 +262,8 @@ export function AlgorithmScreen() {
                     }
                     {
                         testBSTVariables
-                        ? <VividAlgorithm data={testBSTVariables} />
-                        : null
+                            ? <VividAlgorithm data={testBSTVariables}/>
+                            : null
                     }
                 </View>
             </View>

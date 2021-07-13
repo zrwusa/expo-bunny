@@ -21,6 +21,7 @@ function searchBST(root: BinarySearchTreeNode<number> | null, id: number): Binar
     dfs(root);
     return ans;
 }
+
 // 230	Kth Smallest Element in a BST	★★★					inorder
 function kthSmallest(root: BinarySearchTreeNode<number> | null, k: number): number {
     let rank = 0, target = 0;
@@ -36,6 +37,7 @@ function kthSmallest(root: BinarySearchTreeNode<number> | null, k: number): numb
     root && dfsInOrder(root);
     return target;
 }
+
 // 99	Recover Binary Search Tree	★★★						inorder
 // 108  Convert Sorted Array to Binary Search Tree ★★★				build BST
 function sortedArrayToBST(nums: number[]): BinarySearchTreeNode<number> | null {
@@ -52,12 +54,13 @@ function sortedArrayToBST(nums: number[]): BinarySearchTreeNode<number> | null {
 
     return buildTree(0, nums.length - 1);
 }
+
 // 501	Find Mode in Binary Search Tree	★★★						inorder
 function findMode(root: BinarySearchTreeNode<number> | null): number[] {
     if (!root) return [];
-    const map: {[key in string]: number} = {};
+    const map: { [key in string]: number } = {};
     let max: number = 0;
-    const dfsInOrder = (cur:  BinarySearchTreeNode<number>) => {
+    const dfsInOrder = (cur: BinarySearchTreeNode<number>) => {
         cur.left && dfsInOrder(cur.left);
 
         map[cur.id] ? map[cur.id]++ : map[cur.id] = 1;
@@ -76,6 +79,7 @@ function findMode(root: BinarySearchTreeNode<number> | null): number[] {
     }
     return ans;
 }
+
 // 450	Delete Node in a BST	★★★★						binary search
 
 

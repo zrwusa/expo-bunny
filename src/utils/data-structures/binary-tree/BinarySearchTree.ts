@@ -88,7 +88,7 @@ export class BinarySearchTreeNode<T> {
 
 }
 
-export class BinarySearchTree<T> {
+export class BinarySearchTree<T extends number | BinarySearchTreeNode<any>> {
     private _root: BinarySearchTreeNode<T> | null;
     public get root(): BinarySearchTreeNode<T> | null {
         return this._root;

@@ -1,4 +1,4 @@
-import {bunnyConsole, timeEnd, timeStart} from "../utils";
+import {bunnyConsole} from "../utils";
 
 // 1e+7
 // for loop map.set(j, true) 2456
