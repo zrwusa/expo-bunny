@@ -1,19 +1,21 @@
-import {bunnyConsole} from "../utils";
+import {bunnyConsole, timeStart} from "../utils";
 
 // 1e+7
-// for loop map.set(j, true) 2456
-// arr = [];arr[i] = 0       611
-// obj = {};obj[i] = 0       607
-// [...nums]                 448
-// sort                      185
-// for loop push             124
-// for loop =                38
-// arr[i] = 0                15
-// obj[i] = 0                15
-// reverse                   12
-// indexOf last              11
-// arr.toString()            1765
-// JSON.stringify(arr)       316
+// let arr2 = Object.assign([],arr)             4703
+// for loop map.set(j, true)                    2607
+// arr = [];arr[i] = 0                          611
+// obj = {};obj[i] = 0                          607
+// let arr3 = JSON.parse(JSON.stringify(arr))   641
+// arr.toString()                               393
+// JSON.stringify(arr)                          316
+// sort                                         236
+// for loop push                                124
+// [...nums]                                    28
+// for loop =                                   38
+// arr[i] = 0                                   34
+// obj[i] = 0                                   15
+// reverse                                      8
+// indexOf half                                 8
 
 
 // const arr = [];
@@ -29,15 +31,15 @@ import {bunnyConsole} from "../utils";
 // const time1 = timeStart();
 // x = [...arr]
 // timeEnd(time1, '[...nums]');
-
+//
 // const time2 = timeStart();
 // const sorted = arr.sort((a, b) => b - a);
 // timeEnd(time2, 'sorted')
-
+//
 // const time3 = timeStart();
 // const reversed = arr.reverse();
 // timeEnd(time3, 'reverse')
-
+//
 // const time4 = timeStart();
 // const indexOfHalf = arr.indexOf(5e+6);
 // timeEnd(time4, 'indexOf half')
@@ -63,6 +65,18 @@ import {bunnyConsole} from "../utils";
 // const time8 = timeStart();
 // x = [...arr];
 // timeEnd(time8, '[...arr] ')
+//
+// let time9 = timeStart();
+// let arr1 = [...arr];
+// timeEnd(time9, '[...arr] sorted')
+//
+// let time10  = timeStart();
+// let arr2 = Object.assign([],arr);
+// timeEnd(time10, 'Object.assign([],arr)')
+//
+// let time11 = timeStart();
+// let arr3 = JSON.parse(JSON.stringify(arr));
+// timeEnd(time11, 'JSON.parse(JSON.stringify(arr))')
 
 
 // Stack Exceed Size
