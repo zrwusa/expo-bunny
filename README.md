@@ -89,6 +89,12 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 
 [Web Next.js online deployed latest](https://expo-react-bunny.vercel.app)
 
+Test Account:
+
+username:  test@gmail.com 
+
+password:  testtest
+
 ## Downloads
 [App iOS for simulator stable](https://expo.io/artifacts/6a35db9b-add3-4354-8a8a-aae443c27054)
 

@@ -75,21 +75,23 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             })
         }, [])
 
-        return <ScrollView nestedScrollEnabled style={{height: wp(375)}}>
-            <ScrollView style={{width: wp(375)}}
-                        horizontal ref={horizontalScrollView}>
-                <Svg
-                    width={treePanelWidth}
-                    height={treePanelHeight}
-                >
-                    <G fill={colors.background} strokeWidth={strokeWidth} stroke={colors.border}>
-                        {
-                            children
-                        }
-                    </G>
-                </Svg>
+        return (
+            <ScrollView nestedScrollEnabled style={{height: wp(375)}}>
+                <ScrollView style={{width: wp(375)}}
+                            horizontal ref={horizontalScrollView}>
+                    <Svg
+                        width={treePanelWidth}
+                        height={treePanelHeight}
+                    >
+                        <G fill={colors.background} strokeWidth={strokeWidth} stroke={colors.border}>
+                            {
+                                children
+                            }
+                        </G>
+                    </Svg>
+                </ScrollView>
             </ScrollView>
-        </ScrollView>
+        )
     }
 
     const VividTree: React.FC<{ data: TreeNode<any> }> = ({data}) => {
