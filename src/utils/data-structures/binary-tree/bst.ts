@@ -79,15 +79,18 @@ export class BSTNode<V> {
         this._isLeftChild = v;
     }
 
-    constructor(id: BSTNodeId, val?: V | null) {
+    constructor(id: BSTNodeId, val?: V | null, count?: number) {
         if (val === undefined) {
             val = null;
+        }
+        if (count === undefined) {
+            count = 1;
         }
         this._id = id;
         this._val = val || null;
         this._left = null;
         this._right = null;
-        this._count = 0;
+        this._count = count;
         this._allLesserSum = 0;
         this._parent = null;
         this._isLeftChild = null;
@@ -191,8 +194,8 @@ export class BST<T> {
         return dfs(this._root!, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
     }
 
-    insert(id: BSTNodeId, val?: T | null): BSTNode<T> | null {
-        const newNode = new BSTNode<T>(id, val);
+    insert(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> | null {
+        const newNode = new BSTNode<T>(id, val, count);
         const newValue = newNode.id;
         if (this._root === null) {
             this._root = newNode;
@@ -202,18 +205,17 @@ export class BST<T> {
             let traversing = true;
             while (traversing) {
                 if (cur.id === newValue) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, 1, 'allLesserSum');
-                    cur.count++;
+                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
+                    cur.count += newNode.count;
                     //Duplicates are not accepted.
                     traversing = false;
                     return cur;
                 } else if (newValue < cur.id) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, 1, 'allLesserSum');
-                    this._autoAllLesserSum && cur.allLesserSum++;
+                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
+                    if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
                     // Traverse left of the node
                     if (cur.left === null) {
-                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - 1;
-                        newNode.count++;
+                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - newNode.count;
                         newNode.parent = cur;
                         newNode.isLeftChild = true;
                         //Add to the left of the current node
@@ -228,7 +230,6 @@ export class BST<T> {
                     // Traverse right of the node
                     if (cur.right === null) {
                         if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
-                        newNode.count++;
                         newNode.parent = cur;
                         newNode.isLeftChild = false;
                         //Add to the right of the current node
@@ -720,7 +721,7 @@ export class BST<T> {
             if (l > r) return;
             const m = Math.floor(l + (r - l) / 2);
             const midNode = sorted[Math.floor(l + (r - l) / 2)];
-            this.insert(midNode.id, midNode.val);
+            this.insert(midNode.id, midNode.val, midNode.count);
             buildBalanceBST(l, m - 1);
             buildBalanceBST(m + 1, r);
         }

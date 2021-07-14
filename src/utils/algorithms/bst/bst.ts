@@ -87,89 +87,90 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     const arrCopy = [...arr];
     const rest = arrCopy.splice(1);
     const waitingMS = 300;
+    const waitingMS1 = 1000;
+    const waitingMS2 = 10000;
     const proxyVariables: { bst: BST<number> } = new DeepProxy({bst: new BST<number>(arrCopy[0], arrCopy[0], true)}, proxyHandler);
     for (let i of rest) {
         proxyVariables.bst.insert(i, i);
         await wait(waitingMS);
     }
 
-    // await wait(waitingMS);
-    // const getNodeByIdOne = proxyVariables.bst.getNode(10, 'id');
-    // console.log('getNodeByIdOne', getNodeByIdOne);
-    //
-    // await wait(waitingMS);
-    // const getNodesByCount = proxyVariables.bst.getNodes(1, 'count');
-    // console.log('getNodesByCount', getNodesByCount);
-    //
-    // await wait(waitingMS);
-    // const getNodesByLeftSum = proxyVariables.bst.getNodes(2, 'allLesserSum');
-    // console.log('getNodesByLeftSum', getNodesByLeftSum);
-    //
-    // await wait(waitingMS);
-    // const getMinNodeByRoot = proxyVariables.bst.getMinNode();
-    // console.log('getMinNodeByRoot', getMinNodeByRoot);
-    //
-    // await wait(waitingMS);
-    // const getMinNodeBySpecificNode = proxyVariables.bst.getMinNode(proxyVariables.bst.getNode(15));
-    // console.log('getMinNodeBySpecificNode', getMinNodeBySpecificNode);
-    //
-    // await wait(waitingMS);
-    // const subTreeSum = proxyVariables.bst.subTreeSum(proxyVariables.bst.getNode(15));
-    // console.log('subTreeSum', subTreeSum);
-    //
-    // await wait(waitingMS);
-    // const lesserSum = proxyVariables.bst.lesserSum(10);
-    // console.log('lesserSum', lesserSum);
-    //
-    // await wait(waitingMS);
-    // const subTreeAdd = proxyVariables.bst.subTreeAdd(proxyVariables.bst.getNode(15), 1, 'count');
-    // console.log('subTreeAdd', subTreeAdd);
-    //
-    await wait(waitingMS);
-    const allGreaterNodesAdd = proxyVariables.bst.allGreaterNodesAdd(proxyVariables.bst.getNode(14), 2, 'count')
-    console.log('allGreaterNodesAdd', allGreaterNodesAdd);
+    await wait(waitingMS1);
+    const getNodeById = proxyVariables.bst.getNode(10, 'id');
+    console.log('getNode, 10, id', getNodeById);
 
-    // console.log('waiting for balancing')
-    // await wait(10000);
-    // proxyVariables.bst.balance();
-    //
-    // console.log('balanced', proxyVariables.bst.BFS('node'))
-    // await wait(10000);
-    // const waitingMS1 = waitingMS;
-    //
-    // await wait(waitingMS1);
-    // console.log(proxyVariables.bst.remove(11))
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(1);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(4);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(10);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(15);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(5);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(13);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(3);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(8);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(6);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(7);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(9);
-    // await wait(waitingMS1);
-    // proxyVariables.bst.remove(14);
-    // await wait(waitingMS1);
-    //
-    // await wait(waitingMS);
-    // console.log(proxyVariables.bst.BFS());
-    //
-    // await wait(waitingMS);
-    // console.log(proxyVariables.bst.BFS('count'));
+    await wait(waitingMS1);
+    const getNodesByCount = proxyVariables.bst.getNodes(1, 'count');
+    console.log('getNodes, 1, count', getNodesByCount);
+
+    await wait(waitingMS1);
+    const getNodesByLeftSum = proxyVariables.bst.getNodes(2, 'allLesserSum');
+    console.log('getNodes, 2, allLesserSum', getNodesByLeftSum);
+
+    await wait(waitingMS1);
+    const getMinNodeByRoot = proxyVariables.bst.getMinNode();
+    console.log('getMinNode', getMinNodeByRoot);
+
+    await wait(waitingMS1);
+    const getMinNodeBySpecificNode = proxyVariables.bst.getMinNode(proxyVariables.bst.getNode(15));
+    console.log('getMinNode, 15', getMinNodeBySpecificNode);
+
+    await wait(waitingMS1);
+    const subTreeSum = proxyVariables.bst.subTreeSum(proxyVariables.bst.getNode(15));
+    console.log('subTreeSum, 15', subTreeSum);
+
+    await wait(waitingMS1);
+    const lesserSum = proxyVariables.bst.lesserSum(10);
+    console.log('lesserSum, 10', lesserSum);
+
+    await wait(waitingMS1);
+    const subTreeAdd = proxyVariables.bst.subTreeAdd(proxyVariables.bst.getNode(15), 1, 'count');
+    console.log('subTreeAdd, getNode(15)', subTreeAdd);
+
+    await wait(waitingMS2);
+    const allGreaterNodesAdd = proxyVariables.bst.allGreaterNodesAdd(proxyVariables.bst.getNode(11), 2, 'count')
+    console.log('allGreaterNodesAdd, getNode(11), 2, count', allGreaterNodesAdd);
+
+    await wait(waitingMS2);
+    console.log('DFS ,in, node', proxyVariables.bst.DFS('in', 'node'))
+    console.log('waiting for balancing')
+    await wait(waitingMS2);
+    proxyVariables.bst.balance();
+    console.log('balanced BFS, node', proxyVariables.bst.BFS('node'))
+
+    await wait(waitingMS2);
+    console.log('remove, 11', proxyVariables.bst.remove(11))
+    await wait(waitingMS2);
+    console.log('remove, 1', proxyVariables.bst.remove(1))
+    await wait(waitingMS2);
+    console.log('remove, 4', proxyVariables.bst.remove(4))
+    await wait(waitingMS2);
+    console.log('remove, 10', proxyVariables.bst.remove(10))
+    await wait(waitingMS2);
+    console.log('remove, 15', proxyVariables.bst.remove(15))
+    await wait(waitingMS2);
+    console.log('remove, 5', proxyVariables.bst.remove(5))
+    await wait(waitingMS2);
+    console.log('remove, 13', proxyVariables.bst.remove(13))
+    await wait(waitingMS2);
+    console.log('remove, 3', proxyVariables.bst.remove(3))
+    await wait(waitingMS2);
+    console.log('remove, 8', proxyVariables.bst.remove(8))
+    await wait(waitingMS2);
+    console.log('remove, 6', proxyVariables.bst.remove(6))
+    await wait(waitingMS2);
+    console.log('remove, 7', proxyVariables.bst.remove(7))
+    await wait(waitingMS2);
+    console.log('remove, 9', proxyVariables.bst.remove(9))
+    await wait(waitingMS2);
+    console.log('remove, 14', proxyVariables.bst.remove(14))
+    await wait(waitingMS2);
+
+    await wait(waitingMS);
+    console.log('BFS', proxyVariables.bst.BFS());
+
+    await wait(waitingMS);
+    console.log('BFS, count', proxyVariables.bst.BFS('count'));
 
     return proxyVariables.bst;
 }
