@@ -6,6 +6,9 @@ type BSTNodeVal<T extends BSTNode<any>> = T extends BSTNode<infer U>
     ? U
     : any;
 
+type AVLBalanceFactor = -1 | 0 | 1;
+type BalanceFactor = number;
+
 export class BSTNode<V> {
     private _id: BSTNodeId;
     public get id(): BSTNodeId {
@@ -79,6 +82,15 @@ export class BSTNode<V> {
         this._isLeftChild = v;
     }
 
+    private _balanceFactor: BalanceFactor;
+    public get balanceFactor(): BalanceFactor {
+        return this._balanceFactor;
+    }
+
+    public set balanceFactor(v: BalanceFactor) {
+        this._id = v;
+    }
+
     constructor(id: BSTNodeId, val?: V | null, count?: number) {
         if (val === undefined) {
             val = null;
@@ -94,6 +106,7 @@ export class BSTNode<V> {
         this._allLesserSum = 0;
         this._parent = null;
         this._isLeftChild = null;
+        this._balanceFactor = 0;
     }
 }
 
@@ -181,7 +194,7 @@ export class BST<T> {
         }
     }
 
-    // --- start base functions
+    // --- start basic functions
     isValid(): boolean {
         if (!this._root) return true;
 
@@ -277,7 +290,7 @@ export class BST<T> {
         this._root = null;
     }
 
-    // --- end base functions
+    // --- end basic functions
 
     // --- start additional functions
     getMinNode(node?: BSTNode<T> | null): BSTNode<T> | null {
@@ -291,6 +304,99 @@ export class BST<T> {
         }
 
         return node ? _traverse(node) : null;
+    }
+
+    getNodes(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName, onlyOne ?: boolean) {
+        if (propertyName === undefined) {
+            propertyName = 'id';
+        }
+
+        const result: BSTNode<T>[] = [];
+
+        // const _isEqual = (property1: any, property2: any) => {
+        //     if (typeof property1 === typeof property2) {
+        //         switch (typeof property2) {
+        //             case 'object':
+        //                 return JSON.stringify(property1) === JSON.stringify(property2);
+        //             case 'number':
+        //                 return property1 === property2;
+        //             case 'bigint':
+        //                 return property1 === property2;
+        //             case 'boolean':
+        //                 return property1 === property2;
+        //             case 'function':
+        //                 return JSON.stringify(property1) === JSON.stringify(property2);
+        //             case 'string':
+        //                 return property1 === property2;
+        //             case 'symbol':
+        //                 return property1 === property2;
+        //             case 'undefined':
+        //                 return property1 === property2;
+        //             default:
+        //                 return property1 === property2;
+        //         }
+        //     }
+        //     return false;
+        // }
+
+        function _traverse(cur: BSTNode<T>) {
+            switch (propertyName) {
+                case 'id':
+                    if (cur.id === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                case 'count':
+                    if (cur.count === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                case 'val':
+                    if (cur.val === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                case 'allLesserSum':
+                    if (cur.allLesserSum === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                default:
+                    if (cur.id === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+            }
+
+            if (!cur.left && !cur.right) return null;
+            if (propertyName === 'id') {
+                if (nodeProperty < cur.id) {
+                    cur.left ? _traverse(cur.left) : null;
+                }
+                if (nodeProperty > cur.id) {
+                    cur.right ? _traverse(cur.right) : null;
+                }
+            } else {
+                cur.left ? _traverse(cur.left) : null;
+                cur.right ? _traverse(cur.right) : null;
+            }
+
+        }
+
+        this._root && _traverse(this._root);
+        return result;
+    }
+
+    getNode(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName) {
+        if (propertyName === undefined) {
+            propertyName = 'id';
+        }
+        return this.getNodes(nodeProperty, propertyName, true)[0]
     }
 
     BFS(): BSTNodeId[];
@@ -438,98 +544,6 @@ export class BST<T> {
         }
     }
 
-    getNodes(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName, onlyOne ?: boolean) {
-        if (propertyName === undefined) {
-            propertyName = 'id';
-        }
-
-        const result: BSTNode<T>[] = [];
-
-        // const _isEqual = (property1: any, property2: any) => {
-        //     if (typeof property1 === typeof property2) {
-        //         switch (typeof property2) {
-        //             case 'object':
-        //                 return JSON.stringify(property1) === JSON.stringify(property2);
-        //             case 'number':
-        //                 return property1 === property2;
-        //             case 'bigint':
-        //                 return property1 === property2;
-        //             case 'boolean':
-        //                 return property1 === property2;
-        //             case 'function':
-        //                 return JSON.stringify(property1) === JSON.stringify(property2);
-        //             case 'string':
-        //                 return property1 === property2;
-        //             case 'symbol':
-        //                 return property1 === property2;
-        //             case 'undefined':
-        //                 return property1 === property2;
-        //             default:
-        //                 return property1 === property2;
-        //         }
-        //     }
-        //     return false;
-        // }
-
-        function _traverse(cur: BSTNode<T>) {
-            switch (propertyName) {
-                case 'id':
-                    if (cur.id === nodeProperty) {
-                        result.push(cur);
-                        if (onlyOne) return;
-                    }
-                    break;
-                case 'count':
-                    if (cur.count === nodeProperty) {
-                        result.push(cur);
-                        if (onlyOne) return;
-                    }
-                    break;
-                case 'val':
-                    if (cur.val === nodeProperty) {
-                        result.push(cur);
-                        if (onlyOne) return;
-                    }
-                    break;
-                case 'allLesserSum':
-                    if (cur.allLesserSum === nodeProperty) {
-                        result.push(cur);
-                        if (onlyOne) return;
-                    }
-                    break;
-                default:
-                    if (cur.id === nodeProperty) {
-                        result.push(cur);
-                        if (onlyOne) return;
-                    }
-                    break;
-            }
-
-            if (!cur.left && !cur.right) return null;
-            if (propertyName === 'id') {
-                if (nodeProperty < cur.id) {
-                    cur.left ? _traverse(cur.left) : null;
-                }
-                if (nodeProperty > cur.id) {
-                    cur.right ? _traverse(cur.right) : null;
-                }
-            } else {
-                cur.left ? _traverse(cur.left) : null;
-                cur.right ? _traverse(cur.right) : null;
-            }
-
-        }
-
-        this._root && _traverse(this._root);
-        return result;
-    }
-
-    getNode(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName) {
-        if (propertyName === undefined) {
-            propertyName = 'id';
-        }
-        return this.getNodes(nodeProperty, propertyName, true)[0]
-    }
 
     subTreeSum(subTreeRoot: BSTNode<T>, propertyName ?: PropertyName): number {
         if (propertyName === undefined) {
@@ -689,35 +703,27 @@ export class BST<T> {
     }
 
     // TODO need to be optimized, it is O(n)
-    getMaxDepth = (node?: BSTNode<T>) => {
-        const beginRoot = node || this._root;
-        if (!beginRoot) {
+    getMaxDepth(beginRoot?: BSTNode<T>): number {
+        const _beginRoot = beginRoot || this._root;
+        const _getMaxDepth = (cur: BSTNode<T> | null): number => {
+            if (!cur) return 0;
+            let leftHeight = _getMaxDepth(cur.left);
+            let rightHeight = _getMaxDepth(cur.right);
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+
+        if (_beginRoot) {
+            return _getMaxDepth(_beginRoot);
+        } else {
             return 0;
         }
-        let maxDepth = 1;
-        const bfs = (node: BSTNode<T>, level: number) => {
-            if (level > maxDepth) {
-                maxDepth = level;
-            }
-            const children = [];
-            node.left && children.push(node.left);
-            node.right && children.push(node.right);
-            if (children.length < 1) return;
-            for (let i = 0, len = children.length; i < len; i++) {
-                bfs(children[i], level + 1);
-                // TODO not correct
-                // setTimeout(bfs, 0, children[i], level + 1);
-            }
-        }
-        bfs(beginRoot, 1);
-        return maxDepth;
     }
 
     balance() {
         const sorted = this.DFS('in', 'node');
 
         this.clear();
-        const buildBalanceBST = (l: number, r:number) => {
+        const buildBalanceBST = (l: number, r: number) => {
             if (l > r) return;
             const m = Math.floor(l + (r - l) / 2);
             const midNode = sorted[Math.floor(l + (r - l) / 2)];
@@ -733,5 +739,23 @@ export class BST<T> {
             return false;
         }
     }
+
+    isAVLBalanced(): boolean {
+        let balanced = true;
+        const _height = (cur: BSTNode<T> | null): number => {
+            if (!cur) return 0;
+            let leftHeight = _height(cur.left);
+            let rightHeight = _height(cur.right);
+            if (Math.abs(leftHeight - rightHeight) > 1) {
+                balanced = false;
+                return Infinity;
+            }
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+
+        _height(this._root);
+        return balanced;
+    }
+
     // --- end additional functions
 }

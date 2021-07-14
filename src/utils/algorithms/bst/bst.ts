@@ -86,9 +86,9 @@ function findMode(root: BSTNode<number> | null): number[] {
 export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     const arrCopy = [...arr];
     const rest = arrCopy.splice(1);
-    const waitingMS = 300;
-    const waitingMS1 = 1000;
-    const waitingMS2 = 10000;
+    const waitingMS = 100;
+    const waitingMS1 = 200;
+    const waitingMS2 = 300;
     const proxyVariables: { bst: BST<number> } = new DeepProxy({bst: new BST<number>(arrCopy[0], arrCopy[0], true)}, proxyHandler);
     for (let i of rest) {
         proxyVariables.bst.insert(i, i);
@@ -139,31 +139,57 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     console.log('balanced BFS, node', proxyVariables.bst.BFS('node'))
 
     await wait(waitingMS2);
-    console.log('remove, 11', proxyVariables.bst.remove(11))
+    console.log('remove, 11', proxyVariables.bst.remove(11));
+    console.log('isBalance', proxyVariables.bst.isAVLBalanced());
+    console.log('getMaxDepth, getNode(15)', proxyVariables.bst.getMaxDepth(proxyVariables.bst.getNode(15)));
     await wait(waitingMS2);
     console.log('remove, 1', proxyVariables.bst.remove(1))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 4', proxyVariables.bst.remove(4))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 10', proxyVariables.bst.remove(10))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 15', proxyVariables.bst.remove(15))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 5', proxyVariables.bst.remove(5))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 13', proxyVariables.bst.remove(13))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 3', proxyVariables.bst.remove(3))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 8', proxyVariables.bst.remove(8))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 6', proxyVariables.bst.remove(6))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 7', proxyVariables.bst.remove(7))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 9', proxyVariables.bst.remove(9))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
     console.log('remove, 14', proxyVariables.bst.remove(14))
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('getMaxDepth', proxyVariables.bst.getMaxDepth());
     await wait(waitingMS2);
 
     await wait(waitingMS);
