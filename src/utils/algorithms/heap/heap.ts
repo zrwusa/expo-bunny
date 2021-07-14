@@ -25,7 +25,7 @@ export function findKthLargestMinHeap(nums: number[], k: number): number {
         //     heap.add(i);
         // }
         if (heap.size() < k || i >= heap.peek()!) {
-            heap.add(i);
+            heap.insert(i);
         }
         if (heap.size() > k) {
             heap.poll();
@@ -49,7 +49,7 @@ function mergeKLists(lists: SinglyLinkedListNode[]): SinglyLinkedListNode | null
     const heap = new MinHeap<HeapNode<SinglyLinkedListNode>, SinglyLinkedListNode>();
     for (let l of lists) {
         if (l) {
-            heap.add(new HeapNode<SinglyLinkedListNode>(l.value, l));
+            heap.insert(new HeapNode<SinglyLinkedListNode>(l.value, l));
         }
     }
     if (heap.size() < 1) {
@@ -59,7 +59,7 @@ function mergeKLists(lists: SinglyLinkedListNode[]): SinglyLinkedListNode | null
     const ans: SinglyLinkedListNode | null = heap.poll()!.val!;
     ans.prev = null;
     if (ans.next) {
-        heap.add(new HeapNode(ans.next.value, ans.next));
+        heap.insert(new HeapNode(ans.next.value, ans.next));
     }
     let prev: SinglyLinkedListNode = ans;
     while (!heap.isEmpty()) {
@@ -68,7 +68,7 @@ function mergeKLists(lists: SinglyLinkedListNode[]): SinglyLinkedListNode | null
         prev.next = cur;
         prev = prev.next;
         if (cur.next) {
-            heap.add(new HeapNode(cur.next.value, cur.next));
+            heap.insert(new HeapNode(cur.next.value, cur.next));
         }
     }
 
@@ -96,23 +96,23 @@ class MedianFinder {
 
     addNum(num: number): void {
         if (this._leftHeap.size() === 0) {
-            this._leftHeap.add(num);
+            this._leftHeap.insert(num);
         } else {
             const leftPeek = this._leftHeap.peek();
             if (leftPeek !== null) {
                 if (num > leftPeek) {
-                    this._rightHeap.add(num);
+                    this._rightHeap.insert(num);
                 } else {
-                    this._leftHeap.add(num);
+                    this._leftHeap.insert(num);
                 }
             }
         }
         const leftSize = this._leftHeap.size();
         const rightSize = this._rightHeap.size();
         if (leftSize - rightSize >= 2) {
-            this._rightHeap.add(this._leftHeap.poll()!);
+            this._rightHeap.insert(this._leftHeap.poll()!);
         } else if (rightSize > leftSize) {
-            this._leftHeap.add(this._rightHeap.poll()!);
+            this._leftHeap.insert(this._rightHeap.poll()!);
         }
     }
 

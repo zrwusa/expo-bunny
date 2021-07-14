@@ -6,8 +6,8 @@ import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
 import {
-    BinarySearchTree,
-    BinarySearchTreeNode,
+    BST,
+    BSTNode,
     BinaryTreeNode,
     Coordinate,
     getDirectionVector,
@@ -103,7 +103,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | BinarySearchTreeNode<any> | null, maxDepth?: number }> = ({node, maxDepth}) => {
+    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | BSTNode<any> | null, maxDepth?: number }> = ({node, maxDepth}) => {
         return (
             <VividTreeContainer>
                 {
@@ -279,7 +279,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any> | BinarySearchTreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
+    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any> | BSTNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
         if (!node) {
             return null;
         }
@@ -334,7 +334,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     <TSpan x={offsetX} y={offsetY + fontOffsetY}>{node.id}</TSpan>
                     <TSpan x={offsetX} y={offsetY + fontOffsetY + fontSize + wp(2)}>{node.count}</TSpan>
                     {
-                        node instanceof BinarySearchTreeNode
+                        node instanceof BSTNode
                             ? <TSpan x={offsetX}
                                      y={offsetY + fontOffsetY + 2 * fontSize + wp(4)}>{node.allLesserSum}</TSpan>
                             : null
@@ -406,7 +406,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinarySearchTreeNode: React.FC<{ data: BinarySearchTreeNode<any> }> = ({data}) => {
+    const VividBinarySearchTreeNode: React.FC<{ data: BSTNode<any> }> = ({data}) => {
         return (
             <Row>
                 <View style={styles.arrayItem} key={data.id}>
@@ -428,7 +428,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     return <VividTree data={item}/>
                 } else if (item instanceof BinaryTreeNode) {
                     return <VividBinaryTreeNode data={item}/>;
-                } else if (item instanceof BinarySearchTree) {
+                } else if (item instanceof BST) {
                     return <VividBinaryTree node={item.root} maxDepth={item.getMaxDepth()}/>;
                 } else if (item instanceof SinglyLinkedListNode) {
                     return <VividLinkedListNode data={item}/>

@@ -1,9 +1,19 @@
 // Online Algorithms use Heap (e.g. Top K problems)
 // Offline Algorithms use sort
 
-type PropertyType = 'id' | 'val';
-type NodeOrPropertyType = 'node' | PropertyType;
+type PropertyName = 'id' | 'val';
+type NodeOrPropertyName = 'node' | PropertyName;
 type DFSMode = 'pre' | 'in' | 'post';
+
+type HeapNodeVal<T extends HeapNode<any> | number> = T extends HeapNode<infer U>
+    ? U
+    : unknown;
+
+type HeapNodeType<T extends HeapNode<any> | number> = T extends number
+    ? number
+    : T extends HeapNode<infer U>
+        ? HeapNode<U>
+        : unknown;
 
 export class HeapNode<V> {
     private _id: number | string;
@@ -147,7 +157,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         return res;
     }
 
-    add(node: T): void {
+    insert(node: T): void {
         this._nodes.push(node);
         this.heapifyUp(this._nodes.length - 1);
     }
@@ -201,10 +211,10 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
 
     // --- start additional functions
     sort(): number[];
-    sort(nodeOrPropertyType: 'id'): number[];
-    sort(nodeOrPropertyType: 'val'): (V | null)[];
-    sort(nodeOrPropertyType: 'node'): HeapNode<V>[];
-    sort(nodeOrPropertyType?: NodeOrPropertyType) {
+    sort(nodeOrPropertyName: 'id'): number[];
+    sort(nodeOrPropertyName: 'val'): (V | null)[];
+    sort(nodeOrPropertyName: 'node'): HeapNode<V>[];
+    sort(nodeOrPropertyName?: NodeOrPropertyName) {
         const visitedId: (number | string)[] = [];
         const visitedVal: (V | null)[] = [];
         const visitedNode: HeapNode<V>[] = [];
@@ -213,7 +223,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
 
         const pushByValueType = (index: number) => {
             const node: number | HeapNode<V> = this._nodes[index];
-            switch (nodeOrPropertyType) {
+            switch (nodeOrPropertyName) {
                 case 'id':
                     if (node instanceof HeapNode) {
                         visitedId.push(node.id);
@@ -245,7 +255,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         }
 
 
-        switch (nodeOrPropertyType) {
+        switch (nodeOrPropertyName) {
             case 'id':
                 return visitedId;
             case 'val':
@@ -258,10 +268,10 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
     }
 
     DFS(dfsMode: DFSMode): number[];
-    DFS(dfsMode: DFSMode, nodeOrPropertyType: 'id'): number[];
-    DFS(dfsMode: DFSMode, nodeOrPropertyType: 'val'): (V | null)[];
-    DFS(dfsMode: DFSMode, nodeOrPropertyType: 'node'): HeapNode<V>[];
-    DFS(dfsMode: DFSMode, nodeOrPropertyType?: NodeOrPropertyType) {
+    DFS(dfsMode: DFSMode, nodeOrPropertyName: 'id'): number[];
+    DFS(dfsMode: DFSMode, nodeOrPropertyName: 'val'): (V | null)[];
+    DFS(dfsMode: DFSMode, nodeOrPropertyName: 'node'): HeapNode<V>[];
+    DFS(dfsMode: DFSMode, nodeOrPropertyName?: NodeOrPropertyName) {
         const visitedId: (number | string)[] = [];
         const visitedVal: (V | null)[] = [];
         const visitedNode: HeapNode<V>[] = [];
@@ -269,7 +279,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
 
         const pushByValueType = (index: number) => {
             const node: number | HeapNode<V> = this._nodes[index];
-            switch (nodeOrPropertyType) {
+            switch (nodeOrPropertyName) {
                 case 'id':
                     if (node instanceof HeapNode) {
                         visitedId.push(node.id);
@@ -317,7 +327,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         }
 
         this.isValidNode(0) && _traverse(0);
-        switch (nodeOrPropertyType) {
+        switch (nodeOrPropertyName) {
             case 'id':
                 return visitedId;
             case 'val':
