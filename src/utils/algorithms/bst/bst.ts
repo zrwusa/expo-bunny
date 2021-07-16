@@ -1,4 +1,4 @@
-import {AVLTreeNode, BST, BSTNode} from "../../data-structures/binary-tree";
+import {BST, BSTNode} from "../../data-structures/binary-tree";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 import {testBSTCase1} from "./cases";
 import {runAlgorithm} from "../helpers";

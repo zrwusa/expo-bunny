@@ -13,12 +13,13 @@ import {
     getDirectionVector,
     SinglyLinkedListNode,
     Stack,
-    uuidV4, AbstractBST, AbstractBSTNode, AVLTreeNode
+    uuidV4, AbstractBST, AbstractBSTNode
 } from "../../utils";
 import {Card} from "../../containers/Card";
 import {TreeNode} from "../../types";
 import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText, TSpan} from "react-native-svg";
 import {ScrollView} from "react-native";
+import {AVLTreeNode} from "../../utils/data-structures/binary-tree/avl-tree";
 
 export interface VividAlgorithmProps<T> {
     data?: T,
