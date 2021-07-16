@@ -17,7 +17,7 @@ import {
     ladderLengthDFS,
     lengthOfLongestSubstring,
     letterCombinations,
-    reverseLinkedList,
+    reverseLinkedList, testAVLTree,
     testBST,
     testBSTCase1,
     treeData,
@@ -152,6 +152,17 @@ export function AlgorithmScreen() {
         )
     }
 
+    const [testAVLVariables, setGenAVLVariables] = useState<{ [key in string]: unknown }>()
+    const _testAVL = async () => {
+        const result = await testAVLTree(...testBSTCase1,
+            ({value, key, DEFAULT}) => {
+                // console.log(key, value);
+                setGenAVLVariables(prevState => ({...prevState, [key!.toString()]: value}));
+                return DEFAULT
+            }
+        )
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -203,6 +214,9 @@ export function AlgorithmScreen() {
                         </TextButton>
                         <TextButton onPress={_testBST}>
                             <Text>Test BST</Text>
+                        </TextButton>
+                        <TextButton onPress={_testAVL}>
+                            <Text>Test AVL</Text>
                         </TextButton>
                     </Card>
                     {
@@ -263,6 +277,11 @@ export function AlgorithmScreen() {
                     {
                         testBSTVariables
                             ? <VividAlgorithm data={testBSTVariables}/>
+                            : null
+                    }
+                    {
+                        testAVLVariables
+                            ? <VividAlgorithm data={testAVLVariables}/>
                             : null
                     }
                 </View>

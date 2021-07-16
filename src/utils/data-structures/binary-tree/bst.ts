@@ -6,8 +6,8 @@ export type BSTNodeVal<T extends BSTNode<any>> = T extends BSTNode<infer U>
     ? U
     : any;
 
-export class BSTNode<V> {
-    private _id: BSTNodeId;
+export abstract class AbstractNode<V> {
+    protected _id: BSTNodeId;
     public get id(): BSTNodeId {
         return this._id;
     }
@@ -16,7 +16,7 @@ export class BSTNode<V> {
         this._id = v;
     }
 
-    private _val: V | null;
+    protected _val: V | null;
     public get val(): V | null {
         return this._val;
     }
@@ -25,25 +25,25 @@ export class BSTNode<V> {
         this._val = v;
     }
 
-    private _left: BSTNode<V> | null;
-    public get left(): BSTNode<V> | null {
+    protected _left: AbstractNode<V> | null;
+    public get left(): AbstractNode<V> | null {
         return this._left;
     }
 
-    public set left(v: BSTNode<V> | null) {
+    public set left(v: AbstractNode<V> | null) {
         this._left = v;
     }
 
-    private _right: BSTNode<V> | null;
-    public get right(): BSTNode<V> | null {
+    protected _right: AbstractNode<V> | null;
+    public get right(): AbstractNode<V> | null {
         return this._right;
     }
 
-    public set right(v: BSTNode<V> | null) {
+    public set right(v: AbstractNode<V> | null) {
         this._right = v;
     }
 
-    private _count: number;
+    protected _count: number;
     public get count(): number {
         return this._count;
     }
@@ -52,7 +52,7 @@ export class BSTNode<V> {
         this._count = v;
     }
 
-    private _allLesserSum: number;
+    protected _allLesserSum: number;
     public get allLesserSum(): number {
         return this._allLesserSum;
     }
@@ -61,16 +61,16 @@ export class BSTNode<V> {
         this._allLesserSum = v;
     }
 
-    private _parent: BSTNode<V> | null;
-    public get parent(): BSTNode<V> | null {
+    protected _parent: AbstractNode<V> | null;
+    public get parent(): AbstractNode<V> | null {
         return this._parent;
     }
 
-    public set parent(v: BSTNode<V> | null) {
+    public set parent(v: AbstractNode<V> | null) {
         this._parent = v;
     }
 
-    private _isLeftChild: boolean | null;
+    protected _isLeftChild: boolean | null;
     public get isLeftChild(): boolean | null {
         return this._isLeftChild;
     }
@@ -97,12 +97,18 @@ export class BSTNode<V> {
     }
 }
 
+export class BSTNode<V> extends AbstractNode<V>{
+    constructor(id: BSTNodeId, val?: V | null, count?: number) {
+        super(id, val, count);
+    }
+}
+
 type BalanceFactor = number;
 
 const AVL_BALANCED_FACTORS = [-1, 0, 1];
 
-export class AVLTreeNode<V> extends BSTNode<V> {
-    private _balanceFactor: BalanceFactor;
+export class AVLTreeNode<V> extends AbstractNode<V> {
+    protected _balanceFactor: BalanceFactor = 0;
 
     public get balanceFactor(): BalanceFactor {
         return this._balanceFactor;
@@ -112,21 +118,39 @@ export class AVLTreeNode<V> extends BSTNode<V> {
         this._balanceFactor = v;
     }
 
+    protected _left: AVLTreeNode<V> | null;
+    public get left(): AVLTreeNode<V> | null {
+        return this._left;
+    }
+
+    public set left(v: AVLTreeNode<V> | null) {
+        this._left = v;
+    }
+
+    protected _right: AVLTreeNode<V> | null;
+    public get right(): AVLTreeNode<V> | null {
+        return this._right;
+    }
+
+    public set right(v: AVLTreeNode<V> | null) {
+        this._right = v;
+    }
     constructor(id: BSTNodeId, val?: V | null, count?: number) {
         super(id, val, count);
-        this._balanceFactor = 0;
+        this._left = null;
+        this._right = null;
     }
 }
 
 interface I_BST<T> {
     isValid(): boolean;
 
-    // insert(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> | null {
-    insert(newNode: BSTNode<T>): BSTNode<T> | null;
+    // insert(id: BSTNodeId, val?: T | null, count?: number): AbstractNode<T> | null {
+    insert(id: BSTNodeId, val?: T | null, count?: number): AbstractNode<T> | null;
 
-    contains(node: BSTNode<T>): boolean;
+    contains(node: AbstractNode<T>): boolean;
 
-    remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): BSTNode<T> | null;
+    remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): AbstractNode<T> | null;
 
     clear(): void;
 
@@ -135,13 +159,13 @@ interface I_BST<T> {
     // --- end basic functions
 
     // --- start additional functions
-    getMinNode(node?: BSTNode<T> | null): BSTNode<T> | null;
+    getMinNode(node?: AbstractNode<T> | null): AbstractNode<T> | null;
 
-    getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null;
+    getMaxNode(node?: AbstractNode<T> | null): AbstractNode<T> | null;
 
-    getNodes(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName, onlyOne ?: boolean): BSTNode<T>[];
+    getNodes(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName, onlyOne ?: boolean): AbstractNode<T>[];
 
-    getNode(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName): BSTNode<T>;
+    getNode(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName): AbstractNode<T>;
 
     BFS(): BSTNodeId[];
 
@@ -149,13 +173,13 @@ interface I_BST<T> {
 
     BFS(nodeOrPropertyName: 'val'): (T | null)[];
 
-    BFS(nodeOrPropertyName: 'node'): BSTNode<T>[];
+    BFS(nodeOrPropertyName: 'node'): AbstractNode<T>[];
 
     BFS(nodeOrPropertyName: 'count'): number[];
 
     BFS(nodeOrPropertyName: 'allLesserSum'): number[];
 
-    BFS(nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | BSTNode<T> [] | number[] | BSTNodeId[];
+    BFS(nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | AbstractNode<T> [] | number[] | BSTNodeId[];
 
     DFS(): BSTNodeId[];
 
@@ -163,25 +187,24 @@ interface I_BST<T> {
 
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
 
-    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BSTNode<T>[];
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): AbstractNode<T>[];
 
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
 
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
 
-    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | BSTNode<T> [] | number[] | BSTNodeId[];
+    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | AbstractNode<T> [] | number[] | BSTNodeId[];
 
 
-    subTreeSum(subTreeRoot: BSTNode<T>, propertyName ?: PropertyName): number;
+    subTreeSum(subTreeRoot: AbstractNode<T>, propertyName ?: PropertyName): number;
 
     lesserSum(id: BSTNodeId, propertyName ?: PropertyName): number;
 
-    subTreeAdd(subTreeRoot: BSTNode<T>, delta: number, propertyName ?: PropertyName): boolean;
+    subTreeAdd(subTreeRoot: AbstractNode<T>, delta: number, propertyName ?: PropertyName): boolean;
 
-    allGreaterNodesAdd(node: BSTNode<T>, delta: number, propertyName ?: PropertyName): boolean;
+    allGreaterNodesAdd(node: AbstractNode<T>, delta: number, propertyName ?: PropertyName): boolean;
 
-    // TODO need to be optimized, it is O(n)
-    getMaxDepth(beginRoot?: BSTNode<T>): number;
+    getMaxDepth(beginRoot?: AbstractNode<T>): number;
 
     balance(): boolean;
 
@@ -190,16 +213,16 @@ interface I_BST<T> {
 }
 
 export abstract class AbstractBST<T> implements I_BST<T> {
-    protected _root: BSTNode<T> | null;
-    public get root(): BSTNode<T> | null {
+    protected _root: AbstractNode<T> | null = null;
+    public get root(): AbstractNode<T> | null {
         return this._root;
     }
 
-    public set root(v: BSTNode<T> | null) {
+    public set root(v: AbstractNode<T> | null) {
         this._root = v;
     }
 
-    protected _size: number;
+    protected _size: number = 0;
     public get size(): number {
         return this.size;
     }
@@ -210,20 +233,20 @@ export abstract class AbstractBST<T> implements I_BST<T> {
 
     protected readonly _autoAllLesserSum: boolean = false;
 
-    constructor(rootNode?: BSTNode<T> | null, autoPrefixSum?: boolean) {
-        if (rootNode === undefined) {
-            this._root = null;
-            this._size = 0;
-        } else {
-            this._root = rootNode;
-            this._size = 1;
-        }
+    constructor(autoPrefixSum?: boolean, id?: BSTNodeId, val?: T | null, count?: number) {
+        debugger
         if (autoPrefixSum) {
             this._autoAllLesserSum = true;
         }
+        if (id !== undefined) {
+            this.insert(id, val, count);
+        }
+
     }
 
-    private _replaceWithASubTree(node1: BSTNode<T>, node2: BSTNode<T> | null) {
+    abstract createNode(id: BSTNodeId, val?: T | null, count?: number): AbstractNode<T>;
+
+    protected _replaceWithASubTree(node1: AbstractNode<T>, node2: AbstractNode<T> | null) {
         if (node1 && !node2) {
             if (node1.parent) {
                 if (node1.isLeftChild === true) {
@@ -260,7 +283,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
         }
     }
 
-    private _swap(node1: BSTNode<T>, node2: BSTNode<T>) {
+    protected _swap(node1: AbstractNode<T>, node2: AbstractNode<T>) {
         if (node1.left) {
             node2.left = node1.left;
             node1.left.parent = node2;
@@ -277,7 +300,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
     isValid(): boolean {
         if (!this._root) return true;
 
-        function dfs(cur: BSTNode<T> | null, min: BSTNodeId, max: BSTNodeId): boolean {
+        function dfs(cur: AbstractNode<T> | null, min: BSTNodeId, max: BSTNodeId): boolean {
             if (!cur) return true;
             if ((cur.id <= min) || (cur.id >= max)) return false;
             return dfs(cur.left, min, cur.id) && dfs(cur.right, cur.id, max);
@@ -286,18 +309,18 @@ export abstract class AbstractBST<T> implements I_BST<T> {
         return dfs(this._root!, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
     }
 
-    // insert(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> | null {
-    abstract insert(newNode: BSTNode<T>): BSTNode<T> | null;
+    // insert(id: BSTNodeId, val?: T | null, count?: number): AbstractNode<T> | null {
+    abstract insert(id: BSTNodeId, val?: T | null, count?: number): AbstractNode<T> | null;
 
-    contains(node: BSTNode<T>): boolean {
+    contains(node: AbstractNode<T>): boolean {
         return false;
     }
 
-    remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): BSTNode<T> | null {
+    remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): AbstractNode<T> | null {
         if (isUpdateAllLeftSum === undefined) {
             isUpdateAllLeftSum = true;
         }
-        let cur: BSTNode<T> | null = this.getNode(id, 'id');
+        let cur: AbstractNode<T> | null = this.getNode(id, 'id');
 
         if (!cur) return null;
 
@@ -332,12 +355,12 @@ export abstract class AbstractBST<T> implements I_BST<T> {
     // --- end basic functions
 
     // --- start additional functions
-    getMinNode(node?: BSTNode<T> | null): BSTNode<T> | null {
+    getMinNode(node?: AbstractNode<T> | null): AbstractNode<T> | null {
         if (!node) {
             node = this._root;
         }
 
-        function _traverse(cur: BSTNode<T>): BSTNode<T> {
+        function _traverse(cur: AbstractNode<T>): AbstractNode<T> {
             if (!cur.left) return cur;
             return _traverse(cur.left);
         }
@@ -345,12 +368,12 @@ export abstract class AbstractBST<T> implements I_BST<T> {
         return node ? _traverse(node) : null;
     }
 
-    getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null {
+    getMaxNode(node?: AbstractNode<T> | null): AbstractNode<T> | null {
         if (!node) {
             node = this._root;
         }
 
-        function _traverse(cur: BSTNode<T>): BSTNode<T> {
+        function _traverse(cur: AbstractNode<T>): AbstractNode<T> {
             if (!cur.right) return cur;
             return _traverse(cur.right);
         }
@@ -363,7 +386,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
             propertyName = 'id';
         }
 
-        const result: BSTNode<T>[] = [];
+        const result: AbstractNode<T>[] = [];
 
         // const _isEqual = (property1: any, property2: any) => {
         //     if (typeof property1 === typeof property2) {
@@ -391,7 +414,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
         //     return false;
         // }
 
-        function _traverse(cur: BSTNode<T>) {
+        function _traverse(cur: AbstractNode<T>) {
             switch (propertyName) {
                 case 'id':
                     if (cur.id === nodeProperty) {
@@ -454,20 +477,20 @@ export abstract class AbstractBST<T> implements I_BST<T> {
     BFS(): BSTNodeId[];
     BFS(nodeOrPropertyName: 'id'): BSTNodeId[];
     BFS(nodeOrPropertyName: 'val'): (T | null)[];
-    BFS(nodeOrPropertyName: 'node'): BSTNode<T>[];
+    BFS(nodeOrPropertyName: 'node'): AbstractNode<T>[];
     BFS(nodeOrPropertyName: 'count'): number[];
     BFS(nodeOrPropertyName: 'allLesserSum'): number[];
-    BFS(nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | BSTNode<T> [] | number[] | BSTNodeId[] {
+    BFS(nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | AbstractNode<T> [] | number[] | BSTNodeId[] {
         if (nodeOrPropertyName === undefined) {
             nodeOrPropertyName = 'id';
         }
         let visitedId: BSTNodeId[] = [],
             visitedVal: Array<T | null> = [],
-            visitedNode: BSTNode<T>[] = [],
+            visitedNode: AbstractNode<T>[] = [],
             visitedCount: number[] = [],
             visitedLeftSum: number[] = [];
 
-        function pushByValueType(node: BSTNode<T>) {
+        function pushByValueType(node: AbstractNode<T>) {
             switch (nodeOrPropertyName) {
                 case 'id':
                     visitedId.push(node.id);
@@ -490,7 +513,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
             }
         }
 
-        let queue = new Array<BSTNode<T> | null>();
+        let queue = new Array<AbstractNode<T> | null>();
         queue.push(this.root);
         while (queue.length !== 0) {
             let cur = queue.shift();
@@ -519,10 +542,10 @@ export abstract class AbstractBST<T> implements I_BST<T> {
     DFS(): BSTNodeId[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'id'): BSTNodeId[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
-    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BSTNode<T>[];
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): AbstractNode<T>[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
-    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | BSTNode<T> [] | number[] | BSTNodeId[] {
+    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | AbstractNode<T> [] | number[] | BSTNodeId[] {
         if (pattern === undefined) {
             pattern = 'in';
         }
@@ -531,11 +554,11 @@ export abstract class AbstractBST<T> implements I_BST<T> {
         }
         let visitedId: BSTNodeId[] = [],
             visitedVal: Array<T | null> = [],
-            visitedNode: BSTNode<T>[] = [],
+            visitedNode: AbstractNode<T>[] = [],
             visitedCount: number[] = [],
             visitedLeftSum: number[] = [];
 
-        function pushByValueType(node: BSTNode<T>) {
+        function pushByValueType(node: AbstractNode<T>) {
             switch (nodeOrPropertyName) {
                 case 'id':
                     visitedId.push(node.id);
@@ -558,7 +581,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
             }
         }
 
-        function _traverse(node: BSTNode<T>) {
+        function _traverse(node: AbstractNode<T>) {
             switch (pattern) {
                 case 'in':
                     if (node.left) _traverse(node.left);
@@ -597,13 +620,13 @@ export abstract class AbstractBST<T> implements I_BST<T> {
     }
 
 
-    subTreeSum(subTreeRoot: BSTNode<T>, propertyName ?: PropertyName): number {
+    subTreeSum(subTreeRoot: AbstractNode<T>, propertyName ?: PropertyName): number {
         if (propertyName === undefined) {
             propertyName = 'id'
         }
         let sum = 0;
 
-        function _traverse(cur: BSTNode<T>): void {
+        function _traverse(cur: AbstractNode<T>): void {
             let needSum: number;
             switch (propertyName) {
                 case 'id':
@@ -635,7 +658,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
             propertyName = 'id'
         }
         let sum = 0;
-        const _traverse = (cur: BSTNode<T>): void => {
+        const _traverse = (cur: AbstractNode<T>): void => {
             let needSum: number;
             switch (propertyName) {
                 case 'id':
@@ -685,12 +708,12 @@ export abstract class AbstractBST<T> implements I_BST<T> {
         return sum;
     }
 
-    subTreeAdd(subTreeRoot: BSTNode<T>, delta: number, propertyName ?: PropertyName): boolean {
+    subTreeAdd(subTreeRoot: AbstractNode<T>, delta: number, propertyName ?: PropertyName): boolean {
         if (propertyName === undefined) {
             propertyName = 'id';
         }
 
-        const _traverse = (cur: BSTNode<T>) => {
+        const _traverse = (cur: AbstractNode<T>) => {
             switch (propertyName) {
                 case 'id':
                     cur.id += delta;
@@ -718,12 +741,13 @@ export abstract class AbstractBST<T> implements I_BST<T> {
         return false
     }
 
-    allGreaterNodesAdd(node: BSTNode<T>, delta: number, propertyName ?: PropertyName): boolean {
+    allGreaterNodesAdd(node: AbstractNode<T>, delta: number, propertyName ?: PropertyName): boolean {
+        console.log('allGreaterNodesAdd',node)
         if (propertyName === undefined) {
             propertyName = 'id';
         }
 
-        const _traverse = (cur: BSTNode<T>) => {
+        const _traverse = (cur: AbstractNode<T>) => {
             if (cur.id > node.id) {
                 switch (propertyName) {
                     case 'id':
@@ -755,9 +779,9 @@ export abstract class AbstractBST<T> implements I_BST<T> {
     }
 
     // TODO need to be optimized, it is O(n)
-    getMaxDepth(beginRoot?: BSTNode<T>): number {
+    getMaxDepth(beginRoot?: AbstractNode<T>): number {
         const _beginRoot = beginRoot || this._root;
-        const _getMaxDepth = (cur: BSTNode<T> | null): number => {
+        const _getMaxDepth = (cur: AbstractNode<T> | null): number => {
             if (!cur) return 0;
             let leftHeight = _getMaxDepth(cur.left);
             let rightHeight = _getMaxDepth(cur.right);
@@ -780,7 +804,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
             const m = Math.floor(l + (r - l) / 2);
             const midNode = sorted[Math.floor(l + (r - l) / 2)];
             // this.insert(midNode.id, midNode.val, midNode.count);
-            this.insert(new BSTNode<T>(midNode.id, midNode.val, midNode.count));
+            this.insert(midNode.id, midNode.val, midNode.count);
             buildBalanceBST(l, m - 1);
             buildBalanceBST(m + 1, r);
         }
@@ -795,7 +819,7 @@ export abstract class AbstractBST<T> implements I_BST<T> {
 
     isAVLBalanced(): boolean {
         let balanced = true;
-        const _height = (cur: BSTNode<T> | null): number => {
+        const _height = (cur: AbstractNode<T> | null): number => {
             if (!cur) return 0;
             let leftHeight = _height(cur.left);
             let rightHeight = _height(cur.right);
@@ -814,9 +838,15 @@ export abstract class AbstractBST<T> implements I_BST<T> {
 
 }
 
-export class BST<T> extends AbstractBST<T>{
-    insert(newNode: BSTNode<T>): BSTNode<T> | null {
-        const newValue = newNode.id;
+export class BST<T> extends AbstractBST<T> {
+
+    createNode(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> {
+        return new BSTNode<T>(id, val, count);
+    }
+
+    insert(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> | null {
+        const newNode = this.createNode(id, val, count);
+        const newId = newNode.id;
         if (this._root === null) {
             this._root = newNode;
             this._size++;
@@ -825,13 +855,13 @@ export class BST<T> extends AbstractBST<T>{
             let cur = this._root;
             let traversing = true;
             while (traversing) {
-                if (cur.id === newValue) {
+                if (cur.id === newId) {
                     this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
                     cur.count += newNode.count;
                     //Duplicates are not accepted.
                     traversing = false;
                     return cur;
-                } else if (newValue < cur.id) {
+                } else if (newId < cur.id) {
                     this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
                     if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
                     // Traverse left of the node
@@ -848,7 +878,7 @@ export class BST<T> extends AbstractBST<T>{
                         //Traverse the left of the current node
                         cur = cur.left;
                     }
-                } else if (newValue > cur.id) {
+                } else if (newId > cur.id) {
                     // Traverse right of the node
                     if (cur.right === null) {
                         if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
