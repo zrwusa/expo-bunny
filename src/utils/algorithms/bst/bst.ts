@@ -1,9 +1,9 @@
-import {BST, BSTNode} from "../../data-structures/binary-tree";
+import {AVLTreeNode, BST, BSTNode} from "../../data-structures/binary-tree";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 import {testBSTCase1} from "./cases";
 import {runAlgorithm} from "../helpers";
 import {wait} from "../../utils";
-import {AVLTree, AVLTreeNode} from "../../data-structures/binary-tree/avl-tree";
+import {AVLTree} from "../../data-structures/binary-tree/avl-tree";
 /* --- start BST --- */
 //98	Validate Binary Search Tree	★★	530					DFS/inorder
 // 700	Search in a Binary Search Tree	★★	701				binary search
