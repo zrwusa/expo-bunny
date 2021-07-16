@@ -1,17 +1,7 @@
-import {
-    AbstractBST, AbstractNode,
-    AVLTreeNode,
-    BST,
-    BSTNode,
-    BSTNodeId,
-    DFSOrderPattern,
-    NodeOrPropertyName,
-    PropertyName
-} from "./bst";
+import {AbstractBST, AVLTreeNode, BSTNode, BSTNodeId} from "./bst";
 
 
-
-export class AVLTree<T> extends AbstractBST<T> {
+export class AVLTree<T> extends AbstractBST<T, AVLTreeNode<T>> {
 
     createNode(id: BSTNodeId, val?: T | null, count?: number): AVLTreeNode<T> {
         return new AVLTreeNode<T>(id, val, count);
@@ -23,7 +13,7 @@ export class AVLTree<T> extends AbstractBST<T> {
         if (this._root === null) {
             this._root = newNode;
             this._size++;
-            return this._root as AVLTreeNode<T>;
+            return this._root;
         } else {
             let cur = this._root;
             let traversing = true;
@@ -33,7 +23,7 @@ export class AVLTree<T> extends AbstractBST<T> {
                     cur.count += newNode.count;
                     //Duplicates are not accepted.
                     traversing = false;
-                    return cur as AVLTreeNode<T>;
+                    return cur;
                 } else if (newId < cur.id) {
                     this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
                     if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
@@ -46,7 +36,7 @@ export class AVLTree<T> extends AbstractBST<T> {
                         cur.left = newNode;
                         this._size++;
                         traversing = false;
-                        return cur.left as AVLTreeNode<T>;
+                        return cur.left;
                     } else {
                         //Traverse the left of the current node
                         cur = cur.left;
@@ -61,7 +51,7 @@ export class AVLTree<T> extends AbstractBST<T> {
                         cur.right = newNode;
                         this._size++;
                         traversing = false;
-                        return cur.right as AVLTreeNode<T>;
+                        return cur.right;
                     } else {
                         //Traverse the left of the current node
                         cur = cur.right;
@@ -70,6 +60,33 @@ export class AVLTree<T> extends AbstractBST<T> {
             }
         }
         return null
+    }
+
+    remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): AVLTreeNode<T> | null {
+        if (isUpdateAllLeftSum === undefined) {
+            isUpdateAllLeftSum = true;
+        }
+        let cur: AVLTreeNode<T> | null = this.getNode(id, 'id');
+
+        if (!cur) return null;
+
+        this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(cur, -cur.count, 'allLesserSum');
+
+        if (!cur.left && !cur.right) {
+            this._replaceWithASubTree(cur, null);
+        } else if (cur.left && !cur.right) {
+            this._replaceWithASubTree(cur, cur.left)
+        } else if (!cur.left && cur.right) {
+            this._replaceWithASubTree(cur, cur.right);
+        } else if (cur.left && cur.right) {
+            const minNode = this.getMinNode(cur.right);
+            if (minNode) {
+                this.remove(minNode.id, false);
+                this._swap(cur, minNode);
+            }
+        }
+
+        return cur;
     }
 }
 

@@ -13,7 +13,7 @@ import {
     getDirectionVector,
     SinglyLinkedListNode,
     Stack,
-    uuidV4, AbstractBST, AbstractNode
+    uuidV4, AbstractBST, AbstractBSTNode, AVLTreeNode
 } from "../../utils";
 import {Card} from "../../containers/Card";
 import {TreeNode} from "../../types";
@@ -103,7 +103,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | AbstractNode<any> | null, maxDepth?: number }> = ({node, maxDepth}) => {
+    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | AbstractBSTNode<number, BSTNode<number> | AVLTreeNode<number>> | null, maxDepth?: number }> = ({node, maxDepth}) => {
         return (
             <VividTreeContainer>
                 {
