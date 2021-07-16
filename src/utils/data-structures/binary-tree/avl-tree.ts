@@ -1,13 +1,28 @@
-import {AbstractBST, AVLTreeNode, BSTNode, BSTNodeId} from "./bst";
+import {AbstractBST, AbstractBSTNode, BinaryTreeNodeId} from "./bst";
 
+export type BalanceFactor = number;
+
+const AVL_BALANCED_FACTORS = [-1, 0, 1];
+
+export class AVLTreeNode<T> extends AbstractBSTNode<T, AVLTreeNode<T>> {
+    protected _balanceFactor: BalanceFactor = 0;
+
+    public get balanceFactor(): BalanceFactor {
+        return this._balanceFactor;
+    }
+
+    public set balanceFactor(v: BalanceFactor) {
+        this._balanceFactor = v;
+    }
+}
 
 export class AVLTree<T> extends AbstractBST<T, AVLTreeNode<T>> {
 
-    createNode(id: BSTNodeId, val?: T | null, count?: number): AVLTreeNode<T> {
+    createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): AVLTreeNode<T> {
         return new AVLTreeNode<T>(id, val, count);
     }
 
-    insert(id: BSTNodeId, val?: T | null, count?: number): AVLTreeNode<T> | null {
+    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): AVLTreeNode<T> | null {
         const newNode = this.createNode(id, val, count);
         const newId = newNode.id;
         if (this._root === null) {
@@ -62,7 +77,7 @@ export class AVLTree<T> extends AbstractBST<T, AVLTreeNode<T>> {
         return null
     }
 
-    remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): AVLTreeNode<T> | null {
+    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): AVLTreeNode<T> | null {
         if (isUpdateAllLeftSum === undefined) {
             isUpdateAllLeftSum = true;
         }
