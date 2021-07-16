@@ -3,6 +3,7 @@ import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 import {testBSTCase1} from "./cases";
 import {runAlgorithm} from "../helpers";
 import {wait} from "../../utils";
+import {AVLTree, AVLTreeNode} from "../../data-structures/binary-tree/avl-tree";
 /* --- start BST --- */
 //98	Validate Binary Search Tree	★★	530					DFS/inorder
 // 700	Search in a Binary Search Tree	★★	701				binary search
@@ -89,9 +90,10 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     const waitingMS = 100;
     const waitingMS1 = 200;
     const waitingMS2 = 300;
-    const proxyVariables: { bst: BST<number> } = new DeepProxy({bst: new BST<number>(arrCopy[0], arrCopy[0], true)}, proxyHandler);
+    const proxyVariables: { bst: BST<number> } = new DeepProxy({bst: new BST<number>(new BSTNode<number>(arrCopy[0], arrCopy[0]), true)}, proxyHandler);
+
     for (let i of rest) {
-        proxyVariables.bst.insert(i, i);
+        proxyVariables.bst.insert(new BSTNode<number>(i, i));
         await wait(waitingMS);
     }
 
@@ -205,6 +207,20 @@ const runTestBST = async () => {
     await runAlgorithm(testBST, false, ...testBSTCase1);
 }
 
-// runTestBST().then()
+runTestBST().then()
 
+const testAVLTree = async (arr: number[], proxyHandler?: TProxyHandler) => {
+    const arrCopy = [...arr];
+    const rest = arrCopy.splice(1);
+    const proxyObj: { avlTree: AVLTree<number> } = new DeepProxy({avlTree: new AVLTree<number>(new AVLTreeNode<number>(arrCopy[0], arrCopy[0]), true)}, proxyHandler);
+    const waitingMS = 100;
+    const waitingMS1 = 200;
+    const waitingMS2 = 300;
+
+}
+const runTestAVLTree = async () => {
+    await runAlgorithm(testAVLTree, false, ...testBSTCase1);
+}
+
+// runTestAVLTree().then();
 /* --- end BST --- */

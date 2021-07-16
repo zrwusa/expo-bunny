@@ -1,13 +1,10 @@
-type PropertyName = 'id' | 'val' | 'count' | 'allLesserSum';
-type NodeOrPropertyName = 'node' | PropertyName;
-type DFSOrderPattern = 'in' | 'pre' | 'post';
-type BSTNodeId = number;
-type BSTNodeVal<T extends BSTNode<any>> = T extends BSTNode<infer U>
+export type PropertyName = 'id' | 'val' | 'count' | 'allLesserSum';
+export type NodeOrPropertyName = 'node' | PropertyName;
+export type DFSOrderPattern = 'in' | 'pre' | 'post';
+export type BSTNodeId = number;
+export type BSTNodeVal<T extends BSTNode<any>> = T extends BSTNode<infer U>
     ? U
     : any;
-
-type AVLBalanceFactor = -1 | 0 | 1;
-type BalanceFactor = number;
 
 export class BSTNode<V> {
     private _id: BSTNodeId;
@@ -82,15 +79,6 @@ export class BSTNode<V> {
         this._isLeftChild = v;
     }
 
-    private _balanceFactor: BalanceFactor;
-    public get balanceFactor(): BalanceFactor {
-        return this._balanceFactor;
-    }
-
-    public set balanceFactor(v: BalanceFactor) {
-        this._id = v;
-    }
-
     constructor(id: BSTNodeId, val?: V | null, count?: number) {
         if (val === undefined) {
             val = null;
@@ -106,12 +94,103 @@ export class BSTNode<V> {
         this._allLesserSum = 0;
         this._parent = null;
         this._isLeftChild = null;
+    }
+}
+
+type BalanceFactor = number;
+
+const AVL_BALANCED_FACTORS = [-1, 0, 1];
+
+export class AVLTreeNode<V> extends BSTNode<V> {
+    private _balanceFactor: BalanceFactor;
+
+    public get balanceFactor(): BalanceFactor {
+        return this._balanceFactor;
+    }
+
+    public set balanceFactor(v: BalanceFactor) {
+        this._balanceFactor = v;
+    }
+
+    constructor(id: BSTNodeId, val?: V | null, count?: number) {
+        super(id, val, count);
         this._balanceFactor = 0;
     }
 }
 
-export class BST<T> {
-    private _root: BSTNode<T> | null;
+interface I_BST<T> {
+    isValid(): boolean;
+
+    // insert(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> | null {
+    insert(newNode: BSTNode<T>): BSTNode<T> | null;
+
+    contains(node: BSTNode<T>): boolean;
+
+    remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): BSTNode<T> | null;
+
+    clear(): void;
+
+    isEmpty(): boolean;
+
+    // --- end basic functions
+
+    // --- start additional functions
+    getMinNode(node?: BSTNode<T> | null): BSTNode<T> | null;
+
+    getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null;
+
+    getNodes(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName, onlyOne ?: boolean): BSTNode<T>[];
+
+    getNode(nodeProperty: T | BSTNodeId, propertyName ?: PropertyName): BSTNode<T>;
+
+    BFS(): BSTNodeId[];
+
+    BFS(nodeOrPropertyName: 'id'): BSTNodeId[];
+
+    BFS(nodeOrPropertyName: 'val'): (T | null)[];
+
+    BFS(nodeOrPropertyName: 'node'): BSTNode<T>[];
+
+    BFS(nodeOrPropertyName: 'count'): number[];
+
+    BFS(nodeOrPropertyName: 'allLesserSum'): number[];
+
+    BFS(nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | BSTNode<T> [] | number[] | BSTNodeId[];
+
+    DFS(): BSTNodeId[];
+
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'id'): BSTNodeId[];
+
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
+
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BSTNode<T>[];
+
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
+
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
+
+    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: NodeOrPropertyName): Array<T | null> | BSTNode<T> [] | number[] | BSTNodeId[];
+
+
+    subTreeSum(subTreeRoot: BSTNode<T>, propertyName ?: PropertyName): number;
+
+    lesserSum(id: BSTNodeId, propertyName ?: PropertyName): number;
+
+    subTreeAdd(subTreeRoot: BSTNode<T>, delta: number, propertyName ?: PropertyName): boolean;
+
+    allGreaterNodesAdd(node: BSTNode<T>, delta: number, propertyName ?: PropertyName): boolean;
+
+    // TODO need to be optimized, it is O(n)
+    getMaxDepth(beginRoot?: BSTNode<T>): number;
+
+    balance(): boolean;
+
+    isAVLBalanced(): boolean;
+
+}
+
+export abstract class AbstractBST<T> implements I_BST<T> {
+    protected _root: BSTNode<T> | null;
     public get root(): BSTNode<T> | null {
         return this._root;
     }
@@ -120,7 +199,29 @@ export class BST<T> {
         this._root = v;
     }
 
-    private readonly _autoAllLesserSum: boolean = false;
+    protected _size: number;
+    public get size(): number {
+        return this.size;
+    }
+
+    public set size(v: number) {
+        this._size = v;
+    }
+
+    protected readonly _autoAllLesserSum: boolean = false;
+
+    constructor(rootNode?: BSTNode<T> | null, autoPrefixSum?: boolean) {
+        if (rootNode === undefined) {
+            this._root = null;
+            this._size = 0;
+        } else {
+            this._root = rootNode;
+            this._size = 1;
+        }
+        if (autoPrefixSum) {
+            this._autoAllLesserSum = true;
+        }
+    }
 
     private _replaceWithASubTree(node1: BSTNode<T>, node2: BSTNode<T> | null) {
         if (node1 && !node2) {
@@ -172,28 +273,6 @@ export class BST<T> {
         this._replaceWithASubTree(node1, node2);
     }
 
-    constructor(rootNodeOrId?: BSTNode<T> | BSTNodeId | null, val?: T | null, autoPrefixSum?: boolean) {
-        if (rootNodeOrId === undefined) {
-            rootNodeOrId = null;
-            this._root = null;
-        }
-        if (val === undefined) {
-            val = null;
-        }
-        if (autoPrefixSum) {
-            this._autoAllLesserSum = true;
-        }
-        if (rootNodeOrId instanceof BSTNode) {
-            rootNodeOrId.count = 1;
-            if (val !== undefined) rootNodeOrId.val = val;
-            this._root = rootNodeOrId;
-        } else {
-            const nodeRoot = rootNodeOrId ? new BSTNode<T>(rootNodeOrId, val) : null;
-            if (nodeRoot) nodeRoot.count = 1;
-            this._root = nodeRoot;
-        }
-    }
-
     // --- start basic functions
     isValid(): boolean {
         if (!this._root) return true;
@@ -207,56 +286,11 @@ export class BST<T> {
         return dfs(this._root!, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
     }
 
-    insert(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> | null {
-        const newNode = new BSTNode<T>(id, val, count);
-        const newValue = newNode.id;
-        if (this._root === null) {
-            this._root = newNode;
-            return this._root;
-        } else {
-            let cur = this._root;
-            let traversing = true;
-            while (traversing) {
-                if (cur.id === newValue) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
-                    cur.count += newNode.count;
-                    //Duplicates are not accepted.
-                    traversing = false;
-                    return cur;
-                } else if (newValue < cur.id) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
-                    if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
-                    // Traverse left of the node
-                    if (cur.left === null) {
-                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - newNode.count;
-                        newNode.parent = cur;
-                        newNode.isLeftChild = true;
-                        //Add to the left of the current node
-                        cur.left = newNode;
-                        traversing = false;
-                        return cur.left;
-                    } else {
-                        //Traverse the left of the current node
-                        cur = cur.left;
-                    }
-                } else if (newValue > cur.id) {
-                    // Traverse right of the node
-                    if (cur.right === null) {
-                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
-                        newNode.parent = cur;
-                        newNode.isLeftChild = false;
-                        //Add to the right of the current node
-                        cur.right = newNode;
-                        traversing = false;
-                        return cur.right;
-                    } else {
-                        //Traverse the left of the current node
-                        cur = cur.right;
-                    }
-                }
-            }
-        }
-        return null
+    // insert(id: BSTNodeId, val?: T | null, count?: number): BSTNode<T> | null {
+    abstract insert(newNode: BSTNode<T>): BSTNode<T> | null;
+
+    contains(node: BSTNode<T>): boolean {
+        return false;
     }
 
     remove(id: BSTNodeId, isUpdateAllLeftSum?: boolean): BSTNode<T> | null {
@@ -288,6 +322,11 @@ export class BST<T> {
 
     clear() {
         this._root = null;
+        this._size = 0;
+    }
+
+    isEmpty(): boolean {
+        return this._size === 0;
     }
 
     // --- end basic functions
@@ -301,6 +340,19 @@ export class BST<T> {
         function _traverse(cur: BSTNode<T>): BSTNode<T> {
             if (!cur.left) return cur;
             return _traverse(cur.left);
+        }
+
+        return node ? _traverse(node) : null;
+    }
+
+    getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null {
+        if (!node) {
+            node = this._root;
+        }
+
+        function _traverse(cur: BSTNode<T>): BSTNode<T> {
+            if (!cur.right) return cur;
+            return _traverse(cur.right);
         }
 
         return node ? _traverse(node) : null;
@@ -719,7 +771,7 @@ export class BST<T> {
         }
     }
 
-    balance() {
+    balance(): boolean {
         const sorted = this.DFS('in', 'node');
 
         this.clear();
@@ -727,7 +779,8 @@ export class BST<T> {
             if (l > r) return;
             const m = Math.floor(l + (r - l) / 2);
             const midNode = sorted[Math.floor(l + (r - l) / 2)];
-            this.insert(midNode.id, midNode.val, midNode.count);
+            // this.insert(midNode.id, midNode.val, midNode.count);
+            this.insert(new BSTNode<T>(midNode.id, midNode.val, midNode.count));
             buildBalanceBST(l, m - 1);
             buildBalanceBST(m + 1, r);
         }
@@ -758,4 +811,61 @@ export class BST<T> {
     }
 
     // --- end additional functions
+
+}
+
+export class BST<T> extends AbstractBST<T>{
+    insert(newNode: BSTNode<T>): BSTNode<T> | null {
+        const newValue = newNode.id;
+        if (this._root === null) {
+            this._root = newNode;
+            this._size++;
+            return this._root;
+        } else {
+            let cur = this._root;
+            let traversing = true;
+            while (traversing) {
+                if (cur.id === newValue) {
+                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
+                    cur.count += newNode.count;
+                    //Duplicates are not accepted.
+                    traversing = false;
+                    return cur;
+                } else if (newValue < cur.id) {
+                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
+                    if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
+                    // Traverse left of the node
+                    if (cur.left === null) {
+                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - newNode.count;
+                        newNode.parent = cur;
+                        newNode.isLeftChild = true;
+                        //Add to the left of the current node
+                        cur.left = newNode;
+                        this._size++;
+                        traversing = false;
+                        return cur.left;
+                    } else {
+                        //Traverse the left of the current node
+                        cur = cur.left;
+                    }
+                } else if (newValue > cur.id) {
+                    // Traverse right of the node
+                    if (cur.right === null) {
+                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
+                        newNode.parent = cur;
+                        newNode.isLeftChild = false;
+                        //Add to the right of the current node
+                        cur.right = newNode;
+                        this._size++;
+                        traversing = false;
+                        return cur.right;
+                    } else {
+                        //Traverse the left of the current node
+                        cur = cur.right;
+                    }
+                }
+            }
+        }
+        return null
+    }
 }
