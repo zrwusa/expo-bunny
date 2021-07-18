@@ -3,108 +3,6 @@ export type NodeOrPropertyName = 'node' | PropertyName;
 export type DFSOrderPattern = 'in' | 'pre' | 'post';
 export type BinaryTreeNodeId = number;
 
-class BinaryTreeNode<T> {
-    protected _id: BinaryTreeNodeId;
-    public get id(): BinaryTreeNodeId {
-        return this._id;
-    }
-
-    public set id(v: BinaryTreeNodeId) {
-        this._id = v;
-    }
-
-    protected _val: T | null = null;
-    public get val(): T | null {
-        return this._val;
-    }
-
-    public set val(v: T | null) {
-        this._val = v;
-    }
-
-    protected _left: BinaryTreeNode<T> | null = null;
-    public get left(): BinaryTreeNode<T> | null {
-        return this._left;
-    }
-
-    public set left(v: BinaryTreeNode<T> | null) {
-        this._left = v;
-    }
-
-    protected _right: BinaryTreeNode<T> | null = null;
-    public get right(): BinaryTreeNode<T> | null {
-        return this._right;
-    }
-
-    public set right(v: BinaryTreeNode<T> | null) {
-        this._right = v;
-    }
-
-    protected _parent: BinaryTreeNode<T> | null = null;
-    public get parent(): BinaryTreeNode<T> | null {
-        return this._parent;
-    }
-
-    public set parent(v: BinaryTreeNode<T> | null) {
-        this._parent = v;
-    }
-
-    protected _isLeftChild: boolean | null = null;
-    public get isLeftChild(): boolean | null {
-        return this._isLeftChild;
-    }
-
-    public set isLeftChild(v: boolean | null) {
-        this._isLeftChild = v;
-    }
-
-    protected _count: number = 1;
-    public get count(): number {
-        return this._count;
-    }
-
-    public set count(v: number) {
-        this._count = v;
-    }
-
-    protected _height: number = 0;
-
-    public get height(): number {
-        return this._height;
-    }
-
-    public set height(v: number) {
-        this._height = v;
-    }
-
-    protected _allLesserSum: number = 0;
-    public get allLesserSum(): number {
-        return this._allLesserSum;
-    }
-
-    public set allLesserSum(v: number) {
-        this._allLesserSum = v;
-    }
-
-    constructor(id: BinaryTreeNodeId, val?: T | null, count?: number) {
-        if (val === undefined) {
-            val = null;
-        }
-        if (count === undefined) {
-            count = 1;
-        }
-        this._id = id;
-        this._val = val;
-        this._count = count;
-    }
-}
-
-export class BSTNode<V> extends BinaryTreeNode<V> {
-    constructor(id: BinaryTreeNodeId, val?: V | null, count?: number) {
-        super(id, val, count);
-    }
-}
-
 interface I_BinaryTree<T> {
     clear(): void;
 
@@ -151,7 +49,7 @@ interface I_BinaryTree<T> {
     subTreeSum(subTreeRoot: BinaryTreeNode<T>, propertyName ?: PropertyName): number;
 }
 
-abstract class BinaryTree<T> implements I_BinaryTree<T> {
+abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     protected _root: BinaryTreeNode<T> | null = null;
     public get root(): BinaryTreeNode<T> | null {
         return this._root;
@@ -178,7 +76,6 @@ abstract class BinaryTree<T> implements I_BinaryTree<T> {
     }
 
     abstract createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): BinaryTreeNode<T>;
-
 
     clear() {
         this._root = null;
@@ -477,7 +374,115 @@ abstract class BinaryTree<T> implements I_BinaryTree<T> {
     }
 }
 
-export interface I_AbstractBST<T> {
+class BinaryTreeNode<T> {
+    protected _id: BinaryTreeNodeId;
+    public get id(): BinaryTreeNodeId {
+        return this._id;
+    }
+
+    public set id(v: BinaryTreeNodeId) {
+        this._id = v;
+    }
+
+    protected _val: T | null = null;
+    public get val(): T | null {
+        return this._val;
+    }
+
+    public set val(v: T | null) {
+        this._val = v;
+    }
+
+    protected _left: BinaryTreeNode<T> | null = null;
+    public get left(): BinaryTreeNode<T> | null {
+        return this._left;
+    }
+
+    public set left(v: BinaryTreeNode<T> | null) {
+        this._left = v;
+    }
+
+    protected _right: BinaryTreeNode<T> | null = null;
+    public get right(): BinaryTreeNode<T> | null {
+        return this._right;
+    }
+
+    public set right(v: BinaryTreeNode<T> | null) {
+        this._right = v;
+    }
+
+    protected _parent: BinaryTreeNode<T> | null = null;
+    public get parent(): BinaryTreeNode<T> | null {
+        return this._parent;
+    }
+
+    public set parent(v: BinaryTreeNode<T> | null) {
+        this._parent = v;
+    }
+
+    protected _isLeftChild: boolean | null = null;
+    public get isLeftChild(): boolean | null {
+        return this._isLeftChild;
+    }
+
+    public set isLeftChild(v: boolean | null) {
+        this._isLeftChild = v;
+    }
+
+    protected _count: number = 1;
+    public get count(): number {
+        return this._count;
+    }
+
+    public set count(v: number) {
+        this._count = v;
+    }
+
+    protected _height: number = 0;
+
+    public get height(): number {
+        return this._height;
+    }
+
+    public set height(v: number) {
+        this._height = v;
+    }
+
+    protected _allLesserSum: number = 0;
+    public get allLesserSum(): number {
+        return this._allLesserSum;
+    }
+
+    public set allLesserSum(v: number) {
+        this._allLesserSum = v;
+    }
+
+    constructor(id: BinaryTreeNodeId, val?: T | null, count?: number) {
+        if (val === undefined) {
+            val = null;
+        }
+        if (count === undefined) {
+            count = 1;
+        }
+        this._id = id;
+        this._val = val;
+        this._count = count;
+    }
+}
+
+export class BinaryTree<T> extends AbstractBinaryTree<T>{
+    createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): BinaryTreeNode<T> {
+       return new BinaryTreeNode(id, val, count)
+    }
+}
+
+export class BSTNode<V> extends BinaryTreeNode<V> {
+    constructor(id: BinaryTreeNodeId, val?: V | null, count?: number) {
+        super(id, val, count);
+    }
+}
+
+export interface I_BST<T> {
     // --- start basic functions
     isValid(): boolean;
 
@@ -507,7 +512,7 @@ export interface I_AbstractBST<T> {
     // --- end additional functions
 }
 
-export class BST<T> extends BinaryTree<T> implements I_AbstractBST<T> {
+export class BST<T> extends AbstractBinaryTree<T> implements I_BST<T> {
 
     protected readonly _autoAllLesserSum: boolean = false;
 
