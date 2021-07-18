@@ -1,4 +1,5 @@
-import {BinaryTreeNodeId, BST, BSTNode} from "./bst";
+import { BST, BSTNode} from "./bst";
+import {BinaryTreeNodeId} from "./binary-tree";
 
 export class AVLTreeNode<T> extends BSTNode<T> {
 

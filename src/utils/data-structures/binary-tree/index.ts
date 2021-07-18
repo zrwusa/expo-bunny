@@ -1,3 +1,3 @@
-export * from "./BinaryTree"
+export * from "./binary-tree"
 export * from "./bst"
-export * from "./BinaryIndexedTree"
+export * from "./binary-indexed-tree"

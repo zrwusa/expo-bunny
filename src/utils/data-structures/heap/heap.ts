@@ -1,8 +1,8 @@
 // Online Algorithms use Heap (e.g. Top K problems)
 // Offline Algorithms use sort
 
-type PropertyName = 'id' | 'val';
-type NodeOrPropertyName = 'node' | PropertyName;
+type HeapNodePropertyName = 'id' | 'val';
+type HeapNodeOrPropertyName = 'node' | HeapNodePropertyName;
 type DFSMode = 'pre' | 'in' | 'post';
 
 type HeapNodeVal<T extends HeapNode<any> | number> = T extends HeapNode<infer U>
@@ -214,7 +214,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
     sort(nodeOrPropertyName: 'id'): number[];
     sort(nodeOrPropertyName: 'val'): (V | null)[];
     sort(nodeOrPropertyName: 'node'): HeapNode<V>[];
-    sort(nodeOrPropertyName?: NodeOrPropertyName) {
+    sort(nodeOrPropertyName?: HeapNodeOrPropertyName) {
         const visitedId: (number | string)[] = [];
         const visitedVal: (V | null)[] = [];
         const visitedNode: HeapNode<V>[] = [];
@@ -271,7 +271,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
     DFS(dfsMode: DFSMode, nodeOrPropertyName: 'id'): number[];
     DFS(dfsMode: DFSMode, nodeOrPropertyName: 'val'): (V | null)[];
     DFS(dfsMode: DFSMode, nodeOrPropertyName: 'node'): HeapNode<V>[];
-    DFS(dfsMode: DFSMode, nodeOrPropertyName?: NodeOrPropertyName) {
+    DFS(dfsMode: DFSMode, nodeOrPropertyName?: HeapNodeOrPropertyName) {
         const visitedId: (number | string)[] = [];
         const visitedVal: (V | null)[] = [];
         const visitedNode: HeapNode<V>[] = [];

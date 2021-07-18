@@ -41,31 +41,46 @@ import {
 
 export async function binaryTreeInorderTraversal(root: BinaryTreeNode<number> | undefined, proxyHandler: TProxyHandler): Promise<number[]> {
     type Variables = {
-        node: BinaryTreeNode<number> | undefined
+        node: BinaryTreeNode<number> | null
     }
 
-    let proxyVariables = new DeepProxy<Variables>({node: undefined}, proxyHandler);
+    let proxyVariables = new DeepProxy<Variables>({node: null}, proxyHandler);
 
     if (!root) {
         return []
     }
 
-    const leftResult = await binaryTreeInorderTraversal(root.left, proxyHandler);
-
+    let leftResult = root.left && await binaryTreeInorderTraversal(root.left, proxyHandler);
+    await wait(500);
     proxyVariables.node = root.left;
 
+    await wait(500);
     proxyVariables.node = root;
 
-    const rightResult = await binaryTreeInorderTraversal(root.right, proxyHandler);
+    const rightResult = root.right && await binaryTreeInorderTraversal(root.right, proxyHandler);
+    await wait(500);
     proxyVariables.node = root.right;
 
-    await wait(500);
 
-    return [
-        ...leftResult,
-        root.id!,
-        ...rightResult
-    ]
+    if (leftResult && rightResult) {
+        return [
+            ...leftResult,
+            root.id,
+            ...rightResult
+        ]
+    } else if (leftResult) {
+        return [
+            ...leftResult,
+            root.id]
+    } else if (rightResult) {
+        return [
+            root.id,
+            ...rightResult
+        ]
+    } else {
+        return  [root.id]
+    }
+
 }
 
 export const DFS = async (node: TreeNode<number>, type: OrderType, proxyHandler: TProxyHandler) => {

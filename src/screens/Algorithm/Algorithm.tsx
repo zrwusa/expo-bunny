@@ -25,7 +25,7 @@ import {
     treeMaxDepth
 } from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
-import {BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
+import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
 
 export function AlgorithmScreen() {
@@ -33,14 +33,18 @@ export function AlgorithmScreen() {
     const styles = getStyles(sizeLabor, themeLabor);
 
     const [binaryTreeInorderTraversalVariables, setBinaryTreeInorderTraversalVariables] = useState<{ [key in string]: BinaryTreeNode<any> }>()
-    const binaryTree: BinaryTreeNode<any> = new BinaryTreeNode(1, undefined,
-        new BinaryTreeNode(2, new BinaryTreeNode(3)));
+    const binaryTreeNode1 = new BinaryTreeNode<number>(1);
+    const binaryTreeNode2 = new BinaryTreeNode<number>(2);
+    const binaryTreeNode3 = new BinaryTreeNode<number>(3);
+    binaryTreeNode2.left = binaryTreeNode3;
+    binaryTreeNode1.right = binaryTreeNode2;
+    const binaryTree = new BinaryTree<number>(binaryTreeNode1)
     const _binaryTreeInorderTraversal = async () => {
-        await binaryTreeInorderTraversal(binaryTree, ({value, key, DEFAULT}) => {
-            console.log(key, value);
-            setBinaryTreeInorderTraversalVariables(prevState => ({...prevState, [key!.toString()]: value}));
-            return DEFAULT
-        })
+            await binaryTreeInorderTraversal(binaryTree.root!, ({value, key, DEFAULT}) => {
+                console.log(key, value);
+                setBinaryTreeInorderTraversalVariables(prevState => ({...prevState, [key!.toString()]: value}));
+                return DEFAULT
+            })
     }
 
     const [DFSVariables, setDFSVariables] = useState<{ [key in string]: TreeNode<number> }>()
@@ -223,7 +227,7 @@ export function AlgorithmScreen() {
                     {
                         binaryTreeInorderTraversalVariables
                             ? <VividAlgorithm data={binaryTreeInorderTraversalVariables}
-                                              referenceData={binaryTree} relatedNodeKey="node"/>
+                                              referenceData={binaryTree.root} relatedNodeKey="node"/>
                             : null
                     }
                     {

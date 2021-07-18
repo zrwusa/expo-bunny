@@ -1,1 +1,1 @@
-export * from "./HashTable"
+export * from "./hash-table"
