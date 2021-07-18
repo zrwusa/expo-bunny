@@ -1,9 +1,10 @@
-import {AbstractBST, AbstractBSTNode, BinaryTreeNodeId} from "./bst";
+import {BinaryTreeNodeId, BST, BSTNode} from "./bst";
 
-export class AVLTreeNode<T> extends AbstractBSTNode<T, AVLTreeNode<T>> {
+export class AVLTreeNode<T> extends BSTNode<T> {
+
 }
 
-export class AVLTree<T> extends AbstractBST<T, AVLTreeNode<T>> {
+export class AVLTree<T> extends BST<T> {
 
     protected balanceFactor(node: AVLTreeNode<T>): number {
         if (node.right === null) // node has no right subtree

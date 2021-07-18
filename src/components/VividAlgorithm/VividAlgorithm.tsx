@@ -6,10 +6,9 @@ import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
 import {
-    AbstractBST,
-    AbstractBSTNode,
-    BinaryTreeNode,
+    BST,
     BSTNode,
+    BinaryTreeNode,
     Coordinate,
     getDirectionVector,
     SinglyLinkedListNode,
@@ -20,7 +19,6 @@ import {Card} from "../../containers/Card";
 import {TreeNode} from "../../types";
 import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText, TSpan} from "react-native-svg";
 import {ScrollView} from "react-native";
-import {AVLTreeNode} from "../../utils/data-structures/binary-tree/avl-tree";
 
 export interface VividAlgorithmProps<T> {
     data?: T,
@@ -105,7 +103,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | AbstractBSTNode<number, BSTNode<number> | AVLTreeNode<number>> | null, maxHeight?: number }> = ({node, maxHeight}) => {
+    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | BSTNode<number> | null, maxHeight?: number }> = ({node, maxHeight}) => {
         return (
             <VividTreeContainer>
                 {
@@ -336,7 +334,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     <TSpan x={offsetX} y={offsetY + fontOffsetY}>{node.id}</TSpan>
                     <TSpan x={offsetX} y={offsetY + fontOffsetY + fontSize + wp(2)}>{node.count}</TSpan>
                     {
-                        node instanceof AbstractBSTNode
+                        node instanceof BSTNode
                             ? <TSpan x={offsetX}
                                      y={offsetY + fontOffsetY + 2 * fontSize + wp(4)}>{node.allLesserSum}</TSpan>
                             : null
@@ -430,7 +428,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     return <VividTree data={item}/>
                 } else if (item instanceof BinaryTreeNode) {
                     return <VividBinaryTreeNode data={item}/>;
-                } else if (item instanceof AbstractBST) {
+                } else if (item instanceof BST) {
                     return <VividBinaryTree node={item.root} maxHeight={item.getHeight()}/>;
                 } else if (item instanceof SinglyLinkedListNode) {
                     return <VividLinkedListNode data={item}/>
