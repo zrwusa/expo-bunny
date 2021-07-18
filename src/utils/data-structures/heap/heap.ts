@@ -1,19 +1,8 @@
 // Online Algorithms use Heap (e.g. Top K problems)
 // Offline Algorithms use sort
-
 type HeapNodePropertyName = 'id' | 'val';
 type HeapNodeOrPropertyName = 'node' | HeapNodePropertyName;
 type DFSMode = 'pre' | 'in' | 'post';
-
-type HeapNodeVal<T extends HeapNode<any> | number> = T extends HeapNode<infer U>
-    ? U
-    : unknown;
-
-type HeapNodeType<T extends HeapNode<any> | number> = T extends number
-    ? number
-    : T extends HeapNode<infer U>
-        ? HeapNode<U>
-        : unknown;
 
 export class HeapNode<V> {
     private _id: number | string;

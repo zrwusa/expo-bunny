@@ -1,6 +1,6 @@
 /* --- start heap --- */
 // 215. Kth Largest Element in an Array ★★★★
-// O(nlogk)
+// O(nLog(k))
 import {HeapNode, MaxHeap, MinHeap} from "../../data-structures/heap";
 import {runAlgorithm} from "../helpers";
 import {
@@ -16,14 +16,6 @@ import {SinglyLinkedListNode} from "../../data-structures/linked-list";
 export function findKthLargestMinHeap(nums: number[], k: number): number {
     const heap = new MinHeap<number, number>([]);
     for (let i of nums) {
-        // if (heap.size() === k) {
-        //     if (i > heap.peek()!) {
-        //         heap.add(i);
-        //         heap.poll();
-        //     }
-        // } else {
-        //     heap.add(i);
-        // }
         if (heap.size() < k || i >= heap.peek()!) {
             heap.insert(i);
         }
