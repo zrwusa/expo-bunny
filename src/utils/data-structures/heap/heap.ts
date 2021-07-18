@@ -338,6 +338,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
                 return visitedNumber;
         }
     }
+
     // --- end additional functions
 
 }

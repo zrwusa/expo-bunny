@@ -10,7 +10,7 @@ import {
     countSmallerCase5,
     countSmallerCase7
 } from "./cases";
-import {BinaryIndexedTree, BST, BSTNode} from "../../data-structures/binary-tree";
+import {BinaryIndexedTree, BST} from "../../data-structures/binary-tree";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 
 export const searchInRotatedSortedArray = function (nums: number[], target: number) {
@@ -178,7 +178,7 @@ const countSmallerBIT = function (nums: number[]): number[] {
 //  sorted case BST will give a time complexity O(n^2)
 export const countSmallerBST = async (nums: number[], proxyHandler: TProxyHandler) => {
     const rootIndex = nums.length - 1;
-    let proxyVariables = new DeepProxy<{ bst: BST<number> }>({bst: new BST<number>(true,nums[rootIndex], undefined)}, proxyHandler);
+    let proxyVariables = new DeepProxy<{ bst: BST<number> }>({bst: new BST<number>(true, nums[rootIndex], undefined)}, proxyHandler);
     let outputArr = new Array(nums.length).fill(0);
 
     for (let j = nums.length - 1; j > -1; j--) {

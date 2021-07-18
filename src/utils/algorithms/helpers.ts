@@ -1,4 +1,4 @@
-import {bunnyConsole, timeStart} from "../utils";
+import {bunnyConsole} from "../utils";
 
 // 1e+7
 // let arr2 = Object.assign([],arr)             4703

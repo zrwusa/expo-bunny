@@ -6,14 +6,15 @@ import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
 import {
-    BST,
-    BSTNode,
+    AbstractBST,
+    AbstractBSTNode,
     BinaryTreeNode,
+    BSTNode,
     Coordinate,
     getDirectionVector,
     SinglyLinkedListNode,
     Stack,
-    uuidV4, AbstractBST, AbstractBSTNode
+    uuidV4
 } from "../../utils";
 import {Card} from "../../containers/Card";
 import {TreeNode} from "../../types";
@@ -99,18 +100,18 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         return (
             <VividTreeContainer>
                 <VividTreeRecursive node={data} level={1} index={0} familyLength={1} parentX={0} parentY={0}
-                                    maxDepth={data.getMaxDepth()}/>
+                                    maxHeight={data.getHeight()}/>
             </VividTreeContainer>
         )
     }
 
-    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | AbstractBSTNode<number, BSTNode<number> | AVLTreeNode<number>> | null, maxDepth?: number }> = ({node, maxDepth}) => {
+    const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | AbstractBSTNode<number, BSTNode<number> | AVLTreeNode<number>> | null, maxHeight?: number }> = ({node, maxHeight}) => {
         return (
             <VividTreeContainer>
                 {
                     node
                         ? <VividBinaryTreeRecursive node={node} level={1} index={0} familyLength={1}
-                                                    maxDepth={maxDepth}/>
+                                                    maxHeight={maxHeight}/>
                         : null
                 }
             </VividTreeContainer>
@@ -224,7 +225,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const fontOffsetY = fontSize / 3;
 
 
-    const VividTreeRecursive: React.FC<{ node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
+    const VividTreeRecursive: React.FC<{ node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxHeight}) => {
         if (!node) {
             return null;
         }
@@ -235,7 +236,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         let space = 0;
         let offsetX = 0;
         let offsetY = 0;
-        let levelNodeSpace = nodeSpace * Math.pow(2, (maxDepth || 5) - 1 - level)
+        let levelNodeSpace = nodeSpace * Math.pow(2, (maxHeight || 5) - level)
         if (level === 1) {
             space = treePanelWidth / 2
             offsetX = space - circleR;
@@ -261,7 +262,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                                                                       familyLength={family.length}
                                                                                       parentX={offsetX}
                                                                                       parentY={offsetY}
-                                                                                      maxDepth={maxDepth}/>)
+                                                                                      maxHeight={maxHeight}/>)
                     : null
                 }
                 <Circle r={circleR} cx={offsetX} cy={offsetY}
@@ -280,14 +281,14 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any> | BSTNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxDepth?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxDepth}) => {
+    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any> | BSTNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxHeight}) => {
         if (!node) {
             return null;
         }
         let space = 0;
         let offsetX;
         let offsetY;
-        let levelNodeSpace = nodeSpace * Math.pow(2, (maxDepth || 5) - 1 - level)
+        let levelNodeSpace = nodeSpace * Math.pow(2, (maxHeight || 5) - level)
         if (level === 1) {
             space = treePanelWidth / 2
             offsetX = space - circleR;
@@ -310,7 +311,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         ?
                         <VividBinaryTreeRecursive node={node.left} level={level + 1} index={0}
                                                   familyLength={2} parentX={offsetX} parentY={offsetY}
-                                                  maxDepth={maxDepth}/>
+                                                  maxHeight={maxHeight}/>
                         : null
                 }
                 {
@@ -318,7 +319,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         ?
                         <VividBinaryTreeRecursive node={node.right} level={level + 1} index={1}
                                                   familyLength={2} parentX={offsetX} parentY={offsetY}
-                                                  maxDepth={maxDepth}/>
+                                                  maxHeight={maxHeight}/>
                         : null
                 }
                 <Circle r={circleR} cx={offsetX} cy={offsetY}
@@ -430,7 +431,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 } else if (item instanceof BinaryTreeNode) {
                     return <VividBinaryTreeNode data={item}/>;
                 } else if (item instanceof AbstractBST) {
-                    return <VividBinaryTree node={item.root} maxDepth={item.getMaxDepth()}/>;
+                    return <VividBinaryTree node={item.root} maxHeight={item.getHeight()}/>;
                 } else if (item instanceof SinglyLinkedListNode) {
                     return <VividLinkedListNode data={item}/>
                 } else if (item instanceof Map) {

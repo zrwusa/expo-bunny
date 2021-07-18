@@ -154,7 +154,7 @@ export class TreeNode<T> {
         }
     }
 
-    getMaxDepth = () => {
+    getHeight = () => {
         const beginRoot = this;
         let maxDepth = 1;
         if (beginRoot) {

@@ -67,6 +67,16 @@ class BinaryTreeNode<V, N> {
         this._count = v;
     }
 
+    protected _height: number = 0;
+
+    public get height(): number {
+        return this._height;
+    }
+
+    public set height(v: number) {
+        this._height = v;
+    }
+
     protected _allLesserSum: number = 0;
     public get allLesserSum(): number {
         return this._allLesserSum;
@@ -90,8 +100,6 @@ class BinaryTreeNode<V, N> {
 }
 
 export abstract class AbstractBSTNode<V, N extends AbstractBSTNode<V, N>> extends BinaryTreeNode<V, N> {
-
-
     constructor(id: BinaryTreeNodeId, val?: V | null, count?: number) {
         super(id, val, count);
     }
@@ -102,9 +110,15 @@ interface I_BinaryTree<T, N extends BinaryTreeNode<T, N>> {
 
     isEmpty(): boolean;
 
+    getDepth(node: N): number;
+
+    getHeight(beginRoot?: N): number;
+
     getNodes(nodeProperty: T | BinaryTreeNodeId, propertyName ?: PropertyName, onlyOne ?: boolean): N[];
 
-    getNode(nodeProperty: T | BinaryTreeNodeId, propertyName ?: PropertyName): N;
+    getNode(nodeProperty: T | BinaryTreeNodeId, propertyName ?: PropertyName): N | null;
+
+    getPathToRoot(node: N): N[];
 
     BFS(): BinaryTreeNodeId[];
 
@@ -158,26 +172,28 @@ abstract class BinaryTree<T, N extends BinaryTreeNode<T, N>> implements I_Binary
 
     constructor(id?: BinaryTreeNodeId, val?: T | null, count?: number) {
         if (id !== undefined) {
-            this._root =  this.createNode(id, val, count);
+            this._root = this.createNode(id, val, count);
             this._size = 1;
         }
     }
 
     abstract createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): N;
 
-    protected _replaceWithASubTree(node1: N, node2: N | null) {
+    protected _replaceWithASubTree(node1: N, node2: N | null): N | null {
         if (node1 && !node2) {
             if (node1.parent) {
                 if (node1.isLeftChild === true) {
                     node1.parent.left = null;
-                    return null;
+                    return node1;
                 } else if (node1.isLeftChild === false) {
                     node1.parent.right = null;
+                    return node1;
+                } else {
                     return null;
                 }
             } else {
                 this._root = null
-                return null;
+                return this._root;
             }
         } else if (node1 && node2) {
             if (node1.parent) {
@@ -186,23 +202,27 @@ abstract class BinaryTree<T, N extends BinaryTreeNode<T, N>> implements I_Binary
                     node2.isLeftChild = _isLeftChild;
                     node2.parent = node1.parent;
                     node1.parent.left = node2;
-                    return null;
+                    return node2;
                 } else if (_isLeftChild === false) {
                     node2.isLeftChild = _isLeftChild;
                     node2.parent = node1.parent;
                     node1.parent.right = node2;
+                    return node2;
+                } else {
                     return null;
                 }
             } else {
                 node2.isLeftChild = null;
                 node2.parent = null;
                 this._root = node2;
-                return null;
+                return this._root;
             }
+        } else {
+            return null
         }
     }
 
-    protected _swap(node1: N, node2: N) {
+    protected _swap(node1: N, node2: N): N | null {
         if (node1.left) {
             node2.left = node1.left;
             node1.left.parent = node2;
@@ -212,7 +232,7 @@ abstract class BinaryTree<T, N extends BinaryTreeNode<T, N>> implements I_Binary
             node2.right = node1.right;
             node1.right.parent = node2;
         }
-        this._replaceWithASubTree(node1, node2);
+        return this._replaceWithASubTree(node1, node2);
     }
 
     clear() {
@@ -222,6 +242,32 @@ abstract class BinaryTree<T, N extends BinaryTreeNode<T, N>> implements I_Binary
 
     isEmpty(): boolean {
         return this._size === 0;
+    }
+
+    getDepth(node: N): number {
+        let depth = 0;
+        while (node.parent !== null) {
+            depth++;
+            node = node.parent;
+        }
+        return depth;
+    }
+
+    getHeight(beginRoot?: N): number {
+        const _beginRoot = beginRoot || this._root;
+        const _getMaxHeight = (cur: N | null): number => {
+            if (!cur) return 0;
+            if (!cur.left && !cur.right) return 0;
+            let leftHeight = _getMaxHeight(cur.left);
+            let rightHeight = _getMaxHeight(cur.right);
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+
+        if (_beginRoot) {
+            return _getMaxHeight(_beginRoot);
+        } else {
+            return 0;
+        }
     }
 
     getNodes(nodeProperty: T | BinaryTreeNodeId, propertyName ?: PropertyName, onlyOne ?: boolean) {
@@ -284,11 +330,27 @@ abstract class BinaryTree<T, N extends BinaryTreeNode<T, N>> implements I_Binary
         return result;
     }
 
-    getNode(nodeProperty: T | BinaryTreeNodeId, propertyName ?: PropertyName) {
+    getNode(nodeProperty: T | BinaryTreeNodeId, propertyName ?: PropertyName): N | null {
         if (propertyName === undefined) {
             propertyName = 'id';
         }
-        return this.getNodes(nodeProperty, propertyName, true)[0]
+        const node = this.getNodes(nodeProperty, propertyName, true)[0]
+        if (node) {
+            return node;
+        } else {
+            return null;
+        }
+
+    }
+
+    getPathToRoot(node: N): N[] {
+        const result: N[] = [];
+        while (node.parent !== null) {
+            result.unshift(node);
+            node = node.parent;
+        }
+        result.unshift(node);
+        return result;
     }
 
     BFS(): BinaryTreeNodeId[];
@@ -482,7 +544,8 @@ export interface I_AbstractBST<T, N extends AbstractBSTNode<T, N>> {
 
     contains(node: N): boolean;
 
-    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): N | null;
+    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): { deleted: N | null, needBalanced: N | null };
+
     // --- end basic functions
 
     // --- start additional functions
@@ -496,11 +559,10 @@ export interface I_AbstractBST<T, N extends AbstractBSTNode<T, N>> {
 
     allGreaterNodesAdd(node: N, delta: number, propertyName ?: PropertyName): boolean;
 
-    getMaxDepth(beginRoot?: N): number;
-
     balance(): boolean;
 
     isAVLBalanced(): boolean;
+
     // --- end additional functions
 }
 
@@ -515,9 +577,9 @@ export abstract class AbstractBST<T, N extends AbstractBSTNode<T, N>> extends Bi
         }
     }
 
-    abstract insert(id: BinaryTreeNodeId, val?: T | null, count?: number): N | null;
-
-    abstract remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): N | null;
+    // abstract insert(id: BinaryTreeNodeId, val?: T | null, count?: number): N | null;
+    //
+    // abstract remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): N | null;
 
     // --- start basic functions
     isValid(): boolean {
@@ -535,6 +597,129 @@ export abstract class AbstractBST<T, N extends AbstractBSTNode<T, N>> extends Bi
     contains(node: N): boolean {
         return false;
     }
+
+    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): N | null {
+        const newNode = this.createNode(id, val, count);
+        const newId = newNode.id;
+        if (this._root === null) {
+            this._root = newNode;
+            this._size++;
+            return this._root;
+        } else {
+            let cur = this._root;
+            let traversing = true;
+            while (traversing) {
+                if (cur.id === newId) {
+                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
+                    cur.count += newNode.count;
+                    //Duplicates are not accepted.
+                    traversing = false;
+                    return cur;
+                } else if (newId < cur.id) {
+                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
+                    if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
+                    // Traverse left of the node
+                    if (cur.left === null) {
+                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - newNode.count;
+                        newNode.parent = cur;
+                        newNode.isLeftChild = true;
+                        //Add to the left of the current node
+                        cur.left = newNode;
+                        this._size++;
+                        traversing = false;
+                        return cur.left;
+                    } else {
+                        //Traverse the left of the current node
+                        cur = cur.left;
+                    }
+                } else if (newId > cur.id) {
+                    // Traverse right of the node
+                    if (cur.right === null) {
+                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
+                        newNode.parent = cur;
+                        newNode.isLeftChild = false;
+                        //Add to the right of the current node
+                        cur.right = newNode;
+                        this._size++;
+                        traversing = false;
+                        return cur.right;
+                    } else {
+                        //Traverse the left of the current node
+                        cur = cur.right;
+                    }
+                }
+            }
+        }
+        return null
+    }
+
+    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): { deleted: N | null, needBalanced: N | null } {
+
+        if (isUpdateAllLeftSum === undefined) {
+            isUpdateAllLeftSum = true;
+        }
+
+        if (this._root === null) return {deleted: null, needBalanced: null}; // Element is not in the tree
+
+        // Locate the node to be deleted and also locate its parent node
+        let parent: N | null = null;
+        let current: N | null = this._root;
+        let needBalanced: N | null = null;
+        while (current !== null) {
+            if (id < current.id) {
+                parent = current;
+                current = current.left;
+            } else if (id > current.id) {
+                parent = current;
+                current = current.right;
+            } else
+                break; // Element is in the tree pointed by current
+        }
+
+        if (current === null) return {deleted: null, needBalanced: null}; // Element is not in the tree
+
+        // Case 1: current has no left children (See Figure 23.6)
+        if (current.left === null) {
+            // Connect the parent with the right child of the current node
+            if (parent == null) {
+                this._root = current.right;
+            } else {
+                if (id < parent.id)
+                    parent.left = current.right;
+                else
+                    parent.right = current.right;
+                needBalanced = parent;
+            }
+        } else {
+            // Case 2: The current node has a left child
+            // Locate the rightmost node in the left subtree of
+            // the current node and also its parent
+            let parentOfRightMost = current;
+            let rightMost = current.left;
+
+            while (rightMost.right != null) {
+                parentOfRightMost = rightMost;
+                rightMost = rightMost.right; // Keep going to the right
+            }
+
+            // Replace the element in current by the element in rightMost
+            current.id = rightMost.id;
+
+            // Eliminate rightmost node
+            if (parentOfRightMost.right == rightMost)
+                parentOfRightMost.right = rightMost.left;
+            else {
+                // Special case: parentOfRightMost is current
+                parentOfRightMost.left = rightMost.left;
+                needBalanced = parentOfRightMost;
+            }
+        }
+
+        this._size--;
+        this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(current, -current.count, 'allLesserSum');
+        return {deleted: current, needBalanced};
+    }
+
     // --- end basic functions
 
     // --- start additional functions
@@ -688,21 +873,6 @@ export abstract class AbstractBST<T, N extends AbstractBSTNode<T, N>> extends Bi
         return false
     }
 
-    getMaxDepth(beginRoot?: N): number {
-        const _beginRoot = beginRoot || this._root;
-        const _getMaxDepth = (cur: N | null): number => {
-            if (!cur) return 0;
-            let leftHeight = _getMaxDepth(cur.left);
-            let rightHeight = _getMaxDepth(cur.right);
-            return Math.max(leftHeight, rightHeight) + 1;
-        }
-
-        if (_beginRoot) {
-            return _getMaxDepth(_beginRoot);
-        } else {
-            return 0;
-        }
-    }
 
     balance(): boolean {
         const sorted = this.DFS('in', 'node');
@@ -750,87 +920,5 @@ export abstract class AbstractBST<T, N extends AbstractBSTNode<T, N>> extends Bi
 export class BST<T> extends AbstractBST<T, BSTNode<T>> {
     createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): BSTNode<T> {
         return new BSTNode<T>(id, val, count);
-    }
-
-    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): BSTNode<T> | null {
-        const newNode = this.createNode(id, val, count);
-        const newId = newNode.id;
-        if (this._root === null) {
-            this._root = newNode;
-            this._size++;
-            return this._root;
-        } else {
-            let cur = this._root;
-            let traversing = true;
-            while (traversing) {
-                if (cur.id === newId) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
-                    cur.count += newNode.count;
-                    //Duplicates are not accepted.
-                    traversing = false;
-                    return cur;
-                } else if (newId < cur.id) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
-                    if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
-                    // Traverse left of the node
-                    if (cur.left === null) {
-                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - newNode.count;
-                        newNode.parent = cur;
-                        newNode.isLeftChild = true;
-                        //Add to the left of the current node
-                        cur.left = newNode;
-                        this._size++;
-                        traversing = false;
-                        return cur.left;
-                    } else {
-                        //Traverse the left of the current node
-                        cur = cur.left;
-                    }
-                } else if (newId > cur.id) {
-                    // Traverse right of the node
-                    if (cur.right === null) {
-                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
-                        newNode.parent = cur;
-                        newNode.isLeftChild = false;
-                        //Add to the right of the current node
-                        cur.right = newNode;
-                        this._size++;
-                        traversing = false;
-                        return cur.right;
-                    } else {
-                        //Traverse the left of the current node
-                        cur = cur.right;
-                    }
-                }
-            }
-        }
-        return null
-    }
-
-    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): BSTNode<T> | null {
-        if (isUpdateAllLeftSum === undefined) {
-            isUpdateAllLeftSum = true;
-        }
-        let cur: BSTNode<T> | null = this.getNode(id, 'id');
-
-        if (!cur) return null;
-
-        this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(cur, -cur.count, 'allLesserSum');
-
-        if (!cur.left && !cur.right) {
-            this._replaceWithASubTree(cur, null);
-        } else if (cur.left && !cur.right) {
-            this._replaceWithASubTree(cur, cur.left)
-        } else if (!cur.left && cur.right) {
-            this._replaceWithASubTree(cur, cur.right);
-        } else if (cur.left && cur.right) {
-            const minNode = this.getMinNode(cur.right);
-            if (minNode) {
-                this.remove(minNode.id, false);
-                this._swap(cur, minNode);
-            }
-        }
-
-        return cur;
     }
 }

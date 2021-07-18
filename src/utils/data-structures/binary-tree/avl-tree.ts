@@ -1,107 +1,224 @@
 import {AbstractBST, AbstractBSTNode, BinaryTreeNodeId} from "./bst";
 
-export type BalanceFactor = number;
-
-const AVL_BALANCED_FACTORS = [-1, 0, 1];
-
 export class AVLTreeNode<T> extends AbstractBSTNode<T, AVLTreeNode<T>> {
-    protected _balanceFactor: BalanceFactor = 0;
-
-    public get balanceFactor(): BalanceFactor {
-        return this._balanceFactor;
-    }
-
-    public set balanceFactor(v: BalanceFactor) {
-        this._balanceFactor = v;
-    }
 }
 
 export class AVLTree<T> extends AbstractBST<T, AVLTreeNode<T>> {
+
+    protected balanceFactor(node: AVLTreeNode<T>): number {
+        if (node.right === null) // node has no right subtree
+            return -node.height;
+        else if (node.left === null) // node has no left subtree
+            return +node.height;
+        else
+            return node.right.height - node.left.height;
+    }
+
+    protected updateHeight(node: AVLTreeNode<T>): void {
+        if (node.left === null && node.right === null) // node is a leaf
+            node.height = 0;
+        else if (node.left === null) {
+            // node has no left subtree
+            const rightHeight = node.right ? node.right.height : 0;
+            node.height = 1 + rightHeight;
+        } else if (node.right === null) // node has no right subtree
+            node.height = 1 + node.left.height;
+        else
+            node.height = 1 + Math.max(node.right.height, node.left.height);
+    }
+
+    protected balancePath(node: AVLTreeNode<T>): void {
+        const path = this.getPathToRoot(node);
+        for (let i = path.length - 1; i >= 0; i--) {
+            let A = path[i];
+            this.updateHeight(A);
+            switch (this.balanceFactor(A)) {
+                case -2:
+                    if (A && A.left) {
+                        if (this.balanceFactor(A.left) <= 0) {
+                            this.balanceLL(A); // Perform LL rotation
+                        } else {
+                            this.balanceLR(A); // Perform LR rotation
+                        }
+                    }
+                    break;
+                case +2:
+                    if (A && A.right) {
+                        if (this.balanceFactor(A.right) >= 0) {
+                            this.balanceRR(A); // Perform RR rotation
+                        } else {
+                            this.balanceRL(A); // Perform RL rotation
+                        }
+                    }
+            }
+        }
+    }
+
+    protected balanceLL(A: AVLTreeNode<T>): void {
+        const parentOfA = A.parent;
+        const B = A.left; // A is left-heavy and B is left-heavy
+        A.parent = B;
+        if (B && B.right !== null) {
+            B.right.parent = A;
+        }
+        if (B) B.parent = parentOfA;
+        if (A === this.root) {
+            this.root = B;
+        } else {
+            if (parentOfA?.left === A) {
+                parentOfA.left = B;
+            } else {
+                if (parentOfA) parentOfA.right = B;
+            }
+        }
+
+        if (B) {
+            A.left = B.right; // Make T2 the left subtree of A
+            B.right = A; // Make A the left child of B
+        }
+        this.updateHeight(A);
+        if (B) this.updateHeight(B);
+    }
+
+    protected balanceLR(A: AVLTreeNode<T>): void {
+        const parentOfA = A.parent;
+        const B = A.left; // A is left-heavy
+        let C = null;
+        if (B) {
+            C = B.right;// B is right-heavy
+        }
+        if (A) A.parent = C;
+        if (B) B.parent = C;
+
+        if (C) {
+            if (C.left !== null) {
+                C.left.parent = B;
+            }
+            if (C.right !== null) {
+                C.right.parent = A;
+            }
+            C.parent = parentOfA;
+        }
+
+        if (A === this.root) {
+            this.root = C;
+        } else {
+            if (parentOfA) {
+                if (parentOfA.left === A) {
+                    parentOfA.left = C;
+                } else {
+                    parentOfA.right = C;
+                }
+            }
+        }
+
+        if (C) {
+            A.left = C.right; // Make T3 the left subtree of A
+            if (B) B.right = C.left; // Make T2 the right subtree of B
+            C.left = B;
+            C.right = A;
+        }
+
+        this.updateHeight(A); // Adjust heights
+        B && this.updateHeight(B);
+        C && this.updateHeight(C);
+    }
+
+    protected balanceRR(A: AVLTreeNode<T>): void {
+        const parentOfA = A.parent;
+        const B = A.right; // A is right-heavy and B is right-heavy
+        A.parent = B;
+        if (B) {
+            if (B.left !== null) {
+                B.left.parent = A;
+            }
+            B.parent = parentOfA;
+        }
+
+        if (A === this.root) {
+            this.root = B;
+        } else {
+            if (parentOfA) {
+                if (parentOfA.left === A) {
+                    parentOfA.left = B;
+                } else {
+                    parentOfA.right = B;
+                }
+            }
+        }
+
+        if (B) {
+            A.right = B.left; // Make T2 the right subtree of A
+            B.left = A;
+        }
+        this.updateHeight(A);
+        B && this.updateHeight(B);
+    }
+
+    protected balanceRL(A: AVLTreeNode<T>): void {
+        const parentOfA = A.parent;
+        const B = A.right; // A is right-heavy
+        let C = null;
+        if (B) {
+            C = B.left; // B is left-heavy
+        }
+
+        A.parent = C;
+        if (B) B.parent = C;
+
+        if (C) {
+            if (C.left !== null) {
+                C.left.parent = A;
+            }
+            if (C.right !== null) {
+                C.right.parent = B;
+            }
+            C.parent = parentOfA;
+        }
+
+
+        if (A === this.root) {
+            this.root = C;
+        } else {
+            if (parentOfA) {
+                if (parentOfA.left === A) {
+                    parentOfA.left = C;
+                } else {
+                    parentOfA.right = C;
+                }
+            }
+        }
+
+        if (C) A.right = C.left; // Make T2 the right subtree of A
+        if (B && C) B.left = C.right; // Make T3 the left subtree of B
+        if (C) C.left = A;
+        if (C) C.right = B;
+
+        this.updateHeight(A); // Adjust heights
+        B && this.updateHeight(B);
+        C && this.updateHeight(C);
+    }
 
     createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): AVLTreeNode<T> {
         return new AVLTreeNode<T>(id, val, count);
     }
 
     insert(id: BinaryTreeNodeId, val?: T | null, count?: number): AVLTreeNode<T> | null {
-        const newNode = this.createNode(id, val, count);
-        const newId = newNode.id;
-        if (this._root === null) {
-            this._root = newNode;
-            this._size++;
-            return this._root;
+        const inserted = super.insert(id, val, count);
+        if (inserted) {
+            this.balancePath(inserted);
+            return inserted;
         } else {
-            let cur = this._root;
-            let traversing = true;
-            while (traversing) {
-                if (cur.id === newId) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
-                    cur.count += newNode.count;
-                    //Duplicates are not accepted.
-                    traversing = false;
-                    return cur;
-                } else if (newId < cur.id) {
-                    this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
-                    if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
-                    // Traverse left of the node
-                    if (cur.left === null) {
-                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - newNode.count;
-                        newNode.parent = cur;
-                        newNode.isLeftChild = true;
-                        //Add to the left of the current node
-                        cur.left = newNode;
-                        this._size++;
-                        traversing = false;
-                        return cur.left;
-                    } else {
-                        //Traverse the left of the current node
-                        cur = cur.left;
-                    }
-                } else if (newId > cur.id) {
-                    // Traverse right of the node
-                    if (cur.right === null) {
-                        if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
-                        newNode.parent = cur;
-                        newNode.isLeftChild = false;
-                        //Add to the right of the current node
-                        cur.right = newNode;
-                        this._size++;
-                        traversing = false;
-                        return cur.right;
-                    } else {
-                        //Traverse the left of the current node
-                        cur = cur.right;
-                    }
-                }
-            }
+            return null
         }
-        return null
     }
 
-    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): AVLTreeNode<T> | null {
-        if (isUpdateAllLeftSum === undefined) {
-            isUpdateAllLeftSum = true;
+    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): { deleted: AVLTreeNode<T> | null, needBalanced: AVLTreeNode<T> | null } {
+        const {deleted, needBalanced} = super.remove(id, isUpdateAllLeftSum);
+        if (needBalanced) {
+            this.balancePath(needBalanced);
         }
-        let cur: AVLTreeNode<T> | null = this.getNode(id, 'id');
-
-        if (!cur) return null;
-
-        this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(cur, -cur.count, 'allLesserSum');
-
-        if (!cur.left && !cur.right) {
-            this._replaceWithASubTree(cur, null);
-        } else if (cur.left && !cur.right) {
-            this._replaceWithASubTree(cur, cur.left)
-        } else if (!cur.left && cur.right) {
-            this._replaceWithASubTree(cur, cur.right);
-        } else if (cur.left && cur.right) {
-            const minNode = this.getMinNode(cur.right);
-            if (minNode) {
-                this.remove(minNode.id, false);
-                this._swap(cur, minNode);
-            }
-        }
-
-        return cur;
+        return {deleted, needBalanced};
     }
 }
 
