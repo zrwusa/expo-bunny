@@ -183,8 +183,10 @@ export const countSmallerBST = async (nums: number[], proxyHandler: TProxyHandle
 
     for (let j = nums.length - 1; j > -1; j--) {
         if (j !== rootIndex) {
-            const node = proxyVariables.bst.insert(nums[j]);
-            outputArr[j] = node?.allLesserSum;
+            const nodes = proxyVariables.bst.insert(nums[j]);
+            for (let node of nodes) {
+                outputArr[j] = node?.allLesserSum;
+            }
         }
     }
     return outputArr;

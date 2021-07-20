@@ -146,6 +146,63 @@ export const addDays = (date: Date, days: number): Date => {
     return date;
 }
 
+export class WaitManager {
+    private _time1: number = 1000;
+    get time1(): number {
+        return this._time1 / this._nXSpeed;
+    }
+
+    private _time2: number = 2000;
+    get time2(): number {
+        return this._time2 / this._nXSpeed;
+    }
+
+    private _time3: number = 3000;
+    get time3(): number {
+        return this._time3 / this._nXSpeed;
+    }
+
+    private _time4: number = 4000;
+    get time4(): number {
+        return this._time4 / this._nXSpeed;
+    }
+
+    private _time10: number = 10000;
+    get time10(): number {
+        return this._time10 / this._nXSpeed;
+    }
+
+    private _time20: number = 20000;
+    get time20(): number {
+        return this._time20 / this._nXSpeed;
+    }
+
+    private _time30: number = 20000;
+    get time50(): number {
+        return this._time30 / this._nXSpeed;
+    }
+
+    private _time60: number = 60000;
+    get time60(): number {
+        return this._time60 / this._nXSpeed;
+    }
+
+    private _cusTime: number = 1000;
+    get cusTime(): number {
+        return this._cusTime / this._nXSpeed;
+    }
+
+    set cusTime(v: number) {
+        this._cusTime = v;
+    }
+
+    private readonly _nXSpeed: number = 1;
+
+    constructor(nXSpeed?: number) {
+        if (nXSpeed === undefined) nXSpeed = 1;
+        this._nXSpeed = nXSpeed;
+    }
+}
 export const wait = async (ms: number, resolveValue?: any) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {

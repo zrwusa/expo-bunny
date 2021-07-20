@@ -18,9 +18,9 @@ import {
     lengthOfLongestSubstring,
     letterCombinations,
     reverseLinkedList,
-    testAVLTree,
+    testAVLTree, testBinaryTree,
     testBST,
-    testBSTCase1,
+    testBSTCase1, testBSTCase2, testBSTCase3,
     treeData,
     treeMaxDepth
 } from "../../utils/algorithms";
@@ -34,17 +34,17 @@ export function AlgorithmScreen() {
 
     const [binaryTreeInorderTraversalVariables, setBinaryTreeInorderTraversalVariables] = useState<{ [key in string]: BinaryTreeNode<any> }>()
     const binaryTreeNode1 = new BinaryTreeNode<number>(1);
-    const binaryTreeNode2 = new BinaryTreeNode<number>(2);
-    const binaryTreeNode3 = new BinaryTreeNode<number>(3);
-    binaryTreeNode2.left = binaryTreeNode3;
-    binaryTreeNode1.right = binaryTreeNode2;
-    const binaryTree = new BinaryTree<number>(binaryTreeNode1)
+    const binaryTree = new BinaryTree<number>(binaryTreeNode1);
+    // binaryTree.insert(3);
+    // binaryTree.insert(3);
+    // binaryTree.insert(2);
+
     const _binaryTreeInorderTraversal = async () => {
-            await binaryTreeInorderTraversal(binaryTree.root!, ({value, key, DEFAULT}) => {
-                console.log(key, value);
-                setBinaryTreeInorderTraversalVariables(prevState => ({...prevState, [key!.toString()]: value}));
-                return DEFAULT
-            })
+        await binaryTreeInorderTraversal(binaryTree.root!, ({value, key, DEFAULT}) => {
+            console.log(key, value);
+            setBinaryTreeInorderTraversalVariables(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT
+        })
     }
 
     const [DFSVariables, setDFSVariables] = useState<{ [key in string]: TreeNode<number> }>()
@@ -146,6 +146,17 @@ export function AlgorithmScreen() {
         )
     }
 
+    const [testBinaryTreeVariables, setTestBinaryTreeVariables] = useState<{ [key in string]: unknown }>()
+    const _testBinaryTree = async () => {
+        const result = await testBinaryTree(...testBSTCase3,
+            ({value, key, DEFAULT}) => {
+                // console.log(key, value);
+                setTestBinaryTreeVariables(prevState => ({...prevState, [key!.toString()]: value}));
+                return DEFAULT
+            }
+        )
+    }
+
     const [testBSTVariables, setGenBSTVariables] = useState<{ [key in string]: unknown }>()
     const _testBST = async () => {
         const result = await testBST(...testBSTCase1,
@@ -217,6 +228,9 @@ export function AlgorithmScreen() {
                         <TextButton onPress={_countSmallerBST}>
                             <Text>Count Smaller BST</Text>
                         </TextButton>
+                        <TextButton onPress={_testBinaryTree}>
+                            <Text>Test BinaryTree</Text>
+                        </TextButton>
                         <TextButton onPress={_testBST}>
                             <Text>Test BST</Text>
                         </TextButton>
@@ -277,6 +291,11 @@ export function AlgorithmScreen() {
                     {
                         countSmallerVariables
                             ? <VividAlgorithm data={countSmallerVariables}/>
+                            : null
+                    }
+                    {
+                        testBinaryTreeVariables
+                            ? <VividAlgorithm data={testBinaryTreeVariables}/>
                             : null
                     }
                     {

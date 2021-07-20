@@ -1,18 +1,26 @@
-import {BinaryTree, BinaryTreeNode, BinaryTreeNodeId, BinaryTreeNodePropertyName} from "./binary-tree";
+import {BinaryTree, BinaryTreeNode, BinaryTreeNodeId, BinaryTreeNodePropertyName, I_BinaryTree} from "./binary-tree";
 
-export class BSTNode<V> extends BinaryTreeNode<V> {
+export type BSTDeletedResult<T> = { deleted: BSTNode<T> | null, needBalanced: BSTNode<T> | null };
 
+export class BSTNode<T> extends BinaryTreeNode<T> {
+    clone(): BSTNode<T> {
+        return new BSTNode<T>(this._id, this._val, this._count);
+    }
 }
 
-export interface I_BST<T> {
+export interface I_BST<T> extends I_BinaryTree<T> {
     // --- start basic functions
     isValid(): boolean;
 
-    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): BSTNode<T> | null;
+    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): (BSTNode<T> | null)[];
 
     contains(node: BSTNode<T>): boolean;
 
-    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): { deleted: BSTNode<T> | null, needBalanced: BSTNode<T> | null };
+    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): BSTDeletedResult<T>[];
+
+    getNodes(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean): BSTNode<T>[];
+
+    getNode(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName): BSTNode<T> | null;
 
     // --- end basic functions
 
@@ -46,17 +54,18 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
     }
 
     // --- start basic functions
-    createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): BinaryTreeNode<T> {
+    createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): BSTNode<T> {
         return new BSTNode<T>(id, val, count);
     }
 
-    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): BSTNode<T> | null {
+    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): (BSTNode<T> | null)[] {
         const newNode = this.createNode(id, val, count);
         const newId = newNode.id;
+        const inserted: BSTNode<T>[] = []
         if (this._root === null) {
             this._root = newNode;
             this._size++;
-            return this._root;
+            inserted.push(this._root);
         } else {
             let cur = this._root;
             let traversing = true;
@@ -66,7 +75,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
                     cur.count += newNode.count;
                     //Duplicates are not accepted.
                     traversing = false;
-                    return cur;
+                    inserted.push(cur);
                 } else if (newId < cur.id) {
                     this._autoAllLesserSum && cur.right && this.subTreeAdd(cur.right, newNode.count, 'allLesserSum');
                     if (this._autoAllLesserSum) cur.allLesserSum += newNode.count;
@@ -74,12 +83,12 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
                     if (cur.left === null) {
                         if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum - newNode.count;
                         newNode.parent = cur;
-                        newNode.isLeftChild = true;
+                        newNode.familyPosition = 1;
                         //Add to the left of the current node
                         cur.left = newNode;
                         this._size++;
                         traversing = false;
-                        return cur.left;
+                        inserted.push(cur.left);
                     } else {
                         //Traverse the left of the current node
                         cur = cur.left;
@@ -89,12 +98,12 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
                     if (cur.right === null) {
                         if (this._autoAllLesserSum) newNode.allLesserSum = cur.allLesserSum + cur.count;
                         newNode.parent = cur;
-                        newNode.isLeftChild = false;
+                        newNode.familyPosition = 2;
                         //Add to the right of the current node
                         cur.right = newNode;
                         this._size++;
                         traversing = false;
-                        return cur.right;
+                        inserted.push(cur.right);
                     } else {
                         //Traverse the left of the current node
                         cur = cur.right;
@@ -102,74 +111,70 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
                 }
             }
         }
-        return null
+        return inserted;
     }
 
-    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): { deleted: BSTNode<T> | null, needBalanced: BSTNode<T> | null } {
+    remove(id: BinaryTreeNodeId, isUpdateAllLeftSum?: boolean): BSTDeletedResult<T>[] {
 
         if (isUpdateAllLeftSum === undefined) {
             isUpdateAllLeftSum = true;
         }
 
-        if (this._root === null) return {deleted: null, needBalanced: null}; // Element is not in the tree
+        let bstDeletedResult: BSTDeletedResult<T>[] = [];
+
+        if (this._root === null) return bstDeletedResult; // Element is not in the tree
 
         // Locate the node to be deleted and also locate its parent node
-        let parent: BSTNode<T> | null = null;
-        let current: BSTNode<T> | null = this._root;
-        let needBalanced: BSTNode<T> | null = null;
-        while (current !== null) {
-            if (id < current.id) {
-                parent = current;
-                current = current.left;
-            } else if (id > current.id) {
-                parent = current;
-                current = current.right;
-            } else
-                break; // Element is in the tree pointed by current
-        }
+        let current: BSTNode<T> | null = this.getNode(id);
+        if (current === null) return bstDeletedResult; // Element is not in the tree
 
-        if (current === null) return {deleted: null, needBalanced: null}; // Element is not in the tree
+        const parent: BSTNode<T> | null = current?.parent ? current.parent : null;
+        let needBalanced: BSTNode<T> | null = null;
+        let orgCurrent = current;
+        const deletedCount = current.count;
 
         // Case 1: current has no left children (See Figure 23.6)
         if (current.left === null) {
             // Connect the parent with the right child of the current node
-            if (parent == null) {
-                this._root = current.right;
+            if (parent === null) {
+                this.root = current.right;
             } else {
-                if (id < parent.id)
-                    parent.left = current.right;
-                else
-                    parent.right = current.right;
+                switch (current.familyPosition) {
+                    case 1:
+                        parent.left = current.right;
+                        break;
+                    case 2:
+                        parent.right = current.right;
+                        break;
+                }
                 needBalanced = parent;
             }
         } else {
             // Case 2: The current node has a left child
             // Locate the rightmost node in the left subtree of
             // the current node and also its parent
-            let parentOfRightMost = current;
-            let rightMost = current.left;
+            let leftSubTreeMax = this.getMaxNode(current.left);
+            let parentOfLeftSubTreeMax = leftSubTreeMax.parent;
 
-            while (rightMost.right != null) {
-                parentOfRightMost = rightMost;
-                rightMost = rightMost.right; // Keep going to the right
-            }
-
-            // Replace the element in current by the element in rightMost
-            current.id = rightMost.id;
+            // Replace the element in current by the element in leftSubTreeMax
+            orgCurrent = current.swapLocation(leftSubTreeMax);
 
             // Eliminate rightmost node
-            if (parentOfRightMost.right == rightMost)
-                parentOfRightMost.right = rightMost.left;
-            else {
-                // Special case: parentOfRightMost is current
-                parentOfRightMost.left = rightMost.left;
-                needBalanced = parentOfRightMost;
+            if (parentOfLeftSubTreeMax) {
+                if (parentOfLeftSubTreeMax.right === leftSubTreeMax) {
+                    parentOfLeftSubTreeMax.right = leftSubTreeMax.left;
+                } else {
+                    // Special case: parentOfLeftSubTreeMax is current
+                    parentOfLeftSubTreeMax.left = leftSubTreeMax.left;
+                }
+                needBalanced = parentOfLeftSubTreeMax;
             }
         }
 
         this._size--;
-        this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(current, -current.count, 'allLesserSum');
-        return {deleted: current, needBalanced};
+        this._autoAllLesserSum && isUpdateAllLeftSum && this.allGreaterNodesAdd(current, -deletedCount, 'allLesserSum');
+        bstDeletedResult.push({deleted: orgCurrent, needBalanced});
+        return bstDeletedResult;
     }
 
     isValid(): boolean {
@@ -188,9 +193,82 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
         return false;
     }
 
+    getNodes(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean): BSTNode<T>[] {
+        if (propertyName === undefined) {
+            propertyName = 'id';
+        }
+
+        const result: BSTNode<T>[] = [];
+
+        function _traverse(cur: BSTNode<T>) {
+            switch (propertyName) {
+                case 'id':
+                    if (cur.id === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                case 'count':
+                    if (cur.count === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                case 'val':
+                    if (cur.val === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                case 'allLesserSum':
+                    if (cur.allLesserSum === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+                default:
+                    if (cur.id === nodeProperty) {
+                        result.push(cur);
+                        if (onlyOne) return;
+                    }
+                    break;
+            }
+
+            if (!cur.left && !cur.right) return null;
+            if (propertyName === 'id') {
+                if (nodeProperty < cur.id) {
+                    cur.left ? _traverse(cur.left) : null;
+                }
+                if (nodeProperty > cur.id) {
+                    cur.right ? _traverse(cur.right) : null;
+                }
+            } else {
+                cur.left ? _traverse(cur.left) : null;
+                cur.right ? _traverse(cur.right) : null;
+            }
+        }
+
+        this._root && _traverse(this._root);
+        return result;
+    }
+
+    getNode(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName): BSTNode<T> | null {
+        if (propertyName === undefined) {
+            propertyName = 'id';
+        }
+        const node = this.getNodes(nodeProperty, propertyName, true)[0]
+        if (node) {
+            return node;
+        } else {
+            return null;
+        }
+    }
+
     // --- end basic functions
 
     // --- start additional functions
+    getMinNode(): BSTNode<T> | null;
+    getMinNode(node: BSTNode<T>): BSTNode<T>;
     getMinNode(node?: BSTNode<T> | null): BSTNode<T> | null {
         if (!node) {
             node = this._root;
@@ -204,6 +282,8 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
         return node ? _traverse(node) : null;
     }
 
+    getMaxNode(): BSTNode<T> | null;
+    getMaxNode(node: BSTNode<T>): BSTNode<T>;
     getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null {
         if (!node) {
             node = this._root;
@@ -216,6 +296,21 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
 
         return node ? _traverse(node) : null;
     }
+
+    // getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null {
+    //     if (!node) {
+    //         node = this._root;
+    //     }
+    //
+    //     const _findByPath = (cur: BSTNode<T>) => {
+    //         while (cur.right) {
+    //             cur = cur.right; // Keep going to the right
+    //         }
+    //         return cur;
+    //     }
+    //
+    //     return node ? _findByPath(node) : null;
+    // }
 
     lesserSum(id: BinaryTreeNodeId, propertyName ?: BinaryTreeNodePropertyName): number {
         if (propertyName === undefined) {
@@ -341,7 +436,6 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
         return false
     }
 
-
     balance(): boolean {
         const sorted = this.DFS('in', 'node');
 
@@ -350,7 +444,6 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             if (l > r) return;
             const m = Math.floor(l + (r - l) / 2);
             const midNode = sorted[Math.floor(l + (r - l) / 2)];
-            // this.insert(midNode.id, midNode.val, midNode.count);
             this.insert(midNode.id, midNode.val, midNode.count);
             buildBalanceBST(l, m - 1);
             buildBalanceBST(m + 1, r);
@@ -380,5 +473,6 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
         _height(this._root);
         return balanced;
     }
+
     // --- end additional functions
 }

@@ -2,19 +2,23 @@ export type BinaryTreeNodePropertyName = 'id' | 'val' | 'count' | 'allLesserSum'
 export type BinaryTreeNodeOrPropertyName = 'node' | BinaryTreeNodePropertyName;
 export type DFSOrderPattern = 'in' | 'pre' | 'post';
 export type BinaryTreeNodeId = number;
+export type FamilyPosition = 0 | 1 | 2;
+export type BinaryTreeDeletedResult<T> = { deleted: BinaryTreeNode<T> | null, needBalanced: BinaryTreeNode<T> | null };
 
 export interface I_BinaryTree<T> {
     clear(): void;
 
     isEmpty(): boolean;
 
+    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): (BinaryTreeNode<T> | null)[];
+
     getDepth(node: BinaryTreeNode<T>): number;
 
     getHeight(beginRoot?: BinaryTreeNode<T>): number;
 
-    getNodes(nodeProperty: T | BinaryTreeNodeId, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean): BinaryTreeNode<T>[];
+    getNodes(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean): BinaryTreeNode<T>[];
 
-    getNode(nodeProperty: T | BinaryTreeNodeId, propertyName ?: BinaryTreeNodePropertyName): BinaryTreeNode<T> | null;
+    getNode(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName): BinaryTreeNode<T> | null;
 
     getPathToRoot(node: BinaryTreeNode<T>): BinaryTreeNode<T>[];
 
@@ -56,6 +60,10 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     }
 
     public set root(v: BinaryTreeNode<T> | null) {
+        if (v) {
+            v.parent = null;
+            v.familyPosition = 0;
+        }
         this._root = v;
     }
 
@@ -68,7 +76,20 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
         this._size = v;
     }
 
-    constructor(idOrNode?: BinaryTreeNodeId | BinaryTreeNode<T>, val?: T | null, count?: number) {
+    protected _allowDuplicate: boolean = false;
+    public get allowDuplicate(): boolean {
+        return this._allowDuplicate;
+    }
+
+    public set allowDuplicate(v: boolean) {
+        this._allowDuplicate = v;
+    }
+
+    constructor(idOrNode?: BinaryTreeNodeId | BinaryTreeNode<T>, val?: T | null, count?: number, allowDuplicate?: boolean) {
+        if (allowDuplicate === undefined) {
+            allowDuplicate = false;
+        }
+        this._allowDuplicate = allowDuplicate;
         if (idOrNode !== undefined) {
             if (typeof idOrNode === 'number') {
                 this._root = this.createNode(idOrNode, val, count);
@@ -88,6 +109,90 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
 
     isEmpty(): boolean {
         return this._size === 0;
+    }
+
+    insert(id: BinaryTreeNodeId, val?: T | null, count?: number): (BinaryTreeNode<T> | null)[] {
+        if (count === undefined) {
+            count = 1;
+        }
+        const _bfs = (root: BinaryTreeNode<T>, newNode: BinaryTreeNode<T>): BinaryTreeNode<T> | null => {
+            const queue: BinaryTreeNode<T>[] = [root];
+            while (queue.length > 0) {
+                const cur = queue.shift();
+                if (cur) {
+                    if (!cur.left) {
+                        newNode.parent = cur;
+                        newNode.familyPosition = 1;
+                        cur.left = newNode;
+                        this._size++;
+                        return cur.left;
+                    }
+                    if (!cur.right) {
+                        newNode.parent = cur;
+                        newNode.familyPosition = 2;
+                        cur.right = newNode;
+                        this._size++;
+                        return cur.right;
+                    }
+                    cur.left && queue.push(cur.left);
+                    cur.right && queue.push(cur.right);
+                } else {
+                    return null;
+                }
+            }
+            return null;
+        }
+        const inserted: (BinaryTreeNode<T> | null)[] = [];
+        if (this._allowDuplicate) {
+            if (this._root) {
+                for (let i = 0; i < count; i++) {
+                    inserted.push(_bfs(this._root, new BinaryTreeNode<T>(id, val, 1)));
+                }
+            } else {
+                this._root = new BinaryTreeNode<T>(id, val, 1);
+                inserted.push(this._root);
+                this._size = 1;
+                for (let i = 0; i < count - 1; i++) {
+                    inserted.push(_bfs(this._root, new BinaryTreeNode<T>(id, val, 1)));
+                }
+            }
+        } else {
+            const existNode = this.getNode(id);
+            if (this._root) {
+                if (existNode) {
+                    existNode.count += count;
+                    inserted.push(existNode);
+                } else {
+                    inserted.push(_bfs(this._root, new BinaryTreeNode<T>(id, val, count)));
+                }
+            } else {
+                this._root = new BinaryTreeNode<T>(id, val, count);
+                this._size = 1;
+                inserted.push(this._root);
+            }
+        }
+        return inserted;
+    }
+
+    remove(id: BinaryTreeNodeId): BinaryTreeDeletedResult<T>[] {
+        let nodes: BinaryTreeNode<T>[] = [];
+        nodes = this.getNodes(id);
+        for (let node of nodes) {
+            switch (node.familyPosition) {
+                case 0:
+                    if (node.left) {
+
+                    } else if (node.right) {
+
+                    }
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+        }
+        return [{deleted: null, needBalanced: null}];
     }
 
     getDepth(node: BinaryTreeNode<T>): number {
@@ -116,7 +221,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
         }
     }
 
-    getNodes(nodeProperty: T | BinaryTreeNodeId, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean) {
+    getNodes(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean) {
         if (propertyName === undefined) {
             propertyName = 'id';
         }
@@ -158,25 +263,15 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
             }
 
             if (!cur.left && !cur.right) return null;
-            if (propertyName === 'id') {
-                if (nodeProperty < cur.id) {
-                    cur.left ? _traverse(cur.left) : null;
-                }
-                if (nodeProperty > cur.id) {
-                    cur.right ? _traverse(cur.right) : null;
-                }
-            } else {
-                cur.left ? _traverse(cur.left) : null;
-                cur.right ? _traverse(cur.right) : null;
-            }
-
+            cur.left ? _traverse(cur.left) : null;
+            cur.right ? _traverse(cur.right) : null;
         }
 
         this._root && _traverse(this._root);
         return result;
     }
 
-    getNode(nodeProperty: T | BinaryTreeNodeId, propertyName ?: BinaryTreeNodePropertyName): BinaryTreeNode<T> | null {
+    getNode(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName): BinaryTreeNode<T> | null {
         if (propertyName === undefined) {
             propertyName = 'id';
         }
@@ -186,7 +281,6 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
         } else {
             return null;
         }
-
     }
 
     getPathToRoot(node: BinaryTreeNode<T>): BinaryTreeNode<T>[] {
@@ -403,6 +497,10 @@ export class BinaryTreeNode<T> {
     }
 
     public set left(v: BinaryTreeNode<T> | null) {
+        if (v) {
+            v.parent = this;
+            v.familyPosition = 1;
+        }
         this._left = v;
     }
 
@@ -412,6 +510,10 @@ export class BinaryTreeNode<T> {
     }
 
     public set right(v: BinaryTreeNode<T> | null) {
+        if (v) {
+            v.parent = this;
+            v.familyPosition = 2;
+        }
         this._right = v;
     }
 
@@ -424,13 +526,13 @@ export class BinaryTreeNode<T> {
         this._parent = v;
     }
 
-    protected _isLeftChild: boolean | null = null;
-    public get isLeftChild(): boolean | null {
-        return this._isLeftChild;
+    protected _familyPosition: FamilyPosition = 0;
+    public get familyPosition(): FamilyPosition {
+        return this._familyPosition;
     }
 
-    public set isLeftChild(v: boolean | null) {
-        this._isLeftChild = v;
+    public set familyPosition(v: FamilyPosition) {
+        this._familyPosition = v;
     }
 
     protected _count: number = 1;
@@ -472,9 +574,44 @@ export class BinaryTreeNode<T> {
         this._val = val;
         this._count = count;
     }
+
+    replaceLocation(replaceNode: BinaryTreeNode<T>): boolean {
+        this._id = replaceNode.id;
+        this._val = replaceNode.val;
+        this._count = replaceNode.count;
+        this._allLesserSum = replaceNode.allLesserSum;
+        this._height = replaceNode.height;
+        return true;
+    }
+
+    swapLocation(swapNode: BinaryTreeNode<T>): BinaryTreeNode<T> {
+        const tempNode = new BinaryTreeNode<T>(swapNode.id);
+        const { val, count, height, allLesserSum } = swapNode;
+        tempNode.val = val;
+        tempNode.count = count;
+        tempNode.height = height;
+        tempNode.allLesserSum = allLesserSum;
+
+        swapNode.id = this._id;
+        swapNode.val = this._val;
+        swapNode.count = this._count;
+        swapNode.height = this._height;
+        swapNode.allLesserSum = this._allLesserSum;
+
+        this._id = tempNode.id;
+        this._val = tempNode.val;
+        this._count = tempNode.count;
+        this._height = tempNode.height;
+        this._allLesserSum = tempNode.allLesserSum;
+        return swapNode;
+    }
+
+    clone(): BinaryTreeNode<T> {
+        return new BinaryTreeNode<T>(this._id, this._val, this._count);
+    }
 }
 
-export class BinaryTree<T> extends AbstractBinaryTree<T>{
+export class BinaryTree<T> extends AbstractBinaryTree<T> {
     createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): BinaryTreeNode<T> {
         return new BinaryTreeNode(id, val, count)
     }
