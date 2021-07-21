@@ -59,15 +59,15 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
     }
 
     insert(id: BinaryTreeNodeId, val?: T | null, count?: number): (BSTNode<T> | null)[] {
+        const inserted: BSTNode<T>[] = []
         const newNode = this.createNode(id, val, count);
         const newId = newNode.id;
-        const inserted: BSTNode<T>[] = []
-        if (this._root === null) {
-            this._root = newNode;
+        if (this.root === null) {
+            this.root = newNode;
             this._size++;
-            inserted.push(this._root);
+            inserted.push(this.root);
         } else {
-            let cur = this._root;
+            let cur = this.root;
             let traversing = true;
             while (traversing) {
                 if (cur.id === newId) {
@@ -122,7 +122,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
 
         let bstDeletedResult: BSTDeletedResult<T>[] = [];
 
-        if (this._root === null) return bstDeletedResult; // Element is not in the tree
+        if (this.root === null) return bstDeletedResult; // Element is not in the tree
 
         // Locate the node to be deleted and also locate its parent node
         let current: BSTNode<T> | null = this.getNode(id);
@@ -178,7 +178,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
     }
 
     isValid(): boolean {
-        if (!this._root) return true;
+        if (!this.root) return true;
 
         function dfs(cur: BSTNode<T> | null, min: BinaryTreeNodeId, max: BinaryTreeNodeId): boolean {
             if (!cur) return true;
@@ -186,7 +186,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             return dfs(cur.left, min, cur.id) && dfs(cur.right, cur.id, max);
         }
 
-        return dfs(this._root!, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+        return dfs(this.root!, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
     }
 
     contains(node: BSTNode<T>): boolean {
@@ -248,7 +248,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             }
         }
 
-        this._root && _traverse(this._root);
+        this.root && _traverse(this.root);
         return result;
     }
 
@@ -271,7 +271,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
     getMinNode(node: BSTNode<T>): BSTNode<T>;
     getMinNode(node?: BSTNode<T> | null): BSTNode<T> | null {
         if (!node) {
-            node = this._root;
+            node = this.root;
         }
 
         function _traverse(cur: BSTNode<T>): BSTNode<T> {
@@ -286,7 +286,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
     getMaxNode(node: BSTNode<T>): BSTNode<T>;
     getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null {
         if (!node) {
-            node = this._root;
+            node = this.root;
         }
 
         function _traverse(cur: BSTNode<T>): BSTNode<T> {
@@ -299,7 +299,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
 
     // getMaxNode(node?: BSTNode<T> | null): BSTNode<T> | null {
     //     if (!node) {
-    //         node = this._root;
+    //         node = this.root;
     //     }
     //
     //     const _findByPath = (cur: BSTNode<T>) => {
@@ -363,7 +363,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             }
         }
 
-        this._root && _traverse(this._root);
+        this.root && _traverse(this.root);
         return sum;
     }
 
@@ -429,8 +429,8 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             cur.right && _traverse(cur.right);
         }
 
-        if (this._root) {
-            _traverse(this._root);
+        if (this.root) {
+            _traverse(this.root);
             return true;
         }
         return false
@@ -470,7 +470,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             return Math.max(leftHeight, rightHeight) + 1;
         }
 
-        _height(this._root);
+        _height(this.root);
         return balanced;
     }
 

@@ -15,3 +15,10 @@ const arraysToLinkedLists = (arrays: number[][]): SinglyLinkedListNode[] => {
 }
 export const mergeKListsCase1: [SinglyLinkedListNode[]] = [arraysToLinkedLists([[1, 4, 5], [1, 3, 4], [2, 6]])];
 export const mergeKListsCase2: [SinglyLinkedListNode[]] = [arraysToLinkedLists([[1]])];
+
+export const topKFrequentCase1: [number[], number] = [[1, 1, 1, 2, 2, 3], 2];
+export const topKFrequentCase2: [number[], number] = [[1, 2], 2];
+
+export const reorganizeStringCase1: [string] = ['aab'];
+export const reorganizeStringCase2: [string] = ['aaab'];
+export const reorganizeStringCase3: [string] = ['aaaaabbbcccdde'];

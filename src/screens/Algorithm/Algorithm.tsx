@@ -18,9 +18,11 @@ import {
     lengthOfLongestSubstring,
     letterCombinations,
     reverseLinkedList,
-    testAVLTree, testBinaryTree,
+    testAVLTree,
+    testBinaryTree,
     testBST,
-    testBSTCase1, testBSTCase2, testBSTCase3,
+    testBSTCase1,
+    testBSTCase3,
     treeData,
     treeMaxDepth
 } from "../../utils/algorithms";

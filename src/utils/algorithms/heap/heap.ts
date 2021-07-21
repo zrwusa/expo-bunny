@@ -9,7 +9,9 @@ import {
     findKthLargestCase3,
     findKthLargestCase9,
     mergeKListsCase1,
-    mergeKListsCase2
+    mergeKListsCase2,
+    reorganizeStringCase1,
+    topKFrequentCase1
 } from "./cases";
 import {SinglyLinkedListNode} from "../../data-structures/linked-list";
 
@@ -74,7 +76,80 @@ const runAllMergeKLists = async () => {
 
 // runAllMergeKLists().then();
 
-//347
+//347. Top K Frequent Elements
+function topKFrequent(nums: number[], k: number): number[] {
+    const hash: Map<number, number> = new Map<number, number>();
+    for (let num of nums) {
+        if (hash.has(num)) {
+            const val = hash.get(num);
+            if (val !== undefined) {
+                hash.set(num, val + 1);
+            }
+        } else {
+            hash.set(num, 1);
+        }
+    }
+
+    const heap = new MinHeap<HeapNode<[number, number]>, [number, number]>();
+
+    for (let entry of hash) {
+        const node = new HeapNode<[number, number]>(entry[1], entry);
+
+        if (heap.size() < k) {
+            heap.insert(node);
+        } else if (heap.size() === k) {
+            const peek = heap.peek();
+            if (peek!.id < entry[1]) {
+                heap.poll();
+                heap.insert(node);
+            }
+        }
+
+    }
+
+    return heap.toArray().map(item => item.val![0])
+}
+
+function topKFrequentByBucket(nums: number[], k: number): number[] {
+    const hash: Map<number, number> = new Map<number, number>();
+    let maxFrequency = 1;
+    for (let num of nums) {
+        if (hash.has(num)) {
+            const val = hash.get(num);
+            if (val !== undefined) {
+                if (val + 1 > maxFrequency) maxFrequency = val + 1;
+                hash.set(num, val + 1);
+            }
+        } else {
+            hash.set(num, 1);
+        }
+    }
+
+    const buckets = new Array<number[]>(maxFrequency + 1);
+    for (let i = 0; i < buckets.length; i++) {
+        buckets[i] = [];
+    }
+
+    for (let entry of hash) {
+        buckets[entry[1]].push(entry[0]);
+    }
+
+    let ans: number[] = [];
+    while (ans.length < k) {
+        const bucket = buckets.pop();
+        if (bucket && bucket.length > 0) {
+            ans = ans.concat(bucket);
+        }
+    }
+    return ans;
+}
+
+const runAllTopKFrequent = async () => {
+    await runAlgorithm(topKFrequent, false, ...topKFrequentCase1);
+    await runAlgorithm(topKFrequentByBucket, false, ...topKFrequentCase1);
+}
+
+runAllTopKFrequent().then();
 //253
 //295. Find Median from Data Stream  ★★★★
 class MedianFinder {
@@ -138,9 +213,103 @@ const runAllMedianFind = async () => {
 }
 
 // runAllMedianFind().then();
-//767
-//703
 
+// 767. Reorganize String
+function reorganizeString(s: string): string {
+    const hash: Map<string, number> = new Map<string, number>();
+    for (let char of s) {
+        if (hash.has(char)) {
+            let count = hash.get(char);
+            if (count) {
+                hash.set(char, ++count);
+            }
+        } else {
+            hash.set(char, 1);
+        }
+    }
+
+    const heap = new MaxHeap<HeapNode<[string, number]>, [string, number]>();
+
+    for (let entry of hash) {
+        heap.insert(new HeapNode<[string, number]>(entry[1], entry));
+    }
+    let ans: string = '';
+    if (heap.peek()!.val![1] > Math.ceil(s.length / 2)) {
+
+    } else {
+        const conveyor: string[][] = [];
+        const peek = heap.poll();
+        for (let i = 0; i < peek!.id; i++) {
+            conveyor.push([peek!.val![0]])
+        }
+        let processCount = 0;
+        while (heap.size() > 0) {
+            const peek1 = heap.poll();
+            const count = peek1!.id;
+            for (let j = 0; j < count; j++) {
+                processCount++;
+                const cur = conveyor.shift();
+                cur!.push(peek1!.val![0]);
+                conveyor.push(cur!);
+            }
+        }
+        const needOrderedCount = conveyor.length - processCount % conveyor.length;
+
+        for (let m = 0; m < needOrderedCount; m++) {
+            conveyor.push(conveyor.shift()!)
+        }
+        ans = conveyor.join().replaceAll(',', '');
+    }
+    return ans;
+}
+
+const runAllReorganizeString = async () => {
+    await runAlgorithm(reorganizeString, false, ...reorganizeStringCase1);
+}
+
+runAllReorganizeString().then();
+
+// 703. Kth Largest Element in a Stream
+class KthLargest {
+    private _heap: MinHeap<number, number>;
+    private readonly _k: number;
+    constructor(k: number, nums: number[]) {
+        this._k = k;
+        this._heap = new MinHeap<number, number>(nums);
+        while (this._heap.size() > k) {
+            this._heap.poll();
+        }
+    }
+
+    add(val: number): number {
+        const size = this._heap.size();
+        if (size < this._k) {
+            this._heap.insert(val);
+
+        } else if (size === this._k) {
+            if (val > this._heap.peek()!) {
+                this._heap.poll();
+                this._heap.insert(val);
+            }
+        }
+        return this._heap.peek()!;
+    }
+}
+
+const testKthLargest = () => {
+    const kthLargest = new KthLargest(3, [4, 5, 8, 2]);
+    console.log('kthLargest.add(3)', kthLargest.add(3));
+    console.log('kthLargest.add(5)', kthLargest.add(5));
+    console.log('kthLargest.add(10)', kthLargest.add(10));
+    console.log('kthLargest.add(9)', kthLargest.add(9));
+    console.log('kthLargest.add(4)', kthLargest.add(4));
+}
+
+const runAllKthLargest = async () => {
+    await runAlgorithm(testKthLargest, false);
+}
+
+runAllKthLargest().then();
 
 const testHeap1 = () => {
     const minHeap = new MinHeap<number, unknown>([5, 2, 3, 4, 6, 1]);
