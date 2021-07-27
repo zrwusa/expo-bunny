@@ -149,7 +149,7 @@ const runAllTopKFrequent = async () => {
     await runAlgorithm(topKFrequentByBucket, false, ...topKFrequentCase1);
 }
 
-runAllTopKFrequent().then();
+// runAllTopKFrequent().then();
 //253
 //295. Find Median from Data Stream  ★★★★
 class MedianFinder {
@@ -267,7 +267,7 @@ const runAllReorganizeString = async () => {
     await runAlgorithm(reorganizeString, false, ...reorganizeStringCase1);
 }
 
-runAllReorganizeString().then();
+// runAllReorganizeString().then();
 
 // 703. Kth Largest Element in a Stream
 class KthLargest {
@@ -309,7 +309,7 @@ const runAllKthLargest = async () => {
     await runAlgorithm(testKthLargest, false);
 }
 
-runAllKthLargest().then();
+// runAllKthLargest().then();
 
 const testHeap1 = () => {
     const minHeap = new MinHeap<number, unknown>([5, 2, 3, 4, 6, 1]);
@@ -347,11 +347,11 @@ const testHeap3 = () => {
     console.log('DFS preOrder val', heapSortTest.DFS('pre', 'val'));
 }
 
-const runAllTestHeap = async () => {
-    await runAlgorithm(testHeap1, false);
-    await runAlgorithm(testHeap2, false);
-    await runAlgorithm(testHeap3, false);
-}
+// const runAllTestHeap = async () => {
+//     await runAlgorithm(testHeap1, false);
+//     await runAlgorithm(testHeap2, false);
+//     await runAlgorithm(testHeap3, false);
+// }
 
 // runAllTestHeap().then()
 /* --- end heap --- */

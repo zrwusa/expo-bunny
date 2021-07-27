@@ -205,24 +205,191 @@ const runAllCountSmaller = async () => {
     // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase8);
     // await runAlgorithm(countSmallerBST, false, ...countSmallerCase8);
 })()
+
+
+// 278 First Bad Version
+const solution = function (isBadVersion: any) {
+    return function (n: number): number {
+        let firstBad = n;
+        let l = 1;
+        let r = n;
+        while (l <= r) {
+            if (l === r) {
+                return l;
+            }
+            const mid = l + Math.floor((r - l) / 2);
+            const badInLeft = isBadVersion(mid);
+            const firstInRight = mid + 1;
+            if (!badInLeft && isBadVersion(firstInRight)) {
+                return firstInRight;
+            } else {
+                if (badInLeft) {
+                    r = mid;
+                } else {
+                    l = firstInRight;
+                }
+            }
+        }
+        return firstBad;
+    };
+};
 // Binary Search
-// 69 「sqrt(x)」
+// 69 「sqrt(x)」	★★★		upper_bound
+function mySqrt(x: number): number {
+    if (x === 0) {
+        return 0;
+    }
+    if (x === 1) {
+        return 1;
+    }
+    let l = 1, r = x, ans = x;
+    while (r - l >= 1) {
+        const mid = l + Math.floor((r - l) / 2);
+        const midSquare = mid * mid;
+        if (r - l === 1) {
+            ans = l;
+            break;
+        }
+        if (midSquare < x) {
+            l = mid;
+        } else if (midSquare > x) {
+            r = mid;
+        } else {
+            ans = mid;
+            break;
+        }
+    }
+    return ans;
+
+}
 
 /* --- start Binary Search --- */
-// 278 First Bad Version
-// 875 Koko Eating Bananas
+
+// 875	Koko Eating Bananas	★★★	1011   guess ans and check
+function minEatingSpeed(piles: number[], h: number): number {
+    const pilesCount = piles.length;
+    let maxPile = 1;
+
+    for (let pile of piles) {
+        maxPile = Math.max(pile, maxPile);
+    }
+
+    if (h === pilesCount) {
+        return maxPile;
+    }
+
+    const canFinish = (k: number): boolean => {
+        let needTime = 0;
+        for (let pile of piles) {
+            needTime += Math.ceil(pile / k);
+        }
+        return needTime <= h;
+    }
+
+
+    let l = 1, r = maxPile;
+    let minK = maxPile;
+    while (l < r) {
+        const mid = l + Math.floor((r - l) / 2);
+        if (canFinish(mid)) {
+            minK = mid;
+            r = mid;
+        } else {
+            l = mid + 1;
+        }
+    }
+    return minK;
+}
+
 // 378
 // 35	Search Insert Position	★★	34	704	981					upper_bound
+function searchInsert(nums: number[], target: number): number {
+    let l = 0, r = nums.length;
+
+    while (l < r) {
+        const mid = l + Math.floor((r - l) / 2);
+        const midNum = nums[mid];
+        if (midNum === target) {
+            return mid;
+        } else if (midNum > target) {
+            r = mid;
+        } else {
+            l = mid + 1;
+        }
+    }
+    return l;
+}
+
 // 33	Search in Rotated Sorted Array	★★★	81	153	154	162	852			rotated / peak
-// 69	Sqrt(x)	★★★								upper_bound
+
 // 74	Search a 2D Matrix	★★★								treat 2d as 1d
-// 875	Koko Eating Bananas	★★★	1011
-// guess ans and check
+function searchMatrix(matrix: number[][], target: number): boolean {
+    let arr: number[] = [];
+    for (let arrI of matrix) {
+        arr = arr.concat(arrI);
+    }
+
+    let l = 0, r = arr.length;
+    while (l <= r) {
+        const mid = l + Math.floor((r - l) / 2);
+        const midVal = arr[mid];
+        if (midVal === target) {
+            return true;
+        } else if (midVal > target) {
+            r = mid - 1;
+        } else {
+            l = mid + 1;
+        }
+    }
+    return false;
+}
+
+
 // 4	Median of Two Sorted Arrays	★★★★
-// 378
-// Kth Smallest Element in a Sorted Matrix
-// ★★★★	668							kth + matrix
+// 378 Kth Smallest Element in a Sorted Matrix ★★★★	668							kth + matrix
+// TODO use heap,it's more complicate
+function kthSmallest(matrix: number[][], k: number): number {
+    let arr: number[] = [];
+    for (let row of matrix) {
+        arr = arr.concat(row);
+    }
+
+    return arr.sort((a, b) => a - b)[k - 1];
+}
 // 719	Find K-th Smallest Pair Distance	★★★★	786							kth + two pointers
+// TODO use DP
+function smallestDistancePair(nums: number[], k: number): number {
+    nums.sort((a, b) => a - b);
+
+    let min = Infinity, max = nums[nums.length - 1] - nums[0];
+    for (let i = 0; i < nums.length - 1; i++) {
+        min = Math.min(min, nums[i + 1] - nums[i]);
+    }
+
+    function countLessThan(nums: number[], target: number) {
+        let right = 0, count = 0;
+        for (let i = 0; i < nums.length; i++) {
+            while (nums[i] - nums[right] > target && right <= i) right++;
+            count += (i - right);
+        }
+        return count;
+    }
+
+    while (min < max - 1) {
+        let mid = Math.floor((min + max) / 2);
+        let count = countLessThan(nums, mid);
+        if (count > countLessThan(nums, mid - 1) && count === k) return mid;
+        if (count < k) {
+            min = mid;
+        }
+        else {
+            max = mid;
+        }
+    }
+    if (countLessThan(nums, min) >= k) return min;
+    return max;
+}
+
 /* --- end Binary Search --- */
 
 /* --- end Divide and conquer ---*/

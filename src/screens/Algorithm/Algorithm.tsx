@@ -27,7 +27,7 @@ import {
     treeMaxDepth
 } from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
-import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
+import {BinaryTree, BinaryTreeNode, SinglyLinkedList, testGraphs} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
 
 export function AlgorithmScreen() {
@@ -181,6 +181,10 @@ export function AlgorithmScreen() {
         )
     }
 
+    const _testGraphs = () => {
+        testGraphs();
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -238,6 +242,9 @@ export function AlgorithmScreen() {
                         </TextButton>
                         <TextButton onPress={_testAVL}>
                             <Text>Test AVL</Text>
+                        </TextButton>
+                        <TextButton onPress={_testGraphs}>
+                            <Text>Test Graphs</Text>
                         </TextButton>
                     </Card>
                     {
