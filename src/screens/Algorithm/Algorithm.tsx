@@ -22,12 +22,12 @@ import {
     testBinaryTree,
     testBST,
     testBSTCase1,
-    testBSTCase3,
+    testBSTCase3, testGraphs,
     treeData,
     treeMaxDepth
 } from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
-import {BinaryTree, BinaryTreeNode, SinglyLinkedList, testGraphs} from "../../utils/data-structures";
+import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
 
 export function AlgorithmScreen() {

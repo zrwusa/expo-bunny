@@ -12,7 +12,7 @@ import {
     BinaryTree,
     BinaryTreeNode,
     Coordinate, DirectedGraph,
-    getDirectionVector, Graph,
+    getDirectionVector, UndirectedGraph,
     SinglyLinkedListNode,
     Stack,
     uuidV4
@@ -410,7 +410,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 })}
                 {
                     edges.map(edge => {
-                        if (graph instanceof Graph) {
+                        if (graph instanceof UndirectedGraph) {
                             const ends = graph.getEdgeEnds(edge);
                             if (ends.length > 1) {
                                 const v1Coordinate = coordsMap.get(ends[0]);
