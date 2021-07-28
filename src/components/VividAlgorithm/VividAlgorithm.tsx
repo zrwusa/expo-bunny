@@ -1,17 +1,21 @@
 import * as React from "react";
-import {useEffect, useRef} from "react";
+import {useRef} from "react";
 import {Text, View} from "../UI";
 import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
 import {useBunnyKit} from "../../hooks/bunny-kit";
 import {getStyles} from "./styles";
 import {
+    AbstractEdge,
+    AbstractGraph,
+    AbstractVertex,
+    BinaryTree,
     BinaryTreeNode,
-    Coordinate,
-    getDirectionVector,
+    Coordinate, DirectedGraph,
+    getDirectionVector, Graph,
     SinglyLinkedListNode,
     Stack,
-    uuidV4, BinaryTree
+    uuidV4
 } from "../../utils";
 import {Card} from "../../containers/Card";
 import {TreeNode} from "../../types";
@@ -54,6 +58,32 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
+    const LineWithArrow = ({src, dest}: { src: Coordinate, dest: Coordinate }) => {
+
+        return <G>
+            <Defs>
+                <Marker
+                    id="Triangle"
+                    viewBox="0 0 10 10"
+                    refX="0"
+                    refY="5"
+                    markerWidth="4"
+                    markerHeight="3"
+                    orient="auto"
+                >
+                    <Path d="M 0 0 L 10 5 L 0 10 z" fill={arrowColor}/>
+                </Marker>
+            </Defs>
+            <Path
+                d={`M ${src.x} ${src.y} L ${dest.x} ${dest.y}`}
+                fill="none"
+                stroke={arrowColor}
+                strokeWidth="2"
+                markerEnd="url(#Triangle)"
+            />
+        </G>
+    }
+
     const VividString: React.FC<{ data: string }> = ({data}) => {
         return (
             <Row>
@@ -63,15 +93,15 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     }
 
 
-    const VividTreeContainer: React.FC = ({children}) => {
+    const TwoWayScrollSVG: React.FC = ({children}) => {
         const horizontalScrollView = useRef<ScrollView>(null)
-        useEffect(() => {
-            horizontalScrollView?.current?.scrollTo({
-                x: (treePanelWidth - wp(375)) / 2,
-                y: 0,
-                animated: false
-            })
-        }, [])
+        // useEffect(() => {
+        //     horizontalScrollView?.current?.scrollTo({
+        //         x: (treePanelWidth - wp(375)) / 2,
+        //         y: 0,
+        //         animated: false
+        //     })
+        // }, [])
 
         return (
             <ScrollView nestedScrollEnabled style={{height: wp(375)}}>
@@ -94,23 +124,36 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
 
     const VividTree: React.FC<{ data: TreeNode<any> }> = ({data}) => {
         return (
-            <VividTreeContainer>
+            <TwoWayScrollSVG>
                 <VividTreeRecursive node={data} level={1} index={0} familyLength={1} parentX={0} parentY={0}
                                     maxHeight={data.getHeight()}/>
-            </VividTreeContainer>
+            </TwoWayScrollSVG>
         )
     }
 
     const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | null, maxHeight?: number }> = ({node, maxHeight}) => {
         return (
-            <VividTreeContainer>
+            <TwoWayScrollSVG>
                 {
                     node
                         ? <VividBinaryTreeRecursive node={node} level={1} index={0} familyLength={1}
                                                     maxHeight={maxHeight}/>
                         : null
                 }
-            </VividTreeContainer>
+            </TwoWayScrollSVG>
+        )
+    }
+
+    const VividGraph: React.FC<{ data: AbstractGraph<AbstractVertex, AbstractEdge> }> = ({data}) => {
+        console.log(data)
+        return (
+            <TwoWayScrollSVG>
+                {
+                    data
+                        ? <VividGraphDrawer graph={data}/>
+                        : null
+                }
+            </TwoWayScrollSVG>
         )
     }
 
@@ -176,31 +219,14 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                     const from = cell;
                                     const to = relatedMatrixRoutes?.[routeIndex]?.[cellIndex + 1];
                                     const deviationVector = getDirectionVector(from, to);
+                                    if (from && to) {
+                                        const src = new Coordinate((from.y + 0.5 + deviationVector.y * arrowCut) * rectSize,(from.x + 0.5 + deviationVector.x * arrowCut) * rectSize);
+                                        const dest = new Coordinate((to.y + 0.5 - deviationVector.y * arrowCut) * rectSize,(to.x + 0.5 - deviationVector.x * arrowCut) * rectSize);
+                                        return <LineWithArrow  key={src.y + ',' + src.x + dest.y + dest.x} src={src} dest={dest} />;
+                                    } else {
+                                        return null;
+                                    }
 
-                                    return from && to ?
-                                        <G key={from.y + ',' + from.x + to.y + to.x}>
-                                            <Defs>
-                                                <Marker
-                                                    id="Triangle"
-                                                    viewBox="0 0 10 10"
-                                                    refX="0"
-                                                    refY="5"
-                                                    markerWidth="4"
-                                                    markerHeight="3"
-                                                    orient="auto"
-                                                >
-                                                    <Path d="M 0 0 L 10 5 L 0 10 z" fill={arrowColor}/>
-                                                </Marker>
-                                            </Defs>
-                                            <Path
-                                                d={`M ${(from.x + 0.5 + deviationVector.x * arrowCut) * rectSize} ${(from.y + 0.5 + deviationVector.y * arrowCut) * rectSize} L ${(to.x + 0.5 - deviationVector.x * arrowCut) * rectSize} ${(to.y + 0.5 - deviationVector.y * arrowCut) * rectSize}`}
-                                                fill="none"
-                                                stroke={arrowColor}
-                                                strokeWidth="2"
-                                                markerEnd="url(#Triangle)"
-                                            />
-                                        </G>
-                                        : null
                                 })
                             })
                             : null
@@ -277,7 +303,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any> , level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxHeight}) => {
+    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxHeight}) => {
         if (!node) {
             return null;
         }
@@ -331,13 +357,84 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 >
                     <TSpan x={offsetX} y={offsetY + fontOffsetY}>{node.id}</TSpan>
                     <TSpan x={offsetX} y={offsetY + fontOffsetY + fontSize + wp(2)}>{node.count}</TSpan>
-                    {
-                        node instanceof BinaryTreeNode
-                            ? <TSpan x={offsetX}
-                                     y={offsetY + fontOffsetY + 2 * fontSize + wp(4)}>{node.allLesserSum}</TSpan>
-                            : null
-                    }
+
+                    <TSpan x={offsetX}
+                           y={offsetY + fontOffsetY + 2 * fontSize + wp(4)}>{node.allLesserSum}</TSpan>
+
                 </SVGText>
+            </G>
+        )
+    }
+
+
+    const VividGraphDrawer: React.FC<{ graph: AbstractGraph<any, any> }> = ({graph}) => {
+        const vertexDistance = wp(80);
+        const vertices = graph.vertexSet();
+        const vertexCount = vertices.length;
+        const edges = graph.edgeSet();
+        let coordsMap: Map<AbstractVertex, Coordinate> = new Map<AbstractVertex, Coordinate>();
+        const rowCount = Math.ceil(Math.sqrt(vertexCount));
+        for (let i = 0; i < vertexCount; i++) {
+            const rowIndex = Math.floor(i / rowCount);
+            const colIndex = Math.floor(i % rowCount)
+            const y = (rowIndex) * vertexDistance + circleR;
+            const x = (rowIndex % 2 === 0 ? (colIndex + 1) : colIndex) * vertexDistance + circleR;
+            coordsMap.set(vertices[i], new Coordinate(y, x));
+        }
+        return (
+            <G>
+                {
+                    vertices.map(vertex => {
+                    const coordinate = coordsMap.get(vertex);
+                    return (
+                        coordinate
+                            ? <G key={vertex.id}>
+                                <Circle key={vertex.id} r={circleR}
+                                        cx={coordinate.x}
+                                        cy={coordinate.y}
+                                        fill={colors.primary}/>
+                                <SVGText key={vertex.id + 'id'}
+                                         fill="none"
+                                         stroke={colors.text}
+                                         fontSize={fontSize}
+                                         fontWeight={1}
+                                         x={coordinate.x}
+                                         y={coordinate.y + fontOffsetY}
+                                         textAnchor="middle"
+                                >
+                                    <TSpan x={coordinate.x} y={coordinate.y + fontOffsetY}>{vertex.id}</TSpan>
+                                </SVGText>
+                            </G>
+                            : null
+                    )
+                })}
+                {
+                    edges.map(edge => {
+                        if (graph instanceof Graph) {
+                            const ends = graph.getEdgeEnds(edge);
+                            if (ends.length > 1) {
+                                const v1Coordinate = coordsMap.get(ends[0]);
+                                const v2Coordinate = coordsMap.get(ends[1]);
+                                if (v1Coordinate && v2Coordinate) {
+                                    return <Line key={edge.hashCode}
+                                                 x1={v1Coordinate.x} y1={v1Coordinate.y} x2={v2Coordinate.x} y2={v2Coordinate.y}/>
+                                }
+                            }
+                        } else if (graph instanceof DirectedGraph) {
+                            const src = graph.getEdgeSrc(edge);
+                            const dest = graph.getEdgeDest(edge);
+                            if (src && dest) {
+                                const srcCod = coordsMap.get(src);
+                                const destCod = coordsMap.get(dest);
+                                if (srcCod && destCod) {
+                                    return <LineWithArrow
+                                        key={edge.hashCode}
+                                        src={srcCod} dest={destCod}/>
+                                }
+                            }
+                        }
+                    })
+                }
             </G>
         )
     }
@@ -424,6 +521,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             case 'object':
                 if (item instanceof TreeNode) {
                     return <VividTree data={item}/>
+                } else if (item instanceof AbstractGraph) {
+                    return <VividGraph data={item}/>;
                 } else if (item instanceof BinaryTreeNode) {
                     return <VividBinaryTreeNode data={item}/>;
                 } else if (item instanceof BinaryTree) {

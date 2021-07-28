@@ -1,70 +1,67 @@
+import {uuidV4, wait, WaitManager} from "../../utils";
+
 type VertexId = string;
+import _ from "lodash";
+import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 
 interface I_Graph<V, E> {
 
-    // containsVertex(id: VertexId): boolean;
-    //
-    // containsVertex(v: V): boolean;
+    containsVertex(vertexOrId: V | VertexId): boolean;
 
-    getVertex(vertexOrId: V | VertexId): V | null;
+    getVertex(vertexOrId: VertexId | V): V | null;
 
-    // vertexSet(): V[];
-    //
-    // addVertex(): V;
-    //
-    // addVertex(v: V): boolean;
-    //
-    // removeVertex(v: V): boolean;
-    //
-    // removeAllVertices(vertices: V[] | VertexId[]): boolean;
-    //
-    // degreeOf(vertex: V): number;
-    //
-    // inDegreeOf(vertex: V): number;
-    //
-    // outDegreeOf(vertex: V): number;
-    //
-    // edgesOf(vertex: V): E[];
+    getVertexId(vertexOrId: V | VertexId): VertexId;
 
-    incomingEdgesOf(vertex: V): E[];
+    vertexSet(): V[];
 
-    outgoingEdgesOf(vertex: V): E[];
+    addVertex(v: V): boolean;
 
+    removeVertex(vertexOrId: V | VertexId): boolean
 
-    // containsEdge(src: V, dest: V): boolean;
-    //
+    removeAllVertices(vertices: V[] | VertexId[]): boolean;
+
+    degreeOf(vertexOrId: V | VertexId): number;
+
+    edgesOf(vertexOrId: V | VertexId): E[];
+
+    containsEdge(src: V | VertexId, dest: V | VertexId): boolean;
+
     // containsEdge(e: E): boolean;
 
     getEdge(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
 
     getAllEdges(src: V, dest: V): E[];
 
-    //
-    // edgeSet(): E[];
-    //
+    edgeSet(): E[];
+
     // addEdge(src: V, dest: V): E;
-    //
-    // addEdge(src: V, dest: V, e: E): boolean;
 
-    removeEdge(srcOrId: VertexId | V, destOrId: VertexId | V): [E | null, E | null]
+    addEdge(edge: E): boolean;
 
-    // removeEdge(e: E): boolean;
-    //
-    // removeAllEdges(src: V | VertexId, dest: V | VertexId): E[];
-    //
+    removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
+
+    removeEdge(edge: E): E | null;
+
+    removeAllEdges(v1: VertexId | V, v2: VertexId | V): (E | null)[];
+
     // removeAllEdges(edges: E[] | [VertexId, VertexId]): boolean;
-    //
-    // getEdgeSource(e: E): V;
-    //
-    // getEdgeTarget(e: E): V;
-    //
-    // getEdgeWeight(e: E): number;
-    //
-    // setEdgeWeight(e: E, weight: number): void;
-    //
-    // setEdgeWeight(src: V, dest: V, weight: number): void;
-    //
-    // // GraphType getType(): GraphType;
+
+    setEdgeWeight(srcOrId: V | VertexId, destOrId: V | VertexId, weight: number): boolean;
+
+}
+
+export interface I_DirectedGraph<V, E> {
+    incomingEdgesOf(vertex: V): E[];
+
+    outgoingEdgesOf(vertex: V): E[];
+
+    inDegreeOf(vertexOrId: V | VertexId): number;
+
+    outDegreeOf(vertexOrId: V | VertexId): number;
+
+    getEdgeSrc(e: E): V | null;
+
+    getEdgeDest(e: E): V | null;
 }
 
 export class AbstractVertex {
@@ -91,15 +88,12 @@ export class Vertex extends AbstractVertex {
 }
 
 export class DirectedVertex extends AbstractVertex {
-    private _inDegrees: DirectedEdge<DirectedVertex>[] = [];
-    private _outDegrees: DirectedEdge<DirectedVertex>[] = [];
-
     constructor(id: VertexId) {
         super(id);
     }
 }
 
-export abstract class AbstractEdge<V extends AbstractVertex> {
+export abstract class AbstractEdge {
 
     private _weight: number;
     get weight(): number {
@@ -110,291 +104,431 @@ export abstract class AbstractEdge<V extends AbstractVertex> {
         this._weight = v;
     }
 
-    private _src: V;
-    get src(): V {
-        return this._src;
+    private _hashCode: string;
+
+    get hashCode(): string {
+        return this._hashCode;
     }
 
-    set src(v: V) {
-        this._src = v;
+    set hashCode(v: string) {
+        this._hashCode = v;
     }
 
-
-    private _dest: V;
-    get dest(): V {
-        return this._dest;
-    }
-
-    set dest(v: V) {
-        this._dest = v;
-    }
-
-    protected constructor(src: V, dest: V, weight?: number) {
+    protected constructor(weight?: number) {
         if (weight === undefined) weight = AbstractEdge.DEFAULT_EDGE_WEIGHT;
-        this._src = src;
-        this._dest = dest;
         this._weight = weight;
+        this._hashCode = uuidV4();
     }
 
     static DEFAULT_EDGE_WEIGHT: number = 1;
 }
 
-export class Edge<V extends Vertex> extends AbstractEdge<V> {
+export class Edge extends AbstractEdge {
+    private _vertices: [VertexId, VertexId];
 
-    constructor(src: V, dest: V, weight?: number) {
-        super(src, dest, weight);
+    public get vertices() {
+        return this._vertices;
+    }
+
+    public set vertices(v: [VertexId, VertexId]) {
+        this._vertices = v;
+    }
+
+    constructor(v1: VertexId, v2: VertexId, weight?: number) {
+        super(weight);
+        this._vertices = [v1, v2];
     }
 }
 
-export class DirectedEdge<V extends DirectedVertex> extends AbstractEdge<V> {
-    constructor(src: V, dest: V, weight?: number) {
-        super(src, dest, weight);
+export class DirectedEdge extends AbstractEdge {
+    constructor(src: VertexId, dest: VertexId, weight?: number) {
+        super(weight);
+        this._src = src;
+        this._dest = dest;
+    }
+
+    private _src: VertexId;
+    get src(): VertexId {
+        return this._src;
+    }
+
+    set src(v: VertexId) {
+        this._src = v;
+    }
+
+
+    private _dest: VertexId;
+    get dest(): VertexId {
+        return this._dest;
+    }
+
+    set dest(v: VertexId) {
+        this._dest = v;
     }
 }
 
-// export type StorageType = 'adj-list' | 'adj-matrix';
-
-export abstract class AbstractGraph<V extends AbstractVertex, E extends AbstractEdge<V>> implements I_Graph<V, E> {
-
-    protected _vertices: V[] = [];
-    protected readonly _adjList: Map<V, E[]> = new Map();
+export abstract class AbstractGraph<V extends AbstractVertex, E extends AbstractEdge> implements I_Graph<V, E> {
 
     protected constructor() {
     }
 
-    protected abstract createVertex(id: VertexId): V;
+    protected _vertices: V[] = [];
+    protected readonly _edges: E[] = [];
 
-    protected abstract createEdge(src: V, dest: V): E;
+    abstract removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
+    abstract removeEdge(edge: E): E | null;
 
-    getVertex(id: VertexId): V | null {
-        return this._vertices.find(vertex => vertex.id === id) || null
+    getVertex(vertexOrId: VertexId | V): V | null {
+        const vertexId = this.getVertexId(vertexOrId);
+        return this._vertices.find(vertex => vertex.id === vertexId) || null
     }
 
-    getAllEdges(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E[] {
+    getVertexId(vertexOrId: V | VertexId): VertexId {
+        return vertexOrId instanceof AbstractVertex ? vertexOrId.id : vertexOrId;
+    }
+
+    containsVertex(vertexOrId: V | VertexId): boolean {
+        return !!this.getVertex(vertexOrId);
+    }
+
+    vertexSet(): V[] {
+        return this._vertices;
+    }
+
+    abstract getAllEdges(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E[];
+
+    getEdge(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E | null {
+        return this.getAllEdges(srcOrId, destOrId)[0] || null;
+    }
+
+    addVertex(newVertex: V): boolean {
+        if (!this.containsVertex(newVertex)) {
+            this._vertices.push(newVertex);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    removeVertex(vertexOrId: V | VertexId): boolean {
+        const vertexId = this.getVertexId(vertexOrId);
+        const removed = _.remove<V>(this._vertices, v => v.id === vertexId);
+        return removed.length > 0;
+    }
+
+    removeAllVertices(vertices: V[] | VertexId[]): boolean {
+        let removed: boolean[] = [];
+        for (let v of vertices) {
+            removed.push(this.removeVertex(v));
+        }
+        return removed.length > 0;
+    }
+
+    abstract degreeOf(vertexOrId: V | VertexId): number;
+
+    edgeSet(): E[] {
+        return this._edges;
+    }
+
+    abstract edgesOf(vertexOrId: V | VertexId): E[];
+
+    containsEdge(v1: VertexId | V, v2: VertexId | V): boolean {
+        const edge = this.getEdge(v1, v2);
+        return !!edge;
+    }
+
+    abstract addEdge(edge: E): boolean;
+
+    removeAllEdges(v1: VertexId | V, v2: VertexId | V): (E | null)[] {
+        let allEdges = this.getAllEdges(v1, v2);
+        const removed:(E | null)[] = [];
+        for (let edge of allEdges) {
+            removed.push(this.removeEdge(edge));
+        }
+        return removed;
+    }
+
+    setEdgeWeight(srcOrId: VertexId | V, destOrId: VertexId | V, weight: number): boolean {
+        const edge = this.getEdge(srcOrId, destOrId);
+        if (edge) {
+            edge.weight = weight;
+            return  true;
+        } else {
+            return false;
+        }
+    }
+}
+
+export class Graph<V extends Vertex, E extends Edge> extends AbstractGraph<V, E> {
+    constructor() {
+        super();
+    }
+
+    getAllEdges(v1: V | null | VertexId, v2: V | null | VertexId): E[] {
         let edges: E[] = [];
 
-        if (srcOrId !== null && destOrId !== null) {
-            const src: V | null = srcOrId instanceof AbstractVertex ? srcOrId : this.getVertex(srcOrId);
-            const dest: V | null = destOrId instanceof AbstractVertex ? destOrId : this.getVertex(destOrId);
+        if (v1 !== null && v2 !== null) {
+            const vertex1: V | null = this.getVertex(v1);
+            const vertex2: V | null = this.getVertex(v2);
 
-            let srcEdges: E[] | null = null;
-            if (src && dest) {
-                srcEdges = this._adjList.get(src) || null;
-                if (srcEdges && srcEdges.length > 0) {
-                    edges = srcEdges.filter(edge => edge.dest === dest);
-                }
+            if (vertex1 && vertex2) {
+                edges = this._edges.filter(edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id));
             }
         }
 
         return edges;
     }
 
-    getEdge(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E | null {
-        return this.getAllEdges(srcOrId, destOrId)[0] || null;
+    addEdge(edge: E): boolean {
+        let hasVertex = true;
+        for (let v of edge.vertices) {
+            if (!this.containsVertex(v)) hasVertex = false;
+        }
+
+        if (hasVertex) {
+            this._edges.push(edge);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    removeEdgeByEnds(v1: V | VertexId, v2: V | VertexId): E | null {
+
+        const vertex1: V | null = this.getVertex(v1);
+        const vertex2: V | null = this.getVertex(v2);
+
+        if (!vertex1 || !vertex2) {
+            return null;
+        }
+
+        return _.remove<E>(this._edges, edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id))[0] || null;
+    }
+
+
+
+    removeEdge(edge: E): E | null {
+        const removed = _.remove<E>(this._edges, e => e.hashCode === edge.hashCode);
+        return removed[0] || null;
+    }
+
+    degreeOf(vertexOrId: VertexId | V): number {
+        const vertexId = this.getVertexId(vertexOrId);
+        return this._edges.filter(edge => edge.vertices.includes(vertexId)).length;
+    }
+
+    edgesOf(vertexOrId: VertexId | V): E[] {
+        const vertexId = this.getVertexId(vertexOrId);
+        return this._edges.filter(edge => edge.vertices.includes(vertexId))
+    }
+
+    getEdgeEnds(edge: E): V[] {
+        return this._vertices.filter(v => edge.vertices.includes(v.id))
+    }
+}
+
+export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> extends AbstractGraph<V, E> implements I_DirectedGraph<V, E>{
+
+    constructor() {
+        super();
+    }
+
+    getAllEdges(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E[] {
+        let edges: E[] = [];
+
+        if (srcOrId !== null && destOrId !== null) {
+            const src: DirectedVertex | null = this.getVertex(srcOrId);
+            const dest: DirectedVertex | null = this.getVertex(destOrId);
+
+            if (src && dest) {
+                edges = this._edges.filter(edge => edge.src === src.id && edge.dest === dest.id);
+            }
+        }
+
+        return edges;
+    }
+
+    addEdge(edge: E): boolean {
+        let hasVertex = true;
+
+        if (!this.containsVertex(edge.src) || !this.containsVertex(edge.dest)) {
+            hasVertex = false;
+        }
+
+        if (hasVertex) {
+            this._edges.push(edge);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null {
+
+        const src: V | null = this.getVertex(srcOrId);
+        const dest: V | null = this.getVertex(destOrId);
+
+        if (!src || !dest) {
+            return null;
+        }
+
+        return _.remove<E>(this._edges, edge => edge.dest === dest.id && edge.src === src.id)[0] || null;
+    }
+
+    removeEdge(edge: E): E | null {
+        const removed = _.remove<E>(this._edges, e => e.hashCode === edge.hashCode);
+        return removed[0] || null;
+    }
+
+    removeAllEdges(src: VertexId | V, dest: VertexId | V): E[] {
+        return [];
     }
 
     incomingEdgesOf(vertexOrId: V | VertexId): E[] {
-        const target = vertexOrId instanceof AbstractVertex ? vertexOrId : this.getVertex(vertexOrId);
+        const target = this.getVertex(vertexOrId);
         let incomingEdges: E[] = [];
-        if (!target) return incomingEdges;
-        this._adjList.forEach(edges => {
-            incomingEdges = [...incomingEdges, ...edges.filter(edge => edge.dest.id === target.id)];
-        })
+        if (target) {
+            incomingEdges = this._edges.filter(edge => edge.dest === target.id)
+        }
         return incomingEdges;
     }
 
-    outgoingEdgesOf(vertex: V): E[] {
-        return this._adjList.get(vertex) || [];
-    }
-
-    addVertex(newVertexOrId: V | VertexId): V {
-        let exist: V | null = this._vertices.find(vertex => vertex.id === (newVertexOrId instanceof Vertex ? newVertexOrId.id : newVertexOrId)) || null;
-        if (exist) {
-            throw new Error(`${newVertexOrId} already exist`);
-        } else {
-            let _newVertex = newVertexOrId instanceof AbstractVertex ? newVertexOrId : this.createVertex(newVertexOrId);
-            this._vertices.push(_newVertex);
-            return _newVertex;
+    outgoingEdgesOf(vertexOrId: V | VertexId): E[] {
+        const target = this.getVertex(vertexOrId);
+        let incomingEdges: E[] = [];
+        if (target) {
+            incomingEdges = this._edges.filter(edge => edge.src === target.id)
         }
+        return incomingEdges;
     }
 
-    removeEdge(srcOrId: VertexId | V, destOrId: VertexId | V): [E | null, E | null] {
-
-        const srcToDestEdge = this.getEdge(srcOrId, destOrId);
-        const destToSrcEdge = this.getEdge(destOrId, srcOrId);
-
-        const src: V | null = srcOrId instanceof AbstractVertex ? srcOrId : this.getVertex(srcOrId);
-        const dest: V | null = destOrId instanceof AbstractVertex ? destOrId : this.getVertex(destOrId);
-
-        if (!src || !dest) {
-            throw new Error('src or dest does not exist');
-        }
-
-        const srcEdges = this.outgoingEdgesOf(src);
-        if (srcToDestEdge && srcEdges) {
-            this._adjList.set(src, srcEdges.filter(edge => edge.dest !== srcToDestEdge.dest));
-        }
-
-        const destEdges = this.outgoingEdgesOf(dest);
-        if (destToSrcEdge && destEdges) {
-            this._adjList.set(src, destEdges.filter(edge => edge.dest !== destToSrcEdge.dest));
-        }
-
-        return [srcToDestEdge, destToSrcEdge];
+    degreeOf(vertexOrId: VertexId | V): number {
+        const vertexId = this.getVertexId(vertexOrId);
+        return this._edges.filter(edge => edge.src === vertexId || edge.dest === vertexId).length;
     }
 
-    dfsRecursive(startVertexId: VertexId): V[] {
-        let result: V[] = [];
-        // let visited: any = {}; //
-        // let startVertex = this._adjList.find(v => v.id === startVertexId);
-        // let adjacencyList = this._adjList;
-        //
-        // if (startVertex)
-        //     (function dfs(vertex: Vertex): void {
-        //         // Return if vertex has no edges - This is our base case
-        //         if (vertex === null || vertex === undefined) return undefined;
-        //
-        //         // Add vertex dest result list
-        //         result.push(vertex.id);
-        //
-        //         // Add vertex dest visited list
-        //         visited[vertex.id] = true;
-        //
-        //         // For each edge of the vertex, traverse through the neighbors
-        //         adjacencyList.find(v => v.id === vertex.id)?.edges?.forEach(neighbor => {
-        //             // If not visited, recurse of the neighbor edges
-        //             if (visited[neighbor] !== true) {
-        //                 const adjNeighbor = adjacencyList.find(e => e.id === neighbor)
-        //                 if (adjNeighbor) dfs(adjNeighbor);
-        //             }
-        //         });
-        //
-        //     })(startVertex);
-
-        return result;
+    inDegreeOf(vertexOrId: VertexId | V): number {
+        return this.incomingEdgesOf(vertexOrId).length;
     }
 
-    dfsIterative(startVertexId: VertexId): V[] {
-        let result: V[] = [];
-        // let visited: any = {};
-        // let stack: VertexId[] = [];
-        // stack.push(startVertexId);
-        //
-        // while (stack.length > 0) {
-        //     let id = stack.pop();
-        //     let currentVertex = this._adjList.find(e => e.id === id);
-        //     if (currentVertex) {
-        //         if (!visited[currentVertex.id]) {
-        //             // Mark the current vertex as visited
-        //             visited[currentVertex.id] = true;
-        //
-        //             // Add the current vertex dest result list
-        //             result.push(currentVertex.id);
-        //
-        //             // Visit the neighbors of the current vertex one by on, if they are not already visited
-        //             currentVertex.edges?.forEach(neighbor => {
-        //                 if (!visited[neighbor])
-        //                     stack.push(neighbor);
-        //             });
-        //         }
-        //     }
-        //
-        // }
-
-        return result;
+    outDegreeOf(vertexOrId: VertexId | V): number {
+        return this.outgoingEdgesOf(vertexOrId).length;
     }
 
-    bfs(startVertexId: VertexId): V[] {
-        let result: V[] = [];
-        // let visited: any = {};
-        // let queue: VertexId[] = [];
-        // queue.push(startVertexId);
-        //
-        // while (queue.length > 0) {
-        //     let id = queue.shift();
-        //     let currentVertex = this._adjList.find(e => e.id === id);
-        //     if (currentVertex) {
-        //         if (!visited[currentVertex.id]) {
-        //             // Mark the current vertex as visited
-        //             visited[currentVertex.id] = true;
-        //
-        //             // Add the current vertex dest result list
-        //             result.push(currentVertex.id);
-        //
-        //             // Visit the neighbors of the current vertex one by on, if they are not already visited
-        //             currentVertex.edges?.forEach(neighbor => {
-        //                 if (!visited[neighbor])
-        //                     queue.push(neighbor);
-        //             });
-        //
-        //         }
-        //     }
-        //
-        // }
+    edgesOf(vertexOrId: VertexId | V): E[] {
+        const vertexId = this.getVertexId(vertexOrId);
+        return this._edges.filter(edge => edge.src === vertexId || edge.dest === vertexId);
+    }
 
-        return result;
+    getEdgeSrc(e: E): V | null {
+        return this.getVertex(e.src);
+    }
+
+    getEdgeDest(e: E): V | null {
+        return this.getVertex(e.dest);
     }
 }
 
-export class Graph<V extends Vertex, E extends Edge<V>> extends AbstractGraph<Vertex, Edge<Vertex>> {
-    constructor() {
-        super();
-    }
+class MyVertex extends DirectedVertex {
+    data: string;
 
-    protected createVertex(id: VertexId): Vertex {
-        return new Vertex(id);
-    }
-
-    protected createEdge(src: Vertex, dest: Vertex): Edge<Vertex> {
-        return new Edge<Vertex>(src, dest);
-    }
-
-
-    addEdge(srcOrId: VertexId | V, destOrId: VertexId | V): [Edge<Vertex> | null, Edge<Vertex> | null] {
-        const src: Vertex | null = srcOrId instanceof Vertex ? srcOrId : this.getVertex(srcOrId);
-        const dest: Vertex | null = destOrId instanceof Vertex ? destOrId : this.getVertex(destOrId);
-
-        let edge1to2: Edge<Vertex> | null = null;
-        let edge2to1: Edge<Vertex> | null = null;
-        if (src && dest) {
-            const srcEdges = this._adjList.get(src) || [];
-            edge1to2 = this.createEdge(src, dest);
-            this._adjList.set(src, [...srcEdges, edge1to2]);
-
-            const destEdges = this._adjList.get(dest) || [];
-            edge2to1 = this.createEdge(dest, src);
-            this._adjList.set(dest, [...destEdges, edge2to1]);
-        } else {
-            throw new Error('src or _toVertex does not exist');
-        }
-        return [edge1to2, edge2to1];
+    constructor(id: VertexId, data: string) {
+        super(id);
+        this.data = data;
     }
 }
 
-export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge<V>> extends AbstractGraph<DirectedVertex, DirectedEdge<V>> {
+class MyEdge extends DirectedEdge {
+    data: string;
 
-    constructor() {
-        super();
-    }
-
-    protected createVertex(id: VertexId): DirectedVertex {
-        return new DirectedVertex(id);
-    }
-
-    protected createEdge(src: V, dest: V): DirectedEdge<V> {
-        return new DirectedEdge<V>(src, dest);
+    constructor(v1: VertexId, v2: VertexId, weight: number, data: string) {
+        super(v1, v2, weight);
+        this.data = data;
     }
 }
 
-export const testGraphs = () => {
-    const graph = new Graph();
-    console.log('graph.addVertex(\'1\')', graph.addVertex('1'));
-    console.log('graph.addVertex(\'2\')', graph.addVertex('2'));
-    console.log('graph.addEdge(\'1\', \'2\')', graph.addEdge('1', '2'));
-    console.log('graph.getAllEdges(\'1\', \'2\')', graph.getAllEdges('1', '2'));
-    console.log('graph.getAllEdges(graph.getVertex(\'1\'), graph.getVertex(\'2\'))', graph.getAllEdges(graph.getVertex('1'), graph.getVertex('2')));
-    console.log('graph.getAllEdges(\'1\',\'100\')', graph.getAllEdges('1', '100'));
-    console.log('graph.removeEdge(\'1\',\'2\')', graph.removeEdge('1', '2'));
-    console.log('graph.getAllEdges(\'1\', \'2\')', graph.getAllEdges('1', '2'));
+// class MyGraph<V extends MyVertex, E extends MyEdge> extends Graph<V, E> {
+//     constructor() {
+//         super();
+//     }
+// }
+
+const waitMan = new WaitManager(4)
+export const testGraphs = async (proxyHandler: TProxyHandler) => {
+
+    const directedGraph = new DirectedGraph();
+    // console.log('directedGraph.addVertex(\'1\')', directedGraph.addVertex(new DirectedVertex('1')));
+    // console.log('directedGraph.addVertex(\'2\')', directedGraph.addVertex(new DirectedVertex('2')));
+    // console.log('directedGraph.addEdge(\'1\', \'2\')', directedGraph.addEdge(new DirectedEdge('1', '2')));
+    // console.log('directedGraph.getAllEdges(\'1\', \'2\')', directedGraph.getAllEdges('1', '2'));
+    // console.log('directedGraph.getAllEdges(directedGraph.getVertex(\'1\'), directedGraph.getVertex(\'2\'))', directedGraph.getAllEdges(directedGraph.getVertex('1'), directedGraph.getVertex('2')));
+    // console.log('directedGraph.getAllEdges(\'1\',\'100\')', directedGraph.getAllEdges('1', '100'));
+    // console.log('directedGraph.removeEdgeByEnds(\'1\',\'2\')', directedGraph.removeEdgeByEnds('1', '2'));
+    // console.log('directedGraph.getAllEdges(\'1\', \'2\')', directedGraph.getAllEdges('1', '2'));
+
+    // const graph = new Graph();
+    // console.log('graph.addVertex(\'1\')', graph.addVertex(new Vertex('1')));
+    // console.log('graph.addVertex(\'2\')', graph.addVertex(new Vertex('2')));
+    // console.log('graph.addEdge(\'1\', \'2\')', graph.addEdge(new Edge('1', '2', 100)));
+    // console.log('graph.getAllEdges(\'1\', \'2\')', graph.getAllEdges('1', '2'));
+    // console.log('graph.getAllEdges(graph.getVertex(\'1\'), graph.getVertex(\'2\'))', graph.getAllEdges(graph.getVertex('1'), graph.getVertex('2')));
+    // console.log('graph.getAllEdges(\'1\',\'100\')', graph.getAllEdges('1', '100'));
+    // console.log('graph.removeEdgeByEnds(\'1\',\'2\')', graph.removeEdgeByEnds('1', '2'));
+    // console.log('graph.getAllEdges(\'1\', \'2\')', graph.getAllEdges('1', '2'));
+
+
+    let vars: {myGraph : DirectedGraph<MyVertex, MyEdge>} = new DeepProxy({myGraph: new DirectedGraph<MyVertex, MyEdge>()}, proxyHandler);
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'1\', \'data1\'))', vars.myGraph.addVertex(new MyVertex('1', 'data1')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'2\', \'data2\'))', vars.myGraph.addVertex(new MyVertex('2', 'data2')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'3\', \'data3\'))', vars.myGraph.addVertex(new MyVertex('3', 'data3')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'4\', \'data4\'))', vars.myGraph.addVertex(new MyVertex('4', 'data4')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'5\', \'data5\'))', vars.myGraph.addVertex(new MyVertex('5', 'data5')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'6\', \'data6\'))', vars.myGraph.addVertex(new MyVertex('6', 'data6')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'7\', \'data7\'))', vars.myGraph.addVertex(new MyVertex('7', 'data7')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'8\', \'data8\'))', vars.myGraph.addVertex(new MyVertex('8', 'data8')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addVertex(new MyVertex(\'9\', \'data9\'))', vars.myGraph.addVertex(new MyVertex('9', 'data9')));
+    // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
+    //
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addEdge(new MyEdge(\'1\', \'2\', 10, \'edge-data1-2\'))', vars.myGraph.addEdge(new MyEdge('1', '2', 10, 'edge-data1-2')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addEdge(new MyEdge(\'2\', \'1\', 20, \'edge-data2-1\'))', vars.myGraph.addEdge(new MyEdge('2', '1', 20, 'edge-data2-1')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.getAllEdges(\'1\', \'2\')', vars.myGraph.getAllEdges('1', '2'));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.getAllEdges(vars.myGraph.getVertex(\'1\'), vars.myGraph.getVertex(\'2\'))', vars.myGraph.getAllEdges(vars.myGraph.getVertex('1'), vars.myGraph.getVertex('2')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.getAllEdges(\'1\',\'100\')', vars.myGraph.getAllEdges('1', '100'));
+    await wait(waitMan.time3);
+    console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.removeEdgeByEnds(\'1\',\'2\')', vars.myGraph.removeEdgeByEnds('1', '2'));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.getAllEdges(\'1\', \'2\')', vars.myGraph.getAllEdges('1', '2'));
+
+    // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
+    //
+    //
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addEdge(new MyEdge(\'3\', \'1\', 3, \'edge-data-3-1\'))', vars.myGraph.addEdge(new MyEdge('3', '1', 3, 'edge-data-3-1')))
+
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addEdge(new MyEdge(\'1\', \'9\', 19, \'edge-data1-9\'))', vars.myGraph.addEdge(new MyEdge('1', '9', 19, 'edge-data1-9')));
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.addEdge(new MyEdge(\'9\', \'7\', 97, \'edge-data9-7\'))', vars.myGraph.addEdge(new MyEdge('9', '7', 97, 'edge-data9-7')));
+
+    // const myGraphEdge3to1 = vars.myGraph.getEdge('3', '1');
+    //
+    // console.log('vars.myGraph.getAllEdges(\'3\', \'1\')', vars.myGraph.getAllEdges('3', '1'));
+    // myGraphEdge3to1 && console.log('vars.myGraph.removeEdge(myGraphEdge3to1)', vars.myGraph.removeEdge(myGraphEdge3to1));
 }
 

@@ -181,8 +181,13 @@ export function AlgorithmScreen() {
         )
     }
 
-    const _testGraphs = () => {
-        testGraphs();
+    const [testGraphVars, setTestGraphVars] = useState<{ [key in string]: unknown }>()
+    const _testGraphs = async () => {
+        await testGraphs( ({value, key, DEFAULT}) => {
+            console.log(key, value);
+            setTestGraphVars(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT;
+        });
     }
 
     return (
@@ -315,6 +320,11 @@ export function AlgorithmScreen() {
                     {
                         testAVLVariables
                             ? <VividAlgorithm data={testAVLVariables}/>
+                            : null
+                    }
+                    {
+                        testGraphVars
+                            ? <VividAlgorithm data={testGraphVars}/>
                             : null
                     }
                 </View>
