@@ -178,6 +178,7 @@ export class WaitManager {
     }
 
     private _time30: number = 20000;
+
     get time50(): number {
         return this._time30 / this._nXSpeed;
     }
@@ -203,6 +204,7 @@ export class WaitManager {
         this._nXSpeed = nXSpeed;
     }
 }
+
 export const wait = async (ms: number, resolveValue?: any) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -492,4 +494,18 @@ export const timeEnd = (startTime: number, headerLog?: string, consoleConditionF
 }
 
 
+export const arrayRemove = <T>(array: T[], predicate: (item: T, index: number, array: T[]) => boolean) => {
+    let index = -1,
+        length = array ? array.length : 0,
+        result = [];
 
+    while (++index < length) {
+        let value = array[index];
+        if (predicate(value, index, array)) {
+            result.push(value);
+            Array.prototype.splice.call(array, index--, 1);
+            length--;
+        }
+    }
+    return result;
+}

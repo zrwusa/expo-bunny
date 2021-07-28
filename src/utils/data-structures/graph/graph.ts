@@ -1,8 +1,8 @@
-import {uuidV4, wait, WaitManager} from "../../utils";
+import {arrayRemove, uuidV4, wait, WaitManager} from "../../utils";
+import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 
 type VertexId = string;
-import _ from "lodash";
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
+
 
 interface I_Graph<V, E> {
 
@@ -173,9 +173,10 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     }
 
     protected _vertices: V[] = [];
-    protected readonly _edges: E[] = [];
+    protected _edges: E[] = [];
 
     abstract removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
+
     abstract removeEdge(edge: E): E | null;
 
     getVertex(vertexOrId: VertexId | V): V | null {
@@ -212,7 +213,9 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     removeVertex(vertexOrId: V | VertexId): boolean {
         const vertexId = this.getVertexId(vertexOrId);
-        const removed = _.remove<V>(this._vertices, v => v.id === vertexId);
+        // const removed = this._vertices.filter(v => v.id === vertexOrId);
+        // this._vertices = this._vertices.filter(v => v.id !== vertexOrId);
+        const removed = arrayRemove<V>(this._vertices, v => v.id === vertexId);
         return removed.length > 0;
     }
 
@@ -241,7 +244,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     removeAllEdges(v1: VertexId | V, v2: VertexId | V): (E | null)[] {
         let allEdges = this.getAllEdges(v1, v2);
-        const removed:(E | null)[] = [];
+        const removed: (E | null)[] = [];
         for (let edge of allEdges) {
             removed.push(this.removeEdge(edge));
         }
@@ -252,7 +255,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         const edge = this.getEdge(srcOrId, destOrId);
         if (edge) {
             edge.weight = weight;
-            return  true;
+            return true;
         } else {
             return false;
         }
@@ -302,13 +305,18 @@ export class Graph<V extends Vertex, E extends Edge> extends AbstractGraph<V, E>
             return null;
         }
 
-        return _.remove<E>(this._edges, edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id))[0] || null;
+        // const removed = this._edges.filter(edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id));
+        // this._edges = this._edges.filter(edge => !(edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id)));
+        // return removed[0] || null;
+
+        return arrayRemove<E>(this._edges, edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id))[0] || null;
     }
 
 
-
     removeEdge(edge: E): E | null {
-        const removed = _.remove<E>(this._edges, e => e.hashCode === edge.hashCode);
+        // const removed = this._edges.filter(e => e.hashCode === edge.hashCode);
+        // this._edges = this._edges.filter(e => !(e.hashCode === edge.hashCode));
+        const removed = arrayRemove<E>(this._edges, e => e.hashCode === edge.hashCode);
         return removed[0] || null;
     }
 
@@ -327,7 +335,10 @@ export class Graph<V extends Vertex, E extends Edge> extends AbstractGraph<V, E>
     }
 }
 
-export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> extends AbstractGraph<V, E> implements I_DirectedGraph<V, E>{
+// 0 means unknown, 1 means visiting, 2 means visited;
+export type TopologicalStatus = 0 | 1 | 2;
+
+export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> extends AbstractGraph<V, E> implements I_DirectedGraph<V, E> {
 
     constructor() {
         super();
@@ -371,12 +382,16 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         if (!src || !dest) {
             return null;
         }
-
-        return _.remove<E>(this._edges, edge => edge.dest === dest.id && edge.src === src.id)[0] || null;
+        // const removed = this._edges.filter(edge => edge.dest === dest.id && edge.src === src.id);
+        // this._edges = this._edges.filter(edge => !(edge.dest === dest.id && edge.src === src.id));
+        // return removed[0] || null;
+        return arrayRemove<E>(this._edges, edge => edge.dest === dest.id && edge.src === src.id)[0] || null;
     }
 
     removeEdge(edge: E): E | null {
-        const removed = _.remove<E>(this._edges, e => e.hashCode === edge.hashCode);
+        // const removed = this._edges.filter(e => e.hashCode === edge.hashCode);
+        // this._edges = this._edges.filter(e => !(e.hashCode === edge.hashCode));
+        const removed = arrayRemove<E>(this._edges, e => e.hashCode === edge.hashCode);
         return removed[0] || null;
     }
 
@@ -427,6 +442,57 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
     getEdgeDest(e: E): V | null {
         return this.getVertex(e.dest);
     }
+
+    getDestinations(vertex: V | null): V[] {
+        if (vertex === null) {
+            return [];
+        }
+        const destinations: V[] = [];
+        const outgoingEdges = this.outgoingEdgesOf(vertex);
+        for (let outEdge of outgoingEdges) {
+            const child = this.getEdgeDest(outEdge);
+            if (child) {
+                destinations.push(child);
+            }
+        }
+        return destinations;
+    }
+
+    topologicalSort(): V[] | null {
+
+        const statusMap: Map<V, TopologicalStatus> = new Map<V, TopologicalStatus>();
+        for (let vertex of this._vertices) {
+            statusMap.set(vertex, 0);
+        }
+
+        const sorted: V[] = [];
+        let hasCycle = false;
+        const dfs = (cur: V) => {
+            statusMap.set(cur, 1);
+            const children = this.getDestinations(cur);
+            for (let child of children) {
+                const childStatus = statusMap.get(child);
+                if (childStatus === 0) {
+                    dfs(child);
+                } else if (childStatus === 1) {
+                    hasCycle = true;
+                }
+            }
+            statusMap.set(cur, 2);
+            sorted.push(cur);
+        }
+
+        for (let vertex of this._vertices) {
+            if (statusMap.get(vertex) === 0) {
+                dfs(vertex);
+            }
+        }
+
+        if (hasCycle) {
+            return null;
+        }
+        return sorted.reverse();
+    }
 }
 
 class MyVertex extends DirectedVertex {
@@ -453,7 +519,7 @@ class MyEdge extends DirectedEdge {
 //     }
 // }
 
-const waitMan = new WaitManager(4)
+const waitMan = new WaitManager(5)
 export const testGraphs = async (proxyHandler: TProxyHandler) => {
 
     const directedGraph = new DirectedGraph();
@@ -477,7 +543,7 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     // console.log('graph.getAllEdges(\'1\', \'2\')', graph.getAllEdges('1', '2'));
 
 
-    let vars: {myGraph : DirectedGraph<MyVertex, MyEdge>} = new DeepProxy({myGraph: new DirectedGraph<MyVertex, MyEdge>()}, proxyHandler);
+    let vars: { myGraph: DirectedGraph<MyVertex, MyEdge> } = new DeepProxy({myGraph: new DirectedGraph<MyVertex, MyEdge>()}, proxyHandler);
     await wait(waitMan.time3);
     console.log('vars.myGraph.addVertex(new MyVertex(\'1\', \'data1\'))', vars.myGraph.addVertex(new MyVertex('1', 'data1')));
     await wait(waitMan.time3);
@@ -497,7 +563,6 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     await wait(waitMan.time3);
     console.log('vars.myGraph.addVertex(new MyVertex(\'9\', \'data9\'))', vars.myGraph.addVertex(new MyVertex('9', 'data9')));
     // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
-    //
     await wait(waitMan.time3);
     console.log('vars.myGraph.addEdge(new MyEdge(\'1\', \'2\', 10, \'edge-data1-2\'))', vars.myGraph.addEdge(new MyEdge('1', '2', 10, 'edge-data1-2')));
     await wait(waitMan.time3);
@@ -516,8 +581,7 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     console.log('vars.myGraph.getAllEdges(\'1\', \'2\')', vars.myGraph.getAllEdges('1', '2'));
 
     // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
-    //
-    //
+
     await wait(waitMan.time3);
     console.log('vars.myGraph.addEdge(new MyEdge(\'3\', \'1\', 3, \'edge-data-3-1\'))', vars.myGraph.addEdge(new MyEdge('3', '1', 3, 'edge-data-3-1')))
 
@@ -525,6 +589,15 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     console.log('vars.myGraph.addEdge(new MyEdge(\'1\', \'9\', 19, \'edge-data1-9\'))', vars.myGraph.addEdge(new MyEdge('1', '9', 19, 'edge-data1-9')));
     await wait(waitMan.time3);
     console.log('vars.myGraph.addEdge(new MyEdge(\'9\', \'7\', 97, \'edge-data9-7\'))', vars.myGraph.addEdge(new MyEdge('9', '7', 97, 'edge-data9-7')));
+
+    // await wait(waitMan.time3);
+    // console.log('vars.myGraph.addEdge(new MyEdge(\'7\', \'1\', 71, \'edge-data7-1\'))', vars.myGraph.addEdge(new MyEdge('7', '1', 71, 'edge-data7-1')));
+
+    // await wait(waitMan.time3);
+    // console.log('vars.myGraph.addEdge(new MyEdge(\'7\', \'9\', 79, \'edge-data7-9\'))', vars.myGraph.addEdge(new MyEdge('7', '9', 79, 'edge-data7-9')));
+
+    await wait(waitMan.time3);
+    console.log('topologicalSort', vars.myGraph.topologicalSort());
 
     // const myGraphEdge3to1 = vars.myGraph.getEdge('3', '1');
     //
