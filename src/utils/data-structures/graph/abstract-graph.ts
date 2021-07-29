@@ -100,7 +100,6 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     }
 
     protected _vertices: Map<VertexId, V> = new Map<VertexId, V>();
-    protected _edges: E[] = [];
 
     abstract removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
 
@@ -152,9 +151,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     abstract degreeOf(vertexOrId: V | VertexId): number;
 
-    edgeSet(): E[] {
-        return this._edges;
-    }
+    abstract edgeSet(): E[];
 
     abstract edgesOf(vertexOrId: V | VertexId): E[];
 

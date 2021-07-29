@@ -1,4 +1,16 @@
-import {bunnyConsole} from "../utils";
+import {bunnyConsole, timeStart} from "../utils";
+
+// Use Map:
+//       When the stored key is not a string/number/or Symbol, select Map, because Object does not support
+//       When storing large amounts of data, choose Map because it occupies less memory
+//       When you need to perform many operations to add/remove elements, choose Map because it is faster
+//       If you need to maintain the order when inserting, choose Map, because Object will change the order
+//       If you need to iterate/traverse, choose Map, because it is an iterable object by default, and iterating is more convenient
+// Use Object:
+//       When it’s just a simple data structure, choose Object, because it occupies less memory when there is less data and is more efficient when creating a new one.
+//       When you need to use JSON for file transfer, select Object, because JSON does not support Map by default
+//       When you need to perform operations on multiple key values, choose Object because the syntax is more concise
+//       When you need to override the key on the prototype, select Object
 
 // 1e+7
 // let arr2 = Object.assign([],arr)             4703
@@ -152,10 +164,10 @@ import {bunnyConsole} from "../utils";
 // KD Tree	            Θ(log(n))	Θ(log(n))	Θ(log(n))	Θ(log(n))	O(n)	    O(n)	    O(n)	    O(n)	    O(n)
 
 export const runAlgorithm = async (algorithm: Function, isStringify: boolean = false, ...args: any) => {
-    const startTime = new Date().getTime();
+    const startTime = timeStart();
     const result = await algorithm(...args);
-    const timeSpent = new Date().getTime() - startTime;
-    bunnyConsole.log(algorithm.name, 'result -> ', isStringify ? JSON.stringify(result) : result, 'time spent -> ', timeSpent + 'ms');
+    const timeSpent = (performance ? performance.now() : new Date().getTime()) - startTime;
+    bunnyConsole.log(algorithm.name, 'result -> ', isStringify ? JSON.stringify(result) : result, 'time spent -> ', timeSpent.toFixed(2) + 'ms');
     return result;
 }
 

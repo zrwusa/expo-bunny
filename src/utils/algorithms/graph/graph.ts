@@ -219,13 +219,13 @@ function canFinishByGraph(numCourses: number, prerequisites: number[][]): boolea
 
 
 const runAllCanFinish = async () => {
-    // await runAlgorithm(canFinish, false, ...canFinishCase1);
-    // await runAlgorithm(canFinishByGraph, false, ...canFinishCase1);
+    await runAlgorithm(canFinish, false, ...canFinishCase1);
+    await runAlgorithm(canFinishByGraph, false, ...canFinishCase1);
     await runAlgorithm(canFinish, false, ...canFinishCase3);
     await runAlgorithm(canFinishByGraph, false, ...canFinishCase3);
 }
 
-runAllCanFinish().then()
+// runAllCanFinish().then()
 // 399	Evaluate Division	★★★	839	952	990	721	737	union find
 // 785	Is Graph Bipartite?	★★★	886	1042				bipartition, graph coloring
 // 997	Find the Town Judge	★★★						in/out degrees

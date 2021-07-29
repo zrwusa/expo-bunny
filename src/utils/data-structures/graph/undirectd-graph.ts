@@ -29,6 +29,8 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         super();
     }
 
+    protected _edges: E[] = [];
+
     getAllEdges(v1: V | null | VertexId, v2: V | null | VertexId): E[] {
         let edges: E[] = [];
 
@@ -88,5 +90,9 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
             }
         });
         return ends;
+    }
+
+    edgeSet(): E[] {
+        return this._edges;
     }
 }

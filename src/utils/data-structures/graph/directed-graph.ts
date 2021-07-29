@@ -53,6 +53,10 @@ export type TopologicalStatus = 0 | 1 | 2;
 
 export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> extends AbstractGraph<V, E> implements I_DirectedGraph<V, E> {
 
+    protected _outEdgeMap: Map<V, E[]> = new Map<V, E[]>();
+
+    protected _inEdgeMap: Map<V, E[]> = new Map<V, E[]>();
+
     constructor() {
         super();
     }
@@ -61,11 +65,14 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         let edges: E[] = [];
 
         if (srcOrId !== null && destOrId !== null) {
-            const src: DirectedVertex | null = this.getVertex(srcOrId);
-            const dest: DirectedVertex | null = this.getVertex(destOrId);
+            const src: V | null = this.getVertex(srcOrId);
+            const dest: V | null = this.getVertex(destOrId);
 
             if (src && dest) {
-                edges = this._edges.filter(edge => edge.src === src.id && edge.dest === dest.id);
+                const srcOutEdges = this._outEdgeMap.get(src);
+                if (srcOutEdges) {
+                    edges = srcOutEdges.filter(edge => edge.dest === dest.id);
+                }
             }
         }
 
@@ -77,7 +84,22 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
             return false;
         }
 
-        this._edges.push(edge);
+        const srcVertex = this.getVertex(edge.src)!;
+        const srcOutEdges = this._outEdgeMap.get(srcVertex);
+        if (srcOutEdges) {
+            srcOutEdges.push(edge);
+        } else {
+            this._outEdgeMap.set(srcVertex, [edge]);
+        }
+
+        const destVertex = this.getVertex(edge.dest)!;
+        const destInEdges = this._inEdgeMap.get(destVertex);
+        if (destInEdges) {
+            destInEdges.push(edge);
+        } else {
+            this._inEdgeMap.set(destVertex, [edge]);
+        }
+
         return true;
     }
 
@@ -85,16 +107,41 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
 
         const src: V | null = this.getVertex(srcOrId);
         const dest: V | null = this.getVertex(destOrId);
-
+        let removed: E | null = null;
         if (!src || !dest) {
             return null;
         }
-        return arrayRemove<E>(this._edges, edge => edge.dest === dest.id && edge.src === src.id)[0] || null;
+
+        const srcOutEdges = this._outEdgeMap.get(src);
+        if (srcOutEdges) {
+            arrayRemove<E>(srcOutEdges, edge => edge.dest === dest.id);
+        }
+
+        const destInEdges = this._inEdgeMap.get(dest);
+        if (destInEdges) {
+           removed = arrayRemove<E>(destInEdges, edge => edge.src === src.id)[0] || null;
+        }
+        return removed;
     }
 
     removeEdge(edge: E): E | null {
-        const removed = arrayRemove<E>(this._edges, e => e.hashCode === edge.hashCode);
-        return removed[0] || null;
+        let removed: E | null = null;
+        const src = this.getVertex(edge.src);
+        const dest = this.getVertex(edge.dest);
+        if (src && dest) {
+            const srcOutEdges = this._outEdgeMap.get(src);
+            if (srcOutEdges && srcOutEdges.length > 0) {
+                arrayRemove(srcOutEdges, edge => edge.src === src.id);
+            }
+
+            const destInEdges = this._inEdgeMap.get(dest);
+            if (destInEdges && destInEdges.length > 0) {
+                removed = arrayRemove(destInEdges, edge => edge.dest === dest.id)[0];
+            }
+
+        }
+
+        return removed;
     }
 
     removeAllEdges(src: VertexId | V, dest: VertexId | V): E[] {
@@ -103,25 +150,22 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
 
     incomingEdgesOf(vertexOrId: V | VertexId): E[] {
         const target = this.getVertex(vertexOrId);
-        let incomingEdges: E[] = [];
         if (target) {
-            incomingEdges = this._edges.filter(edge => edge.dest === target.id)
+            return this._inEdgeMap.get(target) || [];
         }
-        return incomingEdges;
+        return [];
     }
 
     outgoingEdgesOf(vertexOrId: V | VertexId): E[] {
         const target = this.getVertex(vertexOrId);
-        let incomingEdges: E[] = [];
         if (target) {
-            incomingEdges = this._edges.filter(edge => edge.src === target.id)
+            return this._outEdgeMap.get(target) || [];
         }
-        return incomingEdges;
+        return [];
     }
 
     degreeOf(vertexOrId: VertexId | V): number {
-        const vertexId = this.getVertexId(vertexOrId);
-        return this._edges.filter(edge => edge.src === vertexId || edge.dest === vertexId).length;
+        return this.outDegreeOf(vertexOrId) + this.inDegreeOf(vertexOrId);
     }
 
     inDegreeOf(vertexOrId: VertexId | V): number {
@@ -133,8 +177,7 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
     }
 
     edgesOf(vertexOrId: VertexId | V): E[] {
-        const vertexId = this.getVertexId(vertexOrId);
-        return this._edges.filter(edge => edge.src === vertexId || edge.dest === vertexId);
+        return [...this.outgoingEdgesOf(vertexOrId), ...this.incomingEdgesOf(vertexOrId)];
     }
 
     getEdgeSrc(e: E): V | null {
@@ -194,5 +237,13 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
             return null;
         }
         return sorted.reverse();
+    }
+
+    edgeSet(): E[] {
+        let edges: E[] = [];
+        this._outEdgeMap.forEach(outEdges => {
+            edges = [...edges, ...outEdges];
+        });
+        return edges;
     }
 }

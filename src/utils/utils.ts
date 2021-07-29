@@ -482,14 +482,14 @@ export const bunnyConsole = {
 
 
 export const timeStart = () => {
-    return new Date().getTime();
+    return performance ? performance.now() : new Date().getTime();
 }
 
 export const timeEnd = (startTime: number, headerLog?: string, consoleConditionFn?: (timeSpent: number) => boolean) => {
-    const timeSpent = new Date().getTime() - startTime;
+    const timeSpent = (performance ? performance.now() : new Date().getTime()) - startTime;
     const isPassCondition = consoleConditionFn ? consoleConditionFn(timeSpent) : true
     if (isPassCondition) {
-        bunnyConsole.log(headerLog ? headerLog : 'time spent', timeSpent);
+        bunnyConsole.log(headerLog ? headerLog : 'time spent', timeSpent.toFixed(2));
     }
 }
 
