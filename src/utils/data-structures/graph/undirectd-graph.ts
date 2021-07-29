@@ -45,10 +45,8 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
     }
 
     addEdge(edge: E): boolean {
-        if (this._checkExist) {
-            for (let v of edge.vertices) {
-                if (!this.containsVertex(v)) return false;
-            }
+        for (let v of edge.vertices) {
+            if (!this.containsVertex(v)) return false;
         }
         this._edges.push(edge);
         return true;
@@ -63,17 +61,11 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
             return null;
         }
 
-        // const removed = this._edges.filter(edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id));
-        // this._edges = this._edges.filter(edge => !(edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id)));
-        // return removed[0] || null;
-
         return arrayRemove<E>(this._edges, edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id))[0] || null;
     }
 
 
     removeEdge(edge: E): E | null {
-        // const removed = this._edges.filter(e => e.hashCode === edge.hashCode);
-        // this._edges = this._edges.filter(e => !(e.hashCode === edge.hashCode));
         const removed = arrayRemove<E>(this._edges, e => e.hashCode === edge.hashCode);
         return removed[0] || null;
     }
@@ -89,6 +81,12 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
     }
 
     getEdgeEnds(edge: E): V[] {
-        return this._vertices.filter(v => edge.vertices.includes(v.id))
+        const ends: V[] = [];
+        this._vertices.forEach(v => {
+            if (edge.vertices.includes(v.id)) {
+                ends.push(v);
+            }
+        });
+        return ends;
     }
 }

@@ -372,21 +372,23 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const VividGraphDrawer: React.FC<{ graph: AbstractGraph<any, any> }> = ({graph}) => {
         const vertexDistance = wp(80);
         const vertices = graph.vertexSet();
-        const vertexCount = vertices.length;
+        const vertexCount = vertices.size;
         const edges = graph.edgeSet();
         let coordsMap: Map<AbstractVertex, Coordinate> = new Map<AbstractVertex, Coordinate>();
         const rowCount = Math.ceil(Math.sqrt(vertexCount));
-        for (let i = 0; i < vertexCount; i++) {
+        let i = 0;
+        vertices.forEach((vertex, id) => {
             const rowIndex = Math.floor(i / rowCount);
             const colIndex = Math.floor(i % rowCount)
             const y = (rowIndex) * vertexDistance + circleR;
             const x = (rowIndex % 2 === 0 ? (colIndex + 1) : colIndex) * vertexDistance + circleR;
-            coordsMap.set(vertices[i], new Coordinate(y, x));
-        }
+            coordsMap.set(vertex, new Coordinate(y, x));
+            i++;
+        })
         return (
             <G>
                 {
-                    vertices.map(vertex => {
+                    [...vertices].map(([id, vertex]) => {
                         const coordinate = coordsMap.get(vertex);
                         return (
                             coordinate

@@ -1,4 +1,4 @@
-import {arrayRemove, uuidV4} from "../../utils";
+import {uuidV4} from "../../utils";
 
 export type VertexId = string | number;
 
@@ -10,7 +10,7 @@ export interface I_Graph<V, E> {
 
     getVertexId(vertexOrId: V | VertexId): VertexId;
 
-    vertexSet(): V[];
+    vertexSet(): Map<VertexId, V>;
 
     addVertex(v: V): boolean;
 
@@ -94,16 +94,12 @@ export abstract class AbstractEdge {
 }
 
 export abstract class AbstractGraph<V extends AbstractVertex, E extends AbstractEdge> implements I_Graph<V, E> {
-    protected _checkExist: boolean = false;
 
-    protected constructor(checkExist?: boolean) {
-        if (checkExist === undefined) {
-            checkExist = false;
-        }
-        this._checkExist = checkExist;
+    protected constructor() {
+
     }
 
-    protected _vertices: V[] = [];
+    protected _vertices: Map<VertexId, V> = new Map<VertexId, V>();
     protected _edges: E[] = [];
 
     abstract removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
@@ -112,7 +108,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     getVertex(vertexOrId: VertexId | V): V | null {
         const vertexId = this.getVertexId(vertexOrId);
-        return this._vertices.find(vertex => vertex.id === vertexId) || null
+        return this._vertices.get(vertexId) || null
     }
 
     getVertexId(vertexOrId: V | VertexId): VertexId {
@@ -123,7 +119,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         return !!this.getVertex(vertexOrId);
     }
 
-    vertexSet(): V[] {
+    vertexSet(): Map<VertexId, V> {
         return this._vertices;
     }
 
@@ -134,17 +130,16 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     }
 
     addVertex(newVertex: V): boolean {
-        if (this._checkExist && this.containsVertex(newVertex)) {
+        if (this.containsVertex(newVertex)) {
             return false;
         }
-        this._vertices.push(newVertex);
+        this._vertices.set(newVertex.id, newVertex);
         return true;
     }
 
     removeVertex(vertexOrId: V | VertexId): boolean {
         const vertexId = this.getVertexId(vertexOrId);
-        const removed = arrayRemove<V>(this._vertices, v => v.id === vertexId);
-        return removed.length > 0;
+        return this._vertices.delete(vertexId);
     }
 
     removeAllVertices(vertices: V[] | VertexId[]): boolean {

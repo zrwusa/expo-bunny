@@ -73,10 +73,8 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
     }
 
     addEdge(edge: E): boolean {
-        if (this._checkExist) {
-            if (!(this.containsVertex(edge.src) && this.containsVertex(edge.dest))) {
-                return false;
-            }
+        if (!(this.containsVertex(edge.src) && this.containsVertex(edge.dest))) {
+            return false;
         }
 
         this._edges.push(edge);
@@ -165,8 +163,8 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
     topologicalSort(): V[] | null {
 
         const statusMap: Map<V, TopologicalStatus> = new Map<V, TopologicalStatus>();
-        for (let vertex of this._vertices) {
-            statusMap.set(vertex, 0);
+        for (let entry of this._vertices) {
+            statusMap.set(entry[1], 0);
         }
 
         const sorted: V[] = [];
@@ -186,9 +184,9 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
             sorted.push(cur);
         }
 
-        for (let vertex of this._vertices) {
-            if (statusMap.get(vertex) === 0) {
-                dfs(vertex);
+        for (let entry of this._vertices) {
+            if (statusMap.get(entry[1]) === 0) {
+                dfs(entry[1]);
             }
         }
 
