@@ -22,7 +22,8 @@ import {
     testBinaryTree,
     testBST,
     testBSTCase1,
-    testBSTCase3, testGraphs,
+    testBSTCase3,
+    testGraphs,
     treeData,
     treeMaxDepth
 } from "../../utils/algorithms";
@@ -183,8 +184,8 @@ export function AlgorithmScreen() {
 
     const [testGraphVars, setTestGraphVars] = useState<{ [key in string]: unknown }>()
     const _testGraphs = async () => {
-        await testGraphs( ({value, key, DEFAULT}) => {
-            console.log(key, value);
+        await testGraphs(({value, key, DEFAULT}) => {
+            // console.log(key, value);
             setTestGraphVars(prevState => ({...prevState, [key!.toString()]: value}));
             return DEFAULT;
         });

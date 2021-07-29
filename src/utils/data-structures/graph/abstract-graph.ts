@@ -94,9 +94,13 @@ export abstract class AbstractEdge {
 }
 
 export abstract class AbstractGraph<V extends AbstractVertex, E extends AbstractEdge> implements I_Graph<V, E> {
+    protected _checkExist: boolean = false;
 
-    protected constructor() {
-
+    protected constructor(checkExist?: boolean) {
+        if (checkExist === undefined) {
+            checkExist = false;
+        }
+        this._checkExist = checkExist;
     }
 
     protected _vertices: V[] = [];
@@ -130,12 +134,11 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     }
 
     addVertex(newVertex: V): boolean {
-        if (!this.containsVertex(newVertex)) {
-            this._vertices.push(newVertex);
-            return true;
-        } else {
+        if (this._checkExist && this.containsVertex(newVertex)) {
             return false;
         }
+        this._vertices.push(newVertex);
+        return true;
     }
 
     removeVertex(vertexOrId: V | VertexId): boolean {

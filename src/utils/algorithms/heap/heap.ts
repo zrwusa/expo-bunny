@@ -273,6 +273,7 @@ const runAllReorganizeString = async () => {
 class KthLargest {
     private _heap: MinHeap<number, number>;
     private readonly _k: number;
+
     constructor(k: number, nums: number[]) {
         this._k = k;
         this._heap = new MinHeap<number, number>(nums);

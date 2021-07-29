@@ -11,10 +11,12 @@ import {
     AbstractVertex,
     BinaryTree,
     BinaryTreeNode,
-    Coordinate, DirectedGraph,
-    getDirectionVector, UndirectedGraph,
+    Coordinate,
+    DirectedGraph,
+    getDirectionVector,
     SinglyLinkedListNode,
     Stack,
+    UndirectedGraph,
     uuidV4
 } from "../../utils";
 import {Card} from "../../containers/Card";
@@ -145,7 +147,6 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     }
 
     const VividGraph: React.FC<{ data: AbstractGraph<AbstractVertex, AbstractEdge> }> = ({data}) => {
-        console.log(data)
         return (
             <TwoWayScrollSVG>
                 {
@@ -220,9 +221,10 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                     const to = relatedMatrixRoutes?.[routeIndex]?.[cellIndex + 1];
                                     const deviationVector = getDirectionVector(from, to);
                                     if (from && to) {
-                                        const src = new Coordinate((from.y + 0.5 + deviationVector.y * arrowCut) * rectSize,(from.x + 0.5 + deviationVector.x * arrowCut) * rectSize);
-                                        const dest = new Coordinate((to.y + 0.5 - deviationVector.y * arrowCut) * rectSize,(to.x + 0.5 - deviationVector.x * arrowCut) * rectSize);
-                                        return <LineWithArrow  key={src.y + ',' + src.x + dest.y + dest.x} src={src} dest={dest} />;
+                                        const src = new Coordinate((from.y + 0.5 + deviationVector.y * arrowCut) * rectSize, (from.x + 0.5 + deviationVector.x * arrowCut) * rectSize);
+                                        const dest = new Coordinate((to.y + 0.5 - deviationVector.y * arrowCut) * rectSize, (to.x + 0.5 - deviationVector.x * arrowCut) * rectSize);
+                                        return <LineWithArrow key={src.y + ',' + src.x + dest.y + dest.x} src={src}
+                                                              dest={dest}/>;
                                     } else {
                                         return null;
                                     }
@@ -385,29 +387,29 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             <G>
                 {
                     vertices.map(vertex => {
-                    const coordinate = coordsMap.get(vertex);
-                    return (
-                        coordinate
-                            ? <G key={vertex.id}>
-                                <Circle key={vertex.id} r={circleR}
-                                        cx={coordinate.x}
-                                        cy={coordinate.y}
-                                        fill={colors.primary}/>
-                                <SVGText key={vertex.id + 'id'}
-                                         fill="none"
-                                         stroke={colors.text}
-                                         fontSize={fontSize}
-                                         fontWeight={1}
-                                         x={coordinate.x}
-                                         y={coordinate.y + fontOffsetY}
-                                         textAnchor="middle"
-                                >
-                                    <TSpan x={coordinate.x} y={coordinate.y + fontOffsetY}>{vertex.id}</TSpan>
-                                </SVGText>
-                            </G>
-                            : null
-                    )
-                })}
+                        const coordinate = coordsMap.get(vertex);
+                        return (
+                            coordinate
+                                ? <G key={vertex.id}>
+                                    <Circle key={vertex.id} r={circleR}
+                                            cx={coordinate.x}
+                                            cy={coordinate.y}
+                                            fill={colors.primary}/>
+                                    <SVGText key={vertex.id + 'id'}
+                                             fill="none"
+                                             stroke={colors.text}
+                                             fontSize={fontSize}
+                                             fontWeight={1}
+                                             x={coordinate.x}
+                                             y={coordinate.y + fontOffsetY}
+                                             textAnchor="middle"
+                                    >
+                                        <TSpan x={coordinate.x} y={coordinate.y + fontOffsetY}>{vertex.id}</TSpan>
+                                    </SVGText>
+                                </G>
+                                : null
+                        )
+                    })}
                 {
                     edges.map(edge => {
                         if (graph instanceof UndirectedGraph) {
@@ -417,7 +419,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                 const v2Coordinate = coordsMap.get(ends[1]);
                                 if (v1Coordinate && v2Coordinate) {
                                     return <Line key={edge.hashCode}
-                                                 x1={v1Coordinate.x} y1={v1Coordinate.y} x2={v2Coordinate.x} y2={v2Coordinate.y}/>
+                                                 x1={v1Coordinate.x} y1={v1Coordinate.y} x2={v2Coordinate.x}
+                                                 y2={v2Coordinate.y}/>
                                 }
                             }
                         } else if (graph instanceof DirectedGraph) {

@@ -73,18 +73,14 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
     }
 
     addEdge(edge: E): boolean {
-        let hasVertex = true;
-
-        if (!this.containsVertex(edge.src) || !this.containsVertex(edge.dest)) {
-            hasVertex = false;
+        if (this._checkExist) {
+            if (!(this.containsVertex(edge.src) && this.containsVertex(edge.dest))) {
+                return false;
+            }
         }
 
-        if (hasVertex) {
-            this._edges.push(edge);
-            return true;
-        } else {
-            return false;
-        }
+        this._edges.push(edge);
+        return true;
     }
 
     removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null {
@@ -95,15 +91,10 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         if (!src || !dest) {
             return null;
         }
-        // const removed = this._edges.filter(edge => edge.dest === dest.id && edge.src === src.id);
-        // this._edges = this._edges.filter(edge => !(edge.dest === dest.id && edge.src === src.id));
-        // return removed[0] || null;
         return arrayRemove<E>(this._edges, edge => edge.dest === dest.id && edge.src === src.id)[0] || null;
     }
 
     removeEdge(edge: E): E | null {
-        // const removed = this._edges.filter(e => e.hashCode === edge.hashCode);
-        // this._edges = this._edges.filter(e => !(e.hashCode === edge.hashCode));
         const removed = arrayRemove<E>(this._edges, e => e.hashCode === edge.hashCode);
         return removed[0] || null;
     }

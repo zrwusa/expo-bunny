@@ -1,5 +1,6 @@
 import {BST, BSTNode, I_BST} from "./bst";
 import {BinaryTreeNodeId} from "./binary-tree";
+
 export type AVLTreeDeletedResult<T> = { deleted: AVLTreeNode<T> | null, needBalanced: AVLTreeNode<T> | null };
 
 export interface I_AVLTree<T> extends I_BST<T> {
@@ -20,7 +21,7 @@ export interface I_AVLTree<T> extends I_BST<T> {
 
 export class AVLTreeNode<T> extends BSTNode<T> {
     clone(): AVLTreeNode<T> {
-        return new AVLTreeNode<T>(this._id,this._val,this._count);
+        return new AVLTreeNode<T>(this._id, this._val, this._count);
     }
 }
 

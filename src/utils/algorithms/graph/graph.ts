@@ -1,10 +1,11 @@
 /* --- start Graph --- */
 // 133	Clone Graph	★★	138					queue + hashtable
 // 200	Number of Islands	★★	547	695	733	827	1162
-import {Coordinate} from "../helpers";
+import {Coordinate, runAlgorithm} from "../helpers";
 import {DirectedEdge, DirectedGraph, DirectedVertex, TopologicalStatus, VertexId} from "../../data-structures/graph";
-import {wait, WaitManager} from "../../utils";
+import {timeEnd, timeStart, wait, WaitManager} from "../../utils";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
+import {canFinishCase1, canFinishCase3} from "./cases";
 
 
 class MyVertex extends DirectedVertex {
@@ -31,91 +32,91 @@ class MyGraph<V extends MyVertex, E extends MyEdge> extends DirectedGraph<V, E> 
     }
 }
 
-const waitMan = new WaitManager(5);
+const waitMan = new WaitManager(100);
 
 export const testGraphs = async (proxyHandler: TProxyHandler) => {
 
     const directedGraph = new DirectedGraph();
-    // console.log('directedGraph.addVertex(\'1\')', directedGraph.addVertex(new DirectedVertex('1')));
-    // console.log('directedGraph.addVertex(\'2\')', directedGraph.addVertex(new DirectedVertex('2')));
-    // console.log('directedGraph.addEdge(\'1\', \'2\')', directedGraph.addEdge(new DirectedEdge('1', '2')));
-    // console.log('directedGraph.getAllEdges(\'1\', \'2\')', directedGraph.getAllEdges('1', '2'));
-    // console.log('directedGraph.getAllEdges(directedGraph.getVertex(\'1\'), directedGraph.getVertex(\'2\'))', directedGraph.getAllEdges(directedGraph.getVertex('1'), directedGraph.getVertex('2')));
-    // console.log('directedGraph.getAllEdges(\'1\',\'100\')', directedGraph.getAllEdges('1', '100'));
-    // console.log('directedGraph.removeEdgeByEnds(\'1\',\'2\')', directedGraph.removeEdgeByEnds('1', '2'));
-    // console.log('directedGraph.getAllEdges(\'1\', \'2\')', directedGraph.getAllEdges('1', '2'));
+    // console.log('directedGraph.addVertex(1)', directedGraph.addVertex(new DirectedVertex(1)));
+    // console.log('directedGraph.addVertex(2)', directedGraph.addVertex(new DirectedVertex(2)));
+    // console.log('directedGraph.addEdge(1, 2)', directedGraph.addEdge(new DirectedEdge(1, 2)));
+    // console.log('directedGraph.getAllEdges(1, 2)', directedGraph.getAllEdges(1, 2));
+    // console.log('directedGraph.getAllEdges(directedGraph.getVertex(1), directedGraph.getVertex(2))`, directedGraph.getAllEdges(directedGraph.getVertex(1), directedGraph.getVertex(2)));
+    // console.log('directedGraph.getAllEdges(1,'100')', directedGraph.getAllEdges(1, '100'));
+    // console.log('directedGraph.removeEdgeByEnds(1,2)', directedGraph.removeEdgeByEnds(1, 2));
+    // console.log('directedGraph.getAllEdges(1, 2)', directedGraph.getAllEdges(1, 2));
 
     // const graph = new UndirectedGraph();
-    // console.log('graph.addVertex(\'1\')', graph.addVertex(new UndirectedVertex('1')));
-    // console.log('graph.addVertex(\'2\')', graph.addVertex(new UndirectedVertex('2')));
-    // console.log('graph.addEdge(\'1\', \'2\')', graph.addEdge(new UndirectedEdge('1', '2', 100)));
-    // console.log('graph.getAllEdges(\'1\', \'2\')', graph.getAllEdges('1', '2'));
-    // console.log('graph.getAllEdges(graph.getVertex(\'1\'), graph.getVertex(\'2\'))', graph.getAllEdges(graph.getVertex('1'), graph.getVertex('2')));
-    // console.log('graph.getAllEdges(\'1\',\'100\')', graph.getAllEdges('1', '100'));
-    // console.log('graph.removeEdgeByEnds(\'1\',\'2\')', graph.removeEdgeByEnds('1', '2'));
-    // console.log('graph.getAllEdges(\'1\', \'2\')', graph.getAllEdges('1', '2'));
+    // console.log('graph.addVertex(1)', graph.addVertex(new UndirectedVertex(1)));
+    // console.log('graph.addVertex(2)', graph.addVertex(new UndirectedVertex(2)));
+    // console.log('graph.addEdge(1, 2)', graph.addEdge(new UndirectedEdge(1, 2, 100)));
+    // console.log('graph.getAllEdges(1, 2)', graph.getAllEdges(1, 2));
+    // console.log('graph.getAllEdges(graph.getVertex(1), graph.getVertex(2))`, graph.getAllEdges(graph.getVertex(1), graph.getVertex(2)));
+    // console.log('graph.getAllEdges(1,'100')', graph.getAllEdges(1, '100'));
+    // console.log('graph.removeEdgeByEnds(1,2)', graph.removeEdgeByEnds(1, 2));
+    // console.log('graph.getAllEdges(1, 2)', graph.getAllEdges(1, 2));
 
 
     let vars: { myGraph: DirectedGraph<MyVertex, MyEdge> } = new DeepProxy({myGraph: new DirectedGraph<MyVertex, MyEdge>()}, proxyHandler);
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'1\', \'data1\'))', vars.myGraph.addVertex(new MyVertex(1, 'data1')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(1, 'data1'))`, vars.myGraph.addVertex(new MyVertex(1, 'data1')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'2\', \'data2\'))', vars.myGraph.addVertex(new MyVertex('2', 'data2')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(2, 'data2'))`, vars.myGraph.addVertex(new MyVertex(2, 'data2')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'3\', \'data3\'))', vars.myGraph.addVertex(new MyVertex('3', 'data3')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(3, 'data3'))`, vars.myGraph.addVertex(new MyVertex(3, 'data3')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'4\', \'data4\'))', vars.myGraph.addVertex(new MyVertex('4', 'data4')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(4, 'data4'))`, vars.myGraph.addVertex(new MyVertex(4, 'data4')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'5\', \'data5\'))', vars.myGraph.addVertex(new MyVertex('5', 'data5')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(5, 'data5'))`, vars.myGraph.addVertex(new MyVertex(5, 'data5')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'6\', \'data6\'))', vars.myGraph.addVertex(new MyVertex('6', 'data6')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(6, 'data6'))`, vars.myGraph.addVertex(new MyVertex(6, 'data6')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'7\', \'data7\'))', vars.myGraph.addVertex(new MyVertex('7', 'data7')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(7, 'data7'))`, vars.myGraph.addVertex(new MyVertex(7, 'data7')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'8\', \'data8\'))', vars.myGraph.addVertex(new MyVertex('8', 'data8')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(8, 'data8'))`, vars.myGraph.addVertex(new MyVertex(8, 'data8')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addVertex(new MyVertex(\'9\', \'data9\'))', vars.myGraph.addVertex(new MyVertex('9', 'data9')));
+    console.log(`vars.myGraph.addVertex(new MyVertex(9, 'data9'))`, vars.myGraph.addVertex(new MyVertex(9, 'data9')));
     // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addEdge(new MyEdge(\'1\', \'2\', 10, \'edge-data1-2\'))', vars.myGraph.addEdge(new MyEdge('1', '2', 10, 'edge-data1-2')));
+    console.log(`vars.myGraph.addEdge(new MyEdge(1, 2, 10, 'edge-data1-2'))`, vars.myGraph.addEdge(new MyEdge(1, 2, 10, 'edge-data1-2')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addEdge(new MyEdge(\'2\', \'1\', 20, \'edge-data2-1\'))', vars.myGraph.addEdge(new MyEdge('2', '1', 20, 'edge-data2-1')));
+    console.log(`vars.myGraph.addEdge(new MyEdge(2, 1, 20, 'edge-data2-1'))`, vars.myGraph.addEdge(new MyEdge(2, 1, 20, 'edge-data2-1')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.getAllEdges(\'1\', \'2\')', vars.myGraph.getAllEdges('1', '2'));
+    console.log(`vars.myGraph.getAllEdges(1, 2)`, vars.myGraph.getAllEdges(1, 2));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.getAllEdges(vars.myGraph.getVertex(\'1\'), vars.myGraph.getVertex(\'2\'))', vars.myGraph.getAllEdges(vars.myGraph.getVertex('1'), vars.myGraph.getVertex('2')));
+    console.log(`vars.myGraph.getAllEdges(vars.myGraph.getVertex(1), vars.myGraph.getVertex(2))`, vars.myGraph.getAllEdges(vars.myGraph.getVertex(1), vars.myGraph.getVertex(2)));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.getAllEdges(\'1\',\'100\')', vars.myGraph.getAllEdges('1', '100'));
+    console.log(`vars.myGraph.getAllEdges(1,'100')`, vars.myGraph.getAllEdges(1, '100'));
     await wait(waitMan.time3);
     console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
     await wait(waitMan.time3);
-    console.log('vars.myGraph.removeEdgeByEnds(\'1\',\'2\')', vars.myGraph.removeEdgeByEnds('1', '2'));
+    console.log(`vars.myGraph.removeEdgeByEnds(1,2)`, vars.myGraph.removeEdgeByEnds(1, 2));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.getAllEdges(\'1\', \'2\')', vars.myGraph.getAllEdges('1', '2'));
+    console.log(`vars.myGraph.getAllEdges(1, 2)`, vars.myGraph.getAllEdges(1, 2));
 
     // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
 
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addEdge(new MyEdge(\'3\', \'1\', 3, \'edge-data-3-1\'))', vars.myGraph.addEdge(new MyEdge('3', '1', 3, 'edge-data-3-1')))
+    console.log(`vars.myGraph.addEdge(new MyEdge(3, 1, 3, 'edge-data-3-1'))`, vars.myGraph.addEdge(new MyEdge(3, 1, 3, 'edge-data-3-1')))
 
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addEdge(new MyEdge(\'1\', \'9\', 19, \'edge-data1-9\'))', vars.myGraph.addEdge(new MyEdge('1', '9', 19, 'edge-data1-9')));
+    console.log(`vars.myGraph.addEdge(new MyEdge(1, 9, 19, 'edge-data1-9'))`, vars.myGraph.addEdge(new MyEdge(1, 9, 19, 'edge-data1-9')));
     await wait(waitMan.time3);
-    console.log('vars.myGraph.addEdge(new MyEdge(\'9\', \'7\', 97, \'edge-data9-7\'))', vars.myGraph.addEdge(new MyEdge('9', '7', 97, 'edge-data9-7')));
+    console.log(`vars.myGraph.addEdge(new MyEdge(9, 7, 97, 'edge-data9-7'))`, vars.myGraph.addEdge(new MyEdge(9, 7, 97, 'edge-data9-7')));
 
     // await wait(waitMan.time3);
-    // console.log('vars.myGraph.addEdge(new MyEdge(\'7\', \'1\', 71, \'edge-data7-1\'))', vars.myGraph.addEdge(new MyEdge('7', '1', 71, 'edge-data7-1')));
+    // console.log(`vars.myGraph.addEdge(new MyEdge(7, 1, 71, 'edge-data7-1'))`, vars.myGraph.addEdge(new MyEdge(7, 1, 71, 'edge-data7-1')));
 
-    // await wait(waitMan.time3);
-    // console.log('vars.myGraph.addEdge(new MyEdge(\'7\', \'9\', 79, \'edge-data7-9\'))', vars.myGraph.addEdge(new MyEdge('7', '9', 79, 'edge-data7-9')));
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(7, 9, 79, 'edge-data7-9'))`, vars.myGraph.addEdge(new MyEdge(7, 9, 79, 'edge-data7-9')));
 
     await wait(waitMan.time3);
     console.log('topologicalSort', vars.myGraph.topologicalSort());
 
-    // const myGraphEdge3to1 = vars.myGraph.getEdge('3', '1');
+    // const myGraphEdge3to1 = vars.myGraph.getEdge(3, 1);
     //
-    // console.log('vars.myGraph.getAllEdges(\'3\', \'1\')', vars.myGraph.getAllEdges('3', '1'));
-    // myGraphEdge3to1 && console.log('vars.myGraph.removeEdge(myGraphEdge3to1)', vars.myGraph.removeEdge(myGraphEdge3to1));
+    // console.log(`vars.myGraph.getAllEdges(3, 1)', vars.myGraph.getAllEdges(3, 1));
+    // myGraphEdge3to1 && console.log(`vars.myGraph.removeEdge(myGraphEdge3to1)', vars.myGraph.removeEdge(myGraphEdge3to1));
 }
 
 
@@ -168,7 +169,6 @@ class LinkedNode {
 
 function canFinish(numCourses: number, prerequisites: number[][]): boolean {
     let hash: { [key in number]: number[] } = {};
-
     for (const [course, preRqt] of prerequisites) {
         if (!hash[preRqt]) hash[preRqt] = [];
         hash[preRqt].push(course);
@@ -188,14 +188,44 @@ function canFinish(numCourses: number, prerequisites: number[][]): boolean {
     }
 
     for (let i = 0; i < numCourses; i++) {
-        if (isCircle(i)) return false;
+        if (status[i] === 0) {
+            if (isCircle(i)) return false;
+        }
     }
 
     return true;
 }
 
-// runAlgorithm(canFinish, false, 3, [[1, 0], [2, 0], [1, 2]]).then();
+function canFinishByGraph(numCourses: number, prerequisites: number[][]): boolean {
+    const graph = new DirectedGraph();
 
+    const time1 = timeStart();
+    for (let i = 0; i < numCourses; i++) {
+        graph.addVertex(new DirectedVertex(i));
+    }
+    timeEnd(time1, 'addVertex');
+
+    const time2 = timeStart();
+    for (let pre of prerequisites) {
+        graph.addEdge(new DirectedEdge(pre[0], pre[1]));
+    }
+    timeEnd(time2, 'addEdge');
+
+    const time3 = timeStart();
+    const sorted = graph.topologicalSort();
+    timeEnd(time3, 'topologicalSort');
+    return !!sorted;
+}
+
+
+const runAllCanFinish = async () => {
+    // await runAlgorithm(canFinish, false, ...canFinishCase1);
+    // await runAlgorithm(canFinishByGraph, false, ...canFinishCase1);
+    await runAlgorithm(canFinish, false, ...canFinishCase3);
+    await runAlgorithm(canFinishByGraph, false, ...canFinishCase3);
+}
+
+runAllCanFinish().then()
 // 399	Evaluate Division	★★★	839	952	990	721	737	union find
 // 785	Is Graph Bipartite?	★★★	886	1042				bipartition, graph coloring
 // 997	Find the Town Judge	★★★						in/out degrees

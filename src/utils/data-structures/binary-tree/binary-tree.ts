@@ -586,7 +586,7 @@ export class BinaryTreeNode<T> {
 
     swapLocation(swapNode: BinaryTreeNode<T>): BinaryTreeNode<T> {
         const tempNode = new BinaryTreeNode<T>(swapNode.id);
-        const { val, count, height, allLesserSum } = swapNode;
+        const {val, count, height, allLesserSum} = swapNode;
         tempNode.val = val;
         tempNode.count = count;
         tempNode.height = height;

@@ -356,6 +356,7 @@ function kthSmallest(matrix: number[][], k: number): number {
 
     return arr.sort((a, b) => a - b)[k - 1];
 }
+
 // 719	Find K-th Smallest Pair Distance	★★★★	786							kth + two pointers
 // TODO use DP
 function smallestDistancePair(nums: number[], k: number): number {
@@ -381,8 +382,7 @@ function smallestDistancePair(nums: number[], k: number): number {
         if (count > countLessThan(nums, mid - 1) && count === k) return mid;
         if (count < k) {
             min = mid;
-        }
-        else {
+        } else {
             max = mid;
         }
     }

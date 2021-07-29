@@ -258,14 +258,17 @@ const searchInSortedArray = function (nums: number[], target: number) {
 
 
 export type Direction = 'up' | 'down' | 'left' | 'right';
+
 export class Coordinate {
     y: number;
     x: number;
+
     constructor(y: number, x: number) {
         this.y = y;
         this.x = x;
     }
 }
+
 export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, matrix: number[][], judgeDeadOrDeadCells?: ((destination: Coordinate) => boolean) | Coordinate[]) => {
     let destinationX: number = departure.x, destinationY: number = departure.y;
     switch (direction) {

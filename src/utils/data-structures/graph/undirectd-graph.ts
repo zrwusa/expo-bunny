@@ -45,17 +45,13 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
     }
 
     addEdge(edge: E): boolean {
-        let hasVertex = true;
-        for (let v of edge.vertices) {
-            if (!this.containsVertex(v)) hasVertex = false;
+        if (this._checkExist) {
+            for (let v of edge.vertices) {
+                if (!this.containsVertex(v)) return false;
+            }
         }
-
-        if (hasVertex) {
-            this._edges.push(edge);
-            return true;
-        } else {
-            return false;
-        }
+        this._edges.push(edge);
+        return true;
     }
 
     removeEdgeByEnds(v1: V | VertexId, v2: V | VertexId): E | null {

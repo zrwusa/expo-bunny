@@ -493,19 +493,17 @@ export const timeEnd = (startTime: number, headerLog?: string, consoleConditionF
     }
 }
 
-
 export const arrayRemove = <T>(array: T[], predicate: (item: T, index: number, array: T[]) => boolean) => {
-    let index = -1,
-        length = array ? array.length : 0,
-        result = [];
+    let i = -1, len = array ? array.length : 0, result = [];
 
-    while (++index < length) {
-        let value = array[index];
-        if (predicate(value, index, array)) {
+    while (++i < len) {
+        let value = array[i];
+        if (predicate(value, i, array)) {
             result.push(value);
-            Array.prototype.splice.call(array, index--, 1);
-            length--;
+            Array.prototype.splice.call(array, i--, 1);
+            len--;
         }
     }
+
     return result;
 }
