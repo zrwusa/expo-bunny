@@ -1,4 +1,4 @@
-import {uuidV4} from "../../utils";
+import {arrayRemove, uuidV4} from "../../utils";
 
 export type VertexId = string | number;
 
@@ -36,7 +36,7 @@ export interface I_Graph<V, E> {
 
     addEdge(edge: E): boolean;
 
-    removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
+    removeEdgeBetween(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
 
     removeEdge(edge: E): E | null;
 
@@ -46,6 +46,9 @@ export interface I_Graph<V, E> {
 
     setEdgeWeight(srcOrId: V | VertexId, destOrId: V | VertexId, weight: number): boolean;
 
+    getMinPathBetween(v1: V | VertexId, v2: V | VertexId, isWeight?: boolean): V[] | null;
+
+    getNeighbors(vertexOrId: V | VertexId): V[];
 }
 
 export class AbstractVertex {
@@ -96,12 +99,12 @@ export abstract class AbstractEdge {
 export abstract class AbstractGraph<V extends AbstractVertex, E extends AbstractEdge> implements I_Graph<V, E> {
 
     protected constructor() {
-
     }
+
 
     protected _vertices: Map<VertexId, V> = new Map<VertexId, V>();
 
-    abstract removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
+    abstract removeEdgeBetween(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
 
     abstract removeEdge(edge: E): E | null;
 
@@ -180,4 +183,181 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             return false;
         }
     }
+
+    // abstract getMinPathBetween(v1: V | VertexId, v2: V | VertexId, isWeight?: boolean): V[] | null;
+
+    abstract getNeighbors(vertexOrId: V | VertexId): V[];
+
+    getAllPathsBetween(v1: V | VertexId, v2: V | VertexId): V[][] {
+        let paths: V[][] = [];
+        const vertex1 = this.getVertex(v1);
+        const vertex2 = this.getVertex(v2);
+        if (!(vertex1 && vertex2)) {
+            return [];
+        }
+
+        const dfs = (cur: V, dest: V, visiting: Map<V, boolean>, path: V[]) => {
+            visiting.set(cur, true);
+
+            if (cur === dest) {
+                paths.push([vertex1, ...path]);
+            }
+
+            const neighbors = this.getNeighbors(cur);
+            for (let neighbor of neighbors) {
+                if (!visiting.get(neighbor)) {
+                    path.push(neighbor);
+                    dfs(neighbor, dest, visiting, path);
+                    arrayRemove(path, vertex => vertex === neighbor);
+                }
+            }
+
+            visiting.set(cur, false);
+        }
+
+        dfs(vertex1, vertex2, new Map<V, boolean>(), []);
+        return paths;
+    }
+
+
+    getPathSumWeight(path: V[]): number {
+        let sum = 0;
+        for (let i = 0; i < path.length; i++) {
+            sum += this.getEdge(path[i], path[i + 1])?.weight || 0;
+        }
+        return sum;
+    }
+
+    getMinCostBetween(v1: V | VertexId, v2: V | VertexId, isWeight?: boolean): number | null {
+        if (isWeight === undefined) isWeight = false;
+
+        if (isWeight) {
+            const allPaths = this.getAllPathsBetween(v1, v2);
+            let min = Infinity;
+            for (let path of allPaths) {
+                min = Math.min(this.getPathSumWeight(path), min);
+            }
+            return min;
+        } else {
+            // BFS
+            const vertex2 = this.getVertex(v2);
+            const vertex1 = this.getVertex(v1);
+            if (!(vertex1 && vertex2)) {
+                return null;
+            }
+
+            const visited: Map<V, boolean> = new Map();
+            const queue: V[] = [vertex1];
+            visited.set(vertex1, true);
+            let cost = 0;
+            while (queue.length > 0) {
+                for (let i = 0; i < queue.length; i++) {
+                    const cur = queue.shift();
+                    if (cur === vertex2) {
+                        return cost;
+                    }
+
+                    // TODO consider optimizing to AbstractGraph
+                    const neighbors = this.getNeighbors(cur!);
+                    for (let neighbor of neighbors) {
+                        if (!visited.has(neighbor)) {
+                            visited.set(neighbor, true);
+                            queue.push(neighbor);
+                        }
+                    }
+                }
+                cost++;
+            }
+            return null;
+        }
+    }
+
+    getMinPathBetween(v1: V | VertexId, v2: V | VertexId, isWeight?: boolean): V[] | null {
+        if (isWeight === undefined) isWeight = false;
+
+        if (isWeight) {
+            const allPaths = this.getAllPathsBetween(v1, v2);
+            let min = Infinity;
+            let minIndex = -1;
+            let index = 0;
+            for (let path of allPaths) {
+                const pathSumWeight = this.getPathSumWeight(path);
+                if (pathSumWeight < min) {
+                    min = pathSumWeight;
+                    minIndex = index;
+                }
+                index++;
+            }
+            return allPaths[minIndex] || null;
+        } else {
+            // BFS
+            let minPath: V[] = [];
+            const vertex1 = this.getVertex(v1);
+            const vertex2 = this.getVertex(v2);
+            if (!(vertex1 && vertex2)) {
+                return [];
+            }
+
+            const dfs = (cur: V, dest: V, visiting: Map<V, boolean>, path: V[]) => {
+                visiting.set(cur, true);
+
+                if (cur === dest) {
+                    minPath = [vertex1, ...path];
+                    return;
+                }
+
+                const neighbors = this.getNeighbors(cur);
+                for (let neighbor of neighbors) {
+                    if (!visiting.get(neighbor)) {
+                        path.push(neighbor);
+                        dfs(neighbor, dest, visiting, path);
+                        arrayRemove(path, vertex => vertex === neighbor);
+                    }
+                }
+
+                visiting.set(cur, false);
+            }
+
+            dfs(vertex1, vertex2, new Map<V, boolean>(), []);
+            return minPath;
+        }
+    }
+
+    // single source all destinations shortest path
+    // Dijkstra,Bellman-Ford,SPFA
+    // ???A* search algorithm
+    // ???Johnson
+    // Floyd-warshall O(n^3)
+    getNearest(v1: V | VertexId, isWeight?: boolean): V[] {
+        if (isWeight === undefined) isWeight = false;
+
+        if (isWeight) {
+            // Bellman-Ford can find negative weight cycle O(EV)
+            const nearest: V[] = [];
+            return nearest;
+
+        } else {
+            return this.getNeighbors(v1);
+        }
+    }
+
+    dijkstra(src: V | VertexId) {
+
+    }
+
+    bellmanFord(src: V | VertexId) {
+        let min = Infinity;
+        const n = this._vertices.size;
+        const map: Map<V, number> = new Map();
+
+        for (let i = 0; i < n; i++) {
+
+        }
+    }
+
+    floyd() {
+
+    }
+
+    // Floyd not support graph with negative weight cycle O(V^3)
 }

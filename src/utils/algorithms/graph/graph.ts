@@ -43,7 +43,7 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     // console.log('directedGraph.getAllEdges(1, 2)', directedGraph.getAllEdges(1, 2));
     // console.log('directedGraph.getAllEdges(directedGraph.getVertex(1), directedGraph.getVertex(2))`, directedGraph.getAllEdges(directedGraph.getVertex(1), directedGraph.getVertex(2)));
     // console.log('directedGraph.getAllEdges(1,'100')', directedGraph.getAllEdges(1, '100'));
-    // console.log('directedGraph.removeEdgeByEnds(1,2)', directedGraph.removeEdgeByEnds(1, 2));
+    // console.log('directedGraph.removeEdgeBetween(1,2)', directedGraph.removeEdgeBetween(1, 2));
     // console.log('directedGraph.getAllEdges(1, 2)', directedGraph.getAllEdges(1, 2));
 
     // const graph = new UndirectedGraph();
@@ -53,7 +53,7 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     // console.log('graph.getAllEdges(1, 2)', graph.getAllEdges(1, 2));
     // console.log('graph.getAllEdges(graph.getVertex(1), graph.getVertex(2))`, graph.getAllEdges(graph.getVertex(1), graph.getVertex(2)));
     // console.log('graph.getAllEdges(1,'100')', graph.getAllEdges(1, '100'));
-    // console.log('graph.removeEdgeByEnds(1,2)', graph.removeEdgeByEnds(1, 2));
+    // console.log('graph.removeEdgeBetween(1,2)', graph.removeEdgeBetween(1, 2));
     // console.log('graph.getAllEdges(1, 2)', graph.getAllEdges(1, 2));
 
 
@@ -90,7 +90,7 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     await wait(waitMan.time3);
     console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
     await wait(waitMan.time3);
-    console.log(`vars.myGraph.removeEdgeByEnds(1,2)`, vars.myGraph.removeEdgeByEnds(1, 2));
+    console.log(`vars.myGraph.removeEdgeBetween(1,2)`, vars.myGraph.removeEdgeBetween(1, 2));
     await wait(waitMan.time3);
     console.log(`vars.myGraph.getAllEdges(1, 2)`, vars.myGraph.getAllEdges(1, 2));
 
@@ -111,7 +111,32 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     console.log(`vars.myGraph.addEdge(new MyEdge(7, 9, 79, 'edge-data7-9'))`, vars.myGraph.addEdge(new MyEdge(7, 9, 79, 'edge-data7-9')));
 
     await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(1, 4, 14, 'edge-data1-4'))`, vars.myGraph.addEdge(new MyEdge(1, 4, 14, 'edge-data1-4')));
+
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(4, 7, 47, 'edge-data4-7'))`, vars.myGraph.addEdge(new MyEdge(4, 7, 47, 'edge-data4-7')));
+
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(1, 2, 12, 'edge-data1-2'))`, vars.myGraph.addEdge(new MyEdge(1, 2, 12, 'edge-data1-2')));
+
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(2, 3, 23, 'edge-data2-3'))`, vars.myGraph.addEdge(new MyEdge(2, 3, 23, 'edge-data2-3')));
+
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(3, 5, 35, 'edge-data3-5'))`, vars.myGraph.addEdge(new MyEdge(3, 5, 35, 'edge-data3-5')));
+
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(5, 7, 57, 'edge-data5-7'))`, vars.myGraph.addEdge(new MyEdge(5, 7, 57, 'edge-data5-7')));
+
+
+    await wait(waitMan.time3);
     console.log('topologicalSort', vars.myGraph.topologicalSort());
+
+    await wait(waitMan.time3);
+    console.log('vars.myGraph.getMinPathBetween(1, 7)', vars.myGraph.getMinPathBetween(1, 7));
+
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.getAllPaths(1, 7)`, vars.myGraph.getAllPathsBetween(1, 7));
 
     // const myGraphEdge3to1 = vars.myGraph.getEdge(3, 1);
     //
@@ -227,6 +252,27 @@ const runAllCanFinish = async () => {
 
 // runAllCanFinish().then()
 // 399	Evaluate Division	★★★	839	952	990	721	737	union find
+function calcEquation(equations: [string, string][], values: number[], queries: [string, string][]): number[] {
+    const graph = new DirectedGraph<DirectedVertex, DirectedEdge>();
+    for (let equation of equations) {
+        for (let variable of equation) {
+            graph.addVertex(new DirectedVertex(variable));
+        }
+    }
+
+    for (let i = 0; i < equations.length; i++) {
+        if (equations[i]) {
+            graph.addEdge(new DirectedEdge(equations[i][0], equations[i][1], values[i]));
+        }
+    }
+
+    const ans: number[] = [];
+    for (let query of queries) {
+
+    }
+    return ans;
+}
+
 // 785	Is Graph Bipartite?	★★★	886	1042				bipartition, graph coloring
 // 997	Find the Town Judge	★★★						in/out degrees
 // 433	Minimum Genetic Mutation	★★★	815	863	1129	1263

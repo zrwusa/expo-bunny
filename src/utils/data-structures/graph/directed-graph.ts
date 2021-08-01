@@ -103,7 +103,7 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         return true;
     }
 
-    removeEdgeByEnds(srcOrId: V | VertexId, destOrId: V | VertexId): E | null {
+    removeEdgeBetween(srcOrId: V | VertexId, destOrId: V | VertexId): E | null {
 
         const src: V | null = this.getVertex(srcOrId);
         const dest: V | null = this.getVertex(destOrId);
@@ -119,7 +119,7 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
 
         const destInEdges = this._inEdgeMap.get(dest);
         if (destInEdges) {
-           removed = arrayRemove<E>(destInEdges, edge => edge.src === src.id)[0] || null;
+            removed = arrayRemove<E>(destInEdges, edge => edge.src === src.id)[0] || null;
         }
         return removed;
     }
@@ -245,5 +245,18 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
             edges = [...edges, ...outEdges];
         });
         return edges;
+    }
+
+    getNeighbors(vertexOrId: V | VertexId): V[] {
+        const neighbors: V[] = [];
+        const vertex = this.getVertex(vertexOrId);
+        if (vertex) {
+            const outEdges = this.outgoingEdgesOf(vertex);
+            for (let outEdge of outEdges) {
+                const neighbor = this.getVertex(outEdge.dest)!;
+                neighbors.push(neighbor);
+            }
+        }
+        return neighbors;
     }
 }

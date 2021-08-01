@@ -54,7 +54,7 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         return true;
     }
 
-    removeEdgeByEnds(v1: V | VertexId, v2: V | VertexId): E | null {
+    removeEdgeBetween(v1: V | VertexId, v2: V | VertexId): E | null {
 
         const vertex1: V | null = this.getVertex(v1);
         const vertex2: V | null = this.getVertex(v2);
@@ -94,5 +94,27 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
 
     edgeSet(): E[] {
         return this._edges;
+    }
+
+    getEdgesOf(vertexOrId: V | VertexId): E[] {
+        const vertex = this.getVertex(vertexOrId);
+        const ret: E[] = [];
+        if (!vertex) {
+            return ret;
+        }
+        return this._edges.filter(e => e.vertices.includes(vertex.id))
+    }
+
+    getNeighbors(vertexOrId: V | VertexId): V[] {
+        const neighbors: V[] = [];
+        const vertex = this.getVertex(vertexOrId);
+        if (vertex) {
+            const neighborEdges = this.getEdgesOf(vertex);
+            for (let edge of neighborEdges) {
+                const neighbor = this.getVertex(edge.vertices.filter(e => e !== vertex.id)[0])!;
+                neighbors.push(neighbor);
+            }
+        }
+        return neighbors;
     }
 }
