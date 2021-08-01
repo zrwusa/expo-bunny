@@ -341,7 +341,71 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         }
     }
 
-    dijkstra(src: V | VertexId) {
+    /**
+     * Dijkstra algorithm time: O(logVE) space: O(V + E)
+     * @param src
+     * @param dest
+     */
+    dijkstra(src: V | VertexId, dest?: V | VertexId | null) {
+        if (dest === undefined) dest = null;
+        const vertices = this._vertices;
+        const distMap: Map<V, number> = new Map();
+        const set: Set<V> = new Set();
+        const preMap: Map<V, V | null> = new Map(); // predecessor
+        const srcVertex = this.getVertex(src);
+
+        const destVertex = dest ? this.getVertex(dest) : null
+
+        if (!srcVertex) {
+            return null;
+        }
+
+        // const heap = new MinHeap<HeapNode<V>, V>();
+        for (let [id, v] of vertices) {
+            distMap.set(v, Infinity);
+            // const dist = v === srcVertex ? 0 : Infinity;
+            // heap.insert(new HeapNode(dist, srcVertex));
+        }
+        distMap.set(srcVertex, 0);
+        preMap.set(srcVertex, null);
+
+        const getMin = () => {
+            let min = Infinity;
+            let minV: V | null = null;
+            for (let [key, val] of distMap) {
+                if (!set.has(key)) {
+                    if (val < min) {
+                        min = val;
+                        minV = key;
+                    }
+                }
+            }
+            return minV;
+        }
+
+
+        for (let i = 1; i < vertices.size; i++) {
+            const cur = getMin();
+            if (cur) {
+                set.add(cur);
+                if (destVertex && destVertex === cur) {
+                    return {distMap, preMap, set};
+                }
+                const neighbors = this.getNeighbors(cur);
+                for (let neighbor of neighbors) {
+                    if (!set.has(neighbor)) {
+                        const edge = this.getEdge(cur, neighbor);
+                        if (edge) {
+                            if (edge.weight + distMap.get(cur)! < distMap.get(neighbor)!) {
+                                distMap.set(neighbor, edge.weight + distMap.get(cur)!);
+                                preMap.set(neighbor, cur);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return {distMap, preMap, set};
 
     }
 
@@ -349,7 +413,8 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
 
     /**
-     * BellmanFord O(EV)
+     * BellmanFord time:O(VE) space:O(V)
+     * one to rest pairs
      * @param src
      * @param scanNegativeCycle
      * @param getMin
@@ -362,7 +427,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         const srcVertex = this.getVertex(src);
         const paths: V[][] = [];
         const distMap: Map<V, number> = new Map();
-        const preMap: Map<V, V> = new Map();
+        const preMap: Map<V, V> = new Map(); // predecessor
         let min = Infinity;
         let minPath: V[] = [];
         // TODO
@@ -440,7 +505,43 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         return {hasNegativeCycle, distMap, preMap, paths, min, minPath};
     }
 
+    /**
+     * Floyd algorithm time: O(V^3) space: O(V^2), not support graph with negative weight cycle
+     * all pairs
+     */
     floyd() {
-        // Floyd not support graph with negative weight cycle O(V^3)
+        const idAndVertices = [...this._vertices];
+        const n = idAndVertices.length;
+
+        let costs: number[][] = [];
+        let predecessor: (V | null)[][] = [];
+        // successors
+
+        for (let i = 0; i < n; i++) {
+            costs[i] = [];
+            predecessor[i] = [];
+            for (let j = 0; j < n; j++) {
+                predecessor[i][j] = null;
+            }
+        }
+
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                costs[i][j] = this.getEdge(idAndVertices[i][1], idAndVertices[j][1])?.weight || Infinity;
+            }
+        }
+
+        for (let k = 0; k < n; k++) {
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < n; j++) {
+                    if (costs[i][j] > costs[i][k] + costs[k][j]) {
+                        costs[i][j] = costs[i][k] + costs[k][j];
+                        predecessor[i][j] = idAndVertices[k][1];
+                    }
+                }
+            }
+        }
     }
+
+    // Minimum Spanning Tree
 }
