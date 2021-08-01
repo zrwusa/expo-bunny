@@ -259,4 +259,17 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         }
         return neighbors;
     }
+
+    getEndsOfEdge(edge: E): [V, V] | null {
+        if (!this.containsEdge(edge.src, edge.dest)) {
+            return null;
+        }
+        const v1 = this.getVertex(edge.src);
+        const v2 = this.getVertex(edge.dest);
+        if (v1 && v2) {
+            return [v1, v2];
+        } else {
+            return null;
+        }
+    }
 }

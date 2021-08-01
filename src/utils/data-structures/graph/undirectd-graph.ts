@@ -82,16 +82,6 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         return this._edges.filter(edge => edge.vertices.includes(vertexId))
     }
 
-    getEdgeEnds(edge: E): V[] {
-        const ends: V[] = [];
-        this._vertices.forEach(v => {
-            if (edge.vertices.includes(v.id)) {
-                ends.push(v);
-            }
-        });
-        return ends;
-    }
-
     edgeSet(): E[] {
         return this._edges;
     }
@@ -117,4 +107,18 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         }
         return neighbors;
     }
+
+    getEndsOfEdge(edge: E): [V, V] | null {
+        if (!this.containsEdge(edge.vertices[0], edge.vertices[1])) {
+            return null;
+        }
+        const v1 = this.getVertex(edge.vertices[0]);
+        const v2 = this.getVertex(edge.vertices[1]);
+        if (v1 && v2) {
+            return [v1, v2];
+        } else {
+            return null;
+        }
+    }
+
 }

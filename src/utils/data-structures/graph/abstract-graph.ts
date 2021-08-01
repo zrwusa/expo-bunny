@@ -345,19 +345,102 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     }
 
-    bellmanFord(src: V | VertexId) {
+    abstract getEndsOfEdge(edge: E): [V, V] | null;
+
+
+    /**
+     * BellmanFord O(EV)
+     * @param src
+     * @param scanNegativeCycle
+     * @param getMin
+     * @param genPath
+     */
+    bellmanFord(src: V | VertexId, scanNegativeCycle?: boolean, getMin?: boolean, genPath?: boolean) {
+        if (getMin === undefined) getMin = false;
+        if (genPath === undefined) genPath = false;
+
+        const srcVertex = this.getVertex(src);
+        const paths: V[][] = [];
+        const distMap: Map<V, number> = new Map();
+        const preMap: Map<V, V> = new Map();
         let min = Infinity;
-        const n = this._vertices.size;
-        const map: Map<V, number> = new Map();
+        let minPath: V[] = [];
+        // TODO
+        let hasNegativeCycle: boolean | undefined = undefined;
+        if (scanNegativeCycle) hasNegativeCycle = false;
+        if (!srcVertex) return {hasNegativeCycle, distMap, preMap, paths, min, minPath};
 
-        for (let i = 0; i < n; i++) {
+        const vertices = this._vertices;
+        const numOfVertices = vertices.size;
+        const edges = this.edgeSet();
+        const numOfEdges = edges.length;
 
+        this._vertices.forEach(vertex => {
+            distMap.set(vertex, Infinity);
+        });
+
+        distMap.set(srcVertex, 0);
+
+        for (let i = 1; i < numOfVertices; ++i) {
+            for (let j = 0; j < numOfEdges; ++j) {
+                const ends = this.getEndsOfEdge(edges[j]);
+                if (ends) {
+                    const [s, d] = ends;
+                    const weight = edges[j].weight;
+                    const sWeight = distMap.get(s);
+                    const dWeight = distMap.get(d);
+                    if (sWeight !== undefined && dWeight !== undefined) {
+                        if (distMap.get(s) !== Infinity && sWeight + weight < dWeight) {
+                            distMap.set(d, sWeight + weight);
+                            genPath && preMap.set(d, s);
+                        }
+                    }
+                }
+            }
         }
+
+        let minDest: V | null = null;
+        if (getMin) {
+            distMap.forEach((d, v) => {
+                if (v !== srcVertex) {
+                    if (d < min) {
+                        min = d;
+                        if (genPath) minDest = v;
+                    }
+                }
+            })
+        }
+
+        if (genPath) {
+            for (let [id, v] of vertices) {
+                const path: V[] = [v];
+                let parent = preMap.get(v);
+                while (parent !== undefined) {
+                    path.push(parent);
+                    parent = preMap.get(parent);
+                }
+                const reversed = path.reverse()
+                if (v === minDest) minPath = reversed;
+                paths.push(reversed);
+            }
+        }
+
+        for (let j = 0; j < numOfEdges; ++j) {
+            const ends = this.getEndsOfEdge(edges[j]);
+            if (ends) {
+                const [s] = ends;
+                let weight = edges[j].weight;
+                const sWeight = distMap.get(s);
+                if (sWeight) {
+                    if (sWeight !== Infinity && sWeight + weight < sWeight) hasNegativeCycle = true;
+                }
+            }
+        }
+
+        return {hasNegativeCycle, distMap, preMap, paths, min, minPath};
     }
 
     floyd() {
-
+        // Floyd not support graph with negative weight cycle O(V^3)
     }
-
-    // Floyd not support graph with negative weight cycle O(V^3)
 }
