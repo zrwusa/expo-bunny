@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
 import {Text, View} from "../UI";
 import {Row} from "../../containers/Row";
 import {Col} from "../../containers/Col";
@@ -132,15 +132,18 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     }
 
 
-    const TwoWayScrollSVG: React.FC = ({children}) => {
-        const horizontalScrollView = useRef<ScrollView>(null)
-        // useEffect(() => {
-        //     horizontalScrollView?.current?.scrollTo({
-        //         x: (treePanelWidth - wp(375)) / 2,
-        //         y: 0,
-        //         animated: false
-        //     })
-        // }, [])
+    const TwoWayScrollSVG: React.FC<{autoScroll: boolean}> = ({children, autoScroll}) => {
+        const horizontalScrollView = useRef<ScrollView>(null);
+        if (autoScroll) {
+            useEffect(() => {
+                horizontalScrollView?.current?.scrollTo({
+                    x: (treePanelWidth - wp(375)) / 2,
+                    y: 0,
+                    animated: false
+                })
+            }, [])
+        }
+
 
         return (
             <ScrollView nestedScrollEnabled style={{height: wp(375)}}>
@@ -163,7 +166,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
 
     const VividTree: React.FC<{ data: TreeNode<any> }> = ({data}) => {
         return (
-            <TwoWayScrollSVG>
+            <TwoWayScrollSVG autoScroll>
                 <VividTreeRecursive node={data} level={1} index={0} familyLength={1} parentX={0} parentY={0}
                                     maxHeight={data.getHeight()}/>
             </TwoWayScrollSVG>
@@ -172,7 +175,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
 
     const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | null, maxHeight?: number }> = ({node, maxHeight}) => {
         return (
-            <TwoWayScrollSVG>
+            <TwoWayScrollSVG autoScroll>
                 {
                     node
                         ? <VividBinaryTreeRecursive node={node} level={1} index={0} familyLength={1}
@@ -185,7 +188,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
 
     const VividGraph: React.FC<{ data: AbstractGraph<AbstractVertex, AbstractEdge> }> = ({data}) => {
         return (
-            <TwoWayScrollSVG>
+            <TwoWayScrollSVG autoScroll={false}>
                 {
                     data
                         ? <VividGraphDrawer graph={data}/>
