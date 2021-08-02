@@ -299,7 +299,7 @@ function calcEquation(equations: [string, string][], values: number[], queries: 
 export async function networkDelayTime(times: number[][], n: number, k: number, proxyHandler?: TProxyHandler): Promise<number> {
     let graph;
     if (proxyHandler) {
-        const vars: {graph: DirectedGraph<DirectedVertex, DirectedEdge>} = new DeepProxy({graph: new DirectedGraph()}, proxyHandler);
+        const vars: { graph: DirectedGraph<DirectedVertex, DirectedEdge> } = new DeepProxy({graph: new DirectedGraph()}, proxyHandler);
         graph = vars.graph;
     } else {
         graph = new DirectedGraph();
@@ -316,7 +316,7 @@ export async function networkDelayTime(times: number[][], n: number, k: number, 
         let max = -Infinity;
 
         for (let [v, d] of [...res.distMap]) {
-            if(d === Infinity) return -1;
+            if (d === Infinity) return -1;
             max = Math.max(d, max);
         }
 
@@ -324,6 +324,7 @@ export async function networkDelayTime(times: number[][], n: number, k: number, 
     }
     return -1;
 }
+
 // 847
 // Shortest Path Visiting All Nodes
 // ★★★★	864	1298				BFS

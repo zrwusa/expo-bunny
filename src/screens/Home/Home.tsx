@@ -41,6 +41,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                                 iconSize={wp(20)}/>
                     <Divider/>
                     <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
+                    <Divider/>
                     <InlineJump type="LINK" iconName="car" text={st(`algorithm`)} to="/algorithm"/>
                 </Card>
                 <Card titleMode="OUT" title={st(`apps`)}>

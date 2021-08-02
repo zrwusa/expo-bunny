@@ -10,4 +10,4 @@ for (let i = 0; i < 1e+5; i++) {
 export const canFinishCase3: CanFinishCase = [1e+5, prerequisites];
 
 type NetWorkDelayTimeCase = [[number, number, number][], number, number];
-export const networkDelayTimeCase3:NetWorkDelayTimeCase = [[[1,2,1],[2,3,7],[1,3,4],[2,1,2]], 4, 1];
+export const networkDelayTimeCase3: NetWorkDelayTimeCase = [[[1, 2, 1], [2, 3, 7], [1, 3, 4], [2, 1, 2]], 4, 1];
