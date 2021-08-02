@@ -2,6 +2,9 @@ import {arrayRemove, uuidV4} from "../../utils";
 import {HeapNode, MinHeap} from "../heap";
 
 export type VertexId = string | number;
+export type DijkstraResult<V> =
+    { distMap: Map<V, number>, preMap: Map<V, V | null>, seen: Set<V>, paths: V[][], minDist: number, minPath: V[] }
+    | null;
 
 export interface I_Graph<V, E> {
 
@@ -324,34 +327,26 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         }
     }
 
-    // single source all destinations shortest path
-    // Dijkstra,Bellman-Ford,SPFA
-    // ???A* search algorithm
-    // ???Johnson
-    // Floyd-warshall O(n^3)
-    getNearest(v1: V | VertexId, isWeight?: boolean): V[] {
-        if (isWeight === undefined) isWeight = false;
-
-        if (isWeight) {
-            // Bellman-Ford can find negative weight cycle O(EV)
-            const nearest: V[] = [];
-            return nearest;
-
-        } else {
-            return this.getNeighbors(v1);
-        }
-    }
-
     /**
      * Dijkstra algorithm time: O(VE) space: O(V + E)
      * @param src
      * @param dest
+     * @param getMinDist
+     * @param genPaths
      */
-    dijkstraWithoutHeap(src: V | VertexId, dest?: V | VertexId | null) {
+    dijkstraWithoutHeap(src: V | VertexId, dest?: V | VertexId | null, getMinDist?: boolean, genPaths?: boolean): DijkstraResult<V> {
+        if (getMinDist === undefined) getMinDist = false;
+        if (genPaths === undefined) genPaths = false;
+
         if (dest === undefined) dest = null;
+        let minDist = Infinity;
+        let minDest: V | null = null;
+        let minPath: V[] = [];
+        const paths: V[][] = [];
+
         const vertices = this._vertices;
         const distMap: Map<V, number> = new Map();
-        const set: Set<V> = new Set();
+        const seen: Set<V> = new Set();
         const preMap: Map<V, V | null> = new Map(); // predecessor
         const srcVertex = this.getVertex(src);
 
@@ -370,11 +365,11 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         distMap.set(srcVertex, 0);
         preMap.set(srcVertex, null);
 
-        const getMin = () => {
+        const getMinOfNoSeen = () => {
             let min = Infinity;
             let minV: V | null = null;
             for (let [key, val] of distMap) {
-                if (!set.has(key)) {
+                if (!seen.has(key)) {
                     if (val < min) {
                         min = val;
                         minV = key;
@@ -384,17 +379,36 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             return minV;
         }
 
+        const getPaths = (minV: V | null) => {
+            for (let [id, v] of vertices) {
+                const path: V[] = [v];
+                let parent = preMap.get(v);
+                while (parent) {
+                    path.push(parent);
+                    parent = preMap.get(parent);
+                }
+                const reversed = path.reverse()
+                if (v === minV) minPath = reversed;
+                paths.push(reversed);
+            }
+        }
 
         for (let i = 1; i < vertices.size; i++) {
-            const cur = getMin();
+            const cur = getMinOfNoSeen();
             if (cur) {
-                set.add(cur);
+                seen.add(cur);
                 if (destVertex && destVertex === cur) {
-                    return {distMap, preMap, set};
+                    if (getMinDist) {
+                        minDist = distMap.get(destVertex) || Infinity;
+                    }
+                    if (genPaths) {
+                        getPaths(destVertex)
+                    }
+                    return {distMap, preMap, seen, paths, minDist, minPath};
                 }
                 const neighbors = this.getNeighbors(cur);
                 for (let neighbor of neighbors) {
-                    if (!set.has(neighbor)) {
+                    if (!seen.has(neighbor)) {
                         const edge = this.getEdge(cur, neighbor);
                         if (edge) {
                             if (edge.weight + distMap.get(cur)! < distMap.get(neighbor)!) {
@@ -406,8 +420,24 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                 }
             }
         }
-        return {distMap, preMap, set};
 
+        if (getMinDist) {
+            distMap.forEach((d, v) => {
+                if (v !== srcVertex) {
+                    if (d < minDist) {
+                        minDist = d;
+                        if (genPaths) minDest = v;
+                    }
+                }
+            })
+        }
+
+
+        if (genPaths) {
+            getPaths(minDest)
+        }
+
+        return {distMap, preMap, seen, paths, minDist, minPath};
     }
 
 
@@ -415,9 +445,18 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
      * Dijkstra algorithm time: O(logVE) space: O(V + E)
      * @param src
      * @param dest
+     * @param getMinDist
+     * @param genPaths
      */
-    dijkstra(src: V | VertexId, dest?: V | VertexId | null) {
+    dijkstra(src: V | VertexId, dest?: V | VertexId | null, getMinDist?: boolean, genPaths?: boolean): DijkstraResult<V> {
+        if (getMinDist === undefined) getMinDist = false;
+        if (genPaths === undefined) genPaths = false;
+
         if (dest === undefined) dest = null;
+        let minDist = Infinity;
+        let minDest: V | null = null;
+        let minPath: V[] = [];
+        const paths: V[][] = [];
         const vertices = this._vertices;
         const distMap: Map<V, number> = new Map();
         const seen: Set<V> = new Set();
@@ -440,6 +479,20 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         distMap.set(srcVertex, 0);
         preMap.set(srcVertex, null);
 
+        const getPaths = (minV: V | null) => {
+            for (let [id, v] of vertices) {
+                const path: V[] = [v];
+                let parent = preMap.get(v);
+                while (parent) {
+                    path.push(parent);
+                    parent = preMap.get(parent);
+                }
+                const reversed = path.reverse()
+                if (v === minV) minPath = reversed;
+                paths.push(reversed);
+            }
+        }
+
         while (heap.size() > 0) {
             const curHeapNode = heap.poll();
             const dist = curHeapNode?.id;
@@ -447,20 +500,26 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             if (dist !== undefined && typeof dist === 'number') {
                 if (cur) {
                     seen.add(cur);
-                    if (cur === destVertex) {
-                        return {distMap, preMap, seen};
+                    if (destVertex && destVertex === cur) {
+                        if (getMinDist) {
+                            minDist = distMap.get(destVertex) || Infinity;
+                        }
+                        if (genPaths) {
+                            getPaths(destVertex)
+                        }
+                        return {distMap, preMap, seen, paths, minDist, minPath};
                     }
                     const neighbors = this.getNeighbors(cur);
                     for (let neighbor of neighbors) {
                         if (!seen.has(neighbor)) {
                             const weight = this.getEdge(cur, neighbor)?.weight;
                             if (typeof weight === 'number') {
-                                const distSrcToNeighbor =  distMap.get(neighbor);
+                                const distSrcToNeighbor = distMap.get(neighbor);
                                 if (distSrcToNeighbor) {
                                     if (dist + weight < distSrcToNeighbor) {
                                         heap.insert(new HeapNode(dist + weight, neighbor));
                                         preMap.set(neighbor, cur);
-                                        distMap.set(neighbor,dist + weight );
+                                        distMap.set(neighbor, dist + weight);
                                     }
                                 }
                             }
@@ -469,7 +528,26 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                 }
             }
         }
-        return {distMap, preMap, seen};
+
+
+        if (getMinDist) {
+            distMap.forEach((d, v) => {
+                if (v !== srcVertex) {
+                    if (d < minDist) {
+                        minDist = d;
+                        if (genPaths) minDest = v;
+                    }
+                }
+            })
+        }
+
+
+        if (genPaths) {
+            getPaths(minDest)
+        }
+
+
+        return {distMap, preMap, seen, paths, minDist, minPath};
     }
 
     abstract getEndsOfEdge(edge: E): [V, V] | null;
@@ -572,7 +650,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
      * Floyd algorithm time: O(V^3) space: O(V^2), not support graph with negative weight cycle
      * all pairs
      */
-    floyd() {
+    floyd(): { costs: number[][], predecessor: (V | null)[][] } {
         const idAndVertices = [...this._vertices];
         const n = idAndVertices.length;
 
@@ -604,6 +682,8 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                 }
             }
         }
+        return {costs, predecessor};
+
     }
 
     // Minimum Spanning Tree

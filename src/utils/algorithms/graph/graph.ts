@@ -142,13 +142,17 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     console.log(vars.myGraph.bellmanFord(1))
 
     await wait(waitMan.time3);
-    console.log(vars.myGraph.floyd())
+    const floydResult = vars.myGraph.floyd();
+    console.log(floydResult)
 
     await wait(waitMan.time3);
-    console.log(vars.myGraph.dijkstra(1, 2))
+    console.log(vars.myGraph.dijkstra(1, 2, true, true))
 
     await wait(waitMan.time3);
-    console.log(vars.myGraph.dijkstraWithoutHeap(1, 2))
+    console.log(vars.myGraph.dijkstra(1, null, true, true));
+
+    await wait(waitMan.time3);
+    console.log(vars.myGraph.dijkstraWithoutHeap(1, null, true, true))
     // const myGraphEdge3to1 = vars.myGraph.getEdge(3, 1);
     //
     // console.log(`vars.myGraph.getAllEdges(3, 1)', vars.myGraph.getAllEdges(3, 1));
