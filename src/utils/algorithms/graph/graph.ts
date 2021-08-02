@@ -128,6 +128,8 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     await wait(waitMan.time3);
     console.log(`vars.myGraph.addEdge(new MyEdge(5, 7, 57, 'edge-data5-7'))`, vars.myGraph.addEdge(new MyEdge(5, 7, 57, 'edge-data5-7')));
 
+    await wait(waitMan.time3);
+    console.log(`vars.myGraph.addEdge(new MyEdge(7, 3, 73, 'edge-data7-3'))`, vars.myGraph.addEdge(new MyEdge(7, 3, 73, 'edge-data7-3')));
 
     await wait(waitMan.time3);
     console.log('topologicalSort', vars.myGraph.topologicalSort());
@@ -294,6 +296,34 @@ function calcEquation(equations: [string, string][], values: number[], queries: 
 // unweighted shortest path / BFS
 // 684	Redundant Connection	★★★★	685	1319				cycle, union find
 // 743	Network Delay Time	★★★★	787	882	924	1334		weighted shortest path
+export async function networkDelayTime(times: number[][], n: number, k: number, proxyHandler?: TProxyHandler): Promise<number> {
+    let graph;
+    if (proxyHandler) {
+        const vars: {graph: DirectedGraph<DirectedVertex, DirectedEdge>} = new DeepProxy({graph: new DirectedGraph()}, proxyHandler);
+        graph = vars.graph;
+    } else {
+        graph = new DirectedGraph();
+    }
+
+    for (let [u, v, w] of times) {
+        graph.addVertex(new DirectedVertex(u));
+        graph.addVertex(new DirectedVertex(v));
+        graph.addEdge(new DirectedEdge(u, v, w));
+    }
+
+    const res = graph.dijkstra(k);
+    if (res) {
+        let max = -Infinity;
+
+        for (let [v, d] of [...res.distMap]) {
+            if(d === Infinity) return -1;
+            max = Math.max(d, max);
+        }
+
+        return max;
+    }
+    return -1;
+}
 // 847
 // Shortest Path Visiting All Nodes
 // ★★★★	864	1298				BFS

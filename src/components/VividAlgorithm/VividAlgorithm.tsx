@@ -60,7 +60,29 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const LineWithArrow = ({src, dest}: { src: Coordinate, dest: Coordinate }) => {
+    const LineWithArrow = ({src, dest, weight, cutDelta}: { src: Coordinate, dest: Coordinate, weight?: number, cutDelta?: number }) => {
+        if (cutDelta === undefined) cutDelta = 0;
+
+        const PI = Math.PI;
+        let angle: number = Math.atan2((dest.y - src.y), (dest.x - src.x));
+        let theta: number = angle * (180 / Math.PI);
+        let src1 = new Coordinate(src.y, src.x);
+        let dest1 = new Coordinate(dest.y, dest.x);
+        if (angle <= 0.5 * PI) {
+            src1.x = src.x + Math.cos(angle) * cutDelta;
+            src1.y = src.y + Math.sin(angle) * cutDelta;
+            dest1.x = dest.x - Math.cos(angle) * cutDelta;
+            dest1.y = dest.y - Math.sin(angle) * cutDelta;
+        } else if (angle > 0.5 * PI && angle <= PI) {
+            angle = PI - angle;
+            src1.x = src.x - Math.cos(angle) * cutDelta;
+            src1.y = src.y + Math.sin(angle) * cutDelta;
+            dest1.x = dest.x + Math.cos(angle) * cutDelta;
+            dest1.y = dest.y - Math.sin(angle) * cutDelta;
+        }
+
+        src = src1;
+        dest = dest1;
 
         return <G>
             <Defs>
@@ -73,16 +95,31 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     markerHeight="3"
                     orient="auto"
                 >
-                    <Path d="M 0 0 L 10 5 L 0 10 z" fill={arrowColor}/>
+                    <Path d="M 0 0 L 10 5 L 0 10 z" fill={arrowColor} stroke={arrowColor}/>
                 </Marker>
             </Defs>
             <Path
                 d={`M ${src.x} ${src.y} L ${dest.x} ${dest.y}`}
-                fill="none"
+                fill={arrowColor}
                 stroke={arrowColor}
                 strokeWidth="2"
                 markerEnd="url(#Triangle)"
             />
+            {
+                weight !== undefined && weight !== null
+                    ? <SVGText
+                        strokeWidth={wp(1)}
+                        fontSize={ms.fs.xs}
+                        fill={colors.text}
+                        fontWeight={100}
+                        stroke={colors.text}
+                        x={src.x + (dest.x - src.x) / 2 + (src.x > dest.x ? wp(10) : wp(-10))}
+                        y={src.y + (dest.y - src.y) / 2 + (src.y > dest.y ? wp(3) : wp(-3))}
+                        textAnchor="middle"
+                    >{weight}</SVGText>
+                    : null
+            }
+
         </G>
     }
 
@@ -161,7 +198,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const matrixPanelWidth = wp(360, false);
     const matrixRectStrokeWidth = wp(1, false);
     const arrowCut = 0.3;
-    const arrowColor = colors.warning
+    const arrowColor = colors.accent
 
     const VividMatrix: React.FC<{ data: Array<Array<any>> }> = ({data}) => {
         const rowCount = data?.length;
@@ -223,8 +260,11 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                     if (from && to) {
                                         const src = new Coordinate((from.y + 0.5 + deviationVector.y * arrowCut) * rectSize, (from.x + 0.5 + deviationVector.x * arrowCut) * rectSize);
                                         const dest = new Coordinate((to.y + 0.5 - deviationVector.y * arrowCut) * rectSize, (to.x + 0.5 - deviationVector.x * arrowCut) * rectSize);
-                                        return <LineWithArrow key={src.y + ',' + src.x + dest.y + dest.x} src={src}
-                                                              dest={dest}/>;
+
+                                        return <LineWithArrow key={src.y + ',' + src.x + dest.y + dest.x}
+                                                              src={src}
+                                                              dest={dest}
+                                        />;
                                     } else {
                                         return null;
                                     }
@@ -415,14 +455,16 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 {
                     edges.map(edge => {
                         if (graph instanceof UndirectedGraph) {
-                            const ends = graph.getEdgeEnds(edge);
-                            if (ends.length > 1) {
+                            const ends = graph.getEndsOfEdge(edge);
+                            if (ends && ends.length > 1) {
                                 const v1Coordinate = coordsMap.get(ends[0]);
                                 const v2Coordinate = coordsMap.get(ends[1]);
                                 if (v1Coordinate && v2Coordinate) {
-                                    return <Line key={edge.hashCode}
-                                                 x1={v1Coordinate.x} y1={v1Coordinate.y} x2={v2Coordinate.x}
-                                                 y2={v2Coordinate.y}/>
+                                    return <G>
+                                        <Line key={edge.hashCode}
+                                              x1={v1Coordinate.x} y1={v1Coordinate.y} x2={v2Coordinate.x}
+                                              y2={v2Coordinate.y}/>
+                                    </G>
                                 }
                             }
                         } else if (graph instanceof DirectedGraph) {
@@ -431,10 +473,14 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                             if (src && dest) {
                                 const srcCod = coordsMap.get(src);
                                 const destCod = coordsMap.get(dest);
+                                const edge = graph.getEdge(src, dest);
                                 if (srcCod && destCod) {
                                     return <LineWithArrow
                                         key={edge.hashCode}
-                                        src={srcCod} dest={destCod}/>
+                                        src={srcCod} dest={destCod}
+                                        weight={edge?.weight}
+                                        cutDelta={circleR}
+                                    />
                                 }
                             }
                         }

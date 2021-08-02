@@ -16,7 +16,7 @@ import {
     ladderLengthCase1,
     ladderLengthDFS,
     lengthOfLongestSubstring,
-    letterCombinations,
+    letterCombinations, networkDelayTime, networkDelayTimeCase3,
     reverseLinkedList,
     testAVLTree,
     testBinaryTree,
@@ -191,6 +191,15 @@ export function AlgorithmScreen() {
         });
     }
 
+    const [netWorkDelayTimeVars, setNetWorkDelayTimeVars] = useState<{ [key in string]: unknown }>()
+    const _netWorkDelayTime = async () => {
+        await networkDelayTime(...networkDelayTimeCase3, ({value, key, DEFAULT}) => {
+            // console.log(key, value);
+            setNetWorkDelayTimeVars(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT;
+        });
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -251,6 +260,9 @@ export function AlgorithmScreen() {
                         </TextButton>
                         <TextButton onPress={_testGraphs}>
                             <Text>Test Graphs</Text>
+                        </TextButton>
+                        <TextButton onPress={_netWorkDelayTime}>
+                            <Text>Network Delay Time</Text>
                         </TextButton>
                     </Card>
                     {
@@ -326,6 +338,11 @@ export function AlgorithmScreen() {
                     {
                         testGraphVars
                             ? <VividAlgorithm data={testGraphVars}/>
+                            : null
+                    }
+                    {
+                        netWorkDelayTimeVars
+                            ? <VividAlgorithm data={netWorkDelayTimeVars}/>
                             : null
                     }
                 </View>
