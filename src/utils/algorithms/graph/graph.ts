@@ -146,6 +146,9 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
 
     await wait(waitMan.time3);
     console.log(vars.myGraph.dijkstra(1, 2))
+
+    await wait(waitMan.time3);
+    console.log(vars.myGraph.dijkstraWithoutHeap(1, 2))
     // const myGraphEdge3to1 = vars.myGraph.getEdge(3, 1);
     //
     // console.log(`vars.myGraph.getAllEdges(3, 1)', vars.myGraph.getAllEdges(3, 1));

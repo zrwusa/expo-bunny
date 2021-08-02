@@ -1,4 +1,5 @@
 import {arrayRemove, uuidV4} from "../../utils";
+import {HeapNode, MinHeap} from "../heap";
 
 export type VertexId = string | number;
 
@@ -342,11 +343,11 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     }
 
     /**
-     * Dijkstra algorithm time: O(logVE) space: O(V + E)
+     * Dijkstra algorithm time: O(VE) space: O(V + E)
      * @param src
      * @param dest
      */
-    dijkstra(src: V | VertexId, dest?: V | VertexId | null) {
+    dijkstraWithoutHeap(src: V | VertexId, dest?: V | VertexId | null) {
         if (dest === undefined) dest = null;
         const vertices = this._vertices;
         const distMap: Map<V, number> = new Map();
@@ -407,6 +408,68 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         }
         return {distMap, preMap, set};
 
+    }
+
+
+    /**
+     * Dijkstra algorithm time: O(logVE) space: O(V + E)
+     * @param src
+     * @param dest
+     */
+    dijkstra(src: V | VertexId, dest?: V | VertexId | null) {
+        if (dest === undefined) dest = null;
+        const vertices = this._vertices;
+        const distMap: Map<V, number> = new Map();
+        const seen: Set<V> = new Set();
+        const preMap: Map<V, V | null> = new Map(); // predecessor
+
+        const srcVertex = this.getVertex(src);
+        const destVertex = dest ? this.getVertex(dest) : null
+
+        if (!srcVertex) {
+            return null;
+        }
+
+        for (let [id, v] of vertices) {
+            distMap.set(v, Infinity);
+        }
+
+        const heap = new MinHeap<HeapNode<V>, V>();
+        heap.insert(new HeapNode(0, srcVertex));
+
+        distMap.set(srcVertex, 0);
+        preMap.set(srcVertex, null);
+
+        while (heap.size() > 0) {
+            const curHeapNode = heap.poll();
+            const dist = curHeapNode?.id;
+            const cur = curHeapNode?.val;
+            if (dist !== undefined && typeof dist === 'number') {
+                if (cur) {
+                    seen.add(cur);
+                    if (cur === destVertex) {
+                        return {distMap, preMap, seen};
+                    }
+                    const neighbors = this.getNeighbors(cur);
+                    for (let neighbor of neighbors) {
+                        if (!seen.has(neighbor)) {
+                            const weight = this.getEdge(cur, neighbor)?.weight;
+                            if (typeof weight === 'number') {
+                                const distSrcToNeighbor =  distMap.get(neighbor);
+                                if (distSrcToNeighbor) {
+                                    if (dist + weight < distSrcToNeighbor) {
+                                        heap.insert(new HeapNode(dist + weight, neighbor));
+                                        preMap.set(neighbor, cur);
+                                        distMap.set(neighbor,dist + weight );
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return {distMap, preMap, seen};
     }
 
     abstract getEndsOfEdge(edge: E): [V, V] | null;
