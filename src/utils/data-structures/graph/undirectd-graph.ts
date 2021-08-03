@@ -47,11 +47,9 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
     }
 
     addEdge(edge: E): boolean {
-        for (let v of edge.vertices) {
-            if (!this.containsVertex(v)) return false;
-        }
         for (let end of edge.vertices) {
             const endVertex = this.getVertex(end);
+            if (endVertex === null) return false;
             if (endVertex) {
                 const edges = this._edges.get(endVertex);
                 if (edges) {

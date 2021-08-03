@@ -14,7 +14,7 @@ import {
 } from "../../data-structures/graph";
 import {timeEnd, timeStart, wait, WaitManager} from "../../utils";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
-import {canFinishCase1, canFinishCase3, criticalConnectionsCase1, criticalConnectionsCase10} from "./cases";
+import {canFinishCase1, canFinishCase3, criticalConnectionsCase1} from "./cases";
 
 
 class MyVertex extends DirectedVertex {
@@ -341,16 +341,97 @@ export async function networkDelayTime(times: number[][], n: number, k: number, 
 // 847 Shortest Path Visiting All Nodes ★★★★	864	1298	BFS
 // 332	Reconstruct Itinerary	★★★★						Eulerian path
 // 1192 Critical Connections in a Network ★★★★						Tarjan
+/**
+ * data size 1e+5
+ * [construct graph] 95.10
+ * [tarjan] 72.40
+ * @param n
+ * @param connections
+ */
 function criticalConnections(n: number, connections: number[][]): number[][] {
+    const graph: { [key in number]: number[] } = {};
+
+    const time1 = timeStart();
+    for (let conn of connections) {
+        if (graph[conn[0]]) {
+            graph[conn[0]].push(conn[1]);
+        } else {
+            graph[conn[0]] = [conn[1]];
+        }
+
+        if (graph[conn[1]]) {
+            graph[conn[1]].push(conn[0]);
+        } else {
+            graph[conn[1]] = [conn[0]];
+        }
+    }
+    timeEnd(time1, 'construct graph')
+
+    const dfnMap: Map<number, number> = new Map();
+    const lowMap: Map<number, number> = new Map();
+
+    for (let i = 0; i < n; i++) {
+        dfnMap.set(i, -1);
+        lowMap.set(i, Infinity);
+    }
+
+    const [root] = connections[0];
+    const bridges: number[][] = [];
+
+    const time2 = timeStart();
+    let dfn = 0;
+    const dfs = (cur: number, parent: number | null) => {
+        dfn++;
+        dfnMap.set(cur, dfn);
+        lowMap.set(cur, dfn);
+
+        const neighbors = graph[cur];
+        let childCount = 0; // child in DFS tree not child in graph
+        for (let neighbor of neighbors) {
+            if (neighbor !== parent) {
+                if (dfnMap.get(neighbor) === -1) {
+                    childCount++;
+                    dfs(neighbor, cur);
+                }
+                const childLow = lowMap.get(neighbor);
+                const curLow = lowMap.get(cur);
+                lowMap.set(cur, Math.min(curLow!, childLow!));
+
+                if (childLow! > dfnMap.get(cur)!) {
+                    bridges.push([cur, neighbor]);
+                }
+            }
+        }
+    }
+
+    dfs(root, null);
+    timeEnd(time2, 'tarjan')
+
+    return bridges;
+}
+
+/**
+ * data size 1e+5
+ * [construct graph] 1278.30
+ * [tarjan] 622.90
+ * @param n
+ * @param connections
+ */
+function criticalConnectionsByGraph(n: number, connections: number[][]): number[][] {
     //Critical connection is Bridge
     const graph = new UndirectedGraph();
+
+    const time1 = timeStart();
     for (let [v1, v2] of connections) {
         graph.addVertex(new UndirectedVertex(v1));
         graph.addVertex(new UndirectedVertex(v2));
         graph.addEdge(new UndirectedEdge(v1, v2));
     }
+    timeEnd(time1, 'construct graph')
 
+    const time2 = timeStart();
     const {bridges} = graph.tarjan(false, true);
+    timeEnd(time2, 'tarjan')
 
     const ans: number[][] = [];
     for (let bridge of bridges) {
@@ -362,7 +443,7 @@ function criticalConnections(n: number, connections: number[][]): number[][] {
 
 const runAllCriticalConnections = async () => {
     await runAlgorithm(criticalConnections, false, ...criticalConnectionsCase1);
-    await runAlgorithm(criticalConnections, false, ...criticalConnectionsCase10);
+    await runAlgorithm(criticalConnectionsByGraph, false, ...criticalConnectionsCase1);
 }
 runAllCriticalConnections().then();
 // 943	Find the Shortest Superstring	★★★★★	980	996				Hamiltonian path (DFS / DP)

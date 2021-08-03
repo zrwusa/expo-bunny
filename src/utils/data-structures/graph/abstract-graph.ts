@@ -119,7 +119,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     }
 
     containsVertex(vertexOrId: V | VertexId): boolean {
-        return !!this.getVertex(vertexOrId);
+        return this._vertices.has(this.getVertexId(vertexOrId))
     }
 
     vertexSet(): Map<VertexId, V> {
