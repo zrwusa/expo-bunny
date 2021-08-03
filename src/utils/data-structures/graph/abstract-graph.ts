@@ -686,5 +686,163 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     }
 
+
+    /**--- start find cycles --- */
+
+    /**
+     * Tarjan can find critical edges(bridges) and cycles.
+     * Tarjan can find cycles in directed or undirected graph
+     * Tarjan is an algorithm based on DFS,which is used to solve the connectivity problem of graphs.
+     * Tarjan find the articulation points and bridges of undirected graphs in linear time,
+     * Tarjan solve the bi-connected components of undirected graphs;
+     * Tarjan also solve the strongly connected components, necessary points, and necessary edges of directed graphs.
+     */
+    tarjan(needArticulationPoints?: boolean, needBridges?: boolean, needSCCs?: boolean, needCycles?: boolean) {
+        // !! in undirected graph we will not let child visit parent when DFS
+        // !! articulation point(in DFS search tree not in graph): (cur !== root && cur.has(child)) && (low(child) >= dfn(cur)) || (cur === root && cur.children() >= 2)
+        // !! bridge: low(child) > dfn(cur)
+
+        const defaultConfig = false;
+        if (needArticulationPoints === undefined) needArticulationPoints = defaultConfig;
+        if (needBridges === undefined) needBridges = defaultConfig;
+        if (needSCCs === undefined) needSCCs = defaultConfig;
+        if (needCycles === undefined) needCycles = defaultConfig;
+
+        const dfnMap: Map<V, number> = new Map();
+        const lowMap: Map<V, number> = new Map();
+        const vertices = this._vertices;
+        vertices.forEach(v => {
+            dfnMap.set(v, -1);
+            lowMap.set(v, Infinity);
+        })
+
+        const [root] = vertices.values();
+
+        const articulationPoints: V[] = [];
+        const bridges: E[] = [];
+        let dfn = 0;
+        const dfs = (cur: V, parent: V | null) => {
+            dfn++;
+            dfnMap.set(cur, dfn);
+            lowMap.set(cur, dfn);
+
+            const neighbors = this.getNeighbors(cur);
+            let childCount = 0; // child in DFS tree not child in graph
+            for (let neighbor of neighbors) {
+                if (neighbor !== parent) {
+                    if (dfnMap.get(neighbor) === -1) {
+                        childCount++;
+                        dfs(neighbor, cur);
+                    }
+                    const childLow = lowMap.get(neighbor);
+                    const curLow = lowMap.get(cur);
+                    lowMap.set(cur, Math.min(curLow!, childLow!));
+
+                    if (needArticulationPoints) {
+                        if (cur === root && childCount >= 2 || ((cur !== root) && (childLow! >= dfnMap.get(cur)!))) {
+                            articulationPoints.push(cur);
+                        }
+                    }
+
+                    if (needBridges) {
+                        if (childLow! > dfnMap.get(cur)!) {
+                            bridges.push(this.getEdge(cur, neighbor)!)
+                        }
+                    }
+                }
+            }
+
+        }
+
+        dfs(root, null);
+
+        let SCCs: Map<number, V[]> = new Map();
+
+        const getSCCs = () => {
+            const SCCs: Map<number, V[]> = new Map();
+            lowMap.forEach((low, vertex) => {
+                if (!SCCs.has(low)) {
+                    SCCs.set(low, [vertex])
+                } else {
+                    SCCs.get(low)?.push(vertex);
+                }
+            })
+            return SCCs;
+        }
+
+        if (needSCCs) {
+            SCCs = getSCCs();
+        }
+
+        const cycles: Map<number, V[]> = new Map();
+        if (needCycles) {
+            let SCCs: Map<number, V[]> = new Map();
+            if (SCCs.size < 1) {
+                SCCs = getSCCs();
+            }
+
+            SCCs.forEach((SCC, low) => {
+                if (SCC.length > 1) {
+                    cycles.set(low, SCC);
+                }
+            })
+        }
+
+        return {dfnMap, lowMap, bridges, articulationPoints, SCCs, cycles};
+    }
+
+
+    unionFind() {
+        // vector<pair<int, int>> g;
+        // vector<int> father;
+        //
+        // int findFather(int x) {
+        //     int a = x;
+        //     while (x != father[x]) {
+        //         x = father[x];
+        //     }
+        //     while (a != father[a]) {
+        //         int z = a;
+        //         a = father[a];
+        //         father[z] = x;
+        //     }
+        //     return x;
+        // }
+        //
+        // void Union(int a, int b) {
+        //     int fa = findFather(a);
+        //     int fb = findFather(b);
+        //     father[a] = father[b] = min(fa, fb);
+        // }
+        //
+        // bool isCyclicUnirectedGraph() {
+        //     for (int i = 0; i < g.size(); i++) {
+        //         int u = g[i].first;
+        //         int v = g[i].second;
+        //         if (father[u] == father[v]) {
+        //             return true;
+        //         }
+        //         Union(u, v);
+        //     }
+        //     return false;
+        // }
+        //
+        // bool isCyclicDirectedGraph() {
+        //     for (int i = 0; i < g.size(); i++) {
+        //         int u = g[i].first;
+        //         int v = g[i].second;
+        //         if (father[u] == v) {
+        //             return true;
+        //         }
+        //         father[v] = findFather(u);
+        //     }
+        //     return false;
+        // }
+    }
+
+    /**--- end find cycles --- */
+
+
+    // TODO how to find critical vertices
     // Minimum Spanning Tree
 }

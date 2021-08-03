@@ -2,10 +2,19 @@
 // 133	Clone Graph	★★	138					queue + hashtable
 // 200	Number of Islands	★★	547	695	733	827	1162
 import {Coordinate, runAlgorithm} from "../helpers";
-import {DirectedEdge, DirectedGraph, DirectedVertex, TopologicalStatus, VertexId} from "../../data-structures/graph";
+import {
+    DirectedEdge,
+    DirectedGraph,
+    DirectedVertex,
+    TopologicalStatus,
+    UndirectedEdge,
+    UndirectedGraph,
+    UndirectedVertex,
+    VertexId
+} from "../../data-structures/graph";
 import {timeEnd, timeStart, wait, WaitManager} from "../../utils";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
-import {canFinishCase1, canFinishCase3} from "./cases";
+import {canFinishCase1, canFinishCase3, criticalConnectionsCase1, criticalConnectionsCase10} from "./cases";
 
 
 class MyVertex extends DirectedVertex {
@@ -311,6 +320,10 @@ export async function networkDelayTime(times: number[][], n: number, k: number, 
         graph.addEdge(new DirectedEdge(u, v, w));
     }
 
+    if (!graph.containsVertex(n)) {
+        return -1;
+    }
+
     const res = graph.dijkstra(k);
     if (res) {
         let max = -Infinity;
@@ -325,13 +338,33 @@ export async function networkDelayTime(times: number[][], n: number, k: number, 
     return -1;
 }
 
-// 847
-// Shortest Path Visiting All Nodes
-// ★★★★	864	1298				BFS
+// 847 Shortest Path Visiting All Nodes ★★★★	864	1298	BFS
 // 332	Reconstruct Itinerary	★★★★						Eulerian path
-// 1192
-// Critical Connections in a Network
-// ★★★★						Tarjan
+// 1192 Critical Connections in a Network ★★★★						Tarjan
+function criticalConnections(n: number, connections: number[][]): number[][] {
+    //Critical connection is Bridge
+    const graph = new UndirectedGraph();
+    for (let [v1, v2] of connections) {
+        graph.addVertex(new UndirectedVertex(v1));
+        graph.addVertex(new UndirectedVertex(v2));
+        graph.addEdge(new UndirectedEdge(v1, v2));
+    }
+
+    const {bridges} = graph.tarjan(false, true);
+
+    const ans: number[][] = [];
+    for (let bridge of bridges) {
+        const vertexIds: number[] = bridge.vertices.map(v => v as number);
+        ans.push(vertexIds);
+    }
+    return ans;
+}
+
+const runAllCriticalConnections = async () => {
+    await runAlgorithm(criticalConnections, false, ...criticalConnectionsCase1);
+    await runAlgorithm(criticalConnections, false, ...criticalConnectionsCase10);
+}
+runAllCriticalConnections().then();
 // 943	Find the Shortest Superstring	★★★★★	980	996				Hamiltonian path (DFS / DP)
 // 959	Regions Cut By Slashes	★★★★★						union find / grid + CCs
 /* --- end Graph --- */

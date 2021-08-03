@@ -132,7 +132,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     }
 
 
-    const TwoWayScrollSVG: React.FC<{autoScroll: boolean}> = ({children, autoScroll}) => {
+    const TwoWayScrollSVG: React.FC<{ autoScroll: boolean }> = ({children, autoScroll}) => {
         const horizontalScrollView = useRef<ScrollView>(null);
         if (autoScroll) {
             useEffect(() => {

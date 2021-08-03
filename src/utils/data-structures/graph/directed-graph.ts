@@ -203,8 +203,44 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         return destinations;
     }
 
-    topologicalSort(): V[] | null {
+    /**--- start find cycles --- */
 
+    /**
+     * when stored with adjacency list time: O(V+E)
+     * when stored with adjacency matrix time: O(V^2)
+     */
+    topologicalSort(): V[] | null {
+        // vector<vector<int>> g;
+        // vector<int> color;
+        // int last;
+        // bool hasCycle;
+        //
+        // bool topo_sort() {
+        //     int n = g.size();
+        //     vector<int> degree(n, 0);
+        //     queue<int> q;
+        //     for (int i = 0; i < n; i++) {
+        //         degree[i] = g[i].size();
+        //         if (degree[i] <= 1) {
+        //             q.push(i);
+        //         }
+        //     }
+        //     int cnt = 0;
+        //     while (!q.empty()) {
+        //         cnt++;
+        //         int root = q.front();
+        //         q.pop();
+        //         for (auto child : g[root]) {
+        //             degree[child]--;
+        //             if (degree[child] == 1) {
+        //                 q.push(child);
+        //             }
+        //         }
+        //     }
+        //     return (cnt != n);
+        // }
+        // When judging whether there is a cycle in the undirected graph, all nodes with degree of **<= 1** are enqueued
+        // When judging whether there is a cycle in the directed graph, all nodes with **in degree = 0** are enqueued
         const statusMap: Map<V, TopologicalStatus> = new Map<V, TopologicalStatus>();
         for (let entry of this._vertices) {
             statusMap.set(entry[1], 0);
@@ -238,6 +274,8 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         }
         return sorted.reverse();
     }
+
+    /**--- end find cycles --- */
 
     edgeSet(): E[] {
         let edges: E[] = [];

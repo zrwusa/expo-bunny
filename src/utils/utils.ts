@@ -493,7 +493,7 @@ export const timeEnd = (startTime: number, headerLog?: string, consoleConditionF
     }
 }
 
-export const arrayRemove = <T>(array: T[], predicate: (item: T, index: number, array: T[]) => boolean) => {
+export const arrayRemove = function <T>(array: T[], predicate: (item: T, index: number, array: T[]) => boolean): T[] {
     let i = -1, len = array ? array.length : 0, result = [];
 
     while (++i < len) {
