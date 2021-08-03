@@ -92,6 +92,7 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         if (!vertex) {
             return ret;
         }
+        // 55787 data size makes 40ms
         return this._edges.filter(e => e.vertices.includes(vertex.id))
     }
 
