@@ -29,28 +29,38 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         super();
     }
 
-    protected _edges: E[] = [];
+    protected _edges: Map<V, E[]> = new Map();
 
-    getAllEdges(v1: V | null | VertexId, v2: V | null | VertexId): E[] {
-        let edges: E[] = [];
+    getEdge(v1: V | null | VertexId, v2: V | null | VertexId): E | null {
+        let edges: E[] | undefined = [];
 
         if (v1 !== null && v2 !== null) {
             const vertex1: V | null = this.getVertex(v1);
             const vertex2: V | null = this.getVertex(v2);
 
             if (vertex1 && vertex2) {
-                edges = this._edges.filter(edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id));
+                edges = this._edges.get(vertex1)?.filter(e => e.vertices.includes(vertex2.id))
             }
         }
 
-        return edges;
+        return edges ? edges[0] || null : null;
     }
 
     addEdge(edge: E): boolean {
         for (let v of edge.vertices) {
             if (!this.containsVertex(v)) return false;
         }
-        this._edges.push(edge);
+        for (let end of edge.vertices) {
+            const endVertex = this.getVertex(end);
+            if (endVertex) {
+                const edges = this._edges.get(endVertex);
+                if (edges) {
+                    edges.push(edge)
+                } else {
+                    this._edges.set(endVertex, [edge])
+                }
+            }
+        }
         return true;
     }
 
@@ -63,37 +73,55 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
             return null;
         }
 
-        return arrayRemove<E>(this._edges, edge => edge.vertices.includes(vertex1.id) && edge.vertices.includes(vertex2.id))[0] || null;
+        const v1Edges = this._edges.get(vertex1);
+        let removed: E | null = null;
+        if (v1Edges) {
+            removed = arrayRemove<E>(v1Edges, e => e.vertices.includes(vertex2.id))[0] || null;
+        }
+        const v2Edges = this._edges.get(vertex2);
+        if (v2Edges) {
+            arrayRemove<E>(v2Edges, e => e.vertices.includes(vertex1.id));
+        }
+        return removed
     }
 
 
     removeEdge(edge: E): E | null {
-        const removed = arrayRemove<E>(this._edges, e => e.hashCode === edge.hashCode);
-        return removed[0] || null;
+        return this.removeEdgeBetween(edge.vertices[0], edge.vertices[1]);
     }
 
     degreeOf(vertexOrId: VertexId | V): number {
-        const vertexId = this.getVertexId(vertexOrId);
-        return this._edges.filter(edge => edge.vertices.includes(vertexId)).length;
+        const vertex = this.getVertex(vertexOrId);
+        if (vertex) {
+            return this._edges.get(vertex)?.length || 0;
+        } else {
+            return 0
+        }
     }
 
     edgesOf(vertexOrId: VertexId | V): E[] {
-        const vertexId = this.getVertexId(vertexOrId);
-        return this._edges.filter(edge => edge.vertices.includes(vertexId))
+        const vertex = this.getVertex(vertexOrId);
+        if (vertex) {
+            return this._edges.get(vertex) || []
+        } else {
+            return []
+        }
     }
 
     edgeSet(): E[] {
-        return this._edges;
+        let edges: E[] = [];
+        this._edges.forEach(edge => {
+            edges = [...edges, ...edge];
+        });
+        return edges;
     }
 
     getEdgesOf(vertexOrId: V | VertexId): E[] {
         const vertex = this.getVertex(vertexOrId);
-        const ret: E[] = [];
         if (!vertex) {
-            return ret;
+            return [];
         }
-        // 55787 data size makes 40ms
-        return this._edges.filter(e => e.vertices.includes(vertex.id))
+        return this._edges.get(vertex) || [];
     }
 
     getNeighbors(vertexOrId: V | VertexId): V[] {
@@ -121,5 +149,4 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
             return null;
         }
     }
-
 }

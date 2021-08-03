@@ -61,7 +61,7 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
         super();
     }
 
-    getAllEdges(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E[] {
+    getEdge(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E | null {
         let edges: E[] = [];
 
         if (srcOrId !== null && destOrId !== null) {
@@ -76,7 +76,7 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
             }
         }
 
-        return edges;
+        return edges[0] || null;
     }
 
     addEdge(edge: E): boolean {

@@ -32,11 +32,9 @@ export interface I_Graph<V, E> {
 
     getEdge(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
 
-    getAllEdges(src: V, dest: V): E[];
+    // getAllEdges(src: V, dest: V): E[];
 
     edgeSet(): E[];
-
-    // addEdge(src: V, dest: V): E;
 
     addEdge(edge: E): boolean;
 
@@ -44,7 +42,7 @@ export interface I_Graph<V, E> {
 
     removeEdge(edge: E): E | null;
 
-    removeAllEdges(v1: VertexId | V, v2: VertexId | V): (E | null)[];
+    // removeAllEdges(v1: VertexId | V, v2: VertexId | V): (E | null)[];
 
     // removeAllEdges(edges: E[] | [VertexId, VertexId]): boolean;
 
@@ -105,7 +103,6 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     protected constructor() {
     }
 
-
     protected _vertices: Map<VertexId, V> = new Map<VertexId, V>();
 
     abstract removeEdgeBetween(srcOrId: V | VertexId, destOrId: V | VertexId): E | null;
@@ -129,11 +126,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         return this._vertices;
     }
 
-    abstract getAllEdges(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E[];
-
-    getEdge(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E | null {
-        return this.getAllEdges(srcOrId, destOrId)[0] || null;
-    }
+    abstract getEdge(srcOrId: V | null | VertexId, destOrId: V | null | VertexId): E | null;
 
     addVertex(newVertex: V): boolean {
         if (this.containsVertex(newVertex)) {
@@ -169,15 +162,6 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     abstract addEdge(edge: E): boolean;
 
-    removeAllEdges(v1: VertexId | V, v2: VertexId | V): (E | null)[] {
-        let allEdges = this.getAllEdges(v1, v2);
-        const removed: (E | null)[] = [];
-        for (let edge of allEdges) {
-            removed.push(this.removeEdge(edge));
-        }
-        return removed;
-    }
-
     setEdgeWeight(srcOrId: VertexId | V, destOrId: VertexId | V, weight: number): boolean {
         const edge = this.getEdge(srcOrId, destOrId);
         if (edge) {
@@ -187,8 +171,6 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             return false;
         }
     }
-
-    // abstract getMinPathBetween(v1: V | VertexId, v2: V | VertexId, isWeight?: boolean): V[] | null;
 
     abstract getNeighbors(vertexOrId: V | VertexId): V[];
 
@@ -260,7 +242,6 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                     if (cur === vertex2) {
                         return cost;
                     }
-
                     // TODO consider optimizing to AbstractGraph
                     const neighbors = this.getNeighbors(cur!);
                     for (let neighbor of neighbors) {
@@ -356,11 +337,8 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             return null;
         }
 
-        // const heap = new MinHeap<HeapNode<V>, V>();
         for (let [id, v] of vertices) {
             distMap.set(v, Infinity);
-            // const dist = v === srcVertex ? 0 : Infinity;
-            // heap.insert(new HeapNode(dist, srcVertex));
         }
         distMap.set(srcVertex, 0);
         preMap.set(srcVertex, null);
@@ -421,21 +399,16 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             }
         }
 
-        if (getMinDist) {
-            distMap.forEach((d, v) => {
-                if (v !== srcVertex) {
-                    if (d < minDist) {
-                        minDist = d;
-                        if (genPaths) minDest = v;
-                    }
+        getMinDist && distMap.forEach((d, v) => {
+            if (v !== srcVertex) {
+                if (d < minDist) {
+                    minDist = d;
+                    if (genPaths) minDest = v;
                 }
-            })
-        }
+            }
+        });
 
-
-        if (genPaths) {
-            getPaths(minDest)
-        }
+        genPaths && getPaths(minDest)
 
         return {distMap, preMap, seen, paths, minDist, minPath};
     }
@@ -793,56 +766,10 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
 
     unionFind() {
-        // vector<pair<int, int>> g;
-        // vector<int> father;
-        //
-        // int findFather(int x) {
-        //     int a = x;
-        //     while (x != father[x]) {
-        //         x = father[x];
-        //     }
-        //     while (a != father[a]) {
-        //         int z = a;
-        //         a = father[a];
-        //         father[z] = x;
-        //     }
-        //     return x;
-        // }
-        //
-        // void Union(int a, int b) {
-        //     int fa = findFather(a);
-        //     int fb = findFather(b);
-        //     father[a] = father[b] = min(fa, fb);
-        // }
-        //
-        // bool isCyclicUnirectedGraph() {
-        //     for (int i = 0; i < g.size(); i++) {
-        //         int u = g[i].first;
-        //         int v = g[i].second;
-        //         if (father[u] == father[v]) {
-        //             return true;
-        //         }
-        //         Union(u, v);
-        //     }
-        //     return false;
-        // }
-        //
-        // bool isCyclicDirectedGraph() {
-        //     for (int i = 0; i < g.size(); i++) {
-        //         int u = g[i].first;
-        //         int v = g[i].second;
-        //         if (father[u] == v) {
-        //             return true;
-        //         }
-        //         father[v] = findFather(u);
-        //     }
-        //     return false;
-        // }
     }
 
     /**--- end find cycles --- */
 
 
-    // TODO how to find critical vertices
     // Minimum Spanning Tree
 }

@@ -91,17 +91,17 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     await wait(waitMan.time3);
     console.log(`vars.myGraph.addEdge(new MyEdge(2, 1, 20, 'edge-data2-1'))`, vars.myGraph.addEdge(new MyEdge(2, 1, 20, 'edge-data2-1')));
     await wait(waitMan.time3);
-    console.log(`vars.myGraph.getAllEdges(1, 2)`, vars.myGraph.getAllEdges(1, 2));
+    console.log(`vars.myGraph.getEdge(1, 2)`, vars.myGraph.getEdge(1, 2));
     await wait(waitMan.time3);
-    console.log(`vars.myGraph.getAllEdges(vars.myGraph.getVertex(1), vars.myGraph.getVertex(2))`, vars.myGraph.getAllEdges(vars.myGraph.getVertex(1), vars.myGraph.getVertex(2)));
+    console.log(`vars.myGraph.getEdge(vars.myGraph.getVertex(1), vars.myGraph.getVertex(2))`, vars.myGraph.getEdge(vars.myGraph.getVertex(1), vars.myGraph.getVertex(2)));
     await wait(waitMan.time3);
-    console.log(`vars.myGraph.getAllEdges(1,'100')`, vars.myGraph.getAllEdges(1, '100'));
+    console.log(`vars.myGraph.getEdge(1,'100')`, vars.myGraph.getEdge(1, '100'));
     await wait(waitMan.time3);
     console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
     await wait(waitMan.time3);
     console.log(`vars.myGraph.removeEdgeBetween(1,2)`, vars.myGraph.removeEdgeBetween(1, 2));
     await wait(waitMan.time3);
-    console.log(`vars.myGraph.getAllEdges(1, 2)`, vars.myGraph.getAllEdges(1, 2));
+    console.log(`vars.myGraph.getEdge(1, 2)`, vars.myGraph.getEdge(1, 2));
 
     // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
 
