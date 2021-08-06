@@ -445,8 +445,57 @@ const runAllCriticalConnections = async () => {
     await runAlgorithm(criticalConnections, false, ...criticalConnectionsCase1);
     await runAlgorithm(criticalConnectionsByGraph, false, ...criticalConnectionsCase1);
 }
-runAllCriticalConnections().then();
+// runAllCriticalConnections().then();
 // 943	Find the Shortest Superstring	★★★★★	980	996				Hamiltonian path (DFS / DP)
 // 959	Regions Cut By Slashes	★★★★★						union find / grid + CCs
+export async function regionsBySlashes(grid: string[], proxyHandler?: TProxyHandler): Promise<number> {
+    // let graph;
+    // if (proxyHandler) {
+    //     const vars = new DeepProxy({graph: new UndirectedGraph()}, proxyHandler)
+    //     graph = vars.graph;
+    // } else {
+    //     graph = new UndirectedGraph();
+    // }
+    //
+    // const grid1: [number, number][] = [[1, 4], [0, 1], [1, 3], [3, 0], [1, 2], [2, 5], [5, 1], [3, 7], [7, 6], [6, 3], [7, 5], [5, 8], [8, 7]];
+    // for (let i = 0; i < 9; i++) {
+    //     graph.addVertex(new UndirectedVertex(i));
+    // }
+    // for (let [v1, v2] of grid1) {
+    //     graph.addEdge(new UndirectedEdge(v1, v2));
+    // }
+    // const ret = graph.tarjan(false, false, true, true);
+
+    let graph2;
+    if (proxyHandler) {
+        const vars = new DeepProxy({graph2: new DirectedGraph()}, proxyHandler)
+        graph2 = vars.graph2;
+    } else {
+        graph2 = new DirectedGraph();
+    }
+    const grid2: [string, string][] = [
+        ['a', 'f'], ['f', 'g'], ['g', 'a'],
+        ['a', 'b'],
+        ['b', 'c'], ['c', 'd'], ['d', 'b'],
+        ['c', 'e'], ['d', 'e']
+    ];
+    for (let v of ['a', 'b', 'c', 'd', 'e', 'f', 'g']) {
+        graph2.addVertex(new DirectedVertex(v));
+    }
+    for (let [v1, v2] of grid2) {
+        graph2.addEdge(new DirectedEdge(v1, v2));
+    }
+
+    const ret2 = graph2.tarjan(false, false, true, true);
+
+    let ans = 0;
+
+    return ans;
+}
+
+const runAllRegionsBySlashes = async () => {
+    await runAlgorithm(regionsBySlashes, false);
+}
+// runAllRegionsBySlashes().then();
 /* --- end Graph --- */
 

@@ -60,29 +60,34 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         )
     }
 
-    const LineWithArrow = ({src, dest, weight, cutDelta}: { src: Coordinate, dest: Coordinate, weight?: number, cutDelta?: number }) => {
+    const getPointsByDelta = (src: Coordinate, dest: Coordinate, cutDelta?: number) => {
         if (cutDelta === undefined) cutDelta = 0;
-
         const PI = Math.PI;
         let angle: number = Math.atan2((dest.y - src.y), (dest.x - src.x));
         let theta: number = angle * (180 / Math.PI);
-        let src1 = new Coordinate(src.y, src.x);
-        let dest1 = new Coordinate(dest.y, dest.x);
+        let newSrc = new Coordinate(src.y, src.x);
+        let newDest = new Coordinate(dest.y, dest.x);
         if (angle <= 0.5 * PI) {
-            src1.x = src.x + Math.cos(angle) * cutDelta;
-            src1.y = src.y + Math.sin(angle) * cutDelta;
-            dest1.x = dest.x - Math.cos(angle) * cutDelta;
-            dest1.y = dest.y - Math.sin(angle) * cutDelta;
+            newSrc.x = src.x + Math.cos(angle) * cutDelta;
+            newSrc.y = src.y + Math.sin(angle) * cutDelta;
+            newDest.x = dest.x - Math.cos(angle) * cutDelta;
+            newDest.y = dest.y - Math.sin(angle) * cutDelta;
         } else if (angle > 0.5 * PI && angle <= PI) {
             angle = PI - angle;
-            src1.x = src.x - Math.cos(angle) * cutDelta;
-            src1.y = src.y + Math.sin(angle) * cutDelta;
-            dest1.x = dest.x + Math.cos(angle) * cutDelta;
-            dest1.y = dest.y - Math.sin(angle) * cutDelta;
+            newSrc.x = src.x - Math.cos(angle) * cutDelta;
+            newSrc.y = src.y + Math.sin(angle) * cutDelta;
+            newDest.x = dest.x + Math.cos(angle) * cutDelta;
+            newDest.y = dest.y - Math.sin(angle) * cutDelta;
         }
 
-        src = src1;
-        dest = dest1;
+        src = newSrc;
+        dest = newDest;
+        return {src, dest};
+    }
+
+    const LineWithArrow = ({from, to, weight, delta}: { from: Coordinate, to: Coordinate, weight?: number, delta?: number }) => {
+        if (delta === undefined) delta = 0;
+        const {src, dest} = getPointsByDelta(from, to, delta)
 
         return <G>
             <Defs>
@@ -265,8 +270,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                         const dest = new Coordinate((to.y + 0.5 - deviationVector.y * arrowCut) * rectSize, (to.x + 0.5 - deviationVector.x * arrowCut) * rectSize);
 
                                         return <LineWithArrow key={src.y + ',' + src.x + dest.y + dest.x}
-                                                              src={src}
-                                                              dest={dest}
+                                                              from={src}
+                                                              to={dest}
                                         />;
                                     } else {
                                         return null;
@@ -463,10 +468,11 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                 const v1Coordinate = coordsMap.get(ends[0]);
                                 const v2Coordinate = coordsMap.get(ends[1]);
                                 if (v1Coordinate && v2Coordinate) {
-                                    return <G>
-                                        <Line key={edge.hashCode}
-                                              x1={v1Coordinate.x} y1={v1Coordinate.y} x2={v2Coordinate.x}
-                                              y2={v2Coordinate.y}/>
+                                    const {src, dest} = getPointsByDelta(v1Coordinate, v2Coordinate, circleR);
+                                    return <G key={edge.hashCode}>
+                                        <Line
+                                            x1={src.x} y1={src.y} x2={dest.x}
+                                            y2={dest.y}/>
                                     </G>
                                 }
                             }
@@ -480,9 +486,9 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                 if (srcCod && destCod) {
                                     return <LineWithArrow
                                         key={edge.hashCode}
-                                        src={srcCod} dest={destCod}
+                                        from={srcCod} to={destCod}
                                         weight={edge?.weight}
-                                        cutDelta={circleR}
+                                        delta={circleR}
                                     />
                                 }
                             }

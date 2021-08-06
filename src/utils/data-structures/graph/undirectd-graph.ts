@@ -107,11 +107,13 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
     }
 
     edgeSet(): E[] {
-        let edges: E[] = [];
-        this._edges.forEach(edge => {
-            edges = [...edges, ...edge];
+        const edgeSet: Set<E> = new Set();
+        this._edges.forEach(edges => {
+            edges.forEach(edge => {
+                edgeSet.add(edge);
+            })
         });
-        return edges;
+        return [...edgeSet];
     }
 
     getEdgesOf(vertexOrId: V | VertexId): E[] {

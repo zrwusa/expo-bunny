@@ -19,6 +19,7 @@ import {
     letterCombinations,
     networkDelayTime,
     networkDelayTimeCase3,
+    regionsBySlashes,
     reverseLinkedList,
     testAVLTree,
     testBinaryTree,
@@ -32,6 +33,7 @@ import {
 import {VividAlgorithm} from "../../components/VividAlgorithm";
 import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
 import {ScrollView} from "react-native";
+import {THandlerContext} from "@qiwi/deep-proxy";
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -40,9 +42,13 @@ export function AlgorithmScreen() {
     const [binaryTreeInorderTraversalVariables, setBinaryTreeInorderTraversalVariables] = useState<{ [key in string]: BinaryTreeNode<any> }>()
     const binaryTreeNode1 = new BinaryTreeNode<number>(1);
     const binaryTree = new BinaryTree<number>(binaryTreeNode1);
-    // binaryTree.insert(3);
-    // binaryTree.insert(3);
-    // binaryTree.insert(2);
+
+    const proxyFactory = (setVars: React.Dispatch<React.SetStateAction<{ [p: string]: unknown } | undefined>>) => {
+        return ({value, key, DEFAULT}: THandlerContext<any>) => {
+            setVars(prevState => ({...prevState, [key!.toString()]: value}));
+            return DEFAULT;
+        }
+    }
 
     const _binaryTreeInorderTraversal = async () => {
         await binaryTreeInorderTraversal(binaryTree.root!, ({value, key, DEFAULT}) => {
@@ -84,122 +90,70 @@ export function AlgorithmScreen() {
     const [parenthesisInput, setParenthesisInput] = useState('')
     const [parenthesisVariables, setParenthesisVariables] = useState<{ [key in string]: unknown }>()
     const _parenthesisInput = async () => {
-        const result = await isValidParenthesis(parenthesisInput, ({trapName, value, key, DEFAULT}) => {
-            console.log(key, value);
-            setParenthesisVariables(prevState => ({...prevState, [key!.toString()]: value}));
-            return DEFAULT
-        });
+        const result = await isValidParenthesis(parenthesisInput, proxyFactory(setParenthesisVariables));
         console.log('result', result);
     }
 
     const [lengthOfLongestSubstringValue, setLengthOfLongestSubstringValue] = useState('')
     const [lengthOfLongestSubstringVariables, setLengthOfLongestSubstringVariables] = useState<{ [key in string]: unknown }>()
     const _lengthOfLongestSubstring = async () => {
-        const result = await lengthOfLongestSubstring(lengthOfLongestSubstringValue, ({value, key, DEFAULT}) => {
-            console.log(key, value);
-            setLengthOfLongestSubstringVariables(prevState => ({...prevState, [key!.toString()]: value}));
-            return DEFAULT
-        });
+        const result = await lengthOfLongestSubstring(lengthOfLongestSubstringValue, proxyFactory(setLengthOfLongestSubstringVariables));
         console.log('result', result);
     }
 
     const linkedList = SinglyLinkedList.from([1, 2, 3, 4, 5, 6]);
     const [reverseLinkedListVariables, setReverseLinkedListVariables] = useState<{ [key in string]: unknown }>()
-
     const _reverseLinkedList = async () => {
-        const result = await reverseLinkedList(linkedList.head, ({value, key, DEFAULT}) => {
-            console.log(key, value);
-            setReverseLinkedListVariables(prevState => ({...prevState, [key!.toString()]: value}));
-            return DEFAULT
-        });
+        const result = await reverseLinkedList(linkedList.head, proxyFactory(setReverseLinkedListVariables));
         console.log(result)
     }
 
 
     const [ladderLengthVariables, setLadderLengthVariables] = useState<{ [key in string]: unknown }>()
-
-
     const _ladderLength = async () => {
-        const result = await ladderLengthDFS(...ladderLengthCase1,
-            ({value, key, DEFAULT}) => {
-                console.log(key, value);
-                setLadderLengthVariables(prevState => ({...prevState, [key!.toString()]: value}));
-                return DEFAULT
-            });
+        const result = await ladderLengthDFS(...ladderLengthCase1, proxyFactory(setLadderLengthVariables));
         console.log(result)
     }
 
     const [cutOffTreeVariables, setCutOffTreeVariables] = useState<{ [key in string]: unknown }>()
     const _cutOffTree = async () => {
-        const result = await cutOffTree(...cutOffTreeCase8,
-            ({value, key, DEFAULT}) => {
-                console.log(key, value);
-                setCutOffTreeVariables(prevState => ({...prevState, [key!.toString()]: value}));
-                return DEFAULT
-            });
+        const result = await cutOffTree(...cutOffTreeCase8, proxyFactory(setCutOffTreeVariables));
         console.log(result)
     }
 
     const [countSmallerVariables, setCountSmallerVariables] = useState<{ [key in string]: unknown }>()
     const _countSmallerBST = async () => {
-        const result = await countSmallerBST(...countSmallerCase1,
-            ({value, key, DEFAULT}) => {
-                // console.log(key, value);
-                setCountSmallerVariables(prevState => ({...prevState, [key!.toString()]: value}));
-                return DEFAULT
-            }
-        )
+        const result = await countSmallerBST(...countSmallerCase1, proxyFactory(setCountSmallerVariables))
     }
 
     const [testBinaryTreeVariables, setTestBinaryTreeVariables] = useState<{ [key in string]: unknown }>()
     const _testBinaryTree = async () => {
-        const result = await testBinaryTree(...testBSTCase3,
-            ({value, key, DEFAULT}) => {
-                // console.log(key, value);
-                setTestBinaryTreeVariables(prevState => ({...prevState, [key!.toString()]: value}));
-                return DEFAULT
-            }
-        )
+        const result = await testBinaryTree(...testBSTCase3, proxyFactory(setTestBinaryTreeVariables))
     }
 
     const [testBSTVariables, setGenBSTVariables] = useState<{ [key in string]: unknown }>()
     const _testBST = async () => {
-        const result = await testBST(...testBSTCase1,
-            ({value, key, DEFAULT}) => {
-                // console.log(key, value);
-                setGenBSTVariables(prevState => ({...prevState, [key!.toString()]: value}));
-                return DEFAULT
-            }
-        )
+        const result = await testBST(...testBSTCase1, proxyFactory(setGenBSTVariables))
     }
 
     const [testAVLVariables, setGenAVLVariables] = useState<{ [key in string]: unknown }>()
     const _testAVL = async () => {
-        const result = await testAVLTree(...testBSTCase1,
-            ({value, key, DEFAULT}) => {
-                // console.log(key, value);
-                setGenAVLVariables(prevState => ({...prevState, [key!.toString()]: value}));
-                return DEFAULT
-            }
-        )
+        const result = await testAVLTree(...testBSTCase1, proxyFactory(setGenAVLVariables))
     }
 
     const [testGraphVars, setTestGraphVars] = useState<{ [key in string]: unknown }>()
     const _testGraphs = async () => {
-        await testGraphs(({value, key, DEFAULT}) => {
-            // console.log(key, value);
-            setTestGraphVars(prevState => ({...prevState, [key!.toString()]: value}));
-            return DEFAULT;
-        });
+        await testGraphs(proxyFactory(setTestGraphVars));
     }
 
     const [netWorkDelayTimeVars, setNetWorkDelayTimeVars] = useState<{ [key in string]: unknown }>()
     const _netWorkDelayTime = async () => {
-        await networkDelayTime(...networkDelayTimeCase3, ({value, key, DEFAULT}) => {
-            // console.log(key, value);
-            setNetWorkDelayTimeVars(prevState => ({...prevState, [key!.toString()]: value}));
-            return DEFAULT;
-        });
+        await networkDelayTime(...networkDelayTimeCase3, proxyFactory(setNetWorkDelayTimeVars));
+    }
+
+    const [regionsBySlashesVars, setRegionsBySlashesVars] = useState<{ [key in string]: unknown }>()
+    const _regionsBySlashes = async () => {
+        await regionsBySlashes([], proxyFactory(setRegionsBySlashesVars));
     }
 
     return (
@@ -265,6 +219,9 @@ export function AlgorithmScreen() {
                         </TextButton>
                         <TextButton onPress={_netWorkDelayTime}>
                             <Text>Network Delay Time</Text>
+                        </TextButton>
+                        <TextButton onPress={_regionsBySlashes}>
+                            <Text>Regions By Slashes</Text>
                         </TextButton>
                     </Card>
                     {
@@ -345,6 +302,11 @@ export function AlgorithmScreen() {
                     {
                         netWorkDelayTimeVars
                             ? <VividAlgorithm data={netWorkDelayTimeVars}/>
+                            : null
+                    }
+                    {
+                        regionsBySlashesVars
+                            ? <VividAlgorithm data={regionsBySlashesVars}/>
                             : null
                     }
                 </View>

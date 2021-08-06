@@ -51,6 +51,7 @@ export interface I_DirectedGraph<V, E> {
 // 0 means unknown, 1 means visiting, 2 means visited;
 export type TopologicalStatus = 0 | 1 | 2;
 
+// Strongly connected, One direction connected, Weakly connected
 export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> extends AbstractGraph<V, E> implements I_DirectedGraph<V, E> {
 
     protected _outEdgeMap: Map<V, E[]> = new Map<V, E[]>();

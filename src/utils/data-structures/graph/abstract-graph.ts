@@ -98,6 +98,7 @@ export abstract class AbstractEdge {
     static DEFAULT_EDGE_WEIGHT: number = 1;
 }
 
+// Connected Component === Largest Connected Sub-Graph
 export abstract class AbstractGraph<V extends AbstractVertex, E extends AbstractEdge> implements I_Graph<V, E> {
 
     protected constructor() {
@@ -663,12 +664,11 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     /**--- start find cycles --- */
 
     /**
-     * Tarjan can find critical edges(bridges) and cycles.
-     * Tarjan can find cycles in directed or undirected graph
      * Tarjan is an algorithm based on DFS,which is used to solve the connectivity problem of graphs.
-     * Tarjan find the articulation points and bridges of undirected graphs in linear time,
+     * Tarjan can find cycles in directed or undirected graph
+     * Tarjan can find the articulation points and bridges(critical edges) of undirected graphs in linear time,
      * Tarjan solve the bi-connected components of undirected graphs;
-     * Tarjan also solve the strongly connected components, necessary points, and necessary edges of directed graphs.
+     * Tarjan can find the SSC(strongly connected components), articulation points, and bridges of directed graphs.
      */
     tarjan(needArticulationPoints?: boolean, needBridges?: boolean, needSCCs?: boolean, needCycles?: boolean) {
         // !! in undirected graph we will not let child visit parent when DFS
