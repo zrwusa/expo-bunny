@@ -33,17 +33,6 @@ function HomeScreen({navigation}: HomeScreenProps) {
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, styles.container]}>
-                <Card titleMode="OUT" title={st(`devTools`)}>
-                    <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"
-                                iconSize={wp(20)}/>
-                    <Divider/>
-                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools"
-                                iconSize={wp(20)}/>
-                    <Divider/>
-                    <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
-                    <Divider/>
-                    <InlineJump type="LINK" iconName="car" text={st(`algorithm`)} to="/algorithm"/>
-                </Card>
                 <Card titleMode="OUT" title={st(`apps`)}>
                     <InlineJump type="LINK" iconName="layout7" text={st(`socialMedia`)}
                                 to="/demo-social-media/home"/>
@@ -59,6 +48,17 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <Divider/>
                     <InlineJump type="LINK" iconName="bitcoin" text={st(`cryptoCurrency`)}
                                 to="/demo-crypto-currency/home"/>
+                </Card>
+                <Card titleMode="OUT" title={st(`devTools`)}>
+                    <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"
+                                iconSize={wp(20)}/>
+                    <Divider/>
+                    <InlineJump type="LINK" iconName="tools-2" text={st(`iconTools`)} to="/icon-tools"
+                                iconSize={wp(20)}/>
+                    <Divider/>
+                    <InlineJump type="LINK" iconName="car" text={st(`playground`)} to="/playground"/>
+                    <Divider/>
+                    <InlineJump type="LINK" iconName="car" text={st(`algorithm`)} to="/algorithm"/>
                 </Card>
                 <Card titleMode="OUT" title={st(`navAndRoute`)}>
                     <InlineJump type="LINK" iconName="layout7" text={st(`tab`)} to="/demo-tab/home"/>
