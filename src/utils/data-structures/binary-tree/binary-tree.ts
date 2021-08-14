@@ -14,7 +14,11 @@ export interface I_BinaryTree<T> {
 
     getDepth(node: BinaryTreeNode<T>): number;
 
-    getHeight(beginRoot?: BinaryTreeNode<T>): number;
+    getMinHeight(beginRoot?: BinaryTreeNode<T> | null): number;
+
+    getHeight(beginRoot?: BinaryTreeNode<T> | null): number;
+
+    isBalanced(beginRoot?: BinaryTreeNode<T> | null): boolean;
 
     getNodes(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean): BinaryTreeNode<T>[];
 
@@ -204,21 +208,42 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
         return depth;
     }
 
-    getHeight(beginRoot?: BinaryTreeNode<T>): number {
+    getMinHeight(beginRoot?: BinaryTreeNode<T> | null): number {
+        const _beginRoot = beginRoot || this.root;
+        const _getMinHeight = (cur: BinaryTreeNode<T> | null): number => {
+            if (!cur) return 0;
+            if (!cur.left && !cur.right) return 0;
+            const leftMinHeight = _getMinHeight(cur.left);
+            const rightMinHeight = _getMinHeight(cur.right);
+            return Math.min(leftMinHeight, rightMinHeight) + 1;
+        }
+
+        if (_beginRoot) {
+            return _getMinHeight(_beginRoot);
+        } else {
+            return -1;
+        }
+    }
+
+    getHeight(beginRoot?: BinaryTreeNode<T> | null): number {
         const _beginRoot = beginRoot || this.root;
         const _getMaxHeight = (cur: BinaryTreeNode<T> | null): number => {
             if (!cur) return 0;
             if (!cur.left && !cur.right) return 0;
-            let leftHeight = _getMaxHeight(cur.left);
-            let rightHeight = _getMaxHeight(cur.right);
+            const leftHeight = _getMaxHeight(cur.left);
+            const rightHeight = _getMaxHeight(cur.right);
             return Math.max(leftHeight, rightHeight) + 1;
         }
 
         if (_beginRoot) {
             return _getMaxHeight(_beginRoot);
         } else {
-            return 0;
+            return -1;
         }
+    }
+
+    isBalanced(beginRoot?: BinaryTreeNode<T> | null): boolean {
+        return (this.getMinHeight(beginRoot) >= this.getHeight(beginRoot) + 1)
     }
 
     getNodes(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean) {

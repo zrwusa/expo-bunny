@@ -49,6 +49,8 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         const temp = this._nodes[i];
         this._nodes[i] = this._nodes[j];
         this._nodes[j] = temp;
+        // ES6 swap
+        // [this._nodes[i], this._nodes[j]] = [this._nodes[j], this._nodes[i]];
     }
 
     protected _shouldSwap(parentIndex: number, childIndex: number) {
@@ -210,8 +212,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         const visitedNumber: number[] = []
 
 
-        const pushByValueType = (index: number) => {
-            const node: number | HeapNode<V> = this._nodes[index];
+        const pushByValueType = (node: number | HeapNode<V>) => {
             switch (nodeOrPropertyName) {
                 case 'id':
                     if (node instanceof HeapNode) {
@@ -236,11 +237,18 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
             }
         }
 
+        // while (!this.isEmpty()) {
+        //     this._swap(0, this.size() - 1);
+        //     pushByValueType(this.size() - 1);
+        //     this._nodes.pop();
+        //     this.heapifyDown(0);
+        // }
+
         while (!this.isEmpty()) {
-            this._swap(0, this.size() - 1);
-            pushByValueType(this.size() - 1);
-            this._nodes.pop();
-            this.heapifyDown(0);
+            const top = this.poll();
+            if (top) {
+                pushByValueType(top);
+            }
         }
 
 

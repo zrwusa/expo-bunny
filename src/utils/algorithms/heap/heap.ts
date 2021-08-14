@@ -355,4 +355,13 @@ const testHeap3 = () => {
 // }
 
 // runAllTestHeap().then()
+
+export const testHeap = () => {
+    const minHeap = new MinHeap([3, 2, 4, 5, 1, 9]);
+    console.log(minHeap.sort());
+    console.log(minHeap.sort());
+    const maxHeap = new MaxHeap([3, 2, 4, 5, 1, 9]);
+    console.log(maxHeap.sort());
+    console.log(maxHeap.sort());
+}
 /* --- end heap --- */
