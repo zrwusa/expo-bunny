@@ -1,9 +1,12 @@
+import {Stack} from '../stack';
+
 export type BinaryTreeNodePropertyName = 'id' | 'val' | 'count' | 'allLesserSum';
 export type BinaryTreeNodeOrPropertyName = 'node' | BinaryTreeNodePropertyName;
 export type DFSOrderPattern = 'in' | 'pre' | 'post';
 export type BinaryTreeNodeId = number;
 export type FamilyPosition = 0 | 1 | 2;
 export type BinaryTreeDeletedResult<T> = { deleted: BinaryTreeNode<T> | null, needBalanced: BinaryTreeNode<T> | null };
+export type ResultsByType<T> = Array<T | null> | BinaryTreeNode<T> [] | number[] | BinaryTreeNodeId[];
 
 export interface I_BinaryTree<T> {
     clear(): void;
@@ -38,7 +41,7 @@ export interface I_BinaryTree<T> {
 
     BFS(nodeOrPropertyName: 'allLesserSum'): number[];
 
-    BFS(nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): Array<T | null> | BinaryTreeNode<T> [] | number[] | BinaryTreeNodeId[];
+    BFS(nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T>;
 
     DFS(): BinaryTreeNodeId[];
 
@@ -52,7 +55,21 @@ export interface I_BinaryTree<T> {
 
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
 
-    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): Array<T | null> | BinaryTreeNode<T> [] | number[] | BinaryTreeNodeId[];
+    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T>;
+
+    DFSIterative(): BinaryTreeNodeId[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'id'): BinaryTreeNodeId[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
+
+    DFSIterative(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T>;
 
     subTreeSum(subTreeRoot: BinaryTreeNode<T>, propertyName ?: BinaryTreeNodePropertyName): number;
 }
@@ -318,69 +335,92 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
         return result;
     }
 
+    protected _visitedId: BinaryTreeNodeId[] = [];
+    protected _visitedVal: Array<T | null> = [];
+    protected _visitedNode: BinaryTreeNode<T>[] = [];
+    protected _visitedCount: number[] = [];
+    protected _visitedLeftSum: number[] = [];
+
+    protected _resetResults() {
+        this._visitedId = [];
+        this._visitedVal = [];
+        this._visitedNode = [];
+        this._visitedCount = [];
+        this._visitedLeftSum = [];
+    }
+
+    protected _pushByValueType(node: BinaryTreeNode<T>, nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName) {
+        if (nodeOrPropertyName === undefined) {
+            nodeOrPropertyName = 'id';
+        }
+
+        switch (nodeOrPropertyName) {
+            case 'id':
+                this._visitedId.push(node.id);
+                break;
+            case 'val':
+                this._visitedVal.push(node.val);
+                break;
+            case 'node':
+                this._visitedNode.push(node);
+                break;
+            case 'count':
+                this._visitedCount.push(node.count);
+                break;
+            case 'allLesserSum':
+                this._visitedLeftSum.push(node.allLesserSum);
+                break;
+            default:
+                this._visitedId.push(node.id);
+                break;
+        }
+    }
+
+    protected _getResult(nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T> {
+        if (nodeOrPropertyName === undefined) {
+            nodeOrPropertyName = 'id';
+        }
+
+        switch (nodeOrPropertyName) {
+            case 'id':
+                return this._visitedId;
+            case 'val':
+                return this._visitedVal;
+            case 'node':
+                return this._visitedNode;
+            case 'count':
+                return this._visitedCount;
+            case 'allLesserSum':
+                return this._visitedLeftSum;
+            default:
+                return this._visitedId;
+        }
+    }
+
     BFS(): BinaryTreeNodeId[];
     BFS(nodeOrPropertyName: 'id'): BinaryTreeNodeId[];
     BFS(nodeOrPropertyName: 'val'): (T | null)[];
     BFS(nodeOrPropertyName: 'node'): BinaryTreeNode<T>[];
     BFS(nodeOrPropertyName: 'count'): number[];
     BFS(nodeOrPropertyName: 'allLesserSum'): number[];
-    BFS(nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): Array<T | null> | BinaryTreeNode<T> [] | number[] | BinaryTreeNodeId[] {
+    BFS(nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T> {
         if (nodeOrPropertyName === undefined) {
             nodeOrPropertyName = 'id';
         }
-        let visitedId: BinaryTreeNodeId[] = [],
-            visitedVal: Array<T | null> = [],
-            visitedNode: BinaryTreeNode<T>[] = [],
-            visitedCount: number[] = [],
-            visitedLeftSum: number[] = [];
 
-        function pushByValueType(node: BinaryTreeNode<T>) {
-            switch (nodeOrPropertyName) {
-                case 'id':
-                    visitedId.push(node.id);
-                    break;
-                case 'val':
-                    visitedVal.push(node.val);
-                    break;
-                case 'node':
-                    visitedNode.push(node);
-                    break;
-                case 'count':
-                    visitedCount.push(node.count);
-                    break;
-                case 'allLesserSum':
-                    visitedLeftSum.push(node.allLesserSum);
-                    break;
-                default:
-                    visitedId.push(node.id);
-                    break;
-            }
-        }
+        this._resetResults();
 
         let queue = new Array<BinaryTreeNode<T> | null>();
         queue.push(this.root);
         while (queue.length !== 0) {
             let cur = queue.shift();
             if (cur) {
-                pushByValueType(cur);
+                this._pushByValueType(cur, nodeOrPropertyName);
                 if (cur?.left !== null) queue.push(cur.left);
                 if (cur?.right !== null) queue.push(cur.right);
             }
         }
-        switch (nodeOrPropertyName) {
-            case 'id':
-                return visitedId;
-            case 'val':
-                return visitedVal;
-            case 'node':
-                return visitedNode;
-            case 'count':
-                return visitedCount;
-            case 'allLesserSum':
-                return visitedLeftSum;
-            default:
-                return visitedId;
-        }
+        return this._getResult(nodeOrPropertyName);
     }
 
     DFS(): BinaryTreeNodeId[];
@@ -389,78 +429,109 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
-    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): Array<T | null> | BinaryTreeNode<T> [] | number[] | BinaryTreeNodeId[] {
+    DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T> {
         if (pattern === undefined) {
             pattern = 'in';
         }
+
         if (nodeOrPropertyName === undefined) {
             nodeOrPropertyName = 'id';
         }
-        let visitedId: BinaryTreeNodeId[] = [],
-            visitedVal: Array<T | null> = [],
-            visitedNode: BinaryTreeNode<T>[] = [],
-            visitedCount: number[] = [],
-            visitedLeftSum: number[] = [];
 
-        function pushByValueType(node: BinaryTreeNode<T>) {
-            switch (nodeOrPropertyName) {
-                case 'id':
-                    visitedId.push(node.id);
-                    break;
-                case 'val':
-                    visitedVal.push(node.val);
-                    break;
-                case 'node':
-                    visitedNode.push(node);
-                    break;
-                case 'count':
-                    visitedCount.push(node.count);
-                    break;
-                case 'allLesserSum':
-                    visitedLeftSum.push(node.allLesserSum);
-                    break;
-                default:
-                    visitedId.push(node.id);
-                    break;
-            }
-        }
+        this._resetResults();
 
-        function _traverse(node: BinaryTreeNode<T>) {
+        const _traverse = (node: BinaryTreeNode<T>) => {
             switch (pattern) {
                 case 'in':
                     if (node.left) _traverse(node.left);
-                    pushByValueType(node);
+                    this._pushByValueType(node, nodeOrPropertyName);
                     if (node.right) _traverse(node.right);
                     break;
                 case 'pre':
-                    pushByValueType(node);
+                    this._pushByValueType(node, nodeOrPropertyName);
                     if (node.left) _traverse(node.left);
                     if (node.right) _traverse(node.right);
                     break;
                 case 'post':
                     if (node.left) _traverse(node.left);
                     if (node.right) _traverse(node.right);
-                    pushByValueType(node);
+                    this._pushByValueType(node, nodeOrPropertyName);
                     break;
             }
 
         }
 
         this.root && _traverse(this.root);
-        switch (nodeOrPropertyName) {
-            case 'id':
-                return visitedId;
-            case 'val':
-                return visitedVal;
-            case 'node':
-                return visitedNode;
-            case 'count':
-                return visitedCount;
-            case 'allLesserSum':
-                return visitedLeftSum;
-            default:
-                return visitedId;
+        return this._getResult(nodeOrPropertyName);
+    }
+
+    DFSIterative(): BinaryTreeNodeId[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'id'): BinaryTreeNodeId[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
+
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
+
+
+    /**
+     * Time complexity is O(n)
+     * Space complexity of Iterative DFS equals to recursive DFS which is O(n) because of the stack
+     * @param pattern
+     * @param nodeOrPropertyName
+     * @constructor
+     */
+    DFSIterative(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): Array<T | null> | BinaryTreeNode<T> [] | number[] | BinaryTreeNodeId[] {
+        if (!this.root) return [];
+
+        if (pattern === undefined) {
+            pattern = 'in';
         }
+        if (nodeOrPropertyName === undefined) {
+            nodeOrPropertyName = 'id';
+        }
+        this._resetResults();
+
+        const stack = new Stack<BinaryTreeNode<T>>();
+        const leftMostPush = (node: BinaryTreeNode<T> | null) => {
+            while (node) {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        if (pattern === 'in') {
+            leftMostPush(this.root);
+        } else {
+            stack.push(this.root);
+        }
+
+        while (!stack.isEmpty()) {
+            let cur: BinaryTreeNode<T> | null = stack.pop()!;
+            switch (pattern) {
+                case 'in':
+                    this._pushByValueType(cur, nodeOrPropertyName);
+                    leftMostPush(cur.right);
+                    break;
+                case 'pre':
+                    if (cur.right) stack.push(cur.right);
+                    if (cur.left) stack.push(cur.left);
+                    this._pushByValueType(cur, nodeOrPropertyName);
+                    break;
+                case 'post':
+                    this._pushByValueType(cur, nodeOrPropertyName);
+                    if (cur.left) stack.push(cur.left);
+                    if (cur.right) stack.push(cur.right);
+                    break;
+            }
+        }
+
+        const ret = this._getResult(nodeOrPropertyName);
+        return pattern === 'post' ? ret.reverse() : ret;
     }
 
     subTreeSum(subTreeRoot: BinaryTreeNode<T>, propertyName ?: BinaryTreeNodePropertyName): number {

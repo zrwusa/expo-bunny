@@ -3,7 +3,7 @@ import {testTrieCase1} from "./cases";
 
 export const testTrie = (words: string[]) => {
     const trie = new Trie();
-    for (let word  of words) {
+    for (let word of words) {
         trie.add(word);
     }
 

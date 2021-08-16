@@ -1,11 +1,23 @@
-import {BinaryTree, BST, BSTNode} from "../../data-structures/binary-tree";
+import {BinaryTreeNodeId, BST, BSTNode} from "../../../data-structures/binary-tree";
 import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
 import {testBSTCase1} from "./cases";
-import {runAlgorithm} from "../helpers";
-import {wait, WaitManager} from "../../utils";
-import {AVLTree} from "../../data-structures/binary-tree/avl-tree";
+import {runAlgorithm} from "../../helpers";
+import {wait, WaitManager} from "../../../utils";
+import {AVLTree} from "../../../data-structures/binary-tree/avl-tree";
 /* --- start BST --- */
 //98	Validate Binary Search Tree	★★	530					DFS/inorder
+const isValidBST = (root: BSTNode<number> | null): boolean => {
+    if (!root) return true;
+
+    function dfs(cur: BSTNode<number> | null, min: BinaryTreeNodeId, max: BinaryTreeNodeId): boolean {
+        if (!cur) return true;
+        if ((cur.id <= min) || (cur.id >= max)) return false;
+        return dfs(cur.left, min, cur.id) && dfs(cur.right, cur.id, max);
+    }
+
+    return dfs(root, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+}
+
 // 700	Search in a Binary Search Tree	★★	701				binary search
 function searchBST(root: BSTNode<number> | null, id: number): BSTNode<number> | null {
     let ans = null;
@@ -40,6 +52,41 @@ function kthSmallest(root: BSTNode<number> | null, k: number): number {
 }
 
 // 99	Recover Binary Search Tree	★★★						inorder
+// function recoverTree(root: TreeNode | null): void {
+//
+//     const swap = (nodeA:TreeNode, nodeB:TreeNode) => {
+//         const tempVal = nodeA.val;
+//         nodeA.val = nodeB.val;
+//         nodeB.val = tempVal;
+//     }
+//
+//     const dfs = (cur: TreeNode | null, min, max) => {
+//         if (!cur) return;
+//
+//         if (cur.left && cur.right) {
+//             if (cur.left.val >= cur.right.val) {
+//                 swap(cur.left, cur.right);
+//                 return;
+//             }
+//         }
+//
+//         if (cur.val >= max.val) {
+//             swap(cur, max);
+//             return;
+//         }
+//
+//         if (cur.val <= min.val) {
+//             swap(cur, min);
+//             return;
+//         }
+//
+//         dfs(cur.left, min, cur);
+//         dfs(cur.right, cur, max);
+//     }
+//
+//     dfs(root, new TreeNode(Number.MIN_SAFE_INTEGER), new TreeNode(Number.MAX_SAFE_INTEGER));
+//
+// }
 // 108  Convert Sorted Array to Binary Search Tree ★★★				build BST
 function sortedArrayToBST(nums: number[]): BSTNode<number> | null {
     const buildTree = (l: number, r: number) => {
@@ -85,56 +132,7 @@ const waitManager = new WaitManager(10);
 const {time1, time2, time3} = waitManager;
 
 // 450	Delete Node in a BST	★★★★						binary search
-export async function testBinaryTree(arr: number[], proxyHandler?: TProxyHandler) {
-    const arrCopy = [...arr];
-    const rest = arrCopy.splice(1);
-    const proxyVariables: { binaryTree: BinaryTree<number> } = new DeepProxy({binaryTree: new BinaryTree<number>(arrCopy[0], arrCopy[0])}, proxyHandler);
 
-    for (let i of rest) {
-        console.log(`insert ${i}`, proxyVariables.binaryTree.insert(i, i));
-        await wait(time1);
-    }
-
-    const node6 = proxyVariables.binaryTree.getNode(6);
-    console.log('getHeight(getNode 6)', node6 && proxyVariables.binaryTree.getHeight(node6))
-    console.log('getDepth(getNode 6)', node6 && proxyVariables.binaryTree.getDepth(node6))
-    await wait(time2);
-    const getNodeById = proxyVariables.binaryTree.getNode(10, 'id');
-    console.log('getNode, 10, id', getNodeById);
-
-    await wait(time2);
-    const getNodesByCount = proxyVariables.binaryTree.getNodes(1, 'count');
-    console.log('getNodes, 1, count', getNodesByCount);
-
-    await wait(time2);
-    const getNodesByLeftSum = proxyVariables.binaryTree.getNodes(2, 'allLesserSum');
-    console.log('getNodes, 2, allLesserSum', getNodesByLeftSum);
-
-    await wait(time2);
-    const node15 = proxyVariables.binaryTree.getNode(15)
-    const subTreeSum = node15 && proxyVariables.binaryTree.subTreeSum(node15);
-    console.log('subTreeSum, 15', subTreeSum);
-
-    await wait(time3);
-    console.log('DFS ,in, node', proxyVariables.binaryTree.DFS('in', 'node'))
-    console.log('waiting for balancing')
-
-    await wait(time3);
-
-    await wait(time1);
-    console.log('BFS', proxyVariables.binaryTree.BFS());
-
-    await wait(time1);
-    console.log('BFS, node', proxyVariables.binaryTree.BFS('node'));
-
-    return proxyVariables.binaryTree;
-}
-
-const runTestBinaryTree = async () => {
-    await runAlgorithm(testBinaryTree, false, ...testBSTCase1);
-}
-
-// runTestBinaryTree().then()
 
 export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     const arrCopy = [...arr];
@@ -259,9 +257,11 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     return proxyVariables.bst;
 }
 
+
 const runTestBST = async () => {
     await runAlgorithm(testBST, false, ...testBSTCase1);
 }
+
 
 // runTestBST().then()
 

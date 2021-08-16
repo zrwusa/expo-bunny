@@ -58,7 +58,7 @@ export class Trie {
     }
 
     getWords(): string[] | null {
-        const words:string[] = [];
+        const words: string[] = [];
         const search = (node: TrieNode, word: string) => {
             if (node.keys.size !== 0) {
                 for (let letter of node.keys.keys()) {
@@ -72,7 +72,7 @@ export class Trie {
             }
 
         }
-        search(this._root,  '');
+        search(this._root, '');
         return words.length > 0 ? words : null;
     }
 }

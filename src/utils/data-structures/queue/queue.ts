@@ -4,13 +4,16 @@
  *
  * @class
  */
-export class Queue {
+export class Queue<T> {
+    protected _elements: T[];
+    protected _offset: number;
+
     /**
      * Creates a queue.
      * @param {array} [elements]
      */
-    constructor(elements) {
-        this._elements = Array.isArray(elements) ? elements : [];
+    constructor(elements?: T[]) {
+        this._elements = elements || [];
         this._offset = 0;
     }
 
@@ -19,7 +22,7 @@ export class Queue {
      * @public
      * @param {any} element
      */
-    enqueue(element) {
+    enqueue(element: T): Queue<T> {
         this._elements.push(element);
         return this;
     }
@@ -29,7 +32,7 @@ export class Queue {
      * @public
      * @returns {any}
      */
-    dequeue() {
+    dequeue(): T | null {
         if (this.size() === 0) return null;
 
         const first = this.front();
@@ -49,7 +52,7 @@ export class Queue {
      * @public
      * @returns {any}
      */
-    front() {
+    front(): T | null {
         return this.size() > 0 ? this._elements[this._offset] : null;
     }
 
@@ -58,7 +61,7 @@ export class Queue {
      * @public
      * @returns {any}
      */
-    back() {
+    back(): T | null {
         return this.size() > 0 ? this._elements[this._elements.length - 1] : null;
     }
 
@@ -67,7 +70,7 @@ export class Queue {
      * @public
      * @returns {number}
      */
-    size() {
+    size(): number {
         return this._elements.length - this._offset;
     }
 
@@ -76,7 +79,7 @@ export class Queue {
      * @public
      * @returns {boolean}
      */
-    isEmpty() {
+    isEmpty(): boolean {
         return this.size() === 0;
     }
 
@@ -85,7 +88,7 @@ export class Queue {
      * @public
      * @returns {array}
      */
-    toArray() {
+    toArray(): T[] {
         return this._elements.slice(this._offset);
     }
 
@@ -93,7 +96,7 @@ export class Queue {
      * Clears the queue.
      * @public
      */
-    clear() {
+    clear(): void {
         this._elements = [];
         this._offset = 0;
     }
@@ -103,7 +106,7 @@ export class Queue {
      * @public
      * @return {Queue}
      */
-    clone() {
+    clone(): Queue<T> {
         return new Queue(this._elements.slice(this._offset));
     }
 
@@ -114,7 +117,7 @@ export class Queue {
      * @param {array} elements
      * @return {Queue}
      */
-    static fromArray(elements) {
+    static fromArray<T>(elements: T[]): Queue<T> {
         return new Queue(elements);
     }
 }

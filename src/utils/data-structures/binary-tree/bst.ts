@@ -10,7 +10,7 @@ export class BSTNode<T> extends BinaryTreeNode<T> {
 
 export interface I_BST<T> extends I_BinaryTree<T> {
     // --- start basic functions
-    isValid(): boolean;
+    isBST(): boolean;
 
     insert(id: BinaryTreeNodeId, val?: T | null, count?: number): (BSTNode<T> | null)[];
 
@@ -177,7 +177,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
         return bstDeletedResult;
     }
 
-    isValid(): boolean {
+    isBST(): boolean {
         if (!this.root) return true;
 
         function dfs(cur: BSTNode<T> | null, min: BinaryTreeNodeId, max: BinaryTreeNodeId): boolean {
@@ -187,6 +187,23 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
         }
 
         return dfs(this.root!, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+
+        // if (!this.root) return true;
+        //
+        // let valid = true;
+        //
+        // function dfs(cur: BSTNode<T> | null, min: BinaryTreeNodeId, max: BinaryTreeNodeId): void {
+        //     if (!cur) return;
+        //     if (cur.id <= min || cur.id >= max) {
+        //         valid = false;
+        //         return;
+        //     }
+        //     dfs(cur.left, min, cur.id);
+        //     dfs(cur.right, cur.id, max);
+        // }
+        //
+        // dfs(this.root, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+        // return valid;
     }
 
     contains(node: BSTNode<T>): boolean {

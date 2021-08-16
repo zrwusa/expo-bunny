@@ -28,8 +28,7 @@ import {
     testBSTCase3,
     testGraphs,
     treeData,
-    treeMaxDepth,
-    testTrie
+    treeMaxDepth
 } from "../../utils/algorithms";
 import {VividAlgorithm} from "../../components/VividAlgorithm";
 import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
