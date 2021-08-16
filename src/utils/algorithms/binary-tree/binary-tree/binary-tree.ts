@@ -49,6 +49,15 @@ export async function testBinaryTree(arr: number[], proxyHandler?: TProxyHandler
     await wait(time1);
     console.log('DFSIterative, pre', proxyVariables.binaryTree.DFSIterative('pre'));
 
+    await wait(time1);
+    console.log('morris, in, node', proxyVariables.binaryTree.morris('in', 'node'));
+
+    await wait(time1);
+    console.log('morris, pre', proxyVariables.binaryTree.morris('pre'));
+
+    await wait(time1);
+    console.log('morris, post', proxyVariables.binaryTree.morris('post'));
+
     await wait(time3);
     console.log('DFS ,post, node', proxyVariables.binaryTree.DFS('post', 'node'));
 

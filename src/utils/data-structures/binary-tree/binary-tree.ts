@@ -53,7 +53,7 @@ export interface I_BinaryTree<T> {
 
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
 
-    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];// TODO in BinaryTree not implemented
 
     DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T>;
 
@@ -67,9 +67,23 @@ export interface I_BinaryTree<T> {
 
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
 
-    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];// TODO in BinaryTree not implemented
 
     DFSIterative(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T>;
+
+    morris(): BinaryTreeNodeId[];
+
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'id'): BinaryTreeNodeId[];
+
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
+
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
+
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
+
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];// TODO in BinaryTree not implemented
+
+    morris(pattern ?: 'in' | 'pre' | 'post'): BinaryTreeNode<T>[];
 
     subTreeSum(subTreeRoot: BinaryTreeNode<T>, propertyName ?: BinaryTreeNodePropertyName): number;
 }
@@ -402,7 +416,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     BFS(nodeOrPropertyName: 'val'): (T | null)[];
     BFS(nodeOrPropertyName: 'node'): BinaryTreeNode<T>[];
     BFS(nodeOrPropertyName: 'count'): number[];
-    BFS(nodeOrPropertyName: 'allLesserSum'): number[];
+    BFS(nodeOrPropertyName: 'allLesserSum'): number[];    // TODO in BinaryTree not implemented
     BFS(nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T> {
         if (nodeOrPropertyName === undefined) {
             nodeOrPropertyName = 'id';
@@ -428,7 +442,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
     DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
-    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
+    DFS(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[]; // TODO in BinaryTree not implemented
     DFS(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T> {
         if (pattern === undefined) {
             pattern = 'in';
@@ -466,18 +480,11 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     }
 
     DFSIterative(): BinaryTreeNodeId[];
-
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'id'): BinaryTreeNodeId[];
-
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
-
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
-
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
-
-    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
-
-
+    DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[]; // TODO in BinaryTree not implemented
     /**
      * Time complexity is O(n)
      * Space complexity of Iterative DFS equals to recursive DFS which is O(n) because of the stack
@@ -485,7 +492,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
      * @param nodeOrPropertyName
      * @constructor
      */
-    DFSIterative(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): Array<T | null> | BinaryTreeNode<T> [] | number[] | BinaryTreeNodeId[] {
+    DFSIterative(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: BinaryTreeNodeOrPropertyName): ResultsByType<T> {
         if (!this.root) return [];
 
         if (pattern === undefined) {
@@ -532,6 +539,119 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
 
         const ret = this._getResult(nodeOrPropertyName);
         return pattern === 'post' ? ret.reverse() : ret;
+    }
+
+    getPredecessor(node: BinaryTreeNode<T>): BinaryTreeNode<T> {
+        if (node.left) {
+            let predecessor: BinaryTreeNode<T> | null = node.left;
+            while (predecessor.right && predecessor.right !== node) {
+                predecessor = predecessor.right;
+            }
+            return predecessor;
+        } else {
+            return node;
+        }
+    }
+
+    morris(): BinaryTreeNodeId[];
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'id'): BinaryTreeNodeId[];
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'val'): (T | null)[];
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
+    morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
+    /**
+     * The time complexity of Morris traversal is O(n), it's may slower than others
+     * The space complexity  Morris traversal is O(1)
+     * @param pattern
+     * @param nodeOrPropertyName
+     */
+    morris(pattern?: 'in' | 'pre' | 'post', nodeOrPropertyName?: BinaryTreeNodeOrPropertyName): ResultsByType<T> {
+        if (this.root === null) {
+            return [];
+        }
+
+        pattern = pattern || 'in';
+        nodeOrPropertyName = nodeOrPropertyName || 'id';
+
+        this._resetResults();
+
+        let cur: BinaryTreeNode<T> | null = this.root;
+
+        switch (pattern) {
+            case 'in':
+                while (cur) {
+                    if (cur.left) {
+                        let predecessor = this.getPredecessor(cur);
+                        if (!predecessor.right) {
+                            predecessor.right = cur;
+                            cur = cur.left;
+                            continue;
+                        } else {
+                            predecessor.right = null;
+                        }
+                    }
+                    this._pushByValueType(cur, nodeOrPropertyName);
+                    cur = cur.right;
+                }
+                break;
+            case 'pre':
+                while (cur) {
+                    if (cur.left) {
+                        let predecessor = this.getPredecessor(cur);
+                        if (!predecessor.right) {
+                            predecessor.right = cur;
+                            this._pushByValueType(cur, nodeOrPropertyName);
+                            cur = cur.left;
+                            continue;
+                        } else {
+                            predecessor.right = null;
+                        }
+                    } else {
+                        this._pushByValueType(cur, nodeOrPropertyName);
+                    }
+                    cur = cur.right;
+                }
+                break;
+            case 'post':
+                const reverseEdge = (node: BinaryTreeNode<T> | null) => {
+                    let pre: BinaryTreeNode<T> | null = null;
+                    let next: BinaryTreeNode<T> | null = null;
+                    while (node) {
+                        next = node.right;
+                        node.right = pre;
+                        pre = node;
+                        node = next;
+                    }
+                    return pre;
+                }
+                const printEdge = (node: BinaryTreeNode<T> | null) => {
+                    let tail: BinaryTreeNode<T> | null = reverseEdge(node);
+                    let cur: BinaryTreeNode<T> | null = tail;
+                    while (cur) {
+                        this._pushByValueType(cur, nodeOrPropertyName);
+                        cur = cur.right;
+                    }
+                    reverseEdge(tail);
+                }
+                while (cur) {
+                    if (cur.left) {
+                        let predecessor = this.getPredecessor(cur);
+                        if (predecessor.right === null) {
+                            predecessor.right = cur;
+                            cur = cur.left;
+                            continue;
+                        } else {
+                            predecessor.right = null;
+                            printEdge(cur.left);
+                        }
+                    }
+                    cur = cur.right;
+                }
+                printEdge(this.root);
+                break;
+        }
+
+        return this._getResult(nodeOrPropertyName);
     }
 
     subTreeSum(subTreeRoot: BinaryTreeNode<T>, propertyName ?: BinaryTreeNodePropertyName): number {
