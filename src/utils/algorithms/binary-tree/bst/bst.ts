@@ -1,10 +1,11 @@
-import {BinaryTreeNodeId, BST, BSTNode} from "../../../data-structures/binary-tree";
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
-import {testBSTCase1} from "./cases";
-import {runAlgorithm} from "../../helpers";
-import {wait, WaitManager} from "../../../utils";
-import {AVLTree} from "../../../data-structures/binary-tree/avl-tree";
-/* --- start BST --- */
+import {BinaryTreeNodeId, BST, BSTNode} from '../../../data-structures/binary-tree';
+import {DeepProxy, TProxyHandler} from '@qiwi/deep-proxy';
+import {testBSTCase1} from './cases';
+import {runAlgorithm} from '../../helpers';
+import {wait, WaitManager} from '../../../utils';
+
+/** --- start BST --- **/
+
 //98	Validate Binary Search Tree	★★	530					DFS/inorder
 const isValidBST = (root: BSTNode<number> | null): boolean => {
     if (!root) return true;
@@ -60,32 +61,33 @@ function recoverTree(root: BSTNode<number> | null): void {
         nodeB.val = tempVal;
     }
 
-    let nodeA: BSTNode<number> | null = null;
-    let nodeB: BSTNode<number> | null = null;
+    let firstBad: BSTNode<number> | null = null;
+    let secondBad: BSTNode<number> | null = null;
     let prev: BSTNode<number> | null = null;
     let cur = root;
 
     // Morris Traversal, space complexity is O(1)
     while (cur) {
         if (cur.left) {
-            let predecessor = cur.left;
-            while (predecessor.right && predecessor.right !== cur) {
-                predecessor = predecessor.right;
+            let pred = cur.left; // predecessor
+            while (pred.right && pred.right !== cur) {
+                pred = pred.right;
             }
-            if (!predecessor.right) {
-                predecessor.right = cur;
+            if (!pred.right) {
+                pred.right = cur;
                 cur = cur.left;
                 continue;
             } else {
-                predecessor.right = null;
+                pred.right = null;
             }
         }
+
         if (prev && prev.val! > cur.val!) {
-            if (!nodeA) {
-                nodeA = prev;
-                nodeB = cur;
+            if (!firstBad) {
+                firstBad = prev;
+                secondBad = cur;
             } else {
-                nodeB = cur;
+                secondBad = cur;
             }
         }
 
@@ -93,47 +95,47 @@ function recoverTree(root: BSTNode<number> | null): void {
         cur = cur.right;
     }
 
-    swap(nodeA!, nodeB!);
+    swap(firstBad!, secondBad!);
 }
+
 // 108  Convert Sorted Array to Binary Search Tree ★★★				build BST
 function sortedArrayToBST(nums: number[]): BSTNode<number> | null {
-    const buildTree = (l: number, r: number) => {
-        if (l > r) return null;
-        const m = l + Math.floor((r - l) / 2);
-        const root = new BSTNode<number>(nums[m]);
-        const left = buildTree(l, m - 1);
-        const right = buildTree(m + 1, r);
-        root.left = left;
-        root.right = right;
-        return root;
+    const dfs = (left: number, right: number): BSTNode<number> | null => {
+        if (left > right) return null;
+        const mid = left + Math.floor((right - left) / 2);
+        const cur = new BSTNode<number>(nums[mid]);
+        cur.left = dfs(left, mid - 1);
+        cur.right = dfs(mid + 1, right);
+        return cur;
     }
 
-    return buildTree(0, nums.length - 1);
+    return dfs(0, nums.length - 1);
 }
 
 // 501	Find Mode in Binary Search Tree	★★★						inorder
 function findMode(root: BSTNode<number> | null): number[] {
-    if (!root) return [];
-    const map: { [key in string]: number } = {};
-    let max: number = 0;
-    const dfsInOrder = (cur: BSTNode<number>) => {
-        cur.left && dfsInOrder(cur.left);
+    let max = 0;
+    let count = 0;
+    let prev = -Infinity;
+    let modes: number[] = [];
 
-        map[cur.id] ? map[cur.id]++ : map[cur.id] = 1;
-
-        max = Math.max(max, map[cur.id]);
-
-        cur.right && dfsInOrder(cur.right);
-        if (!cur.left && !cur.right) return;
-    }
-    root && dfsInOrder(root);
-    const ans: number[] = [];
-    for (let i in map) {
-        if (map[i] === max) {
-            ans.push(Number.parseInt(i, 10));
+    const inorderDFS = (cur: BSTNode<number> | null) => {
+        if (!cur) return;
+        inorderDFS(cur.left);
+        count = prev === cur.id ? count + 1 : 1;
+        if (count > max) {
+            modes = [cur.id];
+            max = count;
+        } else if (count === max) {
+            modes.push(cur.id);
         }
+        prev = cur.id;
+        inorderDFS(cur.right);
     }
-    return ans;
+
+    inorderDFS(root);
+
+    return modes;
 }
 
 const waitManager = new WaitManager(10);
@@ -265,140 +267,10 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     return proxyVariables.bst;
 }
 
-
 const runTestBST = async () => {
     await runAlgorithm(testBST, false, ...testBSTCase1);
 }
 
-
 // runTestBST().then()
 
-export const testAVLTree = async (arr: number[], proxyHandler?: TProxyHandler) => {
-    const arrCopy = [...arr];
-    const rest = arrCopy.splice(1);
-    const proxyVariables: { avl: AVLTree<number> } = new DeepProxy({avl: new AVLTree<number>(true, arrCopy[0], arrCopy[0])}, proxyHandler);
-
-    for (let i of rest) {
-        proxyVariables.avl.insert(i, i);
-        await wait(time1);
-    }
-
-    const node6 = proxyVariables.avl.getNode(6);
-    console.log('getHeight(getNode 6)', node6 && proxyVariables.avl.getHeight(node6))
-    console.log('getDepth(getNode 6)', node6 && proxyVariables.avl.getDepth(node6))
-    await wait(time2);
-    const getNodeById = proxyVariables.avl.getNode(10, 'id');
-    console.log('getNode, 10, id', getNodeById);
-
-    await wait(time2);
-    const getNodesByCount = proxyVariables.avl.getNodes(1, 'count');
-    console.log('getNodes, 1, count', getNodesByCount);
-
-    await wait(time2);
-    const getNodesByLeftSum = proxyVariables.avl.getNodes(2, 'allLesserSum');
-    console.log('getNodes, 2, allLesserSum', getNodesByLeftSum);
-
-    await wait(time2);
-    const getMinNodeByRoot = proxyVariables.avl.getMinNode();
-    console.log('getMinNode', getMinNodeByRoot);
-
-    await wait(time2);
-    const node15 = proxyVariables.avl.getNode(15);
-    const getMinNodeBySpecificNode = node15 && proxyVariables.avl.getMinNode(node15);
-    console.log('getMinNode, 15', getMinNodeBySpecificNode);
-
-    await wait(time2);
-    const subTreeSum = node15 && proxyVariables.avl.subTreeSum(node15);
-    console.log('subTreeSum, 15', subTreeSum);
-
-    await wait(time2);
-    const lesserSum = proxyVariables.avl.lesserSum(10);
-    console.log('lesserSum, 10', lesserSum);
-
-    await wait(time2);
-    const subTreeAdd = node15 && proxyVariables.avl.subTreeAdd(node15, 1, 'count');
-    console.log('subTreeAdd, getNode(15)', subTreeAdd);
-
-    await wait(time3);
-    const node11 = proxyVariables.avl.getNode(11);
-    const allGreaterNodesAdd = node11 && proxyVariables.avl.allGreaterNodesAdd(node11, 2, 'count')
-    console.log('allGreaterNodesAdd, getNode(11), 2, count', allGreaterNodesAdd);
-
-    await wait(time3);
-    console.log('DFS ,in, node', proxyVariables.avl.DFS('in', 'node'))
-    console.log('waiting for balancing')
-    await wait(time3);
-    proxyVariables.avl.balance();
-    console.log('balanced BFS, node', proxyVariables.avl.BFS('node'))
-
-    await wait(time3);
-    console.log('remove, 11', proxyVariables.avl.remove(11));
-    console.log('isBalance', proxyVariables.avl.isAVLBalanced());
-    console.log('getHeight, getNode(15)', node15 && proxyVariables.avl.getHeight(node15));
-    await wait(time3);
-    console.log('remove, 1', proxyVariables.avl.remove(1))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 4', proxyVariables.avl.remove(4))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 10', proxyVariables.avl.remove(10))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 15', proxyVariables.avl.remove(15))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 5', proxyVariables.avl.remove(5))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 13', proxyVariables.avl.remove(13))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 3', proxyVariables.avl.remove(3))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 8', proxyVariables.avl.remove(8))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 6', proxyVariables.avl.remove(6))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 7', proxyVariables.avl.remove(7))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 9', proxyVariables.avl.remove(9))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-    console.log('remove, 14', proxyVariables.avl.remove(14))
-    console.log('isAVLBalanced', proxyVariables.avl.isAVLBalanced())
-    console.log('getHeight', proxyVariables.avl.getHeight());
-    await wait(time3);
-
-    await wait(time1);
-    console.log('isAVLBalanced()', proxyVariables.avl.isAVLBalanced())
-    await wait(time1);
-    console.log('BFS', proxyVariables.avl.BFS());
-
-    await wait(time1);
-    console.log('BFS, node', proxyVariables.avl.BFS('node'));
-
-    return proxyVariables.avl;
-
-}
-const runTestAVLTree = async () => {
-    await runAlgorithm(testAVLTree, false, ...testBSTCase1);
-}
-
-// runTestAVLTree().then();
-/* --- end BST --- */
+/** --- end BST --- **/
