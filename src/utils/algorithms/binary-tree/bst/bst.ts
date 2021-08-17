@@ -52,41 +52,49 @@ function kthSmallest(root: BSTNode<number> | null, k: number): number {
 }
 
 // 99	Recover Binary Search Tree	★★★						inorder
-// function recoverTree(root: TreeNode | null): void {
-//
-//     const swap = (nodeA:TreeNode, nodeB:TreeNode) => {
-//         const tempVal = nodeA.val;
-//         nodeA.val = nodeB.val;
-//         nodeB.val = tempVal;
-//     }
-//
-//     const dfs = (cur: TreeNode | null, min, max) => {
-//         if (!cur) return;
-//
-//         if (cur.left && cur.right) {
-//             if (cur.left.val >= cur.right.val) {
-//                 swap(cur.left, cur.right);
-//                 return;
-//             }
-//         }
-//
-//         if (cur.val >= max.val) {
-//             swap(cur, max);
-//             return;
-//         }
-//
-//         if (cur.val <= min.val) {
-//             swap(cur, min);
-//             return;
-//         }
-//
-//         dfs(cur.left, min, cur);
-//         dfs(cur.right, cur, max);
-//     }
-//
-//     dfs(root, new TreeNode(Number.MIN_SAFE_INTEGER), new TreeNode(Number.MAX_SAFE_INTEGER));
-//
-// }
+function recoverTree(root: BSTNode<number> | null): void {
+
+    const swap = (nodeA: BSTNode<number>, nodeB: BSTNode<number>) => {
+        const tempVal = nodeA.val;
+        nodeA.val = nodeB.val;
+        nodeB.val = tempVal;
+    }
+
+    let nodeA: BSTNode<number> | null = null;
+    let nodeB: BSTNode<number> | null = null;
+    let prev: BSTNode<number> | null = null;
+    let cur = root;
+
+    // Morris Traversal, space complexity is O(1)
+    while (cur) {
+        if (cur.left) {
+            let predecessor = cur.left;
+            while (predecessor.right && predecessor.right !== cur) {
+                predecessor = predecessor.right;
+            }
+            if (!predecessor.right) {
+                predecessor.right = cur;
+                cur = cur.left;
+                continue;
+            } else {
+                predecessor.right = null;
+            }
+        }
+        if (prev && prev.val! > cur.val!) {
+            if (!nodeA) {
+                nodeA = prev;
+                nodeB = cur;
+            } else {
+                nodeB = cur;
+            }
+        }
+
+        prev = cur;
+        cur = cur.right;
+    }
+
+    swap(nodeA!, nodeB!);
+}
 // 108  Convert Sorted Array to Binary Search Tree ★★★				build BST
 function sortedArrayToBST(nums: number[]): BSTNode<number> | null {
     const buildTree = (l: number, r: number) => {
