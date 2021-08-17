@@ -1,9 +1,9 @@
-import * as React from "react";
-import {createRef} from "react";
-import {AVPlaybackStatus, Video, VideoProps} from "../../../packages/expo-av/src";
-import {Button, Text, View} from "../UI";
-import {getStyles} from "./styles";
-import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import * as React from 'react';
+import {createRef} from 'react';
+import {AVPlaybackStatus, Video, VideoProps} from '../../../packages/expo-av/src';
+import {Button, Text, View} from '../UI';
+import {getStyles} from './styles';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 interface ShowVideoState {
     isPlaying: boolean,

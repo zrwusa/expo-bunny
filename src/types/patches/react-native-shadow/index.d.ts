@@ -1,5 +1,5 @@
 declare module 'react-native-shadow' {
-    import React from "react";
+    import React from 'react';
 
     export function BoxShadow<BoxShadowProps>(): React.Component;
 

@@ -1,5 +1,5 @@
-import {StyleSheet} from "react-native";
-import {pl} from "../../utils";
+import {StyleSheet} from 'react-native';
+import {pl} from '../../utils';
 
 export const getStyles = () => {
     return StyleSheet.create({

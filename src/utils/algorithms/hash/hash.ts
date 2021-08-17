@@ -2,9 +2,9 @@
 
 // Using Hash Tables TODO
 // 3. Longest Substring Without Repeating Characters
-import {TProxyHandler} from "@qiwi/deep-proxy/typings/interface";
-import {DeepProxy} from "@qiwi/deep-proxy";
-import {wait} from "../../utils";
+import {TProxyHandler} from '@qiwi/deep-proxy/typings/interface';
+import {DeepProxy} from '@qiwi/deep-proxy';
+import {wait} from '../../utils';
 
 export const lengthOfLongestSubstring = async function (input: string, proxyHandler: TProxyHandler) {
     type LengthOfLongestSubstringVariables = {

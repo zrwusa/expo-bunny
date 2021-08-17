@@ -1,4 +1,4 @@
-import {Palette} from "../types";
+import {Palette} from '../types';
 
 export const palette: Palette = {
     // ---start standard material color

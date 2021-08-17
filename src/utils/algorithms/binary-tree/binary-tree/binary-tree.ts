@@ -1,8 +1,8 @@
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
-import {BinaryTree} from "../../../data-structures/binary-tree";
-import {wait, WaitManager} from "../../../utils";
-import {runAlgorithm} from "../../helpers";
-import {testBSTCase1} from "../bst";
+import {DeepProxy, TProxyHandler} from '@qiwi/deep-proxy';
+import {BinaryTree} from '../../../data-structures/binary-tree';
+import {wait, WaitManager} from '../../../utils';
+import {runAlgorithm} from '../../helpers';
+import {testBSTCase1} from '../bst';
 
 const waitManager = new WaitManager(10);
 const {time1, time2, time3} = waitManager;

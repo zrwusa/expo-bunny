@@ -1,6 +1,6 @@
-import {EDemoSaga} from "../../constants";
-import {DemoSagaActions} from "../actions";
-import {DemoSaga, DemoSagaState} from "../../types";
+import {EDemoSaga} from '../../constants';
+import {DemoSagaActions} from '../actions';
+import {DemoSaga, DemoSagaState} from '../../types';
 
 
 export function demoSagaReducer(

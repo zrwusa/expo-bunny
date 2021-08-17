@@ -1,5 +1,5 @@
-import {Dimensions} from "./styles";
-import {APIConfigs} from "./api";
+import {Dimensions} from './styles';
+import {APIConfigs} from './api';
 
 export type APPConfig = APIConfigs & {
     mock: {

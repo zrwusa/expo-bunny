@@ -1,10 +1,10 @@
 // The Auth is brought out to integrate with the passport service in the future
-import {ReactNode} from "react";
-import {GoogleUser} from "expo-google-app-auth";
-import {LoginParams, SignUpParams} from "./payloads";
-import {BLResult} from "./bl";
-import {Method} from "axios";
-import {firebase} from "../firebase/firebase";
+import {ReactNode} from 'react';
+import {GoogleUser} from 'expo-google-app-auth';
+import {LoginParams, SignUpParams} from './payloads';
+import {BLResult} from './bl';
+import {Method} from 'axios';
+import {firebase} from '../firebase/firebase';
 
 export type FirebaseUser = firebase.User
 export type BunnyUser = {

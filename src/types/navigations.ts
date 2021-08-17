@@ -1,5 +1,5 @@
 // Navigations
-import * as Stacks from "../navigation/stacks";
+import * as Stacks from '../navigation/stacks';
 import {
     DefaultNavigatorOptions,
     DrawerRouterOptions,
@@ -7,17 +7,17 @@ import {
     RouteConfig,
     StackRouterOptions,
     TabRouterOptions
-} from "@react-navigation/native";
-import {ComponentType} from "react";
-import {StackNavigationOptions} from "@react-navigation/stack";
-import {MaterialTopTabNavigationOptions} from "@react-navigation/material-top-tabs";
-import {StackNavigationConfig} from "@react-navigation/stack/lib/typescript/src/types";
-import {NavigationState, ParamListBase, Route} from "@react-navigation/routers";
-import {BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
-import {DrawerNavigationOptions} from "@react-navigation/drawer";
-import {BottomTabNavigationConfig} from "@react-navigation/bottom-tabs/src/types";
-import {DrawerNavigationConfig} from "@react-navigation/drawer/src/types";
-import {UnionToIntersection} from "./utils";
+} from '@react-navigation/native';
+import {ComponentType} from 'react';
+import {StackNavigationOptions} from '@react-navigation/stack';
+import {MaterialTopTabNavigationOptions} from '@react-navigation/material-top-tabs';
+import {StackNavigationConfig} from '@react-navigation/stack/lib/typescript/src/types';
+import {NavigationState, ParamListBase, Route} from '@react-navigation/routers';
+import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
+import {DrawerNavigationOptions} from '@react-navigation/drawer';
+import {BottomTabNavigationConfig} from '@react-navigation/bottom-tabs/src/types';
+import {DrawerNavigationConfig} from '@react-navigation/drawer/src/types';
+import {UnionToIntersection} from './utils';
 
 export type RootStackParam = {
     Home: undefined;

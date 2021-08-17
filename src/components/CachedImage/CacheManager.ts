@@ -1,8 +1,8 @@
-import * as FileSystem from "expo-file-system";
-import {DownloadOptions, DownloadProgressData, DownloadResumable} from "expo-file-system";
-import SHA1 from "crypto-js/sha1";
-import {DownloadProgressCallback} from "expo-file-system/src/FileSystem.types";
-import {uuidV4} from "../../utils";
+import * as FileSystem from 'expo-file-system';
+import {DownloadOptions, DownloadProgressData, DownloadResumable} from 'expo-file-system';
+import SHA1 from 'crypto-js/sha1';
+import {DownloadProgressCallback} from 'expo-file-system/src/FileSystem.types';
+import {uuidV4} from '../../utils';
 
 const BASE_DIR = `${FileSystem.cacheDirectory}expo-image-cache/`;
 
@@ -57,8 +57,8 @@ export class CacheLabor {
 
     async init() {
         const {url} = this;
-        const filename = url.substring(url.lastIndexOf("/"), url.indexOf("?") === -1 ? url.length : url.indexOf("?"));
-        const ext = filename.indexOf(".") === -1 ? ".jpg" : filename.substring(filename.lastIndexOf("."));
+        const filename = url.substring(url.lastIndexOf('/'), url.indexOf('?') === -1 ? url.length : url.indexOf('?'));
+        const ext = filename.indexOf('.') === -1 ? '.jpg' : filename.substring(filename.lastIndexOf('.'));
         this.uri = `${BASE_DIR}${SHA1(url)}${ext}`;
         await ensureCacheDirExists()
         const {exists} = await this.getFileInfo();

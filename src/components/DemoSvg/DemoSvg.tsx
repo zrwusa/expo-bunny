@@ -1,12 +1,12 @@
-import React from "react";
-import {View} from "../UI"
-import {getStyles} from "./styles";
-import Svg, {Circle, Rect, SvgUri} from "react-native-svg";
-import SVGR from "./SVGR"
+import React from 'react';
+import {View} from '../UI'
+import {getStyles} from './styles';
+import Svg, {Circle, Rect, SvgUri} from 'react-native-svg';
+import SVGR from './SVGR'
 // import SvgLocalFileXML from "./SvgLocalFileXML"
-import {Platform} from "react-native";
-import {useThemeLabor} from "../../providers/theme-labor";
-import {useSizeLabor} from "../../providers/size-labor";
+import {Platform} from 'react-native';
+import {useThemeLabor} from '../../providers/theme-labor';
+import {useSizeLabor} from '../../providers/size-labor';
 
 export const DemoSvg = () => {
     const sizeLabor = useSizeLabor()

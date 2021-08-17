@@ -1,7 +1,7 @@
-import bunnyAPI from "../../helpers/bunny-api";
-import React, {ReactNode} from "react";
-import {AxiosInstance} from "axios";
-import {RequestContext} from "./RequestContext";
+import bunnyAPI from '../../helpers/bunny-api';
+import React, {ReactNode} from 'react';
+import {AxiosInstance} from 'axios';
+import {RequestContext} from './RequestContext';
 
 export interface RequestProviderProps {
     children: ReactNode;

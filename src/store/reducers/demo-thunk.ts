@@ -1,6 +1,6 @@
-import {DemoThunkActions} from "../actions";
-import {DemoThunkState} from "../../types";
-import {EDemoThunk} from "../../constants";
+import {DemoThunkActions} from '../actions';
+import {DemoThunkState} from '../../types';
+import {EDemoThunk} from '../../constants';
 
 
 export function demoThunkStateReducer(prevState: DemoThunkState = {

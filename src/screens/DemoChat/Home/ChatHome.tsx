@@ -1,23 +1,23 @@
-import React, {useEffect} from "react"
-import {Text} from "../../../components/UI";
-import {Dimensions, FlatList, SafeAreaView, View} from "react-native";
-import {RouteProp} from "@react-navigation/native";
-import {Conversation, DemoChatStackParam, RootStackParam, RootState} from "../../../types";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {useSelector} from "react-redux";
-import {Row} from "../../../containers/Row";
-import {getStyles} from "./styles";
-import {Col} from "../../../containers";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
-import {isLoaded, useFirebaseConnect, useFirestore, useFirestoreConnect} from "react-redux-firebase";
-import {FirestoreReducer} from "redux-firestore";
-import {Avatar} from "../../../components/Avatar";
-import dayJS from "dayjs"
-import isToday from "dayjs/plugin/isToday";
-import {Divider, InlineJump} from "../../../components";
-import {Preparing} from "../../../components/Preparing";
-import {useSafeAreaInsets} from "react-native-safe-area-context";
-import {firestoreTimestampToDate} from "../../../utils";
+import React, {useEffect} from 'react'
+import {Text} from '../../../components/UI';
+import {Dimensions, FlatList, SafeAreaView, View} from 'react-native';
+import {RouteProp} from '@react-navigation/native';
+import {Conversation, DemoChatStackParam, RootStackParam, RootState} from '../../../types';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useSelector} from 'react-redux';
+import {Row} from '../../../containers/Row';
+import {getStyles} from './styles';
+import {Col} from '../../../containers';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {isLoaded, useFirebaseConnect, useFirestore, useFirestoreConnect} from 'react-redux-firebase';
+import {FirestoreReducer} from 'redux-firestore';
+import {Avatar} from '../../../components/Avatar';
+import dayJS from 'dayjs'
+import isToday from 'dayjs/plugin/isToday';
+import {Divider, InlineJump} from '../../../components';
+import {Preparing} from '../../../components/Preparing';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {firestoreTimestampToDate} from '../../../utils';
 
 dayJS.extend(isToday)
 

@@ -1,19 +1,19 @@
-import * as React from "react";
-import {useState} from "react";
-import {PickerSelect, Text, View} from "../../../components/UI";
-import {useTranslation} from "react-i18next";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {Col, getContainerStyles, Row} from "../../../containers";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
-import {Avatar} from "../../../components";
-import {E_MONTH} from "../../../constants";
-import {MonthKey} from "../../../types";
-import {BodyPartCard} from "./BodyPartCard";
-import {getSharedStyles} from "../../../helpers";
-import {BodyPartChartCard} from "./BodyPartChartCard";
-import {SafeAreaView, ScrollView} from "react-native";
-import {data, data1, data2} from "./data";
+import * as React from 'react';
+import {useState} from 'react';
+import {PickerSelect, Text, View} from '../../../components/UI';
+import {useTranslation} from 'react-i18next';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {Col, getContainerStyles, Row} from '../../../containers';
+import {useSizeLabor} from '../../../providers/size-labor';
+import {useThemeLabor} from '../../../providers/theme-labor';
+import {Avatar} from '../../../components';
+import {E_MONTH} from '../../../constants';
+import {MonthKey} from '../../../types';
+import {BodyPartCard} from './BodyPartCard';
+import {getSharedStyles} from '../../../helpers';
+import {BodyPartChartCard} from './BodyPartChartCard';
+import {SafeAreaView, ScrollView} from 'react-native';
+import {data, data1, data2} from './data';
 
 export function HealthHomeScreen() {
     const {t} = useTranslation();

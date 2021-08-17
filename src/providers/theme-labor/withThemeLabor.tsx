@@ -1,6 +1,6 @@
-import {useThemeLabor} from "./useThemeLabor";
-import React from "react";
-import {ThemeLabor} from "../../types";
+import {useThemeLabor} from './useThemeLabor';
+import React from 'react';
+import {ThemeLabor} from '../../types';
 
 export interface WithThemeLabor {
     themeLabor: ThemeLabor
@@ -11,7 +11,7 @@ export function withThemeLabor<T extends WithThemeLabor = WithThemeLabor>(
 ) {
     // Try to create a nice displayName for React Dev Tools.
     const displayName =
-        WrappedComponent.displayName || WrappedComponent.name || "Component";
+        WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
     // Creating the inner component. The calculated Props type here is the where the magic happens.
     const ComponentWithThemeLabor = (props: Omit<T, keyof WithThemeLabor>) => {

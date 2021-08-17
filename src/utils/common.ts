@@ -1,4 +1,4 @@
-import {DebouncedFunction, DebounceOptions, Procedure} from "../types";
+import {DebouncedFunction, DebounceOptions, Procedure} from '../types';
 
 export function throttle(func: Function, limit: number): Function {
     let inThrottle: boolean;

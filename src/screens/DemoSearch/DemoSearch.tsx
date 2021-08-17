@@ -1,19 +1,19 @@
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {Text, View} from "../../components/UI";
-import {RouteProp} from "@react-navigation/native";
-import {DemoSearchDummyDatum, RootStackParam} from "../../types";
-import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {getContainerStyles} from "../../containers";
-import {Animated, SafeAreaView} from "react-native";
-import {randomText, wait} from "../../utils";
-import {FollowUpSearchBar} from "../../components/FollowUpSearchBar";
-import {getStyles} from "./styles";
-import {collectBLResult} from "../../store/actions";
-import {blError} from "../../helpers";
-import {StackNavigationProp} from "@react-navigation/stack";
-import config from "../../config";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import {Text, View} from '../../components/UI';
+import {RouteProp} from '@react-navigation/native';
+import {DemoSearchDummyDatum, RootStackParam} from '../../types';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {getContainerStyles} from '../../containers';
+import {Animated, SafeAreaView} from 'react-native';
+import {randomText, wait} from '../../utils';
+import {FollowUpSearchBar} from '../../components/FollowUpSearchBar';
+import {getStyles} from './styles';
+import {collectBLResult} from '../../store/actions';
+import {blError} from '../../helpers';
+import {StackNavigationProp} from '@react-navigation/stack';
+import config from '../../config';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 type DemoSearchRouteProp = RouteProp<RootStackParam, 'DemoSearch'>;

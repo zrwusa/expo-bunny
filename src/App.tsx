@@ -1,26 +1,26 @@
-import React, {useMemo} from "react";
-import {Platform, StatusBar, Text} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useDispatch, useSelector} from "react-redux";
-import {AppearanceProvider} from "react-native-appearance";
-import {Theme as ThemeNavigation} from "@react-navigation/native";
-import BunnyConstants from "./constants/constants";
-import {RootState} from "./types";
-import {restoreIsReady, restoreNavInitialState, sysError} from "./store/actions";
-import {ThemeLaborContext, ThemeLaborProvider} from "./providers/theme-labor";
-import {Preparing} from "./components/Preparing";
-import {useTranslation} from "react-i18next";
-import {RequestProvider} from "./providers/request-labor";
-import {loadAsync} from "expo-font";
-import icoMoonFont from "./assets/fonts/icomoon/fonts/icomoon.ttf"
-import {SizeLaborProvider} from "./providers/size-labor";
-import NavigatorTree from "./navigation/NavigatorTree"
-import {AuthLaborProvider} from "./providers/auth-labor";
-import {I18nLaborProvider} from "./providers/i18n-labor";
-import RequestLoading from "./components/RequestLoading";
-import BLToast from "./components/BLToast";
-import Sys from "./components/Sys";
-import {SafeAreaProvider} from "react-native-safe-area-context";
+import React, {useMemo} from 'react';
+import {Platform, StatusBar, Text} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppearanceProvider} from 'react-native-appearance';
+import {Theme as ThemeNavigation} from '@react-navigation/native';
+import BunnyConstants from './constants/constants';
+import {RootState} from './types';
+import {restoreIsReady, restoreNavInitialState, sysError} from './store/actions';
+import {ThemeLaborContext, ThemeLaborProvider} from './providers/theme-labor';
+import {Preparing} from './components/Preparing';
+import {useTranslation} from 'react-i18next';
+import {RequestProvider} from './providers/request-labor';
+import {loadAsync} from 'expo-font';
+import icoMoonFont from './assets/fonts/icomoon/fonts/icomoon.ttf'
+import {SizeLaborProvider} from './providers/size-labor';
+import NavigatorTree from './navigation/NavigatorTree'
+import {AuthLaborProvider} from './providers/auth-labor';
+import {I18nLaborProvider} from './providers/i18n-labor';
+import RequestLoading from './components/RequestLoading';
+import BLToast from './components/BLToast';
+import Sys from './components/Sys';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 
 function App() {

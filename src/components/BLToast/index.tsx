@@ -1,2 +1,2 @@
-export {default} from "./BLToast";
-export * from "./BLToast";
+export {default} from './BLToast';
+export * from './BLToast';

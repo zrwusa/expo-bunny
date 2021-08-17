@@ -1,20 +1,20 @@
-import {IcoMoon, Text, TextButton, View} from "../UI";
-import {Row} from "../../containers/Row";
-import {Col} from "../../containers/Col";
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getSharedStyles} from "../../helpers";
-import {getStyles} from "./styles";
-import {FlatList, KeyboardAvoidingView, SafeAreaView} from "react-native";
-import {ModalFromRight} from "../../containers/ModalFromRight";
-import {InlineSelector} from "../InlineSelector";
-import {Searchbar} from "react-native-paper";
-import {firebase} from "../../firebase/firebase";
+import {IcoMoon, Text, TextButton, View} from '../UI';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {getSharedStyles} from '../../helpers';
+import {getStyles} from './styles';
+import {FlatList, KeyboardAvoidingView, SafeAreaView} from 'react-native';
+import {ModalFromRight} from '../../containers/ModalFromRight';
+import {InlineSelector} from '../InlineSelector';
+import {Searchbar} from 'react-native-paper';
+import {firebase} from '../../firebase/firebase';
 import {FieldPath, WhereFilterOp} from '@firebase/firestore-types';
-import {useIsMounted} from "../../hooks/is-mounted";
-import {uuidV4} from "../../utils";
-import {TreeNodePickerNode} from "../../types";
+import {useIsMounted} from '../../hooks/is-mounted';
+import {uuidV4} from '../../utils';
+import {TreeNodePickerNode} from '../../types';
 
 declare const ChildrenKey: unique symbol
 

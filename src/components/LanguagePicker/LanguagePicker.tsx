@@ -1,8 +1,8 @@
-import * as React from "react";
-import {useTranslation} from "react-i18next";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants from "../../constants/constants";
-import {PickerSelect} from "../UI";
+import * as React from 'react';
+import {useTranslation} from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import BunnyConstants from '../../constants/constants';
+import {PickerSelect} from '../UI';
 
 export function LanguagePicker() {
     const {i18n} = useTranslation();

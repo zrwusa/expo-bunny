@@ -1,5 +1,5 @@
-import {arrayRemove} from "../../utils";
-import {AbstractEdge, AbstractGraph, AbstractVertex, VertexId} from "./abstract-graph";
+import {arrayRemove} from '../../utils';
+import {AbstractEdge, AbstractGraph, AbstractVertex, VertexId} from './abstract-graph';
 
 export class UndirectedVertex extends AbstractVertex {
     constructor(id: VertexId) {

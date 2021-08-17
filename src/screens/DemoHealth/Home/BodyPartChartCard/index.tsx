@@ -1,1 +1,1 @@
-export * from "./BodyPartChartCard";
+export * from './BodyPartChartCard';

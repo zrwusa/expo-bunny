@@ -1,15 +1,15 @@
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {View} from "../UI";
-import {RootState} from "../../types";
-import {Col, Row} from "../../containers";
-import {ImageUploader} from "../ImageUploader";
-import {getStyles} from "./styles";
-import {ImageURISource} from "react-native";
-import {useFirestore, useFirestoreConnect} from "react-redux-firebase";
-import {useDispatch, useSelector} from "react-redux";
-import {sysError} from "../../store/actions";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import {View} from '../UI';
+import {RootState} from '../../types';
+import {Col, Row} from '../../containers';
+import {ImageUploader} from '../ImageUploader';
+import {getStyles} from './styles';
+import {ImageURISource} from 'react-native';
+import {useFirestore, useFirestoreConnect} from 'react-redux-firebase';
+import {useDispatch, useSelector} from 'react-redux';
+import {sysError} from '../../store/actions';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 export interface UserAlbumEditorProps {

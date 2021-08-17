@@ -1,2 +1,2 @@
-export * from "./hash"
-export * from "./cases"
+export * from './hash'
+export * from './cases'

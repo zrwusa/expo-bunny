@@ -1,28 +1,28 @@
-import axios, {AxiosResponse} from "axios";
-import {checkAuthAPIProtocol, getApiInstanceConfig} from "./index";
-import {AuthAPIProtocolResponseData} from "../types";
+import axios, {AxiosResponse} from 'axios';
+import {checkAuthAPIProtocol, getApiInstanceConfig} from './index';
+import {AuthAPIProtocolResponseData} from '../types';
 
 export const defaultAuthAPIResponseData = {
-    "httpExtra": {
-        "code": 0,
-        "message": "",
-        "description": "",
-        "errorCode": 0,
-        "errorMessage": "",
-        "errorDescription": "",
-        "errorStack": ""
+    'httpExtra': {
+        'code': 0,
+        'message': '',
+        'description': '',
+        'errorCode': 0,
+        'errorMessage': '',
+        'errorDescription': '',
+        'errorStack': ''
     },
-    "businessLogic": {
-        "code": "",
-        "message": "",
-        "description": "",
-        "errorCode": "",
-        "errorMessage": "",
-        "errorDescription": "",
-        "errorStack": ""
+    'businessLogic': {
+        'code': '',
+        'message': '',
+        'description': '',
+        'errorCode': '',
+        'errorMessage': '',
+        'errorDescription': '',
+        'errorStack': ''
     },
-    "successData": {},
-    "timeSpent": 0
+    'successData': {},
+    'timeSpent': 0
 }
 export const apiAuth = axios.create(getApiInstanceConfig('auth'));
 

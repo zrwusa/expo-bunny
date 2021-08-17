@@ -1,6 +1,6 @@
-import React from "react";
-import {getStyles} from "./styles";
-import {ActivityIndicator, Text, View} from "react-native";
+import React from 'react';
+import {getStyles} from './styles';
+import {ActivityIndicator, Text, View} from 'react-native';
 
 export interface PreparingProps {
     text?: string

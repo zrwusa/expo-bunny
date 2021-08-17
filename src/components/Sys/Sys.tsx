@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {Text, TextButton, TextInput, View} from "../UI";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../types";
-import {getStyles} from "./styles";
-import {sysClearErrors} from "../../store/actions";
-import {Row} from "../../containers/Row";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React, {useEffect, useState} from 'react';
+import {Text, TextButton, TextInput, View} from '../UI';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../types';
+import {getStyles} from './styles';
+import {sysClearErrors} from '../../store/actions';
+import {Row} from '../../containers/Row';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 interface Props {
     title?: string

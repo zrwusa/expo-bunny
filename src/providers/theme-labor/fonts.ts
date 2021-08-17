@@ -1,6 +1,6 @@
-import {Platform, PlatformOSType} from "react-native";
-import {FontConfigPlatform, Fonts, FontsWrapped, JSONSerializable, ThemeName} from "../../types";
-import {EThemes} from "../../constants";
+import {Platform, PlatformOSType} from 'react-native';
+import {FontConfigPlatform, Fonts, FontsWrapped, JSONSerializable, ThemeName} from '../../types';
+import {EThemes} from '../../constants';
 
 const fontConfig: FontConfigPlatform = {
     web: {

@@ -1,1 +1,1 @@
-export * from "./ModalFromRight"
+export * from './ModalFromRight'

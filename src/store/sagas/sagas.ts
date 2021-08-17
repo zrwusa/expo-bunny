@@ -1,5 +1,5 @@
-import {call, put, takeEvery} from "redux-saga/effects"
-import bunnyAPI from "../../helpers/bunny-api";
+import {call, put, takeEvery} from 'redux-saga/effects'
+import bunnyAPI from '../../helpers/bunny-api';
 import {
     collectBLResult,
     getDemoSagas,
@@ -9,16 +9,16 @@ import {
     requesting,
     requestReceived,
     sysError
-} from "../actions";
-import {EBLMsg, EDemoCryptoCurrency, EDemoSaga, EDemoSagaFirebase} from "../../constants";
+} from '../actions';
+import {EBLMsg, EDemoCryptoCurrency, EDemoSaga, EDemoSagaFirebase} from '../../constants';
 import {
     CancelAlertSettingsAction,
     RequestConfig,
     SaveDemoSagaFirebaseTodoAction,
     SaveQuickAlertSettingsAction,
-} from "../../types";
-import {blSuccess} from "../../helpers";
-import {firebase} from "../../firebase";
+} from '../../types';
+import {blSuccess} from '../../helpers';
+import {firebase} from '../../firebase';
 
 export const sagasGenerator = function* () {
     yield takeEvery(EDemoSaga.GET_DEMO_SAGAS, function* (action: ReturnType<typeof getDemoSagas>) {

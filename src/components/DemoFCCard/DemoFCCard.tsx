@@ -1,5 +1,5 @@
-import React from "react";
-import {Text, View} from "../UI";
+import React from 'react';
+import {Text, View} from '../UI';
 
 interface Props {
     title: string,

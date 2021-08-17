@@ -1,26 +1,26 @@
-import * as React from "react";
-import {useEffect, useMemo, useState} from "react";
-import {RouteProp} from "@react-navigation/native";
+import * as React from 'react';
+import {useEffect, useMemo, useState} from 'react';
+import {RouteProp} from '@react-navigation/native';
 import {
     DemoSocialMediaTabStackParam,
     MasonryDatum,
     RootStackParam,
     RootState,
     SocialMediaImageDatum
-} from "../../../types";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {getContainerStyles} from "../../../containers";
-import {getStyles} from "./styles";
-import {Animated, Platform, SafeAreaView} from "react-native";
-import {uuid4} from "@sentry/utils";
-import {Masonry} from "../../../components/Masonry/Masonry";
-import {FollowUpSearchBar} from "../../../components/FollowUpSearchBar";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {useSelector} from "react-redux";
-import {isLoaded, useFirebase, useFirestoreConnect} from "react-redux-firebase";
-import config from "../../../config";
-import {Preparing} from "../../../components/Preparing";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+} from '../../../types';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {getContainerStyles} from '../../../containers';
+import {getStyles} from './styles';
+import {Animated, Platform, SafeAreaView} from 'react-native';
+import {uuid4} from '@sentry/utils';
+import {Masonry} from '../../../components/Masonry/Masonry';
+import {FollowUpSearchBar} from '../../../components/FollowUpSearchBar';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useSelector} from 'react-redux';
+import {isLoaded, useFirebase, useFirestoreConnect} from 'react-redux-firebase';
+import config from '../../../config';
+import {Preparing} from '../../../components/Preparing';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSearch'>;
 type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;

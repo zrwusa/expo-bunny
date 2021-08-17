@@ -1,4 +1,4 @@
-import bunnyAPI from "../../helpers/bunny-api";
+import bunnyAPI from '../../helpers/bunny-api';
 import {
     CollectBLResultAction,
     DemoThunkPayload,
@@ -10,13 +10,13 @@ import {
     RequestingAction,
     RequestReceivedAction,
     SysErrorAction
-} from "../../types";
-import {EBLMsg, EDemoThunk} from "../../constants";
-import {Action, ActionCreator, Dispatch} from "redux";
-import {ThunkAction} from "redux-thunk";
-import {requestFailed, requesting, requestReceived, sysError} from "./sys";
-import {collectBLResult} from "./bl-result";
-import {blError} from "../../helpers";
+} from '../../types';
+import {EBLMsg, EDemoThunk} from '../../constants';
+import {Action, ActionCreator, Dispatch} from 'redux';
+import {ThunkAction} from 'redux-thunk';
+import {requestFailed, requesting, requestReceived, sysError} from './sys';
+import {collectBLResult} from './bl-result';
+import {blError} from '../../helpers';
 
 export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSuccessAction = (payload) => {
     return {

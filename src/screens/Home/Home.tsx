@@ -1,17 +1,17 @@
-import * as React from "react";
-import {ScrollView, View} from "react-native";
-import {RouteProp} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParam} from "../../types";
-import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {Card, getContainerStyles} from "../../containers";
-import {useAuthLabor} from "../../providers/auth-labor";
-import {useDispatch} from "react-redux";
-import {sysError} from "../../store/actions";
-import {Divider} from "../../components/Divider";
-import {getStyles} from "./styles";
-import {InlineJump} from "../../components/InlineJump";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import * as React from 'react';
+import {ScrollView, View} from 'react-native';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParam} from '../../types';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {Card, getContainerStyles} from '../../containers';
+import {useAuthLabor} from '../../providers/auth-labor';
+import {useDispatch} from 'react-redux';
+import {sysError} from '../../store/actions';
+import {Divider} from '../../components/Divider';
+import {getStyles} from './styles';
+import {InlineJump} from '../../components/InlineJump';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -100,10 +100,10 @@ function HomeScreen({navigation}: HomeScreenProps) {
                         navigation.navigate('DemoNestedLv0', {
                             screen: 'NestedLv1Settings',
                             params: {
-                                item: "001",
+                                item: '001',
                                 screen: 'NestedLv2Settings',
                                 params: {
-                                    itemlv2: "002"
+                                    itemlv2: '002'
                                 },
                             },
                         })} iconName="greenkeeper"

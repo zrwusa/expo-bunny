@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {ButtonTO, InButtonText, Text, TextInput, View} from "../../components/UI";
-import {checkColor, colorFaultTolerance, deltaEDes, diffColors} from "../../utils/color";
+import React, {useState} from 'react';
+import {ButtonTO, InButtonText, Text, TextInput, View} from '../../components/UI';
+import {checkColor, colorFaultTolerance, deltaEDes, diffColors} from '../../utils/color';
 import {
     ColorDiffWithPaletteItem,
     ColorDiffWithThemeColorsItem,
@@ -8,20 +8,20 @@ import {
     PaletteKeys,
     ThemeColorKeys,
     ThemeName
-} from "../../types";
-import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from "react-native";
-import {getStyles} from "./styles";
-import {palette, uuidV4} from "../../utils";
-import {Card, Col, Row} from "../../containers";
-import {collectBLResult} from "../../store/actions";
-import {blError} from "../../helpers";
-import {useDispatch} from "react-redux";
-import {ColorTranslator} from "colortranslator";
-import {CopyableText} from "../../components/CopyableText";
-import {ColorValuesCard} from "../../components/ColorValuesCard";
-import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {Tab} from "../../components";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+} from '../../types';
+import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from 'react-native';
+import {getStyles} from './styles';
+import {palette, uuidV4} from '../../utils';
+import {Card, Col, Row} from '../../containers';
+import {collectBLResult} from '../../store/actions';
+import {blError} from '../../helpers';
+import {useDispatch} from 'react-redux';
+import {ColorTranslator} from 'colortranslator';
+import {CopyableText} from '../../components/CopyableText';
+import {ColorValuesCard} from '../../components/ColorValuesCard';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {Tab} from '../../components';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export type UglyColorType = 'Beautiful' | 'RGB' | 'Hex' | 'HSL';
 
@@ -142,7 +142,7 @@ export function ColorFinderScreen() {
         setInputText(text)
         let beautiful = '';
         switch (uglyType) {
-            case "RGB":
+            case 'RGB':
                 beautiful = formatUglyStringToRGB(text)
                 break;
             default:

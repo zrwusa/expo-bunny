@@ -1,8 +1,8 @@
-import React from "react";
-import {StyleProp, View, ViewStyle} from "react-native";
-import {getStyles} from "./styles";
-import {SizeKeys} from "../../types";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React from 'react';
+import {StyleProp, View, ViewStyle} from 'react-native';
+import {getStyles} from './styles';
+import {SizeKeys} from '../../types';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export interface DividerProps {
     isVertical?: boolean,

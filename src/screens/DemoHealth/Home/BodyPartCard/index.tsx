@@ -1,1 +1,1 @@
-export * from "./BodyPartCard";
+export * from './BodyPartCard';

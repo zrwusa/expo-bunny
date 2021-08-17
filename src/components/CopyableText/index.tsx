@@ -1,1 +1,1 @@
-export * from "./CopyableText"
+export * from './CopyableText'

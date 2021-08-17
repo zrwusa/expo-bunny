@@ -1,13 +1,13 @@
-import * as React from "react";
-import {View} from "../../../components/UI";
-import {RouteProp} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {ScrollView} from "react-native";
-import {DemoModalStackParam} from "../../../types";
-import {getContainerStyles} from "../../../containers";
-import {getSharedStyles} from "../../../helpers";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+import * as React from 'react';
+import {View} from '../../../components/UI';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {ScrollView} from 'react-native';
+import {DemoModalStackParam} from '../../../types';
+import {getContainerStyles} from '../../../containers';
+import {getSharedStyles} from '../../../helpers';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;

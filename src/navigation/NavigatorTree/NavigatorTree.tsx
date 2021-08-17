@@ -10,84 +10,84 @@ import {
     DemoTabRNComponentsStack,
     DemoTabStack,
     RootStack
-} from "../stacks";
-import HomeScreen from "../../screens/Home";
-import * as React from "react";
-import {useEffect} from "react";
-import ProfileScreen from "../../screens/Profile";
-import DemoFCReduxHookScreen from "../../screens/DemoFCReduxHook";
-import DemoCollectionScreen from "../../screens/DemoCollection";
-import DemoRouteScreen from "../../screens/DemoRoute";
-import DemoThirdPartScreen from "../../screens/DemoThirdPart";
-import DemoThunkCCScreen from "../../screens/DemoThunkCC/DemoThunkCC";
-import DemoSagaScreen from "../../screens/DemoSaga";
-import DemoMapScreen from "../../screens/DemoMap/DemoMap";
-import {ChatHomeScreen} from "../../screens/DemoChat/Home";
-import DemoShareScreen from "../../screens/DemoShare";
-import {Image, Platform, TouchableOpacity, View} from "react-native";
-import DemoNotificationScreen from "../../screens/DemoNotification/DemoNotification";
-import {NotSupport} from "../../components/NotSupport";
-import TabHomeScreen from "../../screens/DemoTab/Home";
-import TabSettingsScreen from "../../screens/DemoTab/Settings";
+} from '../stacks';
+import HomeScreen from '../../screens/Home';
+import * as React from 'react';
+import {useEffect} from 'react';
+import ProfileScreen from '../../screens/Profile';
+import DemoFCReduxHookScreen from '../../screens/DemoFCReduxHook';
+import DemoCollectionScreen from '../../screens/DemoCollection';
+import DemoRouteScreen from '../../screens/DemoRoute';
+import DemoThirdPartScreen from '../../screens/DemoThirdPart';
+import DemoThunkCCScreen from '../../screens/DemoThunkCC/DemoThunkCC';
+import DemoSagaScreen from '../../screens/DemoSaga';
+import DemoMapScreen from '../../screens/DemoMap/DemoMap';
+import {ChatHomeScreen} from '../../screens/DemoChat/Home';
+import DemoShareScreen from '../../screens/DemoShare';
+import {Image, Platform, TouchableOpacity, View} from 'react-native';
+import DemoNotificationScreen from '../../screens/DemoNotification/DemoNotification';
+import {NotSupport} from '../../components/NotSupport';
+import TabHomeScreen from '../../screens/DemoTab/Home';
+import TabSettingsScreen from '../../screens/DemoTab/Settings';
 import {
     DrawerActions,
     NavigationContainer,
     NavigationContainerProps,
     NavigationContainerRef
-} from "@react-navigation/native";
-import {DocumentTitleOptions, LinkingOptions, Theme} from "@react-navigation/native/lib/typescript/src/types";
-import DrawerHomeScreen from "../../screens/DemoDrawer/Home";
-import DrawerSettingsScreen from "../../screens/DemoDrawer/Settings";
-import NestedLv1HomeScreen from "../../screens/DemoNestedLv0/NestedLv1Home";
-import NestedLv2HomeScreen from "../../screens/DemoNestedLv0/NestedLv1Settings/NestedLv2Home";
-import NestedLv2SettingsScreen from "../../screens/DemoNestedLv0/NestedLv1Settings/NestedLv2Settings";
-import RNHome from "../../screens/DemoRNComponents/RNHome";
-import RNFlatListScreen from "../../screens/DemoRNComponents/RNFlatList";
-import RNSectionListScreen from "../../screens/DemoRNComponents/RNSectionList/SectionList";
-import RNVirtualizedListScreen from "../../screens/DemoRNComponents/RNVirtualizedList";
-import RNKeyboardAvoidingScreen from "../../screens/DemoRNComponents/RNKeyboardAvoiding";
-import RNSafeAreaScreen from "../../screens/DemoRNComponents/RNSafeArea/SafeArea";
-import CryptoCurrencyHomeScreen from "../../screens/DemoCryptoCurrency/Home";
-import CryptoCurrencyAlertScreen from "../../screens/DemoCryptoCurrency/Alert/Alert";
-import SettingsScreen from "../../screens/Settings/Settings";
-import {DemoSuspenseScreen} from "../../screens/DemoSuspense";
-import DemoThemeScreen from "../../screens/DemoTheme";
-import {useTranslation} from "react-i18next";
-import {StackNavigationOptions} from "@react-navigation/stack";
-import {IcoMoon} from "../../components/UI";
-import {useSizeLabor} from "../../providers/size-labor";
-import {getStyles} from "./styles";
-import {useSafeAreaInsets} from "react-native-safe-area-context";
-import {useThemeLabor} from "../../providers/theme-labor";
-import {DefaultNavigatorOptions} from "@react-navigation/core/src/types";
-import {blError, blSuccess, getIconNameByRoute} from "../../helpers";
-import {useAuthLabor} from "../../providers/auth-labor";
-import {collectBLResult} from "../../store/actions";
-import {useDispatch} from "react-redux";
-import {SocialMediaHomeScreen} from "../../screens/DemoSocialMedia/Home";
-import {SocialMediaSettingsScreen} from "../../screens/DemoSocialMedia/Settings";
-import {SocialMediaSearchScreen} from "../../screens/DemoSocialMedia/Search";
-import {DemoSearchScreen} from "../../screens/DemoSearch";
-import {linking} from "./linking";
-import {SocialMediaVideoScreen} from "../../screens/DemoSocialMedia/Media";
-import {PlaygroundScreen} from "../../screens/Playground";
-import {ColorFinderScreen} from "../../screens/ColorFinder";
-import {AuthScreen} from "../../screens/Auth";
-import {HealthHomeScreen} from "../../screens/DemoHealth/Home";
-import {HealthSettingsScreen} from "../../screens/DemoHealth/Settings";
-import {IconToolsScreen} from "../../screens/IconTools";
-import {DrawerNavigationOptions} from "@react-navigation/drawer";
-import {BottomTabBarOptions, BottomTabNavigationOptions} from "@react-navigation/bottom-tabs";
-import {DemoSagaFirebaseScreen} from "../../screens/DemoSagaFirebase";
-import {Row} from "../../containers";
-import {ThemePicker} from "../../components/ThemePicker";
-import {DatingHomeScreen} from "../../screens/DemoDating/Home";
-import {DatingSettingsScreen} from "../../screens/DemoDating/Settings";
-import {ChatRoomScreen} from "../../screens/DemoChat/ChatRoom";
-import {AlgorithmScreen} from "../../screens/Algorithm";
+} from '@react-navigation/native';
+import {DocumentTitleOptions, LinkingOptions, Theme} from '@react-navigation/native/lib/typescript/src/types';
+import DrawerHomeScreen from '../../screens/DemoDrawer/Home';
+import DrawerSettingsScreen from '../../screens/DemoDrawer/Settings';
+import NestedLv1HomeScreen from '../../screens/DemoNestedLv0/NestedLv1Home';
+import NestedLv2HomeScreen from '../../screens/DemoNestedLv0/NestedLv1Settings/NestedLv2Home';
+import NestedLv2SettingsScreen from '../../screens/DemoNestedLv0/NestedLv1Settings/NestedLv2Settings';
+import RNHome from '../../screens/DemoRNComponents/RNHome';
+import RNFlatListScreen from '../../screens/DemoRNComponents/RNFlatList';
+import RNSectionListScreen from '../../screens/DemoRNComponents/RNSectionList/SectionList';
+import RNVirtualizedListScreen from '../../screens/DemoRNComponents/RNVirtualizedList';
+import RNKeyboardAvoidingScreen from '../../screens/DemoRNComponents/RNKeyboardAvoiding';
+import RNSafeAreaScreen from '../../screens/DemoRNComponents/RNSafeArea/SafeArea';
+import CryptoCurrencyHomeScreen from '../../screens/DemoCryptoCurrency/Home';
+import CryptoCurrencyAlertScreen from '../../screens/DemoCryptoCurrency/Alert/Alert';
+import SettingsScreen from '../../screens/Settings/Settings';
+import {DemoSuspenseScreen} from '../../screens/DemoSuspense';
+import DemoThemeScreen from '../../screens/DemoTheme';
+import {useTranslation} from 'react-i18next';
+import {StackNavigationOptions} from '@react-navigation/stack';
+import {IcoMoon} from '../../components/UI';
+import {useSizeLabor} from '../../providers/size-labor';
+import {getStyles} from './styles';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useThemeLabor} from '../../providers/theme-labor';
+import {DefaultNavigatorOptions} from '@react-navigation/core/src/types';
+import {blError, blSuccess, getIconNameByRoute} from '../../helpers';
+import {useAuthLabor} from '../../providers/auth-labor';
+import {collectBLResult} from '../../store/actions';
+import {useDispatch} from 'react-redux';
+import {SocialMediaHomeScreen} from '../../screens/DemoSocialMedia/Home';
+import {SocialMediaSettingsScreen} from '../../screens/DemoSocialMedia/Settings';
+import {SocialMediaSearchScreen} from '../../screens/DemoSocialMedia/Search';
+import {DemoSearchScreen} from '../../screens/DemoSearch';
+import {linking} from './linking';
+import {SocialMediaVideoScreen} from '../../screens/DemoSocialMedia/Media';
+import {PlaygroundScreen} from '../../screens/Playground';
+import {ColorFinderScreen} from '../../screens/ColorFinder';
+import {AuthScreen} from '../../screens/Auth';
+import {HealthHomeScreen} from '../../screens/DemoHealth/Home';
+import {HealthSettingsScreen} from '../../screens/DemoHealth/Settings';
+import {IconToolsScreen} from '../../screens/IconTools';
+import {DrawerNavigationOptions} from '@react-navigation/drawer';
+import {BottomTabBarOptions, BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
+import {DemoSagaFirebaseScreen} from '../../screens/DemoSagaFirebase';
+import {Row} from '../../containers';
+import {ThemePicker} from '../../components/ThemePicker';
+import {DatingHomeScreen} from '../../screens/DemoDating/Home';
+import {DatingSettingsScreen} from '../../screens/DemoDating/Settings';
+import {ChatRoomScreen} from '../../screens/DemoChat/ChatRoom';
+import {AlgorithmScreen} from '../../screens/Algorithm';
 
-type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>["screenOptions"]
-type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>["screenOptions"]
+type DrawerScreenOptions = DefaultNavigatorOptions<DrawerNavigationOptions>['screenOptions']
+type TabBarScreenOptions = DefaultNavigatorOptions<BottomTabNavigationOptions>['screenOptions']
 
 export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
     theme?: Theme | undefined;
@@ -309,19 +309,19 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
 
     useEffect(() => {
         switch (authResult.triggerType) {
-            case "API":
+            case 'API':
                 dispatch(collectBLResult(blError(t('sys.apiNeedLogin'))))
                 break;
-            case "SCREEN":
+            case 'SCREEN':
                 navigateToAuth()
                 break;
-            case "MANUAL":
+            case 'MANUAL':
                 navigateToAuth()
                 break;
-            case "AUTO":
+            case 'AUTO':
                 dispatch(collectBLResult(blSuccess(true, t('sys.LogOutSuccess'))))
                 break;
-            case "OTHERS":
+            case 'OTHERS':
                 navigateToAuth()
                 break;
             default:

@@ -1,5 +1,5 @@
-import {Trie} from "../../data-structures/trie";
-import {testTrieCase1} from "./cases";
+import {Trie} from '../../data-structures/trie';
+import {testTrieCase1} from './cases';
 
 export const testTrie = (words: string[]) => {
     const trie = new Trie();

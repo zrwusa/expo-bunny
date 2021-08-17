@@ -1,2 +1,2 @@
-export * from "./DemoPureComponent";
-export * from "./DemoRegularComponent";
+export * from './DemoPureComponent';
+export * from './DemoRegularComponent';

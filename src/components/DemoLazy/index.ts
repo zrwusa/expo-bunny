@@ -1,1 +1,1 @@
-export * from "./DemoLazy"
+export * from './DemoLazy'

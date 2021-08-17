@@ -1,9 +1,9 @@
-import React from "react";
-import {Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View,} from "react-native";
-import {Button, Text, TextInput} from "../../../components/UI";
-import {getStyles} from "./styles";
-import {getContainerStyles} from "../../../containers";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+import React from 'react';
+import {Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View,} from 'react-native';
+import {Button, Text, TextInput} from '../../../components/UI';
+import {getStyles} from './styles';
+import {getContainerStyles} from '../../../containers';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function RNKeyboardAvoidingScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -12,7 +12,7 @@ function RNKeyboardAvoidingScreen() {
 
     return (
         <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={containerStyles.Screen}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

@@ -1,1 +1,1 @@
-export * from "victory-native"
+export * from 'victory-native'

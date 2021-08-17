@@ -1,4 +1,4 @@
-import {Heap, HeapNode} from "./heap";
+import {Heap, HeapNode} from './heap';
 
 export class MaxHeap<T extends number | HeapNode<V>, V> extends Heap<T, V> {
     constructor(nodes?: T[]) {

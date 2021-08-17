@@ -1,7 +1,7 @@
 /* --- start Divide and conquer ---*/
 // Binary Search
 // 33 Search in Rotated Sorted Array
-import {runAlgorithm} from "../helpers";
+import {runAlgorithm} from '../helpers';
 import {
     countSmallerCase1,
     countSmallerCase2,
@@ -9,9 +9,9 @@ import {
     countSmallerCase4,
     countSmallerCase5,
     countSmallerCase7
-} from "./cases";
-import {BinaryIndexedTree, BST} from "../../data-structures/binary-tree";
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
+} from './cases';
+import {BinaryIndexedTree, BST} from '../../data-structures/binary-tree';
+import {DeepProxy, TProxyHandler} from '@qiwi/deep-proxy';
 
 export const searchInRotatedSortedArray = function (nums: number[], target: number) {
     if (nums.length === 0) return -1; // check empty

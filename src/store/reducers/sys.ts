@@ -1,4 +1,4 @@
-import {ELanguage, ESys, EThemes} from "../../constants";
+import {ELanguage, ESys, EThemes} from '../../constants';
 import {
     RequestConfig,
     RequestFailedPayload,
@@ -8,9 +8,9 @@ import {
     SysClearErrorPayload,
     SysState,
     SysWarnPayload
-} from "../../types";
-import {SysActions} from "../actions";
-import _ from "lodash";
+} from '../../types';
+import {SysActions} from '../actions';
+import _ from 'lodash';
 
 const initialState: SysState = {
     isReady: false,

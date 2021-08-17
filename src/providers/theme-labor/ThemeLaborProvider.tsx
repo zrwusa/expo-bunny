@@ -1,19 +1,19 @@
 // todo description this provider
-import * as React from "react";
-import {useEffect, useMemo, useState} from "react";
-import {ThemeName, ThemeProviderProps} from "../../types";
-import {ThemeLaborContext} from "./ThemeLaborContext";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants, {EThemes} from "../../constants/constants";
-import {collectBLResult, sysError} from "../../store/actions";
-import {useColorScheme} from "react-native-appearance";
-import {useDispatch} from "react-redux";
-import {Preparing} from "../../components/Preparing";
-import {Provider as PaperProvider} from "react-native-paper";
-import {getThemes} from "./theme";
-import _ from "lodash";
-import {Dimensions} from "react-native";
-import {blError} from "../../helpers";
+import * as React from 'react';
+import {useEffect, useMemo, useState} from 'react';
+import {ThemeName, ThemeProviderProps} from '../../types';
+import {ThemeLaborContext} from './ThemeLaborContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import BunnyConstants, {EThemes} from '../../constants/constants';
+import {collectBLResult, sysError} from '../../store/actions';
+import {useColorScheme} from 'react-native-appearance';
+import {useDispatch} from 'react-redux';
+import {Preparing} from '../../components/Preparing';
+import {Provider as PaperProvider} from 'react-native-paper';
+import {getThemes} from './theme';
+import _ from 'lodash';
+import {Dimensions} from 'react-native';
+import {blError} from '../../helpers';
 
 
 function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {

@@ -1,6 +1,6 @@
 // TODO support ImageSourcePropType
-import React, {useEffect, useState} from "react";
-import {IcoMoon, Text, TextButton} from "../UI";
+import React, {useEffect, useState} from 'react';
+import {IcoMoon, Text, TextButton} from '../UI';
 import {
     ActivityIndicator,
     ActivityIndicatorProps,
@@ -17,17 +17,17 @@ import {
     TouchableOpacity,
     View,
     ViewStyle
-} from "react-native";
+} from 'react-native';
 // import * as CameraRoll from "@react-native-community/cameraroll";
-import {getStyles} from "./styles";
+import {getStyles} from './styles';
 import * as ImagePicker from 'expo-image-picker';
 import {ImagePickerOptions} from 'expo-image-picker';
-import {Permissions, removeFileFromFirebaseByURL, uploadFileToFirebase} from "../../helpers";
-import Modal, {ModalProps} from "react-native-modal";
-import {Divider} from "../Divider";
-import {CopyableText} from "../CopyableText";
-import {IcoMoonKeys} from "../../types";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import {Permissions, removeFileFromFirebaseByURL, uploadFileToFirebase} from '../../helpers';
+import Modal, {ModalProps} from 'react-native-modal';
+import {Divider} from '../Divider';
+import {CopyableText} from '../CopyableText';
+import {IcoMoonKeys} from '../../types';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 // import ViewShot,{captureRef} from "react-native-view-shot";
 export type UploadedResult = { uri: string }
 export type RenderPreview = (props: { imageSource: ImageURISource, toggleModal: () => void }) => React.ReactElement | null;

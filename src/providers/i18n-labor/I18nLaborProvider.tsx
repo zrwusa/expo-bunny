@@ -1,15 +1,15 @@
 // todo description this provider
-import * as React from "react";
-import {ReactNode, useEffect, useState} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants from "../../constants/constants";
-import * as localization from "expo-localization";
-import {I18nLaborContext} from "./I18nLaborContext";
-import i18next from "./i18next";
-import {i18n as I18n} from "i18next";
-import {Preparing} from "../../components/Preparing";
-import {useTranslation} from "react-i18next";
-import {shortenTFunctionKey} from "./shorten-t-function-key";
+import * as React from 'react';
+import {ReactNode, useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import BunnyConstants from '../../constants/constants';
+import * as localization from 'expo-localization';
+import {I18nLaborContext} from './I18nLaborContext';
+import i18next from './i18next';
+import {i18n as I18n} from 'i18next';
+import {Preparing} from '../../components/Preparing';
+import {useTranslation} from 'react-i18next';
+import {shortenTFunctionKey} from './shorten-t-function-key';
 
 export interface I18nProviderProps {
     children: ReactNode,

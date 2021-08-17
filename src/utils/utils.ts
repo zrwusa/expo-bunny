@@ -1,6 +1,6 @@
-import {JSONObject, JSONSerializable} from "../types";
-import {firebase} from "../firebase/firebase";
-import _ from "lodash";
+import {JSONObject, JSONSerializable} from '../types';
+import {firebase} from '../firebase/firebase';
+import _ from 'lodash';
 
 export function randomText(length: number) {
     let result = '';

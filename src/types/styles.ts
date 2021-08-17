@@ -1,13 +1,13 @@
-import {DeepLeavesWrap, JsonKeys} from "./utils";
-import {IconProps} from "react-native-vector-icons/Icon";
+import {DeepLeavesWrap, JsonKeys} from './utils';
+import {IconProps} from 'react-native-vector-icons/Icon';
 import glyphMaterialCommunityMap
-    from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {glyphMaterialCommunityCustomMap} from "../helpers";
-import {ReactNode} from "react";
-import glyphMapIcoMoon from "../assets/fonts/icomoon/icomoon.json"
-import {ImageStyle, TextStyle, ViewStyle} from "react-native";
-import {ColorSchemeName} from "react-native-appearance";
-import {VictoryThemeDefinition} from "../components/Victory/Victory.web";
+    from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
+import {glyphMaterialCommunityCustomMap} from '../helpers';
+import {ReactNode} from 'react';
+import glyphMapIcoMoon from '../assets/fonts/icomoon/icomoon.json'
+import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
+import {ColorSchemeName} from 'react-native-appearance';
+import {VictoryThemeDefinition} from '../components/Victory/Victory.web';
 
 export type CheckColor =
     'isColor'
@@ -246,67 +246,67 @@ export type RouteIconFontConfig = {
 }
 
 export type IcoMoonSelectionPreferences = {
-    "showGlyphs": boolean,
-    "showCodes": boolean,
-    "showQuickUse": boolean,
-    "showQuickUse2": boolean,
-    "showSVGs": boolean,
-    "fontPref": {
-        "prefix": string,
-        "metadata": {
-            "fontFamily": string
+    'showGlyphs': boolean,
+    'showCodes': boolean,
+    'showQuickUse': boolean,
+    'showQuickUse2': boolean,
+    'showSVGs': boolean,
+    'fontPref': {
+        'prefix': string,
+        'metadata': {
+            'fontFamily': string
         },
-        "metrics": {
-            "emSize": number,
-            "baseline": number,
-            "whitespace": number
+        'metrics': {
+            'emSize': number,
+            'baseline': number,
+            'whitespace': number
         },
-        "embed": boolean
+        'embed': boolean
     },
-    "imagePref": {
-        "prefix": string,
-        "png": boolean,
-        "useClassSelector": boolean,
-        "color": number,
-        "bgColor": number,
-        "name": string,
-        "classSelector": string
+    'imagePref': {
+        'prefix': string,
+        'png': boolean,
+        'useClassSelector': boolean,
+        'color': number,
+        'bgColor': number,
+        'name': string,
+        'classSelector': string
     },
-    "historySize": number
+    'historySize': number
 }
 export type IcoMoonSelection = {
-    "IcoMoonType": string,
-    "icons": IcoMoonSelectionIcon[],
-    "height": number,
-    "metadata": {
-        "name": string
+    'IcoMoonType': string,
+    'icons': IcoMoonSelectionIcon[],
+    'height': number,
+    'metadata': {
+        'name': string
     },
-    "preferences": IcoMoonSelectionPreferences
+    'preferences': IcoMoonSelectionPreferences
 }
 type Attr = {
-    "fill"?: string
+    'fill'?: string
 }
 export type IcoMoonSelectionIcon = {
-    "icon": {
-        "paths": string[],
-        "attrs": Attr[],
-        "isMulticolor": boolean,
-        "isMulticolor2": boolean,
-        "tags": string[],
-        "grid": number
+    'icon': {
+        'paths': string[],
+        'attrs': Attr[],
+        'isMulticolor': boolean,
+        'isMulticolor2': boolean,
+        'tags': string[],
+        'grid': number
     },
-    "attrs": Attr[],
-    "properties": {
-        "ligatures": string,
-        "id": number,
-        "order": number,
-        "prevSize": number,
-        "code": number,
-        "name": string
+    'attrs': Attr[],
+    'properties': {
+        'ligatures': string,
+        'id': number,
+        'order': number,
+        'prevSize': number,
+        'code': number,
+        'name': string
     },
-    "setIdx": number,
-    "setId": number,
-    "iconIdx": number
+    'setIdx': number,
+    'setId': number,
+    'iconIdx': number
 }
 export type Measure = {
     breakpoints: {

@@ -1,5 +1,5 @@
-import React, {ReactNode} from "react";
-import {StyleProp, StyleSheet, Text, TextStyle, View} from "react-native";
+import React, {ReactNode} from 'react';
+import {StyleProp, StyleSheet, Text, TextStyle, View} from 'react-native';
 
 interface ReadMoreProps {
     numberOfLines: number,
@@ -126,7 +126,7 @@ function nextFrameAsync() {
 
 const styles = StyleSheet.create({
     button: {
-        color: "#888",
+        color: '#888',
         marginTop: 5
     }
 });

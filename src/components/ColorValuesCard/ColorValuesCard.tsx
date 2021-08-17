@@ -1,11 +1,11 @@
-import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem} from "../../types";
-import {Text, View} from "../UI";
-import {CopyableText} from "../CopyableText";
-import React from "react";
-import {getStyles} from "./styles";
-import {Row} from "../../containers/Row";
-import {Col} from "../../containers/Col";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem} from '../../types';
+import {Text, View} from '../UI';
+import {CopyableText} from '../CopyableText';
+import React from 'react';
+import {getStyles} from './styles';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | ColorDiffWithPaletteItem | ColorInputItem }) => {
     const {sizeLabor, themeLabor} = useBunnyKit();

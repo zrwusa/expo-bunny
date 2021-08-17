@@ -1,12 +1,12 @@
-import * as React from "react";
-import {useCallback, useEffect, useMemo, useState} from "react";
-import {FlatList, Platform, RefreshControl, SafeAreaView} from "react-native";
-import {IncrementId} from "../../../utils";
-import {RootState, SocialMediaMainDatum} from "../../../types";
-import {SocialMediaVideoCard} from "../../../components/SocialMediaVideoCard";
-import {isLoaded, useFirebase, useFirestoreConnect} from "react-redux-firebase";
-import {useSelector} from "react-redux";
-import {Preparing} from "../../../components/Preparing";
+import * as React from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {FlatList, Platform, RefreshControl, SafeAreaView} from 'react-native';
+import {IncrementId} from '../../../utils';
+import {RootState, SocialMediaMainDatum} from '../../../types';
+import {SocialMediaVideoCard} from '../../../components/SocialMediaVideoCard';
+import {isLoaded, useFirebase, useFirestoreConnect} from 'react-redux-firebase';
+import {useSelector} from 'react-redux';
+import {Preparing} from '../../../components/Preparing';
 
 export function SocialMediaHomeScreen() {
     const firebase = useFirebase()

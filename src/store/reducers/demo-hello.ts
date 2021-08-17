@@ -1,11 +1,11 @@
-import {EDemoHello} from "../../constants";
-import {DemoHelloState} from "../../types";
-import {DemoHelloActions} from "../actions";
+import {EDemoHello} from '../../constants';
+import {DemoHelloState} from '../../types';
+import {DemoHelloActions} from '../actions';
 
 
 export function demoHelloStateReducer(
     prevState: DemoHelloState = {
-        name: "initialed name",
+        name: 'initialed name',
         order: 0
     }, {type, payload}: DemoHelloActions): DemoHelloState {
     switch (type) {

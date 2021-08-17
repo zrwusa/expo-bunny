@@ -1,5 +1,5 @@
-import {BST, BSTNode, I_BST} from "./bst";
-import {BinaryTreeNodeId} from "./binary-tree";
+import {BST, BSTNode, I_BST} from './bst';
+import {BinaryTreeNodeId} from './binary-tree';
 
 export type AVLTreeDeletedResult<T> = { deleted: AVLTreeNode<T> | null, needBalanced: AVLTreeNode<T> | null };
 

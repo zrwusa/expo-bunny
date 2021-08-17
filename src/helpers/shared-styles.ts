@@ -1,5 +1,5 @@
-import {JSONSerializable, SizeLabor, ThemeLabor} from "../types";
-import {StyleSheet} from "react-native";
+import {JSONSerializable, SizeLabor, ThemeLabor} from '../types';
+import {StyleSheet} from 'react-native';
 
 export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;

@@ -1,10 +1,10 @@
-import {Platform} from "react-native";
-import * as Notifications from "expo-notifications";
-import {Notification} from "expo-notifications";
-import Constants from "expo-constants";
-import {collectBLResult} from "../store/actions";
-import {blSuccess} from "../helpers";
-import store from "../store"
+import {Platform} from 'react-native';
+import * as Notifications from 'expo-notifications';
+import {Notification} from 'expo-notifications';
+import Constants from 'expo-constants';
+import {collectBLResult} from '../store/actions';
+import {blSuccess} from '../helpers';
+import store from '../store'
 
 export type Copywriting = {
     failedToGetToken: string,
@@ -46,7 +46,7 @@ export const registerForPushNotificationsAsync = async (copywriting: Copywriting
 export const schedulePushNotification = async () => {
     await Notifications.scheduleNotificationAsync({
         content: {
-            title: "You've got mail! 📬",
+            title: 'You\'ve got mail! 📬',
             body: 'Here is the notification body',
             sound: 'default',
             data: {data: 'goes here'},
@@ -56,24 +56,24 @@ export const schedulePushNotification = async () => {
 }
 
 export const defaultNotification: Notification = {
-    "request": {
-        "trigger": {
-            "type": "push",
+    'request': {
+        'trigger': {
+            'type': 'push',
         },
-        "identifier": "XXXxXXXx-XXXx-XXXx-XXXx-XXXxXXXxXXXx",
-        "content": {
-            "body": "body",
-            "sound": "default",
-            "launchImageName": "",
-            "subtitle": null,
-            "title": null,
-            "data": {},
-            "categoryIdentifier": "",
-            "attachments": [],
-            "threadIdentifier": "",
+        'identifier': 'XXXxXXXx-XXXx-XXXx-XXXx-XXXxXXXxXXXx',
+        'content': {
+            'body': 'body',
+            'sound': 'default',
+            'launchImageName': '',
+            'subtitle': null,
+            'title': null,
+            'data': {},
+            'categoryIdentifier': '',
+            'attachments': [],
+            'threadIdentifier': '',
         }
     },
-    "date": new Date().getMilliseconds()
+    'date': new Date().getMilliseconds()
 };
 
 // const demoNotification: Notification = {

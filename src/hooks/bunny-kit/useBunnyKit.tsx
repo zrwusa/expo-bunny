@@ -1,7 +1,7 @@
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
-import {useTranslation} from "react-i18next";
-import {useAuthLabor} from "../../providers/auth-labor";
+import {useSizeLabor} from '../../providers/size-labor';
+import {useThemeLabor} from '../../providers/theme-labor';
+import {useTranslation} from 'react-i18next';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {
     AuthFunctions,
     AuthLaborContextType,
@@ -12,8 +12,8 @@ import {
     ThemeLabor,
     User,
     WPOrHP
-} from "../../types";
-import {i18n, TFunction} from "i18next";
+} from '../../types';
+import {i18n, TFunction} from 'i18next';
 
 export interface BunnyKit {
     sizeLabor: SizeLabor,

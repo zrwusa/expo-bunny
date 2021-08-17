@@ -1,1 +1,1 @@
-export * from "./LinearGradientIcon"
+export * from './LinearGradientIcon'

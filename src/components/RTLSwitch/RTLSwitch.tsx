@@ -1,8 +1,8 @@
-import * as React from "react";
-import {SwitchP} from "../UI";
-import BunnyConstants from "../../constants/constants";
-import {I18nManager} from "react-native";
-import {restartApp} from "../../restart";
+import * as React from 'react';
+import {SwitchP} from '../UI';
+import BunnyConstants from '../../constants/constants';
+import {I18nManager} from 'react-native';
+import {restartApp} from '../../restart';
 
 export function RTLSwitch() {
     return <SwitchP

@@ -1,9 +1,9 @@
 // Action payloads
-import {InitialState} from "@react-navigation/native";
-import {BunnyAPIStandardRequestParams} from "./api";
-import {Method} from "axios";
-import {BLResult} from "./bl";
-import {SagaTodo} from "./states";
+import {InitialState} from '@react-navigation/native';
+import {BunnyAPIStandardRequestParams} from './api';
+import {Method} from 'axios';
+import {BLResult} from './bl';
+import {SagaTodo} from './states';
 
 export interface LoginParams {
     email: string;

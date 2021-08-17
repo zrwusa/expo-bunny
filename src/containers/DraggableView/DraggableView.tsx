@@ -1,6 +1,6 @@
-import React, {useRef} from "react";
-import {Animated, PanResponder, StyleSheet} from "react-native";
-import config from "../../config"
+import React, {useRef} from 'react';
+import {Animated, PanResponder, StyleSheet} from 'react-native';
+import config from '../../config'
 
 export const DraggableView = () => {
     const pan = useRef(new Animated.ValueXY()).current;
@@ -32,7 +32,7 @@ export const DraggableView = () => {
 
 const styles = StyleSheet.create({
     box: {
-        backgroundColor: "#61dafb",
+        backgroundColor: '#61dafb',
         width: 80,
         height: 80,
         borderRadius: 4,

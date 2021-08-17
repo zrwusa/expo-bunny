@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {Keyboard, KeyboardEvent} from "react-native";
+import {useEffect, useState} from 'react';
+import {Keyboard, KeyboardEvent} from 'react-native';
 
 export interface UseKeyboardHeight {
     currentHeight: number

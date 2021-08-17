@@ -1,32 +1,32 @@
-import React from "react";
-import {SafeAreaView, SectionList, View} from "react-native";
-import {Text} from "../../../components/UI";
-import {getStyles} from "./styles";
-import {getContainerStyles} from "../../../containers";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+import React from 'react';
+import {SafeAreaView, SectionList, View} from 'react-native';
+import {Text} from '../../../components/UI';
+import {getStyles} from './styles';
+import {getContainerStyles} from '../../../containers';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function SectionListScreen() {
     const {sizeLabor, themeLabor, colors} = useBunnyKit();
     const SECTION_LIST_DATA = [
         {
-            title: "Main dishes",
-            data: ["Pizza", "Burger", "Risotto"]
+            title: 'Main dishes',
+            data: ['Pizza', 'Burger', 'Risotto']
         },
         {
-            title: "Sides",
-            data: ["French Fries", "Onion Rings", "Fried Shrimps"]
+            title: 'Sides',
+            data: ['French Fries', 'Onion Rings', 'Fried Shrimps']
         },
         {
-            title: "Drinks",
-            data: ["Water", "Coke", "Beer"]
+            title: 'Drinks',
+            data: ['Water', 'Coke', 'Beer']
         },
         {
-            title: "Desserts",
-            data: ["Cheese Cake", "Ice Cream"]
+            title: 'Desserts',
+            data: ['Cheese Cake', 'Ice Cream']
         },
         {
-            title: "Soup",
-            data: ["Mushroom Soup", "Tomato Soup", "Papa Soup", "D-start Soup", "Noodle Soup"]
+            title: 'Soup',
+            data: ['Mushroom Soup', 'Tomato Soup', 'Papa Soup', 'D-start Soup', 'Noodle Soup']
         }
     ];
 

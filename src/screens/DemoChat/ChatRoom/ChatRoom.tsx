@@ -1,17 +1,17 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react"
-import {BunnyChat} from "../../../components/BunnyChat"
-import {RouteProp} from "@react-navigation/native";
-import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from "../../../types";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {useDispatch, useSelector} from "react-redux";
-import {isLoaded, useFirestore, useFirestoreConnect} from "react-redux-firebase";
-import {firestoreTimestampToDate, uuidV4} from "../../../utils";
-import {Keyboard, SafeAreaView, TouchableOpacity} from "react-native";
-import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from "../../../components";
-import {IcoMoon} from "../../../components/UI";
-import {getStyles} from "./styles";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
-import {sysError} from "../../../store/actions";
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
+import {BunnyChat} from '../../../components/BunnyChat'
+import {RouteProp} from '@react-navigation/native';
+import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from '../../../types';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useDispatch, useSelector} from 'react-redux';
+import {isLoaded, useFirestore, useFirestoreConnect} from 'react-redux-firebase';
+import {firestoreTimestampToDate, uuidV4} from '../../../utils';
+import {Keyboard, SafeAreaView, TouchableOpacity} from 'react-native';
+import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from '../../../components';
+import {IcoMoon} from '../../../components/UI';
+import {getStyles} from './styles';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {sysError} from '../../../store/actions';
 
 type ChatRoomRouteProp = RouteProp<DemoChatStackParam, 'ChatRoom'>;
 type ChatRoomNavigationProp = StackNavigationProp<DemoChatStackParam, 'ChatRoom'>;

@@ -1,11 +1,11 @@
-import React from "react";
-import {Button, Text, View} from "../../components/UI";
-import {useDispatch, useSelector} from "react-redux";
-import {getDemoSagas} from "../../store/actions";
-import {RootState} from "../../types";
-import {getSharedStyles} from "../../helpers";
-import {getContainerStyles} from "../../containers";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React from 'react';
+import {Button, Text, View} from '../../components/UI';
+import {useDispatch, useSelector} from 'react-redux';
+import {getDemoSagas} from '../../store/actions';
+import {RootState} from '../../types';
+import {getSharedStyles} from '../../helpers';
+import {getContainerStyles} from '../../containers';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 function DemoSagaScreen() {

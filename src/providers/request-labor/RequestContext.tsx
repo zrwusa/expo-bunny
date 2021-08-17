@@ -1,5 +1,5 @@
-import React from "react";
-import bunnyAPI from "../../helpers/bunny-api";
+import React from 'react';
+import bunnyAPI from '../../helpers/bunny-api';
 
 export const RequestContext = React.createContext<typeof bunnyAPI>(new Proxy(bunnyAPI, {
         apply: () => {

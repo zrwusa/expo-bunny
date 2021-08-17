@@ -1,12 +1,12 @@
-import * as React from "react"
-import {useEffect, useState} from "react"
-import {useBunnyKit} from "../../hooks/bunny-kit";
-import {IcoMoon} from "../UI";
-import {Platform, TouchableHighlight, Vibration} from "react-native";
-import {Audio} from "../../../packages/expo-av/src";
-import {uploadFileToFirebase} from "../../helpers";
-import {RECORDING_OPTIONS_PRESET_HIGH_QUALITY} from "../../../packages/expo-av/src/Audio/Recording";
-import {getStyles} from "./styles";
+import * as React from 'react'
+import {useEffect, useState} from 'react'
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {IcoMoon} from '../UI';
+import {Platform, TouchableHighlight, Vibration} from 'react-native';
+import {Audio} from '../../../packages/expo-av/src';
+import {uploadFileToFirebase} from '../../helpers';
+import {RECORDING_OPTIONS_PRESET_HIGH_QUALITY} from '../../../packages/expo-av/src/Audio/Recording';
+import {getStyles} from './styles';
 
 export interface AudioRecorderProps {
     onValueChanged?: (uri: string) => void,

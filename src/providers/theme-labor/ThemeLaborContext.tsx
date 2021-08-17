@@ -1,7 +1,7 @@
-import * as React from "react";
-import {ThemeLabor, ThemeName} from "../../types";
-import {defaultTheme, themes} from "./theme";
-import {EThemes} from "../../constants";
+import * as React from 'react';
+import {ThemeLabor, ThemeName} from '../../types';
+import {defaultTheme, themes} from './theme';
+import {EThemes} from '../../constants';
 
 
 const ThemeLaborContext = React.createContext<ThemeLabor>({

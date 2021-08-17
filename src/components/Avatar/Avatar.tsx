@@ -1,9 +1,9 @@
-import React from "react";
-import {Image, ImageSourcePropType, ImageStyle, ImageURISource, StyleProp} from "react-native";
-import {getStyles} from "./styles";
-import {SizeKeys} from "../../types";
-import {ImageUploader, ImageUploaderProps} from "../ImageUploader";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React from 'react';
+import {Image, ImageSourcePropType, ImageStyle, ImageURISource, StyleProp} from 'react-native';
+import {getStyles} from './styles';
+import {SizeKeys} from '../../types';
+import {ImageUploader, ImageUploaderProps} from '../ImageUploader';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export interface AvatarProps {
     source: ImageSourcePropType,

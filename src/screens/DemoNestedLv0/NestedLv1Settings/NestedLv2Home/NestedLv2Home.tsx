@@ -1,12 +1,12 @@
-import * as React from "react";
-import {ButtonTO, InButtonText, View} from "../../../../components/UI";
-import {RouteProp} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {DemoNestedLv2StackParam} from "../../../../types";
-import {shortenTFunctionKey} from "../../../../providers/i18n-labor";
-import {getContainerStyles} from "../../../../containers";
-import {getSharedStyles} from "../../../../helpers";
-import {useBunnyKit} from "../../../../hooks/bunny-kit";
+import * as React from 'react';
+import {ButtonTO, InButtonText, View} from '../../../../components/UI';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {DemoNestedLv2StackParam} from '../../../../types';
+import {shortenTFunctionKey} from '../../../../providers/i18n-labor';
+import {getContainerStyles} from '../../../../containers';
+import {getSharedStyles} from '../../../../helpers';
+import {useBunnyKit} from '../../../../hooks/bunny-kit';
 
 type NestedLv2HomeRouteProp = RouteProp<DemoNestedLv2StackParam, 'NestedLv2Home'>;
 type NestedLv2HomeNavigationProp = StackNavigationProp<DemoNestedLv2StackParam, 'NestedLv2Settings'>;
@@ -24,7 +24,7 @@ function NestedLv2HomeScreen({route, navigation}: NestedLv2HomeProps) {
 
     return (
         <View style={[containerStyles.Screen, sharedStyles.centralized]}>
-            <ButtonTO onPress={() => navigation.navigate('NestedLv2Settings', {itemlv2: "001"})}>
+            <ButtonTO onPress={() => navigation.navigate('NestedLv2Settings', {itemlv2: '001'})}>
                 <InButtonText>{st(`goToNestedLv2Settings`)}</InButtonText>
             </ButtonTO>
         </View>

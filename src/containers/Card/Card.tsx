@@ -1,11 +1,11 @@
-import * as React from "react";
-import {StyleProp, View, ViewStyle} from "react-native";
-import {useSizeLabor} from "../../providers/size-labor";
-import {useThemeLabor} from "../../providers/theme-labor";
-import {getStyles} from "./styles";
-import {Text} from "../../components/UI"
-import {getContainerStyles} from "../styles";
-import {LinearGradient} from "expo-linear-gradient";
+import * as React from 'react';
+import {StyleProp, View, ViewStyle} from 'react-native';
+import {useSizeLabor} from '../../providers/size-labor';
+import {useThemeLabor} from '../../providers/theme-labor';
+import {getStyles} from './styles';
+import {Text} from '../../components/UI'
+import {getContainerStyles} from '../styles';
+import {LinearGradient} from 'expo-linear-gradient';
 
 export interface OutTitleCardProps {
     title: string,

@@ -1,5 +1,5 @@
 import {InteractionManager, Platform} from 'react-native';
-import {JSONSerializable} from "../types";
+import {JSONSerializable} from '../types';
 
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;

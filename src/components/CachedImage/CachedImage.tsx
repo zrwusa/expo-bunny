@@ -1,6 +1,6 @@
-import * as React from "react";
-import {Image as RNImage, ImageProps, ImageURISource} from "react-native";
-import imageCacheManager from "./CacheManager";
+import * as React from 'react';
+import {Image as RNImage, ImageProps, ImageURISource} from 'react-native';
+import imageCacheManager from './CacheManager';
 
 
 export interface CashedImageProps extends ImageProps {

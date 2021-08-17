@@ -6,8 +6,8 @@ import {
     RequestGetCurrentPriceAction,
     SaveQuickAlertSettingsAction,
     SaveQuickAlertSettingsParams
-} from "../../types";
-import {EDemoCryptoCurrency} from "../../constants";
+} from '../../types';
+import {EDemoCryptoCurrency} from '../../constants';
 
 export function saveQuickAlertSettings(params: SaveQuickAlertSettingsParams): SaveQuickAlertSettingsAction {
     return {

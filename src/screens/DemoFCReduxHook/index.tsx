@@ -1,2 +1,2 @@
-export {default} from "./DemoFCReduxHook";
-export * from "./DemoFCReduxHook";
+export {default} from './DemoFCReduxHook';
+export * from './DemoFCReduxHook';

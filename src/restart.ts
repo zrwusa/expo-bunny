@@ -1,6 +1,6 @@
-import {Platform} from "react-native";
+import {Platform} from 'react-native';
 
-import * as Updates from "expo-updates";
+import * as Updates from 'expo-updates';
 
 async function restartAppNative() {
     return await Updates.reloadAsync();

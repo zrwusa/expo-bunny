@@ -1,14 +1,14 @@
 import * as Notifications from 'expo-notifications';
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from "../../components/UI";
+import {Button, Text, View} from '../../components/UI';
 import {Platform} from 'react-native';
 import {
     defaultNotification,
     registerForPushNotificationsAsync,
     schedulePushNotification
-} from "../../utils/expo-notification";
-import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+} from '../../utils/expo-notification';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 export default function DemoNotificationScreen() {

@@ -1,6 +1,6 @@
-import {CheckColor, CheckColorResult, CheckResultType} from "../types";
-import {EXCEPTIONAL_COLOR, STANDARD_COLOR_NAME_ALL} from "../constants";
-import {ColorTranslator} from "colortranslator"
+import {CheckColor, CheckColorResult, CheckResultType} from '../types';
+import {EXCEPTIONAL_COLOR, STANDARD_COLOR_NAME_ALL} from '../constants';
+import {ColorTranslator} from 'colortranslator'
 
 export function isColor(colorString: string) {
     if (isColorName(colorString)) {

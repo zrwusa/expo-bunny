@@ -1,7 +1,7 @@
 /* --- start Graph --- */
 // 133	Clone Graph	★★	138					queue + hashtable
 // 200	Number of Islands	★★	547	695	733	827	1162
-import {Coordinate, runAlgorithm} from "../helpers";
+import {Coordinate, runAlgorithm} from '../helpers';
 import {
     DirectedEdge,
     DirectedGraph,
@@ -11,10 +11,10 @@ import {
     UndirectedGraph,
     UndirectedVertex,
     VertexId
-} from "../../data-structures/graph";
-import {timeEnd, timeStart, wait, WaitManager} from "../../utils";
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
-import {canFinishCase1, canFinishCase3, criticalConnectionsCase1} from "./cases";
+} from '../../data-structures/graph';
+import {timeEnd, timeStart, wait, WaitManager} from '../../utils';
+import {DeepProxy, TProxyHandler} from '@qiwi/deep-proxy';
+import {canFinishCase1, canFinishCase3, criticalConnectionsCase1} from './cases';
 
 
 class MyVertex extends DirectedVertex {

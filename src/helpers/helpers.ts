@@ -11,10 +11,10 @@ import {
     NavigatorTreeNode,
     RootStackParam,
     RouteIconFontConfig
-} from "../types";
+} from '../types';
 import glyphMaterialCommunityMap
-    from "@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
-import {EBLMsg} from "../constants";
+    from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
+import {EBLMsg} from '../constants';
 import {
     AuthAPIError,
     BunnyAPIError,
@@ -24,15 +24,15 @@ import {
     deepRenameKeys,
     NomicsAPIError,
     uuidV4
-} from "../utils";
-import configORG from "../config";
-import _ from "lodash";
-import icoMoonSelection from "../assets/fonts/icomoon/selection.json"
-import {RouteProp} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {firebase} from "../firebase/firebase";
-import * as ImagePicker from "expo-image-picker";
-import {PanResponder} from "react-native";
+} from '../utils';
+import configORG from '../config';
+import _ from 'lodash';
+import icoMoonSelection from '../assets/fonts/icomoon/selection.json'
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {firebase} from '../firebase/firebase';
+import * as ImagePicker from 'expo-image-picker';
+import {PanResponder} from 'react-native';
 
 export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     const {
@@ -65,10 +65,10 @@ export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
     };
 
     const propsMap: JSONSerializable = {
-        "stack": stackProps,
-        "tab": tabProps,
-        "drawer": drawerProps,
-        "top": tabProps
+        'stack': stackProps,
+        'tab': tabProps,
+        'drawer': drawerProps,
+        'top': tabProps
     };
     return propsMap[navigatorType];
 }
@@ -224,18 +224,18 @@ export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     } catch (err) {
         throw new PErrorClass(err.message, err.stack)
     }
-    const isDataKeysEqual = _.isEqual(dataKeys, ["timeSpent", "successData", "httpExtra", "businessLogic"])
+    const isDataKeysEqual = _.isEqual(dataKeys, ['timeSpent', 'successData', 'httpExtra', 'businessLogic'])
     if (!isDataKeysEqual) {
         throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_ROOT_STRUCTURE)
     }
     const {businessLogic, httpExtra} = data;
     const blKeys = Object.keys(businessLogic);
-    const isBLKeysEqual = _.isEqual(blKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
+    const isBLKeysEqual = _.isEqual(blKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack'])
     if (!isBLKeysEqual) {
         throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE)
     }
     const httpExtraKeys = Object.keys(httpExtra);
-    const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ["code", "message", "description", "errorCode", "errorMessage", "errorDescription", "errorStack"])
+    const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack'])
     if (!isHttpExtraKeysEqual) {
         throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE)
     }
@@ -415,10 +415,10 @@ export const occupationDataFormat = (data: any) => {
     isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed)
     const dataAddedProperties = deepAdd(dataPropertiesRenamed, {
         'category': (item) => {
-            return item["occupationCode"]?.substr(0, 2) || '';
+            return item['occupationCode']?.substr(0, 2) || '';
         },
         'code': (item) => {
-            return item["occupationCode"]?.substr(3, 20) || '';
+            return item['occupationCode']?.substr(3, 20) || '';
         }
     })
 
@@ -453,7 +453,7 @@ export const occupationCategoriesFormat = (data: any) => {
     isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed)
     const dataAddedProperties = deepAdd(dataPropertiesRenamed, {
         'code': (item) => {
-            return item["occupationCode"]?.substr(0, 2) || '';
+            return item['occupationCode']?.substr(0, 2) || '';
         }
     })
 

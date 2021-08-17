@@ -22,10 +22,10 @@ import Time, {TimeProps} from './Time'
 
 import {isSameDay, isSameUser} from './utils'
 import {IMessage, LeftRightStyle, PositionLeftOrRight, User,} from './types'
-import MessageSticker, {MessageStickerProps} from "./MessageSticker";
-import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
-import {ActionSheetProps, connectActionSheet} from "../../../packages/react-native-action-sheet/src";
-import {SizeLabor, ThemeLabor} from "../../types";
+import MessageSticker, {MessageStickerProps} from './MessageSticker';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {ActionSheetProps, connectActionSheet} from '../../../packages/react-native-action-sheet/src';
+import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

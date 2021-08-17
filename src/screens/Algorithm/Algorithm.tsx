@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Text, TextButton, TextInput, View} from "../../components/UI";
-import {getStyles} from "./styles";
-import {OrderType, TreeNode} from "../../types";
-import {Card} from "../../containers/Card";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React, {useState} from 'react';
+import {Text, TextButton, TextInput, View} from '../../components/UI';
+import {getStyles} from './styles';
+import {OrderType, TreeNode} from '../../types';
+import {Card} from '../../containers/Card';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 import {
     BFS,
     binaryTreeInorderTraversal,
@@ -29,11 +29,11 @@ import {
     testGraphs,
     treeData,
     treeMaxDepth
-} from "../../utils/algorithms";
-import {VividAlgorithm} from "../../components/VividAlgorithm";
-import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from "../../utils/data-structures";
-import {ScrollView} from "react-native";
-import {THandlerContext} from "@qiwi/deep-proxy";
+} from '../../utils/algorithms';
+import {VividAlgorithm} from '../../components/VividAlgorithm';
+import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from '../../utils/data-structures';
+import {ScrollView} from 'react-native';
+import {THandlerContext} from '@qiwi/deep-proxy';
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();

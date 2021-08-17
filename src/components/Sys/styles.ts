@@ -1,6 +1,6 @@
-import {StyleSheet} from "react-native";
-import {SizeLabor, ThemeLabor} from "../../types";
-import {getSharedStyles} from "../../helpers";
+import {StyleSheet} from 'react-native';
+import {SizeLabor, ThemeLabor} from '../../types';
+import {getSharedStyles} from '../../helpers';
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
@@ -23,7 +23,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: wp(100),
         },
         buttonBox: {
-            justifyContent: "space-evenly"
+            justifyContent: 'space-evenly'
         }
     });
 }

@@ -1,13 +1,13 @@
-import * as React from "react";
-import {useRef} from "react";
-import {View} from "../../../components/UI";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {Row} from "../../../containers";
-import CardStack, {Card as StackSwiperCard} from "react-native-card-stack-swiper";
-import data from "./data"
-import CardItem from "./CardItem";
-import {getStyles} from "./styles";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+import * as React from 'react';
+import {useRef} from 'react';
+import {View} from '../../../components/UI';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {Row} from '../../../containers';
+import CardStack, {Card as StackSwiperCard} from 'react-native-card-stack-swiper';
+import data from './data'
+import CardItem from './CardItem';
+import {getStyles} from './styles';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 export function DatingHomeScreen() {
     const {sizeLabor, themeLabor, theme, colors, wp, t, ms} = useBunnyKit();

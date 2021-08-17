@@ -1,1 +1,1 @@
-export * from "./RTLSwitch"
+export * from './RTLSwitch'

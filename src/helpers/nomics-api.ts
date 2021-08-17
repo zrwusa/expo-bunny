@@ -1,30 +1,30 @@
-import axios, {AxiosResponse} from "axios";
-import {authLaborContext} from "../providers/auth-labor";
-import {checkNomicsAPIProtocol, getApiInstanceConfig} from "./index";
-import {NomicsAPIProtocolResponseData} from "../types";
-import bunnyAPI from "./bunny-api";
+import axios, {AxiosResponse} from 'axios';
+import {authLaborContext} from '../providers/auth-labor';
+import {checkNomicsAPIProtocol, getApiInstanceConfig} from './index';
+import {NomicsAPIProtocolResponseData} from '../types';
+import bunnyAPI from './bunny-api';
 
 export const defaultNomicsAPIResponseData = {
-    "httpExtra": {
-        "code": 0,
-        "message": "",
-        "description": "",
-        "errorCode": 0,
-        "errorMessage": "",
-        "errorDescription": "",
-        "errorStack": ""
+    'httpExtra': {
+        'code': 0,
+        'message': '',
+        'description': '',
+        'errorCode': 0,
+        'errorMessage': '',
+        'errorDescription': '',
+        'errorStack': ''
     },
-    "businessLogic": {
-        "code": "",
-        "message": "",
-        "description": "",
-        "errorCode": "",
-        "errorMessage": "",
-        "errorDescription": "",
-        "errorStack": ""
+    'businessLogic': {
+        'code': '',
+        'message': '',
+        'description': '',
+        'errorCode': '',
+        'errorMessage': '',
+        'errorDescription': '',
+        'errorStack': ''
     },
-    "successData": null,
-    "timeSpent": 0
+    'successData': null,
+    'timeSpent': 0
 }
 
 const nomicsAPI = axios.create(getApiInstanceConfig('nomics'));

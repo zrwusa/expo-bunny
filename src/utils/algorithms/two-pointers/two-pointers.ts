@@ -1,8 +1,8 @@
 /* --- start Two Pointers --- */
 
 // 11	Container With Most Water	★★	42
-import {runAlgorithm} from "../helpers";
-import {subarraysWithKDistinctCase6} from "./cases";
+import {runAlgorithm} from '../helpers';
+import {subarraysWithKDistinctCase6} from './cases';
 
 function maxArea(height: number[]): number {
     let l = 0, r = height.length - 1;

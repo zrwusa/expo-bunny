@@ -1,7 +1,7 @@
-import Modal, {ModalProps} from "react-native-modal";
-import * as React from "react";
-import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getStyles} from "./styles";
+import Modal, {ModalProps} from 'react-native-modal';
+import * as React from 'react';
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {getStyles} from './styles';
 
 export interface ModalFromRightProps {
     modalProps?: Omit<ModalProps, 'isVisible'>,

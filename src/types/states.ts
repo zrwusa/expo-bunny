@@ -1,12 +1,12 @@
 // Redux store states,different from models entities
-import {InitialState} from "@react-navigation/native";
-import {DemoSaga, NearbyFilm, Region, SchemaFirestore, SchemaRealtimeDB, UserProfile} from "./models";
-import {BLResult} from "./bl";
-import {Notification} from "expo-notifications";
-import {RequestConfig} from "./payloads";
-import {FirebaseReducer} from "react-redux-firebase";
-import {PickerSelectorItem} from "./components";
-import {FirestoreReducer} from "redux-firestore";
+import {InitialState} from '@react-navigation/native';
+import {DemoSaga, NearbyFilm, Region, SchemaFirestore, SchemaRealtimeDB, UserProfile} from './models';
+import {BLResult} from './bl';
+import {Notification} from 'expo-notifications';
+import {RequestConfig} from './payloads';
+import {FirebaseReducer} from 'react-redux-firebase';
+import {PickerSelectorItem} from './components';
+import {FirestoreReducer} from 'redux-firestore';
 
 export type RequestStatus = {
     status: 'LOADING' | 'SUCCESS' | 'FAILED';

@@ -1,5 +1,5 @@
-import {arrayRemove, uuidV4} from "../../utils";
-import {HeapNode, MinHeap} from "../heap";
+import {arrayRemove, uuidV4} from '../../utils';
+import {HeapNode, MinHeap} from '../heap';
 
 export type VertexId = string | number;
 export type DijkstraResult<V> =

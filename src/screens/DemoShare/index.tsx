@@ -1,2 +1,2 @@
-export {default} from "./DemoShare";
-export * from "./DemoShare";
+export {default} from './DemoShare';
+export * from './DemoShare';

@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {View} from "../UI";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../types";
-import {getStyles} from "./styles";
-import {ActivityIndicator} from "react-native";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React, {useEffect, useState} from 'react';
+import {View} from '../UI';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../types';
+import {getStyles} from './styles';
+import {ActivityIndicator} from 'react-native';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 const RequestLoading = () => {
     const {sizeLabor, themeLabor} = useBunnyKit();

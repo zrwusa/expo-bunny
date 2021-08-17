@@ -1,17 +1,17 @@
-import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from "../UI";
-import {Row} from "../../containers/Row";
-import {Col} from "../../containers/Col";
-import {Slider} from "../../../packages/react-native-range-slider-expo/src";
-import {Divider} from "../Divider";
-import {RadioButton} from "react-native-paper";
-import RangeSlider from "../../../packages/react-native-range-slider-expo/src/RangeSlider";
-import * as React from "react";
-import {useState} from "react";
-import _ from "lodash";
-import BunnyConstants from "../../constants/constants";
-import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getSharedStyles} from "../../helpers";
-import {getStyles} from "./styles";
+import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
+import {Slider} from '../../../packages/react-native-range-slider-expo/src';
+import {Divider} from '../Divider';
+import {RadioButton} from 'react-native-paper';
+import RangeSlider from '../../../packages/react-native-range-slider-expo/src/RangeSlider';
+import * as React from 'react';
+import {useState} from 'react';
+import _ from 'lodash';
+import BunnyConstants from '../../constants/constants';
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {getSharedStyles} from '../../helpers';
+import {getStyles} from './styles';
 
 export interface SpousePickerResult {
     distance: number,

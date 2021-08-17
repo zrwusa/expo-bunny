@@ -1,11 +1,11 @@
-import React from "react";
-import {IcoMoon, View} from "../UI";
+import React from 'react';
+import {IcoMoon, View} from '../UI';
 import MaskedView from '@react-native-community/masked-view'
 import {LinearGradient, LinearGradientProps} from 'expo-linear-gradient';
-import {getStyles} from "./styles";
-import {IcoMoonProps} from "../../types";
-import {StyleProp, TextStyle} from "react-native";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import {getStyles} from './styles';
+import {IcoMoonProps} from '../../types';
+import {StyleProp, TextStyle} from 'react-native';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export type LinearGradientIconProps = IcoMoonProps & Omit<LinearGradientProps, 'colors'> & {
     colors?: string[],

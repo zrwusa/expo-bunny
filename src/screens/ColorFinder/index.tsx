@@ -1,1 +1,1 @@
-export * from "./ColorFinder"
+export * from './ColorFinder'

@@ -2,11 +2,11 @@
 
 
 // 94 Binary Tree Inorder Traversal	★ 144 145 429 589 590 987 1302 traversal
-import {OrderType, TreeNode} from "../../../types";
-import {TProxyHandler} from "@qiwi/deep-proxy/typings/interface";
-import {DeepProxy} from "@qiwi/deep-proxy";
-import {wait} from "../../utils";
-import {BinaryTreeNode, Queue, Stack} from "../../data-structures";
+import {OrderType, TreeNode} from '../../../types';
+import {TProxyHandler} from '@qiwi/deep-proxy/typings/interface';
+import {DeepProxy} from '@qiwi/deep-proxy';
+import {wait} from '../../utils';
+import {BinaryTreeNode, Queue, Stack} from '../../data-structures';
 import {
     Coordinate,
     Direction,
@@ -17,7 +17,7 @@ import {
     isOneDiffOrderedPieced,
     MatrixCell,
     runAlgorithm
-} from "../helpers";
+} from '../helpers';
 import {
     cutOffTreeCase1,
     cutOffTreeCase2,
@@ -37,7 +37,7 @@ import {
     updateMatrixCase2,
     updateMatrixCase3,
     updateMatrixCase4
-} from "./cases";
+} from './cases';
 
 export async function binaryTreeInorderTraversal(root: BinaryTreeNode<number> | undefined, proxyHandler: TProxyHandler): Promise<number[]> {
     type Variables = {

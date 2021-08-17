@@ -1,6 +1,6 @@
-import {DemoCryptoCurrencyActions} from "../actions";
-import {EDemoCryptoCurrency} from "../../constants";
-import {DemoCryptoCurrencyState, ReceiveGetCurrentPricePayload} from "../../types";
+import {DemoCryptoCurrencyActions} from '../actions';
+import {EDemoCryptoCurrency} from '../../constants';
+import {DemoCryptoCurrencyState, ReceiveGetCurrentPricePayload} from '../../types';
 
 const initialState: DemoCryptoCurrencyState = {
     currentPrice: 0,

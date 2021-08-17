@@ -1,1 +1,1 @@
-export * from "./StickerPicker"
+export * from './StickerPicker'

@@ -1,29 +1,29 @@
-import axios, {AxiosResponse} from "axios";
-import {authLaborContext} from "../providers/auth-labor";
-import {checkBunnyAPIProtocol, getApiInstanceConfig} from "./index";
-import {BunnyAPIProtocolResponseData} from "../types";
+import axios, {AxiosResponse} from 'axios';
+import {authLaborContext} from '../providers/auth-labor';
+import {checkBunnyAPIProtocol, getApiInstanceConfig} from './index';
+import {BunnyAPIProtocolResponseData} from '../types';
 
 export const defaultBunnyAPIResponseData = {
-    "httpExtra": {
-        "code": 0,
-        "message": "",
-        "description": "",
-        "errorCode": 0,
-        "errorMessage": "",
-        "errorDescription": "",
-        "errorStack": ""
+    'httpExtra': {
+        'code': 0,
+        'message': '',
+        'description': '',
+        'errorCode': 0,
+        'errorMessage': '',
+        'errorDescription': '',
+        'errorStack': ''
     },
-    "businessLogic": {
-        "code": "",
-        "message": "",
-        "description": "",
-        "errorCode": "",
-        "errorMessage": "",
-        "errorDescription": "",
-        "errorStack": ""
+    'businessLogic': {
+        'code': '',
+        'message': '',
+        'description': '',
+        'errorCode': '',
+        'errorMessage': '',
+        'errorDescription': '',
+        'errorStack': ''
     },
-    "successData": null,
-    "timeSpent": 0
+    'successData': null,
+    'timeSpent': 0
 }
 
 const bunnyAPI = axios.create(getApiInstanceConfig('bunny'));

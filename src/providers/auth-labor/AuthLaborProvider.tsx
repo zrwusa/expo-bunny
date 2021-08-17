@@ -1,13 +1,13 @@
 // todo description this provider
-import * as React from "react";
-import {useCallback, useEffect, useMemo, useState} from "react";
-import {AuthLaborProviderProps, AuthResult, BLResult} from "../../types";
-import {AuthLaborContext, authLaborContext} from "./AuthLaborContext";
-import {Preparing} from "../../components/Preparing";
-import {useTranslation} from "react-i18next";
-import {shortenTFunctionKey} from "../i18n-labor";
-import {EventRegister} from "react-native-event-listeners";
-import {uuidV4} from "../../utils";
+import * as React from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {AuthLaborProviderProps, AuthResult, BLResult} from '../../types';
+import {AuthLaborContext, authLaborContext} from './AuthLaborContext';
+import {Preparing} from '../../components/Preparing';
+import {useTranslation} from 'react-i18next';
+import {shortenTFunctionKey} from '../i18n-labor';
+import {EventRegister} from 'react-native-event-listeners';
+import {uuidV4} from '../../utils';
 
 function AuthLaborProvider(props: AuthLaborProviderProps): JSX.Element {
     const {children} = props;

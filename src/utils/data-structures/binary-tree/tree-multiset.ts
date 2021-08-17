@@ -1,5 +1,5 @@
-import {BST, BSTNode, I_BST} from "./bst";
-import {BinaryTreeNodeId} from "./binary-tree";
+import {BST, BSTNode, I_BST} from './bst';
+import {BinaryTreeNodeId} from './binary-tree';
 
 export type TreeMultiSetDeletedResult<T> = { deleted: TreeMultiSetNode<T> | null, needBalanced: TreeMultiSetNode<T> | null };
 

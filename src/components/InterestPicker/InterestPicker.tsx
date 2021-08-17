@@ -1,26 +1,26 @@
-import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from "../UI";
-import {Row} from "../../containers/Row";
-import {Col} from "../../containers/Col";
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getSharedStyles} from "../../helpers";
-import {getStyles} from "./styles";
-import Modal from "react-native-modal";
-import {Divider} from "../Divider";
-import {FlatList} from "react-native";
-import {dictionaries} from "./dictionaries";
-import {Checkbox} from "react-native-paper";
-import lodash from "lodash";
-import {capitalizeWords} from "../../utils";
-import {InlineSelector} from "../InlineSelector";
+import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {getSharedStyles} from '../../helpers';
+import {getStyles} from './styles';
+import Modal from 'react-native-modal';
+import {Divider} from '../Divider';
+import {FlatList} from 'react-native';
+import {dictionaries} from './dictionaries';
+import {Checkbox} from 'react-native-paper';
+import lodash from 'lodash';
+import {capitalizeWords} from '../../utils';
+import {InlineSelector} from '../InlineSelector';
 
 export interface Interest {
     name: string,
     code: string,
 }
 
-export type CheckboxStatus = "checked" | "unchecked" | "indeterminate"
+export type CheckboxStatus = 'checked' | 'unchecked' | 'indeterminate'
 
 export type InterestType = 'sports' | 'musics' | 'foods' | 'movies' | 'books' | 'travels'
 
@@ -167,7 +167,7 @@ export const InterestPicker = (props: InterestPickerProps) => {
                                 return <Checkbox.Item labelStyle={sharedStyles.text2} label={item.name}
                                                       color={colors.primary}
                                                       status={checkState[item.code]} onPress={() => {
-                                    let newStatus: CheckboxStatus = "unchecked";
+                                    let newStatus: CheckboxStatus = 'unchecked';
                                     switch (checkState[item.code]) {
                                         case 'checked':
                                             newStatus = 'unchecked'

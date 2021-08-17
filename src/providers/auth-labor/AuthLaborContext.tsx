@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     AuthContextConfig,
     AuthLaborContextType,
@@ -11,24 +11,24 @@ import {
     StoredUser,
     TriggerType,
     User,
-} from "../../types";
-import {apiAuth} from "../../helpers/auth-api"
-import BunnyConstants, {EBLMsg} from "../../constants/constants";
-import {AxiosResponse} from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Google from "expo-google-app-auth";
+} from '../../types';
+import {apiAuth} from '../../helpers/auth-api'
+import BunnyConstants, {EBLMsg} from '../../constants/constants';
+import {AxiosResponse} from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Google from 'expo-google-app-auth';
 import {
     ANDROID_CLIENT_ID,
     ANDROID_CLIENT_ID_FOR_EXPO,
     FACEBOOK_APP_ID,
     IOS_CLIENT_ID,
     IOS_CLIENT_ID_FOR_EXPO
-} from "@env";
-import _, {identity, pickBy} from "lodash";
-import {blError, blSuccess} from "../../helpers";
-import {EventRegister} from "react-native-event-listeners";
-import {firebase} from "../../firebase/firebase";
-import * as Facebook from "expo-facebook";
+} from '@env';
+import _, {identity, pickBy} from 'lodash';
+import {blError, blSuccess} from '../../helpers';
+import {EventRegister} from 'react-native-event-listeners';
+import {firebase} from '../../firebase/firebase';
+import * as Facebook from 'expo-facebook';
 
 // import * as AppAuth from "expo-app-auth";
 // // When configured correctly, URLSchemes should contain your REVERSED_CLIENT_ID
@@ -133,7 +133,7 @@ const bunnySignUp = async (params: SignUpParams) => {
 
 const bunnyRefreshAuth = async (): Promise<BLResult> => {
     const refreshToken = await AsyncStorage.getItem(refreshTokenPersistenceKey);
-    apiAuth.defaults.headers.common["Authorization"] = `Bearer ${refreshToken}`;
+    apiAuth.defaults.headers.common['Authorization'] = `Bearer ${refreshToken}`;
     const res = await apiAuth.request({method: refreshAPIMethod, url: refreshAPIPath})
     let result: BLResult;
     if (!res) {

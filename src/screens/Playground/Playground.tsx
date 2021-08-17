@@ -1,15 +1,15 @@
-import React, {useState} from "react";
-import {Text, TextButton, View} from "../../components/UI";
-import {Button, TouchableOpacity, Vibration} from "react-native";
-import {getStyles} from "./styles";
-import {useFirestoreConnect} from "react-redux-firebase";
-import {useSelector} from "react-redux";
-import {RootState} from "../../types";
-import {DraggableView} from "../../containers/DraggableView";
-import {randomDate, uuidV4} from "../../utils";
-import {ProgressBar} from "react-native-paper";
-import {Card} from "../../containers/Card";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React, {useState} from 'react';
+import {Text, TextButton, View} from '../../components/UI';
+import {Button, TouchableOpacity, Vibration} from 'react-native';
+import {getStyles} from './styles';
+import {useFirestoreConnect} from 'react-redux-firebase';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../types';
+import {DraggableView} from '../../containers/DraggableView';
+import {randomDate, uuidV4} from '../../utils';
+import {ProgressBar} from 'react-native-paper';
+import {Card} from '../../containers/Card';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export function PlaygroundScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();

@@ -1,10 +1,10 @@
-import {fontsWarehouse} from "./fonts";
-import {JSONSerializable, Themes, ThemeWarehouse} from "../../types";
-import color from "color";
-import {EThemes} from "../../constants";
-import {isLeafParent, isSameStructure, pl} from "../../utils";
-import getSizeLabor from "../size-labor/sizeLabor";
-import {getVictoryTheme} from "./victoryTheme";
+import {fontsWarehouse} from './fonts';
+import {JSONSerializable, Themes, ThemeWarehouse} from '../../types';
+import color from 'color';
+import {EThemes} from '../../constants';
+import {isLeafParent, isSameStructure, pl} from '../../utils';
+import getSizeLabor from '../size-labor/sizeLabor';
+import {getVictoryTheme} from './victoryTheme';
 
 export const getThemeWareHouse = () => {
     const {wp} = getSizeLabor().designsBasedOn.iphoneX

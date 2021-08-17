@@ -8,7 +8,7 @@ import {
     EDemoSagaFirebase,
     EDemoThunk,
     ESys
-} from "../constants";
+} from '../constants';
 import {
     CancelAlertSettingsParams,
     ClearBLResultPayload,
@@ -24,9 +24,9 @@ import {
     SaveQuickAlertSettingsParams,
     SysClearErrorPayload,
     SysWarnPayload
-} from "./payloads";
-import {DemoSaga, NearbyFilm, Region} from "./models";
-import {BLResult} from "./bl";
+} from './payloads';
+import {DemoSaga, NearbyFilm, Region} from './models';
+import {BLResult} from './bl';
 
 export interface DemoHelloAction {
     type: EDemoHello.DEMO_HELLO;

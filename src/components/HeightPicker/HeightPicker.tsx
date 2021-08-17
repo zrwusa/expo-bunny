@@ -1,11 +1,11 @@
-import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from "../UI";
-import {Row} from "../../containers/Row";
-import {Col} from "../../containers/Col";
-import * as React from "react";
-import {useState} from "react";
-import {useBunnyKit} from "../../hooks/bunny-kit";
-import {getSharedStyles} from "../../helpers";
-import {getStyles} from "./styles";
+import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
+import * as React from 'react';
+import {useState} from 'react';
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {getSharedStyles} from '../../helpers';
+import {getStyles} from './styles';
 
 
 export interface HeightPickerProps {

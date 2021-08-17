@@ -1,5 +1,5 @@
-import {DemoSaga, GetDemoSagaParams, ReceiveGetDemoSagasAction, RequestGetDemoSagasAction} from "../../types";
-import {EDemoSaga} from "../../constants";
+import {DemoSaga, GetDemoSagaParams, ReceiveGetDemoSagasAction, RequestGetDemoSagasAction} from '../../types';
+import {EDemoSaga} from '../../constants';
 
 export function getDemoSagas(params: GetDemoSagaParams) {
     return {

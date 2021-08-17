@@ -1,4 +1,4 @@
-import {bunnyConsole, timeStart} from "../utils";
+import {bunnyConsole, timeStart} from '../utils';
 
 // Use Map:
 //       When the stored key is not a string/number/or Symbol, select Map, because Object does not support
@@ -284,16 +284,16 @@ export class Coordinate {
 export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, matrix: number[][], judgeDeadOrDeadCells?: ((destination: Coordinate) => boolean) | Coordinate[]) => {
     let destinationX: number = departure.x, destinationY: number = departure.y;
     switch (direction) {
-        case "up":
+        case 'up':
             destinationY = departure.y + 1;
             break;
-        case "right":
+        case 'right':
             destinationX = departure.x + 1;
             break;
-        case "down":
+        case 'down':
             destinationY = departure.y - 1;
             break;
-        case "left":
+        case 'left':
             destinationX = departure.x - 1;
             break;
     }

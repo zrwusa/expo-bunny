@@ -12,8 +12,8 @@ import {
     SysErrorAction,
     SysWarnAction,
     SysWarnPayload
-} from "../../types";
-import {ESys} from "../../constants";
+} from '../../types';
+import {ESys} from '../../constants';
 
 export const sysError: (payload: Error) => SysErrorAction = (payload) => {
     return {

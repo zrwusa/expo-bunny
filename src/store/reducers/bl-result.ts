@@ -1,6 +1,6 @@
-import {EBL} from "../../constants";
-import {BLResult, BLResultState, ClearBLResultPayload,} from "../../types";
-import {BLActions} from "../actions";
+import {EBL} from '../../constants';
+import {BLResult, BLResultState, ClearBLResultPayload,} from '../../types';
+import {BLActions} from '../actions';
 
 const initialState: BLResultState = {
     blResults: []

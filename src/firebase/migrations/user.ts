@@ -1,4 +1,4 @@
-import {firebase} from "../firebase";
+import {firebase} from '../firebase';
 
 const portraitURLs = {
     a: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/portraits/m/a.jpg',
@@ -34,7 +34,7 @@ const users: firebase.UserInfo[] = [
         phoneNumber: '',
         photoURL: 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fk.jpg?alt=media&token=38b2b032-2f7f-447d-9e83-2e6b8d1cf89f',
         providerId: '',
-        uid: "hovkAoBO4SfArjeT0A9ydAEtfnF3",
+        uid: 'hovkAoBO4SfArjeT0A9ydAEtfnF3',
 
     },
     {
@@ -88,69 +88,69 @@ const users: firebase.UserInfo[] = [
 ]
 
 export const datingUsers = [{
-    "uid": "EvqTQMfHJLRPF2BU3MxbZGoF1R43",
-    "phoneNumber": "",
-    "displayName": "Famie",
-    "providerId": "",
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Ff.jpg?alt=media&token=0f331dc9-be29-4a27-b47c-75e885806666",
-    "email": "fff@gmail.com"
+    'uid': 'EvqTQMfHJLRPF2BU3MxbZGoF1R43',
+    'phoneNumber': '',
+    'displayName': 'Famie',
+    'providerId': '',
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Ff.jpg?alt=media&token=0f331dc9-be29-4a27-b47c-75e885806666',
+    'email': 'fff@gmail.com'
 }, {
-    "email": "girlj@gmail.com",
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-j.jpg?alt=media&token=51635a29-0085-47cc-9e7a-c29a8cad8222",
-    "displayName": "Nora",
-    "uid": "FiwAbC0GmEggjBjhYXT6KYWy5MQ2"
+    'email': 'girlj@gmail.com',
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-j.jpg?alt=media&token=51635a29-0085-47cc-9e7a-c29a8cad8222',
+    'displayName': 'Nora',
+    'uid': 'FiwAbC0GmEggjBjhYXT6KYWy5MQ2'
 }, {
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-i.jpg?alt=media&token=6a7b1ddc-ad8e-4bd4-a289-6b51520d7d2b",
-    "displayName": "Grace",
-    "email": "girli@gmail.com",
-    "uid": "SGGbJPMgHsZElaOnBCIdJvxLtlm2"
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-i.jpg?alt=media&token=6a7b1ddc-ad8e-4bd4-a289-6b51520d7d2b',
+    'displayName': 'Grace',
+    'email': 'girli@gmail.com',
+    'uid': 'SGGbJPMgHsZElaOnBCIdJvxLtlm2'
 }, {
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-g.jpg?alt=media&token=d0c79ecd-187d-49ab-8e4c-2847bb96fbe4",
-    "uid": "ZSELWYRetZSbHNFQTjVxX9aXybk1",
-    "email": "girlg@gmail.com",
-    "displayName": "Penelope"
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-g.jpg?alt=media&token=d0c79ecd-187d-49ab-8e4c-2847bb96fbe4',
+    'uid': 'ZSELWYRetZSbHNFQTjVxX9aXybk1',
+    'email': 'girlg@gmail.com',
+    'displayName': 'Penelope'
 }, {
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-e.jpg?alt=media&token=dd6b0d55-9e53-4744-b6cb-d01a2bf166cf",
-    "displayName": "Camila",
-    "email": "girle@gmail.com",
-    "uid": "cttSShc6sLc6ilC3z08BKaFhykx2"
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-e.jpg?alt=media&token=dd6b0d55-9e53-4744-b6cb-d01a2bf166cf',
+    'displayName': 'Camila',
+    'email': 'girle@gmail.com',
+    'uid': 'cttSShc6sLc6ilC3z08BKaFhykx2'
 }, {
-    "displayName": "Madison",
-    "uid": "d73w1kbo7TVoN7ME0uiAEPmd7er1",
-    "email": "girlh@gmail.com",
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-h.jpg?alt=media&token=5f277881-399f-4401-975d-728101270e45"
+    'displayName': 'Madison',
+    'uid': 'd73w1kbo7TVoN7ME0uiAEPmd7er1',
+    'email': 'girlh@gmail.com',
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-h.jpg?alt=media&token=5f277881-399f-4401-975d-728101270e45'
 }, {
-    "uid": "gEQMxRMVfjRLUngNJHKcIj1Impu1",
-    "phoneNumber": "",
-    "email": "test@gmail.com",
-    "displayName": "Test",
-    "providerId": "",
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fj.jpg?alt=media&token=3b210a82-0e08-4080-a518-f3d7c25368a2"
+    'uid': 'gEQMxRMVfjRLUngNJHKcIj1Impu1',
+    'phoneNumber': '',
+    'email': 'test@gmail.com',
+    'displayName': 'Test',
+    'providerId': '',
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fj.jpg?alt=media&token=3b210a82-0e08-4080-a518-f3d7c25368a2'
 }, {
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-b.jpg?alt=media&token=8a6d8dfd-a52b-47a2-8010-0d9841fea07d",
-    "email": "girlb@gmail.com",
-    "uid": "jOFfjkUgKURpW2IOpED64LzC5B23",
-    "displayName": "Eliana"
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-b.jpg?alt=media&token=8a6d8dfd-a52b-47a2-8010-0d9841fea07d',
+    'email': 'girlb@gmail.com',
+    'uid': 'jOFfjkUgKURpW2IOpED64LzC5B23',
+    'displayName': 'Eliana'
 }, {
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-f.jpg?alt=media&token=de55fda2-6d4c-4f8d-abd7-19bd678a5c90",
-    "email": "girlf@gmail.com",
-    "uid": "ofjK67aCefXFNBc8DDV7WmKZAQW2",
-    "displayName": "Mila"
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-f.jpg?alt=media&token=de55fda2-6d4c-4f8d-abd7-19bd678a5c90',
+    'email': 'girlf@gmail.com',
+    'uid': 'ofjK67aCefXFNBc8DDV7WmKZAQW2',
+    'displayName': 'Mila'
 }, {
-    "displayName": "Naomi",
-    "uid": "q8my5u5kq3d1vDvYu1dNVjpPKiK2",
-    "email": "girla@gmail.com",
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-a.jpg?alt=media&token=18ea1b3c-875b-443d-8f44-1ed54ce5ac88"
+    'displayName': 'Naomi',
+    'uid': 'q8my5u5kq3d1vDvYu1dNVjpPKiK2',
+    'email': 'girla@gmail.com',
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-a.jpg?alt=media&token=18ea1b3c-875b-443d-8f44-1ed54ce5ac88'
 }, {
-    "uid": "qcIR4FfL1AfFGP2SHtVODQ4iLLw1",
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-c.jpg?alt=media&token=e105d5ac-add9-4881-8e8a-cd6aa94b2826",
-    "displayName": "Valentina",
-    "email": "girlc@gmail.com"
+    'uid': 'qcIR4FfL1AfFGP2SHtVODQ4iLLw1',
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-c.jpg?alt=media&token=e105d5ac-add9-4881-8e8a-cd6aa94b2826',
+    'displayName': 'Valentina',
+    'email': 'girlc@gmail.com'
 }, {
-    "photoURL": "https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-d.jpg?alt=media&token=4cffbc0e-c8da-4ee1-ad61-06a1e23f83e2",
-    "displayName": "Ariana",
-    "email": "girld@gmail.com",
-    "uid": "vg9cb0vsbSUDtgfXyPySHX747wQ2"
+    'photoURL': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/portraits%2Fbeautiful-girls%2Fbeautiful-girl-d.jpg?alt=media&token=4cffbc0e-c8da-4ee1-ad61-06a1e23f83e2',
+    'displayName': 'Ariana',
+    'email': 'girld@gmail.com',
+    'uid': 'vg9cb0vsbSUDtgfXyPySHX747wQ2'
 }]
 
 export const migrateUsers = async () => {

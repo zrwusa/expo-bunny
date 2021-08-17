@@ -1,5 +1,5 @@
-import React from "react";
-import {BunnyKit, useBunnyKit} from "./useBunnyKit";
+import React from 'react';
+import {BunnyKit, useBunnyKit} from './useBunnyKit';
 
 export interface WithBunnyKit {
     bunnyKit: BunnyKit

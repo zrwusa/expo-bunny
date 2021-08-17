@@ -1,5 +1,5 @@
-import {SaveDemoSagaFirebaseTodoParams} from "../../types";
-import {EDemoSagaFirebase} from "../../constants";
+import {SaveDemoSagaFirebaseTodoParams} from '../../types';
+import {EDemoSagaFirebase} from '../../constants';
 
 
 export function saveDemoSagaFirebaseTodo(params: SaveDemoSagaFirebaseTodoParams) {

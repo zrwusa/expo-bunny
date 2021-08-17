@@ -1,1 +1,1 @@
-export * from "./LoginVector"
+export * from './LoginVector'

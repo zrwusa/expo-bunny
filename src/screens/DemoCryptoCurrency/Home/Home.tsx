@@ -1,28 +1,28 @@
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {Text, View} from "../../../components/UI";
-import {RouteProp} from "@react-navigation/native";
-import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from "../../../types";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {getContainerStyles} from "../../../containers";
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import {Text, View} from '../../../components/UI';
+import {RouteProp} from '@react-navigation/native';
+import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from '../../../types';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {getContainerStyles} from '../../../containers';
 import {
     VictoryAxis,
     VictoryChart,
     VictoryLine,
     VictoryTooltip,
     VictoryVoronoiContainer
-} from "../../../components/Victory/Victory";
-import nomicsAPI from "../../../helpers/nomics-api";
-import {getStyles} from "./styles";
-import {addDays} from "../../../utils";
-import {useDispatch, useSelector} from "react-redux";
-import axios, {CancelTokenSource} from "axios";
-import {collectBLResult, getCurrentPrice, sysError} from "../../../store/actions";
-import {blError, getSharedStyles} from "../../../helpers";
-import {ScrollView} from "react-native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {Tab} from "../../../components";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+} from '../../../components/Victory/Victory';
+import nomicsAPI from '../../../helpers/nomics-api';
+import {getStyles} from './styles';
+import {addDays} from '../../../utils';
+import {useDispatch, useSelector} from 'react-redux';
+import axios, {CancelTokenSource} from 'axios';
+import {collectBLResult, getCurrentPrice, sysError} from '../../../store/actions';
+import {blError, getSharedStyles} from '../../../helpers';
+import {ScrollView} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {Tab} from '../../../components';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyHome'>;
 type CryptoCurrencyHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;

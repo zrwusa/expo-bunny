@@ -1,9 +1,9 @@
-import {useThemeLabor} from "../../providers/theme-labor";
-import * as React from "react";
-import {EThemes} from "../../constants";
-import {PickerSelect} from "../UI";
-import {ThemeName} from "../../types";
-import {PickerSelectProps} from "react-native-picker-select";
+import {useThemeLabor} from '../../providers/theme-labor';
+import * as React from 'react';
+import {EThemes} from '../../constants';
+import {PickerSelect} from '../UI';
+import {ThemeName} from '../../types';
+import {PickerSelectProps} from 'react-native-picker-select';
 
 export const ThemePicker: React.FC<Omit<PickerSelectProps, 'onValueChange' | 'items'>> = ({...rest}) => {
     const themeLabor = useThemeLabor();

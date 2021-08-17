@@ -1,2 +1,2 @@
-export * from "./linked-list"
-export * from "./cases"
+export * from './linked-list'
+export * from './cases'

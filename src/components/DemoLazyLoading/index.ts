@@ -1,1 +1,1 @@
-export * from "./DemoLazyLoading"
+export * from './DemoLazyLoading'

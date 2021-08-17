@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage, PositionLeftOrRight} from './types'
-import {AudioPlayer, AudioPlayerProps} from "../AudioPlayer";
-import {SizeLabor, ThemeLabor} from "../../types";
-import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
+import {AudioPlayer, AudioPlayerProps} from '../AudioPlayer';
+import {SizeLabor, ThemeLabor} from '../../types';
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

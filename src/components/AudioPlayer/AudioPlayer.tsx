@@ -1,12 +1,12 @@
-import React, {useEffect, useRef, useState} from "react";
-import {ActivityIndicator, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle} from "react-native";
-import {getStyles} from "./styles";
-import {IcoMoon, Text} from "../UI";
-import {AVPlaybackSource, AVPlaybackStatus} from "../../../packages/expo-av/src/AV";
-import {Audio} from "../../../packages/expo-av/src";
-import {ProgressBar} from "react-native-paper";
-import {minuted} from "../../utils";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React, {useEffect, useRef, useState} from 'react';
+import {ActivityIndicator, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {getStyles} from './styles';
+import {IcoMoon, Text} from '../UI';
+import {AVPlaybackSource, AVPlaybackStatus} from '../../../packages/expo-av/src/AV';
+import {Audio} from '../../../packages/expo-av/src';
+import {ProgressBar} from 'react-native-paper';
+import {minuted} from '../../utils';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export interface AudioPlayerProps {
     source: AVPlaybackSource,

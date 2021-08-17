@@ -1,14 +1,14 @@
-import React from "react";
-import {ScrollView} from "react-native";
-import {Button, ButtonTO, InButtonText, LinearGradientButton, Text, View} from "../../components/UI";
-import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {getStyles} from "./styles";
-import BunnyConstants from "../../constants/constants";
-import {Card, getContainerStyles, Row} from "../../containers";
-import {getSharedStyles} from "../../helpers";
+import React from 'react';
+import {ScrollView} from 'react-native';
+import {Button, ButtonTO, InButtonText, LinearGradientButton, Text, View} from '../../components/UI';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {getStyles} from './styles';
+import BunnyConstants from '../../constants/constants';
+import {Card, getContainerStyles, Row} from '../../containers';
+import {getSharedStyles} from '../../helpers';
 // import {LinearGradient} from "expo-linear-gradient";
 import Svg, {Defs, Ellipse, RadialGradient, Rect, Stop,} from 'react-native-svg';
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 const DemoThemeScreen = () => {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
@@ -19,8 +19,8 @@ const DemoThemeScreen = () => {
     const lineProps = {
         strokeOpacity: 1,
         strokeWidth: 1,
-        strokeLinecap: "round",
-        strokeLinejoin: "round",
+        strokeLinecap: 'round',
+        strokeLinejoin: 'round',
     };
     return (
         <ScrollView>

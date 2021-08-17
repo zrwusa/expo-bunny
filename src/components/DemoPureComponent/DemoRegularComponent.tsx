@@ -1,8 +1,8 @@
-import React, {Component} from "react";
-import {Text, View} from "../UI";
-import {getStyles} from "./styles";
-import {SizeLaborContext} from "../../providers/size-labor";
-import {ThemeLaborContext} from "../../providers/theme-labor";
+import React, {Component} from 'react';
+import {Text, View} from '../UI';
+import {getStyles} from './styles';
+import {SizeLaborContext} from '../../providers/size-labor';
+import {ThemeLaborContext} from '../../providers/theme-labor';
 
 type Props = { title?: string, labelBeenRendered?: string, labelRenderedUnit?: string }
 

@@ -1,1 +1,1 @@
-export * from "./AudioRecorder"
+export * from './AudioRecorder'

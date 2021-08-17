@@ -1,8 +1,8 @@
 /* --- start heap --- */
 // 215. Kth Largest Element in an Array ★★★★
 // O(nLog(k))
-import {HeapNode, MaxHeap, MinHeap} from "../../data-structures/heap";
-import {runAlgorithm} from "../helpers";
+import {HeapNode, MaxHeap, MinHeap} from '../../data-structures/heap';
+import {runAlgorithm} from '../helpers';
 import {
     findKthLargestCase1,
     findKthLargestCase2,
@@ -12,8 +12,8 @@ import {
     mergeKListsCase2,
     reorganizeStringCase1,
     topKFrequentCase1
-} from "./cases";
-import {SinglyLinkedListNode} from "../../data-structures/linked-list";
+} from './cases';
+import {SinglyLinkedListNode} from '../../data-structures/linked-list';
 
 export function findKthLargestMinHeap(nums: number[], k: number): number {
     const heap = new MinHeap<number, number>([]);

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import {
     ActivityIndicator,
     Alert,
@@ -12,12 +12,12 @@ import {
     TouchableHighlight,
     TouchableWithoutFeedback,
     View
-} from "react-native";
-import {Button, Pressable, Text, TextInput, TouchableOpacity} from "../../../components/UI";
-import {shortenTFunctionKey} from "../../../providers/i18n-labor";
-import {getContainerStyles, Row} from "../../../containers";
-import {getStyles} from "./styles";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+} from 'react-native';
+import {Button, Pressable, Text, TextInput, TouchableOpacity} from '../../../components/UI';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {getContainerStyles, Row} from '../../../containers';
+import {getStyles} from './styles';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function RNHome() {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
@@ -33,7 +33,7 @@ function RNHome() {
         textLog = st(`onPress`);
     }
 
-    const imageBackgroundImage = {uri: "https://reactjs.org/logo-og.png"};
+    const imageBackgroundImage = {uri: 'https://reactjs.org/logo-og.png'};
     const styleTypes: Array<StatusBarStyle> = ['default', 'dark-content', 'light-content'];
     const [visibleStatusBar, setVisibleStatusBar] = useState(false);
     const [styleStatusBar, setStyleStatusBar] = useState(styleTypes[0]);
@@ -99,8 +99,8 @@ function RNHome() {
                 <Row paddingVertical="l">
                     <View style={containerStyles.Card}>
                         <Switch
-                            trackColor={{false: "#767577", true: "#81b0ff"}}
-                            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                            trackColor={{false: '#767577', true: '#81b0ff'}}
+                            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
                             ios_backgroundColor="#3e3e3e"
                             onValueChange={toggleSwitch}
                             value={isEnabled}
@@ -172,7 +172,7 @@ function RNHome() {
                                     <Text style={modalStyles.modalText}>{st(`helloWorld`)}</Text>
 
                                     <TouchableHighlight
-                                        style={{...modalStyles.openButton, backgroundColor: "#2196F3"}}
+                                        style={{...modalStyles.openButton, backgroundColor: '#2196F3'}}
                                         onPress={() => {
                                             setModalVisible(!modalVisible);
                                         }}

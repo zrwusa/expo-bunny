@@ -20,8 +20,8 @@ import Message, {MessageProps} from './Message'
 import {IMessage, PositionLeftOrRight, Reply, User} from './types'
 import {warning} from './utils'
 import TypingIndicator from './TypingIndicator'
-import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
-import {SizeLabor, ThemeLabor} from "../../types";
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
+import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms} = sizeLabor;

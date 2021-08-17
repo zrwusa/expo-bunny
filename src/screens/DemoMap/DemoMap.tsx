@@ -1,18 +1,18 @@
-import React, {Component, createRef} from "react";
-import {Animated} from "react-native";
-import {Image, Text, TouchableOpacity, View} from "../../components/UI";
+import React, {Component, createRef} from 'react';
+import {Animated} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from '../../components/UI';
 import * as Location from 'expo-location';
-import {ThunkDispatch} from "redux-thunk";
-import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState} from "../../types";
-import {Action} from "redux";
-import {getNearbyFilms, restoreRegion, sysError} from "../../store/actions";
-import {connect} from "react-redux";
-import MapView, {PROVIDER_DEFAULT} from "react-native-maps";
-import BunnyConstants from "../../constants/constants";
-import getStyles, {getCardSize} from "./styles";
-import {getContainerStyles} from "../../containers";
-import config from "../../config";
-import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import {ThunkDispatch} from 'redux-thunk';
+import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState} from '../../types';
+import {Action} from 'redux';
+import {getNearbyFilms, restoreRegion, sysError} from '../../store/actions';
+import {connect} from 'react-redux';
+import MapView, {PROVIDER_DEFAULT} from 'react-native-maps';
+import BunnyConstants from '../../constants/constants';
+import getStyles, {getCardSize} from './styles';
+import {getContainerStyles} from '../../containers';
+import config from '../../config';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -120,12 +120,12 @@ class DemoMapScreen extends Component<DemoMapProps> {
             const scale = this.animation.interpolate({
                 inputRange,
                 outputRange: [1, 2.5, 1],
-                extrapolate: "clamp",
+                extrapolate: 'clamp',
             });
             const opacity = this.animation.interpolate({
                 inputRange,
                 outputRange: [0.35, 1, 0.35],
-                extrapolate: "clamp",
+                extrapolate: 'clamp',
             });
             return {scale, opacity};
         });

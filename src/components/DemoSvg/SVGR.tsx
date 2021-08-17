@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, {G, Path, SvgProps} from "react-native-svg"
+import * as React from 'react'
+import Svg, {G, Path, SvgProps} from 'react-native-svg'
 
 function SvgComponent(props: SvgProps) {
     return (

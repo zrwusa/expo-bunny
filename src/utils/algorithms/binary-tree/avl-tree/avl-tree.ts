@@ -1,8 +1,8 @@
-import {AVLTree} from "../../../data-structures/binary-tree/avl-tree";
-import {runAlgorithm} from "../../helpers";
-import {DeepProxy, TProxyHandler} from "@qiwi/deep-proxy";
-import {wait, WaitManager} from "../../../utils";
-import {testBSTCase1} from "../bst";
+import {AVLTree} from '../../../data-structures/binary-tree/avl-tree';
+import {runAlgorithm} from '../../helpers';
+import {DeepProxy, TProxyHandler} from '@qiwi/deep-proxy';
+import {wait, WaitManager} from '../../../utils';
+import {testBSTCase1} from '../bst';
 
 const avlTree = new AVLTree<number>();
 

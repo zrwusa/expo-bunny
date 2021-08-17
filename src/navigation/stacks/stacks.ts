@@ -1,4 +1,4 @@
-import {createStackNavigator} from "@react-navigation/stack";
+import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {
     AuthTopStackParam,
@@ -13,9 +13,9 @@ import {
     DemoTabRNComponentsStackParam,
     DemoTabStackParam,
     RootStackParam
-} from "../../types";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {createDrawerNavigator} from "@react-navigation/drawer";
+} from '../../types';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 export const RootStack = createStackNavigator<RootStackParam>();
 

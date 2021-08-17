@@ -1,6 +1,6 @@
-import {Action, ActionCreator, Dispatch} from "redux";
-import {ThunkAction} from "redux-thunk";
-import {EBLMsg, EDemoMap} from "../../constants";
+import {Action, ActionCreator, Dispatch} from 'redux';
+import {ThunkAction} from 'redux-thunk';
+import {EBLMsg, EDemoMap} from '../../constants';
 import {
     CollectBLResultAction,
     DemoMapState,
@@ -14,11 +14,11 @@ import {
     RestoreNearbyFilmsAction,
     RestoreRegionAction,
     SysErrorAction
-} from "../../types";
-import bunnyAPI from "../../helpers/bunny-api";
-import {requestFailed, requesting, requestReceived, sysError} from "./sys";
-import {collectBLResult} from "./bl-result";
-import {blError} from "../../helpers";
+} from '../../types';
+import bunnyAPI from '../../helpers/bunny-api';
+import {requestFailed, requesting, requestReceived, sysError} from './sys';
+import {collectBLResult} from './bl-result';
+import {blError} from '../../helpers';
 
 export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAction = (payload) => {
     return {

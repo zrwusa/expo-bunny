@@ -59,22 +59,22 @@ export interface JSONArray extends Array<JSONValue> {
 }
 
 export type TypeName<T> = T extends string
-    ? "string"
+    ? 'string'
     : T extends number
-        ? "number"
+        ? 'number'
         : T extends boolean
-            ? "boolean"
+            ? 'boolean'
             : T extends undefined
-                ? "undefined"
+                ? 'undefined'
                 : T extends Function
-                    ? "function"
-                    : "object";
+                    ? 'function'
+                    : 'object';
 
 export type JsonKeys<T> = keyof {
     [P in keyof T]: number
 }
 
-const arr = ["1", 2, 4, 5, 6] as const;
+const arr = ['1', 2, 4, 5, 6] as const;
 type Range = typeof arr[number];
 const a: Range = 2;
 

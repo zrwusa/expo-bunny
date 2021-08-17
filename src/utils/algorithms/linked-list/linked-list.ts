@@ -9,10 +9,10 @@
 // 707	Design Linked List	★★★★
 
 //206. Reverse Linked List
-import {SinglyLinkedListNode} from "../../data-structures/linked-list";
-import {TProxyHandler} from "@qiwi/deep-proxy/typings/interface";
-import {DeepProxy} from "@qiwi/deep-proxy";
-import {wait} from "../../utils";
+import {SinglyLinkedListNode} from '../../data-structures/linked-list';
+import {TProxyHandler} from '@qiwi/deep-proxy/typings/interface';
+import {DeepProxy} from '@qiwi/deep-proxy';
+import {wait} from '../../utils';
 
 export type ReverseLinkedListVariables = {
     pre: SinglyLinkedListNode | null

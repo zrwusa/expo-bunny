@@ -1,13 +1,13 @@
-import {useLinkTo} from "@react-navigation/native";
-import {Col, getContainerStyles, Row} from "../../containers";
-import {useAuthLabor} from "../../providers/auth-labor";
-import {IcoMoon, Link, Text} from "../UI";
-import {LinearGradientIcon} from "../LinearGradientIcon";
-import {TouchableOpacity} from "react-native";
-import * as React from "react";
-import {IcoMoonKeys} from "../../types";
-import {getStyles} from "./styles";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import {useLinkTo} from '@react-navigation/native';
+import {Col, getContainerStyles, Row} from '../../containers';
+import {useAuthLabor} from '../../providers/auth-labor';
+import {IcoMoon, Link, Text} from '../UI';
+import {LinearGradientIcon} from '../LinearGradientIcon';
+import {TouchableOpacity} from 'react-native';
+import * as React from 'react';
+import {IcoMoonKeys} from '../../types';
+import {getStyles} from './styles';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export interface LineToProps {
     iconName?: IcoMoonKeys,
@@ -52,12 +52,12 @@ export const InlineJump: React.FC<LineToProps> = (props) => {
         </Link> : null
         : <TouchableOpacity onPress={() => {
             switch (type) {
-                case "LINK_TO":
+                case 'LINK_TO':
                     if (to) {
                         linkTo(to)
                     }
                     break;
-                case "NAV":
+                case 'NAV':
                     if (onNav) {
                         onNav()
                     }

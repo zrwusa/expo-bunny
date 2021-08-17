@@ -1,5 +1,5 @@
-import * as React from "react";
-import {Image, ImageStyle, StyleProp} from "react-native";
+import * as React from 'react';
+import {Image, ImageStyle, StyleProp} from 'react-native';
 
 export interface ScalableImageProps {
     uri: string

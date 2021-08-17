@@ -1,9 +1,9 @@
-import {ELanguage} from "../../constants";
-import * as React from "react";
-import {SwitchP} from "../UI";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BunnyConstants from "../../constants/constants";
-import {useTranslation} from "react-i18next";
+import {ELanguage} from '../../constants';
+import * as React from 'react';
+import {SwitchP} from '../UI';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import BunnyConstants from '../../constants/constants';
+import {useTranslation} from 'react-i18next';
 
 export function LanguageSwitch() {
     const {i18n} = useTranslation();

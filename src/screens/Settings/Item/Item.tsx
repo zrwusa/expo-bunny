@@ -1,11 +1,11 @@
-import * as React from "react";
-import {getStyles} from "./styles";
-import {SwitchPaperProps, Text, View} from "../../../components/UI";
-import {useSizeLabor} from "../../../providers/size-labor";
-import {useThemeLabor} from "../../../providers/theme-labor";
-import {PickerSelectProps} from "react-native-picker-select";
-import {Col} from "../../../containers";
-import {getSharedStyles} from "../../../helpers";
+import * as React from 'react';
+import {getStyles} from './styles';
+import {SwitchPaperProps, Text, View} from '../../../components/UI';
+import {useSizeLabor} from '../../../providers/size-labor';
+import {useThemeLabor} from '../../../providers/theme-labor';
+import {PickerSelectProps} from 'react-native-picker-select';
+import {Col} from '../../../containers';
+import {getSharedStyles} from '../../../helpers';
 
 export interface SettingsItemProps {
     label: string;

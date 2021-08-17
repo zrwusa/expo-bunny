@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import {Avatar, Button, List} from "react-native-paper";
-import RNPickerSelect from "react-native-picker-select";
-import {IconMC, View} from "../../components/UI";
-import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {Card, getContainerStyles, Row} from "../../containers";
-import {uuidV4} from "../../utils";
-import {getStyles} from "./styles";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React, {useState} from 'react';
+import {Avatar, Button, List} from 'react-native-paper';
+import RNPickerSelect from 'react-native-picker-select';
+import {IconMC, View} from '../../components/UI';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {Card, getContainerStyles, Row} from '../../containers';
+import {uuidV4} from '../../utils';
+import {getStyles} from './styles';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 interface Props {
     title?: string
@@ -27,15 +27,15 @@ function DemoThirdPartScreen(props: Props) {
     const LIST = [
         {
             id: uuidV4(),
-            name: "Amy Farha",
-            avatar_url: "https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany.jpeg",
-            subtitle: "Alex"
+            name: 'Amy Farha',
+            avatar_url: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany.jpeg',
+            subtitle: 'Alex'
         },
         {
             id: uuidV4(),
-            name: "Chris Jackson",
-            avatar_url: "https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany-avatar.jpeg",
-            subtitle: "Rios"
+            name: 'Chris Jackson',
+            avatar_url: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/mcenany-avatar.jpeg',
+            subtitle: 'Rios'
         },
     ];
     const containerStyles = getContainerStyles(sizeLabor, themeLabor)

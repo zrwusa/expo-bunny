@@ -36,8 +36,8 @@ import BunnyAvatar from './BunnyAvatar'
 
 import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
 import {IMessage,} from './types'
-import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
-import {SizeLabor, ThemeLabor} from "../../types";
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {SizeLabor, ThemeLabor} from '../../types';
 
 dayjs.extend(localizedFormat)
 

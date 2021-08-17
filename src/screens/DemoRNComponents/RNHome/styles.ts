@@ -1,6 +1,6 @@
-import {StyleSheet} from "react-native";
-import BunnyConstants from "../../../constants/constants";
-import {SizeLabor, ThemeLabor} from "../../../types/styles";
+import {StyleSheet} from 'react-native';
+import BunnyConstants from '../../../constants/constants';
+import {SizeLabor, ThemeLabor} from '../../../types/styles';
 
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -9,8 +9,8 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
 
     const activityIndicatorStyles = StyleSheet.create({
         horizontal: {
-            flexDirection: "row",
-            justifyContent: "space-around",
+            flexDirection: 'row',
+            justifyContent: 'space-around',
             padding: 10
         }
     })
@@ -31,15 +31,15 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const imageBackgroundStyles = StyleSheet.create({
         image: {
             flex: 1,
-            resizeMode: "cover",
-            justifyContent: "center"
+            resizeMode: 'cover',
+            justifyContent: 'center'
         },
         text: {
-            color: "white",
+            color: 'white',
             fontSize: 42,
-            fontWeight: "bold",
-            textAlign: "center",
-            backgroundColor: "#000000a0"
+            fontWeight: 'bold',
+            textAlign: 'center',
+            backgroundColor: '#000000a0'
         }
     })
 
@@ -68,17 +68,17 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const modalStyles = StyleSheet.create({
         centeredView: {
             flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
             marginTop: 22
         },
         modalView: {
             margin: 20,
-            backgroundColor: "white",
+            backgroundColor: 'white',
             borderRadius: 20,
             padding: 35,
-            alignItems: "center",
-            shadowColor: "#000",
+            alignItems: 'center',
+            shadowColor: '#000',
             shadowOffset: {
                 width: 0,
                 height: 2
@@ -88,26 +88,26 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             elevation: 5
         },
         openButton: {
-            backgroundColor: "#F194FF",
+            backgroundColor: '#F194FF',
             borderRadius: 20,
             padding: 10,
             elevation: 2
         },
         textStyle: {
-            color: "white",
-            fontWeight: "bold",
-            textAlign: "center"
+            color: 'white',
+            fontWeight: 'bold',
+            textAlign: 'center'
         },
         modalText: {
             marginBottom: 15,
-            textAlign: "center"
+            textAlign: 'center'
         }
     })
 
     const pressableStyles = StyleSheet.create({
         container: {
             flex: 1,
-            justifyContent: "center",
+            justifyContent: 'center',
         },
         text: {
             fontSize: 16
@@ -132,13 +132,13 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginHorizontal: 16
         },
         item: {
-            backgroundColor: "#f9c2ff",
+            backgroundColor: '#f9c2ff',
             padding: 20,
             marginVertical: 8
         },
         header: {
             fontSize: 32,
-            backgroundColor: "#fff"
+            backgroundColor: '#fff'
         },
         title: {
             fontSize: 24
@@ -164,36 +164,36 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const touchableHighlightStyles = StyleSheet.create({
         container: {
             flex: 1,
-            justifyContent: "center",
+            justifyContent: 'center',
             paddingHorizontal: 10
         },
         button: {
-            alignItems: "center",
-            backgroundColor: "#DDDDDD",
+            alignItems: 'center',
+            backgroundColor: '#DDDDDD',
             padding: 10
         },
         countContainer: {
-            alignItems: "center",
+            alignItems: 'center',
             padding: 10
         },
         countText: {
-            color: "#FF00FF"
+            color: '#FF00FF'
         }
     })
 
     const touchableOpacityStyles = StyleSheet.create({
         container: {
             flex: 1,
-            justifyContent: "center",
+            justifyContent: 'center',
             paddingHorizontal: 10
         },
         button: {
-            alignItems: "center",
-            backgroundColor: "#DDDDDD",
+            alignItems: 'center',
+            backgroundColor: '#DDDDDD',
             padding: 10
         },
         countContainer: {
-            alignItems: "center",
+            alignItems: 'center',
             padding: 10
         }
     })
@@ -201,20 +201,20 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const touchableWithoutFeedbackStyles = StyleSheet.create({
         container: {
             flex: 1,
-            justifyContent: "center",
+            justifyContent: 'center',
             paddingHorizontal: 10
         },
         button: {
-            alignItems: "center",
-            backgroundColor: "#DDDDDD",
+            alignItems: 'center',
+            backgroundColor: '#DDDDDD',
             padding: 10
         },
         countContainer: {
-            alignItems: "center",
+            alignItems: 'center',
             padding: 10
         },
         countText: {
-            color: "#FF00FF"
+            color: '#FF00FF'
         }
     })
 

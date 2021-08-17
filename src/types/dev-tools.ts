@@ -1,4 +1,4 @@
-import {ThemeName} from "./styles";
+import {ThemeName} from './styles';
 
 export type ColorInputItem = { text: string, Hex: string, RGB: string, HSL: string }
 export type ColorDiffWithThemeColorsItem = {

@@ -1,6 +1,6 @@
-import React, {PureComponent} from "react";
-import {ButtonTO, InButtonText, Text, View} from "../UI";
-import {WithSizeLabor, withSizeLabor} from "../../providers/size-labor";
+import React, {PureComponent} from 'react';
+import {ButtonTO, InButtonText, Text, View} from '../UI';
+import {WithSizeLabor, withSizeLabor} from '../../providers/size-labor';
 
 interface Props extends WithSizeLabor {
     title: string,

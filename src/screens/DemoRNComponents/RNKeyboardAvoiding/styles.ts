@@ -1,5 +1,5 @@
-import {StyleSheet} from "react-native";
-import {SizeLabor, ThemeLabor} from "../../../types/styles";
+import {StyleSheet} from 'react-native';
+import {SizeLabor, ThemeLabor} from '../../../types/styles';
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
@@ -8,7 +8,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         inner: {
             padding: 24,
             flex: 1,
-            justifyContent: "space-around"
+            justifyContent: 'space-around'
         },
         header: {
             fontSize: 36,
@@ -16,12 +16,12 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         textInput: {
             height: 40,
-            borderColor: "#000000",
+            borderColor: '#000000',
             borderBottomWidth: 1,
             marginBottom: 36
         },
         btnContainer: {
-            backgroundColor: "white",
+            backgroundColor: 'white',
         }
     });
 }

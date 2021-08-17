@@ -1,19 +1,19 @@
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {Platform, View} from "react-native";
-import {RouteProp} from "@react-navigation/native";
-import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from "../../../types";
-import {ButtonTO, InButtonText, PickerSelectChevronRight, Text} from "../../../components/UI";
-import {shortenTFunctionKey} from "../../../providers";
-import {Col, getContainerStyles, Row} from "../../../containers";
-import * as Notifications from "expo-notifications";
-import {defaultNotification, registerForPushNotificationsAsync} from "../../../utils/expo-notification";
-import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings, sysError} from "../../../store/actions";
-import {useDispatch, useSelector} from "react-redux";
-import {getStyles} from "./styles";
-import {getSharedStyles} from "../../../helpers";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import {Platform, View} from 'react-native';
+import {RouteProp} from '@react-navigation/native';
+import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from '../../../types';
+import {ButtonTO, InButtonText, PickerSelectChevronRight, Text} from '../../../components/UI';
+import {shortenTFunctionKey} from '../../../providers';
+import {Col, getContainerStyles, Row} from '../../../containers';
+import * as Notifications from 'expo-notifications';
+import {defaultNotification, registerForPushNotificationsAsync} from '../../../utils/expo-notification';
+import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings, sysError} from '../../../store/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {getStyles} from './styles';
+import {getSharedStyles} from '../../../helpers';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyAlert'>;
 type CryptoCurrencyAlertNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -152,19 +152,19 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
                     </View>
                     <PickerSelectChevronRight
                         value={granularity}
-                        placeholder={{label: "Select " + granularityLabelPrefix, value: 0}}
+                        placeholder={{label: 'Select ' + granularityLabelPrefix, value: 0}}
                         items={mappedDicGranularity}
                         onValueChange={(itemValue) => setGranularity(itemValue)}
                     />
                     <PickerSelectChevronRight
                         value={reminder.times}
-                        placeholder={{label: "Select " + remindTimesLabelPrefix, value: 0}}
+                        placeholder={{label: 'Select ' + remindTimesLabelPrefix, value: 0}}
                         items={mappedDicReminderTimes}
                         onValueChange={(itemValue) => setReminder({...reminder, times: itemValue})}
                     />
                     <PickerSelectChevronRight
                         value={reminder.interval}
-                        placeholder={{label: "Select " + remindIntervalLabelPrefix, value: ''}}
+                        placeholder={{label: 'Select ' + remindIntervalLabelPrefix, value: ''}}
                         items={mappedDicReminderInterval}
                         onValueChange={(itemValue) => setReminder({...reminder, interval: itemValue})}
                     />

@@ -1,4 +1,4 @@
-import {Queue} from "./queue";
+import {Queue} from './queue';
 
 // TODO not perfect
 export class Deque<T> extends Queue<T> {

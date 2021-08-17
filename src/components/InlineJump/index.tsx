@@ -1,1 +1,1 @@
-export * from "./InlineJump"
+export * from './InlineJump'

@@ -1,5 +1,5 @@
-import {StyleSheet} from "react-native";
-import {SizeLabor, ThemeLabor} from "../../../../types/styles";
+import {StyleSheet} from 'react-native';
+import {SizeLabor, ThemeLabor} from '../../../../types/styles';
 
 export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;

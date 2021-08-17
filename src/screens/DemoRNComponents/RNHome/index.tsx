@@ -1,2 +1,2 @@
-export {default} from "./RNHome";
-export * from "./RNHome";
+export {default} from './RNHome';
+export * from './RNHome';

@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native'
 // TODO: support web
 import {IMessage} from './types'
-import {SizeLabor, ThemeLabor} from "../../types";
-import {withBunnyKit, WithBunnyKit} from "../../hooks/bunny-kit";
+import {SizeLabor, ThemeLabor} from '../../types';
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

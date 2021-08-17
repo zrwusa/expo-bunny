@@ -1,7 +1,7 @@
-import * as React from "react";
-import {useState} from "react";
-import {Text, View} from "../../../components/UI";
-import {RouteProp} from "@react-navigation/native";
+import * as React from 'react';
+import {useState} from 'react';
+import {Text, View} from '../../../components/UI';
+import {RouteProp} from '@react-navigation/native';
 import {
     City,
     Country,
@@ -11,12 +11,12 @@ import {
     Religion,
     State,
     University
-} from "../../../types";
-import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from "../../../containers";
-import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
-import {getSharedStyles} from "../../../helpers";
-import {ScrollView} from "react-native";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+} from '../../../types';
+import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from '../../../containers';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {getSharedStyles} from '../../../helpers';
+import {ScrollView} from 'react-native';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 import {
     Divider,
     Graduate,
@@ -27,9 +27,9 @@ import {
     SpousePickerResult,
     TreeNodePicker,
     UserAlbumEditor
-} from "../../../components";
-import {defaultValues} from "../../../constants";
-import {Slider} from "../../../../packages/react-native-range-slider-expo/src";
+} from '../../../components';
+import {defaultValues} from '../../../constants';
+import {Slider} from '../../../../packages/react-native-range-slider-expo/src';
 
 type DatingSettingsRouteProp = RouteProp<DemoDatingTabStackParam, 'DatingSettings'>;
 type DatingSettingsNavigationProp = BottomTabNavigationProp<DemoDatingTabStackParam, 'DatingSettings'>;

@@ -1,1 +1,1 @@
-export * from "./SocialMediaVideoCard"
+export * from './SocialMediaVideoCard'

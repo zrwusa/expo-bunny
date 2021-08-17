@@ -1,5 +1,5 @@
-import {uuidV4} from "../../utils";
-import {firebase} from "../firebase";
+import {uuidV4} from '../../utils';
+import {firebase} from '../firebase';
 
 const socialMediaVideos = [
     {

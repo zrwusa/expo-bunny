@@ -1,2 +1,2 @@
-export {default} from "./DemoNotification";
-export * from "./DemoNotification";
+export {default} from './DemoNotification';
+export * from './DemoNotification';

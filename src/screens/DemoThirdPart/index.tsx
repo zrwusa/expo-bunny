@@ -1,2 +1,2 @@
-export {default} from "./DemoThirdPart";
-export * from "./DemoThirdPart";
+export {default} from './DemoThirdPart';
+export * from './DemoThirdPart';

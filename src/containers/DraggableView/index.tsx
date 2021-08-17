@@ -1,1 +1,1 @@
-export * from "./DraggableView"
+export * from './DraggableView'

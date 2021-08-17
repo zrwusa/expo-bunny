@@ -1,4 +1,4 @@
 export * from './helpers'
 export * from './wsWorker'
-export * from "./shared-styles"
+export * from './shared-styles'
 

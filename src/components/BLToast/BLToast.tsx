@@ -1,11 +1,11 @@
-import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../types";
-import {getStyles} from "./styles";
-import {Snackbar} from "react-native-paper";
-import {Text, View} from "../UI"
-import {setBLResult} from "../../store/actions";
-import {useBunnyKit} from "../../hooks/bunny-kit";
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../types';
+import {getStyles} from './styles';
+import {Snackbar} from 'react-native-paper';
+import {Text, View} from '../UI'
+import {setBLResult} from '../../store/actions';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 const BLToast = () => {
     const {sizeLabor, themeLabor} = useBunnyKit();

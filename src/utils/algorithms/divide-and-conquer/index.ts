@@ -1,2 +1,2 @@
-export * from "./divide-and-conquer"
-export * from "./cases"
+export * from './divide-and-conquer'
+export * from './cases'

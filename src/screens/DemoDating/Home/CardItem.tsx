@@ -1,9 +1,9 @@
-import React from "react";
-import {Image, View} from "react-native";
-import {Col, getContainerStyles, Row} from "../../../containers";
-import {getSharedStyles} from "../../../helpers";
-import {IcoMoon} from "../../../components/UI";
-import {useBunnyKit} from "../../../hooks/bunny-kit";
+import React from 'react';
+import {Image, View} from 'react-native';
+import {Col, getContainerStyles, Row} from '../../../containers';
+import {getSharedStyles} from '../../../helpers';
+import {IcoMoon} from '../../../components/UI';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 export interface CardItemProps {
     description?: string;
@@ -33,7 +33,7 @@ const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches
             ...sharedStylesFlatten.shadowThin,
             backgroundColor: '#ffffff',
             borderRadius: wp(16),
-            alignItems: "center",
+            alignItems: 'center',
             margin: wp(10),
         }}>
             <Image source={image} style={imageStyle}/>

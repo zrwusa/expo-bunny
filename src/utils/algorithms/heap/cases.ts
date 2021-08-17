@@ -1,4 +1,4 @@
-import {SinglyLinkedList, SinglyLinkedListNode} from "../../data-structures/linked-list";
+import {SinglyLinkedList, SinglyLinkedListNode} from '../../data-structures/linked-list';
 
 export const findKthLargestCase1: [number[], number] = [[3, 2, 1, 5, 6, 4], 2];
 export const findKthLargestCase2: [number[], number] = [[3, 2, 3, 1, 2, 4, 5, 5, 6], 4];

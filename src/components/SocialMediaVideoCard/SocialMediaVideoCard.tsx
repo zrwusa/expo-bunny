@@ -1,13 +1,13 @@
-import * as React from "react";
-import {PureComponent} from "react";
-import {IcoMoon, View} from "../UI";
-import {Avatar} from "../Avatar"
-import {Image, Text} from "react-native";
-import {ShowVideo} from "../Video/Video";
-import {ReadMore} from "../ReadMore/ReadMore";
-import {SocialMediaMainDatum} from "../../types";
-import {getStyles} from "./styles";
-import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import * as React from 'react';
+import {PureComponent} from 'react';
+import {IcoMoon, View} from '../UI';
+import {Avatar} from '../Avatar'
+import {Image, Text} from 'react-native';
+import {ShowVideo} from '../Video/Video';
+import {ReadMore} from '../ReadMore/ReadMore';
+import {SocialMediaMainDatum} from '../../types';
+import {getStyles} from './styles';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 interface SocialMediaVideoCardProps extends WithBunnyKit {
     card: SocialMediaMainDatum

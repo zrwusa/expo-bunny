@@ -1,2 +1,2 @@
-export {default} from "./DemoThunkCC";
-export * from "./DemoThunkCC"
+export {default} from './DemoThunkCC';
+export * from './DemoThunkCC'

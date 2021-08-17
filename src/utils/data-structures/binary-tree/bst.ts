@@ -1,4 +1,4 @@
-import {BinaryTree, BinaryTreeNode, BinaryTreeNodeId, BinaryTreeNodePropertyName, I_BinaryTree} from "./binary-tree";
+import {BinaryTree, BinaryTreeNode, BinaryTreeNodeId, BinaryTreeNodePropertyName, I_BinaryTree} from './binary-tree';
 
 export type BSTDeletedResult<T> = { deleted: BSTNode<T> | null, needBalanced: BSTNode<T> | null };
 

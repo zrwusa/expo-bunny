@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import firebase from 'firebase/app';
 import {
     FIREBASE_APP_ID_ANDROID,
     FIREBASE_APP_ID_IOS,
@@ -10,13 +10,13 @@ import {
     FIREBASE_PROJECT_ID,
     FIREBASE_STORAGE_BUCKET,
     GOOGLE_API_KEY
-} from "@env";
-import {Platform} from "react-native";
-import "firebase/auth";
-import "firebase/database";
-import "firebase/firestore";
-import "firebase/functions";
-import "firebase/storage";
+} from '@env';
+import {Platform} from 'react-native';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
+import 'firebase/functions';
+import 'firebase/storage';
 // Optionally import the services that you want to use
 
 export const FIREBASE_CONFIG = {

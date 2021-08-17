@@ -1,72 +1,72 @@
-import {AuthAPIError, BunnyAPIError, NomicsAPIError} from "../utils";
+import {AuthAPIError, BunnyAPIError, NomicsAPIError} from '../utils';
 
 export type AuthAPIProtocolResponseData<T> = {
-    "httpExtra": {
-        "code": number,
-        "message": string,
-        "description": string,
-        "errorCode": number,
-        "errorMessage": string,
-        "errorDescription": string,
-        "errorStack": string
+    'httpExtra': {
+        'code': number,
+        'message': string,
+        'description': string,
+        'errorCode': number,
+        'errorMessage': string,
+        'errorDescription': string,
+        'errorStack': string
     },
-    "businessLogic": {
-        "code": string,
-        "message": string,
-        "description": string,
-        "errorCode": string,
-        "errorMessage": string,
-        "errorDescription": string,
-        "errorStack": string
+    'businessLogic': {
+        'code': string,
+        'message': string,
+        'description': string,
+        'errorCode': string,
+        'errorMessage': string,
+        'errorDescription': string,
+        'errorStack': string
     },
-    "successData"?: T,
-    "timeSpent": number
+    'successData'?: T,
+    'timeSpent': number
 }
 
 export type BunnyAPIProtocolResponseData<T> = {
-    "httpExtra": {
-        "code": number,
-        "message": string,
-        "description": string,
-        "errorCode": number,
-        "errorMessage": string,
-        "errorDescription": string,
-        "errorStack": string
+    'httpExtra': {
+        'code': number,
+        'message': string,
+        'description': string,
+        'errorCode': number,
+        'errorMessage': string,
+        'errorDescription': string,
+        'errorStack': string
     },
-    "businessLogic": {
-        "code": string,
-        "message": string,
-        "description": string,
-        "errorCode": string,
-        "errorMessage": string,
-        "errorDescription": string,
-        "errorStack": string
+    'businessLogic': {
+        'code': string,
+        'message': string,
+        'description': string,
+        'errorCode': string,
+        'errorMessage': string,
+        'errorDescription': string,
+        'errorStack': string
     },
-    "successData"?: T,
-    "timeSpent": number
+    'successData'?: T,
+    'timeSpent': number
 }
 
 export type NomicsAPIProtocolResponseData<T> = {
-    "httpExtra": {
-        "code": number,
-        "message": string,
-        "description": string,
-        "errorCode": number,
-        "errorMessage": string,
-        "errorDescription": string,
-        "errorStack": string
+    'httpExtra': {
+        'code': number,
+        'message': string,
+        'description': string,
+        'errorCode': number,
+        'errorMessage': string,
+        'errorDescription': string,
+        'errorStack': string
     },
-    "businessLogic": {
-        "code": string,
-        "message": string,
-        "description": string,
-        "errorCode": string,
-        "errorMessage": string,
-        "errorDescription": string,
-        "errorStack": string
+    'businessLogic': {
+        'code': string,
+        'message': string,
+        'description': string,
+        'errorCode': string,
+        'errorMessage': string,
+        'errorDescription': string,
+        'errorStack': string
     },
-    "successData"?: T,
-    "timeSpent": number
+    'successData'?: T,
+    'timeSpent': number
 }
 
 export type APIStatusMap = Partial<{
@@ -122,10 +122,10 @@ export type APIConfig = {
     },
     isDevServerProxy: boolean,
     devServerProxy: {
-        "/api": {
+        '/api': {
             target: string,
             pathRewrite: {
-                "^/api-rewrite-path": string
+                '^/api-rewrite-path': string
             }
         }
     },

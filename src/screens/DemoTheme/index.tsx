@@ -1,2 +1,2 @@
-export {default} from "./DemoTheme";
-export * from "./DemoTheme";
+export {default} from './DemoTheme';
+export * from './DemoTheme';

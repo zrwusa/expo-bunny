@@ -1,5 +1,5 @@
-import React from "react";
-import {FlexAlignType, StyleProp, View, ViewStyle} from "react-native";
+import React from 'react';
+import {FlexAlignType, StyleProp, View, ViewStyle} from 'react-native';
 
 export interface ColProps {
     children?: React.ReactNode,

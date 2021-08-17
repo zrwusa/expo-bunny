@@ -1,14 +1,14 @@
-import React from "react";
-import {connect} from "react-redux";
-import {Button, Text, View} from "../../components/UI";
-import {demoThunk} from "../../store/actions";
-import {DemoThunkPayload, DemoThunkState, RootState} from "../../types";
-import {ThunkDispatch} from "redux-thunk";
-import {Action} from "redux";
-import {shortenTFunctionKey} from "../../providers/i18n-labor";
-import {getContainerStyles} from "../../containers";
-import {getSharedStyles} from "../../helpers";
-import {WithBunnyKit, withBunnyKit} from "../../hooks/bunny-kit";
+import React from 'react';
+import {connect} from 'react-redux';
+import {Button, Text, View} from '../../components/UI';
+import {demoThunk} from '../../store/actions';
+import {DemoThunkPayload, DemoThunkState, RootState} from '../../types';
+import {ThunkDispatch} from 'redux-thunk';
+import {Action} from 'redux';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {getContainerStyles} from '../../containers';
+import {getSharedStyles} from '../../helpers';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action>) => ({
@@ -27,8 +27,8 @@ class DemoThunkCCScreen extends React.Component<Props> {
 
     handleThunk(): void {
         this.props.demoThunk({
-            "text": "text-demo",
-            "id": 0
+            'text': 'text-demo',
+            'id': 0
         }).then((value) => {
             console.log('hello world, got', value);
         });

@@ -1,1 +1,1 @@
-export * from "./FollowUpSearchBar"
+export * from './FollowUpSearchBar'

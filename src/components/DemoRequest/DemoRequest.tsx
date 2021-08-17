@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import {ButtonTO, InButtonText, Text, View} from "../UI";
-import {DemoEmployee} from "../../types";
-import {useRequest} from "../../providers/request-labor";
-import {useDispatch} from "react-redux";
-import {saveQuickAlertSettings, sysError} from "../../store/actions";
-import bunnyAPI from "../../helpers/bunny-api";
+import React, {useState} from 'react';
+import {ButtonTO, InButtonText, Text, View} from '../UI';
+import {DemoEmployee} from '../../types';
+import {useRequest} from '../../providers/request-labor';
+import {useDispatch} from 'react-redux';
+import {saveQuickAlertSettings, sysError} from '../../store/actions';
+import bunnyAPI from '../../helpers/bunny-api';
 
 interface Props {
     title: string,
@@ -16,7 +16,7 @@ function DemoRequest(props: Props) {
     const dispatch = useDispatch();
     const [employees, setEmployees] = useState<Array<DemoEmployee>>([])
     const granularity = 0.0001;
-    const expoPushToken = "ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]";
+    const expoPushToken = 'ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]';
     const saveAlertSetting = async function () {
         try {
             await request.post('/push-service/alert-settings', {toke: expoPushToken})

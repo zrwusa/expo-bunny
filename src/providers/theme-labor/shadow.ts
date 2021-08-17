@@ -1,5 +1,5 @@
-import {Animated} from "react-native";
-import {pl} from "../../utils";
+import {Animated} from 'react-native';
+import {pl} from '../../utils';
 
 const SHADOW_COLOR = pl.black;
 const SHADOW_OPACITY = 0.24;
