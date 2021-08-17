@@ -4,7 +4,7 @@ import {IcoMoon, View} from '../UI';
 import {Avatar} from '../Avatar'
 import {Image, Text} from 'react-native';
 import {ShowVideo} from '../Video/Video';
-import {ReadMore} from '../ReadMore/ReadMore';
+import {ReadMore} from '../ReadMore';
 import {SocialMediaMainDatum} from '../../types';
 import {getStyles} from './styles';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';

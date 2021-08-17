@@ -49,7 +49,8 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         comment: {
             fontFamily: fonts.thin.fontFamily,
             fontWeight: fonts.light.fontWeight,
-            color: colors.text
+            color: colors.text,
+            fontSize: ms.fs.xs,
         }
     });
 }

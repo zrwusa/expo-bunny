@@ -1,15 +1,17 @@
 import React, {ReactNode} from 'react';
-import {StyleProp, StyleSheet, Text, TextStyle, View} from 'react-native';
+import {StyleProp, Text, TextStyle, View} from 'react-native';
+import {getStyles} from './styles';
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
-interface ReadMoreProps {
+interface ReadMoreProps extends WithBunnyKit {
     numberOfLines: number,
     onReady?: () => void,
     renderTruncatedFooter?: (param: undefined | (() => void)) => ReactNode,
     renderRevealedFooter?: (param: undefined | (() => void)) => ReactNode,
-    textStyle?: StyleProp<TextStyle>
+    textStyle?: StyleProp<TextStyle>,
 }
 
-export class ReadMore extends React.Component<ReadMoreProps> {
+class ReadMoreInner extends React.Component<React.PropsWithChildren<ReadMoreProps>> {
     private _isMounted = false;
     private _text: Text | null = null
     state = {
@@ -86,6 +88,9 @@ export class ReadMore extends React.Component<ReadMoreProps> {
     };
 
     _maybeRenderReadMore() {
+        const {bunnyKit} = this.props;
+        const {sizeLabor, themeLabor} = bunnyKit;
+        const styles = getStyles(sizeLabor, themeLabor);
         let {shouldShowReadMore, showAllText} = this.state;
 
         if (shouldShowReadMore && !showAllText) {
@@ -112,6 +117,8 @@ export class ReadMore extends React.Component<ReadMoreProps> {
     }
 }
 
+export const ReadMore = withBunnyKit(ReadMoreInner);
+
 function measureHeightAsync(component: Text) {
     return new Promise<number>(resolve => {
         component.measure((x, y, w, h) => {
@@ -123,10 +130,3 @@ function measureHeightAsync(component: Text) {
 function nextFrameAsync() {
     return new Promise(resolve => requestAnimationFrame(() => resolve(true)));
 }
-
-const styles = StyleSheet.create({
-    button: {
-        color: '#888',
-        marginTop: 5
-    }
-});
