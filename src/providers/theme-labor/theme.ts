@@ -9,7 +9,6 @@ import {getVictoryTheme} from './victoryTheme';
 export const getThemeWareHouse = () => {
     const {wp} = getSizeLabor().designsBasedOn.iphoneX
 
-
     const commonFontFamily = {
         light: fontsWarehouse.regular.fontFamily.light,
         dark: fontsWarehouse.regular.fontFamily.dark,
@@ -469,7 +468,7 @@ const extractThemesFromWarehouse = (arg: unknown, themeName: string) => {
 
 export const getThemes = () => {
     let themes: JSONSerializable = {};
-    const themeNames = Object.values(EThemes)
+    const themeNames = Object.values(EThemes);
     themeNames.forEach((name: string) => {
         themes[name] = extractThemesFromWarehouse(getThemeWareHouse(), name)
     })

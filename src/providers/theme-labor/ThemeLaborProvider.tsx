@@ -15,15 +15,15 @@ import _ from 'lodash';
 import {Dimensions} from 'react-native';
 import {blError} from '../../helpers';
 
-
-function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
+const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
     const {children} = props;
     const dispatch = useDispatch()
     const sysColorSchemeName = useColorScheme();
-    const [themes, setThemes] = useState(getThemes())
+    const [themes, setThemes] = useState(getThemes());
     const [isReady, setIsReady] = useState(false);
     const [themeName, setThemeName] = useState(EThemes.light)
     const [theme, setTheme] = useState(themes[themeName]);
+
     const changeTheme = async (themeName: ThemeName) => {
         if (Object.keys(EThemes).includes(themeName)) {
             await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, themeName)
@@ -56,20 +56,26 @@ function ThemeLaborProvider(props: ThemeProviderProps): JSX.Element {
                 setIsReady(true)
             })
 
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        setTheme(themes[themeName]);
+    }, [themes]);
+
     useEffect(() => {
         const onDimensionsChange = _.throttle(() => {
-            setThemes(getThemes())
-            setTheme(themes[themeName])
+            setThemes(getThemes());
         }, BunnyConstants.throttleWait);
         Dimensions.addEventListener('change', onDimensionsChange);
         return () => Dimensions.removeEventListener('change', onDimensionsChange);
     });
+
     const themeLaborMemorized = useMemo(
         () => {
             return {theme, currentThemeName: themeName, themes, changeTheme, sysColorSchemeName}
         }
-        , [theme, changeTheme, themeName, sysColorSchemeName])
+        , [theme, changeTheme, themeName, sysColorSchemeName]);
+
     return (
         isReady
             ? <ThemeLaborContext.Provider value={themeLaborMemorized}>
