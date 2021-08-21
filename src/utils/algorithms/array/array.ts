@@ -50,7 +50,7 @@ function removeDuplicates(nums: number[]): number {
     if (nums.length === 0) return 0;
     let ans = 1;
     for (let i = 1; i < nums.length; i++) {
-        if (nums[i] !== nums[i-1]) {
+        if (nums[i] !== nums[i - 1]) {
             nums[ans++] = nums[i];
         }
     }
@@ -59,7 +59,7 @@ function removeDuplicates(nums: number[]): number {
 
 function moveZeroesPlagiarized(nums: number[]): void {
     let id = 0;
-    for (let i = 0 ; i < nums.length; i++) {
+    for (let i = 0; i < nums.length; i++) {
         if (nums[i] !== 0) {
             nums[id] = nums[i];
             id++;
@@ -73,7 +73,7 @@ function moveZeroesPlagiarized(nums: number[]): void {
 
 function moveZeroes(nums: number[]): void {
     let id = 0;
-    for (let i = 0 ; i < nums.length; i++) {
+    for (let i = 0; i < nums.length; i++) {
         if (nums[i] !== 0) {
             let temp = nums[id];
             nums[id] = nums[i];
@@ -86,9 +86,10 @@ function moveZeroes(nums: number[]): void {
 // 303. Range Sum Query - Immutable
 class NumArray {
     private _cache: Map<number, number> = new Map();
+
     constructor(nums: number[]) {
         for (let i = 0; i < nums.length; i++) {
-            this._cache.set(i,i === 0 ? nums[0] : this._cache.get(i - 1)! + nums[i]);
+            this._cache.set(i, i === 0 ? nums[0] : this._cache.get(i - 1)! + nums[i]);
         }
     }
 
@@ -103,11 +104,12 @@ class NumArray {
 
 // 304. Range Sum Query 2D - Immutable
 class NumMatrixMy {
-    private _cache: (number| undefined)[][] = [];
+    private _cache: (number | undefined)[][] = [];
+
     constructor(matrix: number[][]) {
 
         for (let row = 0; row < matrix.length; row++) {
-            let rowData: (number| undefined)[] = [];
+            let rowData: (number | undefined)[] = [];
             for (let col = 0; col < matrix[row].length; col++) {
                 rowData.push(Infinity);
             }
@@ -174,8 +176,9 @@ class NumMatrixMy {
 
 class NumMatrix {
     private _cache: number[][] = [];
+
     constructor(matrix: number[][]) {
-        const cLen =  matrix.length + 1;
+        const cLen = matrix.length + 1;
         const cache: number[][] = [];
 
         for (let row = 0; row < cLen; row++) {
@@ -188,7 +191,7 @@ class NumMatrix {
 
         for (let row = 1; row < cLen; row++) {
             for (let col = 1; col < matrix[row - 1].length + 1; col++) {
-                cache[row][col] =  cache[row - 1][col]
+                cache[row][col] = cache[row - 1][col]
                     + cache[row][col - 1]
                     - cache[row - 1][col - 1]
                     + matrix[row - 1][col - 1];
@@ -201,7 +204,7 @@ class NumMatrix {
     sumRegion(row1: number, col1: number, row2: number, col2: number): number {
         const {_cache: cache} = this;
         return cache[row2 + 1][col2 + 1]
-            - cache[row2 + 1][ col1]
+            - cache[row2 + 1][col1]
             - cache[row1][col2 + 1]
             + cache[row1][col1];
     }
@@ -215,6 +218,7 @@ class NumArrayMyFirst {
     private readonly _nums: number[];
     private readonly _sums: number[];
     private _diffs: [number, number][] = [];
+
     constructor(nums: number[]) {
         this._nums = nums;
         this._sums = new Array(nums.length + 1).fill(0);
@@ -253,6 +257,7 @@ class NumArrayMySecond {
     private readonly _nums: number[];
     private readonly _sums: number[];
     private _diffs: Map<number, number> = new Map();
+
     constructor(nums: number[]) {
         this._nums = nums;
         this._sums = new Array(nums.length + 1).fill(0);

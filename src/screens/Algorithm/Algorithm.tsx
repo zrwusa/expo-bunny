@@ -21,6 +21,7 @@ import {
     networkDelayTimeCase3,
     regionsBySlashes,
     reverseLinkedList,
+    runAllTestSegmentTree,
     testAVLTree,
     testBinaryTree,
     testBST,
@@ -155,6 +156,8 @@ export function AlgorithmScreen() {
     const _regionsBySlashes = async () => {
         await regionsBySlashes([], proxyFactory(setRegionsBySlashesVars));
     }
+
+    runAllTestSegmentTree().then();
 
     return (
         <ScrollView>

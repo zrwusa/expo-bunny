@@ -15,7 +15,7 @@ export const fallingSquaresMy = function (positions: number[][]): number[] {
         }
         const newHeight = maxInRange + sl;
 
-        for (let i = 0; i < sl; i++ ) {
+        for (let i = 0; i < sl; i++) {
             h[i + left] = newHeight;
         }
 
