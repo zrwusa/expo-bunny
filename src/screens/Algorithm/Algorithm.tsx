@@ -35,6 +35,7 @@ import {VividAlgorithm} from '../../components/VividAlgorithm';
 import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from '../../utils/data-structures';
 import {ScrollView} from 'react-native';
 import {THandlerContext} from '@qiwi/deep-proxy';
+import {isValidSudoku} from '../../utils/algorithms/uncategorized';
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -156,8 +157,6 @@ export function AlgorithmScreen() {
     const _regionsBySlashes = async () => {
         await regionsBySlashes([], proxyFactory(setRegionsBySlashesVars));
     }
-
-    runAllTestSegmentTree().then();
 
     return (
         <ScrollView>
