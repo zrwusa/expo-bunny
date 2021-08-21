@@ -28,7 +28,12 @@ import {bunnyConsole, timeStart} from '../utils';
 // obj[i] = 0                                   15
 // reverse                                      8
 // indexOf half                                 8
+// arr.push(0)                                  117
+// new Array(1e+7).fill(0);                     50
 
+// 1e+8
+// arr.push(0)                                  878
+// new Array(1e+8).fill(0);                     19191
 
 // const arr = [];
 // const obj: {[key in number]: number} = {};
