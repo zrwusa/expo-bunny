@@ -552,7 +552,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     morris(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[];
     /**
      * The time complexity of Morris traversal is O(n), it's may slower than others
-     * The space complexity  Morris traversal is O(1)
+     * The space complexity  Morris traversal is O(1) because no using stack
      * @param pattern
      * @param nodeOrPropertyName
      */
