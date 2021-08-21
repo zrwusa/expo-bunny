@@ -1,5 +1,3 @@
-import {Stack} from '../stack';
-
 export type BinaryTreeNodePropertyName = 'id' | 'val' | 'count' | 'allLesserSum';
 export type NodeOrPropertyName = 'node' | BinaryTreeNodePropertyName;
 export type DFSOrderPattern = 'in' | 'pre' | 'post';
@@ -485,6 +483,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'node'): BinaryTreeNode<T>[];
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'count'): number[];
     DFSIterative(pattern?: DFSOrderPattern, nodeOrPropertyName?: 'allLesserSum'): number[]; // TODO in BinaryTree not implemented
+
     /**
      * Time complexity is O(n)
      * Space complexity of Iterative DFS equals to recursive DFS which is O(n) because of the stack
@@ -493,52 +492,44 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
      * @constructor
      */
     DFSIterative(pattern ?: 'in' | 'pre' | 'post', nodeOrPropertyName ?: NodeOrPropertyName): ResultsByType<T> {
-        if (!this.root) return [];
-
-        if (pattern === undefined) {
-            pattern = 'in';
-        }
-        if (nodeOrPropertyName === undefined) {
-            nodeOrPropertyName = 'id';
-        }
+        pattern = pattern || 'in';
+        nodeOrPropertyName = nodeOrPropertyName || 'id';
         this._resetResults();
-
-        const stack = new Stack<BinaryTreeNode<T>>();
-        const leftMostPush = (node: BinaryTreeNode<T> | null) => {
-            while (node) {
-                stack.push(node);
-                node = node.left;
+        if (!this.root) return this._getResultByPropertyName(nodeOrPropertyName);
+        // 0: visit, 1: print
+        const stack: { opt: 0 | 1, node: BinaryTreeNode<T> | null }[] = [];
+        stack.push({opt: 0, node: this.root});
+        while (stack.length > 0) {
+            const cur = stack.pop();
+            if (!cur || !cur.node) continue;
+            if (cur.opt === 1) {
+                this._pushByPropertyName(cur.node, nodeOrPropertyName);
+            } else {
+                switch (pattern) {
+                    case 'in':
+                        stack.push({opt: 0, node: cur.node.right});
+                        stack.push({opt: 1, node: cur.node});
+                        stack.push({opt: 0, node: cur.node.left});
+                        break;
+                    case 'pre':
+                        stack.push({opt: 0, node: cur.node.right});
+                        stack.push({opt: 0, node: cur.node.left});
+                        stack.push({opt: 1, node: cur.node});
+                        break;
+                    case 'post':
+                        stack.push({opt: 1, node: cur.node});
+                        stack.push({opt: 0, node: cur.node.right});
+                        stack.push({opt: 0, node: cur.node.left});
+                        break;
+                    default:
+                        stack.push({opt: 0, node: cur.node.right});
+                        stack.push({opt: 1, node: cur.node});
+                        stack.push({opt: 0, node: cur.node.left});
+                        break;
+                }
             }
         }
-
-        if (pattern === 'in') {
-            leftMostPush(this.root);
-        } else {
-            stack.push(this.root);
-        }
-
-        while (!stack.isEmpty()) {
-            let cur: BinaryTreeNode<T> | null = stack.pop()!;
-            switch (pattern) {
-                case 'in':
-                    this._pushByPropertyName(cur, nodeOrPropertyName);
-                    leftMostPush(cur.right);
-                    break;
-                case 'pre':
-                    if (cur.right) stack.push(cur.right);
-                    if (cur.left) stack.push(cur.left);
-                    this._pushByPropertyName(cur, nodeOrPropertyName);
-                    break;
-                case 'post':
-                    this._pushByPropertyName(cur, nodeOrPropertyName);
-                    if (cur.left) stack.push(cur.left);
-                    if (cur.right) stack.push(cur.right);
-                    break;
-            }
-        }
-
-        const ret = this._getResultByPropertyName(nodeOrPropertyName);
-        return pattern === 'post' ? ret.reverse() : ret;
+        return this._getResultByPropertyName(nodeOrPropertyName);
     }
 
     getPredecessor(node: BinaryTreeNode<T>): BinaryTreeNode<T> {
