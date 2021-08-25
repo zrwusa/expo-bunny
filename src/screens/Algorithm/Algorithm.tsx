@@ -21,7 +21,6 @@ import {
     networkDelayTimeCase3,
     regionsBySlashes,
     reverseLinkedList,
-    runAllTestSegmentTree,
     testAVLTree,
     testBinaryTree,
     testBST,
@@ -35,7 +34,6 @@ import {VividAlgorithm} from '../../components/VividAlgorithm';
 import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from '../../utils/data-structures';
 import {ScrollView} from 'react-native';
 import {THandlerContext} from '@qiwi/deep-proxy';
-import {isValidSudoku} from '../../utils/algorithms/uncategorized';
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();

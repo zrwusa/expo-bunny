@@ -141,7 +141,7 @@ function solveSudokuBruteForceFailed(board: string[][]): void {
             for (let i = 0; i < 9; i++) {
                 for (let j = 0; j < 9; j++) {
                     if (board[i][j] === '.') {
-                        const exists = new Set([...getRowValidSet(i),...getColValidSet(j),...getBoxValidSet(i, j)]);
+                        const exists = new Set([...getRowValidSet(i), ...getColValidSet(j), ...getBoxValidSet(i, j)]);
                         const possible = getPossible(exists);
                         if (possible.length === 1) {
                             board[i][j] = getPossible(exists)[0];
@@ -152,5 +152,102 @@ function solveSudokuBruteForceFailed(board: string[][]): void {
         }
     }
     fill();
+}
 
+// 48. Rotate Image
+function rotate(matrix: number[][]): void {
+    const n = matrix.length;
+
+    for (let layer = 0; layer < Math.floor(n / 2); layer++) {
+        const last = n - 1 - layer;
+
+        for (let i = 0; i < last - layer; i++) {
+            const topLeft = matrix[layer][layer + i];
+
+            // Top left = bottom left
+            matrix[layer][layer + i] = matrix[last - i][layer];
+
+            // Bottom left = bottom right
+            matrix[last - i][layer] = matrix[last][last - i];
+
+            // Bottom right = top right
+            matrix[last][last - i] = matrix[layer + i][last];
+
+            // Top right = top left
+            matrix[layer + i][last] = topLeft;
+        }
+    }
+}
+
+function subSetOfArray<T>(input: T[]): T[][] {
+    let res: T[][] = [];
+    let dfs = (index: number, accumulated: T[]) => {
+        if (index === input.length) {
+            res.push([...accumulated]);
+            return;
+        }
+        accumulated.push(input[index]);
+        dfs(index + 1, accumulated);
+        accumulated.pop();
+
+        dfs(index + 1, accumulated);
+    }
+
+    dfs(0, [])
+    return res;
+}
+
+// 131. Palindrome Partitioning
+function partition(s: string): string[][] {
+    const ans: string[][] = [];
+    const n = s.length;
+    const isPalindrome = (sub: string) => {
+        let l = 0, r = sub.length - 1;
+        while (l < r) {
+            if (sub[l] !== sub[r]) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+
+    const dfs = (acml: string[], idx: number) => {
+        if (idx === n) {
+            ans.push([...acml]);
+            return;
+        }
+        for (let i = 1; i <= n - idx; i++) {
+            const sub = s.substr(idx, i);
+            if (isPalindrome(sub)) {
+                acml.push(sub);
+                dfs(acml, idx + i);
+                acml.pop();
+            }
+
+        }
+    }
+    dfs([], 0);
+    return ans;
+}
+
+// 312. Burst Balloons
+
+
+// 120. Triangle
+function minimumTotal(triangle: number[][]): number {
+    const dp = [[triangle[0][0]]];
+    let n = triangle.length;
+
+    for (let i = 1; i < n; i++) {
+        const row = [];
+        for (let j = 0; j < triangle[i].length; j++) {
+            const prevCellA = dp[i - 1][j];
+            const prevCellB = dp[i - 1][j - 1];
+            const dpCell = Math.min(prevCellA !== undefined ? prevCellA : Number.MAX_SAFE_INTEGER, prevCellB !== undefined ? prevCellB : Number.MAX_SAFE_INTEGER) + triangle[i][j];
+            row.push(dpCell);
+        }
+        dp.push(row);
+    }
+
+    return Math.min(...dp[n - 1]);
 }
