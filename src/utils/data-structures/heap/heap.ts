@@ -151,6 +151,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
     }
 
     insert(node: T, priority?: number | string): void {
+        // TODO may bugs exist for priorities
         if (priority !== undefined) {
             if (node instanceof HeapNode) {
                 node.id = priority;
