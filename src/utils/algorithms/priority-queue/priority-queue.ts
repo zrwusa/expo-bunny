@@ -10,6 +10,15 @@ export const testPriorityQueue = () => {
     console.log(minNumPQ.front());
     console.log(minNumPQ.toArray());
 
+    const minStringPQ = new MinPriorityQueue<string>();
+    minStringPQ.enqueue('1');
+    minStringPQ.enqueue('6');
+    minStringPQ.enqueue('2');
+    minStringPQ.enqueue('0');
+    minStringPQ.dequeue();
+    console.log(minStringPQ.front());
+    console.log(minStringPQ.toArray());
+
 
     const minPQ = new MinPriorityQueue<{ a: string }>();
     minPQ.enqueue({a: 'a1'}, 1);

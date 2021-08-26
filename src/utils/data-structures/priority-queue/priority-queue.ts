@@ -98,9 +98,8 @@ export abstract class PriorityQueue<T> {
      * @param {number} p - priority
      * @throws {Error} if priority is not a valid number
      */
-    enqueue(element: T, p?: number): PriorityQueue<T> {
-
-        if (typeof element === 'number') {
+    enqueue(element: T, p?: number | string): PriorityQueue<T> {
+        if (typeof element === 'number' || typeof element === 'string') {
             p = element;
         }
 
