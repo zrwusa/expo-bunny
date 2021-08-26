@@ -95,30 +95,30 @@ export abstract class PriorityQueue<T> {
      * Adds an element to the queue
      * @public
      * @param {any} element
-     * @param {number} p - priority
+     * @param priority
      * @throws {Error} if priority is not a valid number
      */
-    enqueue(element: T, p?: number | string): PriorityQueue<T> {
+    enqueue(element: T, priority?: number | string): PriorityQueue<T> {
         if (typeof element === 'number' || typeof element === 'string') {
-            p = element;
+            priority = element;
         }
 
-        if (p === undefined) {
+        if (priority === undefined) {
             throw new Error('.enqueue expects a numeric priority');
         }
-        if (p && Number.isNaN(+p)) {
+        if (priority && Number.isNaN(+priority)) {
             throw new Error('.enqueue expects a numeric priority');
         }
 
-        if (Number.isNaN(+p) && Number.isNaN(this._priorityCb(element))) {
+        if (Number.isNaN(+priority) && Number.isNaN(this._priorityCb(element))) {
             throw new Error(
                 '.enqueue expects a numeric priority '
                 + 'or a constructor callback that returns a number'
             );
         }
 
-        const priority = !Number.isNaN(+p) ? p : this._priorityCb(element);
-        this._heap.insert(new HeapNode<T>(priority, element));
+        const _priority = !Number.isNaN(+priority) ? priority : this._priorityCb(element);
+        this._heap.insert(new HeapNode<T>(_priority, element));
         return this;
     }
 
