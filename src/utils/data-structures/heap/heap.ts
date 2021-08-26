@@ -1,8 +1,10 @@
 // Online Algorithms use Heap (e.g. Top K problems)
 // Offline Algorithms use sort
-type HeapNodePropertyName = 'id' | 'val';
-type HeapNodeOrPropertyName = 'node' | HeapNodePropertyName;
-type DFSMode = 'pre' | 'in' | 'post';
+import {DFSMode} from '../common';
+
+export type HeapNodePropertyName = 'id' | 'val';
+export type HeapNodeOrPropertyName = 'node' | HeapNodePropertyName;
+
 
 export class HeapNode<V> {
     private _id: number | string;
@@ -33,7 +35,7 @@ export class HeapNode<V> {
 }
 
 export abstract class Heap<T extends number | HeapNode<V>, V> {
-    protected readonly _nodes: T[];
+    protected _nodes: T[];
 
     protected constructor(nodes?: T[]) {
         // TODO support distinct
@@ -148,7 +150,12 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         return res;
     }
 
-    insert(node: T): void {
+    insert(node: T, priority?: number | string): void {
+        if (priority !== undefined) {
+            if (node instanceof HeapNode) {
+                node.id = priority;
+            }
+        }
         this._nodes.push(node);
         this.heapifyUp(this._nodes.length - 1);
     }
@@ -334,6 +341,10 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
             default:
                 return visitedNumber;
         }
+    }
+
+    clear() {
+        this._nodes = [];
     }
 
     // --- end additional functions

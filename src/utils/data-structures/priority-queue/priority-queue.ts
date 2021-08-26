@@ -1,3 +1,14 @@
+import {Heap, HeapNode} from '../heap';
+
+export interface PriorityQueueOptions<T> {
+    priority?: (element: T) => number;
+}
+
+export interface PriorityQueueItem<T> {
+    priority: number;
+    element: T;
+}
+
 /**
  * @copyright 2020 Eyas Ranjous <eyas.ranjous@gmail.com>
  * @license MIT
@@ -5,25 +16,33 @@
  * @abstract
  * @class PriorityQueue
  */
-export class PriorityQueue {
+export abstract class PriorityQueue<T> {
+    protected abstract _heap: Heap<HeapNode<T>, T>;
+    protected _priorityCb: (element: T) => number;
+
     /**
      * Creates a priority queue
      * @public
      * @params {object} [options]
      */
-    constructor(options = {}) {
-        const {priority} = options;
-        if (priority !== undefined && typeof priority !== 'function') {
-            throw new Error('.constructor expects a valid priority function');
+    protected constructor(options?: PriorityQueueOptions<T>) {
+        if (options) {
+            const {priority} = options;
+            if (priority !== undefined && typeof priority !== 'function') {
+                throw new Error('.constructor expects a valid priority function');
+            }
+            this._priorityCb = priority || ((el) => +el);
+        } else {
+            this._priorityCb = (el) => +el;
         }
-        this._priorityCb = priority || ((el) => +el);
+
     }
 
     /**
      * @private
      * @returns {object}
      */
-    _getElementWithPriority(node) {
+    _getElementWithPriority(node: any) {
         return {
             priority: node.key,
             element: node.value
@@ -34,7 +53,7 @@ export class PriorityQueue {
      * @public
      * @returns {number}
      */
-    size() {
+    size(): number {
         return this._heap.size();
     }
 
@@ -42,7 +61,7 @@ export class PriorityQueue {
      * @public
      * @returns {boolean}
      */
-    isEmpty() {
+    isEmpty(): boolean {
         return this._heap.isEmpty();
     }
 
@@ -51,9 +70,9 @@ export class PriorityQueue {
      * @public
      * @returns {object}
      */
-    front() {
+    front(): PriorityQueueItem<T> | null {
         if (this.isEmpty()) return null;
-        return this._getElementWithPriority(this._heap.root());
+        return this._getElementWithPriority(this._heap.peek());
     }
 
     /**
@@ -61,7 +80,7 @@ export class PriorityQueue {
      * @public
      * @returns {object}
      */
-    back() {
+    back(): PriorityQueueItem<T> | null {
         if (this.isEmpty()) return null;
         return this._getElementWithPriority(this._heap.leaf());
     }
@@ -73,7 +92,10 @@ export class PriorityQueue {
      * @param {number} p - priority
      * @throws {Error} if priority is not a valid number
      */
-    enqueue(element, p) {
+    enqueue(element: T, p?: number): PriorityQueue<T> {
+        if (p === undefined) {
+            throw new Error('.enqueue expects a numeric priority');
+        }
         if (p && Number.isNaN(+p)) {
             throw new Error('.enqueue expects a numeric priority');
         }
@@ -86,7 +108,7 @@ export class PriorityQueue {
         }
 
         const priority = !Number.isNaN(+p) ? p : this._priorityCb(element);
-        this._heap.insert(+priority, element);
+        this._heap.insert(new HeapNode<T>(priority, element));
         return this;
     }
 
@@ -95,9 +117,9 @@ export class PriorityQueue {
      * @public
      * @returns {object}
      */
-    dequeue() {
+    dequeue(): PriorityQueueItem<T> | null {
         if (this.isEmpty()) return null;
-        return this._getElementWithPriority(this._heap.extractRoot());
+        return this._getElementWithPriority(this._heap.poll());
     }
 
     /**
@@ -105,7 +127,7 @@ export class PriorityQueue {
      * @public
      * @returns {array}
      */
-    toArray() {
+    toArray(): PriorityQueueItem<T>[] {
         return this._heap
             .clone()
             .sort()
@@ -117,7 +139,7 @@ export class PriorityQueue {
      * Clears the queue
      * @public
      */
-    clear() {
+    clear(): void {
         this._heap.clear();
     }
 }

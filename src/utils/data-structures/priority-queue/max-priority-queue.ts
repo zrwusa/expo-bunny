@@ -3,7 +3,8 @@
  * @license MIT
  */
 
-import {MaxHeap} from "../heap";
+import {HeapNode, MaxHeap} from '../heap';
+import {PriorityQueueOptions} from './priority-queue';
 
 const {PriorityQueue} = require('./priority-queue');
 
@@ -11,8 +12,10 @@ const {PriorityQueue} = require('./priority-queue');
  * @class MaxPriorityQueue
  * @extends PriorityQueue
  */
-export class MaxPriorityQueue extends PriorityQueue {
-    constructor(options) {
+export class MaxPriorityQueue<T> extends PriorityQueue<T> {
+    protected _heap: MaxHeap<HeapNode<T>, T>
+
+    constructor(options?: PriorityQueueOptions<T>) {
         super(options);
         this._heap = new MaxHeap();
     }
