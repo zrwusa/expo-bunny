@@ -5,8 +5,8 @@ export interface PriorityQueueOptions<T> {
 }
 
 export interface PriorityQueueItem<T> {
-    priority: number;
-    element: T;
+    priority: number | string;
+    element: T | null;
 }
 
 /**
@@ -42,10 +42,10 @@ export abstract class PriorityQueue<T> {
      * @private
      * @returns {object}
      */
-    _getElementWithPriority(node: any) {
+    _getElementWithPriority(node: HeapNode<T>): PriorityQueueItem<T> {
         return {
-            priority: node.key,
-            element: node.value
+            priority: node.id,
+            element: node.val
         };
     }
 
@@ -71,8 +71,11 @@ export abstract class PriorityQueue<T> {
      * @returns {object}
      */
     front(): PriorityQueueItem<T> | null {
-        if (this.isEmpty()) return null;
-        return this._getElementWithPriority(this._heap.peek());
+        const peek = this._heap.peek();
+        if (!peek) {
+            return null;
+        }
+        return this._getElementWithPriority(peek);
     }
 
     /**
@@ -81,8 +84,11 @@ export abstract class PriorityQueue<T> {
      * @returns {object}
      */
     back(): PriorityQueueItem<T> | null {
-        if (this.isEmpty()) return null;
-        return this._getElementWithPriority(this._heap.leaf());
+        const leaf = this._heap.leaf();
+        if (!leaf) {
+            return null;
+        }
+        return this._getElementWithPriority(leaf);
     }
 
     /**
@@ -93,6 +99,11 @@ export abstract class PriorityQueue<T> {
      * @throws {Error} if priority is not a valid number
      */
     enqueue(element: T, p?: number): PriorityQueue<T> {
+
+        if (typeof element === 'number') {
+            p = element;
+        }
+
         if (p === undefined) {
             throw new Error('.enqueue expects a numeric priority');
         }
@@ -118,8 +129,11 @@ export abstract class PriorityQueue<T> {
      * @returns {object}
      */
     dequeue(): PriorityQueueItem<T> | null {
-        if (this.isEmpty()) return null;
-        return this._getElementWithPriority(this._heap.poll());
+        const top = this._heap.poll();
+        if (!top) {
+            return null;
+        }
+        return this._getElementWithPriority(top);
     }
 
     /**
@@ -130,7 +144,7 @@ export abstract class PriorityQueue<T> {
     toArray(): PriorityQueueItem<T>[] {
         return this._heap
             .clone()
-            .sort()
+            .sort('node')
             .map((n) => this._getElementWithPriority(n))
             .reverse();
     }

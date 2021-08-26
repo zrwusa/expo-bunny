@@ -27,6 +27,7 @@ import {
     testBSTCase1,
     testBSTCase3,
     testGraphs,
+    testPriorityQueue,
     treeData,
     treeMaxDepth
 } from '../../utils/algorithms';
@@ -156,6 +157,10 @@ export function AlgorithmScreen() {
         await regionsBySlashes([], proxyFactory(setRegionsBySlashesVars));
     }
 
+    const _testPriorityQueue = async () => {
+        testPriorityQueue()
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -222,6 +227,9 @@ export function AlgorithmScreen() {
                         </TextButton>
                         <TextButton onPress={_regionsBySlashes}>
                             <Text>Regions By Slashes</Text>
+                        </TextButton>
+                        <TextButton onPress={_testPriorityQueue}>
+                            <Text>Test PriorityQueue</Text>
                         </TextButton>
                     </Card>
                     {
