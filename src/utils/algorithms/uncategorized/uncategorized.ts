@@ -1,4 +1,7 @@
 // 699. Falling Squares
+import {runAlgorithm} from '../helpers';
+import {breakWordIICase8} from './cases';
+
 export const fallingSquaresMy = function (positions: number[][]): number[] {
     const h = [];
 
@@ -250,4 +253,166 @@ function minimumTotal(triangle: number[][]): number {
     }
 
     return Math.min(...dp[n - 1]);
+}
+
+// 198. House Robber
+function rob(nums: number[]): number {
+    const dp: number[] = [0, 0, 0];
+    for (let i = 3; i < nums.length + 3; i++) {
+        const sum = Math.max(dp[i - 2], dp[i - 3]) + nums[i - 3]
+        dp.push(sum);
+    }
+
+    const dpLen = dp.length;
+    const pre1 = dp[dpLen - 1], pre2 = dp[dpLen - 2];
+    return Math.max(pre1 !== undefined ? pre1 : 0, pre2 !== undefined ? pre2 : 0);
+}
+
+// 213. House Robber II
+function robII(nums: number[]): number {
+    if (nums.length === 1) return nums[0];
+    if (nums.length === 0) return 0;
+    const first = nums.slice(0, nums.length - 1);
+    const last = nums.slice(1);
+    const maxFirst = rob(first);
+    const maxLast = rob(last);
+    return Math.max(maxFirst, maxLast);
+}
+
+// 139. Word Break
+// time complexity is O(2*wordDict.length^validWord)
+function wordBreakBruteForce(s: string, wordDict: string[]): boolean {
+    let ans = false;
+    const dfs = (cur: string) => {
+        if (cur.length === 0) {
+            ans = true;
+            return;
+        }
+        if (!ans) {
+            for (let i = 0; i < wordDict.length; i++) {
+                if (cur.substring(0, wordDict[i].length) === wordDict[i]) {
+                    dfs(cur.substring(wordDict[i].length));
+                }
+            }
+        }
+    }
+
+    dfs(s);
+    return ans;
+}
+
+function wordBreak(s: string, wordDict: string[]): boolean {
+    const l = s.length;
+    const dp = new Array(l + 1).fill(false);
+    dp[l] = true;
+
+    for (let i = l - 1; i >= 0; i--) {
+        for (let word of wordDict) {
+            if (dp[i]) break;
+            if (s.substr(i, word.length) === word) {
+                dp[i] = dp[i + word.length];
+            }
+        }
+    }
+
+    return dp[0];
+}
+
+// 140. Word Break II
+// time complexity is O(2*wordDict.length^validWord)
+function wordBreakIIBruteForce(s: string, wordDict: string[]): string[] {
+    let ans: string[] = [];
+    const dfs = (cur: string, acc: string[]) => {
+        if (cur.length === 0) {
+            ans.push(acc.join(' '));
+            return;
+        }
+
+        for (let word of wordDict) {
+            const wl = word.length;
+            const cut = cur.substr(0, wl);
+            if (cut === word) {
+                acc.push(word);
+                dfs(cur.substr(wl), acc);
+                acc.pop();
+            }
+        }
+    }
+
+    dfs(s, []);
+    return ans;
+}
+
+function wordBreakIIDfsDPLoopWordDict(s: string, wordDict: string[]): string[] {
+    const memo: Map<string, string[]> = new Map();
+    const dfs = (sub: string): string[] => {
+        const subMemo = memo.get(sub);
+        if (subMemo) {
+            return subMemo;
+        }
+        const ret = [];
+        for (let word of wordDict) {
+            const prefix = sub.substr(0, word.length);
+            if (prefix === word) {
+                if (prefix === sub) {
+                    ret.push(prefix);
+                } else {
+                    const restOfCur = dfs(sub.substr(prefix.length));
+                    for (let phrase of restOfCur) {
+                        ret.push(prefix + ' ' + phrase);
+                    }
+                }
+            }
+        }
+        memo.set(sub, ret);
+        return ret;
+    }
+
+    return dfs(s);
+}
+
+// Use DP to accelerate,multiple times faster
+function wordBreakIIDfsDPLoopS(s: string, wordDict: string[]): string[] {
+    const wordSet = new Set(wordDict);
+    const memo: Map<string, string[]> = new Map();
+    const dfs = (sub: string): string[] => {
+        const subMemo = memo.get(sub);
+        if (subMemo) {
+            return subMemo;
+        }
+        const ret = [];
+        for (let i = 1; i <= sub.length; i++) {
+            const prefix = sub.substr(0, i);
+            if (wordSet.has(prefix)) {
+                if (prefix === sub) {
+                    ret.push(prefix);
+                } else {
+                    const restOfCur = dfs(sub.substr(prefix.length));
+                    for (let phrase of restOfCur) {
+                        ret.push(prefix + ' ' + phrase);
+                    }
+                }
+            }
+        }
+        memo.set(sub, ret);
+        return ret;
+    }
+
+    return dfs(s);
+}
+
+export const runAllWordBreakII = async () => {
+    // await runAlgorithm(wordBreakIIBruteForce, false, ...breakWordIICase4);
+    // await runAlgorithm(wordBreakIIBruteForce, false, ...breakWordIICase7);
+    await runAlgorithm(wordBreakIIBruteForce, false, ...breakWordIICase8);
+
+    // await runAlgorithm(wordBreakIIDfsDPLoopS, false, ...breakWordIICase4);
+    // await runAlgorithm(wordBreakIIDfsDPLoopS, false, ...breakWordIICase7);
+    // await runAlgorithm(wordBreakIIDfsDPLoopS, false, ...breakWordIICase8);
+
+    // await runAlgorithm(wordBreakIIDfsDPLoopWordDict, false, ...breakWordIICase7);
+    await runAlgorithm(wordBreakIIDfsDPLoopWordDict, false, ...breakWordIICase8);
+
+    // await runAlgorithm(wordBreakIIDfsDPLoopS, false, ...breakWordIICase7);
+    await runAlgorithm(wordBreakIIDfsDPLoopS, false, ...breakWordIICase8);
 }

@@ -168,11 +168,11 @@ import {bunnyConsole, timeStart} from '../utils';
 // AVL Tree	            Θ(log(n))	Θ(log(n))	Θ(log(n))	Θ(log(n))	O(log(n))	O(log(n))	O(log(n))	O(log(n))	O(n)
 // KD Tree	            Θ(log(n))	Θ(log(n))	Θ(log(n))	Θ(log(n))	O(n)	    O(n)	    O(n)	    O(n)	    O(n)
 
-export const runAlgorithm = async (algorithm: Function, isStringify: boolean = false, ...args: any) => {
+export const runAlgorithm = async (algorithm: Function, output: boolean | 'stringify' = true, ...args: any) => {
     const startTime = timeStart();
     const result = await algorithm(...args);
     const timeSpent = (performance ? performance.now() : new Date().getTime()) - startTime;
-    bunnyConsole.log(algorithm.name, 'result -> ', isStringify ? JSON.stringify(result) : result, 'time spent -> ', timeSpent.toFixed(2) + 'ms');
+    bunnyConsole.log(algorithm.name, 'result -> ', output === 'stringify' ? JSON.stringify(result) : output ? result : '', 'time spent -> ', timeSpent.toFixed(2) + 'ms');
     return result;
 }
 

@@ -35,6 +35,7 @@ import {VividAlgorithm} from '../../components/VividAlgorithm';
 import {BinaryTree, BinaryTreeNode, SinglyLinkedList} from '../../utils/data-structures';
 import {ScrollView} from 'react-native';
 import {THandlerContext} from '@qiwi/deep-proxy';
+import {runAllWordBreakII} from '../../utils/algorithms/uncategorized';
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -161,6 +162,10 @@ export function AlgorithmScreen() {
         testPriorityQueue()
     }
 
+    const _runAllBreakWordII = async () => {
+        await runAllWordBreakII();
+    }
+
     return (
         <ScrollView>
             <View style={{flex: 1}}>
@@ -230,6 +235,9 @@ export function AlgorithmScreen() {
                         </TextButton>
                         <TextButton onPress={_testPriorityQueue}>
                             <Text>Test PriorityQueue</Text>
+                        </TextButton>
+                        <TextButton onPress={_runAllBreakWordII}>
+                            <Text>Run All BreakWordII</Text>
                         </TextButton>
                     </Card>
                     {
