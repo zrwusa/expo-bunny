@@ -1,28 +1,28 @@
 import * as React from 'react';
 import {PureComponent} from 'react';
 import {IcoMoon, View} from '../UI';
-import {Avatar} from '../Avatar'
+import {Avatar} from '../Avatar';
 import {Image, Text} from 'react-native';
 import {ShowVideo} from '../Video/Video';
 import {ReadMore} from '../ReadMore';
 import {SocialMediaMainDatum} from '../../types';
 import {getStyles} from './styles';
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 
 interface SocialMediaVideoCardProps extends WithBunnyKit {
-    card: SocialMediaMainDatum
+    card: SocialMediaMainDatum;
 }
 
 class SocialMediaVideoCardInner extends PureComponent<SocialMediaVideoCardProps> {
     constructor(props: SocialMediaVideoCardProps) {
-        super(props)
+        super(props);
     }
 
     render() {
-        const {bunnyKit} = this.props
+        const {bunnyKit} = this.props;
         const {sizeLabor, themeLabor, wp, colors} = bunnyKit;
         const bottomBarIconColor = colors.text;
-        const styles = getStyles(sizeLabor, themeLabor)
+        const styles = getStyles(sizeLabor, themeLabor);
         const {category, user, userAvatar, avSource, imageSource, likes, comments} = this.props.card;
         return (<View>
             <View style={styles.card}>
@@ -45,12 +45,12 @@ class SocialMediaVideoCardInner extends PureComponent<SocialMediaVideoCardProps>
             {
                 category === 'IMAGE'
                     ? imageSource
-                    ? <Image
-                        style={styles.image}
-                        width={wp(373)}
-                        height={wp(210)}
-                        source={imageSource}/>
-                    : null
+                        ? <Image
+                            style={styles.image}
+                            width={wp(373)}
+                            height={wp(210)}
+                            source={imageSource}/>
+                        : null
                     : <ShowVideo
                         isLooping={false}
                         source={avSource}
@@ -76,12 +76,12 @@ class SocialMediaVideoCardInner extends PureComponent<SocialMediaVideoCardProps>
                                      numberOfLines={1}
                     >
                         <Text
-                            style={styles.comment}>{text}</Text></ReadMore>
+                            style={styles.comment}>{text}</Text></ReadMore>;
                 })}
             </View>
-        </View>)
+        </View>);
     }
 
 }
 
-export const SocialMediaVideoCard = withBunnyKit(SocialMediaVideoCardInner)
+export const SocialMediaVideoCard = withBunnyKit(SocialMediaVideoCardInner);

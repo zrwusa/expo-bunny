@@ -21,4 +21,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: 24
         }
     });
-}
+};

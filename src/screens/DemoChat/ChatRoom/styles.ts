@@ -19,4 +19,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             paddingHorizontal: wp(10)
         }
     });
-}
+};

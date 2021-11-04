@@ -1,10 +1,10 @@
-import * as React from 'react'
-import {Animated, StyleSheet} from 'react-native'
-import {TypingAnimation} from 'react-native-typing-animation'
-import {useUpdateLayoutEffect} from './hooks/useUpdateLayoutEffect'
+import * as React from 'react';
+import {Animated, StyleSheet} from 'react-native';
+import {TypingAnimation} from 'react-native-typing-animation';
+import {useUpdateLayoutEffect} from './hooks/useUpdateLayoutEffect';
 import config from '../../config';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
@@ -16,15 +16,15 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderRadius: wp(15),
             backgroundColor: colors.backgroundA,
         },
-    })
-}
+    });
+};
 
 export interface TypingIndicatorProps {
-    isTyping?: boolean
+    isTyping?: boolean;
 }
 
 const TypingIndicator = ({isTyping}: TypingIndicatorProps) => {
-    const {sizeLabor, themeLabor, wp} = useBunnyKit()
+    const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
     const {yCoords, heightScale, marginScale} = React.useMemo(
         () => ({
@@ -33,16 +33,16 @@ const TypingIndicator = ({isTyping}: TypingIndicatorProps) => {
             marginScale: new Animated.Value(0),
         }),
         [],
-    )
+    );
 
     // on isTyping fire side effect
     useUpdateLayoutEffect(() => {
         if (isTyping) {
-            slideIn()
+            slideIn();
         } else {
-            slideOut()
+            slideOut();
         }
-    }, [isTyping])
+    }, [isTyping]);
 
     // side effect
     const slideIn = () => {
@@ -61,8 +61,8 @@ const TypingIndicator = ({isTyping}: TypingIndicatorProps) => {
                 duration: 250,
                 useNativeDriver: config.useNativeDriver,
             }),
-        ]).start()
-    }
+        ]).start();
+    };
 
     // side effect
     const slideOut = () => {
@@ -81,8 +81,8 @@ const TypingIndicator = ({isTyping}: TypingIndicatorProps) => {
                 duration: 250,
                 useNativeDriver: config.useNativeDriver,
             }),
-        ]).start()
-    }
+        ]).start();
+    };
     return (
         <Animated.View
             style={[
@@ -107,8 +107,8 @@ const TypingIndicator = ({isTyping}: TypingIndicatorProps) => {
                 />
             ) : null}
         </Animated.View>
-    )
-}
+    );
+};
 
 
-export default TypingIndicator
+export default TypingIndicator;

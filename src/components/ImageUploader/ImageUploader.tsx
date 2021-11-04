@@ -27,7 +27,7 @@ import Modal, {ModalProps} from 'react-native-modal';
 import {Divider} from '../Divider';
 import {CopyableText} from '../CopyableText';
 import {IcoMoonKeys} from '../../types';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 // import ViewShot,{captureRef} from "react-native-view-shot";
 export type UploadedResult = { uri: string }
 export type RenderPreview = (props: { imageSource: ImageURISource, toggleModal: () => void }) => React.ReactElement | null;
@@ -120,31 +120,31 @@ export function ImageUploader(props: ImageUploaderProps) {
         onUploaded,
         onValueChanged,
         onRemovePhoto,
-    } = props
-    const sizeStyle = {width: isFullFill ? '100%' : width, height: isFullFill ? '100%' : height}
-    const styles = getStyles(sizeLabor, themeLabor)
+    } = props;
+    const sizeStyle = {width: isFullFill ? '100%' : width, height: isFullFill ? '100%' : height};
+    const styles = getStyles(sizeLabor, themeLabor);
     const [image, setImage] = useState<ImageURISource>(source || {uri: ''});
     const [isModalVisible, setModalVisible] = useState(false);
-    const [isUploading, setIsUploading] = useState(false)
+    const [isUploading, setIsUploading] = useState(false);
     // const screenshotIt = useRef<ViewShot>(null)
 
     useEffect(() => {
-        setImage(source || {uri: ''})
-    }, [source])
+        setImage(source || {uri: ''});
+    }, [source]);
 
     const _takePhoto = async () => {
-        const isAllowed = await Permissions.camera.get()
+        const isAllowed = await Permissions.camera.get();
         if (!isAllowed) {
-            return
+            return;
         }
         let pickerResult = await ImagePicker.launchCameraAsync(cameraPickerOptions);
         await _handleImagePicked(pickerResult);
     };
 
     const _pickImage = async () => {
-        const isAllowed = await Permissions.mediaLibrary.get()
+        const isAllowed = await Permissions.mediaLibrary.get();
         if (!isAllowed) {
-            return
+            return;
         }
         let pickerResult = await ImagePicker.launchImageLibraryAsync(imagePickerOptions);
         // const iOS = {
@@ -166,15 +166,15 @@ export function ImageUploader(props: ImageUploaderProps) {
             switch (Platform.OS) {
                 case 'web':
                     const {uri} = pickerResult;
-                    let mimeType = ''
+                    let mimeType = '';
                     if (uri) {
                         const matched = uri.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/);
                         if (matched) {
-                            mimeType = matched[0]
+                            mimeType = matched[0];
                         }
                     }
                     if (mimeType) {
-                        const type = mimeType.split('/')[0]
+                        const type = mimeType.split('/')[0];
                         pickerResult.type = type as 'image' | 'video' | undefined;
                     }
                     break;
@@ -187,32 +187,32 @@ export function ImageUploader(props: ImageUploaderProps) {
     };
 
     const _errorHandle = (e: Error) => {
-        onError && onError(e)
-    }
+        onError && onError(e);
+    };
 
     const _imageError = (e: NativeSyntheticEvent<ImageErrorEventData>) => {
-        e.nativeEvent.error
-        onError && onError(e.nativeEvent.error)
-    }
+        e.nativeEvent.error;
+        onError && onError(e.nativeEvent.error);
+    };
 
     const _handleImagePicked = async (pickerResult: ImagePicker.ImagePickerResult) => {
         onSelected && onSelected(pickerResult);
-        setIsUploading(true)
-        setModalVisible(false)
+        setIsUploading(true);
+        setModalVisible(false);
         try {
             if (!pickerResult.cancelled) {
                 if (image.uri && isDeleteFromServerWhenUpload) {
-                    await removeFileFromFirebaseByURL(image.uri)
+                    await removeFileFromFirebaseByURL(image.uri);
                 }
                 const uploadUrl = await uploadFileToFirebase(pickerResult.uri, path);
                 onUploaded && onUploaded({uri: uploadUrl}, pickerResult.type);
-                setImage({uri: uploadUrl})
-                onValueChanged && onValueChanged({uri: uploadUrl})
+                setImage({uri: uploadUrl});
+                onValueChanged && onValueChanged({uri: uploadUrl});
             }
         } catch (e) {
-            _errorHandle(e)
+            _errorHandle(e);
         } finally {
-            setIsUploading(false)
+            setIsUploading(false);
         }
     };
 
@@ -223,14 +223,14 @@ export function ImageUploader(props: ImageUploaderProps) {
     const _removePhoto = async () => {
         if (image.uri) {
             if (isDeleteFromServerWhenRemove) {
-                const removeResult = await removeFileFromFirebaseByURL(image.uri)
+                const removeResult = await removeFileFromFirebaseByURL(image.uri);
             }
-            const needRemovePhoto = {...image}
+            const needRemovePhoto = {...image};
             setImage({uri: ''});
             setModalVisible(false);
-            onRemovePhoto && onRemovePhoto(needRemovePhoto)
+            onRemovePhoto && onRemovePhoto(needRemovePhoto);
         } else {
-            onRemovePhoto && onRemovePhoto()
+            onRemovePhoto && onRemovePhoto();
         }
     };
     const _share = async () => {
@@ -298,9 +298,9 @@ export function ImageUploader(props: ImageUploaderProps) {
                 <IcoMoon name={placeholderIconName} color={colors.text3}/>
             </View>
         );
-    }
+    };
 
-    const styleJudge: StyleProp<ViewStyle> = renderPreview ? undefined : [styles.container, sizeStyle, style]
+    const styleJudge: StyleProp<ViewStyle> = renderPreview ? undefined : [styles.container, sizeStyle, style];
     return (
         <SafeAreaView
             // ref={screenshotIt}
@@ -349,5 +349,5 @@ export function ImageUploader(props: ImageUploaderProps) {
                 </View>
             </Modal>
         </SafeAreaView>
-    )
+    );
 }

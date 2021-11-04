@@ -106,7 +106,7 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     // console.log(JSON.stringify(vars.myGraph.edgeSet()), vars.myGraph.vertexSet());
 
     await wait(waitMan.time3);
-    console.log(`vars.myGraph.addEdge(new MyEdge(3, 1, 3, 'edge-data-3-1'))`, vars.myGraph.addEdge(new MyEdge(3, 1, 3, 'edge-data-3-1')))
+    console.log(`vars.myGraph.addEdge(new MyEdge(3, 1, 3, 'edge-data-3-1'))`, vars.myGraph.addEdge(new MyEdge(3, 1, 3, 'edge-data-3-1')));
 
     await wait(waitMan.time3);
     console.log(`vars.myGraph.addEdge(new MyEdge(1, 9, 19, 'edge-data1-9'))`, vars.myGraph.addEdge(new MyEdge(1, 9, 19, 'edge-data1-9')));
@@ -150,25 +150,25 @@ export const testGraphs = async (proxyHandler: TProxyHandler) => {
     console.log(`vars.myGraph.getAllPaths(1, 7)`, vars.myGraph.getAllPathsBetween(1, 7));
 
     await wait(waitMan.time3);
-    console.log(vars.myGraph.bellmanFord(1))
+    console.log(vars.myGraph.bellmanFord(1));
 
     await wait(waitMan.time3);
     const floydResult = vars.myGraph.floyd();
-    console.log(floydResult)
+    console.log(floydResult);
 
     await wait(waitMan.time3);
-    console.log(vars.myGraph.dijkstra(1, 2, true, true))
+    console.log(vars.myGraph.dijkstra(1, 2, true, true));
 
     await wait(waitMan.time3);
     console.log(vars.myGraph.dijkstra(1, null, true, true));
 
     await wait(waitMan.time3);
-    console.log(vars.myGraph.dijkstraWithoutHeap(1, null, true, true))
+    console.log(vars.myGraph.dijkstraWithoutHeap(1, null, true, true));
     // const myGraphEdge3to1 = vars.myGraph.getEdge(3, 1);
     //
     // console.log(`vars.myGraph.getAllEdges(3, 1)', vars.myGraph.getAllEdges(3, 1));
     // myGraphEdge3to1 && console.log(`vars.myGraph.removeEdge(myGraphEdge3to1)', vars.myGraph.removeEdge(myGraphEdge3to1));
-}
+};
 
 
 function numIslands(grid: string[][]): number {
@@ -179,7 +179,7 @@ function numIslands(grid: string[][]): number {
     const isLand = (cord: Coordinate) => {
         if (cord.y < 0 || cord.y > boundY || cord.x < 0 || cord.x > boundX) return false;
         return grid[cord.y][cord.x] === '1';
-    }
+    };
 
     let ans: number = 0;
 
@@ -192,7 +192,7 @@ function numIslands(grid: string[][]): number {
         for (let dir of dirs) {
             dfs(new Coordinate(cur.y + dir.y, cur.x + dir.x));
         }
-    }
+    };
 
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[row].length; col++) {
@@ -236,7 +236,7 @@ function canFinish(numCourses: number, prerequisites: number[][]): boolean {
             }
         }
         status[index] = 2;
-    }
+    };
 
     for (let i = 0; i < numCourses; i++) {
         if (status[i] === 0) {
@@ -274,7 +274,7 @@ const runAllCanFinish = async () => {
     await runAlgorithm(canFinishByGraph, false, ...canFinishCase1);
     await runAlgorithm(canFinish, false, ...canFinishCase3);
     await runAlgorithm(canFinishByGraph, false, ...canFinishCase3);
-}
+};
 
 // runAllCanFinish().then()
 // 399	Evaluate Division	★★★	839	952	990	721	737	union find
@@ -365,7 +365,7 @@ function criticalConnections(n: number, connections: number[][]): number[][] {
             graph[conn[1]] = [conn[0]];
         }
     }
-    timeEnd(time1, 'construct graph')
+    timeEnd(time1, 'construct graph');
 
     const dfnMap: Map<number, number> = new Map();
     const lowMap: Map<number, number> = new Map();
@@ -402,10 +402,10 @@ function criticalConnections(n: number, connections: number[][]): number[][] {
                 }
             }
         }
-    }
+    };
 
     dfs(root, null);
-    timeEnd(time2, 'tarjan')
+    timeEnd(time2, 'tarjan');
 
     return bridges;
 }
@@ -427,11 +427,11 @@ function criticalConnectionsByGraph(n: number, connections: number[][]): number[
         graph.addVertex(new UndirectedVertex(v2));
         graph.addEdge(new UndirectedEdge(v1, v2));
     }
-    timeEnd(time1, 'construct graph')
+    timeEnd(time1, 'construct graph');
 
     const time2 = timeStart();
     const {bridges} = graph.tarjan(false, true);
-    timeEnd(time2, 'tarjan')
+    timeEnd(time2, 'tarjan');
 
     const ans: number[][] = [];
     for (let bridge of bridges) {
@@ -444,7 +444,7 @@ function criticalConnectionsByGraph(n: number, connections: number[][]): number[
 const runAllCriticalConnections = async () => {
     await runAlgorithm(criticalConnections, false, ...criticalConnectionsCase1);
     await runAlgorithm(criticalConnectionsByGraph, false, ...criticalConnectionsCase1);
-}
+};
 // runAllCriticalConnections().then();
 // 943	Find the Shortest Superstring	★★★★★	980	996				Hamiltonian path (DFS / DP)
 // 959	Regions Cut By Slashes	★★★★★						union find / grid + CCs
@@ -468,7 +468,7 @@ export async function regionsBySlashes(grid: string[], proxyHandler?: TProxyHand
 
     let graph2;
     if (proxyHandler) {
-        const vars = new DeepProxy({graph2: new DirectedGraph()}, proxyHandler)
+        const vars = new DeepProxy({graph2: new DirectedGraph()}, proxyHandler);
         graph2 = vars.graph2;
     } else {
         graph2 = new DirectedGraph();
@@ -495,7 +495,7 @@ export async function regionsBySlashes(grid: string[], proxyHandler?: TProxyHand
 
 const runAllRegionsBySlashes = async () => {
     await runAlgorithm(regionsBySlashes, false);
-}
+};
 // runAllRegionsBySlashes().then();
 /* --- end Graph --- */
 

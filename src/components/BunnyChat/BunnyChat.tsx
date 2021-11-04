@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react'
+import React, {RefObject} from 'react';
 import {
     Animated,
     FlatList,
@@ -9,37 +9,37 @@ import {
     StyleSheet,
     View,
     ViewStyle,
-} from 'react-native'
-import {ActionSheetOptions, ActionSheetProvider,} from '../../../packages/react-native-action-sheet/src'
-import uuid from 'uuid'
-import {getBottomSpace} from 'react-native-iphone-x-helper'
-import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
+} from 'react-native';
+import {ActionSheetOptions, ActionSheetProvider,} from '../../../packages/react-native-action-sheet/src';
+import uuid from 'uuid';
+import {getBottomSpace} from 'react-native-iphone-x-helper';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 
-import * as utils from './utils'
-import Actions from './Actions'
-import ChatAvatar from './ChatAvatar'
-import Bubble from './Bubble'
-import SystemMessage from './SystemMessage'
-import MessageImage from './MessageImage'
-import MessageSticker from './MessageSticker'
-import MessageText from './MessageText'
-import Composer from './Composer'
-import Day from './Day'
-import InputToolbar, {InputToolbarProps} from './InputToolbar'
-import LoadEarlier from './LoadEarlier'
-import Message from './Message'
-import MessageContainer, {MessageContainerProps} from './MessageContainer'
-import Send from './Send'
-import Time from './Time'
-import BunnyAvatar from './BunnyAvatar'
+import * as utils from './utils';
+import Actions from './Actions';
+import ChatAvatar from './ChatAvatar';
+import Bubble from './Bubble';
+import SystemMessage from './SystemMessage';
+import MessageImage from './MessageImage';
+import MessageSticker from './MessageSticker';
+import MessageText from './MessageText';
+import Composer from './Composer';
+import Day from './Day';
+import InputToolbar, {InputToolbarProps} from './InputToolbar';
+import LoadEarlier from './LoadEarlier';
+import Message from './Message';
+import MessageContainer, {MessageContainerProps} from './MessageContainer';
+import Send from './Send';
+import Time from './Time';
+import BunnyAvatar from './BunnyAvatar';
 
-import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant'
-import {IMessage,} from './types'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {DATE_FORMAT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TIME_FORMAT,} from './Constant';
+import {IMessage,} from './types';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-dayjs.extend(localizedFormat)
+dayjs.extend(localizedFormat);
 
 export interface GiftedChatProps<TMessage extends IMessage> extends MessageContainerProps<TMessage>,
     InputToolbarProps<TMessage> {
@@ -323,12 +323,12 @@ export interface GiftedChatProps<TMessage extends IMessage> extends MessageConta
 }
 
 export interface GiftedChatState<TMessage extends IMessage> {
-    isInitialized: boolean
-    composerHeight?: number
-    messagesContainerHeight?: number | Animated.Value
-    typingDisabled: boolean
-    text?: string
-    messages?: TMessage[]
+    isInitialized: boolean;
+    composerHeight?: number;
+    messagesContainerHeight?: number | Animated.Value;
+    typingDisabled: boolean;
+    text?: string;
+    messages?: TMessage[];
 }
 
 class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedChatProps<TMessage> & WithBunnyKit,
@@ -416,7 +416,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
         maxComposerHeight: MAX_COMPOSER_HEIGHT,
         wrapInSafeArea: true,
         scrollToBottom: true,
-    }
+    };
 
 
     static append<TMessage extends IMessage>(
@@ -425,11 +425,11 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
         inverted = true,
     ) {
         if (!Array.isArray(messages)) {
-            messages = [messages]
+            messages = [messages];
         }
         return inverted
             ? messages.concat(currentMessages)
-            : currentMessages.concat(messages)
+            : currentMessages.concat(messages);
     }
 
     static prepend<TMessage extends IMessage>(
@@ -438,24 +438,24 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
         inverted = true,
     ) {
         if (!Array.isArray(messages)) {
-            messages = [messages]
+            messages = [messages];
         }
         return inverted
             ? currentMessages.concat(messages)
-            : messages.concat(currentMessages)
+            : messages.concat(currentMessages);
     }
 
-    _isMounted: boolean = false
-    _keyboardHeight: number = 0
-    _bottomOffset: number = 0
-    _maxHeight?: number = undefined
-    _isFirstLayout: boolean = true
-    _locale: string = 'en'
-    invertibleScrollViewProps: any = undefined
-    _actionSheetRef: any = undefined
-    _messageContainerRef?: RefObject<FlatList<TMessage>> = React.createRef<FlatList<TMessage>>()
-    _isTextInputWasFocused: boolean = false
-    textInput?: any
+    _isMounted: boolean = false;
+    _keyboardHeight: number = 0;
+    _bottomOffset: number = 0;
+    _maxHeight?: number = undefined;
+    _isFirstLayout: boolean = true;
+    _locale: string = 'en';
+    invertibleScrollViewProps: any = undefined;
+    _actionSheetRef: any = undefined;
+    _messageContainerRef?: RefObject<FlatList<TMessage>> = React.createRef<FlatList<TMessage>>();
+    _isTextInputWasFocused: boolean = false;
+    textInput?: any;
 
     state = {
         isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -464,10 +464,10 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
         typingDisabled: false,
         text: undefined,
         messages: undefined,
-    }
+    };
 
     constructor(props: GiftedChatProps<TMessage> & WithBunnyKit) {
-        super(props)
+        super(props);
 
         this.invertibleScrollViewProps = {
             inverted: this.props.inverted,
@@ -476,26 +476,26 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             onKeyboardWillHide: this.onKeyboardWillHide,
             onKeyboardDidShow: this.onKeyboardDidShow,
             onKeyboardDidHide: this.onKeyboardDidHide,
-        }
+        };
     }
 
     componentDidMount() {
-        const {messages, text} = this.props
-        this.setIsMounted(true)
+        const {messages, text} = this.props;
+        this.setIsMounted(true);
         // this.initLocale()
-        this.setMessages(messages || [])
-        this.setTextFromProp(text)
+        this.setMessages(messages || []);
+        this.setTextFromProp(text);
     }
 
     componentWillUnmount() {
-        this.setIsMounted(false)
+        this.setIsMounted(false);
     }
 
     componentDidUpdate(prevProps: GiftedChatProps<TMessage>) {
-        const {messages, text, inverted} = this.props
+        const {messages, text, inverted} = this.props;
 
         if (this.props !== prevProps) {
-            this.setMessages(messages || [])
+            this.setMessages(messages || []);
         }
 
         if (
@@ -504,46 +504,46 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             prevProps.messages &&
             messages.length !== prevProps.messages.length
         ) {
-            setTimeout(() => this.scrollToBottom(false), 200)
+            setTimeout(() => this.scrollToBottom(false), 200);
         }
 
         if (text !== prevProps.text) {
-            this.setTextFromProp(text)
+            this.setTextFromProp(text);
         }
     }
 
     setTextFromProp(textProp?: string) {
         // Text prop takes precedence over state.
         if (textProp !== undefined && textProp !== this.state.text) {
-            this.setState({text: textProp})
+            this.setState({text: textProp});
         }
     }
 
     getTextFromProp(fallback: string) {
         if (this.props.text === undefined) {
-            return fallback
+            return fallback;
         }
-        return this.props.text
+        return this.props.text;
     }
 
     setMessages(messages: TMessage[]) {
-        this.setState({messages})
+        this.setState({messages});
     }
 
     getMessages() {
-        return this.state.messages
+        return this.state.messages;
     }
 
     setMaxHeight(height: number) {
-        this._maxHeight = height
+        this._maxHeight = height;
     }
 
     getMaxHeight() {
-        return this._maxHeight
+        return this._maxHeight;
     }
 
     setKeyboardHeight(height: number) {
-        this._keyboardHeight = height
+        this._keyboardHeight = height;
     }
 
     getKeyboardHeight() {
@@ -551,56 +551,56 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             // For android: on-screen keyboard resized main container and has own height.
             // @see https://developer.android.com/training/keyboard-input/visibility.html
             // So for calculate the messages container height ignore keyboard height.
-            return 0
+            return 0;
         }
-        return this._keyboardHeight
+        return this._keyboardHeight;
     }
 
     setBottomOffset(value: number) {
-        this._bottomOffset = value
+        this._bottomOffset = value;
     }
 
     getBottomOffset() {
-        return this._bottomOffset
+        return this._bottomOffset;
     }
 
     setIsFirstLayout(value: boolean) {
-        this._isFirstLayout = value
+        this._isFirstLayout = value;
     }
 
     getIsFirstLayout() {
-        return this._isFirstLayout
+        return this._isFirstLayout;
     }
 
     setIsTypingDisabled(value: boolean) {
         this.setState({
             typingDisabled: value,
-        })
+        });
     }
 
     getIsTypingDisabled() {
-        return this.state.typingDisabled
+        return this.state.typingDisabled;
     }
 
     setIsMounted(value: boolean) {
-        this._isMounted = value
+        this._isMounted = value;
     }
 
     getIsMounted() {
-        return this._isMounted
+        return this._isMounted;
     }
 
     getMinInputToolbarHeight() {
         return this.props.renderAccessory
             ? this.props.minInputToolbarHeight! * 2
-            : this.props.minInputToolbarHeight
+            : this.props.minInputToolbarHeight;
     }
 
     calculateInputToolbarHeight(composerHeight: number) {
         return (
             composerHeight +
             (this.getMinInputToolbarHeight()! - this.props.minComposerHeight!)
-        )
+        );
     }
 
     /**
@@ -609,7 +609,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
     getBasicMessagesContainerHeight(composerHeight = this.state.composerHeight) {
         return (
             this.getMaxHeight()! - this.calculateInputToolbarHeight(composerHeight!)
-        )
+        );
     }
 
     /**
@@ -622,12 +622,12 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             this.getBasicMessagesContainerHeight(composerHeight) -
             this.getKeyboardHeight() +
             this.getBottomOffset()
-        )
+        );
     }
 
     safeAreaSupport = (bottomOffset?: number) => {
-        return bottomOffset != null ? bottomOffset : getBottomSpace()
-    }
+        return bottomOffset != null ? bottomOffset : getBottomSpace();
+    };
 
     /**
      * Store text input focus status when keyboard hide to retrieve
@@ -637,7 +637,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
      */
     handleTextInputFocusWhenKeyboardHide() {
         if (!this._isTextInputWasFocused) {
-            this._isTextInputWasFocused = this.textInput?.isFocused() || false
+            this._isTextInputWasFocused = this.textInput?.isFocused() || false;
         }
     }
 
@@ -651,67 +651,67 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             this._isTextInputWasFocused &&
             !this.textInput.isFocused()
         ) {
-            this.textInput.focus()
+            this.textInput.focus();
         }
 
         // Reset the indicator since the keyboard is shown
-        this._isTextInputWasFocused = false
+        this._isTextInputWasFocused = false;
     }
 
     onKeyboardWillShow = (e: any) => {
-        this.handleTextInputFocusWhenKeyboardShow()
+        this.handleTextInputFocusWhenKeyboardShow();
 
         if (this.props.isKeyboardInternallyHandled) {
-            this.setIsTypingDisabled(true)
+            this.setIsTypingDisabled(true);
             this.setKeyboardHeight(
                 e.endCoordinates ? e.endCoordinates.height : e.end.height,
-            )
-            this.setBottomOffset(this.safeAreaSupport(this.props.bottomOffset))
-            const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard()
+            );
+            this.setBottomOffset(this.safeAreaSupport(this.props.bottomOffset));
+            const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
             this.setState({
                 messagesContainerHeight: newMessagesContainerHeight,
-            })
+            });
         }
-    }
+    };
 
     onKeyboardWillHide = (_e: any) => {
-        this.handleTextInputFocusWhenKeyboardHide()
+        this.handleTextInputFocusWhenKeyboardHide();
 
         if (this.props.isKeyboardInternallyHandled) {
-            this.setIsTypingDisabled(true)
-            this.setKeyboardHeight(0)
-            this.setBottomOffset(0)
-            const newMessagesContainerHeight = this.getBasicMessagesContainerHeight()
+            this.setIsTypingDisabled(true);
+            this.setKeyboardHeight(0);
+            this.setBottomOffset(0);
+            const newMessagesContainerHeight = this.getBasicMessagesContainerHeight();
             this.setState({
                 messagesContainerHeight: newMessagesContainerHeight,
-            })
+            });
         }
-    }
+    };
 
     onKeyboardDidShow = (e: any) => {
         if (Platform.OS === 'android') {
-            this.onKeyboardWillShow(e)
+            this.onKeyboardWillShow(e);
         }
-        this.setIsTypingDisabled(false)
-    }
+        this.setIsTypingDisabled(false);
+    };
 
     onKeyboardDidHide = (e: any) => {
         if (Platform.OS === 'android') {
-            this.onKeyboardWillHide(e)
+            this.onKeyboardWillHide(e);
         }
-        this.setIsTypingDisabled(false)
-    }
+        this.setIsTypingDisabled(false);
+    };
 
     scrollToBottom(animated = true) {
         if (this._messageContainerRef && this._messageContainerRef.current) {
-            const {inverted} = this.props
+            const {inverted} = this.props;
             if (!inverted) {
-                this._messageContainerRef.current.scrollToEnd({animated})
+                this._messageContainerRef.current.scrollToEnd({animated});
             } else {
                 this._messageContainerRef.current.scrollToOffset({
                     offset: 0,
                     animated,
-                })
+                });
             }
         }
     }
@@ -950,7 +950,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
             audioProgressColor,
             audioRemainTimeStyle,
             audioPlayButtonIconStyle,
-        }
+        };
         const fragment = (
             <View
                 style={[
@@ -971,18 +971,18 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
                 />
                 {this.renderChatFooter()}
             </View>
-        )
+        );
 
         return this.props.isKeyboardInternallyHandled ? (
             <KeyboardAvoidingView enabled>{fragment}</KeyboardAvoidingView>
         ) : (
             fragment
-        )
+        );
     }
 
     onSend = (messages: TMessage[] | TMessage = [], shouldResetInputToolbar = false) => {
         if (!Array.isArray(messages)) {
-            messages = [messages]
+            messages = [messages];
         }
         const newMessages: TMessage[] = messages.map(message => {
             return {
@@ -990,45 +990,45 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
                 user: this.props.user!,
                 createdAt: new Date(),
                 _id: this.props.messageIdGenerator && this.props.messageIdGenerator(),
-            }
-        })
+            };
+        });
 
         if (shouldResetInputToolbar) {
-            this.setIsTypingDisabled(true)
-            this.resetInputToolbar()
+            this.setIsTypingDisabled(true);
+            this.resetInputToolbar();
         }
         if (this.props.onSend) {
-            this.props.onSend(newMessages, shouldResetInputToolbar)
+            this.props.onSend(newMessages, shouldResetInputToolbar);
         }
 
         if (shouldResetInputToolbar) {
             setTimeout(() => {
                 if (this.getIsMounted()) {
-                    this.setIsTypingDisabled(false)
+                    this.setIsTypingDisabled(false);
                 }
-            }, 100)
+            }, 100);
         }
-    }
+    };
 
     resetInputToolbar() {
         if (this.textInput) {
-            this.textInput.clear()
+            this.textInput.clear();
         }
-        this.notifyInputTextReset()
+        this.notifyInputTextReset();
         const newComposerHeight = this.props.minComposerHeight;
         const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
             newComposerHeight,
-        )
+        );
         this.setState({
             text: this.getTextFromProp(''),
             composerHeight: newComposerHeight,
             messagesContainerHeight: newMessagesContainerHeight,
-        })
+        });
     }
 
     focusTextInput() {
         if (this.textInput) {
-            this.textInput.focus()
+            this.textInput.focus();
         }
     }
 
@@ -1037,75 +1037,75 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
         const newComposerHeight = Math.max(
             this.props.minComposerHeight!,
             Math.min(this.props.maxComposerHeight!, size.height),
-        )
+        );
         const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
             newComposerHeight,
-        )
+        );
         this.setState({
             composerHeight: newComposerHeight,
             messagesContainerHeight: newMessagesContainerHeight,
-        })
-    }
+        });
+    };
 
     onInputTextChanged = (text: string) => {
         // TODO consider to move this to Composer
         if (this.getIsTypingDisabled()) {
-            return
+            return;
         }
         if (this.props.onInputTextChanged) {
-            this.props.onInputTextChanged(text)
+            this.props.onInputTextChanged(text);
         }
         // Only set state if it's not being overridden by a prop.
         if (this.props.text === undefined) {
-            this.setState({text})
+            this.setState({text});
         }
-    }
+    };
 
     notifyInputTextReset() {
         if (this.props.onInputTextChanged) {
-            this.props.onInputTextChanged('')
+            this.props.onInputTextChanged('');
         }
     }
 
     onInitialLayoutViewLayout = (e: any) => {
-        const {layout} = e.nativeEvent
+        const {layout} = e.nativeEvent;
         if (layout.height <= 0) {
-            return
+            return;
         }
-        this.notifyInputTextReset()
-        this.setMaxHeight(layout.height)
-        const newComposerHeight = this.props.minComposerHeight
+        this.notifyInputTextReset();
+        this.setMaxHeight(layout.height);
+        const newComposerHeight = this.props.minComposerHeight;
         const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
             newComposerHeight,
-        )
-        const initialText = this.props.initialText || ''
+        );
+        const initialText = this.props.initialText || '';
         this.setState({
             isInitialized: true,
             text: this.getTextFromProp(initialText),
             composerHeight: newComposerHeight,
             messagesContainerHeight: newMessagesContainerHeight,
-        })
-    }
+        });
+    };
 
     onMainViewLayout = (e: any) => {
         // fix an issue when keyboard is dismissing during the initialization
-        const {layout} = e.nativeEvent
+        const {layout} = e.nativeEvent;
         if (
             this.getMaxHeight() !== layout.height ||
             this.getIsFirstLayout() === true
         ) {
-            this.setMaxHeight(layout.height)
+            this.setMaxHeight(layout.height);
             this.setState({
                 messagesContainerHeight:
                     this._keyboardHeight > 0
                         ? this.getMessagesContainerHeightWithKeyboard()
                         : this.getBasicMessagesContainerHeight(),
-            })
+            });
         }
         if (this.getIsFirstLayout() === true) {
-            this.setIsFirstLayout(false)
+            this.setIsFirstLayout(false);
         }
-    }
+    };
 
     renderInputToolbar() {
 
@@ -1266,36 +1266,36 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
                 ref: (textInput: any) => (this.textInput = textInput),
                 maxLength: this.getIsTypingDisabled() ? 0 : this.props.maxInputLength,
             },
-        }
+        };
         if (this.props.renderInputToolbar) {
-            return this.props.renderInputToolbar(inputToolbarProps)
+            return this.props.renderInputToolbar(inputToolbarProps);
         }
         // TODO type check error
         // @ts-ignore
-        return <InputToolbar<TMessage> {...inputToolbarProps} />
+        return <InputToolbar<TMessage> {...inputToolbarProps} />;
         // return <InputToolbar {...inputToolbarProps} />
     }
 
     renderChatFooter() {
         if (this.props.renderChatFooter) {
-            return this.props.renderChatFooter()
+            return this.props.renderChatFooter();
         }
-        return null
+        return null;
     }
 
     renderLoading() {
         if (this.props.renderLoading) {
-            return this.props.renderLoading()
+            return this.props.renderLoading();
         }
-        return null
+        return null;
     }
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
         if (this.state.isInitialized === true) {
-            const {wrapInSafeArea} = this.props
-            const Wrapper = wrapInSafeArea ? SafeAreaView : View
+            const {wrapInSafeArea} = this.props;
+            const Wrapper = wrapInSafeArea ? SafeAreaView : View;
 
             return (
                 <Wrapper style={styles.safeArea}>
@@ -1308,19 +1308,19 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
                         </View>
                     </ActionSheetProvider>
                 </Wrapper>
-            )
+            );
         }
         return (
             <View style={styles.container} onLayout={this.onInitialLayoutViewLayout}>
                 {this.renderLoading()}
             </View>
-        )
+        );
     }
 }
 
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
     return StyleSheet.create({
         container: {
             flex: 1,
@@ -1328,11 +1328,11 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         safeArea: {
             flex: 1,
         },
-    })
-}
+    });
+};
 
-export * from './types'
-const BunnyChat = withBunnyKit(BunnyChatInner)
+export * from './types';
+const BunnyChat = withBunnyKit(BunnyChatInner);
 export {
     BunnyChat,
     Actions,
@@ -1352,4 +1352,4 @@ export {
     Time,
     BunnyAvatar,
     utils,
-}
+};

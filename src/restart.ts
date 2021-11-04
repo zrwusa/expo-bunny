@@ -9,13 +9,13 @@ async function restartAppNative() {
 async function restartAppWeb() {
     return new Promise((resolve, reject) => {
         const numberRandom = Math.random();
-        numberRandom > 0.5 ? resolve('Mock restarting web success') : reject('Mock restarting web failed')
-    })
+        numberRandom > 0.5 ? resolve('Mock restarting web success') : reject('Mock restarting web failed');
+    });
 }
 
 export async function restartApp() {
     return Platform.select({
         web: restartAppWeb(),
         default: restartAppNative()
-    })
+    });
 }

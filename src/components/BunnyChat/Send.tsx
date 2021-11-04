@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {
     StyleProp,
     StyleSheet,
@@ -8,10 +8,10 @@ import {
     TouchableOpacityProps,
     View,
     ViewStyle,
-} from 'react-native'
-import {IMessage} from './types'
+} from 'react-native';
+import {IMessage} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
@@ -30,23 +30,23 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginLeft: wp(10),
             marginRight: wp(10),
         },
-    })
-}
+    });
+};
 
 export interface SendProps<TMessage extends IMessage> {
-    text?: string
-    sendLabel?: string
-    sendContainerStyle?: StyleProp<ViewStyle>
-    sendTextStyle?: StyleProp<TextStyle>
-    children?: React.ReactNode
-    alwaysShowSend?: boolean
-    disabled?: boolean
-    sendButtonProps?: Partial<TouchableOpacityProps>
+    text?: string;
+    sendLabel?: string;
+    sendContainerStyle?: StyleProp<ViewStyle>;
+    sendTextStyle?: StyleProp<TextStyle>;
+    children?: React.ReactNode;
+    alwaysShowSend?: boolean;
+    disabled?: boolean;
+    sendButtonProps?: Partial<TouchableOpacityProps>;
 
     onSend?(
         messages: TMessage | TMessage[],
         shouldResetInputToolbar: boolean,
-    ): void
+    ): void;
 }
 
 class Send<TMessage extends IMessage> extends Component<SendProps<TMessage> & WithBunnyKit> {
@@ -61,14 +61,14 @@ class Send<TMessage extends IMessage> extends Component<SendProps<TMessage> & Wi
         alwaysShowSend: false,
         disabled: false,
         sendButtonProps: undefined,
-    }
+    };
 
     handleOnPress = () => {
-        const {text, onSend} = this.props
+        const {text, onSend} = this.props;
         if (text && onSend) {
-            onSend({text: text.trim()} as TMessage, true)
+            onSend({text: text.trim()} as TMessage, true);
         }
-    }
+    };
 
     render() {
         const {
@@ -80,19 +80,19 @@ class Send<TMessage extends IMessage> extends Component<SendProps<TMessage> & Wi
             alwaysShowSend,
             disabled,
             sendButtonProps,
-        } = this.props
+        } = this.props;
         if (alwaysShowSend || (text && text.trim().length > 0)) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
             const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <TouchableOpacity
-                    testID='send'
+                    testID="send"
                     accessible
-                    accessibilityLabel='send'
+                    accessibilityLabel="send"
                     style={[styles.container, sendContainerStyle]}
                     onPress={this.handleOnPress}
                     // @ts-ignore
-                    accessibilityTraits='button'
+                    accessibilityTraits="button"
                     disabled={disabled}
                     {...sendButtonProps}
                 >
@@ -100,10 +100,10 @@ class Send<TMessage extends IMessage> extends Component<SendProps<TMessage> & Wi
                         {children || <Text style={[styles.text, sendTextStyle]}>{sendLabel}</Text>}
                     </View>
                 </TouchableOpacity>
-            )
+            );
         }
-        return <View/>
+        return <View/>;
     }
 }
 
-export default withBunnyKit(Send)
+export default withBunnyKit(Send);

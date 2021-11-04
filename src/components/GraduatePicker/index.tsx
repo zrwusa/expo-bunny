@@ -1,1 +1,1 @@
-export * from './GraduatePicker'
+export * from './GraduatePicker';

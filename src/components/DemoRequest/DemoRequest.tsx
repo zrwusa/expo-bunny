@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {ButtonTO, InButtonText, Text, View} from '../UI';
 import {DemoEmployee} from '../../types';
-import {useRequest} from '../../providers/request-labor';
+import {useRequest} from '../../providers';
 import {useDispatch} from 'react-redux';
 import {saveQuickAlertSettings, sysError} from '../../store/actions';
-import bunnyAPI from '../../helpers/bunny-api';
+import {bunnyAPI} from '../../helpers/bunny-api';
 
 interface Props {
     title: string,
@@ -12,25 +12,25 @@ interface Props {
 }
 
 function DemoRequest(props: Props) {
-    const request = useRequest()
+    const request = useRequest();
     const dispatch = useDispatch();
-    const [employees, setEmployees] = useState<Array<DemoEmployee>>([])
+    const [employees, setEmployees] = useState<Array<DemoEmployee>>([]);
     const granularity = 0.0001;
     const expoPushToken = 'ExponentPushToken[oT1TDBCO7jtDytecDBmKWW]';
     const saveAlertSetting = async function () {
         try {
-            await request.post('/push-service/alert-settings', {toke: expoPushToken})
+            await request.post('/push-service/alert-settings', {toke: expoPushToken});
         } catch (err) {
         }
-    }
+    };
 
     const handleSaveQuickAlertSettings = async function () {
         dispatch(saveQuickAlertSettings({
             token: expoPushToken,
             granularity,
             reminder: {times: 3, interval: '1s'}
-        }))
-    }
+        }));
+    };
 
     // const cancelAlertSettings = async function () {
     //     try {
@@ -54,7 +54,7 @@ function DemoRequest(props: Props) {
             //
             // dispatch(getCurrentPrice())
             const res = await bunnyAPI.get(`/employees`);
-            setEmployees(res.data)
+            setEmployees(res.data);
 
             // const res = await nomicsAPI.get('v1/currencies/sparkline', {
             //     params: {
@@ -67,16 +67,16 @@ function DemoRequest(props: Props) {
             // const btcDataMapped = timestamps.map((item: string, index: number) => {
             //     return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
             // })
-        } catch (err) {
+        } catch (err: any) {
             dispatch(sysError(err.toString()));
         }
-    }
+    };
 
     const {buttonTitle} = props;
     return (<View>
         <Text>{props.title}</Text>
         <ButtonTO onPress={async () => {
-            await getEmployees()
+            await getEmployees();
         }}><InButtonText>{buttonTitle}</InButtonText></ButtonTO>
         <View>
             {employees && employees.length > 0

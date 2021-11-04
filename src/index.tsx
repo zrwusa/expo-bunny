@@ -2,21 +2,21 @@ import React, {Suspense} from 'react';
 import {Provider as ReduxProvider} from 'react-redux';
 import store, {rrfProps} from './store';
 import App from './App';
-import {DemoLazyLoading} from './components/DemoLazyLoading';
+import {DemoLazyLoading} from './components';
 import {ReactReduxFirebaseProvider} from 'react-redux-firebase';
-import './hacks/long-period-timer'
+import './hacks/long-period-timer';
 
 export default function index() {
     const renderInner = () => <ReduxProvider store={store}>
         <ReactReduxFirebaseProvider {...rrfProps}>
             <App/>
         </ReactReduxFirebaseProvider>
-    </ReduxProvider>
+    </ReduxProvider>;
 
     // SSR does not support Suspense
     const suspenseWrapped = () => <Suspense fallback={<DemoLazyLoading/>}>
         {renderInner()}
-    </Suspense>
+    </Suspense>;
 
-    return renderInner()
+    return renderInner();
 }

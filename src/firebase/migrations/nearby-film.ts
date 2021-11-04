@@ -209,7 +209,7 @@ const nearbyFilms = [
         'description': 'This is the second best place in Portland',
         '__v': 0
     }
-]
+];
 
 export const migrateNearbyFilms = async () => {
     for (const nearbyFilm of nearbyFilms) {
@@ -219,4 +219,4 @@ export const migrateNearbyFilms = async () => {
             .doc(nearbyFilm._id)
             .set(nearbyFilm);
     }
-}
+};

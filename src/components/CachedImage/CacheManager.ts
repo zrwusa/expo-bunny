@@ -22,8 +22,8 @@ export class CacheLabor {
     uri: string;
     downloadProgressCallback: { [key in string]: DownloadProgressCallback };
     isFileExist: boolean;
-    uriCallbacks: { [key in string]: (uri: string) => void }
-    downloadProgressData: DownloadProgressData | undefined
+    uriCallbacks: { [key in string]: (uri: string) => void };
+    downloadProgressData: DownloadProgressData | undefined;
 
     constructor(url: string, downloadOptions: DownloadOptions) {
         this.url = url;
@@ -42,9 +42,9 @@ export class CacheLabor {
 
     register(callback: (uri: string) => void, downloadProgressCallback?: DownloadProgressCallback) {
         if (this.isDone) {
-            callback(this.uri)
+            callback(this.uri);
             if (this.downloadProgressData) {
-                downloadProgressCallback?.(this.downloadProgressData)
+                downloadProgressCallback?.(this.downloadProgressData);
             }
 
         } else {
@@ -60,32 +60,32 @@ export class CacheLabor {
         const filename = url.substring(url.lastIndexOf('/'), url.indexOf('?') === -1 ? url.length : url.indexOf('?'));
         const ext = filename.indexOf('.') === -1 ? '.jpg' : filename.substring(filename.lastIndexOf('.'));
         this.uri = `${BASE_DIR}${SHA1(url)}${ext}`;
-        await ensureCacheDirExists()
+        await ensureCacheDirExists();
         const {exists} = await this.getFileInfo();
         if (exists) {
             this.isFileExist = true;
         }
 
         if (this.isDone) {
-            return
+            return;
         }
 
 
         this.downloader = FileSystem.createDownloadResumable(url, this.uri, this.downloadOptions, (downloadProgress) => {
             for (const i in this.downloadProgressCallback) {
-                this.downloadProgressCallback[i](downloadProgress)
+                this.downloadProgressCallback[i](downloadProgress);
             }
-            this.downloadProgressCallback = {}
-            this.downloadProgressData = downloadProgress
-            this.isDone = downloadProgress.totalBytesExpectedToWrite === downloadProgress.totalBytesWritten
+            this.downloadProgressCallback = {};
+            this.downloadProgressData = downloadProgress;
+            this.isDone = downloadProgress.totalBytesExpectedToWrite === downloadProgress.totalBytesWritten;
             if (this.isDone) {
                 this.isFileExist = true;
                 for (const i in this.uriCallbacks) {
-                    this.uriCallbacks[i](this.uri)
+                    this.uriCallbacks[i](this.uri);
                 }
-                this.uriCallbacks = {}
+                this.uriCallbacks = {};
             }
-        })
+        });
 
         const downloadResult = await this.downloader.downloadAsync();
 
@@ -108,10 +108,10 @@ export class CacheLabor {
 
 export class CacheManager {
     private cacheLabors: { [url: string]: CacheLabor } = {};
-    private readonly downloadOptions: DownloadOptions = {}
+    private readonly downloadOptions: DownloadOptions = {};
 
     constructor(downloadOptions: DownloadOptions) {
-        this.downloadOptions = downloadOptions
+        this.downloadOptions = downloadOptions;
     }
 
     getCacheLabor(url: string, downloadOptions?: DownloadOptions): CacheLabor {
@@ -124,7 +124,7 @@ export class CacheManager {
     async clearCache(): Promise<void> {
         await FileSystem.deleteAsync(BASE_DIR, {idempotent: true});
         await FileSystem.makeDirectoryAsync(BASE_DIR);
-        this.cacheLabors = {}
+        this.cacheLabors = {};
     }
 
     async getTotalSize(): Promise<number> {
@@ -136,6 +136,6 @@ export class CacheManager {
     }
 }
 
-export default new CacheManager({})
+export default new CacheManager({});
 
 

@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native'
-import dayjs from 'dayjs'
-import {TIME_FORMAT} from './Constant'
-import {IMessage, LeftRightStyle, PositionLeftOrRight} from './types'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import React, {Component} from 'react';
+import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native';
+import dayjs from 'dayjs';
+import {TIME_FORMAT} from './Constant';
+import {IMessage, LeftRightStyle, PositionLeftOrRight} from './types';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 
@@ -14,13 +14,13 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         marginLeft: wp(10),
         marginRight: wp(10),
         marginBottom: wp(5),
-    }
+    };
 
     const textStyle = {
         fontSize: wp(10),
         backgroundColor: 'transparent',
         textAlign: 'right',
-    }
+    };
     return {
         left: StyleSheet.create({
             container: {
@@ -40,15 +40,15 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 ...textStyle,
             },
         }),
-    }
-}
+    };
+};
 
 export interface TimeProps<TMessage extends IMessage> {
-    position: PositionLeftOrRight
-    currentMessage?: TMessage
-    timeContainerStyle?: LeftRightStyle<ViewStyle>
-    timeTextStyle?: LeftRightStyle<TextStyle>
-    timeFormat?: string
+    position: PositionLeftOrRight;
+    currentMessage?: TMessage;
+    timeContainerStyle?: LeftRightStyle<ViewStyle>;
+    timeTextStyle?: LeftRightStyle<TextStyle>;
+    timeFormat?: string;
 }
 
 class Time<TMessage extends IMessage> extends Component<TimeProps<TMessage> & WithBunnyKit> {
@@ -59,7 +59,7 @@ class Time<TMessage extends IMessage> extends Component<TimeProps<TMessage> & Wi
         timeContainerStyle: {},
         timeFormat: TIME_FORMAT,
         timeTextStyle: {},
-    }
+    };
 
     render() {
         const {
@@ -69,7 +69,7 @@ class Time<TMessage extends IMessage> extends Component<TimeProps<TMessage> & Wi
             timeFormat,
             timeTextStyle,
             bunnyKit
-        } = this.props
+        } = this.props;
 
         const {language} = bunnyKit;
 
@@ -96,10 +96,10 @@ class Time<TMessage extends IMessage> extends Component<TimeProps<TMessage> & Wi
                             .format(timeFormat)}
                     </Text>
                 </View>
-            )
+            );
         }
-        return null
+        return null;
     }
 }
 
-export default withBunnyKit(Time)
+export default withBunnyKit(Time);

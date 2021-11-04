@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Text, View} from '../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoSearchDummyDatum, RootStackParam} from '../../types';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../providers';
 import {getContainerStyles} from '../../containers';
 import {Animated, SafeAreaView} from 'react-native';
 import {randomText, wait} from '../../utils';
@@ -13,7 +13,7 @@ import {collectBLResult} from '../../store/actions';
 import {blError} from '../../helpers';
 import {StackNavigationProp} from '@react-navigation/stack';
 import config from '../../config';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 
 type DemoSearchRouteProp = RouteProp<RootStackParam, 'DemoSearch'>;
@@ -30,46 +30,46 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
     const st = shortenTFunctionKey(t, 'screens.DemoSearch');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
 
     const [scrollYValue] = useState(new Animated.Value(0));
-    const [data, setData] = useState<DemoSearchDummyDatum[]>([])
+    const [data, setData] = useState<DemoSearchDummyDatum[]>([]);
 
 
     const getDummyData = () => {
         const dummyData: DemoSearchDummyDatum[] = [];
 
         for (let i = 0; i < 10000; i++) {
-            dummyData.push({id: i, text: randomText(30)})
+            dummyData.push({id: i, text: randomText(30)});
         }
         return dummyData;
-    }
+    };
 
     useEffect(() => {
-    }, [])
+    }, []);
 
 
     const mockSearch = async (keywordText: string) => {
         return new Promise<DemoSearchDummyDatum[]>((resolve, reject) => {
             wait(1000).then(() => {
-                const dummyData = getDummyData()
+                const dummyData = getDummyData();
                 const result = dummyData.filter((item) => {
-                    return item.text.includes(keywordText)
-                })
-                return Math.random() > 0.1 ? resolve(result) : reject(new Error('error when searching'))
-            })
-        })
-    }
+                    return item.text.includes(keywordText);
+                });
+                return Math.random() > 0.1 ? resolve(result) : reject(new Error('error when searching'));
+            });
+        });
+    };
     return (
         <SafeAreaView style={containerStyles.Screen}>
             <FollowUpSearchBar scrollYValue={scrollYValue}
                                defaultKeywords={[]}
                                onSearch={async (searchText) => {
                                    try {
-                                       const searchResult = await mockSearch(searchText)
-                                       setData(searchResult)
+                                       const searchResult = await mockSearch(searchText);
+                                       setData(searchResult);
                                    } catch (e) {
-                                       collectBLResult(blError(e))
+                                       collectBLResult(blError(e));
                                    }
                                }}
             />

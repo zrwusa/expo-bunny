@@ -18,7 +18,7 @@ export interface I_Graph<V, E> {
 
     addVertex(v: V): boolean;
 
-    removeVertex(vertexOrId: V | VertexId): boolean
+    removeVertex(vertexOrId: V | VertexId): boolean;
 
     removeAllVertices(vertices: V[] | VertexId[]): boolean;
 
@@ -112,7 +112,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
     getVertex(vertexOrId: VertexId | V): V | null {
         const vertexId = this.getVertexId(vertexOrId);
-        return this._vertices.get(vertexId) || null
+        return this._vertices.get(vertexId) || null;
     }
 
     getVertexId(vertexOrId: V | VertexId): VertexId {
@@ -120,7 +120,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
     }
 
     containsVertex(vertexOrId: V | VertexId): boolean {
-        return this._vertices.has(this.getVertexId(vertexOrId))
+        return this._vertices.has(this.getVertexId(vertexOrId));
     }
 
     vertexSet(): Map<VertexId, V> {
@@ -200,7 +200,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             }
 
             visiting.set(cur, false);
-        }
+        };
 
         dfs(vertex1, vertex2, new Map<V, boolean>(), []);
         return paths;
@@ -302,7 +302,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                 }
 
                 visiting.set(cur, false);
-            }
+            };
 
             dfs(vertex1, vertex2, new Map<V, boolean>(), []);
             return minPath;
@@ -332,7 +332,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         const preMap: Map<V, V | null> = new Map(); // predecessor
         const srcVertex = this.getVertex(src);
 
-        const destVertex = dest ? this.getVertex(dest) : null
+        const destVertex = dest ? this.getVertex(dest) : null;
 
         if (!srcVertex) {
             return null;
@@ -356,7 +356,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                 }
             }
             return minV;
-        }
+        };
 
         const getPaths = (minV: V | null) => {
             for (let [id, v] of vertices) {
@@ -366,11 +366,11 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                     path.push(parent);
                     parent = preMap.get(parent);
                 }
-                const reversed = path.reverse()
+                const reversed = path.reverse();
                 if (v === minV) minPath = reversed;
                 paths.push(reversed);
             }
-        }
+        };
 
         for (let i = 1; i < vertices.size; i++) {
             const cur = getMinOfNoSeen();
@@ -381,7 +381,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                         minDist = distMap.get(destVertex) || Infinity;
                     }
                     if (genPaths) {
-                        getPaths(destVertex)
+                        getPaths(destVertex);
                     }
                     return {distMap, preMap, seen, paths, minDist, minPath};
                 }
@@ -409,7 +409,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             }
         });
 
-        genPaths && getPaths(minDest)
+        genPaths && getPaths(minDest);
 
         return {distMap, preMap, seen, paths, minDist, minPath};
     }
@@ -437,7 +437,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         const preMap: Map<V, V | null> = new Map(); // predecessor
 
         const srcVertex = this.getVertex(src);
-        const destVertex = dest ? this.getVertex(dest) : null
+        const destVertex = dest ? this.getVertex(dest) : null;
 
         if (!srcVertex) {
             return null;
@@ -461,11 +461,11 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                     path.push(parent);
                     parent = preMap.get(parent);
                 }
-                const reversed = path.reverse()
+                const reversed = path.reverse();
                 if (v === minV) minPath = reversed;
                 paths.push(reversed);
             }
-        }
+        };
 
         while (heap.size() > 0) {
             const curHeapNode = heap.poll();
@@ -479,7 +479,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                             minDist = distMap.get(destVertex) || Infinity;
                         }
                         if (genPaths) {
-                            getPaths(destVertex)
+                            getPaths(destVertex);
                         }
                         return {distMap, preMap, seen, paths, minDist, minPath};
                     }
@@ -512,12 +512,12 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                         if (genPaths) minDest = v;
                     }
                 }
-            })
+            });
         }
 
 
         if (genPaths) {
-            getPaths(minDest)
+            getPaths(minDest);
         }
 
 
@@ -588,7 +588,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                         if (genPath) minDest = v;
                     }
                 }
-            })
+            });
         }
 
         if (genPath) {
@@ -599,7 +599,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                     path.push(parent);
                     parent = preMap.get(parent);
                 }
-                const reversed = path.reverse()
+                const reversed = path.reverse();
                 if (v === minDest) minPath = reversed;
                 paths.push(reversed);
             }
@@ -687,7 +687,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
         vertices.forEach(v => {
             dfnMap.set(v, -1);
             lowMap.set(v, Infinity);
-        })
+        });
 
         const [root] = vertices.values();
 
@@ -719,13 +719,13 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
 
                     if (needBridges) {
                         if (childLow! > dfnMap.get(cur)!) {
-                            bridges.push(this.getEdge(cur, neighbor)!)
+                            bridges.push(this.getEdge(cur, neighbor)!);
                         }
                     }
                 }
             }
 
-        }
+        };
 
         dfs(root, null);
 
@@ -735,13 +735,13 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
             const SCCs: Map<number, V[]> = new Map();
             lowMap.forEach((low, vertex) => {
                 if (!SCCs.has(low)) {
-                    SCCs.set(low, [vertex])
+                    SCCs.set(low, [vertex]);
                 } else {
                     SCCs.get(low)?.push(vertex);
                 }
-            })
+            });
             return SCCs;
-        }
+        };
 
         if (needSCCs) {
             SCCs = getSCCs();
@@ -758,7 +758,7 @@ export abstract class AbstractGraph<V extends AbstractVertex, E extends Abstract
                 if (SCC.length > 1) {
                     cycles.set(low, SCC);
                 }
-            })
+            });
         }
 
         return {dfnMap, lowMap, bridges, articulationPoints, SCCs, cycles};

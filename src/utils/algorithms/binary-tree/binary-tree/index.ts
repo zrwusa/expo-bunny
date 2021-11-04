@@ -1,2 +1,2 @@
-export * from './binary-tree'
-export * from './cases'
+export * from './binary-tree';
+export * from './cases';

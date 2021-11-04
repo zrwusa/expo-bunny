@@ -8,29 +8,29 @@ import BunnyConstants, {EThemes} from '../../constants/constants';
 import {collectBLResult, sysError} from '../../store/actions';
 import {useColorScheme} from 'react-native-appearance';
 import {useDispatch} from 'react-redux';
-import {Preparing} from '../../components/Preparing';
+import {Preparing} from '../../components';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {getThemes} from './theme';
 import _ from 'lodash';
 import {Dimensions} from 'react-native';
 import {blError} from '../../helpers';
 
-const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
+export const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
     const {children} = props;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const sysColorSchemeName = useColorScheme();
     const [themes, setThemes] = useState(getThemes());
     const [isReady, setIsReady] = useState(false);
-    const [themeName, setThemeName] = useState(EThemes.light)
+    const [themeName, setThemeName] = useState(EThemes.light);
     const [theme, setTheme] = useState(themes[themeName]);
 
     const changeTheme = async (themeName: ThemeName) => {
         if (Object.keys(EThemes).includes(themeName)) {
-            await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, themeName)
+            await AsyncStorage.setItem(BunnyConstants.THEME_NAME_PERSISTENCE_KEY, themeName);
             setThemeName(themeName);
-            setTheme(themes[themeName])
+            setTheme(themes[themeName]);
         } else {
-            dispatch(collectBLResult(blError(`No ${themeName} `, true)))
+            dispatch(collectBLResult(blError(`No ${themeName} `, true)));
         }
     };
 
@@ -44,17 +44,17 @@ const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
                 } else if (sysColorSchemeName) {
                     themeName = (sysColorSchemeName === EThemes.dark) ? EThemes.dark : EThemes.light;
                 } else {
-                    themeName = EThemes.light
+                    themeName = EThemes.light;
                 }
-                await changeTheme(themeName)
-            } catch (err) {
+                await changeTheme(themeName);
+            } catch (err: any) {
                 dispatch(sysError(err));
             }
-        }
+        };
         bootstrapAsync()
             .then(() => {
-                setIsReady(true)
-            })
+                setIsReady(true);
+            });
 
     }, []);
 
@@ -72,7 +72,7 @@ const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
 
     const themeLaborMemorized = useMemo(
         () => {
-            return {theme, currentThemeName: themeName, themes, changeTheme, sysColorSchemeName}
+            return {theme, currentThemeName: themeName, themes, changeTheme, sysColorSchemeName};
         }
         , [theme, changeTheme, themeName, sysColorSchemeName]);
 
@@ -84,7 +84,5 @@ const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
                 </PaperProvider>
             </ThemeLaborContext.Provider>
             : <Preparing text="Theme Provider loading"/>
-    )
-}
-
-export {ThemeLaborProvider};
+    );
+};

@@ -1,1 +1,1 @@
-export * from './ColorValuesCard'
+export * from './ColorValuesCard';

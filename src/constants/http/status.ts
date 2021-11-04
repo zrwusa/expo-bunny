@@ -442,7 +442,7 @@ export const status: HttpStatus = {
         'spec_title': '7xx-rfc',
         'spec_href': 'http://documentup.com/joho/7XX-rfc'
     }
-}
+};
 
 export const getStatusDes = (code: number | string) => {
     const codeType = typeof code;
@@ -452,8 +452,8 @@ export const getStatusDes = (code: number | string) => {
             codeDealt = code.toString();
             break;
         default:
-            codeDealt = code
+            codeDealt = code;
             return;
     }
     return status[codeDealt].description;
-}
+};

@@ -16,4 +16,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         tipPanel: {paddingTop: wp(6)},
         tip: {color: colors.text3, fontSize: ms.fs.xs}
     });
-}
+};

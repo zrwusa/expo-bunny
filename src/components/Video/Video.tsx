@@ -3,7 +3,7 @@ import {createRef} from 'react';
 import {AVPlaybackStatus, Video, VideoProps} from '../../../packages/expo-av/src';
 import {Button, Text, View} from '../UI';
 import {getStyles} from './styles';
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 
 interface ShowVideoState {
     isPlaying: boolean,
@@ -16,24 +16,24 @@ export interface ShowVideoProps extends VideoProps, WithBunnyKit {
 }
 
 class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState> {
-    private video = createRef<Video>()
-    private _isMounted = false
+    private video = createRef<Video>();
+    private _isMounted = false;
 
     constructor(props: ShowVideoProps) {
-        super(props)
+        super(props);
 
         this.state = {
             isPlaying: false,
             playbackStatus: undefined,
-        }
+        };
     }
 
     componentDidMount() {
-        this._isMounted = true
+        this._isMounted = true;
     }
 
     componentWillUnmount() {
-        this._isMounted = false
+        this._isMounted = false;
     }
 
     render() {
@@ -51,7 +51,7 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
                     isLooping
                     onPlaybackStatusUpdate={playbackStatus => {
                         if (!this._isMounted) {
-                            return
+                            return;
                         }
                         if (!playbackStatus.isLoaded) {
                             // Update your UI for the unloaded state
@@ -86,7 +86,7 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
                             title={isPlaying ? 'Pause' : 'Play'}
                             onPress={() => {
                                 if (this.video.current) {
-                                    return isPlaying ? this.video.current.pauseAsync() : this.video.current.playAsync()
+                                    return isPlaying ? this.video.current.pauseAsync() : this.video.current.playAsync();
                                 }
                             }}
                         />

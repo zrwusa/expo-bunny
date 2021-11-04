@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Text, View} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from '../../../types';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../../providers';
 import {getContainerStyles} from '../../../containers';
 import {
     VictoryAxis,
@@ -22,7 +22,7 @@ import {blError, getSharedStyles} from '../../../helpers';
 import {ScrollView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Tab} from '../../../components';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyHome'>;
 type CryptoCurrencyHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -44,31 +44,31 @@ function CryptoCurrencyHomeScreen() {
     const {Screen, Box} = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const {} = sharedStyles;
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     const [btcData, setBtcData] = useState([
         {x: new Date('1990-01-01'), y: 5}
     ]);
-    const {currentPrice} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
-    const [type, setType] = useState('BTC')
-    const [dateRange, setDateRange] = useState('1d')
+    const {currentPrice} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState);
+    const [type, setType] = useState('BTC');
+    const [dateRange, setDateRange] = useState('1d');
     const getHistoricalPrices = async (type: string, dateRange: string) => {
         let start = '';
         let end = new Date().toISOString();
         switch (dateRange) {
             case '1d':
-                start = addDays(new Date(), -1).toISOString()
+                start = addDays(new Date(), -1).toISOString();
                 break;
             case '1w':
-                start = addDays(new Date(), -7).toISOString()
+                start = addDays(new Date(), -7).toISOString();
                 break;
             case '1m':
-                start = addDays(new Date(), -30).toISOString()
+                start = addDays(new Date(), -30).toISOString();
                 break;
             case '1y':
-                start = addDays(new Date(), -365).toISOString()
+                start = addDays(new Date(), -365).toISOString();
                 break;
             default:
-                start = addDays(new Date(), -1).toISOString()
+                start = addDays(new Date(), -1).toISOString();
                 break;
         }
         source = axios.CancelToken.source();
@@ -80,28 +80,28 @@ function CryptoCurrencyHomeScreen() {
                     start,
                     end
                 }
-            })
-            const {timestamps, prices} = res.data[0]
+            });
+            const {timestamps, prices} = res.data[0];
 
             const btcDataMapped = timestamps.map((item: string, index: number) => {
-                return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
-            })
-            setBtcData(btcDataMapped)
+                return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))};
+            });
+            setBtcData(btcDataMapped);
         } catch (e) {
-            dispatch(collectBLResult(blError(e.message, false)))
+            dispatch(collectBLResult(blError(e.message, false)));
         }
-    }
+    };
     useEffect(() => {
         try {
-            dispatch(getCurrentPrice())
+            dispatch(getCurrentPrice());
         } catch (e) {
-            dispatch(sysError(e))
+            dispatch(sysError(e));
         }
         getHistoricalPrices(type, dateRange).then();
         return () => {
-            source.cancel(t('sys.canceledRequest'))
-        }
-    }, [])
+            source.cancel(t('sys.canceledRequest'));
+        };
+    }, []);
 
     return (
         <ScrollView>
@@ -110,13 +110,13 @@ function CryptoCurrencyHomeScreen() {
                 <Tab items={types}
                      value={type}
                      onChange={async (item) => {
-                         setType(item)
+                         setType(item);
                          await getHistoricalPrices(item, dateRange);
                      }}/>
                 <Tab items={dateRanges}
                      value={dateRange}
                      onChange={async (item) => {
-                         setDateRange(item)
+                         setDateRange(item);
                          await getHistoricalPrices(type, item);
                      }}/>
                 <VictoryChart

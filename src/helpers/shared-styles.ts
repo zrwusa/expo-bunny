@@ -177,15 +177,15 @@ export const getSharedStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) =>
         article: {},
         footer: {},
 
-    })
+    });
 
     let sharedStylesFlatten: StyleSheet.NamedStyles<any>;
-    const traversableSmartStyles = sharedStyles as unknown as JSONSerializable
+    const traversableSmartStyles = sharedStyles as unknown as JSONSerializable;
     sharedStylesFlatten = Object.keys(traversableSmartStyles).reduce((newObject, key) => ({
         ...newObject,
         [key]: StyleSheet.flatten(traversableSmartStyles[key])
-    }), {})
+    }), {});
 
 
-    return {sharedStyles, sharedStylesFlatten}
-}
+    return {sharedStyles, sharedStylesFlatten};
+};

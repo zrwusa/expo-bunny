@@ -73,7 +73,7 @@ const socialMediaVideos = [
             }
         ]
     }
-]
+];
 
 export const migrateSocialMediaVideos = async () => {
 
@@ -84,4 +84,4 @@ export const migrateSocialMediaVideos = async () => {
             .doc(socialMediaVideo._id)
             .set(socialMediaVideo);
     }
-}
+};

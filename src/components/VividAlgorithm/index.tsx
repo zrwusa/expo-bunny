@@ -1,1 +1,1 @@
-export * from './VividAlgorithm'
+export * from './VividAlgorithm';

@@ -28,5 +28,5 @@ export function RTLSwitch() {
         //             // todo,in case of using .catch expression,this err will not be caught by fastRefresh tool
         //         });
         // }}
-    />
+    />;
 }

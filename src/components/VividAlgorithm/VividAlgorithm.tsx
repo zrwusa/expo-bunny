@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {useEffect, useRef} from 'react';
 import {Text, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {Card, Col, Row} from '../../containers';
+import {useBunnyKit} from '../../hooks';
 import {getStyles} from './styles';
 import {
     AbstractEdge,
@@ -19,7 +18,6 @@ import {
     UndirectedGraph,
     uuidV4
 } from '../../utils';
-import {Card} from '../../containers/Card';
 import {TreeNode} from '../../types';
 import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText, TSpan} from 'react-native-svg';
 import {ScrollView} from 'react-native';
@@ -57,8 +55,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
             <Row>
                 <Col size={6}><Text>{data.toString()}</Text></Col>
             </Row>
-        )
-    }
+        );
+    };
 
     const getPointsByDelta = (src: Coordinate, dest: Coordinate, cutDelta?: number) => {
         if (cutDelta === undefined) cutDelta = 0;
@@ -83,11 +81,16 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         src = newSrc;
         dest = newDest;
         return {src, dest};
-    }
+    };
 
-    const LineWithArrow = ({from, to, weight, delta}: { from: Coordinate, to: Coordinate, weight?: number, delta?: number }) => {
+    const LineWithArrow = ({
+                               from,
+                               to,
+                               weight,
+                               delta
+                           }: { from: Coordinate, to: Coordinate, weight?: number, delta?: number }) => {
         if (delta === undefined) delta = 0;
-        const {src, dest} = getPointsByDelta(from, to, delta)
+        const {src, dest} = getPointsByDelta(from, to, delta);
 
         return <G>
             <Defs>
@@ -125,16 +128,16 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     : null
             }
 
-        </G>
-    }
+        </G>;
+    };
 
     const VividString: React.FC<{ data: string }> = ({data}) => {
         return (
             <Row>
                 <Col size={6}><Text>{data}</Text></Col>
             </Row>
-        )
-    }
+        );
+    };
 
 
     const TwoWayScrollSVG: React.FC<{ autoScroll: boolean }> = ({children, autoScroll}) => {
@@ -145,8 +148,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     x: (treePanelWidth - wp(375)) / 2,
                     y: 0,
                     animated: false
-                })
-            }, [])
+                });
+            }, []);
         }
 
 
@@ -166,8 +169,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     </Svg>
                 </ScrollView>
             </ScrollView>
-        )
-    }
+        );
+    };
 
     const VividTree: React.FC<{ data: TreeNode<any> }> = ({data}) => {
         return (
@@ -175,8 +178,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 <VividTreeRecursive node={data} level={1} index={0} familyLength={1} parentX={0} parentY={0}
                                     maxHeight={data.getHeight()}/>
             </TwoWayScrollSVG>
-        )
-    }
+        );
+    };
 
     const VividBinaryTree: React.FC<{ node: BinaryTreeNode<any> | null, maxHeight?: number }> = ({node, maxHeight}) => {
         return (
@@ -188,8 +191,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         : null
                 }
             </TwoWayScrollSVG>
-        )
-    }
+        );
+    };
 
     const VividGraph: React.FC<{ data: AbstractGraph<AbstractVertex, AbstractEdge> }> = ({data}) => {
         return (
@@ -200,19 +203,19 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         : null
                 }
             </TwoWayScrollSVG>
-        )
-    }
+        );
+    };
 
     const matrixPanelWidth = wp(360, false);
     const matrixRectStrokeWidth = wp(1, false);
     const arrowCut = 0.3;
-    const arrowColor = colors.accent
+    const arrowColor = colors.accent;
 
     const VividMatrix: React.FC<{ data: Array<Array<any>> }> = ({data}) => {
         const rowCount = data?.length;
         const colCount = data?.[0]?.length;
         if (colCount < 1) {
-            return null
+            return null;
         }
         const rectSize = (matrixPanelWidth - (colCount + 1) * matrixRectStrokeWidth) / colCount;
         const matrixHeight = rectSize * rowCount;
@@ -237,8 +240,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                 strokeDasharray={`${rectSize},${rectSize * 2},${rectSize}`}
                                 strokeWidth={matrixRectStrokeWidth}
                                 fill={isActive ? colors.primary : colors.backgroundA}
-                            />
-                        })
+                            />;
+                        });
                     })}
                     {data.map((row, i) => {
                         const rowKey = i.toString();
@@ -255,8 +258,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                 x={(j + 0.5) * rectSize}
                                 y={(i + 0.5) * rectSize}
                                 textAnchor="middle"
-                            >{data[i][j].toString()}</SVGText>
-                        })
+                            >{data[i][j].toString()}</SVGText>;
+                        });
                     })}
                     {
                         relatedMatrixRoutes
@@ -277,15 +280,15 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                         return null;
                                     }
 
-                                })
+                                });
                             })
                             : null
                     }
                 </G>
             </Svg>
 
-        )
-    }
+        );
+    };
 
     const treePanelWidth = wp(20000);
     const treePanelHeight = wp(20000);
@@ -297,7 +300,15 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
     const fontOffsetY = fontSize / 3;
 
 
-    const VividTreeRecursive: React.FC<{ node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxHeight}) => {
+    const VividTreeRecursive: React.FC<{ node: TreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({
+                                                                                                                                                                                   node,
+                                                                                                                                                                                   level = 1,
+                                                                                                                                                                                   index = 0,
+                                                                                                                                                                                   familyLength = 1,
+                                                                                                                                                                                   parentX,
+                                                                                                                                                                                   parentY,
+                                                                                                                                                                                   maxHeight
+                                                                                                                                                                               }) => {
         if (!node) {
             return null;
         }
@@ -308,9 +319,9 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         let space = 0;
         let offsetX = 0;
         let offsetY = 0;
-        let levelNodeSpace = nodeSpace * Math.pow(2, (maxHeight || 5) - level)
+        let levelNodeSpace = nodeSpace * Math.pow(2, (maxHeight || 5) - level);
         if (level === 1) {
-            space = treePanelWidth / 2
+            space = treePanelWidth / 2;
             offsetX = space - circleR;
             offsetY = (level - 1) * levelOffset + circleR + strokeWidth;
         } else {
@@ -350,19 +361,27 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     textAnchor="middle"
                 >{node.name || node.id}</SVGText>
             </G>
-        )
-    }
+        );
+    };
 
-    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({node, level = 1, index = 0, familyLength = 1, parentX, parentY, maxHeight}) => {
+    const VividBinaryTreeRecursive: React.FC<{ node: BinaryTreeNode<any>, level: number, index: number, familyLength: number, parentX?: number, parentY?: number, maxHeight?: number }> = ({
+                                                                                                                                                                                               node,
+                                                                                                                                                                                               level = 1,
+                                                                                                                                                                                               index = 0,
+                                                                                                                                                                                               familyLength = 1,
+                                                                                                                                                                                               parentX,
+                                                                                                                                                                                               parentY,
+                                                                                                                                                                                               maxHeight
+                                                                                                                                                                                           }) => {
         if (!node) {
             return null;
         }
         let space = 0;
         let offsetX;
         let offsetY;
-        let levelNodeSpace = nodeSpace * Math.pow(2, (maxHeight || 5) - level)
+        let levelNodeSpace = nodeSpace * Math.pow(2, (maxHeight || 5) - level);
         if (level === 1) {
-            space = treePanelWidth / 2
+            space = treePanelWidth / 2;
             offsetX = space - circleR;
             offsetY = (level - 1) * levelOffset + circleR + strokeWidth;
         } else {
@@ -413,8 +432,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
 
                 </SVGText>
             </G>
-        )
-    }
+        );
+    };
 
 
     const VividGraphDrawer: React.FC<{ graph: AbstractGraph<any, any> }> = ({graph}) => {
@@ -427,12 +446,12 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
         let i = 0;
         vertices.forEach((vertex, id) => {
             const rowIndex = Math.floor(i / rowCount);
-            const colIndex = Math.floor(i % rowCount)
+            const colIndex = Math.floor(i % rowCount);
             const y = (rowIndex) * vertexDistance + circleR;
             const x = (rowIndex % 2 === 0 ? (colIndex + 1) : colIndex) * vertexDistance + circleR;
             coordsMap.set(vertex, new Coordinate(y, x));
             i++;
-        })
+        });
         return (
             <G>
                 {
@@ -458,7 +477,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                     </SVGText>
                                 </G>
                                 : null
-                        )
+                        );
                     })}
                 {
                     edges.map(edge => {
@@ -473,7 +492,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                         <Line
                                             x1={src.x} y1={src.y} x2={dest.x}
                                             y2={dest.y}/>
-                                    </G>
+                                    </G>;
                                 }
                             }
                         } else if (graph instanceof DirectedGraph) {
@@ -489,15 +508,15 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                         from={srcCod} to={destCod}
                                         weight={edge?.weight}
                                         delta={circleR}
-                                    />
+                                    />;
                                 }
                             }
                         }
                     })
                 }
             </G>
-        )
-    }
+        );
+    };
 
     const VividArray: React.FC<{ data: any[] }> = ({data}) => {
         return (
@@ -521,8 +540,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
 
                 }
             </View>
-        )
-    }
+        );
+    };
 
     const VividObject: React.FC<{ data: { [key in string]: any } }> = ({data}) => {
         return (
@@ -532,12 +551,12 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                         return <View style={styles.arrayItem} key={key}>
                             <Text>{key}</Text>
                             <Text>{data[key]}</Text>
-                        </View>
+                        </View>;
                     })
                 }
             </Row>
-        )
-    }
+        );
+    };
 
     const VividLinkedListNode: React.FC<{ data: SinglyLinkedListNode }> = ({data}) => {
         return (
@@ -547,8 +566,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     <Text>{data.value}</Text>
                 </View>
             </Row>
-        )
-    }
+        );
+    };
 
     // TODO
     const VividBinaryTreeNode: React.FC<{ data: BinaryTreeNode<any> }> = ({data}) => {
@@ -558,8 +577,8 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     <Text>{data.id}</Text>
                 </View>
             </Row>
-        )
-    }
+        );
+    };
 
     const VividBinarySearchTreeNode: React.FC<{ data: BinaryTreeNode<any> }> = ({data}) => {
         return (
@@ -568,11 +587,11 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                     <Text>{data.id}</Text>
                 </View>
             </Row>
-        )
-    }
+        );
+    };
 
     const renderVariable = (item: any) => {
-        if (!item) return null
+        if (!item) return null;
         switch (typeof item) {
             case 'number':
                 return <VividNumber data={item}/>;
@@ -580,7 +599,7 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 return <VividString data={item}/>;
             case 'object':
                 if (item instanceof TreeNode) {
-                    return <VividTree data={item}/>
+                    return <VividTree data={item}/>;
                 } else if (item instanceof AbstractGraph) {
                     return <VividGraph data={item}/>;
                 } else if (item instanceof BinaryTreeNode) {
@@ -588,18 +607,18 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                 } else if (item instanceof BinaryTree) {
                     return <VividBinaryTree node={item.root} maxHeight={item.getHeight()}/>;
                 } else if (item instanceof SinglyLinkedListNode) {
-                    return <VividLinkedListNode data={item}/>
+                    return <VividLinkedListNode data={item}/>;
                 } else if (item instanceof Map) {
-                    return <VividArray data={Array.from(item)}/>
+                    return <VividArray data={Array.from(item)}/>;
                 } else if (item instanceof Stack) {
-                    return <VividArray data={item.toArray()}/>
+                    return <VividArray data={item.toArray()}/>;
                 } else if (item instanceof Array) {
-                    return <VividArray data={item}/>
+                    return <VividArray data={item}/>;
                 } else {
                     return <VividObject data={item}/>;
                 }
         }
-    }
+    };
 
     return <View>
         {
@@ -618,10 +637,10 @@ export const VividAlgorithm = function <T extends { [key in string]: any }>(prop
                                 renderVariable(item)
                             }
                         </Card>
-                        : null
+                        : null;
 
                 })
                 : null
         }
-    </View>
-}
+    </View>;
+};

@@ -27,7 +27,7 @@ export const fallingSquaresMy = function (positions: number[][]): number[] {
     }
 
     return ans;
-}
+};
 
 // 36 Valid Sudoku
 // 0  0,0 ~ 2,2
@@ -42,7 +42,7 @@ export const fallingSquaresMy = function (positions: number[][]): number[] {
 export const isValidSudoku = function (board: string[][]): boolean {
     const subValid = (dotNums: number, size: number) => {
         return dotNums === 9 || dotNums === 1 && size === 9 || 10 - dotNums === size;
-    }
+    };
 
     const areBoxesValid = () => {
         for (let s = 0; s < 9; s++) {
@@ -61,7 +61,7 @@ export const isValidSudoku = function (board: string[][]): boolean {
             if (!subValid(dotNums, set.size)) return false;
         }
         return true;
-    }
+    };
 
     const areRowsValid = () => {
         for (let r = 0; r < 9; r++) {
@@ -76,7 +76,7 @@ export const isValidSudoku = function (board: string[][]): boolean {
             if (!subValid(dotNums, set.size)) return false;
         }
         return true;
-    }
+    };
 
     const areColsValid = () => {
         for (let c = 0; c < 9; c++) {
@@ -95,9 +95,9 @@ export const isValidSudoku = function (board: string[][]): boolean {
 
         }
         return true;
-    }
+    };
     return areRowsValid() && areColsValid() && areBoxesValid();
-}
+};
 
 // 37. Sudoku Solver
 function solveSudokuBruteForceFailed(board: string[][]): void {
@@ -107,7 +107,7 @@ function solveSudokuBruteForceFailed(board: string[][]): void {
             set.add(board[r][i]);
         }
         return set;
-    }
+    };
 
     const getColValidSet = (c: number) => {
         const set = new Set();
@@ -115,7 +115,7 @@ function solveSudokuBruteForceFailed(board: string[][]): void {
             set.add(board[i][c]);
         }
         return set;
-    }
+    };
 
     const getBoxValidSet = (r: number, c: number) => {
         let row1 = Math.floor(r / 3) * 3, row2 = row1 + 3, col1 = Math.floor(c / 3) * 3, col2 = col1 + 3;
@@ -126,7 +126,7 @@ function solveSudokuBruteForceFailed(board: string[][]): void {
             }
         }
         return set;
-    }
+    };
 
     const getPossible = (exists: Set<any>) => {
         const possible = [];
@@ -138,7 +138,7 @@ function solveSudokuBruteForceFailed(board: string[][]): void {
         }
         return possible;
 
-    }
+    };
     const fill = () => {
         for (let a = 0; a < 81; a++) {
             for (let i = 0; i < 9; i++) {
@@ -153,7 +153,7 @@ function solveSudokuBruteForceFailed(board: string[][]): void {
                 }
             }
         }
-    }
+    };
     fill();
 }
 
@@ -194,9 +194,9 @@ function subSetOfArray<T>(input: T[]): T[][] {
         accumulated.pop();
 
         dfs(index + 1, accumulated);
-    }
+    };
 
-    dfs(0, [])
+    dfs(0, []);
     return res;
 }
 
@@ -212,7 +212,7 @@ function partition(s: string): string[][] {
             r--;
         }
         return true;
-    }
+    };
 
     const dfs = (acml: string[], idx: number) => {
         if (idx === n) {
@@ -228,7 +228,7 @@ function partition(s: string): string[][] {
             }
 
         }
-    }
+    };
     dfs([], 0);
     return ans;
 }
@@ -259,7 +259,7 @@ function minimumTotal(triangle: number[][]): number {
 function rob(nums: number[]): number {
     const dp: number[] = [0, 0, 0];
     for (let i = 3; i < nums.length + 3; i++) {
-        const sum = Math.max(dp[i - 2], dp[i - 3]) + nums[i - 3]
+        const sum = Math.max(dp[i - 2], dp[i - 3]) + nums[i - 3];
         dp.push(sum);
     }
 
@@ -295,7 +295,7 @@ function wordBreakBruteForce(s: string, wordDict: string[]): boolean {
                 }
             }
         }
-    }
+    };
 
     dfs(s);
     return ans;
@@ -337,7 +337,7 @@ function wordBreakIIBruteForce(s: string, wordDict: string[]): string[] {
                 acc.pop();
             }
         }
-    }
+    };
 
     dfs(s, []);
     return ans;
@@ -366,7 +366,7 @@ function wordBreakIIDfsDPLoopWordDict(s: string, wordDict: string[]): string[] {
         }
         memo.set(sub, ret);
         return ret;
-    }
+    };
 
     return dfs(s);
 }
@@ -396,7 +396,7 @@ function wordBreakIIDfsDPLoopS(s: string, wordDict: string[]): string[] {
         }
         memo.set(sub, ret);
         return ret;
-    }
+    };
 
     return dfs(s);
 }
@@ -415,4 +415,4 @@ export const runAllWordBreakII = async () => {
 
     // await runAlgorithm(wordBreakIIDfsDPLoopS, false, ...breakWordIICase7);
     await runAlgorithm(wordBreakIIDfsDPLoopS, false, ...breakWordIICase8);
-}
+};

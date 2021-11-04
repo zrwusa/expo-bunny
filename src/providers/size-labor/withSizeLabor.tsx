@@ -2,13 +2,15 @@ import {useSizeLabor} from './useSizeLabor';
 import React from 'react';
 import {SizeLabor} from '../../types';
 
+console.log('useSizeLabor', useSizeLabor);
+
 export interface WithSizeLabor {
-    sizeLabor: SizeLabor
+    sizeLabor: SizeLabor;
 }
 
-export function withSizeLabor<T extends WithSizeLabor = WithSizeLabor>(
+export const withSizeLabor = <T extends WithSizeLabor = WithSizeLabor>(
     WrappedComponent: React.ComponentType<T>
-) {
+) => {
     // Try to create a nice displayName for React Dev Tools.
     const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
@@ -16,7 +18,6 @@ export function withSizeLabor<T extends WithSizeLabor = WithSizeLabor>(
     const ComponentWithSizeLabor = (props: Omit<T, keyof WithSizeLabor>) => {
         // Fetch the props you want to inject. This could be done with context instead.
         const sizeLabor = useSizeLabor();
-
         // props comes afterwards so the can override the default ones.
         return <WrappedComponent {...(props as T)} sizeLabor={sizeLabor}/>;
     };
@@ -24,4 +25,4 @@ export function withSizeLabor<T extends WithSizeLabor = WithSizeLabor>(
     ComponentWithSizeLabor.displayName = `withSizeLabor(${displayName})`;
 
     return ComponentWithSizeLabor;
-}
+};

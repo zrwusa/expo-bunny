@@ -1,6 +1,6 @@
-import React, {ReactNode} from 'react'
-import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import React, {ReactNode} from 'react';
+import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {ActionSheetProps, connectActionSheet} from '../../../packages/react-native-action-sheet/src';
 import {SizeLabor, ThemeLabor} from '../../types';
 
@@ -27,18 +27,18 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             backgroundColor: colors.transparent,
             textAlign: 'center',
         },
-    })
-}
+    });
+};
 
 export interface ActionsProps {
-    actionsConfig?: { [key: string]: (props: ActionsProps & ActionSheetProps & WithBunnyKit) => void }
-    actionOptionTintColor?: string
-    renderActionIcon?: () => ReactNode
-    actionWrapperStyle?: StyleProp<ViewStyle>
-    actionIconTextStyle?: StyleProp<TextStyle>
-    actionContainerStyle?: StyleProp<ViewStyle>
+    actionsConfig?: { [key: string]: (props: ActionsProps & ActionSheetProps & WithBunnyKit) => void };
+    actionOptionTintColor?: string;
+    renderActionIcon?: () => ReactNode;
+    actionWrapperStyle?: StyleProp<ViewStyle>;
+    actionIconTextStyle?: StyleProp<TextStyle>;
+    actionContainerStyle?: StyleProp<ViewStyle>;
 
-    onPressActionButton?(): void
+    onPressActionButton?(): void;
 }
 
 class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunnyKit> {
@@ -49,13 +49,13 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
         actionContainerStyle: {},
         actionIconTextStyle: {},
         actionWrapperStyle: {},
-    }
+    };
 
     onActionsPress = () => {
         // TODO support multi actions
-        const {actionsConfig, showActionSheetWithOptions} = this.props
-        const optionKeys = Object.keys(actionsConfig!)
-        const cancelButtonIndex = optionKeys.indexOf('Cancel')
+        const {actionsConfig, showActionSheetWithOptions} = this.props;
+        const optionKeys = Object.keys(actionsConfig!);
+        const cancelButtonIndex = optionKeys.indexOf('Cancel');
         showActionSheetWithOptions(
             {
                 options: optionKeys,
@@ -63,17 +63,17 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
                 tintColor: this.props.actionOptionTintColor,
             },
             (buttonIndex: number) => {
-                const key = optionKeys[buttonIndex]
+                const key = optionKeys[buttonIndex];
                 if (key) {
-                    actionsConfig![key](this.props)
+                    actionsConfig![key](this.props);
                 }
             },
-        )
-    }
+        );
+    };
 
     renderIcon() {
         if (this.props.renderActionIcon) {
-            return this.props.renderActionIcon()
+            return this.props.renderActionIcon();
         }
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
@@ -82,7 +82,7 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
             <View style={[styles.wrapper, this.props.actionWrapperStyle]}>
                 <Text style={[styles.iconText, this.props.actionIconTextStyle]}>+</Text>
             </View>
-        )
+        );
     }
 
     render() {
@@ -95,8 +95,8 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
             >
                 {this.renderIcon()}
             </TouchableOpacity>
-        )
+        );
     }
 }
 
-export default withBunnyKit(connectActionSheet(Actions))
+export default withBunnyKit(connectActionSheet(Actions));

@@ -3,7 +3,7 @@ import {Image, ImageSourcePropType, ImageStyle, ImageURISource, StyleProp} from 
 import {getStyles} from './styles';
 import {SizeKeys} from '../../types';
 import {ImageUploader, ImageUploaderProps} from '../ImageUploader';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 export interface AvatarProps {
     source: ImageSourcePropType,
@@ -21,7 +21,7 @@ export type SizeAvatarMap = {
 export function Avatar(props: AvatarProps) {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
-    const {size, source, style, shouldUpload = false, uploaderProps, isBorder = true} = props
+    const {size, source, style, shouldUpload = false, uploaderProps, isBorder = true} = props;
     const finalSize: SizeKeys = size || 'm';
     const sizeAvatarMap: SizeAvatarMap = {
         xxs: wp(16),
@@ -31,9 +31,9 @@ export function Avatar(props: AvatarProps) {
         l: wp(40),
         xl: wp(56),
         xxl: wp(78)
-    }
-    const borderDiff: number = isBorder ? wp(2) : 0
-    const borderWidth: number = isBorder ? wp(1) : 0
+    };
+    const borderDiff: number = isBorder ? wp(2) : 0;
+    const borderWidth: number = isBorder ? wp(1) : 0;
 
     return shouldUpload
         ?
@@ -63,5 +63,5 @@ export function Avatar(props: AvatarProps) {
             }, style]}
             width={sizeAvatarMap[finalSize]}
             height={sizeAvatarMap[finalSize]}
-            source={source}/>
+            source={source}/>;
 }

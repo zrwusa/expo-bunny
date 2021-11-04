@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text, View} from '../UI'
+import {Text, View} from '../UI';
 import {getStyles} from './styles';
 import {ActivityIndicator} from 'react-native';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 export function DemoLazyLoading() {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
@@ -12,6 +12,6 @@ export function DemoLazyLoading() {
             <ActivityIndicator size="large"/>
             <Text>Waiting fro lazy components</Text>
         </View>
-    )
+    );
 }
 

@@ -61,7 +61,7 @@ let majorityElement = function (nums: number[]) {
         }
     }
     return majority;
-}
+};
 // 153	Find Minimum in Rotated Sorted Array	★★	154
 const findMin = function (nums: number[]): number {
     const n = nums.length;
@@ -81,7 +81,7 @@ const findMin = function (nums: number[]): number {
     } else {
         return findMin(nums);
     }
-}
+};
 // 912	Sort an Array	★★★						merge sort
 // 307
 class NumArray {
@@ -113,7 +113,7 @@ const countSmallerNoReverse = function (nums: number[]): number[] {
     let positions: number[] = [];
 
     for (let i = nums.length - 1; i > -1; i--) {
-        positions.unshift(uniqueSorted.indexOf(nums[i]))
+        positions.unshift(uniqueSorted.indexOf(nums[i]));
     }
 
     // O(n)
@@ -123,7 +123,7 @@ const countSmallerNoReverse = function (nums: number[]): number[] {
             sum += freqs[i];
         }
         return sum;
-    }
+    };
 
     let ans: number[] = [];
     for (let i = nums.length - 1; i > -1; i--) {
@@ -132,7 +132,7 @@ const countSmallerNoReverse = function (nums: number[]): number[] {
     }
 
     return ans;
-}
+};
 
 const countSmallerBITPlagiarized = (nums: number[]): number[] => {
     const ranks = new Map<number, number>();
@@ -172,7 +172,7 @@ const countSmallerBIT = function (nums: number[]): number[] {
     }
 
     return ans.reverse();
-}
+};
 
 // TODO ,so far LeetCode gives cases that be sorted.The sorted cases cannot be solved by BST, because in
 //  sorted case BST will give a time complexity O(n^2)
@@ -199,12 +199,12 @@ const runAllCountSmaller = async () => {
     await runAlgorithm(countSmallerBIT, false, ...countSmallerCase4);
     await runAlgorithm(countSmallerBIT, false, ...countSmallerCase5);
     await runAlgorithm(countSmallerBIT, false, ...countSmallerCase7);
-}
+};
 // runAllCountSmaller().then()
 (async () => {
     // await runAlgorithm(countSmallerBIT, false, ...countSmallerCase8);
     // await runAlgorithm(countSmallerBST, false, ...countSmallerCase8);
-})()
+})();
 
 
 // 278 First Bad Version
@@ -284,7 +284,7 @@ function minEatingSpeed(piles: number[], h: number): number {
             needTime += Math.ceil(pile / k);
         }
         return needTime <= h;
-    }
+    };
 
 
     let l = 1, r = maxPile;

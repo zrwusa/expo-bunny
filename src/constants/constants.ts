@@ -30,7 +30,7 @@ const BunnyConstants = {
     fnNoop: () => undefined,
     fooInterval: setInterval((): void => undefined, 0),
     fooTimeout: setTimeout((): void => undefined, 0),
-}
+};
 
 export const defaultValues = {
     country: {
@@ -100,7 +100,7 @@ export const defaultValues = {
         definition: '',
         id: '',
     } as Religion
-}
+};
 
 
 export enum ESys {
@@ -250,14 +250,14 @@ export const EThemes: EnumThemeNames = {
     dark: 'dark',
     indigo: 'indigo',
     tinder: 'tinder'
-}
+};
 
 export const ELanguage = {
     en: 'en',
     zh: 'zh',
-}
+};
 
-export default BunnyConstants
+export default BunnyConstants;
 
 
 export const E_MONTH: Month = {
@@ -273,7 +273,7 @@ export const E_MONTH: Month = {
     October: 'October',
     November: 'November',
     December: 'December'
-}
+};
 
 export const EXCEPTIONAL_COLOR = {
     'transparent': {
@@ -284,7 +284,7 @@ export const EXCEPTIONAL_COLOR = {
         'RGBA': 'rgba(255,255,255,0)',
         'HSLA': 'hsla(255,100%,100%,0)'
     },
-}
+};
 
 export const STANDARD_COLOR_NAME_ALL = {
 
@@ -1416,4 +1416,4 @@ export const STANDARD_COLOR_NAME_ALL = {
         'RGBA': 'rgba(154,205,50,1)',
         'HSLA': 'hsla(80,60.8%,50%,1.000)'
     }
-}
+};

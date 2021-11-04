@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
     ActivityIndicator,
     Clipboard,
@@ -9,21 +9,21 @@ import {
     TouchableWithoutFeedback,
     View,
     ViewStyle,
-} from 'react-native'
+} from 'react-native';
 
-import QuickReplies, {QuickRepliesProps} from './QuickReplies'
+import QuickReplies, {QuickRepliesProps} from './QuickReplies';
 
-import MessageText, {MessageTextProps} from './MessageText'
-import MessageImage, {MessageImageProps} from './MessageImage'
-import MessageVideo, {MessageVideoProps} from './MessageVideo'
-import MessageAudio, {MessageAudioProps} from './MessageAudio'
+import MessageText, {MessageTextProps} from './MessageText';
+import MessageImage, {MessageImageProps} from './MessageImage';
+import MessageVideo, {MessageVideoProps} from './MessageVideo';
+import MessageAudio, {MessageAudioProps} from './MessageAudio';
 
-import Time, {TimeProps} from './Time'
+import Time, {TimeProps} from './Time';
 
-import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, PositionLeftOrRight, User,} from './types'
+import {isSameDay, isSameUser} from './utils';
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User,} from './types';
 import MessageSticker, {MessageStickerProps} from './MessageSticker';
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {ActionSheetProps, connectActionSheet} from '../../../packages/react-native-action-sheet/src';
 import {SizeLabor, ThemeLabor} from '../../types';
 
@@ -99,11 +99,11 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 marginHorizontal: wp(10),
             },
         }),
-    }
-}
+    };
+};
 
 // TODO need i18n
-const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
+const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel'];
 
 
 export interface BubbleProps<TMessage extends IMessage> extends MessageImageProps<TMessage>,
@@ -195,26 +195,26 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
         usernameStyle: {},
         containerToNextStyle: {},
         containerToPreviousStyle: {},
-    }
+    };
 
 
     onPress = () => {
         if (this.props.onPress) {
-            this.props.onPress(this.context, this.props.currentMessage)
+            this.props.onPress(this.context, this.props.currentMessage);
         }
-    }
+    };
 
     onLongPress = () => {
-        const {currentMessage} = this.props
+        const {currentMessage} = this.props;
         if (this.props.onLongPress) {
-            this.props.onLongPress(this.context, this.props.currentMessage)
+            this.props.onLongPress(this.context, this.props.currentMessage);
         } else if (currentMessage && currentMessage.text) {
-            const {textLongPressOptionTitles} = this.props
+            const {textLongPressOptionTitles} = this.props;
             const options =
                 textLongPressOptionTitles && textLongPressOptionTitles.length > 0
                     ? textLongPressOptionTitles.slice(0, 2)
-                    : DEFAULT_OPTION_TITLES
-            const cancelButtonIndex = options.length - 1
+                    : DEFAULT_OPTION_TITLES;
+            const cancelButtonIndex = options.length - 1;
             this.props.showActionSheetWithOptions(
                 {
                     options,
@@ -223,15 +223,15 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 (buttonIndex: number) => {
                     switch (buttonIndex) {
                         case 0:
-                            Clipboard.setString(currentMessage.text)
-                            break
+                            Clipboard.setString(currentMessage.text);
+                            break;
                         default:
-                            break
+                            break;
                     }
                 },
-            )
+            );
         }
-    }
+    };
 
     styledBubbleToNext() {
         const {
@@ -240,7 +240,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             position,
             containerToNextStyle,
             bunnyKit,
-        } = this.props
+        } = this.props;
 
         if (
             currentMessage &&
@@ -254,9 +254,9 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             return [
                 styles[position].containerToNext,
                 containerToNextStyle && containerToNextStyle[position],
-            ]
+            ];
         }
-        return null
+        return null;
     }
 
     styledBubbleToPrevious() {
@@ -266,7 +266,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             position,
             containerToPreviousStyle,
             bunnyKit
-        } = this.props
+        } = this.props;
         if (
             currentMessage &&
             previousMessage &&
@@ -279,16 +279,16 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             return [
                 styles[position].containerToPrevious,
                 containerToPreviousStyle && containerToPreviousStyle[position],
-            ]
+            ];
         }
-        return null
+        return null;
     }
 
     renderQuickReplies() {
         const {
             currentMessage,
             nextMessage,
-        } = this.props
+        } = this.props;
         if (currentMessage && currentMessage.quickReplies) {
             const {
                 onQuickReply,
@@ -297,7 +297,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 keepReplies,
                 renderQuickReplySend,
                 quickReplyStyle
-            } = this.props
+            } = this.props;
 
             const quickRepliesProps = {
                 currentMessage,
@@ -308,16 +308,16 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 keepReplies,
                 renderQuickReplySend,
                 quickReplyStyle
-            }
+            };
             if (this.props.renderQuickReplies) {
-                return this.props.renderQuickReplies(quickRepliesProps)
+                return this.props.renderQuickReplies(quickRepliesProps);
             }
             return (
                 <QuickReplies<TMessage> {...quickRepliesProps} />
                 // <QuickReplies {...quickRepliesProps} />
-            )
+            );
         }
-        return null
+        return null;
     }
 
     renderMessageText() {
@@ -355,14 +355,14 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageReadyForDisplay,
                 onMessageLoadError,
                 isDebug,
-            }
+            };
             if (this.props.renderMessageText) {
-                return this.props.renderMessageText(messageTextProps)
+                return this.props.renderMessageText(messageTextProps);
             }
-            return <MessageText<TMessage> {...messageTextProps} />
+            return <MessageText<TMessage> {...messageTextProps} />;
             // return <MessageText {...messageTextProps} />
         }
-        return null
+        return null;
     }
 
     renderMessageImage() {
@@ -380,7 +380,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageReadyForDisplay,
                 onMessageLoadError,
                 isDebug
-            } = this.props
+            } = this.props;
             const messageImageProps = {
                 messages,
                 currentMessage,
@@ -394,14 +394,14 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageReadyForDisplay,
                 onMessageLoadError,
                 isDebug
-            }
+            };
             if (this.props.renderMessageImage) {
-                return this.props.renderMessageImage(messageImageProps)
+                return this.props.renderMessageImage(messageImageProps);
             }
-            return <MessageImage<TMessage> {...messageImageProps} />
+            return <MessageImage<TMessage> {...messageImageProps} />;
             // return <MessageImage {...messageImageProps} />
         }
-        return null
+        return null;
     }
 
     renderMessageSticker() {
@@ -417,7 +417,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageReadyForDisplay,
                 onMessageLoadError,
                 isDebug
-            } = this.props
+            } = this.props;
             const messageStickerProps = {
                 currentMessage,
                 stickerContainerStyle,
@@ -429,14 +429,14 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageReadyForDisplay,
                 onMessageLoadError,
                 isDebug
-            }
+            };
             if (this.props.renderMessageSticker) {
-                return this.props.renderMessageSticker(messageStickerProps)
+                return this.props.renderMessageSticker(messageStickerProps);
             }
-            return <MessageSticker<TMessage> {...messageStickerProps} />
+            return <MessageSticker<TMessage> {...messageStickerProps} />;
             // return <MessageSticker {...messageStickerProps} />
         }
-        return null
+        return null;
     }
 
     renderMessageVideo() {
@@ -465,14 +465,14 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 onMessageReadyForDisplay,
                 onMessageLoadError,
                 isDebug
-            }
+            };
             if (this.props.renderMessageVideo) {
-                return this.props.renderMessageVideo(messageVideoProps)
+                return this.props.renderMessageVideo(messageVideoProps);
             }
-            return <MessageVideo<TMessage> {...messageVideoProps} />
+            return <MessageVideo<TMessage> {...messageVideoProps} />;
             // return <MessageVideo {...messageVideoProps} />
         }
-        return null
+        return null;
     }
 
     renderMessageAudio() {
@@ -512,20 +512,20 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 audioProgressColor,
                 audioRemainTimeStyle,
                 audioPlayButtonIconStyle,
-            }
+            };
             if (this.props.renderMessageAudio) {
-                return this.props.renderMessageAudio(messageAudioProps)
+                return this.props.renderMessageAudio(messageAudioProps);
             }
-            return <MessageAudio<TMessage> {...messageAudioProps} />
+            return <MessageAudio<TMessage> {...messageAudioProps} />;
             // return <MessageAudio {...messageAudioProps} />
         }
-        return null
+        return null;
     }
 
     renderTicks() {
-        const {currentMessage, renderTicks, user, bunnyKit} = this.props
+        const {currentMessage, renderTicks, user, bunnyKit} = this.props;
         if (renderTicks && currentMessage) {
-            return renderTicks(currentMessage)
+            return renderTicks(currentMessage);
         }
         if (
             currentMessage &&
@@ -533,7 +533,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             currentMessage.user &&
             currentMessage.user._id !== user._id
         ) {
-            return null
+            return null;
         }
         if (
             currentMessage &&
@@ -555,9 +555,9 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                         <ActivityIndicator color={'white'} size={wp(10)}/>
                     )}
                 </View>
-            )
+            );
         }
-        return null
+        return null;
     }
 
     renderTime() {
@@ -568,28 +568,28 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 timeContainerStyle,
                 timeFormat,
                 timeTextStyle
-            } = this.props
+            } = this.props;
             const timeProps = {
                 position,
                 currentMessage,
                 timeContainerStyle,
                 timeFormat,
                 timeTextStyle
-            }
+            };
             if (this.props.renderTime) {
-                return this.props.renderTime(timeProps)
+                return this.props.renderTime(timeProps);
             }
-            return <Time<TMessage> {...timeProps} />
+            return <Time<TMessage> {...timeProps} />;
             // return <Time {...timeProps} />
         }
-        return null
+        return null;
     }
 
     renderUsername() {
-        const {currentMessage, user, bunnyKit} = this.props
+        const {currentMessage, user, bunnyKit} = this.props;
         if (this.props.renderUsernameOnMessage && currentMessage) {
             if (user && currentMessage.user._id === user._id) {
-                return null
+                return null;
             }
             const {sizeLabor, themeLabor} = bunnyKit;
             const styles = getStyles(sizeLabor, themeLabor);
@@ -603,16 +603,16 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                         ~ {currentMessage.user.name}
                     </Text>
                 </View>
-            )
+            );
         }
-        return null
+        return null;
     }
 
     renderCustomView() {
         if (this.props.renderCustomView) {
-            return this.props.renderCustomView(this.props)
+            return this.props.renderCustomView(this.props);
         }
-        return null
+        return null;
     }
 
     renderBubbleContent() {
@@ -634,7 +634,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 {this.renderMessageAudio()}
                 {this.renderMessageText()}
             </View>
-        )
+        );
     }
 
     render() {
@@ -644,7 +644,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             bubbleWrapperStyle,
             bottomContainerStyle,
             bunnyKit
-        } = this.props
+        } = this.props;
         const {sizeLabor, themeLabor} = bunnyKit;
         const styles = getStyles(sizeLabor, themeLabor);
         return (
@@ -666,7 +666,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                         onPress={this.onPress}
                         onLongPress={this.onLongPress}
                         // @ts-ignore
-                        accessibilityTraits='text'
+                        accessibilityTraits="text"
                         {...this.props.touchableProps}
                     >
                         <View>
@@ -686,8 +686,8 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 </View>
                 {this.renderQuickReplies()}
             </View>
-        )
+        );
     }
 }
 
-export default withBunnyKit(connectActionSheet(Bubble))
+export default withBunnyKit(connectActionSheet(Bubble));

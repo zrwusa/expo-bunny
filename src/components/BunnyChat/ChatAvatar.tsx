@@ -1,9 +1,9 @@
-import React, {ReactNode} from 'react'
-import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
-import BunnyAvatar from './BunnyAvatar'
-import {isSameDay, isSameUser} from './utils'
-import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import React, {ReactNode} from 'react';
+import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native';
+import BunnyAvatar from './BunnyAvatar';
+import {isSameDay, isSameUser} from './utils';
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -37,26 +37,26 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 borderRadius: wp(18),
             },
         }),
-    }
-}
+    };
+};
 
 
 export interface ChatAvatarProps<TMessage extends IMessage> {
-    currentMessage?: TMessage
-    previousMessage?: TMessage
-    nextMessage?: TMessage
-    position: PositionLeftOrRight
-    renderAvatarOnTop?: boolean
-    showAvatarForEveryMessage?: boolean
-    avatarImageStyle?: LeftRightStyle<ImageStyle>
-    avatarContainerStyle?: LeftRightStyle<ViewStyle>
-    avatarTextStyle?: TextStyle
+    currentMessage?: TMessage;
+    previousMessage?: TMessage;
+    nextMessage?: TMessage;
+    position: PositionLeftOrRight;
+    renderAvatarOnTop?: boolean;
+    showAvatarForEveryMessage?: boolean;
+    avatarImageStyle?: LeftRightStyle<ImageStyle>;
+    avatarContainerStyle?: LeftRightStyle<ViewStyle>;
+    avatarTextStyle?: TextStyle;
 
-    renderAvatar?(props: Omit<ChatAvatarProps<TMessage>, 'renderAvatar'>): ReactNode
+    renderAvatar?(props: Omit<ChatAvatarProps<TMessage>, 'renderAvatar'>): ReactNode;
 
-    onPressAvatar?(user: User): void
+    onPressAvatar?(user: User): void;
 
-    onLongPressAvatar?(user: User): void
+    onLongPressAvatar?(user: User): void;
 }
 
 class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarProps<TMessage> & WithBunnyKit> {
@@ -73,17 +73,17 @@ class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarPr
         },
         onLongPressAvatar: () => {
         },
-    }
+    };
 
 
     renderAvatar() {
         if (this.props.renderAvatar) {
-            const {renderAvatar, ...avatarProps} = this.props
-            return this.props.renderAvatar(avatarProps)
+            const {renderAvatar, ...avatarProps} = this.props;
+            return this.props.renderAvatar(avatarProps);
         }
         if (this.props.currentMessage) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor)
+            const styles = getStyles(sizeLabor, themeLabor);
             return (
                 <BunnyAvatar
                     avatarStyle={
@@ -104,9 +104,9 @@ class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarPr
                         this.props.onLongPressAvatar(this.props.currentMessage!.user)
                     }
                 />
-            )
+            );
         }
-        return null
+        return null;
     }
 
     render() {
@@ -120,15 +120,15 @@ class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarPr
             previousMessage,
             nextMessage,
             avatarImageStyle,
-        } = this.props
-        const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
-        const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom'
+        } = this.props;
+        const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage;
+        const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom';
 
         if (renderAvatar === null) {
-            return null
+            return null;
         }
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor)
+        const styles = getStyles(sizeLabor, themeLabor);
 
         if (
             !showAvatarForEveryMessage &&
@@ -154,7 +154,7 @@ class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarPr
                         }
                     />
                 </View>
-            )
+            );
         }
 
         return (
@@ -167,8 +167,8 @@ class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarPr
             >
                 {this.renderAvatar()}
             </View>
-        )
+        );
     }
 }
 
-export default withBunnyKit(ChatAvatar)
+export default withBunnyKit(ChatAvatar);

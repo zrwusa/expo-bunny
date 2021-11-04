@@ -66,7 +66,7 @@ export class CachedImage extends React.Component<CashedImageProps, CashedImageSt
         const isImageReady = sourceState && sourceState?.uri;
         return isImageReady
             ? <RNImage source={sourceState} {...rest} />
-            : null
+            : null;
     }
 }
 

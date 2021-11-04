@@ -1,7 +1,7 @@
-import React from 'react'
-import {Platform, StyleSheet, TextInput, TextInputProps} from 'react-native'
-import {DEFAULT_PLACEHOLDER, MIN_COMPOSER_HEIGHT} from './Constant'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import React from 'react';
+import {Platform, StyleSheet, TextInput, TextInputProps} from 'react-native';
+import {DEFAULT_PLACEHOLDER, MIN_COMPOSER_HEIGHT} from './Constant';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -31,24 +31,24 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 web: wp(4),
             }),
         },
-    })
-}
+    });
+};
 
 export interface ComposerProps {
-    composerHeight?: number
-    text?: string
-    placeholder?: string
-    placeholderTextColor?: string
-    textInputProps?: Partial<TextInputProps>
-    textInputStyle?: TextInputProps['style']
-    textInputAutoFocus?: boolean
-    keyboardAppearance?: TextInputProps['keyboardAppearance']
-    multiline?: boolean
-    disableComposer?: boolean
+    composerHeight?: number;
+    text?: string;
+    placeholder?: string;
+    placeholderTextColor?: string;
+    textInputProps?: Partial<TextInputProps>;
+    textInputStyle?: TextInputProps['style'];
+    textInputAutoFocus?: boolean;
+    keyboardAppearance?: TextInputProps['keyboardAppearance'];
+    multiline?: boolean;
+    disableComposer?: boolean;
 
-    onTextChanged?(text: string): void
+    onTextChanged?(text: string): void;
 
-    onInputSizeChanged?(layout: { width: number; height: number }): void
+    onInputSizeChanged?(layout: { width: number; height: number }): void;
 }
 
 class Composer extends React.Component<ComposerProps & WithBunnyKit> {
@@ -68,17 +68,17 @@ class Composer extends React.Component<ComposerProps & WithBunnyKit> {
         },
         onInputSizeChanged: () => {
         },
-    }
+    };
 
 
-    layout?: { width: number; height: number } = undefined
+    layout?: { width: number; height: number } = undefined;
 
     onLayout = (e: any) => {
-        const {layout} = e.nativeEvent
+        const {layout} = e.nativeEvent;
 
         // Support earlier versions of React Native on Android.
         if (!layout) {
-            return
+            return;
         }
 
         if (
@@ -87,20 +87,20 @@ class Composer extends React.Component<ComposerProps & WithBunnyKit> {
                 (this.layout.width !== layout.width ||
                     this.layout.height !== layout.height))
         ) {
-            this.layout = layout
-            this.props.onInputSizeChanged!(this.layout!)
+            this.layout = layout;
+            this.props.onInputSizeChanged!(this.layout!);
         }
-    }
+    };
 
     onChangeText = (text: string) => {
         // TODO when this happens the MessageText rerenders,not sure is this necessary
-        this.props.onTextChanged!(text)
-    }
+        this.props.onTextChanged!(text);
+    };
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
-        const {placeholderTextColor = colors.placeholder} = this.props
+        const {placeholderTextColor = colors.placeholder} = this.props;
         return (
             <TextInput
                 testID={this.props.placeholder}
@@ -129,12 +129,12 @@ class Composer extends React.Component<ComposerProps & WithBunnyKit> {
                 autoFocus={this.props.textInputAutoFocus}
                 value={this.props.text}
                 enablesReturnKeyAutomatically
-                underlineColorAndroid='transparent'
+                underlineColorAndroid="transparent"
                 keyboardAppearance={this.props.keyboardAppearance}
                 {...this.props.textInputProps}
             />
-        )
+        );
     }
 }
 
-export default withBunnyKit(Composer)
+export default withBunnyKit(Composer);

@@ -174,7 +174,7 @@ export const runAlgorithm = async (algorithm: Function, output: boolean | 'strin
     const timeSpent = (performance ? performance.now() : new Date().getTime()) - startTime;
     bunnyConsole.log(algorithm.name, 'result -> ', output === 'stringify' ? JSON.stringify(result) : output ? result : '', 'time spent -> ', timeSpent.toFixed(2) + 'ms');
     return result;
-}
+};
 
 export const isOneDiffOrdered = (wordA: string, wordB: string) => {
     let diffCount = 0;
@@ -187,7 +187,7 @@ export const isOneDiffOrdered = (wordA: string, wordB: string) => {
         }
     }
     return true;
-}
+};
 
 export const isOneDiffOrderedPieced = (wordA: string, wordB: string) => {
     for (let i = 0, len = wordA.length; i < len; i++) {
@@ -199,7 +199,7 @@ export const isOneDiffOrderedPieced = (wordA: string, wordB: string) => {
         }
     }
     return false;
-}
+};
 
 // export const genOneDiffOrderedPieced = (wordA: string) => {
 //     const result = [];
@@ -251,7 +251,7 @@ export const isOneDiff = (word1: string, word2: string) => {
         }
     }
     return true;
-}
+};
 
 
 const searchInSortedArray = function (nums: number[], target: number) {
@@ -271,7 +271,7 @@ const searchInSortedArray = function (nums: number[], target: number) {
         }
     }
     return -1;
-}
+};
 
 
 export type Direction = 'up' | 'down' | 'left' | 'right';
@@ -306,7 +306,7 @@ export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, 
 
     if (matrix) {
         if (destinationY < 0 || destinationY > matrix.length - 1 || destinationX < 0 || destinationX > matrix[destinationY].length - 1) {
-            return undefined
+            return undefined;
         }
     }
 
@@ -318,14 +318,14 @@ export const fourthQuadrantMove = (departure: Coordinate, direction: Direction, 
         } else {
             for (let deadCell of judgeDeadOrDeadCells) {
                 if (destination.x === deadCell.x && destination.y === deadCell.y) {
-                    return undefined
+                    return undefined;
                 }
             }
         }
     }
 
     return destination;
-}
+};
 
 export type MatrixCell = [number, number]
 export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Direction, matrix?: Array<Array<number>>, judgeDeadOrDeadCells?: ((destination: MatrixCell) => boolean) | Array<MatrixCell>) => {
@@ -334,15 +334,15 @@ export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Dire
         right: [0, 1],
         down: [1, 0],
         left: [0, -1]
-    }
+    };
 
-    let newRow = departure[0] + directions[direction][0]
-    let newCol = departure[1] + directions[direction][1]
+    let newRow = departure[0] + directions[direction][0];
+    let newCol = departure[1] + directions[direction][1];
     const destination: MatrixCell = [newRow, newCol];
 
     if (matrix) {
         if (newRow < 0 || newRow > matrix.length - 1 || newCol < 0 || newCol > matrix[newRow].length - 1) {
-            return undefined
+            return undefined;
         }
     }
 
@@ -355,14 +355,14 @@ export const fourthQuadrantMoveByIndex = (departure: MatrixCell, direction: Dire
         } else {
             for (let deadCell of judgeDeadOrDeadCells) {
                 if (newRow === deadCell[0] && newCol === deadCell[1]) {
-                    return undefined
+                    return undefined;
                 }
             }
         }
     }
 
     return destination;
-}
+};
 
 
 export const getRouteByParentsHash = (parents: { [key in string]: Coordinate }, leaf: Coordinate, hashFunction: (cell: Coordinate) => string) => {
@@ -373,17 +373,17 @@ export const getRouteByParentsHash = (parents: { [key in string]: Coordinate }, 
         const curParent = parents[hashFunction(cur!)];
         if (curParent) {
             value.push(curParent);
-            route.push(curParent)
+            route.push(curParent);
         }
     }
     return route.reverse();
-}
+};
 
 export type HorizontalDirection = -1 | 1 | 0;
 export type VerticalDirection = 1 | -1 | 0;
 export const getDirectionVector = (from?: Coordinate, to?: Coordinate): { x: HorizontalDirection, y: VerticalDirection } => {
     if (!from || !to) {
-        return {x: 0, y: 0}
+        return {x: 0, y: 0};
     }
     let horizontal: HorizontalDirection;
     let vertical: VerticalDirection;
@@ -395,5 +395,5 @@ export const getDirectionVector = (from?: Coordinate, to?: Coordinate): { x: Hor
     if (to.y === from.y) {
         vertical = 0;
     }
-    return {x: horizontal, y: vertical}
-}
+    return {x: horizontal, y: vertical};
+};

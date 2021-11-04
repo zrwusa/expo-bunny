@@ -33,7 +33,7 @@ const runAllFindKthLargest = async () => {
     await runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase2);
     await runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase3);
     await runAlgorithm(findKthLargestMinHeap, false, ...findKthLargestCase9);
-}
+};
 
 // runAllFindKthLargest().then();
 
@@ -72,7 +72,7 @@ function mergeKLists(lists: SinglyLinkedListNode[]): SinglyLinkedListNode | null
 const runAllMergeKLists = async () => {
     await runAlgorithm(mergeKLists, false, ...mergeKListsCase1);
     await runAlgorithm(mergeKLists, false, ...mergeKListsCase2);
-}
+};
 
 // runAllMergeKLists().then();
 
@@ -107,7 +107,7 @@ function topKFrequent(nums: number[], k: number): number[] {
 
     }
 
-    return heap.toArray().map(item => item.val![0])
+    return heap.toArray().map(item => item.val![0]);
 }
 
 function topKFrequentByBucket(nums: number[], k: number): number[] {
@@ -147,7 +147,7 @@ function topKFrequentByBucket(nums: number[], k: number): number[] {
 const runAllTopKFrequent = async () => {
     await runAlgorithm(topKFrequent, false, ...topKFrequentCase1);
     await runAlgorithm(topKFrequentByBucket, false, ...topKFrequentCase1);
-}
+};
 
 // runAllTopKFrequent().then();
 //253
@@ -209,8 +209,8 @@ function medianFind() {
 }
 
 const runAllMedianFind = async () => {
-    await runAlgorithm(medianFind, false)
-}
+    await runAlgorithm(medianFind, false);
+};
 
 // runAllMedianFind().then();
 
@@ -240,7 +240,7 @@ function reorganizeString(s: string): string {
         const conveyor: string[][] = [];
         const peek = heap.poll();
         for (let i = 0; i < peek!.id; i++) {
-            conveyor.push([peek!.val![0]])
+            conveyor.push([peek!.val![0]]);
         }
         let processCount = 0;
         while (heap.size() > 0) {
@@ -256,7 +256,7 @@ function reorganizeString(s: string): string {
         const needOrderedCount = conveyor.length - processCount % conveyor.length;
 
         for (let m = 0; m < needOrderedCount; m++) {
-            conveyor.push(conveyor.shift()!)
+            conveyor.push(conveyor.shift()!);
         }
         ans = conveyor.join().replaceAll(',', '');
     }
@@ -265,7 +265,7 @@ function reorganizeString(s: string): string {
 
 const runAllReorganizeString = async () => {
     await runAlgorithm(reorganizeString, false, ...reorganizeStringCase1);
-}
+};
 
 // runAllReorganizeString().then();
 
@@ -304,11 +304,11 @@ const testKthLargest = () => {
     console.log('kthLargest.add(10)', kthLargest.add(10));
     console.log('kthLargest.add(9)', kthLargest.add(9));
     console.log('kthLargest.add(4)', kthLargest.add(4));
-}
+};
 
 const runAllKthLargest = async () => {
     await runAlgorithm(testKthLargest, false);
-}
+};
 
 // runAllKthLargest().then();
 
@@ -321,9 +321,9 @@ const testHeap1 = () => {
     minHeap.poll();
     minHeap.poll();
     console.log(minHeap.toArray());
-    console.log(MinHeap.heapify([3, 2, 1, 5, 6, 7, 8, 9, 10]).toArray())
-    return
-}
+    console.log(MinHeap.heapify([3, 2, 1, 5, 6, 7, 8, 9, 10]).toArray());
+    return;
+};
 
 const testHeap2 = () => {
     // const maxHeap = new MaxHeap<number>([5, 2, 3, 4, 6, 1]);
@@ -336,7 +336,7 @@ const testHeap2 = () => {
     maxHeap.poll();
     console.log(maxHeap.toArray());
     console.log(MaxHeap.heapify([3, 2, 1, 5, 6, 7, 8, 9, 10]).toArray());
-}
+};
 
 const testHeap3 = () => {
     const heapSortTest = new MinHeap<HeapNode<number>, number>([new HeapNode<number>(2, 2), new HeapNode<number>(5), new HeapNode<number>(8), new HeapNode<number>(3), new HeapNode<number>(1), new HeapNode<number>(6, 6), new HeapNode<number>(7), new HeapNode<number>(4)]);
@@ -346,7 +346,7 @@ const testHeap3 = () => {
     console.log('DFS inOrder id', heapSortTest.DFS('in', 'id'));
     console.log('DFS inOrder val', heapSortTest.DFS('in', 'val'));
     console.log('DFS preOrder val', heapSortTest.DFS('pre', 'val'));
-}
+};
 
 // const runAllTestHeap = async () => {
 //     await runAlgorithm(testHeap1, false);
@@ -363,5 +363,5 @@ export const testHeap = () => {
     const maxHeap = new MaxHeap([3, 2, 4, 5, 1, 9]);
     console.log(maxHeap.sort());
     console.log(maxHeap.sort());
-}
+};
 /* --- end heap --- */

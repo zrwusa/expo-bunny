@@ -1,8 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
-import {authLaborContext} from '../providers/auth-labor';
+import {authLaborContext} from '../providers';
 import {checkNomicsAPIProtocol, getApiInstanceConfig} from './index';
 import {NomicsAPIProtocolResponseData} from '../types';
-import bunnyAPI from './bunny-api';
+import {bunnyAPI} from './bunny-api';
 
 export const defaultNomicsAPIResponseData = {
     'httpExtra': {
@@ -25,33 +25,33 @@ export const defaultNomicsAPIResponseData = {
     },
     'successData': null,
     'timeSpent': 0
-}
+};
 
-const nomicsAPI = axios.create(getApiInstanceConfig('nomics'));
+export const nomicsAPI = axios.create(getApiInstanceConfig('nomics'));
 
 nomicsAPI.interceptors.request.use(
     async (config) => {
         const {accessToken} = await authLaborContext.authFunctions.getPersistenceAuth();
         // "Accept": "application/json",
         // "Content-Type": "application/x-www-form-urlencoded"
-        config.headers['Content-Type'] = 'application/json'
+        config.headers['Content-Type'] = 'application/json';
         if (accessToken) {
-            config.headers['Authorization'] = `Bearer ${accessToken}`
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
     },
     async error => {
-        return Promise.reject(error)
+        return Promise.reject(error);
     });
 
 nomicsAPI.interceptors.response.use(
     (response: AxiosResponse<NomicsAPIProtocolResponseData<any>>) => {
         // status 200-300
         if (!checkNomicsAPIProtocol(response.data)) {
-            response.data = defaultNomicsAPIResponseData
+            response.data = defaultNomicsAPIResponseData;
         }
-        response.data = response.data.successData
-        return response
+        response.data = response.data.successData;
+        return response;
     },
     async (error) => {
         const {response, request, config} = error;
@@ -60,23 +60,23 @@ nomicsAPI.interceptors.response.use(
             const {status, data} = response;
             switch (status) {
                 case 401:
-                    const {businessLogic} = data
-                    const {errorCode} = businessLogic
+                    const {businessLogic} = data;
+                    const {errorCode} = businessLogic;
                     if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005', 'BL_BUNNY_012'].includes(errorCode)) {
                         const {authFunctions} = authLaborContext;
                         const {bunnyRefreshAuth, logOut} = authFunctions;
                         try {
-                            const {success} = await bunnyRefreshAuth()
+                            const {success} = await bunnyRefreshAuth();
                             if (!success) {
-                                await logOut('API')
+                                await logOut('API');
                             } else {
                                 const originalRequest = config;
                                 originalRequest._retry = true;
                                 return bunnyAPI(originalRequest);
                             }
                         } catch (e) {
-                            await logOut('API')
-                            throw e
+                            await logOut('API');
+                            throw e;
                         }
                     }
                     break;
@@ -84,14 +84,14 @@ nomicsAPI.interceptors.response.use(
                     break;
             }
             if (checkNomicsAPIProtocol(response.data)) {
-                throw error
+                throw error;
             }
         } else if (request) {
             // status 100-200 timeout The request was made but no response was received, `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js
             throw error;
         } else {
             // Something happened in setting up the request and triggered an error
-            throw error
+            throw error;
         }
     });
 

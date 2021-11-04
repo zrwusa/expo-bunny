@@ -14,10 +14,10 @@ import {
     View
 } from 'react-native';
 import {Button, Pressable, Text, TextInput, TouchableOpacity} from '../../../components/UI';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../../providers';
 import {getContainerStyles, Row} from '../../../containers';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 function RNHome() {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
@@ -47,7 +47,7 @@ function RNHome() {
         touchableHighlightStyles,
         touchableOpacityStyles,
         touchableWithoutFeedbackStyles,
-    } = getStyles(sizeLabor, themeLabor)
+    } = getStyles(sizeLabor, themeLabor);
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
 
@@ -61,8 +61,8 @@ function RNHome() {
             return setStyleStatusBar(styleTypes[0]);
         }
         return setStyleStatusBar(styleTypes[styleId]);
-    }
-    const uselessPlaceholder = st(`uselessPlaceholder`)
+    };
+    const uselessPlaceholder = st(`uselessPlaceholder`);
     const [textInputValue, onChangeText] = React.useState(uselessPlaceholder);
     const [touchableHighlightCount, setTouchableHighlightCount] = useState(0);
     const onTouchableHighlightPress = () => setTouchableHighlightCount(touchableHighlightCount + 1);

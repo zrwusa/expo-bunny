@@ -246,7 +246,7 @@ const socialMediaImages = [
         'text': 'Sed nisi odio. Temporibus reprehenderit officiis nemo.',
         'uri': 'https://i.pinimg.com/236x/46/99/c8/4699c803a6577db55ffc7726c3a0bdb5.jpg'
     }
-]
+];
 export const migrateSocialMediaImages = async () => {
     for (const socialMediaImage of socialMediaImages) {
         await firebase
@@ -255,4 +255,4 @@ export const migrateSocialMediaImages = async () => {
             .doc(socialMediaImage._id)
             .set(socialMediaImage);
     }
-}
+};

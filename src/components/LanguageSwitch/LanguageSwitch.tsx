@@ -12,7 +12,7 @@ export function LanguageSwitch() {
         value={language === ELanguage.en}
         onValueChange={async (value) => {
             const lang = value ? ELanguage.zh : ELanguage.en;
-            await i18n.changeLanguage(lang)
+            await i18n.changeLanguage(lang);
             await AsyncStorage.setItem(BunnyConstants.LANGUAGE_TYPE_PERSISTENCE_KEY, lang);
-        }}/>
+        }}/>;
 }

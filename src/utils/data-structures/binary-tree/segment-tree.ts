@@ -112,7 +112,7 @@ export class SegmentTree {
                 dfs(cur.right!, index, sum, val);
             }
             cur.sum = cur.left!.sum + cur.right!.sum;
-        }
+        };
 
         dfs(root, index, sum);
     }
@@ -135,7 +135,7 @@ export class SegmentTree {
             } else {
                 return dfs(cur.left!, i, mid) + dfs(cur.right!, mid + 1, j);
             }
-        }
+        };
         return dfs(root, indexA, indexB);
     }
 }

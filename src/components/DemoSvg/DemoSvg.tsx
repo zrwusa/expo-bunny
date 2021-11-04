@@ -1,15 +1,14 @@
 import React from 'react';
-import {View} from '../UI'
+import {View} from '../UI';
 import {getStyles} from './styles';
 import Svg, {Circle, Rect, SvgUri} from 'react-native-svg';
-import SVGR from './SVGR'
+import SVGR from './SVGR';
 // import SvgLocalFileXML from "./SvgLocalFileXML"
 import {Platform} from 'react-native';
-import {useThemeLabor} from '../../providers/theme-labor';
-import {useSizeLabor} from '../../providers/size-labor';
+import {useSizeLabor, useThemeLabor} from '../../providers';
 
 export const DemoSvg = () => {
-    const sizeLabor = useSizeLabor()
+    const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const styles = getStyles(sizeLabor, themeLabor);
     return (
@@ -45,5 +44,5 @@ export const DemoSvg = () => {
             <SVGR height="100" width="100"/>
             {/*<SvgLocalFileXML/>*/}
         </View>
-    )
-}
+    );
+};

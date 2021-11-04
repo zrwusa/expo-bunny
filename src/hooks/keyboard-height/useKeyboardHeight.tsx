@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {Keyboard, KeyboardEvent} from 'react-native';
 
 export interface UseKeyboardHeight {
-    currentHeight: number
+    currentHeight: number;
 }
 
 export const useKeyboardHeight = (): UseKeyboardHeight => {
@@ -27,3 +27,4 @@ export const useKeyboardHeight = (): UseKeyboardHeight => {
 
     return {currentHeight: keyboardHeight};
 };
+export default useKeyboardHeight;

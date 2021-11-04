@@ -1,7 +1,7 @@
-import React from 'react'
-import {Image, ImageStyle, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View,} from 'react-native'
-import {User} from './types'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import React from 'react';
+import {Image, ImageStyle, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View,} from 'react-native';
+import {User} from './types';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 
@@ -25,17 +25,17 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             backgroundColor: colors.transparent,
             fontWeight: '100',
         },
-    })
-}
+    });
+};
 
 export interface GiftedAvatarProps {
-    user?: User
-    avatarStyle?: StyleProp<ImageStyle>
-    textStyle?: StyleProp<TextStyle>
+    user?: User;
+    avatarStyle?: StyleProp<ImageStyle>;
+    textStyle?: StyleProp<TextStyle>;
 
-    onPress?(props: any): void
+    onPress?(props: any): void;
 
-    onLongPress?(props: any): void
+    onLongPress?(props: any): void;
 }
 
 class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
@@ -45,26 +45,26 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
         onLongPress: undefined,
         avatarStyle: {},
         textStyle: {},
-    }
+    };
 
 
-    avatarName?: string = undefined
-    avatarColor?: string = undefined
+    avatarName?: string = undefined;
+    avatarColor?: string = undefined;
 
     setAvatarColor() {
-        const userName = (this.props.user && this.props.user.name) || ''
-        const name = userName.toUpperCase().split(' ')
+        const userName = (this.props.user && this.props.user.name) || '';
+        const name = userName.toUpperCase().split(' ');
         if (name.length === 1) {
-            this.avatarName = `${name[0].charAt(0)}`
+            this.avatarName = `${name[0].charAt(0)}`;
         } else if (name.length > 1) {
-            this.avatarName = `${name[0].charAt(0)}${name[1].charAt(0)}`
+            this.avatarName = `${name[0].charAt(0)}${name[1].charAt(0)}`;
         } else {
-            this.avatarName = ''
+            this.avatarName = '';
         }
 
-        let sumChars = 0
+        let sumChars = 0;
         for (let i = 0; i < userName.length; i += 1) {
-            sumChars += userName.charCodeAt(i)
+            sumChars += userName.charCodeAt(i);
         }
 
         // inspired by https://github.com/wbinnssmith/react-user-avatar
@@ -77,35 +77,35 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
             '#e74c3c',
             '#1abc9c',
             '#2c3e50',
-        ]
+        ];
 
-        this.avatarColor = colors[sumChars % colors.length]
+        this.avatarColor = colors[sumChars % colors.length];
     }
 
     renderAvatar() {
-        const {user} = this.props
+        const {user} = this.props;
         if (user) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
             const styles = getStyles(sizeLabor, themeLabor);
             if (typeof user.avatar === 'function') {
-                return user.avatar([styles.avatarStyle, this.props.avatarStyle])
+                return user.avatar([styles.avatarStyle, this.props.avatarStyle]);
             } else if (typeof user.avatar === 'string') {
                 return (
                     <Image
                         source={{uri: user.avatar}}
                         style={[styles.avatarStyle, this.props.avatarStyle]}
                     />
-                )
+                );
             } else if (typeof user.avatar === 'number') {
                 return (
                     <Image
                         source={user.avatar}
                         style={[styles.avatarStyle, this.props.avatarStyle]}
                     />
-                )
+                );
             }
         }
-        return null
+        return null;
     }
 
     renderInitials() {
@@ -115,18 +115,18 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
             <Text style={[styles.textStyle, this.props.textStyle]}>
                 {this.avatarName}
             </Text>
-        )
+        );
     }
 
     handleOnPress = () => {
-        const {onPress, ...other} = this.props
+        const {onPress, ...other} = this.props;
         if (this.props.onPress) {
-            this.props.onPress(other)
+            this.props.onPress(other);
         }
-    }
+    };
 
     handleOnLongPress = () => {
-    }
+    };
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
@@ -145,9 +145,9 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
                         this.props.avatarStyle,
                     ]}
                     // @ts-ignore
-                    accessibilityTraits='image'
+                    accessibilityTraits="image"
                 />
-            )
+            );
         }
         if (this.props.user.avatar) {
             return (
@@ -156,14 +156,14 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
                     onPress={this.props.onPress}
                     onLongPress={this.props.onLongPress}
                     // @ts-ignore
-                    accessibilityTraits='image'
+                    accessibilityTraits="image"
                 >
                     {this.renderAvatar()}
                 </TouchableOpacity>
-            )
+            );
         }
 
-        this.setAvatarColor()
+        this.setAvatarColor();
 
         return (
             <TouchableOpacity
@@ -176,12 +176,12 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
                     this.props.avatarStyle,
                 ]}
                 // @ts-ignore
-                accessibilityTraits='image'
+                accessibilityTraits="image"
             >
                 {this.renderInitials()}
             </TouchableOpacity>
-        )
+        );
     }
 }
 
-export default withBunnyKit(BunnyAvatar)
+export default withBunnyKit(BunnyAvatar);

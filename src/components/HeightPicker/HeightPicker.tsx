@@ -1,9 +1,8 @@
 import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import * as React from 'react';
 import {useState} from 'react';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 import {getSharedStyles} from '../../helpers';
 import {getStyles} from './styles';
 
@@ -25,17 +24,17 @@ export const HeightPicker = (props: HeightPickerProps) => {
     } = props;
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
-    const [height, setHeight] = useState(initialHeight)
+    const [height, setHeight] = useState(initialHeight);
 
     const _reset = () => {
 
-    }
+    };
 
     return <View style={[styles.container]}>
         <View style={styles.header}>
             <Row>
                 <Col><TextButton onPress={() => {
-                    onCancel?.()
+                    onCancel?.();
                 }}><IcoMoon name="x"/></TextButton></Col>
                 <Col align="center"><Text>{title}</Text></Col>
                 <Col align="flex-end"><TextButton onPress={_reset}><Text
@@ -49,8 +48,8 @@ export const HeightPicker = (props: HeightPickerProps) => {
         </View>
         <View style={[styles.footer]}>
             <ButtonTO onPress={() => {
-                onDone?.(height)
+                onDone?.(height);
             }}><InButtonText>Done</InButtonText></ButtonTO>
         </View>
-    </View>
-}
+    </View>;
+};

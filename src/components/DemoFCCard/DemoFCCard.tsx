@@ -12,5 +12,5 @@ const DemoFCCard: React.FC<Props> = ({title, paragraph, children}) => {
         {/*we can use children even though we haven't defined them in our FCCardProps*/}
         {children}
     </View>);
-}
+};
 export default DemoFCCard;

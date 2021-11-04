@@ -1,21 +1,19 @@
 import {ActivityIndicator, TextInput, View} from 'react-native';
 import * as React from 'react';
-import {InputCard} from '../../containers/InputCard';
+import {InputCard, Row} from '../../containers';
 import {InButtonText, LinearGradientButton, Text, TextInputIcon} from '../UI';
 import {LinearGradientIcon} from '../LinearGradientIcon';
-import {Row} from '../../containers/Row';
 import * as FirebaseRecaptcha from 'expo-firebase-recaptcha';
 import {FIREBASE_CONFIG} from '../../firebase';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey, useAuthLabor} from '../../providers';
 import {getStyles} from './styles';
-import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useDispatch} from 'react-redux';
 import {collectBLResult} from '../../store/actions';
 import {navToReference} from '../../helpers';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 type FirebasePhoneLoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type FirebasePhoneLoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -29,8 +27,8 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
     const styles = getStyles(sizeLabor, themeLabor);
-    const {authFunctions} = useAuthLabor()
-    const dispatch = useDispatch()
+    const {authFunctions} = useAuthLabor();
+    const dispatch = useDispatch();
 
     const recaptchaVerifier = React.useRef<FirebaseRecaptcha.FirebaseRecaptchaVerifierModal>(null);
     const verificationCodeTextInput = React.useRef<TextInput>(null);
@@ -50,39 +48,39 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
         try {
             const result = await authFunctions.firebaseSendOTP(phoneNumber,
                 // @ts-ignore
-                recaptchaVerifier.current)
+                recaptchaVerifier.current);
             if (result.success) {
-                const {verificationId} = result.data
+                const {verificationId} = result.data;
                 setVerifyInProgress(false);
                 setVerificationId(verificationId);
                 verificationCodeTextInput.current?.focus();
             } else {
-                dispatch(collectBLResult(result))
+                dispatch(collectBLResult(result));
             }
         } catch ({message}) {
             setVerifyError(message);
             setVerifyInProgress(false);
         }
-    }
+    };
     const firebaseConfirmOTP = async () => {
         setConfirmError('');
         setConfirmInProgress(true);
         try {
-            const result = await authFunctions.firebaseConfirmOTP(verificationId, verificationCode, true)
+            const result = await authFunctions.firebaseConfirmOTP(verificationId, verificationCode, true);
             if (result.success) {
                 setConfirmInProgress(false);
                 setVerificationId('');
                 setVerificationCode('');
                 verificationCodeTextInput.current?.clear();
-                navToReference(route, navigation)
+                navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result))
+                dispatch(collectBLResult(result));
             }
         } catch ({message}) {
             setConfirmError(message);
             setConfirmInProgress(false);
         }
-    }
+    };
     return <View>
         <View style={styles.contentPhone}>
             <InputCard title={st(`enterPhoneNumber`)}>
@@ -95,7 +93,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                     editable={!verificationId}
                     onChangeText={(phoneNumber: string) => setPhoneNumber(phoneNumber)}
                     renderIcon={() => {
-                        return <LinearGradientIcon name="phone" size={wp(20)}/>
+                        return <LinearGradientIcon name="phone" size={wp(20)}/>;
                     }}
                 />
             </InputCard>
@@ -125,7 +123,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                     placeholder={t(`placeholders.otp`)}
                     onChangeText={(verificationCode: string) => setVerificationCode(verificationCode)}
                     renderIcon={() => {
-                        return <LinearGradientIcon name="sort-numerically-outline" size={wp(20)}/>
+                        return <LinearGradientIcon name="sort-numerically-outline" size={wp(20)}/>;
                     }}
                 />
             </InputCard>
@@ -147,5 +145,5 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                 </Text>
             </View>
         )}
-    </View>
-}
+    </View>;
+};

@@ -2,11 +2,11 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {demoHello} from '../../store/actions';
 import {Button, Text, View} from '../../components/UI';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../providers';
 import {getContainerStyles} from '../../containers';
 import {RootState} from '../../types';
 import {getSharedStyles} from '../../helpers';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 function DemoFCReduxHookScreen() {
     const {sizeLabor, themeLabor, t} = useBunnyKit();

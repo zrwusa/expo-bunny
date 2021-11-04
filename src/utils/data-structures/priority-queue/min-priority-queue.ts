@@ -12,7 +12,7 @@ import {HeapNode, MinHeap} from '../heap';
  * @extends PriorityQueue
  */
 export class MinPriorityQueue<T> extends PriorityQueue<T> {
-    protected _heap: MinHeap<HeapNode<T>, T>
+    protected _heap: MinHeap<HeapNode<T>, T>;
 
     constructor(options?: PriorityQueueOptions<T>) {
         super(options);

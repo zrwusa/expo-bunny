@@ -53,7 +53,7 @@ export class Trie {
             }
 
         }
-        const target = node.keys.get(input)
+        const target = node.keys.get(input);
         return !!(target && target.isEnd);
     }
 
@@ -71,7 +71,7 @@ export class Trie {
                 word.length > 0 && words.push(word);
             }
 
-        }
+        };
         search(this._root, '');
         return words.length > 0 ? words : null;
     }

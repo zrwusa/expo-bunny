@@ -13,4 +13,4 @@ export const migrateReligions = async () => {
     //             .set(religion)
     //     }
     // }
-}
+};

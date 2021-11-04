@@ -3,10 +3,10 @@ import {ButtonTO, InButtonText, View} from '../../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {DemoNestedLv2StackParam} from '../../../../types';
-import {shortenTFunctionKey} from '../../../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../../../providers';
 import {getContainerStyles} from '../../../../containers';
 import {getSharedStyles} from '../../../../helpers';
-import {useBunnyKit} from '../../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../../hooks';
 
 type NestedLv2HomeRouteProp = RouteProp<DemoNestedLv2StackParam, 'NestedLv2Home'>;
 type NestedLv2HomeNavigationProp = StackNavigationProp<DemoNestedLv2StackParam, 'NestedLv2Settings'>;

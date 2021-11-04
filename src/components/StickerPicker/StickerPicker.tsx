@@ -1,5 +1,5 @@
 // TODO crash when large gif images loaded
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {useKeyboardHeight} from '../../hooks/keyboard-height';
@@ -17,20 +17,20 @@ export interface StickerPickerProps {
 }
 
 export const StickerPicker = ({isShow = false, onValueChanged, quality = 'MEDIUM'}: StickerPickerProps) => {
-    const {sizeLabor, themeLabor} = useBunnyKit()
-    const {currentHeight} = useKeyboardHeight()
-    const [stickers, setStickers] = useState<Sticker[]>([])
+    const {sizeLabor, themeLabor} = useBunnyKit();
+    const {currentHeight} = useKeyboardHeight();
+    const [stickers, setStickers] = useState<Sticker[]>([]);
     const firebase = useFirebase();
-    const styles = getStyles(sizeLabor, themeLabor)
-    const isMounted = useRef(false)
+    const styles = getStyles(sizeLabor, themeLabor);
+    const isMounted = useRef(false);
 
     const qualityMap: { [key in Quality]: string } = {
         LOW: 'ShaunTheSheep128/',
         MEDIUM: 'ShaunTheSheep256/',
         HIGH: 'ShaunTheSheep/'
-    }
+    };
 
-    const shaunTheSheepRef = firebase.storage().ref(qualityMap[quality])
+    const shaunTheSheepRef = firebase.storage().ref(qualityMap[quality]);
 
     useEffect(() => {
         isMounted.current = true;
@@ -41,20 +41,20 @@ export const StickerPicker = ({isShow = false, onValueChanged, quality = 'MEDIUM
             // }
             // setStickers(stickers)
 
-            const allStickerRef = await shaunTheSheepRef.listAll()
+            const allStickerRef = await shaunTheSheepRef.listAll();
 
             const stickers = await Promise.all(allStickerRef.items.map(async (stickerRef) => {
-                const url = await stickerRef.getDownloadURL()
-                return {id: stickerRef.fullPath, url}
-            }))
+                const url = await stickerRef.getDownloadURL();
+                return {id: stickerRef.fullPath, url};
+            }));
 
-            isMounted.current && setStickers(stickers)
+            isMounted.current && setStickers(stickers);
         })();
 
         return () => {
             isMounted.current = false;
-        }
-    }, [])
+        };
+    }, []);
 
     return isShow
         ? <View style={{height: currentHeight || 346}}>
@@ -63,15 +63,15 @@ export const StickerPicker = ({isShow = false, onValueChanged, quality = 'MEDIUM
                     stickers.map((sticker => {
                         return <View key={sticker.id}>
                             <TouchableOpacity onPress={async () => {
-                                onValueChanged && onValueChanged(sticker.url)
+                                onValueChanged && onValueChanged(sticker.url);
                             }}>
                                 {/*<Image style={styles.stickerImage} source={{uri: sticker.url}}/>*/}
                                 <CachedImage style={styles.stickerImage} source={{uri: sticker.url}}/>
                             </TouchableOpacity>
-                        </View>
+                        </View>;
                     }))
                 }
             </ScrollView>
         </View>
-        : null
-}
+        : null;
+};

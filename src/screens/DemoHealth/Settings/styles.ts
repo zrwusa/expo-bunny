@@ -6,7 +6,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
-    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     return StyleSheet.create({
         container: {padding: wp(16)},
         label: {
@@ -17,4 +17,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             alignItems: 'flex-end'
         }
     });
-}
+};

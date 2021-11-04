@@ -1,1 +1,1 @@
-export * from './Algorithm'
+export * from './Algorithm';

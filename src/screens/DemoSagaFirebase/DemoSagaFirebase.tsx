@@ -9,29 +9,29 @@ import {useFirebaseConnect} from 'react-redux-firebase';
 import {getStyles} from './styles';
 import {randomText} from '../../utils';
 import {FlatList} from 'react-native';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {shortenTFunctionKey} from '../../providers';
+import {useBunnyKit} from '../../hooks';
 
 
 export function DemoSagaFirebaseScreen() {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const dispatch = useDispatch();
-    useFirebaseConnect([{path: 'todoList', queryParams: ['limitToLast=100']}])
-    const todoList = useSelector((rootState: RootState) => rootState.firebaseState.ordered.todoList)
-    const st = shortenTFunctionKey(t, 'screens.DemoSagaFirebase')
+    useFirebaseConnect([{path: 'todoList', queryParams: ['limitToLast=100']}]);
+    const todoList = useSelector((rootState: RootState) => rootState.firebaseState.ordered.todoList);
+    const st = shortenTFunctionKey(t, 'screens.DemoSagaFirebase');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const [text, setText] = useState(`text-${randomText(3)}`);
     const [done, setDone] = useState(Math.random() > 0.5);
 
     const memorizedTodo = useMemo(() => {
         if (todoList && todoList.length > 0) {
-            return todoList.reverse()
+            return todoList.reverse();
         } else {
-            return []
+            return [];
         }
-    }, [todoList && todoList.length])
+    }, [todoList && todoList.length]);
     useEffect(() => {
         // async function storeHighScore(userId: string, score: number) {
         //     await firebase
@@ -44,19 +44,19 @@ export function DemoSagaFirebaseScreen() {
         //
         // storeHighScore('001', 200)
         //     .then()
-    })
+    });
     return (
         <View style={[containerStyles.Screen, sharedStyles.centralizeHorizontal]}>
             <View style={styles.todoContainer}>
                 <Row paddingVertical="l">
                     <Col>
                         <TextInput value={text} onChangeText={(value) => {
-                            setText(value)
+                            setText(value);
                         }}/>
                     </Col>
                     <Col align="flex-end">
                         <SwitchP value={done} onValueChange={(value) => {
-                            setDone(value)
+                            setDone(value);
                         }}/>
                     </Col>
                 </Row>
@@ -66,7 +66,7 @@ export function DemoSagaFirebaseScreen() {
                     dispatch(saveDemoSagaFirebaseTodo({
                         text,
                         done
-                    }))
+                    }));
                 }}>
                     <InButtonText>{st('saveDemoSagaFirebaseTodo')}</InButtonText>
                 </LinearGradientButton>
@@ -97,7 +97,7 @@ export function DemoSagaFirebaseScreen() {
                                                 <Text>{item.value.done.toString()}</Text>
                                             </Col>
                                         </Row>
-                                    </View>
+                                    </View>;
                                 }}
                             />
                             : null
@@ -105,6 +105,6 @@ export function DemoSagaFirebaseScreen() {
                 </View>
             </View>
         </View>
-    )
+    );
 }
 

@@ -10,7 +10,7 @@ const portraitURLs = {
     g: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/portraits/m/g.jpg',
     h: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/portraits/m/h.jpg',
     i: 'https://raw.githubusercontent.com/zrwusa/assets/master/images/portraits/m/i.jpg',
-}
+};
 const users: firebase.UserInfo[] = [
     {
         displayName: 'Pablo Rios',
@@ -85,7 +85,7 @@ const users: firebase.UserInfo[] = [
         providerId: '',
         uid: 'EvqTQMfHJLRPF2BU3MxbZGoF1R43',
     }
-]
+];
 
 export const datingUsers = [{
     'uid': 'EvqTQMfHJLRPF2BU3MxbZGoF1R43',
@@ -151,7 +151,7 @@ export const datingUsers = [{
     'displayName': 'Ariana',
     'email': 'girld@gmail.com',
     'uid': 'vg9cb0vsbSUDtgfXyPySHX747wQ2'
-}]
+}];
 
 export const migrateUsers = async () => {
     for (const user of users) {
@@ -159,6 +159,6 @@ export const migrateUsers = async () => {
             .firestore()
             .collection('users')
             .doc(user.uid)
-            .set(user)
+            .set(user);
     }
-}
+};

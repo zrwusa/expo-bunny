@@ -19,19 +19,19 @@ export type ReverseLinkedListVariables = {
 }
 
 export async function reverseLinkedList(head: SinglyLinkedListNode | null, proxyHandler: TProxyHandler): Promise<SinglyLinkedListNode | null> {
-    let pre = null
+    let pre = null;
     let variables: ReverseLinkedListVariables = {
         pre: null
-    }
+    };
     let variablesProxy = new DeepProxy<ReverseLinkedListVariables>(variables, proxyHandler);
     while (head) {
-        await wait(500)
-        const next = head.next
-        head.next = variablesProxy.pre
-        variablesProxy.pre = head
-        head = next
+        await wait(500);
+        const next = head.next;
+        head.next = variablesProxy.pre;
+        variablesProxy.pre = head;
+        head = next;
     }
-    return pre
+    return pre;
 }
 
 /* --- end Linked List ---*/

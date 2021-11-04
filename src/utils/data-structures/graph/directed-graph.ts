@@ -262,7 +262,7 @@ export class DirectedGraph<V extends DirectedVertex, E extends DirectedEdge> ext
             }
             statusMap.set(cur, 2);
             sorted.push(cur);
-        }
+        };
 
         for (let entry of this._vertices) {
             if (statusMap.get(entry[1]) === 0) {

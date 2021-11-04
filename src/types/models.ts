@@ -2,7 +2,7 @@
 import {ImageSourcePropType, ImageURISource} from 'react-native';
 import {AVPlaybackSource} from '../../packages/expo-av/src/AV';
 import {SagaTodo} from './states';
-import {IMessage} from '../components/BunnyChat';
+import {IMessage} from '../components';
 import firebase from 'firebase';
 import {StoredUser} from './auth';
 
@@ -64,7 +64,7 @@ export type DemoSearchDummyDatum = { id: number, text: string }
 
 
 export interface UserProfile {
-    email: string
+    email: string;
 }
 
 export type IMMessageType = 'MESSAGE' | 'IMAGE' | 'STICKER_GIF' | 'AUDIO' | 'VIDEO' | ''
@@ -145,7 +145,7 @@ export interface OccupationCategory {
 }
 
 export interface Translation {
-    [key: string]: string
+    [key: string]: string;
 }
 
 export interface Timezone {

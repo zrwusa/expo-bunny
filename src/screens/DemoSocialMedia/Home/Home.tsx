@@ -6,15 +6,15 @@ import {RootState, SocialMediaMainDatum} from '../../../types';
 import {SocialMediaVideoCard} from '../../../components/SocialMediaVideoCard';
 import {isLoaded, useFirebase, useFirestoreConnect} from 'react-redux-firebase';
 import {useSelector} from 'react-redux';
-import {Preparing} from '../../../components/Preparing';
+import {Preparing} from '../../../components';
 
 export function SocialMediaHomeScreen() {
-    const firebase = useFirebase()
+    const firebase = useFirebase();
     useFirestoreConnect([
         {collection: 'socialMediaVideos'}
-    ])
-    const socialMediaVideos = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaVideos)
-    const [mannyCardData, setMannyCardData] = useState<SocialMediaMainDatum[]>([])
+    ]);
+    const socialMediaVideos = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaVideos);
+    const [mannyCardData, setMannyCardData] = useState<SocialMediaMainDatum[]>([]);
     const [refreshing, setRefreshing] = useState(false);
 
     // const getSocialMediaVideos = async () => {
@@ -24,41 +24,41 @@ export function SocialMediaHomeScreen() {
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
         // await getSocialMediaVideos()
-        return setRefreshing(false)
+        return setRefreshing(false);
     }, []);
 
     const memoizedSocialMediaVideos = useMemo(() => {
         if (socialMediaVideos && socialMediaVideos.length > 0) {
             return socialMediaVideos.map((item) => {
-                return item
-            })
+                return item;
+            });
         }
-        return []
-    }, [socialMediaVideos])
+        return [];
+    }, [socialMediaVideos]);
 
     useEffect(() => {
         // getSocialMediaVideos().then()
-    }, [])
+    }, []);
 
     useEffect(() => {
-        const cardData5Items: SocialMediaMainDatum[] = memoizedSocialMediaVideos
+        const cardData5Items: SocialMediaMainDatum[] = memoizedSocialMediaVideos;
         let mannyCardData: SocialMediaMainDatum[] = [];
 
-        const cardIncrementId = new IncrementId('card-')
-        const commentIncrementId = new IncrementId('comment-')
+        const cardIncrementId = new IncrementId('card-');
+        const commentIncrementId = new IncrementId('comment-');
 
         for (let i = 0; i < 10; i++) {
             for (let card of cardData5Items) {
-                let newCard: SocialMediaMainDatum = {...card, comments: [], id: cardIncrementId.getId()}
+                let newCard: SocialMediaMainDatum = {...card, comments: [], id: cardIncrementId.getId()};
                 for (let comment of card.comments) {
-                    let newComment = {...comment, id: commentIncrementId.getId()}
-                    newCard.comments.push(newComment)
+                    let newComment = {...comment, id: commentIncrementId.getId()};
+                    newCard.comments.push(newComment);
                 }
-                mannyCardData.push(newCard)
+                mannyCardData.push(newCard);
             }
         }
-        setMannyCardData(mannyCardData)
-    }, [memoizedSocialMediaVideos])
+        setMannyCardData(mannyCardData);
+    }, [memoizedSocialMediaVideos]);
 
     return (
         <SafeAreaView style={{flex: 1}}>
@@ -86,7 +86,7 @@ export function SocialMediaHomeScreen() {
 
 
                                 onEndReached={() => {
-                                    console.log('onEndReached')
+                                    console.log('onEndReached');
                                 }}
                     />
                     : <Preparing/>

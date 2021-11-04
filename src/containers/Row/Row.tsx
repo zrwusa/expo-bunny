@@ -1,8 +1,7 @@
 import React from 'react';
 import {FlexStyle, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {SizeKeys} from '../../types';
-import {useSizeLabor} from '../../providers/size-labor';
-import {useThemeLabor} from '../../providers/theme-labor';
+import {useSizeLabor, useThemeLabor} from '../../providers';
 import {getStyles} from './styles';
 
 export interface RowProps {
@@ -17,11 +16,11 @@ export type RowSizeMap = {
     [key in SizeKeys]: number
 }
 
-export const Row = function (props: RowProps) {
-    const {children, size, paddingVertical, style, align = 'flex-start'} = props
+export const Row = (props: RowProps) => {
+    const {children, size, paddingVertical, style, align = 'flex-start'} = props;
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const {wp} = sizeLabor.designsBasedOn.iphoneX
+    const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const styles = getStyles(sizeLabor, themeLabor);
     const rowPaddingVertical: RowSizeMap = {
         xxs: wp(2),
@@ -31,9 +30,9 @@ export const Row = function (props: RowProps) {
         l: wp(10),
         xl: wp(12),
         xxl: wp(16)
-    }
+    };
 
-    const styleOBJ = StyleSheet.flatten<ViewStyle>(style)
+    const styleOBJ = StyleSheet.flatten<ViewStyle>(style);
 
     // let flexGrow: FlexStyle['flexGrow'] = size;
     // let flexShrink: FlexStyle['flexShrink'] = size;
@@ -56,7 +55,7 @@ export const Row = function (props: RowProps) {
 
     const isPaddingTop = styleOBJ ? (styleOBJ.padding || styleOBJ.paddingVertical || styleOBJ.paddingTop) : 0;
     const isPaddingBottom = styleOBJ ? (styleOBJ.padding || styleOBJ.paddingVertical || styleOBJ.paddingBottom) : 0;
-    const paddingVerticalValue = paddingVertical ? rowPaddingVertical[paddingVertical] : 0
+    const paddingVerticalValue = paddingVertical ? rowPaddingVertical[paddingVertical] : 0;
     const mergeStyle: StyleProp<ViewStyle> = [
         {
             flexDirection: 'row',
@@ -69,8 +68,8 @@ export const Row = function (props: RowProps) {
             paddingBottom: isPaddingBottom || paddingVerticalValue,
         },
         style
-    ]
+    ];
     return <View style={mergeStyle}>
         {children ? children : null}
-    </View>
-}
+    </View>;
+};

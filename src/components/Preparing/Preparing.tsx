@@ -3,7 +3,7 @@ import {getStyles} from './styles';
 import {ActivityIndicator, Text, View} from 'react-native';
 
 export interface PreparingProps {
-    text?: string
+    text?: string;
 }
 
 export const Preparing = (props: PreparingProps) => {
@@ -20,5 +20,5 @@ export const Preparing = (props: PreparingProps) => {
                 : null
             }
         </View>
-    )
-}
+    );
+};

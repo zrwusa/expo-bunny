@@ -76,6 +76,6 @@ export const travels = [
     {name: 'J-Travel', code: 'A0010'},
 ];
 
-export const dictionaries = {sports, musics, foods, movies, books, travels}
+export const dictionaries = {sports, musics, foods, movies, books, travels};
 
 

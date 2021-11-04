@@ -174,7 +174,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
                 }
             }
             return null;
-        }
+        };
         const inserted: (BinaryTreeNode<T> | null)[] = [];
         if (this._allowDuplicate) {
             if (this.root) {
@@ -245,7 +245,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
             const leftMinHeight = _getMinHeight(cur.left);
             const rightMinHeight = _getMinHeight(cur.right);
             return Math.min(leftMinHeight, rightMinHeight) + 1;
-        }
+        };
 
         if (_beginRoot) {
             return _getMinHeight(_beginRoot);
@@ -262,7 +262,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
             const leftHeight = _getMaxHeight(cur.left);
             const rightHeight = _getMaxHeight(cur.right);
             return Math.max(leftHeight, rightHeight) + 1;
-        }
+        };
 
         if (_beginRoot) {
             return _getMaxHeight(_beginRoot);
@@ -272,7 +272,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
     }
 
     isBalanced(beginRoot?: BinaryTreeNode<T> | null): boolean {
-        return (this.getMinHeight(beginRoot) >= this.getHeight(beginRoot) + 1)
+        return (this.getMinHeight(beginRoot) >= this.getHeight(beginRoot) + 1);
     }
 
     getNodes(nodeProperty: BinaryTreeNodeId | number | T, propertyName ?: BinaryTreeNodePropertyName, onlyOne ?: boolean) {
@@ -329,7 +329,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
         if (propertyName === undefined) {
             propertyName = 'id';
         }
-        const node = this.getNodes(nodeProperty, propertyName, true)[0]
+        const node = this.getNodes(nodeProperty, propertyName, true)[0];
         if (node) {
             return node;
         } else {
@@ -471,7 +471,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
                     break;
             }
 
-        }
+        };
 
         this.root && _traverse(this.root);
         return this._getResultByPropertyName(nodeOrPropertyName);
@@ -614,7 +614,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
                         node = next;
                     }
                     return pre;
-                }
+                };
                 const printEdge = (node: BinaryTreeNode<T> | null) => {
                     let tail: BinaryTreeNode<T> | null = reverseEdge(node);
                     let cur: BinaryTreeNode<T> | null = tail;
@@ -623,7 +623,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
                         cur = cur.right;
                     }
                     reverseEdge(tail);
-                }
+                };
                 while (cur) {
                     if (cur.left) {
                         let predecessor = this.getPredecessor(cur);
@@ -647,7 +647,7 @@ export abstract class AbstractBinaryTree<T> implements I_BinaryTree<T> {
 
     subTreeSum(subTreeRoot: BinaryTreeNode<T>, propertyName ?: BinaryTreeNodePropertyName): number {
         if (propertyName === undefined) {
-            propertyName = 'id'
+            propertyName = 'id';
         }
         let sum = 0;
 
@@ -820,6 +820,6 @@ export class BinaryTreeNode<T> {
 
 export class BinaryTree<T> extends AbstractBinaryTree<T> {
     createNode(id: BinaryTreeNodeId, val?: T | null, count?: number): BinaryTreeNode<T> {
-        return new BinaryTreeNode(id, val, count)
+        return new BinaryTreeNode(id, val, count);
     }
 }

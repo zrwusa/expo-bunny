@@ -1811,4 +1811,4 @@ export const mediaTypes = {
         'spec_title': 'RFC-ietf-payload-vp8-17',
         'spec_href': 'https://tools.ietf.org/html/rfc-ietf-payload-vp8-17'
     }
-}
+};

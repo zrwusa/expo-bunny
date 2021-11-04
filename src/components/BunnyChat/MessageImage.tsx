@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle,} from 'react-native'
-import {IMessage} from './types'
+import React, {Component} from 'react';
+import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewStyle,} from 'react-native';
+import {IMessage} from './types';
 import LightBox from '../../../packages/react-native-lightbox';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
+import {withBunnyKit, WithBunnyKit} from '../../hooks';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
@@ -20,8 +20,8 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             flex: 1,
             resizeMode: 'contain',
         },
-    })
-}
+    });
+};
 
 export interface MessageImageProps<TMessage extends IMessage> {
     messages?: TMessage[],
@@ -57,7 +57,7 @@ class MessageImage<TMessage extends IMessage> extends Component<MessageImageProp
         onMessageReadyForDisplay: undefined,
         onMessageLoadError: undefined,
         isDebug: false
-    }
+    };
 
     render() {
         const {
@@ -68,7 +68,7 @@ class MessageImage<TMessage extends IMessage> extends Component<MessageImageProp
             currentMessage,
             isDebug,
             messages,
-        } = this.props
+        } = this.props;
         isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageImage props', this.props);
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
@@ -83,37 +83,37 @@ class MessageImage<TMessage extends IMessage> extends Component<MessageImageProp
                     {
                         currentMessage
                             ? currentMessage.image
-                            ? <Image
-                                style={[styles.image, imageStyle]}
-                                onLoad={() => {
-                                    isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onLoad')
-                                    this.props.onMessageLoad?.(currentMessage)
-                                    isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onMessageReadyForDisplay')
-                                    this.props.onMessageReadyForDisplay?.(currentMessage)
-                                }}
-                                onLoadStart={() => {
-                                    isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onLoadStart')
-                                    this.props.onMessageLoadStart?.(currentMessage)
-                                }}
-                                onLoadEnd={() => {
-                                    isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onLoadEnd')
-                                    this.props.onMessageLoadEnd?.(currentMessage)
-                                }}
-                                onError={(e) => {
-                                    isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onError')
-                                    this.props.onMessageLoadError?.(e.nativeEvent.error, currentMessage)
-                                }}
+                                ? <Image
+                                    style={[styles.image, imageStyle]}
+                                    onLoad={() => {
+                                        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onLoad');
+                                        this.props.onMessageLoad?.(currentMessage);
+                                        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onMessageReadyForDisplay');
+                                        this.props.onMessageReadyForDisplay?.(currentMessage);
+                                    }}
+                                    onLoadStart={() => {
+                                        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onLoadStart');
+                                        this.props.onMessageLoadStart?.(currentMessage);
+                                    }}
+                                    onLoadEnd={() => {
+                                        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onLoadEnd');
+                                        this.props.onMessageLoadEnd?.(currentMessage);
+                                    }}
+                                    onError={(e) => {
+                                        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', 'MessageImage onError');
+                                        this.props.onMessageLoadError?.(e.nativeEvent.error, currentMessage);
+                                    }}
 
-                                source={{uri: currentMessage.image}}
-                                {...imageProps}
-                            />
-                            : <Text>{'currentMessage.image is undefined'}</Text>
+                                    source={{uri: currentMessage.image}}
+                                    {...imageProps}
+                                />
+                                : <Text>{'currentMessage.image is undefined'}</Text>
                             : <Text>{'currentMessage is undefined'}</Text>
                     }
                 </LightBox>
             </View>
-        )
+        );
     }
 }
 
-export default withBunnyKit(MessageImage)
+export default withBunnyKit(MessageImage);

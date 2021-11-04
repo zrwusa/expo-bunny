@@ -2,10 +2,8 @@ import * as React from 'react';
 import {useState} from 'react';
 import {PickerSelect, Text, View} from '../../../components/UI';
 import {useTranslation} from 'react-i18next';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {shortenTFunctionKey, useSizeLabor, useThemeLabor} from '../../../providers';
 import {Col, getContainerStyles, Row} from '../../../containers';
-import {useSizeLabor} from '../../../providers/size-labor';
-import {useThemeLabor} from '../../../providers/theme-labor';
 import {Avatar} from '../../../components';
 import {E_MONTH} from '../../../constants';
 import {MonthKey} from '../../../types';
@@ -25,19 +23,19 @@ export function HealthHomeScreen() {
     const {theme} = themeLabor;
     const {colors} = theme;
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor)
-    const [selectedMonth, setSelectedMonth] = useState<MonthKey>('January')
+    const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
+    const [selectedMonth, setSelectedMonth] = useState<MonthKey>('January');
     const monthKeys = Object.keys(E_MONTH) as MonthKey[];
-    const monthItems = monthKeys.map(month => ({label: month, value: month, color: colors.text}))
+    const monthItems = monthKeys.map(month => ({label: month, value: month, color: colors.text}));
     const dataMapped = data.map((item: { x: string, y: number }, index: number) => {
-        return {x: new Date(item.x), y: parseFloat((item.y / 1000).toFixed(0))}
-    })
+        return {x: new Date(item.x), y: parseFloat((item.y / 1000).toFixed(0))};
+    });
     const data1Mapped = data1.map((item: { x: string, y: number }, index: number) => {
-        return {x: new Date(item.x), y: parseFloat((item.y / 1000).toFixed(0))}
-    })
+        return {x: new Date(item.x), y: parseFloat((item.y / 1000).toFixed(0))};
+    });
     const data2Mapped = data2.map((item: { x: string, y: number }, index: number) => {
-        return {x: new Date(item.x), y: parseFloat((item.y / 1000).toFixed(0))}
-    })
+        return {x: new Date(item.x), y: parseFloat((item.y / 1000).toFixed(0))};
+    });
     return (
         <SafeAreaView style={{flex: 1}}>
             <ScrollView>
@@ -66,7 +64,7 @@ export function HealthHomeScreen() {
                                     items={monthItems}
                                     value="January"
                                     onValueChange={(value: MonthKey) => {
-                                        setSelectedMonth(value)
+                                        setSelectedMonth(value);
                                     }}
                                 />
                             </Col>

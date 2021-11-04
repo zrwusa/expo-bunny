@@ -4,24 +4,24 @@ import {ScrollView} from 'react-native';
 import {getStyles} from './styles';
 import {Card, Row} from '../../containers';
 import {useDispatch} from 'react-redux';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../providers';
 import {glyphIcoMoonMap} from '../../helpers';
 import {CopyableText} from '../../components/CopyableText';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 
 export function IconToolsScreen() {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
-    const st = shortenTFunctionKey(t, 'screens.IconTools')
-    const dispatch = useDispatch()
+    const st = shortenTFunctionKey(t, 'screens.IconTools');
+    const dispatch = useDispatch();
     const {themes} = themeLabor;
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
 
-    const [glyph, setGlyph] = useState('')
+    const [glyph, setGlyph] = useState('');
     const handleGenerate = () => {
-        setGlyph(JSON.stringify(glyphIcoMoonMap))
-    }
-    const [inputHeight, setInputHeight] = useState(0)
+        setGlyph(JSON.stringify(glyphIcoMoonMap));
+    };
+    const [inputHeight, setInputHeight] = useState(0);
     return (
         <ScrollView style={{flex: 1}}>
             <View style={styles.container}>
@@ -49,5 +49,5 @@ export function IconToolsScreen() {
                 </Card>
             </View>
         </ScrollView>
-    )
+    );
 }

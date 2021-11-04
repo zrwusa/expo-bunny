@@ -53,7 +53,7 @@ export const linking = {
                 stringify: {
                     id: (id: string) => {
                         // when passing a param through URL the param key will be stringified
-                        return id
+                        return id;
                     }
                 },
             },
@@ -313,4 +313,4 @@ export const linking = {
             },
         }
     },
-}
+};

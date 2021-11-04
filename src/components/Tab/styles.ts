@@ -7,7 +7,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
-    const {} = sharedStylesFlatten
+    const {} = sharedStylesFlatten;
     return StyleSheet.create({
         tabs: {
             borderBottomColor: colors.border,
@@ -35,4 +35,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             color: colors.secondary
         },
     });
-}
+};

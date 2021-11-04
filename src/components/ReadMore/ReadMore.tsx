@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {StyleProp, Text, TextStyle, View} from 'react-native';
 import {getStyles} from './styles';
-import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
+import {withBunnyKit, WithBunnyKit} from '../../hooks';
 
 interface ReadMoreProps extends WithBunnyKit {
     numberOfLines: number,
@@ -13,7 +13,7 @@ interface ReadMoreProps extends WithBunnyKit {
 
 class ReadMoreInner extends React.Component<React.PropsWithChildren<ReadMoreProps>> {
     private _isMounted = false;
-    private _text: Text | null = null
+    private _text: Text | null = null;
     state = {
         measured: false,
         shouldShowReadMore: false,

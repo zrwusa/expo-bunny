@@ -1,2 +1,2 @@
-export * from './InputCard'
+export * from './InputCard';
 

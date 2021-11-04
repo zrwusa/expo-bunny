@@ -1,10 +1,10 @@
-import {Row} from '../../containers/Row';
+import {Row} from '../../containers';
 import {Text, View} from '../UI';
 import * as React from 'react';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../providers';
 import {getSharedStyles} from '../../helpers';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 
 export interface TabProps<ItemT> {
@@ -19,7 +19,7 @@ export const Tab = ({items, placeholder, value, onChange}: TabProps<any>) => {
     const st = shortenTFunctionKey(t, 'dictionary');
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const {} = sharedStyles;
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     return <Row style={styles.tabs}>
         {
             items.map(item => {
@@ -30,8 +30,8 @@ export const Tab = ({items, placeholder, value, onChange}: TabProps<any>) => {
                     <Text style={[styles.tabText, activeTextStyle]}
                           onPress={() => onChange(item)}>{st(item)}</Text>
                     <View style={[styles.tabIndicator, activeIndicatorStyle]}/>
-                </View>
+                </View>;
             })
         }
-    </Row>
-}
+    </Row>;
+};

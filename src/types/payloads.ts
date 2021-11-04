@@ -31,7 +31,7 @@ export interface ClearBLResultPayload {
 }
 
 export interface SetBLResultPayload {
-    blResult: BLResult
+    blResult: BLResult;
 }
 
 export interface SysClearErrorPayload {
@@ -62,7 +62,7 @@ export interface RequestConfig {
 export interface RequestingPayload {
     method: Method;
     url: string;
-    params?: any
+    params?: any;
 }
 
 export interface RequestReceivedPayload {
@@ -105,7 +105,7 @@ export interface GetDemoSagaParams extends BunnyAPIStandardRequestParams {
     filter?: {
         id?: number,
         text?: string
-    }
+    };
 }
 
 export interface SaveDemoSagaFirebaseTodoParams extends SagaTodo {

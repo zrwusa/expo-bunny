@@ -30,4 +30,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             paddingHorizontal: ms.sp.l,
         },
     });
-}
+};

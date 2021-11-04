@@ -3327,4 +3327,4 @@ export const industries = [
             }
         ]
     }
-]
+];

@@ -26,4 +26,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             justifyContent: 'space-evenly'
         }
     });
-}
+};

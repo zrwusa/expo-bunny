@@ -129,6 +129,6 @@ const config: APPConfig = {
         }
     },
     'useNativeDriver': true
-}
+};
 
-export default config
+export default config;

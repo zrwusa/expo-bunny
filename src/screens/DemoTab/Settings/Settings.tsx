@@ -2,11 +2,11 @@ import * as React from 'react';
 import {Text, View} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoTabStackParam} from '../../../types';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../../providers';
 import {getContainerStyles} from '../../../containers';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {getSharedStyles} from '../../../helpers';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 type TabSettingsRouteProp = RouteProp<DemoTabStackParam, 'TabSettings'>;
 type TabSettingsNavigationProp = BottomTabNavigationProp<DemoTabStackParam, 'TabSettings'>;

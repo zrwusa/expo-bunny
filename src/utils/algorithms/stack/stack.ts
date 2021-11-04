@@ -22,7 +22,7 @@ export const isValidParenthesis = async function (input: string, proxyHandler: T
     let variablesProxy = new DeepProxy<IsValidParenthesisVariables>({
         stack: new Stack<HashKey>(),
         char: ''
-    }, proxyHandler)
+    }, proxyHandler);
 
     const hash: { [key in HashKey]: string } = {
         '(': ')',
@@ -31,7 +31,7 @@ export const isValidParenthesis = async function (input: string, proxyHandler: T
     };
 
     for (const char of onlyHashKey) {
-        await wait(500)
+        await wait(500);
         if (char in hash) {
             variablesProxy.stack.push(char as HashKey);
         } else {

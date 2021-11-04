@@ -2,15 +2,14 @@ import React from 'react';
 import {BunnyKit, useBunnyKit} from './useBunnyKit';
 
 export interface WithBunnyKit {
-    bunnyKit: BunnyKit
+    bunnyKit: BunnyKit;
 }
 
-export function withBunnyKit<T>(
+export const withBunnyKit = <T extends any>(
     Component: React.ComponentType<T>
-) {
+) => {
     // Try to create a nice displayName for React Dev Tools.
-    const displayName =
-        Component.displayName || Component.name || 'Component';
+    const displayName = Component.displayName || Component.name || 'Component';
 
     // TODO not very well for supporting generic components
     const GenericComponent = Component as <ArgumentT extends object>(props: T) => JSX.Element;
@@ -26,4 +25,4 @@ export function withBunnyKit<T>(
     ComponentWithBunnyKit.displayName = `withBunnyKit(${displayName})`;
 
     return ComponentWithBunnyKit;
-}
+};

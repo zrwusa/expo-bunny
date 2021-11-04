@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Animated, Keyboard, NativeSyntheticEvent, SafeAreaView, TextInputKeyPressEventData} from 'react-native';
 import {getStyles} from './styles';
 import {IcoMoon, Text, TextInput, TouchableOpacity, View} from '../UI';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 interface SearchComponentProps {
     scrollYValue: Animated.Value,
@@ -18,9 +18,9 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
         onSearch
     } = props;
 
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     const {colors} = themeLabor.theme;
-    const {zi} = sizeLabor.ms
+    const {zi} = sizeLabor.ms;
     const clampedScroll = Animated.diffClamp(
         Animated.add(
             scrollYValue.interpolate({
@@ -32,7 +32,7 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
         ),
         0,
         50,
-    )
+    );
 
     const searchBarTranslate = clampedScroll.interpolate({
         inputRange: [0, 50],
@@ -47,71 +47,71 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
     });
 
 
-    const [isFocus, setIsFocus] = useState(false)
-    const [searchText, setSearchText] = useState('')
-    const defaultWidth = wp(320)
-    const focusWidth = wp(290)
+    const [isFocus, setIsFocus] = useState(false);
+    const [searchText, setSearchText] = useState('');
+    const defaultWidth = wp(320);
+    const focusWidth = wp(290);
 
 
     const invokeSearch = async () => {
         // if (searchText.trim() !== '') {
         if (onSearch) {
-            onSearch(searchText)
+            onSearch(searchText);
         }
         // }
-    }
+    };
 
     const handleFocus = () => {
-        setIsFocus(true)
-    }
+        setIsFocus(true);
+    };
     const handleBlur = () => {
-        setIsFocus(false)
-    }
+        setIsFocus(false);
+    };
 
     const handleInputTextChange = (value: string) => {
-        setSearchText(value)
-    }
+        setSearchText(value);
+    };
     const handleKeyPress = ({nativeEvent}: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
         if (nativeEvent.key === 'Enter') {
-            invokeSearch().then()
+            invokeSearch().then();
         }
-    }
+    };
     const handleCancel = () => {
-        Keyboard.dismiss()
-        setSearchText('')
-    }
+        Keyboard.dismiss();
+        setSearchText('');
+    };
     const handleEndEditing = async () => {
-        invokeSearch().then()
-    }
+        invokeSearch().then();
+    };
     const handleCameraIconPress = () => {
 
-    }
-    const [toWidth, setToWidth] = useState(defaultWidth)
-    const widthAnim = useRef(new Animated.Value(defaultWidth)).current
+    };
+    const [toWidth, setToWidth] = useState(defaultWidth);
+    const widthAnim = useRef(new Animated.Value(defaultWidth)).current;
     useEffect(() => {
         if (defaultKeywords && defaultKeywords.length > 0) {
-            setSearchText(defaultKeywords.join(' ').toString())
+            setSearchText(defaultKeywords.join(' ').toString());
         }
-    }, [JSON.stringify(defaultKeywords)])
+    }, [JSON.stringify(defaultKeywords)]);
     useEffect(() => {
         const timingAnimConfig: Animated.TimingAnimationConfig = {
             toValue: toWidth,
             duration: 300,
             useNativeDriver: false // the width property can only use js animation
-        }
+        };
         Animated.timing(
             widthAnim,
             timingAnimConfig
         ).start();
-    }, [toWidth])
+    }, [toWidth]);
 
     useEffect(() => {
         if (isFocus) {
-            setToWidth(focusWidth)
+            setToWidth(focusWidth);
         } else {
-            setToWidth(defaultWidth)
+            setToWidth(defaultWidth);
         }
-    }, [isFocus])
+    }, [isFocus]);
 
 
     return (
@@ -154,7 +154,7 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
                 </View>
             </Animated.View>
         </SafeAreaView>
-    )
-}
+    );
+};
 
 

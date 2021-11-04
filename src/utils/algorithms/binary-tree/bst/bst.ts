@@ -17,7 +17,7 @@ const isValidBST = (root: BSTNode<number> | null): boolean => {
     }
 
     return dfs(root, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
-}
+};
 
 // 700	Search in a Binary Search Tree	★★	701				binary search
 function searchBST(root: BSTNode<number> | null, id: number): BSTNode<number> | null {
@@ -30,7 +30,7 @@ function searchBST(root: BSTNode<number> | null, id: number): BSTNode<number> | 
         if (!cur.left && !cur.right) return;
         if ((id < cur.id) && cur.left) dfs(cur.left);
         if ((id > cur.id) && cur.right) dfs(cur.right);
-    }
+    };
 
     dfs(root);
     return ans;
@@ -47,7 +47,7 @@ function kthSmallest(root: BSTNode<number> | null, k: number): number {
         }
         cur.right && dfsInOrder(cur.right);
         if (!cur.left && !cur.right) return;
-    }
+    };
     root && dfsInOrder(root);
     return target;
 }
@@ -59,7 +59,7 @@ function recoverTree(root: BSTNode<number> | null): void {
         const tempVal = nodeA.val;
         nodeA.val = nodeB.val;
         nodeB.val = tempVal;
-    }
+    };
 
     let firstBad: BSTNode<number> | null = null;
     let secondBad: BSTNode<number> | null = null;
@@ -107,7 +107,7 @@ function sortedArrayToBST(nums: number[]): BSTNode<number> | null {
         cur.left = dfs(left, mid - 1);
         cur.right = dfs(mid + 1, right);
         return cur;
-    }
+    };
 
     return dfs(0, nums.length - 1);
 }
@@ -131,7 +131,7 @@ function findMode(root: BSTNode<number> | null): number[] {
         }
         prev = cur.id;
         inorderDFS(cur.right);
-    }
+    };
 
     inorderDFS(root);
 
@@ -155,8 +155,8 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     }
 
     const node6 = proxyVariables.bst.getNode(6);
-    console.log('getHeight(getNode 6)', node6 && proxyVariables.bst.getHeight(node6))
-    console.log('getDepth(getNode 6)', node6 && proxyVariables.bst.getDepth(node6))
+    console.log('getHeight(getNode 6)', node6 && proxyVariables.bst.getHeight(node6));
+    console.log('getDepth(getNode 6)', node6 && proxyVariables.bst.getDepth(node6));
     await wait(time2);
     const getNodeById = proxyVariables.bst.getNode(10, 'id');
     console.log('getNode, 10, id', getNodeById);
@@ -174,7 +174,7 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
     console.log('getMinNode', getMinNodeByRoot);
 
     await wait(time2);
-    const node15 = proxyVariables.bst.getNode(15)
+    const node15 = proxyVariables.bst.getNode(15);
     const getMinNodeBySpecificNode = node15 && proxyVariables.bst.getMinNode(node15);
     console.log('getMinNode, 15', getMinNodeBySpecificNode);
 
@@ -192,72 +192,72 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
 
     await wait(time3);
     const node11 = proxyVariables.bst.getNode(11);
-    const allGreaterNodesAdd = node11 && proxyVariables.bst.allGreaterNodesAdd(node11, 2, 'count')
+    const allGreaterNodesAdd = node11 && proxyVariables.bst.allGreaterNodesAdd(node11, 2, 'count');
     console.log('allGreaterNodesAdd, getNode(11), 2, count', allGreaterNodesAdd);
 
     await wait(time3);
-    console.log('DFS ,in, node', proxyVariables.bst.DFS('in', 'node'))
-    console.log('waiting for balancing')
+    console.log('DFS ,in, node', proxyVariables.bst.DFS('in', 'node'));
+    console.log('waiting for balancing');
     await wait(time3);
     proxyVariables.bst.balance();
-    console.log('balanced BFS, node', proxyVariables.bst.BFS('node'))
+    console.log('balanced BFS, node', proxyVariables.bst.BFS('node'));
 
     await wait(time3);
     console.log('remove, 11', proxyVariables.bst.remove(11));
     console.log('isBalance', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight, getNode(15)', node15 && proxyVariables.bst.getHeight(node15));
     await wait(time3);
-    console.log('remove, 1', proxyVariables.bst.remove(1))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 1', proxyVariables.bst.remove(1));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 4', proxyVariables.bst.remove(4))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 4', proxyVariables.bst.remove(4));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 10', proxyVariables.bst.remove(10))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 10', proxyVariables.bst.remove(10));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 15', proxyVariables.bst.remove(15))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 15', proxyVariables.bst.remove(15));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 5', proxyVariables.bst.remove(5))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 5', proxyVariables.bst.remove(5));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 13', proxyVariables.bst.remove(13))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 13', proxyVariables.bst.remove(13));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 3', proxyVariables.bst.remove(3))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 3', proxyVariables.bst.remove(3));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 8', proxyVariables.bst.remove(8))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 8', proxyVariables.bst.remove(8));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 6', proxyVariables.bst.remove(6))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 6', proxyVariables.bst.remove(6));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 7', proxyVariables.bst.remove(7))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 7', proxyVariables.bst.remove(7));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 9', proxyVariables.bst.remove(9))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 9', proxyVariables.bst.remove(9));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
-    console.log('remove, 14', proxyVariables.bst.remove(14))
-    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced())
+    console.log('remove, 14', proxyVariables.bst.remove(14));
+    console.log('isAVLBalanced', proxyVariables.bst.isAVLBalanced());
     console.log('getHeight', proxyVariables.bst.getHeight());
     await wait(time3);
 
     await wait(time1);
-    console.log('isAVLBalanced()', proxyVariables.bst.isAVLBalanced())
+    console.log('isAVLBalanced()', proxyVariables.bst.isAVLBalanced());
     await wait(time1);
     console.log('BFS', proxyVariables.bst.BFS());
 
@@ -269,7 +269,7 @@ export async function testBST(arr: number[], proxyHandler?: TProxyHandler) {
 
 const runTestBST = async () => {
     await runAlgorithm(testBST, false, ...testBSTCase1);
-}
+};
 
 // runTestBST().then()
 

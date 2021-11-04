@@ -16,5 +16,5 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         label: {fontSize: ms.fs.l},
         bottomBar: {}
-    })
-}
+    });
+};

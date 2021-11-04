@@ -1,19 +1,17 @@
 import {IcoMoon, Text, TextButton, View} from '../UI';
 import * as React from 'react';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import {Divider} from '../Divider';
 import {Keyboard, Platform} from 'react-native';
 import {collectBLResult, sysError} from '../../store/actions';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey, useAuthLabor} from '../../providers';
 import {getStyles} from './styles';
-import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {navToReference} from '../../helpers';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 type LoginVectorRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type LoginVectorNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -27,7 +25,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
     const styles = getStyles(sizeLabor, themeLabor);
-    const {authFunctions} = useAuthLabor()
+    const {authFunctions} = useAuthLabor();
     const dispatch = useDispatch();
 
     return <View>
@@ -46,12 +44,12 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
         <Row style={styles.vectorRow}>
             <Col size={6}>
                 <TextButton style={styles.vectorButton} onPress={async () => {
-                    Keyboard.dismiss()
+                    Keyboard.dismiss();
                     try {
-                        await authFunctions.dummyLogin()
-                        navToReference(route, navigation)
+                        await authFunctions.dummyLogin();
+                        navToReference(route, navigation);
                     } catch (e) {
-                        dispatch(sysError(e))
+                        dispatch(sysError(e));
                     }
                 }}>
                     <IcoMoon name="drink" size={wp(24)} style={styles.icon}/>
@@ -63,16 +61,16 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                     ? <>
                         <Col size={6}>
                             <TextButton style={styles.vectorButton} onPress={async () => {
-                                Keyboard.dismiss()
+                                Keyboard.dismiss();
                                 try {
-                                    const result = await authFunctions.facebookLogin(true, true)
+                                    const result = await authFunctions.facebookLogin(true, true);
                                     if (result.success) {
-                                        navToReference(route, navigation)
+                                        navToReference(route, navigation);
                                     } else {
-                                        dispatch(collectBLResult(result))
+                                        dispatch(collectBLResult(result));
                                     }
                                 } catch (e) {
-                                    dispatch(sysError(e))
+                                    dispatch(sysError(e));
                                 }
                             }}>
                                 <IcoMoon name="facebook" style={styles.icon}/>
@@ -81,16 +79,16 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                         </Col>
                         <Col size={6}>
                             <TextButton style={styles.vectorButton} onPress={async () => {
-                                Keyboard.dismiss()
+                                Keyboard.dismiss();
                                 try {
-                                    const result = await authFunctions.googleLogin(true, true)
+                                    const result = await authFunctions.googleLogin(true, true);
                                     if (result.success) {
-                                        navToReference(route, navigation)
+                                        navToReference(route, navigation);
                                     } else {
-                                        dispatch(collectBLResult(result))
+                                        dispatch(collectBLResult(result));
                                     }
                                 } catch (e) {
-                                    dispatch(sysError(e))
+                                    dispatch(sysError(e));
                                 }
                             }}>
                                 <IcoMoon name="google" style={styles.icon}/>
@@ -101,5 +99,5 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                     : <></>
             }
         </Row>
-    </View>
-}
+    </View>;
+};

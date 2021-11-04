@@ -432,6 +432,6 @@ export const palette: Palette = {
     pink80: '#FED1E7',
     blue70: '#D6E7F4',
     //---end---
-}
+};
 
-export const pl = palette
+export const pl = palette;

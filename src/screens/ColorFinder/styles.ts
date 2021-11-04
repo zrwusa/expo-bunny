@@ -39,4 +39,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderWidth: ms.sp.xxs,
         }
     });
-}
+};

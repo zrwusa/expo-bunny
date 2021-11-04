@@ -18,4 +18,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         itemBox: {flexDirection: 'row'},
         itemText: {marginRight: 10}
     });
-}
+};

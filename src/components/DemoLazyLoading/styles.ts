@@ -17,6 +17,6 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             color: colors.text,
             fontSize: ms.fs.s
         }
-    })
-}
+    });
+};
 

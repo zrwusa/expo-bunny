@@ -41,7 +41,7 @@ try {
         // firebase.firestore();
     }
 } catch (err) {
-    console.error(err)
+    console.error(err);
     // ignore app already initialized error on snack
 }
 

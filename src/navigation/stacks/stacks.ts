@@ -35,7 +35,7 @@ export const DemoCryptoCurrencyTabStack = createBottomTabNavigator<DemoCryptoCur
 
 export const DemoSocialMediaTabStack = createBottomTabNavigator<DemoSocialMediaTabStackParam>();
 
-export const AuthTopTabStack = createMaterialTopTabNavigator<AuthTopStackParam>()
+export const AuthTopTabStack = createMaterialTopTabNavigator<AuthTopStackParam>();
 
 export const DemoHealthTabStack = createBottomTabNavigator<DemoHealthTabStackParam>();
 

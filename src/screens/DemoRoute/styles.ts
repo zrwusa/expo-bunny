@@ -13,4 +13,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginTop: 10
         },
     });
-}
+};

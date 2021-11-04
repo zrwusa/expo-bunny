@@ -12,17 +12,17 @@ export const getCardSize = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     return {
         width: CARD_WIDTH,
         height: CARD_HEIGHT
-    }
-}
+    };
+};
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {width, height} = Dimensions.get('window');
-    const {colors} = themeLabor.theme
+    const {colors} = themeLabor.theme;
 
-    const cardSize = getCardSize(sizeLabor, themeLabor)
+    const cardSize = getCardSize(sizeLabor, themeLabor);
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
-    const {shadow} = sharedStylesFlatten
+    const {shadow} = sharedStylesFlatten;
     return StyleSheet.create({
         mapView: {
             flex: 1,
@@ -84,5 +84,5 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderColor: 'rgba(130,4,150, 0.5)',
         },
     });
-}
+};
 export default getStyles;

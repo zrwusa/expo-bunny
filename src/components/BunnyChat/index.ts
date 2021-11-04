@@ -1,1 +1,1 @@
-export * from './BunnyChat'
+export * from './BunnyChat';

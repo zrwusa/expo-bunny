@@ -6,7 +6,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors} = themeLabor.theme;
-    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     return StyleSheet.create({
         container: {
             padding: ms.sp.l
@@ -25,4 +25,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: wp(140),
         }
     });
-}
+};

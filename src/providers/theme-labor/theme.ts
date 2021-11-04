@@ -3,18 +3,18 @@ import {JSONSerializable, Themes, ThemeWarehouse} from '../../types';
 import color from 'color';
 import {EThemes} from '../../constants';
 import {isLeafParent, isSameStructure, pl} from '../../utils';
-import getSizeLabor from '../size-labor/sizeLabor';
+import {getSizeLabor} from '../size-labor';
 import {getVictoryTheme} from './victoryTheme';
 
 export const getThemeWareHouse = () => {
-    const {wp} = getSizeLabor().designsBasedOn.iphoneX
+    const {wp} = getSizeLabor().designsBasedOn.iphoneX;
 
     const commonFontFamily = {
         light: fontsWarehouse.regular.fontFamily.light,
         dark: fontsWarehouse.regular.fontFamily.dark,
         indigo: fontsWarehouse.regular.fontFamily.dark,
         tinder: fontsWarehouse.regular.fontFamily.light,
-    }
+    };
 
 
     const themeWarehouse: ThemeWarehouse = {
@@ -443,37 +443,37 @@ export const getThemeWareHouse = () => {
             }
         },
         victory: getVictoryTheme()
-    }
+    };
     return themeWarehouse;
-}
+};
 
 const extractThemesFromWarehouse = (arg: unknown, themeName: string) => {
     let themeWarehouseNode = arg as JSONSerializable;
-    let themeNode: JSONSerializable = {}
+    let themeNode: JSONSerializable = {};
     if (themeWarehouseNode instanceof Array) {
-        themeNode = []
+        themeNode = [];
     }
-    const nodeKeys = Object.keys(themeWarehouseNode)
+    const nodeKeys = Object.keys(themeWarehouseNode);
     nodeKeys.forEach(k => {
         if (!isSameStructure(themeWarehouseNode[k], EThemes)) {
-            themeNode[k] = extractThemesFromWarehouse(themeWarehouseNode[k], themeName)
+            themeNode[k] = extractThemesFromWarehouse(themeWarehouseNode[k], themeName);
         } else if (isLeafParent(themeWarehouseNode[k])) {
-            themeNode[k] = themeWarehouseNode[k][themeName]
+            themeNode[k] = themeWarehouseNode[k][themeName];
         } else {
-            themeNode[k] = {}
+            themeNode[k] = {};
         }
-    })
+    });
     return themeNode;
-}
+};
 
 export const getThemes = () => {
     let themes: JSONSerializable = {};
     const themeNames = Object.values(EThemes);
     themeNames.forEach((name: string) => {
-        themes[name] = extractThemesFromWarehouse(getThemeWareHouse(), name)
-    })
+        themes[name] = extractThemesFromWarehouse(getThemeWareHouse(), name);
+    });
     return themes as Themes;
-}
+};
 
 export const themes = getThemes();
 

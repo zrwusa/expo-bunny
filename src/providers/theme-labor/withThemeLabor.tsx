@@ -3,12 +3,12 @@ import React from 'react';
 import {ThemeLabor} from '../../types';
 
 export interface WithThemeLabor {
-    themeLabor: ThemeLabor
+    themeLabor: ThemeLabor;
 }
 
-export function withThemeLabor<T extends WithThemeLabor = WithThemeLabor>(
+export const withThemeLabor = <T extends WithThemeLabor = WithThemeLabor>(
     WrappedComponent: React.ComponentType<T>
-) {
+) => {
     // Try to create a nice displayName for React Dev Tools.
     const displayName =
         WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -25,4 +25,4 @@ export function withThemeLabor<T extends WithThemeLabor = WithThemeLabor>(
     ComponentWithThemeLabor.displayName = `withThemeLabor(${displayName})`;
 
     return ComponentWithThemeLabor;
-}
+};

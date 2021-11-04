@@ -1,2 +1,2 @@
-export * from './bst'
-export * from './cases'
+export * from './bst';
+export * from './cases';

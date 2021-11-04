@@ -12,4 +12,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: ms.fs.s
         }
     });
-}
+};

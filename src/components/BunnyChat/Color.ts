@@ -14,4 +14,4 @@ export default {
     //
     // optionTintColor: '#007AFF',
     // timeTextColor: '#aaa',
-}
+};

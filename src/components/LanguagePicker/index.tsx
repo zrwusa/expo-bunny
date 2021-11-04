@@ -1,1 +1,1 @@
-export * from './LanguagePicker'
+export * from './LanguagePicker';

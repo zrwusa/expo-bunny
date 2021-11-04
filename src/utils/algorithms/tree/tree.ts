@@ -47,7 +47,7 @@ export async function binaryTreeInorderTraversal(root: BinaryTreeNode<number> | 
     let proxyVariables = new DeepProxy<Variables>({node: null}, proxyHandler);
 
     if (!root) {
-        return []
+        return [];
     }
 
     let leftResult = root.left && await binaryTreeInorderTraversal(root.left, proxyHandler);
@@ -67,18 +67,18 @@ export async function binaryTreeInorderTraversal(root: BinaryTreeNode<number> | 
             ...leftResult,
             root.id,
             ...rightResult
-        ]
+        ];
     } else if (leftResult) {
         return [
             ...leftResult,
-            root.id]
+            root.id];
     } else if (rightResult) {
         return [
             root.id,
             ...rightResult
-        ]
+        ];
     } else {
-        return [root.id]
+        return [root.id];
     }
 
 }
@@ -104,14 +104,14 @@ export const DFS = async (node: TreeNode<number>, type: OrderType, proxyHandler:
                 await DFS(left, type, proxyHandler);
                 // console.log(node.id);
                 variablesProxy.nodeNeedPrint = node;
-                await wait(500)
+                await wait(500);
 
                 await DFS(right, type, proxyHandler);
                 break;
             case 'PreOrder':
                 // console.log(node.id);
                 variablesProxy.nodeNeedPrint = node;
-                await wait(500)
+                await wait(500);
 
                 await DFS(left, type, proxyHandler);
                 await DFS(right, type, proxyHandler);
@@ -121,12 +121,12 @@ export const DFS = async (node: TreeNode<number>, type: OrderType, proxyHandler:
                 await DFS(right, type, proxyHandler);
                 // console.log(node.id);
                 variablesProxy.nodeNeedPrint = node;
-                await wait(500)
+                await wait(500);
 
                 break;
         }
     }
-}
+};
 
 // 102	Binary Tree Level Order Traversal	★★	107	429	872			collecting nodes
 export const BFS = async (node: TreeNode<number>, proxyHandler: TProxyHandler) => {
@@ -153,7 +153,7 @@ export const BFS = async (node: TreeNode<number>, proxyHandler: TProxyHandler) =
         }
     }
     return nodes;
-}
+};
 
 /* --- start Search (BFS/DFS) ---*/
 
@@ -167,7 +167,7 @@ export async function letterCombinations(digits: string, proxyHandler: TProxyHan
     let proxyVariables = new DeepProxy<{ accumulated: string, result: string[] }>({
         accumulated: '',
         result: []
-    }, proxyHandler)
+    }, proxyHandler);
 
     const digitsMap: { [key in PhoneKeys]: string } = {
         '2': 'abc',
@@ -194,7 +194,7 @@ export async function letterCombinations(digits: string, proxyHandler: TProxyHan
             await wait(500);
             accumulated.pop();
         }
-    }
+    };
 
     await dfs(0, new Stack<string>());
 
@@ -224,7 +224,7 @@ const permute = function <T>(nums: T[]) {
             rest = restBacktrack;
             accumulated.pop();
         }
-    }
+    };
 
     dfs([], [...nums]);
 
@@ -263,7 +263,7 @@ const permuteMN = function <T>(nums: T[], n: number, excludeSelf: boolean = true
                 rest = restBackTrack;
             }
         }
-    }
+    };
     dfs([], nums, 0);
     return result;
 };
@@ -306,7 +306,7 @@ const combineMN = function <T>(nums: T[], n: number, excludeSelf: boolean = true
                 rest = restBackTrack;
             }
         }
-    }
+    };
     dfs([], nums, 0);
     return result;
 };
@@ -317,7 +317,7 @@ const combineMN = function <T>(nums: T[], n: number, excludeSelf: boolean = true
 function generateParenthesis(n: number): string[] {
     // corner case
     if (n === 1) {
-        return ['()']
+        return ['()'];
     }
 
     let result: string[] = [];
@@ -349,7 +349,7 @@ function generateParenthesis(n: number): string[] {
                 accumulated = accumulated.substr(0, accumulated.length - 1);
             }
         }
-    }
+    };
 
     dfs('', 0);
 
@@ -362,7 +362,7 @@ function generateParenthesis(n: number): string[] {
 
 export function ladderLengthDFS(beginWord: string, endWord: string, wordList: string[], proxyHandler: TProxyHandler): number {
 
-    let proxyVariables = new DeepProxy<{ tree: TreeNode<string> }>({tree: new TreeNode(beginWord, beginWord, beginWord)}, proxyHandler)
+    let proxyVariables = new DeepProxy<{ tree: TreeNode<string> }>({tree: new TreeNode(beginWord, beginWord, beginWord)}, proxyHandler);
 
     const wordListLength = wordList.length;
     // corner case
@@ -404,7 +404,7 @@ export function ladderLengthDFS(beginWord: string, endWord: string, wordList: st
                 rest = backTrackRest;
             }
         }
-    }
+    };
 
     dfs([], wordList, 0, proxyVariables.tree);
 
@@ -413,47 +413,47 @@ export function ladderLengthDFS(beginWord: string, endWord: string, wordList: st
 
 // Plagiarized 3440 ms
 export const ladderLengthPlagiarized = function (beginWord: string, endWord: string, wordList: string[], proxyHandler: TProxyHandler) {
-    let queue = [beginWord]
-    let level = 1
+    let queue = [beginWord];
+    let level = 1;
     if (!wordList.includes(endWord)) {
-        return 0
+        return 0;
     }
-    let map: { [key in string]: boolean } = {}
+    let map: { [key in string]: boolean } = {};
     while (queue.length) {
-        let diffByOne = []
+        let diffByOne = [];
         while (queue.length) {
             // console.log(queue)
-            let ele = queue.shift()
-            map[ele!] = true
-            let eleChar = ele!.split('')
+            let ele = queue.shift();
+            map[ele!] = true;
+            let eleChar = ele!.split('');
             for (let i = 0; i < wordList.length; i++) {
-                let count = 0
-                let wordChar = wordList[i].split('')
+                let count = 0;
+                let wordChar = wordList[i].split('');
                 for (let j = 0; j < eleChar.length; j++) {
                     if (wordChar[j] !== eleChar[j]) {
-                        count++
+                        count++;
                         if (count == 2) {
-                            break
+                            break;
                         }
                     }
                 }
                 if (count == 1) {
                     if (wordList[i] == endWord) {
-                        return level + 1
+                        return level + 1;
                     }
                     if (!map[wordList[i]]) {
-                        diffByOne.push(wordList[i])
-                        map[wordList[i]] = true
+                        diffByOne.push(wordList[i]);
+                        map[wordList[i]] = true;
                     }
                 }
             }
         }
         if (diffByOne.length) {
-            queue = [...queue, ...diffByOne]
+            queue = [...queue, ...diffByOne];
         }
-        level++
+        level++;
     }
-    return 0
+    return 0;
 };
 
 export const ladderLengthBFS = function (beginWord: string, endWord: string, wordList: string[]) {
@@ -486,7 +486,7 @@ export const ladderLengthBFS = function (beginWord: string, endWord: string, wor
         }
     }
     return 0;
-}
+};
 
 export const ladderLengthTwoWayBFS = function (beginWord: string, endWord: string, wordList: string[]) {
     if (wordList.length < 1 || !wordList.includes(endWord)) {
@@ -530,7 +530,7 @@ export const ladderLengthTwoWayBFS = function (beginWord: string, endWord: strin
         }
     }
     return 0;
-}
+};
 
 const runAllLadderLength = async () => {
     await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase1);
@@ -540,7 +540,7 @@ const runAllLadderLength = async () => {
     await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase5);
     await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase6);
     await runAlgorithm(ladderLengthTwoWayBFS, false, ...ladderLengthCase7);
-}
+};
 // runAllLadderLength().then()
 
 // 542	01 Matrix	★★★	675	934						BFS
@@ -586,7 +586,7 @@ export const updateMatrix = (mat: number[][]): number[][] => {
         }
     }
     return costMat;
-}
+};
 
 export const updateMatrixByIndex = (mat: number[][]): number[][] => {
     const rowCount = mat.length, colCount = mat[0].length;
@@ -630,7 +630,7 @@ export const updateMatrixByIndex = (mat: number[][]): number[][] => {
         }
     }
     return costMat;
-}
+};
 
 const runAllUpdateMatrix = async () => {
     await runAlgorithm(updateMatrix, false, ...updateMatrixCase1);
@@ -641,7 +641,7 @@ const runAllUpdateMatrix = async () => {
     await runAlgorithm(updateMatrixByIndex, false, ...updateMatrixCase3);
     await runAlgorithm(updateMatrix, false, ...updateMatrixCase4);
     await runAlgorithm(updateMatrixByIndex, false, ...updateMatrixCase4);
-}
+};
 // runAllUpdateMatrix().then()
 
 
@@ -663,7 +663,7 @@ export async function cutOffTree(forest: number[][], proxyHandler?: TProxyHandle
     for (let rowIndex = 0; rowIndex < forest.length; rowIndex++) {
         for (let colIndex = 0; colIndex < forest[rowIndex].length; colIndex++) {
             if (forest[rowIndex][colIndex] > 1) {
-                treeCoordinates.push({y: rowIndex, x: colIndex})
+                treeCoordinates.push({y: rowIndex, x: colIndex});
             }
         }
     }
@@ -721,11 +721,11 @@ export async function cutOffTree(forest: number[][], proxyHandler?: TProxyHandle
             if (queue.length === 0) {
                 queue = tempQueue;
                 tempQueue = [];
-                level++
+                level++;
             }
         }
         return -1;
-    }
+    };
 
     let begin: Coordinate = {y: 0, x: 0};
 
@@ -762,7 +762,7 @@ function cutOffTreeByIndex(forest: number[][]): number {
     for (let rowIndex = 0; rowIndex < forest.length; rowIndex++) {
         for (let colIndex = 0; colIndex < forest[rowIndex].length; colIndex++) {
             if (forest[rowIndex][colIndex] > 1) {
-                treeCoordinates.push([rowIndex, colIndex])
+                treeCoordinates.push([rowIndex, colIndex]);
             }
         }
     }
@@ -800,11 +800,11 @@ function cutOffTreeByIndex(forest: number[][]): number {
             if (queue.length === 0) {
                 queue = tempQueue;
                 tempQueue = [];
-                level++
+                level++;
             }
         }
         return -1;
-    }
+    };
 
     let begin: MatrixCell = [0, 0];
 
@@ -850,7 +850,7 @@ const runAllCutOffTree = async () => {
 
     await runAlgorithm(cutOffTree, false, ...cutOffTreeCase7);
     await runAlgorithm(cutOffTreeByIndex, false, ...cutOffTreeCase7);
-}
+};
 // runAllCutOffTree().then()
 
 
@@ -881,7 +881,7 @@ export const treeMaxDepth = (node: TreeNode<number>): number => {
         const maxRight = treeMaxDepth(right);
         return Math.max(maxLeft, maxRight) + 1;
     } else {
-        return 1
+        return 1;
     }
-}
+};
 /* --- end tree ---*/

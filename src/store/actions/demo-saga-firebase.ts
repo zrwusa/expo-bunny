@@ -6,5 +6,5 @@ export function saveDemoSagaFirebaseTodo(params: SaveDemoSagaFirebaseTodoParams)
     return {
         type: EDemoSagaFirebase.SAVE_DEMO_SAGA_FIREBASE_TODO,
         payload: params
-    }
+    };
 }

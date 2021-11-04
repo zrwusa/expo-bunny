@@ -1,9 +1,8 @@
 import {IcoMoon, Text, TextButton, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 import {getSharedStyles} from '../../helpers';
 import {getStyles} from './styles';
 import {FlatList, KeyboardAvoidingView, SafeAreaView} from 'react-native';
@@ -16,7 +15,7 @@ import {useIsMounted} from '../../hooks/is-mounted';
 import {uuidV4} from '../../utils';
 import {TreeNodePickerNode} from '../../types';
 
-declare const ChildrenKey: unique symbol
+declare const ChildrenKey: unique symbol;
 
 
 export type WhereArguments = [string | FieldPath, WhereFilterOp, any];
@@ -62,22 +61,22 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
     } = props;
 
 
-    const [currentNodesState, setCurrentNodesState] = useState<TreeNodePickerNode[]>(level !== 0 ? currentNodes as TreeNodePickerNode[] : new Array<TreeNodePickerNode>(leafLevel))
-    const [orgData, setOrgData] = useState(data)
-    const [filterData, setFilterData] = useState(orgData)
-    const [children, setChildren] = useState<TreeNodePickerNode[] | undefined>(undefined)
-    const childrenLevel = level + 1
+    const [currentNodesState, setCurrentNodesState] = useState<TreeNodePickerNode[]>(level !== 0 ? currentNodes as TreeNodePickerNode[] : new Array<TreeNodePickerNode>(leafLevel));
+    const [orgData, setOrgData] = useState(data);
+    const [filterData, setFilterData] = useState(orgData);
+    const [children, setChildren] = useState<TreeNodePickerNode[] | undefined>(undefined);
+    const childrenLevel = level + 1;
 
     const _reset = () => {
 
-    }
+    };
 
-    const title = titles[level]
-    const childrenKey = childrenKeys[level]
-    const collectionPath = collectionPaths[level]
-    const keyExtractor = keyExtractors[level]
-    const displayField = displayFields[level]
-    const [childrenCondition, setChildrenCondition] = useState<WhereArguments>()
+    const title = titles[level];
+    const childrenKey = childrenKeys[level];
+    const collectionPath = collectionPaths[level];
+    const keyExtractor = keyExtractors[level];
+    const displayField = displayFields[level];
+    const [childrenCondition, setChildrenCondition] = useState<WhereArguments>();
     useEffect(() => {
         (async () => {
             if (dataMode === 'firestore' && isMounted) {
@@ -93,72 +92,72 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
                     snapshot = await collectionRef
                         .get();
                 }
-                let data: TreeNodePickerNode[] = []
+                let data: TreeNodePickerNode[] = [];
                 snapshot.forEach((doc) => {
-                    data.push(doc.data() as TreeNodePickerNode)
+                    data.push(doc.data() as TreeNodePickerNode);
                 });
                 setOrgData(data);
-                setFilterData(data)
+                setFilterData(data);
             }
-        })()
+        })();
 
-    }, [])
+    }, []);
 
     const treeNodePress = async (treeNode: TreeNodePickerNode) => {
         // TODO when child selected,this should not be called
-        const newState: TreeNodePickerNode[] = [...currentNodesState]
+        const newState: TreeNodePickerNode[] = [...currentNodesState];
         newState[level] = treeNode;
         switch (dataMode) {
             case 'local':
                 if (treeNode?.[childrenKey]) {
-                    setChildren(treeNode[childrenKey])
-                    setIsShowChildrenModal(true)
+                    setChildren(treeNode[childrenKey]);
+                    setIsShowChildrenModal(true);
                 } else {
-                    setChildren(undefined)
-                    onDone?.(newState)
+                    setChildren(undefined);
+                    onDone?.(newState);
                 }
                 break;
             case 'firestore':
-                const condition = conditions?.[childrenLevel]
-                const $key = condition?.[2].split('$')[1]
+                const condition = conditions?.[childrenLevel];
+                const $key = condition?.[2].split('$')[1];
                 const fieldPath = condition?.[0];
                 const filterOp = condition?.[1];
 
-                setCurrentNodesState(newState)
+                setCurrentNodesState(newState);
                 if (level === leafLevel) {
-                    onDone?.(newState)
+                    onDone?.(newState);
                 } else {
                     if (fieldPath && filterOp && $key) {
 
-                        setChildrenCondition([fieldPath, filterOp, treeNode[$key]])
-                        setChildren([])
+                        setChildrenCondition([fieldPath, filterOp, treeNode[$key]]);
+                        setChildren([]);
                         setIsShowChildrenModal(true);
                     }
                 }
                 break;
         }
-    }
+    };
 
-    const [isShowChildrenModal, setIsShowChildrenModal] = useState(false)
-    const [searchQuery, setSearchQuery] = useState('')
+    const [isShowChildrenModal, setIsShowChildrenModal] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const onChangeSearch = (searchQuery: string) => {
-        setSearchQuery(searchQuery)
-    }
+        setSearchQuery(searchQuery);
+    };
 
     useEffect(() => {
         const filterData = searchQuery.trim()
             ? orgData?.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
-            : orgData
-        setFilterData(filterData)
-    }, [searchQuery])
+            : orgData;
+        setFilterData(filterData);
+    }, [searchQuery]);
 
     return <SafeAreaView style={[styles.container]}>
         <View style={styles.header}>
             <Row>
                 <Col>
                     <TextButton onPress={() => {
-                        onCancel?.()
+                        onCancel?.();
                     }}><IcoMoon name="x"/></TextButton>
                 </Col>
                 <Col align="center"><Text>{title}</Text></Col>
@@ -194,11 +193,11 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
                                 textAlign="flex-start"
                                 columns={[0, 9, 1]}
                                 onPress={async () => {
-                                    await treeNodePress(item)
+                                    await treeNodePress(item);
                                 }}
                                 renderText={() => item?.[displayField]?.toString() || ''}
                                 isShowChevron={dataMode === 'local' ? !!item.children : level !== leafLevel}
-                            />
+                            />;
                         }}
                     />
                     <Searchbar placeholder="Search"
@@ -210,7 +209,7 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
                         ? <ModalFromRight
                             isVisible={isShowChildrenModal}
                             onVisibleChanged={isVisible => {
-                                setIsShowChildrenModal(isVisible)
+                                setIsShowChildrenModal(isVisible);
                             }}>
                             <TreeNodePicker
                                 condition={childrenCondition}
@@ -219,7 +218,7 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
 
                                 onDone={(result) => {
                                     setIsShowChildrenModal(false);
-                                    onDone?.(result)
+                                    onDone?.(result);
                                 }}
                                 onCancel={() => {
                                     setIsShowChildrenModal(false);
@@ -245,5 +244,5 @@ export const TreeNodePicker = (props: TreeNodePickerProps) => {
         {/*        onDone?.(treeNode)*/}
         {/*    }}><InButtonText>Done</InButtonText></ButtonTO>*/}
         {/*</View>*/}
-    </SafeAreaView>
-}
+    </SafeAreaView>;
+};

@@ -5,7 +5,7 @@ import {getDemoSagas} from '../../store/actions';
 import {RootState} from '../../types';
 import {getSharedStyles} from '../../helpers';
 import {getContainerStyles} from '../../containers';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 
 function DemoSagaScreen() {
@@ -23,17 +23,17 @@ function DemoSagaScreen() {
                     pageNum: 1, pageCount: 10, filter: {
                         text: 'saga1'
                     }
-                }))
+                }));
             }} title="fetchDemoSagas"/>
             {
                 items && items.length > 0
                     ? items.map(item => {
-                        return <Text key={item.id}>{item.text}</Text>
+                        return <Text key={item.id}>{item.text}</Text>;
                     })
                     : null
             }
         </View>
-    )
+    );
 }
 
-export default DemoSagaScreen
+export default DemoSagaScreen;

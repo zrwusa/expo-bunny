@@ -27,7 +27,7 @@ import {
 } from '../utils';
 import configORG from '../config';
 import _ from 'lodash';
-import icoMoonSelection from '../assets/fonts/icomoon/selection.json'
+import icoMoonSelection from '../assets/fonts/icomoon/selection.json';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {firebase} from '../firebase/firebase';
@@ -71,7 +71,7 @@ export const navigatorPropsExtract = (node: NavigatorTreeNode) => {
         'top': tabProps
     };
     return propsMap[navigatorType];
-}
+};
 
 export const tabBarIconNameConfig: JSONSerializable = {
     TabHome: {
@@ -155,7 +155,7 @@ export const tabBarIconNameConfig: JSONSerializable = {
         focused: 'user-o',
     },
 
-}
+};
 
 const getIconMCCustomMap = (iconConfig: any) => {
     let map: JSONSerializable = {};
@@ -165,23 +165,23 @@ const getIconMCCustomMap = (iconConfig: any) => {
         const focusedKey = iconConfig[key]['focused'];
         map[defaultKey] = glyphMapT[defaultKey];
         map[focusedKey] = glyphMapT[focusedKey];
-    })
+    });
     return map as object;
-}
+};
 
-export const glyphMaterialCommunityCustomMap = getIconMCCustomMap(tabBarIconNameConfig)
+export const glyphMaterialCommunityCustomMap = getIconMCCustomMap(tabBarIconNameConfig);
 
 export const icoMoonSelectionToGlyphMap = (icoMoonSelection: IcoMoonSelection) => {
     let map: JSONSerializable = {};
     const {icons} = icoMoonSelection;
     for (const i in icons as IcoMoonSelectionIcon[]) {
-        const iconProperties = icons[i].properties
+        const iconProperties = icons[i].properties;
         const {name, code} = iconProperties;
         map[name.toString()] = code;
     }
     return map as object;
-}
-export const glyphIcoMoonMap = icoMoonSelectionToGlyphMap(icoMoonSelection as IcoMoonSelection)
+};
+export const glyphIcoMoonMap = icoMoonSelectionToGlyphMap(icoMoonSelection as IcoMoonSelection);
 
 export const getIconNameByRoute = (routeName: string, focused: boolean): IcoMoonKeys => {
     const key = focused ? 'focused' : 'default';
@@ -192,74 +192,74 @@ export const getIconNameByRoute = (routeName: string, focused: boolean): IcoMoon
     } else {
         iconName = '';
     }
-    return iconName as IcoMoonKeys
-}
+    return iconName as IcoMoonKeys;
+};
 
 export const blError = (blMsg: string, shouldShow?: boolean): BLResult => {
-    const shouldShowParam = shouldShow !== undefined ? shouldShow : true
+    const shouldShowParam = shouldShow !== undefined ? shouldShow : true;
     return {
         id: uuidV4(),
         success: false,
         data: undefined,
         message: blMsg,
         shouldShow: shouldShowParam
-    }
-}
+    };
+};
 
 export const blSuccess = <TData extends any>(data: TData, message?: string, shouldShow?: boolean): BLResult => {
-    const shouldShowParam = shouldShow !== undefined ? shouldShow : true
+    const shouldShowParam = shouldShow !== undefined ? shouldShow : true;
     return {
         id: uuidV4(),
         success: true,
         data: data,
         message: message || '',
         shouldShow: shouldShowParam
-    }
-}
+    };
+};
 
 export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
-    let dataKeys
+    let dataKeys;
     try {
-        dataKeys = Object.keys(data)
-    } catch (err) {
-        throw new PErrorClass(err.message, err.stack)
+        dataKeys = Object.keys(data);
+    } catch (err: any) {
+        throw new PErrorClass(err.message, err.stack);
     }
-    const isDataKeysEqual = _.isEqual(dataKeys, ['timeSpent', 'successData', 'httpExtra', 'businessLogic'])
+    const isDataKeysEqual = _.isEqual(dataKeys, ['timeSpent', 'successData', 'httpExtra', 'businessLogic']);
     if (!isDataKeysEqual) {
-        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_ROOT_STRUCTURE)
+        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_ROOT_STRUCTURE);
     }
     const {businessLogic, httpExtra} = data;
     const blKeys = Object.keys(businessLogic);
-    const isBLKeysEqual = _.isEqual(blKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack'])
+    const isBLKeysEqual = _.isEqual(blKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack']);
     if (!isBLKeysEqual) {
-        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE)
+        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE);
     }
     const httpExtraKeys = Object.keys(httpExtra);
-    const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack'])
+    const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack']);
     if (!isHttpExtraKeysEqual) {
-        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE)
+        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE);
     }
     const {errorCode, errorMessage, errorStack} = businessLogic;
     if (errorCode) {
-        throw new PErrorClass(errorMessage, errorCode, errorStack)
+        throw new PErrorClass(errorMessage, errorCode, errorStack);
     }
     return true;
-}
+};
 
 export const checkAuthAPIProtocol = (data: any) => {
-    return checkCommonAPIProtocol(data, AuthAPIError)
-}
+    return checkCommonAPIProtocol(data, AuthAPIError);
+};
 
 export const checkBunnyAPIProtocol = (data: any) => {
-    return checkCommonAPIProtocol(data, BunnyAPIError)
-}
+    return checkCommonAPIProtocol(data, BunnyAPIError);
+};
 
 export const checkNomicsAPIProtocol = (data: any) => {
-    return checkCommonAPIProtocol(data, NomicsAPIError)
-}
+    return checkCommonAPIProtocol(data, NomicsAPIError);
+};
 
 export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
-    const config = configORG as APPConfig
+    const config = configORG as APPConfig;
     const apiConfig = config[apiConfigName];
 
     if (apiConfig) {
@@ -272,62 +272,62 @@ export const getApiInstanceConfig = (apiConfigName: APIConfigName) => {
         let httpPrefix;
         let defaultPort;
 
-        let finalBaseUrl = ''
+        let finalBaseUrl = '';
         if (isDevServer) {
             const devServerHost = `${devServer.domain}${devServer.port}`;
             const devProxyPrefix = isDevServerProxy ? Object.keys(devServerProxy)[0] : '';
-            finalBaseUrl = `${devServerHost}${devProxyPrefix}`
+            finalBaseUrl = `${devServerHost}${devProxyPrefix}`;
         } else {
             const env = process.env.NODE_ENV === 'production' ? 'prod' : apiConfig.env;
-            const envObj = apiConfig[env]
+            const envObj = apiConfig[env];
             if (envObj) {
                 httpPrefix = envObj.isHttps ? 'https://' : 'http://';
                 defaultPort = envObj.isHttps ? 443 : 80;
-                port = envObj.port || defaultPort
-                finalBaseUrl = `${httpPrefix}${envObj.domain}:${port}`
+                port = envObj.port || defaultPort;
+                finalBaseUrl = `${httpPrefix}${envObj.domain}:${port}`;
             } else {
-                throw (`${env} config not available,check the config`)
+                throw (`${env} config not available,check the config`);
             }
 
         }
         return {
             baseURL: finalBaseUrl,
             timeout
-        }
+        };
     }
 
-}
+};
 
 // todo be compatible to all StackParam
-export type NavToRoute = RouteProp<AuthTopStackParam, 'Login' | 'SignUp'> ;
+export type NavToRoute = RouteProp<AuthTopStackParam, 'Login' | 'SignUp'>;
 export type NavToNavigation = StackNavigationProp<RootStackParam, 'Auth'>;
 
 export const navToReference = (route: NavToRoute, navigation: NavToNavigation) => {
     let referenceRoute;
     // todo maybe nested reference
     if (route.params && route.params.reference) {
-        referenceRoute = JSON.parse(route.params.reference)
-        navigation.navigate(referenceRoute)
+        referenceRoute = JSON.parse(route.params.reference);
+        navigation.navigate(referenceRoute);
     } else {
-        navigation.navigate('Home')
+        navigation.navigate('Home');
     }
-}
+};
 
 export const navToLogin = (route: NavToRoute, navigation: NavToNavigation) => {
     if (route.params && route.params.reference) {
-        navigation.navigate('Auth', {screen: 'Login', params: {reference: route.params.reference}})
+        navigation.navigate('Auth', {screen: 'Login', params: {reference: route.params.reference}});
     } else {
-        navigation.navigate('Auth', {screen: 'Login'})
+        navigation.navigate('Auth', {screen: 'Login'});
     }
-}
+};
 
 export const navToSignUp = (route: NavToRoute, navigation: NavToNavigation) => {
     if (route.params && route.params.reference) {
-        navigation.navigate('Auth', {screen: 'SignUp', params: {reference: route.params.reference}})
+        navigation.navigate('Auth', {screen: 'SignUp', params: {reference: route.params.reference}});
     } else {
-        navigation.navigate('Auth', {screen: 'SignUp'})
+        navigation.navigate('Auth', {screen: 'SignUp'});
     }
-}
+};
 
 export const uploadFileToFirebase = async function (uri: string, path?: string) {
     // Why are we using XMLHttpRequest? See:
@@ -356,20 +356,20 @@ export const uploadFileToFirebase = async function (uri: string, path?: string) 
     // blob.close();
 
     return await snapshot.ref.getDownloadURL();
-}
+};
 
 export const removeFileFromFirebaseByURL = async function (uri: string) {
     try {
         const imageRef = firebase.storage().refFromURL(uri);
-        return await imageRef.delete()
-    } catch (e) {
+        return await imageRef.delete();
+    } catch (e: any) {
         if (['storage/invalid-argument', 'storage/object-not-found'].includes(e.code)) {
-            return
+            return;
         } else {
-            throw e
+            throw e;
         }
     }
-}
+};
 
 export const Permissions = {
     mediaLibrary: {
@@ -384,12 +384,12 @@ export const Permissions = {
     camera: {
         get: async () => {
             // if (Platform.OS !== 'web') {
-            const cameraPermission = await ImagePicker.requestCameraPermissionsAsync()
+            const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
             return cameraPermission.status === 'granted';
             // }
         }
     }
-}
+};
 
 const _panResponder = PanResponder.create({
     onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -398,21 +398,21 @@ const _panResponder = PanResponder.create({
     onMoveShouldSetPanResponderCapture: (evt, gestureState) => true
 });
 
-export const panHandlersBlock = _panResponder.panHandlers
+export const panHandlersBlock = _panResponder.panHandlers;
 
 
 export const occupationDataFormat = (data: any) => {
     const isDebug = false;
-    const dataCamelKeys = deepKeysConvert(data, 'camel')
-    isDebug && console.log('dataCamel', dataCamelKeys)
+    const dataCamelKeys = deepKeysConvert(data, 'camel');
+    isDebug && console.log('dataCamel', dataCamelKeys);
 
     const dataPropertiesRenamed = deepRenameKeys(dataCamelKeys,
         {
             occupationTitle: 'name',
             occupationSort: 'sort',
             occupationType: 'type'
-        })
-    isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed)
+        });
+    isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed);
     const dataAddedProperties = deepAdd(dataPropertiesRenamed, {
         'category': (item) => {
             return item['occupationCode']?.substr(0, 2) || '';
@@ -420,9 +420,9 @@ export const occupationDataFormat = (data: any) => {
         'code': (item) => {
             return item['occupationCode']?.substr(3, 20) || '';
         }
-    })
+    });
 
-    isDebug && console.log('dataAddedProperties', dataAddedProperties)
+    isDebug && console.log('dataAddedProperties', dataAddedProperties);
     const dataPropertiesRemoved = deepRemoveByKey(dataAddedProperties, [
         '2019PercentOfIndustry',
         '2019Employment',
@@ -432,32 +432,32 @@ export const occupationDataFormat = (data: any) => {
         'projected2029Employment',
         'projected2029PercentOfIndustry',
         'projected2029PercentOfOccupation',
-        'occupationCode'])
+        'occupationCode']);
 
-    isDebug && console.log('dataPropertiesRemoved', dataPropertiesRemoved)
+    isDebug && console.log('dataPropertiesRemoved', dataPropertiesRemoved);
     return dataPropertiesRemoved;
-}
+};
 
 
 export const occupationCategoriesFormat = (data: any) => {
     const isDebug = false;
-    const dataCamelKeys = deepKeysConvert(data, 'camel')
-    isDebug && console.log('dataCamel', dataCamelKeys)
+    const dataCamelKeys = deepKeysConvert(data, 'camel');
+    isDebug && console.log('dataCamel', dataCamelKeys);
 
     const dataPropertiesRenamed = deepRenameKeys(dataCamelKeys,
         {
             occupationTitle: 'name',
             occupationSort: 'sort',
             occupationType: 'type'
-        })
-    isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed)
+        });
+    isDebug && console.log('dataPropertiesRenamed', dataPropertiesRenamed);
     const dataAddedProperties = deepAdd(dataPropertiesRenamed, {
         'code': (item) => {
             return item['occupationCode']?.substr(0, 2) || '';
         }
-    })
+    });
 
-    isDebug && console.log('dataAddedProperties', dataAddedProperties)
+    isDebug && console.log('dataAddedProperties', dataAddedProperties);
     const dataPropertiesRemoved = deepRemoveByKey(dataAddedProperties, [
         '2019PercentOfIndustry',
         '2019Employment',
@@ -467,9 +467,9 @@ export const occupationCategoriesFormat = (data: any) => {
         'projected2029Employment',
         'projected2029PercentOfIndustry',
         'projected2029PercentOfOccupation',
-        'occupationCode'])
+        'occupationCode']);
 
-    isDebug && console.log('dataPropertiesRemoved', dataPropertiesRemoved)
+    isDebug && console.log('dataPropertiesRemoved', dataPropertiesRemoved);
     return dataPropertiesRemoved;
-}
+};
 

@@ -1,8 +1,8 @@
 import color from 'color';
 import {Animated} from 'react-native';
-import {themes} from './theme'
+import {themes} from './theme';
 
-const DarkTheme = themes.dark
+const DarkTheme = themes.dark;
 export default function overlay(
     elevation: number | Animated.Value = 1,
     surfaceColor: string = DarkTheme.colors.surface

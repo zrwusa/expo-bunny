@@ -10,7 +10,7 @@ import {
     demoThunkStateReducer,
     sysStateReducer
 } from './reducers';
-import {sagasGenerator} from './sagas'
+import {sagasGenerator} from './sagas';
 import {firebase} from '../firebase/firebase';
 import {firebaseReducer} from 'react-redux-firebase';
 import {RootState} from '../types';
@@ -28,7 +28,7 @@ const rootReducer = combineReducers<RootState>({
     firestoreState: firestoreReducer
 });
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
 
 // you might choose one redux middleware which you prefer,
@@ -43,13 +43,13 @@ sagaMiddleware.run(sagasGenerator);
 const rrfConfig = {
     userProfile: 'users'
     // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-}
+};
 
 export const rrfProps = {
     firebase: firebase,
     config: rrfConfig,
     dispatch: store.dispatch,
     createFirestoreInstance // <- needed if using firestore
-}
+};
 
 export default store;

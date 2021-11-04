@@ -9,11 +9,11 @@ import {ImageURISource} from 'react-native';
 import {useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {useDispatch, useSelector} from 'react-redux';
 import {sysError} from '../../store/actions';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 
 export interface UserAlbumEditorProps {
-    photoPath?: string
+    photoPath?: string;
 }
 
 
@@ -21,47 +21,47 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
     const {sizeLabor, themeLabor, wp, user} = useBunnyKit();
 
     const styles = getStyles(sizeLabor, themeLabor);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const firebaseUser = user?.firebaseUser;
-    let userId = ''
+    let userId = '';
     if (firebaseUser) {
         userId = firebaseUser.uid;
     }
     const {photoPath = `usersWithPhotos/${userId}`} = props;
-    const firestore = useFirestore()
+    const firestore = useFirestore();
 
-    useFirestoreConnect(photoPath)
+    useFirestoreConnect(photoPath);
 
-    const usersWithPhotos = useSelector((state: RootState) => state.firestoreState.ordered.usersWithPhotos)
+    const usersWithPhotos = useSelector((state: RootState) => state.firestoreState.ordered.usersWithPhotos);
 
     const _imageUploaderError = (e: Error) => {
-        dispatch(sysError(e))
-    }
+        dispatch(sysError(e));
+    };
 
     const _removePhoto = async (position: string, source?: ImageURISource) => {
-        await firestore.update(photoPath, {[position]: {uri: ''}})
-    }
+        await firestore.update(photoPath, {[position]: {uri: ''}});
+    };
 
     const _savePhoto = async (position: string, photoUrl?: string) => {
         if (!photoUrl) {
             return;
         }
-        await firestore.update(photoPath, {[position]: {uri: photoUrl}})
-    }
+        await firestore.update(photoPath, {[position]: {uri: photoUrl}});
+    };
 
-    const [sources, setSources] = useState<{ [key: string]: ImageURISource }>()
+    const [sources, setSources] = useState<{ [key: string]: ImageURISource }>();
 
     useEffect(() => {
         if (usersWithPhotos && usersWithPhotos.length > 0) {
             // todo react-redux-firebase type issue
-            setSources(usersWithPhotos[0] as { [key: string]: ImageURISource })
+            setSources(usersWithPhotos[0] as { [key: string]: ImageURISource });
         }
-    }, [usersWithPhotos])
+    }, [usersWithPhotos]);
 
 
     useEffect(() => {
         (async () => {
-            const doc = await firestore.get(photoPath)
+            const doc = await firestore.get(photoPath);
             if (!doc.exists) {
                 await firestore.set(photoPath, {
                     '0': {uri: ''},
@@ -70,11 +70,11 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                     '3': {uri: ''},
                     '4': {uri: ''},
                     '5': {uri: ''}
-                })
+                });
             }
-        })()
-    }, [])
-    const userPhotosPath = `/userPhotos/${userId}`
+        })();
+    }, []);
+    const userPhotosPath = `/userPhotos/${userId}`;
 
     return (
         <View style={styles.albumContainer}>
@@ -90,10 +90,10 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                     isDeleteFromServerWhenRemove
                                     isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
-                                        await _savePhoto('0', value.uri)
+                                        await _savePhoto('0', value.uri);
                                     }}
                                     onRemovePhoto={async (needRemove) => {
-                                        await _removePhoto('0', needRemove)
+                                        await _removePhoto('0', needRemove);
                                     }}
                                     onError={_imageUploaderError}
                                 />
@@ -107,10 +107,10 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                         isDeleteFromServerWhenRemove
                                         isDeleteFromServerWhenUpload
                                         onValueChanged={async (value) => {
-                                            await _savePhoto('1', value.uri)
+                                            await _savePhoto('1', value.uri);
                                         }}
                                         onRemovePhoto={async (needRemove) => {
-                                            await _removePhoto('1', needRemove)
+                                            await _removePhoto('1', needRemove);
                                         }}
                                         onError={_imageUploaderError}
                                     />
@@ -123,10 +123,10 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                         isDeleteFromServerWhenRemove
                                         isDeleteFromServerWhenUpload
                                         onValueChanged={async (value) => {
-                                            await _savePhoto('2', value.uri)
+                                            await _savePhoto('2', value.uri);
                                         }}
                                         onRemovePhoto={async (needRemove) => {
-                                            await _removePhoto('2', needRemove)
+                                            await _removePhoto('2', needRemove);
                                         }}
                                         onError={_imageUploaderError}
                                     />
@@ -142,10 +142,10 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                     isDeleteFromServerWhenRemove
                                     isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
-                                        await _savePhoto('3', value.uri)
+                                        await _savePhoto('3', value.uri);
                                     }}
                                     onRemovePhoto={async (needRemove) => {
-                                        await _removePhoto('3', needRemove)
+                                        await _removePhoto('3', needRemove);
                                     }}
                                     onError={_imageUploaderError}
                                 />
@@ -158,10 +158,10 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                     isDeleteFromServerWhenRemove
                                     isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
-                                        await _savePhoto('4', value.uri)
+                                        await _savePhoto('4', value.uri);
                                     }}
                                     onRemovePhoto={async (needRemove) => {
-                                        await _removePhoto('4', needRemove)
+                                        await _removePhoto('4', needRemove);
                                     }}
                                     onError={_imageUploaderError}
                                 />
@@ -174,10 +174,10 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
                                     isDeleteFromServerWhenRemove
                                     isDeleteFromServerWhenUpload
                                     onValueChanged={async (value) => {
-                                        await _savePhoto('5', value.uri)
+                                        await _savePhoto('5', value.uri);
                                     }}
                                     onRemovePhoto={async (needRemove) => {
-                                        await _removePhoto('5', needRemove)
+                                        await _removePhoto('5', needRemove);
                                     }}
                                     onError={_imageUploaderError}
                                 />

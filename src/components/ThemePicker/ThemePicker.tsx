@@ -1,4 +1,4 @@
-import {useThemeLabor} from '../../providers/theme-labor';
+import {useThemeLabor} from '../../providers';
 import * as React from 'react';
 import {EThemes} from '../../constants';
 import {PickerSelect} from '../UI';
@@ -12,16 +12,16 @@ export const ThemePicker: React.FC<Omit<PickerSelectProps, 'onValueChange' | 'it
     const {colors} = theme;
 
     const themeLabels = Object.keys(EThemes).map((themeName) => {
-        return {label: themeName, value: themeName, color: colors.text}
-    })
+        return {label: themeName, value: themeName, color: colors.text};
+    });
 
     const handleValueChange = async (itemValue: ThemeName) => {
-        console.log('---4?handleValueChange', itemValue)
+        console.log('---4?handleValueChange', itemValue);
         // todo always be invoked 4 times
         if (itemValue) {
             await changeTheme(itemValue);
         }
-    }
+    };
 
     return <PickerSelect
         value={currentThemeName}
@@ -29,5 +29,5 @@ export const ThemePicker: React.FC<Omit<PickerSelectProps, 'onValueChange' | 'it
         onValueChange={handleValueChange}
         items={themeLabels}
         {...rest}
-    />
-}
+    />;
+};

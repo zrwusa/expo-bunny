@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {View} from 'react-native';
 import {getStyles} from './styles';
-import {Text} from '../../../../components/UI'
+import {Text} from '../../../../components/UI';
 import {Col, Row} from '../../../../containers';
 import {LinearGradientIcon} from '../../../../components/LinearGradientIcon';
-import {useBunnyKit} from '../../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../../hooks';
 
 export interface BodyPartCardProps {
     title?: string,
@@ -16,7 +16,7 @@ export interface BodyPartCardProps {
 export function BodyPartCard(props: BodyPartCardProps) {
     const {sizeLabor, themeLabor, colors, ms} = useBunnyKit();
     const {title, children, bodyPart, date} = props;
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     return <View style={styles.bodyPartCard}>
         <Row style={{alignItems: 'flex-start'}}>
             <Col size={3} style={{alignItems: 'flex-end'}}>
@@ -39,5 +39,5 @@ export function BodyPartCard(props: BodyPartCardProps) {
         <Row style={{justifyContent: 'center', marginTop: 6}}>
             <Text>{date}</Text>
         </Row>
-    </View>
+    </View>;
 }

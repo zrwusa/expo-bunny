@@ -25,18 +25,18 @@ export type Cast<T, TComplex> = { [M in keyof TComplex]: T };
 export type DeepLeavesWrap<T, TComplex> =
     T extends string ? Cast<string, TComplex>
         : T extends number ? Cast<number, TComplex>
-        : T extends boolean ? Cast<boolean, TComplex>
-            : T extends undefined ? Cast<undefined, TComplex>
-                : T extends null ? Cast<null, TComplex>
-                    : T extends void ? Cast<void, TComplex>
-                        : T extends symbol ? Cast<symbol, TComplex>
-                            : T extends AnyFunction ? Cast<AnyFunction, TComplex>
-                                : T extends Date ? Cast<Date, TComplex>
-                                    : {
-                                        [K in keyof T]:
-                                        T[K] extends (infer U)[] ? DeepLeavesWrap<U, TComplex>[]
-                                            : DeepLeavesWrap<T[K], TComplex>;
-                                    }
+            : T extends boolean ? Cast<boolean, TComplex>
+                : T extends undefined ? Cast<undefined, TComplex>
+                    : T extends null ? Cast<null, TComplex>
+                        : T extends void ? Cast<void, TComplex>
+                            : T extends symbol ? Cast<symbol, TComplex>
+                                : T extends AnyFunction ? Cast<AnyFunction, TComplex>
+                                    : T extends Date ? Cast<Date, TComplex>
+                                        : {
+                                            [K in keyof T]:
+                                            T[K] extends (infer U)[] ? DeepLeavesWrap<U, TComplex>[]
+                                                : DeepLeavesWrap<T[K], TComplex>;
+                                        }
 
 
 // export type JSONSerializable = {
@@ -49,7 +49,7 @@ export type JSONSerializable = {
     [key: string]: any
 }
 
-export type JSONValue = string | number | boolean | undefined | JSONObject ;
+export type JSONValue = string | number | boolean | undefined | JSONObject;
 
 export interface JSONObject {
     [key: string]: JSONValue;
@@ -150,9 +150,9 @@ export class TreeNode<T> {
         if (children instanceof Array) {
             this.children = this.children.concat(children);
         } else {
-            this.children.push(children)
+            this.children.push(children);
         }
-    }
+    };
 
     getHeight = () => {
         const beginRoot = this;
@@ -168,11 +168,11 @@ export class TreeNode<T> {
                         bfs(children[i], level + 1);
                     }
                 }
-            }
+            };
             bfs(beginRoot, 1);
         }
         return maxDepth;
-    }
+    };
 
 }
 

@@ -2,7 +2,7 @@ import {heightPercentageToDP as hp2dp, widthPercentageToDP as wp2dp} from './res
 import bunnyConfig from '../../config';
 import {DesignsBasedOn, DimensionKeys, Measure} from '../../types';
 
-const getSizeLabor = () => {
+export const getSizeLabor = () => {
     const defaultDimensionFun = {
         wp: (width: number, shouldRound?: boolean) => {
             return wp2dp((width / 375), shouldRound);
@@ -10,7 +10,7 @@ const getSizeLabor = () => {
         hp: (height: number, shouldRound?: boolean) => {
             return hp2dp((height / 812), shouldRound);
         }
-    }
+    };
     let designsBasedOn: DesignsBasedOn = {
         bunnyUI: defaultDimensionFun,
         iphoneX: defaultDimensionFun,
@@ -20,7 +20,7 @@ const getSizeLabor = () => {
         custom1: defaultDimensionFun,
         custom2: defaultDimensionFun,
         custom3: defaultDimensionFun
-    }
+    };
     const dimensions = bunnyConfig.UE.dimensions;
     // let i: DimensionKeys
     // for (i in dimensions) {
@@ -33,7 +33,7 @@ const getSizeLabor = () => {
     //         }
     //     };
     // }
-    const keys = Object.keys(dimensions) as Array<DimensionKeys>
+    const keys = Object.keys(dimensions) as Array<DimensionKeys>;
     keys.forEach(function (key) {
         designsBasedOn[key] = {
             wp: (width: number, shouldRound?: boolean) => {
@@ -43,7 +43,7 @@ const getSizeLabor = () => {
                 return hp2dp((height / dimensions[key]['height']), shouldRound);
             }
         };
-    })
+    });
     const _designsBasedOn = designsBasedOn;
     const {wp} = _designsBasedOn.iphoneX;
     // todo need typescript to constrain types
@@ -129,8 +129,5 @@ const getSizeLabor = () => {
         dbo: _designsBasedOn,
         measure: _measure,
         ms: _measure,
-    }
-}
-
-
-export default getSizeLabor
+    };
+};

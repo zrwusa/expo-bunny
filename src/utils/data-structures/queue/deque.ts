@@ -26,7 +26,7 @@ export class Deque<T> extends Queue<T> {
     }
 
     getFirst(): T | null {
-        return this.peekFirst()
+        return this.peekFirst();
     }
 
     getLast(): T | null {

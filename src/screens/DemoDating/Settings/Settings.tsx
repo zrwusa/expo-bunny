@@ -16,7 +16,7 @@ import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from '../
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {getSharedStyles} from '../../../helpers';
 import {ScrollView} from 'react-native';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 import {
     Divider,
     Graduate,
@@ -54,54 +54,54 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
     const idealSpouseTitle = 'Ideal Girl';
     const [isShowSpouseModal, setIsShowSpouseModal] = useState(false);
     const _toggleSpouseModal = () => {
-        setIsShowSpouseModal(!isShowSpouseModal)
-    }
+        setIsShowSpouseModal(!isShowSpouseModal);
+    };
 
     const [idealSpouse, setIdealSpouse] = useState<SpousePickerResult>({
         distance: 10,
         age: 24,
         fromHeight: 163,
         toHeight: 180
-    })
+    });
 
 
     const occupationTitle = 'Occupation';
     const [isShowOccupationModal, setIsShowOccupationModal] = useState(false);
     const _toggleOccupationModal = () => {
-        setIsShowOccupationModal(!isShowOccupationModal)
-    }
+        setIsShowOccupationModal(!isShowOccupationModal);
+    };
     const [occupation, setOccupation] = useState<OccupationSelected>([
-        defaultValues.occupationCategory, defaultValues.occupation])
+        defaultValues.occupationCategory, defaultValues.occupation]);
 
 
     const graduateTitle = 'Graduate';
     const [isShowGraduateModal, setIsShowGraduateModal] = useState(false);
     const _toggleGraduateModal = () => {
-        setIsShowGraduateModal(!isShowGraduateModal)
-    }
-    const [graduate, setGraduate] = useState<UniversitySelected | undefined>([defaultValues.university])
+        setIsShowGraduateModal(!isShowGraduateModal);
+    };
+    const [graduate, setGraduate] = useState<UniversitySelected | undefined>([defaultValues.university]);
 
 
     const heightTitle = 'Height';
     const [isShowHeightModal, setIsShowHeightModal] = useState(false);
     const _toggleHeightModal = () => {
-        setIsShowHeightModal(!isShowHeightModal)
-    }
-    const [height, setHeight] = useState<number | undefined>(0)
+        setIsShowHeightModal(!isShowHeightModal);
+    };
+    const [height, setHeight] = useState<number | undefined>(0);
 
     const religionTitle = 'Religion';
     const [isShowReligionModal, setIsShowReligionModal] = useState(false);
     const _toggleReligionModal = () => {
-        setIsShowReligionModal(!isShowReligionModal)
-    }
-    const [religion, setReligion] = useState<ReligionSelected>([defaultValues.religion])
+        setIsShowReligionModal(!isShowReligionModal);
+    };
+    const [religion, setReligion] = useState<ReligionSelected>([defaultValues.religion]);
 
     const liveInTitle = 'LiveIn';
     const [isShowLiveInModal, setIsShowLiveInModal] = useState(false);
     const _toggleLiveInModal = () => {
-        setIsShowLiveInModal(!isShowLiveInModal)
-    }
-    const [liveIn, setLiveIn] = useState<LiveInSelected>([defaultValues.country, defaultValues.state, defaultValues.city])
+        setIsShowLiveInModal(!isShowLiveInModal);
+    };
+    const [liveIn, setLiveIn] = useState<LiveInSelected>([defaultValues.country, defaultValues.state, defaultValues.city]);
     return (
         <ScrollView style={[containerStyles.Screen]}>
             <UserAlbumEditor/>
@@ -118,45 +118,45 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
             <View style={{paddingHorizontal: wp(10)}}>
                 <InlineSelector title={idealSpouseTitle}
                                 onPress={() => {
-                                    _toggleSpouseModal()
+                                    _toggleSpouseModal();
                                 }}
                                 renderText={() => {
                                     return idealSpouse.distance + 'mi,' +
                                         idealSpouse.age + 'years old,' +
-                                        idealSpouse.toHeight + 'cm'
+                                        idealSpouse.toHeight + 'cm';
                                 }}/>
                 <Divider/>
 
                 <InlineSelector title={occupationTitle}
                                 onPress={() => {
-                                    _toggleOccupationModal()
+                                    _toggleOccupationModal();
                                 }}
                                 renderText={() => {
-                                    return occupation?.[1]?.name || ''
+                                    return occupation?.[1]?.name || '';
                                 }}/>
                 <Divider/>
                 <InlineSelector title={graduateTitle}
                                 onPress={() => {
-                                    _toggleGraduateModal()
+                                    _toggleGraduateModal();
                                 }}
                                 renderText={() => {
-                                    return graduate?.[0].name || ''
+                                    return graduate?.[0].name || '';
                                 }}/>
                 <Divider/>
                 <InlineSelector title={religionTitle}
                                 onPress={() => {
-                                    _toggleReligionModal()
+                                    _toggleReligionModal();
                                 }}
                                 renderText={() => {
-                                    return religion?.[0].display || ''
+                                    return religion?.[0].display || '';
                                 }}/>
                 <Divider/>
                 <InlineSelector title={liveInTitle}
                                 onPress={() => {
-                                    _toggleLiveInModal()
+                                    _toggleLiveInModal();
                                 }}
                                 renderText={() => {
-                                    return liveIn?.[2]?.name || ''
+                                    return liveIn?.[2]?.name || '';
                                 }}/>
                 <Divider/>
                 <Row style={{paddingHorizontal: wp(10), paddingVertical: wp(3)}}>
@@ -191,12 +191,12 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                     marginBottom: wp(1)
                 }]}>Interests</Text>
             <InterestPicker type="edit" onDone={(result) => {
-                console.log(result)
+                console.log(result);
             }}/>
 
             <ModalFromBottom isVisible={isShowSpouseModal}
                              onVisibleChanged={isVisible => {
-                                 setIsShowSpouseModal(isVisible)
+                                 setIsShowSpouseModal(isVisible);
                              }}>
                 <SpousePicker
                     title={idealSpouseTitle}
@@ -211,7 +211,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
             </ModalFromBottom>
             <ModalFromRight isVisible={isShowOccupationModal}
                             onVisibleChanged={isVisible => {
-                                setIsShowOccupationModal(isVisible)
+                                setIsShowOccupationModal(isVisible);
                             }}>
                 <TreeNodePicker
                     titles={['Category', 'Occupation', 'Test']}
@@ -226,7 +226,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
                     // data={occupationTreeData}
                     // childrenKeys={['children', 'children']}
                     onDone={(result) => {
-                        console.log(result)
+                        console.log(result);
 
                         setOccupation(result as unknown as OccupationSelected);
                         setIsShowOccupationModal(false);
@@ -248,7 +248,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
             </ModalFromRight>
             <ModalFromRight isVisible={isShowGraduateModal}
                             onVisibleChanged={isVisible => {
-                                setIsShowGraduateModal(isVisible)
+                                setIsShowGraduateModal(isVisible);
                             }}>
                 <TreeNodePicker
                     titles={['University']}
@@ -275,7 +275,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
             </ModalFromRight>
             <ModalFromRight isVisible={isShowHeightModal}
                             onVisibleChanged={isVisible => {
-                                setIsShowHeightModal(isVisible)
+                                setIsShowHeightModal(isVisible);
                             }}>
                 <HeightPicker
                     title={heightTitle}
@@ -290,7 +290,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
             </ModalFromRight>
             <ModalFromRight isVisible={isShowReligionModal}
                             onVisibleChanged={isVisible => {
-                                setIsShowReligionModal(isVisible)
+                                setIsShowReligionModal(isVisible);
                             }}>
                 <TreeNodePicker
                     titles={['Religion']}
@@ -317,7 +317,7 @@ export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
             </ModalFromRight>
             <ModalFromRight isVisible={isShowLiveInModal}
                             onVisibleChanged={isVisible => {
-                                setIsShowLiveInModal(isVisible)
+                                setIsShowLiveInModal(isVisible);
                             }}>
                 <TreeNodePicker
                     titles={['Country', 'State', 'City']}

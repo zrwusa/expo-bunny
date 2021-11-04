@@ -17,4 +17,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
         item: {marginBottom: wp(1)}
     });
-}
+};

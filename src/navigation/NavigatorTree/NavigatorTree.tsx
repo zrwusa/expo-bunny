@@ -26,7 +26,7 @@ import {ChatHomeScreen} from '../../screens/DemoChat/Home';
 import DemoShareScreen from '../../screens/DemoShare';
 import {Image, Platform, TouchableOpacity, View} from 'react-native';
 import DemoNotificationScreen from '../../screens/DemoNotification/DemoNotification';
-import {NotSupport} from '../../components/NotSupport';
+import {NotSupport} from '../../components';
 import TabHomeScreen from '../../screens/DemoTab/Home';
 import TabSettingsScreen from '../../screens/DemoTab/Settings';
 import {
@@ -55,13 +55,11 @@ import DemoThemeScreen from '../../screens/DemoTheme';
 import {useTranslation} from 'react-i18next';
 import {StackNavigationOptions} from '@react-navigation/stack';
 import {IcoMoon} from '../../components/UI';
-import {useSizeLabor} from '../../providers/size-labor';
+import {useAuthLabor, useSizeLabor, useThemeLabor} from '../../providers';
 import {getStyles} from './styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useThemeLabor} from '../../providers/theme-labor';
 import {DefaultNavigatorOptions} from '@react-navigation/core/src/types';
 import {blError, blSuccess, getIconNameByRoute} from '../../helpers';
-import {useAuthLabor} from '../../providers/auth-labor';
 import {collectBLResult} from '../../store/actions';
 import {useDispatch} from 'react-redux';
 import {SocialMediaHomeScreen} from '../../screens/DemoSocialMedia/Home';
@@ -101,7 +99,7 @@ export type NavigatorTreeProps = Omit<NavigationContainerProps, 'children'> & {
 const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const sizeLabor = useSizeLabor();
     const {ms, designsBasedOn} = sizeLabor;
-    const {authResult, authFunctions} = useAuthLabor()
+    const {authResult, authFunctions} = useAuthLabor();
     const dispatch = useDispatch();
     const {wp} = designsBasedOn.iphoneX;
     const themeLabor = useThemeLabor();
@@ -116,8 +114,8 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
         return (<Row style={styles.settingBox}>
             <ThemePicker/>
             {/*<LanguagePicker/>*/}
-        </Row>)
-    }
+        </Row>);
+    };
 
     const screenOptionsStackCommon: StackNavigationOptions = {
         animationEnabled: true,
@@ -149,31 +147,31 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 web: wp(50),
             })
         }
-    }
+    };
 
     const optionsMergeWithTitle = function (needMerged?: any) {
         return function ({route}: any) {
             const finalOptions = {
                 title: t(`screens.${route.name}.title`),
                 ...(needMerged && needMerged),
-            }
+            };
             return finalOptions;
-        }
-    }
+        };
+    };
 
     const optionsAuth: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: false,
         headerShown: true,
         headerLeft: () => null
-    }
+    };
 
     const optionsChat: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: true,
         headerShown: false,
         headerLeft: () => null
-    }
+    };
     const optionsSocialMedia: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: true,
@@ -200,28 +198,28 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         color: colors.primary,
                         fontSize: ms.fs.l,
                         marginRight: wp(10)
-                    }}/></View>
+                    }}/></View>;
         },
         headerTitle: () => <Image style={{width: wp(100), height: wp(30)}}
                                   source={theme.dark
                                       ? require('../../assets/images/art-font-bunny-white.png')
                                       : require('../../assets/images/art-font-bunny.png')}/>,
-    }
+    };
 
     const optionsHealth: StackNavigationOptions = {
         ...screenOptionsStackCommon,
         animationEnabled: true,
         headerShown: true,
-    }
+    };
 
     const screenOptionsTabBarIcon: TabBarScreenOptions = ({route}) => {
         return {
             tabBarIcon: ({focused, color, size}) => {
-                const name = getIconNameByRoute(route.name, focused)
+                const name = getIconNameByRoute(route.name, focused);
                 return <IcoMoon name={name} style={{color: color}} size={wp(size / 1.25)}/>;
             },
-        }
-    }
+        };
+    };
 
     const screenOptionsDrawer: DrawerScreenOptions = ({navigation}) => {
         return {
@@ -234,7 +232,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             headerShown: true,
             headerLeft: () => {
                 return (<TouchableOpacity onPress={() => {
-                    navigation.dispatch(DrawerActions.toggleDrawer())
+                    navigation.dispatch(DrawerActions.toggleDrawer());
                 }}>
                     <IcoMoon
                         name="menu"
@@ -243,11 +241,11 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                             fontSize: ms.fs.l,
                             color: colors.text
                         }}/>
-                </TouchableOpacity>)
+                </TouchableOpacity>);
             },
             headerStatusBarHeight: Platform.select({native: 0})
-        }
-    }
+        };
+    };
 
     const tabBarOptionsCommon: BottomTabBarOptions = {
         tabStyle: {
@@ -260,74 +258,74 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             height: wp(46) + insets.bottom
         },
         labelPosition: 'below-icon'
-    }
+    };
 
     const tabBarOptionsSocialMedia: BottomTabBarOptions = {
         ...tabBarOptionsCommon,
         showLabel: false,
-    }
+    };
 
     const tabBarOptionsDating: BottomTabBarOptions = {
         ...tabBarOptionsCommon,
         showLabel: false,
-    }
+    };
 
     const tabBarOptionsHealth: BottomTabBarOptions = {
         ...tabBarOptionsCommon,
         showLabel: false,
-    }
+    };
     // --- options end ---
 
     const listenersNeedAuth = () => {
         return {
             focus: function () {
-                authFunctions.authTrigger('SCREEN')
+                authFunctions.authTrigger('SCREEN');
             },
-        }
-    }
+        };
+    };
 
     const navigateToAuth = () => {
         if (authResult.isLogin) {
-            return
+            return;
         }
         if (navigationRef.current) {
-            const curRoute = navigationRef.current.getCurrentRoute()
+            const curRoute = navigationRef.current.getCurrentRoute();
             if (!curRoute) {
-                navigationRef.current.navigate('Auth', {screen: 'Login'})
-                return
+                navigationRef.current.navigate('Auth', {screen: 'Login'});
+                return;
             }
             if (!['Login', 'SignUp'].includes(curRoute.name)) {
                 navigationRef.current.navigate('Auth', {
                     screen: 'Login',
                     params: {reference: JSON.stringify(curRoute)}
-                })
+                });
             } else {
-                return
+                return;
             }
         }
-    }
+    };
 
     useEffect(() => {
         switch (authResult.triggerType) {
             case 'API':
-                dispatch(collectBLResult(blError(t('sys.apiNeedLogin'))))
+                dispatch(collectBLResult(blError(t('sys.apiNeedLogin'))));
                 break;
             case 'SCREEN':
-                navigateToAuth()
+                navigateToAuth();
                 break;
             case 'MANUAL':
-                navigateToAuth()
+                navigateToAuth();
                 break;
             case 'AUTO':
-                dispatch(collectBLResult(blSuccess(true, t('sys.LogOutSuccess'))))
+                dispatch(collectBLResult(blSuccess(true, t('sys.LogOutSuccess'))));
                 break;
             case 'OTHERS':
-                navigateToAuth()
+                navigateToAuth();
                 break;
             default:
                 break;
         }
-    }, [authResult.triggerUUID])
+    }, [authResult.triggerUUID]);
 
     const navigationRef = React.useRef<NavigationContainerRef>(null);
     return <NavigationContainer
@@ -371,7 +369,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                                   options={optionsMergeWithTitle()}/>
                             <DemoChatStack.Screen name="ChatRoom" component={ChatRoomScreen}
                                                   options={optionsMergeWithTitle()}/>
-                        </DemoChatStack.Navigator>
+                        </DemoChatStack.Navigator>;
                     }
                 }
             </RootStack.Screen>
@@ -381,7 +379,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
             <RootStack.Screen name="DemoNotification" component={
                 Platform.OS !== 'web'
                     ? DemoNotificationScreen
-                    : () => <NotSupport text='Not supported on web'/>} options={optionsMergeWithTitle()}/>
+                    : () => <NotSupport text="Not supported on web"/>} options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoTab" options={optionsMergeWithTitle()}>
                 {
                     (props) => {
@@ -392,7 +390,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                             <DemoTabStack.Screen name="TabSettings" component={TabSettingsScreen}
                                                  initialParams={{'item': 'item-001'}}
                                                  options={optionsMergeWithTitle()}/>
-                        </DemoTabStack.Navigator>
+                        </DemoTabStack.Navigator>;
                     }
                 }
             </RootStack.Screen>
@@ -407,7 +405,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                         <DemoDrawerStack.Screen name="DrawerSettings" component={DrawerSettingsScreen}
                                                 initialParams={{'item': 'item-001'}}
                                                 options={optionsMergeWithTitle()}/>
-                    </DemoDrawerStack.Navigator>
+                    </DemoDrawerStack.Navigator>;
                 }}
             </RootStack.Screen>
             <RootStack.Screen name="DemoNestedLv0" options={optionsMergeWithTitle()}>
@@ -425,10 +423,10 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                     <DemoNestedLv2Stack.Screen name="NestedLv2Settings"
                                                                component={NestedLv2SettingsScreen}
                                                                options={optionsMergeWithTitle()}/>
-                                </DemoNestedLv2Stack.Navigator>
+                                </DemoNestedLv2Stack.Navigator>;
                             }}
                         </DemoNestedLv1Stack.Screen>
-                    </DemoNestedLv1Stack.Navigator>
+                    </DemoNestedLv1Stack.Navigator>;
                 }}
             </RootStack.Screen>
             <RootStack.Screen name="DemoRNComponents" options={optionsMergeWithTitle()}>
@@ -452,7 +450,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                                              options={optionsMergeWithTitle()}/>
                             <DemoTabRNComponentsStack.Screen name="RNSafeArea" component={RNSafeAreaScreen}
                                                              options={optionsMergeWithTitle()}/>
-                        </DemoTabRNComponentsStack.Navigator>
+                        </DemoTabRNComponentsStack.Navigator>;
                     }
                 }
             </RootStack.Screen>
@@ -472,7 +470,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                                                        text="Not supported on web"/>}
                                                                initialParams={{isPush: true}}
                                                                options={optionsMergeWithTitle()}/>
-                        </DemoCryptoCurrencyTabStack.Navigator>
+                        </DemoCryptoCurrencyTabStack.Navigator>;
                     }
                 }
             </RootStack.Screen>
@@ -495,7 +493,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                             <DemoSocialMediaTabStack.Screen name="SocialMediaSettings"
                                                             component={SocialMediaSettingsScreen}
                                                             initialParams={{'item': 'item-001'}}/>
-                        </DemoSocialMediaTabStack.Navigator>
+                        </DemoSocialMediaTabStack.Navigator>;
                     }
                 }
             </RootStack.Screen>
@@ -517,7 +515,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                             <DemoHealthTabStack.Screen name="HealthSettings"
                                                        component={HealthSettingsScreen}
                                                        options={optionsMergeWithTitle()}/>
-                        </DemoHealthTabStack.Navigator>
+                        </DemoHealthTabStack.Navigator>;
                     }
                 }
             </RootStack.Screen>
@@ -533,7 +531,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                                                        options={optionsMergeWithTitle()}/>
                             <DemoDatingTabStack.Screen name="DatingSettings" component={DatingSettingsScreen}
                                                        options={optionsMergeWithTitle()}/>
-                        </DemoDatingTabStack.Navigator>
+                        </DemoDatingTabStack.Navigator>;
                     }
                 }
             </RootStack.Screen>
@@ -542,7 +540,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                               options={optionsMergeWithTitle()}/>
             <RootStack.Screen name="DemoTheme" component={DemoThemeScreen} options={optionsMergeWithTitle()}/>
         </RootStack.Navigator>
-    </NavigationContainer>
-}
+    </NavigationContainer>;
+};
 
-export default NavigatorTree
+export default NavigatorTree;

@@ -3,15 +3,14 @@ import {useState} from 'react';
 import {IcoMoon, PickerSelect, SwitchP, Text, View} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoHealthTabStackParam, RootStackParam} from '../../../types';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {Card, getContainerStyles, Row} from '../../../containers';
+import {shortenTFunctionKey} from '../../../providers';
+import {Card, Col, getContainerStyles, Row} from '../../../containers';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Divider} from '../../../components/Divider';
+import {Divider} from '../../../components';
 import {LinearGradientIcon} from '../../../components/LinearGradientIcon';
 import {getStyles} from './styles';
-import {Col} from '../../../containers/Col';
 import {SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 type HealthSettingsRouteProp = RouteProp<DemoHealthTabStackParam, 'HealthSettings'>;
 type HealthSettingsNavigationProp = StackNavigationProp<RootStackParam, 'DemoHealth'>;
@@ -26,11 +25,11 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
     const st = shortenTFunctionKey(t, 'screens.HealthSettings');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
-    const styles = getStyles(sizeLabor, themeLabor)
-    const [weightUnit, setWeightUnit] = useState('kg')
-    const [distanceUnit, setDistanceUnit] = useState('km')
-    const [lengthUnit, setLengthUnit] = useState('cm')
-    const [isNotification, setIsNotification] = useState(true)
+    const styles = getStyles(sizeLabor, themeLabor);
+    const [weightUnit, setWeightUnit] = useState('kg');
+    const [distanceUnit, setDistanceUnit] = useState('km');
+    const [lengthUnit, setLengthUnit] = useState('cm');
+    const [isNotification, setIsNotification] = useState(true);
 
     return (
         <SafeAreaView style={{flex: 1}}>
@@ -56,7 +55,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                                       color: colors.text
                                                   }]}
                                                   onValueChange={(value) => {
-                                                      setWeightUnit(value)
+                                                      setWeightUnit(value);
                                                   }}
                                     />
                                 </Row>
@@ -81,7 +80,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                                       color: colors.text
                                                   }, {label: 'foot', value: 'foot', color: colors.text}]}
                                                   onValueChange={(value) => {
-                                                      setDistanceUnit(value)
+                                                      setDistanceUnit(value);
                                                   }}
                                     />
                                 </Row>
@@ -106,7 +105,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                                                       color: colors.text
                                                   }]}
                                                   onValueChange={(value) => {
-                                                      setLengthUnit(value)
+                                                      setLengthUnit(value);
                                                   }}
                                     />
                                 </Row>
@@ -124,7 +123,7 @@ export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
                             <Col size={1} style={styles.rightWrapper}>
                                 <SwitchP value={isNotification}
                                          onValueChange={(value) => {
-                                             setIsNotification(value)
+                                             setIsNotification(value);
                                          }}
                                 />
                             </Col>

@@ -4,16 +4,16 @@ import {ButtonTO, InButtonText, Text, View} from '../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParam, RootState} from '../../types';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../providers';
 import {ImageURISource, SafeAreaView, ScrollView} from 'react-native';
 import {getStyles} from './styles';
 import ImageProgressive from '../../components/UI/ImageProgressive';
 import {Col, getContainerStyles, Row} from '../../containers';
 import {getSharedStyles} from '../../helpers';
-import {Avatar} from '../../components/Avatar';
+import {Avatar} from '../../components';
 import {useFirestore} from 'react-redux-firebase';
 import {useSelector} from 'react-redux';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Profile'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Profile'>;
@@ -24,40 +24,40 @@ interface Props {
 }
 
 function ProfileScreen({route, navigation}: Props) {
-    const {sizeLabor, themeLabor, t, user} = useBunnyKit()
+    const {sizeLabor, themeLabor, t, user} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Profile');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-    const firestore = useFirestore()
-    const userId = user?.storedUser?.uid
+    const firestore = useFirestore();
+    const userId = user?.storedUser?.uid;
 
     const getStoredUser = async () => {
         await firestore.get({
             collection: 'users',
             where: [['uid', '==', userId]],
             storeAs: 'storedUser'
-        })
-    }
+        });
+    };
 
-    const storedUser = useSelector((rootState: RootState) => rootState.firestoreState.ordered.storedUser)
+    const storedUser = useSelector((rootState: RootState) => rootState.firestoreState.ordered.storedUser);
 
     const _uploadedPortrait = async (source: ImageURISource) => {
         if (source?.uri) {
             if (!userId) {
-                return
+                return;
             }
-            const usersRef = firestore.collection('users')
+            const usersRef = firestore.collection('users');
             await usersRef.doc(userId).set({photoURL: source.uri}, {merge: true});
-            await getStoredUser()
+            await getStoredUser();
         }
-    }
+    };
 
     useEffect(() => {
         (async () => {
-            await getStoredUser()
-        })()
-    }, [])
+            await getStoredUser();
+        })();
+    }, []);
 
     return (
         <SafeAreaView>
@@ -112,7 +112,7 @@ function ProfileScreen({route, navigation}: Props) {
             </ScrollView>
         </SafeAreaView>
 
-    )
+    );
 }
 
 export default ProfileScreen;

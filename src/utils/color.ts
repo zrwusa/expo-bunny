@@ -1,34 +1,34 @@
 import {CheckColor, CheckColorResult, CheckResultType} from '../types';
 import {EXCEPTIONAL_COLOR, STANDARD_COLOR_NAME_ALL} from '../constants';
-import {ColorTranslator} from 'colortranslator'
+import {ColorTranslator} from 'colortranslator';
 
 export function isColor(colorString: string) {
     if (isColorName(colorString)) {
-        return true
+        return true;
     }
     if (isExceptionalColor(colorString)) {
-        return true
+        return true;
     }
     if (isHex(colorString)) {
-        return true
+        return true;
     }
     if (isHexA(colorString)) {
-        return true
+        return true;
     }
     if (isRGB(colorString)) {
-        return true
+        return true;
     }
     if (isRGBA(colorString)) {
-        return true
+        return true;
     }
     if (isHSL(colorString)) {
-        return true
+        return true;
     }
     if (isHSLA(colorString)) {
-        return true
+        return true;
     }
 
-    return false
+    return false;
     // const RegExpColor = /^(?:#(?:[A-Fa-f0-9]{3}){1,2}|(?:rgb[(](?:\s*0*(?:\d\d?(?:\.\d+)?(?:\s*%)?|\.\d+\s*%|100(?:\.0*)?\s*%|(?:1\d\d|2[0-4]\d|25[0-5])(?:\.\d+)?)\s*(?:,(?![)])|(?=[)]))){3}|hsl[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*|(?:rgba[(](?:\s*0*(?:\d\d?(?:\.\d+)?(?:\s*%)?|\.\d+\s*%|100(?:\.0*)?\s*%|(?:1\d\d|2[0-4]\d|25[0-5])(?:\.\d+)?)\s*,){3}|hsla[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*,)\s*0*(?:\.\d+|1(?:\.0*)?)\s*)[)])$/
     // return RegExpColor.test(colorString);
 }
@@ -44,12 +44,12 @@ export function checkColor(colorString: string) {
         isRGBA: isRGBA(colorString),
         isHSL: isHSL(colorString),
         isHSLA: isHSLA(colorString),
-    }
-    const checkResultKeys = Object.keys(checkResult) as CheckColor[]
-    let colorType: CheckResultType = ''
+    };
+    const checkResultKeys = Object.keys(checkResult) as CheckColor[];
+    let colorType: CheckResultType = '';
     for (let item of checkResultKeys) {
         if (item !== 'isColor') {
-            colorType = (checkResult[item] ? item.substr(2, item.length - 2) : '') as CheckResultType
+            colorType = (checkResult[item] ? item.substr(2, item.length - 2) : '') as CheckResultType;
             if (colorType) {
                 break;
             }
@@ -60,12 +60,12 @@ export function checkColor(colorString: string) {
 
 
 export function isHex(colorString: string) {
-    const RegExpHex = /^#(?:[A-Fa-f0-9]{3}){1,2}$/
+    const RegExpHex = /^#(?:[A-Fa-f0-9]{3}){1,2}$/;
     return RegExpHex.test(colorString);
 }
 
 export function isHexA(colorString: string) {
-    const RegExpHex = /^#(?:[A-Fa-f0-9]{4}){1,2}$/
+    const RegExpHex = /^#(?:[A-Fa-f0-9]{4}){1,2}$/;
     return RegExpHex.test(colorString);
 }
 
@@ -75,49 +75,49 @@ export function isRGB(colorString: string) {
 }
 
 export function isRGBA(colorString: string) {
-    const RegExpRGBA = /^rgba[(](?:\s*0*(?:\d\d?(?:\.\d+)?(?:\s*%)?|\.\d+\s*%|100(?:\.0*)?\s*%|(?:1\d\d|2[0-4]\d|25[0-5])(?:\.\d+)?)\s*,){3}\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/
+    const RegExpRGBA = /^rgba[(](?:\s*0*(?:\d\d?(?:\.\d+)?(?:\s*%)?|\.\d+\s*%|100(?:\.0*)?\s*%|(?:1\d\d|2[0-4]\d|25[0-5])(?:\.\d+)?)\s*,){3}\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/;
     return RegExpRGBA.test(colorString);
 }
 
 export function isHSL(colorString: string) {
-    const RegExpHSL = /^hsl[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*[)]$/
+    const RegExpHSL = /^hsl[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*[)]$/;
     return RegExpHSL.test(colorString);
 }
 
 export function isHSLA(colorString: string) {
-    const RegExpHSLA = /^hsla[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*,\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/
+    const RegExpHSLA = /^hsla[(]\s*0*(?:[12]?\d{1,2}|3(?:[0-5]\d|60))\s*(?:\s*,\s*0*(?:\d\d?(?:\.\d+)?\s*%|\.\d+\s*%|100(?:\.0*)?\s*%)){2}\s*,\s*0*(?:\.\d+|1(?:\.0*)?)\s*[)]$/;
     return RegExpHSLA.test(colorString);
 }
 
 export function getColorByName(colorName: string) {
-    const key = colorName.toLowerCase() as keyof typeof STANDARD_COLOR_NAME_ALL
-    return STANDARD_COLOR_NAME_ALL[key]
+    const key = colorName.toLowerCase() as keyof typeof STANDARD_COLOR_NAME_ALL;
+    return STANDARD_COLOR_NAME_ALL[key];
 }
 
 export function isColorName(colorName: string) {
-    return !!getColorByName(colorName)
+    return !!getColorByName(colorName);
 }
 
 export function getExceptionalColor(colorName: string) {
-    const key = colorName.toLowerCase() as keyof typeof EXCEPTIONAL_COLOR
-    return EXCEPTIONAL_COLOR[key]
+    const key = colorName.toLowerCase() as keyof typeof EXCEPTIONAL_COLOR;
+    return EXCEPTIONAL_COLOR[key];
 }
 
 export function isExceptionalColor(colorName: string) {
-    return !!getExceptionalColor(colorName)
+    return !!getExceptionalColor(colorName);
 }
 
 export function colorFaultTolerance(colorString: string) {
     if (!isColor(colorString)) {
-        return ''
+        return '';
     }
     if (isExceptionalColor(colorString)) {
-        return getExceptionalColor(colorString).RGBA
+        return getExceptionalColor(colorString).RGBA;
     }
     if (isColorName(colorString)) {
-        return getColorByName(colorString).RGBA
+        return getColorByName(colorString).RGBA;
     }
-    return colorString
+    return colorString;
 }
 
 
@@ -125,7 +125,7 @@ export function rgbaStringToRgbaArray(rgba: string) {
     return rgba.substring(5, rgba.length - 1)
         .replace(/ /g, '')
         .split(',').map(item => {
-            return parseFloat(item)
+            return parseFloat(item);
         });
 }
 
@@ -140,21 +140,21 @@ export function rgbArrayToLab(rgb: number[]) {
     x = (x > 0.008856) ? Math.pow(x, 1 / 3) : (7.787 * x) + 16 / 116;
     y = (y > 0.008856) ? Math.pow(y, 1 / 3) : (7.787 * y) + 16 / 116;
     z = (z > 0.008856) ? Math.pow(z, 1 / 3) : (7.787 * z) + 16 / 116;
-    return [(116 * y) - 16, 500 * (x - y), 200 * (y - z)]
+    return [(116 * y) - 16, 500 * (x - y), 200 * (y - z)];
 }
 
 
 export function deltaEFromString(colorA: string, colorB: string, shouldDiffAlpha: boolean) {
     // todo some diff of colors are over 100,need ensure if that a bug
-    const colorATolerance = colorFaultTolerance(colorA)
-    const colorBTolerance = colorFaultTolerance(colorB)
+    const colorATolerance = colorFaultTolerance(colorA);
+    const colorBTolerance = colorFaultTolerance(colorB);
     if (!colorATolerance || !colorBTolerance) {
-        return 100
+        return 100;
     }
-    const rgbA = ColorTranslator.toRGBA(colorATolerance)
-    const rgbB = ColorTranslator.toRGBA(colorBTolerance)
-    const rgbaArrayA = rgbaStringToRgbaArray(rgbA)
-    const rgbaArrayB = rgbaStringToRgbaArray(rgbB)
+    const rgbA = ColorTranslator.toRGBA(colorATolerance);
+    const rgbB = ColorTranslator.toRGBA(colorBTolerance);
+    const rgbaArrayA = rgbaStringToRgbaArray(rgbA);
+    const rgbaArrayB = rgbaStringToRgbaArray(rgbB);
     let labA = rgbArrayToLab(rgbaArrayA);
     let labB = rgbArrayToLab(rgbaArrayB);
     let deltaL = labA[0] - labB[0];
@@ -172,10 +172,10 @@ export function deltaEFromString(colorA: string, colorB: string, shouldDiffAlpha
     let deltaHkhsh = deltaH / (sh);
     let i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
 
-    let deltaEDiff = i < 0 ? 0 : Math.sqrt(i)
+    let deltaEDiff = i < 0 ? 0 : Math.sqrt(i);
     if (shouldDiffAlpha) {
-        let alphaDiff = rgbaArrayA[3] - rgbaArrayB[3]
-        let alphaDiffS = 100 * Math.sqrt(alphaDiff * alphaDiff)
+        let alphaDiff = rgbaArrayA[3] - rgbaArrayB[3];
+        let alphaDiffS = 100 * Math.sqrt(alphaDiff * alphaDiff);
         return deltaEDiff;
     } else {
         return deltaEDiff;
@@ -191,24 +191,24 @@ export function deltaEFromString(colorA: string, colorB: string, shouldDiffAlpha
 
 
 export function deltaEDes(similarityValue: number) {
-    let des = ''
+    let des = '';
     if (similarityValue === 0) {
-        des = 'Perception'
+        des = 'Perception';
     } else if (similarityValue <= 1) {
-        des = 'Not perceptible by human eyes'
+        des = 'Not perceptible by human eyes';
     } else if (similarityValue <= 2) {
-        des = 'Perceptible through close observation'
+        des = 'Perceptible through close observation';
     } else if (similarityValue <= 10) {
-        des = 'Perceptible at a glance'
+        des = 'Perceptible at a glance';
     } else if (similarityValue <= 49) {
-        des = 'Similar than opposite'
+        des = 'Similar than opposite';
     } else if (similarityValue > 49) {
-        des = 'Exact opposite'
+        des = 'Exact opposite';
     }
-    return des
+    return des;
 }
 
 export function diffColors(colorA: string, colorB: string) {
-    return deltaEFromString(colorA, colorB, false)
+    return deltaEFromString(colorA, colorB, false);
 }
 

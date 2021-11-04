@@ -13,9 +13,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             justifyContent: 'space-around',
             padding: 10
         }
-    })
+    });
 
-    const switchStyles = StyleSheet.create({})
+    const switchStyles = StyleSheet.create({});
 
     const imageStyles = StyleSheet.create({
         tinyLogo: {
@@ -26,7 +26,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             width: 66,
             height: 58,
         },
-    })
+    });
 
     const imageBackgroundStyles = StyleSheet.create({
         image: {
@@ -41,7 +41,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             textAlign: 'center',
             backgroundColor: '#000000a0'
         }
-    })
+    });
 
 
 // const keyboardAvoidingViewStyles = StyleSheet.create({
@@ -102,7 +102,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginBottom: 15,
             textAlign: 'center'
         }
-    })
+    });
 
     const pressableStyles = StyleSheet.create({
         container: {
@@ -123,7 +123,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderColor: '#f0f0f0',
             backgroundColor: '#f9f9f9'
         }
-    })
+    });
 
     const sectionListStyles = StyleSheet.create({
         container: {
@@ -143,7 +143,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         title: {
             fontSize: 24
         }
-    })
+    });
 
     const statusBarStyles = StyleSheet.create({
         container: {
@@ -159,7 +159,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         textStyle: {
             textAlign: 'center'
         }
-    })
+    });
 
     const touchableHighlightStyles = StyleSheet.create({
         container: {
@@ -179,7 +179,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         countText: {
             color: '#FF00FF'
         }
-    })
+    });
 
     const touchableOpacityStyles = StyleSheet.create({
         container: {
@@ -196,7 +196,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             alignItems: 'center',
             padding: 10
         }
-    })
+    });
 
     const touchableWithoutFeedbackStyles = StyleSheet.create({
         container: {
@@ -216,7 +216,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         countText: {
             color: '#FF00FF'
         }
-    })
+    });
 
     const virtualizedListStyles = StyleSheet.create({
         container: {
@@ -234,12 +234,12 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         title: {
             fontSize: 32,
         },
-    })
+    });
     const home = StyleSheet.create({
         container: {
             padding: ms.sp.m
         },
-    })
+    });
     return {
         home,
         activityIndicatorStyles,
@@ -254,5 +254,5 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         touchableOpacityStyles,
         touchableWithoutFeedbackStyles,
         virtualizedListStyles,
-    }
-}
+    };
+};

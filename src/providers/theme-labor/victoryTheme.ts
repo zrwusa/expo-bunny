@@ -1,8 +1,8 @@
 import {pl, reverseColor} from '../../utils';
-import getSizeLabor from '../size-labor/sizeLabor';
+import {getSizeLabor} from '../size-labor';
 
 export const getVictoryTheme = () => {
-    const {wp} = getSizeLabor().designsBasedOn.iphoneX
+    const {wp} = getSizeLabor().designsBasedOn.iphoneX;
 
     const colorScale = [
         {
@@ -41,7 +41,7 @@ export const getVictoryTheme = () => {
             indigo: reverseColor(pl.cyan900),
             tinder: pl.cyan900,
         }
-    ]
+    ];
 
     // axis.style.grid.stroke
     // pie.style.data.stroke,
@@ -78,7 +78,7 @@ export const getVictoryTheme = () => {
         dark: pl.orange800,
         indigo: pl.tealA500,
         tinder: pl.purple500,
-    }
+    };
 
     // area.style.data.fill,
     // histogram.style.data.stroke,
@@ -545,5 +545,5 @@ export const getVictoryTheme = () => {
             },
             baseProps
         )
-    }
-}
+    };
+};

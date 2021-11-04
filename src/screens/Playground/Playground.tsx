@@ -5,11 +5,10 @@ import {getStyles} from './styles';
 import {useFirestoreConnect} from 'react-redux-firebase';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../types';
-import {DraggableView} from '../../containers/DraggableView';
+import {Card, DraggableView} from '../../containers';
 import {randomDate, uuidV4} from '../../utils';
 import {ProgressBar} from 'react-native-paper';
-import {Card} from '../../containers/Card';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 export function PlaygroundScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -41,17 +40,17 @@ export function PlaygroundScreen() {
         // await migrateUniversities()
         // await migrateReligions()
         setProgress(1);
-    }
+    };
 
     useFirestoreConnect([
         {collection: 'demoFirestore'} // or 'demoFirestore'
-    ])
+    ]);
 
-    const demoFirestore = useSelector((state: RootState) => state.firestoreState.ordered.demoFirestore)
+    const demoFirestore = useSelector((state: RootState) => state.firestoreState.ordered.demoFirestore);
 
     let testData = [];
     for (let i = 0; i < 1000; i++) {
-        testData.push({id: uuidV4()})
+        testData.push({id: uuidV4()});
     }
 
     return (
@@ -70,7 +69,7 @@ export function PlaygroundScreen() {
 
                 <Card title="vibration" titleMode="OUT">
                     <TouchableOpacity onPress={() => {
-                        Vibration.vibrate(10)
+                        Vibration.vibrate(10);
                     }}><Text>Vibration</Text>
                     </TouchableOpacity>
                 </Card>
@@ -83,13 +82,13 @@ export function PlaygroundScreen() {
                                     <Text>{item.id}</Text>
                                     <Text>{item.name}</Text>
                                     <Text>{item.keywords}</Text>
-                                </View>
+                                </View>;
                             })
                         }
                     </View>
                 </Card>
                 <Button title="random date" onPress={() => {
-                    console.log(randomDate(new Date('2020-01-01'), new Date(), new Date('2021-3-1'), 0.5))
+                    console.log(randomDate(new Date('2020-01-01'), new Date(), new Date('2021-3-1'), 0.5));
                 }}/>
                 {/*<FlatList data={testData}*/}
                 {/*          keyExtractor={item => item.id}*/}
@@ -106,7 +105,7 @@ export function PlaygroundScreen() {
             </View>
 
         </View>
-    )
+    );
 }
 
 

@@ -1,2 +1,2 @@
-export * from './priority-queue'
-export * from './cases'
+export * from './priority-queue';
+export * from './cases';

@@ -1,1 +1,1 @@
-export * from './ThemePicker'
+export * from './ThemePicker';

@@ -3,9 +3,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../types';
 import {getStyles} from './styles';
 import {Snackbar} from 'react-native-paper';
-import {Text, View} from '../UI'
+import {Text, View} from '../UI';
 import {setBLResult} from '../../store/actions';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 const BLToast = () => {
     const {sizeLabor, themeLabor} = useBunnyKit();
@@ -20,24 +20,24 @@ const BLToast = () => {
                     visible={blResult.shouldShow}
                     duration={Snackbar.DURATION_MEDIUM}
                     onDismiss={() => {
-                        blResult.shouldShow = false
-                        dispatch(setBLResult(blResult))
+                        blResult.shouldShow = false;
+                        dispatch(setBLResult(blResult));
                     }}
                     action={{
                         label: 'Close',
                         onPress: () => {
-                            blResult.shouldShow = false
-                            dispatch(setBLResult(blResult))
+                            blResult.shouldShow = false;
+                            dispatch(setBLResult(blResult));
                         },
                     }}
                 >
                     <View>
                         <Text style={styles.text}>{blResult.message}</Text>
                     </View>
-                </Snackbar>
+                </Snackbar>;
             })}
         </View>
 
     );
-}
+};
 export default BLToast;

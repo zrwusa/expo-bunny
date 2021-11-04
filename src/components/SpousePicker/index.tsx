@@ -1,1 +1,1 @@
-export * from './SpousePicker'
+export * from './SpousePicker';

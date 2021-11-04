@@ -1,1 +1,1 @@
-export * from './NotSupport'
+export * from './NotSupport';

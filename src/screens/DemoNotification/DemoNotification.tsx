@@ -7,8 +7,8 @@ import {
     registerForPushNotificationsAsync,
     schedulePushNotification
 } from '../../utils/expo-notification';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {shortenTFunctionKey} from '../../providers';
+import {useBunnyKit} from '../../hooks';
 
 
 export default function DemoNotificationScreen() {
@@ -72,7 +72,7 @@ export default function DemoNotificationScreen() {
         })
             .then(token => {
                 if (token) {
-                    setExpoPushToken(token)
+                    setExpoPushToken(token);
                 }
             });
 
@@ -111,6 +111,6 @@ export default function DemoNotificationScreen() {
                 }}
             />
         </View>
-    ) : (<Text>Dummy notification</Text>)
+    ) : (<Text>Dummy notification</Text>);
 
 }

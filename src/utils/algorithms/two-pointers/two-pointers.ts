@@ -71,8 +71,8 @@ function subarraysWithKDistinct(nums: number[], k: number): number {
 
 const runAllSubarraysWithKDistinct = async () => {
     await runAlgorithm(subarraysWithKDistinct, false, ...subarraysWithKDistinctCase6);
-}
+};
 
 // runAllSubarraysWithKDistinct().then();
 /* --- end Two Pointers --- */
-export {}
+export {};

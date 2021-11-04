@@ -1,13 +1,13 @@
 import {useLinkTo} from '@react-navigation/native';
 import {Col, getContainerStyles, Row} from '../../containers';
-import {useAuthLabor} from '../../providers/auth-labor';
+import {useAuthLabor} from '../../providers';
 import {IcoMoon, Link, Text} from '../UI';
 import {LinearGradientIcon} from '../LinearGradientIcon';
 import {TouchableOpacity} from 'react-native';
 import * as React from 'react';
 import {IcoMoonKeys} from '../../types';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 export interface LineToProps {
     iconName?: IcoMoonKeys,
@@ -22,10 +22,10 @@ export const InlineJump: React.FC<LineToProps> = (props) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const linkTo = useLinkTo();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor)
-    const {authFunctions} = useAuthLabor()
+    const styles = getStyles(sizeLabor, themeLabor);
+    const {authFunctions} = useAuthLabor();
     const {iconName, iconSize = wp(22), text, to, type, onNav, children} = props;
-    const {colors} = themeLabor.theme
+    const {colors} = themeLabor.theme;
     const iconColor = {color: colors.buttonText};
     return type === 'LINK'
         ?
@@ -54,12 +54,12 @@ export const InlineJump: React.FC<LineToProps> = (props) => {
             switch (type) {
                 case 'LINK_TO':
                     if (to) {
-                        linkTo(to)
+                        linkTo(to);
                     }
                     break;
                 case 'NAV':
                     if (onNav) {
-                        onNav()
+                        onNav();
                     }
                     break;
             }
@@ -80,6 +80,6 @@ export const InlineJump: React.FC<LineToProps> = (props) => {
                     <IcoMoon name="chevron-right1"/>
                 </Col>
             </Row>
-        </TouchableOpacity>
+        </TouchableOpacity>;
 
-}
+};

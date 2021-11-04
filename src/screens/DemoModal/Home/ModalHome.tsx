@@ -2,12 +2,12 @@ import * as React from 'react';
 import {View} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../../providers';
 import {ScrollView} from 'react-native';
 import {DemoModalStackParam} from '../../../types';
 import {getContainerStyles} from '../../../containers';
 import {getSharedStyles} from '../../../helpers';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 type ModalHomeRouteProp = RouteProp<DemoModalStackParam, 'ModalHome'>;
 type ModalHomeNavigationProp = StackNavigationProp<DemoModalStackParam, 'ModalHome'>;
@@ -28,7 +28,7 @@ function ModalHomeScreen({route, navigation}: ModalHomeProps) {
             <View style={[containerStyles.Screen, sharedStyles.centralized]}>
             </View>
         </ScrollView>
-    )
+    );
 }
 
 export default ModalHomeScreen;

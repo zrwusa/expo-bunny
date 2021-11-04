@@ -1,1 +1,1 @@
-export * from './InterestPicker'
+export * from './InterestPicker';

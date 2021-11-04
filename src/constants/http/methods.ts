@@ -341,4 +341,4 @@ export const methods = {
         'spec_title': 'RFC3253#3.5',
         'spec_href': 'https://tools.ietf.org/html/rfc3253#section-3.5'
     }
-}
+};

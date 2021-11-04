@@ -1,2 +1,2 @@
-export * from './useKeyboardHeight'
-export * from './withKeyboardHeight'
+export * from './useKeyboardHeight';
+export * from './withKeyboardHeight';

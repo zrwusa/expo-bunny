@@ -8,7 +8,7 @@ import {
     RootState,
     SocialMediaImageDatum
 } from '../../../types';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../../providers';
 import {getContainerStyles} from '../../../containers';
 import {getStyles} from './styles';
 import {Animated, Platform, SafeAreaView} from 'react-native';
@@ -19,8 +19,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {isLoaded, useFirebase, useFirestoreConnect} from 'react-redux-firebase';
 import config from '../../../config';
-import {Preparing} from '../../../components/Preparing';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {Preparing} from '../../../components';
+import {useBunnyKit} from '../../../hooks';
 
 type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSearch'>;
 type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;
@@ -34,41 +34,41 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
     const {sizeLabor, themeLabor, wp, t} = useBunnyKit();
     const firebase = useFirebase();
     const getSocialMediaImages = async () => {
-        await firebase.watchEvent('value', 'socialMediaImages', 'socialMediaImages')
-    }
+        await firebase.watchEvent('value', 'socialMediaImages', 'socialMediaImages');
+    };
     useFirestoreConnect([
         {collection: 'socialMediaImages'}
-    ])
-    const socialMediaImages = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaImages)
+    ]);
+    const socialMediaImages = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaImages);
 
     const st = shortenTFunctionKey(t, 'screens.SocialMediaSearch');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
-    const [MasonryData, setMasonryData] = useState<MasonryDatum<SocialMediaImageDatum>[]>([])
+    const [MasonryData, setMasonryData] = useState<MasonryDatum<SocialMediaImageDatum>[]>([]);
 
     const memoizedSocialMediaImages = useMemo(() => {
         if (!socialMediaImages) {
-            return []
+            return [];
         }
-        return socialMediaImages.map(item => item)
-    }, [socialMediaImages])
+        return socialMediaImages.map(item => item);
+    }, [socialMediaImages]);
 
     useEffect(() => {
-        getSocialMediaImages().then()
-    }, [])
+        getSocialMediaImages().then();
+    }, []);
 
     useEffect(() => {
         if (!socialMediaImages) {
-            return
+            return;
         }
         let column1 = [],
             column2 = [],
             column3 = [];
 
-        let manyBricks: SocialMediaImageDatum[] = memoizedSocialMediaImages
+        let manyBricks: SocialMediaImageDatum[] = memoizedSocialMediaImages;
 
         for (let i = 0; i < 1; i++) {
-            manyBricks = manyBricks.concat(memoizedSocialMediaImages)
+            manyBricks = manyBricks.concat(memoizedSocialMediaImages);
         }
 
         let i = 0;
@@ -81,34 +81,34 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
                 column3.push(manyBricks[i++]);
             }
         }
-        let newMasonryData: MasonryDatum<SocialMediaImageDatum>[] = []
+        let newMasonryData: MasonryDatum<SocialMediaImageDatum>[] = [];
         for (let i = 0; i < 10; i++) {
-            newMasonryData.push({id: uuid4(), column1, column2, column3})
+            newMasonryData.push({id: uuid4(), column1, column2, column3});
         }
-        setMasonryData(newMasonryData)
-    }, [socialMediaImages])
+        setMasonryData(newMasonryData);
+    }, [socialMediaImages]);
 
     const imageWidth = wp(375 / 3 - 1);
 
     const getItem = function (data: [], index: number) {
-        return data[index]
-    }
+        return data[index];
+    };
 
     const getItemCount = function (data: []) {
         return data.length;
-    }
+    };
     const [scrollYValue] = useState(new Animated.Value(0));
     const handleSearch = (key: string) => {
         let column1 = [],
             column2 = [],
             column3 = [];
 
-        let manyBricks: SocialMediaImageDatum[] = []
+        let manyBricks: SocialMediaImageDatum[] = [];
 
         for (let i = 0; i < 1; i++) {
             manyBricks = manyBricks.concat(memoizedSocialMediaImages.filter((brick) => {
-                return brick.text.includes(key)
-            }))
+                return brick.text.includes(key);
+            }));
         }
 
         let i = 0;
@@ -121,12 +121,12 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
                 column3.push(manyBricks[i++]);
             }
         }
-        let newMasonryData: MasonryDatum<SocialMediaImageDatum>[] = []
+        let newMasonryData: MasonryDatum<SocialMediaImageDatum>[] = [];
         for (let i = 0; i < 10; i++) {
-            newMasonryData.push({id: uuid4(), column1, column2, column3})
+            newMasonryData.push({id: uuid4(), column1, column2, column3});
         }
-        setMasonryData(newMasonryData)
-    }
+        setMasonryData(newMasonryData);
+    };
     return (
         <SafeAreaView style={containerStyles.Screen}>
             <FollowUpSearchBar scrollYValue={scrollYValue} onSearch={handleSearch}/>

@@ -1,1 +1,1 @@
-export * from './InlineSelector'
+export * from './InlineSelector';

@@ -39,7 +39,7 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
             const vertex2: V | null = this.getVertex(v2);
 
             if (vertex1 && vertex2) {
-                edges = this._edges.get(vertex1)?.filter(e => e.vertices.includes(vertex2.id))
+                edges = this._edges.get(vertex1)?.filter(e => e.vertices.includes(vertex2.id));
             }
         }
 
@@ -53,9 +53,9 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
             if (endVertex) {
                 const edges = this._edges.get(endVertex);
                 if (edges) {
-                    edges.push(edge)
+                    edges.push(edge);
                 } else {
-                    this._edges.set(endVertex, [edge])
+                    this._edges.set(endVertex, [edge]);
                 }
             }
         }
@@ -80,7 +80,7 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         if (v2Edges) {
             arrayRemove<E>(v2Edges, e => e.vertices.includes(vertex1.id));
         }
-        return removed
+        return removed;
     }
 
 
@@ -93,16 +93,16 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         if (vertex) {
             return this._edges.get(vertex)?.length || 0;
         } else {
-            return 0
+            return 0;
         }
     }
 
     edgesOf(vertexOrId: VertexId | V): E[] {
         const vertex = this.getVertex(vertexOrId);
         if (vertex) {
-            return this._edges.get(vertex) || []
+            return this._edges.get(vertex) || [];
         } else {
-            return []
+            return [];
         }
     }
 
@@ -111,7 +111,7 @@ export class UndirectedGraph<V extends UndirectedVertex, E extends UndirectedEdg
         this._edges.forEach(edges => {
             edges.forEach(edge => {
                 edgeSet.add(edge);
-            })
+            });
         });
         return [...edgeSet];
     }

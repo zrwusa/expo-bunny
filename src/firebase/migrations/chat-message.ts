@@ -3,10 +3,10 @@ import {datingUsers} from './user';
 import {IMMessage} from '../../types';
 import {randomDate} from '../../utils';
 import dayJS from 'dayjs';
-import weekday from 'dayjs/plugin/weekday'
+import weekday from 'dayjs/plugin/weekday';
 import {firebase} from '../firebase';
 
-dayJS.extend(weekday)
+dayJS.extend(weekday);
 
 const demoVideo = 'https://raw.githubusercontent.com/zrwusa/assets/master/videos/big-buck-bunny.mp4';
 const demoAudio = 'https://www.kozco.com/tech/LRMonoPhase4.wav';
@@ -15,9 +15,9 @@ const demoAudio = 'https://www.kozco.com/tech/LRMonoPhase4.wav';
 //     return firebase.firestore.Timestamp.fromDate(new Date(date))
 // }
 
-const lastWeek = dayJS().weekday(-7).toDate()
+const lastWeek = dayJS().weekday(-7).toDate();
 
-const randomNeededDate = () => randomDate(new Date('2019-01-01'), new Date(), lastWeek, 0.5)
+const randomNeededDate = () => randomDate(new Date('2019-01-01'), new Date(), lastWeek, 0.5);
 
 const groupChatMessagesTestBase: IMMessage[] = [
     {
@@ -180,9 +180,9 @@ const groupChatMessagesTestBase: IMMessage[] = [
         'conversationId': 'conversation-001',
         'sticker': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/ShaunTheSheep256%2FShaunTheSheep-256px-19.gif?alt=media&token=35de2bb7-d3f3-4e6e-b41f-c2d29409ff1c',
         'createdAt': randomNeededDate(),
-    }]
+    }];
 
-let groupChatMessagesTest: IMMessage[] = []
+let groupChatMessagesTest: IMMessage[] = [];
 
 const datingChatMessagesBase: IMMessage[] = [
     {
@@ -346,9 +346,9 @@ const datingChatMessagesBase: IMMessage[] = [
         'sticker': 'https://firebasestorage.googleapis.com/v0/b/expo-react-bunny.appspot.com/o/ShaunTheSheep256%2FShaunTheSheep-256px-19.gif?alt=media&token=35de2bb7-d3f3-4e6e-b41f-c2d29409ff1c',
         'createdAt': randomNeededDate(),
     }
-]
+];
 
-let datingChatMessages: IMMessage[] = []
+let datingChatMessages: IMMessage[] = [];
 
 const generateMoreGroupChatMessages = () => {
     for (let conversation of conversations) {
@@ -358,18 +358,18 @@ const generateMoreGroupChatMessages = () => {
                 _id: conversation._id + '-' + chatMessage._id,
                 conversationId: conversation._id,
                 createdAt: randomNeededDate(),
-            }
-            groupChatMessagesTest.push(newMessage)
+            };
+            groupChatMessagesTest.push(newMessage);
         }
     }
 
-}
+};
 const generateMoreDatingChatMessages = () => {
 
     for (let conversation of datingConversations) {
         for (let user of datingUsers) {
             if (conversation.users.includes(user.uid)) {
-                let datingMessagesGenerated: IMMessage[] = []
+                let datingMessagesGenerated: IMMessage[] = [];
                 for (let chatMessage of datingChatMessagesBase) {
                     let newMessage: IMMessage = {
                         ...chatMessage,
@@ -377,22 +377,22 @@ const generateMoreDatingChatMessages = () => {
                         conversationId: conversation._id,
                         createdAt: randomNeededDate(),
                         user: (() => {
-                            const testUser = datingUsers.filter((item) => item.uid === 'gEQMxRMVfjRLUngNJHKcIj1Impu1')[0]
-                            let currentUser = Math.random() > 0.7 ? testUser : user
+                            const testUser = datingUsers.filter((item) => item.uid === 'gEQMxRMVfjRLUngNJHKcIj1Impu1')[0];
+                            let currentUser = Math.random() > 0.7 ? testUser : user;
                             return {
                                 name: currentUser.displayName,
                                 _id: currentUser.uid,
                                 avatar: currentUser.photoURL
-                            }
+                            };
                         })()
-                    }
-                    datingMessagesGenerated.push(newMessage)
+                    };
+                    datingMessagesGenerated.push(newMessage);
                 }
-                datingChatMessages = datingChatMessages.concat(datingMessagesGenerated)
+                datingChatMessages = datingChatMessages.concat(datingMessagesGenerated);
             }
         }
     }
-}
+};
 
 export const migrateGroupChatMessages = async () => {
     generateMoreGroupChatMessages();
@@ -404,7 +404,7 @@ export const migrateGroupChatMessages = async () => {
             .doc(message._id as string)
             .set(message);
     }
-}
+};
 
 export const migrateDatingChatMessages = async () => {
     generateMoreDatingChatMessages();
@@ -416,5 +416,5 @@ export const migrateDatingChatMessages = async () => {
             .doc(message._id as string)
             .set(message);
     }
-}
+};
 

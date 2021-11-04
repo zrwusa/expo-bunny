@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {ButtonTO, InButtonText, Text, View} from '../UI';
-import {WithSizeLabor, withSizeLabor} from '../../providers/size-labor';
+import {withSizeLabor, WithSizeLabor} from '../../providers/size-labor';
 
 interface Props extends WithSizeLabor {
     title: string,
@@ -11,7 +11,7 @@ interface Props extends WithSizeLabor {
 
 type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
 
-class DemoCCClock extends PureComponent<Props, States> {
+export class DemoCCClockInner extends PureComponent<Props, States> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -57,5 +57,6 @@ class DemoCCClock extends PureComponent<Props, States> {
     }
 }
 
-// HOC to pass sizeLabor
-export default withSizeLabor(DemoCCClock);
+console.log('withSizeLabor', withSizeLabor);
+
+export const DemoCCClock = withSizeLabor(DemoCCClockInner);

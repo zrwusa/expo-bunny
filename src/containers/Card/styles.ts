@@ -7,7 +7,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp, hp} = designsBasedOn.iphoneX;
     const {theme} = themeLabor;
     const {colors, borderRadius} = theme;
-    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
+    const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     const {shadowAround, title, card} = sharedStylesFlatten;
     return StyleSheet.create({});
-}
+};

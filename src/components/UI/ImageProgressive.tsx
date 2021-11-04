@@ -2,7 +2,7 @@ import React from 'react';
 import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, View} from 'react-native';
 import {getStyles} from './styles';
 import config from '../../config';
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 
 export interface ImageProgressiveProps extends WithBunnyKit {
     previewSource: ImageSourcePropType,
@@ -20,14 +20,14 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
             useNativeDriver: config.useNativeDriver,
             toValue: 1,
         }).start();
-    }
+    };
 
     onImageLoad = () => {
         Animated.timing(this.imageAnimated, {
             useNativeDriver: config.useNativeDriver,
             toValue: 1,
         }).start();
-    }
+    };
 
     render() {
         const {
@@ -38,7 +38,7 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
             ...rest
         } = this.props;
         const {sizeLabor, themeLabor} = bunnyKit;
-        const styles = getStyles(sizeLabor, themeLabor)
+        const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={styles.ImageProgressive.container}>
                 <Animated.Image

@@ -1,1 +1,1 @@
-export * from './IconTools'
+export * from './IconTools';

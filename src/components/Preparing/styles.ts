@@ -15,4 +15,4 @@ export const getStyles = () => {
             color: pl.grey700,
         }
     });
-}
+};

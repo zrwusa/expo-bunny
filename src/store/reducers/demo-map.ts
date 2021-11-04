@@ -54,11 +54,14 @@ const initialState = {
     }
 };
 
-export function demoMapStateReducer(prevState: DemoMapState = initialState, {type, payload}: DemoMapActions): DemoMapState {
+export function demoMapStateReducer(prevState: DemoMapState = initialState, {
+    type,
+    payload
+}: DemoMapActions): DemoMapState {
     switch (type) {
         case EDemoMap.RESTORE_NEARBY_FILMS: {
             for (let item of <NearbyFilm[]>payload) {
-                item.id = uuidV4()
+                item.id = uuidV4();
             }
             return {
                 ...prevState,
@@ -69,7 +72,7 @@ export function demoMapStateReducer(prevState: DemoMapState = initialState, {typ
             return {
                 ...prevState,
                 region: <Region>payload,
-            }
+            };
         }
         default:
             return prevState;

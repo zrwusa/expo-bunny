@@ -14,4 +14,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             color: colors.surface,
         },
     });
-}
+};

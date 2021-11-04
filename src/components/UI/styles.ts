@@ -6,7 +6,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {colors, borderRadius, roundness, fonts} = themeLabor.theme;
-    const {sharedStyles, sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor)
+    const {sharedStyles, sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     const ImageProgressive = StyleSheet.create({
         imageOverlay: {
             position: 'absolute',
@@ -46,7 +46,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         modalViewBottom: {
             backgroundColor: colors.surface,
         }
-    })
+    });
 
 
     const ButtonTO = StyleSheet.create({
@@ -54,13 +54,13 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             ...sharedStylesFlatten.button,
             justifyContent: 'center'
         }
-    })
+    });
 
     const LinkButton = StyleSheet.create({
         LinkButton: {
             ...sharedStylesFlatten.button,
         },
-    })
+    });
 
     const TextButton = StyleSheet.create({
         TextButton: {
@@ -71,7 +71,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             paddingVertical: ms.sp.m,
             paddingHorizontal: ms.sp.m,
         },
-    })
+    });
 
     const LinearGradientButton = StyleSheet.create({
         container: {
@@ -89,7 +89,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             paddingHorizontal: ms.sp.m,
             borderRadius: borderRadius.button
         },
-    })
+    });
 
 
     const InputButtonText = StyleSheet.create({
@@ -99,19 +99,19 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: ms.fs.m,
             textAlign: 'center',
         },
-    })
+    });
 
     const Text = StyleSheet.create({
         Text: {
             ...sharedStylesFlatten.text,
         },
-    })
+    });
 
     const Image = StyleSheet.create({
         Image: {
             backgroundColor: colors.backdrop,
         },
-    })
+    });
 
     const TextInput = StyleSheet.create({
         TextInput: {
@@ -123,7 +123,7 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderWidth: wp(1),
             borderColor: colors.border,
         },
-    })
+    });
 
     const TextInputIcon = StyleSheet.create({
         input: {
@@ -148,18 +148,18 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             borderColor: colors.border,
             padding: wp(6)
         },
-    })
+    });
 
     const IconMC = StyleSheet.create({
         IconMC: {
             color: colors.text,
             fontSize: ms.fs.xl,
         },
-    })
+    });
 
     return {
         ImageProgressive, PickerSelect, ButtonTO, TextButton,
         LinearGradientButton, LinkButton, InputButtonText, Text,
         Image, TextInput, TextInputIcon, IconMC
-    }
-}
+    };
+};

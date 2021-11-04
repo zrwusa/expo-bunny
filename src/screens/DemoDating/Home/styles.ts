@@ -15,4 +15,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         albumContainer: {justifyContent: 'center'},
         album: {width: wp(370)}
     });
-}
+};

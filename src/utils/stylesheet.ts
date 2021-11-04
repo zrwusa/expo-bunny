@@ -5,24 +5,24 @@ export const getStyleObj = (style: any) => {
     if (style) {
         switch (typeof style) {
             case 'number':
-                result = StyleSheet.flatten(style)
+                result = StyleSheet.flatten(style);
                 break;
             case 'object':
                 if (style instanceof Array) {
                     let combineObj = {};
                     for (let key in style) {
-                        combineObj = {...combineObj, ...StyleSheet.flatten(style[key])}
+                        combineObj = {...combineObj, ...StyleSheet.flatten(style[key])};
                     }
                     result = combineObj;
                 } else {
-                    result = style
+                    result = style;
                 }
                 break;
             default:
-                result = {}
+                result = {};
                 break;
         }
     }
 
-    return result
-}
+    return result;
+};

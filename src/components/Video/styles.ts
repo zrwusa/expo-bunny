@@ -17,4 +17,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             alignItems: 'center',
         },
     });
-}
+};

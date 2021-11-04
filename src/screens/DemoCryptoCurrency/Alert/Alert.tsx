@@ -13,7 +13,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getStyles} from './styles';
 import {getSharedStyles} from '../../../helpers';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyAlert'>;
 type CryptoCurrencyAlertNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -30,9 +30,9 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
     const stSys = shortenTFunctionKey(t, i18nSysPrefix);
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor)
-    const dispatch = useDispatch()
-    const {currentPrice, dictionaries} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState)
+    const styles = getStyles(sizeLabor, themeLabor);
+    const dispatch = useDispatch();
+    const {currentPrice, dictionaries} = useSelector((rootState: RootState) => rootState.demoCryptoCurrencyState);
     const dicGranularity = dictionaries.granularity;
     const dicReminderTimes = dictionaries.times;
     const dicReminderInterval = dictionaries.interval;
@@ -48,16 +48,16 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
 
     const [expoPushToken, setExpoPushToken] = useState('');
     const [notification, setNotification] = useState(defaultNotification);
-    const [granularity, setGranularity] = useState(0.05)
-    const [reminder, setReminder] = useState({times: 3, interval: '1m'})
+    const [granularity, setGranularity] = useState(0.05);
+    const [reminder, setReminder] = useState({times: 3, interval: '1m'});
 
     const handleSaveQuickAlertSettings = async function () {
-        dispatch(saveQuickAlertSettings({token: expoPushToken, granularity, reminder}))
-    }
+        dispatch(saveQuickAlertSettings({token: expoPushToken, granularity, reminder}));
+    };
 
     const handleCancelAllAlertSettings = async function () {
-        dispatch(cancelAlertSettings({token: expoPushToken, cancelAll: true}))
-    }
+        dispatch(cancelAlertSettings({token: expoPushToken, cancelAll: true}));
+    };
 
     useEffect(() => {
         Notifications.setNotificationHandler({
@@ -71,15 +71,15 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
             const token = await registerForPushNotificationsAsync({
                 failedToGetToken: stSys(`failedToGetToken`),
                 mustUsePhysicalDevice: stSys(`mustUsePhysicalDevice`)
-            })
+            });
             if (token) {
                 setExpoPushToken(token);
             }
 
             try {
-                dispatch(getCurrentPrice())
+                dispatch(getCurrentPrice());
             } catch (e) {
-                dispatch(sysError(e))
+                dispatch(sysError(e));
             }
 
             notificationReceivedListener = Notifications
@@ -90,7 +90,7 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
             notificationRespondedListener = Notifications
                 .addNotificationResponseReceivedListener(response => {
                 });
-        }
+        };
         initPushNotification().then();
         return () => {
             Notifications.removeNotificationSubscription(notificationReceivedListener);
@@ -100,20 +100,20 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
 
     const granularityLabelPrefix = st(`granularity`).padEnd(35, '\u2004');
     const mappedDicGranularity = dicGranularity.map(item => {
-        item.inputLabel = granularityLabelPrefix + item.label
-        return item
-    })
+        item.inputLabel = granularityLabelPrefix + item.label;
+        return item;
+    });
     const remindTimesLabelPrefix = st(`remindTimesLabel`).padEnd(35, '\u2004');
     const mappedDicReminderTimes = dicReminderTimes.map(item => {
-        item.inputLabel = remindTimesLabelPrefix + item.label
-        return item
-    })
+        item.inputLabel = remindTimesLabelPrefix + item.label;
+        return item;
+    });
 
     const remindIntervalLabelPrefix = st(`remindIntervalLabel`).padEnd(35, '\u2004');
     const mappedDicReminderInterval = dicReminderInterval.map(item => {
-        item.inputLabel = remindIntervalLabelPrefix + item.label
-        return item
-    })
+        item.inputLabel = remindIntervalLabelPrefix + item.label;
+        return item;
+    });
 
     const currentPriceLabelPrefix = st(`currentPriceLabel`).padEnd(30, '\u2004');
 
@@ -183,5 +183,5 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
                 </Row>
             </View>
         </View>
-    ) : (<Text>Dummy CryptoCurrencyAlert</Text>)
+    ) : (<Text>Dummy CryptoCurrencyAlert</Text>);
 }

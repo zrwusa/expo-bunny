@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react'
-import {BunnyChat} from '../../../components/BunnyChat'
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {AudioRecorder, BunnyChat, ImageUploader, Preparing, StickerPicker} from '../../../components';
 import {RouteProp} from '@react-navigation/native';
 import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from '../../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -7,10 +7,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {isLoaded, useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {firestoreTimestampToDate, uuidV4} from '../../../utils';
 import {Keyboard, SafeAreaView, TouchableOpacity} from 'react-native';
-import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from '../../../components';
 import {IcoMoon} from '../../../components/UI';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 import {sysError} from '../../../store/actions';
 
 type ChatRoomRouteProp = RouteProp<DemoChatStackParam, 'ChatRoom'>;
@@ -22,7 +21,7 @@ export interface ChatRoomProps {
 }
 
 export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
-    const {conversationId} = route.params
+    const {conversationId} = route.params;
     const firestore = useFirestore();
     const {sizeLabor, themeLabor, authLabor, wp} = useBunnyKit();
     const {authResult} = authLabor;
@@ -39,9 +38,9 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                 ['conversationId', '==', conversationId]
             ],
         }
-    ])
+    ]);
 
-    const chatMessages = useSelector((state: RootState) => state.firestoreState.ordered.chatMessages)
+    const chatMessages = useSelector((state: RootState) => state.firestoreState.ordered.chatMessages);
 
     // const [chatMessagesAdapted,setChatMessagesAdapted] = useState<IMMessage[]>([])
     //
@@ -57,34 +56,34 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
             firestore.get({
                 collection: 'chatMessages',
                 limit: 0,
-            }).then()
+            }).then();
             // dispatch({ type: actionTypes.CLEAR_DATA, meta: { collection: 'chatMessages' } })
-        }
-    }, [])
+        };
+    }, []);
 
     let chatMessagesAdapted = chatMessages?.map((serverItem) => {
-        return {...serverItem, createdAt: firestoreTimestampToDate(serverItem.createdAt)}
-    })
+        return {...serverItem, createdAt: firestoreTimestampToDate(serverItem.createdAt)};
+    });
 
     const memoizedUser = useMemo(() => {
         if (!user) {
-            return {_id: 'defaultId', avatar: '', name: 'defaultName'}
+            return {_id: 'defaultId', avatar: '', name: 'defaultName'};
         }
-        const {firebaseUser, storedUser} = user
+        const {firebaseUser, storedUser} = user;
         if (firebaseUser) {
             return {
                 _id: firebaseUser.uid || 'defaultId',
                 avatar: storedUser?.photoURL || '',
                 name: firebaseUser.displayName || 'defaultName'
-            }
+            };
         }
-    }, [user])
+    }, [user]);
 
 
-    const [isShowAudioButton, setIsShowAudioButton] = useState(true)
-    const [isShowStickerPicker, setIsShowStickerPicker] = useState(false)
+    const [isShowAudioButton, setIsShowAudioButton] = useState(true);
+    const [isShowStickerPicker, setIsShowStickerPicker] = useState(false);
 
-    const chatAssetsPath = `/chatAssets/${memoizedUser?._id}`
+    const chatAssetsPath = `/chatAssets/${memoizedUser?._id}`;
 
     const generateMessage = (type: IMMessageType, payload?: string, needMerge?: Partial<IMMessage>) => {
         let text = '', image = '', audio = '', video = '', sticker = '';
@@ -105,7 +104,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                 video = payload || '';
                 break;
             default:
-                break
+                break;
         }
         return {
             _id: uuidV4(),
@@ -122,28 +121,28 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
             pending: true,
             sent: false,
             ...needMerge,
-        } as IMMessage
-    }
+        } as IMMessage;
+    };
 
     const handleSend = useCallback(async (messages = []) => {
-        const msg = generateMessage('MESSAGE', messages[0].text)
-        await storeMessage(msg)
-    }, [])
+        const msg = generateMessage('MESSAGE', messages[0].text);
+        await storeMessage(msg);
+    }, []);
 
     const storeMessage = async (msg: IMMessage) => {
-        await firestore.set(`chatMessages/${msg._id}`, msg)
-        await setSent(msg)
-    }
+        await firestore.set(`chatMessages/${msg._id}`, msg);
+        await setSent(msg);
+    };
 
     const setSent = async (msg: IMMessage) => {
-        await firestore.update(`chatMessages/${msg._id}`, {sent: true, pending: false})
-    }
+        await firestore.update(`chatMessages/${msg._id}`, {sent: true, pending: false});
+    };
 
     const setReceived = async (msg: IMMessage) => {
         if ((memoizedUser && memoizedUser._id) !== msg?.user._id) {
-            await firestore.update(`chatMessages/${msg._id}`, {received: true})
+            await firestore.update(`chatMessages/${msg._id}`, {received: true});
         }
-    }
+    };
 
     return (
         <SafeAreaView style={{flex: 1}}>
@@ -168,24 +167,24 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         // showAvatarForEveryMessage
                         messages={chatMessagesAdapted}
                         onSend={async (messages) => {
-                            console.log('onSend', messages)
-                            await handleSend(messages)
+                            console.log('onSend', messages);
+                            await handleSend(messages);
                         }}
 
                         user={memoizedUser}
 
                         textInputProps={{
                             onFocus: () => {
-                                setIsShowStickerPicker(false)
+                                setIsShowStickerPicker(false);
                             }
                         }}
 
                         onInputTextChanged={(text) => {
-                            setIsShowAudioButton(!text)
+                            setIsShowAudioButton(!text);
                         }}
 
                         onMessageReadyForDisplay={async (currentMessage: IMMessage) => {
-                            await setReceived(currentMessage)
+                            await setReceived(currentMessage);
                         }}
 
                         onMessageLoadError={(e, currentMessage) => {
@@ -202,9 +201,9 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         renderActions={() => {
                             return <>
                                 <TouchableOpacity onPress={() => {
-                                    Keyboard.dismiss()
+                                    Keyboard.dismiss();
                                     // TODO issue when this triggered firebase writes channel and rerenders all
-                                    setIsShowStickerPicker(!isShowStickerPicker)
+                                    setIsShowStickerPicker(!isShowStickerPicker);
                                 }}>
                                     <IcoMoon name="chat4" style={styles.stickerPickerIcon}/>
                                 </TouchableOpacity>
@@ -214,37 +213,37 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                                     renderPreview={({toggleModal}) => {
                                         return <TouchableOpacity
                                             onPress={() => {
-                                                toggleModal()
+                                                toggleModal();
                                             }}>
                                             <IcoMoon name="paperclip" size={wp(16)}
                                                      style={styles.mediaLibraryPickerIcon}/>
-                                        </TouchableOpacity>
+                                        </TouchableOpacity>;
                                     }}
                                     onUploaded={async (imageSource, type) => {
-                                        let mediaType: IMMessageType = ''
+                                        let mediaType: IMMessageType = '';
                                         switch (type) {
                                             case 'image':
-                                                mediaType = 'IMAGE'
+                                                mediaType = 'IMAGE';
                                                 break;
                                             case 'video':
-                                                mediaType = 'VIDEO'
+                                                mediaType = 'VIDEO';
                                                 break;
                                         }
-                                        const msg = generateMessage(mediaType, imageSource.uri)
-                                        await storeMessage(msg)
+                                        const msg = generateMessage(mediaType, imageSource.uri);
+                                        await storeMessage(msg);
                                     }}
                                 />
-                            </>
+                            </>;
                         }}
                         renderSend={(props) => {
-                            const {text, onSend} = props
+                            const {text, onSend} = props;
                             return (<>
                                     {isShowAudioButton
                                         ? <AudioRecorder isUpload
                                                          uploadPath={chatAssetsPath}
                                                          onValueChanged={async (uri) => {
-                                                             const messageNeedSent = generateMessage('AUDIO', uri)
-                                                             await storeMessage(messageNeedSent)
+                                                             const messageNeedSent = generateMessage('AUDIO', uri);
+                                                             await storeMessage(messageNeedSent);
                                                          }}/>
                                         : <TouchableOpacity onPress={() => {
                                             if (text && onSend && memoizedUser) {
@@ -257,13 +256,13 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                                     }
 
                                 </>
-                            )
+                            );
                         }}
                     />
                     <StickerPicker
                         isShow={isShowStickerPicker}
                         onValueChanged={async (uri) => {
-                            const msg = generateMessage('STICKER_GIF', uri)
+                            const msg = generateMessage('STICKER_GIF', uri);
                             await storeMessage(msg);
                             // setIsShowStickerPicker(false);
                         }}/>
@@ -272,5 +271,5 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
             }
 
         </SafeAreaView>
-    )
+    );
 }

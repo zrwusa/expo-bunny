@@ -1,5 +1,5 @@
 // import {Button as ButtonElement, ButtonProps as ButtonElementProps, Text as TextElement, TextProps as TextElementProps} from "react-native-elements";
-import {useThemeLabor} from '../../providers/theme-labor';
+import {useSizeLabor, useThemeLabor} from '../../providers';
 import {
     Button as ButtonRN,
     ButtonProps,
@@ -25,13 +25,12 @@ import {useLinkProps} from '@react-navigation/native';
 import React from 'react';
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
 import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from '../../types';
-import selection from '../../assets/fonts/icomoon/selection.json'
-import {useSizeLabor} from '../../providers/size-labor';
+import selection from '../../assets/fonts/icomoon/selection.json';
 import {Switch as SwitchPaper} from 'react-native-paper';
 import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from 'react-native-picker-select';
 import {getStyles} from './styles';
 import {LinearGradient} from 'expo-linear-gradient';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -40,46 +39,46 @@ export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'i
 // try to use the theme to standardize the definition and use of properties
 export const ButtonTO: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const {ButtonTO} = getStyles(sizeLabor, themeLabor)
-    const mergedStyle = [ButtonTO.ButtonTO, style]
+    const {ButtonTO} = getStyles(sizeLabor, themeLabor);
+    const mergedStyle = [ButtonTO.ButtonTO, style];
     return (<TouchableOpacityRN style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
-}
+};
 
 export const TextButton: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const {TextButton} = getStyles(sizeLabor, themeLabor)
-    const mergedStyle = [TextButton.TextButton, style]
+    const {TextButton} = getStyles(sizeLabor, themeLabor);
+    const mergedStyle = [TextButton.TextButton, style];
     return (<TouchableOpacityRN style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
-}
+};
 
 export const Button: React.FC<ButtonProps> = ({children, color, ...rest}) => {
     const {colors} = useBunnyKit();
     return (<ButtonRN color={color || colors.backgroundBtn} {...rest} />);
-}
+};
 
 export const LinearGradientButton: React.FC<TouchableOpacityProps> = ({style, children, disabled, ...rest}) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
 
-    const {LinearGradientButton} = getStyles(sizeLabor, themeLabor)
+    const {LinearGradientButton} = getStyles(sizeLabor, themeLabor);
 
     const mergedStyle = [disabled && LinearGradientButton.disabled, LinearGradientButton.container, style];
     const {theme} = themeLabor;
     const {colors} = theme;
-    const finalColors = disabled ? [colors.disabled, colors.disabled] : colors.backgroundLinear
+    const finalColors = disabled ? [colors.disabled, colors.disabled] : colors.backgroundLinear;
     return <TouchableOpacity style={mergedStyle} disabled={disabled} {...rest}>
         <LinearGradient start={{x: 0, y: 1}} end={{x: 1, y: 0}}
                         style={LinearGradientButton.linearGradient}
                         colors={finalColors}>
             {children}
         </LinearGradient>
-    </TouchableOpacity>
-}
+    </TouchableOpacity>;
+};
 
 export const LinkButton: React.FC<LinkProps> = ({to, action, style, children, ...rest}) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
     const {onPress, ...props} = useLinkProps({to, action});
-    const {LinkButton} = getStyles(sizeLabor, themeLabor)
-    const mergedStyle = [LinkButton.LinkButton, style]
+    const {LinkButton} = getStyles(sizeLabor, themeLabor);
+    const mergedStyle = [LinkButton.LinkButton, style];
     return (
         <TouchableOpacityRN style={mergedStyle} onPress={onPress} {...props} {...rest}>
             {children}
@@ -89,7 +88,7 @@ export const LinkButton: React.FC<LinkProps> = ({to, action, style, children, ..
 
 export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}) => {
     const {onPress, ...props} = useLinkProps({to, action});
-    const mergedStyle = [{}, style]
+    const mergedStyle = [{}, style];
     return (
         <TouchableOpacityRN style={mergedStyle} onPress={onPress} {...props} {...rest}>
             {children}
@@ -99,29 +98,29 @@ export const Link: React.FC<LinkProps> = ({to, action, style, children, ...rest}
 
 export const InButtonText: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const {InputButtonText} = getStyles(sizeLabor, themeLabor)
-    const mergedStyle = [InputButtonText.InputButtonText, style]
+    const {InputButtonText} = getStyles(sizeLabor, themeLabor);
+    const mergedStyle = [InputButtonText.InputButtonText, style];
     return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
-}
+};
 
 export const View: React.FC<ViewProps> = ({children, style, ...rest}) => {
-    const mergedStyle = [{}, style]
+    const mergedStyle = [{}, style];
     return (<ViewRN style={mergedStyle} {...rest}>{children}</ViewRN>);
-}
+};
 
 export const Text: React.FC<TextProps> = ({children, style, ...rest}) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const {Text} = getStyles(sizeLabor, themeLabor)
-    const mergedStyle: StyleProp<TextStyle> = [Text.Text, style]
+    const {Text} = getStyles(sizeLabor, themeLabor);
+    const mergedStyle: StyleProp<TextStyle> = [Text.Text, style];
     return (<TextRN style={mergedStyle} {...rest}>{children}</TextRN>);
-}
+};
 
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({children, style, ...rest}) => {
-    const mergedStyle = [{}, style]
+    const mergedStyle = [{}, style];
     return (<TouchableOpacityRN
         style={mergedStyle} {...rest} >{children}</TouchableOpacityRN>);
-}
+};
 
 export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) => {
     const {colors} = useThemeLabor().theme;
@@ -129,41 +128,47 @@ export const Pressable: React.FC<PressableProps> = ({children, style, ...rest}) 
     //     backgroundColor: colors.background,
     // }, style]
     return (<PressableRN style={style} {...rest} >{children}</PressableRN>);
-}
+};
 
 export const Image: React.FC<ImageProps> = ({children, style, ...rest}) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const {Image} = getStyles(sizeLabor, themeLabor)
-    const mergedStyle = [Image.Image, style]
+    const {Image} = getStyles(sizeLabor, themeLabor);
+    const mergedStyle = [Image.Image, style];
     return (<ImageRN
         style={mergedStyle}  {...rest} >{children}</ImageRN>);
-}
+};
 
 export const TextInput: React.FC<TextInputProps> = ({style, ...rest}) => {
     const {sizeLabor, themeLabor, colors} = useBunnyKit();
-    const {TextInput} = getStyles(sizeLabor, themeLabor)
+    const {TextInput} = getStyles(sizeLabor, themeLabor);
     // todo Typescript check for outline properties bug
-    const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
+    const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null;
     // @ts-ignore
-    const mergedStyle: StyleProp<ViewStyle> = [TextInput.TextInput, webOutline, style]
+    const mergedStyle: StyleProp<ViewStyle> = [TextInput.TextInput, webOutline, style];
     return (<TextInputRN
         placeholderTextColor={colors.placeholder}
         style={mergedStyle} {...rest} />);
-}
+};
 
 export interface TextInputIconProps extends TextInputProps {
     renderIcon?: () => (React.ReactElement<MaterialCommunityIconsProps>),
 }
 
 // ref?: React.RefObject<TextInputRN>;
-export const TextInputIcon = React.forwardRef<TextInputRN, TextInputIconProps>(({style, renderIcon, editable, autoCapitalize = 'none', ...rest}, ref) => {
+export const TextInputIcon = React.forwardRef<TextInputRN, TextInputIconProps>(({
+                                                                                    style,
+                                                                                    renderIcon,
+                                                                                    editable,
+                                                                                    autoCapitalize = 'none',
+                                                                                    ...rest
+                                                                                }, ref) => {
     const {sizeLabor, themeLabor, colors} = useBunnyKit();
 
-    const {TextInputIcon} = getStyles(sizeLabor, themeLabor)
+    const {TextInputIcon} = getStyles(sizeLabor, themeLabor);
     // todo Typescript check for outline properties bug
-    const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null
+    const webOutline = Platform.OS === 'web' ? {outlineWidth: 0} : null;
     // @ts-ignore
-    const mergedStyle: StyleProp<ViewStyle> = [TextInputIcon.input, webOutline, style]
+    const mergedStyle: StyleProp<ViewStyle> = [TextInputIcon.input, webOutline, style];
     return (<View
         style={TextInputIcon.container}>
         <View style={TextInputIcon.iconContainer}>{renderIcon && renderIcon()}</View>
@@ -174,7 +179,7 @@ export const TextInputIcon = React.forwardRef<TextInputRN, TextInputIconProps>((
             placeholderTextColor={colors.placeholder}
             style={mergedStyle} {...rest} />
     </View>);
-})
+});
 export type SwitchPaperProps = React.ComponentPropsWithRef<typeof SwitchRN> & {
     disabled?: boolean;
     value?: boolean;
@@ -189,20 +194,25 @@ export const SwitchP: React.FC<SwitchPaperProps> = ({style, ...rest}) => {
     const {wp} = designsBasedOn.iphoneX;
     const mergedStyle = [{
         transform: [{scaleX: wp(0.8, false)}, {scaleY: wp(0.8, false)}],
-    }, style]
+    }, style];
     return (<SwitchPaper color={colors.backgroundBtn}
                          style={mergedStyle} {...rest}/>);
-}
+};
 
-export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<TextStyle> }> = ({children, style, name, ...rest}) => {
+export const IconMC: React.FC<MaterialCommunityIconsProps & { style?: StyleProp<TextStyle> }> = ({
+                                                                                                     children,
+                                                                                                     style,
+                                                                                                     name,
+                                                                                                     ...rest
+                                                                                                 }) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const {IconMC} = getStyles(sizeLabor, themeLabor)
-    const mergedStyle = [IconMC.IconMC, style]
+    const {IconMC} = getStyles(sizeLabor, themeLabor);
+    const mergedStyle = [IconMC.IconMC, style];
     return (<MaterialCommunityIcons
         name={name}
         style={mergedStyle}
     />);
-}
+};
 
 export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> = (
     {
@@ -216,13 +226,20 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
     const mergedStyle = [{
         color: color || colors.text,
         fontSize: size || ms.fs.l,
-    }, style]
+    }, style];
     return (<IconFromIcoMoon
         name={name}
         style={mergedStyle}
     />);
-}
-export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, placeholder, items, style, Icon, ...rest}) => {
+};
+export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({
+                                                                         children,
+                                                                         placeholder,
+                                                                         items,
+                                                                         style,
+                                                                         Icon,
+                                                                         ...rest
+                                                                     }) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
 
     const styles = getStyles(sizeLabor, themeLabor);
@@ -231,9 +248,9 @@ export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, 
             android: 'black',
             ios: item.color,
             web: item.color,
-        })
-        return item
-    })
+        });
+        return item;
+    });
     let finalPlaceholder = placeholder;
     if (finalPlaceholder) {
         if (finalPlaceholder.hasOwnProperty('color')) {
@@ -244,10 +261,10 @@ export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, 
                 ios: finalPlaceholder.color,
                 // @ts-ignore
                 web: finalPlaceholder.color,
-            })
+            });
         }
     }
-    const IconDefault = (Platform.OS !== 'web' ? () => <IcoMoon name="chevron-down1"/> : null)
+    const IconDefault = (Platform.OS !== 'web' ? () => <IcoMoon name="chevron-down1"/> : null);
     return (<ReactNativePickerSelect
         style={{
             iconContainer: styles.PickerSelect.iconContainer,
@@ -272,13 +289,13 @@ export const PickerSelect: React.FC<ReactNativePickerSelectProps> = ({children, 
         children={children}
         {...rest}
     />);
-}
+};
 export const PickerSelectChevronRight: React.FC<ReactNativePickerSelectProps> = ({style, Icon, ...rest}) => {
     const {colors} = useBunnyKit();
 
     const {ms, designsBasedOn} = useSizeLabor();
     const {wp} = designsBasedOn.iphoneX;
-    const mergedIconStyle = []
+    const mergedIconStyle = [];
     const IconProp = Icon || (() => <IcoMoon name="chevron-right"
                                              style={{
                                                  marginTop: ms.sp.m,
@@ -286,7 +303,7 @@ export const PickerSelectChevronRight: React.FC<ReactNativePickerSelectProps> = 
                                                  color: colors.text,
                                              }}
                                              size={wp(20)}
-    />)
+    />);
 
     return (<ReactNativePickerSelect
         // style={styles.pickerSelector}
@@ -314,7 +331,7 @@ export const PickerSelectChevronRight: React.FC<ReactNativePickerSelectProps> = 
         {...rest}
         Icon={IconProp}
     />);
-}
+};
 
 
 // The theme switch is not supported, but for future scalability,

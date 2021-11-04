@@ -1,20 +1,20 @@
 import * as React from 'react';
 import {useRef} from 'react';
 import {View} from '../../../components/UI';
-import {shortenTFunctionKey} from '../../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../../providers';
 import {Row} from '../../../containers';
 import CardStack, {Card as StackSwiperCard} from 'react-native-card-stack-swiper';
-import data from './data'
+import data from './data';
 import CardItem from './CardItem';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 export function DatingHomeScreen() {
     const {sizeLabor, themeLabor, theme, colors, wp, t, ms} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DatingHome');
     const styles = getStyles(sizeLabor, themeLabor);
 
-    const swipper = useRef<CardStack>(null)
+    const swipper = useRef<CardStack>(null);
     return (
         <View style={styles.screen}>
             <Row style={styles.filter}>

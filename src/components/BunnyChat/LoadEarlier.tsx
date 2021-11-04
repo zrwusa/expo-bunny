@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
     ActivityIndicator,
     Platform,
@@ -9,8 +9,8 @@ import {
     TouchableOpacity,
     View,
     ViewStyle,
-} from 'react-native'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+} from 'react-native';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {ActivityIndicatorSize} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
 
@@ -44,20 +44,20 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 default: wp(-15),
             }),
         },
-    })
-}
+    });
+};
 
 export interface LoadEarlierProps {
-    isLoadingEarlier?: boolean
-    loadEarlierLabel?: string
-    loadEarlierContainerStyle?: StyleProp<ViewStyle>
-    loadEarlierWrapperStyle?: StyleProp<ViewStyle>
-    loadEarlierTextStyle?: StyleProp<TextStyle>
-    activityIndicatorStyle?: StyleProp<ViewStyle>
-    activityIndicatorColor?: string
-    activityIndicatorSize?: ActivityIndicatorSize
+    isLoadingEarlier?: boolean;
+    loadEarlierLabel?: string;
+    loadEarlierContainerStyle?: StyleProp<ViewStyle>;
+    loadEarlierWrapperStyle?: StyleProp<ViewStyle>;
+    loadEarlierTextStyle?: StyleProp<TextStyle>;
+    activityIndicatorStyle?: StyleProp<ViewStyle>;
+    activityIndicatorColor?: string;
+    activityIndicatorSize?: ActivityIndicatorSize;
 
-    onLoadEarlier?(): void
+    onLoadEarlier?(): void;
 }
 
 class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
@@ -72,7 +72,7 @@ class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
         activityIndicatorStyle: {},
         activityIndicatorColor: 'white',
         activityIndicatorSize: 'small' as ActivityIndicatorSize,
-    }
+    };
 
     renderLoading() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
@@ -82,7 +82,7 @@ class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
                 <Text style={[styles.text, this.props.loadEarlierTextStyle]}>
                     {this.props.loadEarlierLabel}
                 </Text>
-            )
+            );
         }
         return (
             <View>
@@ -95,7 +95,7 @@ class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
                     style={[styles.activityIndicator, this.props.activityIndicatorStyle]}
                 />
             </View>
-        )
+        );
     }
 
     render() {
@@ -106,19 +106,19 @@ class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
                 style={[styles.container, this.props.loadEarlierContainerStyle]}
                 onPress={() => {
                     if (this.props.onLoadEarlier) {
-                        this.props.onLoadEarlier()
+                        this.props.onLoadEarlier();
                     }
                 }}
                 disabled={this.props.isLoadingEarlier === true}
                 // @ts-ignore
-                accessibilityTraits='button'
+                accessibilityTraits="button"
             >
                 <View style={[styles.wrapper, this.props.loadEarlierWrapperStyle]}>
                     {this.renderLoading()}
                 </View>
             </TouchableOpacity>
-        )
+        );
     }
 }
 
-export default withBunnyKit(LoadEarlier)
+export default withBunnyKit(LoadEarlier);

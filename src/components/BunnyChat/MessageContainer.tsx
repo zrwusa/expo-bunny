@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react'
+import React, {RefObject} from 'react';
 
 import {
     FlatList,
@@ -13,14 +13,14 @@ import {
     TouchableOpacity,
     View,
     ViewStyle,
-} from 'react-native'
+} from 'react-native';
 
-import LoadEarlier, {LoadEarlierProps} from './LoadEarlier'
-import Message, {MessageProps} from './Message'
-import {IMessage, PositionLeftOrRight, Reply, User} from './types'
-import {warning} from './utils'
-import TypingIndicator from './TypingIndicator'
-import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
+import LoadEarlier, {LoadEarlierProps} from './LoadEarlier';
+import Message, {MessageProps} from './Message';
+import {IMessage, PositionLeftOrRight, Reply, User} from './types';
+import {warning} from './utils';
+import TypingIndicator from './TypingIndicator';
+import {withBunnyKit, WithBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -70,41 +70,41 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: ms.fs.m,
             color: colors.text3
         }
-    })
-}
+    });
+};
 
 
 export interface MessageContainerProps<TMessage extends IMessage> extends Omit<MessageProps<TMessage>, 'key' | 'position' | 'currentMessage' | 'showActionSheetWithOptions'>, LoadEarlierProps {
 
-    forwardRef?: RefObject<FlatList<TMessage>>
-    isTyping?: boolean
-    inverted?: boolean
-    scrollToBottomOffset?: number
-    messages?: TMessage[]
-    scrollToBottomStyle?: StyleProp<ViewStyle>
-    user?: User
-    infiniteScroll?: boolean
-    isLoadingEarlier?: boolean
-    loadEarlier?: boolean
-    alignTop?: boolean
-    scrollToBottom?: boolean
-    extraData?: any
-    invertibleScrollViewProps?: any
-    listViewProps?: Partial<ListViewProps>
+    forwardRef?: RefObject<FlatList<TMessage>>;
+    isTyping?: boolean;
+    inverted?: boolean;
+    scrollToBottomOffset?: number;
+    messages?: TMessage[];
+    scrollToBottomStyle?: StyleProp<ViewStyle>;
+    user?: User;
+    infiniteScroll?: boolean;
+    isLoadingEarlier?: boolean;
+    loadEarlier?: boolean;
+    alignTop?: boolean;
+    scrollToBottom?: boolean;
+    extraData?: any;
+    invertibleScrollViewProps?: any;
+    listViewProps?: Partial<ListViewProps>;
 
-    renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
+    renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode;
 
-    renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
+    renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode;
 
-    renderMessage?(props: MessageProps<TMessage>): React.ReactNode
+    renderMessage?(props: MessageProps<TMessage>): React.ReactNode;
 
-    renderChatEmpty?(): React.ReactNode
+    renderChatEmpty?(): React.ReactNode;
 
-    renderScrollToBottom?(): React.ReactNode
+    renderScrollToBottom?(): React.ReactNode;
 
-    onLoadEarlier?(): void
+    onLoadEarlier?(): void;
 
-    onQuickReply?(replies: Reply[]): void
+    onQuickReply?(replies: Reply[]): void;
 }
 
 interface MessageContainerState {
@@ -136,12 +136,12 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
         scrollToBottomStyle: {},
         infiniteScroll: false,
         isLoadingEarlier: false,
-    }
+    };
 
     state = {
         showScrollBottom: false,
         hasScrolled: false,
-    }
+    };
 
     constructor(props: MessageContainerProps<TMessage> & WithBunnyKit) {
         super(props);
@@ -149,18 +149,18 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
 
     renderTypingIndicator = () => {
         if (Platform.OS === 'web') {
-            return null
+            return null;
         }
-        return <TypingIndicator isTyping={this.props.isTyping || false}/>
-    }
+        return <TypingIndicator isTyping={this.props.isTyping || false}/>;
+    };
 
     renderFooter = () => {
         if (this.props.renderFooter) {
-            return this.props.renderFooter(this.props)
+            return this.props.renderFooter(this.props);
         }
 
-        return this.renderTypingIndicator()
-    }
+        return this.renderTypingIndicator();
+    };
 
     renderLoadEarlier = () => {
         if (this.props.loadEarlier === true) {
@@ -178,7 +178,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 activityIndicatorColor,
                 activityIndicatorSize,
                 isDebug
-            } = this.props
+            } = this.props;
             const loadEarlierProps = {
                 onLoadEarlier,
                 isLoadingEarlier,
@@ -189,31 +189,31 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 activityIndicatorStyle,
                 activityIndicatorColor,
                 activityIndicatorSize
-            }
+            };
 
-            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level2]MessageContainer loadEarlierProps', loadEarlierProps)
+            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level2]MessageContainer loadEarlierProps', loadEarlierProps);
             if (this.props.renderLoadEarlier) {
-                return this.props.renderLoadEarlier(loadEarlierProps)
+                return this.props.renderLoadEarlier(loadEarlierProps);
             }
-            return <LoadEarlier {...loadEarlierProps} />
+            return <LoadEarlier {...loadEarlierProps} />;
         }
-        return null
-    }
+        return null;
+    };
 
     scrollTo(options: { animated?: boolean; offset: number }) {
         if (this.props.forwardRef && this.props.forwardRef.current && options) {
-            this.props.forwardRef.current.scrollToOffset(options)
+            this.props.forwardRef.current.scrollToOffset(options);
         }
     }
 
     scrollToBottom = (animated: boolean = true) => {
-        const {inverted} = this.props
+        const {inverted} = this.props;
         if (inverted) {
-            this.scrollTo({offset: 0, animated})
+            this.scrollTo({offset: 0, animated});
         } else if (this.props.forwardRef && this.props.forwardRef.current) {
-            this.props.forwardRef!.current!.scrollToEnd({animated})
+            this.props.forwardRef!.current!.scrollToEnd({animated});
         }
-    }
+    };
 
     handleOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const {
@@ -222,45 +222,45 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 contentSize: {height: contentSizeHeight},
                 layoutMeasurement: {height: layoutMeasurementHeight},
             },
-        } = event
-        const {scrollToBottomOffset} = this.props
+        } = event;
+        const {scrollToBottomOffset} = this.props;
         if (this.props.inverted) {
             if (contentOffsetY > scrollToBottomOffset!) {
-                this.setState({showScrollBottom: true, hasScrolled: true})
+                this.setState({showScrollBottom: true, hasScrolled: true});
             } else {
-                this.setState({showScrollBottom: false, hasScrolled: true})
+                this.setState({showScrollBottom: false, hasScrolled: true});
             }
         } else {
             if (
                 contentOffsetY < scrollToBottomOffset! &&
                 contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
             ) {
-                this.setState({showScrollBottom: true, hasScrolled: true})
+                this.setState({showScrollBottom: true, hasScrolled: true});
             } else {
-                this.setState({showScrollBottom: false, hasScrolled: true})
+                this.setState({showScrollBottom: false, hasScrolled: true});
             }
         }
-    }
+    };
 
     renderRow = ({item, index}: ListRenderItemInfo<TMessage>) => {
         if (!item._id && item._id !== 0) {
-            warning('BunnyChat: `_id` is missing for message', JSON.stringify(item))
+            warning('BunnyChat: `_id` is missing for message', JSON.stringify(item));
         }
         if (!item.user) {
             if (!item.system) {
                 warning(
                     'BunnyChat: `user` is missing for message',
                     JSON.stringify(item),
-                )
+                );
             }
-            item.user = {_id: 0}
+            item.user = {_id: 0};
         }
-        const {messages, user, inverted} = this.props
+        const {messages, user, inverted} = this.props;
         if (messages && user) {
             const previousMessage =
-                (inverted ? messages[index + 1] : messages[index - 1]) || {}
+                (inverted ? messages[index + 1] : messages[index - 1]) || {};
             const nextMessage =
-                (inverted ? messages[index - 1] : messages[index + 1]) || {}
+                (inverted ? messages[index - 1] : messages[index + 1]) || {};
             const {
                 audioContainerStyle,
                 audioStyle,
@@ -346,7 +346,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 audioProgressColor,
                 audioRemainTimeStyle,
                 audioPlayButtonIconStyle,
-            } = this.props
+            } = this.props;
 
             const messageProps = {
                 audioContainerStyle,
@@ -441,16 +441,16 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 key: item._id,
                 currentMessage: item,
                 position: item.user._id === user._id ? 'right' : 'left' as PositionLeftOrRight,
-            }
-            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level2]MessageContainer messageProps', messageProps)
+            };
+            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level2]MessageContainer messageProps', messageProps);
             if (this.props.renderMessage) {
-                return this.props.renderMessage(messageProps)
+                return this.props.renderMessage(messageProps);
             }
-            return <Message<TMessage> {...messageProps} />
+            return <Message<TMessage> {...messageProps} />;
             // return <Message {...messageProps} />
         }
-        return null
-    }
+        return null;
+    };
 
     renderChatEmpty = () => {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
@@ -462,31 +462,31 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                 <View style={styles.emptyChatContainer}>
                     {this.props.renderChatEmpty()}
                 </View>
-            )
+            );
         }
-        return <View style={styles.container}/>
-    }
+        return <View style={styles.container}/>;
+    };
 
     renderHeaderWrapper = () => {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>
-        )
-    }
+        );
+    };
 
     renderScrollBottomComponent() {
-        const {renderScrollToBottom, bunnyKit: {sizeLabor, themeLabor}} = this.props
-        const styles = getStyles(sizeLabor, themeLabor)
+        const {renderScrollToBottom, bunnyKit: {sizeLabor, themeLabor}} = this.props;
+        const styles = getStyles(sizeLabor, themeLabor);
         if (renderScrollToBottom) {
-            return renderScrollToBottom()
+            return renderScrollToBottom();
         }
 
-        return <Text style={styles.scrollToBottomButton}>v</Text>
+        return <Text style={styles.scrollToBottomButton}>v</Text>;
     }
 
     renderScrollToBottomWrapper() {
-        const propsStyle = this.props.scrollToBottomStyle || {}
+        const propsStyle = this.props.scrollToBottomStyle || {};
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
         return (
@@ -498,7 +498,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                     {this.renderScrollBottomComponent()}
                 </TouchableOpacity>
             </View>
-        )
+        );
     }
 
     onLayoutList = () => {
@@ -510,9 +510,9 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
             setTimeout(
                 () => this.scrollToBottom && this.scrollToBottom(false),
                 15 * this.props.messages!.length,
-            )
+            );
         }
-    }
+    };
 
     onEndReached = ({distanceFromEnd}: { distanceFromEnd: number }) => {
         const {
@@ -520,7 +520,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
             onLoadEarlier,
             infiniteScroll,
             isLoadingEarlier,
-        } = this.props
+        } = this.props;
         if (
             infiniteScroll &&
             (this.state.hasScrolled || distanceFromEnd > 0) &&
@@ -530,14 +530,14 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
             !isLoadingEarlier &&
             Platform.OS !== 'web'
         ) {
-            onLoadEarlier()
+            onLoadEarlier();
         }
-    }
+    };
 
-    keyExtractor = (item: TMessage) => `${item._id}`
+    keyExtractor = (item: TMessage) => `${item._id}`;
 
     render() {
-        const {inverted, bunnyKit: {sizeLabor, themeLabor}} = this.props
+        const {inverted, bunnyKit: {sizeLabor, themeLabor}} = this.props;
         const styles = getStyles(sizeLabor, themeLabor);
         return (
             <View
@@ -576,8 +576,8 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
                     {...this.props.listViewProps}
                 />
             </View>
-        )
+        );
     }
 }
 
-export default withBunnyKit(MessageContainer)
+export default withBunnyKit(MessageContainer);

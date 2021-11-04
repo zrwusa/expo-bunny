@@ -11,4 +11,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             paddingTop: wp(55)
         }
     });
-}
+};

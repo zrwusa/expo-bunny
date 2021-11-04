@@ -15,6 +15,6 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         text: {
             fontSize: ms.fs.s
         }
-    })
-}
+    });
+};
 

@@ -7,4 +7,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {colors} = themeLabor.theme;
 
     return StyleSheet.create({});
-}
+};

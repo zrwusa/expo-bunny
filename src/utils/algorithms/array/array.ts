@@ -37,7 +37,7 @@ function canJumpMy(nums: number[]): boolean {
 function twoSum(nums: number[], target: number): number[] {
     const diffMap: Map<number, number> = new Map();
     for (let i = 0; i < nums.length; i++) {
-        const first = diffMap.get(nums[i])
+        const first = diffMap.get(nums[i]);
         if (first !== undefined) {
             return [first, i];
         }
@@ -132,7 +132,7 @@ class NumMatrixMy {
 
                 return (this._cache[row][col - 1] || 0) + colSum;
             }
-        }
+        };
 
         for (let row = 0; row < matrix.length; row++) {
             for (let col = 0; col < matrix[row].length; col++) {
@@ -231,7 +231,7 @@ class NumArrayMyFirst {
     }
 
     update(index: number, val: number): void {
-        this._diffs.push([index, val - this._nums[index]])
+        this._diffs.push([index, val - this._nums[index]]);
         this._nums[index] = val;
         // console.log(val)
         // console.log(this._diffs)

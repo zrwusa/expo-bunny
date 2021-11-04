@@ -33,4 +33,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginRight: ms.sp.s,
         }
     });
-}
+};

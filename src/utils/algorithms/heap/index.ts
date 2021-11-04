@@ -1,2 +1,2 @@
-export * from './heap'
-export * from './cases'
+export * from './heap';
+export * from './cases';

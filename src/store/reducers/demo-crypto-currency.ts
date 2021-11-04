@@ -38,17 +38,17 @@ const initialState: DemoCryptoCurrencyState = {
             {label: '2h', value: '2h'},
         ],
     }
-}
+};
 export const demoCryptoCurrencyReducer = (
     prevState = initialState,
     action: DemoCryptoCurrencyActions,
 ): DemoCryptoCurrencyState => {
     switch (action.type) {
         case EDemoCryptoCurrency.RECEIVE_CURRENT_PRICE:
-            const xxx = action.payload as ReceiveGetCurrentPricePayload
-            return {...prevState, ...xxx}
+            const xxx = action.payload as ReceiveGetCurrentPricePayload;
+            return {...prevState, ...xxx};
         default:
-            return prevState
+            return prevState;
     }
-}
+};
 

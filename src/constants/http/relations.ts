@@ -401,4 +401,4 @@ export const relations = {
         'spec_title': 'draft-ietf-httpbis-legally-restricted-status',
         'spec_href': 'https://tools.ietf.org/html/draft-ietf-httpbis-legally-restricted-status'
     }
-}
+};

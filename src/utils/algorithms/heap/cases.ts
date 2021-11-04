@@ -12,7 +12,7 @@ const arraysToLinkedLists = (arrays: number[][]): SinglyLinkedListNode[] => {
         linkedLists.push(SinglyLinkedList.from(list)!.head!);
     }
     return linkedLists;
-}
+};
 export const mergeKListsCase1: [SinglyLinkedListNode[]] = [arraysToLinkedLists([[1, 4, 5], [1, 3, 4], [2, 6]])];
 export const mergeKListsCase2: [SinglyLinkedListNode[]] = [arraysToLinkedLists([[1]])];
 

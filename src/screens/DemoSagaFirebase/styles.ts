@@ -19,4 +19,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             height: hp(300),
         },
     });
-}
+};

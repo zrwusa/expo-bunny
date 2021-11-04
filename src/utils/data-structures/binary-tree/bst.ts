@@ -59,7 +59,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
     }
 
     insert(id: BinaryTreeNodeId, val?: T | null, count?: number): (BSTNode<T> | null)[] {
-        const inserted: BSTNode<T>[] = []
+        const inserted: BSTNode<T>[] = [];
         const newNode = this.createNode(id, val, count);
         const newId = newNode.id;
         if (this.root === null) {
@@ -273,7 +273,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
         if (propertyName === undefined) {
             propertyName = 'id';
         }
-        const node = this.getNodes(nodeProperty, propertyName, true)[0]
+        const node = this.getNodes(nodeProperty, propertyName, true)[0];
         if (node) {
             return node;
         } else {
@@ -331,7 +331,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
 
     lesserSum(id: BinaryTreeNodeId, propertyName ?: BinaryTreeNodePropertyName): number {
         if (propertyName === undefined) {
-            propertyName = 'id'
+            propertyName = 'id';
         }
         let sum = 0;
         const _traverse = (cur: BSTNode<T>): void => {
@@ -378,7 +378,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
                     return;
                 }
             }
-        }
+        };
 
         this.root && _traverse(this.root);
         return sum;
@@ -408,13 +408,13 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             if (!cur.left && !cur.right) return;
             cur.left && _traverse(cur.left);
             cur.right && _traverse(cur.right);
-        }
+        };
 
         if (subTreeRoot) {
             _traverse(subTreeRoot);
             return true;
         }
-        return false
+        return false;
     }
 
     allGreaterNodesAdd(node: BSTNode<T>, delta: number, propertyName ?: BinaryTreeNodePropertyName): boolean {
@@ -444,13 +444,13 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             if (!cur.left && !cur.right) return;
             (cur.left && cur.id > node.id) && _traverse(cur.left);
             cur.right && _traverse(cur.right);
-        }
+        };
 
         if (this.root) {
             _traverse(this.root);
             return true;
         }
-        return false
+        return false;
     }
 
     balance(): boolean {
@@ -464,7 +464,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
             this.insert(midNode.id, midNode.val, midNode.count);
             buildBalanceBST(l, m - 1);
             buildBalanceBST(m + 1, r);
-        }
+        };
 
         if (sorted.length > 0) {
             buildBalanceBST(0, sorted.length - 1);
@@ -485,7 +485,7 @@ export class BST<T> extends BinaryTree<T> implements I_BST<T> {
                 return Infinity;
             }
             return Math.max(leftHeight, rightHeight) + 1;
-        }
+        };
 
         _height(this.root);
         return balanced;

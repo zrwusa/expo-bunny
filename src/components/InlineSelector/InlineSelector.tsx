@@ -1,8 +1,7 @@
 import {FlexAlignType, GestureResponderEvent, StyleProp, TextStyle, TouchableOpacity} from 'react-native';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 import {getSharedStyles} from '../../helpers';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import {IcoMoon, Text} from '../UI';
 import * as React from 'react';
 
@@ -21,16 +20,26 @@ export interface InlineProps {
 let count = 0;
 const counter = () => {
     return count++;
-}
+};
 
 // Use React.memo as PureComponent instead of recompose.pure
 export const InlineSelector = React.memo((props: InlineProps) => {
     // console.log('InlineSelector',counter())
-    const {title, renderText, onPress, columns = [4, 8, 1], isShowChevron = true, titleStyle, textStyle, textAlign = 'flex-end', renderColumn2} = props;
+    const {
+        title,
+        renderText,
+        onPress,
+        columns = [4, 8, 1],
+        isShowChevron = true,
+        titleStyle,
+        textStyle,
+        textAlign = 'flex-end',
+        renderColumn2
+    } = props;
     const {sizeLabor, themeLabor, wp, t, colors, user} = useBunnyKit();
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     return <TouchableOpacity onPress={(e) => {
-        onPress?.(e)
+        onPress?.(e);
     }}>
         <Row style={{padding: wp(10)}}>
             <Col size={columns[0]}>
@@ -58,5 +67,5 @@ export const InlineSelector = React.memo((props: InlineProps) => {
                 }
             </Col>
         </Row>
-    </TouchableOpacity>
-})
+    </TouchableOpacity>;
+});

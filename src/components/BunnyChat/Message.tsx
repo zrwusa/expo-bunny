@@ -1,14 +1,14 @@
-import React from 'react'
-import {LayoutChangeEvent, StyleSheet, View, ViewStyle} from 'react-native'
+import React from 'react';
+import {LayoutChangeEvent, StyleSheet, View, ViewStyle} from 'react-native';
 
-import ChatAvatar, {ChatAvatarProps} from './ChatAvatar'
-import Bubble, {BubbleProps} from './Bubble'
-import SystemMessage, {SystemMessageProps} from './SystemMessage'
-import Day, {DayProps} from './Day'
+import ChatAvatar, {ChatAvatarProps} from './ChatAvatar';
+import Bubble, {BubbleProps} from './Bubble';
+import SystemMessage, {SystemMessageProps} from './SystemMessage';
+import Day, {DayProps} from './Day';
 
-import {isSameUser} from './utils'
-import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {isSameUser} from './utils';
+import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -32,37 +32,37 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
                 marginRight: wp(8),
             },
         }),
-    }
-}
+    };
+};
 
 export interface MessageProps<TMessage extends IMessage> extends BubbleProps<TMessage>,
     DayProps<TMessage>,
     ChatAvatarProps<TMessage>,
     SystemMessageProps<TMessage> {
-    currentMessage?: TMessage
-    previousMessage?: TMessage
-    nextMessage?: TMessage
-    position: PositionLeftOrRight
-    messageContainerStyle?: LeftRightStyle<ViewStyle>
+    currentMessage?: TMessage;
+    previousMessage?: TMessage;
+    nextMessage?: TMessage;
+    position: PositionLeftOrRight;
+    messageContainerStyle?: LeftRightStyle<ViewStyle>;
 
     shouldUpdateMessage?(
         props: MessageProps<TMessage>,
         nextProps: MessageProps<TMessage>,
-    ): boolean
+    ): boolean;
 
-    onMessageLayout?(event: LayoutChangeEvent): void
+    onMessageLayout?(event: LayoutChangeEvent): void;
 
-    renderDay?(props: DayProps<TMessage>): React.ReactNode
+    renderDay?(props: DayProps<TMessage>): React.ReactNode;
 
-    renderBubble?(props: BubbleProps<TMessage>): React.ReactNode
+    renderBubble?(props: BubbleProps<TMessage>): React.ReactNode;
 
-    renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
+    renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode;
 
-    user?: User
-    showUserAvatar?: boolean
-    inverted?: boolean
+    user?: User;
+    showUserAvatar?: boolean;
+    inverted?: boolean;
     // TODO
-    key: any
+    key: any;
 }
 
 class Message<TMessage extends IMessage> extends React.Component<MessageProps<TMessage> & WithBunnyKit> {
@@ -82,19 +82,19 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
         inverted: true,
         shouldUpdateMessage: undefined,
         onMessageLayout: undefined,
-    }
+    };
 
     shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
-        const next = nextProps.currentMessage!
-        const current = this.props.currentMessage!
-        const {previousMessage, nextMessage} = this.props
-        const nextPropsMessage = nextProps.nextMessage
-        const nextPropsPreviousMessage = nextProps.previousMessage
+        const next = nextProps.currentMessage!;
+        const current = this.props.currentMessage!;
+        const {previousMessage, nextMessage} = this.props;
+        const nextPropsMessage = nextProps.nextMessage;
+        const nextPropsPreviousMessage = nextProps.previousMessage;
 
         const shouldUpdate =
             (this.props.shouldUpdateMessage &&
                 this.props.shouldUpdateMessage(this.props, nextProps)) ||
-            false
+            false;
 
         return (
             next.sent !== current.sent ||
@@ -109,7 +109,7 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             previousMessage !== nextPropsPreviousMessage ||
             nextMessage !== nextPropsMessage ||
             shouldUpdate
-        )
+        );
     }
 
     renderDay() {
@@ -135,16 +135,16 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
                 dayTextStyle,
                 dayTextProps,
                 dateFormat
-            }
+            };
 
-            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message dayProps', dayProps)
+            isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message dayProps', dayProps);
             if (this.props.renderDay) {
-                return this.props.renderDay(dayProps)
+                return this.props.renderDay(dayProps);
             }
-            return <Day<TMessage> {...dayProps} />
+            return <Day<TMessage> {...dayProps} />;
             // return <Day {...dayProps} />
         }
-        return null
+        return null;
     }
 
     renderBubble() {
@@ -288,13 +288,13 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             audioProgressColor,
             audioRemainTimeStyle,
             audioPlayButtonIconStyle,
-        }
-        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message bubbleProps', bubbleProps)
+        };
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message bubbleProps', bubbleProps);
 
         if (this.props.renderBubble) {
-            return this.props.renderBubble(bubbleProps)
+            return this.props.renderBubble(bubbleProps);
         }
-        return <Bubble<TMessage> {...bubbleProps} />
+        return <Bubble<TMessage> {...bubbleProps} />;
         // return <Bubble {...bubbleProps} />
     }
 
@@ -312,17 +312,17 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             systemMessageContainerStyle,
             systemMessageWrapperStyle,
             systemTextStyle
-        }
-        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message systemMessageProps', systemMessageProps)
+        };
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message systemMessageProps', systemMessageProps);
         if (this.props.renderSystemMessage) {
-            return this.props.renderSystemMessage(systemMessageProps)
+            return this.props.renderSystemMessage(systemMessageProps);
         }
-        return <SystemMessage<TMessage> {...systemMessageProps} />
+        return <SystemMessage<TMessage> {...systemMessageProps} />;
         // return <SystemMessage {...systemMessageProps} />
     }
 
     renderAvatar() {
-        const {user, currentMessage, showUserAvatar} = this.props
+        const {user, currentMessage, showUserAvatar} = this.props;
 
         if (
             user &&
@@ -332,7 +332,7 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             user._id === currentMessage.user._id &&
             !showUserAvatar
         ) {
-            return null
+            return null;
         }
 
         if (
@@ -340,7 +340,7 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             currentMessage.user &&
             currentMessage.user.avatar === null
         ) {
-            return null
+            return null;
         }
 
         // const {messageContainerStyle, onMessageLayout, ...props} = this.props
@@ -367,9 +367,9 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             avatarImageStyle,
             onPressAvatar,
             onLongPressAvatar
-        }
-        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message avatarProps', avatarProps)
-        return <ChatAvatar {...avatarProps} />
+        };
+        isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level3]Message avatarProps', avatarProps);
+        return <ChatAvatar {...avatarProps} />;
     }
 
     render() {
@@ -379,9 +379,9 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
             nextMessage,
             position,
             messageContainerStyle,
-        } = this.props
+        } = this.props;
         if (currentMessage) {
-            const sameUser = isSameUser(currentMessage, nextMessage!)
+            const sameUser = isSameUser(currentMessage, nextMessage!);
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
             const styles = getStyles(sizeLabor, themeLabor);
             return (
@@ -404,10 +404,10 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
                         </View>
                     )}
                 </View>
-            )
+            );
         }
-        return null
+        return null;
     }
 }
 
-export default withBunnyKit(Message)
+export default withBunnyKit(Message);

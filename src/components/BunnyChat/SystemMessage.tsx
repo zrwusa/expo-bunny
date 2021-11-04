@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle,} from 'react-native'
-import {IMessage} from './types'
+import React, {Component} from 'react';
+import {StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle,} from 'react-native';
+import {IMessage} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
+import {withBunnyKit, WithBunnyKit} from '../../hooks';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
@@ -21,14 +21,14 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: wp(12),
             fontWeight: '300',
         },
-    })
-}
+    });
+};
 
 export interface SystemMessageProps<TMessage extends IMessage> {
-    currentMessage?: TMessage
-    systemMessageContainerStyle?: StyleProp<ViewStyle>
-    systemMessageWrapperStyle?: StyleProp<ViewStyle>
-    systemTextStyle?: StyleProp<TextStyle>
+    currentMessage?: TMessage;
+    systemMessageContainerStyle?: StyleProp<ViewStyle>;
+    systemMessageWrapperStyle?: StyleProp<ViewStyle>;
+    systemTextStyle?: StyleProp<TextStyle>;
 }
 
 class SystemMessage<TMessage extends IMessage> extends Component<SystemMessageProps<TMessage> & WithBunnyKit> {
@@ -37,7 +37,7 @@ class SystemMessage<TMessage extends IMessage> extends Component<SystemMessagePr
         systemMessageContainerStyle: {},
         systemMessageWrapperStyle: {},
         systemTextStyle: {},
-    }
+    };
 
     render() {
         const {
@@ -45,7 +45,7 @@ class SystemMessage<TMessage extends IMessage> extends Component<SystemMessagePr
             systemMessageContainerStyle,
             systemMessageWrapperStyle,
             systemTextStyle,
-        } = this.props
+        } = this.props;
         if (currentMessage) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
             const styles = getStyles(sizeLabor, themeLabor);
@@ -55,10 +55,10 @@ class SystemMessage<TMessage extends IMessage> extends Component<SystemMessagePr
                         <Text style={[styles.text, systemTextStyle]}>{currentMessage.text}</Text>
                     </View>
                 </View>
-            )
+            );
         }
-        return null
+        return null;
     }
 }
 
-export default withBunnyKit(SystemMessage)
+export default withBunnyKit(SystemMessage);

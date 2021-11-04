@@ -51,4 +51,4 @@ export const migrateCountries = async () => {
     //             .set(city)
     //     }
     // }
-}
+};

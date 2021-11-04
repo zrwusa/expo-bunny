@@ -1,2 +1,2 @@
-export * from './two-pointers'
-export * from './cases'
+export * from './two-pointers';
+export * from './cases';

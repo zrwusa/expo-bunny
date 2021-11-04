@@ -4,22 +4,22 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../types';
 import {getStyles} from './styles';
 import {sysClearErrors} from '../../store/actions';
-import {Row} from '../../containers/Row';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {Row} from '../../containers';
+import {useBunnyKit} from '../../hooks';
 
 interface Props {
-    title?: string
+    title?: string;
 }
 
 const Sys = ({title}: Props) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
     const sysState = useSelector((store: RootState) => store.sysState);
-    const [isShow, setIsShow] = useState(false)
+    const [isShow, setIsShow] = useState(false);
     const styles = getStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     useEffect(() => {
-        setIsShow(sysState.errors.length > 0)
-    }, [JSON.stringify(sysState.errors)])
+        setIsShow(sysState.errors.length > 0);
+    }, [JSON.stringify(sysState.errors)]);
     return (
         isShow
             ? <View style={styles.errorConsole}>
@@ -34,14 +34,14 @@ const Sys = ({title}: Props) => {
                 }
                 <Row style={styles.buttonBox}>
                     <TextButton onPress={() => {
-                        dispatch(sysClearErrors({all: true}))
+                        dispatch(sysClearErrors({all: true}));
                     }}><Text>Clear</Text></TextButton>
                     <TextButton onPress={() => {
-                        setIsShow(false)
+                        setIsShow(false);
                     }}><Text>Close</Text></TextButton>
                 </Row>
             </View>
             : null
     );
-}
+};
 export default Sys;

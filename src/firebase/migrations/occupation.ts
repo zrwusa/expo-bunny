@@ -9,4 +9,4 @@ export const migrateOccupations = async () => {
     //         .doc(occupation.code)
     //         .set(occupation)
     // }
-}
+};

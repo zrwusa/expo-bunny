@@ -14,6 +14,6 @@ export const migrateUniversities = async () => {
     // //         .add(university)
     // // }
     // console.log('done')
-}
+};
 
 

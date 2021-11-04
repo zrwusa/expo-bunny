@@ -1,2 +1,2 @@
-export * from './useBunnyKit'
-export * from './withBunnyKit'
+export * from './useBunnyKit';
+export * from './withBunnyKit';

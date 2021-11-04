@@ -3,18 +3,18 @@ import * as React from 'react';
 import {useEffect, useMemo, useState} from 'react';
 import {MeasureProviderProps} from '../../types';
 import {Dimensions} from 'react-native';
-import _ from 'lodash'
+import _ from 'lodash';
 import BunnyConstants from '../../constants/constants';
-import getSizeLabor from './sizeLabor';
+import {getSizeLabor} from './sizeLabor';
 import {SizeLaborContext} from './SizeLaborContext';
 
-function SizeLaborProvider(props: MeasureProviderProps): JSX.Element {
+export const SizeLaborProvider = (props: MeasureProviderProps): JSX.Element => {
     const {children} = props;
     const [sizeLabor, setSizeLabor] = useState(getSizeLabor());
 
     useEffect(() => {
         const onDimensionsChange = _.throttle(() => {
-            setSizeLabor(getSizeLabor())
+            setSizeLabor(getSizeLabor());
         }, BunnyConstants.throttleWait);
         Dimensions.addEventListener('change', onDimensionsChange);
         return () => Dimensions.removeEventListener('change', onDimensionsChange);
@@ -27,6 +27,4 @@ function SizeLaborProvider(props: MeasureProviderProps): JSX.Element {
             {children}
         </SizeLaborContext.Provider>
     );
-}
-
-export {SizeLaborProvider};
+};

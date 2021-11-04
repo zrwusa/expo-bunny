@@ -1,2 +1,2 @@
-export * from './segment-tree'
-export * from './cases'
+export * from './segment-tree';
+export * from './cases';

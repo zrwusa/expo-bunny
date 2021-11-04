@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react'
-import {StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle,} from 'react-native'
-import dayjs from 'dayjs'
+import React, {PureComponent} from 'react';
+import {StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewStyle,} from 'react-native';
+import dayjs from 'dayjs';
 
-import {isSameDay} from './utils'
-import {DATE_FORMAT} from './Constant'
-import {IMessage} from './types'
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {isSameDay} from './utils';
+import {DATE_FORMAT} from './Constant';
+import {IMessage} from './types';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -24,19 +24,19 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             fontSize: wp(12),
             fontWeight: '600',
         },
-    })
+    });
 
-}
+};
 
 export interface DayProps<TMessage extends IMessage> {
-    currentMessage?: TMessage
-    nextMessage?: TMessage
-    previousMessage?: TMessage
-    dayContainerStyle?: StyleProp<ViewStyle>
-    dayWrapperStyle?: StyleProp<ViewStyle>
-    dayTextStyle?: StyleProp<TextStyle>
-    dayTextProps?: TextProps
-    dateFormat?: string
+    currentMessage?: TMessage;
+    nextMessage?: TMessage;
+    previousMessage?: TMessage;
+    dayContainerStyle?: StyleProp<ViewStyle>;
+    dayWrapperStyle?: StyleProp<ViewStyle>;
+    dayTextStyle?: StyleProp<TextStyle>;
+    dayTextProps?: TextProps;
+    dateFormat?: string;
 }
 
 class Day<TMessage extends IMessage> extends PureComponent<DayProps<TMessage> & WithBunnyKit> {
@@ -50,7 +50,7 @@ class Day<TMessage extends IMessage> extends PureComponent<DayProps<TMessage> & 
         dayTextStyle: {},
         dayTextProps: {},
         dateFormat: DATE_FORMAT,
-    }
+    };
 
 
     render() {
@@ -63,7 +63,7 @@ class Day<TMessage extends IMessage> extends PureComponent<DayProps<TMessage> & 
             dayTextStyle,
             dayTextProps,
             bunnyKit,
-        } = this.props
+        } = this.props;
         const {language} = bunnyKit;
         if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
             const {createdAt} = currentMessage;
@@ -79,10 +79,10 @@ class Day<TMessage extends IMessage> extends PureComponent<DayProps<TMessage> & 
                         </Text>
                     </View>
                 </View>
-            )
+            );
         }
-        return null
+        return null;
     }
 }
 
-export default withBunnyKit(Day)
+export default withBunnyKit(Day);

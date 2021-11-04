@@ -15,4 +15,4 @@ export const demoHello2: (payload: DemoHello2Payload) => DemoHello2Action = (pay
     };
 };
 
-export type DemoHelloActions = DemoHelloAction | DemoHello2Action ;
+export type DemoHelloActions = DemoHelloAction | DemoHello2Action;

@@ -23,4 +23,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             resizeMode: 'contain',
         },
     });
-}
+};

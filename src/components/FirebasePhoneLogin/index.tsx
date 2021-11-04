@@ -1,1 +1,1 @@
-export * from './FirebasePhoneLogin'
+export * from './FirebasePhoneLogin';

@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {Avatar, Button, List} from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import {IconMC, View} from '../../components/UI';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../providers';
 import {Card, getContainerStyles, Row} from '../../containers';
 import {uuidV4} from '../../utils';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 interface Props {
-    title?: string
+    title?: string;
 }
 
 type States = { name: string, pickerValue: string }
@@ -19,10 +19,10 @@ function DemoThirdPartScreen(props: Props) {
     const [state, setState] = useState<States>({
         name: 'DemoThirdPart',
         pickerValue: 'football'
-    })
+    });
 
     const st = shortenTFunctionKey(t, 'screens.DemoThirdPart');
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
 
     const LIST = [
         {
@@ -38,7 +38,7 @@ function DemoThirdPartScreen(props: Props) {
             subtitle: 'Rios'
         },
     ];
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     return (
         <View style={[containerStyles.Screen, styles.container]}>

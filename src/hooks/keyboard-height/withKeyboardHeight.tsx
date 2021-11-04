@@ -1,9 +1,9 @@
 import React from 'react';
 import {UseKeyboardHeight, useKeyboardHeight} from './useKeyboardHeight';
 
-export function withKeyboardHeight<T extends UseKeyboardHeight = UseKeyboardHeight>(
+export const withKeyboardHeight = <T extends UseKeyboardHeight = UseKeyboardHeight>(
     WrappedComponent: React.ComponentType<T>
-) {
+) => {
     const displayName =
         WrappedComponent.displayName || WrappedComponent.name || 'Component';
     const ComponentWithKeyboardHeight = (props: Omit<T, keyof UseKeyboardHeight>) => {
@@ -12,4 +12,5 @@ export function withKeyboardHeight<T extends UseKeyboardHeight = UseKeyboardHeig
     };
     ComponentWithKeyboardHeight.displayName = `withKeyboardHeight(${displayName})`;
     return ComponentWithKeyboardHeight;
-}
+};
+export default withKeyboardHeight;

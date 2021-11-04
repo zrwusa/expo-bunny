@@ -11,4 +11,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             padding: ms.sp.m
         }
     });
-}
+};

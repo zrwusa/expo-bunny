@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
-import {authLaborContext} from '../providers/auth-labor';
-import {checkBunnyAPIProtocol, getApiInstanceConfig} from './index';
+import {authLaborContext} from '../providers';
 import {BunnyAPIProtocolResponseData} from '../types';
+import {checkBunnyAPIProtocol, getApiInstanceConfig} from './helpers';
 
 export const defaultBunnyAPIResponseData = {
     'httpExtra': {
@@ -24,33 +24,32 @@ export const defaultBunnyAPIResponseData = {
     },
     'successData': null,
     'timeSpent': 0
-}
-
-const bunnyAPI = axios.create(getApiInstanceConfig('bunny'));
+};
+export const bunnyAPI = axios.create(getApiInstanceConfig('bunny'));
 
 bunnyAPI.interceptors.request.use(
     async (config) => {
         const {accessToken} = await authLaborContext.authFunctions.getPersistenceAuth();
         // "Accept": "application/json",
         // "Content-Type": "application/x-www-form-urlencoded"
-        config.headers['Content-Type'] = 'application/json'
+        config.headers['Content-Type'] = 'application/json';
         if (accessToken) {
-            config.headers['Authorization'] = `Bearer ${accessToken}`
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
     },
     async error => {
-        return Promise.reject(error)
+        return Promise.reject(error);
     });
 
 bunnyAPI.interceptors.response.use(
     (response: AxiosResponse<BunnyAPIProtocolResponseData<any>>) => {
         // status 200-300
         if (!checkBunnyAPIProtocol(response.data)) {
-            response.data = defaultBunnyAPIResponseData
+            response.data = defaultBunnyAPIResponseData;
         }
-        response.data = response.data.successData
-        return response
+        response.data = response.data.successData;
+        return response;
     },
     async (error) => {
         const {response, request, config} = error;
@@ -59,23 +58,23 @@ bunnyAPI.interceptors.response.use(
             const {status, data} = response;
             switch (status) {
                 case 401:
-                    const {businessLogic} = data
-                    const {errorCode} = businessLogic
+                    const {businessLogic} = data;
+                    const {errorCode} = businessLogic;
                     if (['BL_BUNNY_002', 'BL_BUNNY_003', 'BL_BUNNY_004', 'BL_BUNNY_005', 'BL_BUNNY_012'].includes(errorCode)) {
                         const {authFunctions} = authLaborContext;
                         const {bunnyRefreshAuth, logOut} = authFunctions;
                         try {
-                            const {success} = await bunnyRefreshAuth()
+                            const {success} = await bunnyRefreshAuth();
                             if (!success) {
-                                await logOut('API')
+                                await logOut('API');
                             } else {
                                 const originalRequest = config;
                                 originalRequest._retry = true;
                                 return bunnyAPI(originalRequest);
                             }
                         } catch (e) {
-                            await logOut('API')
-                            throw e
+                            await logOut('API');
+                            throw e;
                         }
                     }
                     break;
@@ -83,15 +82,16 @@ bunnyAPI.interceptors.response.use(
                     break;
             }
             if (checkBunnyAPIProtocol(response.data)) {
-                throw error
+                throw error;
             }
         } else if (request) {
             // status 100-200 timeout The request was made but no response was received, `error.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js
             throw error;
         } else {
             // Something happened in setting up the request and triggered an error
-            throw error
+            throw error;
         }
     });
 
 export default bunnyAPI;
+

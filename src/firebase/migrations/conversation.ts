@@ -2,7 +2,7 @@ import {firebase} from '../firebase';
 import {Conversation} from '../../types';
 import {randomDate} from '../../utils';
 
-const demoCreatedAt = randomDate(new Date('2020-1-1'), new Date())
+const demoCreatedAt = randomDate(new Date('2020-1-1'), new Date());
 export const conversations: Conversation[] = [
     {
         _id: 'conversation-001',
@@ -124,7 +124,7 @@ export const conversations: Conversation[] = [
         updatedAt: 1620982332610,
         // deletedAt: undefined
     }
-]
+];
 
 
 export const datingConversations: Conversation[] = [
@@ -248,14 +248,14 @@ export const datingConversations: Conversation[] = [
         updatedAt: 1620982332610,
         // deletedAt: undefined
     }
-]
+];
 export const migrateConversations = async () => {
     for (const conversation of conversations) {
         await firebase
             .firestore()
             .collection('conversations')
             .doc(conversation._id)
-            .set(conversation)
+            .set(conversation);
     }
 
     for (const conversation of datingConversations) {
@@ -263,6 +263,6 @@ export const migrateConversations = async () => {
             .firestore()
             .collection('conversations')
             .doc(conversation._id)
-            .set(conversation)
+            .set(conversation);
     }
-}
+};

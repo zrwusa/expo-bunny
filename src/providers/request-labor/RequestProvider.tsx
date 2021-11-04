@@ -1,4 +1,4 @@
-import bunnyAPI from '../../helpers/bunny-api';
+import {bunnyAPI} from '../../helpers';
 import React, {ReactNode} from 'react';
 import {AxiosInstance} from 'axios';
 import {RequestContext} from './RequestContext';
@@ -6,9 +6,9 @@ import {RequestContext} from './RequestContext';
 export interface RequestProviderProps {
     children: ReactNode;
     axiosInstance?: AxiosInstance;
-};
+}
 
-export function RequestProvider(props: RequestProviderProps) {
+export const RequestProvider = (props: RequestProviderProps) => {
     const {children, axiosInstance} = props;
     // if (axiosInstance === undefined) {
     //     throw new Error('The component using the the context must be a descendant of the context provider')
@@ -18,4 +18,4 @@ export function RequestProvider(props: RequestProviderProps) {
             {children}
         </RequestContext.Provider>
     );
-}
+};

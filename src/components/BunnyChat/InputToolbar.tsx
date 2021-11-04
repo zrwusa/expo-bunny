@@ -1,11 +1,11 @@
-import React from 'react'
-import {EmitterSubscription, Keyboard, StyleProp, StyleSheet, View, ViewStyle,} from 'react-native'
+import React from 'react';
+import {EmitterSubscription, Keyboard, StyleProp, StyleSheet, View, ViewStyle,} from 'react-native';
 
-import Composer, {ComposerProps} from './Composer'
-import Send, {SendProps} from './Send'
-import Actions, {ActionsProps} from './Actions'
+import Composer, {ComposerProps} from './Composer';
+import Send, {SendProps} from './Send';
+import Actions, {ActionsProps} from './Actions';
 import {IMessage} from './types';
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
@@ -27,8 +27,8 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         accessory: {
             height: wp(44),
         },
-    })
-}
+    });
+};
 
 
 export interface InputToolbarProps<TMessage extends IMessage> extends ActionsProps,
@@ -51,7 +51,7 @@ export interface InputToolbarProps<TMessage extends IMessage> extends ActionsPro
 }
 
 export interface InputToolbarState {
-    position: string
+    position: string;
 }
 
 class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolbarProps<TMessage> & WithBunnyKit,
@@ -66,33 +66,33 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
         accessoryStyle: {},
         onPressActionButton: () => {
         },
-    }
+    };
 
     // TODO constructor
     state = {
         position: 'absolute',
-    }
+    };
 
-    keyboardWillShowListener?: EmitterSubscription = undefined
-    keyboardWillHideListener?: EmitterSubscription = undefined
+    keyboardWillShowListener?: EmitterSubscription = undefined;
+    keyboardWillHideListener?: EmitterSubscription = undefined;
 
     componentDidMount() {
         this.keyboardWillShowListener = Keyboard.addListener(
             'keyboardWillShow',
             this.keyboardWillShow,
-        )
+        );
         this.keyboardWillHideListener = Keyboard.addListener(
             'keyboardWillHide',
             this.keyboardWillHide,
-        )
+        );
     }
 
     componentWillUnmount() {
         if (this.keyboardWillShowListener) {
-            this.keyboardWillShowListener.remove()
+            this.keyboardWillShowListener.remove();
         }
         if (this.keyboardWillHideListener) {
-            this.keyboardWillHideListener.remove()
+            this.keyboardWillHideListener.remove();
         }
     }
 
@@ -100,17 +100,17 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
         if (this.state.position !== 'relative') {
             this.setState({
                 position: 'relative',
-            })
+            });
         }
-    }
+    };
 
     keyboardWillHide = () => {
         if (this.state.position !== 'absolute') {
             this.setState({
                 position: 'absolute',
-            })
+            });
         }
-    }
+    };
 
     renderActions() {
         const {
@@ -128,15 +128,15 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
             actionContainerStyle,
             actionIconTextStyle,
             actionWrapperStyle,
-        }
+        };
         if (this.props.renderActions) {
-            return this.props.renderActions(actionsProps)
+            return this.props.renderActions(actionsProps);
             // } else {
         } else if (actionsConfig) {
             // TODO why need onPressActionButton to render Actions
-            return <Actions {...actionsProps} />
+            return <Actions {...actionsProps} />;
         }
-        return null
+        return null;
     }
 
     renderSend() {
@@ -161,11 +161,11 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
             alwaysShowSend,
             disabled,
             sendButtonProps
-        }
+        };
         if (this.props.renderSend) {
-            return this.props.renderSend(sendProps)
+            return this.props.renderSend(sendProps);
         }
-        return <Send<TMessage> {...sendProps} />
+        return <Send<TMessage> {...sendProps} />;
         // return <Send {...sendProps} />
     }
 
@@ -197,12 +197,12 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
             keyboardAppearance,
             onTextChanged,
             onInputSizeChanged
-        }
+        };
         if (this.props.renderComposer) {
-            return this.props.renderComposer(composerProps)
+            return this.props.renderComposer(composerProps);
         }
 
-        return <Composer {...composerProps} />
+        return <Composer {...composerProps} />;
     }
 
     renderAccessory() {
@@ -213,9 +213,9 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
                 <View style={[styles.accessory, this.props.accessoryStyle]}>
                     {this.props.renderAccessory(this.props)}
                 </View>
-            )
+            );
         }
-        return null
+        return null;
     }
 
     render() {
@@ -238,8 +238,8 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
                 </View>
                 {this.renderAccessory()}
             </View>
-        )
+        );
     }
 }
 
-export default withBunnyKit(InputToolbar)
+export default withBunnyKit(InputToolbar);

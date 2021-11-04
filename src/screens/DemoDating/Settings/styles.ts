@@ -12,4 +12,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             marginBottom: wp(10)
         }
     });
-}
+};

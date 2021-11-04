@@ -144,7 +144,7 @@ export namespace reduxFirestore {
 }
 
 export namespace FirestoreReducer {
-    declare const entitySymbol: unique symbol
+    declare const entitySymbol: unique symbol;
 
     export type Entity<T> = T & {
         [entitySymbol]: never
@@ -166,17 +166,17 @@ export namespace FirestoreReducer {
         errors: {
             allIds: string[]
             byQuery: any[]
-        }
-        listeners: Listeners
-        data: FirestoreData<Schema>
-        ordered: OrderedData<Schema>
-        queries: Data<ReduxFirestoreQuerySetting & (Dictionary<any> | any)>
+        };
+        listeners: Listeners;
+        data: FirestoreData<Schema>;
+        ordered: OrderedData<Schema>;
+        queries: Data<ReduxFirestoreQuerySetting & (Dictionary<any> | any)>;
         status: {
             requested: Dictionary<boolean>
             requesting: Dictionary<boolean>
             timestamps: Dictionary<number>
-        }
+        };
     }
 
-    const prototype: {}
+    const prototype: {};
 }

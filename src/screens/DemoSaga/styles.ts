@@ -12,4 +12,4 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     return StyleSheet.create({
         xxx: {...sharedStylesFlatten.btn}
     });
-}
+};

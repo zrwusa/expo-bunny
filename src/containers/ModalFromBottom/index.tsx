@@ -1,1 +1,1 @@
-export * from './ModalFromBottom'
+export * from './ModalFromBottom';

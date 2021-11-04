@@ -4,10 +4,10 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParam} from '../../types';
 import {getStyles} from './styles';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey} from '../../providers';
 import {getContainerStyles} from '../../containers';
 import {getSharedStyles} from '../../helpers';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'DemoRoute'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'DemoRoute'>;
@@ -21,7 +21,7 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const {id, isHuman, sort} = props.route.params;
     const st = shortenTFunctionKey(t, 'screens.DemoRoute');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor)
+    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     const styles = getStyles(sizeLabor, themeLabor);

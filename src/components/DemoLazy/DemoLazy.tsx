@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text, View} from '../UI'
+import {Text, View} from '../UI';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 interface Props {
-    title: string
+    title: string;
 }
 
 export const DemoLazy = (props: Props) => {
@@ -14,5 +14,5 @@ export const DemoLazy = (props: Props) => {
         <View>
             <Text style={styles.text}>{props.title}</Text>
         </View>
-    )
-}
+    );
+};

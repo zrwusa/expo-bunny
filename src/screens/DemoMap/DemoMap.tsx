@@ -12,7 +12,7 @@ import BunnyConstants from '../../constants/constants';
 import getStyles, {getCardSize} from './styles';
 import {getContainerStyles} from '../../containers';
 import config from '../../config';
-import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
+import {WithBunnyKit, withBunnyKit} from '../../hooks';
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -31,7 +31,7 @@ export interface DemoMapProps extends ReturnType<typeof mapDispatchToProps>,
 
 class DemoMapScreen extends Component<DemoMapProps> {
 
-    private mapView = createRef<MapView>()
+    private mapView = createRef<MapView>();
     private index: number = 0;
     private regionTimeout: ReturnType<typeof setTimeout> = setTimeout(() => '', 1000);
     private animation: Animated.Value = new Animated.Value(0);
@@ -54,7 +54,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
                 ...BunnyConstants.latLngDeltaGrace
-            })
+            });
         } catch (e) {
             this.props.sysError(e);
         }
@@ -85,14 +85,14 @@ class DemoMapScreen extends Component<DemoMapProps> {
                         wp(350)
                     );
                 }
-            }, 10)
+            }, 10);
         });
         // await this.getCurLocation();
         await this.props.getNearbyFilms({
             latitude: this.props.region.latitude,
             longitude: this.props.region.longitude,
             ...BunnyConstants.latLngDeltaGrace
-        })
+        });
     }
 
     onMarkerPress(marker: NearbyFilm) {
@@ -151,7 +151,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
                         };
                         return (
                             <Marker key={index} coordinate={marker.coordinate} onPress={() => {
-                                this.onMarkerPress(marker)
+                                this.onMarkerPress(marker);
                             }}>
                                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
                                     <Animated.View style={[styles.ring, scaleStyle]}/>
@@ -177,7 +177,7 @@ class DemoMapScreen extends Component<DemoMapProps> {
                                      contentContainerStyle={styles.endPadding}>
                     {this.props.demoNearbyFilms.length > 0 && this.props.demoNearbyFilms.map((marker, index) => (
                         <TouchableOpacity onPress={() => {
-                            this.onMarkerPress(marker)
+                            this.onMarkerPress(marker);
                         }} key={marker.id}>
                             <View style={styles.card}>
                                 <Image source={marker.image} style={styles.cardImage} resizeMode="cover"/>

@@ -8,4 +8,4 @@
 // 901	Online Stock Span	★★★	907	1019					monotonic stack
 // 239	Sliding Window Maximum	★★★							monotonic queue
 /* --- end Advanced --- */
-export {}
+export {};

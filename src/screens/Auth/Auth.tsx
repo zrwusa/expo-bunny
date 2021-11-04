@@ -10,7 +10,7 @@ import {getStyles} from './styles';
 import {LoginScreen} from './Login';
 import {SignUpScreen} from './SignUp';
 import {useTranslation} from 'react-i18next';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Auth'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -25,13 +25,13 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
     if (route) {
         if (route.name && route.params && route.params.screen) {
             //todo tab change without change route.params
-            isLoginScreen = (route.name === 'Auth' && route.params.screen === 'Login')
+            isLoginScreen = (route.name === 'Auth' && route.params.screen === 'Login');
         }
     }
     const {sizeLabor, themeLabor, colors, wp, theme} = useBunnyKit();
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
-    const {t} = useTranslation()
+    const {t} = useTranslation();
     return (
         <SafeAreaView style={[containerStyles.Screen]}>
             <View style={[containerStyles.Screen]}>
@@ -46,7 +46,7 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
                                                screenOptions={({route}) => {
                                                    return {
                                                        title: t(`screens.${route.name}.title`),
-                                                   }
+                                                   };
                                                }}
                                                tabBarOptions={{
                                                    labelStyle: {

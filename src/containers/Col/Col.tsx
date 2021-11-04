@@ -8,8 +8,8 @@ export interface ColProps {
     align?: FlexAlignType;
 }
 
-export const Col = function (props: ColProps) {
-    const {children, size = 1, style, align = 'stretch'} = props
+export const Col = (props: ColProps) => {
+    const {children, size = 1, style, align = 'stretch'} = props;
 
     // const styleOBJ = StyleSheet.flatten<ViewStyle>(style)
     // // web basis 'auto' shrink:0 grow:0
@@ -40,8 +40,8 @@ export const Col = function (props: ColProps) {
             justifyContent: 'center',
         },
         style
-    ]
+    ];
     return <View style={mergeStyle}>
         {children ? children : null}
-    </View>
-}
+    </View>;
+};

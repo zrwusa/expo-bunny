@@ -1,4 +1,4 @@
-import {useThemeLabor} from '../../providers/theme-labor';
+import {useThemeLabor} from '../../providers';
 import {EThemes} from '../../constants';
 import * as React from 'react';
 import {SwitchP} from '../UI';
@@ -11,5 +11,5 @@ export function ThemeSwitch() {
         if (changeTheme) {
             changeTheme(themeName);
         }
-    }}/>
+    }}/>;
 }

@@ -7958,7 +7958,7 @@ export const religions = [{
     'created': '2016-05-17T02:39:38.090109Z',
     'ancestry': ['Religious Group'],
     'language': 'en'
-}]
+}];
 
 export const religionsXXX = [{
     'pk': 1101,
@@ -18374,4 +18374,4 @@ export const religionsXXX = [{
     'poll': 8,
     'description': 'ND',
     'belongs_to_external_poll': false
-}]
+}];

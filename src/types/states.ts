@@ -42,7 +42,7 @@ export type DemoMapState = {
 }
 
 export interface DemoSagaState {
-    items: DemoSaga[]
+    items: DemoSaga[];
 }
 
 export interface DemoCryptoCurrencyState {
@@ -62,8 +62,8 @@ export interface DemoCryptoCurrencyState {
 }
 
 export interface SagaTodo {
-    text: string
-    done: boolean
+    text: string;
+    done: boolean;
 }
 
 export interface RootState {

@@ -1,20 +1,17 @@
 import {InButtonText, LinearGradientButton, Text, TextButton, TextInputIcon, View} from '../UI';
 import * as React from 'react';
 import {useState} from 'react';
-import {Row} from '../../containers/Row';
+import {Col, InputCard, Row} from '../../containers';
 import {collectBLResult, sysError} from '../../store/actions';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey, useAuthLabor} from '../../providers';
 import {getStyles} from './styles';
-import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {InputCard} from '../../containers/InputCard';
 import {LinearGradientIcon} from '../LinearGradientIcon';
 import {blError} from '../../helpers';
-import {Col} from '../../containers/Col';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 type ForgotPasswordRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type ForgotPasswordNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -31,60 +28,60 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
     const styles = getStyles(sizeLabor, themeLabor);
-    const {authFunctions} = useAuthLabor()
+    const {authFunctions} = useAuthLabor();
     const dispatch = useDispatch();
-    const [username, setUsername] = useState(email)
-    const [isSent, setIsSent] = useState(false)
+    const [username, setUsername] = useState(email);
+    const [isSent, setIsSent] = useState(false);
 
     const navToReference = () => {
         let referenceRoute;
         if (route.params && route.params.reference) {
-            referenceRoute = JSON.parse(route.params.reference)
-            navigation.navigate(referenceRoute)
+            referenceRoute = JSON.parse(route.params.reference);
+            navigation.navigate(referenceRoute);
         } else {
-            navigation.navigate('Home')
+            navigation.navigate('Home');
         }
-    }
+    };
 
     const navToLogin = () => {
         let referenceRoute;
         if (route.params && route.params.reference) {
-            referenceRoute = JSON.parse(route.params.reference)
-            navigation.navigate(referenceRoute)
+            referenceRoute = JSON.parse(route.params.reference);
+            navigation.navigate(referenceRoute);
         } else {
-            navigation.navigate('Home')
+            navigation.navigate('Home');
         }
-    }
+    };
 
     const forgotPassword = async () => {
         try {
             if (username) {
-                const result = await authFunctions.firebaseResetPassword(username)
+                const result = await authFunctions.firebaseResetPassword(username);
                 if (result.success) {
-                    setIsSent(true)
+                    setIsSent(true);
                 } else {
-                    dispatch(collectBLResult(result))
+                    dispatch(collectBLResult(result));
                 }
             } else {
-                dispatch(collectBLResult(blError('Please enter email')))
+                dispatch(collectBLResult(blError('Please enter email')));
             }
 
         } catch (e) {
-            dispatch(sysError(e))
+            dispatch(sysError(e));
         }
 
-    }
+    };
     return <View style={styles.container}>
         <InputCard title={st(`email`)}>
             <TextInputIcon placeholder={t(`placeholders.email`)}
                            textContentType="emailAddress"
                            value={username}
                            onChangeText={(value) => {
-                               setUsername(value)
+                               setUsername(value);
                            }}
                            autoCapitalize="none"
                            renderIcon={() => {
-                               return <LinearGradientIcon name="mail" size={wp(20)}/>
+                               return <LinearGradientIcon name="mail" size={wp(20)}/>;
                            }}/>
         </InputCard>
         <Row style={styles.row}>
@@ -96,7 +93,7 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
             <Col size={1}/>
             <Col size={6}>
                 <TextButton onPress={() => {
-                    if (onCancel) onCancel()
+                    if (onCancel) onCancel();
                 }}>
                     <Text>{st(`goToLogin`)}</Text></TextButton>
             </Col>
@@ -109,12 +106,12 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
                     </Row>
                     <Row style={styles.row}>
                         <LinearGradientButton onPress={() => {
-                            if (onSent) onSent()
+                            if (onSent) onSent();
                         }}><InButtonText>{st(`goToLogin`)}</InButtonText></LinearGradientButton>
                     </Row>
 
                 </>
                 : null
         }
-    </View>
-}
+    </View>;
+};

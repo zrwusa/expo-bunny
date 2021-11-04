@@ -2,9 +2,8 @@ import {InButtonText, LinearGradientButton, Text, TextInputIcon, View} from '../
 import * as React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {shortenTFunctionKey, useAuthLabor} from '../../providers';
 import {getContainerStyles, InputCard, Row} from '../../containers';
-import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -14,10 +13,10 @@ import {collectBLResult, sysError} from '../../store/actions';
 import {getStyles} from './styles';
 import {LoginVector} from '../../components/LoginVector';
 import {FirebasePhoneLogin} from '../../components/FirebasePhoneLogin';
-import {Tab} from '../../components/Tab';
+import {Tab} from '../../components';
 import {ForgotPassword} from '../../components/ForgotPassword';
 import {navToReference} from '../../helpers';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 type LoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type LoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -32,50 +31,50 @@ export function LoginScreen({route, navigation}: LoginProps) {
     const st = shortenTFunctionKey(t, 'screens.Auth');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
-    const {authFunctions} = useAuthLabor()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const {authFunctions} = useAuthLabor();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const firebaseLoginMethods = ['email', 'phone'];
-    const [loginMethod, setLoginMethod] = useState('email')
-    const [isForgot, setIsForgot] = useState(false)
+    const [loginMethod, setLoginMethod] = useState('email');
+    const [isForgot, setIsForgot] = useState(false);
 
     const firebaseEmailLogin = async () => {
-        Keyboard.dismiss()
+        Keyboard.dismiss();
         // todo can not use await to catch error,wait for Firebase to resolve this bug
         try {
-            const result = await authFunctions.firebaseEmailLogin(email, password, true)
+            const result = await authFunctions.firebaseEmailLogin(email, password, true);
             if (result.success) {
-                navToReference(route, navigation)
+                navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result))
+                dispatch(collectBLResult(result));
             }
         } catch (e) {
-            dispatch(sysError(e))
+            dispatch(sysError(e));
         }
-    }
+    };
 
     const bunnyLogin = async () => {
-        Keyboard.dismiss()
+        Keyboard.dismiss();
         try {
-            const result = await authFunctions.bunnyLogin({email, password})
+            const result = await authFunctions.bunnyLogin({email, password});
             if (result.success) {
-                navToReference(route, navigation)
+                navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result))
+                dispatch(collectBLResult(result));
             }
         } catch (e) {
-            dispatch(sysError(e))
+            dispatch(sysError(e));
         }
-    }
+    };
 
     const handleLogin = async () => {
-        await firebaseEmailLogin()
-    }
+        await firebaseEmailLogin();
+    };
     return <View style={[containerStyles.Screen]}>
         <ScrollView style={styles.loginOrSignUpContainer}>
             <Tab items={firebaseLoginMethods} value={loginMethod} onChange={(item) => {
-                setLoginMethod(item)
+                setLoginMethod(item);
             }}/>
             {loginMethod === 'email' && !isForgot
                 ?
@@ -85,10 +84,10 @@ export function LoginScreen({route, navigation}: LoginProps) {
                                        textContentType="emailAddress"
                                        value={email}
                                        onChangeText={(value) => {
-                                           setEmail(value)
+                                           setEmail(value);
                                        }}
                                        renderIcon={() => {
-                                           return <LinearGradientIcon name="mail" size={wp(20)}/>
+                                           return <LinearGradientIcon name="mail" size={wp(20)}/>;
                                        }}/>
                     </InputCard>
                     <InputCard title={st(`password`)}>
@@ -96,18 +95,18 @@ export function LoginScreen({route, navigation}: LoginProps) {
                                        textContentType="password"
                                        value={password}
                                        onChangeText={(value) => {
-                                           setPassword(value)
+                                           setPassword(value);
                                        }}
                                        secureTextEntry
                                        renderIcon={() => {
-                                           return <LinearGradientIcon name="lock" size={wp(22)}/>
+                                           return <LinearGradientIcon name="lock" size={wp(22)}/>;
                                        }}
                         />
                     </InputCard>
                     <Row style={{marginTop: ms.sp.l, justifyContent: 'flex-end'}}>
                         <TouchableOpacity onPress={
                             () => {
-                                setIsForgot(true)
+                                setIsForgot(true);
                             }
                         }><Text>Forgot password?</Text></TouchableOpacity>
                     </Row>
@@ -129,10 +128,10 @@ export function LoginScreen({route, navigation}: LoginProps) {
                     ? <ForgotPassword route={route}
                                       navigation={navigation}
                                       onSent={() => {
-                                          setIsForgot(false)
+                                          setIsForgot(false);
                                       }}
                                       onCancel={() => {
-                                          setIsForgot(false)
+                                          setIsForgot(false);
                                       }}
                                       email={email}
                     />
@@ -140,5 +139,5 @@ export function LoginScreen({route, navigation}: LoginProps) {
             }
             <LoginVector route={route} navigation={navigation}/>
         </ScrollView>
-    </View>
+    </View>;
 }

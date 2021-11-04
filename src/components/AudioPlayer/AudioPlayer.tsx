@@ -6,7 +6,7 @@ import {AVPlaybackSource, AVPlaybackStatus} from '../../../packages/expo-av/src/
 import {Audio} from '../../../packages/expo-av/src';
 import {ProgressBar} from 'react-native-paper';
 import {minuted} from '../../utils';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 export interface AudioPlayerProps {
     source: AVPlaybackSource,
@@ -26,28 +26,41 @@ export interface AudioPlayerProps {
 export function AudioPlayer(props: AudioPlayerProps) {
     const {sizeLabor, themeLabor, colors} = useBunnyKit();
     const styles = getStyles(sizeLabor, themeLabor);
-    const {source, style, onLoad, onLoadStart, onLoadEnd, onError, isDebug = false, progressStyle, progressColor, playButtonStyle, remainTimeStyle, playButtonIconStyle} = props
-    const soundRef = useRef<Audio.Sound>()
-    const [status, setStatus] = useState<AVPlaybackStatus>({isLoaded: false})
-    const [error, setError] = useState('')
+    const {
+        source,
+        style,
+        onLoad,
+        onLoadStart,
+        onLoadEnd,
+        onError,
+        isDebug = false,
+        progressStyle,
+        progressColor,
+        playButtonStyle,
+        remainTimeStyle,
+        playButtonIconStyle
+    } = props;
+    const soundRef = useRef<Audio.Sound>();
+    const [status, setStatus] = useState<AVPlaybackStatus>({isLoaded: false});
+    const [error, setError] = useState('');
     useEffect(() => {
         (async () => {
             try {
                 if (!source) {
-                    return
+                    return;
                 }
-                onLoadStart?.()
+                onLoadStart?.();
                 const {sound} = await Audio.Sound.createAsync(source);
                 if (status?.isLoaded) {
-                    onLoad?.()
+                    onLoad?.();
                 }
                 // todo on web platform status.durationMillis is NaN
                 soundRef.current = sound;
-                soundRef.current.setOnPlaybackStatusUpdate(setStatus)
-                onLoadEnd?.()
+                soundRef.current.setOnPlaybackStatusUpdate(setStatus);
+                onLoadEnd?.();
             } catch (e) {
-                isDebug && console.log(e.toString())
-                setError(e.toString())
+                isDebug && console.log(e.toString());
+                setError(e.toString());
                 onError?.(e);
                 onLoadEnd?.();
             }
@@ -56,19 +69,19 @@ export function AudioPlayer(props: AudioPlayerProps) {
 
         return () => {
             (async () => {
-                const curSoundRef = soundRef.current
+                const curSoundRef = soundRef.current;
                 if (curSoundRef) {
-                    curSoundRef.setOnPlaybackStatusUpdate(null)
+                    curSoundRef.setOnPlaybackStatusUpdate(null);
                     // await curSoundRef.stopAsync();
                     await curSoundRef.unloadAsync();
                 }
             })();
-        }
-    }, [])
+        };
+    }, []);
 
     async function togglePlayOrPause() {
         if (!soundRef.current) {
-            return
+            return;
         }
         if (status && status.isLoaded) {
             const curSoundRef = soundRef.current;
@@ -77,7 +90,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
                     await curSoundRef.pauseAsync();
                 } else {
                     if (status.positionMillis === status.durationMillis) {
-                        await curSoundRef.replayAsync()
+                        await curSoundRef.replayAsync();
                     } else {
                         await curSoundRef.playAsync();
                     }
@@ -96,7 +109,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
         }
         {
             <TouchableOpacity onPress={async () => {
-                await togglePlayOrPause()
+                await togglePlayOrPause();
             }}>
                 <View style={styles.control}>
                     <View style={[styles.playButton, playButtonStyle]}>
@@ -133,5 +146,5 @@ export function AudioPlayer(props: AudioPlayerProps) {
                 </View>
             </TouchableOpacity>
         }
-    </View>
+    </View>;
 }

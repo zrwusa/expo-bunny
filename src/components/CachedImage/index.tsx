@@ -1,1 +1,1 @@
-export * from './CachedImage'
+export * from './CachedImage';

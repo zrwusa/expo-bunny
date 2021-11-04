@@ -9,7 +9,7 @@ export type HeapNodeOrPropertyName = 'node' | HeapNodePropertyName;
 export class HeapNode<V> {
     private _id: number | string;
     get id(): number | string {
-        return this._id
+        return this._id;
     }
 
     set id(v: number | string) {
@@ -18,7 +18,7 @@ export class HeapNode<V> {
 
     private _val: V | null;
     get val(): V | null {
-        return this._val
+        return this._val;
     }
 
     set val(v: V | null) {
@@ -27,7 +27,7 @@ export class HeapNode<V> {
 
     constructor(id: number | string, val?: V | null) {
         if (val === undefined) {
-            val = null
+            val = null;
         }
         this._id = id;
         this._val = val || null;
@@ -68,7 +68,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
     }
 
     protected _hasParent(childIndex: number): boolean {
-        return this._parentIndex(childIndex) > -1
+        return this._parentIndex(childIndex) > -1;
     }
 
     protected _leftChildIndex(parentIndex: number): number {
@@ -90,7 +90,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
     }
 
     protected _hasLeftChild(parentIndex: number) {
-        return this._leftChildIndex(parentIndex) !== -1
+        return this._leftChildIndex(parentIndex) !== -1;
     }
 
     protected _hasRightChild(parentIndex: number) {
@@ -217,7 +217,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         const visitedId: (number | string)[] = [];
         const visitedVal: (V | null)[] = [];
         const visitedNode: HeapNode<V>[] = [];
-        const visitedNumber: number[] = []
+        const visitedNumber: number[] = [];
 
 
         const pushByValueType = (node: number | HeapNode<V>) => {
@@ -239,11 +239,11 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
                     break;
                 default:
                     if (typeof node === 'number') {
-                        visitedNumber.push(node)
+                        visitedNumber.push(node);
                     }
                     break;
             }
-        }
+        };
 
         // while (!this.isEmpty()) {
         //     this._swap(0, this.size() - 1);
@@ -280,7 +280,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
         const visitedId: (number | string)[] = [];
         const visitedVal: (V | null)[] = [];
         const visitedNode: HeapNode<V>[] = [];
-        const visitedNumber: number[] = []
+        const visitedNumber: number[] = [];
 
         const pushByValueType = (index: number) => {
             const node: number | HeapNode<V> = this._nodes[index];
@@ -302,11 +302,11 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
                     break;
                 default:
                     if (typeof node === 'number') {
-                        visitedNumber.push(node)
+                        visitedNumber.push(node);
                     }
                     break;
             }
-        }
+        };
 
         const _traverse = (cur: number) => {
             const leftChildIndex = cur * 2 + 1;
@@ -329,7 +329,7 @@ export abstract class Heap<T extends number | HeapNode<V>, V> {
                     break;
             }
 
-        }
+        };
 
         this.isValidNode(0) && _traverse(0);
         switch (nodeOrPropertyName) {

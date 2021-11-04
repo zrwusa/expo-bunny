@@ -1,6 +1,6 @@
 import Modal, {ModalProps} from 'react-native-modal';
 import * as React from 'react';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 import {getStyles} from './styles';
 
 export interface ModalFromBottomProps {
@@ -23,5 +23,5 @@ export const ModalFromBottom: React.FC<ModalFromBottomProps> = (props) => {
                   onBackdropPress={() => onVisibleChanged?.(false)}
                   {...modalProps}>
         {children}
-    </Modal>
-}
+    </Modal>;
+};

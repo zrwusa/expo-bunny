@@ -1,4 +1,4 @@
-import bunnyAPI from '../../helpers/bunny-api';
+import {bunnyAPI} from '../../helpers/bunny-api';
 import {
     CollectBLResultAction,
     DemoThunkPayload,
@@ -28,20 +28,20 @@ export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSu
 export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkState, void, DemoThunkSuccessAction>> = (reqParams: DemoThunkPayload) => {
     return async (dispatch: Dispatch<DemoThunkSuccessAction | SysErrorAction | CollectBLResultAction | RequestingAction | RequestReceivedAction | RequestFailedAction>): Promise<Action> => {
         let result;
-        const config: RequestConfig = {url: '/demo-thunks', method: 'POST', data: reqParams}
+        const config: RequestConfig = {url: '/demo-thunks', method: 'POST', data: reqParams};
         try {
-            result = dispatch(requesting(config))
+            result = dispatch(requesting(config));
             const res = await bunnyAPI.request(config);
             if (res.data) {
                 result = dispatch(demoThunkSuccess(res.data));
-                result = dispatch(requestReceived(config))
+                result = dispatch(requestReceived(config));
             } else {
                 result = dispatch(collectBLResult(blError(EBLMsg.NO_DEMO_THUNK_DATA)));
             }
-            return result
-        } catch (e) {
-            result = dispatch(sysError(e))
-            result = dispatch(requestFailed(config))
+            return result;
+        } catch (e: any) {
+            result = dispatch(sysError(e));
+            result = dispatch(requestFailed(config));
             return result;
         }
     };

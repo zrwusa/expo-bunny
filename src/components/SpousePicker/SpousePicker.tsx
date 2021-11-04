@@ -1,6 +1,5 @@
 import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import {Slider} from '../../../packages/react-native-range-slider-expo/src';
 import {Divider} from '../Divider';
 import {RadioButton} from 'react-native-paper';
@@ -9,7 +8,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import _ from 'lodash';
 import BunnyConstants from '../../constants/constants';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 import {getSharedStyles} from '../../helpers';
 import {getStyles} from './styles';
 
@@ -55,17 +54,17 @@ export const SpousePicker = (props: SpousePickerProps) => {
     } = props;
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
-    const [fromHeight, setFromHeight] = useState(initialFromHeight)
-    const [toHeight, setToHeight] = useState(initialToHeight)
-    const [age, setAge] = useState(initialAge)
-    const [distance, setDistance] = useState(initialDistance)
-    const [interestedIn, setInterestedIn] = useState(initialInterestedIn)
+    const [fromHeight, setFromHeight] = useState(initialFromHeight);
+    const [toHeight, setToHeight] = useState(initialToHeight);
+    const [age, setAge] = useState(initialAge);
+    const [distance, setDistance] = useState(initialDistance);
+    const [interestedIn, setInterestedIn] = useState(initialInterestedIn);
 
     const ageIndicated = _.throttle((value: number) => {
-        setAge(value)
+        setAge(value);
     }, BunnyConstants.throttleWait);
     const distanceIndicated = _.throttle((value: number) => {
-        setDistance(value)
+        setDistance(value);
     }, BunnyConstants.throttleWait);
 
     const _reset = () => {
@@ -74,13 +73,13 @@ export const SpousePicker = (props: SpousePickerProps) => {
         setAge(initialAge);
         setFromHeight(initialFromHeight);
         setToHeight(initialToHeight);
-    }
+    };
 
     return <View style={[styles.container]}>
         <View style={styles.header}>
             <Row>
                 <Col><TextButton onPress={() => {
-                    onCancel?.()
+                    onCancel?.();
                 }}><IcoMoon name="x"/></TextButton></Col>
                 <Col align="center"><Text>{title}</Text></Col>
                 <Col align="flex-end"><TextButton onPress={_reset}><Text
@@ -153,13 +152,13 @@ export const SpousePicker = (props: SpousePickerProps) => {
                              max={maxHeight}
                              step={1}
                              fromValueOnChange={value => {
-                                 setFromHeight(value)
+                                 setFromHeight(value);
                              }}
                              fromValueOnIndicated={value => {
                                  // console.log('---fromValueOnIndicated',value)
                              }}
                              toValueOnChange={value => {
-                                 setToHeight(value)
+                                 setToHeight(value);
                              }}
                              toValueOnIndicated={value => {
                                  // console.log('---toValueOnIndicated',value)
@@ -175,8 +174,8 @@ export const SpousePicker = (props: SpousePickerProps) => {
 
         <View style={[styles.footer]}>
             <ButtonTO onPress={() => {
-                onDone?.({distance, age, fromHeight, toHeight})
+                onDone?.({distance, age, fromHeight, toHeight});
             }}><InButtonText>Done</InButtonText></ButtonTO>
         </View>
-    </View>
-}
+    </View>;
+};

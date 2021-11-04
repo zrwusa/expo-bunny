@@ -4,18 +4,18 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../types';
 import {getStyles} from './styles';
 import {ActivityIndicator} from 'react-native';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 
 const RequestLoading = () => {
     const {sizeLabor, themeLabor} = useBunnyKit();
     const {requestStatuses} = useSelector((store: RootState) => store.sysState);
-    const [isShow, setIsShow] = useState(false)
+    const [isShow, setIsShow] = useState(false);
     const styles = getStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     useEffect(() => {
-        const loadingRequests = requestStatuses.filter(item => item.status === 'LOADING')
-        setIsShow(loadingRequests.length > 0)
-    }, [JSON.stringify(requestStatuses)])
+        const loadingRequests = requestStatuses.filter(item => item.status === 'LOADING');
+        setIsShow(loadingRequests.length > 0);
+    }, [JSON.stringify(requestStatuses)]);
     return (
         isShow
             ? <View style={styles.container}>
@@ -23,5 +23,5 @@ const RequestLoading = () => {
             </View>
             : null
     );
-}
+};
 export default RequestLoading;

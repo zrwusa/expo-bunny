@@ -64,34 +64,34 @@ const getFontConfigLeavesWrappedWithThemeNames = () => {
     // Todo as unknown as is not a safe method
     let fontConfigAlias = fontConfig as unknown as JSONSerializable;
     Object.keys(fontConfig).forEach(platformName => {
-        configWithThemeName[platformName] = {}
+        configWithThemeName[platformName] = {};
         Object.keys(fontConfigAlias[platformName]).forEach(fontName => {
-            configWithThemeName[platformName][fontName] = {}
+            configWithThemeName[platformName][fontName] = {};
             Object.keys(fontConfigAlias[platformName][fontName]).forEach(fontProperty => {
-                configWithThemeName[platformName][fontName][fontProperty] = {}
-                const themeKeys = Object.keys(EThemes) as Array<ThemeName>
+                configWithThemeName[platformName][fontName][fontProperty] = {};
+                const themeKeys = Object.keys(EThemes) as Array<ThemeName>;
                 themeKeys.forEach((themeName) => {
                     configWithThemeName[platformName][fontName][fontProperty][EThemes[themeName]] = fontConfigAlias[platformName][fontName][fontProperty];
-                })
-            })
+                });
+            });
 
-        })
-    })
+        });
+    });
     return configWithThemeName;
-}
+};
 
-export function configureFonts(
+export const configureFonts = (
     config?: { [platform in PlatformOSType | 'default']?: Fonts }
-): Fonts {
+): Fonts => {
     return Platform.select({...fontConfig, ...config}) as Fonts;
-}
+};
 
 export const fonts = configureFonts();
 
-export function configureFontsWarehouse(
+export const configureFontsWarehouse = (
     config?: { [platform in PlatformOSType | 'default']?: FontsWrapped }
-): FontsWrapped {
+): FontsWrapped => {
     return Platform.select({...getFontConfigLeavesWrappedWithThemeNames(), ...config}) as FontsWrapped;
-}
+};
 
 export const fontsWarehouse = configureFontsWarehouse();

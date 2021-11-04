@@ -13,7 +13,7 @@ const {PriorityQueue} = require('./priority-queue');
  * @extends PriorityQueue
  */
 export class MaxPriorityQueue<T> extends PriorityQueue<T> {
-    protected _heap: MaxHeap<HeapNode<T>, T>
+    protected _heap: MaxHeap<HeapNode<T>, T>;
 
     constructor(options?: PriorityQueueOptions<T>) {
         super(options);

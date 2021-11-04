@@ -4,7 +4,7 @@ import glyphMaterialCommunityMap
     from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
 import {glyphMaterialCommunityCustomMap} from '../helpers';
 import {ReactNode} from 'react';
-import glyphMapIcoMoon from '../assets/fonts/icomoon/icomoon.json'
+import glyphMapIcoMoon from '../assets/fonts/icomoon/icomoon.json';
 import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 import {ColorSchemeName} from 'react-native-appearance';
 import {VictoryThemeDefinition} from '../components/Victory/Victory.web';
@@ -229,15 +229,15 @@ export type MaterialCommunityCustomIconsKeys = JsonKeys<typeof glyphMaterialComm
 export type IcoMoonKeys = JsonKeys<typeof glyphMapIcoMoon>
 
 export interface MaterialCommunityIconsProps extends IconProps {
-    name: MaterialCommunityIconKeys
+    name: MaterialCommunityIconKeys;
 }
 
 export interface MaterialCommunityCustomIconsProps extends IconProps {
-    name: MaterialCommunityCustomIconsKeys
+    name: MaterialCommunityCustomIconsKeys;
 }
 
 export interface IcoMoonProps extends IconProps {
-    name: IcoMoonKeys
+    name: IcoMoonKeys;
 }
 
 export type RouteIconFontConfig = {

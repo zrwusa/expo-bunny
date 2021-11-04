@@ -7,10 +7,10 @@ export const testSegmentTree = (values: number[], update1: [number, number], que
     sgt.updateNode(...update1);
     console.info(sgt.querySumByRange(...query1));
     return sgt.root;
-}
+};
 
 export const runAllTestSegmentTree = async () => {
     await runAlgorithm(testSegmentTree, false, ...testSegmentTreeCase1);
-}
+};
 
 

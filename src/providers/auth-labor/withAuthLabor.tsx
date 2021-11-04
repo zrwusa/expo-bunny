@@ -5,9 +5,9 @@ import {useAuthLabor} from './useAuthLabor';
 export interface WithAuthLabor extends AuthLaborContextTypePartial {
 }
 
-export function withAuthLabor<T extends WithAuthLabor = WithAuthLabor>(
+export const withAuthLabor = <T extends WithAuthLabor = WithAuthLabor>(
     WrappedComponent: React.ComponentType<T>
-) {
+) => {
     // Try to create a nice displayName for React Dev Tools.
     const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
@@ -23,4 +23,4 @@ export function withAuthLabor<T extends WithAuthLabor = WithAuthLabor>(
     ComponentWithAuthLabor.displayName = `withAuthLabor(${displayName})`;
 
     return ComponentWithAuthLabor;
-}
+};

@@ -162,7 +162,7 @@ export const occupationCategories = [
         'displayLevel': 1,
         'code': '53'
     }
-]
+];
 
 export const migrateOccupationCategories = async () => {
     for (const occupationCategory of occupationCategories) {
@@ -170,6 +170,6 @@ export const migrateOccupationCategories = async () => {
             .firestore()
             .collection('occupationCategories')
             .doc(occupationCategory.code)
-            .set(occupationCategory)
+            .set(occupationCategory);
     }
-}
+};

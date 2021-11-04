@@ -38,4 +38,4 @@ export const testPriorityQueue = () => {
     maxPQ.dequeue();
     console.log(maxPQ.front());
     console.log(maxPQ.toArray());
-}
+};

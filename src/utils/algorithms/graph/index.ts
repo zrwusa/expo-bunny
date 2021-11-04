@@ -1,2 +1,2 @@
-export * from './graph'
-export * from './cases'
+export * from './graph';
+export * from './cases';

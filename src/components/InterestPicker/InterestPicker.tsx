@@ -1,9 +1,8 @@
 import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useBunnyKit} from '../../hooks/bunny-kit';
+import {useBunnyKit} from '../../hooks';
 import {getSharedStyles} from '../../helpers';
 import {getStyles} from './styles';
 import Modal from 'react-native-modal';
@@ -63,7 +62,7 @@ export const InterestPicker = (props: InterestPickerProps) => {
 
     const _reset = () => {
 
-    }
+    };
 
     const [result, setResult] = useState({
         sports: initialSports,
@@ -72,28 +71,28 @@ export const InterestPicker = (props: InterestPickerProps) => {
         movies: initialMovies,
         books: initialBooks,
         travels: initialTravels
-    })
+    });
 
-    const [showModal, setShowModal] = useState(false)
-    const [modalType, setModalType] = useState<InterestType>('musics')
-    const [checkState, setCheckState] = useState<{ [key in string]: CheckboxStatus }>({})
+    const [showModal, setShowModal] = useState(false);
+    const [modalType, setModalType] = useState<InterestType>('musics');
+    const [checkState, setCheckState] = useState<{ [key in string]: CheckboxStatus }>({});
     const _toggleModal = (type: InterestType) => {
-        setModalType(type)
+        setModalType(type);
         let newCheckState: { [key in string]: CheckboxStatus } = {};
         dictionaries[type].forEach(item => {
-            newCheckState[item.code] = 'unchecked'
-        })
-        const interests = result[type]
+            newCheckState[item.code] = 'unchecked';
+        });
+        const interests = result[type];
         interests.forEach(interest => {
-            newCheckState[interest.code] = 'checked'
-        })
-        setCheckState((prev) => (newCheckState))
-        setShowModal(!showModal)
-    }
+            newCheckState[interest.code] = 'checked';
+        });
+        setCheckState((prev) => (newCheckState));
+        setShowModal(!showModal);
+    };
 
     useEffect(() => {
-        onDone?.(result)
-    }, [result])
+        onDone?.(result);
+    }, [result]);
 
 
     return (
@@ -101,37 +100,37 @@ export const InterestPicker = (props: InterestPickerProps) => {
             <View>
                 <InlineSelector title="Sports"
                                 onPress={() => {
-                                    _toggleModal('sports')
+                                    _toggleModal('sports');
                                 }}
                                 renderText={() => result.sports.map(item => item.name).join(',')}/>
                 <Divider/>
                 <InlineSelector title="Musics"
                                 onPress={() => {
-                                    _toggleModal('musics')
+                                    _toggleModal('musics');
                                 }}
                                 renderText={() => result.musics.map(item => item.name).join(',')}/>
                 <Divider/>
                 <InlineSelector title="Foods"
                                 onPress={() => {
-                                    _toggleModal('foods')
+                                    _toggleModal('foods');
                                 }}
                                 renderText={() => result.foods.map(item => item.name).join(',')}/>
                 <Divider/>
                 <InlineSelector title="Movies"
                                 onPress={() => {
-                                    _toggleModal('movies')
+                                    _toggleModal('movies');
                                 }}
                                 renderText={() => result.movies.map(item => item.name).join(',')}/>
                 <Divider/>
                 <InlineSelector title="Books"
                                 onPress={() => {
-                                    _toggleModal('books')
+                                    _toggleModal('books');
                                 }}
                                 renderText={() => result.books.map(item => item.name).join(',')}/>
                 <Divider/>
                 <InlineSelector title="Travels"
                                 onPress={() => {
-                                    _toggleModal('travels')
+                                    _toggleModal('travels');
                                 }}
                                 renderText={() => result.travels.map(item => item.name).join(',')}/>
             </View>
@@ -146,7 +145,7 @@ export const InterestPicker = (props: InterestPickerProps) => {
                     <View style={styles.header}>
                         <Row>
                             <Col><TextButton onPress={() => {
-                                setShowModal(false)
+                                setShowModal(false);
                             }}><IcoMoon name="x"/></TextButton></Col>
                             <Col align="center"><Text
                                 style={sharedStyles.title}>{capitalizeWords(modalType)}</Text></Col>
@@ -170,46 +169,46 @@ export const InterestPicker = (props: InterestPickerProps) => {
                                     let newStatus: CheckboxStatus = 'unchecked';
                                     switch (checkState[item.code]) {
                                         case 'checked':
-                                            newStatus = 'unchecked'
+                                            newStatus = 'unchecked';
                                             break;
                                         case 'unchecked':
-                                            newStatus = 'checked'
+                                            newStatus = 'checked';
                                             break;
                                         case 'indeterminate':
-                                            newStatus = 'checked'
+                                            newStatus = 'checked';
                                             break;
                                     }
                                     setCheckState((prev) => ({
                                         ...prev,
                                         [item.code]: newStatus
-                                    }))
-                                }}/>
+                                    }));
+                                }}/>;
                             }}
                         />
                     </View>
                     <View style={[styles.footer]}>
                         <ButtonTO onPress={() => {
-                            _toggleModal('musics')
+                            _toggleModal('musics');
 
                             let checked = lodash.pickBy(checkState, function (value) {
                                 return value === 'checked';
                             });
-                            const checkedKeys = Object.keys(checked)
+                            const checkedKeys = Object.keys(checked);
                             const checkedInterests = dictionaries[modalType].filter(item => {
-                                return checkedKeys.includes(item.code)
-                            })
+                                return checkedKeys.includes(item.code);
+                            });
 
                             setResult(prevState => (
                                 {
                                     ...prevState,
                                     [modalType]: checkedInterests
                                 }
-                            ))
+                            ));
                         }}><InButtonText>Done</InButtonText></ButtonTO>
                     </View>
                 </View>
 
             </Modal>
         </View>
-    )
-}
+    );
+};

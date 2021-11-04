@@ -1,10 +1,10 @@
 import React from 'react';
 import {SafeAreaView, View, VirtualizedList} from 'react-native';
-import {Text} from '../../../components/UI'
+import {Text} from '../../../components/UI';
 import {getStyles} from './styles';
-import {useThemeLabor} from '../../../providers/theme-labor';
+import {useThemeLabor} from '../../../providers';
 import {getContainerStyles} from '../../../containers';
-import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {useBunnyKit} from '../../../hooks';
 
 type VirtualizedListItem = {
     id: string;
@@ -13,7 +13,7 @@ type VirtualizedListItem = {
 
 function RNVirtualizedListScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor)
+    const styles = getStyles(sizeLabor, themeLabor);
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
 
     const virtualizedListData: VirtualizedListItem[] = [];
@@ -22,15 +22,15 @@ function RNVirtualizedListScreen() {
         return {
             id: Math.random().toString(12).substring(0),
             title: `Item ${index + 1}`,
-        }
-    }
+        };
+    };
 
     const getVirtualizedListItemCount = (data: []) => {
         return 1000;
-    }
+    };
 
     const VirtualizedListItem = ({title}: VirtualizedListItem) => {
-        const {colors} = useThemeLabor().theme
+        const {colors} = useThemeLabor().theme;
 
         return (
             <View style={{
@@ -44,7 +44,7 @@ function RNVirtualizedListScreen() {
                 <Text style={styles.title}>{title}</Text>
             </View>
         );
-    }
+    };
 
 
     return (

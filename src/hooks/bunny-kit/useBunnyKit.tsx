@@ -1,7 +1,5 @@
-import {useSizeLabor} from '../../providers/size-labor';
-import {useThemeLabor} from '../../providers/theme-labor';
+import {useAuthLabor, useSizeLabor, useThemeLabor} from '../../providers';
 import {useTranslation} from 'react-i18next';
-import {useAuthLabor} from '../../providers/auth-labor';
 import {
     AuthFunctions,
     AuthLaborContextType,
@@ -36,7 +34,7 @@ export const useBunnyKit = () => {
     const themeLabor = useThemeLabor();
     const authLabor = useAuthLabor();
     const {wp, hp} = sizeLabor.designsBasedOn.iphoneX;
-    const {ms} = sizeLabor
+    const {ms} = sizeLabor;
     const {t, i18n} = useTranslation();
     const {language} = i18n;
     const {theme} = themeLabor;
@@ -57,5 +55,5 @@ export const useBunnyKit = () => {
         colors,
         user,
         authFunctions
-    } as BunnyKit
+    } as BunnyKit;
 };

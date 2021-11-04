@@ -1,2 +1,2 @@
-export * from './uncategorized'
-export * from './cases'
+export * from './uncategorized';
+export * from './cases';
