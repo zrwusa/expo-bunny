@@ -73,7 +73,7 @@ function CryptoCurrencyHomeScreen() {
         }
         source = axios.CancelToken.source();
         try {
-            const res = await nomicsAPI.get('v1/currencies/sparkline', {
+            const {data: {data}} = await nomicsAPI.get('v1/currencies/sparkline', {
                 cancelToken: source.token,
                 params: {
                     ids: type,
@@ -81,7 +81,8 @@ function CryptoCurrencyHomeScreen() {
                     end
                 }
             });
-            const {timestamps, prices} = res.data[0];
+
+            const {timestamps, prices} = data[0];
 
             const btcDataMapped = timestamps.map((item: string, index: number) => {
                 return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))};

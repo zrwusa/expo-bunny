@@ -30,12 +30,12 @@ export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAc
 export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapState, void, RestoreNearbyFilmsAction>> = (reqParams: GetNearbyFilmsReqParams) => {
     return async (dispatch: Dispatch<RestoreNearbyFilmsAction | SysErrorAction | CollectBLResultAction | RequestingAction | RequestSuccessAction | RequestFailedAction>): Promise<Action> => {
         let result;
-        const config: RequestConfig = {method: 'GET', url: '/nearby-films', params: reqParams};
+        const config: RequestConfig = {method: 'GET', url: '/api/nearby-films', params: reqParams};
         try {
             result = dispatch(requesting(config));
-            const res = await bunnyAPI.request(config);
-            if (res.data) {
-                result = dispatch(restoreNearbyFilms(res.data));
+            const {data: {data}} = await bunnyAPI.request(config);
+            if (data) {
+                result = dispatch(restoreNearbyFilms(data));
                 result = dispatch(requestSuccess(config));
             } else {
                 result = dispatch(collectBLResult(blError(EBizLogicMsg.NO_NEARBY_FILMS)));
