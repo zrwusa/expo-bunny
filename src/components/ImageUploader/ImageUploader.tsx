@@ -27,7 +27,7 @@ import Modal, {ModalProps} from 'react-native-modal';
 import {Divider} from '../Divider';
 import {CopyableText} from '../CopyableText';
 import {IcoMoonKeys} from '../../types';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 // import ViewShot,{captureRef} from "react-native-view-shot";
 export type UploadedResult = { uri: string }
 export type RenderPreview = (props: { imageSource: ImageURISource, toggleModal: () => void }) => React.ReactElement | null;
@@ -209,7 +209,7 @@ export function ImageUploader(props: ImageUploaderProps) {
                 setImage({uri: uploadUrl});
                 onValueChanged && onValueChanged({uri: uploadUrl});
             }
-        } catch (e) {
+        } catch (e: any) {
             _errorHandle(e);
         } finally {
             setIsUploading(false);

@@ -1,8 +1,9 @@
 // import {Button as ButtonElement, ButtonProps as ButtonElementProps, Text as TextElement, TextProps as TextElementProps} from "react-native-elements";
-import {useSizeLabor, useThemeLabor} from '../../providers';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {
     Button as ButtonRN,
     ButtonProps,
+    ColorValue,
     Image as ImageRN,
     ImageProps,
     Platform,
@@ -26,11 +27,12 @@ import React from 'react';
 import {createIconSetFromIcoMoon, MaterialCommunityIcons} from '@expo/vector-icons';
 import {IcoMoonProps, LinkProps, MaterialCommunityIconsProps} from '../../types';
 import selection from '../../assets/fonts/icomoon/selection.json';
+import {useSizeLabor} from '../../providers/size-labor';
 import {Switch as SwitchPaper} from 'react-native-paper';
 import ReactNativePickerSelect, {PickerSelectProps as ReactNativePickerSelectProps} from 'react-native-picker-select';
 import {getStyles} from './styles';
 import {LinearGradient} from 'expo-linear-gradient';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export const IconFromIcoMoon = createIconSetFromIcoMoon(selection, 'IcoMoon', 'icomoon.ttf');
 
@@ -223,8 +225,8 @@ export const IcoMoon: React.FC<IcoMoonProps & { style?: StyleProp<TextStyle> }> 
     const {colors, ms} = useBunnyKit();
 
 
-    const mergedStyle = [{
-        color: color || colors.text,
+    const mergedStyle: StyleProp<TextStyle> = [{
+        color: color as ColorValue || colors.text,
         fontSize: size || ms.fs.l,
     }, style];
     return (<IconFromIcoMoon

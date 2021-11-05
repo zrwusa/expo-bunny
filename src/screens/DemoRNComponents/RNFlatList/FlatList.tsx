@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {getStyles} from './styles';
 import {getContainerStyles} from '../../../containers';
-import {useBunnyKit} from '../../../hooks';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function RNFlatListScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();

@@ -3,13 +3,15 @@ import {ScrollView, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParam} from '../../types';
-import {shortenTFunctionKey, useAuthLabor} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {Card, getContainerStyles} from '../../containers';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
-import {sysError} from '../../store/actions';
-import {Divider, InlineJump} from '../../components';
+import {collectSysError} from '../../store/actions';
+import {Divider} from '../../components/Divider';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks';
+import {InlineJump} from '../../components/InlineJump';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
 type HomeNavigationProp = StackNavigationProp<RootStackParam, 'Home'>;
@@ -164,8 +166,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <InlineJump type="NAV" iconName="log-out" text={st(`logOut`)} onNav={async () => {
                         try {
                             await authFunctions.logOut('MANUAL');
-                        } catch (e) {
-                            dispatch(sysError(e));
+                        } catch (e: any) {
+                            dispatch(collectSysError(e));
                         }
                     }} iconSize={wp(20)}/>
                 </Card>

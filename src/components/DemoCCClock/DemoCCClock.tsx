@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {ButtonTO, InButtonText, Text, View} from '../UI';
-import {withSizeLabor, WithSizeLabor} from '../../providers/size-labor';
+import {WithSizeLabor, withSizeLabor} from '../../providers/size-labor';
 
 interface Props extends WithSizeLabor {
     title: string,
@@ -56,7 +56,5 @@ export class DemoCCClockInner extends PureComponent<Props, States> {
         this.stop();
     }
 }
-
-console.log('withSizeLabor', withSizeLabor);
 
 export const DemoCCClock = withSizeLabor(DemoCCClockInner);

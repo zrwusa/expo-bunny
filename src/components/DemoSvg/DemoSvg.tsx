@@ -5,7 +5,8 @@ import Svg, {Circle, Rect, SvgUri} from 'react-native-svg';
 import SVGR from './SVGR';
 // import SvgLocalFileXML from "./SvgLocalFileXML"
 import {Platform} from 'react-native';
-import {useSizeLabor, useThemeLabor} from '../../providers';
+import {useThemeLabor} from '../../providers/theme-labor';
+import {useSizeLabor} from '../../providers/size-labor';
 
 export const DemoSvg = () => {
     const sizeLabor = useSizeLabor();

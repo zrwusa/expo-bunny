@@ -4,7 +4,7 @@ import {TypingAnimation} from 'react-native-typing-animation';
 import {useUpdateLayoutEffect} from './hooks/useUpdateLayoutEffect';
 import config from '../../config';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

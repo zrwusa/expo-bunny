@@ -2,12 +2,12 @@ import * as React from 'react';
 import {Text} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoSocialMediaTabStackParam, RootStackParam} from '../../../types';
-import {shortenTFunctionKey} from '../../../providers';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
 import {Card, getContainerStyles} from '../../../containers';
 import {SafeAreaView} from 'react-native';
 import {getStyles} from './styles';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useBunnyKit} from '../../../hooks';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 
 type SocialMediaSettingsRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSettings'>;

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {View} from '../../components/UI';
-import {getContainerStyles} from '../../containers';
+import {Text, View} from '../../components/UI';
+import {getContainerStyles, Row} from '../../containers';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -10,7 +10,8 @@ import {getStyles} from './styles';
 import {LoginScreen} from './Login';
 import {SignUpScreen} from './SignUp';
 import {useTranslation} from 'react-i18next';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {Checkbox} from 'react-native-paper';
 
 type ProfileRouteProp = RouteProp<RootStackParam, 'Auth'>;
 type ProfileNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -32,6 +33,9 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
     const styles = getStyles(sizeLabor, themeLabor);
     const {t} = useTranslation();
+
+    const [isBunnyAuth, setIsBunnyAuth] = React.useState(false);
+
     return (
         <SafeAreaView style={[containerStyles.Screen]}>
             <View style={[containerStyles.Screen]}>
@@ -64,9 +68,22 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
                                                    },
                                                }}
                     >
-                        <AuthTopTabStack.Screen name="Login" component={LoginScreen}/>
-                        <AuthTopTabStack.Screen name="SignUp" component={SignUpScreen}/>
+                        <AuthTopTabStack.Screen name="Login">
+                            {props => <LoginScreen {...props} isBunnyAuth={isBunnyAuth}/>}
+                        </AuthTopTabStack.Screen>
+                        <AuthTopTabStack.Screen name="SignUp">
+                            {props => <SignUpScreen {...props} isBunnyAuth={isBunnyAuth}/>}
+                        </AuthTopTabStack.Screen>
                     </AuthTopTabStack.Navigator>
+                    <Row style={styles.authService}>
+                        <Text>Bunny Auth</Text>
+                        <Checkbox
+                            status={isBunnyAuth ? 'checked' : 'unchecked'}
+                            onPress={() => {
+                                setIsBunnyAuth(!isBunnyAuth);
+                            }}
+                        />
+                    </Row>
                 </View>
                 <View style={styles.footer}>
                 </View>

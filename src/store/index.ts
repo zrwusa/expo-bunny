@@ -35,7 +35,7 @@ const sagaMiddleware = createSagaMiddleware();
 // just delete the demos you not prefer,or just use them all
 // const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMiddleware));
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMiddleware));
 sagaMiddleware.run(sagasGenerator);
 // sagaMiddleware.run(saveQuickAlertSettingsSaga);
 

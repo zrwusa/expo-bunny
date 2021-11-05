@@ -9,8 +9,8 @@ import {useFirebaseConnect} from 'react-redux-firebase';
 import {getStyles} from './styles';
 import {randomText} from '../../utils';
 import {FlatList} from 'react-native';
-import {shortenTFunctionKey} from '../../providers';
-import {useBunnyKit} from '../../hooks';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 export function DemoSagaFirebaseScreen() {

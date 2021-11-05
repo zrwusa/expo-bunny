@@ -3,7 +3,7 @@ import {ImageStyle, StyleSheet, TextStyle, View, ViewStyle,} from 'react-native'
 import BunnyAvatar from './BunnyAvatar';
 import {isSameDay, isSameUser} from './utils';
 import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {

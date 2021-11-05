@@ -3,13 +3,15 @@ import * as React from 'react';
 import {Share} from 'react-native';
 import {ButtonTO, Image, InButtonText, Text, TouchableOpacity, View} from '../../components/UI';
 import {useDispatch} from 'react-redux';
-import {sysError} from '../../store/actions';
+import {collectSysError} from '../../store/actions';
 import * as ImagePicker from 'expo-image-picker';
 import * as Sharing from 'expo-sharing';
-import {shortenTFunctionKey, useSizeLabor, useThemeLabor} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getContainerStyles} from '../../containers';
+import {useSizeLabor} from '../../providers/size-labor';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {getSharedStyles} from '../../helpers';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export type SelectedImage = {
     localUri: string
@@ -33,8 +35,8 @@ function DemoShareScreen() {
             } else if (result.action === Share.dismissedAction) {
                 // dismissed
             }
-        } catch (error) {
-            dispatch(sysError(error.toString()));
+        } catch (e: any) {
+            dispatch(collectSysError(e.toString()));
         }
     };
 

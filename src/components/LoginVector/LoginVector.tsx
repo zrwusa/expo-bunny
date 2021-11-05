@@ -1,17 +1,19 @@
 import {IcoMoon, Text, TextButton, View} from '../UI';
 import * as React from 'react';
-import {Col, Row} from '../../containers';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
 import {Divider} from '../Divider';
 import {Keyboard, Platform} from 'react-native';
-import {collectBLResult, sysError} from '../../store/actions';
-import {shortenTFunctionKey, useAuthLabor} from '../../providers';
+import {collectBLResult, collectSysError} from '../../store/actions';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getStyles} from './styles';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {navToReference} from '../../helpers';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type LoginVectorRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type LoginVectorNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -48,8 +50,8 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                     try {
                         await authFunctions.dummyLogin();
                         navToReference(route, navigation);
-                    } catch (e) {
-                        dispatch(sysError(e));
+                    } catch (e: any) {
+                        dispatch(collectSysError(e));
                     }
                 }}>
                     <IcoMoon name="drink" size={wp(24)} style={styles.icon}/>
@@ -69,8 +71,8 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                     } else {
                                         dispatch(collectBLResult(result));
                                     }
-                                } catch (e) {
-                                    dispatch(sysError(e));
+                                } catch (e: any) {
+                                    dispatch(collectSysError(e));
                                 }
                             }}>
                                 <IcoMoon name="facebook" style={styles.icon}/>
@@ -87,8 +89,8 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                     } else {
                                         dispatch(collectBLResult(result));
                                     }
-                                } catch (e) {
-                                    dispatch(sysError(e));
+                                } catch (e: any) {
+                                    dispatch(collectSysError(e));
                                 }
                             }}>
                                 <IcoMoon name="google" style={styles.icon}/>

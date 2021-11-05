@@ -1,8 +1,9 @@
 import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
-import {Col, Row} from '../../containers';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 import {getSharedStyles} from '../../helpers';
 import {getStyles} from './styles';
 import Modal from 'react-native-modal';

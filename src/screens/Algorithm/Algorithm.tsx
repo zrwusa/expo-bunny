@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Text, TextButton, TextInput, View} from '../../components/UI';
 import {getStyles} from './styles';
 import {OrderType, TreeNode} from '../../types';
-import {Card} from '../../containers';
-import {useBunnyKit} from '../../hooks';
+import {Card} from '../../containers/Card';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 import {
     BFS,
     binaryTreeInorderTraversal,

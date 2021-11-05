@@ -8,8 +8,8 @@ import {getStyles} from './styles';
 import {ImageURISource} from 'react-native';
 import {useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {useDispatch, useSelector} from 'react-redux';
-import {sysError} from '../../store/actions';
-import {useBunnyKit} from '../../hooks';
+import {collectSysError} from '../../store/actions';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 export interface UserAlbumEditorProps {
@@ -35,7 +35,7 @@ export function UserAlbumEditor(props: UserAlbumEditorProps) {
     const usersWithPhotos = useSelector((state: RootState) => state.firestoreState.ordered.usersWithPhotos);
 
     const _imageUploaderError = (e: Error) => {
-        dispatch(sysError(e));
+        dispatch(collectSysError(e));
     };
 
     const _removePhoto = async (position: string, source?: ImageURISource) => {

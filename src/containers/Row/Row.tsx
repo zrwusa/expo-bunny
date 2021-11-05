@@ -1,7 +1,8 @@
 import React from 'react';
 import {FlexStyle, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {SizeKeys} from '../../types';
-import {useSizeLabor, useThemeLabor} from '../../providers';
+import {useSizeLabor} from '../../providers/size-labor';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {getStyles} from './styles';
 
 export interface RowProps {

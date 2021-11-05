@@ -6,20 +6,17 @@ import {AppearanceProvider} from 'react-native-appearance';
 import {Theme as ThemeNavigation} from '@react-navigation/native';
 import BunnyConstants from './constants/constants';
 import {RootState} from './types';
-import {restoreIsReady, restoreNavInitialState, sysError} from './store/actions';
-import {
-    AuthLaborProvider,
-    I18nLaborProvider,
-    RequestProvider,
-    SizeLaborProvider,
-    ThemeLaborContext,
-    ThemeLaborProvider
-} from './providers';
-import {Preparing} from './components';
+import {collectSysError, restoreIsReady, restoreNavInitialState} from './store/actions';
+import {ThemeLaborContext, ThemeLaborProvider} from './providers/theme-labor';
+import {Preparing} from './components/Preparing';
 import {useTranslation} from 'react-i18next';
+import {RequestProvider} from './providers/request-labor';
 import {loadAsync} from 'expo-font';
 import icoMoonFont from './assets/fonts/icomoon/fonts/icomoon.ttf';
+import {SizeLaborProvider} from './providers/size-labor';
 import NavigatorTree from './navigation/NavigatorTree';
+import {AuthLaborProvider} from './providers/auth-labor';
+import {I18nLaborProvider} from './providers/i18n-labor';
 import RequestLoading from './components/RequestLoading';
 import BLToast from './components/BLToast';
 import Sys from './components/Sys';
@@ -42,7 +39,7 @@ function App() {
             try {
                 await loadAsync({IcoMoon: icoMoonFont});
             } catch (err: any) {
-                dispatch(sysError(err.toString()));
+                dispatch(collectSysError(err.toString()));
             } finally {
                 try {
                     if (Platform.OS !== 'web') {
@@ -53,14 +50,14 @@ function App() {
                         }
                     }
                 } catch (err: any) {
-                    dispatch(sysError(err.toString()));
+                    dispatch(collectSysError(err.toString()));
                 } finally {
                     dispatch(restoreIsReady({isReady: true}));
                 }
             }
         };
         bootstrapAsync()
-            .catch((err) => dispatch(sysError(err.toString())));
+            .catch((err) => dispatch(collectSysError(err.toString())));
         return () => clearTimeout(mockPreparingTimer);
     }, []);
 

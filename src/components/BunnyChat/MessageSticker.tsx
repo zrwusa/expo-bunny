@@ -3,7 +3,7 @@ import {Image, ImageProps, ImageStyle, StyleProp, StyleSheet, Text, View, ViewSt
 // TODO: support web
 import {IMessage} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {withBunnyKit, WithBunnyKit} from '../../hooks';
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

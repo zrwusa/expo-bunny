@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Animated, Keyboard, NativeSyntheticEvent, SafeAreaView, TextInputKeyPressEventData} from 'react-native';
 import {getStyles} from './styles';
 import {IcoMoon, Text, TextInput, TouchableOpacity, View} from '../UI';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 interface SearchComponentProps {
     scrollYValue: Animated.Value,

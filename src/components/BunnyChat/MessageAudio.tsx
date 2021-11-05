@@ -4,7 +4,7 @@ import {StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-nat
 import {IMessage, PositionLeftOrRight} from './types';
 import {AudioPlayer, AudioPlayerProps} from '../AudioPlayer';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {withBunnyKit, WithBunnyKit} from '../../hooks';
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

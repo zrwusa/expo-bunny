@@ -3,7 +3,7 @@ import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native';
 import dayjs from 'dayjs';
 import {TIME_FORMAT} from './Constant';
 import {IMessage, LeftRightStyle, PositionLeftOrRight} from './types';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 

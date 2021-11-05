@@ -1,10 +1,10 @@
-import {Row} from '../../containers';
+import {Row} from '../../containers/Row';
 import {Text, View} from '../UI';
 import * as React from 'react';
-import {shortenTFunctionKey} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getSharedStyles} from '../../helpers';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 export interface TabProps<ItemT> {

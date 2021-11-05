@@ -1,5 +1,5 @@
 // TODO crash when large gif images loaded
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {useKeyboardHeight} from '../../hooks/keyboard-height';

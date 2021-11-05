@@ -10,7 +10,7 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {ActivityIndicatorSize} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
 

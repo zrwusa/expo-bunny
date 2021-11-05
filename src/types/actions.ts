@@ -27,6 +27,7 @@ import {
 } from './payloads';
 import {DemoSaga, NearbyFilm, Region} from './models';
 import {BLResult} from './bl';
+import {Method} from 'axios';
 
 export interface DemoHelloAction {
     type: EDemoHello.DEMO_HELLO;
@@ -83,8 +84,8 @@ export interface RequestingAction {
     payload: RequestConfig;
 }
 
-export interface RequestReceivedAction {
-    type: ESys.REQUEST_RECEIVED;
+export interface RequestSuccessAction {
+    type: ESys.REQUEST_SUCCESS;
     payload: RequestConfig;
 }
 
@@ -141,4 +142,68 @@ export interface RequestGetCurrentPriceAction {
 export interface ReceiveGetCurrentPriceAction {
     type: EDemoCryptoCurrency.RECEIVE_CURRENT_PRICE,
     payload: ReceiveGetCurrentPricePayload
+}
+
+
+export interface SysClearErrorsAction {
+    type: ESys.CLEAR_ERRORS;
+    payload: SysClearErrorPayload;
+}
+
+
+export interface SysWarnAction {
+    type: ESys.WARN;
+    payload: SysWarnPayload;
+}
+
+export interface RestoreIsReadyAction {
+    type: ESys.RESTORE_IS_READY;
+    payload: RestoreIsReadyPayload;
+}
+
+export interface RequestingAction {
+    type: ESys.REQUESTING;
+    payload: RequestConfig;
+}
+
+export interface RequestSuccessAction {
+    type: ESys.REQUEST_SUCCESS;
+    payload: RequestConfig;
+}
+
+export interface RequestFailedAction {
+    type: ESys.REQUEST_FAILED;
+    payload: RequestConfig;
+}
+
+export interface RequestFailedPayload {
+    method: Method;
+    url: string;
+    params?: any;
+}
+
+export interface RequestingAction {
+    type: ESys.REQUESTING;
+    payload: RequestConfig;
+}
+
+export interface SysErrorAction {
+    type: ESys.ERROR;
+    payload: Error;
+}
+
+export interface RequestFailedAction {
+    type: ESys.REQUEST_FAILED;
+    payload: RequestConfig;
+}
+
+export interface RequestSuccessAction {
+    type: ESys.REQUEST_SUCCESS;
+    payload: RequestConfig;
+}
+
+export interface RequestReceivedPayload {
+    method: Method;
+    url: string;
+    params?: any;
 }

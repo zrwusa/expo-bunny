@@ -13,7 +13,7 @@ import {
     User,
 } from '../../types';
 import {apiAuth} from '../../helpers/auth-api';
-import BunnyConstants, {EBLMsg} from '../../constants/constants';
+import BunnyConstants, {EBizLogicMsg} from '../../constants/constants';
 import {AxiosResponse} from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Google from 'expo-google-app-auth';
@@ -25,7 +25,7 @@ import {
     IOS_CLIENT_ID_FOR_EXPO
 } from '@env';
 import _, {identity, pickBy} from 'lodash';
-import {blError, blSuccess} from '../../helpers';
+import {blError, blSuccess} from '../../helpers/helpers';
 import {EventRegister} from 'react-native-event-listeners';
 import {firebase} from '../../firebase/firebase';
 import * as Facebook from 'expo-facebook';
@@ -37,15 +37,15 @@ import * as Facebook from 'expo-facebook';
 
 const config: AuthContextConfig = {
     loginAPIMethod: 'PUT',
-    loginAPIPath: '/auth/login',
+    loginAPIPath: '/api/auth/login',
     signUpAPIMethod: 'POST',
-    signUpAPIPath: '/auth/register',
+    signUpAPIPath: '/api/auth/register',
     refreshAPIMethod: 'PUT',
-    refreshAPIPath: '/auth/refresh',
-    accessTokenValuePath: 'accessToken',
-    accessTokenExpValuePath: 'accessTokenExp',
-    refreshTokenValuePath: 'refreshToken',
-    refreshTokenExpValuePath: 'refreshTokenExp',
+    refreshAPIPath: '/api/auth/refresh',
+    accessTokenValuePath: 'access_token',
+    accessTokenExpValuePath: 'access_token_exp',
+    refreshTokenValuePath: 'refresh_token',
+    refreshTokenExpValuePath: 'refresh_token_exp',
     userValuePath: 'user',
     accessTokenPersistenceKey: BunnyConstants.ACCESS_TOKEN_PERSISTENCE_KEY,
     accessTokenExpPersistenceKey: BunnyConstants.ACCESS_TOKEN_EXP_PERSISTENCE_KEY,
@@ -72,11 +72,16 @@ const persistenceAuth = async ({
                                    accessTokenExp,
                                    refreshTokenExp
                                }: PersistenceAuthParam) => {
-    accessToken && await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken);
-    accessTokenExp && await AsyncStorage.setItem(accessTokenExpPersistenceKey, accessTokenExp);
-    refreshTokenExp && await AsyncStorage.setItem(refreshTokenExpPersistenceKey, refreshTokenExp);
-    refreshToken && await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken);
-    user && await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user));
+    try {
+        accessToken && await AsyncStorage.setItem(accessTokenPersistenceKey, accessToken);
+        accessTokenExp && await AsyncStorage.setItem(accessTokenExpPersistenceKey, accessTokenExp.toString());
+        refreshTokenExp && await AsyncStorage.setItem(refreshTokenExpPersistenceKey, refreshTokenExp.toString());
+        refreshToken && await AsyncStorage.setItem(refreshTokenPersistenceKey, refreshToken);
+        user && await AsyncStorage.setItem(userPersistenceKey, JSON.stringify(user));
+    } catch (e: any) {
+        console.error(e);
+    }
+
 };
 
 const triggerLogin = async (result: BLResult) => {
@@ -91,13 +96,13 @@ const triggerLogin = async (result: BLResult) => {
 const loginOrSignUp = async (res: any) => {
     let result: BLResult;
     if (!res) {
-        result = blError(EBLMsg.NO_AUTH_API_RESPONDED);
+        result = blError(EBizLogicMsg.NO_AUTH_API_RESPONDED);
         await triggerLogin(result);
         return result;
     }
-    const {data} = res;
+    const {data} = res.data;
     if (!data) {
-        result = blError(EBLMsg.NO_DATA_RESPONDED);
+        result = blError(EBizLogicMsg.NO_DATA_RESPONDED);
         await triggerLogin(result);
         return result;
     }
@@ -108,12 +113,12 @@ const loginOrSignUp = async (res: any) => {
 
     const user = _.get(data, userValuePath);
     if (!(accessToken && refreshToken)) {
-        result = blError(EBLMsg.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED);
+        result = blError(EBizLogicMsg.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED);
         await triggerLogin(result);
         return result;
     }
     if (!user) {
-        result = blError(EBLMsg.NO_USER_INFO_RESPONDED);
+        result = blError(EBizLogicMsg.NO_USER_INFO_RESPONDED);
         await triggerLogin(result);
         return result;
     }
@@ -143,20 +148,20 @@ const bunnyRefreshAuth = async (): Promise<BLResult> => {
     const res = await apiAuth.request({method: refreshAPIMethod, url: refreshAPIPath});
     let result: BLResult;
     if (!res) {
-        result = blError(EBLMsg.NO_AUTH_API_RESPONDED);
+        result = blError(EBizLogicMsg.NO_AUTH_API_RESPONDED);
         EventRegister.emit('bunnyRefreshAuth', result);
         return result;
     }
-    const {data} = res;
+    const {data} = res.data;
     if (!data) {
-        result = blError(EBLMsg.NO_DATA_RESPONDED);
+        result = blError(EBizLogicMsg.NO_DATA_RESPONDED);
         EventRegister.emit('bunnyRefreshAuth', result);
         return result;
     }
     const accessToken = _.get(data, accessTokenValuePath);
     const accessTokenExp = _.get(data, accessTokenExpValuePath);
     if (!accessToken) {
-        result = blError(EBLMsg.NO_ACCESS_TOKEN_RESPONDED);
+        result = blError(EBizLogicMsg.NO_ACCESS_TOKEN_RESPONDED);
         EventRegister.emit('bunnyRefreshAuth', result);
         return result;
     }
@@ -214,16 +219,16 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
     });
     let result: BLResult;
     if (!googleResponse) {
-        result = blError(EBLMsg.NO_GOOGLE_LOGIN_RESULT);
+        result = blError(EBizLogicMsg.NO_GOOGLE_LOGIN_RESULT);
     }
     switch (googleResponse.type) {
         case 'cancel':
-            result = blError(EBLMsg.GOOGLE_LOGIN_CANCELED);
+            result = blError(EBizLogicMsg.GOOGLE_LOGIN_CANCELED);
             break;
         case 'success':
             const {idToken, accessToken, refreshToken, user} = googleResponse;
             if (!accessToken || !refreshToken) {
-                result = blError(EBLMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS);
+                result = blError(EBizLogicMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS);
             }
             if (isFirebase) {
                 await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
@@ -239,7 +244,7 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
             }
             break;
         default:
-            result = blError(EBLMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID);
+            result = blError(EBizLogicMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID);
             break;
     }
     await triggerLogin(result);
@@ -248,7 +253,7 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
 
 const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential, isStoreUser: boolean = true) => {
     if (!userCredential || !userCredential.user) {
-        return blError(EBLMsg.FIREBASE_INVALID_USER_CREDENTIAL);
+        return blError(EBizLogicMsg.FIREBASE_INVALID_USER_CREDENTIAL);
     }
     let idToken: string, user: firebase.User;
     const currentUser = firebase.auth().currentUser;
@@ -269,7 +274,7 @@ const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential,
             user: {firebaseUser: user, storedUser},
         });
     } else {
-        return blError(EBLMsg.FIREBASE_INVALID_CURRENT_USER);
+        return blError(EBizLogicMsg.FIREBASE_INVALID_CURRENT_USER);
     }
 };
 
@@ -284,7 +289,7 @@ const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) =
     const {type} = facebookResponse;
     switch (type) {
         case 'cancel':
-            result = blError(EBLMsg.FACEBOOK_LOGIN_CANCELED);
+            result = blError(EBizLogicMsg.FACEBOOK_LOGIN_CANCELED);
             break;
         case 'success':
             // @ts-ignore
@@ -306,7 +311,7 @@ const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) =
             }
             break;
         default :
-            result = blError(EBLMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID);
+            result = blError(EBizLogicMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID);
             break;
     }
     await triggerLogin(result);

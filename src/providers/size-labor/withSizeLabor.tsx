@@ -2,8 +2,6 @@ import {useSizeLabor} from './useSizeLabor';
 import React from 'react';
 import {SizeLabor} from '../../types';
 
-console.log('useSizeLabor', useSizeLabor);
-
 export interface WithSizeLabor {
     sizeLabor: SizeLabor;
 }

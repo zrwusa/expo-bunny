@@ -5,10 +5,10 @@ import {demoThunk} from '../../store/actions';
 import {DemoThunkPayload, DemoThunkState, RootState} from '../../types';
 import {ThunkDispatch} from 'redux-thunk';
 import {Action} from 'redux';
-import {shortenTFunctionKey} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getContainerStyles} from '../../containers';
 import {getSharedStyles} from '../../helpers';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 const mapStateToProps = (rootState: RootState) => ({...rootState.demoThunkState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoThunkState, void, Action>) => ({

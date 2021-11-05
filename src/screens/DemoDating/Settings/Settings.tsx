@@ -16,7 +16,7 @@ import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from '../
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {getSharedStyles} from '../../../helpers';
 import {ScrollView} from 'react-native';
-import {useBunnyKit} from '../../../hooks';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 import {
     Divider,
     Graduate,

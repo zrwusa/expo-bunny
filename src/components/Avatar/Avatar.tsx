@@ -3,7 +3,7 @@ import {Image, ImageSourcePropType, ImageStyle, ImageURISource, StyleProp} from 
 import {getStyles} from './styles';
 import {SizeKeys} from '../../types';
 import {ImageUploader, ImageUploaderProps} from '../ImageUploader';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export interface AvatarProps {
     source: ImageSourcePropType,

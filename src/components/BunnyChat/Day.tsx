@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import {isSameDay} from './utils';
 import {DATE_FORMAT} from './Constant';
 import {IMessage} from './types';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {

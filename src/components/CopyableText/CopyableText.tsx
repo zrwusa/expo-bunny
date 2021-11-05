@@ -2,7 +2,7 @@ import React from 'react';
 import {Clipboard, TextProps, TouchableOpacity} from 'react-native';
 import {collectBLResult} from '../../store/actions';
 import {blSuccess} from '../../helpers';
-import {useThemeLabor} from '../../providers';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {Text} from '../UI';
 import {useDispatch} from 'react-redux';
 

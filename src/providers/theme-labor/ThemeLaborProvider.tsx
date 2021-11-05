@@ -5,10 +5,10 @@ import {ThemeName, ThemeProviderProps} from '../../types';
 import {ThemeLaborContext} from './ThemeLaborContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BunnyConstants, {EThemes} from '../../constants/constants';
-import {collectBLResult, sysError} from '../../store/actions';
+import {collectBLResult, collectSysError} from '../../store/actions';
 import {useColorScheme} from 'react-native-appearance';
 import {useDispatch} from 'react-redux';
-import {Preparing} from '../../components';
+import {Preparing} from '../../components/Preparing';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {getThemes} from './theme';
 import _ from 'lodash';
@@ -48,7 +48,7 @@ export const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
                 }
                 await changeTheme(themeName);
             } catch (err: any) {
-                dispatch(sysError(err));
+                dispatch(collectSysError(err));
             }
         };
         bootstrapAsync()

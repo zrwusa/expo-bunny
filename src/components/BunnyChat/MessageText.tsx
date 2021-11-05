@@ -3,7 +3,7 @@ import {Linking, StyleProp, StyleSheet, Text, TextProps, TextStyle, View, ViewSt
 import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 import {IMessage, LeftRightStyle, PositionLeftOrRight} from './types';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {ActionSheetProps, connectActionSheet} from '../../../packages/react-native-action-sheet/src';
 import {SizeLabor, ThemeLabor} from '../../types';
 

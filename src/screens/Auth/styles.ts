@@ -42,6 +42,9 @@ export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
             width: wp(100),
             ...shadowAround
         },
+        authService: {
+            justifyContent: 'flex-end'
+        }
 
     });
 };

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {AudioRecorder, BunnyChat, ImageUploader, Preparing, StickerPicker} from '../../../components';
+import {BunnyChat} from '../../../components/BunnyChat';
 import {RouteProp} from '@react-navigation/native';
 import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from '../../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -7,10 +7,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {isLoaded, useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {firestoreTimestampToDate, uuidV4} from '../../../utils';
 import {Keyboard, SafeAreaView, TouchableOpacity} from 'react-native';
+import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from '../../../components';
 import {IcoMoon} from '../../../components/UI';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../../hooks';
-import {sysError} from '../../../store/actions';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
+import {collectSysError} from '../../../store/actions';
 
 type ChatRoomRouteProp = RouteProp<DemoChatStackParam, 'ChatRoom'>;
 type ChatRoomNavigationProp = StackNavigationProp<DemoChatStackParam, 'ChatRoom'>;
@@ -188,7 +189,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
                         }}
 
                         onMessageLoadError={(e, currentMessage) => {
-                            dispatch(sysError(e));
+                            dispatch(collectSysError(e));
                         }}
                         // actionSheet={() => {
                         //     return {

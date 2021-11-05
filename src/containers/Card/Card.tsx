@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
-import {useSizeLabor, useThemeLabor} from '../../providers';
+import {useSizeLabor} from '../../providers/size-labor';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {getStyles} from './styles';
 import {Text} from '../../components/UI';
 import {getContainerStyles} from '../styles';

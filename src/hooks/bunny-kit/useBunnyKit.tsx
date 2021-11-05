@@ -1,5 +1,7 @@
-import {useAuthLabor, useSizeLabor, useThemeLabor} from '../../providers';
+import {useSizeLabor} from '../../providers/size-labor';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {useTranslation} from 'react-i18next';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {
     AuthFunctions,
     AuthLaborContextType,

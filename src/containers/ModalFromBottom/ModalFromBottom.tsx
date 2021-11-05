@@ -1,6 +1,6 @@
 import Modal, {ModalProps} from 'react-native-modal';
 import * as React from 'react';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 import {getStyles} from './styles';
 
 export interface ModalFromBottomProps {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, View} from 'react-native';
 import {getStyles} from './styles';
 import config from '../../config';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 export interface ImageProgressiveProps extends WithBunnyKit {
     previewSource: ImageSourcePropType,

@@ -6,12 +6,12 @@ import {BLResult} from './bl';
 import {SagaTodo} from './states';
 
 export interface LoginParams {
-    email: string;
+    username: string;
     password: string;
 }
 
 export interface SignUpParams {
-    email: string;
+    username: string;
     password: string;
 }
 

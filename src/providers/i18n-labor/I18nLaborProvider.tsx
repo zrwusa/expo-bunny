@@ -7,7 +7,7 @@ import * as localization from 'expo-localization';
 import {I18nLaborContext} from './I18nLaborContext';
 import i18next from './i18next';
 import {i18n as I18n} from 'i18next';
-import {Preparing} from '../../components';
+import {Preparing} from '../../components/Preparing';
 import {useTranslation} from 'react-i18next';
 import {shortenTFunctionKey} from './shorten-t-function-key';
 

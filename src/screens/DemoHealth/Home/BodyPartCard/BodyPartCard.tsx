@@ -4,7 +4,7 @@ import {getStyles} from './styles';
 import {Text} from '../../../../components/UI';
 import {Col, Row} from '../../../../containers';
 import {LinearGradientIcon} from '../../../../components/LinearGradientIcon';
-import {useBunnyKit} from '../../../../hooks';
+import {useBunnyKit} from '../../../../hooks/bunny-kit';
 
 export interface BodyPartCardProps {
     title?: string,

@@ -1,17 +1,20 @@
 import {InButtonText, LinearGradientButton, Text, TextButton, TextInputIcon, View} from '../UI';
 import * as React from 'react';
 import {useState} from 'react';
-import {Col, InputCard, Row} from '../../containers';
-import {collectBLResult, sysError} from '../../store/actions';
-import {shortenTFunctionKey, useAuthLabor} from '../../providers';
+import {Row} from '../../containers/Row';
+import {collectBLResult, collectSysError} from '../../store/actions';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getStyles} from './styles';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {InputCard} from '../../containers/InputCard';
 import {LinearGradientIcon} from '../LinearGradientIcon';
 import {blError} from '../../helpers';
-import {useBunnyKit} from '../../hooks';
+import {Col} from '../../containers/Col';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type ForgotPasswordRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
 type ForgotPasswordNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -66,8 +69,8 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
                 dispatch(collectBLResult(blError('Please enter email')));
             }
 
-        } catch (e) {
-            dispatch(sysError(e));
+        } catch (e: any) {
+            dispatch(collectSysError(e));
         }
 
     };

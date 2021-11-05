@@ -5,14 +5,14 @@ import * as Location from 'expo-location';
 import {ThunkDispatch} from 'redux-thunk';
 import {DemoMapState, GetNearbyFilmsReqParams, NearbyFilm, Region, RootState} from '../../types';
 import {Action} from 'redux';
-import {getNearbyFilms, restoreRegion, sysError} from '../../store/actions';
+import {collectSysError, getNearbyFilms, restoreRegion} from '../../store/actions';
 import {connect} from 'react-redux';
 import MapView, {PROVIDER_DEFAULT} from 'react-native-maps';
 import BunnyConstants from '../../constants/constants';
 import getStyles, {getCardSize} from './styles';
 import {getContainerStyles} from '../../containers';
 import config from '../../config';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 const {Marker} = MapView as any; // react-native-maps under typescript bug trick
 
@@ -21,7 +21,7 @@ const mapStateToProps = (rootState: RootState) => ({...rootState.demoMapState});
 const mapDispatchToProps = (dispatch: ThunkDispatch<DemoMapState, void, Action>) => ({
     getNearbyFilms: async (reqParams: GetNearbyFilmsReqParams) => dispatch(getNearbyFilms(reqParams)),
     restoreRegion: (region: Region) => dispatch(restoreRegion(region)),
-    sysError: (err: Error) => dispatch(sysError(err))
+    collectSysError: (err: Error) => dispatch(collectSysError(err))
 });
 
 export interface DemoMapProps extends ReturnType<typeof mapDispatchToProps>,
@@ -55,8 +55,8 @@ class DemoMapScreen extends Component<DemoMapProps> {
                 longitude: location.coords.longitude,
                 ...BunnyConstants.latLngDeltaGrace
             });
-        } catch (e) {
-            this.props.sysError(e);
+        } catch (e: any) {
+            this.props.collectSysError(e);
         }
     }
 

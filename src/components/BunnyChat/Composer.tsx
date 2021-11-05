@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform, StyleSheet, TextInput, TextInputProps} from 'react-native';
 import {DEFAULT_PLACEHOLDER, MIN_COMPOSER_HEIGHT} from './Constant';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {

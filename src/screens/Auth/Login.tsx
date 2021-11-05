@@ -2,21 +2,22 @@ import {InButtonText, LinearGradientButton, Text, TextInputIcon, View} from '../
 import * as React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {shortenTFunctionKey, useAuthLabor} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getContainerStyles, InputCard, Row} from '../../containers';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LinearGradientIcon} from '../../components/LinearGradientIcon';
 import {Keyboard, ScrollView, TouchableOpacity} from 'react-native';
-import {collectBLResult, sysError} from '../../store/actions';
+import {collectBLResult, collectSysError} from '../../store/actions';
 import {getStyles} from './styles';
 import {LoginVector} from '../../components/LoginVector';
 import {FirebasePhoneLogin} from '../../components/FirebasePhoneLogin';
-import {Tab} from '../../components';
+import {Tab} from '../../components/Tab';
 import {ForgotPassword} from '../../components/ForgotPassword';
 import {navToReference} from '../../helpers';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type LoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type LoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -24,9 +25,10 @@ type LoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
 export interface LoginProps {
     route: LoginRouteProp;
     navigation: LoginNavigationProp;
+    isBunnyAuth: boolean;
 }
 
-export function LoginScreen({route, navigation}: LoginProps) {
+export function LoginScreen({route, navigation, isBunnyAuth}: LoginProps) {
     const {sizeLabor, themeLabor, wp, t, ms} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
     const containerStyles = getContainerStyles(sizeLabor, themeLabor);
@@ -49,28 +51,29 @@ export function LoginScreen({route, navigation}: LoginProps) {
             } else {
                 dispatch(collectBLResult(result));
             }
-        } catch (e) {
-            dispatch(sysError(e));
+        } catch (e: any) {
+            dispatch(collectSysError(e));
         }
     };
 
     const bunnyLogin = async () => {
         Keyboard.dismiss();
         try {
-            const result = await authFunctions.bunnyLogin({email, password});
+            const result = await authFunctions.bunnyLogin({username: email, password});
             if (result.success) {
                 navToReference(route, navigation);
             } else {
                 dispatch(collectBLResult(result));
             }
-        } catch (e) {
-            dispatch(sysError(e));
+        } catch (e: any) {
+            dispatch(collectSysError(e));
         }
     };
 
     const handleLogin = async () => {
-        await firebaseEmailLogin();
+        isBunnyAuth ? await bunnyLogin() : await firebaseEmailLogin();
     };
+
     return <View style={[containerStyles.Screen]}>
         <ScrollView style={styles.loginOrSignUpContainer}>
             <Tab items={firebaseLoginMethods} value={loginMethod} onChange={(item) => {

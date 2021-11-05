@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {ActionSheetProps, connectActionSheet} from '../../../packages/react-native-action-sheet/src';
 import {SizeLabor, ThemeLabor} from '../../types';
 

@@ -1,6 +1,7 @@
 import {Text, View} from '../../components/UI';
 import * as React from 'react';
-import {useSizeLabor, useThemeLabor} from '../../providers';
+import {useSizeLabor} from '../../providers/size-labor';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {getContainerStyles} from '../styles';
 
 export interface InputCardProps {

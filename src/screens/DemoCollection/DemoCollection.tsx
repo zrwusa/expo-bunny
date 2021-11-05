@@ -1,13 +1,15 @@
 import React from 'react';
 import DemoFCCard from '../../components/DemoFCCard';
-import {DemoCCClock, DemoPureComponent, DemoRegularComponent, DemoSvg} from '../../components';
 import DemoRequest from '../../components/DemoRequest';
 import {TextInput, View} from '../../components/UI';
-import {shortenTFunctionKey} from '../../providers';
+import {DemoSvg} from '../../components/DemoSvg';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {ScrollView} from 'react-native';
 import {getContainerStyles, Row} from '../../containers';
+import {DemoPureComponent, DemoRegularComponent} from '../../components/DemoPureComponent';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
+import {DemoCCClock} from '../../components';
 
 function DemoCollectionScreen() {
     const {sizeLabor, themeLabor, t} = useBunnyKit();

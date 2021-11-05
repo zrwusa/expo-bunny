@@ -1,8 +1,9 @@
+import {ESys} from '../../constants';
 import {
     RequestConfig,
     RequestFailedAction,
     RequestingAction,
-    RequestReceivedAction,
+    RequestSuccessAction,
     RestoreIsReadyAction,
     RestoreIsReadyPayload,
     RestoreNavInitialStateAction,
@@ -13,9 +14,9 @@ import {
     SysWarnAction,
     SysWarnPayload
 } from '../../types';
-import {ESys} from '../../constants';
 
-export const sysError: (payload: Error) => SysErrorAction = (payload) => {
+
+export const collectSysError: (payload: Error) => SysErrorAction = (payload) => {
     return {
         type: ESys.ERROR,
         payload
@@ -30,6 +31,7 @@ export const sysClearErrors: (payload: SysClearErrorPayload) => SysClearErrorsAc
     };
 };
 
+
 export const sysWarn: (payload: SysWarnPayload) => SysWarnAction = (payload) => {
     return {
         type: ESys.WARN,
@@ -37,17 +39,19 @@ export const sysWarn: (payload: SysWarnPayload) => SysWarnAction = (payload) => 
     };
 };
 
-export const restoreNavInitialState: (payload: RestoreNavInitialStatePayload) => RestoreNavInitialStateAction = (payload) => {
-    return {
-        type: ESys.RESTORE_NAV_INITIAL_STATE,
-        payload
-    };
-};
 
 export const restoreIsReady: (payload: RestoreIsReadyPayload) => RestoreIsReadyAction = (payload) => {
     return {
         type: ESys.RESTORE_IS_READY,
         payload,
+    };
+};
+
+
+export const requestFailed: (payload: RequestConfig) => RequestFailedAction = (payload) => {
+    return {
+        type: ESys.REQUEST_FAILED,
+        payload
     };
 };
 
@@ -58,16 +62,18 @@ export const requesting: (payload: RequestConfig) => RequestingAction = (payload
     };
 };
 
-export const requestReceived: (payload: RequestConfig) => RequestReceivedAction = (payload) => {
+
+export const requestSuccess: (payload: RequestConfig) => RequestSuccessAction = (payload) => {
     return {
-        type: ESys.REQUEST_RECEIVED,
+        type: ESys.REQUEST_SUCCESS,
         payload,
     };
 };
 
-export const requestFailed: (payload: RequestConfig) => RequestFailedAction = (payload) => {
+
+export const restoreNavInitialState = (payload: RestoreNavInitialStatePayload): RestoreNavInitialStateAction => {
     return {
-        type: ESys.REQUEST_FAILED,
+        type: ESys.RESTORE_NAV_INITIAL_STATE,
         payload
     };
 };
@@ -79,5 +85,5 @@ export type SysActions =
     | RestoreNavInitialStateAction
     | SysClearErrorsAction
     | RequestingAction
-    | RequestReceivedAction
+    | RequestSuccessAction
     | RequestFailedAction;

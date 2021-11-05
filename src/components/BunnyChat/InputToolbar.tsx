@@ -5,7 +5,7 @@ import Composer, {ComposerProps} from './Composer';
 import Send, {SendProps} from './Send';
 import Actions, {ActionsProps} from './Actions';
 import {IMessage} from './types';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {

@@ -7,7 +7,7 @@ import {ShowVideo} from '../Video/Video';
 import {ReadMore} from '../ReadMore';
 import {SocialMediaMainDatum} from '../../types';
 import {getStyles} from './styles';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 interface SocialMediaVideoCardProps extends WithBunnyKit {
     card: SocialMediaMainDatum;

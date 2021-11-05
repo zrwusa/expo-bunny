@@ -19,9 +19,9 @@ import {useDispatch} from 'react-redux';
 import {ColorTranslator} from 'colortranslator';
 import {CopyableText} from '../../components/CopyableText';
 import {ColorValuesCard} from '../../components/ColorValuesCard';
-import {shortenTFunctionKey} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {Tab} from '../../components';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export type UglyColorType = 'Beautiful' | 'RGB' | 'Hex' | 'HSL';
 

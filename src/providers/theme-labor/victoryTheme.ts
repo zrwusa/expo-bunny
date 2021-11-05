@@ -1,5 +1,5 @@
 import {pl, reverseColor} from '../../utils';
-import {getSizeLabor} from '../size-labor';
+import {getSizeLabor} from '../size-labor/sizeLabor';
 
 export const getVictoryTheme = () => {
     const {wp} = getSizeLabor().designsBasedOn.iphoneX;

@@ -54,8 +54,8 @@ export class CachedImage extends React.Component<CashedImageProps, CashedImageSt
                         }
                     }, (progress) => {
                     });
-            } catch (error) {
-                onError?.(error);
+            } catch (e: any) {
+                onError?.(e);
             }
         }
     }

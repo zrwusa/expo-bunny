@@ -2,9 +2,9 @@ import React from 'react';
 import {SafeAreaView, View, VirtualizedList} from 'react-native';
 import {Text} from '../../../components/UI';
 import {getStyles} from './styles';
-import {useThemeLabor} from '../../../providers';
+import {useThemeLabor} from '../../../providers/theme-labor';
 import {getContainerStyles} from '../../../containers';
-import {useBunnyKit} from '../../../hooks';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type VirtualizedListItem = {
     id: string;

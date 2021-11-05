@@ -4,7 +4,7 @@ import {ScaledImage} from '../ScalableImage/ScalableImage';
 import {uuid4} from '@sentry/utils';
 import {MasonryDatum, SocialMediaImageDatum} from '../../types';
 import {getStyles} from './styles';
-import {WithBunnyKit, withBunnyKit} from '../../hooks';
+import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 
 export interface MasonryProps extends WithBunnyKit {

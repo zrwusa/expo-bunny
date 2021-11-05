@@ -1,4 +1,4 @@
-import {bunnyAPI} from '../../helpers';
+import bunnyAPI from '../../helpers/bunny-api';
 import React, {ReactNode} from 'react';
 import {AxiosInstance} from 'axios';
 import {RequestContext} from './RequestContext';

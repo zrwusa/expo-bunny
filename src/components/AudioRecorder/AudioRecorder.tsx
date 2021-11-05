@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 import {IcoMoon} from '../UI';
 import {Platform, TouchableHighlight, Vibration} from 'react-native';
 import {Audio} from '../../../packages/expo-av/src';

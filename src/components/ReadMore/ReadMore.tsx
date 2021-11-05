@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {StyleProp, Text, TextStyle, View} from 'react-native';
 import {getStyles} from './styles';
-import {withBunnyKit, WithBunnyKit} from '../../hooks';
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
 interface ReadMoreProps extends WithBunnyKit {
     numberOfLines: number,

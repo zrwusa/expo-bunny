@@ -5,7 +5,7 @@ import {getDemoSagas} from '../../store/actions';
 import {RootState} from '../../types';
 import {getSharedStyles} from '../../helpers';
 import {getContainerStyles} from '../../containers';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 function DemoSagaScreen() {

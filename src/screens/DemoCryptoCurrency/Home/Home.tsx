@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Text, View} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from '../../../types';
-import {shortenTFunctionKey} from '../../../providers';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
 import {getContainerStyles} from '../../../containers';
 import {
     VictoryAxis,
@@ -17,12 +17,12 @@ import {getStyles} from './styles';
 import {addDays} from '../../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import axios, {CancelTokenSource} from 'axios';
-import {collectBLResult, getCurrentPrice, sysError} from '../../../store/actions';
+import {collectBLResult, collectSysError, getCurrentPrice} from '../../../store/actions';
 import {blError, getSharedStyles} from '../../../helpers';
 import {ScrollView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Tab} from '../../../components';
-import {useBunnyKit} from '../../../hooks';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type CryptoCurrencyHomeRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyHome'>;
 type CryptoCurrencyHomeNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -87,15 +87,15 @@ function CryptoCurrencyHomeScreen() {
                 return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))};
             });
             setBtcData(btcDataMapped);
-        } catch (e) {
+        } catch (e: any) {
             dispatch(collectBLResult(blError(e.message, false)));
         }
     };
     useEffect(() => {
         try {
             dispatch(getCurrentPrice());
-        } catch (e) {
-            dispatch(sysError(e));
+        } catch (e: any) {
+            dispatch(collectSysError(e));
         }
         getHistoricalPrices(type, dateRange).then();
         return () => {

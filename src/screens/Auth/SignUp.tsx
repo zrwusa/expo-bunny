@@ -2,18 +2,19 @@ import {InButtonText, LinearGradientButton, TextInputIcon, View} from '../../com
 import * as React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {shortenTFunctionKey, useAuthLabor} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getContainerStyles, InputCard, Row} from '../../containers';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LinearGradientIcon} from '../../components/LinearGradientIcon';
 import {Keyboard} from 'react-native';
-import {collectBLResult, sysError} from '../../store/actions';
+import {collectBLResult, collectSysError} from '../../store/actions';
 import {LoginVector} from '../../components/LoginVector';
 import {getSharedStyles, navToReference} from '../../helpers';
 import {getStyles} from './styles';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type SignUpRouteProp = RouteProp<AuthTopStackParam, 'SignUp'>;
 type SignUpNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -21,9 +22,10 @@ type SignUpNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
 export interface SignUpProps {
     route: SignUpRouteProp;
     navigation: SignUpNavigationProp;
+    isBunnyAuth: boolean;
 }
 
-export function SignUpScreen({route, navigation}: SignUpProps) {
+export function SignUpScreen({route, navigation, isBunnyAuth}: SignUpProps) {
     const {sizeLabor, themeLabor, colors, wp, theme, t, ms} = useBunnyKit();
     const dispatch = useDispatch();
     const st = shortenTFunctionKey(t, 'screens.Auth');
@@ -44,27 +46,27 @@ export function SignUpScreen({route, navigation}: SignUpProps) {
             } else {
                 dispatch(collectBLResult(result));
             }
-        } catch (e) {
-            dispatch(sysError(e));
+        } catch (e: any) {
+            dispatch(collectSysError(e));
         }
     };
 
     const bunnySignUp = async () => {
         Keyboard.dismiss();
         try {
-            const result = await authFunctions.bunnySignUp({email: username, password: password});
+            const result = await authFunctions.bunnySignUp({username: username, password: password});
             if (result.success) {
                 navToReference(route, navigation);
             } else {
                 dispatch(collectBLResult(result));
             }
-        } catch (e) {
-            dispatch(sysError(e));
+        } catch (e: any) {
+            dispatch(collectSysError(e));
         }
     };
 
     const handleSignUp = async () => {
-        await firebaseEmailSignUp();
+        isBunnyAuth ? await bunnySignUp() : await firebaseEmailSignUp();
     };
     return <View style={containerStyles.Screen}>
         <View style={styles.loginOrSignUpContainer}>

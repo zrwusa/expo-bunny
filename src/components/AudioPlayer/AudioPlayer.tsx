@@ -6,7 +6,7 @@ import {AVPlaybackSource, AVPlaybackStatus} from '../../../packages/expo-av/src/
 import {Audio} from '../../../packages/expo-av/src';
 import {ProgressBar} from 'react-native-paper';
 import {minuted} from '../../utils';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export interface AudioPlayerProps {
     source: AVPlaybackSource,
@@ -58,7 +58,7 @@ export function AudioPlayer(props: AudioPlayerProps) {
                 soundRef.current = sound;
                 soundRef.current.setOnPlaybackStatusUpdate(setStatus);
                 onLoadEnd?.();
-            } catch (e) {
+            } catch (e: any) {
                 isDebug && console.log(e.toString());
                 setError(e.toString());
                 onError?.(e);

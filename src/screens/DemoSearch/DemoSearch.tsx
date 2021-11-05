@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Text, View} from '../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoSearchDummyDatum, RootStackParam} from '../../types';
-import {shortenTFunctionKey} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getContainerStyles} from '../../containers';
 import {Animated, SafeAreaView} from 'react-native';
 import {randomText, wait} from '../../utils';
@@ -13,7 +13,7 @@ import {collectBLResult} from '../../store/actions';
 import {blError} from '../../helpers';
 import {StackNavigationProp} from '@react-navigation/stack';
 import config from '../../config';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 type DemoSearchRouteProp = RouteProp<RootStackParam, 'DemoSearch'>;
@@ -68,7 +68,7 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
                                    try {
                                        const searchResult = await mockSearch(searchText);
                                        setData(searchResult);
-                                   } catch (e) {
+                                   } catch (e: any) {
                                        collectBLResult(blError(e));
                                    }
                                }}

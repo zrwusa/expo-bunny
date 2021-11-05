@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from '../UI';
 import {getStyles} from './styles';
 import {ActivityIndicator} from 'react-native';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export function DemoLazyLoading() {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();

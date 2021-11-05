@@ -4,10 +4,10 @@ import {ScrollView} from 'react-native';
 import {getStyles} from './styles';
 import {Card, Row} from '../../containers';
 import {useDispatch} from 'react-redux';
-import {shortenTFunctionKey} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {glyphIcoMoonMap} from '../../helpers';
 import {CopyableText} from '../../components/CopyableText';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 export function IconToolsScreen() {

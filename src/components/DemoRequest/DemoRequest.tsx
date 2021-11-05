@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {ButtonTO, InButtonText, Text, View} from '../UI';
 import {DemoEmployee} from '../../types';
-import {useRequest} from '../../providers';
+import {useRequest} from '../../providers/request-labor';
 import {useDispatch} from 'react-redux';
-import {saveQuickAlertSettings, sysError} from '../../store/actions';
+import {collectSysError, saveQuickAlertSettings} from '../../store/actions';
 import {bunnyAPI} from '../../helpers/bunny-api';
 
 interface Props {
@@ -68,7 +68,7 @@ function DemoRequest(props: Props) {
             //     return {x: new Date(item), y: parseFloat(parseFloat(prices[index]).toFixed(2))}
             // })
         } catch (err: any) {
-            dispatch(sysError(err.toString()));
+            dispatch(collectSysError(err.toString()));
         }
     };
 

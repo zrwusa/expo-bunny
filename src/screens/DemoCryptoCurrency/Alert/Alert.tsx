@@ -4,16 +4,16 @@ import {Platform, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from '../../../types';
 import {ButtonTO, InButtonText, PickerSelectChevronRight, Text} from '../../../components/UI';
-import {shortenTFunctionKey} from '../../../providers';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
 import {Col, getContainerStyles, Row} from '../../../containers';
 import * as Notifications from 'expo-notifications';
 import {defaultNotification, registerForPushNotificationsAsync} from '../../../utils/expo-notification';
-import {cancelAlertSettings, getCurrentPrice, saveQuickAlertSettings, sysError} from '../../../store/actions';
+import {cancelAlertSettings, collectSysError, getCurrentPrice, saveQuickAlertSettings} from '../../../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import {getStyles} from './styles';
 import {getSharedStyles} from '../../../helpers';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useBunnyKit} from '../../../hooks';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type CryptoCurrencyAlertRouteProp = RouteProp<DemoCryptoCurrencyTabStackParam, 'CryptoCurrencyAlert'>;
 type CryptoCurrencyAlertNavigationProp = StackNavigationProp<RootStackParam, 'DemoCryptoCurrency'>;
@@ -78,8 +78,8 @@ export default function CryptoCurrencyAlertScreen({route, navigation}: CryptoCur
 
             try {
                 dispatch(getCurrentPrice());
-            } catch (e) {
-                dispatch(sysError(e));
+            } catch (e: any) {
+                dispatch(collectSysError(e));
             }
 
             notificationReceivedListener = Notifications

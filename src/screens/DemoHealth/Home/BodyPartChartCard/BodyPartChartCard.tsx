@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {getStyles} from './styles';
 import {Text} from '../../../../components/UI';
 import {Col, Row} from '../../../../containers';
-import {Divider} from '../../../../components';
+import {Divider} from '../../../../components/Divider';
 import {MonthKey} from '../../../../types';
 import {
     VictoryAxis,
@@ -13,7 +13,7 @@ import {
     VictoryTooltip,
     VictoryVoronoiContainer
 } from '../../../../components/Victory/Victory';
-import {useBunnyKit} from '../../../../hooks';
+import {useBunnyKit} from '../../../../hooks/bunny-kit';
 
 export interface BodyPartCardProps {
     title?: string,

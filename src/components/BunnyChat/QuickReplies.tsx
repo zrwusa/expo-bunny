@@ -3,7 +3,7 @@ import {StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle,} from 'r
 import {IMessage, Reply} from './types';
 import {warning} from './utils';
 import {SizeLabor, ThemeLabor} from '../../types';
-import {withBunnyKit, WithBunnyKit} from '../../hooks';
+import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
 const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

@@ -1,19 +1,21 @@
 import {ActivityIndicator, TextInput, View} from 'react-native';
 import * as React from 'react';
-import {InputCard, Row} from '../../containers';
+import {InputCard} from '../../containers/InputCard';
 import {InButtonText, LinearGradientButton, Text, TextInputIcon} from '../UI';
 import {LinearGradientIcon} from '../LinearGradientIcon';
+import {Row} from '../../containers/Row';
 import * as FirebaseRecaptcha from 'expo-firebase-recaptcha';
 import {FIREBASE_CONFIG} from '../../firebase';
-import {shortenTFunctionKey, useAuthLabor} from '../../providers';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {getStyles} from './styles';
+import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useDispatch} from 'react-redux';
 import {collectBLResult} from '../../store/actions';
 import {navToReference} from '../../helpers';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type FirebasePhoneLoginRouteProp = RouteProp<AuthTopStackParam, 'Login'>;
 type FirebasePhoneLoginNavigationProp = StackNavigationProp<RootStackParam, 'Auth'>;
@@ -57,8 +59,8 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
             } else {
                 dispatch(collectBLResult(result));
             }
-        } catch ({message}) {
-            setVerifyError(message);
+        } catch (e: any) {
+            setVerifyError(e.message);
             setVerifyInProgress(false);
         }
     };
@@ -76,8 +78,8 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
             } else {
                 dispatch(collectBLResult(result));
             }
-        } catch ({message}) {
-            setConfirmError(message);
+        } catch (e: any) {
+            setConfirmError(e.message);
             setConfirmInProgress(false);
         }
     };

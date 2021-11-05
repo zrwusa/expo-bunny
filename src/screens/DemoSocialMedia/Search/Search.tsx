@@ -8,7 +8,7 @@ import {
     RootState,
     SocialMediaImageDatum
 } from '../../../types';
-import {shortenTFunctionKey} from '../../../providers';
+import {shortenTFunctionKey} from '../../../providers/i18n-labor';
 import {getContainerStyles} from '../../../containers';
 import {getStyles} from './styles';
 import {Animated, Platform, SafeAreaView} from 'react-native';
@@ -19,8 +19,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {isLoaded, useFirebase, useFirestoreConnect} from 'react-redux-firebase';
 import config from '../../../config';
-import {Preparing} from '../../../components';
-import {useBunnyKit} from '../../../hooks';
+import {Preparing} from '../../../components/Preparing';
+import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type SocialMediaSearchRouteProp = RouteProp<DemoSocialMediaTabStackParam, 'SocialMediaSearch'>;
 type SocialMediaSearchNavigationProp = StackNavigationProp<RootStackParam, 'DemoSocialMedia'>;

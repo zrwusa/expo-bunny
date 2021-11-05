@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {useEffect, useRef} from 'react';
 import {Text, View} from '../UI';
-import {Card, Col, Row} from '../../containers';
-import {useBunnyKit} from '../../hooks';
+import {Row} from '../../containers/Row';
+import {Col} from '../../containers/Col';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 import {getStyles} from './styles';
 import {
     AbstractEdge,
@@ -21,6 +22,7 @@ import {
 import {TreeNode} from '../../types';
 import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText, TSpan} from 'react-native-svg';
 import {ScrollView} from 'react-native';
+import {Card} from '../../containers';
 
 export interface VividAlgorithmProps<T> {
     data?: T,

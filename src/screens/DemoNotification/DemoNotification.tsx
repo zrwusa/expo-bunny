@@ -7,8 +7,8 @@ import {
     registerForPushNotificationsAsync,
     schedulePushNotification
 } from '../../utils/expo-notification';
-import {shortenTFunctionKey} from '../../providers';
-import {useBunnyKit} from '../../hooks';
+import {shortenTFunctionKey} from '../../providers/i18n-labor';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
 export default function DemoNotificationScreen() {

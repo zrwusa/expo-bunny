@@ -5,7 +5,7 @@ import {LinearGradient, LinearGradientProps} from 'expo-linear-gradient';
 import {getStyles} from './styles';
 import {IcoMoonProps} from '../../types';
 import {StyleProp, TextStyle} from 'react-native';
-import {useBunnyKit} from '../../hooks';
+import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export type LinearGradientIconProps = IcoMoonProps & Omit<LinearGradientProps, 'colors'> & {
     colors?: string[],

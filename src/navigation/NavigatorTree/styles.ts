@@ -1,5 +1,5 @@
 import {Platform, StyleSheet} from 'react-native';
-import {useSizeLabor} from '../../providers';
+import {useSizeLabor} from '../../providers/size-labor';
 import {getSharedStyles} from '../../helpers';
 import {SizeLabor, ThemeLabor} from '../../types';
 

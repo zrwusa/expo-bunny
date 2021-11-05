@@ -14,7 +14,6 @@ import {
 } from '../types';
 import glyphMaterialCommunityMap
     from '@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
-import {EBLMsg} from '../constants';
 import {
     AuthAPIError,
     BunnyAPIError,
@@ -217,6 +216,34 @@ export const blSuccess = <TData extends any>(data: TData, message?: string, shou
     };
 };
 
+// export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
+//     let dataKeys;
+//     try {
+//         dataKeys = Object.keys(data);
+//     } catch (err: any) {
+//         throw new PErrorClass(err.message, err.stack);
+//     }
+//     const isDataKeysEqual = _.isEqual(dataKeys, ['timeSpent', 'successData', 'httpExtra', 'businessLogic']);
+//     if (!isDataKeysEqual) {
+//         throw new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_ROOT_STRUCTURE);
+//     }
+//     const {businessLogic, httpExtra} = data;
+//     const blKeys = Object.keys(businessLogic);
+//     const isBLKeysEqual = _.isEqual(blKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack']);
+//     if (!isBLKeysEqual) {
+//         throw new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE);
+//     }
+//     const httpExtraKeys = Object.keys(httpExtra);
+//     const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack']);
+//     if (!isHttpExtraKeysEqual) {
+//         throw new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE);
+//     }
+//     const {errorCode, errorMessage, errorStack} = businessLogic;
+//     if (errorCode) {
+//         throw new PErrorClass(errorMessage, errorCode, errorStack);
+//     }
+//     return true;
+// };
 export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     let dataKeys;
     try {
@@ -224,28 +251,35 @@ export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     } catch (err: any) {
         throw new PErrorClass(err.message, err.stack);
     }
-    const isDataKeysEqual = _.isEqual(dataKeys, ['timeSpent', 'successData', 'httpExtra', 'businessLogic']);
+    const isDataKeysEqual = _.isEqual(dataKeys.sort(), ['time_spent', 'data', 'http_extra', 'business_logic', 'server_error'].sort());
     if (!isDataKeysEqual) {
-        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_ROOT_STRUCTURE);
+        // dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_ROOT_STRUCTURE)));
+        return false;
     }
-    const {businessLogic, httpExtra} = data;
-    const blKeys = Object.keys(businessLogic);
-    const isBLKeysEqual = _.isEqual(blKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack']);
+    const {business_logic, http_extra, server_error} = data;
+    const blKeys = Object.keys(business_logic);
+    const isBLKeysEqual = _.isEqual(blKeys.sort(), ['code', 'message', 'description', 'error_code', 'error_message', 'error_description', 'error_stack'].sort());
     if (!isBLKeysEqual) {
-        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE);
+        // dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE)));
+        return false;
     }
-    const httpExtraKeys = Object.keys(httpExtra);
-    const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys, ['code', 'message', 'description', 'errorCode', 'errorMessage', 'errorDescription', 'errorStack']);
+    const httpExtraKeys = Object.keys(http_extra);
+    const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys.sort(), ['code', 'message', 'description'].sort());
+
     if (!isHttpExtraKeysEqual) {
-        throw new PErrorClass(EBLMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE);
+        // dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE)));
+        return false;
     }
-    const {errorCode, errorMessage, errorStack} = businessLogic;
-    if (errorCode) {
-        throw new PErrorClass(errorMessage, errorCode, errorStack);
+
+    const serverErrorKeys = Object.keys(server_error);
+    const isServerErrorKeysEqual = _.isEqual(serverErrorKeys.sort(), ['code', 'message', 'stack'].sort());
+
+    if (!isServerErrorKeysEqual) {
+        // dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_SERVER_STRUCTURE)));
+        return false;
     }
     return true;
 };
-
 export const checkAuthAPIProtocol = (data: any) => {
     return checkCommonAPIProtocol(data, AuthAPIError);
 };

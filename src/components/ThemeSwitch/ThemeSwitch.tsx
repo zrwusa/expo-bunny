@@ -1,4 +1,4 @@
-import {useThemeLabor} from '../../providers';
+import {useThemeLabor} from '../../providers/theme-labor';
 import {EThemes} from '../../constants';
 import * as React from 'react';
 import {SwitchP} from '../UI';

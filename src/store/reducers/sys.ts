@@ -67,7 +67,7 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             return {
                 ...prevState,
             };
-        case ESys.REQUEST_RECEIVED:
+        case ESys.REQUEST_SUCCESS:
             const receivedPayload = payload as RequestReceivedPayload;
             _.remove(prevState.requestStatuses, item => (item.url === receivedPayload.url && item.method === receivedPayload.method && item.params === receivedPayload.params));
             // prevState.requestStatuses.map(item=>{
