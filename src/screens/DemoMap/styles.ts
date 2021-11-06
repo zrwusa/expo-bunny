@@ -14,7 +14,7 @@ export const getCardSize = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         height: CARD_HEIGHT
     };
 };
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = sizeLabor;
     const {wp, hp} = designsBasedOn.iphoneX;
     const {width, height} = Dimensions.get('window');
@@ -85,4 +85,4 @@ const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
         },
     });
 };
-export default getStyles;
+export default makeStyles;

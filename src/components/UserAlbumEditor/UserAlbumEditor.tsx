@@ -4,7 +4,7 @@ import {View} from '../UI';
 import {RootState} from '../../types';
 import {Col, Row} from '../../containers';
 import {ImageUploader} from '../ImageUploader';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {ImageURISource} from 'react-native';
 import {useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {useDispatch, useSelector} from 'react-redux';
@@ -20,7 +20,7 @@ export interface UserAlbumEditorProps {
 export function UserAlbumEditor(props: UserAlbumEditorProps) {
     const {sizeLabor, themeLabor, wp, user} = useBunnyKit();
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const dispatch = useDispatch();
     const firebaseUser = user?.firebaseUser;
     let userId = '';

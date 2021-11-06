@@ -6,7 +6,7 @@ import {Image, Text} from 'react-native';
 import {ShowVideo} from '../Video/Video';
 import {ReadMore} from '../ReadMore';
 import {SocialMediaMainDatum} from '../../types';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 interface SocialMediaVideoCardProps extends WithBunnyKit {
@@ -22,7 +22,7 @@ class SocialMediaVideoCardInner extends PureComponent<SocialMediaVideoCardProps>
         const {bunnyKit} = this.props;
         const {sizeLabor, themeLabor, wp, colors} = bunnyKit;
         const bottomBarIconColor = colors.text;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         const {category, user, userAvatar, avSource, imageSource, likes, comments} = this.props.card;
         return (<View>
             <View style={styles.card}>

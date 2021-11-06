@@ -1,4 +1,4 @@
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import * as React from 'react';
 import {Share} from 'react-native';
 import {ButtonTO, Image, InButtonText, Text, TouchableOpacity, View} from '../../components/UI';
@@ -7,7 +7,7 @@ import {collectSysError} from '../../store/actions';
 import * as ImagePicker from 'expo-image-picker';
 import * as Sharing from 'expo-sharing';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getContainerStyles} from '../../containers';
+import {makeContainerStyles} from '../../containers';
 import {useSizeLabor} from '../../providers/size-labor';
 import {useThemeLabor} from '../../providers/theme-labor';
 import {getSharedStyles} from '../../helpers';
@@ -67,8 +67,8 @@ function DemoShareScreen() {
     };
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (

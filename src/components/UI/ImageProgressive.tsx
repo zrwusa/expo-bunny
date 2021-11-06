@@ -1,6 +1,6 @@
 import React from 'react';
 import {Animated, ImageResizeMode, ImageSourcePropType, ImageStyle, StyleProp, View} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import config from '../../config';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
@@ -38,7 +38,7 @@ class ImageProgressive extends React.Component<ImageProgressiveProps> {
             ...rest
         } = this.props;
         const {sizeLabor, themeLabor} = bunnyKit;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View style={styles.ImageProgressive.container}>
                 <Animated.Image

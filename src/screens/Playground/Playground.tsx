@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, TextButton, View} from '../../components/UI';
 import {Button, TouchableOpacity, Vibration} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useFirestoreConnect} from 'react-redux-firebase';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../types';
@@ -13,7 +13,7 @@ import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export function PlaygroundScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const [progress, setProgress] = useState(0);
     const handleMigrate = async () => {
         setProgress(0);

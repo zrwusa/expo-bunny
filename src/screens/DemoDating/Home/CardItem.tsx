@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, View} from 'react-native';
-import {Col, getContainerStyles, Row} from '../../../containers';
+import {Col, makeContainerStyles, Row} from '../../../containers';
 import {getSharedStyles} from '../../../helpers';
 import {IcoMoon} from '../../../components/UI';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
@@ -17,7 +17,7 @@ export interface CardItemProps {
 
 const CardItem = ({description, hasActions, hasVariant, image, isOnline, matches, name,}: CardItemProps) => {
     const {sizeLabor, themeLabor, colors, wp, hp} = useBunnyKit();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles, sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     const imageStyle = [
         {

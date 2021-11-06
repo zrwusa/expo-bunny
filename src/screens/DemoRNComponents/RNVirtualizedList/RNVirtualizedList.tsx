@@ -1,9 +1,9 @@
 import React from 'react';
 import {SafeAreaView, View, VirtualizedList} from 'react-native';
 import {Text} from '../../../components/UI';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useThemeLabor} from '../../../providers/theme-labor';
-import {getContainerStyles} from '../../../containers';
+import {makeContainerStyles} from '../../../containers';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 type VirtualizedListItem = {
@@ -13,8 +13,8 @@ type VirtualizedListItem = {
 
 function RNVirtualizedListScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
 
     const virtualizedListData: VirtualizedListItem[] = [];
 

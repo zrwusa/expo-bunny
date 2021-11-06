@@ -4,7 +4,7 @@ import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {ActionSheetProps, connectActionSheet} from '../../../packages/react-native-action-sheet/src';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -76,7 +76,7 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
             return this.props.renderActionIcon();
         }
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         // TODO support multi actions
         return (
             <View style={[styles.wrapper, this.props.actionWrapperStyle]}>
@@ -87,7 +87,7 @@ class Actions extends React.Component<ActionsProps & ActionSheetProps & WithBunn
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <TouchableOpacity
                 style={[styles.container, this.props.actionContainerStyle]}

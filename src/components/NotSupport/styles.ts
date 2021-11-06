@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {theme} = themeLabor;
     const {colors} = theme;
     const {wp} = sizeLabor.designsBasedOn.iphoneX;

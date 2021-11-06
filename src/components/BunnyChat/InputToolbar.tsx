@@ -8,7 +8,7 @@ import {IMessage} from './types';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -208,7 +208,7 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
     renderAccessory() {
         if (this.props.renderAccessory) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <View style={[styles.accessory, this.props.accessoryStyle]}>
                     {this.props.renderAccessory(this.props)}
@@ -220,7 +220,7 @@ class InputToolbar<TMessage extends IMessage> extends React.Component<InputToolb
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View
                 style={

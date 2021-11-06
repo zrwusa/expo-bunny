@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, TextButton, TextInput, View} from '../../components/UI';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {OrderType, TreeNode} from '../../types';
 import {Card} from '../../containers/Card';
 import {useBunnyKit} from '../../hooks/bunny-kit';
@@ -39,7 +39,7 @@ import {runAllWordBreakII} from '../../utils/algorithms/uncategorized';
 
 export function AlgorithmScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     const [binaryTreeInorderTraversalVariables, setBinaryTreeInorderTraversalVariables] = useState<{ [key in string]: BinaryTreeNode<any> }>();
     const binaryTreeNode1 = new BinaryTreeNode<number>(1);

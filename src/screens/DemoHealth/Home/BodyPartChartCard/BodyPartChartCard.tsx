@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {View} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {Text} from '../../../../components/UI';
 import {Col, Row} from '../../../../containers';
-import {Divider} from '../../../../components/Divider';
+import {Divider} from '../../../../components';
 import {MonthKey} from '../../../../types';
 import {
     VictoryAxis,
@@ -27,7 +27,7 @@ export function BodyPartChartCard(props: BodyPartCardProps) {
     const {sizeLabor, themeLabor, theme, wp, ms} = useBunnyKit();
     const {title, children, bodyPart, month, data} = props;
     const {colors, victory} = theme;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
 
     return <View style={styles.bodyPartChartCard}>

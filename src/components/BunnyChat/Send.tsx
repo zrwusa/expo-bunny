@@ -13,7 +13,7 @@ import {IMessage} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -83,7 +83,7 @@ class Send<TMessage extends IMessage> extends Component<SendProps<TMessage> & Wi
         } = this.props;
         if (alwaysShowSend || (text && text.trim().length > 0)) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <TouchableOpacity
                     testID="send"

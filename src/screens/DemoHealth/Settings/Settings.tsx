@@ -4,12 +4,11 @@ import {IcoMoon, PickerSelect, SwitchP, Text, View} from '../../../components/UI
 import {RouteProp} from '@react-navigation/native';
 import {DemoHealthTabStackParam, RootStackParam} from '../../../types';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {Card, getContainerStyles, Row} from '../../../containers';
+import {Card, Col, makeContainerStyles, Row} from '../../../containers';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Divider} from '../../../components/Divider';
 import {LinearGradientIcon} from '../../../components/LinearGradientIcon';
-import {getStyles} from './styles';
-import {Col} from '../../../containers/Col';
+import {makeStyles} from './styles';
 import {SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
@@ -24,9 +23,9 @@ export interface HealthSettingsProps {
 export function HealthSettingsScreen({route, navigation}: HealthSettingsProps) {
     const {sizeLabor, themeLabor, colors, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.HealthSettings');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const [weightUnit, setWeightUnit] = useState('kg');
     const [distanceUnit, setDistanceUnit] = useState('km');
     const [lengthUnit, setLengthUnit] = useState('cm');

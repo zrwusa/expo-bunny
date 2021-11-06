@@ -15,8 +15,8 @@ import {
 } from 'react-native';
 import {Button, Pressable, Text, TextInput, TouchableOpacity} from '../../../components/UI';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {getContainerStyles, Row} from '../../../containers';
-import {getStyles} from './styles';
+import {makeContainerStyles, Row} from '../../../containers';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function RNHome() {
@@ -47,8 +47,8 @@ function RNHome() {
         touchableHighlightStyles,
         touchableOpacityStyles,
         touchableWithoutFeedbackStyles,
-    } = getStyles(sizeLabor, themeLabor);
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    } = makeStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
 
 
     const changeVisibilityStatusBar = () => {

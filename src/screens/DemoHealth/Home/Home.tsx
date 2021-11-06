@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {PickerSelect, Text, View} from '../../../components/UI';
 import {useTranslation} from 'react-i18next';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {Col, getContainerStyles, Row} from '../../../containers';
+import {Col, makeContainerStyles, Row} from '../../../containers';
 import {useSizeLabor} from '../../../providers/size-labor';
 import {useThemeLabor} from '../../../providers/theme-labor';
 import {Avatar} from '../../../components';
@@ -24,7 +24,7 @@ export function HealthHomeScreen() {
     const themeLabor = useThemeLabor();
     const {theme} = themeLabor;
     const {colors} = theme;
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const [selectedMonth, setSelectedMonth] = useState<MonthKey>('January');
     const monthKeys = Object.keys(E_MONTH) as MonthKey[];

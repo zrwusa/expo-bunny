@@ -2,15 +2,14 @@ import {ColorDiffWithPaletteItem, ColorDiffWithThemeColorsItem, ColorInputItem} 
 import {Text, View} from '../UI';
 import {CopyableText} from '../CopyableText';
 import React from 'react';
-import {getStyles} from './styles';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {makeStyles} from './styles';
+import {Col, Row} from '../../containers';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export const ColorValuesCard = (props: { item: ColorDiffWithThemeColorsItem | ColorDiffWithPaletteItem | ColorInputItem }) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
     const {item} = props;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     return <View>
         <Row paddingVertical="m">
             <Col size={1}>

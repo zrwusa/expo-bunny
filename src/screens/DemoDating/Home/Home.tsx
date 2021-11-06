@@ -6,13 +6,13 @@ import {Row} from '../../../containers';
 import CardStack, {Card as StackSwiperCard} from 'react-native-card-stack-swiper';
 import data from './data';
 import CardItem from './CardItem';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 export function DatingHomeScreen() {
     const {sizeLabor, themeLabor, theme, colors, wp, t, ms} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DatingHome');
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     const swipper = useRef<CardStack>(null);
     return (

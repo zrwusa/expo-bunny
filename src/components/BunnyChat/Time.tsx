@@ -7,7 +7,7 @@ import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     const containerStyle = {
@@ -75,7 +75,7 @@ class Time<TMessage extends IMessage> extends Component<TimeProps<TMessage> & Wi
 
         if (!!currentMessage) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <View
                     style={[

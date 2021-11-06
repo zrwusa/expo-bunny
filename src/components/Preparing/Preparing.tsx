@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {ActivityIndicator, Text, View} from 'react-native';
 
 export interface PreparingProps {
@@ -9,7 +9,7 @@ export interface PreparingProps {
 export const Preparing = (props: PreparingProps) => {
     const {text = ''} = props;
 
-    const styles = getStyles();
+    const styles = makeStyles();
     return (
         <View style={styles.container}>
             <ActivityIndicator size="large"/>

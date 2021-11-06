@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {StyleProp, Text, TextStyle, View} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
 interface ReadMoreProps extends WithBunnyKit {
@@ -90,7 +90,7 @@ class ReadMoreInner extends React.Component<React.PropsWithChildren<ReadMoreProp
     _maybeRenderReadMore() {
         const {bunnyKit} = this.props;
         const {sizeLabor, themeLabor} = bunnyKit;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         let {shouldShowReadMore, showAllText} = this.state;
 
         if (shouldShowReadMore && !showAllText) {

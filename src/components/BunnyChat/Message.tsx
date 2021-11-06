@@ -11,7 +11,7 @@ import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     return {
         left: StyleSheet.create({
@@ -383,7 +383,7 @@ class Message<TMessage extends IMessage> extends React.Component<MessageProps<TM
         if (currentMessage) {
             const sameUser = isSameUser(currentMessage, nextMessage!);
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <View onLayout={onMessageLayout}>
                     {this.renderDay()}

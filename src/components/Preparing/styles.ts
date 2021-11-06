@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {pl} from '../../utils';
 
-export const getStyles = () => {
+export const makeStyles = () => {
     return StyleSheet.create({
         container: {
             flex: 1,

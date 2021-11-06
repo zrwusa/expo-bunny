@@ -1,7 +1,7 @@
 // Redux store states,different from models entities
 import {InitialState} from '@react-navigation/native';
 import {DemoSaga, NearbyFilm, Region, SchemaFirestore, SchemaRealtimeDB, UserProfile} from './models';
-import {BLResult} from './bl';
+import {BizLogicResult} from './biz-logic';
 import {Notification} from 'expo-notifications';
 import {RequestConfig} from './payloads';
 import {FirebaseReducer} from 'react-redux-firebase';
@@ -22,8 +22,8 @@ export type SysState = {
     requestStatuses: RequestStatus[]
 }
 
-export type BLResultState = {
-    blResults: BLResult[]
+export type BizLogicResultState = {
+    bizLogicResults: BizLogicResult[]
 }
 
 export interface DemoHelloState {
@@ -68,7 +68,7 @@ export interface SagaTodo {
 
 export interface RootState {
     sysState: SysState,
-    blResultState: BLResultState,
+    bizLogicResultState: BizLogicResultState,
     demoHelloState: DemoHelloState,
     demoThunkState: DemoThunkState,
     demoMapState: DemoMapState,

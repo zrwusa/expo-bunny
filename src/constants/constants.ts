@@ -116,7 +116,7 @@ export enum ESys {
     REQUEST_RECEIVED = 'REQUEST_RECEIVED',
 }
 
-export enum EBL {
+export enum EBizLogic {
     COLLECT_BL_RESULT = 'COLLECT_BL_RESULT',
     CLEAR_BL_RESULT = 'CLEAR_BL_RESULT',
     SET_BL_RESULT = 'SET_BL_RESULT'

@@ -1,6 +1,5 @@
 import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import {Slider} from '../../../packages/react-native-range-slider-expo/src';
 import {Divider} from '../Divider';
 import {RadioButton} from 'react-native-paper';
@@ -11,7 +10,7 @@ import _ from 'lodash';
 import BunnyConstants from '../../constants/constants';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 import {getSharedStyles} from '../../helpers';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 
 export interface SpousePickerResult {
     distance: number,
@@ -54,7 +53,7 @@ export const SpousePicker = (props: SpousePickerProps) => {
         title = 'title'
     } = props;
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const [fromHeight, setFromHeight] = useState(initialFromHeight);
     const [toHeight, setToHeight] = useState(initialToHeight);
     const [age, setAge] = useState(initialAge);

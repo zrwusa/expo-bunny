@@ -4,7 +4,7 @@ import {IMessage} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
 import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -48,7 +48,7 @@ class SystemMessage<TMessage extends IMessage> extends Component<SystemMessagePr
         } = this.props;
         if (currentMessage) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <View style={[styles.container, systemMessageContainerStyle]}>
                     <View style={systemMessageWrapperStyle}>

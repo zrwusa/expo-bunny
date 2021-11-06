@@ -1,7 +1,7 @@
 // todo description this provider
 import * as React from 'react';
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import {AuthLaborProviderProps, AuthResult, BLResult} from '../../types';
+import {AuthLaborProviderProps, AuthResult, BizLogicResult} from '../../types';
 import {AuthLaborContext, authLaborContext} from './AuthLaborContext';
 import {Preparing} from '../../components/Preparing';
 import {useTranslation} from 'react-i18next';
@@ -21,8 +21,8 @@ export const AuthLaborProvider = (props: AuthLaborProviderProps): JSX.Element =>
         return authResultState;
     }, [JSON.stringify(authResultState)]);
 
-    const handleLogin = useCallback((blResult: BLResult) => {
-            const {success, data} = blResult;
+    const handleLogin = useCallback((bizLogicResult: BizLogicResult) => {
+            const {success, data} = bizLogicResult;
             if (success) {
                 const {accessToken, refreshToken, user} = data;
                 setAuthResultState({
@@ -42,7 +42,7 @@ export const AuthLaborProvider = (props: AuthLaborProviderProps): JSX.Element =>
         },
         []);
 
-    const handleCheckIsLogin = useCallback(({data}: BLResult) => {
+    const handleCheckIsLogin = useCallback(({data}: BizLogicResult) => {
         setAuthResultState((preState) => ({...preState, isLogin: data}));
     }, []);
 
@@ -50,7 +50,7 @@ export const AuthLaborProvider = (props: AuthLaborProviderProps): JSX.Element =>
         setAuthResultState((preState) => ({...preState, triggerType, triggerUUID: uuidV4()}));
     }, []);
 
-    const handleLogOut = useCallback(({success, message}: BLResult) => {
+    const handleLogOut = useCallback(({success, message}: BizLogicResult) => {
         if (success) {
             setAuthResultState({
                 accessToken: '',
@@ -64,7 +64,7 @@ export const AuthLaborProvider = (props: AuthLaborProviderProps): JSX.Element =>
 
     }, []);
 
-    const handleBunnyRefreshAuth = useCallback(({success, data, message}: BLResult) => {
+    const handleBunnyRefreshAuth = useCallback(({success, data, message}: BizLogicResult) => {
         if (success) {
             const {accessToken} = data;
             setAuthResultState((preState) => ({...preState, accessToken}));

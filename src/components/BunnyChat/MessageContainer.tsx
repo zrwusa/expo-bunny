@@ -23,7 +23,7 @@ import TypingIndicator from './TypingIndicator';
 import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms} = sizeLabor;
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
@@ -454,7 +454,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
 
     renderChatEmpty = () => {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         if (this.props.renderChatEmpty) {
             return this.props.inverted ? (
                 this.props.renderChatEmpty()
@@ -469,7 +469,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
 
     renderHeaderWrapper = () => {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>
         );
@@ -477,7 +477,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
 
     renderScrollBottomComponent() {
         const {renderScrollToBottom, bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         if (renderScrollToBottom) {
             return renderScrollToBottom();
         }
@@ -488,7 +488,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
     renderScrollToBottomWrapper() {
         const propsStyle = this.props.scrollToBottomStyle || {};
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View style={[styles.scrollToBottomStyle, propsStyle]}>
                 <TouchableOpacity
@@ -538,7 +538,7 @@ class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureC
 
     render() {
         const {inverted, bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View
                 style={

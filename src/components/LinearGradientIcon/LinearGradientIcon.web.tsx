@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {IcoMoon} from '../UI';
 import {LinearGradientIconProps} from './LinearGradientIcon';
 import {useBunnyKit} from '../../hooks/bunny-kit';
@@ -11,7 +11,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
     const {designsBasedOn} = sizeLabor;
     const finalSize = size || wp(20),
         colorsDefault = [theme.colors.backgroundBtn, theme.colors.backgroundBtn2];
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     return (
         <IcoMoon
             name={name}

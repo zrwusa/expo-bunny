@@ -5,7 +5,7 @@ import {ThemeName, ThemeProviderProps} from '../../types';
 import {ThemeLaborContext} from './ThemeLaborContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BunnyConstants, {EThemes} from '../../constants/constants';
-import {collectBLResult, collectSysError} from '../../store/actions';
+import {collectBizLogicResult, collectSysError} from '../../store/actions';
 import {useColorScheme} from 'react-native-appearance';
 import {useDispatch} from 'react-redux';
 import {Preparing} from '../../components/Preparing';
@@ -13,7 +13,7 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import {getThemes} from './theme';
 import _ from 'lodash';
 import {Dimensions} from 'react-native';
-import {blError} from '../../helpers';
+import {bizLogicError} from '../../helpers';
 
 export const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
     const {children} = props;
@@ -30,7 +30,7 @@ export const ThemeLaborProvider = (props: ThemeProviderProps): JSX.Element => {
             setThemeName(themeName);
             setTheme(themes[themeName]);
         } else {
-            dispatch(collectBLResult(blError(`No ${themeName} `, true)));
+            dispatch(collectBizLogicResult(bizLogicError(`No ${themeName} `, true)));
         }
     };
 

@@ -19,7 +19,7 @@ import {
     ViewStyle
 } from 'react-native';
 // import * as CameraRoll from "@react-native-community/cameraroll";
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import * as ImagePicker from 'expo-image-picker';
 import {ImagePickerOptions} from 'expo-image-picker';
 import {Permissions, removeFileFromFirebaseByURL, uploadFileToFirebase} from '../../helpers';
@@ -122,7 +122,7 @@ export function ImageUploader(props: ImageUploaderProps) {
         onRemovePhoto,
     } = props;
     const sizeStyle = {width: isFullFill ? '100%' : width, height: isFullFill ? '100%' : height};
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const [image, setImage] = useState<ImageURISource>(source || {uri: ''});
     const [isModalVisible, setModalVisible] = useState(false);
     const [isUploading, setIsUploading] = useState(false);

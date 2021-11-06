@@ -2,9 +2,9 @@ import * as React from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
 import {useSizeLabor} from '../../providers/size-labor';
 import {useThemeLabor} from '../../providers/theme-labor';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {Text} from '../../components/UI';
-import {getContainerStyles} from '../styles';
+import {makeContainerStyles} from '../styles';
 import {LinearGradient} from 'expo-linear-gradient';
 
 export interface OutTitleCardProps {
@@ -21,8 +21,8 @@ export const Card = (props: OutTitleCardProps) => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {colors} = themeLabor.theme;
-    const styles = getStyles(sizeLabor, themeLabor);
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const mergedStyle = [containerStyles.Card, style];
     // return <View>
     //     {children}

@@ -5,7 +5,7 @@ import {IMessage} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
 import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     return StyleSheet.create({
         container: {},
@@ -61,7 +61,7 @@ class MessageSticker<TMessage extends IMessage> extends Component<MessageSticker
         } = this.props;
         isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageSticker props', this.props);
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View style={[styles.container, stickerContainerStyle]}>
                 {currentMessage

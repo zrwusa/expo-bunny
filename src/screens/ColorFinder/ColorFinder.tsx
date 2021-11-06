@@ -10,11 +10,11 @@ import {
     ThemeName
 } from '../../types';
 import {NativeSyntheticEvent, ScrollView, TextInputKeyPressEventData} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {palette, uuidV4} from '../../utils';
 import {Card, Col, Row} from '../../containers';
-import {collectBLResult} from '../../store/actions';
-import {blError} from '../../helpers';
+import {collectBizLogicResult} from '../../store/actions';
+import {bizLogicError} from '../../helpers';
 import {useDispatch} from 'react-redux';
 import {ColorTranslator} from 'colortranslator';
 import {CopyableText} from '../../components/CopyableText';
@@ -30,7 +30,7 @@ export function ColorFinderScreen() {
     const st = shortenTFunctionKey(t, 'screens.ColorFinder');
     const dispatch = useDispatch();
     const {themes} = themeLabor;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const [inputText, setInputText] = useState('');
     const [colorInput, setColorInput] = useState<ColorInputItem>({text: '', Hex: '', RGB: '', HSL: ''});
     const [similarColorsFromTheme, setSimilarColorsFromTheme] = useState<ColorDiffWithThemeColorsItem[]>([]);
@@ -71,7 +71,7 @@ export function ColorFinderScreen() {
         const inputColorText = colorFaultTolerance(colorInput.text);
         const checkColorResult = checkColor(inputColorText);
         if (!checkColorResult.isColor) {
-            dispatch(collectBLResult(blError('Not a color string', true)));
+            dispatch(collectBizLogicResult(bizLogicError('Not a color string', true)));
             return;
         }
         const themesKeys = Object.keys(themes) as ThemeName [];

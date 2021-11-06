@@ -3,9 +3,9 @@ import {Text} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoSocialMediaTabStackParam, RootStackParam} from '../../../types';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {Card, getContainerStyles} from '../../../containers';
+import {Card, makeContainerStyles} from '../../../containers';
 import {SafeAreaView} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
@@ -21,8 +21,8 @@ export interface SocialMediaSettingsProps {
 export function SocialMediaSettingsScreen({route, navigation}: SocialMediaSettingsProps) {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.SocialMediaSettings');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     return (
         <SafeAreaView style={containerStyles.Screen}>

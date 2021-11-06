@@ -1,13 +1,13 @@
 import React from 'react';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
-import {getStyles} from './styles';
-import {getContainerStyles} from '../../../containers';
+import {makeStyles} from './styles';
+import {makeContainerStyles} from '../../../containers';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function RNFlatListScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     type IFlatListItem = {
         id: string;
         title: string;

@@ -1,12 +1,12 @@
 import {useLinkTo} from '@react-navigation/native';
-import {Col, getContainerStyles, Row} from '../../containers';
+import {Col, makeContainerStyles, Row} from '../../containers';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {IcoMoon, Link, Text} from '../UI';
 import {LinearGradientIcon} from '../LinearGradientIcon';
 import {TouchableOpacity} from 'react-native';
 import * as React from 'react';
 import {IcoMoonKeys} from '../../types';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
 export interface LineToProps {
@@ -21,8 +21,8 @@ export interface LineToProps {
 export const InlineJump: React.FC<LineToProps> = (props) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const linkTo = useLinkTo();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor();
     const {iconName, iconSize = wp(22), text, to, type, onNav, children} = props;
     const {colors} = themeLabor.theme;

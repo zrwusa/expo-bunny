@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {Text, View} from '../../components/UI';
-import {getContainerStyles, Row} from '../../containers';
+import {makeContainerStyles, Row} from '../../containers';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthTopTabStack} from '../../navigation/stacks';
 import {Image, SafeAreaView} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {LoginScreen} from './Login';
 import {SignUpScreen} from './SignUp';
 import {useTranslation} from 'react-i18next';
@@ -30,8 +30,8 @@ export const AuthScreen = ({route, navigation}: Auth1Props) => {
         }
     }
     const {sizeLabor, themeLabor, colors, wp, theme} = useBunnyKit();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {t} = useTranslation();
 
     const [isBunnyAuth, setIsBunnyAuth] = React.useState(false);

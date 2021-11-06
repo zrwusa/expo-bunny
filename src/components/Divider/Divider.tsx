@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {SizeKeys} from '../../types';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
@@ -16,7 +16,7 @@ export type SizeVerticalMap = {
 
 export function Divider(props: DividerProps) {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {isVertical, size, style} = props;
     const sizeVerticalMap: SizeVerticalMap = {
         xxs: wp(6),

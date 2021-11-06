@@ -5,7 +5,7 @@ import {warning} from './utils';
 import {SizeLabor, ThemeLabor} from '../../types';
 import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -141,7 +141,7 @@ class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProp
         const {replies} = this.state;
         const {sendText, renderQuickReplySend: customSend} = this.props;
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <TouchableOpacity
                 style={[styles.quickReply, styles.sendLink]}
@@ -166,7 +166,7 @@ class QuickReplies<TMessage extends IMessage> extends Component<QuickRepliesProp
 
         const {type} = currentMessage!.quickReplies!;
         const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View style={styles.container}>
                 {currentMessage!.quickReplies!.values.map(

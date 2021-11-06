@@ -3,7 +3,7 @@ import {FlexStyle, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {SizeKeys} from '../../types';
 import {useSizeLabor} from '../../providers/size-labor';
 import {useThemeLabor} from '../../providers/theme-labor';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 
 export interface RowProps {
     children?: React.ReactNode,
@@ -22,7 +22,7 @@ export const Row = (props: RowProps) => {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const rowPaddingVertical: RowSizeMap = {
         xxs: wp(2),
         xs: wp(4),

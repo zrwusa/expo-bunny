@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {BunnyChat} from '../../../components/BunnyChat';
+import {AudioRecorder, BunnyChat, ImageUploader, Preparing, StickerPicker} from '../../../components';
 import {RouteProp} from '@react-navigation/native';
 import {DemoChatStackParam, IMMessage, IMMessageType, RootState} from '../../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -7,9 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {isLoaded, useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {firestoreTimestampToDate, uuidV4} from '../../../utils';
 import {Keyboard, SafeAreaView, TouchableOpacity} from 'react-native';
-import {AudioRecorder, ImageUploader, Preparing, StickerPicker} from '../../../components';
 import {IcoMoon} from '../../../components/UI';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 import {collectSysError} from '../../../store/actions';
 
@@ -29,7 +28,7 @@ export function ChatRoomScreen({route, navigation}: ChatRoomProps) {
     const {user} = authResult;
     const dispatch = useDispatch();
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     useFirestoreConnect([
         {

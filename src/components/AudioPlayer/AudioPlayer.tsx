@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, StyleProp, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {IcoMoon, Text} from '../UI';
 import {AVPlaybackSource, AVPlaybackStatus} from '../../../packages/expo-av/src/AV';
 import {Audio} from '../../../packages/expo-av/src';
@@ -25,7 +25,7 @@ export interface AudioPlayerProps {
 
 export function AudioPlayer(props: AudioPlayerProps) {
     const {sizeLabor, themeLabor, colors} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {
         source,
         style,

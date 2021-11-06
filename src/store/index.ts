@@ -21,7 +21,7 @@ const rootReducer = combineReducers<RootState>({
     demoThunkState: demoThunkStateReducer,
     demoMapState: demoMapStateReducer,
     sysState: sysStateReducer,
-    blResultState: blStateReducer,
+    bizLogicResultState: blStateReducer,
     demoSagaState: demoSagaReducer,
     demoCryptoCurrencyState: demoCryptoCurrencyReducer,
     firebaseState: firebaseReducer,

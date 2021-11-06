@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createRef} from 'react';
 import {AVPlaybackStatus, Video, VideoProps} from '../../../packages/expo-av/src';
 import {Button, Text, View} from '../UI';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 interface ShowVideoState {
@@ -40,7 +40,7 @@ class ShowVideoInner extends React.PureComponent<ShowVideoProps, ShowVideoState>
         const {isPlaying, playbackStatus} = this.state;
         const {bunnyKit, onPlaybackStatusUpdate, shouldShowButton, shouldShowStatus, ...rest} = this.props;
         const {sizeLabor, themeLabor} = bunnyKit;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View>
                 <Video

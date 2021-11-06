@@ -2,7 +2,7 @@ import {
     APIConfigName,
     APPConfig,
     AuthTopStackParam,
-    BLResult,
+    BizLogicResult,
     ErrorClass,
     IcoMoonKeys,
     IcoMoonSelection,
@@ -194,7 +194,7 @@ export const getIconNameByRoute = (routeName: string, focused: boolean): IcoMoon
     return iconName as IcoMoonKeys;
 };
 
-export const blError = (blMsg: string, shouldShow?: boolean): BLResult => {
+export const bizLogicError = (blMsg: string, shouldShow?: boolean): BizLogicResult => {
     const shouldShowParam = shouldShow !== undefined ? shouldShow : true;
     return {
         id: uuidV4(),
@@ -205,7 +205,7 @@ export const blError = (blMsg: string, shouldShow?: boolean): BLResult => {
     };
 };
 
-export const blSuccess = <TData extends any>(data: TData, message?: string, shouldShow?: boolean): BLResult => {
+export const bizLogicSuccess = <TData extends any>(data: TData, message?: string, shouldShow?: boolean): BizLogicResult => {
     const shouldShowParam = shouldShow !== undefined ? shouldShow : true;
     return {
         id: uuidV4(),

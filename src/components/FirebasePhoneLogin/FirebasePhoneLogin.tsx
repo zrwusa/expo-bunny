@@ -1,19 +1,18 @@
 import {ActivityIndicator, TextInput, View} from 'react-native';
 import * as React from 'react';
-import {InputCard} from '../../containers/InputCard';
+import {InputCard, Row} from '../../containers';
 import {InButtonText, LinearGradientButton, Text, TextInputIcon} from '../UI';
 import {LinearGradientIcon} from '../LinearGradientIcon';
-import {Row} from '../../containers/Row';
 import * as FirebaseRecaptcha from 'expo-firebase-recaptcha';
 import {FIREBASE_CONFIG} from '../../firebase';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useDispatch} from 'react-redux';
-import {collectBLResult} from '../../store/actions';
+import {collectBizLogicResult} from '../../store/actions';
 import {navToReference} from '../../helpers';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
@@ -28,7 +27,7 @@ export interface FirebasePhoneLoginProps {
 export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps) => {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor();
     const dispatch = useDispatch();
 
@@ -57,7 +56,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                 setVerificationId(verificationId);
                 verificationCodeTextInput.current?.focus();
             } else {
-                dispatch(collectBLResult(result));
+                dispatch(collectBizLogicResult(result));
             }
         } catch (e: any) {
             setVerifyError(e.message);
@@ -76,7 +75,7 @@ export const FirebasePhoneLogin = ({route, navigation}: FirebasePhoneLoginProps)
                 verificationCodeTextInput.current?.clear();
                 navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result));
+                dispatch(collectBizLogicResult(result));
             }
         } catch (e: any) {
             setConfirmError(e.message);

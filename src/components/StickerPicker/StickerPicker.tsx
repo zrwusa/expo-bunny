@@ -5,7 +5,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useKeyboardHeight} from '../../hooks/keyboard-height';
 import {useFirebase} from 'react-redux-firebase';
 import {Sticker} from '../../types';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {CachedImage} from '../CachedImage';
 
 export type Quality = 'LOW' | 'MEDIUM' | 'HIGH'
@@ -21,7 +21,7 @@ export const StickerPicker = ({isShow = false, onValueChanged, quality = 'MEDIUM
     const {currentHeight} = useKeyboardHeight();
     const [stickers, setStickers] = useState<Sticker[]>([]);
     const firebase = useFirebase();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const isMounted = useRef(false);
 
     const qualityMap: { [key in Quality]: string } = {

@@ -3,7 +3,7 @@ import {View} from '../UI';
 import {ScaledImage} from '../ScalableImage/ScalableImage';
 import {uuid4} from '@sentry/utils';
 import {MasonryDatum, SocialMediaImageDatum} from '../../types';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
 
@@ -22,7 +22,7 @@ class MasonryInner extends React.PureComponent<MasonryProps> {
         const {wp} = sizeLabor.designsBasedOn.iphoneX;
         const {column1, column2, column3} = this.props.data;
 
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
 
         return (
             <View style={styles.masonry}>

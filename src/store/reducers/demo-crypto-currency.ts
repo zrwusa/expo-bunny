@@ -41,12 +41,11 @@ const initialState: DemoCryptoCurrencyState = {
 };
 export const demoCryptoCurrencyReducer = (
     prevState = initialState,
-    action: DemoCryptoCurrencyActions,
+    {type, payload}: DemoCryptoCurrencyActions,
 ): DemoCryptoCurrencyState => {
-    switch (action.type) {
+    switch (type) {
         case EDemoCryptoCurrency.RECEIVE_CURRENT_PRICE:
-            const xxx = action.payload as ReceiveGetCurrentPricePayload;
-            return {...prevState, ...xxx};
+            return {...prevState, ...<ReceiveGetCurrentPricePayload>payload};
         default:
             return prevState;
     }

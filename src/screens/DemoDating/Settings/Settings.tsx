@@ -12,7 +12,7 @@ import {
     State,
     University
 } from '../../../types';
-import {Col, getContainerStyles, ModalFromBottom, ModalFromRight, Row} from '../../../containers';
+import {Col, makeContainerStyles, ModalFromBottom, ModalFromRight, Row} from '../../../containers';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {getSharedStyles} from '../../../helpers';
 import {ScrollView} from 'react-native';
@@ -47,7 +47,7 @@ export type ReligionSelected = [Religion] | undefined;
 
 export function DatingSettingsScreen({route, navigation}: DatingSettingsProps) {
     const {sizeLabor, themeLabor, wp, t, colors, user} = useBunnyKit();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
 

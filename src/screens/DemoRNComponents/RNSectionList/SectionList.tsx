@@ -1,8 +1,8 @@
 import React from 'react';
 import {SafeAreaView, SectionList, View} from 'react-native';
 import {Text} from '../../../components/UI';
-import {getStyles} from './styles';
-import {getContainerStyles} from '../../../containers';
+import {makeStyles} from './styles';
+import {makeContainerStyles} from '../../../containers';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function SectionListScreen() {
@@ -39,8 +39,8 @@ function SectionListScreen() {
             <Text style={{fontSize: 24}}>{title}</Text>
         </View>
     );
-    const styles = getStyles(sizeLabor, themeLabor);
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
 
     return (
         <SafeAreaView style={[containerStyles.Screen, styles.container]}>

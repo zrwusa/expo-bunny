@@ -8,7 +8,7 @@ import {IMessage} from './types';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -68,7 +68,7 @@ class Day<TMessage extends IMessage> extends PureComponent<DayProps<TMessage> & 
         if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
             const {createdAt} = currentMessage;
             const {sizeLabor, themeLabor} = bunnyKit;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <View style={[styles.container, dayContainerStyle]}>
                     <View style={dayWrapperStyle}>

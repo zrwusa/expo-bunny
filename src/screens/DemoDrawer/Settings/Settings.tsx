@@ -3,7 +3,7 @@ import {Text, View} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoDrawerStackParam, RootStackParam} from '../../../types';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {getContainerStyles} from '../../../containers';
+import {makeContainerStyles} from '../../../containers';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {getSharedStyles} from '../../../helpers';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
@@ -19,7 +19,7 @@ export interface DrawerSettingsProps {
 function DrawerSettingsScreen({route, navigation}: DrawerSettingsProps) {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DrawerSettings');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     return (
         <View style={[containerStyles.Screen, sharedStyles.centralized]}>

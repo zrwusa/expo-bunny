@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Text, View} from '../UI';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {SizeLaborContext} from '../../providers/size-labor';
 import {ThemeLaborContext} from '../../providers/theme-labor';
 
@@ -28,7 +28,7 @@ export class DemoPureComponent extends PureComponent<Props> {
                     return (
                         <ThemeLaborContext.Consumer>
                             {(themeLabor) => {
-                                const styles = getStyles(sizeLabor, themeLabor);
+                                const styles = makeStyles(sizeLabor, themeLabor);
                                 return <View>
                                     <Text>{title}</Text>
                                     <View style={styles.demoSizeLabor}/>

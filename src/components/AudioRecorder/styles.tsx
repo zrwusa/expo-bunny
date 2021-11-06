@@ -3,7 +3,7 @@ import {useSizeLabor} from '../../providers/size-labor';
 import {getSharedStyles} from '../../helpers';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-export const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {ms, designsBasedOn} = useSizeLabor();
     const {wp} = designsBasedOn.iphoneX;
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);

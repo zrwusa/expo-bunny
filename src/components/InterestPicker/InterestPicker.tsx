@@ -1,11 +1,10 @@
 import {ButtonTO, IcoMoon, InButtonText, Text, TextButton, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 import {getSharedStyles} from '../../helpers';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import Modal from 'react-native-modal';
 import {Divider} from '../Divider';
 import {FlatList} from 'react-native';
@@ -59,7 +58,7 @@ export const InterestPicker = (props: InterestPickerProps) => {
         initialTravels = [],
     } = props;
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     const _reset = () => {
 

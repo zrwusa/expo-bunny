@@ -6,7 +6,7 @@ import {Platform, TouchableHighlight, Vibration} from 'react-native';
 import {Audio} from '../../../packages/expo-av/src';
 import {uploadFileToFirebase} from '../../helpers';
 import {RECORDING_OPTIONS_PRESET_HIGH_QUALITY} from '../../../packages/expo-av/src/Audio/Recording';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 
 export interface AudioRecorderProps {
     onValueChanged?: (uri: string) => void,
@@ -36,7 +36,7 @@ export const AudioRecorder = ({
     const [recording, setRecording] = useState<Audio.Recording>();
     const [status, setStatus] = useState<AudioRecordingStatus>('STOPPED');
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     useEffect(() => {
         onStatusChanged && onStatusChanged(status);
     }, [status]);

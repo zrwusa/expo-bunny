@@ -3,9 +3,9 @@ import {Avatar, Button, List} from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import {IconMC, View} from '../../components/UI';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {Card, getContainerStyles, Row} from '../../containers';
+import {Card, makeContainerStyles, Row} from '../../containers';
 import {uuidV4} from '../../utils';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
 interface Props {
@@ -22,7 +22,7 @@ function DemoThirdPartScreen(props: Props) {
     });
 
     const st = shortenTFunctionKey(t, 'screens.DemoThirdPart');
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     const LIST = [
         {
@@ -38,7 +38,7 @@ function DemoThirdPartScreen(props: Props) {
             subtitle: 'Rios'
         },
     ];
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
 
     return (
         <View style={[containerStyles.Screen, styles.container]}>

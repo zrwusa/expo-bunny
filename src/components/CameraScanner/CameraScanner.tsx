@@ -16,7 +16,7 @@ export function CameraScanner() {
     if (hasPermission === null) {
         return <View/>;
     }
-    if (hasPermission === false) {
+    if (!hasPermission) {
         return <Text>No access to camera</Text>;
     }
     return (

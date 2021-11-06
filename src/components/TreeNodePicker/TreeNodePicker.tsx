@@ -1,13 +1,11 @@
 import {IcoMoon, Text, TextButton, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, ModalFromRight, Row} from '../../containers';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 import {getSharedStyles} from '../../helpers';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {FlatList, KeyboardAvoidingView, SafeAreaView} from 'react-native';
-import {ModalFromRight} from '../../containers/ModalFromRight';
 import {InlineSelector} from '../InlineSelector';
 import {Searchbar} from 'react-native-paper';
 import {firebase} from '../../firebase/firebase';
@@ -41,7 +39,7 @@ export type TreeNodePickerProps = {
 export const TreeNodePicker = (props: TreeNodePickerProps) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const isMounted = useIsMounted();
     const {
         dataMode = 'local',

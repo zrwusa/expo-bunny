@@ -25,14 +25,12 @@ const initialState: SysState = {
 export function sysStateReducer(prevState: SysState = initialState, {type, payload}: SysActions): SysState {
     switch (type) {
         case ESys.RESTORE_IS_READY:
-            const restoreIsReadyPayload = payload as RestoreIsReadyPayload;
             return {
                 ...prevState,
-                ...restoreIsReadyPayload,
+                ...<RestoreIsReadyPayload>payload,
             };
         case ESys.ERROR:
-            const sysErrorPayload = payload as Error;
-            prevState.errors.push(sysErrorPayload);
+            prevState.errors.push(<Error>payload);
             return {
                 ...prevState,
             };
@@ -56,38 +54,24 @@ export function sysStateReducer(prevState: SysState = initialState, {type, paylo
             };
 
         case ESys.RESTORE_NAV_INITIAL_STATE:
-            const restoreNavInitialStatePayload = payload as RestoreNavInitialStatePayload;
             return {
                 ...prevState,
-                ...restoreNavInitialStatePayload
+                ...<RestoreNavInitialStatePayload>payload
             };
         case ESys.REQUESTING:
-            const requestingPayload = payload as RequestConfig;
-            prevState.requestStatuses.push({...requestingPayload, status: 'LOADING'});
+            prevState.requestStatuses.push({...<RequestConfig>payload, status: 'LOADING'});
             return {
                 ...prevState,
             };
         case ESys.REQUEST_SUCCESS:
             const receivedPayload = payload as RequestReceivedPayload;
             _.remove(prevState.requestStatuses, item => (item.url === receivedPayload.url && item.method === receivedPayload.method && item.params === receivedPayload.params));
-            // prevState.requestStatuses.map(item=>{
-            //     if(item.id===receivedPayload.id){
-            //         item.status = 'SUCCESS'
-            //     }
-            // })
             return {
                 ...prevState,
             };
         case ESys.REQUEST_FAILED:
             const requestFailedPayload = payload as RequestFailedPayload;
             _.remove(prevState.requestStatuses, item => (item.url === requestFailedPayload.url && item.method === requestFailedPayload.method && item.params === requestFailedPayload.params));
-
-            // prevState.requestStatuses.map(item=>{
-            //     if(item.id===requestFailedPayload.id){
-            //         item.status = 'FAILED'
-            //     }
-            // })
-
             return {
                 ...prevState,
             };

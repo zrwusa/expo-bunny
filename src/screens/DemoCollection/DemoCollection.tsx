@@ -2,20 +2,18 @@ import React from 'react';
 import DemoFCCard from '../../components/DemoFCCard';
 import DemoRequest from '../../components/DemoRequest';
 import {TextInput, View} from '../../components/UI';
-import {DemoSvg} from '../../components/DemoSvg';
+import {DemoCCClock, DemoPureComponent, DemoRegularComponent, DemoSvg} from '../../components';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {ScrollView} from 'react-native';
-import {getContainerStyles, Row} from '../../containers';
-import {DemoPureComponent, DemoRegularComponent} from '../../components/DemoPureComponent';
-import {getStyles} from './styles';
+import {makeContainerStyles, Row} from '../../containers';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../hooks/bunny-kit';
-import {DemoCCClock} from '../../components';
 
-function DemoCollectionScreen() {
+export const DemoCollectionScreen = () => {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DemoCollection');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     return (
         <ScrollView>
             <View style={[containerStyles.Screen, styles.container]}>
@@ -66,6 +64,6 @@ function DemoCollectionScreen() {
             </View>
         </ScrollView>
     );
-}
+};
 
 export default DemoCollectionScreen;

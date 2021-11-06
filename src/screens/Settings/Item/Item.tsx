@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {SwitchPaperProps, Text, View} from '../../../components/UI';
 import {useSizeLabor} from '../../../providers/size-labor';
 import {useThemeLabor} from '../../../providers/theme-labor';
@@ -15,7 +15,7 @@ export interface SettingsItemProps {
 export default function SettingsItem({label, renderPicker}: SettingsItemProps) {
     const sizeLabor = useSizeLabor();
     const themeLabor = useThemeLabor();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     return (
         <View style={styles.item}>

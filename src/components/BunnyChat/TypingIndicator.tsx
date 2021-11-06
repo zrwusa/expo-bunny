@@ -6,7 +6,7 @@ import config from '../../config';
 import {SizeLabor, ThemeLabor} from '../../types';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -25,7 +25,7 @@ export interface TypingIndicatorProps {
 
 const TypingIndicator = ({isTyping}: TypingIndicatorProps) => {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {yCoords, heightScale, marginScale} = React.useMemo(
         () => ({
             yCoords: new Animated.Value(wp(200)),

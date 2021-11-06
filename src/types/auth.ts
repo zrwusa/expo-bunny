@@ -2,7 +2,7 @@
 import {ReactNode} from 'react';
 import {GoogleUser} from 'expo-google-app-auth';
 import {LoginParams, SignUpParams} from './payloads';
-import {BLResult} from './bl';
+import {BizLogicResult} from './biz-logic';
 import {Method} from 'axios';
 import {firebase} from '../firebase/firebase';
 
@@ -68,20 +68,20 @@ export type PersistenceAuthInfo = {
 
 export type AuthLaborContextTypePartial = Partial<AuthLaborContextType>
 export type AuthFunctions = {
-    bunnyLogin: (params: LoginParams) => Promise<BLResult>,
-    googleLogin: (isFirebase: boolean, isStoreUser: boolean) => Promise<BLResult>,
-    facebookLogin: (isFirebase: boolean, isStoreUser: boolean) => Promise<BLResult>,
+    bunnyLogin: (params: LoginParams) => Promise<BizLogicResult>,
+    googleLogin: (isFirebase: boolean, isStoreUser: boolean) => Promise<BizLogicResult>,
+    facebookLogin: (isFirebase: boolean, isStoreUser: boolean) => Promise<BizLogicResult>,
     firebaseSendOTP: (phoneInfoOptions: firebase.auth.PhoneInfoOptions | string,
-                      applicationVerifier: firebase.auth.ApplicationVerifier) => Promise<BLResult>,
-    firebaseConfirmOTP: (verificationId: string, verificationCode: string, isStoreUser: boolean) => Promise<BLResult>,
-    firebaseEmailLogin: (email: string, password: string, isStoreUser: boolean) => Promise<BLResult>,
-    firebaseEmailSignUp: (email: string, password: string, isStoreUser: boolean) => Promise<BLResult>,
-    firebaseResetPassword: (email: string) => Promise<BLResult>,
-    dummyLogin: () => Promise<BLResult>,
-    logOut: (triggerType?: TriggerType) => Promise<BLResult>,
-    bunnySignUp: (params: SignUpParams) => Promise<BLResult>,
+                      applicationVerifier: firebase.auth.ApplicationVerifier) => Promise<BizLogicResult>,
+    firebaseConfirmOTP: (verificationId: string, verificationCode: string, isStoreUser: boolean) => Promise<BizLogicResult>,
+    firebaseEmailLogin: (email: string, password: string, isStoreUser: boolean) => Promise<BizLogicResult>,
+    firebaseEmailSignUp: (email: string, password: string, isStoreUser: boolean) => Promise<BizLogicResult>,
+    firebaseResetPassword: (email: string) => Promise<BizLogicResult>,
+    dummyLogin: () => Promise<BizLogicResult>,
+    logOut: (triggerType?: TriggerType) => Promise<BizLogicResult>,
+    bunnySignUp: (params: SignUpParams) => Promise<BizLogicResult>,
     getPersistenceAuth: () => Promise<PersistenceAuthInfo>,
-    bunnyRefreshAuth: () => Promise<BLResult>
+    bunnyRefreshAuth: () => Promise<BizLogicResult>
     authTrigger: (triggerType: TriggerType) => void
 }
 export type AuthLaborContextType = {

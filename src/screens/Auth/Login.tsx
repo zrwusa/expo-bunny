@@ -3,15 +3,15 @@ import * as React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getContainerStyles, InputCard, Row} from '../../containers';
+import {InputCard, makeContainerStyles, Row} from '../../containers';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LinearGradientIcon} from '../../components/LinearGradientIcon';
 import {Keyboard, ScrollView, TouchableOpacity} from 'react-native';
-import {collectBLResult, collectSysError} from '../../store/actions';
-import {getStyles} from './styles';
+import {collectBizLogicResult, collectSysError} from '../../store/actions';
+import {makeStyles} from './styles';
 import {LoginVector} from '../../components/LoginVector';
 import {FirebasePhoneLogin} from '../../components/FirebasePhoneLogin';
 import {Tab} from '../../components/Tab';
@@ -31,8 +31,8 @@ export interface LoginProps {
 export function LoginScreen({route, navigation, isBunnyAuth}: LoginProps) {
     const {sizeLabor, themeLabor, wp, t, ms} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -49,7 +49,7 @@ export function LoginScreen({route, navigation, isBunnyAuth}: LoginProps) {
             if (result.success) {
                 navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result));
+                dispatch(collectBizLogicResult(result));
             }
         } catch (e: any) {
             dispatch(collectSysError(e));
@@ -63,7 +63,7 @@ export function LoginScreen({route, navigation, isBunnyAuth}: LoginProps) {
             if (result.success) {
                 navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result));
+                dispatch(collectBizLogicResult(result));
             }
         } catch (e: any) {
             dispatch(collectSysError(e));

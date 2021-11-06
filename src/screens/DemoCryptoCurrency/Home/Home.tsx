@@ -4,7 +4,7 @@ import {Text, View} from '../../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoCryptoCurrencyTabStackParam, RootStackParam, RootState} from '../../../types';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {getContainerStyles} from '../../../containers';
+import {makeContainerStyles} from '../../../containers';
 import {
     VictoryAxis,
     VictoryChart,
@@ -13,12 +13,12 @@ import {
     VictoryVoronoiContainer
 } from '../../../components/Victory/Victory';
 import nomicsAPI from '../../../helpers/nomics-api';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {addDays} from '../../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 import axios, {CancelTokenSource} from 'axios';
-import {collectBLResult, collectSysError, getCurrentPrice} from '../../../store/actions';
-import {blError, getSharedStyles} from '../../../helpers';
+import {collectBizLogicResult, collectSysError, getCurrentPrice} from '../../../store/actions';
+import {bizLogicError, getSharedStyles} from '../../../helpers';
 import {ScrollView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Tab} from '../../../components';
@@ -41,10 +41,10 @@ function CryptoCurrencyHomeScreen() {
     const st = shortenTFunctionKey(t, 'screens.CryptoCurrencyHome');
     const dispatch = useDispatch();
     const {victory} = themeLabor.theme;
-    const {Screen, Box} = getContainerStyles(sizeLabor, themeLabor);
+    const {Screen, Box} = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const {} = sharedStyles;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const [btcData, setBtcData] = useState([
         {x: new Date('1990-01-01'), y: 5}
     ]);
@@ -89,7 +89,7 @@ function CryptoCurrencyHomeScreen() {
             });
             setBtcData(btcDataMapped);
         } catch (e: any) {
-            dispatch(collectBLResult(blError(e.message, false)));
+            dispatch(collectBizLogicResult(bizLogicError(e.message, false)));
         }
     };
     useEffect(() => {

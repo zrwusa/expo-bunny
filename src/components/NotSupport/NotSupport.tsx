@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {Text, View} from 'react-native';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
@@ -10,7 +10,7 @@ export interface NotSupportProps {
 export const NotSupport = (props: NotSupportProps) => {
     const {sizeLabor, themeLabor} = useBunnyKit();
     const {text} = props;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{text}</Text>

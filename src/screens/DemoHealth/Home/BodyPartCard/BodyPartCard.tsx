@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {Text} from '../../../../components/UI';
 import {Col, Row} from '../../../../containers';
 import {LinearGradientIcon} from '../../../../components/LinearGradientIcon';
@@ -16,7 +16,7 @@ export interface BodyPartCardProps {
 export function BodyPartCard(props: BodyPartCardProps) {
     const {sizeLabor, themeLabor, colors, ms} = useBunnyKit();
     const {title, children, bodyPart, date} = props;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     return <View style={styles.bodyPartCard}>
         <Row style={{alignItems: 'flex-start'}}>
             <Col size={3} style={{alignItems: 'flex-end'}}>

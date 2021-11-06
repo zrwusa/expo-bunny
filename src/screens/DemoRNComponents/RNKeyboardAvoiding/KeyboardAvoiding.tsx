@@ -1,14 +1,14 @@
 import React from 'react';
 import {Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View,} from 'react-native';
 import {Button, Text, TextInput} from '../../../components/UI';
-import {getStyles} from './styles';
-import {getContainerStyles} from '../../../containers';
+import {makeStyles} from './styles';
+import {makeContainerStyles} from '../../../containers';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
 function RNKeyboardAvoidingScreen() {
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     return (
         <KeyboardAvoidingView

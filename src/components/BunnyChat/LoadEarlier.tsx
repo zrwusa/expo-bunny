@@ -14,7 +14,7 @@ import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {ActivityIndicatorSize} from './types';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -76,7 +76,7 @@ class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
 
     renderLoading() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         if (this.props.isLoadingEarlier === false) {
             return (
                 <Text style={[styles.text, this.props.loadEarlierTextStyle]}>
@@ -100,7 +100,7 @@ class LoadEarlier extends React.Component<LoadEarlierProps & WithBunnyKit> {
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <TouchableOpacity
                 style={[styles.container, this.props.loadEarlierContainerStyle]}

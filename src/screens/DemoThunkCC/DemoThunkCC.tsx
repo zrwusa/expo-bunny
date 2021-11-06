@@ -6,7 +6,7 @@ import {DemoThunkPayload, DemoThunkState, RootState} from '../../types';
 import {ThunkDispatch} from 'redux-thunk';
 import {Action} from 'redux';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getContainerStyles} from '../../containers';
+import {makeContainerStyles} from '../../containers';
 import {getSharedStyles} from '../../helpers';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
@@ -38,7 +38,7 @@ class DemoThunkCCScreen extends React.Component<Props> {
         const {text, id, bunnyKit} = this.props;
         const {sizeLabor, themeLabor, t} = bunnyKit;
         const st = shortenTFunctionKey(t, 'screens.DemoThunkCC');
-        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+        const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
         const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
         return (

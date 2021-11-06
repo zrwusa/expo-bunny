@@ -3,9 +3,9 @@ import {Text, View} from '../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParam} from '../../types';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getContainerStyles} from '../../containers';
+import {makeContainerStyles} from '../../containers';
 import {getSharedStyles} from '../../helpers';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
@@ -21,10 +21,10 @@ function DemoRouteScreen(props: DemoRouteProps) {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const {id, isHuman, sort} = props.route.params;
     const st = shortenTFunctionKey(t, 'screens.DemoRoute');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     return (
         <View style={[containerStyles.Screen, sharedStyles.centralized]}>

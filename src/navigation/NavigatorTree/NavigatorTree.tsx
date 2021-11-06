@@ -58,11 +58,11 @@ import {IcoMoon} from '../../components/UI';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {useSizeLabor} from '../../providers/size-labor';
 import {useThemeLabor} from '../../providers/theme-labor';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {DefaultNavigatorOptions} from '@react-navigation/core/src/types';
-import {blError, blSuccess, getIconNameByRoute} from '../../helpers';
-import {collectBLResult} from '../../store/actions';
+import {bizLogicError, bizLogicSuccess, getIconNameByRoute} from '../../helpers';
+import {collectBizLogicResult} from '../../store/actions';
 import {useDispatch} from 'react-redux';
 import {SocialMediaHomeScreen} from '../../screens/DemoSocialMedia/Home';
 import {SocialMediaSettingsScreen} from '../../screens/DemoSocialMedia/Settings';
@@ -108,7 +108,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     const {theme} = themeLabor;
     const {colors} = theme;
     const {t} = useTranslation();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const insets = useSafeAreaInsets();
 
     // --- options start ---
@@ -310,7 +310,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
     useEffect(() => {
         switch (authResult.triggerType) {
             case 'API':
-                dispatch(collectBLResult(blError(t('sys.apiNeedLogin'))));
+                dispatch(collectBizLogicResult(bizLogicError(t('sys.apiNeedLogin'))));
                 break;
             case 'SCREEN':
                 navigateToAuth();
@@ -319,7 +319,7 @@ const NavigatorTree: React.FC<NavigatorTreeProps> = (props) => {
                 navigateToAuth();
                 break;
             case 'AUTO':
-                dispatch(collectBLResult(blSuccess(true, t('sys.LogOutSuccess'))));
+                dispatch(collectBizLogicResult(bizLogicSuccess(true, t('sys.LogOutSuccess'))));
                 break;
             case 'OTHERS':
                 navigateToAuth();

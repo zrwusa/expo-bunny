@@ -1,7 +1,7 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {bunnyAPI} from '../../helpers/bunny-api';
 import {
-    collectBLResult,
+    collectBizLogicResult,
     collectSysError,
     getDemoSagas,
     receiveGetCurrentPrice,
@@ -17,7 +17,7 @@ import {
     SaveDemoSagaFirebaseTodoAction,
     SaveQuickAlertSettingsAction,
 } from '../../types';
-import {blSuccess} from '../../helpers';
+import {bizLogicSuccess} from '../../helpers';
 import {firebase} from '../../firebase';
 
 export const sagasGenerator = function* () {
@@ -29,7 +29,7 @@ export const sagasGenerator = function* () {
         try {
             yield put(requesting(config));
             const {data: {data}} = yield call(() => bunnyAPI.request(config));
-            yield put(collectBLResult(blSuccess(data, EBizLogicMsg.GET_DEMO_SAGAS_SUCCESS, false)));
+            yield put(collectBizLogicResult(bizLogicSuccess(data, EBizLogicMsg.GET_DEMO_SAGAS_SUCCESS, false)));
             yield put(receiveGetDemoSagas(data.items));
             yield put(requestSuccess(config));
         } catch (e: any) {
@@ -46,7 +46,7 @@ export const sagasGenerator = function* () {
         try {
             yield put(requesting(config));
             const {data} = yield call(() => bunnyAPI.request(config));
-            yield put(collectBLResult(blSuccess(data, EBizLogicMsg.SAVE_QUICK_ALERT_SETTINGS_SUCCESS)));
+            yield put(collectBizLogicResult(bizLogicSuccess(data, EBizLogicMsg.SAVE_QUICK_ALERT_SETTINGS_SUCCESS)));
             yield put(requestSuccess(config));
         } catch (e: any) {
             yield put(collectSysError(e));
@@ -62,7 +62,7 @@ export const sagasGenerator = function* () {
         try {
             yield put(requesting(config));
             const {data} = yield call(() => bunnyAPI.request(config));
-            yield put(collectBLResult(blSuccess(data, EBizLogicMsg.CANCEL_ALL_ALERT_SETTINGS_SUCCESS)));
+            yield put(collectBizLogicResult(bizLogicSuccess(data, EBizLogicMsg.CANCEL_ALL_ALERT_SETTINGS_SUCCESS)));
             yield put(requestSuccess(config));
         } catch (e: any) {
             yield put(collectSysError(e));
@@ -78,7 +78,7 @@ export const sagasGenerator = function* () {
             yield put(requesting(config));
             const {data: {data}} = yield call(() => bunnyAPI.request(config));
             yield put(receiveGetCurrentPrice({currentPrice: data}));
-            yield put(collectBLResult(blSuccess(data, EBizLogicMsg.GET_CURRENT_PRICE_SUCCESS, false)));
+            yield put(collectBizLogicResult(bizLogicSuccess(data, EBizLogicMsg.GET_CURRENT_PRICE_SUCCESS, false)));
             yield put(requestSuccess(config));
         } catch (e: any) {
             yield put(collectSysError(e));

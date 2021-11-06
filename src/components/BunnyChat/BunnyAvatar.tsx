@@ -5,7 +5,7 @@ import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -86,7 +86,7 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
         const {user} = this.props;
         if (user) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             if (typeof user.avatar === 'function') {
                 return user.avatar([styles.avatarStyle, this.props.avatarStyle]);
             } else if (typeof user.avatar === 'string') {
@@ -110,7 +110,7 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
 
     renderInitials() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <Text style={[styles.textStyle, this.props.textStyle]}>
                 {this.avatarName}
@@ -130,7 +130,7 @@ class BunnyAvatar extends React.Component<GiftedAvatarProps & WithBunnyKit> {
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         if (
             !this.props.user ||
             (!this.props.user.name && !this.props.user.avatar)

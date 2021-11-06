@@ -1292,7 +1292,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         if (this.state.isInitialized === true) {
             const {wrapInSafeArea} = this.props;
             const Wrapper = wrapInSafeArea ? SafeAreaView : View;
@@ -1319,7 +1319,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
 }
 
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     return StyleSheet.create({
         container: {

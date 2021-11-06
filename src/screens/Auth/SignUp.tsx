@@ -3,17 +3,17 @@ import * as React from 'react';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getContainerStyles, InputCard, Row} from '../../containers';
+import {InputCard, makeContainerStyles, Row} from '../../containers';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LinearGradientIcon} from '../../components/LinearGradientIcon';
 import {Keyboard} from 'react-native';
-import {collectBLResult, collectSysError} from '../../store/actions';
+import {collectBizLogicResult, collectSysError} from '../../store/actions';
 import {LoginVector} from '../../components/LoginVector';
 import {getSharedStyles, navToReference} from '../../helpers';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type SignUpRouteProp = RouteProp<AuthTopStackParam, 'SignUp'>;
@@ -29,9 +29,9 @@ export function SignUpScreen({route, navigation, isBunnyAuth}: SignUpProps) {
     const {sizeLabor, themeLabor, colors, wp, theme, t, ms} = useBunnyKit();
     const dispatch = useDispatch();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -44,7 +44,7 @@ export function SignUpScreen({route, navigation, isBunnyAuth}: SignUpProps) {
             if (result.success) {
                 navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result));
+                dispatch(collectBizLogicResult(result));
             }
         } catch (e: any) {
             dispatch(collectSysError(e));
@@ -58,7 +58,7 @@ export function SignUpScreen({route, navigation, isBunnyAuth}: SignUpProps) {
             if (result.success) {
                 navToReference(route, navigation);
             } else {
-                dispatch(collectBLResult(result));
+                dispatch(collectBizLogicResult(result));
             }
         } catch (e: any) {
             dispatch(collectSysError(e));

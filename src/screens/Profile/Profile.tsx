@@ -6,9 +6,9 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParam, RootState} from '../../types';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
 import {ImageURISource, SafeAreaView, ScrollView} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import ImageProgressive from '../../components/UI/ImageProgressive';
-import {Col, getContainerStyles, Row} from '../../containers';
+import {Col, makeContainerStyles, Row} from '../../containers';
 import {getSharedStyles} from '../../helpers';
 import {Avatar} from '../../components/Avatar';
 import {useFirestore} from 'react-redux-firebase';
@@ -26,8 +26,8 @@ interface Props {
 function ProfileScreen({route, navigation}: Props) {
     const {sizeLabor, themeLabor, t, user} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Profile');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
     const firestore = useFirestore();
     const userId = user?.storedUser?.uid;

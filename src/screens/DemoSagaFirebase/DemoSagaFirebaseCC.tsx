@@ -94,9 +94,9 @@
 // //         console.log('---todoList', todoList)
 // //         const {theme} = themeLabor;
 // //         const {designsBasedOn} = sizeLabor;
-// //         const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+// //         const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
 // //         const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
-// //         const styles = getStyles(sizeLabor, themeLabor);
+// //         const styles = makeStyles(sizeLabor, themeLabor);
 // //         const {wp} = designsBasedOn.iphoneX;
 // //         const {width} = getCardSize(sizeLabor, themeLabor);
 // //         return (

@@ -1,6 +1,6 @@
 // Redux actions
 import {
-    EBL,
+    EBizLogic,
     EDemoCryptoCurrency,
     EDemoHello,
     EDemoMap,
@@ -11,7 +11,7 @@ import {
 } from '../constants';
 import {
     CancelAlertSettingsParams,
-    ClearBLResultPayload,
+    ClearBizLogicResultPayload,
     DemoHello2Payload,
     DemoHelloPayload,
     DemoThunkSuccessPayload,
@@ -26,7 +26,7 @@ import {
     SysWarnPayload
 } from './payloads';
 import {DemoSaga, NearbyFilm, Region} from './models';
-import {BLResult} from './bl';
+import {BizLogicResult} from './biz-logic';
 import {Method} from 'axios';
 
 export interface DemoHelloAction {
@@ -44,19 +44,19 @@ export interface SysErrorAction {
     payload: Error;
 }
 
-export interface CollectBLResultAction {
-    type: EBL.COLLECT_BL_RESULT;
-    payload: BLResult;
+export interface CollectBizLogicResultAction {
+    type: EBizLogic.COLLECT_BL_RESULT;
+    payload: BizLogicResult;
 }
 
-export interface ClearBLResultAction {
-    type: EBL.CLEAR_BL_RESULT;
-    payload: ClearBLResultPayload;
+export interface ClearBizLogicResultAction {
+    type: EBizLogic.CLEAR_BL_RESULT;
+    payload: ClearBizLogicResultPayload;
 }
 
-export interface SetBLResultAction {
-    type: EBL.SET_BL_RESULT;
-    payload: BLResult;
+export interface SetBizLogicResultAction {
+    type: EBizLogic.SET_BL_RESULT;
+    payload: BizLogicResult;
 }
 
 export interface SysClearErrorsAction {
@@ -137,6 +137,7 @@ export interface CancelAlertSettingsAction {
 
 export interface RequestGetCurrentPriceAction {
     type: EDemoCryptoCurrency.GET_CURRENT_PRICE,
+    payload: undefined
 }
 
 export interface ReceiveGetCurrentPriceAction {

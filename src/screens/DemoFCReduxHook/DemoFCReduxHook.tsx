@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {demoHello} from '../../store/actions';
 import {Button, Text, View} from '../../components/UI';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getContainerStyles} from '../../containers';
+import {makeContainerStyles} from '../../containers';
 import {RootState} from '../../types';
 import {getSharedStyles} from '../../helpers';
 import {useBunnyKit} from '../../hooks/bunny-kit';
@@ -13,7 +13,7 @@ function DemoFCReduxHookScreen() {
     const st = shortenTFunctionKey(t, 'screens.DemoFCReduxHook');
     const dispatch = useDispatch();
     const demoHelloState = useSelector((rootState: RootState) => rootState.demoHelloState);
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (

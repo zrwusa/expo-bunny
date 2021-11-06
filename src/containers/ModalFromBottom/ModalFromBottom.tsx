@@ -1,7 +1,7 @@
 import Modal, {ModalProps} from 'react-native-modal';
 import * as React from 'react';
 import {useBunnyKit} from '../../hooks/bunny-kit';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 
 export interface ModalFromBottomProps {
     modalProps?: Omit<ModalProps, 'isVisible'>,
@@ -12,7 +12,7 @@ export interface ModalFromBottomProps {
 export const ModalFromBottom: React.FC<ModalFromBottomProps> = (props) => {
     const {modalProps, children, isVisible = false, onVisibleChanged} = props;
     const {sizeLabor, themeLabor} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     return <Modal isVisible={isVisible}
                   onSwipeComplete={() => onVisibleChanged?.(false)}
                   swipeDirection="down"

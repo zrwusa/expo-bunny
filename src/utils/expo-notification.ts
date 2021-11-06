@@ -2,8 +2,8 @@ import {Platform} from 'react-native';
 import * as Notifications from 'expo-notifications';
 import {Notification} from 'expo-notifications';
 import Constants from 'expo-constants';
-import {collectBLResult} from '../store/actions';
-import {blSuccess} from '../helpers';
+import {collectBizLogicResult} from '../store/actions';
+import {bizLogicSuccess} from '../helpers';
 import store from '../store';
 
 export type Copywriting = {
@@ -21,12 +21,12 @@ export const registerForPushNotificationsAsync = async (copywriting: Copywriting
             finalStatus = status;
         }
         if (finalStatus !== 'granted') {
-            store.dispatch(collectBLResult(blSuccess(undefined, copywriting.failedToGetToken)));
+            store.dispatch(collectBizLogicResult(bizLogicSuccess(undefined, copywriting.failedToGetToken)));
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
     } else {
-        store.dispatch(collectBLResult(blSuccess(undefined, copywriting.mustUsePhysicalDevice)));
+        store.dispatch(collectBizLogicResult(bizLogicSuccess(undefined, copywriting.mustUsePhysicalDevice)));
         return;
     }
 

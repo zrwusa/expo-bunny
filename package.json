@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "expo-react-bunny description",
   "scripts": {
-    "start": "expo start",
+    "dev": "expo start",
     "ios": "expo start --ios",
     "android": "expo start --android",
     "web": "expo start --web",

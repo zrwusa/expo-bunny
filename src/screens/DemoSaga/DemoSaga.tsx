@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getDemoSagas} from '../../store/actions';
 import {RootState} from '../../types';
 import {getSharedStyles} from '../../helpers';
-import {getContainerStyles} from '../../containers';
+import {makeContainerStyles} from '../../containers';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
 
@@ -13,7 +13,7 @@ function DemoSagaScreen() {
     const dispatch = useDispatch();
     const demoSagaState = useSelector((rootState: RootState) => rootState.demoSagaState);
     const {items} = demoSagaState;
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (

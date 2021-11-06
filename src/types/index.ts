@@ -8,6 +8,6 @@ export * from './navigations';
 export * from './api';
 export * from './models';
 export * from './states';
-export * from './bl';
+export * from './biz-logic';
 export * from './configs';
 export * from './dev-tools';

@@ -10,7 +10,7 @@ import {SizeLabor, ThemeLabor} from '../../types';
 const WWW_URL_PATTERN = /^www\./i;
 
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     // TODO not responsive
@@ -153,7 +153,7 @@ class MessageText<TMessage extends IMessage> extends React.Component<MessageText
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         const linkStyle = [
             styles[this.props.position].link,
             this.props.linkStyle && this.props.linkStyle[this.props.position],

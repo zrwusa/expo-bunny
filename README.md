@@ -120,11 +120,11 @@ xcrun simctl launch booted com.zrwusa.expo-react-bunny
 ```sh
 // with yarn
 yarn
-yarn start
+yarn dev
 
 // with npm
 npm install
-npm start
+npm dev
 ```
 ## Development
 

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import {useEffect, useRef} from 'react';
 import {Text, View} from '../UI';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Card, Col, Row} from '../../containers';
 import {useBunnyKit} from '../../hooks/bunny-kit';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {
     AbstractEdge,
     AbstractGraph,
@@ -22,7 +21,6 @@ import {
 import {TreeNode} from '../../types';
 import Svg, {Circle, Defs, G, Line, Marker, Path, Rect, Text as SVGText, TSpan} from 'react-native-svg';
 import {ScrollView} from 'react-native';
-import {Card} from '../../containers';
 
 export interface VividAlgorithmProps<T> {
     data?: T,
@@ -35,7 +33,7 @@ export interface VividAlgorithmProps<T> {
 export const VividAlgorithm = function <T extends { [key in string]: any }>(props: VividAlgorithmProps<T>) {
     const {data, referenceData, relatedNodeKey, relatedRouteKey, isDebug = false} = props;
     const {sizeLabor, themeLabor, wp, colors, ms} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     let relatedNode: TreeNode<any> | undefined;
     let relatedBinaryNode: BinaryTreeNode<any> | undefined;

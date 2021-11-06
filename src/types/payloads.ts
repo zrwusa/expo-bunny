@@ -2,7 +2,7 @@
 import {InitialState} from '@react-navigation/native';
 import {BunnyAPIStandardRequestParams} from './api';
 import {Method} from 'axios';
-import {BLResult} from './bl';
+import {BizLogicResult} from './biz-logic';
 import {SagaTodo} from './states';
 
 export interface LoginParams {
@@ -21,17 +21,17 @@ export interface SysErrorPayload {
 }
 
 // export interface BLInfoPayload {
-//     info: BLResult;
+//     info: BizLogicResult;
 // }
 
-export interface ClearBLResultPayload {
+export interface ClearBizLogicResultPayload {
     all?: boolean;
     top?: number;
     last?: number;
 }
 
-export interface SetBLResultPayload {
-    blResult: BLResult;
+export interface SetBizLogicResultPayload {
+    bizLogicResult: BizLogicResult;
 }
 
 export interface SysClearErrorPayload {

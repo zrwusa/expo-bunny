@@ -1,12 +1,11 @@
 import {IcoMoon, Text, TextButton, View} from '../UI';
 import * as React from 'react';
-import {Row} from '../../containers/Row';
-import {Col} from '../../containers/Col';
+import {Col, Row} from '../../containers';
 import {Divider} from '../Divider';
 import {Keyboard, Platform} from 'react-native';
-import {collectBLResult, collectSysError} from '../../store/actions';
+import {collectBizLogicResult, collectSysError} from '../../store/actions';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {RouteProp} from '@react-navigation/native';
@@ -26,7 +25,7 @@ export interface LoginVectorProps {
 export const LoginVector = ({route, navigation}: LoginVectorProps) => {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor();
     const dispatch = useDispatch();
 
@@ -69,7 +68,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                     if (result.success) {
                                         navToReference(route, navigation);
                                     } else {
-                                        dispatch(collectBLResult(result));
+                                        dispatch(collectBizLogicResult(result));
                                     }
                                 } catch (e: any) {
                                     dispatch(collectSysError(e));
@@ -87,7 +86,7 @@ export const LoginVector = ({route, navigation}: LoginVectorProps) => {
                                     if (result.success) {
                                         navToReference(route, navigation);
                                     } else {
-                                        dispatch(collectBLResult(result));
+                                        dispatch(collectBizLogicResult(result));
                                     }
                                 } catch (e: any) {
                                     dispatch(collectSysError(e));

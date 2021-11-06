@@ -1,6 +1,6 @@
 import {bunnyAPI} from '../../helpers/bunny-api';
 import {
-    CollectBLResultAction,
+    CollectBizLogicResultAction,
     DemoThunkPayload,
     DemoThunkState,
     DemoThunkSuccessAction,
@@ -15,10 +15,10 @@ import {EBizLogicMsg, EDemoThunk} from '../../constants';
 import {Action, ActionCreator, Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
 import {collectSysError, requestFailed, requesting, requestSuccess} from './sys';
-import {collectBLResult} from './bl-result';
-import {blError} from '../../helpers';
+import {collectBizLogicResult} from './biz-logic-result';
+import {bizLogicError} from '../../helpers';
 
-export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSuccessAction = (payload) => {
+export const demoThunkSuccess = (payload: DemoThunkSuccessPayload): DemoThunkSuccessAction => {
     return {
         type: EDemoThunk.DEMO_THUNK_SUCCESS,
         payload
@@ -26,7 +26,7 @@ export const demoThunkSuccess: (payload: DemoThunkSuccessPayload) => DemoThunkSu
 };
 
 export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkState, void, DemoThunkSuccessAction>> = (reqParams: DemoThunkPayload) => {
-    return async (dispatch: Dispatch<DemoThunkSuccessAction | SysErrorAction | CollectBLResultAction | RequestingAction | RequestSuccessAction | RequestFailedAction>): Promise<Action> => {
+    return async (dispatch: Dispatch<DemoThunkSuccessAction | SysErrorAction | CollectBizLogicResultAction | RequestingAction | RequestSuccessAction | RequestFailedAction>): Promise<Action> => {
         let result;
         const config: RequestConfig = {url: '/demo-thunks', method: 'POST', data: reqParams};
         try {
@@ -36,7 +36,7 @@ export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkStat
                 result = dispatch(demoThunkSuccess(res.data));
                 result = dispatch(requestSuccess(config));
             } else {
-                result = dispatch(collectBLResult(blError(EBizLogicMsg.NO_DEMO_THUNK_DATA)));
+                result = dispatch(collectBizLogicResult(bizLogicError(EBizLogicMsg.NO_DEMO_THUNK_DATA)));
             }
             return result;
         } catch (e: any) {

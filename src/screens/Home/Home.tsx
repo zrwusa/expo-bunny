@@ -4,12 +4,12 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParam} from '../../types';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {Card, getContainerStyles} from '../../containers';
+import {Card, makeContainerStyles} from '../../containers';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {collectSysError} from '../../store/actions';
 import {Divider} from '../../components/Divider';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {InlineJump} from '../../components/InlineJump';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
@@ -26,8 +26,8 @@ function HomeScreen({navigation}: HomeScreenProps) {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const dispatch = useDispatch();
     const st = shortenTFunctionKey(t, 'screens.Home');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor();
 
     return (

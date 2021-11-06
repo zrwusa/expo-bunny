@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {SizeLabor, ThemeLabor} from '../types';
 import {getSharedStyles} from '../helpers';
 
-export const getContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+export const makeContainerStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {sharedStylesFlatten} = getSharedStyles(sizeLabor, themeLabor);
     const {ms, designsBasedOn} = sizeLabor;
     const {wp} = designsBasedOn.iphoneX;

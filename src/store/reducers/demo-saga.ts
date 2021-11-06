@@ -9,10 +9,9 @@ export function demoSagaReducer(
     }, {type, payload}: DemoSagaActions): DemoSagaState {
     switch (type) {
         case EDemoSaga.RECEIVE_GET_DEMO_SAGAS:
-            const payloadNow = payload as DemoSaga[];
             return {
                 ...prevState,
-                items: payloadNow
+                items: <DemoSaga[]>payload
             };
         default:
             return prevState;

@@ -2,7 +2,7 @@ import {Action, ActionCreator, Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
 import {EBizLogicMsg, EDemoMap} from '../../constants';
 import {
-    CollectBLResultAction,
+    CollectBizLogicResultAction,
     DemoMapState,
     GetNearbyFilmsReqParams,
     NearbyFilm,
@@ -17,10 +17,10 @@ import {
 } from '../../types';
 import {bunnyAPI} from '../../helpers/bunny-api';
 import {collectSysError, requestFailed, requesting, requestSuccess} from './sys';
-import {collectBLResult} from './bl-result';
-import {blError} from '../../helpers';
+import {collectBizLogicResult} from './biz-logic-result';
+import {bizLogicError} from '../../helpers';
 
-export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAction = (payload) => {
+export const restoreNearbyFilms = (payload: NearbyFilm[]): RestoreNearbyFilmsAction => {
     return {
         type: EDemoMap.RESTORE_NEARBY_FILMS,
         payload
@@ -28,7 +28,7 @@ export const restoreNearbyFilms: (payload: NearbyFilm[]) => RestoreNearbyFilmsAc
 };
 
 export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapState, void, RestoreNearbyFilmsAction>> = (reqParams: GetNearbyFilmsReqParams) => {
-    return async (dispatch: Dispatch<RestoreNearbyFilmsAction | SysErrorAction | CollectBLResultAction | RequestingAction | RequestSuccessAction | RequestFailedAction>): Promise<Action> => {
+    return async (dispatch: Dispatch<RestoreNearbyFilmsAction | SysErrorAction | CollectBizLogicResultAction | RequestingAction | RequestSuccessAction | RequestFailedAction>): Promise<Action> => {
         let result;
         const config: RequestConfig = {method: 'GET', url: '/api/nearby-films', params: reqParams};
         try {
@@ -38,7 +38,7 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapS
                 result = dispatch(restoreNearbyFilms(data));
                 result = dispatch(requestSuccess(config));
             } else {
-                result = dispatch(collectBLResult(blError(EBizLogicMsg.NO_NEARBY_FILMS)));
+                result = dispatch(collectBizLogicResult(bizLogicError(EBizLogicMsg.NO_NEARBY_FILMS)));
             }
             return result;
         } catch (e: any) {
@@ -49,7 +49,7 @@ export const getNearbyFilms: ActionCreator<ThunkAction<Promise<Action>, DemoMapS
     };
 };
 
-export const restoreRegion: (payload: Region) => RestoreRegionAction = (payload) => {
+export const restoreRegion = (payload: Region): RestoreRegionAction => {
     return {
         type: EDemoMap.RESTORE_REGION,
         payload

@@ -27,7 +27,7 @@ import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {ActionSheetProps, connectActionSheet} from '../../../packages/react-native-action-sheet/src';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return {
@@ -250,7 +250,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             isSameDay(currentMessage, nextMessage)
         ) {
             const {sizeLabor, themeLabor} = bunnyKit;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return [
                 styles[position].containerToNext,
                 containerToNextStyle && containerToNextStyle[position],
@@ -275,7 +275,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             isSameDay(currentMessage, previousMessage)
         ) {
             const {sizeLabor, themeLabor} = bunnyKit;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return [
                 styles[position].containerToPrevious,
                 containerToPreviousStyle && containerToPreviousStyle[position],
@@ -540,7 +540,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             (currentMessage.sent || currentMessage.received || currentMessage.pending)
         ) {
             const {sizeLabor, themeLabor} = bunnyKit;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             const {wp} = sizeLabor.designsBasedOn.iphoneX;
             return (
                 <View style={styles.content.tickView}>
@@ -592,7 +592,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
                 return null;
             }
             const {sizeLabor, themeLabor} = bunnyKit;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <View style={styles.content.usernameView}>
                     <Text
@@ -646,7 +646,7 @@ class Bubble<TMessage extends IMessage> extends React.Component<BubbleProps<TMes
             bunnyKit
         } = this.props;
         const {sizeLabor, themeLabor} = bunnyKit;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         return (
             <View
                 style={[

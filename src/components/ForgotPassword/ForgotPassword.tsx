@@ -1,19 +1,17 @@
 import {InButtonText, LinearGradientButton, Text, TextButton, TextInputIcon, View} from '../UI';
 import * as React from 'react';
 import {useState} from 'react';
-import {Row} from '../../containers/Row';
-import {collectBLResult, collectSysError} from '../../store/actions';
+import {Col, InputCard, Row} from '../../containers';
+import {collectBizLogicResult, collectSysError} from '../../store/actions';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {RouteProp} from '@react-navigation/native';
 import {AuthTopStackParam, RootStackParam} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {InputCard} from '../../containers/InputCard';
 import {LinearGradientIcon} from '../LinearGradientIcon';
-import {blError} from '../../helpers';
-import {Col} from '../../containers/Col';
+import {bizLogicError} from '../../helpers';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type ForgotPasswordRouteProp = RouteProp<AuthTopStackParam, 'Login'> | RouteProp<AuthTopStackParam, 'SignUp'>;
@@ -30,7 +28,7 @@ export interface ForgotPasswordProps {
 export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: ForgotPasswordProps) => {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.Auth');
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {authFunctions} = useAuthLabor();
     const dispatch = useDispatch();
     const [username, setUsername] = useState(email);
@@ -63,10 +61,10 @@ export const ForgotPassword = ({route, navigation, onSent, onCancel, email}: For
                 if (result.success) {
                     setIsSent(true);
                 } else {
-                    dispatch(collectBLResult(result));
+                    dispatch(collectBizLogicResult(result));
                 }
             } else {
-                dispatch(collectBLResult(blError('Please enter email')));
+                dispatch(collectBizLogicResult(bizLogicError('Please enter email')));
             }
 
         } catch (e: any) {

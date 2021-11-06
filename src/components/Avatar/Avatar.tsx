@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, ImageSourcePropType, ImageStyle, ImageURISource, StyleProp} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {SizeKeys} from '../../types';
 import {ImageUploader, ImageUploaderProps} from '../ImageUploader';
 import {useBunnyKit} from '../../hooks/bunny-kit';
@@ -20,7 +20,7 @@ export type SizeAvatarMap = {
 
 export function Avatar(props: AvatarProps) {
     const {sizeLabor, themeLabor, wp} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {size, source, style, shouldUpload = false, uploaderProps, isBorder = true} = props;
     const finalSize: SizeKeys = size || 'm';
     const sizeAvatarMap: SizeAvatarMap = {

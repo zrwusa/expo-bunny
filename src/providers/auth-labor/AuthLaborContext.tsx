@@ -3,7 +3,7 @@ import {
     AuthContextConfig,
     AuthLaborContextType,
     AuthRes,
-    BLResult,
+    BizLogicResult,
     LoginParams,
     PersistenceAuthParam,
     PersistenceAuthParamKey,
@@ -25,7 +25,7 @@ import {
     IOS_CLIENT_ID_FOR_EXPO
 } from '@env';
 import _, {identity, pickBy} from 'lodash';
-import {blError, blSuccess} from '../../helpers/helpers';
+import {bizLogicError, bizLogicSuccess} from '../../helpers/helpers';
 import {EventRegister} from 'react-native-event-listeners';
 import {firebase} from '../../firebase/firebase';
 import * as Facebook from 'expo-facebook';
@@ -84,7 +84,7 @@ const persistenceAuth = async ({
 
 };
 
-const triggerLogin = async (result: BLResult) => {
+const triggerLogin = async (result: BizLogicResult) => {
     const {success, data} = result;
     if (success) {
         await persistenceAuth(data);
@@ -94,15 +94,15 @@ const triggerLogin = async (result: BLResult) => {
 };
 
 const loginOrSignUp = async (res: any) => {
-    let result: BLResult;
+    let result: BizLogicResult;
     if (!res) {
-        result = blError(EBizLogicMsg.NO_AUTH_API_RESPONDED);
+        result = bizLogicError(EBizLogicMsg.NO_AUTH_API_RESPONDED);
         await triggerLogin(result);
         return result;
     }
     const {data} = res.data;
     if (!data) {
-        result = blError(EBizLogicMsg.NO_DATA_RESPONDED);
+        result = bizLogicError(EBizLogicMsg.NO_DATA_RESPONDED);
         await triggerLogin(result);
         return result;
     }
@@ -113,17 +113,17 @@ const loginOrSignUp = async (res: any) => {
 
     const user = _.get(data, userValuePath);
     if (!(accessToken && refreshToken)) {
-        result = blError(EBizLogicMsg.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED);
+        result = bizLogicError(EBizLogicMsg.NO_ACCESS_TOKEN_OR_REFRESH_TOKEN_RESPONDED);
         await triggerLogin(result);
         return result;
     }
     if (!user) {
-        result = blError(EBizLogicMsg.NO_USER_INFO_RESPONDED);
+        result = bizLogicError(EBizLogicMsg.NO_USER_INFO_RESPONDED);
         await triggerLogin(result);
         return result;
     }
 
-    result = blSuccess({accessToken, accessTokenExp, refreshToken, refreshTokenExp, user: {bunnyUser: user}});
+    result = bizLogicSuccess({accessToken, accessTokenExp, refreshToken, refreshTokenExp, user: {bunnyUser: user}});
     await triggerLogin(result);
     return result;
 };
@@ -142,40 +142,40 @@ const bunnySignUp = async (params: SignUpParams) => {
     return await loginOrSignUp(res);
 };
 
-const bunnyRefreshAuth = async (): Promise<BLResult> => {
+const bunnyRefreshAuth = async (): Promise<BizLogicResult> => {
     const refreshToken = await AsyncStorage.getItem(refreshTokenPersistenceKey);
     apiAuth.defaults.headers.common['Authorization'] = `Bearer ${refreshToken}`;
     const res = await apiAuth.request({method: refreshAPIMethod, url: refreshAPIPath});
-    let result: BLResult;
+    let result: BizLogicResult;
     if (!res) {
-        result = blError(EBizLogicMsg.NO_AUTH_API_RESPONDED);
+        result = bizLogicError(EBizLogicMsg.NO_AUTH_API_RESPONDED);
         EventRegister.emit('bunnyRefreshAuth', result);
         return result;
     }
     const {data} = res.data;
     if (!data) {
-        result = blError(EBizLogicMsg.NO_DATA_RESPONDED);
+        result = bizLogicError(EBizLogicMsg.NO_DATA_RESPONDED);
         EventRegister.emit('bunnyRefreshAuth', result);
         return result;
     }
     const accessToken = _.get(data, accessTokenValuePath);
     const accessTokenExp = _.get(data, accessTokenExpValuePath);
     if (!accessToken) {
-        result = blError(EBizLogicMsg.NO_ACCESS_TOKEN_RESPONDED);
+        result = bizLogicError(EBizLogicMsg.NO_ACCESS_TOKEN_RESPONDED);
         EventRegister.emit('bunnyRefreshAuth', result);
         return result;
     }
     await persistenceAuth({accessToken, accessTokenExp});
-    result = blSuccess(accessToken);
+    result = bizLogicSuccess(accessToken);
     EventRegister.emit('bunnyRefreshAuth', result);
     return result;
 };
 
 const logOut = async (triggerType?: TriggerType) => {
     const {success, message} = await removePersistenceAuth();
-    let result: BLResult;
+    let result: BizLogicResult;
     if (success) {
-        result = blSuccess(true);
+        result = bizLogicSuccess(true);
         EventRegister.emit('LogOut', result);
         await checkIsLogin();
         if (triggerType) {
@@ -183,7 +183,7 @@ const logOut = async (triggerType?: TriggerType) => {
         }
         return result;
     } else {
-        result = blError(message);
+        result = bizLogicError(message);
         EventRegister.emit('LogOut', result);
         await checkIsLogin();
         return result;
@@ -199,7 +199,7 @@ const dummyLogin = async () => {
     };
     const accessTokenExp = '3043008000000';
     const refreshTokenExp = '3043008000000';
-    const result = blSuccess({
+    const result = bizLogicSuccess({
         accessToken,
         accessTokenExp,
         refreshToken,
@@ -217,18 +217,18 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
         iosStandaloneAppClientId: `${IOS_CLIENT_ID}`,
         androidStandaloneAppClientId: `${ANDROID_CLIENT_ID}`,
     });
-    let result: BLResult;
+    let result: BizLogicResult;
     if (!googleResponse) {
-        result = blError(EBizLogicMsg.NO_GOOGLE_LOGIN_RESULT);
+        result = bizLogicError(EBizLogicMsg.NO_GOOGLE_LOGIN_RESULT);
     }
     switch (googleResponse.type) {
         case 'cancel':
-            result = blError(EBizLogicMsg.GOOGLE_LOGIN_CANCELED);
+            result = bizLogicError(EBizLogicMsg.GOOGLE_LOGIN_CANCELED);
             break;
         case 'success':
             const {idToken, accessToken, refreshToken, user} = googleResponse;
             if (!accessToken || !refreshToken) {
-                result = blError(EBizLogicMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS);
+                result = bizLogicError(EBizLogicMsg.GOOGLE_ACCESS_TOKEN_OR_REFRESH_TOKEN_NOT_EXISTS);
             }
             if (isFirebase) {
                 await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
@@ -236,7 +236,7 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
                 const userCredential = await firebase.auth().signInWithCredential(credential);
                 result = await firebaseLoginResult(userCredential, isStoreUser);
             } else {
-                result = blSuccess({
+                result = bizLogicSuccess({
                     accessToken,
                     refreshToken,
                     user: {googleUser: user},
@@ -244,7 +244,7 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
             }
             break;
         default:
-            result = blError(EBizLogicMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID);
+            result = bizLogicError(EBizLogicMsg.GOOGLE_LOGIN_RESULT_TYPE_INVALID);
             break;
     }
     await triggerLogin(result);
@@ -253,7 +253,7 @@ const googleLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => 
 
 const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential, isStoreUser: boolean = true) => {
     if (!userCredential || !userCredential.user) {
-        return blError(EBizLogicMsg.FIREBASE_INVALID_USER_CREDENTIAL);
+        return bizLogicError(EBizLogicMsg.FIREBASE_INVALID_USER_CREDENTIAL);
     }
     let idToken: string, user: firebase.User;
     const currentUser = firebase.auth().currentUser;
@@ -267,19 +267,19 @@ const firebaseLoginResult = async (userCredential: firebase.auth.UserCredential,
             storedUser = await storeUserInfo(userCredential);
         }
 
-        return blSuccess({
+        return bizLogicSuccess({
             accessToken: idToken,
             refreshToken: user.refreshToken,
             // accessTokenExp: user.expirationTime.toString(),
             user: {firebaseUser: user, storedUser},
         });
     } else {
-        return blError(EBizLogicMsg.FIREBASE_INVALID_CURRENT_USER);
+        return bizLogicError(EBizLogicMsg.FIREBASE_INVALID_CURRENT_USER);
     }
 };
 
 const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) => {
-    let result: BLResult;
+    let result: BizLogicResult;
     await Facebook.initializeAsync({
         appId: FACEBOOK_APP_ID,
     });
@@ -289,7 +289,7 @@ const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) =
     const {type} = facebookResponse;
     switch (type) {
         case 'cancel':
-            result = blError(EBizLogicMsg.FACEBOOK_LOGIN_CANCELED);
+            result = bizLogicError(EBizLogicMsg.FACEBOOK_LOGIN_CANCELED);
             break;
         case 'success':
             // @ts-ignore
@@ -304,14 +304,14 @@ const facebookLogin = async (isFirebase: boolean, isStoreUser: boolean = true) =
                 // Get the user's name using Facebook's Graph API
                 const facebookGetMeResponse = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
                 const user = await facebookGetMeResponse.json();
-                result = blSuccess({
+                result = bizLogicSuccess({
                     accessToken: token,
                     user: {facebookUser: user},
                 });
             }
             break;
         default :
-            result = blError(EBizLogicMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID);
+            result = bizLogicError(EBizLogicMsg.FACEBOOK_LOGIN_RESULT_TYPE_INVALID);
             break;
     }
     await triggerLogin(result);
@@ -377,7 +377,7 @@ const firebaseSendOTP = async (phoneInfoOptions: firebase.auth.PhoneInfoOptions 
         // @ts-ignore
         applicationVerifier
     );
-    return blSuccess({verificationId});
+    return bizLogicSuccess({verificationId});
 };
 
 const firebaseConfirmOTP = async (verificationId: string, verificationCode: string, isStoreUser: boolean = true) => {
@@ -393,7 +393,7 @@ const firebaseConfirmOTP = async (verificationId: string, verificationCode: stri
 
 const firebaseResetPassword = async (email: string) => {
     await firebase.auth().sendPasswordResetEmail(email);
-    return blSuccess(true);
+    return bizLogicSuccess(true);
 };
 
 const removePersistenceAuth = async (authParam?: PersistenceAuthParamKey[]) => {
@@ -403,14 +403,14 @@ const removePersistenceAuth = async (authParam?: PersistenceAuthParamKey[]) => {
         authParam.includes('refreshToken') && await AsyncStorage.removeItem(refreshTokenPersistenceKey);
         authParam.includes('refreshTokenExp') && await AsyncStorage.removeItem(refreshTokenExpPersistenceKey);
         authParam.includes('user') && await AsyncStorage.removeItem(userPersistenceKey);
-        return blSuccess(true);
+        return bizLogicSuccess(true);
     }
     await AsyncStorage.removeItem(accessTokenPersistenceKey);
     await AsyncStorage.removeItem(accessTokenExpPersistenceKey);
     await AsyncStorage.removeItem(refreshTokenExpPersistenceKey);
     await AsyncStorage.removeItem(refreshTokenPersistenceKey);
     await AsyncStorage.removeItem(userPersistenceKey);
-    return blSuccess(true);
+    return bizLogicSuccess(true);
 };
 
 const getPersistenceAuth = async () => {
@@ -450,7 +450,7 @@ const checkTokenExp = () => {
 const checkIsLogin = async () => {
     const {accessToken} = await getPersistenceAuth();
     let isLogin = !!accessToken;
-    EventRegister.emit('checkIsLogin', blSuccess(isLogin));
+    EventRegister.emit('checkIsLogin', bizLogicSuccess(isLogin));
     return isLogin;
 };
 

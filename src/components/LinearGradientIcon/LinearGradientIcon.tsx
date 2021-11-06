@@ -2,7 +2,7 @@ import React from 'react';
 import {IcoMoon, View} from '../UI';
 import MaskedView from '@react-native-community/masked-view';
 import {LinearGradient, LinearGradientProps} from 'expo-linear-gradient';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {IcoMoonProps} from '../../types';
 import {StyleProp, TextStyle} from 'react-native';
 import {useBunnyKit} from '../../hooks/bunny-kit';
@@ -22,7 +22,7 @@ export function LinearGradientIcon(props: LinearGradientIconProps) {
         startDefault = {x: 0, y: 0},
         endDefault = {x: 0, y: 1};
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     return (
         <View style={{width: finalSize, height: finalSize}} {...rest}>
             <MaskedView

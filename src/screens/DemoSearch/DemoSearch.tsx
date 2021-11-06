@@ -4,13 +4,13 @@ import {Text, View} from '../../components/UI';
 import {RouteProp} from '@react-navigation/native';
 import {DemoSearchDummyDatum, RootStackParam} from '../../types';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
-import {getContainerStyles} from '../../containers';
+import {makeContainerStyles} from '../../containers';
 import {Animated, SafeAreaView} from 'react-native';
 import {randomText, wait} from '../../utils';
 import {FollowUpSearchBar} from '../../components/FollowUpSearchBar';
-import {getStyles} from './styles';
-import {collectBLResult} from '../../store/actions';
-import {blError} from '../../helpers';
+import {makeStyles} from './styles';
+import {collectBizLogicResult} from '../../store/actions';
+import {bizLogicError} from '../../helpers';
 import {StackNavigationProp} from '@react-navigation/stack';
 import config from '../../config';
 import {useBunnyKit} from '../../hooks/bunny-kit';
@@ -28,9 +28,9 @@ export interface DemoSearchProps {
 export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.DemoSearch');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     const [scrollYValue] = useState(new Animated.Value(0));
     const [data, setData] = useState<DemoSearchDummyDatum[]>([]);
@@ -69,7 +69,7 @@ export function DemoSearchScreen({route, navigation}: DemoSearchProps) {
                                        const searchResult = await mockSearch(searchText);
                                        setData(searchResult);
                                    } catch (e: any) {
-                                       collectBLResult(blError(e));
+                                       collectBizLogicResult(bizLogicError(e));
                                    }
                                }}
             />

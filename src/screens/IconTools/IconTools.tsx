@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {ButtonTO, InButtonText, Text, View} from '../../components/UI';
 import {ScrollView} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {Card, Row} from '../../containers';
 import {useDispatch} from 'react-redux';
 import {shortenTFunctionKey} from '../../providers/i18n-labor';
@@ -15,7 +15,7 @@ export function IconToolsScreen() {
     const st = shortenTFunctionKey(t, 'screens.IconTools');
     const dispatch = useDispatch();
     const {themes} = themeLabor;
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     const [glyph, setGlyph] = useState('');
     const handleGenerate = () => {

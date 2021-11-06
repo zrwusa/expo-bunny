@@ -9,8 +9,8 @@ import {
     SocialMediaImageDatum
 } from '../../../types';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {getContainerStyles} from '../../../containers';
-import {getStyles} from './styles';
+import {makeContainerStyles} from '../../../containers';
+import {makeStyles} from './styles';
 import {Animated, Platform, SafeAreaView} from 'react-native';
 import {uuid4} from '@sentry/utils';
 import {Masonry} from '../../../components/Masonry/Masonry';
@@ -42,8 +42,8 @@ export function SocialMediaSearchScreen({route, navigation}: SocialMediaSearchPr
     const socialMediaImages = useSelector((rootState: RootState) => rootState.firestoreState.ordered.socialMediaImages);
 
     const st = shortenTFunctionKey(t, 'screens.SocialMediaSearch');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-    const styles = getStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const [MasonryData, setMasonryData] = useState<MasonryDatum<SocialMediaImageDatum>[]>([]);
 
     const memoizedSocialMediaImages = useMemo(() => {

@@ -5,17 +5,14 @@ import {RouteProp} from '@react-navigation/native';
 import {Conversation, DemoChatStackParam, RootStackParam, RootState} from '../../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
-import {Row} from '../../../containers/Row';
-import {getStyles} from './styles';
-import {Col} from '../../../containers';
+import {Col, Row} from '../../../containers';
+import {makeStyles} from './styles';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 import {isLoaded, useFirebaseConnect, useFirestore, useFirestoreConnect} from 'react-redux-firebase';
 import {FirestoreReducer} from 'redux-firestore';
-import {Avatar} from '../../../components/Avatar';
+import {Avatar, Divider, InlineJump, Preparing} from '../../../components';
 import dayJS from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
-import {Divider, InlineJump} from '../../../components';
-import {Preparing} from '../../../components/Preparing';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {firestoreTimestampToDate} from '../../../utils';
 
@@ -31,7 +28,7 @@ export interface ChatHomeProps {
 
 export function ChatHomeScreen({route, navigation}: ChatHomeProps) {
     const {sizeLabor, themeLabor, user, wp} = useBunnyKit();
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
 
     const firebaseUser = user?.firebaseUser;
 

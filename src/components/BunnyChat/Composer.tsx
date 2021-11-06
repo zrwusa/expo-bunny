@@ -4,7 +4,7 @@ import {DEFAULT_PLACEHOLDER, MIN_COMPOSER_HEIGHT} from './Constant';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return StyleSheet.create({
@@ -99,7 +99,7 @@ class Composer extends React.Component<ComposerProps & WithBunnyKit> {
 
     render() {
         const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         const {placeholderTextColor = colors.placeholder} = this.props;
         return (
             <TextInput

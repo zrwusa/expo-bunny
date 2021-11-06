@@ -104,6 +104,13 @@ export const getSizeLabor = () => {
             xxl: wp(128),
         },
         zIndex: {
+            // mobile stepper: 1000
+            // speed dial: 1050
+            // app bar: 1100
+            // drawer: 1200
+            // modal: 1300
+            // snackbar: 1400
+            // tooltip: 1500
             xxs: 10,
             xs: 100,
             s: 1000,

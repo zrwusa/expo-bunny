@@ -4,7 +4,7 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {DemoNestedLv1StackParam} from '../../../types';
 import {shortenTFunctionKey} from '../../../providers/i18n-labor';
-import {getContainerStyles} from '../../../containers';
+import {makeContainerStyles} from '../../../containers';
 import {getSharedStyles} from '../../../helpers';
 import {useBunnyKit} from '../../../hooks/bunny-kit';
 
@@ -19,7 +19,7 @@ export interface NestedLv1HomeProps {
 function NestedLv1HomeScreen({route, navigation}: NestedLv1HomeProps) {
     const {sizeLabor, themeLabor, t} = useBunnyKit();
     const st = shortenTFunctionKey(t, 'screens.NestedLv1Home');
-    const containerStyles = getContainerStyles(sizeLabor, themeLabor);
+    const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
     const {sharedStyles} = getSharedStyles(sizeLabor, themeLabor);
 
     return (

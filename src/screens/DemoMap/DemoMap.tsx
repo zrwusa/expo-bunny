@@ -9,8 +9,8 @@ import {collectSysError, getNearbyFilms, restoreRegion} from '../../store/action
 import {connect} from 'react-redux';
 import MapView, {PROVIDER_DEFAULT} from 'react-native-maps';
 import BunnyConstants from '../../constants/constants';
-import getStyles, {getCardSize} from './styles';
-import {getContainerStyles} from '../../containers';
+import makeStyles, {getCardSize} from './styles';
+import {makeContainerStyles} from '../../containers';
 import config from '../../config';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 
@@ -108,8 +108,8 @@ class DemoMapScreen extends Component<DemoMapProps> {
     render(): React.ReactNode {
         const {bunnyKit} = this.props;
         const {sizeLabor, themeLabor, wp} = bunnyKit;
-        const containerStyles = getContainerStyles(sizeLabor, themeLabor);
-        const styles = getStyles(sizeLabor, themeLabor);
+        const containerStyles = makeContainerStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         const {width} = getCardSize(sizeLabor, themeLabor);
         const interpolations = this.props.demoNearbyFilms.map((marker, index) => {
             const inputRange = [

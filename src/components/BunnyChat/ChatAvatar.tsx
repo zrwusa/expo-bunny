@@ -6,7 +6,7 @@ import {IMessage, LeftRightStyle, PositionLeftOrRight, User} from './types';
 import {WithBunnyKit, withBunnyKit} from '../../hooks/bunny-kit';
 import {SizeLabor, ThemeLabor} from '../../types';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     return {
         left: StyleSheet.create({
@@ -83,7 +83,7 @@ class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarPr
         }
         if (this.props.currentMessage) {
             const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-            const styles = getStyles(sizeLabor, themeLabor);
+            const styles = makeStyles(sizeLabor, themeLabor);
             return (
                 <BunnyAvatar
                     avatarStyle={
@@ -128,7 +128,7 @@ class ChatAvatar<TMessage extends IMessage> extends React.Component<ChatAvatarPr
             return null;
         }
         const {bunnyKit: {sizeLabor, themeLabor}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
 
         if (
             !showAvatarForEveryMessage &&

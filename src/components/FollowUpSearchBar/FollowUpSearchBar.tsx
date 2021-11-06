@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, Keyboard, NativeSyntheticEvent, SafeAreaView, TextInputKeyPressEventData} from 'react-native';
-import {getStyles} from './styles';
+import {makeStyles} from './styles';
 import {IcoMoon, Text, TextInput, TouchableOpacity, View} from '../UI';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
@@ -18,7 +18,7 @@ export const FollowUpSearchBar = (props: SearchComponentProps) => {
         onSearch
     } = props;
 
-    const styles = getStyles(sizeLabor, themeLabor);
+    const styles = makeStyles(sizeLabor, themeLabor);
     const {colors} = themeLabor.theme;
     const {zi} = sizeLabor.ms;
     const clampedScroll = Animated.diffClamp(

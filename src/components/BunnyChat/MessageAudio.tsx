@@ -6,7 +6,7 @@ import {AudioPlayer, AudioPlayerProps} from '../AudioPlayer';
 import {SizeLabor, ThemeLabor} from '../../types';
 import {withBunnyKit, WithBunnyKit} from '../../hooks/bunny-kit';
 
-const getStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
+const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
     const {wp} = sizeLabor.designsBasedOn.iphoneX;
     const {theme: {colors}} = themeLabor;
     return {
@@ -108,7 +108,7 @@ class MessageAudio<TMessage extends IMessage> extends Component<MessageAudioProp
         } = this.props;
         isDebug && console.log('%c[ chat ]', 'background: #555; color: #bada55', '[level4]MessageAudio props', this.props);
         const {bunnyKit: {sizeLabor, themeLabor, colors}} = this.props;
-        const styles = getStyles(sizeLabor, themeLabor);
+        const styles = makeStyles(sizeLabor, themeLabor);
         const stylesEnsurePosition = styles[position];
         return (
             <View style={[stylesEnsurePosition.container, audioContainerStyle]}>
