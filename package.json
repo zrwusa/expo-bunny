@@ -24,7 +24,7 @@
     "clear:android": "expo start --android --reset-cache",
     "clear:metro": "expo start -c",
     "remove:cache:metro": "rm -rf /tmp/metro-*",
-    "eject": "expo eject"
+    "dev:next": "NODE_OPTIONS=\"--max_old_space_size=8192\" next"
   },
   "dependencies": {
     "@qiwi/deep-proxy": "^1.8.2",

@@ -177,12 +177,6 @@ export interface RequestFailedAction {
     payload: RequestConfig;
 }
 
-export interface RequestFailedPayload {
-    method: Method;
-    url: string;
-    params?: any;
-}
-
 export interface RequestingAction {
     type: ESys.REQUESTING;
     payload: RequestConfig;
@@ -201,10 +195,4 @@ export interface RequestFailedAction {
 export interface RequestSuccessAction {
     type: ESys.REQUEST_SUCCESS;
     payload: RequestConfig;
-}
-
-export interface RequestReceivedPayload {
-    method: Method;
-    url: string;
-    params?: any;
 }
