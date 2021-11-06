@@ -8,9 +8,8 @@ import {Card, makeContainerStyles} from '../../containers';
 import {useAuthLabor} from '../../providers/auth-labor';
 import {useDispatch} from 'react-redux';
 import {collectSysError} from '../../store/actions';
-import {Divider} from '../../components/Divider';
+import {Divider, InlineJump} from '../../components';
 import {makeStyles} from './styles';
-import {InlineJump} from '../../components/InlineJump';
 import {useBunnyKit} from '../../hooks/bunny-kit';
 
 type HomeRouteProp = RouteProp<RootStackParam, 'Home'>;
@@ -20,7 +19,6 @@ export interface HomeScreenProps {
     route: HomeRouteProp;
     navigation: HomeNavigationProp;
 }
-
 
 function HomeScreen({navigation}: HomeScreenProps) {
     const {sizeLabor, themeLabor, t, wp} = useBunnyKit();

@@ -30,11 +30,6 @@ import {EventRegister} from 'react-native-event-listeners';
 import {firebase} from '../../firebase/firebase';
 import * as Facebook from 'expo-facebook';
 
-// import * as AppAuth from "expo-app-auth";
-// // When configured correctly, URLSchemes should contain your REVERSED_CLIENT_ID
-// const {URLSchemes} = AppAuth;
-// console.log('---URLSchemes', URLSchemes)
-
 const config: AuthContextConfig = {
     loginAPIMethod: 'PUT',
     loginAPIPath: '/api/auth/login',
@@ -172,6 +167,8 @@ const bunnyRefreshAuth = async (): Promise<BizLogicResult> => {
 };
 
 const logOut = async (triggerType?: TriggerType) => {
+    // TODO not tested
+    const res = await firebase.auth().signOut();
     const {success, message} = await removePersistenceAuth();
     let result: BizLogicResult;
     if (success) {
