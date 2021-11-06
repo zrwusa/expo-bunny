@@ -40,7 +40,7 @@ try {
         // // Initialize Cloud Firestore through Firebase
         // firebase.firestore();
     }
-} catch (err) {
+} catch (err: any) {
     console.error(err);
     // ignore app already initialized error on snack
 }

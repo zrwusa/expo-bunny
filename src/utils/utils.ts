@@ -95,7 +95,7 @@ export const deepObjectStrictEqual = (object1: JSONSerializable, object2: JSONSe
 export const isTypeEqual = <T>(obj: unknown) => {
     try {
         let m = obj as unknown as T;
-    } catch (e) {
+    } catch (e: any) {
     }
 };
 

@@ -47,7 +47,7 @@ bunnyAPI.interceptors.response.use(
                                 originalRequest._retry = true;
                                 return bunnyAPI(originalRequest);
                             }
-                        } catch (e) {
+                        } catch (e: any) {
                             await logOut('API');
                             throw e;
                         }

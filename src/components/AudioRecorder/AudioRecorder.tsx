@@ -58,7 +58,7 @@ export const AudioRecorder = ({
             setRecording(recording);
             setStatus('STARTED');
             isDebug && console.log('Recording started');
-        } catch (err) {
+        } catch (err: any) {
             setStatus('ERROR');
             isDebug && console.error('Failed to start recording', err);
         }

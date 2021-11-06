@@ -13,7 +13,7 @@ export function RTLSwitch() {
             timerMockAnimationComplete = setTimeout(() => {
                 try {
                     const res = restartApp();
-                } catch (err) {
+                } catch (err: any) {
                     //in case of using try catch expression,this err will be caught by fastRefresh tool
                 }
                 clearTimeout(timerMockAnimationComplete);

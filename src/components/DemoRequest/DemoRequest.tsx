@@ -20,7 +20,7 @@ function DemoRequest(props: Props) {
     const saveAlertSetting = async function () {
         try {
             await request.post('/api/push-service/alert-settings', {toke: expoPushToken});
-        } catch (err) {
+        } catch (err: any) {
         }
     };
 
