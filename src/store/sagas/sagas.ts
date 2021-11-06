@@ -1,5 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {bunnyAPI} from '../../helpers/bunny-api';
+
 import {
     collectBizLogicResult,
     collectSysError,
@@ -94,7 +95,7 @@ export const sagasGenerator = function* () {
         const config: RequestConfig = {url, method, data: payload};
         try {
             yield put(requesting(config));
-            const res = yield call(() => {
+            yield call(() => {
                 return firebase.database().ref(url).push(payload);
             });
             yield put(requestSuccess(config));

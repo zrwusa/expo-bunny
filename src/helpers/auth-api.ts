@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import {AuthAPIProtocol} from '../types';
-import { getApiInstanceConfig} from './helpers';
+import {getApiInstanceConfig} from './helpers';
 import {checkAuthAPIProtocol} from './api-protocols';
 
 export const apiAuth = axios.create(getApiInstanceConfig('auth'));

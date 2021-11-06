@@ -140,7 +140,8 @@
     "next-fonts": "^1.5.1",
     "next-images": "^1.7.0",
     "next-offline": "^5.0.5",
-    "next-transpile-modules": "^6.4.0"
+    "next-transpile-modules": "^6.4.0",
+    "redux-dynamic-middlewares": "^2.0.0"
   },
   "private": true
 }

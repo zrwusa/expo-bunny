@@ -1,10 +1,11 @@
 import {ErrorClass} from '../types';
 import _ from 'lodash';
 import {AuthAPIError, BunnyAPIError, NomicsAPIError} from '../utils';
-// import {collectSysError} from '../store/actions/sys';
-// import {EBizLogicMsg} from '../constants';
-// import store from '../store/store';
-// const {dispatch} = store;
+import {collectSysError} from '../store/actions/sys';
+import {EBizLogicMsg} from '../constants';
+import store from '../store/store';
+
+const {dispatch} = store;
 export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     let dataKeys;
     try {
@@ -21,14 +22,14 @@ export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     const blKeys = Object.keys(business_logic);
     const isBLKeysEqual = _.isEqual(blKeys.sort(), ['code', 'message', 'description', 'error_code', 'error_message', 'error_description', 'error_stack'].sort());
     if (!isBLKeysEqual) {
-        // dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE)));
+        dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_BL_STRUCTURE)));
         return false;
     }
     const httpExtraKeys = Object.keys(http_extra);
     const isHttpExtraKeysEqual = _.isEqual(httpExtraKeys.sort(), ['code', 'message', 'description'].sort());
 
     if (!isHttpExtraKeysEqual) {
-        // dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE)));
+        dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_EXTRA_STRUCTURE)));
         return false;
     }
 
@@ -36,7 +37,7 @@ export const checkCommonAPIProtocol = (data: any, PErrorClass: ErrorClass) => {
     const isServerErrorKeysEqual = _.isEqual(serverErrorKeys.sort(), ['code', 'message', 'stack'].sort());
 
     if (!isServerErrorKeysEqual) {
-        // dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_SERVER_STRUCTURE)));
+        dispatch(collectSysError(new PErrorClass(EBizLogicMsg.NOT_CONFORM_TO_API_RESPONSE_SERVER_STRUCTURE)));
         return false;
     }
     return true;

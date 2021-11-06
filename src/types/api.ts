@@ -39,8 +39,8 @@ export type BunnyAPIProtocol<T> = {
         error_stack: string
     },
     server_error: {
-        code: string, 
-        message: string, 
+        code: string,
+        message: string,
         stack: string
     },
     data?: T,

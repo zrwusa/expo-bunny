@@ -8,7 +8,7 @@ import BunnyConstants from './constants/constants';
 import {RootState} from './types';
 import {collectSysError, restoreIsReady, restoreNavInitialState} from './store/actions';
 import {ThemeLaborContext, ThemeLaborProvider} from './providers/theme-labor';
-import {Preparing} from './components/Preparing';
+import {Preparing} from './components';
 import {useTranslation} from 'react-i18next';
 import {RequestProvider} from './providers/request-labor';
 import {loadAsync} from 'expo-font';

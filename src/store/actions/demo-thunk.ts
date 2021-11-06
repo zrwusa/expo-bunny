@@ -28,12 +28,12 @@ export const demoThunkSuccess = (payload: DemoThunkSuccessPayload): DemoThunkSuc
 export const demoThunk: ActionCreator<ThunkAction<Promise<Action>, DemoThunkState, void, DemoThunkSuccessAction>> = (reqParams: DemoThunkPayload) => {
     return async (dispatch: Dispatch<DemoThunkSuccessAction | SysErrorAction | CollectBizLogicResultAction | RequestingAction | RequestSuccessAction | RequestFailedAction>): Promise<Action> => {
         let result;
-        const config: RequestConfig = {url: '/demo-thunks', method: 'POST', data: reqParams};
+        const config: RequestConfig = {url: '/api/example-thunks', method: 'POST', data: reqParams};
         try {
             result = dispatch(requesting(config));
-            const res = await bunnyAPI.request(config);
-            if (res.data) {
-                result = dispatch(demoThunkSuccess(res.data));
+            const {data: {data}} = await bunnyAPI.request(config);
+            if (data) {
+                result = dispatch(demoThunkSuccess(data));
                 result = dispatch(requestSuccess(config));
             } else {
                 result = dispatch(collectBizLogicResult(bizLogicError(EBizLogicMsg.NO_DEMO_THUNK_DATA)));
