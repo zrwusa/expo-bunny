@@ -1,32 +1,10 @@
 import axios, {AxiosResponse} from 'axios';
 import {authLaborContext} from '../providers/auth-labor';
-import {BunnyAPIProtocolResponseData} from '../types';
-import {checkBunnyAPIProtocol, getApiInstanceConfig} from './helpers';
+import {BunnyAPIProtocol} from '../types';
+import {getApiInstanceConfig} from './helpers';
+import {checkBunnyAPIProtocol} from './api-protocols';
 
-export const defaultBunnyAPIResponseData = {
-    'httpExtra': {
-        'code': 0,
-        'message': '',
-        'description': '',
-        'errorCode': 0,
-        'errorMessage': '',
-        'errorDescription': '',
-        'errorStack': ''
-    },
-    'businessLogic': {
-        'code': '',
-        'message': '',
-        'description': '',
-        'errorCode': '',
-        'errorMessage': '',
-        'errorDescription': '',
-        'errorStack': ''
-    },
-    'successData': null,
-    'timeSpent': 0
-};
 export const bunnyAPI = axios.create(getApiInstanceConfig('bunny'));
-
 
 bunnyAPI.interceptors.request.use(
     async (config) => {
@@ -42,7 +20,7 @@ bunnyAPI.interceptors.request.use(
     });
 
 bunnyAPI.interceptors.response.use(
-    (response: AxiosResponse<BunnyAPIProtocolResponseData<any>>) => {
+    (response: AxiosResponse<BunnyAPIProtocol<any>>) => {
         // status 200-299
         checkBunnyAPIProtocol(response.data);
         return response;

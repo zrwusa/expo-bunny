@@ -1,30 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
 import {authLaborContext} from '../providers/auth-labor';
-import {BunnyAPIProtocolResponseData} from '../types';
-import {checkBunnyAPIProtocol, getApiInstanceConfig} from './helpers';
-
-export const defaultNomicsAPIResponseData = {
-    'httpExtra': {
-        'code': 0,
-        'message': '',
-        'description': '',
-        'errorCode': 0,
-        'errorMessage': '',
-        'errorDescription': '',
-        'errorStack': ''
-    },
-    'businessLogic': {
-        'code': '',
-        'message': '',
-        'description': '',
-        'errorCode': '',
-        'errorMessage': '',
-        'errorDescription': '',
-        'errorStack': ''
-    },
-    'successData': null,
-    'timeSpent': 0
-};
+import {NomicsAPIProtocol} from '../types';
+import {getApiInstanceConfig} from './helpers';
+import {checkBunnyAPIProtocol} from './api-protocols';
 
 export const nomicsAPI = axios.create(getApiInstanceConfig('nomics'));
 
@@ -42,7 +20,7 @@ nomicsAPI.interceptors.request.use(
     });
 
 nomicsAPI.interceptors.response.use(
-    (response: AxiosResponse<BunnyAPIProtocolResponseData<any>>) => {
+    (response: AxiosResponse<NomicsAPIProtocol<any>>) => {
         // status 200-299
         checkBunnyAPIProtocol(response.data);
         return response;

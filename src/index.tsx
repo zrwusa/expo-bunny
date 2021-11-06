@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react';
 import {Provider as ReduxProvider} from 'react-redux';
-import store, {rrfProps} from './store';
+import store, {rrfProps} from './store/store';
 import App from './App';
 import {DemoLazyLoading} from './components';
 import {ReactReduxFirebaseProvider} from 'react-redux-firebase';

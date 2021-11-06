@@ -1,29 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
-import {AuthAPIProtocolResponseData} from '../types';
-import {checkAuthAPIProtocol, getApiInstanceConfig} from './helpers';
-
-export const defaultAuthAPIResponseData = {
-    'httpExtra': {
-        'code': 0,
-        'message': '',
-        'description': '',
-        'errorCode': 0,
-        'errorMessage': '',
-        'errorDescription': '',
-        'errorStack': ''
-    },
-    'businessLogic': {
-        'code': '',
-        'message': '',
-        'description': '',
-        'errorCode': '',
-        'errorMessage': '',
-        'errorDescription': '',
-        'errorStack': ''
-    },
-    'successData': {},
-    'timeSpent': 0
-};
+import {AuthAPIProtocol} from '../types';
+import { getApiInstanceConfig} from './helpers';
+import {checkAuthAPIProtocol} from './api-protocols';
 
 export const apiAuth = axios.create(getApiInstanceConfig('auth'));
 
@@ -37,7 +15,7 @@ apiAuth.interceptors.request.use(
     });
 
 apiAuth.interceptors.response.use(
-    (response: AxiosResponse<AuthAPIProtocolResponseData<any>>) => {
+    (response: AxiosResponse<AuthAPIProtocol<any>>) => {
         // status 200-300
         checkAuthAPIProtocol(response.data);
         return response;

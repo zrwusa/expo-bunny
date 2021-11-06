@@ -4,7 +4,7 @@ import {Notification} from 'expo-notifications';
 import Constants from 'expo-constants';
 import {collectBizLogicResult} from '../store/actions';
 import {bizLogicSuccess} from '../helpers';
-import store from '../store';
+import store from '../store/store';
 
 export type Copywriting = {
     failedToGetToken: string,

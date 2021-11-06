@@ -28,7 +28,7 @@ const rootReducer = combineReducers<RootState>({
     firestoreState: firestoreReducer
 });
 
-const sagaMiddleware = createSagaMiddleware();
+export const sagaMiddleware = createSagaMiddleware();
 
 
 // you might choose one redux middleware which you prefer,
