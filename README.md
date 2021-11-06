@@ -85,7 +85,7 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 ## Online Simples
 [Expo online deployed stable](https://expo.io/@zrwusa/projects/expo-react-bunny)
 
-[Web Next.js online deployed stable](https://expo-react-bunny-akodd3mj6-zrwusa.vercel.app)
+[Web Next.js online deployed stable](https://expo-react-bunny-jlbcujxu2-zrwusa.vercel.app)
 
 [Web Next.js online deployed latest](https://expo-react-bunny.vercel.app)
 
