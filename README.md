@@ -137,7 +137,7 @@ yarn mock
 npm run mock
 ```
 ### BackEnd server
-I also provided a complete standard KOA backend,including RESTFul API,push notification feature and MongoDB access
+I also provided a complete standard KOA backend,including RESTFul API,Mysql Sequelize,MongoDB Mongoose,Redis,Mailer,push notification feature
 [react-bunny-server](https://github.com/zrwusa/react-bunny-server)
 
 ### Local web server
