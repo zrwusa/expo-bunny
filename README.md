@@ -78,7 +78,8 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 </table>
 
 
-
+# Javascript version
+[If not Typescript,just use Javascript](https://github.com/zrwusa/react-bunny)
 
 # Preview
 
