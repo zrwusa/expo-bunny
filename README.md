@@ -79,7 +79,7 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 
 
 # Javascript version
-[If not Typescript,just use Javascript](https://github.com/zrwusa/react-bunny)
+[If not Typescript,just use Javascript](https://github.com/zrwusa/expo-bunny)
 
 # Preview
 
