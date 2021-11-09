@@ -47,7 +47,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
                     <InlineJump type="LINK" iconName="bitcoin" text={st(`cryptoCurrency`)}
                                 to="/demo-crypto-currency/home"/>
                 </Card>
-                <Card titleMode="OUT" title={st(`devTools1`)}>
+                <Card titleMode="OUT" title={st(`devTools`)}>
                     <InlineJump type="LINK" iconName="search" text={st(`colorFinder`)} to="/color-finder"
                                 iconSize={wp(20)}/>
                     <Divider/>
