@@ -11,7 +11,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import {ActionSheetOptions, ActionSheetProvider,} from '../../../packages/react-native-action-sheet/src';
-import uuid from 'uuid';
+import {v4} from 'uuid';
 import {getBottomSpace} from 'react-native-iphone-x-helper';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -340,7 +340,7 @@ class BunnyChatInner<TMessage extends IMessage> extends React.Component<GiftedCh
         text: undefined,
         placeholder: DEFAULT_PLACEHOLDER,
         disableComposer: false,
-        messageIdGenerator: () => uuid.v4(),
+        messageIdGenerator: () => v4(),
         user: undefined,
         onSend: () => {
         },

@@ -1,5 +1,15 @@
 import * as React from 'react';
-import {AccessibilityInfo, findNodeHandle, Image, Platform, ScrollView, StyleSheet, Text, UIManager, View,} from 'react-native';
+import {
+    AccessibilityInfo,
+    findNodeHandle,
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    UIManager,
+    View,
+} from 'react-native';
 import TouchableNativeFeedbackSafe from './TouchableNativeFeedbackSafe';
 import {ActionSheetOptions} from '../types';
 
@@ -159,7 +169,7 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
         marginRight: 32,
-        justifyContent: "center",
+        justifyContent: 'center',
     },
     message: {
         marginTop: 12,

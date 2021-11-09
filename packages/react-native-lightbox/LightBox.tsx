@@ -1,6 +1,6 @@
 import React, {Children, cloneElement, Component, createRef} from 'react';
 import {Animated, StyleProp, TouchableHighlight, TouchableWithoutFeedbackProps, View, ViewStyle} from 'react-native';
-import {LightBoxOverlay} from "./LightBoxOverlay";
+import {LightBoxOverlay} from './LightBoxOverlay';
 
 
 export interface LightBoxProps {
@@ -39,7 +39,7 @@ export default class LightBox extends Component<LightBoxProps> {
         },
     };
 
-    private _root = createRef<View>()
+    private _root = createRef<View>();
 
     state = {
         isOpen: false,
@@ -63,7 +63,7 @@ export default class LightBox extends Component<LightBoxProps> {
             );
         }
         return this.props.children;
-    }
+    };
 
     getOverlayProps = () => ({
         isOpen: this.state.isOpen,
@@ -76,7 +76,7 @@ export default class LightBox extends Component<LightBoxProps> {
         didOpen: this.props.didOpen,
         willClose: this.props.willClose,
         onClose: this.onClose,
-    })
+    });
 
     open = () => {
         this._root.current?.measure((ox, oy, width, height, px, py) => {
@@ -111,11 +111,11 @@ export default class LightBox extends Component<LightBoxProps> {
                 });
             });
         });
-    }
+    };
 
     close = () => {
-        throw new Error('LightBox.close method is deprecated. Use renderHeader(close) prop instead.')
-    }
+        throw new Error('LightBox.close method is deprecated. Use renderHeader(close) prop instead.');
+    };
 
     onClose = () => {
         this.state.layoutOpacity.setValue(1);
@@ -127,7 +127,7 @@ export default class LightBox extends Component<LightBoxProps> {
             routes.pop();
             this.props.navigator.immediatelyResetRouteStack(routes);
         }
-    }
+    };
 
     render() {
         // measure will not return anything useful if we dont attach a onLayout handler on android

@@ -11,7 +11,8 @@ export default function connectActionSheet<OwnProps>(
             <Consumer>
                 {({showActionSheetWithOptions}) => {
                     return (
-                        <WrappedComponent {...props as OwnProps} showActionSheetWithOptions={showActionSheetWithOptions}/>
+                        <WrappedComponent {...props as OwnProps}
+                                          showActionSheetWithOptions={showActionSheetWithOptions}/>
                     );
                 }}
             </Consumer>

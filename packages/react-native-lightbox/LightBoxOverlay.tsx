@@ -18,8 +18,8 @@ const STATUS_BAR_OFFSET = (Platform.OS === 'android' ? -25 : 0);
 const isIOS = Platform.OS === 'ios';
 
 const getCurrentWindowDimension = () => {
-    return Dimensions.get('window')
-}
+    return Dimensions.get('window');
+};
 
 const getStyles = () => {
     return StyleSheet.create({
@@ -59,7 +59,7 @@ const getStyles = () => {
             shadowOpacity: 0.8,
         },
     });
-}
+};
 
 export interface LightBoxOverlayProps {
     origin: {
@@ -102,7 +102,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
         backgroundColor: 'black',
     };
 
-    private _panResponder: PanResponderInstance
+    private _panResponder: PanResponderInstance;
 
     constructor(props: LightBoxOverlayProps) {
         super(props);
@@ -183,7 +183,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
             this.setState({isAnimating: false});
             this.props.didOpen && this.props.didOpen();
         });
-    }
+    };
 
     close = () => {
         this.props.willClose && this.props.willClose();
@@ -202,7 +202,7 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
             });
             this.props.onClose && this.props.onClose();
         });
-    }
+    };
 
     componentDidUpdate(prevProps: LightBoxOverlayProps) {
         if (this.props.isOpen !== prevProps.isOpen && this.props.isOpen) {
@@ -246,16 +246,26 @@ export class LightBoxOverlay extends Component<LightBoxOverlayProps, LightBoxOve
             });
         }
 
-        const styles = getStyles()
+        const styles = getStyles();
 
         const openStyle = [styles.open, {
             left: openVal.interpolate({inputRange: [0, 1], outputRange: [origin.x, target.x]}),
-            top: openVal.interpolate({inputRange: [0, 1], outputRange: [origin.y + STATUS_BAR_OFFSET, target.y + STATUS_BAR_OFFSET]}),
-            width: openVal.interpolate({inputRange: [0, 1], outputRange: [origin.width, getCurrentWindowDimension().width]}),
-            height: openVal.interpolate({inputRange: [0, 1], outputRange: [origin.height, getCurrentWindowDimension().height]}),
+            top: openVal.interpolate({
+                inputRange: [0, 1],
+                outputRange: [origin.y + STATUS_BAR_OFFSET, target.y + STATUS_BAR_OFFSET]
+            }),
+            width: openVal.interpolate({
+                inputRange: [0, 1],
+                outputRange: [origin.width, getCurrentWindowDimension().width]
+            }),
+            height: openVal.interpolate({
+                inputRange: [0, 1],
+                outputRange: [origin.height, getCurrentWindowDimension().height]
+            }),
         }];
 
-        const background = (<Animated.View style={[styles.background, {backgroundColor: backgroundColor}, lightBoxOpacityStyle]}/>);
+        const background = (
+            <Animated.View style={[styles.background, {backgroundColor: backgroundColor}, lightBoxOpacityStyle]}/>);
         const header = (<Animated.View style={[styles.header, lightBoxOpacityStyle]}>{(renderHeader ?
                 renderHeader(this.close) :
                 (

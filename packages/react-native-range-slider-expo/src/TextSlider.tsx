@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Animated, I18nManager, LayoutChangeEvent, StyleProp, StyleSheet, Text, TextInput, TextStyle, View} from 'react-native';
+import {
+    Animated,
+    I18nManager,
+    LayoutChangeEvent,
+    StyleProp,
+    StyleSheet,
+    Text,
+    TextInput,
+    TextStyle,
+    View
+} from 'react-native';
 import {PanGestureHandler, PanGestureHandlerGestureEvent, State} from 'react-native-gesture-handler';
 
 const osRtl = I18nManager.isRTL;
@@ -51,7 +61,7 @@ const TextualSlider = ({
     const [max, setMax] = useState(1);
 
     // rtl settings
-    const [flexDirection, setFlexDirection] = useState<"row" | "row-reverse" | "column" | "column-reverse" | undefined>('row');
+    const [flexDirection, setFlexDirection] = useState<'row' | 'row-reverse' | 'column' | 'column-reverse' | undefined>('row');
     const [svgOffset, setSvgOffset] = useState<object>({left: (knobSize - 40) / 2});
 
     const [valueOffset, setValueOffset] = useState(0);
@@ -100,21 +110,21 @@ const TextualSlider = ({
         setValueOffset(newOffset);
         const index = Math.round(((newOffset + (knobSize / 2)) * (max - min) / TextualSliderWidth) / step) * step + min;
         valueOnChange(values[index]);
-    }
+    };
     const settingValue = (newOffset: number) => {
         translateX.setValue(newOffset);
         inRangeScaleX.setValue((newOffset + (knobSize / 2)) / TextualSliderWidth + 0.01);
-    }
+    };
     const setValueText = (totalOffset: number) => {
         const numericValue: number = Math.floor(((totalOffset + (knobSize / 2)) * (max - min) / TextualSliderWidth) / step) * step + min;
         valueTextRef.current?.setNativeProps({text: values[numericValue].text});
-    }
+    };
     const setStepSize = (max: number, min: number, step: number) => {
         const numberOfSteps = ((max - min) / step);
         const stepSize = TextualSliderWidth / numberOfSteps;
         setStepInPixels(stepSize);
         return stepSize;
-    }
+    };
 
     // value gesture events ------------------------------------------------------------------------
     const onGestureEvent = (event: PanGestureHandlerGestureEvent) => {
@@ -127,7 +137,7 @@ const TextualSlider = ({
             }
             inRangeScaleX.setValue((totalOffset + (knobSize / 2)) / TextualSliderWidth + 0.01);
         }
-    }
+    };
     const onHandlerStateChange = (event: PanGestureHandlerGestureEvent) => {
         if (event.nativeEvent.state === State.BEGAN) {
             scaleTo(valueLabelScale, 1);
@@ -143,7 +153,7 @@ const TextualSlider = ({
             setValueStatic(newOffset, knobSize, stepInPixels);
             scaleTo(valueLabelScale, 0.01);
         }
-    }
+    };
     // ------------------------------------------------------------------------------------------------
 
     // gesture events help functions ------------------------------------------------------------------
@@ -159,20 +169,29 @@ const TextualSlider = ({
     // setting bar width ------------------------------------------------------------------------------
     const onLayout = (event: LayoutChangeEvent) => {
         setTextualSliderWidth(event.nativeEvent.layout.width);
-    }
+    };
     // ------------------------------------------------------------------------------------------------
 
     const labelOpacity = valueLabelScale.interpolate({
         inputRange: [0.1, 1],
         outputRange: [0, 1]
-    })
+    });
     return (
-        <Animated.View style={[styles.container, {opacity, padding: styleSize === 'large' ? 7 : styleSize === 'medium' ? 14 : 21}]}>
+        <Animated.View style={[styles.container, {
+            opacity,
+            padding: styleSize === 'large' ? 7 : styleSize === 'medium' ? 14 : 21
+        }]}>
             {
                 showValueLabels &&
                 <View style={{width: '100%', flexDirection}}>
                     <Animated.View
-                        style={{position: 'absolute', bottom: 0, left: 0, opacity: labelOpacity, transform: [{translateX}, {scale: valueLabelScale}]}}
+                        style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            opacity: labelOpacity,
+                            transform: [{translateX}, {scale: valueLabelScale}]
+                        }}
                     >
                         <View style={{width: '100%', alignItems: 'center'}}>
                             <TextInput style={{
@@ -188,7 +207,14 @@ const TextualSlider = ({
                     </Animated.View>
                 </View>
             }
-            <View style={{width: '100%', height: knobSize, marginVertical: 4, position: 'relative', flexDirection, alignItems: 'center'}}>
+            <View style={{
+                width: '100%',
+                height: knobSize,
+                marginVertical: 4,
+                position: 'relative',
+                flexDirection,
+                alignItems: 'center'
+            }}>
                 <View style={[styles.bar, {
                     backgroundColor: inRangeBarColor,
                     left: knobSize / 4,
@@ -223,13 +249,17 @@ const TextualSlider = ({
             {
                 showRangeLabels &&
                 <View style={{width: '100%', flexDirection, justifyContent: 'space-between'}}>
-                    <Text style={[rangeLabelsStyle, {fontWeight: "bold", marginLeft: -7}]}>{values.length > 1 ? values[0].text : ''}</Text>
-                    <Text style={[rangeLabelsStyle, {fontWeight: "bold"}]}>{values.length > 1 ? values[max].text : ''}</Text>
+                    <Text style={[rangeLabelsStyle, {
+                        fontWeight: 'bold',
+                        marginLeft: -7
+                    }]}>{values.length > 1 ? values[0].text : ''}</Text>
+                    <Text
+                        style={[rangeLabelsStyle, {fontWeight: 'bold'}]}>{values.length > 1 ? values[max].text : ''}</Text>
                 </View>
             }
         </Animated.View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

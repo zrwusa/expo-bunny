@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Animated, I18nManager, LayoutChangeEvent, StyleSheet, Text, TextInput, View} from 'react-native';
 import {PanGestureHandler, PanGestureHandlerGestureEvent, State} from 'react-native-gesture-handler';
-import {useBunnyKit} from "../../../src/hooks/bunny-kit";
+import {useBunnyKit} from '../../../src/hooks/bunny-kit';
 
 const SMALL_SIZE = 24;
 const MEDIUM_SIZE = 34;
@@ -68,7 +68,7 @@ export default (props: SliderProps) => {
     const [stepInPixels, setStepInPixels] = useState(0);
 
     // rtl settings
-    const [flexDirection, setFlexDirection] = useState<"row" | "row-reverse" | "column" | "column-reverse" | undefined>('row');
+    const [flexDirection, setFlexDirection] = useState<'row' | 'row-reverse' | 'column' | 'column-reverse' | undefined>('row');
     const [svgOffset, setSvgOffset] = useState<object>({left: (knobSize - 40) / 2});
 
     const [fromValueOffset, setFromValueOffset] = useState(0);
@@ -121,7 +121,7 @@ export default (props: SliderProps) => {
         'small': SMALL_SIZE,
         'medium': MEDIUM_SIZE,
         'large': LARGE_SIZE
-    }
+    };
     useEffect(() => {
         const size = typeof styleSize === 'number' ? styleSize : sizeMap[styleSize];
         setKnobSize(size);
@@ -131,36 +131,36 @@ export default (props: SliderProps) => {
     // initializing settings helpers
     const calculateFromValue = (newOffset: number, knobSize: number, stepInPixels: number) => {
         return Math.floor((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
-    }
+    };
     const setFromValueStatic = (newOffset: number, knobSize: number, stepInPixels: number) => {
         newOffset = calculateFromValue(newOffset, knobSize, stepInPixels);
         setFromValue(newOffset);
         setFromValueOffset(newOffset);
         fromValueOnChange(Math.floor(((newOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min);
-    }
+    };
     const setFromValue = (newOffset: number) => {
         translateXFromValue.setValue(newOffset);
         leftBarScaleX.setValue((newOffset + (knobSize / 2)) / sliderWidth + 0.01);
-    }
+    };
     const calculateToValue = (newOffset: number, knobSize: number, stepInPixels: number) => {
         return Math.ceil((newOffset + (knobSize / 2)) / stepInPixels) * stepInPixels - (knobSize / 2);
-    }
+    };
     const setToValueStatic = (newOffset: number, knobSize: number, stepInPixels: number) => {
         newOffset = calculateToValue(newOffset, knobSize, stepInPixels);
         setToValue(newOffset);
         setToValueOffset(newOffset);
         toValueOnChange(Math.ceil(((newOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min);
-    }
+    };
     const setToValue = (newOffset: number) => {
         translateXtoValue.setValue(newOffset);
         rightBarScaleX.setValue(1.01 - ((newOffset + (knobSize / 2)) / sliderWidth));
-    }
+    };
     const setStepSize = (max: number, min: number, step: number) => {
         const numberOfSteps = ((max - min) / step);
         const stepSize = sliderWidth / numberOfSteps;
         setStepInPixels(stepSize);
         return stepSize;
-    }
+    };
     const setValueText = (totalOffset: number, isFrom = true) => {
         if (isFrom && fromValueTextRef != null) {
             const numericValue: number = Math.floor(((totalOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min;
@@ -171,7 +171,7 @@ export default (props: SliderProps) => {
             toValueOnIndicated?.(numericValue);
             toValueTextRef.current?.setNativeProps({text: numericValue.toString() + valueLabelsUnit});
         }
-    }
+    };
 
 
     // from value gesture events ------------------------------------------------------------------------
@@ -182,7 +182,7 @@ export default (props: SliderProps) => {
             setValueText(totalOffset, true);
             leftBarScaleX.setValue((totalOffset + (knobSize / 2)) / sliderWidth + 0.01);
         }
-    }
+    };
     const onHandlerStateChangeFromValue = (event: PanGestureHandlerGestureEvent) => {
         if (event.nativeEvent.state === State.BEGAN) {
             if (showValueLabelsOnlyWhenDrag) scaleTo(fromValueScale, 1);
@@ -196,10 +196,10 @@ export default (props: SliderProps) => {
             } else if (newOffset >= toValueOffset) {
                 newOffset = toValueOffset - stepInPixels;
             }
-            setFromValueStatic(newOffset, knobSize, stepInPixels)
+            setFromValueStatic(newOffset, knobSize, stepInPixels);
             if (showValueLabelsOnlyWhenDrag) scaleTo(fromValueScale, 0.01);
         }
-    }
+    };
     // ------------------------------------------------------------------------------------------------
 
     // to value gesture events ------------------------------------------------------------------------
@@ -210,7 +210,7 @@ export default (props: SliderProps) => {
             setValueText(totalOffset, false);
             rightBarScaleX.setValue(1.01 - ((totalOffset + (knobSize / 2)) / sliderWidth));
         }
-    }
+    };
     const onHandlerStateChangeToValue = (event: PanGestureHandlerGestureEvent) => {
         if (event.nativeEvent.state === State.BEGAN) {
             if (showValueLabelsOnlyWhenDrag) scaleTo(toValueScale, 1);
@@ -230,7 +230,7 @@ export default (props: SliderProps) => {
             if (showValueLabelsOnlyWhenDrag) scaleTo(toValueScale, 0.01);
             toValueOnChange(Math.ceil(((newOffset + (knobSize / 2)) * (max - min) / sliderWidth) / step) * step + min);
         }
-    }
+    };
     // ------------------------------------------------------------------------------------------------
 
     // gesture events help functions ------------------------------------------------------------------
@@ -244,8 +244,8 @@ export default (props: SliderProps) => {
 
     const setElevations = (fromValue: number, toValue: number) => {
         setFromElevation(fromValue);
-        setToElevation(toValue)
-    }
+        setToElevation(toValue);
+    };
     // ------------------------------------------------------------------------------------------------
 
     // setting bar width ------------------------------------------------------------------------------
@@ -257,26 +257,31 @@ export default (props: SliderProps) => {
             setToValueOffset(width - knobSize / 2);
             setWasInitialized(true);
         }
-    }
+    };
     // ------------------------------------------------------------------------------------------------
     const bubbleSizeMap: { [key in Size]: { width: number, height: number } } = {
         'small': {width: 20, height: 28},
         'medium': {width: 40, height: 56},
         'large': {width: 50, height: 70},
-    }
+    };
     // const bubbleSizeMap: { [key in Size]: { width: string, height: string } } = {
     //     'small': {width: `${100*20/40}%`, height: `${28*56/56}%`},
     //     'medium': {width: `${100*40/40}%`, height: `${100*56/56}%`},
     //     'large': {width: `${100*50/40}%`, height: `${100*70/56}%`},
     // }
-    const bubbleSize = typeof styleSize === "number" ? {width: styleSize, height: styleSize} : bubbleSizeMap[styleSize];
-    const bubbleBottomValue = typeof styleSize === "number" ? styleSize : bubbleSizeMap[styleSize].height;
-    const bubbleBottom = valueLabelsPosition === 'up' ? 0 : -bubbleBottomValue
+    const bubbleSize = typeof styleSize === 'number' ? {width: styleSize, height: styleSize} : bubbleSizeMap[styleSize];
+    const bubbleBottomValue = typeof styleSize === 'number' ? styleSize : bubbleSizeMap[styleSize].height;
+    const bubbleBottom = valueLabelsPosition === 'up' ? 0 : -bubbleBottomValue;
     const renderValueLabels = () => {
         return (showValueLabels &&
             <View style={{width: '100%', height: 1, flexDirection}}>
                 <Animated.View
-                    style={{position: 'absolute', bottom: 0, left: 0, transform: [{translateX: translateXFromValue}, {scale: fromValueScale}]}}
+                    style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        transform: [{translateX: translateXFromValue}, {scale: fromValueScale}]
+                    }}
                 >
                     {
                         showBubbles
@@ -348,23 +353,33 @@ export default (props: SliderProps) => {
                     }} ref={toValueTextRef}/>
                 </Animated.View>
             </View>
-        )
+        );
 
-    }
+    };
     const paddingSizeMap: { [key in Size]: number } = {
         'small': 21,
         'medium': 14,
         'large': 7
-    }
-    const styles = getStyle(knobSize)
+    };
+    const styles = getStyle(knobSize);
     return (
-        <Animated.View style={[styles.container, {opacity, padding: typeof styleSize === "number" ? styleSize / 2 : paddingSizeMap[styleSize]}]}>
+        <Animated.View style={[styles.container, {
+            opacity,
+            padding: typeof styleSize === 'number' ? styleSize / 2 : paddingSizeMap[styleSize]
+        }]}>
             {
                 valueLabelsPosition === 'up'
                     ? renderValueLabels()
                     : null
             }
-            <View style={{width: '100%', height: knobSize, marginVertical: 4, position: 'relative', flexDirection, alignItems: 'center'}}>
+            <View style={{
+                width: '100%',
+                height: knobSize,
+                marginVertical: 4,
+                position: 'relative',
+                flexDirection,
+                alignItems: 'center'
+            }}>
                 <View style={{
                     position: 'absolute',
                     backgroundColor: inRangeBarColor,
@@ -404,7 +419,8 @@ export default (props: SliderProps) => {
                     borderRadius: knobSize / 3,
                     backgroundColor: outOfRangeBarColor
                 }}/>
-                <PanGestureHandler onGestureEvent={onGestureEventFromValue} onHandlerStateChange={onHandlerStateChangeFromValue}>
+                <PanGestureHandler onGestureEvent={onGestureEventFromValue}
+                                   onHandlerStateChange={onHandlerStateChangeFromValue}>
                     {/*<Animated.View style={[styles.knob, {*/}
                     {/*    height: knobSize,*/}
                     {/*    width: knobSize,*/}
@@ -421,7 +437,8 @@ export default (props: SliderProps) => {
                         <Text style={styles.knobInnerDivider}>| | |</Text>
                     </Animated.View>
                 </PanGestureHandler>
-                <PanGestureHandler onGestureEvent={onGestureEventToValue} onHandlerStateChange={onHandlerStateChangeToValue}>
+                <PanGestureHandler onGestureEvent={onGestureEventToValue}
+                                   onHandlerStateChange={onHandlerStateChangeToValue}>
                     {/*<Animated.View style={[styles.knob, {*/}
                     {/*    height: knobSize,*/}
                     {/*    width: knobSize,*/}
@@ -447,8 +464,8 @@ export default (props: SliderProps) => {
             {
                 showRangeLabels
                     ? <View style={{width: '100%', flexDirection, justifyContent: 'space-between'}}>
-                        <Text style={{color: rangeLabelsTextColor, fontWeight: "bold", fontSize}}>{min}</Text>
-                        <Text style={{color: rangeLabelsTextColor, fontWeight: "bold", fontSize}}>{max}</Text>
+                        <Text style={{color: rangeLabelsTextColor, fontWeight: 'bold', fontSize}}>{min}</Text>
+                        <Text style={{color: rangeLabelsTextColor, fontWeight: 'bold', fontSize}}>{max}</Text>
                     </View>
                     : null
             }
@@ -483,4 +500,4 @@ const getStyle = (knobSize: number) => {
             color: 'white'
         }
     });
-}
+};

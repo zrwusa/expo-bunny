@@ -1,5 +1,14 @@
 import * as React from 'react';
-import {Animated, BackHandler, Easing, Modal, StyleSheet, TouchableWithoutFeedback, View, ViewProps,} from 'react-native';
+import {
+    Animated,
+    BackHandler,
+    Easing,
+    Modal,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    View,
+    ViewProps,
+} from 'react-native';
 import ActionGroup from './ActionGroup';
 import {ActionSheetOptions} from '../types';
 

@@ -64,9 +64,9 @@ export const makeStyles = (sizeLabor: SizeLabor, themeLabor: ThemeLabor) => {
 
     const TextButton = StyleSheet.create({
         TextButton: {
-            // flexDirection: 'row',
-            // justifyContent: 'center',
-            // alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
             // fontSize: ms.fs.m,
             paddingVertical: ms.sp.m,
             paddingHorizontal: ms.sp.m,
