@@ -4,7 +4,7 @@ import {makeStyles} from './styles';
 import {SizeLaborContext} from '../../providers/size-labor';
 import {ThemeLaborContext} from '../../providers/theme-labor';
 
-type Props = { title?: string, labelBeenRendered?: string, labelRenderedUnit?: string }
+interface Props { title?: string; labelBeenRendered?: string; labelRenderedUnit?: string }
 
 // PureComponent ensures rendering just from props or contexts changing.Not rendered by parent component
 export class DemoRegularComponent extends Component<Props> {

@@ -9,7 +9,7 @@ interface Props extends WithSizeLabor {
     tipLabel: string
 }
 
-type States = { time: Date, intervalID: ReturnType<typeof setInterval> }
+interface States { time: Date; intervalID: ReturnType<typeof setInterval> }
 
 export class DemoCCClockInner extends PureComponent<Props, States> {
     constructor(props: Props) {
