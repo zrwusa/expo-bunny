@@ -1,0 +1,1 @@
+{"ast":null,"code":"export*from\"./Settings\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/screens/DemoHealth/Settings/index.tsx"],"names":[],"mappings":"AAAA","sourcesContent":["export * from './Settings';\n"]},"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import{EDemoHello}from\"../../constants\";export var demoHello=function demoHello(payload){return{type:EDemoHello.DEMO_HELLO,payload:payload};};export var demoHello2=function demoHello2(payload){return{type:EDemoHello.DEMO_HELLO2,payload:payload};};","map":null,"metadata":{},"sourceType":"module"}

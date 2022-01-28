@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from'react';import{Text,View}from\"../UI\";var DemoFCCard=function DemoFCCard(_ref){var title=_ref.title,paragraph=_ref.paragraph,children=_ref.children;return React.createElement(View,null,React.createElement(Text,null,title),children);};export default DemoFCCard;","map":null,"metadata":{},"sourceType":"module"}

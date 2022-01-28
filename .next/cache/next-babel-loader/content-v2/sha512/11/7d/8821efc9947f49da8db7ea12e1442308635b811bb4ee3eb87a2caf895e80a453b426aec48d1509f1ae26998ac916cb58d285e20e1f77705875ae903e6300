@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./DemoSaga\";export*from\"./DemoSaga\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/screens/DemoSaga/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,kBACA","sourcesContent":["export {default} from './DemoSaga';\nexport * from './DemoSaga';\n"]},"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import*as React from'react';import{getSizeLabor}from\"./sizeLabor\";export var SizeLaborContext=React.createContext(getSizeLabor());SizeLaborContext.displayName='SizeLaborContext';","map":null,"metadata":{},"sourceType":"module"}

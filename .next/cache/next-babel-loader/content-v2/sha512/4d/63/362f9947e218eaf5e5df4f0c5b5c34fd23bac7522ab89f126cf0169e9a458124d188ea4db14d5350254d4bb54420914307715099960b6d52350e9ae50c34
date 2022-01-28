@@ -1,0 +1,1 @@
+{"ast":null,"code":"import*as React from'react';import{ThemeLaborContext}from\"./ThemeLaborContext\";export var useThemeLabor=function useThemeLabor(){return React.useContext(ThemeLaborContext);};","map":null,"metadata":{},"sourceType":"module"}

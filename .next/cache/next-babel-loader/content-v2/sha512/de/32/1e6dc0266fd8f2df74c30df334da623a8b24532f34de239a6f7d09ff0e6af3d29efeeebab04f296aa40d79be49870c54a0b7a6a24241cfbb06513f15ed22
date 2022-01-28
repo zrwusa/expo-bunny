@@ -1,0 +1,1 @@
+{"ast":null,"code":"import*as React from'react';import SafeAreaView from\"react-native-web/dist/exports/SafeAreaView\";export function SocialMediaVideoScreen(){return React.createElement(SafeAreaView,{style:{flex:1}});}","map":null,"metadata":{},"sourceType":"module"}

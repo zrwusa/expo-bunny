@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Platform from\"react-native-web/dist/exports/Platform\";export var MIN_COMPOSER_HEIGHT=Platform.select({ios:33,android:41,web:34});export var MAX_COMPOSER_HEIGHT=200;export var DEFAULT_PLACEHOLDER='Type a message...';export var DATE_FORMAT='ll';export var TIME_FORMAT='LT';","map":null,"metadata":{},"sourceType":"module"}

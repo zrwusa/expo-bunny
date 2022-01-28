@@ -1,0 +1,2109 @@
+ifconfig en0 | grep inet | grep -v inet6 | cut -d ' ' -f2
+
+gunzip -c foo.tar.gz | tar xopf -
+
+com.zrwusa.exporeactbunny
+
+sudo killall -HUP mDNSResponder; say dns cleared successfully
+
+/Users/revone/projects/expo-react-bunny/node_modules/react-native/keystores
+
+885187778268-sa6e0rubaqe1idh6323trqfdi6giqcsq.apps.googleusercontent.com
+
+
+885187778268-gpa16i4lra9rjllqeblif6rq33dut3av.apps.googleusercontent.com
+
+xcrun simctl install booted ./expo-react-bunny.app
+xcrun simctl launch booted com.zrwusa.expo-react-bunny
+
+node_modules/react-native-web/dist/modules/ImageLoader/index.js
+this is a react-native-web bug if remote uri 403 ImageUriCache will infinitely loop load
+
+
+
+
+ "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "expo-react-bunny-group",
+            "project": "expo-react-bunny",
+            "authToken": "a53f3c757fb541a694489f5df4729b85f31a09ff52ac4dfcbb0acb2b93b4ab60"
+          }
+        }
+      ]
+    }
+
+brew cask install react-native-debugger
+
+ brew reinstall react-native-debugger
+
+expo fetch:ios:certs
+
+expo fetch:android:keystore
+expo fetch:android:hashes
+
+
+kill $(lsof -t -i:8080)
+
+
+
+com.zrwusa.expo-react-bunny
+
+// Use this code snippet in your app.
+// If you need more information about configurations or implementing the sample code, visit the AWS docs:
+// https://aws.amazon.com/developers/getting-started/nodejs/
+
+// Load the AWS SDK
+var AWS = require('aws-sdk'),
+    region = "us-east-2",
+    secretName = "expo-react-bunny",
+    secret,
+    decodedBinarySecret;
+
+// Create a Secrets Manager client
+var client = new AWS.SecretsManager({
+    region: region
+});
+
+// In this sample we only handle the specific exceptions for the 'GetSecretValue' API.
+// See https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+// We rethrow the exception by default.
+
+import AWS from "aws-sdk";
+const region = "us-east-2",
+    secretName = "expo-react-bunny";
+ let   secret,
+    decodedBinarySecret;
+
+const client = new AWS.SecretsManager({
+    region: region
+});
+
+client.getSecretValue({SecretId: secretName}, function(err, data) {
+    if (err) {
+        console.log('------secret',err);
+
+        if (err.code === 'DecryptionFailureException')
+            // Secrets Manager can't decrypt the protected secret text using the provided KMS key.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+        else if (err.code === 'InternalServiceErrorException')
+            // An error occurred on the server side.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+        else if (err.code === 'InvalidParameterException')
+            // You provided an invalid value for a parameter.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+        else if (err.code === 'InvalidRequestException')
+            // You provided a parameter value that is not valid for the current state of the resource.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+        else if (err.code === 'ResourceNotFoundException')
+            // We can't find the resource that you asked for.
+            // Deal with the exception here, and/or rethrow at your discretion.
+            throw err;
+    }
+    else {
+        // Decrypts secret using the associated KMS CMK.
+        // Depending on whether the secret is a string or binary, one of these fields will be populated.
+        if ('SecretString' in data) {
+            secret = data.SecretString;
+
+        }
+        console.log('------secret',data);
+
+        // else {
+        //     let buff = new Buffer(data.SecretBinary, 'base64');
+        //     decodedBinarySecret = buff.toString('ascii');
+        // }
+    }
+
+    // Your code goes here.
+});
+
+
+font-family: "Gabriele Light Ribbon FG", "Courier New", monospace
+
+Unexpected text node: Item 2. A text node cannot be a child of a <View>
+
+
+
+const items: Item[] = [
+    {
+        "index": "A",
+        "label": "The",
+        "items": [
+            {
+                "index": "A-A",
+                "label": "quick",
+                "items": [
+                    {
+                        "index": "A-A-A",
+                        "label": "brown",
+                        "items": [
+                            {
+                                "index": "A-A-A-A",
+                                "label": "quick",
+                                "items": [
+                                    {
+                                        "index": "A-A-A-A-A",
+                                        "label": "brown",
+                                        "items": [
+                                            {
+                                                "index": "A-A-A-A-A-A",
+                                                "label": "quick",
+                                                "items": [
+                                                    {
+                                                        "index": "A-A-A-A-A-A-A",
+                                                        "label": "brown"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "index": "B",
+        "label": "fox",
+        "items": [
+            {
+                "index": "B-A",
+                "label": "jumps",
+                "items": [
+                    {
+                        "index": "B-A-A",
+                        "label": "over"
+                    }
+                ]
+            },
+            {
+                "index": "B-B",
+                "label": "the",
+                "items": [
+                    {
+                        "index": "B-B-A",
+                        "label": "lazy",
+                        "items": [
+                            {
+                                "index": "B-B-A-A",
+                                "label": "soptted"
+                            },
+                            {
+                                "index": "B-B-A-B",
+                                "label": "dog."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+
+
+
+import {createStackNavigator} from "@react-navigation/stack";
+import {RootStackParam} from "../../types/stacks";
+import {SignInScreen} from "../../screens/Auth";
+import * as React from "react";
+import {useSelector} from "react-redux";
+import {RootState} from "../../types/models";
+import HomeScreen from "../../screens/Home";
+import ProfileScreen from "../../screens/Profile";
+import DemoFCReduxHookScreen from "../../screens/DemoFCReduxHook";
+import DemoCollectionScreen from "../../screens/DemoHome";
+import DemoRouteScreen from "../../screens/DemoRoute";
+import DemoThirdPartScreen from "../../screens/DemoThirdPart";
+import DemoMapScreen from "../../screens/DemoMap/DemoMap";
+import DemoThunkCCScreen from "../../screens/DemoThunkCC";
+import TestMapScreen from "../../screens/TestMap";
+import DemoTabScreen from "../../screens/DemoTab";
+import DemoRNComponentsScreen from "../../screens/DemoRNComponents";
+import DemoNestedScreen from "../../screens/DemoNested";
+
+export const RootStack = createStackNavigator<RootStackParam>();
+
+function RootStackNavigatorWithScreensIn() {
+    const authState = useSelector((store: RootState) => store.authState);
+
+    return (
+        <RootStack.Navigator>
+            {(authState.accessToken === undefined) ? (
+                <RootStack.Screen name="SignIn" component={SignInScreen}/>
+            ) : (
+                <>
+                    <RootStack.Screen name="Home" component={HomeScreen}/>
+                    <RootStack.Screen name="Profile" component={ProfileScreen} initialParams={{id: '000'}}/>
+                    <RootStack.Screen name="DemoFCReduxHook" component={DemoFCReduxHookScreen}/>
+                    <RootStack.Screen name="DemoCollection" component={DemoCollectionScreen}/>
+                    <RootStack.Screen name="DemoRoute" component={DemoRouteScreen}/>
+                    <RootStack.Screen name="DemoThirdPart" component={DemoThirdPartScreen}/>
+                    <RootStack.Screen name="DemoMap" component={DemoMapScreen}/>
+                    <RootStack.Screen name="DemoThunkCC" component={DemoThunkCCScreen}/>
+                    <RootStack.Screen name="TestMap" component={TestMapScreen}/>
+                    <RootStack.Screen name="DemoTab" component={DemoTabScreen}/>
+                    <RootStack.Screen name="DemoNested" component={DemoNestedScreen}/>
+                    <RootStack.Screen name="DemoRNComponents" component={DemoRNComponentsScreen}/>
+                </>
+            )}
+        </RootStack.Navigator>
+    )
+}
+
+export default RootStackNavigatorWithScreensIn
+
+
+declare module 'react-native-shadow' {
+    export function BoxShadow(): React.Component;
+}
+
+
+
+declare module 'react-native-shadow' {
+    import React from "react";
+    interface BoxShadowProps extends ElementClass{
+        setting?:{
+            width?:number;
+            height?:number;
+            color?:string;
+            border?:number;
+            radius?:number;
+            opacity?:number;
+            x?:number;
+            y?:number;
+            style?:Object;
+        };
+    }
+
+    export class BoxShadow<BoxShadowProps>{
+        props:BoxShadowProps
+    }
+    export function BorderShadow(): React.Component;
+}
+
+
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+    return obj[key];
+}
+
+这是一个类型安全的解决方案，而不是简单地调用let value = obj[key];之类的东西。
+
+react-native-i18n
+formik
+babel-plugin-module-resolver
+
+Check internet connectivity
+Avoid Inline Stylings
+Exception Handling
+Always Perform Both Local and Server Validations
+Make Sure Your App is Responsive
+Add Loading spinners While Fetching The Data Or Waiting For an API Response
+
+Create a Design System spacing color typography
+Define a Theme Object
+Supply the Theme through React‘s Context API
+Break the System into Components
+Use Responsive Style Properties
+Enforce the System with TypeScript
+Evolve Your Styling Workflow
+
+react-native link react-native-vector-icons
+
+useMemo
+
+
+mport React, { Component } from "react";
+import { Button, View } from "react-native";
+
+interface IMyComponentProps {
+  colWidth?: number;
+}
+
+class MyComponent<P extends IMyComponentProps> extends Component<P> {
+  getProps() {
+    return this.props
+  }
+}
+
+interface IMyButtonProps extends IMyComponentProps {
+  title: string;
+  onPress: () => void;
+}
+
+class MyButton extends MyComponent<IMyButtonProps> {
+  render() {
+    return (
+      <View {...this.getProps()}>
+        <Button title={this.props.title} onPress={this.props.onPress} />
+      </View>
+    );
+  }
+}
+
+import { Platform, PlatformOSType } from 'react-native';
+import type { Fonts } from '../types';
+
+const fontConfig = {
+  web: {
+    regular: {
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontWeight: '400' as '400',
+    },
+    medium: {
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontWeight: '500' as '500',
+    },
+    light: {
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontWeight: '300' as '300',
+    },
+    thin: {
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+      fontWeight: '100' as '100',
+    },
+  },
+  ios: {
+    regular: {
+      fontFamily: 'System',
+      fontWeight: '400' as '400',
+    },
+    medium: {
+      fontFamily: 'System',
+      fontWeight: '500' as '500',
+    },
+    light: {
+      fontFamily: 'System',
+      fontWeight: '300' as '300',
+    },
+    thin: {
+      fontFamily: 'System',
+      fontWeight: '100' as '100',
+    },
+  },
+  default: {
+    regular: {
+      fontFamily: 'sans-serif',
+      fontWeight: 'normal' as 'normal',
+    },
+    medium: {
+      fontFamily: 'sans-serif-medium',
+      fontWeight: 'normal' as 'normal',
+    },
+    light: {
+      fontFamily: 'sans-serif-light',
+      fontWeight: 'normal' as 'normal',
+    },
+    thin: {
+      fontFamily: 'sans-serif-thin',
+      fontWeight: 'normal' as 'normal',
+    },
+  },
+};
+
+export default function configureFonts(
+  config?: { [platform in PlatformOSType | 'default']?: Fonts }
+): Fonts {
+  const fonts = Platform.select({ ...fontConfig, ...config }) as Fonts;
+  return fonts;
+}
+
+/Users/revone/Library/Android/sdk
+
+[ -d "$HOME/Library/Android/sdk" ] && ANDROID_SDK=$HOME/Library/Android/sdk || ANDROID_SDK=$HOME/Android/Sdk
+echo "export ANDROID_SDK=$ANDROID_SDK" >> ~/`[[ $SHELL == *"zsh" ]] && echo '.zshenv' || echo '.bash_profile'`
+
+
+nvm is not compatible with the npm config "prefix" option: currently set to "/usr/local"
+Run `npm config delete prefix` or `nvm use --delete-prefix v14.2.0 --silent` to unset it.
+complete:13: command not found: compdef
+➜  ~
+
+
+Google web login
+
+Reuse Components, Not Styles
+
+
+type FC<P = {}> = FunctionComponent<P>;
+type PropsWithChildren<P> = P & { children?: ReactNode };
+
+function trace<T>(arg: T): T {
+    console.log(arg);
+    return arg;
+}
+trace('aaa');
+type A<T = string> = Array<T>;
+const aa: A = [1]; // type 'number' is not assignable to type 'string'.
+const bb: A = ["1"]; // ok
+const cc: A<number> = [1]; // ok
+
+
+type cutTailFn = CutTail<typeof fn>，可以返回(a: string, b:number) => boolean
+
+type GetFnArgumentsTypeTuple<F> = F extends (...args: infer U) => any ? U : never
+
+function fn(a: string, b: number, c: boolean) {
+    return b;
+}
+
+type FnArguments = GetFnArgumentsTypeTuple<typeof fn>
+
+const variableA: FnArguments = ['i am a string', 1, false]
+
+
+type Foobar<T> = {
+  1: something, // 停止递归的分支
+  0: Foobar<...> // 继续递归的分支
+}[Condition<...>] // 一个返回字面量“1”或“0”的泛型工具
+
+
+type DeepPartial<T> = T extends Function
+  ? T
+  : T extends object
+  ? { [P in keyof T]?: DeepPartial<T[P]> }
+  : T;
+
+type PartialedWindow = DeepPartial<Window>;
+
+type-fest
+
+interface Seal {
+  name: string;
+  url: string;
+}
+interface API {
+  "/user": { name: string; age: number; phone: string };
+  "/seals": { seal: Seal[] };
+}
+const api = <URL extends keyof API>(url: URL): Promise<API[URL]> => {
+  return fetch(url).then((res) => res.json());
+};
+
+
+const keys = ["name", "age"] as const;
+
+// this is now the union we wanted, "name" | "age"
+type Keys = typeof keys[number];
+let key:Keys ='name'
+
+
+export type ForkDeep<T, U> = T extends Function
+    ? U
+    : T extends object
+        ? { [P in keyof T]: ForkDeep<T[P], U> }
+        : { [M in keyof U]: T extends boolean ? boolean : T };
+
+type A = {
+    a: {
+        "a-a": {
+            "a-a-a": boolean,
+            "a-a-b": number
+        }
+    }
+}
+
+type B = {
+    dark: string,
+    default: string
+}
+type C = ForkDeep<A, B>
+let c: C = {
+    a: {
+        "a-a":
+            {
+                "a-a-a": {dark: true, default: false},
+                "a-a-b": {dark: 1, default: 2}
+            }
+    }
+}
+
+
+enum Options {
+    ONE = 'one',
+    TWO = 'two',
+    THREE = 'three',
+}
+
+type OptionRequirements = {
+    [key in Options]: string; // Note that "key in".
+}
+
+
+once fast refresh broken,check your ts errors
+
+type UnionToIntersection<U> =
+    (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+type CheckForUnion<T, TErr, TOk> = [T] extends [UnionToIntersection<T>] ? TOk : TErr
+
+function makeObject<K extends string>(key: K & CheckForUnion<K, never, {}>): { [P in K]: string } {
+    return { [key]: "Hello, World!" } as { [P in K]: string };
+}
+
+type K = 'a'|'b'
+type OOO = CheckForUnion<K,never, {}>
+
+type Foo<T> = [T] extends [any] ? T[] : never;
+
+// 'Bar' is no longer a union.
+type Bar = Foo<string | number>;
+//   ^ = type Bar = (string | number)[]
+
+
+type GetReturnType<original extends Function> =
+    original extends (...x: any[]) => infer returnType ? returnType : never;
+const xxx = (x: string, y: number) => {
+    return {a: x, b: y}
+}
+type Ret = GetReturnType<typeof xxx>
+
+const someRandomStuff = <fn extends Function>(originalFn: fn) => {
+    const result: GetReturnType<fn> = originalFn(12345);
+
+    return result;
+}
+const innerFn = (item: number) => item;
+const xxx1 = someRandomStuff(innerFn)
+
+
+
+/**
+ * Take two objects T and U and create the new one with uniq keys for T a U objectI
+ * helper generic for `DeepMergeTwoTypes`
+ */
+type GetObjDifferentKeys<T, U> = Omit<T, keyof U> & Omit<U, keyof T>
+/**
+ * Take two objects T and U and create the new one with the same objects keys
+ * helper generic for `DeepMergeTwoTypes`
+ */
+type GetObjSameKeys<T, U> = Omit<T | U, keyof GetObjDifferentKeys<T, U>>
+type MergeTwoObjects<T, U> =
+// non shared keys are optional
+    Partial<GetObjDifferentKeys<T, U>>
+    // shared keys are recursively resolved by `DeepMergeTwoTypes<...>`
+    & { [K in keyof GetObjSameKeys<T, U>]: DeepMergeTwoTypes<T[K], U[K]> }
+// it merge 2 static types and try to avoid of unnecessary options (`'`)
+export type DeepMergeTwoTypes<T, U> =
+// check if generic types are arrays and unwrap it and do the recursion
+    [T, U] extends [(infer TItem)[], (infer UItem)[]]
+        ? DeepMergeTwoTypes<TItem, UItem>[]
+        // check if generic types are objects
+        : [T, U] extends [{ [key: string]: unknown }, { [key: string]: unknown }]
+        ? MergeTwoObjects<T, U>
+        : [T, U] extends [{ [key: string]: unknown } | undefined, { [key: string]: unknown } | undefined]
+            ? MergeTwoObjects<NonNullable<T>, NonNullable<U>> | undefined
+            : T | U
+
+// test cases:
+type A = { key1: { a: { b: 'c' } }, key2: undefined }
+type B = { key1: { a: {} }, key3: string }
+
+const fn = (c: DeepMergeTwoTypes<A, B>) => c.key3
+
+
+
+export type TreeLeafDeep<T, U> = T extends Function
+    ? U
+    : T extends object
+        ? { [P in keyof T]: TreeLeafDeep<T[P], U> }
+        : U;
+
+export type ForkDeep<T, U> = T extends object ? { [P in keyof T]: ForkDeep<T[P], U> }
+    : { [M in keyof U]: T extends boolean ? boolean : T }
+
+
+
+
+
+export type DeepRecord<T, U> = T extends { [key: string]: any } ? { [P in keyof T]: DeepRecord<T[P], U> }
+    : T extends { [key: string]: any } | undefined ? { [P in keyof T]: DeepRecord<T[P], U> }
+        : T extends boolean ? { [M in keyof U]: boolean }
+            : T extends string ? { [M in keyof U]: string }
+                // Todo : T extends (infer F) ? { [M in keyof U]: F}
+                : { [M in keyof U]: T }
+// Test
+type A = {
+    a1: number,
+    a2: number,
+}
+
+type B = {
+    b1: A,
+    b2: string,
+}
+
+type C = {
+    default: string,
+    dark: string,
+}
+
+type M = DeepXXX<B, C>
+let m: M = {
+    b1: {a1: {default: 1, dark: 2}, a2: {default: 1, dark: 2}},
+    b2: {default: '1', dark: '2'}
+}
+
+function instanceOf<T>(object: any): object is T {
+    return object.discriminator === 'I-AM-A';
+}
+
+function isString(s): s is string {
+    return typeof s === 'string';
+}
+function toUpperCase(x: unknown) {
+    if(isString(x)) {
+        x.toUpperCase(); // ✅ all good, x is string
+    }
+}
+toUpperCase(1)
+
+
+const ACTIVITY_ATTRIBUTES = {
+    onsite: {
+        id:  "applied",
+    },
+    donation: {
+        id: "donated",
+    },
+    online: {
+        id: "applied_online",
+    },
+    reviewe: {
+        id: "reviewed",
+    },
+}
+
+export type ContactAttribute = "applied" | "applied_online" | "donated" | "messaged" | "reviewed"
+
+function isOfTypeContact (inputId: string): inputId is ContactAttribute {
+    return ["applied", "applied_online", "donated", "messaged", "reviewed"].includes(inputId);
+}
+
+console.log(isOfTypeContact(ACTIVITY_ATTRIBUTES.onsite.id)) // true
+
+function shallowEqual(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (let key of keys1) {
+    if (object1[key] !== object2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+nested tiered
+
+
+type Category={
+    a:string
+}
+
+export class CategoryObject implements Category {
+    constructor() {
+
+    }
+    a: string = '';
+}
+const category: Category = new CategoryObject()
+
+const data = {
+  value: 123,
+  text: 'text',
+  subData: {
+    value: false
+  }
+};
+type Data = typeof data;
+// type Data = {
+//   value: number;
+//   text: string;
+//   subData: {
+//     value: boolean;
+//   };
+// }
+
+
+
+const data = ['text 1', 'text 2'] as const;
+type Data = typeof data[number];
+// type Data = "text 1" | "text 2"
+
+const locales = [
+  {
+    locale: 'se',
+    language: 'Swedish',
+  },
+  {
+    locale: 'en',
+    language: 'English',
+  }
+] as const;
+type Locale = typeof locales[number]['locale'];
+// type Locale = "se" | "en"
+
+
+
+const currencySymbols = {
+  GBP: '£',
+  USD: '$',
+  EUR: '€',
+}
+type CurrencySymbol = keyof typeof currencySymbols;
+// type CurrencySymbol = "GBP" | "USD" | "EUR"
+
+type-fest A collection of essential TypeScript types
+ts-essentials All basic TypeScript types in one place
+typescript-conditional-types Helpers for typescript generic types
+ts-types-utils Type utilities for typescript
+type-zoo A menagerie of useful type operators for TypeScript
+unionize Boilerplate-free functional sum types in TypeScript
+hkts A simple encoding of higher-kinded types in TypeScript
+safe-units Type-safe TypeScript units of measure
+type-plus Additional types and types adjusted utilities for TypeScript
+is Type check values
+conditional-type-checks Types for testing TypeScript types.
+ts-transformer-keys
+
+type TypeName<T> = T extends string
+  ? "string"
+  : T extends number
+  ? "number"
+  : T extends boolean
+  ? "boolean"
+  : T extends undefined
+  ? "undefined"
+  : T extends Function
+  ? "function"
+  : "object";
+
+
+  npm install diff --save
+
+
+  You cannot use the Updates module in development mode in a production app. To test manual updates, make a release build with `npm run ios --configuration Release` or `npm run android --variant Release`.
+
+
+  warn Calling react-native link [packageName] is deprecated in favor of autolinking. It will be removed in the next major release.
+  Autolinking documentation: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md
+
+
+
+React has detected a change in the order of Hooks called by App. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://fb.me/rules-of-hooks
+Rendered fewer hooks than expected. This may be caused by an accidental early return statement.
+
+    "@react-navigation/bottom-tabs": "^5.11.2",
+
+ "@react-navigation/drawer": "^5.11.5",
+    "@react-navigation/native": "^5.8.10",
+    "@react-navigation/stack": "^5.12.8",
+
+node_modules/@react-navigation/stack/lib/module/navigators/createStackNavigator.js
+
+                    <ButtonTO onPress={() =>
+                        navigation.navigate('DemoNested', {
+                            screen: 'NestedSettings',
+                            params: {
+                                screen: 'NestedLv2Settings',
+                                params: {item: "001"},
+                            },
+                        })
+                    }><InButtonText>{st(`passParamsFromRootToLeaf`)}</InButtonText></ButtonTO>
+
+                    {
+                                        stack: Stacks.DemoNestedLv2Stack,
+                                        name: "NestedSettings",
+                                        path: "nested-settings/:item",
+                                        parse: {
+                                            item: (item: string) => `${item}`,
+                                        },
+                                        options: {...optionsHeaderAndAnimation, headerShown: true},
+                                        screenOptions: optionsHeaderAndAnimation,
+                                        navigatorType: 'stack',
+                                        childrenNode: [
+                                            {
+                                                component: NestedLv2HomeScreen,
+                                                name: "NestedLv2Home",
+                                                path: "nested-lv2-home",
+                                                navigatorType: 'stack',
+                                            },
+                                            {
+                                                component: NestedLv2SettingsScreen,
+                                                name: "NestedLv2Settings",
+                                                path: "nested-lv2-settings/:item",
+                                                parse: {
+                                                    item: (item: string) => `${item}`,
+                                                },
+                                                navigatorType: 'stack',
+                                            }
+                                        ]
+                                    }
+Layout With Flexbox
+Aspect Ratio
+Screen Dimensions
+Detect the Platform
+Device Screen Orientation
+
+
+                // let ios = {
+                //     "env": {
+                //         "EXPO_TARGET": "managed",
+                //         "NODE_ENV": "development",
+                //     },
+                // }
+                // let next = {
+                //     version: 'v14.2.0',
+                //     versions: {
+                //         node: '14.2.0',
+                //         v8: '8.1.307.31-node.33',
+                //         uv: '1.37.0',
+                //         zlib: '1.2.11',
+                //         brotli: '1.0.7',
+                //         ares: '1.16.0',
+                //         modules: '83',
+                //         nghttp2: '1.40.0',
+                //         napi: '6',
+                //         llhttp: '2.0.4',
+                //         openssl: '1.1.1g',
+                //         cldr: '36.1',
+                //         icu: '66.1',
+                //         tz: '2019c',
+                //         unicode: '13.0'
+                //     },
+                //     arch: 'x64',
+                //     platform: 'darwin',
+                //     release: {
+                //         name: 'node',
+                //         sourceUrl: 'https://nodejs.org/download/release/v14.2.0/node-v14.2.0.tar.gz',
+                //         headersUrl: 'https://nodejs.org/download/release/v14.2.0/node-v14.2.0-headers.tar.gz'
+                //     },
+                //     "moduleLoadList":
+                //         [
+                //             'Internal Binding native_module',
+                //             'Internal Binding errors',
+                //             'Internal Binding buffer',
+                //             'NativeModule internal/errors',
+                //             'Internal Binding config',
+                //             'Internal Binding constants',
+                //             'Internal Binding util',
+                //             'Internal Binding types',
+                //             'NativeModule internal/util',
+                //             'NativeModule internal/util/types',
+                //             'NativeModule internal/assert',
+                //             'Internal Binding icu',
+                //             'NativeModule internal/util/inspect',
+                //             'NativeModule events',
+                //             'Internal Binding string_decoder',
+                //             'NativeModule internal/validators',
+                //             'NativeModule internal/buffer',
+                //             'NativeModule buffer',
+                //             'NativeModule internal/process/per_thread',
+                //             'Internal Binding process_methods',
+                //             'Internal Binding credentials',
+                //             'Internal Binding async_wrap',
+                //             'Internal Binding task_queue',
+                //             'NativeModule internal/async_hooks',
+                //             'NativeModule internal/process/promises',
+                //             'NativeModule internal/fixed_queue',
+                //             'NativeModule internal/process/task_queues',
+                //             'Internal Binding trace_events',
+                //             'NativeModule internal/console/constructor',
+                //             'NativeModule internal/console/global',
+                //             'NativeModule internal/util/inspector',
+                //             'Internal Binding inspector',
+                //             'NativeModule internal/querystring',
+                //             'NativeModule internal/constants',
+                //             'NativeModule path',
+                //             'Internal Binding url',
+                //             'NativeModule internal/url',
+                //             'NativeModule internal/encoding',
+                //             'Internal Binding timers',
+                //             'NativeModule internal/linkedlist',
+                //             'NativeModule internal/priority_queue',
+                //             'NativeModule internal/util/debuglog',
+                //             'NativeModule internal/timers',
+                //             'NativeModule timers',
+                //             'NativeModule internal/process/execution',
+                //             'NativeModule internal/process/warning',
+                //             'NativeModule internal/process/signal',
+                //             'Internal Binding options',
+                //             'NativeModule internal/options',
+                //             'NativeModule internal/bootstrap/pre_execution',
+                //             'NativeModule internal/inspector_async_hook',
+                //             'Internal Binding report',
+                //             'NativeModule internal/process/report',
+                //             'Internal Binding fs',
+                //             'NativeModule internal/fs/utils',
+                //             'Internal Binding fs_dir',
+                //             'NativeModule internal/fs/dir',
+                //             'NativeModule fs',
+                //             'NativeModule internal/idna',
+                //             'NativeModule url',
+                //             'NativeModule internal/modules/cjs/helpers',
+                //             'NativeModule internal/source_map/source_map_cache',
+                //             'Internal Binding contextify',
+                //             'NativeModule vm',
+                //             'Internal Binding module_wrap',
+                //             'NativeModule internal/modules/esm/module_job',
+                //             'NativeModule internal/modules/esm/module_map',
+                //             'NativeModule internal/modules/esm/resolve',
+                //             'NativeModule internal/modules/esm/get_format',
+                //             'NativeModule internal/modules/esm/get_source',
+                //             'NativeModule internal/modules/esm/transform_source',
+                //             'NativeModule internal/modules/esm/create_dynamic_module',
+                //             'NativeModule internal/modules/esm/translators',
+                //             'NativeModule internal/modules/esm/loader',
+                //             'NativeModule internal/vm/module',
+                //             'NativeModule internal/process/esm_loader',
+                //             'NativeModule internal/modules/cjs/loader',
+                //             'NativeModule internal/modules/run_main',
+                //             'Internal Binding os',
+                //             'NativeModule os',
+                //             'NativeModule internal/streams/destroy',
+                //             'NativeModule internal/streams/pipeline',
+                //             'NativeModule internal/streams/end-of-stream',
+                //             'NativeModule internal/streams/legacy',
+                //             'NativeModule internal/streams/buffer_list',
+                //             'NativeModule internal/streams/state',
+                //             'NativeModule _stream_readable',
+                //             'NativeModule _stream_writable',
+                //             'NativeModule _stream_duplex',
+                //             'NativeModule _stream_transform',
+                //             'NativeModule _stream_passthrough',
+                //             'NativeModule stream',
+                //             'NativeModule internal/net',
+                //             'Internal Binding uv',
+                //             'Internal Binding stream_wrap',
+                //             'Internal Binding tcp_wrap',
+                //             'Internal Binding pipe_wrap',
+                //             'NativeModule internal/stream_base_commons',
+                //             'Internal Binding dtrace',
+                //             'NativeModule internal/dtrace',
+                //             "89moreitems"
+                //         ],
+                // }
+web = {"title":"browser","browser":true,"env":{},"argv":[],"version":"","versions":{}}
+
+fatpomelo.com
+revonediablo.com
+
+    "react-native-web": "~0.13.18",
+    "react-native-web-maps": "^0.3.0",
+
+Like it is described in GoogleChrome/workbox#1790 there is no good way to fix this (especially from Quasar side). However, we do not want to supply a dummy service worker in dev mode because that would make the whole developer experience awful. You'd be able to test your service worker only on production builds which adds a lot of overhead and time lost. But like we wrote in our docs, when you develop an app and your goal at that moment does not include handling the service worker, you can temporarily switch to "quasar dev -m spa". Wish the workbox team would find a way to avoid the issue, but at the moment, it is what it is.
+
+https://api.nomics.com/v1/currencies/ticker?key=9eef7b9eb970415233a0e2db897010d0&ids=BTC,ETH,XRP&interval=1h,30d&convert=EUR&per-page=100&page=1
+
+
+First page blocked by robots meta content "noindex, nofollow"
+import compose from 'ramda';
+import withRedux from './with-redux.js';
+import withAuth from './with-auth.js';
+import withLogging from './with-logging.js';
+import withLayout from './with-layout.js';
+const page = compose(
+  withRedux,
+  withAuth,
+  withLogging,
+  withLayout('default'),
+);
+export default page;
+
+Don’t Repeat Yourself (DRY)
+Do One Thing (DOT) (from Unix philosophy)
+Separation of Concerns
+The Principle of Least Knowledge (Law of Demeter)
+
+Uncaught TypeError: Object(...) is not a function
+
+Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+
+Name	DeepSkyBlue
+Rgb	rgb(0, 191, 255)
+Hex	#00bfff
+Hsl	hsl(195, 100%, 50%)
+Hwb	hwb(195, 0%, 0%)
+Cmyk	cmyk(100%, 25%, 0%, 0%)
+Ncol	C25, 0%, 0%
+
+mobx-state-tree
+immutable-js
+redux-saga
+
+<SafeAreaProvider initialMetrics={initialWindowMetrics}>
+
+
+1、 截图中出现了Android
+2、 截图中出现了hack苹果的内容
+3、 评论中出现了“屌丝”等不雅词汇
+4、 App中包含谈论Android系统的内容
+5、 你修改了状态栏，不行
+6、 只有第三方登录，没有自己的注册登陆功能，不行
+7、 您的应用包括色情内容（色情交易，色情展示）
+8、 有微信分享功能，结果因为要强制用户安装微信，才能使用该功能，被拒
+9、 应用内用了圆角按钮，无情被拒
+10、 你给我解释解释，应用里的积分从哪里来，到哪里去？
+11、 应用里面表示有广告，但是审核者玩了后说没广告，后来申述成功，因为第二次游戏的时候才会出现广告（虐心重复向游戏），你丫就不能玩两遍么，一遍就几十秒~~
+12、 有第三方支付（支付宝）果断被拒！！！
+13、 因为集成了友盟 友盟获取用户mac地址被拒了。
+14、 您的内容因为没有举报功能、含有色情内容不能通过。
+15、 使用第三方的logo被拒(由于涉及到联通运营方面 果断在关于里面加了个联通的logo 标识合作伙伴 果断被拒 要求提供联通的书面证明。)
+16、 没给测试帐号
+17、 QR CODE里边有android的下载地址（直接转跳iTunes后通过）
+18、 不符合iOS UI审美观（改UI）
+19、 只有第三方登陆，没有自己的注册登陆功能...（新增登陆注册功能通过）
+20、 你的软件加了强制评论功能：就一个按钮点击进入评论，必须改成先提示框提醒用户是否进入评论.
+21、 存放文档的地方由于iCloud会自动备份而被拒绝，只有用户自己使用和创建出来的才允许放在Document文件夹下。
+22、 审核员打不开我的接口，换海外vps，过最蛋疼的。
+23、 因为截图里面放了iPhone的模型被拒。
+24、 游戏运行崩溃；
+25、 游戏截图中有“测试字样”；
+26、 游戏太简单；
+27、 一次提交多个相同的游戏；
+28、 游戏中使用其他版权图片（使用了flappybird原图）
+29、 加了广告框架，游戏中缺没有广告显示（其实是在game over时候显示，结果测试人员就一直不知道怎么能死）；
+30、 内购不能使用；
+31、 game center不能使用。
+32、 App Store显示名字和软件名称不符合。
+33、 支付时不得强制获取用户信息（比如 登陆、注册），必须在看到价格之前让用户登陆、注册。
+34、 App内购，产品类型不对。
+35、 内购没有Restore按钮；
+36、 有登陆注册功能，但没有提供测试账户（大意了）
+37、 有去除广告的按钮，但没发现有广告。(后来截了个图，回复审核那边，两小时之内就通过审核了)
+38、 版权问题。没有提供相关的版权文件
+39、 评级问题：提交的时候是评级4星，后来被拒，改成12星，通过审核了。
+40、 关键字不符合要求
+41、 内容太简单，说是浪费用户时间
+42、 界面风格不符合iOS风格
+43、 应用评级，从4+改成12+，再改成16+最后说我不符合16+，我再改回4+，竟然过了...
+44、 Splash上放了个蝙蝠侠蜘蛛侠，版权问题未给通过，后让UI改画了一个猥琐男人，通过了。
+45、 应用内有个保存图片至相册的按钮，然后plist里有个Application supports iTunes file sharing设为了yes，无情被拒。
+46、 用户在应用里自己下载的文档都不能存放在Document文件夹下，被拒。
+47、 为了获得审查应用程序的完整功能，我们需要相关的硬件。 我以前都是录制一个操作视频上传然后就通过了，这回我录了2次都是相同的回复，不知道抽什么风。
+48、 做了款社交的软件，上线的时候没有提供账号和密码，导致审核的时候进不去,reject. ps:那么大个注册 看不到么？看不到么？
+49、 论坛模块里由用户发的活动贴提到安卓平台和WP平台被拒，然后我说我没问题，他说三个工作日之内电话联系，过去4-5天了，还没联系。
+50、 按钮位置不符合ios风格。
+51、 一个笑话APP，开机画面上有“逗比”这两个字，苹果审核说含有粗俗不文明的文字，然后被拒了。
+52、 QQ登陆功能，但是没下载QQ就不行。
+53、 第一次没有给用户举报的功能。加了只有新浪和qq登录没有自己的登录注册系统（QQ SDK的没装QQ提示的是下载）。好像还有没有用户协议巴拉巴拉，反正那次审核就耗一月的时间。
+54、 审核人员打开app无法加载内容，一般是因为国内服务器的问题。解决方法是录个app的操作视频，放到youtube上，发给苹果，屡试不爽。
+55、 界面太丑被拒，换了张背景图通过了。
+56、 iPad 写成了IPad。
+57、 没提供注册功能，被拒...开放注册通过；
+58、 按钮图片类似iPhone桌面图标被拒；
+59、 因为iCloud云备份的问题被拒绝，将备份功能关闭通过。
+60、 使用第三方SDK，有个提示信息遮挡了状态栏。
+61、 图片上有链接。
+62、 因为有android关键字被拒绝了，因为描述中有android关键字被拒绝了，因为有swfit关键字是个没发布的语言被拒绝了。因为按钮点击无效被拒绝了。
+63、 内容包含苹果产品iPad
+64、 有竖中指的图片
+65、 IDFA展示广告没有提供视频
+？66、 注册页未添加pravicy声明文件。
+67、 iTunes升级后，分级莫名奇妙由12+变成了4+。
+68、 用了显眼的词语,其实就是"Beautiful girl"之类的，说内容令人反感。
+69、 引导页文案与内容不符。
+70、 因为应用截图被拒。美术偷懒给了4张android的截图，虽然app内容是一样的，但是顶部的状态栏是Android的！
+71、 名字不符合，包含不良信息，包含与当前app不符的内容，包含特殊含义的歧义字符
+72、 App中有积分墙
+73、 App中有第三方支付(如短信支付，积分墙支付)
+74、 App的功能过于单一或仅仅是一个demo
+75、 在注册时强制获取用户信息
+76、 需要提供原作者的版权授权书
+77、 App中有IAP内购，但是没有恢复内购的按钮
+78、 强制玩家给App评5星好评
+79、 没有兼容iOS
+80、 做了一款智能家居的应用，没有提供应用控制智能设备的视频地址没拒，每一次提交新版都要确保你的视频地址是否有效，有一次我就没有确认(YouTube的个人视频上传之后如果不设置成公共视频过一段时间就会转为私有的，除了自己别人无法访问)，然后视频地址刚好无效了。。。
+81、 资讯客户端焦点图放出了盘古破解iOS8越狱的新闻。。
+82、 截图中出现一只玩具企鹅，然后拒绝说我们发现这个营销截图不能充分反映你的应用使用
+83、 成人应用可以上架AppStore：内容必须“有用”
+？启用后台服务，以使其在审核期间处于活动和可用状态
+？1.5 开发者信息，用户需要知道如何就疑问和支持问题与您取得联系。请确保您的支持 URL 中包含便捷的联系方式。如果未能提供准确的最新联系信息，不但会让客户有不好的感受，可能还会违反某些国家/地区的法律。另外，请确保在 Wallet 凭证中包含发卡机构的有效联系方式，以及分配给凭证的品牌或商标所有者的专用证书。
+？请使用 TestFlight。所有通过 TestFlight 提交以进行测试发布的 App 都应旨在公开发布，并应遵循“App Review 准则”。请注意，使用 TestFlight 的 App 不得分发给测试者用以换取任何类型的报酬，包括作为众筹资金的奖励。对于测试版 App 的大幅更新应先提交至 TestFlight App Review 团队，然后再分发给您的测试者。要了解更多信息，请访问“TestFlight Beta Testing”。
+？(ii) 这些 App 必须使用 Xcode 中提供的技术来进行打包和提交；不允许使用第三方安装器。另外，这些 App 必须是单个的自包含应用程序安装包，不能将代码或资源安装在共享位置。
+？(ix) 这些 App 必须在单个 App 套装内包含所有的语言和本地化支持
+？2.5.1 App 可以只使用公共 API。进一步了解公共 API。
+？2.5.4 多任务处理 App 只允许在实现预期用途时使用后台服务：VoIP、音频播放、地理位置、任务完成记录和本地通知等。如果 App 使用定位后台模式，请提醒用户，这么做会大幅缩短电池使用时间。
+？2.5.5 我们将在 IPv6 网络上进行审核。如果您的 App 无法与 IPv6 寻址功能兼容，则可能无法通过审核。
+？2.5.7 基于蜂窝移动网络且超过 10 分钟的视频流内容必须使用 HTTP Live Streaming，并包含一个基准 192 kbps HTTP Live Stream。
+？2.5.9 如果 App 会改变标准开关（如音量增/减和铃声/静音开关）的功能，或改变其他的原生用户界面元素或行为，则该 App 会遭到拒绝。
+？4.2.1 App 应该为实现预期用途而使用 API 和框架，并在 App 描述中说明集成详情。例如，HomeKit 框架应提供家居自动化服务，HealthKit 则应该用于保持健康和健身目的，并集成在“健康”App 中。
+?(i) 如果 app 会收集用户信息或使用数据，其内必须制定隐私政策，并征得用户的同意才能收集。这包括（但不限于）以下 app：实施 HealthKit 或其他健康/医疗技术、HomeKit、键盘扩展功能、Apple Pay、表情贴纸和 iMessage 扩展功能的 app；包含登录信息的 app；或访问设备上用户数据（例如位置、通讯录、日历等）的 app。
+?(ii) 如果 app 不包含基于帐户的重要功能，请允许用户在不登录的情况下使用。App 不得要求用户提供个人信息才能正常使用，除非个人信息与 app 的核心功能直接相关，或是法律要求时。如果您的核心 app 功能与特定的社交网络（如 Facebook、微信、微博或 Twitter 等）不相关，您必须提供无需登录或其他类似机制的访问权限。调取基本档案信息、分享到社交网络或邀请朋友使用 app 等不视为核心 app 功能。
+?5.1.5 定位服务
+
+ 只有在定位服务与 App 提供的功能和服务直接相关时，才能在 App 中使用定位服务。基于位置的 API 不得用于提供紧急服务，不得对汽车、飞机和其他设备进行自主控制（小型设备，如轻量无人机和玩具除外），不得遥控汽车防盗系统等。在收集、传输或使用位置数据之前，务必进行通知并获得用户同意。如果 App 会使用后台定位服务，请务必在 App 中说明相应的原因；请参考“Human Interface Guidelines”，了解相应的最佳做法。
+
+ clutch icon shuffle deny minute unusual stumble rack december resemble village pig
+
+ [Unhandled promise rejection: Error: Expected a JSON response from server when fetching Expo token
+
+    "expo-notifications": "^0.9.0",
+
+todo 4.4.1 键盘扩展功能还需要遵循一些额外的规则。
+Expedite Review
+
+Google login
+{
+  "accessToken": "ya29.a0AfH6SMAcaXbMp1sCPZ0AdbqW1XYccIkMYSUrxCsJzVkpZ3O-2zH-sjwAnbrIFheaq-RNBJZK2tVVNbjEP96ZyVI5cMNF_Slur2cZDGcq99ZkP_zVKN417i3GVcz9dtxsjvDbFlnKIDLDMqbN0_MNLES31LulcsFdoX8doeefNNM",
+  "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2MTI5YmE1NDNjNTZlOWZiZDUzZGZkY2I3Nzg5ZjhiZjhmMWExYTEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI4ODUxODc3NzgyNjgtc2E2ZTBydWJhcWUxaWRoNjMyM3RycWZkaTZnaXFjc3EuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI4ODUxODc3NzgyNjgtc2E2ZTBydWJhcWUxaWRoNjMyM3RycWZkaTZnaXFjc3EuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDAzNTUzOTM2NzY4Mzk4MDI4MDciLCJlbWFpbCI6Inpyd3VzYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IlZTZWtkNU9KNWV1dThOOEgxM1dJNVEiLCJub25jZSI6IklBOGdJQ09kazZuZ1BoM0JCeXdQYzRJYlVqRlNjdFJkajY5RHF6SlJDWEUiLCJuYW1lIjoiUnVpd2VuIFplbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2drYm1ER0hFaHUtVjN1THVuVUowSUJDQm5PNWxsLVZMOFJCbkNVPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlJ1aXdlbiIsImZhbWlseV9uYW1lIjoiWmVuZyIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNjA5NDE2Mjk0LCJleHAiOjE2MDk0MTk4OTR9.ZArHCpyt7EIH_nJA9amAL-HMiKW9t5OW5SIP3GERxv5juh-EzoEtiq_cpdvqTK5bOj9pPkFafbuQsCeL0l7fAIpxHuToPnc4FBq6FlngbelBs5rfCU9_O_sS1aFzoUxrGm__d-FmnKmozaE0IEerJ6JiCJE6CBIaXJGL9lYOLI3wnCOqa3-hHguMPYGG-yY86mcKaPQ9oiyVLlCpfEeI2XupA9s4YCj-F7irw0GeRp0W7UbsMBWEc-v7709HQOEgtZAIQLjp4UFjvXd-PNKw-jga2LSmg6Y3ylmrljMY0Qw_3h9Fq9qf2RnsPCjreGWZ7z63KKsoXLLtn5nfU0ARZg",
+  "refreshToken": "1//0guuIAmObLC1NCgYIARAAGBASNwF-L9IrUGOLzPZJGkva9n_2STWdimyb21euB4m6qHvBmkPl5q7NkwNHpGasJmH_n42P3AaddF4",
+  "type": "success",
+  "user": {
+    "email": "zrwusa@gmail.com",
+    "familyName": "Zeng",
+    "givenName": "Ruiwen",
+    "id": "100355393676839802807",
+    "name": "Ruiwen Zeng",
+    "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c"
+  }
+}
+
+
+info Opening /Users/revone/projects/expo-react-bunny/src/screens/DemoBitcoin/BitcoinAlert/BitcoinAlert.tsx with webstorm
+error spawn webstorm ENOENT
+info
+ How to fix:
+  When you see Red Box with stack trace, you can click any
+  stack frame to jump to the source file. The packager will launch your
+  editor of choice. It will first look at REACT_EDITOR environment
+  variable, then at EDITOR.
+  To set it up, you can add something like
+  export REACT_EDITOR=atom to your ~/.bashrc or ~/.zshrc depending on
+  which shell you use.
+
+    "expo-error-recovery": "^2.0.1",
+
+
+let's encrypt是免费的，七牛和阿里云的SSL都是免费的……
+
+naming convention
+Airbnb React/JSX Style Guide
+https://github.com/airbnb/javascript/tree/master/react
+
+moment、numeral、jest
+
+
+
+// interface Seal {
+//     name: string;
+//     url: string;
+// }
+// interface API {
+//     "/user": { name: string; age: number; phone: string };
+//     "/seals": { seal: Seal[] };
+// }
+// const apiTODO = <URL extends keyof API>(url: URL): Promise<API[URL]> => {
+//     return fetch(url).then((res) => res.json());
+// };
+
+&#32; == 普通的英文半角空格
+&#160; == &nbsp; == &#xA0; == no-break space （普通的英文半角空格但不换行）
+&#12288; == 中文全角空格 （一个中文宽度）
+&#8194; == &ensp; == en空格 （半个中文宽度）
+&#8195; == &emsp; == em空格 （一个中文宽度）
+&#8197; == 四分之一em空格 （四分之一中文宽度）
+
+
+HTTPS SSL
+So, quick sanity to make sure this issue is related to SSL/TLS, try sending the request with the "SSL certificate verification" option disabled. (Settings -> General -> Request)
+
+If the server requires client certificates to be sent with the request, configure appropriate client certificates. (Settings -> Certificates -> Client Certificates)
+
+And if you are trying to request an untrusted host (e.g, localhost) add the CA certificate of the server. (Settings -> Certificates -> CA Certificates)
+
+Also, check if there's any warning/debug message when you make the request using curl with the -v flag.
+
+
+DEV development 开发
+SIT System Integrate Test 系统整合测试（内测）
+UAT User Acceptance Test 用户验收测试
+PET Performance Evaluation Test 性能评估测试（压测）
+SIM simulation 仿真
+PRD/PROD production 产品/正式/生产
+
+pro环境：生产环境，面向外部用户的环境，连接上互联网即可访问的正式环境。
+
+pre环境：灰度环境，外部用户可以访问，但是服务器配置相对低，其它和生产一样。
+
+test环境：测试环境，外部用户无法访问，专门给测试人员使用的，版本相对稳定。
+
+dev环境：开发环境，外部用户无法访问，开发人员使用，版本变动很大。
+
+
+${ANDROID_HOME}/emulator
+./emulator -avd Pixel_XL_API_29 -writable-system
+
+While on${ANDROID_HOME}/tools:
+/Users/revone/Library/Android/sdk/tools
+
+# adb disable-verity
+
+
+VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc.
+
+Excessive number of pending callbacks: 501. Some pending callbacks that might have leaked by never being called from native code
+
+
+       let cardData = [{id:'0'},{id:'1'}];
+        for (let i = 0; i < 2; i++) {
+            for (let m = 0;m<cardData.length;m++ ) {
+                cardData[m].id = i.toString()+m.toString();
+                console.log(i.toString()+m.toString())
+                console.log(cardData)
+            }
+        }
+
+Encountered a fatal error during playback: The AVPlayerItem instance has failed with the error code -1001 and domain "NSURLErrorDomain".
+
+Encountered a fatal error during playback: The decoder required for this media is busy. - The AVPlayerItem instance has failed with the error code -11839 and domain "AVFoundationErrorDomain".
+
+
+React.ReactElement<MaterialCommunityIconsProps>
+React.Component<MaterialCommunityIconsProps>
+JSX.Element
+React.FC
+React.ComponentType<MaterialCommunityIconsProps>
+
+
+ 1. Clear watchman watches: watchman watch-del-all
+ 2. Delete node_modules and run yarn install
+ 3. Reset Metro's cache: yarn start --reset-cache
+ 4. Remove the cache: rm -rf /tmp/metro-*
+
+
+TypeScript: The tsconfig.json has been updated (Use EXPO_NO_TYPESCRIPT_SETUP to skip)
+
+› Required modifications made to the tsconfig.json:
+
+  extends is now expo/tsconfig.base
+
+ - react-native-pager-view - expected version range: 5.0.12 - actual version installed: ^5.1.3
+ - react-native-screens - expected version range: ~3.0.0 - actual version installed: ^3.1.1
+ - react-native-svg - expected version range: 12.1.0 - actual version installed: ^12.1.1-0
+
+
+ react-native link @react-native-community/art
+warn Calling react-native link [packageName] is deprecated in favor of autolinking. It will be removed in the next major release.
+Autolinking documentation: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md
+
+
+react-native unlink @react-native-community/art
+warn Calling react-native unlink [packageName] is deprecated in favor of autolinking. It will be removed in the next major release.
+Autolinking documentation: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md
+
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if
+          request.time < timestamp.date(2021, 3, 3);
+    }
+  }
+}
+
+
+                const firebaseLoginResult = {
+                    "additionalUserInfo": {
+                        "isNewUser": false,
+                        "profile": {
+                            "at_hash": "SDnfeW6zx5drewlYJvSmZw",
+                            "aud": "885187778268-sa6e0rubaqe1idh6323trqfdi6giqcsq.apps.googleusercontent.com",
+                            "azp": "885187778268-sa6e0rubaqe1idh6323trqfdi6giqcsq.apps.googleusercontent.com",
+                            "email": "zrwusa@gmail.com",
+                            "email_verified": true,
+                            "exp": 1619078516,
+                            "family_name": "Zeng",
+                            "given_name": "Ruiwen",
+                            "iat": 1619074916,
+                            "iss": "https://accounts.google.com",
+                            "locale": "en",
+                            "name": "Ruiwen Zeng",
+                            "nonce": "sz0kkQoSbxAmXmfdCOq9t2pqzB7p8VPAUCxQygADJHg",
+                            "picture": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
+                            "sub": "100355393676839802807",
+                        },
+                        "providerId": "google.com",
+                    },
+                    "credential": {
+                        "oauthAccessToken": "ya29.a0AfH6SMDApadbzXqEcP3HCWiu788yNzymjLe-PGvDyP9vtYyo6Jet-21--TN0-IcvmOkOVSovzNBPFneXGzRUegTUoRpki3WUlK7KphVHX_m7GXnVrVX7CbrXzMYjIsvQV64BNDUeAeukyd0dIRN48_LHRyYx",
+                        "oauthIdToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImRlOTU1NmFkNDY4MDMxMmMxMTdhZmFlZjI5MjBmNWY5OWE0Yzc5ZmQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI4ODUxODc3NzgyNjgtc2E2ZTBydWJhcWUxaWRoNjMyM3RycWZkaTZnaXFjc3EuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI4ODUxODc3NzgyNjgtc2E2ZTBydWJhcWUxaWRoNjMyM3RycWZkaTZnaXFjc3EuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDAzNTUzOTM2NzY4Mzk4MDI4MDciLCJlbWFpbCI6Inpyd3VzYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IlNEbmZlVzZ6eDVkcmV3bFlKdlNtWnciLCJub25jZSI6InN6MGtrUW9TYnhBbVhtZmRDT3E5dDJwcXpCN3A4VlBBVUN4UXlnQURKSGciLCJuYW1lIjoiUnVpd2VuIFplbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2drYm1ER0hFaHUtVjN1THVuVUowSUJDQm5PNWxsLVZMOFJCbkNVPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlJ1aXdlbiIsImZhbWlseV9uYW1lIjoiWmVuZyIsImxvY2FsZSI6ImVuIiwiaWF0IjoxNjE5MDc0OTE2LCJleHAiOjE2MTkwNzg1MTZ9.JBD5qJG5Kbw6Dzv-B2zu36FMes2UeS1Y7aLdvIX-iti8iqmSzKIfa5pvja4oQVmsan_oQFFTEYebB7yGdiwabVvJRfVV0fdAYAGkBw-zoOh43LALUoRtqPx6eABmA-2QAVZbKPgt0LgpMSs_pUMC-FzU7-vlnxT34HmishdssUT7q6GRFQegyFsVUYFSNqGayvT2FRgvnpXpOcLYH0jtxD7Ccz2AWgEMcSp4WFVuV81aGPO_V1F--gICA4RhENuT8ylZcdI1OoI-NOyXQ9IEHhaArmmwx2-F316eYtOEK1oQcORB7gXdo6Gnp1_4OCLFWLVOD3aX_25HHtAVZw_bzA",
+                        "providerId": "google.com",
+                        "signInMethod": "google.com",
+                    },
+                    "operationType": "signIn",
+                    "user": {
+                        "apiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4",
+                        "appName": "[DEFAULT]",
+                        "authDomain": "expo-react-bunny.firebaseapp.com",
+                        "createdAt": "1618980200837",
+                        "displayName": "Ruiwen Zeng",
+                        "email": "zrwusa@gmail.com",
+                        "emailVerified": true,
+                        "isAnonymous": false,
+                        "lastLoginAt": "1619074862196",
+                        "multiFactor": {
+                            "enrolledFactors": [],
+                        },
+                        "phoneNumber": null,
+                        "photoURL": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
+                        "providerData": [
+                            {
+                                "displayName": "Ruiwen Zeng",
+                                "email": "zrwusa@gmail.com",
+                                "phoneNumber": null,
+                                "photoURL": "https://lh3.googleusercontent.com/a-/AOh14GgkbmDGHEhu-V3uLunUJ0IBCBnO5ll-VL8RBnCU=s96-c",
+                                "providerId": "google.com",
+                                "uid": "100355393676839802807",
+                            },
+                        ],
+                        "redirectEventId": null,
+                        "stsTokenManager": {
+                            "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjOGUyYjI5NmM2ZjMyODRlYzMwYjg4NjVkNzI5M2U2MjdmYTJiOGYiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiUnVpd2VuIFplbmciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2drYm1ER0hFaHUtVjN1THVuVUowSUJDQm5PNWxsLVZMOFJCbkNVPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2V4cG8tcmVhY3QtYnVubnkiLCJhdWQiOiJleHBvLXJlYWN0LWJ1bm55IiwiYXV0aF90aW1lIjoxNjE5MDc0OTE2LCJ1c2VyX2lkIjoia3pzeFpuSkl3b095b3ZQOWJyV0ZDd05xQ2V5MiIsInN1YiI6Imt6c3habkpJd29PeW92UDlicldGQ3dOcUNleTIiLCJpYXQiOjE2MTkwNzQ5MTYsImV4cCI6MTYxOTA3ODUxNiwiZW1haWwiOiJ6cnd1c2FAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMDAzNTUzOTM2NzY4Mzk4MDI4MDciXSwiZW1haWwiOlsienJ3dXNhQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.rAo_0S1b9CSJNBB5MYK7B5qp2C_0X-umvNu6atMHD55L_j0rBfrVX_d8_MM3gWEGI9onsdryLQPO9oe2A3_PEVl3ZvYdXnXSRfhFbthTR5QhxUe9GQjgmq2xutwuHsuJskB6DGFWkIlzZXL4QXkwOuE78Vc7rQCj1bugQt5FlKBfq-WD0s0UYFW1Fg6HrM0pHgReL30TdwFLoArBTWYEEnXo9aXr9r8kA201zuOGQPdxC0_26YCpZJjTqKaohzGDrr2TjT02ADna4DtzAPBgBNDdNeWzy1x-QXduq9BaMtV-cod_FzAr8PwtHfsfee-aHe35ik6QORQCT8aHwS-shQ",
+                            "apiKey": "AIzaSyDCdDf8m_Kaf0t6J_egFFZ8ASgwUnctUL4",
+                            "expirationTime": 1619078516595,
+                            "refreshToken": "AGEhc0AGE9I1K8awvQGhd_T7Sc01fGWddTS2YZW0NJvlBqin67E02hJjrweqrFL7P6c-h4h7ITM1ZDyH25ROIPNg5H4Ez5kWAkNfTTJ9LCHZRNyW4II_tJmjT-JlbJnjRXZKnOhOPPybA2K9S2wQ-lAtRPN0my3yqqN9IXXOlvM9IO7RQN3nOxRBO72QHi8jjImHAwLToW5Gw7nQgDnPRI7pPgvznuzbHCooX9P5RpZdoiffD2kq7WlYtGpFJww3NeI27KoWcfCpYRzWdmThCFi1g0ucvNW6AMd4lerlTdLl0i1sZRHd4BVh2WXpwxCx5cy3I65fOKLevGpOCVvFRiPVcVQdnKCE39PhKYazOIoXpMGeo6uuXz6EWLchKIo43US3ArSivMyJtj8ng5A9OeCyxBTt8bQ8c-2dxv7DqjNFSM1jcfHlqUE",
+                        },
+                        "tenantId": null,
+                        "uid": "kzsxZnJIwoOyovP9brWFCwNqCey2",
+                    },
+                }
+
+
+{
+  "error": {
+    "code": 400,
+    "message": "TOO_MANY_ATTEMPTS_TRY_LATER",
+    "errors": [
+      {
+        "message": "TOO_MANY_ATTEMPTS_TRY_LATER",
+        "domain": "global",
+        "reason": "invalid"
+      }
+    ]
+  }
+}
+
+Error: We have blocked all requests from this device due to unusual activity. Try again later.
+
+/Users/revone/Library/Android/sdk/emulator/emulator @Pixel_XL_API_29
+
+
+
+
+"expo-firebase-analytics": "^4.0.2",
+    "expo-firebase-app": "^2.0.0",
+    "expo-firebase-auth": "^2.0.0",
+    "expo-firebase-crashlytics": "^2.0.0",
+    "expo-firebase-database": "^2.0.0",
+    "expo-firebase-firestore": "^2.0.0",
+    "expo-firebase-functions": "^2.0.0",
+    "expo-firebase-instance-id": "^2.0.0",
+    "expo-firebase-invites": "^2.0.0",
+    "expo-firebase-links": "^2.0.0",
+    "expo-firebase-messaging": "^2.0.0",
+    "expo-firebase-notifications": "^2.0.0",
+    "expo-firebase-performance": "^2.0.0",
+    "expo-firebase-recaptcha": "^1.4.1",
+    "expo-firebase-remote-config": "^2.0.0",
+    "expo-firebase-storage": "^2.0.0",
+    "expo-google-app-auth": "^8.1.7",
+
+    // type A = {a:string,m:string}
+    // type B = {b:string,m:string}
+    // type C = {c:string,m:string}
+    // type M = A | B | C
+    // let m:M;
+
+
+Firebase Storage: User does not have permission to access 'cbe56dc2-c857-44fc-a9e5-68e19e9c6d7e'. (storage/unauthorized)
+Couldn't start project on web: Webpack Dev Server is not running
+
+
+We couldn't find a git repository in your project directory.
+It's recommended to back up your project before proceeding.
+
+✔ Would you like to proceed? … yes
+
+✔ Created native projects
+✔ Added Metro config.
+✔ Updated package.json and added index.js entry point for iOS and Android.
+› Removed "main": "node_modules/expo/AppEntry.js" from package.json because we recommend using index.js as main instead.
+
+🧶 Using Yarn to install packages. Pass --npm to use npm instead.
+✔ Cleaned JavaScript dependencies.
+✔ Installed JavaScript dependencies.
+✔ Config synced
+
+✔ Installed pods and initialized Xcode workspace.
+
+➡️  Next steps
+› 💡 You may want to run npx @react-native-community/cli doctor to help install any tools that your app may need to run your native projects.
+› 🔑 Download your Android keystore (if you're not sure if you need to, just run the command and see): expo fetch:android:keystore
+› 📁 The property assetBundlePatterns does not have the same effect in the bare workflow.
+  Learn more: https://docs.expo.io/bare/updating-your-app/#embedding-assets
+
+☑️  When you are ready to run your project
+To compile and run your project in development, execute one of the following commands:
+› yarn ios
+› yarn android
+› yarn web
+➜  expo-react-bunny-bare
+
+
+
+
+➜  expo-react-bunny-bare git:(main) yarn android
+yarn run v1.22.10
+$ react-native run-android
+info Running jetifier to migrate libraries to AndroidX. You can disable it using "--no-jetifier" flag.
+Jetifier found 2112 file(s) to forward-jetify. Using 12 workers...
+info Starting JS server...
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+info Launching emulator...
+info Successfully launched emulator.
+info Installing the app...
+Downloading https://services.gradle.org/distributions/gradle-6.8-all.zip
+
+..............................
+Unzipping /Users/revone/.gradle/wrapper/dists/gradle-6.8-all/9emh0d32e025cam7aasxcw002/gradle-6.8-all.zip to /Users/revone/.gradle/wrapper/dists/gradle-6.8-all/9emh0d32e025cam7aasxcw002
+Set executable permissions for: /Users/revone/.gradle/wrapper/dists/gradle-6.8-all/9emh0d32e025cam7aasxcw002/gradle-6.8/bin/gradle
+
+Welcome to Gradle 6.8!
+
+Here are the highlights of this release:
+ - Faster Kotlin DSL script compilation
+ - Vendor selection for Java toolchains
+ - Convenient execution of tasks in composite builds
+ - Consistent dependency resolution
+
+For more details see https://docs.gradle.org/6.8/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+> Configure project :app
+
+Installing unimodules:
+ unimodules-core@7.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/@unimodules/core
+ unimodules-react-native-adapter@6.2.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/@unimodules/react-native-adapter
+ expo-app-auth@10.1.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-app-auth
+ expo-application@3.1.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-application
+ expo-av@9.1.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-av
+ unimodules-permissions-interface@6.2.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-camera/node_modules/unimodules-permissions-interface
+ expo-camera@11.0.3 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-camera
+ expo-constants@10.1.3 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-constants
+ expo-device@2.4.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-device
+ expo-error-recovery@2.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-error-recovery
+ expo-facebook@11.0.5 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-facebook
+ expo-file-system@11.0.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-file-system
+ expo-firebase-core@3.0.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-firebase-core
+ expo-font@9.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-font
+ expo-haptics@10.0.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-haptics
+ expo-image-loader@2.1.1 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-loader
+ expo-image-picker@10.1.4 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker
+ expo-keep-awake@9.1.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-keep-awake
+ expo-linear-gradient@9.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-linear-gradient
+ expo-localization@10.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-localization
+ expo-location@12.0.4 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-location
+ expo-notifications@0.11.6 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-notifications
+ expo-permissions@12.0.1 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-permissions
+ expo-sharing@9.1.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-sharing
+ expo-splash-screen@0.10.2 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-splash-screen
+ expo-structured-headers@1.0.1 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-structured-headers
+ expo-updates@0.5.5 from /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-updates
+ unimodules-app-loader@2.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-app-loader
+ unimodules-barcode-scanner-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-barcode-scanner-interface
+ unimodules-camera-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-camera-interface
+ unimodules-constants-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-constants-interface
+ unimodules-face-detector-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-face-detector-interface
+ unimodules-file-system-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-file-system-interface
+ unimodules-font-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-font-interface
+ unimodules-image-loader-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-image-loader-interface
+ unimodules-sensors-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-sensors-interface
+ unimodules-task-manager-interface@6.1.0 from /Users/revone/projects/expo-react-bunny-bare/node_modules/unimodules-task-manager-interface
+
+Found some duplicated unimodule packages. Installed the ones with the highest version number.
+Make sure following dependencies of your project are resolving to one specific version:
+ expo-application, expo-constants, expo-updates, unimodules-permissions-interface
+
+> Task :app:processDebugGoogleServices
+Parsing json file: /Users/revone/projects/expo-react-bunny-bare/android/app/google-services.json
+
+> Task :expo-file-system:processDebugManifest
+/Users/revone/projects/expo-react-bunny-bare/node_modules/expo-file-system/android/src/main/AndroidManifest.xml:9:9-20:20 Warning:
+        provider#expo.modules.filesystem.FileSystemFileProvider@android:authorities was tagged at AndroidManifest.xml:9 to replace other declarations but no other declaration present
+
+> Task :app:processDebugMainManifest
+/Users/revone/projects/expo-react-bunny-bare/android/app/src/debug/AndroidManifest.xml:17:9-26:20 Warning:
+        provider#expo.modules.filesystem.FileSystemFileProvider@android:authorities was tagged at AndroidManifest.xml:17 to replace other declarations but no other declaration present
+
+> Task :unimodules-core:compileDebugJavaWithJavac
+
+> Task :expo-app-auth:compileDebugJavaWithJavac
+
+> Task :expo-application:compileDebugJavaWithJavac
+
+> Task :expo-av:compileDebugKotlin
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-av/android/src/main/java/expo/modules/av/progress/AndroidLooperTimeMachine.kt: (8, 5): 'constructor Handler()' is deprecated. Deprecated in Java
+
+> Task :expo-av:compileDebugJavaWithJavac
+
+> Task :expo-constants:compileDebugJavaWithJavac
+
+> Task :expo-device:compileDebugJavaWithJavac
+
+> Task :expo-facebook:compileDebugJavaWithJavac
+
+> Task :expo-file-system:compileDebugJavaWithJavac
+
+> Task :expo-haptics:compileDebugJavaWithJavac
+
+> Task :expo-image-loader:compileDebugKotlin
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-loader/android/src/main/java/expo/modules/imageloader/ImageLoaderModule.kt: (6, 19): 'AsyncTask<Params : Any!, Progress : Any!, Result : Any!>' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-loader/android/src/main/java/expo/modules/imageloader/ImageLoaderModule.kt: (11, 42): 'SimpleTarget<Z : Any!>' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-loader/android/src/main/java/expo/modules/imageloader/ImageLoaderModule.kt: (61, 7): 'AsyncTask<Params : Any!, Progress : Any!, Result : Any!>' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-loader/android/src/main/java/expo/modules/imageloader/ImageLoaderModule.kt: (61, 17): 'THREAD_POOL_EXECUTOR: Executor!' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-loader/android/src/main/java/expo/modules/imageloader/ImageLoaderModule.kt: (83, 22): 'SimpleTarget<Z : Any!>' is deprecated. Deprecated in Java
+
+> Task :expo-image-picker:compileDebugKotlin
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ImagePickerConstants.kt: (97, 34): 'TAG_ISO_SPEED_RATINGS: String' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ImagePickerModule.kt: (339, 123): 'execute(vararg Void?): AsyncTask<Void?, Void?, Void?>!' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ImagePickerModule.kt: (368, 147): 'execute(vararg Void?): AsyncTask<Void?, Void?, Void?>!' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ImagePickerModule.kt: (376, 119): 'execute(vararg Void?): AsyncTask<Void?, Void?, Void?>!' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/tasks/ImageResultTask.kt: (5, 19): 'AsyncTask<Params : Any!, Progress : Any!, Result : Any!>' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/tasks/ImageResultTask.kt: (24, 5): 'AsyncTask<Params : Any!, Progress : Any!, Result : Any!>' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/tasks/ImageResultTask.kt: (24, 5): 'constructor AsyncTask<Params : Any!, Progress : Any!, Result : Any!>()' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/tasks/VideoResultTask.kt: (6, 19): 'AsyncTask<Params : Any!, Progress : Any!, Result : Any!>' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/tasks/VideoResultTask.kt: (21, 6): 'AsyncTask<Params : Any!, Progress : Any!, Result : Any!>' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/tasks/VideoResultTask.kt: (21, 6): 'constructor AsyncTask<Params : Any!, Progress : Any!, Result : Any!>()' is deprecated. Deprecated in Java
+
+> Task :expo-localization:compileDebugJavaWithJavac
+
+> Task :expo-camera:compileDebugJavaWithJavac
+
+> Task :expo-notifications:compileDebugKotlin
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/service/delegates/Base64Serialization.kt: (26, 45): Returning type parameter has been inferred to Nothing implicitly because Nothing is more specific than specified expected type. Please specify type arguments explicitly in accordance with expected type to hide this warning. Nothing can produce an exception at runtime. See KT-36776 for more details.
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/service/delegates/ExpoPresentationDelegate.kt: (176, 70): 'priority: Int' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/service/delegates/ExpoPresentationDelegate.kt: (177, 41): 'vibrate: LongArray!' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/service/delegates/ExpoPresentationDelegate.kt: (178, 30): 'sound: Uri!' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-notifications/android/src/main/java/expo/modules/notifications/service/delegates/FirebaseMessagingDelegate.kt: (86, 30): Unnecessary safe call on a non-null receiver of type (Mutable)Map<String!, String!>
+
+> Task :expo-notifications:compileDebugJavaWithJavac
+
+> Task :expo-location:compileDebugJavaWithJavac
+
+> Task :expo-splash-screen:compileDebugKotlin
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/SplashScreenController.kt: (21, 25): 'constructor Handler()' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/SplashScreenController.kt: (42, 7): Parameter 'failureCallback' is never used
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/singletons/SplashScreenStatusBar.kt: (23, 27): 'replaceSystemWindowInsets(Int, Int, Int, Int): WindowInsets' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/singletons/SplashScreenStatusBar.kt: (24, 29): 'getter for systemWindowInsetLeft: Int' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/singletons/SplashScreenStatusBar.kt: (26, 29): 'getter for systemWindowInsetRight: Int' is deprecated. Deprecated in Java
+w: /Users/revone/projects/expo-react-bunny-bare/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/singletons/SplashScreenStatusBar.kt: (27, 29): 'getter for systemWindowInsetBottom: Int' is deprecated. Deprecated in Java
+
+> Task :expo-updates:compileDebugJavaWithJavac
+The following annotation processors are not incremental: room-compiler-2.1.0.jar (androidx.room:room-compiler:2.1.0).
+Make sure all annotation processors are incremental to improve your build speed.
+
+> Task :react-native-appearance:compileDebugJavaWithJavac
+
+> Task :react-native-async-storage_async-storage:compileDebugJavaWithJavac
+
+> Task :react-native-community_cameraroll:compileDebugJavaWithJavac
+
+> Task :react-native-fast-image:compileDebugJavaWithJavac
+
+> Task :react-native-gesture-handler:compileDebugJavaWithJavac
+
+> Task :react-native-maps:compileDebugJavaWithJavac
+
+> Task :react-native-pager-view:compileDebugJavaWithJavac
+
+> Task :react-native-picker_picker:compileDebugJavaWithJavac
+
+> Task :react-native-safe-area-context:compileDebugJavaWithJavac
+
+> Task :react-native-screens:compileDebugJavaWithJavac
+
+> Task :react-native-view-shot:compileDebugJavaWithJavac
+
+> Task :react-native-webview:compileDebugJavaWithJavac
+
+> Task :app:compileDebugJavaWithJavac
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libc++_shared.so, libevent-2.1.so, libevent_core-2.1.so, libevent_extra-2.1.so, libfb.so, libfbjni.so, libflipper.so, libfolly_futures.so, libfolly_json.so, libglog.so, libglog_init.so, libhermes-executor-debug.so, libhermes-executor-release.so, libhermes-inspector.so, libimagepipeline.so, libjsc.so, libjscexecutor.so, libjsijniprofiler.so, libjsinspector.so, libnative-filters.so, libnative-imagetranscoder.so, libreactnativeblob.so, libreactnativejni.so, libreanimated.so, libturbomodulejsijni.so, libyoga.so.
+
+> Task :app:installDebug
+Installing APK 'app-debug.apk' on 'Pixel_XL_API_29(AVD) - 10' for app:debug
+Installed on 1 device.
+w: Detected multiple Kotlin daemon sessions at build/kotlin/sessions
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 7.0.
+Use '--warning-mode all' to show the individual deprecation warnings.
+See https://docs.gradle.org/6.8/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 7m 44s
+938 actionable tasks: 938 executed
+info Connecting to the development server...
+8081
+info Starting the app on "emulator-5554"...
+Starting: Intent { cmp=com.zrwusa.exporeactbunny/.MainActivity }
+✨  Done in 480.41s.
+
+
+The native view manager required by name (ExpoVideoView) from NativeViewManagerAdapter isn't exported by @unimodules/react-native-adapter. Views of this type may not render correctly. Exported view managers: [ExpoLinearGradient, ExponentCamera].
+
+TypeError: config.onPanResponderMove is not a function. (In 'config.onPanResponderMove(event, gestureState)', 'config.onPanResponderMove' is an instance of AnimatedEvent)
+
+Error: Style property 'width' is not supported by native animated module  FollowUpSearchBar (at Search.tsx:132)
+
+ <script type="text/javascript">
+        // let startX,startY;
+        // document.addEventListener('touchstart',function(e){
+        //     startX = e.touches[0].pageX;
+        //     startY = e.touches[0].pageY;
+        // });
+
+        document.addEventListener('touchmove',function(e){
+            // let moveX = e.touches[0].pageX;
+            // let moveY = e.touches[0].pageY;
+            // if(Math.abs(moveX-startX)>Math.abs(moveY-startY)){
+                e.preventDefault();
+            // }
+        }, {passive: false});
+    </script>
+
+
+const [pressStatus, setPressStatus] = useState(false)
+
+    const _panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: (evt, gestureState) => true,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onMoveShouldSetPanResponder: (evt, gestureState) => true,
+        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+
+        onPanResponderGrant: (evt, gestureState) => {
+            setPressStatus(true)
+        },
+        onPanResponderMove: (evt, gestureState) => {
+            if (gestureState.dx > 4 || gestureState.dx < -4) {
+                setPressStatus(false)
+            }
+        },
+        onPanResponderTerminationRequest: (evt, gestureState) => true,
+        onPanResponderRelease: (evt, gestureState) => {
+            // if (this.pressStatus) {
+            //     this.props.onPress && this.props.onPress();
+            // }
+            setPressStatus(false)
+
+        },
+        onPanResponderTerminate: (evt, gestureState) => {
+            // 另一个组件已经成为了新的响应者，所以当前手势将被取消。
+        },
+        onShouldBlockNativeResponder: (evt, gestureState) => {
+            // 返回一个布尔值，决定当前组件是否应该阻止原生组件成为JS响应者
+            // 默认返回true。目前暂时只支持android。
+            //基于业务交互场景，如果这里使用js事件处理，会导致容器不能左右滑动。所以设置成false.
+            return false;
+        },
+    });
+
+
+        const wrapperPanResponder = PanResponder.create({
+            onMoveShouldSetPanResponder: () => false,
+            onStartShouldSetPanResponder: () => false,
+            onPanResponderGrant: () => {
+                console.log('GRANTED TO WRAPPER');
+            },
+            onPanResponderMove: (evt, gestureState) => {
+                console.log('WRAPPER MOVED');
+            }
+        });
+
+
+    // let variablesProxy = new Proxy<LengthOfLongestSubstringVariables>(variables, {
+    //     get(target, name) {
+    //         let ret = Reflect.get(target, name);
+    //         if (typeof ret === 'function') {
+    //             ret = ret.bind(target);
+    //         }
+    //         return ret;
+    //     },
+    //     set(target, name, value) {
+    //         console.log(target)
+    //         return Reflect.set(target, name, value);
+    //     }
+    // });
+
+
+.lp:5 [Deprecation] Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+
+Option to view all the testcases
+Array -> empty array, out of range limits, out of range numbers.
+Linked List -> Empty linked list, last node linked list scenarios, in case multiple lists are involved handling both of them(adding numbers, merging linked list, pairwise swap etc.)
+Trees -> Empty tree, single left, single right, empty leaf nodes.
+
+O(N)    N < 1e6
+O(LogN) N < 1e4
+O(N^2)  N < 1e3
+
+
+
+View Default Style
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    align-items: stretch;
+    border: 0px solid black;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0px;
+    min-height: 0px;
+    min-width: 0px;
+    padding: 0px;
+    position: relative;
+    z-index: 0;
+
+
+	Can't analyse webpack.config.js: coding assistance will ignore module resolution rules in this file.
+				Possible reasons: this file is not a valid webpack configuration file or its format is not currently supported by the IDE.
+				Error details:  @expo/webpack-config requires a valid `mode` string which should be one of: development, production, none
+
+
+ @react-native-community/masked-view  expo-av expo-camera  expo-facebook expo-file-system expo-haptics expo-image-picker expo-linear-gradient expo-linking expo-localization expo-location expo-sharing expo-status-bar react-native-reanimated
+
+
+@expo/webpack-config
+
+
+
+
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "version": "1.0.0",
+  "description": "expo-react-bunny description",
+  "scripts": {
+    "dev": "expo start",
+    "ios": "expo start --ios",
+    "android": "expo start --android",
+    "web": "expo start --web",
+    "web:https": "expo start --web --https",
+    "debug:prod": "expo start --no-dev",
+    "debug:prod:minify": "expo start --no-dev --minify",
+    "clear:start:ios": "expo start --clear --ios",
+    "build": "next build",
+    "build:ios": "expo build:ios",
+    "build:web": "expo build:web",
+    "build:android": "expo build:android",
+    "build:clear:ios": "expo build:ios --clear-provisioning-profile",
+    "publish:expo": "expo publish",
+    "mock": "node mock/server.js",
+    "web:serve": "http-server -P http://localhost:8080? web-build/",
+    "clear:watchman": "watchman watch-del-all",
+    "clear:rn": "react-native clean-project",
+    "clear:android": "expo start --android --reset-cache",
+    "clear:metro": "expo start -c",
+    "remove:cache:metro": "rm -rf /tmp/metro-*",
+    "dev:next": "NODE_OPTIONS=\"--max_old_space_size=8192\" next"
+  },
+  "dependencies": {
+    "@qiwi/deep-proxy": "^1.8.2",
+    "@react-native-async-storage/async-storage": "^1.15.2",
+    "@react-native-community/cameraroll": "^4.0.4",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-native-picker/picker": "1.9.11",
+    "@react-navigation/bottom-tabs": "^5.11.9",
+    "@react-navigation/devtools": "^5.1.22",
+    "@react-navigation/drawer": "^5.12.5",
+    "@react-navigation/material-top-tabs": "^5.3.15",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
+    "@types/crypto-js": "^4.0.1",
+    "@types/dom-mediacapture-record": "^1.0.7",
+    "@types/react-native-snap-carousel": "^3.8.2",
+    "@types/recompose": "^0.30.7",
+    "@types/uuid": "^8.3.0",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "color": "^3.1.3",
+    "colortranslator": "^1.7.0",
+    "crypto-js": "^4.0.0",
+    "dayjs": "^1.10.4",
+    "expo": "^41.0.0",
+    "expo-av": "~9.1.2",
+    "expo-blur": "^9.0.3",
+    "expo-camera": "~11.0.2",
+    "expo-facebook": "~11.0.5",
+    "expo-file-system": "~11.0.2",
+    "expo-firebase-recaptcha": "^1.4.1",
+    "expo-google-app-auth": "^8.1.7",
+    "expo-haptics": "~10.0.0",
+    "expo-image-picker": "~10.1.4",
+    "expo-linear-gradient": "~9.1.0",
+    "expo-linking": "~2.2.3",
+    "expo-localization": "~10.1.0",
+    "expo-location": "~12.0.4",
+    "expo-next-react-navigation": "^1.2.1",
+    "expo-notifications": "^0.11.5",
+    "expo-sharing": "~9.1.2",
+    "expo-status-bar": "~1.0.4",
+    "expo-updates": "^0.5.4",
+    "facebook-nodejs-business-sdk": "^11.0.0",
+    "firebase": "8.2.3",
+    "http-server": "^0.12.3",
+    "i18next": "^20.2.1",
+    "json-server": "^0.16.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.8.13",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-appearance": "^0.3.4",
+    "react-native-card-stack-swiper": "^1.2.5",
+    "react-native-communications": "^2.2.1",
+    "react-native-dotenv": "^2.5.5",
+    "react-native-event-listeners": "^1.0.7",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-gif-search": "^1.3.2",
+    "react-native-maps": "^0.27.1",
+    "react-native-modal": "^11.10.0",
+    "react-native-pager-view": "5.0.12",
+    "react-native-paper": "^4.7.2",
+    "react-native-parsed-text": "0.0.22",
+    "react-native-picker-select": "^8.0.4",
+    "react-native-reanimated": "~2.1.0",
+    "react-native-responsive-screen": "^1.4.2",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-screens": "~3.0.0",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-svg": "12.1.0",
+    "react-native-tab-view": "^3.0.1",
+    "react-native-typing-animation": "^0.1.7",
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-view-shot": "3.1.2",
+    "react-native-web": "^0.15.7",
+    "react-native-web-linear-gradient": "^1.1.1",
+    "react-native-web-maps": "^0.3.0",
+    "react-native-webview": "11.2.3",
+    "react-redux": "^7.2.3",
+    "react-redux-firebase": "^3.10.0",
+    "recompose": "^0.30.0",
+    "redux-firestore": "^0.15.0",
+    "redux-saga": "^1.1.3",
+    "redux-thunk": "^2.3.0",
+    "sentry-expo": "^3.1.3",
+    "styled-components": "^5.2.3",
+    "typescript": "^4.2.4",
+    "uuid": "3.4.0",
+    "victory-native": "^35.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@expo/next-adapter": "^2.1.67",
+    "@expo/vector-icons": "^12.0.4",
+    "@expo/webpack-config": "^0.16.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@types/color": "^3.0.1",
+    "@types/lodash": "^4.14.168",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-native": "^0.64.5",
+    "@types/react-native-communications": "2.2.1",
+    "@types/react-native-vector-icons": "^6.4.6",
+    "@types/react-redux": "^7.1.16",
+    "@types/styled-components-react-native": "^5.1.1",
+    "@types/styled-system": "^5.1.11",
+    "babel-plugin-inline-import": "^3.0.0",
+    "next": "^10.1.3",
+    "next-compose-plugins": "^2.2.1",
+    "next-fonts": "^1.5.1",
+    "next-images": "^1.7.0",
+    "next-offline": "^5.0.5",
+    "next-transpile-modules": "^9.0.0",
+    "redux-dynamic-middlewares": "^2.0.0"
+  },
+  "private": true
+}
+
+
+
+
+
+
+
+
+
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "version": "1.0.0",
+  "description": "expo-react-bunny description",
+  "scripts": {
+    "dev": "expo start",
+    "ios": "expo start --ios",
+    "android": "expo start --android",
+    "web": "expo start --web",
+    "web:https": "expo start --web --https",
+    "debug:prod": "expo start --no-dev",
+    "debug:prod:minify": "expo start --no-dev --minify",
+    "clear:start:ios": "expo start --clear --ios",
+    "build": "next build",
+    "build:ios": "expo build:ios",
+    "build:web": "expo build:web",
+    "build:android": "expo build:android",
+    "build:clear:ios": "expo build:ios --clear-provisioning-profile",
+    "publish:expo": "expo publish",
+    "mock": "node mock/server.js",
+    "web:serve": "http-server -P http://localhost:8080? web-build/",
+    "clear:watchman": "watchman watch-del-all",
+    "clear:rn": "react-native clean-project",
+    "clear:android": "expo start --android --reset-cache",
+    "clear:metro": "expo start -c",
+    "remove:cache:metro": "rm -rf /tmp/metro-*",
+    "dev:next": "NODE_OPTIONS=\"--max_old_space_size=8192\" next"
+  },
+  "dependencies": {
+    "@qiwi/deep-proxy": "^1.8.2",
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-native-community/cameraroll": "^4.0.4",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-picker/picker": "2.1.0",
+    "@react-navigation/bottom-tabs": "^5.11.9",
+    "@react-navigation/devtools": "^5.1.22",
+    "@react-navigation/drawer": "^5.12.5",
+    "@react-navigation/material-top-tabs": "^5.3.15",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
+    "@types/crypto-js": "^4.0.1",
+    "@types/dom-mediacapture-record": "^1.0.7",
+    "@types/react-native-snap-carousel": "^3.8.2",
+    "@types/recompose": "^0.30.7",
+    "@types/uuid": "^8.3.0",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "color": "^3.1.3",
+    "colortranslator": "^1.7.0",
+    "crypto-js": "^4.0.0",
+    "dayjs": "^1.10.4",
+    "expo": "^43.0.0",
+    "expo-av": "~10.1.3",
+    "expo-blur": "~10.0.3",
+    "expo-camera": "~12.0.3",
+    "expo-facebook": "~12.0.3",
+    "expo-file-system": "~13.0.3",
+    "expo-firebase-recaptcha": "^1.4.1",
+    "expo-google-app-auth": "~9.0.0",
+    "expo-haptics": "~11.0.3",
+    "expo-image-picker": "~11.0.3",
+    "expo-linear-gradient": "~10.0.3",
+    "expo-linking": "~2.4.2",
+    "expo-localization": "~11.0.0",
+    "expo-location": "~13.0.4",
+    "expo-next-react-navigation": "^1.2.1",
+    "expo-notifications": "~0.13.3",
+    "expo-sharing": "~10.0.3",
+    "expo-status-bar": "~1.1.0",
+    "expo-updates": "~0.10.13",
+    "facebook-nodejs-business-sdk": "^11.0.0",
+    "firebase": "8.2.3",
+    "http-server": "^0.12.3",
+    "i18next": "^20.2.1",
+    "json-server": "^0.16.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mime": "^3.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-i18next": "^11.8.13",
+    "react-native": "0.64.2",
+    "react-native-appearance": "~0.3.3",
+    "react-native-card-stack-swiper": "^1.2.5",
+    "react-native-communications": "^2.2.1",
+    "react-native-dotenv": "^2.5.5",
+    "react-native-event-listeners": "^1.0.7",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-gif-search": "^1.3.2",
+    "react-native-maps": "0.28.0",
+    "react-native-modal": "^11.10.0",
+    "react-native-pager-view": "5.4.6",
+    "react-native-paper": "^4.7.2",
+    "react-native-parsed-text": "0.0.22",
+    "react-native-picker-select": "^8.0.4",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-responsive-screen": "^1.4.2",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.8.0",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-svg": "12.1.1",
+    "react-native-tab-view": "^3.0.1",
+    "react-native-typing-animation": "^0.1.7",
+    "react-native-unimodules": "^0.14.10",
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-view-shot": "3.1.2",
+    "react-native-web": "0.17.1",
+    "react-native-web-linear-gradient": "^1.1.1",
+    "react-native-web-maps": "^0.3.0",
+    "react-native-webview": "11.13.0",
+    "react-redux": "^7.2.3",
+    "react-redux-firebase": "^3.10.0",
+    "recompose": "^0.30.0",
+    "redux-firestore": "^0.15.0",
+    "redux-saga": "^1.1.3",
+    "redux-thunk": "^2.3.0",
+    "sentry-expo": "^4.0.0",
+    "styled-components": "^5.2.3",
+    "typescript": "~4.3.5",
+    "uuid": "^8.3.2",
+    "victory-native": "^35.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@expo/next-adapter": "^2.1.67",
+    "@expo/vector-icons": "^12.0.0",
+    "@expo/webpack-config": "^0.16.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@types/color": "^3.0.1",
+    "@types/lodash": "^4.14.168",
+    "@types/react": "~17.0.21",
+    "@types/react-dom": "~17.0.9",
+    "@types/react-native": "~0.64.12",
+    "@types/react-native-communications": "2.2.1",
+    "@types/react-native-vector-icons": "^6.4.6",
+    "@types/react-redux": "^7.1.16",
+    "@types/styled-components-react-native": "^5.1.1",
+    "@types/styled-system": "^5.1.11",
+    "babel-plugin-inline-import": "^3.0.0",
+    "next": "^10.1.3",
+    "next-compose-plugins": "^2.2.1",
+    "next-fonts": "^1.5.1",
+    "next-images": "^1.7.0",
+    "next-offline": "^5.0.5",
+    "next-transpile-modules": "^9.0.0",
+    "redux-dynamic-middlewares": "^2.0.0"
+  },
+  "private": true
+}
+ // convert whole project into javascript
+ npx tsc --jsx preserve -t es2020 --outDir js --noEmit false

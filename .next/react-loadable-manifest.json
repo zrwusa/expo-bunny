@@ -1,0 +1,16 @@
+{
+  "../src/screens/DemoSuspense/DemoSuspense.tsx -> ../../components/DemoLazy/DemoLazy": {
+    "id": "wL0w",
+    "files": []
+  },
+  "index.tsx -> ../src/index": {
+    "id": "2YZa",
+    "files": [
+      "static/chunks/framework.134068d0d75e96f55e30.js",
+      "static/chunks/ff239f9d.f72fb320123fabcc0baf.js",
+      "static/chunks/d91e9ae9.6797dd4b3429bf2af737.js",
+      "static/chunks/c4e8da0c.8c7e66a9cee4884cca22.js",
+      "static/chunks/12.c8daa965761c482c3ad1.js"
+    ]
+  }
+}

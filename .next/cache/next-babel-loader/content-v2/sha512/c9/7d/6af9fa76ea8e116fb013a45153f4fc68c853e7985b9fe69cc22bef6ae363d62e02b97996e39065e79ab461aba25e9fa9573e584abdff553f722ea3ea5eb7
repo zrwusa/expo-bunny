@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./Sys\";export*from\"./Sys\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/components/Sys/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,aACA","sourcesContent":["export {default} from './Sys';\nexport * from './Sys';\n"]},"metadata":{},"sourceType":"module"}

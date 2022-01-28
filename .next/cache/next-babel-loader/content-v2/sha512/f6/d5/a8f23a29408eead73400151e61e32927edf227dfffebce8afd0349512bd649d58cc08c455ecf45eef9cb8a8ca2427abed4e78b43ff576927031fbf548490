@@ -1,0 +1,1 @@
+{"ast":null,"code":"\"use strict\";exports.__esModule=true;exports.default=getAssetPathFromRoute;function getAssetPathFromRoute(route){var ext=arguments.length>1&&arguments[1]!==undefined?arguments[1]:'';var path=route==='/'?'/index':/^\\/index(\\/|$)/.test(route)?\"/index\"+route:\"\"+route;return path+ext;}","map":null,"metadata":{},"sourceType":"script"}

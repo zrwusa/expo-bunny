@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./DemoRequest\";export*from\"./DemoRequest\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/components/DemoRequest/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,qBACA","sourcesContent":["export {default} from './DemoRequest';\nexport * from './DemoRequest';\n"]},"metadata":{},"sourceType":"module"}

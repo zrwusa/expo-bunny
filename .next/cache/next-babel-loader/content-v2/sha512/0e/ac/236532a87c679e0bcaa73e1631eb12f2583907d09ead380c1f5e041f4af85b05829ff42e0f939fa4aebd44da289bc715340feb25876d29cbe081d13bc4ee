@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./Profile\";export*from\"./Profile\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/screens/Profile/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,iBACA","sourcesContent":["export {default} from './Profile';\nexport * from './Profile';\n"]},"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import StyleSheet from\"react-native-web/dist/exports/StyleSheet\";import{pl}from\"../../utils\";export var makeStyles=function makeStyles(){return StyleSheet.create({container:{flex:1,backgroundColor:pl.grey100,justifyContent:'center',alignItems:'center'},text:{marginTop:10,fontSize:16,color:pl.grey700}});};","map":null,"metadata":{},"sourceType":"module"}

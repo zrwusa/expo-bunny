@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./DemoShare\";export*from\"./DemoShare\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/screens/DemoShare/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,mBACA","sourcesContent":["export {default} from './DemoShare';\nexport * from './DemoShare';\n"]},"metadata":{},"sourceType":"module"}

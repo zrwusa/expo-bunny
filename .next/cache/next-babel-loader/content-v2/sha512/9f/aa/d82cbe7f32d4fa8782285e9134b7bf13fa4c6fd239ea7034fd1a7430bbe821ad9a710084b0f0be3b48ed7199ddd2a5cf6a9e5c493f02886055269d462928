@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./Settings\";export*from\"./Settings\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/screens/DemoTab/Settings/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,kBACA","sourcesContent":["export {default} from './Settings';\nexport * from './Settings';\n"]},"metadata":{},"sourceType":"module"}

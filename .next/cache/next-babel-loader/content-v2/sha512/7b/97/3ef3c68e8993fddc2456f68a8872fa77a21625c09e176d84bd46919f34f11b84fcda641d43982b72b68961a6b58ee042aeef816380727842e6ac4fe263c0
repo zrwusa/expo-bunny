@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var errors=[];export var popError=function popError(){return errors.pop();};export var addError=function addError(error){return errors.push(error);};","map":null,"metadata":{},"sourceType":"module"}

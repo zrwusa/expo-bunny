@@ -1,0 +1,1 @@
+{"ast":null,"code":"export*from\"./NotSupport\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/components/NotSupport/index.ts"],"names":[],"mappings":"AAAA","sourcesContent":["export * from './NotSupport';\n"]},"metadata":{},"sourceType":"module"}

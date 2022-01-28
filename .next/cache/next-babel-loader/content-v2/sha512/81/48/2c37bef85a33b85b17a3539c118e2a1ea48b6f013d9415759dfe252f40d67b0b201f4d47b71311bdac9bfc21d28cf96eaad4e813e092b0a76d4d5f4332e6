@@ -1,0 +1,1 @@
+{"ast":null,"code":"export*from\"./Tab\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/components/Tab/index.tsx"],"names":[],"mappings":"AAAA","sourcesContent":["export * from './Tab';\n"]},"metadata":{},"sourceType":"module"}

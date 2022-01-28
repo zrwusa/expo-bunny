@@ -1,0 +1,1 @@
+{"ast":null,"code":"import*as React from'react';import{AuthLaborContext}from\"./AuthLaborContext\";export var useAuthLabor=function useAuthLabor(){return React.useContext(AuthLaborContext);};","map":null,"metadata":{},"sourceType":"module"}

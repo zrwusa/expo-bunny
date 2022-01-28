@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./LightBox\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/packages/react-native-lightbox/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA","sourcesContent":["export {default} from './LightBox';\n"]},"metadata":{},"sourceType":"module"}

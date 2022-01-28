@@ -1,0 +1,1 @@
+{"ast":null,"code":"export*from\"./ModalFromRight\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/containers/ModalFromRight/index.tsx"],"names":[],"mappings":"AAAA","sourcesContent":["export * from './ModalFromRight';\n"]},"metadata":{},"sourceType":"module"}

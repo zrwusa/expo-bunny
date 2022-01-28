@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var shortenTFunctionKey=function shortenTFunctionKey(t,prefix){return function(key){return t(prefix+\".\"+key);};};","map":null,"metadata":{},"sourceType":"module"}

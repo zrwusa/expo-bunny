@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./DemoFCCard\";export*from\"./DemoFCCard\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/components/DemoFCCard/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,oBACA","sourcesContent":["export {default} from './DemoFCCard';\nexport * from './DemoFCCard';\n"]},"metadata":{},"sourceType":"module"}

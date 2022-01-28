@@ -1,0 +1,1 @@
+{"ast":null,"code":"\"use strict\";exports.__esModule=true;exports.isDynamicRoute=isDynamicRoute;var TEST_ROUTE=/\\/\\[[^/]+?\\](?=\\/|$)/;function isDynamicRoute(route){return TEST_ROUTE.test(route);}","map":null,"metadata":{},"sourceType":"script"}

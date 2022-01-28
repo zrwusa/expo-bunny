@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Animated from\"react-native-web/dist/exports/Animated\";import FlatList from\"react-native-web/dist/exports/FlatList\";export var AnimatedFlatList=function AnimatedFlatList(){return Animated.createAnimatedComponent(FlatList);};","map":null,"metadata":{},"sourceType":"module"}

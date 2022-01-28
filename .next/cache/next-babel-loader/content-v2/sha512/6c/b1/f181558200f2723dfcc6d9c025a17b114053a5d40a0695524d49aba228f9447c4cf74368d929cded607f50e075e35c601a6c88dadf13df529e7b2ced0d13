@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"./DemoThirdPart\";export*from\"./DemoThirdPart\";","map":{"version":3,"sources":["/Users/revone/projects/expo-react-bunny/src/screens/DemoThirdPart/index.tsx"],"names":[],"mappings":"AAAA,OAAA,OAAA,uBACA","sourcesContent":["export {default} from './DemoThirdPart';\nexport * from './DemoThirdPart';\n"]},"metadata":{},"sourceType":"module"}

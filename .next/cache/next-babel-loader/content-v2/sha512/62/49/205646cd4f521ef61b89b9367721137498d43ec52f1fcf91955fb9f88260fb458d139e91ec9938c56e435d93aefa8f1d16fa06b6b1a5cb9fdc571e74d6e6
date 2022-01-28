@@ -1,0 +1,1 @@
+{"ast":null,"code":"\"use strict\";exports.__esModule=true;exports.detectLocaleCookie=detectLocaleCookie;function detectLocaleCookie(req,locales){var _ref=req.cookies||{},NEXT_LOCALE=_ref.NEXT_LOCALE;return NEXT_LOCALE?locales.find(function(locale){return NEXT_LOCALE.toLowerCase()===locale.toLowerCase();}):undefined;}","map":null,"metadata":{},"sourceType":"script"}

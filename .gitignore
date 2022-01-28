@@ -12,22 +12,22 @@ web-build/
 # macOS
 .DS_Store
 
-.idea/
-.vscode/
-note.txt
+#.idea/
+#.vscode/
+#note.txt
 backup/
 __tests__/
-note.md
-test.json
-test.ts
-test-b.json
-test.html
-.env
-.expo-shared/
-yarn-error.log
+#note.md
+#test.json
+#test.ts
+#test-b.json
+#test.html
+#.env
+#.expo-shared/
+#yarn-error.log
 .next/
 
-.vercel/
-src/google/
+#.vercel/
+#src/google/
 src/assets/videos/
-src/firebase/migrations/raw-data/
+#src/firebase/migrations/raw-data/

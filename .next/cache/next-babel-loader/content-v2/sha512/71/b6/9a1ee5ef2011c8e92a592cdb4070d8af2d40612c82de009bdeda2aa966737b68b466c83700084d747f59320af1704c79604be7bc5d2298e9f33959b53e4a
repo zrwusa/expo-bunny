@@ -1,0 +1,1 @@
+{"ast":null,"code":"import{useEffect,useRef}from'react';export var useIsMounted=function useIsMounted(){var componentIsMounted=useRef(true);useEffect(function(){return function(){componentIsMounted.current=false;};},[]);return componentIsMounted;};","map":null,"metadata":{},"sourceType":"module"}
