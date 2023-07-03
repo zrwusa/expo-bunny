@@ -16,7 +16,7 @@ export const ThemePicker: React.FC<Omit<PickerSelectProps, 'onValueChange' | 'it
     });
 
     const handleValueChange = async (itemValue: ThemeName) => {
-        console.log('---4?handleValueChange', itemValue);
+        // console.log('---4?handleValueChange', itemValue);
         // todo always be invoked 4 times
         if (itemValue) {
             await changeTheme(itemValue);

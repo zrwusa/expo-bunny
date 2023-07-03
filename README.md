@@ -271,7 +271,17 @@ yarn next
 
 2."The remaining 10 percent of the code accounts for the other 90 percent of the development time."--— Tom Cargill, Bell Labs.
 
-
+<table>
+<thead>
+    <tr>
+        <td>Scope</td><td>Theory</td>
+    </tr>
+</thead>
+    <tr>
+        <td>Javascript</td>
+        <td>IIFEs to encapsulate some code within a local scope so that variables declared in it do not leak to the global scope.</td>
+    </tr>
+</table>
 ## Architecture benefits
  Architecture is necessary to save time during the development process, to maintain the system’s testability and extensibility over a long development period.
  
@@ -284,3 +294,9 @@ yarn next
  2.test:simplification of code testing (you will need fewer testers and have fewer missed “production bugs”);
  
  3.developer:easier to involve new developers into the project.
+
+
+# Environment/Dependencies
+## Node.js
+
+version v15.0.1
