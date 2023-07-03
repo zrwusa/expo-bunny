@@ -14,7 +14,6 @@ web-build/
 
 #.idea/
 #.vscode/
-#note.txt
 backup/
 __tests__/
 #note.md
@@ -35,3 +34,4 @@ src/assets/videos/
 test.html
 test.json
 test.ts
+note.txt
