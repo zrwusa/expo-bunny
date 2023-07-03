@@ -3,7 +3,9 @@
     "backup/",
     "web-build/",
     "note.txt",
-    "test.json"
+//    "test.json",
+//    "test.html",
+//    "test.ts"
   ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
