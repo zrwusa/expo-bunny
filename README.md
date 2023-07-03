@@ -27,8 +27,6 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 <!--## SOLID patterns,UML diagram-->
 
 
-
-
 # Tech Stack
 
 - React Native,
@@ -36,9 +34,7 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 - Redux,
 - Expo,
 - Firbase
-- Next.js for deploying
-
-
+- Next.js for web deploying
 
 
 # Principles
@@ -78,9 +74,30 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 </tbody>
 </table>
 
+# Environment/Dependencies
+
+<table>
+<thead>
+    <tr>
+        <td>Dependency</td>
+        <td>Version</td>
+        <td>Tips</td>
+    </tr>
+</thead>
+    <tr>
+        <td>Node.js</td>
+        <td>v15.0.1</td>
+        <td>You'd better to use NVM, it firmly helps you to keep different versions of Node.js</td>
+    </tr>
+    <tr>
+        <td>expo</td>
+        <td>41.0.0</td>
+        <td></td>
+    </tr>
+</table>
 
 # Javascript version
-[If not Typescript,just use Javascript](https://github.com/zrwusa/expo-bunny)
+[If not Typescript,just use Javascript](https://github.com/zrwusa/expo-bunny-js)
 
 # Preview
 
@@ -282,6 +299,7 @@ yarn next
         <td>IIFEs to encapsulate some code within a local scope so that variables declared in it do not leak to the global scope.</td>
     </tr>
 </table>
+
 ## Architecture benefits
  Architecture is necessary to save time during the development process, to maintain the system’s testability and extensibility over a long development period.
  
@@ -294,9 +312,3 @@ yarn next
  2.test:simplification of code testing (you will need fewer testers and have fewer missed “production bugs”);
  
  3.developer:easier to involve new developers into the project.
-
-
-# Environment/Dependencies
-## Node.js
-
-version v15.0.1
