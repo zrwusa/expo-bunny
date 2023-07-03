@@ -2,7 +2,7 @@
   "exclude": [
     "backup/",
     "web-build/",
-    "note.txt",
+//    "note.txt",
 //    "test.json",
 //    "test.html",
 //    "test.ts"
