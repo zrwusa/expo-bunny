@@ -31,3 +31,7 @@ __tests__/
 #src/google/
 src/assets/videos/
 #src/firebase/migrations/raw-data/
+
+test.html
+test.json
+test.ts
