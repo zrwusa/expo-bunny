@@ -1,6 +1,6 @@
 # expo-react-bunny
-We don't want a complicated project, what we want is a collection of samples based on cutting-edge technologies.
 
+Write once run everywhere,iOS Android and Web I know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal!
 
 ![Demo](https://raw.githubusercontent.com/zrwusa/assets/master/images/ad.gif)
 ![Products](https://raw.githubusercontent.com/zrwusa/assets/master/images/ad-10-sec-16m.gif)
