@@ -1,10 +1,9 @@
 # expo-react-bunny
 
-Write once run everywhere,iOS Android and Web I know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal!
+Write once run everywhere,iOS Android and Web We know you don't want a complicated project, what you want is a collection of samples based on cutting-edge technologies.Your happy use is my goal!
 
 ![Demo](https://raw.githubusercontent.com/zrwusa/assets/master/images/ad.gif)
 ![Products](https://raw.githubusercontent.com/zrwusa/assets/master/images/ad-10-sec-16m.gif)
-
 
 
 # Architecture principles
@@ -66,10 +65,11 @@ So, it can turn out to be a million-dollar mistake. When I switched to TypeScrip
 <tr><td>React Native Vector Icons</td><td>  </td></tr>
 <tr><td>React Navigation (Stack,Tab,Drawer,Nested,Route Params)</td><td>  </td></tr>
 <tr><td>Redux Thunk</td><td>  </td></tr>
+<tr><td>React Native Web</td><td>  </td></tr>
 <tr><td>Map</td><td>  </td></tr>
 <tr><td>Push Notification</td><td>  </td></tr>
 <tr><td>React Native Components All In One</td><td></td></tr>
-<tr><td>Mock RESTFul Server</td><td></td></tr>
+<tr><td>RESTFul Server</td><td></td></tr>
 <tr><td>Https localhost Self Signed Certification</td><td></td></tr>
 </tbody>
 </table>
@@ -156,8 +156,10 @@ yarn mock
 npm run mock
 ```
 ### BackEnd server
-I also provided a complete standard KOA backend,including RESTFul API,Mysql Sequelize,MongoDB Mongoose,Redis,Mailer,push notification feature
-[react-bunny-server](https://github.com/zrwusa/react-bunny-server)
+
+We also provide a standard Typescript Express backend.
+Typescript + Express + Docker + Postgres + MongoDB + Redis + Nginx + Swagger + Prom-client
+[RESTFul server](https://github.com/zrwusa/bunny-rest)
 
 ### Local web server
 ```sh
@@ -208,7 +210,7 @@ Expo Firebase Starter
 ```
 -->
 
-### For responsive development
+### For design-based adaptive development
 
 Just configure the dimensions size used by the designer, "size-labor" provider will automatically be compatible different devices
 
